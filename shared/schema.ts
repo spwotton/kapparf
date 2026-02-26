@@ -389,6 +389,16 @@ export const TOOL_CATALOG: ToolEntry[] = [
   { name: "SpiderFoot", repo: "https://github.com/smicallef/spiderfoot", description: "Automated OSINT collection — 200+ data sources for threat intelligence", domain: "wifi" },
   { name: "Sherlock", repo: "https://github.com/sherlock-project/sherlock", description: "Hunt usernames across 400+ social networks for OSINT profiling", domain: "wifi" },
   { name: "FOCA", repo: "https://github.com/ElevenPaths/FOCA", description: "Metadata extraction and network infrastructure analysis tool", domain: "wifi" },
+  { name: "ggwave", repo: "https://github.com/ggerganov/ggwave", description: "Data-over-sound library — ultrasonic/audible frequency data transmission for ESP32 side-channel beacons", domain: "sdr" },
+  { name: "wave-share", repo: "https://github.com/ggerganov/wave-share", description: "Peer-to-peer data sharing via sound — serverless file transfer using ggwave audio modulation", domain: "sdr" },
+  { name: "ggmorse", repo: "https://github.com/ggerganov/ggmorse", description: "Real-time Morse code decoder via audio input — automatic WPM detection and signal analysis", domain: "sdr" },
+  { name: "swift-f0", repo: "https://github.com/lars76/swift-f0", description: "Fundamental frequency (F0) pitch estimation — detect 46.875 Hz and harmonic carrier signals in audio", domain: "sdr" },
+  { name: "rtl_433", repo: "https://github.com/merbanan/rtl_433", description: "ISM band 433/868/915 MHz decoder — sensors, weather stations, tire pressure monitors, garage doors", domain: "sdr" },
+  { name: "pyAudioAnalysis", repo: "https://github.com/tyiannak/pyAudioAnalysis", description: "Audio feature extraction, classification, and segmentation — detect anomalous acoustic signatures", domain: "sdr" },
+  { name: "NeuroKit", repo: "https://github.com/neuropsychology/NeuroKit", description: "Neurophysiological signal processing (EEG/ECG/EMG) — HUMINT biometric correlation and theta-band analysis", domain: "elf" },
+  { name: "BrainFlow", repo: "https://github.com/brainflow-dev/brainflow", description: "Universal BCI/EEG board interface — real-time biosignal acquisition for HUMINT theta-band and biometric events", domain: "elf" },
+  { name: "pyRiemann", repo: "https://github.com/pyRiemann/pyRiemann", description: "Riemannian geometry for BCI — EEG covariance classification for biometric state detection and HUMINT correlation", domain: "elf" },
+  { name: "EEG-To-Text", repo: "https://github.com/MikeWangWZHL/EEG-To-Text", description: "Neural decoding — translate EEG brain signals to text for HUMINT cognitive state analysis and biometric event logging", domain: "elf" },
 ];
 
 export interface CorrelationRule {
