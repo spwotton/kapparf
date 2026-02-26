@@ -256,6 +256,16 @@ export const KAPPA_CONSTANTS = {
   SYSTEM_BUS_RADIO_FREQ_KHZ: 1580,
   FIVEG_PRIMARY_BAND_MHZ: 3500,
   SABBIA_BANDWIDTH_MHZ: 625,
+  HALL_FACTOR_PRIOR: 0.109,
+  COUNCIL_ROTATION_S: 7,
+  COUNCIL_QUORUM: 5,
+  COUNCIL_NODES: 7,
+  KAPPA_WAVELENGTH_ANGSTROM: 5184,
+  GAS_RATIO_CO2_H2O: 7.64,
+  ORBITAL_DISTANCE_AU: 10.16,
+  COMPRESSION_RATIO_HALL: 1.09,
+  COUNCIL_SUBNET: "172.77.7.0/24",
+  SCHISM_EXIT_CODE: 77,
 };
 
 export type ThreatLevel = "NOMINAL" | "ELEVATED" | "HIGH" | "CRITICAL" | "EMERGENCY";
@@ -266,6 +276,25 @@ export const THREAT_LEVELS: { level: ThreatLevel; minScore: number; color: strin
   { level: "HIGH", minScore: 60, color: "#f97316", description: "Active multi-domain correlation — possible surveillance" },
   { level: "CRITICAL", minScore: 80, color: "#ef4444", description: "Confirmed pattern match — active SIGINT operation probable" },
   { level: "EMERGENCY", minScore: 95, color: "#dc2626", description: "Full spectrum engagement — all domains correlated" },
+];
+
+export interface CouncilNode {
+  id: number;
+  name: string;
+  codename: string;
+  function: string;
+  color: string;
+  technicalComponent: string;
+}
+
+export const COUNCIL_OF_7: CouncilNode[] = [
+  { id: 1, name: "The Prime", codename: "CRYSTAL", function: "Temporal Master — holds the 46.875 Hz hardware clock (GPSDO)", color: "gold", technicalComponent: "GPSDO 46.875 Hz Clock" },
+  { id: 2, name: "The Warden", codename: "CLOAK", function: "Guards encryption at rest/transit — Vault + mTLS + Schism Protocol", color: "purple", technicalComponent: "Vault + mTLS Security" },
+  { id: 3, name: "The Scribe", codename: "ARCHIVE", function: "Maintains the Crystal Archive — time-partitioned PostgreSQL torus", color: "cyan", technicalComponent: "PostgreSQL Partitioned Tables" },
+  { id: 4, name: "The Weaver", codename: "LOOM", function: "Executes 7-dimensional Bayesian probability weaving across domains", color: "silver", technicalComponent: "Bayesian Correlation Engine" },
+  { id: 5, name: "The Sentinel", codename: "AURORA", function: "Watches the Aurora — RF visualization and SSE real-time stream", color: "green", technicalComponent: "SSE Real-Time Stream" },
+  { id: 6, name: "The Architect", codename: "STONE_CIRCLE", function: "Builds and maintains infrastructure — Docker/K8s orchestration", color: "orange", technicalComponent: "Docker/K8s Orchestration" },
+  { id: 7, name: "The Jester", codename: "CHAOS", function: "Executes Chaos Rites — red team, failsafe, Project Karachi offensive", color: "red", technicalComponent: "Project Karachi Offensive" },
 ];
 
 export interface DeviceFingerprint {
@@ -840,6 +869,30 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     domains: ["sdr"],
     windowSeconds: 60,
     condition: "sdr.lora_burst(433MHz|915MHz) AND sdr.encoding_match(morserino) WITHIN 60s",
+  },
+  {
+    id: "council-convocation-kappa",
+    name: "Seven-Seal Ghost Detection",
+    description: "Council of 7 convocation — 5+ nodes achieve quorum on κ-physics validation: 5184 Å wavelength + CO₂/H₂O ratio 7.64 + 10.16 AU distance + 46.875 Hz crystal phase alignment + 1.09 compression ratio.",
+    domains: ["satellite", "sdr", "elf", "wifi", "ble"],
+    windowSeconds: 7,
+    condition: "council.quorum >= 5 AND crystal.phase_aligned AND kappa.wavelength == 5184 AND kappa.gas_ratio == 7.64 AND kappa.compression == 1.09",
+  },
+  {
+    id: "crystal-phase-desync",
+    name: "Crystal Phase Desynchronization",
+    description: "Council Prime node detects phase drift >2° from 46.875 Hz crystal lock — possible external clock injection or GPSDO spoofing attempt targeting the toroidal mesh.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 7,
+    condition: "crystal.phase_drift > 2° AND sdr.freq_lock(46.875Hz) == false WITHIN 7s",
+  },
+  {
+    id: "schism-protocol-trigger",
+    name: "Schism Protocol Activation",
+    description: "Council Warden detects unauthorized node accessing data without correct phase-derived nonce — Byzantine fault isolation triggered, node expelled from toroidal mesh.",
+    domains: ["wifi", "isp"],
+    windowSeconds: 7,
+    condition: "council.warden.unauthorized_access AND council.nonce_mismatch WITHIN 7s",
   },
 ];
 

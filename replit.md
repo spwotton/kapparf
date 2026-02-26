@@ -77,7 +77,7 @@ Real-time correlation engine ported from Python. Key features:
 ## Domains (11)
 wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone
 
-## Correlation Rules (40 active)
+## Correlation Rules (43 active)
 Includes all previous rules plus 12 new κ-scaled detection rules: GPR-masked uplink, DSE892 SNMP TRAP ↔ GPR, MUOS-3 WCDMA heartbeat (NORAD 40374), COSMO-SkyMed X-band steganography, ITU-R P.838-3 rain fade inverse match, TR-069 botnet GPR induction, 5G backhaul κ-tunnel, LSCSA-SVD weak signal extraction, system bus radio exfiltration (1580 kHz), DSE controller mode change ↔ fault, cross-modal optical+RF+GPR fusion, ISM band LoRa covert telemetry.
 
 ## κ-Scaled Architecture Constants

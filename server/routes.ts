@@ -22,6 +22,7 @@ import {
   PARTYTOWN_THREAT,
   KYNDRYL_ZSCALER_PROFILE,
   FINSPY_V2_DELIVERABLES,
+  COUNCIL_OF_7,
   type ToolGitHubMeta,
   type FlightData,
   type PhoenixCountdown,
@@ -513,6 +514,10 @@ export async function registerRoutes(
       totalDays,
     };
     res.json(countdown);
+  });
+
+  app.get("/api/council", (_req, res) => {
+    res.json(COUNCIL_OF_7);
   });
 
   app.get("/api/finspy/intel", (_req, res) => {
