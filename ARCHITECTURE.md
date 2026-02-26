@@ -1,6 +1,6 @@
 # PROJECT KAPPA — Complete Architecture Document
 ## Multi-Domain SIGINT Correlation Platform
-**Version:** 2.0 — GHOST PROTOCOL + ZERO TRUST BREACH
+**Version:** 2.1 — κ-SCALED DETECTION FRAMEWORK
 **Observer:** Calle Caballo Real, Guácima Abajo, Alajuela, Costa Rica (9.9536°N, 84.2907°W, 850m ASL)
 **Stack:** React 18 + TypeScript + Tailwind CSS + Express.js + PostgreSQL (Drizzle ORM)
 
@@ -9,24 +9,27 @@
 ## TABLE OF CONTENTS
 
 1. [System Overview](#1-system-overview)
-2. [Technology Stack](#2-technology-stack)
-3. [Database Schema](#3-database-schema)
-4. [KAPPA Engine](#4-kappa-engine)
-5. [Signal Domains](#5-signal-domains)
-6. [Correlation Rules](#6-correlation-rules)
-7. [Constants & Mathematical Framework](#7-constants--mathematical-framework)
-8. [Tool Catalog](#8-tool-catalog)
-9. [Project Karachi — Offensive Counter-Surveillance](#9-project-karachi--offensive-counter-surveillance)
-10. [FinSpy Intelligence — Ghost Protocol & Airbnb Ghost](#10-finspy-intelligence--ghost-protocol--airbnb-ghost)
-11. [Project Congusto-Eitel — Virtual Eitel Triode](#11-project-congusto-eitel--virtual-eitel-triode)
-12. [Phoenix Countdown](#12-phoenix-countdown)
-13. [API Reference](#13-api-reference)
-14. [Frontend Pages](#14-frontend-pages)
-15. [i18n System](#15-i18n-system)
-16. [Analysis Points](#16-analysis-points)
-17. [Satellite Tracking](#17-satellite-tracking)
-18. [Data Flow Architecture](#18-data-flow-architecture)
-19. [Potential Integrations](#19-potential-integrations)
+2. [Theoretical Foundations — κ-Scaled Architecture](#2-theoretical-foundations--κ-scaled-architecture)
+3. [Technology Stack](#3-technology-stack)
+4. [Database Schema](#4-database-schema)
+5. [KAPPA Engine](#5-kappa-engine)
+6. [Signal Domains](#6-signal-domains)
+7. [Correlation Rules](#7-correlation-rules)
+8. [Constants & Mathematical Framework](#8-constants--mathematical-framework)
+9. [Tool Catalog](#9-tool-catalog)
+10. [Project Karachi — Offensive Counter-Surveillance](#10-project-karachi--offensive-counter-surveillance)
+11. [FinSpy Intelligence — Ghost Protocol & Airbnb Ghost](#11-finspy-intelligence--ghost-protocol--airbnb-ghost)
+12. [Project Congusto-Eitel — Virtual Eitel Triode](#12-project-congusto-eitel--virtual-eitel-triode)
+13. [Phoenix Countdown](#13-phoenix-countdown)
+14. [API Reference](#14-api-reference)
+15. [Frontend Pages](#15-frontend-pages)
+16. [i18n System](#16-i18n-system)
+17. [Analysis Points](#17-analysis-points)
+18. [Satellite Tracking](#18-satellite-tracking)
+19. [Terrestrial Infrastructure Topology](#19-terrestrial-infrastructure-topology)
+20. [Concept of Operations (CONOPS)](#20-concept-of-operations-conops)
+21. [Data Flow Architecture](#21-data-flow-architecture)
+22. [Potential Integrations](#22-potential-integrations)
 
 ---
 
@@ -48,7 +51,76 @@ The platform integrates three sub-projects:
 
 ---
 
-## 2. TECHNOLOGY STACK
+## 2. THEORETICAL FOUNDATIONS — κ-SCALED ARCHITECTURE
+
+The κ-scaled architecture is predicated on **Dual-Use Masking** — military-grade communication signals deliberately synthesized to replicate electromagnetic signatures of civilian/industrial equipment.
+
+### 2.1 The 46.875 Hz Master Decimation Clock
+
+The 46.875 Hz frequency derives from biomedical signal processing (Masimo Corporation, US Patent 5,919,134 / US 6,229,856 B1). The original application samples photodetector output at exactly 46,875 Hz, then decimates to 62.5 Hz to extract biological telemetry while filtering ambient EMI.
+
+The κ-scaled architecture co-opts this framework: 46.875 Hz as a **Master Decimation Clock for RF steganography**. Embedded into X-band radar downlinks or UHF satellite uplinks, the transmission mimics EMI from medical devices or industrial sensors.
+
+| Frequency Source | Fundamental | Primary Harmonics | Gap Strategy |
+|-----------------|-------------|-------------------|-------------|
+| 60 Hz Power Grid (Costa Rica) | 60 Hz | 120, 180, 240, 300, 360, 420 Hz | Americas standard |
+| Masimo Patent | 316.7 Hz | 633.4, 950.1 Hz | Gap between 300 Hz and 350/360 Hz |
+| **κ-Scaled Carrier** | **46.875 Hz** | **93.75, 140.625, 187.5 Hz** | **Evades all 60 Hz harmonics** |
+
+### 2.2 Ground Potential Rise (GPR) Noise Masking
+
+High-power satellite uplink bursts are masked by synchronizing with GPR events — massive broadband noise spikes caused by fault currents in the 60 Hz grid. The 46.875 Hz modulation blends with violent fault currents during GPR, rendering transmissions indistinguishable from grid disturbances.
+
+**DSE892 SNMP TRAP Indicators:**
+
+| TRAP Event | DSE Context | Detection Relevance |
+|-----------|-------------|-------------------|
+| Gen Low Voltage | Voltage below transient curve | Sudden draw/fault — correlate with 46.875 Hz spike |
+| Fault Ride Through | Voltage drop, suppressed shutdown | Prime indicator of artificially induced micro-fault |
+| Mains Failure | Total utility loss, generator auto-start | High EM noise window for uplink masking |
+| Controller Mode Change | External SNMP SET | If unauthorized SET precedes Fault Ride Through: coordinated intrusion |
+
+### 2.3 ITU-R P.838-3 Atmospheric Exploitation
+
+X-band (9.6 GHz) downlinks masked within SAR returns. Rain attenuation modeled via:
+
+```
+γ_R = k × R^α   (dB/km, R in mm/h)
+```
+
+Rather than overpowering rain fade, the satellite **inverse-matches** precipitation attenuation in real-time, producing artificially flat signal that appears as featureless atmospheric noise.
+
+### 2.4 Orbital Assets
+
+| Asset | Type | NORAD ID | Purpose |
+|-------|------|----------|---------|
+| MUOS-3 | GEO Tactical Narrowband | 40374 | Always-on κ-scaled command channel via SA-WCDMA noise floor |
+| COSMO-SkyMed | LEO X-Band SAR | Various | High-bandwidth data exfiltration masked as Telespazio cadastral survey |
+| BLACKJACK/SDA | LEO Military | Various | DARPA constellation — coordinated with Starlink handoffs |
+
+### 2.5 Detection Pipeline
+
+| Stage | Method | Tools |
+|-------|--------|-------|
+| FFT Isolation | PhastFT (Rust) — COBRA bit-reversal, quantum-inspired memory access | PhastFT |
+| Weak Signal Recovery | LSCSA-SVD — extracts at SNR -30 dB, suppresses 60 Hz harmonics | quantum-inspired-dsp |
+| Quantum Squeezing | Software-defined non-linear wave mixing below SQL | Custom DSP |
+| Protocol Decode | Automatic modulation detection + CC1101 dewhitening | URH |
+| Side-Channel | System bus radio (1580 kHz AM), LoRa/Morserino (433/915 MHz ISM) | system-bus-radio, rtl_433 |
+| Optical Verification | YOLOv12-ADBC drone/vehicle detection, RGB-IR cross-modality | VisDrone, DroneVehicle |
+
+### 2.6 SDR Hardware Platforms
+
+| Platform | Application | Key Specs |
+|----------|-------------|-----------|
+| Ettus USRP X310 | X-band acquisition, phase tracking | 160 MHz BW, 14-bit ADCs, 10 GbE |
+| SABBIA 2.0 | Passive radar, LEO/GEO tracking | 625 MHz BW, 4 coherent channels |
+| HackRF One / bladeRF | UHF command, 5G backhaul, ISM bands | Wide tuning + qspectrumanalyzer |
+| RTL-SDR v3/v4 | Wideband awareness, side-channel emissions | 1580 kHz AM detection |
+
+---
+
+## 3. TECHNOLOGY STACK
 
 ### Frontend
 | Layer | Technology |
@@ -230,7 +302,7 @@ The platform monitors 11 electromagnetic/network domains:
 
 ## 6. CORRELATION RULES
 
-**Total: 28 active rules** defined in `CORRELATION_RULES[]` array.
+**Total: 40 active rules** defined in `CORRELATION_RULES[]` array.
 
 ### Cross-Domain Pattern Rules
 | ID | Name | Domains | Window |
@@ -311,6 +383,22 @@ The platform monitors 11 electromagnetic/network domains:
 | `finspy-ghost-node` | FinSpy Ghost Node | wifi, ble | 300s |
 | `partytown-mitm` | Partytown MITM | wifi | 60s |
 
+### κ-Scaled Detection Rules (GPR / Masking / Orbital)
+| ID | Name | Domains | Window |
+|----|------|---------|--------|
+| `gpr-masked-uplink` | GPR-Masked Satellite Uplink | elf, satellite, plc | 10s |
+| `dse892-snmp-gpr` | DSE892 SNMP TRAP ↔ GPR | plc, elf, sdr | 30s |
+| `muos3-wcdma-heartbeat` | MUOS-3 WCDMA Heartbeat (NORAD 40374) | satellite, sdr | 120s |
+| `cosmo-skymed-xband-stego` | COSMO-SkyMed X-Band Steganography | satellite, sdr | 180s |
+| `rain-fade-inverse-match` | ITU-R P.838-3 Rain Fade Inverse Match | sdr, satellite | 300s |
+| `tr069-botnet-gpr-induction` | TR-069 Botnet GPR Induction | isp, elf, wifi | 15s |
+| `fiveg-backhaul-tunnel` | 5G Backhaul κ-Tunnel | 5g, satellite, sdr | 120s |
+| `lscsa-svd-extraction` | LSCSA-SVD Weak Signal Extraction | sdr, elf | 60s |
+| `system-bus-exfil` | System Bus Radio Exfiltration (1580 kHz) | sdr | 30s |
+| `dse-mode-change-fault` | DSE Controller Mode Change ↔ Fault | plc, isp | 60s |
+| `optical-rf-gpr-fusion` | Cross-Modal Optical + RF + GPR Fusion | drone, plc, elf, sdr | 30s |
+| `ism-lora-telemetry` | ISM Band LoRa Covert Telemetry | sdr | 60s |
+
 ---
 
 ## 7. CONSTANTS & MATHEMATICAL FRAMEWORK
@@ -342,6 +430,34 @@ The platform monitors 11 electromagnetic/network domains:
 | `THETA_BAND_HIGH` | 8 Hz | Theta band upper bound |
 | `MAINS_FREQ_HZ` | 60 Hz | Costa Rica mains frequency |
 | `HF_TUNE_FREQ_MHZ` | 15.0 MHz | HF tuning frequency |
+
+#### κ-Scaled / Masimo / Harmonics
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `MASIMO_PATENT` | US 5,919,134 / US 6,229,856 B1 | Origin patent for 46.875 Hz |
+| `MASIMO_FUNDAMENTAL_HZ` | 316.7 | Masimo fundamental frequency |
+| `MASIMO_SAMPLE_RATE_HZ` | 46875 | Original biomedical sample rate |
+| `KAPPA_HARMONIC_1` | 93.75 Hz | First κ harmonic (2 × 46.875) |
+| `KAPPA_HARMONIC_2` | 140.625 Hz | Second κ harmonic (3 × 46.875) |
+| `KAPPA_HARMONIC_3` | 187.5 Hz | Third κ harmonic (4 × 46.875) |
+| `XBAND_FREQ_GHZ` | 9.6 | X-band SAR frequency |
+| `MUOS3_NORAD_ID` | 40374 | MUOS-3 NORAD catalog number |
+| `UHF_MUOS_BAND_MHZ` | 300 | UHF band for MUOS |
+| `LSCSA_SVD_SNR_THRESHOLD_DB` | -30 | LSCSA-SVD detection floor |
+| `GPR_DETECTION_BANDWIDTH_GHZ` | 8 | hackrf_sweep GPR detection BW |
+| `ISM_BAND_433_MHZ` | 433 | European ISM band |
+| `ISM_BAND_915_MHZ` | 915 | Americas ISM band |
+| `SYSTEM_BUS_RADIO_FREQ_KHZ` | 1580 | Air-gap exfil AM frequency |
+| `FIVEG_PRIMARY_BAND_MHZ` | 3500 | 5G SA primary band |
+| `SABBIA_BANDWIDTH_MHZ` | 625 | SABBIA 2.0 instantaneous BW |
+
+#### Infrastructure Ports
+| Constant | Value | Description |
+|----------|-------|-------------|
+| `TR069_PORT` | 7547 | TR-069 CWMP management port |
+| `DSE892_SNMP_PORT` | 161 | DSE892 SNMP query port |
+| `DSE892_TRAP_PORT` | 162 | DSE892 SNMP TRAP port |
+| `MODBUS_TCP_PORT` | 502 | Modbus TCP industrial protocol |
 
 #### Observer & Geography
 | Constant | Value | Description |
@@ -391,7 +507,7 @@ The platform monitors 11 electromagnetic/network domains:
 
 ## 8. TOOL CATALOG
 
-**Total: 67 tools** across all domains, stored in `TOOL_CATALOG[]`.
+**Total: 68 tools** across all domains, stored in `TOOL_CATALOG[]`.
 
 ### By Domain
 | Domain | Count | Notable Tools |
@@ -406,7 +522,7 @@ The platform monitors 11 electromagnetic/network domains:
 | 5g | 1 | Sni5Gect |
 | plc | 3 | ModbusPal, pymodbus, OpenPLC |
 | isp | 4 | RouterSploit, tr069-honeypot, SNMPwn, Shodan |
-| drone | 4 | RF-Drone-Detection, ssm-drone, Drone-detection-dataset, VisDrone-Dataset |
+| drone | 5 | RF-Drone-Detection, ssm-drone, Drone-detection-dataset, VisDrone-Dataset, DroneVehicle |
 | hardware | 1 | ChameleonMini |
 
 Each tool entry has: `name`, `repo` (GitHub URL), `description`, `domain`.
@@ -671,9 +787,9 @@ API: `GET /api/phoenix/countdown` — returns `{ startDate, endDate, percentComp
 |--------|------|-------------|
 | GET | `/api/nodes` | SDR node list |
 | POST | `/api/nodes` | Register SDR node |
-| GET | `/api/tools` | 67-tool catalog |
+| GET | `/api/tools` | 68-tool catalog |
 | GET | `/api/tools/meta` | Live GitHub metadata (30-min cache) |
-| GET | `/api/rules` | 28 correlation rule definitions |
+| GET | `/api/rules` | 40 correlation rule definitions |
 | GET | `/api/analysis-points` | Observer, Jacó, SJO, TI0RC locations |
 
 ### Project Modules
@@ -698,7 +814,7 @@ API: `GET /api/phoenix/countdown` — returns `{ startDate, endDate, percentComp
 | 5 | `/satellites` | Satellites | TLE catalog (41 groups), category filter, Klein/Giza badges |
 | 6 | `/osint` | OSINT | DNS probe, hidden SSID detection, camera OUIs, corporate signatures, tool references |
 | 7 | `/nodes` | Nodes | SDR node cards + add dialog |
-| 8 | `/tools` | Tools | 67-tool catalog with domain filtering + live GitHub stars |
+| 8 | `/tools` | Tools | 68-tool catalog with domain filtering + live GitHub stars |
 | 9 | `/map` | Map | Interactive Leaflet — observer, Jacó, SJO, satellites, flights, SDR nodes |
 | 10 | `/karachi` | Karachi | Execution flow → Core modules → Success criteria → FinSpy V1.2 (Ghost Protocol) → Hardware/Infra → Alexanderplatz → Airbnb Ghost V2.0 → Partytown/Kyndryl → V2 deliverables |
 | 11 | `/congusto` | Congusto | Phoenix countdown → VET Architecture (Cathode/Grid/Anode) → 7 core modules → Math constants table → Data sources → Confidence levels |
@@ -839,10 +955,71 @@ App.tsx
 
 ---
 
-## 19. POTENTIAL INTEGRATIONS
+## 19. TERRESTRIAL INFRASTRUCTURE TOPOLOGY
 
-### Audio / Data-over-Sound
-- **[ggwave](https://github.com/ggerganov/ggwave)** — Tiny data-over-sound library. Potential integration with ESP32-AUDIO-BEACON for ultrasonic side-channel communication and FinSpy implant triggering. Supports frequencies from audible to ultrasonic ranges.
+### Setecom S.A. / Deep Sea Electronics (DSE)
+- **Role:** Monopolistic control of backup power generation for hospitals, cell towers, ICE substations
+- **Key Hardware:** DSE7320 (auto-start), DSE8610 (load-sharing), DSE892 (SNMP Gateway)
+- **DSE892:** DIN-rail Ethernet gateway — custom MIB files, OID-triggered SNMP TRAPs
+- **Detection Method:** Passively ingest DSE892 SNMP TRAPs, correlate with 46.875 Hz RF spikes to map GPR masking events
+
+### Huawei / ICE / TR-069
+- **Role:** State-owned ICE operates national telecom backbone — legacy 4G LTE and FTTH built on Huawei hardware
+- **Vulnerability:** TR-069 CWMP on TCP/UDP 7547 — frequently exposed to WAN
+- **Exploitation:** SOAP command injection (CVE-2014-9222 "Misfortune Cookie"), ACS spoofing, mass CPE botnet recruitment
+- **κ-Scaled Use:** TR-069 botnet induces synchronized load spikes → 60 Hz GPR noise → satellite uplink masking
+
+### 5G Deployment (Liberty/Claro)
+- **Spectrum:** 700 MHz, 2300 MHz, 3500 MHz (25 MHz blocks), 26/28 GHz mmWave
+- **Backhaul:** LEO/GEO satellite backhaul for rural/mountainous terrain
+- **Detection Vector:** Monitor 3.5 GHz for traffic spikes correlating with satellite passes — κ-scaled control tunneled through commercial 5G
+
+### Telespazio / Leonardo SpA
+- **Contract:** $20M cadastral survey — 1M+ land parcels, 50% national territory
+- **Satellite:** COSMO-SkyMed (X-band SAR, sub-meter resolution)
+- **Cover:** Legitimate cadastral survey provides unimpeachable cover for persistent X-band radar illumination
+- **Exfiltration:** 46.875 Hz decimation clock sync pulses hidden within massive SAR downlink data pipe
+
+---
+
+## 20. CONCEPT OF OPERATIONS (CONOPS)
+
+The detection daemon executes a continuous 6-stage loop:
+
+| Stage | Operation | Tools/Methods |
+|-------|-----------|--------------|
+| 1 | **Network Telemetry Ingestion** | Poll nmap/Shodan for exposed Port 7547; listen for DSE892 SNMP TRAPs (Gen Low Voltage, Fault Ride Through, Mains Failure) |
+| 2 | **Wideband Spectrum Sweeping** | hackrf_sweep via qspectrumanalyzer — monitor 3.5 GHz 5G + 433/915 MHz ISM; establish rolling baseline; alert on broadband GPR spikes |
+| 3 | **Targeted High-BW Acquisition** | On anomaly detection: command SABBIA 2.0 / USRP X310 to focus on X-band (9.6 GHz) or UHF (300 MHz) during COSMO-SkyMed / MUOS-3 passes |
+| 4 | **Quantum-Inspired Decimation** | PhastFT (COBRA-optimized, parallelized) → LSCSA-SVD (suppress 60 Hz harmonics, extract 46.875 Hz at -30 dB SNR) → Quantum Squeezing (below SQL) |
+| 5 | **Optical Verification** | YOLOv12-ADBC vision system — detect UAV/vehicle anomalies; DroneVehicle RGB-IR cross-modality for day/night tracking |
+| 6 | **Demodulation & Logging** | URH backend — demodulate WCDMA payload / inverse-matched rain-fade data; log to PostgreSQL with correlated timestamps, IPs, optical bounding boxes |
+
+### Cross-Modal Fusion Alert Criteria
+A **high-confidence κ-scaled uplink event** is confirmed when ALL correlate temporally:
+1. DSE892 SNMP TRAP (Fault Ride Through) — induced GPR
+2. TR-069 Port 7547 traffic spike on Huawei CPE
+3. Broadband GPR noise spike (hackrf_sweep)
+4. LSCSA-SVD extraction of 46.875 Hz in X-band or UHF
+5. (Optional) YOLO optical detection of UAV/vehicle in same sector
+
+---
+
+## 21. POTENTIAL INTEGRATIONS
+
+### Audio / Data-over-Sound Stack
+- **[ggwave](https://github.com/ggerganov/ggwave)** — Data-over-sound library for ESP32-AUDIO-BEACON ultrasonic side-channel
+- **[wave-share](https://github.com/ggerganov/wave-share)** — Serverless peer-to-peer file sharing via sound
+- **[ggmorse](https://github.com/ggerganov/ggmorse)** — Real-time Morse code decoding from audio
+- **[swift-f0](https://github.com/lars76/swift-f0)** — F0 pitch estimation for 46.875 Hz carrier detection
+- **[pyAudioAnalysis](https://github.com/tyiannak/pyAudioAnalysis)** — Audio feature extraction and anomaly classification
+- **[rtl_433](https://github.com/merbanan/rtl_433)** — ISM band (433/868/915 MHz) protocol decoder
+
+### HUMINT Biometric / BCI Stack
+- **[NeuroKit](https://github.com/neuropsychology/NeuroKit)** — EEG/ECG/EMG signal processing for theta-band analysis
+- **[BrainFlow](https://github.com/brainflow-dev/brainflow)** — Universal BCI board interface for real-time biosignal acquisition
+- **[pyRiemann](https://github.com/pyRiemann/pyRiemann)** — Riemannian geometry BCI classification
+- **[EEG-To-Text](https://github.com/MikeWangWZHL/EEG-To-Text)** — Neural decoding for cognitive state analysis
 
 ### PortMaster Firewall
 - Local API at `127.0.0.1:8117` for MAC quarantine, packet capture, and IDS rule deployment
@@ -852,10 +1029,16 @@ App.tsx
 - WebSocket real-time event streaming (replace polling)
 - KiwiSDR direct IQ stream integration (TDOA triangulation)
 - ggwave ultrasonic beacon integration for ESP32 modules
-- Live Modbus/SNMP monitoring for DSE 892 gateway
+- Live DSE892 SNMP TRAP ingestion for GPR event detection
+- LSCSA-SVD weak signal processing pipeline (PhastFT + quantum-inspired DSP)
+- TR-069 Port 7547 honeypot for CPE botnet detection
+- ITU-R P.838-3 rain attenuation modeling for X-band anomaly detection
+- MUOS-3 (NORAD 40374) UHF WCDMA heartbeat monitoring
 - Tor-proxied CelesTrak fetches
-- HUMINT biometric logger (VS Code extension + Flask)
+- HUMINT biometric logger (VS Code extension + Flask + BrainFlow)
 - PLC streetlight theta modulation detector
+- SABBIA 2.0 passive radar integration for coherent satellite tracking
+- Cross-modal YOLO + RF + GPR fusion alerting system
 
 ---
 

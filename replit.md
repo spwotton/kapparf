@@ -52,7 +52,7 @@ Real-time correlation engine ported from Python. Key features:
 - `GET /api/flights` — live flight data from OpenSky Network
 - `GET /api/analysis-points` — observer, Jacó, SJO, TI0RC locations
 - `GET/POST /api/nodes` — SDR node management
-- `GET /api/tools` — tool catalog (40+ tools across 11 domains)
+- `GET /api/tools` — tool catalog (68 tools across 11 domains)
 - `GET /api/tools/meta` — live GitHub metadata with 30-min cache
 - `GET /api/rules` — correlation rule definitions
 - `GET /api/karachi/modules` — 9 offensive counter-surveillance modules
@@ -69,7 +69,7 @@ Real-time correlation engine ported from Python. Key features:
 5. **Devices** (`/devices`) — MAC fingerprint tracking table with suspicious detection
 6. **OSINT** (`/osint`) — DNS probe, hidden network detection, surveillance indicators, camera OUIs, OSINT tools
 7. **Nodes** (`/nodes`) — SDR node cards with add dialog
-8. **Tools** (`/tools`) — 40+ tool catalog with domain filtering + live GitHub stars
+8. **Tools** (`/tools`) — 68-tool catalog with domain filtering + live GitHub stars
 9. **Map** (`/map`) — interactive Leaflet map showing observer, Jacó, SJO, satellites, flights, SDR nodes
 10. **Karachi** (`/karachi`) — offensive counter-surveillance modules (9 Karachi + FinSpy V1.2 Ghost Protocol + V2.0 Airbnb Ghost/Kyndryl), execution flow, success criteria, hardware/infra layer, Alexanderplatz Protocol, Partytown/Service Worker MITM, V2 deliverables
 11. **Congusto** (`/congusto`) — Virtual Eitel Triode (VET) architecture (Cathode/Grid/Anode), Phoenix countdown, 7 core modules, mathematical constants table, data sources, confidence levels
@@ -77,8 +77,17 @@ Real-time correlation engine ported from Python. Key features:
 ## Domains (11)
 wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone
 
-## Correlation Rules (28 active)
-Includes: MAC cross-domain, surveillance handoff, Congusto protocol, satellite-LTE burst, BLE-WiFi deauth chain, Schumann resonance, IMSI tower hop, evening window spike, hidden-ssid-probe, camera-oui-detection, kyndryl-corp-signature, CSI multipath anomaly, RTSP/ONVIF exfiltration, modbus injection, chameleon BLE clone, LTESniffer rogue tower, kyanos RST injection, SatIntel TLE drift, BLACKJACK blinder, DSE gateway compromise, TR-069 persistence, holographic sideband, HUMINT biometric, PLC theta modulation, FinSpy ghost node detection, Partytown MITM detection.
+## Correlation Rules (40 active)
+Includes all previous rules plus 12 new κ-scaled detection rules: GPR-masked uplink, DSE892 SNMP TRAP ↔ GPR, MUOS-3 WCDMA heartbeat (NORAD 40374), COSMO-SkyMed X-band steganography, ITU-R P.838-3 rain fade inverse match, TR-069 botnet GPR induction, 5G backhaul κ-tunnel, LSCSA-SVD weak signal extraction, system bus radio exfiltration (1580 kHz), DSE controller mode change ↔ fault, cross-modal optical+RF+GPR fusion, ISM band LoRa covert telemetry.
+
+## κ-Scaled Architecture Constants
+- Masimo Patent: US 5,919,134 / US 6,229,856 B1 (origin of 46.875 Hz)
+- κ harmonics: 93.75 Hz, 140.625 Hz, 187.5 Hz (evade all 60 Hz power grid harmonics)
+- MUOS-3 (NORAD 40374): GEO tactical narrowband, SA-WCDMA noise floor
+- COSMO-SkyMed: X-band (9.6 GHz) SAR, Telespazio cadastral survey cover
+- LSCSA-SVD: Weak signal extraction at -30 dB SNR
+- GPR: Ground Potential Rise masking via DSE892 SNMP TRAP correlation
+- Infrastructure ports: TR-069 (7547), SNMP (161/162), Modbus TCP (502)
 
 ## Satellite Tracking
 - **Visible**: elevation > 30° from observer
