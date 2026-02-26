@@ -1,23 +1,26 @@
 import {
   type User, type InsertUser,
-  type DetectionEvent, type InsertDetectionEvent,
-  type AnomalyReport, type InsertAnomalyReport,
+  type SignalEvent, type InsertSignalEvent,
+  type Correlation, type InsertCorrelation,
   type SatellitePass, type InsertSatellitePass,
   type SdrNode, type InsertSdrNode,
-  users, detectionEvents, anomalyReports, satellitePasses, sdrNodes,
+  users, signalEvents, correlations, satellitePasses, sdrNodes,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, sql } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  getDetections(): Promise<DetectionEvent[]>;
-  getRecentDetections(limit: number): Promise<DetectionEvent[]>;
-  createDetection(event: InsertDetectionEvent): Promise<DetectionEvent>;
-  getAnomalies(): Promise<AnomalyReport[]>;
-  createAnomaly(report: InsertAnomalyReport): Promise<AnomalyReport>;
+  getSignalEvents(domain?: string): Promise<SignalEvent[]>;
+  getRecentSignalEvents(limit: number): Promise<SignalEvent[]>;
+  createSignalEvent(event: InsertSignalEvent): Promise<SignalEvent>;
+  getSignalEventsByWindow(windowSeconds: number): Promise<SignalEvent[]>;
+  getEventCountsByDomain(): Promise<Record<string, number>>;
+  getCorrelations(): Promise<Correlation[]>;
+  createCorrelation(correlation: InsertCorrelation): Promise<Correlation>;
+  getCorrelationCount(): Promise<number>;
   getSatellites(): Promise<SatellitePass[]>;
   upsertSatellite(pass: InsertSatellitePass): Promise<SatellitePass>;
   getNodes(): Promise<SdrNode[]>;
@@ -41,26 +44,54 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async getDetections(): Promise<DetectionEvent[]> {
-    return db.select().from(detectionEvents).orderBy(desc(detectionEvents.timestamp));
+  async getSignalEvents(domain?: string): Promise<SignalEvent[]> {
+    if (domain) {
+      return db.select().from(signalEvents).where(eq(signalEvents.domain, domain)).orderBy(desc(signalEvents.timestamp));
+    }
+    return db.select().from(signalEvents).orderBy(desc(signalEvents.timestamp));
   }
 
-  async getRecentDetections(limit: number): Promise<DetectionEvent[]> {
-    return db.select().from(detectionEvents).orderBy(desc(detectionEvents.timestamp)).limit(limit);
+  async getRecentSignalEvents(limit: number): Promise<SignalEvent[]> {
+    return db.select().from(signalEvents).orderBy(desc(signalEvents.timestamp)).limit(limit);
   }
 
-  async createDetection(event: InsertDetectionEvent): Promise<DetectionEvent> {
-    const [detection] = await db.insert(detectionEvents).values(event).returning();
-    return detection;
+  async createSignalEvent(event: InsertSignalEvent): Promise<SignalEvent> {
+    const [created] = await db.insert(signalEvents).values(event).returning();
+    return created;
   }
 
-  async getAnomalies(): Promise<AnomalyReport[]> {
-    return db.select().from(anomalyReports).orderBy(desc(anomalyReports.timestamp));
+  async getSignalEventsByWindow(windowSeconds: number): Promise<SignalEvent[]> {
+    const cutoff = new Date(Date.now() - windowSeconds * 1000);
+    return db.select().from(signalEvents)
+      .where(sql`${signalEvents.timestamp} > ${cutoff}`)
+      .orderBy(desc(signalEvents.timestamp));
   }
 
-  async createAnomaly(report: InsertAnomalyReport): Promise<AnomalyReport> {
-    const [anomaly] = await db.insert(anomalyReports).values(report).returning();
-    return anomaly;
+  async getEventCountsByDomain(): Promise<Record<string, number>> {
+    const result = await db.select({
+      domain: signalEvents.domain,
+      count: sql<number>`count(*)::int`,
+    }).from(signalEvents).groupBy(signalEvents.domain);
+
+    const counts: Record<string, number> = {};
+    for (const row of result) {
+      counts[row.domain] = row.count;
+    }
+    return counts;
+  }
+
+  async getCorrelations(): Promise<Correlation[]> {
+    return db.select().from(correlations).orderBy(desc(correlations.timestamp));
+  }
+
+  async createCorrelation(correlation: InsertCorrelation): Promise<Correlation> {
+    const [created] = await db.insert(correlations).values(correlation).returning();
+    return created;
+  }
+
+  async getCorrelationCount(): Promise<number> {
+    const [result] = await db.select({ count: sql<number>`count(*)::int` }).from(correlations);
+    return result?.count ?? 0;
   }
 
   async getSatellites(): Promise<SatellitePass[]> {

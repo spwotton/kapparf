@@ -9,22 +9,22 @@ import { HeaderControls } from "@/components/header-controls";
 import { ThemeProvider } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
 import NotFound from "@/pages/not-found";
-import OverviewPage from "@/pages/overview";
-import SignalsPage from "@/pages/signals";
+import DashboardPage from "@/pages/overview";
+import EventsPage from "@/pages/events";
+import CorrelationsPage from "@/pages/correlations";
 import SatellitesPage from "@/pages/satellites";
-import AnomaliesPage from "@/pages/anomalies";
 import NodesPage from "@/pages/nodes";
-import ConstantsPage from "@/pages/constants";
+import ToolsPage from "@/pages/tools";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={OverviewPage} />
-      <Route path="/signals" component={SignalsPage} />
+      <Route path="/" component={DashboardPage} />
+      <Route path="/events" component={EventsPage} />
+      <Route path="/correlations" component={CorrelationsPage} />
       <Route path="/satellites" component={SatellitesPage} />
-      <Route path="/anomalies" component={AnomaliesPage} />
       <Route path="/nodes" component={NodesPage} />
-      <Route path="/constants" component={ConstantsPage} />
+      <Route path="/tools" component={ToolsPage} />
       <Route component={NotFound} />
     </Switch>
   );

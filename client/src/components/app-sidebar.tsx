@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Radio, Satellite, AlertTriangle, Server, Calculator, LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,12 +19,12 @@ export function AppSidebar() {
   const [location] = useLocation();
 
   const items = [
-    { title: t("nav.overview"), url: "/", icon: LayoutDashboard },
-    { title: t("nav.signals"), url: "/signals", icon: Radio },
+    { title: t("nav.dashboard"), url: "/", icon: LayoutDashboard },
+    { title: t("nav.events"), url: "/events", icon: Activity },
+    { title: t("nav.correlations"), url: "/correlations", icon: Link2 },
     { title: t("nav.satellites"), url: "/satellites", icon: Satellite },
-    { title: t("nav.anomalies"), url: "/anomalies", icon: AlertTriangle },
     { title: t("nav.nodes"), url: "/nodes", icon: Server },
-    { title: t("nav.constants"), url: "/constants", icon: Calculator },
+    { title: t("nav.tools"), url: "/tools", icon: Wrench },
   ];
 
   return (
@@ -51,7 +51,7 @@ export function AppSidebar() {
                   <SidebarMenuButton
                     asChild
                     data-active={location === item.url}
-                    data-testid={`nav-${item.url.replace("/", "") || "overview"}`}
+                    data-testid={`nav-${item.url.replace("/", "") || "dashboard"}`}
                   >
                     <Link href={item.url}>
                       <item.icon className="h-4 w-4" />
@@ -65,7 +65,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4">
-        <p className="text-xs text-muted-foreground">Samuel Wotton</p>
+        <p className="text-xs text-muted-foreground font-mono">9.95°N 84.15°W</p>
       </SidebarFooter>
     </Sidebar>
   );

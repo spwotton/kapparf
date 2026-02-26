@@ -1,210 +1,176 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
-import { GOS_CONSTANTS, type DetectionEvent } from "@shared/schema";
-import { MapPin, Clock, Activity, Target } from "lucide-react";
+import { KAPPA_CONSTANTS, DOMAINS, type SignalEvent } from "@shared/schema";
+import { MapPin, Activity, Wifi, Radio, Satellite, Signal } from "lucide-react";
 
-function PhoenixCountdown() {
+const domainIcons: Record<string, typeof Wifi> = {
+  wifi: Wifi,
+  ble: Signal,
+  lte: Radio,
+  "5g": Radio,
+  satellite: Satellite,
+  sdr: Radio,
+  elf: Activity,
+};
+
+const domainColors: Record<string, string> = {
+  wifi: "bg-green-500/10 text-green-700 dark:text-green-400",
+  ble: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+  lte: "bg-red-500/10 text-red-700 dark:text-red-400",
+  "5g": "bg-orange-500/10 text-orange-700 dark:text-orange-400",
+  satellite: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
+  sdr: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+  elf: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400",
+};
+
+export default function DashboardPage() {
   const { t } = useI18n();
-  const [now, setNow] = useState(new Date());
 
-  useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const phoenix = GOS_CONSTANTS.PHOENIX_DATE;
-  const diff = phoenix.getTime() - now.getTime();
-  const totalDays = diff / (1000 * 60 * 60 * 24);
-  const years = Math.floor(totalDays / 365.25);
-  const months = Math.floor((totalDays % 365.25) / 30.44);
-  const days = Math.floor(totalDays % 30.44);
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-  const startDate = new Date("2012-07-04T00:00:00Z");
-  const totalSpan = phoenix.getTime() - startDate.getTime();
-  const elapsed = now.getTime() - startDate.getTime();
-  const progress = Math.min(100, Math.max(0, (elapsed / totalSpan) * 100));
-
-  return (
-    <Card>
-      <CardHeader className="pb-3">
-        <div className="flex items-center gap-2">
-          <Clock className="h-4 w-4 text-muted-foreground" />
-          <CardTitle className="text-sm font-medium">{t("overview.countdown")}</CardTitle>
-        </div>
-        <CardDescription className="text-xs">{t("overview.countdownDesc")}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-4 gap-3 mb-4">
-          {[
-            { value: years, label: t("overview.years") },
-            { value: months, label: t("overview.months") },
-            { value: days, label: t("overview.days") },
-            { value: hours, label: t("overview.hours") },
-          ].map((item) => (
-            <div key={item.label} className="text-center">
-              <div className="text-2xl font-mono font-semibold tabular-nums" data-testid={`text-countdown-${item.label}`}>
-                {item.value}
-              </div>
-              <div className="text-xs text-muted-foreground">{item.label}</div>
-            </div>
-          ))}
-        </div>
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between gap-1 text-xs text-muted-foreground">
-            <span>{t("overview.progress")}</span>
-            <span className="font-mono">{progress.toFixed(1)}%</span>
-          </div>
-          <Progress value={progress} className="h-1.5" data-testid="progress-phoenix" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-function PipelineStatus() {
-  const { t } = useI18n();
-  const { data: pipeline } = useQuery<{
-    running: boolean;
-    cycleCount: number;
-    lastCycle: string | null;
-    nextCycle: string | null;
+  const { data: stats, isLoading: statsLoading } = useQuery<{
+    totalEvents: number;
+    correlationCount: number;
+    domainCounts: Record<string, number>;
   }>({
-    queryKey: ["/api/pipeline/status"],
-    refetchInterval: 5000,
+    queryKey: ["/api/stats"],
+    refetchInterval: 10000,
   });
 
-  return (
-    <Card>
-      <CardHeader className="pb-3">
-        <div className="flex items-center gap-2">
-          <Activity className="h-4 w-4 text-muted-foreground" />
-          <CardTitle className="text-sm font-medium">{t("overview.pipeline")}</CardTitle>
-        </div>
-        <CardDescription className="text-xs">{t("overview.pipelineDesc")}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        {!pipeline ? (
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-3/4" />
-          </div>
-        ) : (
-          <div className="space-y-3">
-            <div className="flex items-center justify-between gap-1">
-              <span className="text-sm text-muted-foreground">{t("overview.status")}</span>
-              <Badge variant={pipeline.running ? "default" : "secondary"} data-testid="badge-pipeline-status">
-                {pipeline.running ? t("overview.running") : t("overview.stopped")}
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between gap-1">
-              <span className="text-sm text-muted-foreground">{t("overview.cycleCount")}</span>
-              <span className="text-sm font-mono" data-testid="text-cycle-count">{pipeline.cycleCount}</span>
-            </div>
-            {pipeline.lastCycle && (
-              <div className="flex items-center justify-between gap-1">
-                <span className="text-sm text-muted-foreground">{t("overview.lastCycle")}</span>
-                <span className="text-xs font-mono text-muted-foreground">
-                  {new Date(pipeline.lastCycle).toLocaleTimeString()}
-                </span>
-              </div>
-            )}
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
-
-function ObserverCard() {
-  const { t } = useI18n();
-  return (
-    <Card>
-      <CardHeader className="pb-3">
-        <div className="flex items-center gap-2">
-          <MapPin className="h-4 w-4 text-muted-foreground" />
-          <CardTitle className="text-sm font-medium">{t("overview.observer")}</CardTitle>
-        </div>
-        <CardDescription className="text-xs">{t("overview.observerDesc")}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          {[
-            { label: t("overview.lat"), value: `${GOS_CONSTANTS.OBSERVER_LAT}\u00B0 N` },
-            { label: t("overview.lon"), value: `${Math.abs(GOS_CONSTANTS.OBSERVER_LON)}\u00B0 W` },
-            { label: t("overview.alt"), value: `${GOS_CONSTANTS.OBSERVER_ALT} km` },
-            { label: t("overview.minElev"), value: `${GOS_CONSTANTS.MIN_ELEVATION}\u00B0` },
-          ].map((row) => (
-            <div key={row.label} className="flex items-center justify-between gap-1">
-              <span className="text-sm text-muted-foreground">{row.label}</span>
-              <span className="text-sm font-mono">{row.value}</span>
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  );
-}
-
-export default function OverviewPage() {
-  const { t } = useI18n();
-  const { data: detections, isLoading } = useQuery<DetectionEvent[]>({
-    queryKey: ["/api/detections", "recent"],
+  const { data: recentEvents, isLoading: eventsLoading } = useQuery<SignalEvent[]>({
+    queryKey: ["/api/events", "recent"],
     refetchInterval: 10000,
   });
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight" data-testid="text-page-title">{t("overview.title")}</h1>
-        <p className="text-sm text-muted-foreground mt-1">{t("overview.description")}</p>
+        <h1 className="text-2xl font-semibold tracking-tight" data-testid="text-page-title">{t("dashboard.title")}</h1>
+        <p className="text-sm text-muted-foreground mt-1">{t("dashboard.description")}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <PipelineStatus />
-        <PhoenixCountdown />
-        <ObserverCard />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium">{t("dashboard.totalEvents")}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {statsLoading ? (
+              <Skeleton className="h-8 w-20" />
+            ) : (
+              <div className="text-3xl font-mono font-semibold tabular-nums" data-testid="text-total-events">
+                {stats?.totalEvents ?? 0}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm font-medium">{t("dashboard.totalCorrelations")}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {statsLoading ? (
+              <Skeleton className="h-8 w-20" />
+            ) : (
+              <div className="text-3xl font-mono font-semibold tabular-nums" data-testid="text-total-correlations">
+                {stats?.correlationCount ?? 0}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">{t("dashboard.observer")}</CardTitle>
+            </div>
+            <CardDescription className="text-xs">{t("dashboard.observerDesc")}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-1.5 text-sm">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-muted-foreground">{t("dashboard.lat")}</span>
+                <span className="font-mono">{KAPPA_CONSTANTS.OBSERVER_LAT}&deg; N</span>
+              </div>
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-muted-foreground">{t("dashboard.lon")}</span>
+                <span className="font-mono">{Math.abs(KAPPA_CONSTANTS.OBSERVER_LON)}&deg; W</span>
+              </div>
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-muted-foreground">{t("dashboard.alt")}</span>
+                <span className="font-mono">{KAPPA_CONSTANTS.OBSERVER_ALT} km</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
+
+      <Card>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-sm font-medium">{t("dashboard.domainBreakdown")}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {statsLoading ? (
+            <div className="flex gap-3 flex-wrap">
+              {[1, 2, 3].map((i) => <Skeleton key={i} className="h-8 w-24" />)}
+            </div>
+          ) : (
+            <div className="flex gap-3 flex-wrap">
+              {DOMAINS.map((domain) => {
+                const count = stats?.domainCounts?.[domain] ?? 0;
+                return (
+                  <div
+                    key={domain}
+                    className={`px-3 py-1.5 rounded-md text-sm font-mono ${domainColors[domain] || "bg-muted text-muted-foreground"}`}
+                    data-testid={`badge-domain-${domain}`}
+                  >
+                    {domain.toUpperCase()} <span className="font-semibold ml-1">{count}</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <div>
-        <div className="flex items-center gap-2 mb-3">
-          <Target className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-sm font-medium">{t("overview.recentDetections")}</h2>
-        </div>
-        {isLoading ? (
+        <h2 className="text-sm font-medium mb-3">{t("dashboard.recentEvents")}</h2>
+        {eventsLoading ? (
           <div className="space-y-2">
-            {[1, 2, 3].map((i) => (
-              <Skeleton key={i} className="h-12 w-full" />
-            ))}
+            {[1, 2, 3].map((i) => <Skeleton key={i} className="h-12 w-full" />)}
           </div>
-        ) : !detections || detections.length === 0 ? (
+        ) : !recentEvents || recentEvents.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center text-sm text-muted-foreground">
-              {t("overview.noDetections")}
+              {t("dashboard.noEvents")}
             </CardContent>
           </Card>
         ) : (
           <div className="space-y-2">
-            {detections.slice(0, 5).map((d) => (
-              <Card key={d.id}>
-                <CardContent className="py-3 flex items-center justify-between gap-2 flex-wrap">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-sm">{d.frequency.toFixed(3)} Hz</span>
-                    <Badge variant="secondary">{d.source}</Badge>
-                  </div>
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <span>SNR {d.snr.toFixed(1)} dB</span>
-                    <span>{d.confidence.toFixed(0)}%</span>
-                    <span className="font-mono">{new Date(d.timestamp).toLocaleTimeString()}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {recentEvents.slice(0, 8).map((evt) => {
+              const Icon = domainIcons[evt.domain] || Activity;
+              return (
+                <Card key={evt.id} data-testid={`card-event-${evt.id}`}>
+                  <CardContent className="py-3 flex items-center justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-3">
+                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <Badge variant="secondary" className={domainColors[evt.domain]}>
+                        {evt.domain.toUpperCase()}
+                      </Badge>
+                      <span className="text-sm">{evt.eventType}</span>
+                      <span className="text-sm text-muted-foreground">{evt.source}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="font-mono">{(evt.confidence * 100).toFixed(0)}%</span>
+                      <span className="font-mono">{new Date(evt.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         )}
       </div>

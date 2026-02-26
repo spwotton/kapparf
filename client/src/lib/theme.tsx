@@ -12,14 +12,14 @@ const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
-    const saved = localStorage.getItem("kyma-theme");
+    const saved = localStorage.getItem("kappa-theme");
     if (saved === "dark" || saved === "light") return saved;
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   });
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("kyma-theme", theme);
+    localStorage.setItem("kappa-theme", theme);
   }, [theme]);
 
   const setTheme = useCallback((t: Theme) => setThemeState(t), []);

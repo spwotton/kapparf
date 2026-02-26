@@ -1,0 +1,183 @@
+# Project KAPPA: Multi-Domain Signal Intelligence & Correlation Engine
+
+## Fictional Research Prompt for a Speculative Tech Novel
+
+**Setting:** In a parallel universe where global surveillance infrastructure has converged into a seamless panopticon, a group of counter-surveillance engineers must build a system to detect, decode, and correlate signals across every layer of the electromagnetic spectrum—from ELF waves penetrating the ocean to satellite megaconstellations in low Earth orbit. This project, codenamed **KAPPA**, aims to reveal the hidden hand behind the "Toroidal Recursion."
+
+**Disclaimer:** The following is a purely fictional technical specification for a novel. Any resemblance to real-world technologies or events is coincidental and used for narrative purposes only.
+
+---
+
+## 1. Overview
+
+The KAPPA system is a modular, scalable signal intelligence platform that fuses data from multiple open-source and custom-built sensors to detect anomalies and correlate them across domains. It must:
+
+- Capture and analyze **ELF (Extremely Low Frequency)**, **HF/VHF/UHF**, **WiFi**, **Bluetooth/BLE**, **cellular (LTE/5G)**, and **satellite** communications.
+- Identify patterns indicative of coordinated surveillance, such as synchronized satellite passes with terrestrial RF bursts, or hidden command channels piggybacking on commercial infrastructure.
+- Provide a unified query interface and real-time dashboard for human analysts.
+
+---
+
+## 2. Core Requirements
+
+### 2.1 Data Acquisition Layer
+Integrate the following tools into a common ingestion pipeline. Each tool must be wrapped with a standardized output format (JSON over ZeroMQ or MQTT) containing timestamp, frequency/band, source metadata, and decoded payload (where possible).
+
+| Domain | Tool / Library | Purpose |
+|--------|----------------|---------|
+| **WiFi / Packet** | [kyanos](https://github.com/hengyoush/kyanos) | Long-term flow storage and analysis |
+| | [kubeshark](https://github.com/kubeshark/kubeshark) | Kubernetes traffic mirroring (if cluster available) |
+| | [mirrord](https://github.com/metalbear-co/mirrord) | Live traffic mirroring for debugging |
+| | [ptcpdump](https://github.com/mozillazg/ptcpdump) | Process-aware packet capture |
+| | [ngrep](https://github.com/jpr5/ngrep) | Grep-like network packet display |
+| | [Above](https://github.com/caster0x00/Above) | Network scanner (investigate) |
+| | [WindowsSpyBlocker](https://github.com/crazy-max/WindowsSpyBlocker) | Detect Windows telemetry |
+| | [fort](https://github.com/tnodir/fort) | Firewall testing / reconnaissance |
+| **Bluetooth / BLE** | [Sniffle](https://github.com/nccgroup/Sniffle) | TI CC1352/CC2652 BLE sniffer |
+| | [BTLE](https://github.com/JiaoXianjun/BTLE) | Ubertooth-based BLE sniffer |
+| **Cellular (LTE/5G)** | [LTESniffer](https://github.com/SysSec-KAIST/LTESniffer) | Passive LTE downlink sniffer |
+| | [Sni5Gect](https://github.com/asset-group/Sni5Gect-5GNR-sniffing-and-exploitation) | 5G NR sniffing & exploitation |
+| **Satellite** | [gr-satellites](https://github.com/daniestevez/gr-satellites) | GNU Radio decoder for many satellite protocols |
+| | [himawari.js](https://github.com/jakiestfu/himawari.js) | Real-time Himawari satellite imagery |
+| | [keeptrack.space](https://github.com/thkruz/keeptrack.space) | Satellite tracking library |
+| | [satpy](https://github.com/pytroll/satpy) | Python library for satellite data processing |
+| | [gpredict](https://github.com/csete/gpredict) | Satellite tracking and orbit prediction |
+| | [SatIntel](https://github.com/ANG13T/SatIntel) | OSINT tool for satellite intelligence |
+| | [sar-interference-tracker](https://github.com/bellingcat/sar-interference-tracker) | Detect SAR interference |
+| | [PythonFromSpace](https://github.com/kscottz/PythonFromSpace) | Satellite image analysis tutorials/code |
+| | [SecureLEO](https://github.com/Yongjae-ICIS/SecureLEO) | LEO satellite security analysis |
+| | [iridium-sniffer](https://github.com/alphafox02/iridium-sniffer) | Decode Iridium satellite signals |
+| **SDR / General RF** | [sdrtrunk](https://github.com/DSheirer/sdrtrunk) | Multi-channel trunked radio decoder |
+| | [spektrum](https://github.com/pavels/spektrum) | Spectrum analyzer |
+| | [inspectrum](https://github.com/miek/inspectrum) | Offline radio signal analyzer |
+| | [PySDR](https://github.com/777arc/PySDR) | Educational SDR code and examples |
+| **Hardware / Utility** | [ChameleonMini](https://github.com/emsec/ChameleonMini) | RFID emulator (for proximity attacks) |
+
+### 2.2 Common Data Model
+All ingested events must conform to a schema:
+
+```json
+{
+  "timestamp": "2026-02-25T12:34:56.789Z",
+  "domain": "wifi | ble | lte | 5g | satellite | sdr | elf",
+  "source": "interface name / frequency / satellite NORAD ID",
+  "event_type": "beacon | deauth | handshake | paging | telemetry | etc.",
+  "confidence": 0.0-1.0,
+  "metadata": { ... },   // tool-specific details
+  "raw": "base64..."     // optional
+}
+```
+
+### 2.3 Processing Pipeline
+- **Real-time stream processing** using Apache Flink or Kafka Streams.
+- **Feature extraction**: For each event, extract relevant features (MAC addresses, SSIDs, frequencies, orbital parameters, signal strength, etc.) and store in a time-series database (InfluxDB/TimescaleDB).
+- **Anomaly detection**: Use statistical models (e.g., Isolation Forest) and rule-based triggers to flag unusual patterns (e.g., unexpected satellite maneuvers coinciding with terrestrial bursts).
+
+### 2.4 Correlation Engine
+The heart of KAPPA: a rule-based and ML-assisted engine that identifies cross-domain patterns.
+
+- **Rule DSL**: Allow analysts to write rules like:
+  ```
+  WHEN
+    wifi.probe_req.mac == ble.advertisement.mac
+    WITHIN 10 seconds
+  THEN alert "Dual-band activity from same device"
+  ```
+- **Temporal joins**: Correlate events across domains using sliding windows.
+- **Spatial correlation**: For satellite events, use TLE data to compute ground tracks and correlate with terrestrial sensors in the vicinity.
+- **Example patterns to detect**:
+  - Satellite pass over a location followed by a burst of LTE paging messages → possible command upload.
+  - BLE beacon with a MAC that later appears in a WiFi deauth flood → coordinated harassment.
+  - ELF signals at 7.83 Hz (Schumann resonance) modulated with data → submarine communication.
+  - 46.875 Hz carrier in DSP spectrum → artifact or hidden channel? (Known from 48 kHz / 1024 FFT; could be used for low-rate data injection.)
+
+### 2.5 Storage & API
+- **Time-series DB**: InfluxDB with downsampling policies for long-term retention.
+- **Metadata DB**: PostgreSQL for device fingerprints, known malicious indicators, satellite TLEs.
+- **REST API** (FastAPI) for querying events, adding rules, and retrieving correlation results.
+- **WebSocket** for real-time alerts.
+
+### 2.6 Dashboard
+A React-based dashboard with:
+- Real-time event feed.
+- Map view (Leaflet) showing satellite ground tracks and geolocated terrestrial events.
+- Correlation timeline with drill-down.
+- Rule management interface.
+
+### 2.7 Scalability (“Kappa Scaled”)
+- Microservices architecture (Docker/Kubernetes).
+- Horizontal scaling of ingestion and correlation workers.
+- Edge sensors (Raspberry Pi + SDR) that forward data to central cluster via MQTT.
+- Use of Kafka for resilient event streaming.
+
+---
+
+## 3. Fictional Context for the Novel
+
+In the book, the KAPPA system is deployed by a rogue team of ex-intelligence analysts who discover that a covert surveillance network—dubbed **“Toroidal Recursion”**—uses a combination of:
+
+- **DARPA BLACKJACK** and **SDA Transport Layer** satellites to form a low-latency mesh network with optical inter-satellite links (star/diamond formations).
+- **Starlink** terminals repurposed as backhaul for ground sensors.
+- **46.875 Hz** carriers hidden in commercial WiFi routers (using the DSP artifact as a covert channel).
+- **ELF transmitters** off the coast of Costa Rica (near Jacó) to communicate with submarines and deep-ground sensors.
+
+The protagonists must correlate satellite passes with bursts of 46.875 Hz energy detected on hacked IoT devices, leading them to a network of compromised **Kyndryl-managed** telecom infrastructure (Claro, Liberty) and **Setecom** industrial controllers. The **Riemann hypothesis** and **128.23° twist** appear as mathematical signatures in the modulation schemes—clues that the system was designed using advanced topological mathematics.
+
+The KAPPA engine becomes the tool that unravels the conspiracy, but also attracts the attention of the very forces it seeks to expose.
+
+---
+
+## 4. Implementation Plan (for the Developer)
+
+### Phase 0: Tool Survey
+- Test each listed tool in a sandbox environment. Document output formats and feasibility of real-time integration.
+- Prioritize tools that offer machine-readable output (JSON, protobuf) or have Python bindings.
+
+### Phase 1: Core Infrastructure
+- Set up Kafka + Zookeeper.
+- Implement ingestion service that spawns tool wrappers as subprocesses and forwards normalized events to Kafka.
+- Create schema registry (Avro/Protobuf) for event validation.
+
+### Phase 2: Satellite Integration
+- Use `gpredict` or `pyephem` to compute real-time satellite positions.
+- Cross-reference with SDA public TLEs (NORAD) and detect formations (star/diamond patterns).
+- Integrate `gr-satellites` to decode telemetry from LEO constellations (including potentially classified ones if signals are captured).
+
+### Phase 3: Correlation Engine
+- Develop rule engine using Python with a simple DSL.
+- Implement windowed joins using Kafka Streams (or Flink) for low-latency correlations.
+- Add ML anomaly detection (e.g., LSTM on time-series of signal strengths) to detect stealthy patterns.
+
+### Phase 4: Dashboard & API
+- FastAPI backend with WebSocket.
+- React frontend with real-time charts and maps.
+
+### Phase 5: Deployment & Documentation
+- Docker Compose for local testing.
+- Helm charts for Kubernetes deployment.
+- Detailed user guide and rule-writing tutorial.
+
+---
+
+## 5. Success Criteria
+
+- The system can simultaneously ingest data from at least five different domains (e.g., WiFi, BLE, LTE, satellite, SDR) in real time.
+- Correlation rules trigger within 2 seconds of pattern completion.
+- The dashboard updates live with minimal latency.
+- New sensors can be added with less than 100 lines of wrapper code.
+- The fictional narrative includes plausible technical descriptions derived from the working prototype.
+
+---
+
+## 6. Additional Research References (Fictional)
+
+- “RSNC: Resonome-Stratified Neural Codex” – a fictional paper describing a three-tier codebook for neural decoding (can be adapted to signal classification).
+- “BLACKJACK & SDA Intelligence Brief” – background on satellite formations.
+- “Simulation Collapse and Topological Immunity” – speculative physics underlying the conspiracy.
+- “True Research on Super Artificial Intelligence Computer Based Satellite Deep Tech” – a pseudoscientific but richly detailed document that provides inspiration for the book’s antagonist technology.
+
+---
+
+**End of Prompt**
+
+This document provides a complete, technically detailed specification for building the KAPPA system, tailored for a developer while serving as a narrative blueprint for a techno-thriller novel. The tools and concepts are real, the integration is feasible, and the fictional layer adds depth without compromising technical accuracy.
