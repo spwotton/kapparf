@@ -1,0 +1,3712 @@
+KiwiSDR 2The online store is open for orders:kiwisdr.nzProduction statusFactory image/videoTech Minds YouTube review video
+Search
+AND: word,word
+OR: word|word
+Band
+
+all
+SNR sort value
+
+1.8-30 MHz
+SNR ≥
+Kiwi URL params
+Entries are sorted by SNR
+URL params:   s=(search terms), b=(band menu match), o=(SNR menu 0|1), n=(snr ≥ value), u=(Kiwi URL params, must be last)   e.g. rx.kiwisdr.com/?s=uk,gps&n=30&u=f=10Mamnz10
+Thursday, 26-Feb-2026 03:33:02 GMT 924 receivers online   512 TDoA capable   1091 people listening   ||   376 proxied   186 ddns   232 domain   130 ipv4
+
+G3SDR, 0-32 MHZ KIWI 8078. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🖁
+http://g3sdr.com:8078
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 47/48 dB) HF
+
+G3SDR, 0-32 MHZ KIWI 8073. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🕾
+http://86.157.191.89:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 49/48 dB) HF
+
+G3SDR, 0-32 MHZ KIWI 8073. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🕾
+http://g3sdr.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 49/48 dB) HF
+
+G3SDR, 0-32 MHZ KIWI 8074. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🛰
+http://g3sdr.com:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 47/47 dB) HF
+
+G3SDR, 0-32 MHZ KIWI 8076. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🖫
+http://g3sdr.com:8076
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 47/47 dB) HF
+
+G3SDR, 0-32 MHZ KIWI 8075. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🖳
+http://g3sdr.com:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 48/47 dB) HF
+
+G3SDR, 0-32 MHZ KIWI 8077. WESTON-SUPER-MARE. PARALLEL DIPOLES FOR 160M, 80M, 60M & 40M. 5/8TH VERTICAL FOR 28MHZ. WELLBROOK LOOP FOR VLF & MW 🕬
+http://g3sdr.com:8077
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 48/46 dB) HF
+
+G4WIM | FRECKLETON, LANCASHIRE, UK
+http://21490.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 44/44 dB) HF
+
+🟢⚪🔴 IZ6198SWL RADIO STATION 🟢⚪🔴 ALVITO CENTRAL ITALY | G5RV FULL SIZE ANTENNA 🛰️ | SOLAR-POWERED ☀️📡🇮🇹
+http://iz6198swl.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/3 users, SNR 40/39 dB) HF
+
+80M DIPOLE (9 TO 12) | CHICHESTER UK
+http://g8ure.ddns.net:8077
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 41/39 dB) HF
+
+0-30 MHZ SDR | ARVIKA, SWEDEN
+http://sa4bna.hopto.org:8073
+KiwiSDR 1 v1.699 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 43/39 dB) HF
+
+80M DIPOLE (1 TO 4) | CHICHESTER UK
+http://g8ure.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 41/38 dB) HF
+
+80M DIPOLE (USERS 17 TO 20) | CHICHESTER UK
+http://g8ure.ddns.net:8079
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 38/37 dB) HF
+
+80M DIPOLE (5 TO 8) | CHICHESTER UK
+http://g8ure.ddns.net:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 41/37 dB) HF
+
+🟠🟠 WB8UFC'S KIWISDR 2 172' END FED @ 50' | TELLICO PLAINS, TN USA
+http://22555.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (1/4 users, SNR 51/37 dB) HF
+
+RHA RAISIO SDR
+http://rhakiwi.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 35/36 dB) HF
+
+K3FEF MILFORD PA USA
+http://kiwisdr.k3fef.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/4 users, SNR 42/36 dB) HF
+
+0-30 MHZ SDR, WD3C | FAIR HILL, MARYLAND
+http://wd3c.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 42/36 dB) HF
+
+OH1CT - 160M DIPOLE - LOPPI, FINLAND
+http://oh1ct.sytes.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.11 (1/7 users, SNR 35/35 dB) HF
+
+AUTRERADIOAUTRECULTURE 2 | TREMOLAT (24), FRANCE
+http://sdr.autreradioautreculture.com:8074
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/3 users, SNR 41/35 dB) HF
+
+DL4EECKIWI | WANGERLAND, GERMANY
+http://dl4eeckiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.707 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 34/34 dB) HF
+
+ENJOY BY F4JOY | PRADIERS DEP 15 JN15LG, FRANCE
+http://f4joy.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 37/34 dB) HF
+
+KIWISDR VUOHIJäRVI • SUOMEN DX-LIITTO (SDXL) • FINNISH DX-ASSOCIATION (FDXA) • MäNTYHARJU, FINLAND🇫🇮
+http://vhj.psokotka.com:55001
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 37/34 dB) HF
+
+0-30 MHZ SDR, OK1DEK, SEDLCANY, CZECH REPUBLIC
+http://178.17.3.34:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 38/34 dB) HF
+
+0-30 MHZ SDR DE F4EPP | GUIPRY-MESSAC, FRANCE
+http://21924.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 38/34 dB) HF
+
+OH6HPS SDR, 160M HORIZONTAL LOOP, MUURAME, FINLAND
+http://oh6hps.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 38/34 dB) HF
+
+F5LFE - NORTH BURGUNDY KIWISDR 0-30 MHZ | MARSANGY (89), FRANCE
+http://www.f5lfe.fr:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 38/34 dB) HF
+
+80M DIPOLE (13-16) | CHICHESTER UK
+http://g8ure.ddns.net:8078
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/4 users, SNR 39/34 dB) HF
+
+WEB-SDR FRIESLAND MW | FRYSLAN, THE NETHERLANDS
+http://rffryslan.vosrx.nl:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 40/34 dB) HF
+
+0-30 MHZ SDR | [N0BQV] [REPUBLIC, MISSOURI. USA
+http://n0bqv.proxy.kiwisdr.com
+KiwiSDR 2 v1.827 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (1/6 users, SNR 41/34 dB) HF
+
+W4GUZ .5-30 MHZ SDR BAKERSVILLE, NORTH CAROLINA
+http://ssi.proxy.kiwisdr.com
+KiwiSDR 1 v1.701 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/1 users, SNR 45/34 dB) HF
+
+N3VLF (FORMERLY KM4SII) KIWISDR | CLEMMONS, NC, USA
+http://km4sii.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 32/33 dB) HF
+
+KIWISDR WITH DIPOLE | SZEKESFEHERVAR, HUNGARY
+http://fsdr.duckdns.org
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 35/33 dB) HF
+
+0-30 MHZ SDR, BV7AU PINGTUNG TAIWAN
+http://bv7au.ddns.net:8073
+KiwiSDR 1 v1.707 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (8/8 users, SNR 37/33 dB) HF
+
+EA5JGN | HONDON VALLEY SDR | SPAIN
+http://ei2hh.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 38/33 dB) HF
+
+0-30 MHZ SDR, OE3KDC, AUSTRIA
+http://kiwi.web-sdr.at:8073
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 38/33 dB) HF
+
+BEVERAGE - NORTH | CHICHESTER UK
+http://g8ure.ddns.net:8073
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/4 users, SNR 41/33 dB) HF
+
+0-30 MHZ FUNKAMATEURE E.V. | BAUNATAL, GERMANY
+http://178.63.122.223:8073
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 31/32 dB) HF
+
+LINKZ - KIWI 2 | ISERE, FRANCE
+http://linkz.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (2/4 users, SNR 32/32 dB) HF
+
+VE6ARS KIWI #1
+http://208.38.9.135:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 33/32 dB) HF
+
+VE6ARS KIWI #2
+http://208.38.9.135:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 33/32 dB) HF
+
+🇳🇱 ► PB8W ◀ 🇳🇱 ► WILLEM ◀ 🇳🇱 ► PAHGOR ACTIVE LOOP SN:001 ◀ 🇳🇱 | ASSEN | NETHERLANDS
+http://pb8w.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 34/32 dB) HF
+
+IRELAND NORTH WEST.....IRELAND
+http://irelandnorthwest.proxy.kiwisdr.com
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 35/32 dB) HF
+
+SM1OII KIWISDR | HABLINGBO, GOTLAND ISLAND, SWEDEN
+http://81.170.195.170:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/2 users, SNR 37/32 dB) HF
+
+EAGLE 3, KIWISDR2 IN KOTKA, FINLAND
+http://eagle3.psokotka.com:8076
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 38/32 dB) HF
+
+HB9BMR 0...30 MHZ | GURMELS, SWITZERLAND
+http://21115.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 39/32 dB) HF
+
+0-30 MHZ SDR, I1FQH - CASALE MONFERRATO ITALY
+http://i1fqh.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 39/32 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 120 FT T2FD ANTENNA
+http://sdr.hfunderground.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/3 users, SNR 39/32 dB) HF
+
+🌲46º NORTH #1 ~ K9DXI, PRESQUE ISLE, WISCONSIN | USA🌲
+http://k9dxikiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 31/31 dB) HF
+
+EC2AQW 0-30 MHZ SDR | ARANO (NAVARRA) SPAIN
+http://21959.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/3 users, SNR 32/31 dB) HF
+
+DF0TWN KIWISDR 30 MHZ SDR | BAD BENTHEIM, GERMANY
+http://df0twn.dnsuser.de:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 33/31 dB) HF
+
+VA3XA HF SDR | OTTAWA, CANADA
+http://21263.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 30/30 dB) HF
+
+OL1F 1-30 MHZ SDR, 268M ASL | VELVARY, CZECH REPUBLIC
+http://21684.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/2 users, SNR 30/30 dB) HF
+
+0-30 MHZ SDR, W1NT 》NEWTON, NEW HAMPSHIRE, NH USA
+http://24.218.56.55:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/3 users, SNR 30/30 dB) HF
+
+1.7-30 MHZ SDR, HG5ACZ, HUNGARY, JN87PQ, FD4 WINDOM
+http://hg5acz.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 31/30 dB) HF
+
+OH3AA HAMEENLINNAN RADIOAMATOORIT KIWISDR 0-30 MHZ | HäMEENLINNA, FINLAND
+http://oh3aa.dy.fi:18073
+KiwiSDR 1 v1.815 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/2 users, SNR 34/30 dB) HF
+
+0.06-30 MHZ SDR | WEST BEND, WI, USA
+http://21223.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/4 users, SNR 35/30 dB) HF
+
+W4COA PENNSYLVANIA | REINHOLD, PA
+http://22001.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 36/30 dB) HF
+
+IRELAND NORTH WEST 3
+http://irelandnorthwest3.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 36/30 dB) HF
+
+KB5AG 0-30 MHZ KIWI SDR V2 | KNOXVILLE, TN USA
+http://kb5ag.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 38/30 dB) HF
+
+0.01-30 MHZ SDR | ACTIVE E-FIELD VERT. ANTENNA | GERMANY, BAVARIA, LANDSHUT
+http://kiwisdr.dl1rf.ipv64.de:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 38/30 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 250 FT V BEAM ANTENNA AIMED TO EUROPE - GOOD EVERYWHERE ESP LOWER BANDS
+http://sdr.hfunderground.com:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D9.13 (3/4 users, SNR 41/30 dB) HF
+
+10-30MHZ SDR, KD2OM | VICTOR, NEW YORK
+http://www.ecsykes.com:8074
+KiwiSDR 1 v1.822 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D9.13 (2/2 users, SNR 44/30 dB) HF
+
+NORTHERN UTAH KIWISDR #1 (0-30 MHZ, TCI-530 OMNI)
+http://166.70.44.45:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.9 (6/8 users, SNR 28/29 dB) HF
+
+NORTHERN UTAH KIWISDR #1 (0-30 MHZ, TCI-530 OMNI)
+http://kiwisdr1.sdrutah.org:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.9 (6/8 users, SNR 28/29 dB) HF
+
+0-52 MHZ SDR VISEU PORTUGAL PICAMIOLOS
+http://tsunami.sytes.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (1/8 users, SNR 28/29 dB) HF
+
+0-30 MHZ SDR, SK2HG, SIKNAS FORTRESS, SWEDEN
+http://kiwisdr.sk2hg.se:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 29/29 dB) HF
+
+0-30 MHZ SDR | ROTTWEIL, BADEN - WüRTTEMBERG, GERMANY
+http://db3th.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 30/29 dB) HF
+
+K4JK SDR | FORK UNION, VIRGINIA, USA
+http://k4jk-1.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/8 users, SNR 31/29 dB) HF
+
+0-30 MHZ SDR TREDXK #3 | TAMPERE, FINLAND
+http://tredxk.no-ip.org:8075
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 31/29 dB) HF
+
+RADIOHILL, ALBERSCHWENDE, AUSTRIA, 995M ASL, 80M LONG VERTICAL LOOP
+http://kiwi.oe9.oevsv.at:8073
+KiwiSDR 2 v1.828 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (6/8 users, SNR 34/29 dB) HF
+
+IRELAND NORTH WEST 4
+http://22424.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 35/29 dB) HF
+
+0-30 MHZ SM6NYJ DIPOLE FD4 | VARBERG, SWEDEN
+http://21271.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/2 users, SNR 37/29 dB) HF
+
+W0AY: KIWISDR @1 0.1-30 MHZ | W. MONTANA, USA
+http://22033.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 38/29 dB) HF
+
+AUTRERADIOAUTRECULTURE 1 | TREMOLAT (24), FRANCE
+http://sdr.autreradioautreculture.com:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/2 users, SNR 38/29 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 400 FOOT SOUTH BEVERAGE
+http://sdr.hfunderground.com:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/2 users, SNR 38/29 dB) HF
+
+0-30 MHZ SDR, AB9MQ, CARLOCK ILLINOIS USA
+http://ab9mq.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/1 users, SNR 39/29 dB) HF
+
+10 KHZ - 32 MHZ W8BUG KNOXVILLE, TN, USA
+http://scottgs.com:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/3 users, SNR 39/29 dB) HF
+
+🗲 30 KHZ-30 MHZ 🗲 | SOBIKOW, POLAND
+http://jm55.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 28/28 dB) HF
+
+0-30 MHZ SDR | K8BMZ | TRAVERSE CITY, MI
+http://kiwi.k8bmz.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 28/28 dB) HF
+
+SUOMEN DX-LIITTO SDXL-IIT OH2BUA | IITTI, FINLAND
+http://oh2bua.fi:8073
+KiwiSDR 1 v1.826 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D9.13 (0/4 users, SNR 28/28 dB) HF
+
+SV2CSN 0-30 MHZ SDR FROM EDESSA GREECE
+http://21900.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (0/3 users, SNR 29/28 dB) HF
+
+0-30 MHZ SDR | RUDOLPH, WISCONSIN
+http://22343.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 29/28 dB) HF
+
+KIWISDR MAAKESKI • SUOMEN DX-LIITTO (SDXL) • FINNISH DX-ASSOCIATION (FDXA) • PADASJOKI, FINLAND🇫🇮
+http://maakeski.psokotka.com:8076
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 32/28 dB) HF
+
+HB9TMC SDR | MALVAGLIA TI, SWITZERLAND
+http://hb9tmc.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.11 (6/8 users, SNR 33/28 dB) HF
+
+LINKZ - KIWI 3 | ISERE, FRANCE
+http://linkz.ddns.net:8075
+KiwiSDR 2 v1.829 ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.8 (0/4 users, SNR 33/28 dB) HF
+
+RADIO FREE CITRUS 🍊 | 0-30MHZ | 31' VERTICAL (TEMPORARY) | CITRUS COUNTY, FL USA
+http://21084.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 34/28 dB) HF
+
+0-30 MHZ SDR, OZ1AEF, DENMARK
+http://87.104.90.69:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 34/28 dB) HF
+
+DC1EHG | HASELUNNE, GERMANY
+http://hanshomepa0ehg.ddns.net:8073
+KiwiSDR 1 v1.819 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 34/28 dB) HF
+
+0-30 MHZ SDR, OE3AKB, OBERWOELBLING, AUSTRIA
+http://oe3akb.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 34/28 dB) HF
+
+0-30 MHZ SDR, LEIDEN, THE NETHERLANS. WELLBROOK ALA1530 LOOP ANTENNA
+http://kiwi-sdr1-leiden.impactam.nl:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 35/28 dB) HF
+
+LINKZ - KIWI 1 | ISERE, FRANCE
+http://linkz.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (0/4 users, SNR 35/28 dB) HF
+
+K1VL - SHREWSBURY, VERMONT, USA - 36+ RECEIVERS
+http://sdr.k1vl.com:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (2/4 users, SNR 36/28 dB) HF
+
+N1NTE-1 - MA/CT BORDER USA
+http://sigmasdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 37/28 dB) HF
+
+0-30 MHZ SDR KF8KK-2 (OF 2) | EMPIRE, MICHIGAN MI US
+http://22059.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 38/28 dB) HF
+
+0-30 MHZ SDR | STEVENSVILLE, MT
+http://mtkiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 39/28 dB) HF
+
+0-30 MHZ SDR | MIE, JAPAN
+http://183.76.42.115:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 27/27 dB) HF
+
+0-30 MHZ SDR, HB9CWK HEIMISWIL, SWITZERLAND
+http://hb9cwk.internet-box.ch:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 27/27 dB) HF
+
+NORTHERN UTAH KIWISDR #2 (0-30 MHZ, TCI-530 OMNI)
+http://kiwisdr2.sdrutah.org:8074
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.9 (6/8 users, SNR 27/27 dB) HF
+
+SKIP.LAND #1 | SCRATCHMONEY'S 0-30 MHZ HI-FI WIDE SDR (V2) | FULL-WAVE 80M SKYWIRE HORIZONTAL LOOP + LZ1AQ GORDO-LOOP (SWITCHABLE) BEST KIWI SNR IN SOUTH USA @ NIGHT!
+http://skip.land:8073
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.11 (1/3 users, SNR 27/27 dB) HF
+
+🌲46º NORTH #2 ~ K9DXI, PRESQUE ISLE, WISCONSIN | USA🌲
+http://21042.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.8 (3/3 users, SNR 28/27 dB) HF
+
+KIWISDR-1 PA8AD | DE KIEL, NETHERLANDS
+http://pa8ad-1.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 28/27 dB) HF
+
+0-30 MHZ SDR | ZW-FRIESLAND, THE NETHERLANDS
+http://81.172.193.108:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/1 users, SNR 29/27 dB) HF
+
+G3SDH. 0-30 MHZ KIWISDR. 80M DOUBLET AT 9 METRES AGL | NEAR BRISTOL, UK
+http://g3sdh.com:8053
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 30/27 dB) HF
+
+KD9KHZ | BROOKFIELD, WI USA
+http://22459.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/2 users, SNR 32/27 dB) HF
+
+0-30 MHZ SDR | 52249 ESCHWEILER - GERMANY
+http://87.78.90.124:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 32/27 dB) HF
+
+0-30 MHZ SDR | RICHMOND, VIRGINA USA
+http://kiwisdrkf4ral.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 33/27 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 58 FT T2FD ANTENNA
+http://sdr.hfunderground.com:8078
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 35/27 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 500 FT NORTHEAST BEVERAGE TO EUROPE
+http://sdr.hfunderground.com:8076
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/3 users, SNR 38/27 dB) HF
+
+N1NTE-2 - MA/CT BORDER, USA
+http://sigmasdr.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 38/27 dB) HF
+
+N1NTE-4 - MA/CT BORDER, USA
+http://sigmasdr.ddns.net:8076
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (2/4 users, SNR 38/27 dB) HF
+
+NJ2US HF CAPE MAY COUNTY, NJ USA
+http://21610.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 40/27 dB) HF
+
+0-30 MHZ SDR #2, SM0KOT, SWEDEN | MALA, NORTHERN SWEDEN.
+http://aspliden.kostet.se:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/3 users, SNR 25/26 dB) HF
+
+DF3LZ, KIWISDR1 | HAMBURG, GERMANY, 33M T2FD
+http://85.183.11.108:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 26/26 dB) HF
+
+0-30 MHZ, IRKUTSK, RUSSIA
+http://irk.swl.su
+KiwiSDR 1 v1.820 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (2/4 users, SNR 26/26 dB) HF
+
+0-30 MHZ SDR | BERN, SWITZERLAND
+http://kiwisdr-bern.try.yaler.io
+KiwiSDR 1 v1.800 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 26/26 dB) HF
+
+SILESIA | POLAND
+http://okno.ddns.net:8073
+KiwiSDR 1 v1.826 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 26/26 dB) HF
+
+1.6-10 MHZ SDR | TAMBOV, RUSSIA
+http://sdr.radiorubka.org
+KiwiSDR 1 v1.808 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (2/4 users, SNR 26/26 dB) HF
+
+0-30 MHZ KIWISDR-F6ABJ-FRANCE
+http://f6abj-kiwihf.ddns.net:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 27/26 dB) HF
+
+DL7VDX SDR 0-30MHZ ANT: CUSHCRAFT R7000 | WERNEUCHEN, BRANDENBURG, GERMANY
+http://sdr.dl7vdx.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 27/26 dB) HF
+
+DIJON SUD-EST | BOURGOGNE, FRANCE
+http://dijonse.fr:8073
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (0/3 users, SNR 28/26 dB) HF
+
+KIWI MCS | DALHEM, BELGIUM
+http://margellenas.synology.me:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 28/26 dB) HF
+
+METHOW VALLEY RADIO KIWISDR#1 | WINTHROP WA
+http://mvr1.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/2 users, SNR 28/26 dB) HF
+
+0-30 MHZ SDR, DX.CZ | MARIANSKE LAZNE, CZECH
+http://109.164.114.15:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.8 (0/3 users, SNR 30/26 dB) HF
+
+0-30 MHZ DH8WR RUDOLSTADT JO50QR ANT. 80M DELTA LOOP VERT. FULL SIZE
+http://22355.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (7/8 users, SNR 30/26 dB) HF
+
+0-30 MHZ SDR, G3XOU | TAVISTOCK, DEVON, UK
+http://82.69.125.202:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 30/26 dB) HF
+
+GM4RDX | N/E SCOTLAND
+http://gm4rdx.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 30/26 dB) HF
+
+SUOMEN DX-LIITTO (SDXL-LOH1) - FINNISH DX-ASSOCIATION - 380M BEVERAGE 308 DEGREES | LOHJA, FINLAND
+http://sdxl-loh.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 30/26 dB) HF
+
+EI6IZ SDR #1 KIWISDR V2 | CASTLEBAR, CO MAYO, IRELAND
+http://88.81.100.130:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 31/26 dB) HF
+
+SUOMEN DX-LIITTO (SDXL-PAR) • FINNISH DX-ASSOCIATION (FDXA) • 80M HORISONTAL LOOP • PARAINEN, SOUTH-WEST FINLAND 🇫🇮
+http://oh1rj.proxy.kiwisdr.com
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 31/26 dB) HF
+
+WESSEX KIWI V1 - G8JNJ - 0-30MHZ - SOUTH WEST UK
+http://wessex.zapto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (0/4 users, SNR 31/26 dB) HF
+
+0-30 MHZ SDR DO6DOC ANDI | DORTMUND, GERMANY
+http://kiwisdr.serveftp.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 32/26 dB) HF
+
+0-30 MHZ SDR, KH6ILT, ELIDA OH USA
+http://174.101.219.87:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 33/26 dB) HF
+
+750 SIMPLEX GROUP | LONG ISLAND, NEW YORK, USA
+http://22772.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 33/26 dB) HF
+
+LODI FARM KIWISDR
+http://22036.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 34/26 dB) HF
+
+N9AZZ 0-30 MHZ SDR | CARTERVILLE, IL. USA
+http://n9azz.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 34/26 dB) HF
+
+0-30 MHZ RHA SDR KORPILAHTI, LONG WIRE 430M 58°
+http://rha2sdr.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 34/26 dB) HF
+
+LEICESTER MF, 42M HIGH VERTICAL
+http://sip1.maxxwave.co.uk:8074
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (1/3 users, SNR 34/26 dB) 0-3 MHz
+
+KK4OVW 0-30 MHZ SDR | WHITE HOUSE, TENNESSEE
+http://22164.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/7 users, SNR 35/26 dB) HF
+
+N8BTR 0-30 MHZ SDR @ TALL PINES CABIN | CRIVITZ, WI, USA
+http://21040.proxy.kiwisdr.com
+KiwiSDR 2 v1.826 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (3/3 users, SNR 39/26 dB) HF
+
+BJöRNHOLMEN KIWI WEBSDR | STOCKHOLM ARCHIPELAGO
+http://22639.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 25/25 dB) HF
+
+0-30 MHZ SDR, HB9RLM | ZIELEBACH SWITZERLAND
+http://hb9rlm.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 25/25 dB) HF
+
+KT4RS 0-30 MHZ KIWISDR | LAUREL SPRINGS, NORTH CAROLINA, USA
+http://kiwisdr.itfais.com:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (2/4 users, SNR 25/25 dB) HF
+
+0-30 MHZ / REMOTE SP / SDR / POLAND | JęDRZEJóW
+http://sp7wk.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 25/25 dB) HF
+
+0-30 MHZ SDR | POMMIER DE BEAUREPAIRE (38) FRANCE
+http://f6abj-kiwihf.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 26/25 dB) HF
+
+OE9XRV | BREGENZ, AUSTRIA
+http://shack.oe9.at:8073
+KiwiSDR 1 v1.828 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (7/8 users, SNR 26/25 dB) HF
+
+SKIP.LAND #2 | SCRATCHMONEY'S 0-30 MHZ HI-FI WIDE SDR (V1) | FULL-WAVE 80M SKYWIRE HORIZONTAL LOOP + LZ1AQ GORDO-LOOP (SWITCHABLE) BEST KIWI SNR IN SOUTH USA @ NIGHT!
+http://skip.land:8074
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.11 (1/3 users, SNR 26/25 dB) HF
+
+N1DRS 0-30 MHZ SDR | WEYMOUTH, MA
+http://22434.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 27/25 dB) HF
+
+0-30 MHZ HF SDR, VE6JY - LAMONT, ALBERTA, CANADA
+http://ciw321.cfars.ca:8174
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (5/8 users, SNR 27/25 dB) HF
+
+VE6JY | LAMONT, ALBERTA
+http://ciw321.cfars.ca:8173
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 28/25 dB) HF
+
+EI6IZ SDR #1 KIWISDR V2 | CASTLEBAR, CO MAYO, IRELAND
+http://kiwi.minish.org:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 30/25 dB) HF
+
+0-30 MHZ SDR | TRECASTELLI, ITALY
+http://iw2nke.ddns.net:8073
+KiwiSDR 1 v1.827 ⁣ 📡 GPS ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (2/4 users, SNR 31/25 dB) HF
+
+0-30 MHZ SDR, | WOOFFERTON
+http://kiwisdr.johnnorton.co.uk:8073
+KiwiSDR 1 v1.699 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 31/25 dB) HF
+
+WESSEX KIWI V2 - G8JNJ - 0-30MHZ - SOUTH WEST UK
+http://wessex.zapto.org:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 31/25 dB) HF
+
+FINNINGLEY ARS | DONCASTER, UK
+http://g0ghk.uk:8050
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/1 users, SNR 32/25 dB) HF
+
+0-30 MHZ SDR, K1RA/KW4VA VIRGINIA, USA
+http://kiwisdr.k1ra.us:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (1/4 users, SNR 33/25 dB) HF
+
+0-30 MHZ KIWISDR #2, DC9FD, FULDA, GERMANY, ALA1530LN
+http://ko9xjv5u227qbxwa.myfritz.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (0/3 users, SNR 33/25 dB) HF
+
+N1NTE-3 - MA/CT BORDER, USA
+http://sigmasdr.ddns.net:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 35/25 dB) HF
+
+GREAT LAKES ONLINE RECEIVER | MUSKEGON, MICHIGAN USA
+http://greatlakesreceiver.hopto.me:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (2/4 users, SNR 36/25 dB) HF
+
+ACTIVE LOOP, MOSCOW, RUSSIA
+http://msk.swl.su
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (0/4 users, SNR 21/24 dB) HF
+
+RVK HF 0.1 - 30 MHZ MHZ 60M WIRE | REYKJAVIK ICELAND
+http://rvk.utvarp.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/8 users, SNR 21/24 dB) HF
+
+14 MHZ SDR | SHINHIDAKA, HOKKAIDO JAPAN
+http://sdrhkd.ddns.net:8484
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/1 users, SNR 23/24 dB) HF
+
+WALT SALMANIW + THE NW PACIFIC GROUP - DXER.CA | HAIDA GWAII B.C. CANADA
+http://207.102.144.154:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.5 (1/3 users, SNR 24/24 dB) HF
+
+BANANA PORT, SDR RX 0...30 MHZ | ASIKKALA, FINLAND
+http://21612.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/3 users, SNR 24/24 dB) HF
+
+⛰️ 0–30 MHZ SDR · Приём! (PRIYOM!) · 425 66 🐑 | NAPIER, NEW ZEALAND 🇳🇿
+http://21996.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 24/24 dB) HF
+
+0-30 MHZ RHA, 48MB FOLDED DIPOLE | KORPILAHTI, FINLAND
+http://rha2sdr.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 24/24 dB) HF
+
+SM5AJV 0-30 MHZ SDR | HEBY, SWEDEN
+http://websdr.qrq.se
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 25/24 dB) HF
+
+SDR ESBJERG - DENMARK - 0-30 MHZ
+http://21086.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/2 users, SNR 27/24 dB) HF
+
+SKIP.LAND #3 | SCRATCHMONEY'S 0-30 MHZ HI-FI WIDE KIWISDR (V2) | FULL-WAVE 80M SKYWIRE HORIZONTAL LOOP. BEST KIWI SNR IN SOUTH USA @ NIGHT!
+http://skip.land:8075
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/3 users, SNR 27/24 dB) HF
+
+10 KHZ-30 MHZ SDR, SM2BYC, SWEDEN
+http://sm2byc.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (1/4 users, SNR 28/24 dB) HF
+
+0-30 MHZ SDR | (51.821407, 7.918051)
+http://dk0ep.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 29/24 dB) HF
+
+0-30 MHZ-SDR, IW3HBX - NOALE 🇮🇹 ITALY 🇮🇹
+http://iw3hbx.ddns.net:5555
+KiwiSDR v1.690 ⁣ 📡 GPS ⁣ ⏳ LIMITS ⁣ 📻 DRM ⁣⁣ 🌀D10.8 (1/4 users, SNR 29/24 dB) HF
+
+0-30 MHZ SDR BY OZ1BFM | VEJBY, DENMARK
+http://oz1bfm.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (1/4 users, SNR 29/24 dB) HF
+
+0-30 MHZ SDR, SV1NQZ, SPARTA
+http://siros.ddns.net:8073
+KiwiSDR 1 v1.710 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 29/24 dB) HF
+
+0-30 MHZ SDR, GRöTö, SWEDEN
+http://sk6ag3.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 29/24 dB) HF
+
+0-30 MHZ SDR, HA2NA - HA2QE (GRANTE TOWER), HUNGARY
+http://194.36.182.122:8073
+KiwiSDR 1 v1.710 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 30/24 dB) HF
+
+DL9KCE, 0.00-32.00 MHZ SDR | WABERN, GERMANY
+http://dl9kce.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/8 users, SNR 30/24 dB) HF
+
+FENU-RADIO KIWI2-SDR | KEFIKON / SWITZERLAND
+http://fenuradio-kiwi2.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 30/24 dB) HF
+
+KIWISDR2 - F8FIV - 0-30 MHZ SDR | GUIPAVAS, FRANCE
+http://86.223.5.158:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 31/24 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 900 FT SKY LOOP ANTENNA
+http://sdr.hfunderground.com:8077
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 31/24 dB) HF
+
+EI5IN | IRELAND CENTRAL | MULLINGAR | WESTMEATH | 580M/1900FT BEVERAGE NE/SW
+http://44.31.191.63:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D12.13 (1/4 users, SNR 33/24 dB) 0-10 MHz
+
+0-30 MHZ KIWISDR | DAUPHIN, MANITOBA, CANADA
+http://21307.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 35/24 dB) HF
+
+0-30 MHZ SDR KF8KK-1 (OF 2) | EMPIRE, MICHIGAN, MI USA
+http://21662.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 37/24 dB) HF
+
+KARELIA SW DX | JOENSUU, FINLAND
+http://kareliaswdx.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 40/24 dB) HF
+
+0-30 MHZ SDR - DL0RCW - S46 | CRIMMITSCHAU, GERMANY
+http://22432.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 22/23 dB) HF
+
+110-142MHZ AIRBAND KIWISDR | SWITZERLAND HASENBERG04 AG 700M / ANTENNA: VHF OMNI
+http://hasenberg04.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 23 dB) Airband
+
+0-30 MHZ SDR HA6SMF | BARAND HUNGARY JELSZó:SUNTUSKE
+http://ha6smfkiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 23/23 dB) HF
+
+1.8-32 MHZ KIWISDR2 | SWLEM17 | WICHITA, KS USA
+http://21594.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣⁣ 🌀D11.9 (7/8 users, SNR 24/23 dB) HF
+
+DF3LZ, KIWISDR2 | HAMBURG, GERMANY
+http://85.183.11.108:8074
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣⁣ 🌀D11.9 (1/2 users, SNR 24/23 dB) HF
+
+NW0Q GLEN CARBON, IL.
+http://nw0q.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/1 users, SNR 24/23 dB) HF
+
+0-30 MHZ SDR, PI4AMF, ARKEMHEENSE POLDER (NIJKERK GLD), NETHERLANDS
+http://62.45.81.168:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 25/23 dB) HF
+
+0-30 MHZ KIWI SDR( 4CH ), HL5NTR, DAEGU_CITY REPUBLIC OF KOREA. LOOP-TYPE ANTENNA.
+http://hl5ntr.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 25/23 dB) HF
+
+WD9EYT 10KHZ-30 MHZ KIWISDR | GODFREY, IL USA
+http://21763.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 26/23 dB) HF
+
+W1HB | ARLINGTON, VIRGINIA
+http://69.138.168.179:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 26/23 dB) HF
+
+0-30 MHZ SDR | WILDBERG, SWITZERLAND
+http://wildmountain.ham-radio-op.net:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 26/23 dB) HF
+
+ARI-ISOLA D'ISCHIA M.TE EPOMEO
+http://82.85.225.234:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 27/23 dB) HF
+
+0-30 MHZ SDR, DANIELE IK2WBG, COMO (CO) ITALY
+http://kiwiik2wbg.ddns.net:8073
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 27/23 dB) HF
+
+VE7AV | PRINCE GEORGE. BRITISH COLUMBIA, CANADA
+http://kiwisdr.ve7av.ca:8073
+KiwiSDR 1 v1.822 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/8 users, SNR 27/23 dB) HF
+
+0-30 MHZ SDR | NEW BRAUNFELS, TX
+http://newbraunfels.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/3 users, SNR 27/23 dB) HF
+
+0-30 MHZ SDR | KLOOSTERHAAR, OVERIJSSEL, THE NETHERLANDS
+http://21366.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 32/23 dB) HF
+
+🗲 0-30MHZ 6 X KIWI CARD SDR, VK3KHZ, VICTORIA, AUSTRALIA 🗲
+http://sdr-amradioantennas.com:8072
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 34/23 dB) HF
+
+🗲 0-30MHZ 6 X KIWI CARD SDR, VK3KHZ, VICTORIA, AUSTRALIA 🗲
+http://sdr-amradioantennas.com:8076
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (7/8 users, SNR 34/23 dB) HF
+
+🗲 0-30MHZ 6 X KIWI CARD SDR, VK3KHZ, VICTORIA, AUSTRALIA 🗲
+http://sdr-amradioantennas.com:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (7/8 users, SNR 35/23 dB) HF
+
+WILL IT PLAY IN PEORIA (ILLINOIS)?
+http://radio.ofadam.com:8073
+KiwiSDR 1 v1.828 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (8/8 users, SNR 36/23 dB) HF
+
+🗲 0-30MHZ 6 X KIWI CARD SDR, VK3KHZ, VICTORIA, AUSTRALIA 🗲
+http://sdr-amradioantennas.com:8071
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 36/23 dB) HF
+
+0-30 MHZ SDR | FARMINGTON, MN
+http://21832.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 22/22 dB) HF
+
+0.1-30 MHZ SDR#2 AT HL3AMO - DAEJEON, REP. OF KOREA
+http://hik.iptime.org:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (3/3 users, SNR 22/22 dB) HF
+
+JA5FP 40M | CHIBA, JAPAN
+http://ja5fp2.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 22/22 dB) 5-10 MHz
+
+KFS SE KIWISDR | HALF MOON BAY, CALIFORNIA
+http://kiwisdr.kfsdr.com:8076
+KiwiSDR 1 v1.819 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (1/8 users, SNR 22/22 dB) HF
+
+OH5AE OH5R SDR | ELIMäKI, FINLAND
+http://oh5ae.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/7 users, SNR 22/22 dB) HF
+
+RX AHORNALP LU, 1'140 ASL 🇨🇭 @ HB9DSE, 1 - 30MHZ
+http://ahorn.proxy.kiwisdr.com
+KiwiSDR 1 v1.708 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 23/22 dB) HF
+
+0-30 MHZ SDR | KAKAAKO, HAWAII, USA
+http://22329.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 24/22 dB) HF
+
+0.3-30 MHZ 8-CHANNEL SDR, W7PUA | ADAIR VILLAGE, OREGON, USA
+http://w7pua-2.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/8 users, SNR 24/22 dB) HF
+
+0-30 MHZ SDR | PALM HARBOR, FLORIDA
+http://22315.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 25/22 dB) HF
+
+KIWI SDR IN NORTH SHROPSHIRE UK
+http://82.71.90.132:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (7/8 users, SNR 25/22 dB) HF
+
+0-30 MHZ SDR, HURRICANE (NORTHERN GERMANY)
+http://hurricane.ddns.me:8073
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 25/22 dB) HF
+
+0-30 MHZ SDR(REDIRECT TO THE NEXT RECEIVER WHEN FULL.) | OITA, JAPAN
+http://kiwi.web-sdr.net
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/3 users, SNR 25/22 dB) HF
+
+METHOW VALLEY RADIO KIWISDR#2 | TWISP WA
+http://mvr2.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 25/22 dB) HF
+
+SM7IUN 0-30 MHZ SDR | BJäRRED, SWEDEN
+http://websdr.sm7iun.se:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (4/4 users, SNR 25/22 dB) HF
+
+LCARC - MCNEIL CANYON | LAKE CHELAN, WASHINGTON
+http://k7abj.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/3 users, SNR 27/22 dB) HF
+
+KX4AZ/T 0-30 MHZ SDR | TUSTIN, MICHIGAN (USA)
+http://kx4az_t1.proxy.kiwisdr.com:8073
+KiwiSDR 1 v1.822 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/8 users, SNR 27/22 dB) HF
+
+🗲 0-30MHZ 6 X KIWI CARD SDR, VK3KHZ, VICTORIA, AUSTRALIA 🗲
+http://sdr-amradioantennas.com:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 27/22 dB) HF
+
+0-30 MHZ SDR, NORTHERN CALIFORNIA USA
+http://kr6la.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 29/22 dB) HF
+
+LU1HCW-LW1HJP | ALPA CORRAL ARGENTINA
+http://190.123.83.42:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/2 users, SNR 30/22 dB) HF
+
+🗲 0-30MHZ 6 X KIWI CARD SDR, VK3KHZ, VICTORIA, AUSTRALIA 🗲
+http://sdr-amradioantennas.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (8/8 users, SNR 30/22 dB) HF
+
+0-30 MHZ SDR | COVENTRY, TWP., OH
+http://162.199.177.108:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 31/22 dB) HF
+
+0-30 MHZ SDR 'KX4AZ' | ATHENS, GEORGIA (USA)
+http://kx4az1.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/8 users, SNR 31/22 dB) HF
+
+K0LTO - LITTLE THOMPSON OBSERVATORY - WWW.STARKIDS.ORG | BERTHOUD, COLORADO USA
+http://w0air.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/8 users, SNR 32/22 dB) HF
+
+K2RH SDR | NEW JERSEY
+http://sdr.k2rh.radio:8072
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 34/22 dB) HF
+
+0-30 MHZ DL0MZ DARC OV-MAINZ | JN49AV @ DF7PN
+http://Hallmann.selfhost.eu
+KiwiSDR 1 v1.693 ⁣ 📡 GPS ⁣ ⏳ LIMITS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 20/21 dB) HF
+
+0-30 MHZ SDR | CHIBA, JAPAN
+http://22299.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 22/21 dB) HF
+
+0-30 MHZ SDR | NEW ZEALAND, AUCKLAND
+http://22337.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 22/21 dB) HF
+
+WD4VA 0-30 MHZ SDR
+http://wd4va.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (8/8 users, SNR 22/21 dB) HF
+
+HB9ADJ | ROCHE VD SWITZERLAND
+http://22579.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 23/21 dB) 3.5-30 MHz
+
+0-30 MHZ KIWISDR 🇮🇪 IK7FMO, RICCARDO GIULIANI & GIUSEPPE CISTERNINO | CONVERSANO (BARI) - CENTRAL PUGLIA - ITALIA - ITALY ***O***
+http://ik7fmo.ddns.net:8073
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/1 users, SNR 23/21 dB) HF
+
+PE1OPQ | NETHERLANDS
+http://radio-tpot.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 23/21 dB) HF
+
+0-30 MHZ SDR | WALDHEIM SAXONIA GERMANY
+http://22327.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 24/21 dB) HF
+
+DF4OR - HERXHEIM, KIWISDR 0-30 MHZ
+http://df4or.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 25/21 dB) HF
+
+KIWISDR#2 FROM DO9HM | SEYBOTHENREUTH, BAVARIA-GERMANY
+http://do9hm.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 25/21 dB) HF
+
+0-30 MHZ SDR, KK6PR CROOKED RIVER RANCH, OR - USA
+http://kk6pr.ddns.net:8076
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 25/21 dB) HF
+
+0-30 MHZ SDR, KK6PR CROOKED RIVER RANCH, OR - USA
+http://kk6pr.ddns.net:8077
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 25/21 dB) HF
+
+DL2SBA | FILDERSTADT/GERMANY
+http://dl2sba.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.11 (0/4 users, SNR 26/21 dB) HF
+
+KIWISDR AT TAIKOREA ROAD | PALMERSTON NORTH, NEW ZEALAND
+http://kiwisdr.tko.zlwan.net:8073
+KiwiSDR 1 v1.822 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 26/21 dB) HF
+
+0-30 MHZ SDR | KM4RT - TIPTON CO. TN
+http://km4rt.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 26/21 dB) HF
+
+IV3HZR-BAYER MUGGIA(TRIESTE)ANTENNA WELLBROOK ALA1530 LN-REPLICA
+http://93.43.217.147:8075
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣⁣ 🌀D8.5 (0/3 users, SNR 28/21 dB) HF
+
+HB9VQQ, EFHW 80-40-20-15-10 VERTICAL/INV L | HINWIL, SWITZERLAND
+http://kiwi.hb9vqq.ch:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (6/8 users, SNR 28/21 dB) HF
+
+0-30 MHZ SDR, RIGI SCHEIDEGG AT 1'660M - REMOTE DX-STATION BY HB9RYZ AND HB9CQK
+http://kiwisdr.rigiremote.ch
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 28/21 dB) HF
+
+0-30 MHZ SDR | CHETEK WISCONSIN USA
+http://22303.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 29/21 dB) HF
+
+DM9SC KIWISDR | MEMMINGEN, GERMANY
+http://22140.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 30/21 dB) HF
+
+0-30 MHZ SDR #2 | WEST MOUNTAIN, DUTCHESS COUNTY, NY, USA
+http://listener2.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (1/4 users, SNR 33/21 dB) HF
+
+0-32 MHZ SDR, N4JJS, UNITED STATES
+http://n4jjs.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/8 users, SNR 19/20 dB) HF
+
+0-30 MHZ SDR VE2BWX | MONTREAL, CANADA
+http://209.91.186.16:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 20/20 dB) HF
+
+OE9NGH | LANGENEGG VORARLBER AUSTRIA
+http://21528.proxy.kiwisdr.com
+KiwiSDR 2 v1.702 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 20/20 dB) HF
+
+FR4RX HF KIWISDR | NIGHTTIME ONLY! | REUNION ISLAND (SAINT-PIERRE)
+http://fr4rx.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 20/20 dB) HF
+
+KPH 0-30 MHZ SDR FED BY TCI-530 3-30 MHZ OMNI | POINT REYES, CALIFORNIA
+http://kphsdr.com:8073
+KiwiSDR 1 v1.819 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 20/20 dB) HF
+
+KIWISDR EAST BAVARIA | GERMANY / CENTRAL EUROPE
+http://sdr-bayern.spdns.de:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 20/20 dB) HF
+
+0-30 MHZ SDR | ECUBLENS-FR, SWITZERLAND
+http://21625.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 21/20 dB) HF
+
+LA5FBA / LA6LLA 0-30 MHZ SDR SIGDAL, NORWAY
+http://82.146.85.60:8073
+KiwiSDR 1 v1.826 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (3/8 users, SNR 21/20 dB) HF
+
+0-30 MHZ SDR || F5NKP || NR PARIS, FRANCE
+http://f5nkp.freeboxos.fr:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 21/20 dB) HF
+
+0-30 MHZ SDR, BM2KVV TAIWAN #2
+http://jplin53c.proxy.kiwisdr.com
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (7/8 users, SNR 21/20 dB) HF
+
+0-30 MHZ KIWISDR, JULUSSDALEN#1, ELVERUM - NORWAY
+http://julussdalen1.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/8 users, SNR 21/20 dB) HF
+
+HB9HZW (0-30 MHZ KIWISDR-2) VALAIS - SWITZERLAND
+http://kiwisdr.hb9hzw.ch
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (0/3 users, SNR 21/20 dB) HF
+
+0-30 MHZ KIWISDR, RAPPERSWIL BE, JN37RC
+http://rapperswil-be.proxy.kiwisdr.com
+KiwiSDR 1 v1.710 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 21/20 dB) HF
+
+DL2TT | ESSEN, GERMANY
+http://t.ben2.de:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 21/20 dB) HF
+
+0.5-30 MHZ SDR | JK1EIO YOKOHAMA, JAPAN
+http://118.87.9.113:8073
+KiwiSDR 1 v1.710 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 22/20 dB) HF
+
+KIWI | SVARTKLUBBUDDEN, SWEDEN
+http://94.254.120.99:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/2 users, SNR 22/20 dB) HF
+
+0-30 MHZ SDR | JQ3JPN MINOH, OSAKA, JAPAN
+http://jq3jpn.tplinkdns.com:4400
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (4/4 users, SNR 22/20 dB) HF
+
+SE WASHINGTON BLAIR FARM, USA
+http://kiwisdr2blair.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/3 users, SNR 22/20 dB) HF
+
+0-32 MHZ SDR, S5/S57BIT, SLOVENIA
+http://s57bit.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 22/20 dB) HF
+
+SUOMEN DX-LIITTO (SDXL-VIR) FINNISH DX-ASSOCIATION (FDXA) 170M BOG 250 DEG VIRRAT, POHJOIS-HÄME FINLAND 🇫🇮
+http://sdxlkiwi7.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 22/20 dB) HF
+
+0-30 MHZ SDR | CORONATION, ALBERTA, CANADA
+http://va6ok.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 22/20 dB) HF
+
+N8GA FLATFOOT KIWISDR #1 | CABLE, OH
+http://167.20.189.92:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (1/8 users, SNR 23/20 dB) HF
+
+- 0-30MHZ HF SDR - 🇵🇱 161OS344 | PLONSK | POLAND
+http://plonsk.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D11.11 (2/4 users, SNR 24/20 dB) HF
+
+10 KHZ - 30 MHZ SDR RECEIVER - KIWISDR 2 (2024) | LA3CO - SANDEFJORD, NORWAY
+http://21702.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 25/20 dB) HF
+
+VP9NI KIWISDR | SMITHS PARISH, BERMUDA
+http://21778.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/3 users, SNR 25/20 dB) HF
+
+IK4MTC | COLLECCHIO, ITALY
+http://21887.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 25/20 dB) HF
+
+0-30 MHZ SDR | MERTHYR TYDFIL, SOUTH WALES, UK
+http://gw0kig.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 26/20 dB) HF
+
+0-30 MHZ SDR, ZL1KFM, NORTH WAIKATO, NEW ZEALAND (SDR UPGRADE, 80MTR FULL WAVE CLOSED LOOP CONNECTED). I AM EXPERIENCING SOME QRM, FROM I BELIEVE MY SOLAR CHARGER.
+http://kiwisdrzl1kfm.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 26/20 dB) HF
+
+0-30 MHZ SDR | DORTMUND, GERMANY
+http://da1vid.ipv64.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (4/4 users, SNR 27/20 dB) HF
+
+15 KHZ-30 MHZ KIWISDR2 - F1JEK/P - FRANCE - DX-500 ACTIVE ANTENNA.
+http://f1jeksdr1.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (0/4 users, SNR 27/20 dB) HF
+
+KPH 0-30 MHZ SDR FED BY 100M MARCONI-T | POINT REYES CALIFORNIA
+http://kphsdr.com:8072
+KiwiSDR 1 v1.819 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/8 users, SNR 27/20 dB) HF
+
+G4ZFE 0-30 MHZ SDR | BRACKNELL, 🇬🇧 UNITED KINGDOM
+http://21818.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 28/20 dB) HF
+
+🍊🥭LU5LCR PASO DE LA PATRIA 🥭🍊
+http://22200.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 28/20 dB) HF
+
+G0MJW 0-30 MHZ SDR | HARWELL, UK
+http://77.104.172.101:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/1 users, SNR 28/20 dB) HF
+
+G3SDH. 0-30 MHZ KIWISDR. WELLBROOK LOOP. | NEAR BRISTOL, UK
+http://g3sdh.com:8054
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 29/20 dB) HF
+
+SHORTWAVE CENTRAL | MANDEVILLE, LA (CURRENT ANTENNA ORIENTATION: 330° | SEE IFRAME EXTENSION FOR IMPORTANT/RELEVANT INFORMATION)
+http://21118.proxy.kiwisdr.com
+KiwiSDR 2 v1.806 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/6 users, SNR 32/20 dB) HF
+
+BOB HAWKINS | EDINBURGH, INDIANA, USA
+http://207.135.223.250:8078
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣⁣ 🌀D11.9 (1/3 users, SNR 35/20 dB) HF
+
+PEMBLETON FARMS KIWISDR 1 | NORTHFIELD TOWNSHIP, MICHIGAN, USA
+http://misdr.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 35/20 dB) HF
+
+0-30 MHZ SDR, W1NJC | SUTTON, MA USA
+http://kiwisdr.njctech.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.11 (0/4 users, SNR 37/20 dB) HF
+
+0-30 MHZ FUNKFREUNDE WERRATAL | TIEFENORT-KRAYENBURG, GERMANY
+http://4xe4gzz9q3vzm153.myfritz.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 18/19 dB) HF
+
+0-30 MHZ SDR - ELEKTRON - THESSALONIKI, GREECE
+http://elektrongr.ddns.net:8073
+KiwiSDR 1 v1.699 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/19 dB) HF
+
+0-30 MHZ SDR | SULZ AM NECKAR, DEUTSCHLAND
+http://21624.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (0/4 users, SNR 19/19 dB) HF
+
+G5VZ | YORKSHIRE, UK
+http://21819.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 19/19 dB) HF
+
+HOFMANN'S SDR 2 | THAMSBRüCK, GERMANY
+http://21918.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 19/19 dB) HF
+
+NORTH BRIDGEND SDR 0-30MHZ
+http://gw0kax.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 19/19 dB) HF
+
+0-30 MHZ SDR RADIO STATION AT MINOWA, KAMIINAGUN, NAGANO, JAPAN
+http://ja0veu.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 19/19 dB) HF
+
+0-30 MHZ KIWI 2 SDR, TOKEN, MOJAVE DESERT
+http://21214.proxy.kiwisdr.com
+KiwiSDR 2 v1.826 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 20/19 dB) HF
+
+0-30 MHZ SDR | KYOTO, JAPAN
+http://60.236.98.22:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/3 users, SNR 20/19 dB) HF
+
+ZUERICH
+http://80.218.128.11:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 20/19 dB) HF
+
+DL8LAS TRENT, 0-30 MHZ SDR
+http://dl8las.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (1/4 users, SNR 20/19 dB) HF
+
+KU4BY | ELIZABETH CITY, NC
+http://kiwisdr.ku4by.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (4/4 users, SNR 20/19 dB) HF
+
+0-30 MHZ SDR, NORTHERN KENTUCKY, USA
+http://kiwisdr.marmosetelectronics.com:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 20/19 dB) HF
+
+THE REAL VLF-HF SDR RECEIVER 8KHZ-30MHZ | 16M LONGWIRE@8M HEIGHT | GROUND | BLEEDRESISTOR | ATTENTUATORS | GPS | HTTPS - HTTPS://KIWISDR.YO3BN.RO/ | BUCHAREST, ROMANIA
+http://kiwisdr.yo3bn.ro:8073
+KiwiSDR 1 v1.822 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 20/19 dB) HF
+
+0-30MHZ SDR, JH4SBD | FUKUYAMA, JAPAN
+http://sdrfukuyama.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/8 users, SNR 20/19 dB) HF
+
+LA3L LARVIK NORWAY
+http://22207.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 21/19 dB) HF
+
+KIWISDR - 0-30 MHZ | GEDERN, HESSEN, GERMANY
+http://22372.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 21/19 dB) HF
+
+0-30 MHZ SDR KU4SD | ATHENS, GA USA
+http://99.102.143.126:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/7 users, SNR 21/19 dB) HF
+
+0-30 MHZ SDR, BM2KVV TAIWAN #3
+http://jplin53z.proxy.kiwisdr.com
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (8/8 users, SNR 21/19 dB) HF
+
+0-30 MHZ SDR, VR2BG | HONG KONG
+http://vr2bg.proxy.kiwisdr.com
+KiwiSDR 1 v1.698 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (8/8 users, SNR 21/19 dB) HF
+
+UA4CC | SARATOV, RUSSIA
+http://188.162.63.103:8073
+KiwiSDR 1 v1.822 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/1 users, SNR 22/19 dB) 14-30 MHz
+
+0-30 MHZ SDR, ROTTERDAM, THE NETHERLANDS. KILROCK, ATLANTICA AND MCB RADIO CONTROL RECEIVER [NO WSPR ALLOWED]
+http://77.173.58.48:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (1/3 users, SNR 22/19 dB) HF
+
+0-30 MHZ SDR | TAIPEI, TAIWAN
+http://21248.proxy.kiwisdr.com
+KiwiSDR 2 v1.707 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (8/8 users, SNR 23/19 dB) HF
+
+0-30 MHZ HULK SMASH KIWISDR - DAYTON, OH, UNITED STATES
+http://22209.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 23/19 dB) HF
+
+N8GA FLATFOOT KIWISDR #2 | CABLE, OH
+http://hill.n8ga.org:8074
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/8 users, SNR 23/19 dB) HF
+
+0-30 MHZ SDR | BOONE, NC, USA
+http://k1he.proxy.kiwisdr.com
+KiwiSDR 1 v1.824 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 23/19 dB) HF
+
+13RF029📶📻0-30 MHZ SDR📻📶 | BüLZIG JO61JV
+http://hnswerkstatt.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.5 (0/4 users, SNR 24/19 dB) HF
+
+KA7OEI KIWI | WEST JORDAN, UT, U.S.A.
+http://ka7oeikiwi.ddns.net:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (7/8 users, SNR 24/19 dB) HF
+
+HB9VQQ, SPIDERBEAM YAGI 40-20-15-17-12-10 | HINWIL, SWITZERLAND
+http://kiwiv2.hb9vqq.ch:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 24/19 dB) HF
+
+YB3TE | 0-30 MHZ KIWISDR | SIDOARJO, INDONESIA
+http://yb3te.metroduta.com:8073
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 24/19 dB) HF
+
+0-30 MHZ SDR | JERSEY UNITED KINGDOM
+http://antskiwisdr.zapto.org:8077
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 25/19 dB) HF
+
+METHOW VALLEY RADIO KIWISDR#4 | WINTHROP WA
+http://mvr4.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 26/19 dB) HF
+
+0-30 MHZ SDR, GB0SNB, KELVEDON HATCH SECRET NUCLEAR BUNKER | BRENTWOOD, ESSEX, UK
+http://sdr.gb0snb.com:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D12.5 (2/4 users, SNR 26/19 dB) HF
+
+DL0WH | WEINHEIM, NR HEIDELBERG, GERMANY
+http://db0whm.hamnet.network:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 27/19 dB) HF
+
+K6VZK 0-30 MHZ KIWISDR #1 | PALOMAR MOUTAIN, CA
+http://palomar-1.proxy.kiwisdr.com
+KiwiSDR 2 v1.822 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (2/2 users, SNR 29/19 dB) HF
+
+0-30 MHZ SDR, N4TTN, ANGIER, NC
+http://n4ttn.ham-radio-op.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (6/8 users, SNR 30/19 dB) HF
+
+KA1GXR 0-30 MHZ SDR1 | ASHLAND MA USA
+http://173.48.189.54:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (0/3 users, SNR 33/19 dB) HF
+
+CENTRAL INDIANA'S SDR STATION
+http://21128.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣⁣ 🌀D11.8 (3/3 users, SNR 34/19 dB) HF
+
+0-30 MHZ SDR | NOTTINGHAM, ENGLAND.
+http://21798.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17/18 dB) HF
+
+KU4A | LEXINGTON KENTUCKY USA
+http://98.19.242.85:8073
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 17/18 dB) HF
+
+0-30 MHZ SDR, DH2WS, GERMANY
+http://dh2ws.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 17/18 dB) HF
+
+0-30 MHZ SDR | PORT JERVIS, NEW YORK
+http://21606.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.10 (0/4 users, SNR 18/18 dB) HF
+
+W7RNA .1-30 MHZ SDR | PHOENIX, AZ, USA
+http://72.216.135.109:8072
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 18/18 dB) HF
+
+0-30 MHZ KIWISDR CENTRAL NC KIWI 1
+http://75.189.217.152:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (5/8 users, SNR 18/18 dB) HF
+
+0-30 MHZ SDR, | HALLE SAALE SAXONY ANHALT GERMANY
+http://alfaromeo170.myqnapcloud.com:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 18/18 dB) HF
+
+K9CZI CRESWELL, OREGON
+http://k9czi-1.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/8 users, SNR 18/18 dB) HF
+
+KF2DA KIWISDR 2 | ELMIRA, NY
+http://kf2da.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 18/18 dB) HF
+
+0-30 MHZ SDR, G0DUB, IO83OE | CHESTER, UK
+http://kiwisdr.g0dub.uk:8073
+KiwiSDR 1 v1.699 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/8 users, SNR 18/18 dB) HF
+
+0-30 MHZ SDR | MBUTUY, PARAGUAY. LF/MW ANTENNA ONLY!
+http://mbu.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 18/18 dB) HF
+
+0-30 MHZ SDR | VIESTIKALLIO OH2MOH, ARTJäRVI, FINLAND
+http://oh2moh.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/1 users, SNR 18/18 dB) HF
+
+0-30 MHZ SDR, MM3NDH, CENTRAL SCOTLAND, UK
+http://websdr.scotlandchat.co.uk
+KiwiSDR 2 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 18/18 dB) HF
+
+F4KNP, RC MONTBELIARD, DOUBS, FRANCE 0-30 MHZ SDR
+http://176.170.38.29:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 19/18 dB) HF
+
+DL8LAS-2 TRENT 0-30 MHZ SDR
+http://21952.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (0/4 users, SNR 19/18 dB) HF
+
+0-30 MHZ SDR, DL6NEP | NORTHERN BAVARIA, GERMANY
+http://dl6nep.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣⁣ 🌀D8.5 (0/3 users, SNR 19/18 dB) HF
+
+JP7FSO,0-30 MHZ SDR, FUKUSHIMA JAPAN
+http://jp7fso-kiwisdr.sytes.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/3 users, SNR 19/18 dB) HF
+
+0-30 MHZ SDR, LA3WAA, TRONDHEIM, NORWAY
+http://178.164.123.136:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 20/18 dB) HF
+
+[FELINE] 0-30MHZ SDR | WATERFALL BAY, HONG KONG
+http://42.2.199.9:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣⁣ 🌀D11.11 (1/7 users, SNR 20/18 dB) HF
+
+10 KHZ-30 MHZ SDR | ROCKPORT, MAINE
+http://rx2.wa2zkd.net:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 20/18 dB) HF
+
+ECKROT'S KIWI II, 0-30 MHZ SDR, THURINGIA, GERMANY
+http://erserver.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/4 users, SNR 21/18 dB) HF
+
+HS0ZQS | NONTHABURI, THAILAND
+http://hs0zqs.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (6/8 users, SNR 21/18 dB) HF
+
+HAMBURG METROPOL SOUTH | GERMANY
+http://kiwisdr.dynpc.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 21/18 dB) HF
+
+KIWISDR-1, SE WASHINGTON STATE (KB7GF), NORTHWEST USA
+http://sagebrushsdr.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 21/18 dB) HF
+
+0-30 MHZ SDR | WHITSTABLE, UK
+http://177.ham-radio-op.net:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 23/18 dB) HF
+
+0-30 MHZ LOOP 95M, HB9EXC, SWITZERLAND
+http://81.13.254.159:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.9 (0/4 users, SNR 23/18 dB) HF
+
+IG-AFU TELEKOM BONN
+http://dl0dtm.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 23/18 dB) HF
+
+BEDFORD UK 0-30 MHZ V1 KIWISDR
+http://remoteradio.changeip.org:8085
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/4 users, SNR 23/18 dB) HF
+
+SV1UH 0-30 MHZ SDR | (38.832695, 20.706681)
+http://22641.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 24/18 dB) HF
+
+G3ROO KIWISDR | CLIPGATE FARM, NR DOVER. UK
+http://5.56.54.220:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 24/18 dB) 0-11 MHz
+
+G8GPO | AMPTHILL
+http://g8gporx.proxy.kiwisdr.com
+KiwiSDR 1 v1.702 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 24/18 dB) HF
+
+IZHEVSK, RUSSIA WELLBROOK ALA1530.
+http://izh.swl.su
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D10.13 (0/4 users, SNR 24/18 dB) HF
+
+MILANO SDR
+http://milano1602.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 24/18 dB) HF
+
+0-30 MHZ SDR | DL3ZID SCHWERIN
+http://80.146.81.18:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣⁣ 🌀D10.11 (0/4 users, SNR 25/18 dB) HF
+
+0-30 MHZ SDR, BIKEDORK, MINNEAPOLIS USA
+http://bikedork.myddns.me:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 25/18 dB) HF
+
+0-30 MHZ SDR, G8OCV/M1GEO, PULHAM MARKET, UK
+http://norfolk.george-smart.co.uk:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D12.4 (3/4 users, SNR 25/18 dB) HF
+
+WESSEX- G8JNJ - 0-62MHZ - SOUTH WEST UK
+http://wessex.hopto.org:8075
+KiwiSDR v1.690 ⁣ 📡 GPS ⁣ ⏳ LIMITS ⁣ 📻 DRM ⁣⁣ 🌀D10.8 (0/4 users, SNR 26/18 dB) 0.020-62 MHz
+
+0-30 MHZ SDR | WOKING, ENGLAND
+http://145.40.178.33:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 27/18 dB) HF
+
+K6VZK 0-30 MHZ KIWISDR #2 | PALOMAR MOUTAIN, CA
+http://palomar-2.proxy.kiwisdr.com
+KiwiSDR 2 v1.822 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (1/1 users, SNR 27/18 dB) HF
+
+0-30 MHZ SDR, SK6AG | BORåS
+http://sk6ag2.ddns.net:8072
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 27/18 dB) HF
+
+KF7K SDR | OREM UTAH USA
+http://kiwi.kf7k.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣⁣ 🌀D11.11 (0/4 users, SNR 28/18 dB) HF
+
+0-30 MHZ SDR, W2DB | CROWLEY, TX EM12HO
+http://sdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 28/18 dB) HF
+
+0-30 MHZ SDR, VE6HFD HANNA, ALBERTA
+http://ve6hfd.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (0/4 users, SNR 28/18 dB) HF
+
+RF-PRO-1 NORTH SOUTH RECEIVE | FAYETTEVILLE, GA
+http://22018.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 29/18 dB) HF
+
+NA5B 0 - 30 MHZ WASHINGTON DC AREA USA
+http://www.na5b.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 30/18 dB) HF
+
+0-30 MHZ SDR | SOUTHINGTON, OHIO USA
+http://22511.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/3 users, SNR 31/18 dB) HF
+
+N0DSS | ST. LOUIS, MISSOURI
+http://22661.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/1 users, SNR 31/18 dB) HF
+
+K3GMQ - BUCKS COUNTY, PA USA
+http://bucks.hopto.org:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 31/18 dB) HF
+
+0-30 MHZ SDR | LEEDS, ENGLAND UK
+http://21845.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 16/17 dB) HF
+
+BARßEL / LOWER SAXONY / GERMANY / 0-30 MHZ SDR
+http://barsselsdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 16/17 dB) HF
+
+0-30 MHZ SDR#2, DG2SAX, ALBSTADT/GERMANY
+http://dg2sax.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 16/17 dB) HF
+
+KARELIA MW DX | JOENSUU, FINLAND
+http://kareliamwdx.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17 dB) HF
+
+AI4FU-KIWI 0-30MHZ SDR | KNOXVILLE, TENNESSEE, USA
+http://107.132.73.183:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (5/8 users, SNR 17/17 dB) HF
+
+SY2CGP 0-30 MHZ SDR FROM EDESSA TEST GREECE
+http://22093.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17/17 dB) HF
+
+0-30 MHZ SDR | KITCHENER, ONTARIO
+http://22687.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 17/17 dB) HF
+
+WA7CCA 160-10M NE AZ
+http://azwhtmtns.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 17/17 dB) HF
+
+0-30 MHZ SDR, BV3UN 桃園龜山 | TAOYUAN, TAIWAN
+http://bv3un.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (2/8 users, SNR 17/17 dB) HF
+
+0-30 MHZ SDR, DAB956, COTTBUS, GERMANY
+http://dab956kiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/17 dB) HF
+
+1,80-30 MHZ KIWISDR-F6ABJ-FRANCE | POMMIER DE BEAUREPAIRE (38)
+http://f6abj-kiwihf.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/17 dB) HF
+
+VK3MV: 0-30 MHZ SDR | MELBOURNE, AUSTRALIA
+http://vk3mv.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 17/17 dB) HF
+
+0-30 MHZ SDR 13OZ1 🌍 | DONAUWöRTH GERMANY
+http://13oz1.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 18/17 dB) HF
+
+N3KA - 0-30 MHZ SDR | SUNNYVALE, CALIFORNIA USA
+http://21331.proxy.kiwisdr.com
+KiwiSDR 2 v1.826 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/8 users, SNR 18/17 dB) HF
+
+0-30 MHZ SDR | MISHIMA, JAPAN
+http://ja2jvc.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/17 dB) HF
+
+0-30 MHZ SDR, JK1LOT, TOKYO, JAPAN
+http://jk1lot.ham-radio-op.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/17 dB) HF
+
+0-30 MHZ SDR | GROßKAROLINENFELD, GERMANY
+http://kiwisdr.dl0fhr.de:8080
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (1/4 users, SNR 18/17 dB) HF
+
+0-30 MHZ SDR, DK0TE, DHBW RAVENSBURG CAMPUS FRIEDRICHSHAFEN, GERMANY
+http://kiwisdr.inf.dhbw-ravensburg.de:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 18/17 dB) HF
+
+WL5N KIWI SDR | FAIRBANKS ALASKA USA
+http://northernfrontier.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 18/17 dB) HF
+
+0-30 MHZ SDR, W9AD BARRINGTON HILLS, IL
+http://w9adkiwi.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 18/17 dB) HF
+
+0-30 MHZ SDR | HUTT VALLEY, NEW ZEALAND
+http://20200.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/4 users, SNR 19/17 dB) HF
+
+0-30 MHZ SDR | MIDWOUD, NETHERLANDS
+http://62.45.123.77:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (0/3 users, SNR 19/17 dB) HF
+
+0-30 MHZ SDR, ON7AVC, BELGIUM | BRUSSELS
+http://94.225.172.192:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 19/17 dB) HF
+
+K9CZI CRESWELL, OREGON
+http://k9czi-2.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 19/17 dB) HF
+
+CHOCO69 KIWI SDR SOLAR POWERED | VéROSSAZ SWITZERLAND
+http://178.237.95.113:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 20/17 dB) 0-300 MHz
+
+MY LIL RADIO | STAFFORD, VA
+http://21326.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 20/17 dB) HF
+
+KIWISDR-2, SE WASHINGTON STATE (KB7GF), NORTHWEST USA
+http://21420.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 20/17 dB) HF
+
+0-30 MHZ SDR | CH-3464 SCHMIDIGEN-MüHLEWEG
+http://hb9cl.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 20/17 dB) HF
+
+0-30 MHZ SDR | FLORES ISLAND, AZORES, PORTUGAL
+http://22561.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/3 users, SNR 21/17 dB) HF
+
+0-30 MHZ SDR, DL1BAJ | HOOKSIEL, GERMANY
+http://dl1bajkiwisdr.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 21/17 dB) HF
+
+OE5SLN WEB-SDR | MEHRNBACH, UPPER AUSTRIA, AUSTRIA
+http://178.115.248.93:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 22/17 dB) HF
+
+F5EFK SDR | VANNES, FRANCE
+http://22111.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 22/17 dB) HF
+
+0-30 MHZ MFJ-1886 LOOP, DH5PR, RHEDE, GERMANY
+http://91.137.118.149:8073
+KiwiSDR 1 v1.710 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 22/17 dB) HF
+
+KERNOW - G8JNJ - 10KHZ-30MHZ SDR - CORNWALL - SOUTH WEST UK
+http://kernow.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 22/17 dB) HF
+
+BIRDY (SWL) | EMSBüREN, GERMANY
+http://kiwisdr.birdsnest.name:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 22/17 dB) HF
+
+0-30 MHZ KIWISDR, NORDHORN, NORTH WEST GERMANY
+http://trebor1401.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 22/17 dB) HF
+
+KE3BK 0-30 MHZ SDR | MOUNTAIN HOUSE, CA
+http://73.66.163.172:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 23/17 dB) HF
+
+DG3SDK | 0-30 MHZ SDR | ESSLINGEN, GERMANY
+http://kiwi.dg3sdk.de
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/4 users, SNR 24/17 dB) HF
+
+0-30 MHZ SDR - SCHWARZENBURG | BERN
+http://kiwisdr-schwarzenburg.try.yaler.io
+KiwiSDR 1 v1.800 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/2 users, SNR 24/17 dB) LF
+
+MSARS HF KIWISDR BURGESS HILL, WEST SUSSEX, UK
+http://msars.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 24/17 dB) HF
+
+PE1MUQ | NETHERLANDS
+http://pe1muq.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 24/17 dB) HF
+
+LAKE WETTERN DX GROUP - SK6WW KARLSBORG | SWEDEN
+http://sk5sm-at-sk6ww.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 24/17 dB) HF
+
+K8MLM 0-30 MHZ SDR | TIMBERLINE, MOUNTAIN, WV, USA FM19HB
+http://22178.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 25/17 dB) HF
+
+0-30 MHZ SDR, KK1D | NIANTIC, CT, USA
+http://47.165.132.115:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/2 users, SNR 25/17 dB) HF
+
+ZL2P H4 MASTERTON NEW ZEALAND
+http://h4.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 25/17 dB) HF
+
+0-30 MHZ KIWI SDR FORM DL0HGN/DQ1V | GERMANY, HAGENOW
+http://kiwisdr.dl0hgn.ipv64.net
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 25/17 dB) HF
+
+ZL2P H6 MASTERTON NEW ZEALAND
+http://h6.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 26/17 dB) HF
+
+0-30 MHZ SDR | HB9ODP | TICINO, SOUTH SWITZERLAND, 1600M, NEAR GOTTHARD PASS | 160M TRIANGLE LOOP ANTENNA H~12M
+http://hb9odp.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/8 users, SNR 26/17 dB) HF
+
+K9MQ - NORTHWEST INDIANA / CHICAGOLAND
+http://sdr.k9mq.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (1/4 users, SNR 26/17 dB) HF
+
+0-30 MHZ SDR | CROTON | PLYMOUTH, MN
+http://croton.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 30/17 dB) HF
+
+GRMS HYD | HYDERABAD
+http://hyd.twrmon.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 15/16 dB) HF
+
+0-30 MHZ SDR AT DS1TUW, SEOUL, REP. OF KOREA, MLA-30+ ACTIVE LOOP, 60M AGL, DIGISKIMMER RUNNING
+http://ds1tuw.iptime.org:8073
+KiwiSDR 1 v1.808 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (7/8 users, SNR 16/16 dB) HF
+
+CYPRUS AMATEUR RADIO SOCIETY (0-30 MHZ SDR)
+http://sdr.cyhams.org
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 16/16 dB) HF
+
+SAPPORO★HOKKAIDO★JAPAN★1.6-30MHZ BCL, SWL
+http://sdrsapporo.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/3 users, SNR 16/16 dB) HF
+
+0-30 MHZ SDR, ZS6BKW ANTENNA, KIWISDR2 | CENTURION, SOUTH AFRICA
+http://kiwisdr.r7d.xyz:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (6/8 users, SNR 17/16 dB) HF
+
+KIWISDR-2 PA8AD | DE KIEL, NETHERLANDS
+http://pa8ad-2.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 17/16 dB) HF
+
+0-30 MHZ SDR | WALDHEIM, GERMANY
+http://swl-prh.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17/16 dB) HF
+
+NAFO 0-30 MHZ OSINT
+http://130.180.17.30:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 19/16 dB) HF
+
+0-30 MHZ SDR | VAC, HUNGARY
+http://22638.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 19/16 dB) HF
+
+OK1XOM NEMOJOV 0-30 MHZ SDR
+http://45.82.233.80:8073
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (1/2 users, SNR 19/16 dB) HF
+
+0-30 MHZ SDR | ALIX, ALBERTA
+http://ve6zh.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/8 users, SNR 19/16 dB) HF
+
+0-30 MHZ-KIWISDR, IZ6BYY - 🇮🇹 MAGNETIC LOOP ANTENNA IN CENTRAL ITALY 📶
+http://iz6byy.k1fm.us
+KiwiSDR 1 v1.822 ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (0/4 users, SNR 20/16 dB) HF
+
+GRENLAND | SKIEN, NORWAY
+http://lb1pj-kiwisdr.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/3 users, SNR 20/16 dB) HF
+
+PD0DH - KIWISDR - THE NETHERLANDS
+http://pd0dh.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 20/16 dB) HF
+
+W4BF 0-30 MHZ SDR | MELBOURNE, FL USA
+http://21470.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 21/16 dB) HF
+
+0-30 MHZ SDR | ROTTERDAM, THE NETHERLANDS
+http://21774.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 21/16 dB) HF
+
+M0WHU 0-30 MHZ SDR | SOUTHEND - UK
+http://apatheticgeek.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (6/8 users, SNR 21/16 dB) HF
+
+0-30 MHZ SDR, BM2KVV TAIWAN #1
+http://jplin53a.proxy.kiwisdr.com
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (8/8 users, SNR 21/16 dB) HF
+
+BEDFORD UK 0-30 MHZ V2 KIWISDR
+http://remoteradio.changeip.org:8086
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/3 users, SNR 21/16 dB) HF
+
+KIWISDR KOTKA • SUOMEN DX-LIITTO (SDXL) • FINNISH DX-ASSOCIATION (FDXA) • KOTKA, FINLAND🇫🇮
+http://sauna.psokotka.com:8075
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 21/16 dB) HF
+
+0-30 MHZ KIWISDR | DO6LSM | BORGWEDEL, GERMANY
+http://do6lsm.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/3 users, SNR 22/16 dB) HF
+
+0-30 MHZ KIWI#1 - PT2FHC, BRASILA, BRAZIL
+http://kiwibsb1.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 22/16 dB) HF
+
+WG3K 0-30 MHZ SDR | CHESAPEAKE BEACH, MD
+http://21337.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/8 users, SNR 23/16 dB) HF
+
+0-30 MHZ SDR | KORSCHENBROICH, GERMANY
+http://kiwi.apps.exdsl.nl
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 24/16 dB) HF
+
+IK1YRA PUBLIC HF KIWISDR2 MULTI MODE RX | NEAR VIVERONE LAKE, ITALY
+http://21262.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 25/16 dB) 0.100-22 MHz
+
+W0AY: KIWISDR @1 0.1-30 MHZ | W. MONTANA, USA
+http://22034.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 25/16 dB) HF
+
+VP9NI KIWISDR2 | SMITHS PARISH, BERMUDA
+http://22701.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 25/16 dB) HF
+
+KIWISDR2 ZL2WL | HASTINGS, NEW ZEALAND
+http://21779.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 26/16 dB) HF
+
+0-30 MHZ SDR, NM7A, ORCAS ISLAND, USA | DEER HARBOR, WASHINGTON
+http://kiwisdr.gadallah.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/2 users, SNR 27/16 dB) HF
+
+0-30 MHZ SDR, AG5RT, AUSTIN, TEXAS
+http://atxsdr.zapto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.5 (2/3 users, SNR 28/16 dB) HF
+
+0-30 MHZ SDR, VE3HOA | OTTAWA, CANADA
+http://ve3hoa.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (1/4 users, SNR 28/16 dB) HF
+
+0-30 MHZ SDR | BIG BEND FLORIDA
+http://21310.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 29/16 dB) HF
+
+INNATE EXCESS SDR | WEST CHESTER, OHIO, USA
+http://n8xs.synology.me:8073
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 29/16 dB) HF
+
+0-30 MHZ SDR INGENIEURBüRO RöMER, BLACK FOREST | KARLSBAD, WEST GERMANY
+http://ibr.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 14/15 dB) HF
+
+0.05-30 MHZ SDR, DB1UJ, PADERBORN UNIVERSITY, GERMANY
+http://ntkiwi.uni-paderborn.de:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.10 (7/8 users, SNR 14/15 dB) HF
+
+KIWISDR2 ZL7DX CHATHAM ISLANDS, NEW ZEALAND
+http://zl7dx.proxy.kiwisdr.com
+KiwiSDR 2 v1.808 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (1/3 users, SNR 14/15 dB) HF
+
+HZ1SF | RIYADH, SAUDI ARABIA
+http://21472.proxy.kiwisdr.com
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/8 users, SNR 15/15 dB) HF
+
+0-30 MHZ SDR | HüNXE, GERMANY
+http://22098.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 15/15 dB) HF
+
+KIWISDRS ESPAÑA BARCELONA SPAIN EA3ER 0-30 MHZ
+http://22626.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 15/15 dB) HF
+
+0-30 MHZ SDR | GRACEVILLE, FL, USA
+http://72.170.239.252:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/2 users, SNR 15/15 dB) HF
+
+HOFMANN'S SDR | ILLEBEN, GERMANY
+http://91.137.17.115:8073
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 15/15 dB) HF
+
+KIWISDR DEL RADIO CLUB ARGENTINO (LU4AA) UBICADO EN EL INSTITUTO ARGENTINO DE RADIOASTRONOMíA, PROVINCIA DE BUENOS AIRES, ARGENTINA
+http://lu4aa.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 15/15 dB) HF
+
+WA7CCA 160-10M REMOTE
+http://socalmtns.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 15/15 dB) HF
+
+0-30 KIWISDR2 | HAMAMATSU, JAPAN
+http://21083.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (3/4 users, SNR 16/15 dB) HF
+
+0-30 MHZ SDR | EDOGAWA-KU, TOKYO, JAPAN
+http://21344.proxy.kiwisdr.com
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 16/15 dB) HF
+
+OAKLAND SDR | CHARLESTON, SC USA
+http://21557.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 16/15 dB) HF
+
+0-30 MHZ SDR | CREWE UK
+http://21809.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 16/15 dB) HF
+
+G7UAK, CUMBRIA. UK
+http://21870.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 16/15 dB) HF
+
+DF2SI 0-30 MHZ SDR | FüRSTENFELDBRUCK, GERMANY
+http://21897.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 16/15 dB) HF
+
+KE2MX KIWISDR | CALVERTON, NEW YORK
+http://22000.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/3 users, SNR 16/15 dB) HF
+
+0-30 MHZ SDR | BISHOP, GA
+http://22765.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/2 users, SNR 16/15 dB) HF
+
+0-30 MHZ SDR, BV3UN TAIWAN TAOYUAN
+http://bv3un.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 16/15 dB) HF
+
+0-30 MHZ SDR, DX6RAN, NEGROS OCCIDENTAL, PHILIPPINES
+http://dx6ran.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/7 users, SNR 16/15 dB) HF
+
+DG0JBD MARIENBERG GERMANY
+http://kiwi-dg0jbd.stbach.de
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (0/4 users, SNR 16/15 dB) HF
+
+QRZBOOK.NET KIWI SDR | TAUNTON
+http://qrzbooksdr.ddns.net:8001
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/3 users, SNR 16/15 dB) HF
+
+0-30 MHZ SDR 2 | ST JUST IN PENWITH, CORNWALL, ENGLAND
+http://21247.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.8 (1/3 users, SNR 17/15 dB) HF
+
+IV3HZR-BAYER(IZTOK) MUGGIA(TRIESTE)ANTENNA:TAGRA BT-101 BALLERINA
+http://21699.proxy.kiwisdr.com
+KiwiSDR 2 v1.826 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 17/15 dB) HF
+
+0-30 MHZ SDR, G8AOE | YARM, NORTHEAST ENGLAND
+http://planet3.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (5/7 users, SNR 17/15 dB) HF
+
+HENRY W6REK ( 0 TO 15MHZ ) | SAN JOSE, CALIFORNIA, USA (SOUTH OF SAN FRANCISCO)
+http://sybil.yak.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 17/15 dB) 0-15 MHz
+
+OM5AKC, MARIAN NEMčIč, 0-30 MHZ SDR | NITRA
+http://62.197.223.84:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/15 dB) HF
+
+0 - 30 MHZ SDR | 🇩🇪🇩🇪🇩🇪🇩🇪 URL: HTTP://RX2.RADIO101.DE 🇩🇪🇩🇪🇩🇪🇩🇪 ESCHWEILER (13KM EAST OF AACHEN, GERMANY)
+http://79.238.103.72:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/15 dB) HF
+
+0 - 30 MHZ SDR | 🇩🇪🇩🇪🇩🇪🇩🇪 URL: HTTP://RX2.RADIO101.DE 🇩🇪🇩🇪🇩🇪🇩🇪 ESCHWEILER (13KM EAST OF AACHEN, GERMANY)
+http://79.238.103.72:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/15 dB) HF
+
+0-32 MHZ SDR, SWLJN49, LUDWIGSHAFEN EDIGHEIM, GERMANY
+http://ams.dedyn.io:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.11 (0/4 users, SNR 18/15 dB) HF
+
+0-30 MHZ SDR, DL7APJ, GERMANY, TELTOW
+http://meinsdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/15 dB) HF
+
+0-30 MHZ SDR | ZIERIKZEE, NETHERLANDS
+http://21886.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/4 users, SNR 19/15 dB) HF
+
+0-30 MHZ SDR, PA1KE DEN BOSCH
+http://88.159.31.251:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 19/15 dB) HF
+
+2-30MHZ SDR #3, VK5ARG REMOTE RECEIVER SITE | NEAR TARLEE, SOUTH AUSTRALIA
+http://kiwisdr.areg.org.au:8075
+KiwiSDR 1 v1.709 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 19/15 dB) HF
+
+0-30 MHZ SDR#1 IF ALL 4 CHANNELS ARE FULL → AUTOMATICALLY REDIRECTED TO SDR#2. - JH1PGF, TOKYO, JAPAN
+http://kiwisdr.hirokinet.com:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 19/15 dB) HF
+
+0-30 MHZ SDR, LA2G, NORWAY
+http://la2g.ddns.net:8072
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 19/15 dB) HF
+
+0-30 MHZ SDR, ZL2VH BRANCH 63 NEW ZEALAND | MOUNT CLIMIE, UPPER HUTT NZ
+http://123.255.47.67:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 20/15 dB) HF
+
+0-30 MHZ SDR | WILLESDEN, LONDON
+http://21145.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (2/4 users, SNR 20/15 dB) HF
+
+KIWI 2 DB0SLF (WWW.X26.DE) | SAALFELD/SAALE
+http://kiwi.x26.de
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 20/15 dB) HF
+
+KIWI SDR SOUTH WALES, UK | MERTHYR TYDFIL LOCATION 2
+http://shack2.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 20/15 dB) HF
+
+0-30 MHZ SDR | AMSTERDAM NY USA
+http://22837.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 21/15 dB) HF
+
+0-30 MHZ SDR | FORDHAM, CAMBRIDGESHIRE, UK
+http://fordham.george-smart.co.uk:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/4 users, SNR 21/15 dB) HF
+
+0-30 MHZ SDR | LOVELAND, COLORADO
+http://kw5usa.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 21/15 dB) HF
+
+QUIET RURAL MLA LOOP NEAR IHRHOVE (JO33RE).
+http://si47.de:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 21/15 dB) HF
+
+0-30 MHZ SDR | MANHATTAN, KS, USA
+http://22308.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 22/15 dB) HF
+
+0-30 MHZ SDR, DL/JO43UG, TOSTEDT, NORTHERN GERMANY
+http://nordheide2.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 22/15 dB) HF
+
+LA6LU KIWISDR - SVELVIK, NORWAY (0-30 MHZ SDR)
+http://la6lukiwisdrno.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 23/15 dB) HF
+
+KU4BY | ELIZABETH CITY, NC
+http://kiwisdr.ku4by.com:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 24/15 dB) HF
+
+ZL2P H9 MASTERTON NEW ZEALAND
+http://h9.proxy.kiwisdr.com
+KiwiSDR 2 v1.809 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 25/15 dB) HF
+
+10 KHZ - 30 MHZ SDR, WA2ZKD | ROCHESTER, NEW YORK
+http://jimlill.com:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D9.13 (0/3 users, SNR 26/15 dB) HF
+
+0-30 MHZ SDR | INDIAN HARBOUR BEACH, FLORIDA
+http://kiwi.sdr.audio:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 27/15 dB) HF
+
+RF-PRO-1 EAST WEST RECEIVE | FAYETTEVILLE, GA
+http://22017.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 29/15 dB) HF
+
+KB1UIF KIWISDR | ASHLEY FALLS, MA.USA.
+http://kb1uif-kiwisdr.ddns.net:8073
+KiwiSDR 1 v1.806 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 29/15 dB) HF
+
+0-30 MHZ SDR | BIG BEND FLORIDA
+http://21079.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/3 users, SNR 30/15 dB) HF
+
+0-30 MHZ, KIWI SDR @ DF9DX, ABOUT 30 KM NORTH EAST FROM AACHEN | LINNICH, GERMANY
+http://sabbel-nich.goip.de:8073
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 13/14 dB) HF
+
+KIWISDR - VK2ATZ | TERALBA, NEW SOUTH WALES. AUSTRALIA.
+http://vk2atz.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 13/14 dB) HF
+
+0-30 MHZ KIWISDR VER2.0 | INNER-WEST SYDNEY | K180WLA 0.1-180MHZ ACTIVE LOOP 2024 VERSION
+http://21117.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.8 (0/3 users, SNR 14/14 dB) HF
+
+0-30 MHZ SDR | ALCUDIA MALLORCA ESPAñA
+http://37.10.74.235:8073
+KiwiSDR 1 v1.701 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 14/14 dB) HF
+
+DO4GME | WINZELN
+http://80.146.26.60:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 14/14 dB) HF
+
+KB8VUC'S SDR | WAYLAND, MI, USA
+http://kb8vuckiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/1 users, SNR 14/14 dB) HF
+
+WESTERN TF3GZ/TF4AH | ORLYGSHOFN; ICELAND
+http://orlygshofn.utvarp.com:8080
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/8 users, SNR 14/14 dB) HF
+
+0-30 MHZ KIWISDR, VE3HLS, SO PHISAI, THAILAND
+http://ve3hls.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 14/14 dB) HF
+
+0-30 MHZ SDR, | POLAND, WARSAW
+http://warszawa.proxy.kiwisdr.com
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 14/14 dB) HF
+
+0-30 MHZ, DL2BQA, NEUSTADT, RHEINLAND-PFALZ, GERMANY
+http://95.88.77.200:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/3 users, SNR 15/14 dB) HF
+
+0-30 MHZ SDR | BAROSSA VALLEY | ANGASTON, SOUTH AUSTRALIA
+http://barossa.servebeer.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D10.11 (0/6 users, SNR 15/14 dB) HF
+
+0.1-30 MHZ SDR#1 AT HL3AMO - DAEJEON, REP. OF KOREA
+http://hik.iptime.org:8074
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (6/6 users, SNR 15/14 dB) HF
+
+0-30 MHZ SDR, N4LDR, LURAY, VA USA
+http://73.171.115.74:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 16/14 dB) HF
+
+0-30 MHZ SDR, W1CLM | CHAMPAIGN, ILLINOIS USA
+http://kiwisdr.moxley.us:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 16/14 dB) HF
+
+ZL1AB NORTH SHORE RADIO CLUB KIWISDR2 | AUCKLAND, NEW ZEALAND
+http://22282.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17/14 dB) HF
+
+0-30 MHZ SDR, I1CRA/IZ1GLG | CASSINE, ITALY
+http://kiwisdr.briata.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 17/14 dB) HF
+
+0-30 MHZ FOR NDB HUNTERS, OH5LIZ FINLAND
+http://oh5liz.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/3 users, SNR 17/14 dB) HF
+
+VK4UL/VK4EEN | GODWIN BEACH, BRISBANE
+http://vk4een.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17/14 dB) HF
+
+WEST CONNECT SDR 2 MW/LW | SLIGO, NORTH WEST IRELAND
+http://95.45.236.182
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣⁣ 🌀D8.5 (0/2 users, SNR 19/14 dB) HF
+
+0-30 MHZ SDR | COIMBRA, PORTUGAL
+http://hjf2014.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/4 users, SNR 19/14 dB) HF
+
+ZTL E.V. HF SDR (0-30 MHZ), GPA-50 VERTICAL (80,20,15,10M) | LANDAU I.D. PFALZ, GERMANY
+http://sdr.ztl.space:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 19/14 dB) HF
+
+VE6DDD 0-30 MHZ SDR | ROCKY MOUNTAIN HOUSE, ALBERTA
+http://ve6ddd.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 19/14 dB) HF
+
+0-32 MHZ KIWISDR, PE1NOD. | HIGH TECH CAMPUS EINDHOVEN, THE NETHERLANDS.
+http://83.247.88.41:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 20/14 dB) HF
+
+K4DDI MIRAMAR CITY, FLORIDA
+http://kiwisdr.radiorescate.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 20/14 dB) HF
+
+DX CENTRAL | MANDEVILLE, LA | MULTIPLE ANTENNAS THROUGH AN ANTENNA SWITCH. SEE IFRAME EXTENSION FOR RELEVANT/IMPORTANT INFORMATION.
+http://dxcentral.proxy.kiwisdr.com
+KiwiSDR 2 v1.800 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.8 (2/6 users, SNR 21/14 dB) HF
+
+0-30 MHZ SDR, DK0FFO, FRANKFURT (ODER), GERMANY
+http://kiwisdr-DK0FFO.hamspirit.de:8073
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 21/14 dB) HF
+
+0-30 MHZ SDR, WO2S | RALEIGH, NC
+http://kiwisdr.openham.net
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/8 users, SNR 21/14 dB) HF
+
+BERGEN OP ZOOM, NL🗼LOOP ANT W/E HI-FIDELITY LISTENING OF AM BCB AND SW STATIONS
+http://84.25.81.186:8075
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (0/3 users, SNR 22/14 dB) HF
+
+0-30 MHZ SDR | NASHVILLE, TN
+http://k1fb.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 22/14 dB) HF
+
+0-30 MHZ KIWISDR 2 + CROSS COUNTRY WIRELESS MAG LOOP | SAINTE MARCELLINE DE KILDARE, QUEBEC, CANADA
+http://21383.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 24/14 dB) HF
+
+AA4PG | BIRMINGHAM AL
+http://cahabatechnology.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/8 users, SNR 24/14 dB) HF
+
+WB5LLI/5 | PASS CHRISTIAN, MS USA
+http://108.208.11.177:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 25/14 dB) HF
+
+VE3JSJ | HAMILTON, ONTARIO, CANADA - WEST END OF LAKE ONTARIO
+http://22500.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (4/4 users, SNR 26/14 dB) HF
+
+LUIS GTZ MONTERREY MX
+http://dxmty.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 27/14 dB) HF
+
+0-30 MHZ SDR | W4FFC - GARS - PORT SAINT JOE, FLORIDA, USA
+http://22062.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/8 users, SNR 12/13 dB) HF
+
+0-30 MHZ SDR | FAZENDA SãO FRANCISCO - ITAPEVA, SP - BRAZIL
+http://itapeva.websdr.com.br:8973
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 12/13 dB) HF
+
+VK2BIO 10KHZ - 30MHZ SDR | NOWRA, NSW, AUSTRALIA
+http://106.69.123.108:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 13/13 dB) HF
+
+| GOVERNMENT CAMP, OR
+http://21113.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 13/13 dB) HF
+
+BOLTON UK | UNITED KINGDOM
+http://bolton.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 13/13 dB) HF
+
+0-30 MHZ KIWISDR 2 | BERNAU BEI BERLIN, GERMANY
+http://db0bbb.dnshome.de:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 13/13 dB) HF
+
+0-30 MHZ SDR DF6DBF | HAGEN, GERMANY
+http://df6dbf.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 13/13 dB) HF
+
+KFS NW KIWISDR | HALF MOON BAY, CALIFORNIA
+http://kiwisdr.kfsdr.com:8074
+KiwiSDR 1 v1.819 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/8 users, SNR 13/13 dB) HF
+
+| WELLINGTON CBD, NEW ZEALAND
+http://21198.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/5 users, SNR 14/13 dB) HF
+
+0-30 MHZ SDR, NDXA, JJ1LIB, YOKOHAMA
+http://59.129.216.68:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 14/13 dB) HF
+
+0-30 MHZ SDR WITH YOULOOP | SENZIG-KRüPELSEE JO62UG
+http://dh9zig-p.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 14/13 dB) HF
+
+0-30 MHZ SDR | NAILSEA, BRISTOL
+http://g4ahg.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/8 users, SNR 14/13 dB) HF
+
+0-30 MHZ SDR | SWITZERLAND HASENBERG03 AG 700M / ANTENNA: SIRIO GAIN-MASTER 25.5-30MHZ
+http://hasenberg03.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 14/13 dB) HF
+
+JA5FP LF | CHIBA, JAPAN
+http://ja5fp1.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 14/13 dB) 0.010-2 MHz
+
+HB9VQQ, N4CY COPPER TUBE LOOP ø 1M | HINWIL, SWITZERLAND
+http://kiwi.hb9vqq.ch:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (6/8 users, SNR 14/13 dB) HF
+
+VK2MB: MANLY-WARRINGAH RADIO SOCIETY KIWISDR | SYDNEY, NEW SOUTH WALES, AUSTRALIA
+http://websdr.mwrs.org.au:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 14/13 dB) HF
+
+NL12894 KIWISDR DELFZIJL NETHERLANDS WITH PA0FRI SHIELDED ACTIVELOOP
+http://21671.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 15/13 dB) HF
+
+0-30 MHZ KIWISDR SP1EXB | STARE WIERZCHOWO, POLAND
+http://87.251.229.127:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D9.13 (2/4 users, SNR 15/13 dB) HF
+
+0-30 MHZ SDR | EDOGAWA-KU, TOKYO, JAPAN
+http://ja7kbr2.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 15/13 dB) HF
+
+0-32 MHZ SDR, HB9TTU, RUSSIKON SWITZERLAND, OPTIMIZED FOR 20-30 MHZ
+http://hb9ttu.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 16/13 dB) HF
+
+G4LVD/SDR | IPSWICH SUFFOLK UK
+http://21868.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 17/13 dB) HF
+
+RADIOCLUB S59GCD | MALIC, SLOVENIA
+http://77.38.19.217:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/13 dB) HF
+
+0-30 MHZ SDR, VICTOR DELTA PARIS FRANCE
+http://90.46.27.243:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 17/13 dB) HF
+
+0-30 MHZ SDR | LONDON, ONTARIO (CANADA)
+http://bachner.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 17/13 dB) HF
+
+HF WEB SDR HALLE ( SAALE ) GERMANY 0-30 MHZ
+http://db0hal.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/13 dB) HF
+
+0-30 MHZ SDR2 | SENDEN, GERMANY
+http://dl5ycx.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.8 (0/4 users, SNR 17/13 dB) HF
+
+MANILA KIWISDR 0-30 MHZ
+http://kiwi.manilasdr.net
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (2/3 users, SNR 17/13 dB) HF
+
+2-30MHZ SDR #2, VK5ARG REMOTE RECEIVER SITE | NEAR TARLEE, SOUTH AUSTRALIA
+http://kiwisdr.areg.org.au:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/13 dB) HF
+
+ON5KDX 0-30 MHZ SDR | BW BELGIUM
+http://21365.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 18/13 dB) HF
+
+ILGRADIO (DK9FI) KIWI2 SDR 0-30 MHZ | HOMBERG, GERMANY
+http://84.119.145.94:8073
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 18/13 dB) HF
+
+ECKROT'S KIWI II, 0-30 MHZ SDR, THURINGIA, GERMANY
+http://erserver.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D10.11 (0/4 users, SNR 18/13 dB) HF
+
+SUOMEN DX-LIITTO (SDXL-PAL) • FINNISH DX-ASSOCIATION (FDXA) • MEGADIPOL • PALLAS, ENONTEKIÖ, LAPLAND, FINLAND 🇫🇮
+http://pallas-kiwi.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 18/13 dB) HF
+
+0-30 MHZ SDR | CYPRUS
+http://cyp.twrmon.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (0/7 users, SNR 19/13 dB) HF
+
+0-30 MHZ SAN JUAN DEL RIO | GRUPO DIEXISTA MEXICO SDR
+http://grupodiexistamx-sdr.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 19/13 dB) HF
+
+KIWISDR: 0-30MHZ, NORFOLK COAST AMATEUR RADIO SOCIETY (NCARS), JO02RV, UK
+http://ncars.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 19/13 dB) HF
+
+IZ2442SWL 0.0-30.0 MHZ SDR | CAPIAGO INTIMIANO, COMO, ITALY
+http://vpncap.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/2 users, SNR 19/13 dB) HF
+
+0-30 MHZ SDR, W3PIE RECEIVER #2, UNIONTOWN, WESTERN PENNSYLVANIA, USA
+http://w3piesdr.ddns.net:7073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 19/13 dB) HF
+
+0-30 MHZ SDR | GREENFIELD, OH
+http://22446.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/8 users, SNR 20/13 dB) HF
+
+0-30 MHZ SDR | DOVER
+http://176.26.93.169:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 22/13 dB) HF
+
+LOGANSWL 0-30 MHZ SDR
+http://22274.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 22/13 dB) HF
+
+0-30 MHZ SDR, KJ6EI/VE7 | SALT SPRING ISLAND, BRITISH COLUMBIA, CANADA
+http://kj6ei.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (7/7 users, SNR 22/13 dB) HF
+
+0-30 MHZ SDR | ROTTERDAM, NETHERLANDS
+http://21092.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/4 users, SNR 23/13 dB) HF
+
+NA5C 0-30 MHZ SDR | RIO GRANDE VALLEY
+http://21738.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (0/4 users, SNR 25/13 dB) HF
+
+0-30 MHZ SDR | KINGSVILLE ON
+http://22341.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 11/12 dB) HF
+
+0-30MHZ KIWISDR | SWITZERLAND ZURICH ALTSTETTEN01 JN47FJ (HB9HEH)
+http://altstetten01.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D9.13 (0/4 users, SNR 11/12 dB) HF
+
+0-30 MHZ SDR, PHONEMA SPEAKERS | RAJADELL, CATALONIA
+http://phonemarx.tplinkdns.com:8072
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (5/8 users, SNR 11/12 dB) HF
+
+SE.WA.STATE.USA, COLUMBIA BASIN | KENNEWICK, WA.USA
+http://sdr2kiwi2meter.ddns.net:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 12 dB) 2m
+
+0-30 MHZ SDR | KIRK MICHAEL, ISLE OF MAN
+http://21793.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 12/12 dB) HF
+
+0-30 MHZ G7JUR | FARNHAM, ENGLAND, UK
+http://21826.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 12/12 dB) HF
+
+0-30 MHZ SDR | MAUI, HAWAII, USA
+http://22215.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 12/12 dB) HF
+
+0-30 MHZ SDR | LA SERENA, CHILE
+http://22352.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 12/12 dB) HF
+
+0-30 MHZ SDR AT N6LED | MADERA, CALIFORNIA, USA
+http://22485.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 12/12 dB) HF
+
+0-30 MHZ SDR | BEAULIEU SUR MER | SOUTH EAST COTE D’AZUR | 06 FRANCE
+http://22669.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 12/12 dB) HF
+
+S >> qrv: East <---> West -->
+0-30 MHZ SDR, DE -GERMANY - STUTTGART
+http://radioneckar.selfhost.eu:8073
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 12/12 dB) HF
+
+0-30 MHZ SDR, BALINGEN, GERMANY
+http://sdr.sixvpn.net
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (1/4 users, SNR 12/12 dB) HF
+
+EAST WENATCHEE-KIWI
+http://stehekin-kiwi.proxy.kiwisdr.com
+KiwiSDR 1 v1.826 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (1/1 users, SNR 12/12 dB) HF
+
+0-30 MHZ SDR | LUEDINGHAUSEN
+http://vampir.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 12/12 dB) HF
+
+ZL2BA LOCATED IN MASTERTON, NEW ZEALAND 0-30MHZ SDR
+http://zl2ba.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 12/12 dB) HF
+
+OA4DFF | LIMA - PERU
+http://200.123.27.181:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/3 users, SNR 13/12 dB) 6.5-30 MHz
+
+DOKKUM FRIESLAND NL
+http://212.52.246.172:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 13/12 dB) HF
+
+KX1Q - \"THE BURG\" - 7-30 MHZ SDR | BOSTON, MASS
+http://22008.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 13/12 dB) 7-30 MHz
+
+0-30 MHZ SDR | NORTH OF BRUSSELS, BELGIUM
+http://94.111.44.157:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 13/12 dB) HF
+
+CENTRAL CZECHIA SDR
+http://centralczechia.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/8 users, SNR 13/12 dB) HF
+
+OE3GAS KIWISDR 0-30 MHZ | HOLLABRUNN, LOWER AUSTRIA
+http://oe3gas.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (0/4 users, SNR 13/12 dB) HF
+
+0-30 MHZ SDR | SIEKIERKI WIELKIE, POLAND
+http://s.kalinowski.edu.pl:8073
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 13/12 dB) HF
+
+KIWISDR2 - MILTON KEYNES, UK | 50 KHZ - 30 MHZ | WELLBROOK LOOP FLX1530LN - INDOORS
+http://uk-milton-keynes-kiwisdr2.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 13/12 dB) HF
+
+3-30 MHZ SDR, VK3CMZ, VICTORIA
+http://vk3cmz.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 13/12 dB) HF
+
+KIWISDR-2 ZL2DW HASTINGS NEW ZEALAND
+http://zl2dw.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 13/12 dB) HF
+
+0-30 MHZ SDR | ROTTERDAM, FEIJENOORD, THE NETHERLANDS
+http://21020.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/3 users, SNR 14/12 dB) HF
+
+DH0GSU 0-30 MHZ SDR | KARLSRUHE, GERMANY
+http://21354.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 14/12 dB) HF
+
+KSZSDR | ZUG, SWITZERLAND
+http://22273.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 14/12 dB) HF
+
+0-30 MHZ SDR | KAENA POINT, HAWAII, USA
+http://22328.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 14/12 dB) HF
+
+0-30 MHZ SDR, JJ1EQL | KAWASAKI, JAPAN
+http://aa842.jp:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 14/12 dB) HF
+
+0-30 MHZ SDR | BOGOR, INDONESIA
+http://aviolanda.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (1/4 users, SNR 14/12 dB) HF
+
+KIWI2-2 N1CL | MAPLE VALLEY, WASHINGTON, USA
+http://kiwi.n1cldesigns.com:8074
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (8/8 users, SNR 14/12 dB) HF
+
+WRHNET KIWI SDR 0-30 MHZ | WEST YORKSHIRE
+http://wrhnet.co.uk:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 14/12 dB) HF
+
+WINGS KIWI SDR | ALDERNEY CHANNEL ISLANDS
+http://21789.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣⁣ 🌀D11.9 (0/3 users, SNR 15/12 dB) HF
+
+0-30 MHZ 🇩🇪 🇩🇪 SWLJO53DK 🇩🇪 🇩🇪 VOßMOOR OT VON ESCHEBURG 🇩🇪 🇩🇪 GERMANY
+http://21951.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 15/12 dB) HF
+
+0-30 MHZ SDR2, AA6CQ | IRVINE, CALIFORNIA, USA
+http://22161.proxy.kiwisdr.com
+KiwiSDR 2 v1.813 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/2 users, SNR 15/12 dB) HF
+
+0-30 MHZ SDR | EDOGAWA-KU, TOKYO, JAPAN
+http://ja7kbr.proxy.kiwisdr.com
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/2 users, SNR 15/12 dB) HF
+
+0-30 MHZ SDR | DOHA, QATAR
+http://midskiwi.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/8 users, SNR 15/12 dB) HF
+
+MARTIN | MEHLINGEN, GERMANY
+http://zubi.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 15/12 dB) HF
+
+0-30 MHZ SDR | EDOGAWA-KU, TOKYO, JAPAN
+http://21554.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (7/8 users, SNR 16/12 dB) HF
+
+METHOW VALLEY RADIO KIWISDR#3 | WINTHROP WA
+http://mvr3.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (2/3 users, SNR 16/12 dB) HF
+
+0-30 MHZ SDR | ALBERTIRSA, HUNGARY
+http://kiwiradio.ddns.net
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/12 dB) HF
+
+2-30MHZ SDR #1, VK5ARG REMOTE RECEIVER SITE | NEAR TARLEE, SOUTH AUSTRALIA
+http://kiwisdr.areg.org.au:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 17/12 dB) HF
+
+0-32 MHZ SDR | MANUSDR | GERWISCH, GERMANY
+http://kiwisdr.servepics.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/12 dB) HF
+
+0-30 MHZ SDR, WPC4ALP, MIDDLE TENNESSEE, USA
+http://midtn.dynu.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 17/12 dB) HF
+
+0-30 MHZ SDR | BROOMFIELD, CO (39.98755, -105.03344)
+http://n0ls.homedns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 17/12 dB) HF
+
+VK2GGC SDR2: 0-30MHZ T2FD DIPOLE - HUNTER VALLEY NSW AUSTRALIA
+http://vk2ggc.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 17/12 dB) HF
+
+HB9VIV - KIWISDR V2 | SERVION, SWITZERLAND
+http://hb9viv.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣⁣ 🌀D11.8 (0/2 users, SNR 18/12 dB) HF
+
+0-30 MHZ SDR, DE1LON | MEERBUSCH, GERMANY
+http://df1lon.synology.me:8073
+KiwiSDR 1 v1.702 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 19/12 dB) HF
+
+🇳🇱 🇳🇱 🇳🇱 PE1RDP 🇳🇱 🇳🇱 🇳🇱 VELDHOVEN - THE NETHERLANDS
+http://pe1rdp.no-ip.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 19/12 dB) HF
+
+0-30 MHZ SDR, FRANCE (BELGIUM BORDER)
+http://sdr.mimosys.net:8074
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 19/12 dB) HF
+
+0-30 MHZ SDR | SAN BENEDETTO DEL TRONTO 🇮🇹
+http://fabrys.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/1 users, SNR 20/12 dB) HF
+
+0-30 MHZ SDR | SOUTHPORT, UK
+http://sdr.shortwave.am
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣⁣ 🌀D11.9 (0/2 users, SNR 20/12 dB) HF
+
+SDR | RICHMOND HILL, ONTARIO
+http://22347.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 21/12 dB) HF
+
+0-30 MHZ SDR | NORTHWEST SEATTLE WA
+http://97.113.239.171:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 26/12 dB) HF
+
+VE6WZ REMOTE STATION. BEVERAGE ARRAYS. MW AND LOW-BANDS | SUNDRE, AB
+http://162.248.34.28:8073
+KiwiSDR 1 v1.690 ⁣ 📡 GPS ⁣ ⏳ LIMITS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 11/11 dB) 0-8 MHz
+
+DIETIKON SDR-1 0-32 MHZ, HB9HJF, JN47EJ SWITZERLAND
+http://185.183.195.173:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D10.13 (0/3 users, SNR 11/11 dB) HF
+
+0.1-32 MHZ KIWISDR2 - 4 USER SELECTABLE ANTENNAS - N6VUD | UKIAH, CALIFORNIA USA
+http://22049.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (0/4 users, SNR 11/11 dB) HF
+
+OE5GEL 0-30 MHZ SDR | WALDHAUSEN IM STRUDENGAU
+http://22630.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/3 users, SNR 11/11 dB) HF
+
+0-30 MHZ SDR, 14HAM01 / DAVIKEN - CHANTILLY (60) NORTH FRANCE
+http://chantilly-sdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 11/11 dB) HF
+
+DIETIKON SDR-1 0-32 MHZ, HB9HJF, JN47EJ SWITZERLAND
+http://kiwisdr.cathalferris.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D10.13 (0/3 users, SNR 11/11 dB) HF
+
+\"STATION B\" #3 | CANTERBURY UK
+http://kiwisdr3.hoka.co.uk:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 11/11 dB) HF
+
+GRMS KTM | KATHMANDU, NEPAL
+http://ktm.twrmon.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (2/4 users, SNR 11/11 dB) HF
+
+0-30 MHZ SDR, RIO, OSAKA, JAPAN
+http://os.f5.si:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/4 users, SNR 11/11 dB) HF
+
+CENTRAL UTAH SDR HOSTED BY KC7TCH
+http://sdr.kc7tch.com
+KiwiSDR 2 v1.828 ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (4/4 users, SNR 11/11 dB) HF
+
+SDR-1 0-32 MHZ SDR, W5TSU OKLAHOMA CITY, USA
+http://sdr.w5tsu.net:8075
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 11/11 dB) HF
+
+✅ SNOWLINE SDR ✅ | DRY PLAINS, NEW SOUTH WALES, AUSTRALIA
+http://snowlinesdr.vk1hf.com:8073
+KiwiSDR 2 v1.696 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 11/11 dB) HF
+
+MATTHIAS LENARDT | DL1NDG | WWW.VIL.CITY | 0-30 MHZ SDR | IT'S A LOT OF FUN TO BE A PART OF THE KIWISDR-COMMUNITY, THEREFORE IT'S ALSO A PLEASURE TO SHARE MY STATION HERE WITH YOU ;-) | NüRNBERG / NUERNBERG / NUREMBERG, GERMANY
+http://vilradio.dynv6.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 11/11 dB) HF
+
+EI2HWB 0-30 MHZ SDR | GREYSTONES, WICKLOW, IRELAND
+http://21703.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR | THALHEIM, SCHWEIZ
+http://21707.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 12/11 dB) HF
+
+GM4RIV STRANRAER
+http://21804.proxy.kiwisdr.com
+KiwiSDR 2 v1.826 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 12/11 dB) HF
+
+G3GPO | BALDOCK HERTS
+http://21869.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR | BEND, OREGON USA
+http://22148.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR | APEX NC
+http://22904.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR | SWITZERLAND HASENBERG01 AG 700M / ANTENNA: SIRIO GAIN-MASTER 25.5-30MHZ
+http://hasenberg01.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ KIWISDR 2 | HOBART, TASMANIA, AUSTRALIA
+http://hobart.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 12/11 dB) HF
+
+TECSUN RADIOS AUSTRALIA. 0-30 MHZ SDR, ARALUEN, NSW, AUSTRALIA
+http://kiwisdr.tecsunradios.com.au:8073
+KiwiSDR 1 v1.708 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 12/11 dB) HF
+
+STATION B SDR1 | CANTERBURY, ENGLAND
+http://kiwisdr1.hoka.co.uk:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR | OCEAN PARK, (PACIFIC COUNTY) WASHINGTON USA
+http://n7drd.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ ⏳ Limits ⁣⁣ 🌀D11.9 (0/3 users, SNR 12/11 dB) HF
+
+HF
+http://tangerkiwi.ddns.net
+KiwiSDR 1 v1.699 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR, VK1CM CANBERRA AUSTRALIA
+http://vk1cm.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 12/11 dB) HF
+
+0-30 MHZ SDR, VK2CEL, AUSTRALIA | FENNELL BAY, NSW
+http://175.111.177.234:8073
+KiwiSDR 1 v1.822 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 13/11 dB) HF
+
+IK8SUT - 0-30 MHZ - KIWISDR2 - SOUTH ITALY - 🇮🇹
+http://21443.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 13/11 dB) HF
+
+0-30 MHZ SDR
+http://22625.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 13/11 dB) HF
+
+0-30 MHZ SDR, SCHENKENBERG, THALHEIM, SWITZERLAND
+http://thalheim-1.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 13/11 dB) HF
+
+KIWISDR - DN9WHV WILHELMSHAVEN GERMANY 0-30MHZ
+http://21902.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 14/11 dB) HF
+
+0-30 MHZ SDR | TUALATIN, OREGON USA
+http://aredn.k1rks.me:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/1 users, SNR 14/11 dB) HF
+
+0-30 MHZ SDR - AM MW FILTERED OUT | REGINA, SASKATCHEWAN, CANADA
+http://ve5sar-kiwisdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (6/7 users, SNR 14/11 dB) HF
+
+KG7PD KIWI2 SDR | LYNNWOOD, WA USA
+http://21762.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/8 users, SNR 15/11 dB) HF
+
+0-30 MHZ SDR | WYRALLAH NSW AUSTRALIA
+http://220.233.181.49:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 15/11 dB) HF
+
+G4FUI.DDNS.NET:8073 SDR (PART TIME) | PENRITH (U.K.)
+http://86.162.54.174:8073
+KiwiSDR 1 v1.824 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (5/8 users, SNR 15/11 dB) HF
+
+KE6GG | DALY CITY, CA
+http://ke6gg.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 15/11 dB) HF
+
+0-30 MHZ SDR | OMAHA, NEBRASKA
+http://kiwisdr.criffield.net:8073
+KiwiSDR 1 v1.709 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 15/11 dB) HF
+
+0-30 MHZ SDR, DL6ECS, JENA, GERMANY
+http://kiwisdr.ddnss.de:8073
+KiwiSDR 1 v1.708 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 15/11 dB) HF
+
+0-30 MHZ SDR | WELS AT
+http://witikiwi.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (6/8 users, SNR 15/11 dB) HF
+
+0-30 MHZ SDR OF PA4009 | EIBERGEN, THE NETHERLANDS
+http://21194.proxy.kiwisdr.com
+KiwiSDR 2 v1.808 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 16/11 dB) HF
+
+0-30 MHZ SDR, DQA647 | MOENCHENGLADBACH, GERMANY
+http://kiwisdr-mg.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (1/4 users, SNR 16/11 dB) HF
+
+0-30 MHZ SDR, MAZAMA, WASHINGTON, USA
+http://mazama.proxy.kiwisdr.com
+KiwiSDR 1 v1.826 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 16/11 dB) HF
+
+0-30 MHZ SDR | BOONE, NC USA
+http://p3hosting.dscloud.biz:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/3 users, SNR 16/11 dB) HF
+
+0-30 MHZ SDR KIWISDR | IW2KPL FRANCO | ANTENNA : WINDOM 7-BAND OFC DIPOLE (42 MT. LONG, FROM 80 MT. TO 10 MT. BANDS) | BERGAMO, ITALY | JN45TQ
+http://www.dxcluster.world:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 16/11 dB) HF
+
+🟢⚪️🔴I0080PR RADIO STATION🟢⚪️🔴PARMA NORD ITALY🟢⚪️🔴
+http://21882.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (4/4 users, SNR 17/11 dB) HF
+
+W4COA 2-30 MHZ SDR | WARRENTON, VIRGINIA
+http://22002.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (3/4 users, SNR 17/11 dB) HF
+
+KIWI2-1 N1CL | MAPLE VALLEY, WASHINGTON, USA
+http://kiwi.n1cldesigns.com:8073
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 17/11 dB) HF
+
+ON0NR (AGRAN) 0.01-30 MHZ SDR | NAMUR-WéPION
+http://on0nr-sdr.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 17/11 dB) HF
+
+0-30 MHZ SDR, W3PIE RECEIVER #1, UNIONTOWN, WESTERN PENNSYLVANIA, USA
+http://w3piesdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (1/3 users, SNR 18/11 dB) HF
+
+0-30 MHZ KIWI SDR, 1HS1322 .CAGLIARI ITALY
+http://sergiocorda.synology.me:28073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 19/11 dB) HF
+
+PA3GJX 0-30 MHZ SDR | IJSSELMUIDEN, NETHERLANDS
+http://85.147.201.225:8073
+KiwiSDR 1 v1.708 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/2 users, SNR 20/11 dB) HF
+
+0-30 MHZ SDR | BROWNSVILLE, TEXAS, USA
+http://rgv.twrmon.net:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 20/11 dB) HF
+
+0-30 MHZ KIWISDR | KAMEN, GERMANY
+http://dl1dam.feste-ip.net:8185
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 21/11 dB) HF
+
+0-30 MHZ SDR, WS5W ANNA TEXAS USA
+http://204.235.44.74:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (5/8 users, SNR 10/10 dB) HF
+
+0-30 MHZ SDR | BERLIN WEDDING, GERMANY | DF1RF
+http://21106.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (7/8 users, SNR 10/10 dB) HF
+
+0-30 MHZ SDR, DL7ASM | BERLIN, GERMANY
+http://21377.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/4 users, SNR 10/10 dB) HF
+
+K7SPS 0-30 MHZ SDR | NEW PLYMOUTH IDAHO USA
+http://21426.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 10/10 dB) HF
+
+0-30 MHZ KIWISDR, DM0ESS, GERMANY
+http://24.134.86.93:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 10/10 dB) HF
+
+0-30 MHZ SDR, | ROSEBURG, OREGON, USA
+http://47.39.41.144:8073
+KiwiSDR 1 v1.828 ⁣ 📡 GPS ⁣⁣ 🌀D11.11 (3/4 users, SNR 10/10 dB) HF
+
+0-30 MHZ SDR, GM8XBZ IN W SCOTLAND
+http://argyllsdr.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/4 users, SNR 10/10 dB) HF
+
+0-32 MHZ SDR, WEST TEXAS | LUBBOCK, TX
+http://data3.caprockweather.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 10/10 dB) HF
+
+F1UBL - JN08 NEAR PARIS - YVELINES - FRANCE - 0-30 MHZ SDR
+http://f1ubl.ddns.net:8072
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/4 users, SNR 10/10 dB) HF
+
+0-30 MHZ SDR, IK2BIY ITALY
+http://ik2biy.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 10/10 dB) HF
+
+0-30 MHZ SDR, N2YO | CHANTILLY VA, USA
+http://kiwisdr.n2yo.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 10/10 dB) HF
+
+HE9TGW, WINTERTHUR SWITZERLAND
+http://kiwiwinterthur.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 10/10 dB) HF
+
+0-30 MHZ KIWISDR, VK2KTJ, AUSTRALIA
+http://nikola.animats.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 10/10 dB) HF
+
+KIWISDR2 ZLAS HASTINGS NEW ZEALAND
+http://zl2as.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 10/10 dB) HF
+
+ZL2BKW | PALMERSTON NORTH, NEW ZEALAND
+http://zl2bkw.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 10/10 dB) HF
+
+S53A | POLSECE SLOVENIA 900M ASL
+http://21909.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 11/10 dB) HF
+
+KG7SXF 3-30 MHZ SDR | MARYSVILLE, WA
+http://22050.proxy.kiwisdr.com
+KiwiSDR 2 v1.821 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 11/10 dB) HF
+
+0-30 MHZ SDR | LEKNES ( LOFOTEN ISLANDS).
+http://22604.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 11/10 dB) HF
+
+0-30 MHZ SDR AUXERRE FRANCE
+http://82.64.206.44:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 11/10 dB) HF
+
+DC8YZ ROTH, BAVARIA, GERMANY, JN59MF, 0-30 MHZ SDR
+http://dc8yz.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 11/10 dB) HF
+
+0-30 MHZ | DE6CDA | AMBERG, GERMANY
+http://de6cda.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 11/10 dB) HF
+
+KA0GBG 0-30 MHZ SDR | LAKEWOOD, COLORADO
+http://jpvm54.proxy.kiwisdr.com
+KiwiSDR 1 v1.804 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 11/10 dB) HF
+
+0-30 MHZ SDR, WHIDBEY ISLAND, WA, USA MFJ-1886 LOOP
+http://oss706.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/2 users, SNR 11/10 dB) HF
+
+0-30 MHZ SDR, BAD RAGAZ, SWITZERLAND
+http://sdr-badragaz.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 11/10 dB) HF
+
+FRANK IN BALLARAT TESTING
+http://vk3zfs.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 11/10 dB) HF
+
+0-30 MHZ SDR PE1RFF | HELMOND, BRABANT, THE NETHERLANDS
+http://21934.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 12/10 dB) HF
+
+RADIOCLUB COSTA RICA | SAN JOSE
+http://ti0rc.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (3/8 users, SNR 12/10 dB) HF
+
+PA3GUK 0-30 MHZ SDR | BEILEN, NETHERLANDS
+http://21033.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.8 (0/3 users, SNR 13/10 dB) HF
+
+0-30 MHZ SDR (TEST) | OSS, NETHERLANDS
+http://21950.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 13/10 dB) HF
+
+0-30 MHZ SDR | ROSEBURG, OREGON USA
+http://47.39.41.144:8074
+KiwiSDR 1 v1.828 ⁣⁣ 🌀D11.11 (3/4 users, SNR 13/10 dB) HF
+
+0-30 MHZ SDR, THALHEIM, SCHENKENBERG, SWITZERLAND
+http://thalheim-3.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (6/8 users, SNR 13/10 dB) HF
+
+0-30 MHZ SDR | BAD BLANKENBURG, GERMANY
+http://21961.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 14/10 dB) HF
+
+KIWISDR THALHEIM - 0-30 MHZ SDR
+http://thalheim-2.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (5/8 users, SNR 14/10 dB) HF
+
+0-30 MHZ SDR, W7DJS | SURPRISE, AZ
+http://38.18.68.3:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/3 users, SNR 15/10 dB) HF
+
+0-30 MHZ SDR, K2ZN, USA | ROCHESTER, NY
+http://k2zn.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 15/10 dB) HF
+
+0-30 MHZ KIWISDR & WELLBROOK ALA1530LNP NA IN WESTERVILLE OHIO, USA
+http://65.60.164.132:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 25/10 dB) HF
+
+0-30 MHZ SDR, DL0ABT, BERLIN
+http://astw.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 25/10 dB) HF
+
+0-32 MHZ SDR VERTICAL HF, SQ5BPD/SQ5ALQ, POLAND | WARSZAWA
+http://185.238.204.191:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 9/10 dB) HF
+
+0-30 MHZ SDR | KITA-NAGOYA, AICHI, JAPAN
+http://21805.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 10/9 dB) HF
+
+EMERALDSDR | CARLOW, IRELAND
+http://51.182.44.48:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 10/9 dB) HF
+
+FUNKCLUB SCHLöSSLI - HB9RE - DMR2282157 | BODENBERG, SWITZERLAND
+http://hb9re.ddns.net:8081
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 10/9 dB) HF
+
+0-30 MHZ KIWISDR2 | HIROSHIMA, JAPAN
+http://hirolin.duckdns.org:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 10/9 dB) HF
+
+🇨🇳 0-22 MHZ KIWISDR 2 📻 欢迎光临 | 新竹市 HSINCHU CITY, TAIWAN, CHINA
+http://jjm0311.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 10/9 dB) 0-22 MHz
+
+0-30 MHZ SDR VK6QS | AUGUSTA, WESTERN AUSTRALIA
+http://vk6qs2.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 10/9 dB) HF
+
+0-30 MHZ SDR | HAMMOND, SOUTH AUSTRALIA
+http://wartli.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 10/9 dB) HF
+
+KIWISDR2 ZL2TPQ HASTINGS NEW ZEALAND
+http://zl2tpq.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 10/9 dB) HF
+
+0-30 MHZ SDR, VN/SWL, VIETNAM
+http://113.23.57.178:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 11/9 dB) HF
+
+NW7R - KIWISDR 2 | WEST SEATTLE, WA USA
+http://21088.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 11/9 dB) HF
+
+SV8RV | ZAKYNTHOS (ZANTE) ISL., GREECE
+http://sv8rv.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/8 users, SNR 11/9 dB) HF
+
+0-32 MHZ 😃 [DL0073SWL] 😃 KIWISDR BERLIN/LICHTERFELDE GERMANY 📻🎶🎶🎶🇩🇪🇩🇪🇩🇪😃🇩🇪🇩🇪🇩🇪🎶🎶🎶📻
+http://thomas0177.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (1/4 users, SNR 11/9 dB) HF
+
+0-30 MHZ SDR | TRUTH OR CONSEQUENCES, NEW MEXICO, 87901
+http://torcnm777.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (2/4 users, SNR 11/9 dB) HF
+
+0-30 MHZ SDR | ANCHORAGE, ALASKA
+http://wl7no.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (4/4 users, SNR 11/9 dB) HF
+
+ANTZ KIWISDR2 NO3 | JERSEY UK
+http://21181.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 12/9 dB) HF
+
+OE3RCB | TULLN, AUSTRIA, EUROPE
+http://kiwi.bergi.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/2 users, SNR 12/9 dB) HF
+
+0-30 MHZ SDR | JERSEY UNITED KINGDOM
+http://antskiwisdr.zapto.org:8078
+KiwiSDR 1 v1.710 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/6 users, SNR 13/9 dB) HF
+
+0-30 MHZ SDR, BM2KVV TAIWAN #4
+http://jplin53b.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (7/8 users, SNR 13/9 dB) HF
+
+0.5-30 MHZ SDR (KIWISDR 4 OF 5), MARAHAU, TASMAN DISTRICT, NEW ZEALAND
+http://kiwisdr4.owdjim.gen.nz:8074
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (0/3 users, SNR 13/9 dB) HF
+
+0-30 MHZ SDR, LU4EEC, RAMOS MEJIA, BUENOS AIRES, ARGENTINA
+http://lu4eec.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/3 users, SNR 13/9 dB) HF
+
+0-30 MHZ SDR OPERATED BY THE MARLBOROUGH AMATEUR RADIO CLUB
+http://zl2ks.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 13/9 dB) HF
+
+VK4KY 0-30 MHZ SDR | ESK, QUEENSLAND, AUSTRALIA
+http://22537.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 14/9 dB) HF
+
+##VK3JTM 160M LOOP ARARAT VIC AUSTRALIA##
+http://59.167.177.246:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 14/9 dB) HF
+
+0-30 MHZ SDR, WELLBROOK ALA1530LN LOOP, SWL/JO02JH, UNITED KINGDOM | IXWORTH, SUFFOLK, UK
+http://86.168.204.65:8073
+KiwiSDR 1 v1.702 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 14/9 dB) HF
+
+TWR | JOHANNESBURG
+http://jnb.twrmon.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/7 users, SNR 14/9 dB) 0.300-29 MHz
+
+ZL1HEX | ONEWHERO, NEW ZEALAND
+http://kiwisdr.zl1hex.com:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 14/9 dB) HF
+
+0.5-30 MHZ SDR (KIWISDR 1 OF 5), MARAHAU, TASMAN DISTRICT, NEW ZEALAND
+http://kiwisdr1.owdjim.gen.nz:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 14/9 dB) HF
+
+0.5-30 MHZ SDR (KIWISDR 3 OF 5), MARAHAU, TASMAN DISTRICT, NEW ZEALAND
+http://kiwisdr3.owdjim.gen.nz:8077
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (4/8 users, SNR 14/9 dB) HF
+
+0-32 MHZ SDR, PARDINHO, SP - BRAZIL
+http://pardinho.websdr.com.br:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 15/9 dB) HF
+
+WB2SRI / GEORGETOWN / 0-30 MHZ SDR | WASHINGTON, DC, USA
+http://dupont.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 16/9 dB) HF
+
+######ZL2J 0-30 MHZ SDR ANTENNA 400M DOUBLET \"NEW ANTENNA\"#####
+http://zl2j.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 16/9 dB) HF
+
+KN6TYF 160-10M KIWI2, OAKLAND, CA
+http://bayarea.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 18/9 dB) HF
+
+N5RV'S 0-30MHZ SDR IN WEST CENTRAL TEXAS
+http://22458.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 22/9 dB) HF
+
+LA6LU KIWISDR - CHA-AM, THAILAND (0-30 MHZ SDR)
+http://la6lukiwisdrth.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (4/4 users, SNR 22/9 dB) HF
+
+0-30 MHZ SDR | BAGHDAD, IRAQ
+http://21987.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 8/9 dB) HF
+
+0-30 MHZ SDR, VK3TLW, BURWOOD EAST, MELBORNE, AUSTRALIA
+http://kiwisdr.vk3tlw.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 8/9 dB) HF
+
+0-30 MHZ SDR, VK3TLW, BURWOOD EAST, MELBORNE, AUSTRALIA
+http://kiwisdr3.vk3tlw.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 8/9 dB) HF
+
+ES-SVL 30M SDR | TALLINN, ESTONIA
+http://21712.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/1 users, SNR 9/9 dB) HF
+
+VK6BL VK6HL HF | MT BARKER, WESTERN AUSTRALIA
+http://22378.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 9/9 dB) HF
+
+N3UIH | RIDLEY PARK PA, USA
+http://22479.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 9/9 dB) HF
+
+0-30 MHZ HAM KIWISDR | SWITZERLAND HASENBERG05 AG 700M (HB9HEH) / ANTENNA: SIRIO GAIN-MASTER 25.5-30MHZ
+http://hasenberg05.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 9/9 dB) HF
+
+1.8-30 MHZ SDR | MILTON ON, CANADA
+http://kiwi.hobiecat.cc:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 9/9 dB) HF
+
+0-30 MHZ SDR, KN4QCK/HOLTVILLE, AL
+http://kn4qck.duckdns.org:8073
+KiwiSDR 1 v1.708 ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (1/4 users, SNR 9/9 dB) HF
+
+0.1-30 MHZ SDR TF3GZ GRáNUMóAR ICELAND
+http://krokur.utvarp.com
+KiwiSDR 1 v1.699 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/8 users, SNR 9/9 dB) HF
+
+SIGINT-STREHLA
+http://strehla.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (0/3 users, SNR 9/9 dB) HF
+
+0-30 MHZ SDR | SAN CARLOS, CHILE
+http://xq4ktm.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 9/9 dB) HF
+
+0-30 MHZ SDR | STOWPORT, TASMANIA, AU
+http://tassyjim.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 10/8 dB) HF
+
+0-30 MHZ SDR, SM0JZT #2 | KUNGSäNGEN, SWEDEN
+http://192.36.155.252:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 11/8 dB) HF
+
+0-30 MHZ SDR PE1MMQ | URK NETHERLANDS
+http://22038.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 11/8 dB) HF
+
+K7LEN 0-30 MHZ SDR | WORLEY, IDAHO USA
+http://k7len.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/2 users, SNR 11/8 dB) HF
+
+KJ5CHW 0-30 MHZ SDR | SAN ANTONIO, TX
+http://21305.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/1 users, SNR 12/8 dB) HF
+
+ET3AA 0-30 MHZ SDR, ADDIS ABABA, ETHIOPIA
+http://21114.proxy.kiwisdr.com
+KiwiSDR 2 v1.700 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/3 users, SNR 13/8 dB) HF
+
+THE UK'S MOST EASTERLY KIWISDR | LOWESTOFT, SUFFOLK
+http://21785.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 15/8 dB) HF
+
+███ 0-30 MHZ SDR #1, VK5PH, IRONSTONE RANGE, SOUTH AUSTRALIA ███
+http://sdr.ironstonerange.com:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 15/8 dB) HF
+
+0.5-30 MHZ, W8RKO, DAYTON, OHIO, USA
+http://nippynet.com:8073
+KiwiSDR 1 v1.817 ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 16/8 dB) HF
+
+███ 0-30 MHZ SDR #4, VK5PH, IRONSTONE RANGE, SOUTH AUSTRALIA ███
+http://sdr.ironstonerange.com:8076
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (2/4 users, SNR 16/8 dB) HF
+
+🟠VK3SOL-STRATHBOGIE RX1. VICTORIA, AUSTRALIA [VERT. LOOP. 0.2-30MHZ]🟠
+http://22545.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 19/8 dB) HF
+
+0-30 MHZ SDR | EATONTON GEORGIA USA
+http://k4ega.ddns.net:8073
+KiwiSDR 2 v1.800 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 19/8 dB) HF
+
+0-30 MHZ SDR, KB6C, STAUFFER, CALIFORNIA
+http://kb6c.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 19/8 dB) HF
+
+VE4ACE LISTENING POST | WINNIPEG MANITOBA CANADA
+http://142.161.232.202:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 8/8 dB) HF
+
+0 - 30 MHZ SDR | 🇮🇪 🇮🇪 🇮🇪 🇮🇪 URL: HTTP://RX3.RADIO101.DE 🇮🇪 🇮🇪 🇮🇪 🇮🇪 GLENBEIGH, KERRY / IRELAND
+http://185.11.65.87:8073
+KiwiSDR 1 v1.826 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 8/8 dB) HF
+
+ANOTHER KIWI | NEW CASTLE PA.
+http://22552.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣⁣ 🌀D11.11 (0/3 users, SNR 8/8 dB) HF
+
+0-30 MHZ SDR | SWITZERLAND HASENBERG02 AG 700M / ANTENNA: SIRIO GAIN-MASTER 25.5-30MHZ
+http://hasenberg02.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 8/8 dB) HF
+
+0-30 MHZ SDR, JAVARADIOFRANCE
+http://javaradiofrance.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 8/8 dB) HF
+
+KIWISDR 1 | 0-30 MHZ SDR | EDDC2 - 5 | DRESDEN, GERMANY
+http://jimjackii.no-ip.org:8089
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.9 (0/4 users, SNR 8/8 dB) HF
+
+0-30 MHZ SDR | PARIS, FRANCE
+http://kiwi.poneytelecom.rocks
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.13 (2/4 users, SNR 8/8 dB) HF
+
+AD0VC 0-30 MHZ SDR | WESTMINSTER, CO USA
+http://kiwisdr.ad0vc.com:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/4 users, SNR 8/8 dB) HF
+
+0-30 MHZ SDR, HA/N2LAW HUNGARY (HOSSZúHETéNY, BA)
+http://kiwisdr.ha.n2law.net:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 8/8 dB) HF
+
+0-30 MHZ SDR - SOUTH WEST | SYDNEY | AUSTRALIA | VK2ARI
+http://kiwisdrvk2ari.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 8/8 dB) HF
+
+0.3 - 30 MHZ SDR | WANGANUI, NEW ZEALAND
+http://sdr.zl2ja.org:8073
+KiwiSDR 1 v1.826 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 8/8 dB) HF
+
+0-30 MHZ SDR | HALLAM, VIC, AUSTRALIA
+http://21295.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 9/8 dB) HF
+
+M7SDJ | 0-30 MHZ SDR | CHEPSTOW, UNITED KINGDOM
+http://21603.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/4 users, SNR 9/8 dB) HF
+
+0-30 MHZ SDR | MOBILE, AL
+http://22317.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 9/8 dB) HF
+
+0-32 MHZ SDR, MONTEVIDEO, URUGUAY
+http://cx8bit.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (6/8 users, SNR 9/8 dB) HF
+
+KIWISDR (2) | JN68EG, AMPFING, GERMANY
+http://fb.dd5fz.me:8074
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (7/8 users, SNR 9/8 dB) HF
+
+MONTEREY BAY AMATEUR RADIO ASSOCIATION | MARINA, CALIFORNIA
+http://198.189.159.209:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 10/7 dB) HF
+
+VK4GFR | 0-30MHZ SDR | TOWNSVILLE, QUEENSLAND
+http://21982.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 11/7 dB) HF
+
+0-30 MHZ SDR | ALLENSPARK, COLORADO
+http://22048.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 11/7 dB) HF
+
+0-30 MHZ SDR | BREDA, NETHERLANDS
+http://21915.proxy.kiwisdr.com
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 12/7 dB) HF
+
+0-30 MHZ SDR | SANTIAGO, CHILE
+http://ce3pbr.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 12/7 dB) HF
+
+0-30 MHZ SDR | NEW HAVEN COUNTY, CONNECTICUT, USA
+http://kiwi.maidgina.cafe
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 13/7 dB) HF
+
+0.5-30 MHZ SDR (KIWISDR 2 OF 5), MARAHAU, TASMAN DISTRICT, NEW ZEALAND
+http://kiwisdr2.owdjim.gen.nz:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 13/7 dB) HF
+
+9M2AMH KIWISDR-KL | KUALA LUMPUR, MALAYSIA
+http://21439.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 15/7 dB) LF
+
+███ 0-30 MHZ SDR #2, VK5PH, IRONSTONE RANGE, SOUTH AUSTRALIA ███
+http://sdr.ironstonerange.com:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 15/7 dB) HF
+
+███ 0-30 MHZ SDR #3, VK5PH, IRONSTONE RANGE, SOUTH AUSTRALIA ███
+http://sdr.ironstonerange.com:8075
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 16/7 dB) HF
+
+W3HFU - WESTMINSTER, MD, USA - 11 METER BAND DIPOLE
+http://sdr.hfunderground.com:8079
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 18/7 dB) HF
+
+KIWISDR 2 @ DO1MF/DE2MFF | WALSRODE, GERMANY
+http://21646.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 6/7 dB) HF
+
+DE27251 | SCHOLEN, GERMANY
+http://21189.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/2 users, SNR 7/7 dB) HF
+
+0-30 MHZ SDR | HILLIARD OHIO USA
+http://21690.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/2 users, SNR 7/7 dB) HF
+
+0-30 MHZ SDR, DL1KGT, GERMANY
+http://dl1kgt.hopto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 7/7 dB) HF
+
+0-30 MHZ SDR @ G4GNK, BALDERTON NR. NEWARK-ON-TRENT, NOTTINGHAMSHIRE, ENGLAND, UK
+http://g4gnk.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 7/7 dB) HF
+
+0-30 MHZ SDR | ROSS-ON-WYE, ENGLAND
+http://gibsons.dyndns.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D9.13 (2/3 users, SNR 7/7 dB) HF
+
+0-30 MHZ SDR, QUE4, WICKER PARK, CHICAGO, ILLINOIS
+http://kiwisdr.que4.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 7/7 dB) HF
+
+KT0TT 0-30 MHZ KIWISDR MUSCATINE IOWA USA
+http://kt0tt.dynu.net:8073
+KiwiSDR 1 v1.708 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 7/7 dB) HF
+
+0-30 MHZ SDR | CIRENCESTER | SOUTH WEST ENGLAND | UK
+http://21802.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 8/7 dB) HF
+
+0-30 MHZ SDR | CITTà DI SAN MARINO, REPUBLIC OF SAN MARINO
+http://22416.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 8/7 dB) HF
+
+KIWISDR 2 (0-30 MHZ) W/ K-180WLA ACTIVE LOOP BROADBAND RECEIVING ANTENNA @ 277M | SAN DIEGO, CALIFORNIA
+http://22544.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (6/8 users, SNR 8/7 dB) HF
+
+0-30 MHZ KIWI SDR RECIVER | OZ1KVB SOENDERBORG DENMARK
+http://86.52.211.220:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D10.11 (0/4 users, SNR 8/7 dB) HF
+
+SDR-PAL-1 (KIWI) • MEGALOOP • PALLAS, ENONTEKIÖ, LAPLAND, FINLAND 🇫🇮
+http://pallas-kiwi-2.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (3/3 users, SNR 8/7 dB) HF
+
+0-30 MHZ PARAGUAY KIWISDR
+http://paraguay.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 🚫 Limits ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/4 users, SNR 8/7 dB) HF
+
+0-30 MHZ SDR, W7DP CLUB HOUSE | COLLEGE PLACE, WA
+http://receiver.wwares.org
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/4 users, SNR 8/7 dB) HF
+
+ZS2JB - KIWISDR | GQEBERHA, SOUTH AFRICA
+http://alg.twrmon.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/7 users, SNR 9/7 dB) 0.300-29 MHz
+
+0-30 MHZ SDR, EA2RCF RADIOCLUB FORONDA. | VITORIA-GASTEIZ, SPAIN
+http://kiwi.ea2rcf.org:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.9 (1/4 users, SNR 9/7 dB) HF
+
+KFS SW KIWISDR | HALF MOON BAY, CALIFORNIA
+http://kiwisdr.kfsdr.com:8075
+KiwiSDR 1 v1.819 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (0/8 users, SNR 9/7 dB) HF
+
+WB7AWL 0-30 MHZ SDR | OREGON CITY, OREGON, USA
+http://kiwisdr.wb7awl.us:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 9/7 dB) HF
+
+0-30 MHZ SDR | KARLSRUHE, GERMANY
+http://22433.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/1 users, SNR 12/6 dB) HF
+
+0-30 MHZ SDR | SAN DIEGO, CA
+http://22576.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/4 users, SNR 12/6 dB) HF
+
+ERIZ - BERNER OBERLAND - SCHWEIZ 🇨🇭🇨🇭🇨🇭
+http://84.227.25.65:8073
+KiwiSDR 1 v1.821 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 14/6 dB) HF
+
+🟠VK3SOL-STRATHBOGIE RX2. VICTORIA, AUSTRALIA [HOR. LOOP 0.2-30MHZ]🟠
+http://22568.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 20/6 dB) HF
+
+50MHZ YAGI | CHICHESTER UK
+http://g8ure.ddns.net:8076
+KiwiSDR 1 v1.829 ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (4/4 users, SNR 6 dB) 6m
+
+0-30 MHZ SDR | ST JUST IN PENWITH, CORNWALL, ENGLAND
+http://21246.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.8 (1/3 users, SNR 6/6 dB) HF
+
+0-30 MHZ SDR G7JHU | NR SKEGNESS, LINCOLNSHIRE, UK
+http://21575.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 6/6 dB) HF
+
+"STATION B" #2 | CANTERBURY UK
+http://kiwisdr2.hoka.co.uk:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 6/6 dB) HF
+
+0-30 MHZ SDR | BAD SCHöNBORN, GERMANY
+http://noto.de:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 6/6 dB) HF
+
+YG1AIG 0-30 MHZ SDR | BANDUNG - INDONESIA
+http://ptlen.proxy.kiwisdr.com
+KiwiSDR 1 v1.826 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D9.13 (2/8 users, SNR 6/6 dB) HF
+
+ANTSZ KIWISDR2 NO4 | JERSEY, UNITED KINGDOM
+http://21182.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 7/6 dB) HF
+
+0-30 MHZ SDR, VK5ABN, AUSTRALIA
+http://kiwisdr.ping.net.au:8081
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 7/6 dB) HF
+
+CANADIAN PRAIRIES SHORTWAVE - 0-30 MHZ KIWISDR | CALGARY, ALBERTA, CANADA
+http://canadian-prairies-shortwave.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 8/6 dB) HF
+
+0-30 MHZ SDR | WELS AT
+http://21175.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/8 users, SNR 9/6 dB) HF
+
+KIWISDR (1) | JN68EG, AMPFING, GERMANY
+http://fb.dd5fz.me:8073
+KiwiSDR 2 v1.828 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (7/8 users, SNR 9/6 dB) HF
+
+1700 KHZ - 30 MHZ SDR, WA2ZKD | ROCHESTER, NEW YORK
+http://jimlill.com:8075
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D9.13 (0/4 users, SNR 9/6 dB) HF
+
+KM6CQ PONDEROSA SDR .1-30 MHZ | WASHOE VALLEY, NEVADA USA
+http://71.9.250.2:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (2/4 users, SNR 12/5 dB) HF
+
+0-30 MHZ SDR | LAKE MERWIN, WASHINGTON STATE, U.S.A.
+http://21185.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (1/4 users, SNR 5/5 dB) HF
+
+0-30 MHZ SDR | GREER, SC, USA
+http://22646.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/3 users, SNR 5/5 dB) HF
+
+0-30 MHZ KIWISDR, CAMPING FRASO-RANCH, CHASSERALL, JN37MC, LIGNIèRES NE, SWITZERLAND (HB9HEH)
+http://chasseral.proxy.kiwisdr.com
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 5/5 dB) HF
+
+0-30 MHZ SDR, ZL2QF - BANCH 87, NEW ZEALAND
+http://sdr.zapto.org:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/4 users, SNR 5/5 dB) HF
+
+KIWISDR#1 FROM DO9HM | SEYBOTHENREUTH, BAVARIA-GERMANY
+http://seybothenreuth.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 5/5 dB) HF
+
+0-30 MHZ SDR, DARC OV D10 | BERLIN, GERMANY
+http://xorrox.de:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 5/5 dB) HF
+
+N8GA FLATFOOT KIWISDR #3 | CABLE, OH
+http://hill.n8ga.org:8075
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D10.11 (0/8 users, SNR 6/5 dB) HF
+
+RADIO ELVIRA SDR DIJK EN WAARD | HEERHUGOWAARD, THE NETHERLANDS
+http://radioelvira.sytes.net:8073
+KiwiSDR 1 v1.710 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/8 users, SNR 6/5 dB) HF
+
+KIWISDR2 | ZL3RCK QTH: WHITE ROCK, NORTH CANTERBURY, NEW ZEALAND
+http://zl3rck.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/6 users, SNR 6/5 dB) HF
+
+0-30 MHZ SDR | AMSTERDAM, THE NETHERLANDS
+http://21512.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 7/5 dB) HF
+
+0-30 MHZ SDR | GRESHAM, OREGON
+http://50.53.22.254:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 7/5 dB) HF
+
+KIWISDR2 AT WF4V | LORTON, VA
+http://21238.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (5/8 users, SNR 8/5 dB) HF
+
+0-30 MHZ SDR | AMHERST, NH USA
+http://kiwisdr.km3t.net:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/8 users, SNR 14/4 dB) HF
+
+DAVE M1CTK 0-30 MHZ SDR | WELLBROOK 1530 MW/SW LOOP | BRIGHTON, UNITED KINGDOM
+http://193.237.202.87:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/3 users, SNR 4/4 dB) HF
+
+KZ4MR - 0-30 MHZ SDR | LEESBURG, VIRGINIA, UNITED STATES
+http://22551.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (6/8 users, SNR 4/4 dB) HF
+
+KC3MN 0-30 MHZ SDR | DURYEA, PENNSYLVANIA, USA.
+http://23.28.39.73:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 4/4 dB) HF
+
+N4AN 0-30 MHZ SDR | FORT LAUDERDALE FLORIDA
+http://73.245.136.72:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 4/4 dB) HF
+
+DJ8KL 0-30 MHZ SDR | HANNOVER, GERMANY
+http://77.21.181.19:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 4/4 dB) HF
+
+0-30 MHZ SDR - BAREC (GREDGWIN)
+http://gredgwin.barec.net.au:8074
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 4/4 dB) HF
+
+0-30 MHZ SDR | ETTEN-LEUR, NETHERLANDS
+http://213.93.198.56:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (3/8 users, SNR 6/4 dB) HF
+
+0-30 MHZ KIWISDR - YOULOOP ANTENNA FOR NOW | LEEDS, UK
+http://m0rvb.net:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 7/4 dB) HF
+
+118-148 MHZ AIRBAND+SAT+2M BAND | KRASNOARMEYSK, RUSSIA
+http://std.swl.su:8073
+KiwiSDR v1.690 ⁣ ⏳🚫 LIMITS ⁣⁣ 🌀D10.8 (0/4 users, SNR 3 dB) Airband
+
+|N3EDS|KIWISDR 2| 1 OF 2 | SOMERSET, PA USA
+http://24.154.27.173:8040
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 3/3 dB) HF
+
+|N3EDS|KIWISDR 2| 2 OF 2 | SOMERSET, PA USA
+http://24.154.27.173:8041
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (2/8 users, SNR 3/3 dB) HF
+
+0-30 MHZ SDR, JA1GJD/2, AICHI, JAPAN
+http://rio.f5.si:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.5 (6/8 users, SNR 3/3 dB) HF
+
+VK2GGC SDR1: 10M 6 ELEMENT LFA YAGI BEAMING USA - HUNTER VALLEY NSW AUSTRALIA
+http://vk2ggc.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/2 users, SNR 3/3 dB) HF
+
+KIWISDR2 | RAUMATI SOUTH, NEW ZEALAND
+http://21502.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 4/3 dB) HF
+
+0-30 MHZ SDR, MISC. LOOP ANTENNAS, BRISBANE, AUSTRALIA
+http://sdrbris.proxy.kiwisdr.com
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users, SNR 4/3 dB) HF
+
+0-30 MHZ SDR | PORTO ALEGRE, RIO GRANDE DO SUL, BRAZIL
+http://21104.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.8 (3/8 users, SNR 5/3 dB) HF
+
+0-30 MHZ SDR | MANSFIELD GEORGIA USA
+http://mansfieldga.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (1/4 users, SNR 6/3 dB) HF
+
+VELUWE KIWI SDR 0-30 MHZ SDR | OTTERLO, KINGDOM OF THE NETHERLANDS
+http://21878.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 7/3 dB) HF
+
+0-30 MHZ SDR | WAIMEA, HAWAII
+http://76.53.60.62:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (1/8 users, SNR 4/2 dB) HF
+
+0-30 MHZ SDR | ALMERE, NETHERLANDS
+http://kiwisdr.pa7ey.nl:8073
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 4/2 dB) HF
+
+SATELLITE QO100 -- F6BIR KIWISDR | ANSERVILLE NR PARIS
+http://f6bir.ddns.net:8074
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳🚫 Limits ⁣⁣ 🌀D8.5 (0/4 users, SNR 1 dB) 10GHz
+
+BURNABY 🇨🇦 BRITISH COLUMBIA 🇨🇦 CANADA | 0.05-32MHZ W/ GPS + ADC
+http://21264.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.8 (0/4 users, SNR 2/1 dB) HF
+
+0-30 MHZ KIWISDR - DO9PL & 13RC811 - METTMANN / NEANDERTAL - JO31LG - GERMANY
+http://13rc811.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/8 users) HF
+
+SDR GROESBEEK BY PA1W/P
+http://31.187.212.228:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (4/8 users) HF
+
+0,5-30 MHZ SDR, BAD MüNSTEREIFEL
+http://5.10.166.25:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users) HF
+
+0-30 MHZ SDR | 🇦🇹🇦🇹🇦🇹🇦🇹 URL: HTTP://RX1.RADIO101.DE 🇦🇹🇦🇹🇦🇹🇦🇹 KUFSTEIN / NIEDERNDORFERBERG (950M A.S.L.), AUSTRIA
+http://80.121.99.116:8073
+KiwiSDR 1 v1.826 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users) HF
+
+0-30 MHZ SDR, G4CAO | NORTHWEST SURREY
+http://86.184.212.35:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (7/8 users) HF
+
+0-30 MHZ SDR, DF3AF | LIPPSTADT -BAD WALDLIESBORN
+http://df3af.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/4 users) HF
+
+0.1-30 MHZ SDR (KIWISDR 5 OF 5), MARAHAU, TASMAN DISTRICT, NEW ZEALAND
+http://kiwisdr5.owdjim.gen.nz:8079
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣⁣ 🌀D11.11 (13/14 users) HF
+
+0-30 MHZ SDR | SULNIAC 56250, FRANCE.
+http://kiwisdr56.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users) HF
+
+0-30 MHZ SDR, TF3GZ KOPAVOGUR ICELAND
+http://kop.utvarp.com
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (1/8 users) HF
+
+DM6CM | BONIWHIP | WENTORF, GERMANY
+http://s4wmv4hovyls5ebz.myfritz.net:8075
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users) HF
+
+0 - 30 MHZ, JO62SM | DEUTSCHLAND, BERLIN
+http://sdr.dn9lo.de:8073
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users) HF
+
+DE2HJW SDR JO53CN DL NR HAMBURG
+http://kiwijo53cn.ddnss.org:8073
+KiwiSDR 1 v1.826 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/2 users, SNR 6/3 dB, NO ANTENNA CONNECTED?) HF
+
+0-30 MHZ SDR | ATWATER, OH
+http://21782.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 3/3 dB, NO ANTENNA CONNECTED?) HF
+
+WF7I'S SDR | NATURAL BRIDGE, VA
+http://22338.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/3 users, SNR 3/3 dB, NO ANTENNA CONNECTED?) HF
+
+KE0GHU | OLATHE, KS
+http://22696.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 3/3 dB, NO ANTENNA CONNECTED?) HF
+
+KIWISDR @ VE2RM | MONT-RIGAUD, QC, CANADA
+http://74.114.21.161:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/8 users, SNR 3/2 dB, NO ANTENNA CONNECTED?) HF
+
+0-30 MHZ SDR, DG8EK | DUISBURG, GERMANY ONLY ACCESSIBLE FROM GERMANY
+http://in-serm.dyndns.org:8073
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (6/8 users, SNR 3/2 dB, NO ANTENNA CONNECTED?) HF
+
+0-30 MHZ SDR, ON1AFF, BELGIUM
+http://sdr1.on1aff.be
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (0/3 users, SNR 3/2 dB, NO ANTENNA CONNECTED?) HF
+
+0-30 MHZ SDR | VORDERER BAYERISCHER WALD
+http://vbw.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 3/3 dB, NO ANTENNA CONNECTED?) HF
+
+0-30 MHZ SDR, OK2CNI, JIHLAVA, CZECH REPUBLIC
+http://185.183.73.73:8073
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+G0YYZ | BARNSLEY, UK
+http://21833.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.11 (0/4 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+W4JCW | CAMDEN, SOUTH CAROLINA USA
+http://22025.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📡 GPS ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+OP0P - KIWISDR 0-30 MHZ SDR - BELGIUM
+http://22691.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.11 (0/8 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+KO4NAD | CULLMAN ALABAMA
+http://24.241.205.243:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ 📶 Ant-Switch ⁣⁣ 🌀D8.5 (0/3 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+KO4NAD | CULLMAN ALABAMA
+http://24.241.205.243:8073
+KiwiSDR 1 v1.829 ⁣ 🎵 20 kHz ⁣ 📡 GPS ⁣ 📶 Ant-Switch ⁣⁣ 🌀D11.8 (0/3 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+0-30 MHZ -YO8SGV- KN37EX- KIWISDR | DOROHOI, ROMANIA
+http://kiwisdr-dorohoi.ddns.net:8073
+KiwiSDR 1 v1.829 ⁣ ⏳ Limits ⁣⁣ 🌀D8.5 (0/4 users, SNR 2/2 dB, NO ANTENNA CONNECTED?) HF
+
+1.8-29.7 MHZ SDR, W9XA | BATAVIA, IL, USA
+http://w9xa.us:8073
+KiwiSDR 1 v1.829 ⁣ 📡 GPS ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D8.5 (3/4 users, SNR 2/1 dB, NO ANTENNA CONNECTED?) HF
+
+AC9TA SDR | MADISON, IL USA
+http://22188.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (2/4 users, SNR 1/1 dB, NO ANTENNA CONNECTED?) HF
+
+K4MIE 0-30 MHZ SDR | HUNTSVILLE ALABAMA USA EM64QR
+http://22204.proxy.kiwisdr.com
+KiwiSDR 2 v1.829 ⁣ ⏳ Limits ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 1/1 dB, NO ANTENNA CONNECTED?) HF
+
+10 KHZ - 32 MHZ W8BUG KNOXVILLE, TN, USA
+http://scottgs.com:8074
+KiwiSDR 1 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D8.11 (1/3 users, SNR 1/1 dB, NO ANTENNA CONNECTED?) HF
+
+KIWISDR @HB9HXX (0.1 TO 30 MHZ)🇨🇭 | EGG SZ, SWITZERLAND
+http://wh.ddns.net:8073
+KiwiSDR 2 v1.829 ⁣ 📻 DRM ⁣⁣ 🌀D11.9 (0/4 users, SNR 1/1 dB, NO ANTENNA CONNECTED?) HF
