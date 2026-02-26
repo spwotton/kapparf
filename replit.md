@@ -69,7 +69,7 @@ Real-time correlation engine ported from Python. Key features:
 5. **Devices** (`/devices`) — MAC fingerprint tracking table with suspicious detection
 6. **OSINT** (`/osint`) — DNS probe, hidden network detection, surveillance indicators, camera OUIs, OSINT tools
 7. **Nodes** (`/nodes`) — SDR node cards with add dialog
-8. **Tools** (`/tools`) — 68-tool catalog with domain filtering + live GitHub stars
+8. **Tools** (`/tools`) — 68-tool catalog with domain filtering + live GitHub stars, plus 8 integrated interactive tools (tabbed: Interactive / Catalog)
 9. **Map** (`/map`) — interactive Leaflet map showing observer, Jacó, SJO, satellites, flights, SDR nodes
 10. **Karachi** (`/karachi`) — offensive counter-surveillance modules (9 Karachi + FinSpy V1.2 Ghost Protocol + V2.0 Airbnb Ghost/Kyndryl), execution flow, success criteria, hardware/infra layer, Alexanderplatz Protocol, Partytown/Service Worker MITM, V2 deliverables
 11. **Congusto** (`/congusto`) — Virtual Eitel Triode (VET) architecture (Cathode/Grid/Anode), Phoenix countdown, 7 core modules, mathematical constants table, data sources, confidence levels
@@ -94,6 +94,23 @@ Includes all previous rules plus 12 new κ-scaled detection rules: GPR-masked up
 - **Overhead**: elevation > 75°
 - **KLEIN**: azimuth within ±2° of 128.23° (Klein twist angle)
 - **GIZA**: elevation within ±2° of 51.77° (Giza cutoff)
+
+## Integrated Interactive Tools (8 tools)
+All live — no mock data. Located on the Tools page under "Interactive" tab.
+1. **HTTP Probe** (Wireshark/Bettercap/tcpdump) — HTTP header analysis, security header audit, latency measurement
+2. **Packet Decoder** (tcpdump/Wireshark/Bettercap) — Decode raw Ethernet/IP/TCP/UDP frames from hex
+3. **Port Scanner** (nmap/Above) — TCP connect scan on 20 common ports with service identification
+4. **DNS Harvester** (theHarvester/SpiderFoot) — DNS records, SOA, MX, TXT, subdomain enumeration
+5. **MAC OUI Lookup** (Wireshark/Bettercap) — Device vendor identification via macvendors.com API
+6. **RF Calculator** (PhastFT/urh) — Frequency/wavelength/harmonics with κ-Clock, Schumann, ISM presets
+7. **ADS-B Decoder** (dump1090/pyModeS) — Decode raw Mode S hex (DF17 Extended Squitter, ICAO, callsign, altitude)
+8. **Morse Code** (ggmorse/Morserino-32) — Encode/decode ITU Morse code
+
+### Backend Endpoints
+- `POST /api/tools/mac-lookup` — MAC OUI vendor lookup (macvendors.com)
+- `POST /api/tools/whois` — DNS harvesting with subdomain enumeration
+- `POST /api/tools/port-scan` — TCP connect port scan
+- `POST /api/tools/http-probe` — HTTP HEAD request with security header analysis
 
 ## OSINT Capabilities
 - DNS/reverse lookup (Node.js dns module)

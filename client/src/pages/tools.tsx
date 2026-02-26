@@ -4,9 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useI18n } from "@/lib/i18n";
 import { TOOL_CATALOG, DOMAINS, type ToolEntry, type ToolGitHubMeta } from "@shared/schema";
-import { ExternalLink, Star, GitFork } from "lucide-react";
+import { ExternalLink, Star, GitFork, Wrench, Zap } from "lucide-react";
+import { IntegratedTools } from "@/components/integrated-tools";
 
 const domainColors: Record<string, string> = {
   wifi: "bg-green-500/10 text-green-700 dark:text-green-400",
@@ -20,6 +22,7 @@ const domainColors: Record<string, string> = {
   radar: "bg-rose-500/10 text-rose-700 dark:text-rose-400",
   plc: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
   isp: "bg-slate-500/10 text-slate-700 dark:text-slate-400",
+  drone: "bg-red-500/10 text-red-700 dark:text-red-400",
 };
 
 export default function ToolsPage() {
@@ -47,101 +50,120 @@ export default function ToolsPage() {
         <p className="text-sm text-muted-foreground mt-1">{t("tools.description")}</p>
       </div>
 
-      <div className="flex gap-2 flex-wrap">
-        <Button
-          variant={filter === "all" ? "default" : "outline"}
-          size="sm"
-          onClick={() => setFilter("all")}
-          data-testid="button-tools-filter-all"
-        >
-          {t("tools.all")} ({TOOL_CATALOG.length})
-        </Button>
-        {allDomains.map((d) => {
-          const count = TOOL_CATALOG.filter((tool) => tool.domain === d).length;
-          if (count === 0) return null;
-          return (
+      <Tabs defaultValue="interactive" className="w-full">
+        <TabsList data-testid="tabs-tools">
+          <TabsTrigger value="interactive" data-testid="tab-interactive">
+            <Zap className="h-3.5 w-3.5 mr-1.5" />
+            {t("tools.interactive")}
+          </TabsTrigger>
+          <TabsTrigger value="catalog" data-testid="tab-catalog">
+            <Wrench className="h-3.5 w-3.5 mr-1.5" />
+            {t("tools.catalog")} ({TOOL_CATALOG.length})
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="interactive" className="mt-4">
+          <IntegratedTools />
+        </TabsContent>
+
+        <TabsContent value="catalog" className="mt-4 space-y-4">
+          <div className="flex gap-2 flex-wrap">
             <Button
-              key={d}
-              variant={filter === d ? "default" : "outline"}
+              variant={filter === "all" ? "default" : "outline"}
               size="sm"
-              onClick={() => setFilter(d)}
-              data-testid={`button-tools-filter-${d}`}
+              onClick={() => setFilter("all")}
+              data-testid="button-tools-filter-all"
             >
-              {d.toUpperCase()} ({count})
+              {t("tools.all")} ({TOOL_CATALOG.length})
             </Button>
-          );
-        })}
-      </div>
+            {allDomains.map((d) => {
+              const count = TOOL_CATALOG.filter((tool) => tool.domain === d).length;
+              if (count === 0) return null;
+              return (
+                <Button
+                  key={d}
+                  variant={filter === d ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setFilter(d)}
+                  data-testid={`button-tools-filter-${d}`}
+                >
+                  {d.toUpperCase()} ({count})
+                </Button>
+              );
+            })}
+          </div>
 
-      <div className="border rounded-md">
-        <div className="grid grid-cols-[1fr_auto_auto_auto_auto_2fr] gap-3 p-3 text-xs font-medium text-muted-foreground border-b">
-          <span>{t("tools.name")}</span>
-          <span>{t("tools.domain")}</span>
-          <span>{t("tools.stars")}</span>
-          <span>{t("tools.language")}</span>
-          <span>{t("tools.license")}</span>
-          <span>{t("tools.toolDescription")}</span>
-        </div>
-        {filtered.map((tool) => {
-          const meta = metaMap.get(tool.name);
-          return (
-            <div
-              key={tool.name}
-              className="grid grid-cols-[1fr_auto_auto_auto_auto_2fr] gap-3 p-3 text-sm border-b last:border-b-0 items-center"
-              data-testid={`row-tool-${tool.name}`}
-            >
-              <a
-                href={tool.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium flex items-center gap-1.5 hover:underline"
-              >
-                {tool.name}
-                <ExternalLink className="h-3 w-3 text-muted-foreground" />
-              </a>
-              <Badge variant="secondary" className={`${domainColors[tool.domain] || ""} text-[10px]`}>
-                {tool.domain.toUpperCase()}
-              </Badge>
-              <span className="font-mono text-xs flex items-center gap-1 min-w-[60px]">
-                {metaLoading ? (
-                  <Skeleton className="h-4 w-12" />
-                ) : meta ? (
-                  <>
-                    <Star className="h-3 w-3 text-yellow-500" />
-                    {meta.stars.toLocaleString()}
-                    {meta.forks > 0 && (
-                      <span className="text-muted-foreground ml-1 flex items-center gap-0.5">
-                        <GitFork className="h-3 w-3" />
-                        {meta.forks}
-                      </span>
-                    )}
-                  </>
-                ) : (
-                  <span className="text-muted-foreground">—</span>
-                )}
-              </span>
-              <span className="text-xs font-mono min-w-[50px]">
-                {meta?.language || <span className="text-muted-foreground">—</span>}
-              </span>
-              <span className="text-xs font-mono min-w-[60px]">
-                {meta?.license || <span className="text-muted-foreground">—</span>}
-              </span>
-              <span className="text-xs text-muted-foreground">
-                {meta?.description || tool.description}
-                {meta?.archived && <Badge variant="destructive" className="ml-2 text-[9px]">ARCHIVED</Badge>}
-              </span>
+          <div className="border rounded-md">
+            <div className="grid grid-cols-[1fr_auto_auto_auto_auto_2fr] gap-3 p-3 text-xs font-medium text-muted-foreground border-b">
+              <span>{t("tools.name")}</span>
+              <span>{t("tools.domain")}</span>
+              <span>{t("tools.stars")}</span>
+              <span>{t("tools.language")}</span>
+              <span>{t("tools.license")}</span>
+              <span>{t("tools.toolDescription")}</span>
             </div>
-          );
-        })}
-      </div>
+            {filtered.map((tool) => {
+              const meta = metaMap.get(tool.name);
+              return (
+                <div
+                  key={tool.name}
+                  className="grid grid-cols-[1fr_auto_auto_auto_auto_2fr] gap-3 p-3 text-sm border-b last:border-b-0 items-center"
+                  data-testid={`row-tool-${tool.name}`}
+                >
+                  <a
+                    href={tool.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium flex items-center gap-1.5 hover:underline"
+                  >
+                    {tool.name}
+                    <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                  </a>
+                  <Badge variant="secondary" className={`${domainColors[tool.domain] || ""} text-[10px]`}>
+                    {tool.domain.toUpperCase()}
+                  </Badge>
+                  <span className="font-mono text-xs flex items-center gap-1 min-w-[60px]">
+                    {metaLoading ? (
+                      <Skeleton className="h-4 w-12" />
+                    ) : meta ? (
+                      <>
+                        <Star className="h-3 w-3 text-yellow-500" />
+                        {meta.stars.toLocaleString()}
+                        {meta.forks > 0 && (
+                          <span className="text-muted-foreground ml-1 flex items-center gap-0.5">
+                            <GitFork className="h-3 w-3" />
+                            {meta.forks}
+                          </span>
+                        )}
+                      </>
+                    ) : (
+                      <span className="text-muted-foreground">&mdash;</span>
+                    )}
+                  </span>
+                  <span className="text-xs font-mono min-w-[50px]">
+                    {meta?.language || <span className="text-muted-foreground">&mdash;</span>}
+                  </span>
+                  <span className="text-xs font-mono min-w-[60px]">
+                    {meta?.license || <span className="text-muted-foreground">&mdash;</span>}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {meta?.description || tool.description}
+                    {meta?.archived && <Badge variant="destructive" className="ml-2 text-[9px]">ARCHIVED</Badge>}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
 
-      <Card>
-        <CardContent className="py-4 text-xs text-muted-foreground">
-          {TOOL_CATALOG.length} tools cataloged across {allDomains.filter(d => TOOL_CATALOG.some(t => t.domain === d)).length} domains.
-          {ghMeta && ` GitHub metadata loaded for ${ghMeta.length} repositories.`}
-          {metaLoading && ` ${t("tools.loadingMeta")}`}
-        </CardContent>
-      </Card>
+          <Card>
+            <CardContent className="py-4 text-xs text-muted-foreground">
+              {TOOL_CATALOG.length} tools cataloged across {allDomains.filter(d => TOOL_CATALOG.some(t => t.domain === d)).length} domains.
+              {ghMeta && ` GitHub metadata loaded for ${ghMeta.length} repositories.`}
+              {metaLoading && ` ${t("tools.loadingMeta")}`}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

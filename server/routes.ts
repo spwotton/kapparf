@@ -520,6 +520,258 @@ export async function registerRoutes(
     res.json(COUNCIL_OF_7);
   });
 
+  function isPrivateIp(ip: string): boolean {
+    const parts = ip.split(".").map(Number);
+    if (parts.length !== 4) return true;
+    if (parts[0] === 10) return true;
+    if (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) return true;
+    if (parts[0] === 192 && parts[1] === 168) return true;
+    if (parts[0] === 127) return true;
+    if (parts[0] === 0) return true;
+    if (parts[0] === 169 && parts[1] === 254) return true;
+    return false;
+  }
+
+  app.post("/api/tools/mac-lookup", async (req, res) => {
+    const { mac } = req.body;
+    if (!mac || typeof mac !== "string") {
+      return res.status(400).json({ error: "MAC address required" });
+    }
+
+    const cleaned = mac.replace(/[^a-fA-F0-9]/g, "").slice(0, 12);
+    if (cleaned.length < 6) {
+      return res.status(400).json({ error: "Invalid MAC address — need at least 6 hex characters" });
+    }
+
+    try {
+      const oui = cleaned.slice(0, 6).toUpperCase();
+      const response = await fetch(`https://api.macvendors.com/${oui}`, {
+        headers: { "User-Agent": "KAPPA-SIGINT" },
+      });
+
+      if (!response.ok) {
+        return res.json({
+          mac: cleaned.replace(/(.{2})(?=.)/g, "$1:").toUpperCase(),
+          oui,
+          vendor: null,
+          found: false,
+        });
+      }
+
+      const vendor = await response.text();
+      res.json({
+        mac: cleaned.replace(/(.{2})(?=.)/g, "$1:").toUpperCase(),
+        oui,
+        vendor: vendor.trim(),
+        found: true,
+      });
+    } catch (err) {
+      console.error("MAC lookup error:", err);
+      res.status(500).json({ error: "MAC lookup failed" });
+    }
+  });
+
+  app.post("/api/tools/whois", async (req, res) => {
+    const { domain } = req.body;
+    if (!domain || typeof domain !== "string") {
+      return res.status(400).json({ error: "Domain required" });
+    }
+
+    const cleaned = domain.trim().toLowerCase().replace(/^https?:\/\//, "").split("/")[0];
+
+    try {
+      const dns = await import("dns");
+      const { promisify } = await import("util");
+      const resolve4 = promisify(dns.resolve4);
+      const resolveNs = promisify(dns.resolveNs);
+      const resolveMx = promisify(dns.resolveMx);
+      const resolveTxt = promisify(dns.resolveTxt);
+      const resolveSoa = promisify(dns.resolveSoa);
+      const resolveCname = promisify(dns.resolveCname);
+
+      const result: Record<string, unknown> = {
+        domain: cleaned,
+        timestamp: new Date().toISOString(),
+      };
+
+      try { result.ipv4 = await resolve4(cleaned); } catch { result.ipv4 = []; }
+      try { result.ns = await resolveNs(cleaned); } catch { result.ns = []; }
+      try { result.mx = await resolveMx(cleaned); } catch { result.mx = []; }
+      try { result.soa = await resolveSoa(cleaned); } catch { result.soa = null; }
+      try { result.cname = await resolveCname(cleaned); } catch { result.cname = []; }
+      try {
+        const txt = await resolveTxt(cleaned);
+        result.txt = txt.map(r => r.join(""));
+      } catch { result.txt = []; }
+
+      const subdomains = ["www", "mail", "ftp", "api", "dev", "staging", "admin", "vpn", "remote", "mx", "ns1", "ns2", "cdn", "app", "portal"];
+      const found: string[] = [];
+      await Promise.allSettled(
+        subdomains.map(async (sub) => {
+          try {
+            const ips = await resolve4(`${sub}.${cleaned}`);
+            if (ips.length > 0) found.push(`${sub}.${cleaned}`);
+          } catch {}
+        })
+      );
+      result.subdomains = found.sort();
+
+      res.json(result);
+    } catch (err) {
+      console.error("WHOIS lookup error:", err);
+      res.status(500).json({ error: "WHOIS lookup failed" });
+    }
+  });
+
+  app.post("/api/tools/port-scan", async (req, res) => {
+    const { target, ports } = req.body;
+    if (!target || typeof target !== "string") {
+      return res.status(400).json({ error: "Target hostname or IP required" });
+    }
+
+    const net = await import("net");
+    const dns = await import("dns");
+    const { promisify } = await import("util");
+
+    let resolvedIp = target;
+    const isIp = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(target);
+    if (isIp && isPrivateIp(target)) {
+      return res.status(400).json({ error: "Private/reserved IP addresses are not allowed" });
+    }
+    if (!isIp) {
+      try {
+        const resolve4 = promisify(dns.resolve4);
+        const ips = await resolve4(target);
+        resolvedIp = ips[0];
+        if (isPrivateIp(resolvedIp)) {
+          return res.status(400).json({ error: "Target resolves to a private IP address" });
+        }
+      } catch {
+        return res.status(400).json({ error: `Cannot resolve hostname: ${target}` });
+      }
+    }
+
+    const MAX_PORTS = 30;
+    const defaultPorts = [21, 22, 23, 25, 53, 80, 110, 143, 443, 445, 993, 995, 1433, 3306, 3389, 5432, 5900, 8080, 8443, 8888];
+    const scanPorts: number[] = (Array.isArray(ports)
+      ? ports.filter((p: unknown) => typeof p === "number" && p > 0 && p < 65536)
+      : defaultPorts
+    ).slice(0, MAX_PORTS);
+
+    const portNames: Record<number, string> = {
+      21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP", 53: "DNS",
+      80: "HTTP", 110: "POP3", 143: "IMAP", 443: "HTTPS", 445: "SMB",
+      993: "IMAPS", 995: "POP3S", 1433: "MSSQL", 3306: "MySQL",
+      3389: "RDP", 5432: "PostgreSQL", 5900: "VNC", 8080: "HTTP-Alt",
+      8443: "HTTPS-Alt", 8888: "HTTP-Alt2", 161: "SNMP", 162: "SNMP-Trap",
+      502: "Modbus", 7547: "TR-069",
+    };
+
+    const results = await Promise.allSettled(
+      scanPorts.map(
+        (port) =>
+          new Promise<{ port: number; open: boolean; service: string }>((resolve) => {
+            const socket = new net.Socket();
+            socket.setTimeout(2000);
+            socket.on("connect", () => {
+              socket.destroy();
+              resolve({ port, open: true, service: portNames[port] || "unknown" });
+            });
+            socket.on("timeout", () => {
+              socket.destroy();
+              resolve({ port, open: false, service: portNames[port] || "unknown" });
+            });
+            socket.on("error", () => {
+              socket.destroy();
+              resolve({ port, open: false, service: portNames[port] || "unknown" });
+            });
+            socket.connect(port, resolvedIp);
+          })
+      )
+    );
+
+    const portResults = results
+      .filter((r): r is PromiseFulfilledResult<{ port: number; open: boolean; service: string }> => r.status === "fulfilled")
+      .map((r) => r.value)
+      .sort((a, b) => a.port - b.port);
+
+    res.json({
+      target,
+      resolvedIp,
+      timestamp: new Date().toISOString(),
+      ports: portResults,
+      openCount: portResults.filter((p) => p.open).length,
+      scannedCount: portResults.length,
+    });
+  });
+
+  app.post("/api/tools/http-probe", async (req, res) => {
+    const { url } = req.body;
+    if (!url || typeof url !== "string") {
+      return res.status(400).json({ error: "URL required" });
+    }
+
+    let targetUrl = url.trim();
+    if (!targetUrl.startsWith("http://") && !targetUrl.startsWith("https://")) {
+      targetUrl = `https://${targetUrl}`;
+    }
+
+    try {
+      const parsedUrl = new URL(targetUrl);
+      const hostname = parsedUrl.hostname;
+      if (/^(127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|0\.|169\.254\.|localhost)/i.test(hostname)) {
+        return res.status(400).json({ error: "Private/reserved addresses are not allowed" });
+      }
+
+      const startTime = Date.now();
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+
+      const response = await fetch(targetUrl, {
+        method: "HEAD",
+        headers: { "User-Agent": "KAPPA-SIGINT/1.0" },
+        signal: controller.signal,
+        redirect: "manual",
+      });
+      clearTimeout(timeout);
+
+      const latency = Date.now() - startTime;
+      const headers: Record<string, string> = {};
+      response.headers.forEach((value, key) => {
+        headers[key] = value;
+      });
+
+      const securityHeaders = {
+        "strict-transport-security": headers["strict-transport-security"] || null,
+        "content-security-policy": headers["content-security-policy"] || null,
+        "x-frame-options": headers["x-frame-options"] || null,
+        "x-content-type-options": headers["x-content-type-options"] || null,
+        "x-xss-protection": headers["x-xss-protection"] || null,
+        "referrer-policy": headers["referrer-policy"] || null,
+        "permissions-policy": headers["permissions-policy"] || null,
+      };
+
+      const presentCount = Object.values(securityHeaders).filter(Boolean).length;
+
+      res.json({
+        url: targetUrl,
+        status: response.status,
+        statusText: response.statusText,
+        latency,
+        headers,
+        securityHeaders,
+        securityScore: Math.round((presentCount / 7) * 100),
+        server: headers["server"] || null,
+        poweredBy: headers["x-powered-by"] || null,
+        contentType: headers["content-type"] || null,
+        timestamp: new Date().toISOString(),
+      });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "HTTP probe failed";
+      res.status(500).json({ error: message });
+    }
+  });
+
   app.get("/api/finspy/intel", (_req, res) => {
     res.json({
       intel: FINSPY_INTEL,
