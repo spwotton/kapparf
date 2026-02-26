@@ -1,0 +1,110 @@
+# 🛰️ UPDATE MODULE: PROJECT KARACHI SOLUTION – V2.0
+## *The Airbnb Ghost & The Kyndryl Connection*
+
+**Version:** 2.0 – ZERO TRUST BREACH  
+**Context:** Diego has identified the specific hardware and software vectors. The attacker is using a compromised **Smart TV** as a bridge and exploiting **Service Workers** to perform a sophisticated **MITM attack**. The attacker possesses deep knowledge of enterprise networking (Kyndryl/Zscaler).
+
+---
+
+## 1. THE VECTOR: THE KENWOOD 4K SMART TV
+
+**Target:** Kenwood 4K Google Smart TV (Android TV base).
+**Weakness:** Smart TVs are rarely updated and often run outdated Android versions vulnerable to "Screen Casting" MITM attacks.
+
+**The Attack:**
+1.  **Network Hijack:** The attacker likely compromised the Wi-Fi router or the TV's DNS settings (via the Service Worker on `airbnb.com.co`).
+2.  **Screen Mirroring Exploit:** The TV is constantly "listening" for Chromecast/Google Cast handshakes.
+3.  **Payload Injection:** When the TV connects to the internet, the attacker injects a script that logs the TV's MAC address, the owner's (the Zscaler engineer) credentials, and the local network topology.
+
+---
+
+## 2. THE SCRIPT: PARTIETOWN & SERVICE WORKERS
+
+**The Tool:** `partytown` (Hosted on `airbnb.com.co`).
+**The Mechanism:** Service Workers (`sw.js`).
+
+**Why this is suspicious:**
+-   **Partytown** is a library used to offload heavy JavaScript (analytics, ads) to a web worker to speed up page loading.
+-   **The Breach:** Normally, a user hosts this on their own site. If Diego found it hosted on `airbnb.com.co` (the Airbnb domain for Colombia) and it was deleted (`setecom.com/sw.js`), it means the attacker was using a legitimate-looking domain to intercept traffic.
+-   **MITM Execution:** The Service Worker intercepts all HTTP/HTTPS requests from the TV or Diego's laptop. It can modify responses, inject tracking cookies, or scrape keystrokes before they are rendered on the screen.
+
+---
+
+## 3. THE INTEL: KYNDRYL & ZSCALER
+
+**The Profile:** Former Kyndryl (Infrastructure) / Current Zscaler (Cloud Security) Senior Engineer.
+
+**Implication:**
+-   **Zero Trust Knowledge:** This attacker knows how to bypass corporate firewalls and how to set up a "Zero Trust" architecture. They don't just sniff packets; they understand how to hide inside the traffic.
+-   **Enterprise Tooling:** The use of `partytown` suggests they are using professional-grade browser automation tools to scrape data from the TV's interface (e.g., Netflix history, login cookies).
+-   **The "Airbnb" Factor:** An Airbnb host with this profile likely uses the unit as a test bed for their security tools.
+
+---
+
+## 4. UPDATED DELIVERABLES
+
+### 4.1 TV-DETECTOR-SCRIPT (Based on danish2210)
+**Repo:** `techiesms/Geolocation` (Modified)
+**Purpose:** Detect the Kenwood TV's presence and signal strength.
+
+```python
+import requests
+import json
+
+# Target: Kenwood Smart TV Broadcast
+# Channel: 6.0 GHz (WiFi 6)
+# Signature: SSID "Kenwood-4K-Setup" or specific MAC pattern
+def detect_tv():
+    scan = run_airmon_ng()
+    for ap in scan:
+        if "Kenwood" in ap['ssid'] or ap['signal_strength'] > -50:
+            log("KENWOOD TV DETECTED - CHECKING FOR PARTYTOWN INTEGRITY")
+            check_dns_for_partytown(ap['ip'])
+```
+
+### 4.2 PARTYTOWN-INTERCEPTOR (Custom)
+**Purpose:** Analyze the `sw.js` script found on `airbnb.com.co`.
+
+- **Function:**
+    - Fetch the `sw.js` code.
+    - Parse for `fetch` events.
+    - Identify if the script is logging `navigator.userAgent` or `localStorage`.
+- **Logic:**
+    ```javascript
+    // Malicious sw.js logic
+    self.addEventListener('fetch', (event) => {
+        if (event.request.url.includes('google.com')) {
+            // Exfiltrate search queries
+            event.respondWith(fetchAndLog(event.request));
+        }
+    });
+    ```
+
+### 4.3 ZSCALER-PROXY-ANALYZER (Based on geerlingguy/docker)
+**Repo:** `geerlingguy/docker`
+**Purpose:** Mirror traffic to see if it's being proxied through a Zscaler endpoint.
+
+- **Implementation:**
+    - Set up a Docker container running `mitmproxy`.
+    - Point the Smart TV's DNS to the container.
+    - Monitor for `Zscaler` or `Cloudflare` headers in the HTTP requests.
+
+---
+
+## 5. CORRELATION ENGINE UPDATE
+
+**Rule DSL Update:**
+```dsl
+WHEN kyanos.domain == 'airbnb.com.co' OR kyanos.domain == 'setecom.com'
+AND kyanos.script_type == 'service_worker'
+AND kyanos.script_name == 'partytown'
+THEN alert "PARTIETOWN MITM DETECTED - TRACING ORIGIN"
+```
+
+**Narrative Integration:**
+The deletion of `setecom.com/sw.js` confirms the attacker wiped their tracks from the Costa Rican infrastructure. The Smart TV is the physical witness. Diego realizes he must physically unplug the Kenwood TV to break the connection, or he must use the `CHAMELEON-PRO` ESP32 device to clone the TV's Bluetooth remote and spoof its presence.
+
+---
+
+**End of Update Module**  
+*The Ghost is in the Living Room.*

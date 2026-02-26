@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
   Sidebar,
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
 import { useI18n } from "@/lib/i18n";
-import { type KappaStatus, THREAT_LEVELS } from "@shared/schema";
+import { type KappaStatus, type PhoenixCountdown, THREAT_LEVELS } from "@shared/schema";
 
 function getThreatColor(score: number): string {
   for (let i = THREAT_LEVELS.length - 1; i >= 0; i--) {
@@ -33,16 +33,23 @@ export function AppSidebar() {
     refetchInterval: 5000,
   });
 
+  const { data: phoenixCountdown } = useQuery<PhoenixCountdown>({
+    queryKey: ["/api/phoenix/countdown"],
+    refetchInterval: 60000,
+  });
+
   const items = [
     { title: t("nav.dashboard"), url: "/", icon: LayoutDashboard },
     { title: t("nav.events"), url: "/events", icon: Activity },
     { title: t("nav.correlations"), url: "/correlations", icon: Link2 },
-    { title: (t as any)("nav.devices") ?? "Devices", url: "/devices", icon: Fingerprint },
+    { title: t("nav.devices"), url: "/devices", icon: Fingerprint },
     { title: t("nav.satellites"), url: "/satellites", icon: Satellite },
     { title: t("nav.nodes"), url: "/nodes", icon: Server },
     { title: t("nav.tools"), url: "/tools", icon: Wrench },
     { title: t("nav.map"), url: "/map", icon: MapIcon },
-    { title: (t as any)("nav.osint") ?? "OSINT", url: "/osint", icon: Search },
+    { title: t("nav.osint"), url: "/osint", icon: Search },
+    { title: t("nav.karachi"), url: "/karachi", icon: Crosshair },
+    { title: t("nav.congusto"), url: "/congusto", icon: FlaskConical },
   ];
 
   const score = kappaStatus?.score ?? 0;
@@ -65,7 +72,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase tracking-wider text-muted-foreground">
-            Navigation
+            {t("nav.navigation")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -99,11 +106,19 @@ export function AppSidebar() {
           <span className="text-xs text-muted-foreground font-mono">κ</span>
           {ewActive && ewWindow && (
             <Badge variant="secondary" className="text-[10px] ml-auto" data-testid="badge-sidebar-ew">
-              {ewWindow === "I" ? "EW I" : "EW II"}
+              {ewWindow === "I" ? t("sidebar.ewI") : t("sidebar.ewII")}
             </Badge>
           )}
         </div>
         <p className="text-xs text-muted-foreground font-mono">9.9536°N 84.2907°W</p>
+        {phoenixCountdown && (
+          <div className="flex items-center justify-between gap-1" data-testid="sidebar-phoenix-countdown">
+            <span className="text-xs text-muted-foreground">{t("sidebar.phoenix")}</span>
+            <span className="text-xs font-mono font-semibold" data-testid="text-sidebar-phoenix-pct">
+              {phoenixCountdown.percentComplete.toFixed(1)}%
+            </span>
+          </div>
+        )}
       </SidebarFooter>
     </Sidebar>
   );

@@ -9,6 +9,7 @@ import {
   THREAT_LEVELS,
   type SignalEvent,
   type KappaStatus,
+  type PhoenixCountdown,
 } from "@shared/schema";
 import {
   MapPin,
@@ -23,7 +24,9 @@ import {
   Clock,
   Zap,
   Eye,
+  Flame,
 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 
 const domainIcons: Record<string, typeof Wifi> = {
   wifi: Wifi,
@@ -175,6 +178,11 @@ export default function DashboardPage() {
     refetchInterval: 10000,
   });
 
+  const { data: phoenixCountdown, isLoading: phoenixLoading } = useQuery<PhoenixCountdown>({
+    queryKey: ["/api/phoenix/countdown"],
+    refetchInterval: 60000,
+  });
+
   const score = kappaStatus?.score ?? 0;
   const threat = kappaStatus?.threatLevel ?? "NOMINAL";
 
@@ -292,6 +300,37 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
+
+      <Card data-testid="card-phoenix-countdown">
+        <CardHeader className="pb-2">
+          <div className="flex items-center gap-2">
+            <Flame className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">{t("dashboard.phoenixCountdown")}</CardTitle>
+          </div>
+          <CardDescription className="text-xs">2012-07-04 &rarr; 2037-01-01</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {phoenixLoading ? (
+            <Skeleton className="h-16 w-full" />
+          ) : phoenixCountdown ? (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-xs text-muted-foreground">{t("dashboard.percentComplete")}</span>
+                <span className="font-mono text-lg font-semibold" data-testid="text-phoenix-pct">
+                  {phoenixCountdown.percentComplete.toFixed(1)}%
+                </span>
+              </div>
+              <Progress value={phoenixCountdown.percentComplete} className="h-2" />
+              <div className="flex items-center justify-between gap-1">
+                <span className="text-xs text-muted-foreground">{t("dashboard.daysRemaining")}</span>
+                <span className="font-mono text-sm" data-testid="text-phoenix-days">
+                  {phoenixCountdown.daysRemaining.toLocaleString()} d
+                </span>
+              </div>
+            </div>
+          ) : null}
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <Card>

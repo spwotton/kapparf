@@ -55,9 +55,14 @@ Real-time correlation engine ported from Python. Key features:
 - `GET /api/tools` — tool catalog (40+ tools across 11 domains)
 - `GET /api/tools/meta` — live GitHub metadata with 30-min cache
 - `GET /api/rules` — correlation rule definitions
+- `GET /api/karachi/modules` — 9 offensive counter-surveillance modules
+- `GET /api/congusto/architecture` — VET triode architecture (Cathode/Grid/Anode)
+- `GET /api/congusto/modules` — 7 Congusto-Eitel modules
+- `GET /api/phoenix/countdown` — Phoenix countdown (2012-07-04 to 2037-01-01)
+- `GET /api/finspy/intel` — FinSpy intelligence brief (V1.2 Ghost Protocol + V2.0 Airbnb Ghost)
 
 ## Pages
-1. **Dashboard** (`/`) — kappa score gauge (SVG arc), threat level, evening window, observer location, domain bars, correlation stats, alerts, events
+1. **Dashboard** (`/`) — kappa score gauge (SVG arc), threat level, evening window, observer location, domain bars, correlation stats, alerts, events, Phoenix countdown card
 2. **Events** (`/events`) — multi-domain event feed with domain filter tabs, ingest dialog
 3. **Correlations** (`/correlations`) — correlation results + rule reference + run button
 4. **Satellites** (`/satellites`) — TLE catalog selector, category filter, Klein/Giza badges
@@ -66,12 +71,14 @@ Real-time correlation engine ported from Python. Key features:
 7. **Nodes** (`/nodes`) — SDR node cards with add dialog
 8. **Tools** (`/tools`) — 40+ tool catalog with domain filtering + live GitHub stars
 9. **Map** (`/map`) — interactive Leaflet map showing observer, Jacó, SJO, satellites, flights, SDR nodes
+10. **Karachi** (`/karachi`) — offensive counter-surveillance modules (9 Karachi + FinSpy V1.2 Ghost Protocol + V2.0 Airbnb Ghost/Kyndryl), execution flow, success criteria, hardware/infra layer, Alexanderplatz Protocol, Partytown/Service Worker MITM, V2 deliverables
+11. **Congusto** (`/congusto`) — Virtual Eitel Triode (VET) architecture (Cathode/Grid/Anode), Phoenix countdown, 7 core modules, mathematical constants table, data sources, confidence levels
 
 ## Domains (11)
 wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone
 
-## Correlation Rules (26 active)
-Includes: MAC cross-domain, surveillance handoff, Congusto protocol, satellite-LTE burst, BLE-WiFi deauth chain, Schumann resonance, IMSI tower hop, evening window spike, hidden-ssid-probe, camera-oui-detection, kyndryl-corp-signature, CSI multipath anomaly, RTSP/ONVIF exfiltration, modbus injection, and more.
+## Correlation Rules (28 active)
+Includes: MAC cross-domain, surveillance handoff, Congusto protocol, satellite-LTE burst, BLE-WiFi deauth chain, Schumann resonance, IMSI tower hop, evening window spike, hidden-ssid-probe, camera-oui-detection, kyndryl-corp-signature, CSI multipath anomaly, RTSP/ONVIF exfiltration, modbus injection, chameleon BLE clone, LTESniffer rogue tower, kyanos RST injection, SatIntel TLE drift, BLACKJACK blinder, DSE gateway compromise, TR-069 persistence, holographic sideband, HUMINT biometric, PLC theta modulation, FinSpy ghost node detection, Partytown MITM detection.
 
 ## Satellite Tracking
 - **Visible**: elevation > 30° from observer

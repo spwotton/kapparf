@@ -225,6 +225,16 @@ export const KAPPA_CONSTANTS = {
   SJO_LAT: 9.9939,
   SJO_LON: -84.2088,
   SJO_ICAO: "MROC",
+  PHOENIX_START_MS: new Date("2012-07-04").getTime(),
+  PHOENIX_END_MS: new Date("2037-01-01").getTime(),
+  MAINS_FREQ_HZ: 60,
+  TDOA_SDR_PRIMARY: "ws://ti0rc.proxy.kiwisdr.com:8073",
+  TDOA_SDR_SECONDARY: "ws://kiwisdr.puntarenas.cr:8073",
+  TDOA_SDR_CARIBBEAN: "ws://pj4g.proxy.kiwisdr.com:8073",
+  HF_TUNE_FREQ_MHZ: 15.0,
+  SCHUMANN_HZ: 7.83,
+  THETA_BAND_LOW: 4,
+  THETA_BAND_HIGH: 8,
 };
 
 export type ThreatLevel = "NOMINAL" | "ELEVATED" | "HIGH" | "CRITICAL" | "EMERGENCY";
@@ -607,4 +617,528 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     windowSeconds: 30,
     condition: "wifi.port IN [554, 8080] AND isp.outbound_spike WITHIN 30s",
   },
+  {
+    id: "chameleon-ble-clone",
+    name: "CHAMELEON-PRO BLE Clone Detection",
+    description: "BLE MAC clone detected — CHAMELEON-PRO device spoofing a tracked MAC address via modified ESP32 firmware. Correlates beacon drops with LTE alerts.",
+    domains: ["ble", "wifi"],
+    windowSeconds: 15,
+    condition: "ble.mac_duplicate AND wifi.probe_from_same_mac WITHIN 15s",
+  },
+  {
+    id: "ltesniffer-rogue-tower",
+    name: "Rogue LTE Tower Handover",
+    description: "LTESNIFFER-NG forced RRC re-establishment — malformed Radio Resource Control message triggered handover to virtual eighth tower.",
+    domains: ["lte", "satellite"],
+    windowSeconds: 30,
+    condition: "lte.rrc_reestablish AND lte.new_tower_id NOT IN known_towers WITHIN 30s",
+  },
+  {
+    id: "kyanos-rst-injection",
+    name: "KYANOS-REVERSE RST Injection",
+    description: "RST injection response — KYANOS-REVERSE neutralized attacker sniffing session. TCP Reset packets injected after detecting mdk3/aireplay-ng signature.",
+    domains: ["wifi"],
+    windowSeconds: 5,
+    condition: "wifi.flow_signature IN [mdk3, aireplay-ng] AND tcp.rst_injected WITHIN 5s",
+  },
+  {
+    id: "satintel-tle-drift",
+    name: "SATINTEL-SPOOF TLE Drift",
+    description: "TLE manipulation active — SATINTEL-SPOOF applied velocity bias to satellite mean motion (n) and mean anomaly (M). Elevation reports offset by 15-20°.",
+    domains: ["satellite"],
+    windowSeconds: 120,
+    condition: "satellite.tle_delta(n) > threshold AND satellite.elevation_offset > 15°",
+  },
+  {
+    id: "blackjack-blinder-active",
+    name: "BLACKJACK-BLINDER RF Injection",
+    description: "Coherent 46.875 Hz DDS signal modulated with GPS spoofing pattern — satellite receiver locked onto injection signal instead of ground truth.",
+    domains: ["satellite", "sdr", "elf"],
+    windowSeconds: 60,
+    condition: "sdr.dds_active(46.875Hz) AND satellite.pass AND elf.coherent_injection WITHIN 60s",
+  },
+  {
+    id: "dse-gateway-compromise",
+    name: "DSE 892 Gateway Shell Access",
+    description: "SNMP buffer overflow RCE successful on DSE 892 industrial gateway — execve(/bin/sh) executed. Generator controls and 46.875 Hz modulation accessible.",
+    domains: ["plc", "isp"],
+    windowSeconds: 30,
+    condition: "plc.snmp_overflow(payload > 1024) AND plc.shell_spawn WITHIN 30s",
+  },
+  {
+    id: "tr069-persistence",
+    name: "TR-069 Persistent Backdoor",
+    description: "Modified config.xml loaded on Huawei ONT reboot via TR-069 CWMP authentication bypass — persistent ghost admin connection established.",
+    domains: ["isp"],
+    windowSeconds: 60,
+    condition: "isp.tr069_inform(modified_config) AND isp.ont_reboot WITHIN 60s",
+  },
+  {
+    id: "holographic-sideband",
+    name: "Kalenkov Holographic Modulation",
+    description: "Symmetrical ±46.875 Hz sidebands detected around strong HF carrier (15 MHz) — Kalenkov holographic detector flagged coherent modulation pattern.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 120,
+    condition: "sdr.carrier_peak AND sdr.sideband_ratio(±46.875Hz) > 0.1 AND phase_coherence_low",
+  },
+  {
+    id: "humint-biometric-correlation",
+    name: "HUMINT Biometric Event Correlation",
+    description: "TAS2R38 metallic taste or visual ripple event logged within ±2 seconds of satellite + RF coincidence — biometric confirmation of surveillance window.",
+    domains: ["elf", "satellite", "sdr"],
+    windowSeconds: 10,
+    condition: "humint.event(TAS2R38|visual_ripple) AND satellite.pass AND sdr.rf_spike WITHIN ±2s",
+  },
+  {
+    id: "plc-theta-modulation",
+    name: "PLC Theta-Band Modulation",
+    description: "4-8 Hz theta modulation detected on 46.875 Hz carrier synchronized with satellite pass — streetlight hypnosis pattern via power line communication.",
+    domains: ["plc", "elf", "satellite"],
+    windowSeconds: 300,
+    condition: "plc.carrier(46.875Hz) AND elf.theta_mod(4-8Hz) AND satellite.pass WITHIN 300s",
+  },
+  {
+    id: "finspy-ghost-node",
+    name: "FinSpy Ghost Node Detection",
+    description: "Suspicious MAC address matching FinSpy blacklist detected via kyanos flow analysis — Ghost relay node confirmed within 5000km of Berlin Alexanderplatz gateway.",
+    domains: ["wifi", "ble"],
+    windowSeconds: 300,
+    condition: "kyanos.event_type == 'mac_suspicious' AND kyanos.mac_address IN finspy_blacklist AND location.distance(berlin) < 5000km",
+  },
+  {
+    id: "partytown-mitm",
+    name: "Partytown MITM Detection",
+    description: "Service Worker (partytown) detected on airbnb.com.co or setecom.com domain — potential MITM interception of HTTP/HTTPS requests via malicious sw.js.",
+    domains: ["wifi"],
+    windowSeconds: 60,
+    condition: "kyanos.domain IN ['airbnb.com.co', 'setecom.com'] AND kyanos.script_type == 'service_worker' AND kyanos.script_name == 'partytown'",
+  },
 ];
+
+export interface KarachiModule {
+  id: string;
+  name: string;
+  codename: string;
+  base: string;
+  purpose: string;
+  category: "spoofing" | "injection" | "flow-analysis" | "orbital" | "exploit" | "kernel" | "system";
+  domains: string[];
+  implementation: string;
+  capabilities: string[];
+  useCase: string;
+  target?: string;
+  vulnerability?: string;
+}
+
+export const KARACHI_MODULES: KarachiModule[] = [
+  {
+    id: "chameleon-pro",
+    name: "CHAMELEON-PRO",
+    codename: "BLE/RFID Spoofing",
+    base: "emsec/ChameleonMini",
+    purpose: "Clone and inject BLE advertisements to track or disrupt local devices",
+    category: "spoofing",
+    domains: ["ble", "wifi"],
+    implementation: "Modified ESP32 firmware",
+    capabilities: ["MAC Cloning", "Advertisement Injection", "Device Tracking"],
+    useCase: "Identify attacker devices by correlating BLE beacon drops with LTESniffer alerts",
+  },
+  {
+    id: "ltesniffer-ng",
+    name: "LTESNIFFER-NG",
+    codename: "Active LTE Injection",
+    base: "SysSec-KAIST/LTESniffer",
+    purpose: "Force mobile devices to connect to a fake tower",
+    category: "injection",
+    domains: ["lte"],
+    implementation: "Modified Linux kernel module + user-space daemon",
+    capabilities: ["RRC Manipulation", "Rogue Handover", "Packet Capture"],
+    useCase: "Create a virtual eighth tower to intercept attacker mobile communications",
+  },
+  {
+    id: "kyanos-reverse",
+    name: "KYANOS-REVERSE",
+    codename: "Flow Analysis + Kill Switch",
+    base: "hengyoush/kyanos",
+    purpose: "Identify and neutralize known monitoring tools",
+    category: "flow-analysis",
+    domains: ["wifi"],
+    implementation: "Python wrapper around libpcap",
+    capabilities: ["Pattern Matching (mdk3, aireplay-ng, DARPA firmware)", "RST Injection", "Heuristic Logging / Kill List"],
+    useCase: "Detect and terminate attacker sniffing sessions via TCP Reset injection",
+  },
+  {
+    id: "satintel-spoof",
+    name: "SATINTEL-SPOOF",
+    codename: "Orbital Deception",
+    base: "gpredict + gr-satellites",
+    purpose: "Spoof satellite telemetry to desynchronize adversary timing",
+    category: "orbital",
+    domains: ["satellite"],
+    implementation: "Python daemon proxying satellite.js",
+    capabilities: ["TLE Manipulation (velocity bias on n and M)", "Elevation False Positive (15-20° offset)"],
+    useCase: "Cause BLACKJACK satellite to miss its 30° trigger window, breaking adversary timing attack",
+  },
+  {
+    id: "dse-webnet-rce",
+    name: "DSE-WEBNET-RCE",
+    codename: "Industrial Gateway RCE",
+    base: "Custom C payload + snmpwalk",
+    purpose: "Root local industrial gateway controllers",
+    category: "exploit",
+    domains: ["plc"],
+    implementation: "Custom C payload + snmpwalk wrapper",
+    capabilities: ["Shell Access (execve /bin/sh)", "Generator Control", "46.875 Hz Modulation Disable"],
+    useCase: "Gain access to generator controls and disable 46.875 Hz grid injection",
+    target: "DSE 892 Gateway (Industrial Control)",
+    vulnerability: "SNMP Buffer Overflow (payload > 1024 bytes overwrites return address)",
+  },
+  {
+    id: "tr069-persist",
+    name: "TR-069-PERSIST",
+    codename: "ONT Persistent Backdoor",
+    base: "Python requests library",
+    purpose: "Establish persistent ghost admin access to local ISP infrastructure",
+    category: "exploit",
+    domains: ["isp"],
+    implementation: "Python script using requests library",
+    capabilities: ["Config Injection (config.xml backdoor)", "Persistent Reboot Survival", "Ghost Admin Access"],
+    useCase: "Become ghost admin of local ISP infrastructure to monitor attacker traffic",
+    target: "Huawei ONT (CPE)",
+    vulnerability: "TR-069 CWMP Authentication Bypass",
+  },
+  {
+    id: "blackjack-blinder",
+    name: "BLACKJACK-BLINDER",
+    codename: "Satellite RF Injection",
+    base: "HackRF + directional antenna",
+    purpose: "Blind satellite tracking by injecting coherent RF signal",
+    category: "exploit",
+    domains: ["satellite", "sdr"],
+    implementation: "High-power SDR (HackRF) with directional antenna + DDS",
+    capabilities: ["Coherent 46.875 Hz RF Injection (DDS)", "GPS Spoofing Pattern Modulation", "Location Falsification"],
+    useCase: "Satellite receiver locks onto injected signal — telemetry reports false location, blinding tracking system",
+    target: "DARPA BLACKJACK / SDA Constellation",
+  },
+  {
+    id: "mirrord-rootkit",
+    name: "MIRRORD-ROOTKIT",
+    codename: "Kernel Traffic Mirroring",
+    base: "metalbear-co/mirrord",
+    purpose: "Kernel-level traffic mirroring to detect hardware backdoors",
+    category: "kernel",
+    domains: ["wifi"],
+    implementation: "Linux Kernel Module (LKM)",
+    capabilities: ["sk_buff Structure Hooking", "Hidden Socket Mirroring", "Mole Detection (hardware backdoor traffic)"],
+    useCase: "Discover that a hardware mole is sending keystrokes via compromised PowerShell session",
+  },
+  {
+    id: "windows-spy-blocker-pro",
+    name: "WINDOWS-SPY-BLOCKER-PRO",
+    codename: "Telemetry Weaponization",
+    base: "crazy-max/WindowsSpyBlocker",
+    purpose: "Weaponize Windows telemetry for counter-surveillance",
+    category: "system",
+    domains: ["wifi"],
+    implementation: "Modified telemetry interceptor with MITM capabilities",
+    capabilities: ["Telemetry Redirect to Local Server", "Payload Modification Before Forwarding", "Reverse Shell Injection via Telemetry Stream"],
+    useCase: "Redirect and modify Windows telemetry traffic, inject reverse shell into telemetry stream",
+  },
+];
+
+export interface VetElement {
+  id: string;
+  name: string;
+  role: string;
+  element: "cathode" | "grid" | "anode";
+  implementation: string;
+  description: string;
+}
+
+export const VET_ARCHITECTURE: VetElement[] = [
+  {
+    id: "cathode",
+    name: "Cathode",
+    role: "Signal Source",
+    element: "cathode",
+    implementation: "KiwiSDR WebSocket streams (raw IQ) + CelesTrak TLE fetcher",
+    description: "Primary signal ingestion layer — connects to KiwiSDR nodes (TI0RC San Jose, Puntarenas, PJ4G Bonaire) for HF IQ data and fetches TLE orbital elements from CelesTrak for BLACKJACK/SDA constellation tracking.",
+  },
+  {
+    id: "grid",
+    name: "Grid",
+    role: "Control / Modulation",
+    element: "grid",
+    implementation: "Node.js event engine — satellite look angles and trigger windows",
+    description: "Control layer that computes real-time satellite elevation/azimuth for La Guacima observer. Triggers analysis windows when elevation exceeds 30°. Runs every 10 seconds, managing temporal correlation gates.",
+  },
+  {
+    id: "anode",
+    name: "Anode",
+    role: "Output / Collection",
+    element: "anode",
+    implementation: "Dashboard + PostgreSQL event store + JSON logs",
+    description: "Output collection layer — stores correlated events in PostgreSQL, broadcasts via WebSocket to the dashboard, and maintains JSON logs for offline analysis. Color-coded visualization: Cyan (idle), Yellow (satellite overhead), Red (full correlation).",
+  },
+];
+
+export interface CongustoModule {
+  id: string;
+  name: string;
+  description: string;
+  technology: string;
+  implementation: string;
+  features: string[];
+}
+
+export const CONGUSTO_MODULES: CongustoModule[] = [
+  {
+    id: "sdr-temporal-anchor",
+    name: "SDR Temporal Anchor",
+    description: "Extracts the 46.875 Hz carrier and Hall sidebands from KiwiSDR IQ streams",
+    technology: "Python + DSP (numpy, scipy)",
+    implementation: "WebSocket connection to KiwiSDR, ADPCM decode, downsample to 48 kHz, 1024-point FFT. Looks for energy in bin 4 (46.875 Hz) and bin 7 (74.9 Hz). TDOA phase difference when two SDRs are used.",
+    features: ["46.875 Hz carrier detection (FFT bin 4)", "74.9 Hz Hall sideband (bin 7)", "TDOA triangulation (TI0RC + Puntarenas)", "Phase coherence analysis"],
+  },
+  {
+    id: "satellite-orbital-engine",
+    name: "Satellite Orbital Engine",
+    description: "Computes real-time look angles for BLACKJACK, SDA, and 3I/ATLAS objects",
+    technology: "Node.js (satellite.js, axios)",
+    implementation: "Fetches CelesTrak GP TLEs, propagates to current time, computes elevation/azimuth for observer at 9.9524°N, 84.2907°W, 850m. Emits satellite_pass event when elevation > 30°. All requests via Tor SOCKS5 proxy.",
+    features: ["BLACKJACK/SDA constellation tracking", "CelesTrak TLE auto-refresh", "30° elevation trigger", "Tor-proxied requests"],
+  },
+  {
+    id: "kalenkov-holographic",
+    name: "Kalenkov Holographic Detector",
+    description: "Identifies symmetrical sidebands at ±46.875 Hz around a strong HF carrier",
+    technology: "Python (numpy FFT)",
+    implementation: "Locates strongest carrier in FFT output, computes energy at (carrier_bin ± 4). Flags as holographic modulation if sideband/carrier ratio > 0.1 and phase coherence is low.",
+    features: ["Symmetrical sideband detection", "Carrier-to-sideband ratio analysis", "Phase coherence measurement", "Holographic modulation flagging"],
+  },
+  {
+    id: "industrial-telemetry",
+    name: "Industrial Telemetry Monitor",
+    description: "Detects anomalous traffic from DSE gateways and TR-069-managed routers",
+    technology: "Node.js + Python (tshark, Shodan)",
+    implementation: "Monitors DSE Webnet via Modbus TCP (port 502), SNMP v2 (ports 161/162). Detects TR-069 CWMP sessions (port 7547) for Huawei ONT remote management. Parses SNMP traps for generator alarms.",
+    features: ["DSE 892 Modbus/TCP monitoring", "SNMP v2 trap analysis (OIDs)", "TR-069 CWMP Inform detection", "Shodan passive device discovery"],
+  },
+  {
+    id: "plc-streetlight",
+    name: "PLC / Streetlight Hypnosis Detector",
+    description: "Detects 46.875 Hz carrier and theta modulation on power lines using house wiring as antenna",
+    technology: "Python DSP",
+    implementation: "Same FFT pipeline but looks for 60 Hz peak (46.875 × 1.28) that appears/disappears in sync with satellite passes. Detects theta-band (4-8 Hz) modulation on the carrier.",
+    features: ["Power-line carrier detection", "60 Hz harmonic correlation", "Theta-band (4-8 Hz) modulation", "Satellite-synchronized appearance"],
+  },
+  {
+    id: "humint-biometric",
+    name: "HUMINT Biometric Logger",
+    description: "Manual timestamping of TAS2R38 metallic taste and visual ripple events",
+    technology: "VS Code Extension + Flask API",
+    implementation: "VS Code status-bar button sends POST to local Flask API with {timestamp, event_type, intensity(1-5)}. Stored in PostgreSQL, broadcast via WebSocket. Dashboard highlights RF+satellite events within ±2s of HUMINT log.",
+    features: ["TAS2R38 metallic taste logging", "Visual ripple event capture", "High-precision timestamps", "±2s correlation window"],
+  },
+  {
+    id: "correlation-engine",
+    name: "Correlation Engine",
+    description: "Combines events from all modules and computes confidence score for Toroidal Recursion activity",
+    technology: "Node.js",
+    implementation: "Sliding window of 10 seconds. HIGH = satellite(>30°) + 46.875 Hz spike + HUMINT(±5s). MEDIUM = satellite + RF spike. LOW = satellite only or RF only.",
+    features: ["HIGH/MEDIUM/LOW confidence scoring", "10-second sliding window", "Multi-module event fusion", "Toroidal Recursion detection"],
+  },
+];
+
+export interface FinSpyIntelBrief {
+  adversary: string;
+  method: string;
+  keyIndicators: string[];
+  ghostNodes: string[];
+  gateway: string;
+}
+
+export const FINSPY_INTEL: FinSpyIntelBrief = {
+  adversary: "Gamma Group (FinSpy/FinFisher)",
+  method: "Commercial-grade spyware deployed via compromised IoT devices and automated infrastructure",
+  keyIndicators: [
+    "Kernel-Level Rootkits: OS kernel hooking (similar to MIRRORD-ROOTKIT)",
+    "Ghost Hardware: Compromised routers/IoT devices relaying traffic",
+    "Alexanderplatz Gateway: Berlin server relay for Costa Rican network exfiltration",
+  ],
+  ghostNodes: ["FIN_GHOST_01"],
+  gateway: "Alexanderplatz_Server_01",
+};
+
+export interface FinSpyHardwareModule {
+  id: string;
+  name: string;
+  codename: string;
+  repo: string;
+  purpose: string;
+  implementation: string;
+  useCase: string;
+}
+
+export const FINSPY_HARDWARE_MODULES: FinSpyHardwareModule[] = [
+  {
+    id: "finspy-esp32-detector",
+    name: "ESP32-DETECTOR",
+    codename: "FINSPY-ESP32",
+    repo: "techiesms/Geolocation",
+    purpose: "Identifying physical location of FinSpy Ghost relay nodes",
+    implementation: "ESP32 uses Google Geolocation API to triangulate MAC address of FinSpy heartbeat device. Detects hardcoded MAC addresses or specific SSIDs (e.g. FIN_GHOST_01).",
+    useCase: "Mobile ghost detector — ESP32 in vehicle alerts operator phone with GPS coordinates when FinSpy relay node activates nearby",
+  },
+  {
+    id: "finspy-esp32-audio",
+    name: "ESP32-AUDIO-BEACON",
+    codename: "FINSPY-AUDIO",
+    repo: "techiesms/ESP32-ChatGPT",
+    purpose: "Audio side-channel attack on FinSpy implant",
+    implementation: "ESP32 plays specific ultrasonic frequency that triggers FinSpy audio recording module on nearby devices (phones/laptops), forcing implant to activate its microphone.",
+    useCase: "Force FinSpy implant microphone activation to reveal recording activity on target devices",
+  },
+];
+
+export interface FinSpyInfraModule {
+  id: string;
+  name: string;
+  codename: string;
+  repo: string;
+  purpose: string;
+  implementation: string[];
+  deployCommand?: string;
+}
+
+export const FINSPY_INFRA_MODULES: FinSpyInfraModule[] = [
+  {
+    id: "gamma-cleanup",
+    name: "GAMMA-CLEANUP-PLAYBOOK",
+    codename: "GAMMA-ANSIBLE",
+    repo: "geerlingguy/ansible",
+    purpose: "Automated removal of FinSpy artifacts",
+    implementation: [
+      "Registry Scan: Removes known FinSpy registry keys (HKEY_LOCAL_MACHINE\\SOFTWARE\\GammaGroup)",
+      "Process Killer: Terminates FinService.exe, C2Client.exe",
+      "Network Flush: Clears DNS cache to stop DNS poisoning",
+    ],
+    deployCommand: "ansible-playbook gamma_cleanup.yml -i localhost",
+  },
+  {
+    id: "ghost-firewall",
+    name: "GHOST-FIREWALL",
+    codename: "GHOST-DOCKER",
+    repo: "geerlingguy/docker",
+    purpose: "Isolating system from Alexanderplatz gateway",
+    implementation: [
+      "Docker container running iptables rules blocking Berlin IP range (Alexanderplatz)",
+      "Logs all blocked traffic to separate volume for analysis",
+    ],
+  },
+];
+
+export interface AlexanderplatzProtocol {
+  source: string;
+  latency: string;
+  type: string;
+  status: string;
+}
+
+export const ALEXANDERPLATZ_PROTOCOL: AlexanderplatzProtocol = {
+  source: "Alexanderplatz_Server_01",
+  latency: "8ms",
+  type: "FinSpy Relay",
+  status: "Active",
+};
+
+export interface AirbnbGhostVector {
+  target: string;
+  weakness: string;
+  attackSteps: string[];
+}
+
+export const AIRBNB_GHOST_VECTOR: AirbnbGhostVector = {
+  target: "Kenwood 4K Google Smart TV (Android TV base)",
+  weakness: "Smart TVs rarely updated — vulnerable to Screen Casting MITM attacks",
+  attackSteps: [
+    "Network Hijack: Compromised Wi-Fi router or TV DNS settings via Service Worker on airbnb.com.co",
+    "Screen Mirroring Exploit: TV constantly listening for Chromecast/Google Cast handshakes",
+    "Payload Injection: Script logs TV MAC address, owner (Zscaler engineer) credentials, and local network topology",
+  ],
+};
+
+export interface PartytownThreat {
+  tool: string;
+  domain: string;
+  mechanism: string;
+  indicators: string[];
+}
+
+export const PARTYTOWN_THREAT: PartytownThreat = {
+  tool: "partytown (hosted on airbnb.com.co)",
+  domain: "airbnb.com.co",
+  mechanism: "Service Workers (sw.js)",
+  indicators: [
+    "Partytown library offloading JS to web worker — hosted on suspicious domain instead of first-party",
+    "Deleted sw.js on setecom.com confirms attacker wiped tracks from Costa Rican infrastructure",
+    "Service Worker intercepts all HTTP/HTTPS requests — modifies responses, injects tracking cookies, scrapes keystrokes",
+  ],
+};
+
+export interface KyndrylZscalerProfile {
+  role: string;
+  implications: string[];
+}
+
+export const KYNDRYL_ZSCALER_PROFILE: KyndrylZscalerProfile = {
+  role: "Former Kyndryl (Infrastructure) / Current Zscaler (Cloud Security) Senior Engineer",
+  implications: [
+    "Zero Trust Knowledge: Knows how to bypass corporate firewalls and set up Zero Trust architecture — hides inside traffic",
+    "Enterprise Tooling: Uses professional-grade browser automation tools to scrape data from TV interface (Netflix history, login cookies)",
+    "Airbnb Factor: Host likely uses the unit as a test bed for security tools",
+  ],
+};
+
+export interface FinSpyDeliverable {
+  id: string;
+  name: string;
+  codename: string;
+  repo?: string;
+  purpose: string;
+  implementation: string;
+}
+
+export const FINSPY_V2_DELIVERABLES: FinSpyDeliverable[] = [
+  {
+    id: "tv-detector",
+    name: "TV-DETECTOR-SCRIPT",
+    repo: "techiesms/Geolocation (Modified)",
+    purpose: "Detect Kenwood TV presence and signal strength",
+    codename: "TV-DETECT",
+    implementation: "Scan 6.0 GHz WiFi 6 channel for SSID 'Kenwood-4K-Setup' or specific MAC pattern. Signal strength > -50 dBm triggers Partytown integrity check on detected IP.",
+  },
+  {
+    id: "partytown-interceptor",
+    name: "PARTYTOWN-INTERCEPTOR",
+    purpose: "Analyze sw.js script found on airbnb.com.co",
+    codename: "SW-INTERCEPT",
+    implementation: "Fetch sw.js code, parse for fetch event listeners, identify if script is logging navigator.userAgent or localStorage. Detect exfiltration of search queries via modified fetch responses.",
+  },
+  {
+    id: "zscaler-proxy-analyzer",
+    name: "ZSCALER-PROXY-ANALYZER",
+    repo: "geerlingguy/docker",
+    purpose: "Mirror traffic to detect Zscaler endpoint proxying",
+    codename: "ZSCALER-MIRROR",
+    implementation: "Docker container running mitmproxy. Point Smart TV DNS to container. Monitor for Zscaler or Cloudflare headers in HTTP requests.",
+  },
+];
+
+export interface PhoenixCountdown {
+  startDate: string;
+  endDate: string;
+  percentComplete: number;
+  daysRemaining: number;
+  totalDays: number;
+}

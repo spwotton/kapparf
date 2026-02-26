@@ -11,8 +11,20 @@ import {
   TLE_CATALOG_GROUPS,
   TLE_CATEGORIES,
   ANALYSIS_POINTS,
+  KARACHI_MODULES,
+  VET_ARCHITECTURE,
+  CONGUSTO_MODULES,
+  FINSPY_INTEL,
+  FINSPY_HARDWARE_MODULES,
+  FINSPY_INFRA_MODULES,
+  ALEXANDERPLATZ_PROTOCOL,
+  AIRBNB_GHOST_VECTOR,
+  PARTYTOWN_THREAT,
+  KYNDRYL_ZSCALER_PROFILE,
+  FINSPY_V2_DELIVERABLES,
   type ToolGitHubMeta,
   type FlightData,
+  type PhoenixCountdown,
 } from "@shared/schema";
 
 export async function registerRoutes(
@@ -472,6 +484,48 @@ export async function registerRoutes(
       console.error("Weather data error:", err);
       res.status(500).json({ error: "Failed to fetch weather data" });
     }
+  });
+
+  app.get("/api/karachi/modules", (_req, res) => {
+    res.json(KARACHI_MODULES);
+  });
+
+  app.get("/api/congusto/architecture", (_req, res) => {
+    res.json(VET_ARCHITECTURE);
+  });
+
+  app.get("/api/congusto/modules", (_req, res) => {
+    res.json(CONGUSTO_MODULES);
+  });
+
+  app.get("/api/phoenix/countdown", (_req, res) => {
+    const now = Date.now();
+    const start = KAPPA_CONSTANTS.PHOENIX_START_MS;
+    const end = KAPPA_CONSTANTS.PHOENIX_END_MS;
+    const totalDays = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+    const daysRemaining = Math.max(0, Math.floor((end - now) / (1000 * 60 * 60 * 24)));
+    const percentComplete = Math.min(100, Math.max(0, ((now - start) / (end - start)) * 100));
+    const countdown: PhoenixCountdown = {
+      startDate: new Date(start).toISOString(),
+      endDate: new Date(end).toISOString(),
+      percentComplete,
+      daysRemaining,
+      totalDays,
+    };
+    res.json(countdown);
+  });
+
+  app.get("/api/finspy/intel", (_req, res) => {
+    res.json({
+      intel: FINSPY_INTEL,
+      hardwareModules: FINSPY_HARDWARE_MODULES,
+      infraModules: FINSPY_INFRA_MODULES,
+      alexanderplatz: ALEXANDERPLATZ_PROTOCOL,
+      airbnbGhost: AIRBNB_GHOST_VECTOR,
+      partytown: PARTYTOWN_THREAT,
+      kyndrylProfile: KYNDRYL_ZSCALER_PROFILE,
+      v2Deliverables: FINSPY_V2_DELIVERABLES,
+    });
   });
 
   return httpServer;

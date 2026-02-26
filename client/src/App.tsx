@@ -18,6 +18,8 @@ import ToolsPage from "@/pages/tools";
 import MapPage from "@/pages/map";
 import DevicesPage from "@/pages/devices";
 import OsintPage from "@/pages/osint";
+import KarachiPage from "@/pages/karachi";
+import CongustoPage from "@/pages/congusto";
 
 function Router() {
   return (
@@ -31,6 +33,8 @@ function Router() {
       <Route path="/tools" component={ToolsPage} />
       <Route path="/map" component={MapPage} />
       <Route path="/osint" component={OsintPage} />
+      <Route path="/karachi" component={KarachiPage} />
+      <Route path="/congusto" component={CongustoPage} />
       <Route component={NotFound} />
     </Switch>
   );
