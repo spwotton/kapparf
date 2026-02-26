@@ -15,6 +15,7 @@ import CorrelationsPage from "@/pages/correlations";
 import SatellitesPage from "@/pages/satellites";
 import NodesPage from "@/pages/nodes";
 import ToolsPage from "@/pages/tools";
+import MapPage from "@/pages/map";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/satellites" component={SatellitesPage} />
       <Route path="/nodes" component={NodesPage} />
       <Route path="/tools" component={ToolsPage} />
+      <Route path="/map" component={MapPage} />
       <Route component={NotFound} />
     </Switch>
   );

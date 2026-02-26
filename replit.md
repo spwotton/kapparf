@@ -1,21 +1,28 @@
 # Project KAPPA — Multi-Domain Signal Intelligence & Correlation Platform
 
 ## Overview
-KAPPA is a software-defined SIGINT platform built with React + Tailwind + TypeScript (frontend), Express (backend), and PostgreSQL (database). It correlates electromagnetic emissions across five domains — Cellular (LTE/5G), Satellite, WiFi, Bluetooth/BLE, and SDR — using passive collection tools.
+KAPPA is a software-defined SIGINT platform built with React + Tailwind + TypeScript (frontend), Express (backend), and PostgreSQL (database). It correlates electromagnetic emissions across 10 domains — WiFi, BLE, LTE, 5G, Satellite, SDR, ELF, Radar (ADS-B), PLC, and ISP — using passive collection tools.
 
-**Observer location:** Guacima, Costa Rica (9.95°N, 84.15°W, 0.9 km alt)
+**Observer location:** Calle Caballo Real, Guácima Abajo, Alajuela, Costa Rica (9.9536°N, 84.2907°W, 0.9 km alt)
+
+## Analysis Points
+- **Observer** — Guácima Abajo (9.9536°N, 84.2907°W)
+- **Jacó** — Pacific coast analysis point (9.6142°N, 84.6278°W)
+- **SJO** — Juan Santamaría International Airport, ICAO: MROC (9.9939°N, 84.2088°W)
+- **TI0RC** — Radio Club de Costa Rica KiwiSDR node (9.9360°N, 84.1088°W)
 
 ## Architecture
-- **Frontend:** React + Tailwind CSS + shadcn/ui, wouter routing, TanStack Query v5
+- **Frontend:** React + Tailwind CSS + shadcn/ui, wouter routing, TanStack Query v5, Leaflet/OpenStreetMap
 - **Backend:** Express.js with typed routes, Drizzle ORM
 - **Database:** PostgreSQL (Neon serverless driver)
 - **i18n:** EN/ES language toggle with localStorage persistence
 - **Theme:** Light/dark toggle, warm neutral Notion-style design
+- **Map:** Leaflet + react-leaflet v4 with OpenStreetMap tiles
 
 ## Database Tables
-- `signal_events` — unified multi-domain events (wifi, ble, lte, 5g, satellite, sdr, elf)
+- `signal_events` — unified multi-domain events (wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp)
 - `correlations` — cross-domain temporal pattern matches with linked event IDs
-- `satellite_passes` — TLE-based satellite tracking data from CelesTrak
+- `satellite_passes` — TLE-based satellite tracking data from CelesTrak (41 catalog groups, with lat/lon/alt/category)
 - `sdr_nodes` — remote SDR receiver configuration (KiwiSDR, etc.)
 - `users` — authentication (unused currently)
 
@@ -25,34 +32,47 @@ KAPPA is a software-defined SIGINT platform built with React + Tailwind + TypeSc
 - `GET /api/events/recent` — last 20 events
 - `POST /api/correlations/run` — execute correlation engine on 5-min window
 - `GET /api/correlations` — list correlation results
-- `GET/POST /api/satellites` — satellite data, TLE refresh from CelesTrak
+- `GET /api/satellites` — satellite data
+- `GET /api/satellites/groups` — list all 41 TLE catalog groups and categories
+- `POST /api/satellites/refresh` — multi-group TLE refresh from CelesTrak (body: {groups: string[]})
+- `GET /api/flights` — live flight data from OpenSky Network (SJO/Costa Rica airspace)
+- `GET /api/analysis-points` — observer, Jacó, SJO, TI0RC locations
 - `GET/POST /api/nodes` — SDR node management
-- `GET /api/tools` — tool catalog (27 tools across 7 domains)
-- `GET /api/rules` — 8 correlation rule definitions
+- `GET /api/tools` — tool catalog (40+ tools across 10 domains)
+- `GET /api/tools/meta` — live GitHub metadata (stars, language, license, forks) with 30-min cache
+- `GET /api/rules` — 18 correlation rule definitions
 
 ## Pages
 1. **Dashboard** (`/`) — stats, domain breakdown, observer location, recent events
 2. **Events** (`/events`) — multi-domain event feed with domain filter tabs, ingest dialog
 3. **Correlations** (`/correlations`) — correlation results + rule reference + run button
-4. **Satellites** (`/satellites`) — TLE refresh, pass predictions
+4. **Satellites** (`/satellites`) — multi-group TLE catalog selector, category filter, pass predictions
 5. **Nodes** (`/nodes`) — SDR node cards with add dialog
-6. **Tools** (`/tools`) — 27-tool catalog with domain filtering
+6. **Tools** (`/tools`) — 40+ tool catalog with domain filtering + live GitHub stars/language/license
+7. **Map** (`/map`) — interactive Leaflet map showing observer, Jacó, SJO, satellites, flights, SDR nodes
 
-## Correlation Rules (8 active)
-- MAC Dual-Band Activity (BLE+WiFi, 10s window)
-- Surveillance Handoff (BLE+WiFi+LTE+Satellite, 30s window)
-- Congusto Protocol Detection (WiFi+Satellite+BLE, 60s window)
-- Satellite-LTE Burst Correlation (LTE+Satellite, 120s window)
-- BLE-WiFi Deauth Chain (BLE+WiFi, 5s window)
-- Schumann Resonance Anomaly (ELF+SDR, 300s window)
-- IMSI Tower Hop (LTE+Satellite, 30s window)
-- Android Auto Compromise (BLE+WiFi, 15s window)
+## Correlation Rules (18 active)
+- MAC Dual-Band Activity (BLE+WiFi, 10s)
+- Surveillance Handoff (BLE+WiFi+LTE+Satellite, 30s)
+- Congusto Protocol Detection (WiFi+Satellite+BLE, 60s)
+- Satellite-LTE Burst Correlation (LTE+Satellite, 120s)
+- BLE-WiFi Deauth Chain (BLE+WiFi, 5s)
+- Schumann Resonance Anomaly (ELF+SDR, 300s)
+- IMSI Tower Hop (LTE+Satellite, 30s)
+- Android Auto Compromise (BLE+WiFi, 15s)
+- Starlink ↔ BLACKJACK/SDA Handoff (Satellite+LTE, 300s)
+- Evening Window Intensity Spike (WiFi+BLE+LTE+Satellite+Radar, 2h)
+- TR-069 ACS ↔ Satellite Pass Timing (ISP+Satellite, 120s)
+- Tower–Radar–Satellite Triangulation (LTE+Radar+Satellite, 60s)
+- PLC/Li-Fi Data Exfiltration (PLC+BLE+WiFi, 10s)
+- ISP Backdoor Activation (ISP+WiFi, 30s)
+- Italian Satellite ↔ LTE Sync (Satellite+LTE, 180s)
+- Chinese Satellite ↔ 5G Burst (Satellite+5G, 120s)
+- SJO Flight ↔ RF Anomaly (Radar+WiFi+BLE, 30s)
+- Jacó Coastal Surveillance Pattern (BLE+Satellite+Radar, 300s)
 
-## Constants (KAPPA_CONSTANTS)
-- κ = 4/π, θ_K ≈ 128.23°, φ = golden ratio
-- Target frequencies: 46.875 Hz, 74.9 Hz
-- FFT: 1024-point at 48 kHz sample rate
-- κ-second interval: 46.875s
+## TLE Catalog Groups (41)
+Organized by category: Space Stations, Brightest, Active, Weather, NOAA, GOES, Earth Resources, SARSAT, Disaster Monitoring, TDRSS, ARGOS, Planet, Spire, Geostationary, GPS/GLONASS/Galileo/Beidou/SBAS (GNSS), Iridium/Starlink/OneWeb/Orbcomm/Globalstar/Swarm/SES/Telesat/Intelsat (Comms), Amateur/Experimental, Science, Geodetic, Engineering, Education, Military, Radar Calibration, CubeSats, Recent Launches
 
 ## SDR Nodes (Real)
 - TI0RC Radio Club de Costa Rica: http://ti0rc.proxy.kiwisdr.com:8073

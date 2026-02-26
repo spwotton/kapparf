@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -25,6 +25,7 @@ export function AppSidebar() {
     { title: t("nav.satellites"), url: "/satellites", icon: Satellite },
     { title: t("nav.nodes"), url: "/nodes", icon: Server },
     { title: t("nav.tools"), url: "/tools", icon: Wrench },
+    { title: t("nav.map"), url: "/map", icon: MapIcon },
   ];
 
   return (
@@ -65,7 +66,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4">
-        <p className="text-xs text-muted-foreground font-mono">9.95°N 84.15°W</p>
+        <p className="text-xs text-muted-foreground font-mono">9.9536°N 84.2907°W</p>
       </SidebarFooter>
     </Sidebar>
   );

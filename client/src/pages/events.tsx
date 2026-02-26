@@ -24,6 +24,9 @@ const domainColors: Record<string, string> = {
   satellite: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
   sdr: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
   elf: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400",
+  radar: "bg-rose-500/10 text-rose-700 dark:text-rose-400",
+  plc: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
+  isp: "bg-slate-500/10 text-slate-700 dark:text-slate-400",
 };
 
 function IngestDialog() {

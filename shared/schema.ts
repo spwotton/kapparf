@@ -40,6 +40,10 @@ export const satellitePasses = pgTable("satellite_passes", {
   elevation: real("elevation"),
   azimuth: real("azimuth"),
   range: real("range"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
+  altitude: real("altitude"),
+  category: text("category").notNull().default("active"),
   passTime: timestamp("pass_time"),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -90,7 +94,96 @@ export type InsertSatellitePass = z.infer<typeof insertSatellitePassSchema>;
 export type SdrNode = typeof sdrNodes.$inferSelect;
 export type InsertSdrNode = z.infer<typeof insertSdrNodeSchema>;
 
-export const DOMAINS = ["wifi", "ble", "lte", "5g", "satellite", "sdr", "elf"] as const;
+export const DOMAINS = ["wifi", "ble", "lte", "5g", "satellite", "sdr", "elf", "radar", "plc", "isp"] as const;
+
+export interface TleCatalogGroup {
+  id: string;
+  name: string;
+  url: string;
+  category: string;
+}
+
+export const TLE_CATALOG_GROUPS: TleCatalogGroup[] = [
+  { id: "stations", name: "Space Stations", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle", category: "stations" },
+  { id: "visual", name: "100 Brightest", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=visual&FORMAT=tle", category: "visual" },
+  { id: "active", name: "Active Satellites", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=active&FORMAT=tle", category: "active" },
+  { id: "weather", name: "Weather", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=weather&FORMAT=tle", category: "weather" },
+  { id: "noaa", name: "NOAA", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle", category: "noaa" },
+  { id: "goes", name: "GOES", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=goes&FORMAT=tle", category: "goes" },
+  { id: "resource", name: "Earth Resources", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=resource&FORMAT=tle", category: "resource" },
+  { id: "sarsat", name: "Search & Rescue (SARSAT)", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=sarsat&FORMAT=tle", category: "sarsat" },
+  { id: "dmc", name: "Disaster Monitoring", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=dmc&FORMAT=tle", category: "dmc" },
+  { id: "tdrss", name: "Tracking & Data Relay", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=tdrss&FORMAT=tle", category: "tdrss" },
+  { id: "argos", name: "ARGOS Data Collection", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=argos&FORMAT=tle", category: "argos" },
+  { id: "planet", name: "Planet", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=planet&FORMAT=tle", category: "planet" },
+  { id: "spire", name: "Spire", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=spire&FORMAT=tle", category: "spire" },
+  { id: "geo", name: "Geostationary", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=geo&FORMAT=tle", category: "geo" },
+  { id: "gpz", name: "GPS Operational", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=gps-ops&FORMAT=tle", category: "gnss" },
+  { id: "glonass", name: "GLONASS Operational", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=glo-ops&FORMAT=tle", category: "gnss" },
+  { id: "galileo", name: "Galileo", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=galileo&FORMAT=tle", category: "gnss" },
+  { id: "beidou", name: "Beidou", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=beidou&FORMAT=tle", category: "gnss" },
+  { id: "sbas", name: "SBAS", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=sbas&FORMAT=tle", category: "gnss" },
+  { id: "iridium", name: "Iridium", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium&FORMAT=tle", category: "comms" },
+  { id: "iridium-next", name: "Iridium NEXT", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=iridium-NEXT&FORMAT=tle", category: "comms" },
+  { id: "starlink", name: "Starlink", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle", category: "comms" },
+  { id: "oneweb", name: "OneWeb", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=oneweb&FORMAT=tle", category: "comms" },
+  { id: "orbcomm", name: "Orbcomm", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=orbcomm&FORMAT=tle", category: "comms" },
+  { id: "globalstar", name: "Globalstar", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=globalstar&FORMAT=tle", category: "comms" },
+  { id: "swarm", name: "Swarm", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=swarm&FORMAT=tle", category: "comms" },
+  { id: "amateur", name: "Amateur Radio", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=amateur&FORMAT=tle", category: "amateur" },
+  { id: "x-comm", name: "Experimental Comm", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=x-comm&FORMAT=tle", category: "amateur" },
+  { id: "science", name: "Space & Earth Science", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=science&FORMAT=tle", category: "science" },
+  { id: "geodetic", name: "Geodetic", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=geodetic&FORMAT=tle", category: "science" },
+  { id: "engineering", name: "Engineering", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=engineering&FORMAT=tle", category: "engineering" },
+  { id: "education", name: "Education", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=education&FORMAT=tle", category: "education" },
+  { id: "military", name: "Miscellaneous Military", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=military&FORMAT=tle", category: "military" },
+  { id: "radar", name: "Radar Calibration", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=radar&FORMAT=tle", category: "military" },
+  { id: "cubesat", name: "CubeSats", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=cubesat&FORMAT=tle", category: "cubesat" },
+  { id: "other", name: "Other Comm", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=other-comm&FORMAT=tle", category: "comms" },
+  { id: "satnogs", name: "SatNOGS", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=satnogs&FORMAT=tle", category: "amateur" },
+  { id: "ses", name: "SES", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=ses&FORMAT=tle", category: "comms" },
+  { id: "telesat", name: "Telesat", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=telesat&FORMAT=tle", category: "comms" },
+  { id: "intelsat", name: "Intelsat", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=intelsat&FORMAT=tle", category: "comms" },
+  { id: "last-30-days", name: "Last 30 Days Launches", url: "https://celestrak.org/NORAD/elements/gp.php?GROUP=last-30-days&FORMAT=tle", category: "recent" },
+];
+
+export const TLE_CATEGORIES: Record<string, string> = {
+  stations: "Space Stations",
+  visual: "Brightest",
+  active: "Active",
+  weather: "Weather",
+  noaa: "NOAA",
+  goes: "GOES",
+  resource: "Earth Resources",
+  sarsat: "Search & Rescue",
+  dmc: "Disaster Monitoring",
+  tdrss: "Relay Satellites",
+  argos: "ARGOS",
+  planet: "Planet Labs",
+  spire: "Spire",
+  geo: "Geostationary",
+  gnss: "Navigation (GNSS)",
+  comms: "Communications",
+  amateur: "Amateur/Experimental",
+  science: "Science",
+  engineering: "Engineering",
+  education: "Education",
+  military: "Military",
+  cubesat: "CubeSats",
+  recent: "Recent Launches",
+};
+
+export interface ToolGitHubMeta {
+  name: string;
+  stars: number;
+  language: string | null;
+  license: string | null;
+  updatedAt: string;
+  description: string | null;
+  archived: boolean;
+  forks: number;
+  openIssues: number;
+}
 export type Domain = typeof DOMAINS[number];
 
 export const KAPPA_CONSTANTS = {
@@ -103,13 +196,47 @@ export const KAPPA_CONSTANTS = {
   HALL_MULTIPLIER: 1.598,
   FFT_SIZE: 1024,
   SAMPLE_RATE: 48000,
-  OBSERVER_LAT: 9.95,
-  OBSERVER_LON: -84.15,
+  OBSERVER_LAT: 9.953592,
+  OBSERVER_LON: -84.290668,
   OBSERVER_ALT: 0.9,
   MIN_ELEVATION: 30,
   MAC_CORRELATION_WINDOW_S: 10,
   SURVEILLANCE_HANDOFF_WINDOW_S: 30,
+  JACO_LAT: 9.6142,
+  JACO_LON: -84.6278,
+  SJO_LAT: 9.9939,
+  SJO_LON: -84.2088,
+  SJO_ICAO: "MROC",
 };
+
+export interface AnalysisPoint {
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+  description: string;
+}
+
+export const ANALYSIS_POINTS: AnalysisPoint[] = [
+  { id: "observer", name: "Observer — Guácima Abajo", lat: 9.953592, lon: -84.290668, description: "Calle Caballo Real, Provincia de Alajuela" },
+  { id: "jaco", name: "Jacó", lat: 9.6142, lon: -84.6278, description: "Pacific coast analysis point, Puntarenas" },
+  { id: "sjo", name: "SJO — Juan Santamaría Intl", lat: 9.9939, lon: -84.2088, description: "ICAO: MROC — primary international airport" },
+  { id: "ti0rc", name: "TI0RC KiwiSDR", lat: 9.9360, lon: -84.1088, description: "Radio Club de Costa Rica SDR node" },
+];
+
+export interface FlightData {
+  icao24: string;
+  callsign: string | null;
+  originCountry: string;
+  longitude: number | null;
+  latitude: number | null;
+  altitude: number | null;
+  velocity: number | null;
+  heading: number | null;
+  verticalRate: number | null;
+  onGround: boolean;
+  squawk: string | null;
+}
 
 export interface ToolEntry {
   name: string;
@@ -146,6 +273,19 @@ export const TOOL_CATALOG: ToolEntry[] = [
   { name: "inspectrum", repo: "https://github.com/miek/inspectrum", description: "Offline radio signal analysis and IQ file viewer", domain: "sdr" },
   { name: "PySDR", repo: "https://github.com/777arc/PySDR", description: "SDR fundamentals textbook with Python examples", domain: "sdr" },
   { name: "ChameleonMini", repo: "https://github.com/emsec/ChameleonMini", description: "Programmable RFID/NFC card emulator for proximity testing", domain: "hardware" },
+  { name: "dump1090", repo: "https://github.com/antirez/dump1090", description: "ADS-B Mode S decoder for RTL-SDR — aircraft radar tracking", domain: "radar" },
+  { name: "tar1090", repo: "https://github.com/wiedehopf/tar1090", description: "ADS-B radar web interface with aircraft history and heatmaps", domain: "radar" },
+  { name: "readsb", repo: "https://github.com/wiedehopf/readsb", description: "ADS-B decoder daemon — successor to dump1090-fa", domain: "radar" },
+  { name: "opensky-api", repo: "https://github.com/openskynetwork/opensky-api", description: "OpenSky Network API client for live flight tracking", domain: "radar" },
+  { name: "ADS-B Exchange", repo: "https://github.com/adsbexchange/adsb-exchange", description: "Community-driven ADS-B flight tracking network", domain: "radar" },
+  { name: "pyModeS", repo: "https://github.com/junzis/pyModeS", description: "Python Mode S and ADS-B message decoder library", domain: "radar" },
+  { name: "ModbusPal", repo: "https://github.com/zerokol/ModbusPal", description: "Modbus/PLC protocol simulator and analyzer", domain: "plc" },
+  { name: "pymodbus", repo: "https://github.com/pymodbus-dev/pymodbus", description: "Full Modbus protocol implementation — SCADA/PLC analysis", domain: "plc" },
+  { name: "OpenPLC", repo: "https://github.com/thiagoralves/OpenPLC_v3", description: "Open-source PLC runtime for industrial control analysis", domain: "plc" },
+  { name: "RouterSploit", repo: "https://github.com/threat9/routersploit", description: "ISP router/CPE exploitation framework — TR-069 ACS analysis", domain: "isp" },
+  { name: "tr069-honeypot", repo: "https://github.com/aatlasis/tr069-honeypot", description: "TR-069 ACS honeypot for detecting ISP management abuse", domain: "isp" },
+  { name: "SNMPwn", repo: "https://github.com/hatlord/snmpwn", description: "SNMP credential brute-force and ISP device enumeration", domain: "isp" },
+  { name: "Shodan", repo: "https://github.com/achillean/shodan-python", description: "Internet-connected device search — ISP infrastructure mapping", domain: "isp" },
 ];
 
 export interface CorrelationRule {
@@ -221,5 +361,85 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     domains: ["ble", "wifi"],
     windowSeconds: 15,
     condition: "ble.uuid == 0x2D00 THEN wifi.tcp_syn(8.8.8.8:443) WITHIN 15s",
+  },
+  {
+    id: "starlink-blackjack-handoff",
+    name: "Starlink ↔ BLACKJACK/SDA Handoff",
+    description: "Starlink satellite pass ends while BLACKJACK/SDA constellation satellite begins pass at similar azimuth — indicates coordinated handoff pattern. Peak 6-10pm local window.",
+    domains: ["satellite", "lte"],
+    windowSeconds: 300,
+    condition: "starlink.pass_end THEN blackjack.pass_start WITHIN 300s AND azimuth_delta < 30°",
+  },
+  {
+    id: "evening-window-intensity",
+    name: "Evening Window Intensity Spike",
+    description: "Aggregate cross-domain event rate exceeds 2σ baseline during 6-8pm or 8-10pm local windows — correlates with satellite density peaks.",
+    domains: ["wifi", "ble", "lte", "satellite", "radar"],
+    windowSeconds: 7200,
+    condition: "event_rate > 2σ_baseline DURING 18:00-22:00 CST",
+  },
+  {
+    id: "tr069-satellite-timing",
+    name: "TR-069 ACS ↔ Satellite Pass Timing",
+    description: "ISP TR-069 management session initiated during satellite overhead window — Liberty/Claro CPE remote access coinciding with reconnaissance pass.",
+    domains: ["isp", "satellite"],
+    windowSeconds: 120,
+    condition: "isp.tr069_session AND satellite.elevation > 30° WITHIN 120s",
+  },
+  {
+    id: "tower-radar-sat-triangulation",
+    name: "Tower–Radar–Satellite Triangulation",
+    description: "LTE tower handoff + ADS-B aircraft pass + satellite overhead — three-domain spatial correlation around observer location.",
+    domains: ["lte", "radar", "satellite"],
+    windowSeconds: 60,
+    condition: "lte.handoff AND radar.aircraft_in_range AND satellite.pass WITHIN 60s",
+  },
+  {
+    id: "plc-lifi-exfil",
+    name: "PLC/Li-Fi Data Exfiltration",
+    description: "Powerline communication burst or modulated light emission coincides with BLE beacon and outbound WiFi connection — possible covert exfiltration channel.",
+    domains: ["plc", "ble", "wifi"],
+    windowSeconds: 10,
+    condition: "plc.burst OR lifi.modulation THEN ble.beacon AND wifi.outbound WITHIN 10s",
+  },
+  {
+    id: "isp-backdoor-correlation",
+    name: "ISP Backdoor Activation",
+    description: "Liberty/Claro CPE opens TR-069 ACS connection to management server while SNMP community string probing detected — ISP-side remote access pattern.",
+    domains: ["isp", "wifi"],
+    windowSeconds: 30,
+    condition: "isp.tr069_connect AND wifi.snmp_probe WITHIN 30s",
+  },
+  {
+    id: "italian-sat-lte-sync",
+    name: "Italian Satellite ↔ LTE Sync",
+    description: "Italian constellation satellite (COSMO-SkyMed, PRISMA) pass coincides with unusual LTE PDCCH allocation pattern — SAR imaging correlation.",
+    domains: ["satellite", "lte"],
+    windowSeconds: 180,
+    condition: "satellite.name CONTAINS 'COSMO|PRISMA' AND lte.pdcch_anomaly WITHIN 180s",
+  },
+  {
+    id: "chinese-sat-5g-correlation",
+    name: "Chinese Satellite ↔ 5G Burst",
+    description: "Chinese constellation satellite (Yaogan, Jilin, Gaofen) overhead during 5G NR SSB burst density increase — possible C2 or ELINT correlation.",
+    domains: ["satellite", "5g"],
+    windowSeconds: 120,
+    condition: "satellite.name CONTAINS 'YAOGAN|JILIN|GAOFEN' AND 5g.ssb_burst_spike WITHIN 120s",
+  },
+  {
+    id: "sjo-flight-rf-correlation",
+    name: "SJO Flight ↔ RF Anomaly",
+    description: "ADS-B aircraft within 10km of SJO runway coincides with WiFi deauth burst or BLE MAC flood — possible jamming or surveillance near airport.",
+    domains: ["radar", "wifi", "ble"],
+    windowSeconds: 30,
+    condition: "radar.aircraft(distance_sjo < 10km) AND (wifi.deauth OR ble.mac_flood) WITHIN 30s",
+  },
+  {
+    id: "jaco-coastal-surveillance",
+    name: "Jacó Coastal Surveillance Pattern",
+    description: "Multiple domain activity spike at Jacó analysis point — BLE device tracking + satellite pass + ADS-B patrol aircraft over Pacific coast.",
+    domains: ["ble", "satellite", "radar"],
+    windowSeconds: 300,
+    condition: "ble.density_jaco > threshold AND satellite.pass(jaco) AND radar.aircraft(jaco_coast) WITHIN 300s",
   },
 ];
