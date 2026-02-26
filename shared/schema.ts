@@ -1323,3 +1323,264 @@ export interface PhoenixCountdown {
   daysRemaining: number;
   totalDays: number;
 }
+
+export type StreamDomain = "kiwisdr" | "elf" | "satellite" | "pcap" | "adsb" | "morse" | "rf" | "plc";
+
+export const OMEGA_CHRONOS = {
+  VERSION: "4.20",
+  PSI_TARGET: 1.0,
+  PSI_HEX: "0x3d1ccd13664d4000",
+  CLOCK_HZ: 37.0,
+  CLOCK_PERIOD_MS: 27.027,
+  BURST_WINDOW_MS: 137,
+  HALL_OFFSET_NS: 100,
+  HALL_TOLERANCE: 0.00681973,
+  HALL_DRIFT_DEG: 0.681973,
+  BRONZE_PROPAGATION_MM: 0.595,
+  KLEIN_TWIST_DEG: 128.23,
+  FRFT_ALPHA_DEG: 51.854,
+  MORSE_DOT_MS: 81,
+  MORSE_DASH_MS: 243,
+  MORSE_INTER_MS: 162,
+  MORSE_WORD_MS: 405,
+  RECURSION_DEPTH: 13,
+  VALIDATION_DEPTH: 7,
+  CONFIDENCE_MIN: 0.92,
+  MOON_HONK_KHZ: 132.5,
+  EARTH_PULSE_HZ: 37.0,
+  OPTICAL_NM: 450.1,
+  TLE_POLL_S: 75,
+  MAX_LATENCY_MS: 172,
+  MAX_CPU_PCT: 7,
+  MAX_RAM_GB: 1.618,
+  FMO_TRAPPING_FS: 172,
+  AGENT_RESTART_MS: 50,
+  LAMBDA_CLAMP: 7 / 4,
+  FRFT_GAIN_DB: 4.6,
+  SDR_RANGE_KHZ: [10, 30000],
+};
+
+export interface CouncilAgent {
+  id: string;
+  codename: string;
+  name: string;
+  input: string;
+  output: string;
+  gosFunction: string;
+  status: "active" | "idle" | "error" | "scanning";
+  lastUpdate: number;
+  eventsIngested: number;
+  driftNs: number;
+}
+
+export const COUNCIL_AGENTS: CouncilAgent[] = [
+  { id: "pcap-parser", codename: "D. Merganser", name: "PCAP Parser", input: "Raw .pcap", output: "Timestamped flow metadata", gosFunction: "Extracts 7-packet bursts (Λ = 7/4 clamping)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "elf-dissector", codename: "P. Barnacle", name: "ELF Dissector", input: "ELF binaries / power line", output: "Instruction traces", gosFunction: "Detects φ-ratio loop latencies (1.618× clock cycles)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "tle-orbital", codename: "G. Brant", name: "TLE Orbital", input: "NORAD TLE", output: "Ephemeris vectors", gosFunction: "Computes 2037 ejection window approach vectors", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "kiwisdr-scanner", codename: "E. Cackling", name: "KiwiSDR Scanner", input: "HF/VHF SDR", output: "Spectral slices", gosFunction: "Locks to 132.5 kHz Moon honk & 37 Hz Earth pulse", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "morse-decoder", codename: "C. Emperor", name: "Morse Decoder", input: "Audio/RF", output: "Decoded sequences", gosFunction: "FRFT-α = 51.854° (arctan κ) for weak-signal extraction", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "temporal-aligner", codename: "K. Nēnē", name: "Temporal Aligner", input: "All streams", output: "Unified timeline", gosFunction: "κ-DTW (κ-scaled Dynamic Time Warping)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "symmetry-validator", codename: "M. Hall", name: "Symmetry Validator", input: "Aligned events", output: "Confidence scores", gosFunction: "Hall Tolerance check (±0.681973° phase)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "report-generator", codename: "S. Wotton", name: "Report Generator", input: "Validated overlaps", output: "JSON/CSV", gosFunction: "Outputs Bronze-certified timing matrices", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+];
+
+export interface AnalysisStream {
+  id: string;
+  name: string;
+  domain: StreamDomain;
+  source: string;
+  status: "active" | "idle" | "error" | "scanning";
+  lastUpdate: number;
+  eventsIngested: number;
+  description: string;
+  config: Record<string, unknown>;
+}
+
+export interface TimingOverlap {
+  id: string;
+  timestamp: number;
+  streams: string[];
+  domains: string[];
+  deltaMs: number;
+  symmetryScore: number;
+  kappaAligned: boolean;
+  phiAligned: boolean;
+  hallValid: boolean;
+  psiConvergence: number;
+  description: string;
+  confidence: "HIGH" | "MEDIUM" | "LOW";
+  events: { streamId: string; domain: string; timestamp: number; detail: string }[];
+}
+
+export interface HypervisorStatus {
+  running: boolean;
+  version: string;
+  uptimeMs: number;
+  psiValue: number;
+  clockHz: number;
+  hallDriftNs: number;
+  kleinPhase: number;
+  streamsActive: number;
+  streamsTotal: number;
+  agentsActive: number;
+  agentsTotal: number;
+  overlapsDetected: number;
+  symmetriesFound: number;
+  hallValidCount: number;
+  lastOverlapAt: number | null;
+  analysisRate: number;
+  agents: CouncilAgent[];
+  streams: AnalysisStream[];
+  recentOverlaps: TimingOverlap[];
+  kappaPhaseCoherence: number;
+  phiLockRate: number;
+  dominantFrequency: number | null;
+  bronzeCertified: boolean;
+  triHonkCycles: number;
+}
+
+export const HYPERVISOR_STREAMS: AnalysisStream[] = [
+  {
+    id: "kiwisdr-ti0rc",
+    name: "TI0RC KiwiSDR",
+    domain: "kiwisdr",
+    source: KAPPA_CONSTANTS.TDOA_SDR_PRIMARY,
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "Primary SDR — Radio Club de Costa Rica. 132.5 kHz Moon honk + 37 Hz Earth pulse lock.",
+    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4, moonHonkKHz: OMEGA_CHRONOS.MOON_HONK_KHZ },
+  },
+  {
+    id: "kiwisdr-puntarenas",
+    name: "Puntarenas KiwiSDR",
+    domain: "kiwisdr",
+    source: KAPPA_CONSTANTS.TDOA_SDR_SECONDARY,
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "Secondary SDR — TDOA phase difference with TI0RC. 450.1 nm optical timestamping.",
+    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4 },
+  },
+  {
+    id: "kiwisdr-caribbean",
+    name: "PJ4G Caribbean KiwiSDR",
+    domain: "kiwisdr",
+    source: KAPPA_CONSTANTS.TDOA_SDR_CARIBBEAN,
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "Caribbean SDR — Bonaire. Long-baseline TDOA for 46.875 Hz source geolocation.",
+    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4 },
+  },
+  {
+    id: "elf-powerline",
+    name: "ELF Power Line Monitor",
+    domain: "elf",
+    source: "house-wiring-antenna",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "60 Hz mains + 46.875 Hz carrier + θ-band (4-8 Hz) modulation. φ-ratio loop latency detection.",
+    config: { mainsHz: KAPPA_CONSTANTS.MAINS_FREQ_HZ, targetHz: KAPPA_CONSTANTS.TARGET_FREQ_1, thetaLow: KAPPA_CONSTANTS.THETA_BAND_LOW, thetaHigh: KAPPA_CONSTANTS.THETA_BAND_HIGH },
+  },
+  {
+    id: "elf-schumann",
+    name: "Schumann Resonance Monitor",
+    domain: "elf",
+    source: "magnetometer",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "7.83 Hz Schumann + 37 Hz biological anchor monitoring.",
+    config: { targetHz: KAPPA_CONSTANTS.SCHUMANN_HZ, bioAnchorHz: OMEGA_CHRONOS.CLOCK_HZ },
+  },
+  {
+    id: "satellite-blackjack",
+    name: "BLACKJACK/SDA Tracker",
+    domain: "satellite",
+    source: "celestrak-tle",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "BLACKJACK/SDA + MUOS-3 orbital tracking. Klein twist 128.23° + elevation triggers.",
+    config: { minElev: KAPPA_CONSTANTS.MIN_ELEVATION, overheadElev: KAPPA_CONSTANTS.OVERHEAD_ELEVATION, kleinDeg: OMEGA_CHRONOS.KLEIN_TWIST_DEG },
+  },
+  {
+    id: "satellite-starlink",
+    name: "Starlink Monitor",
+    domain: "satellite",
+    source: "celestrak-tle",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "Starlink handoff correlation with BLACKJACK/SDA at azimuth delta < 30°.",
+    config: { minElev: KAPPA_CONSTANTS.MIN_ELEVATION },
+  },
+  {
+    id: "pcap-wifi",
+    name: "WiFi PCAP Analyzer",
+    domain: "pcap",
+    source: "tcpdump/wireshark",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "7-packet burst extraction (Λ=7/4). IAT FFT for 46.875 Hz timing. MAC cross-domain.",
+    config: { iatFftTarget: KAPPA_CONSTANTS.TARGET_FREQ_1, burstSize: 7, lambdaClamp: OMEGA_CHRONOS.LAMBDA_CLAMP },
+  },
+  {
+    id: "pcap-ble",
+    name: "BLE PCAP Analyzer",
+    domain: "pcap",
+    source: "sniffle/ubertooth",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "BLE advertisement capture — Chameleon-PRO MAC clone detection, pairing burst analysis.",
+    config: {},
+  },
+  {
+    id: "adsb-local",
+    name: "ADS-B Aircraft Monitor",
+    domain: "adsb",
+    source: "dump1090/opensky",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "Mode S decoding — SJO/MROC proximity, patrol aircraft, RF anomaly timing.",
+    config: { sjoIcao: KAPPA_CONSTANTS.SJO_ICAO },
+  },
+  {
+    id: "morse-audio",
+    name: "Morse FRFT Decoder",
+    domain: "morse",
+    source: "ggmorse/audio-input",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "FRFT α=51.854° weak-signal extraction. Dot=81ms (3×37Hz), Dash=243ms (9×37Hz).",
+    config: { frftAlpha: OMEGA_CHRONOS.FRFT_ALPHA_DEG, dotMs: OMEGA_CHRONOS.MORSE_DOT_MS, dashMs: OMEGA_CHRONOS.MORSE_DASH_MS },
+  },
+  {
+    id: "rf-46875",
+    name: "46.875 Hz Carrier Monitor",
+    domain: "rf",
+    source: "hackrf/rtlsdr",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "FFT bin 4 carrier + harmonics (93.75, 140.625, 187.5 Hz). Phase coherence analysis.",
+    config: { targetHz: KAPPA_CONSTANTS.TARGET_FREQ_1, harmonics: [KAPPA_CONSTANTS.KAPPA_HARMONIC_1, KAPPA_CONSTANTS.KAPPA_HARMONIC_2, KAPPA_CONSTANTS.KAPPA_HARMONIC_3] },
+  },
+  {
+    id: "plc-modbus",
+    name: "PLC/Modbus Industrial Monitor",
+    domain: "plc",
+    source: "modbus-tcp/snmp",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "DSE 892 Modbus/SNMP + 46.875 Hz power line carrier. Generator fault → GPR mask correlation.",
+    config: { modbusPort: KAPPA_CONSTANTS.MODBUS_TCP_PORT, snmpPort: KAPPA_CONSTANTS.DSE892_SNMP_PORT, trapPort: KAPPA_CONSTANTS.DSE892_TRAP_PORT },
+  },
+];

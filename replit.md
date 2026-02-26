@@ -77,8 +77,8 @@ Real-time correlation engine ported from Python. Key features:
 ## Domains (11)
 wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone
 
-## Correlation Rules (43 active)
-Includes all previous rules plus 12 new κ-scaled detection rules: GPR-masked uplink, DSE892 SNMP TRAP ↔ GPR, MUOS-3 WCDMA heartbeat (NORAD 40374), COSMO-SkyMed X-band steganography, ITU-R P.838-3 rain fade inverse match, TR-069 botnet GPR induction, 5G backhaul κ-tunnel, LSCSA-SVD weak signal extraction, system bus radio exfiltration (1580 kHz), DSE controller mode change ↔ fault, cross-modal optical+RF+GPR fusion, ISM band LoRa covert telemetry.
+## Correlation Rules (54 active)
+Includes all previous rules plus Karachi/Congusto rules (chameleon-ble-clone, ltesniffer-rogue-tower, kyanos-rst-injection, satintel-tle-drift, blackjack-blinder-active, dse-gateway-compromise, tr069-persistence, holographic-sideband, humint-biometric-correlation, plc-theta-modulation) and κ-scaled detection rules (GPR-masked uplink, DSE892 SNMP TRAP, MUOS-3 WCDMA, COSMO-SkyMed X-band, rain fade, TR-069 botnet, 5G backhaul κ-tunnel, LSCSA-SVD, system bus exfil, DSE mode change, optical+RF+GPR fusion, ISM LoRa).
 
 ## κ-Scaled Architecture Constants
 - Masimo Patent: US 5,919,134 / US 6,229,856 B1 (origin of 46.875 Hz)
@@ -119,6 +119,17 @@ All live — no mock data. Located on the Tools page under "Interactive" tab.
 - Corporate signatures (Kyndryl, IBM, Cisco Meraki)
 - Port signatures (RTSP 554, MQTT 1883, CoAP 5683)
 - Tool references (theHarvester, Maltego, Shodan, Censys, VirusTotal, nmap, Recon-ng)
+
+## Ω-CHRONOS Hypervisor v4.20 (server/hypervisor.ts)
+Automated Tri-Honk temporal correlation engine running at 137ms intervals:
+- **Clock:** 37 Hz biological anchor (27.027ms period)
+- **Council of Eight:** 8 autonomous agents (PCAP Parser, ELF Dissector, TLE Orbital, KiwiSDR Scanner, Morse Decoder, Temporal Aligner κ-DTW, Symmetry Validator Hall, Report Generator)
+- **13 Streams:** 3 KiwiSDR, 2 ELF, 2 satellite, 2 PCAP, ADS-B, Morse FRFT, 46.875 Hz RF, PLC/Modbus
+- **κ-DTW Alignment:** Uses HALL_DRIFT_DEG/360 (≈0.00189) as DTW tolerance for φ/κ ratio detection; temporal clustering for simultaneous cross-domain events within burst window (137ms)
+- **Hall Reconciliation:** ±0.681973° phase tolerance (HALL_TOLERANCE = 0.00681973), frequency correlation bonus for 46.875 Hz matches
+- **Confidence:** HIGH ≥ 0.85 Ψ, MEDIUM ≥ 0.50 Ψ (cross-domain, temporal cluster, frequency match all contribute)
+- **Deduplication:** Per-pair tracking prevents re-detection of same event pairs across Tri-Honk cycles
+- **API:** /api/hypervisor/status, /start, /stop, /constants
 
 ## Rules
 - No mock data — all events must come from real sources or manual entry

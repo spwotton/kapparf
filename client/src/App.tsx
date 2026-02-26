@@ -20,6 +20,7 @@ import DevicesPage from "@/pages/devices";
 import OsintPage from "@/pages/osint";
 import KarachiPage from "@/pages/karachi";
 import CongustoPage from "@/pages/congusto";
+import HypervisorPage from "@/pages/hypervisor";
 
 function Router() {
   return (
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/osint" component={OsintPage} />
       <Route path="/karachi" component={KarachiPage} />
       <Route path="/congusto" component={CongustoPage} />
+      <Route path="/hypervisor" component={HypervisorPage} />
       <Route component={NotFound} />
     </Switch>
   );

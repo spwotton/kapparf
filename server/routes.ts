@@ -2,10 +2,12 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
+import { hypervisor } from "./hypervisor";
 import {
   insertSignalEventSchema,
   insertSdrNodeSchema,
   KAPPA_CONSTANTS,
+  OMEGA_CHRONOS,
   TOOL_CATALOG,
   CORRELATION_RULES,
   TLE_CATALOG_GROUPS,
@@ -60,6 +62,7 @@ export async function registerRoutes(
     }
     const event = await storage.createSignalEvent(parsed.data);
     kappaEngine.ingest(event);
+    hypervisor.ingestEvent(event);
     res.json(event);
   });
 
@@ -518,6 +521,24 @@ export async function registerRoutes(
 
   app.get("/api/council", (_req, res) => {
     res.json(COUNCIL_OF_7);
+  });
+
+  app.get("/api/hypervisor/status", (_req, res) => {
+    res.json(hypervisor.getStatus());
+  });
+
+  app.post("/api/hypervisor/start", (_req, res) => {
+    hypervisor.start();
+    res.json({ ok: true, status: hypervisor.getStatus() });
+  });
+
+  app.post("/api/hypervisor/stop", (_req, res) => {
+    hypervisor.stop();
+    res.json({ ok: true, status: hypervisor.getStatus() });
+  });
+
+  app.get("/api/hypervisor/constants", (_req, res) => {
+    res.json(OMEGA_CHRONOS);
   });
 
   function isPrivateIp(ip: string): boolean {
