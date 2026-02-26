@@ -14,6 +14,7 @@ const domainIcons: Record<string, typeof Wifi> = {
   satellite: Satellite,
   sdr: Radio,
   elf: Activity,
+  drone: Activity,
 };
 
 const domainColors: Record<string, string> = {
@@ -27,6 +28,7 @@ const domainColors: Record<string, string> = {
   radar: "bg-rose-500/10 text-rose-700 dark:text-rose-400",
   plc: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
   isp: "bg-slate-500/10 text-slate-700 dark:text-slate-400",
+  drone: "bg-red-500/10 text-red-700 dark:text-red-400",
 };
 
 export default function DashboardPage() {

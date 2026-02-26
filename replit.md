@@ -51,7 +51,11 @@ KAPPA is a software-defined SIGINT platform built with React + Tailwind + TypeSc
 6. **Tools** (`/tools`) — 40+ tool catalog with domain filtering + live GitHub stars/language/license
 7. **Map** (`/map`) — interactive Leaflet map showing observer, Jacó, SJO, satellites, flights, SDR nodes
 
-## Correlation Rules (18 active)
+## Satellite Tracking
+- **Visible**: elevation > 30° from observer
+- **Overhead**: elevation > 75° — satellite is near zenith, directly above observer. Shown with red pulsing marker on map and red OVERHEAD badge in table.
+
+## Correlation Rules (21 active)
 - MAC Dual-Band Activity (BLE+WiFi, 10s)
 - Surveillance Handoff (BLE+WiFi+LTE+Satellite, 30s)
 - Congusto Protocol Detection (WiFi+Satellite+BLE, 60s)
@@ -70,6 +74,18 @@ KAPPA is a software-defined SIGINT platform built with React + Tailwind + TypeSc
 - Chinese Satellite ↔ 5G Burst (Satellite+5G, 120s)
 - SJO Flight ↔ RF Anomaly (Radar+WiFi+BLE, 30s)
 - Jacó Coastal Surveillance Pattern (BLE+Satellite+Radar, 300s)
+- Drone RF Signature Detection (Drone+SDR+BLE, 30s)
+- Drone ↔ Satellite Overhead Correlation (Drone+Satellite+SDR, 120s)
+- Drone ↔ SJO Airspace Intrusion (Drone+Radar+SDR, 60s)
+
+## Domains (11)
+wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone
+
+## Drone Detection Suite
+Tools: RF-Drone-Detection, ssm-drone, Drone-detection-dataset, VisDrone-Dataset
+DSP: PhastFT, quantum-inspired-dsp, Quantum-Sparse-Coding
+Morse/RF: Morserino-32, MorseCodeWithRF, saatja-rpi
+Analysis: urh (Universal Radio Hacker), system-bus-radio (TEMPEST countermeasure), qspectrumanalyzer
 
 ## TLE Catalog Groups (41)
 Organized by category: Space Stations, Brightest, Active, Weather, NOAA, GOES, Earth Resources, SARSAT, Disaster Monitoring, TDRSS, ARGOS, Planet, Spire, Geostationary, GPS/GLONASS/Galileo/Beidou/SBAS (GNSS), Iridium/Starlink/OneWeb/Orbcomm/Globalstar/Swarm/SES/Telesat/Intelsat (Comms), Amateur/Experimental, Science, Geodetic, Engineering, Education, Military, Radar Calibration, CubeSats, Recent Launches

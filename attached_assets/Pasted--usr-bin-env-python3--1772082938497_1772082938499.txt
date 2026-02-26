@@ -1,0 +1,865 @@
+#!/usr/bin/env python3
+"""
+╔══════════════════════════════════════════════════════════════════════╗
+║  KAPPA CORRELATOR — Single-File Multi-Domain RF Intelligence       ║
+║  Consolidated script: all adapters + correlation + dashboard       ║
+║                                                                     ║
+║  Usage:                                                             ║
+║    python kappa_correlator.py               # Simulated mode        ║
+║    python kappa_correlator.py --live        # Live hardware capture ║
+║    python kappa_correlator.py --json        # JSON-only output      ║
+║                                                                     ║
+║  Constants:                                                         ║
+║    κ = 4/π ≈ 1.2732    46.875 Hz = 48000/1024                     ║
+║    Klein twist = 128.23°    Giza cutoff = 51.77°                   ║
+║                                                                     ║
+║  Project KAPPA — Multi-Domain RF Intelligence & Correlation         ║
+╚══════════════════════════════════════════════════════════════════════╝
+"""
+from __future__ import annotations
+
+import argparse
+import asyncio
+import json
+import logging
+import math
+import os
+import random
+import sys
+import time
+import uuid
+from collections import deque
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Callable, Coroutine
+
+# ═══════════════════════════════════════════════════════════════════════
+# I. CONSTANTS & CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════
+
+PHI = (1 + math.sqrt(5)) / 2          # 1.618...
+KAPPA = 4 / math.pi                   # 1.2732...  κ₁
+KAPPA2 = PHI ** 0.75                   # 1.4346...  κ₂
+CLOCK_HZ = 48000 / 1024               # 46.875 Hz
+KLEIN_TWIST_DEG = 128.23              # 180° - arctan(κ₁)
+GIZA_CUTOFF_DEG = 51.77               # arctan(κ₁)
+
+GUACIMA_LAT = 9.95                    # La Guácima, Costa Rica
+GUACIMA_LON = -84.15
+GUACIMA_ALT_M = 840.0
+
+MAC_WINDOW_SEC = 10.0
+IMSI_WINDOW_SEC = 30.0
+SAT_ELEV_MIN = 30.0
+CONGUSTO_LOW = 46.85
+CONGUSTO_HIGH = 46.90
+FFT_SIZE = 1024
+ALERT_COOLDOWN = 60.0
+
+DATA_DIR = Path("kappa_data")
+LOG_DIR = DATA_DIR / "logs"
+ALERT_DIR = DATA_DIR / "alerts"
+for d in (DATA_DIR, LOG_DIR, ALERT_DIR):
+    d.mkdir(parents=True, exist_ok=True)
+
+log = logging.getLogger("kappa")
+
+# ═══════════════════════════════════════════════════════════════════════
+# II. DATA MODELS
+# ═══════════════════════════════════════════════════════════════════════
+
+@dataclass
+class KappaEvent:
+    timestamp: float = field(default_factory=time.time)
+    domain: str = ""
+    source: str = ""
+    event_type: str = ""
+    confidence: float = 1.0
+    metadata: dict = field(default_factory=dict)
+    raw: bytes = b""
+    event_id: str = field(default_factory=lambda: uuid.uuid4().hex[:12])
+
+    def to_json(self) -> str:
+        return json.dumps({
+            "event_id": self.event_id,
+            "timestamp": self.timestamp,
+            "domain": self.domain,
+            "source": self.source,
+            "event_type": self.event_type,
+            "confidence": self.confidence,
+            "metadata": self.metadata,
+        })
+
+
+@dataclass
+class CorrelationAlert:
+    alert_type: str = ""
+    severity: int = 1
+    events: list = field(default_factory=list)
+    description: str = ""
+    kappa_score: float = 0.0
+    timestamp: float = field(default_factory=time.time)
+
+    def to_json(self) -> str:
+        return json.dumps({
+            "type": self.alert_type,
+            "severity": self.severity,
+            "description": self.description,
+            "kappa_score": round(self.kappa_score, 1),
+            "timestamp": self.timestamp,
+            "event_count": len(self.events),
+        })
+
+
+@dataclass
+class DeviceFingerprint:
+    mac: str = ""
+    imsi: str = ""
+    tmsi: str = ""
+    first_seen: float = field(default_factory=time.time)
+    last_seen: float = field(default_factory=time.time)
+    domains_seen: set = field(default_factory=set)
+    events: list = field(default_factory=list)
+    tower_ids: list = field(default_factory=list)
+
+    @property
+    def cross_domain_count(self) -> int:
+        return len(self.domains_seen)
+
+    @property
+    def is_suspicious(self) -> bool:
+        return self.cross_domain_count >= 2
+
+# ═══════════════════════════════════════════════════════════════════════
+# III. IN-MEMORY MESSAGE BUS
+# ═══════════════════════════════════════════════════════════════════════
+
+class Bus:
+    """Lightweight pub-sub message bus."""
+
+    def __init__(self):
+        self._subs: list[tuple[str, Callable]] = []
+        self._stats = {"published": 0, "delivered": 0}
+
+    def subscribe(self, pattern: str, callback):
+        self._subs.append((pattern, callback))
+
+    async def publish(self, topic: str, event: KappaEvent):
+        self._stats["published"] += 1
+        for pattern, callback in self._subs:
+            if self._match(pattern, topic):
+                self._stats["delivered"] += 1
+                try:
+                    await callback(topic, event)
+                except Exception as e:
+                    log.error(f"Bus delivery error: {e}")
+
+    async def close(self):
+        self._subs.clear()
+
+    @staticmethod
+    def _match(pattern: str, topic: str) -> bool:
+        if pattern == "#" or pattern == topic:
+            return True
+        if pattern.endswith("/#"):
+            prefix = pattern[:-2]
+            return topic == prefix or topic.startswith(prefix + "/")
+        parts_p = pattern.split("/")
+        parts_t = topic.split("/")
+        if len(parts_p) != len(parts_t):
+            return False
+        return all(p == "+" or p == t for p, t in zip(parts_p, parts_t))
+
+# ═══════════════════════════════════════════════════════════════════════
+# IV. DOMAIN ADAPTERS
+# ═══════════════════════════════════════════════════════════════════════
+
+# ── Base ─────────────────────────────────────────────────────────────
+
+class BaseAdapter:
+    DOMAIN = "unknown"
+
+    def __init__(self, bus: Bus, simulate: bool = True):
+        self.bus = bus
+        self.simulate = simulate
+        self._running = False
+        self._task = None
+
+    async def start(self):
+        self._running = True
+        self._task = asyncio.create_task(self._run())
+
+    async def stop(self):
+        self._running = False
+        if self._task:
+            self._task.cancel()
+
+    async def _run(self):
+        raise NotImplementedError
+
+    async def _emit(self, event_type: str, source: str, confidence: float,
+                    metadata: dict, raw: bytes = b""):
+        evt = KappaEvent(
+            domain=self.DOMAIN, source=source, event_type=event_type,
+            confidence=confidence, metadata=metadata, raw=raw,
+        )
+        await self.bus.publish(f"kappa/{self.DOMAIN}/{event_type}", evt)
+
+
+# Shared MAC pool for cross-domain correlation in simulation
+_SHARED_MACS = [
+    "DE:AD:BE:EF:01:01", "DE:AD:BE:EF:02:02",
+    "DE:AD:BE:EF:03:03", "CA:FE:BA:BE:04:04",
+]
+
+# ── WiFi ─────────────────────────────────────────────────────────────
+
+class WiFiAdapter(BaseAdapter):
+    DOMAIN = "wifi"
+
+    def __init__(self, bus, simulate=True):
+        super().__init__(bus, simulate)
+        self._iat_buffer: deque[float] = deque(maxlen=FFT_SIZE)
+        self._last_pkt = 0.0
+
+    async def _run(self):
+        if not self.simulate:
+            await self._live_capture()
+        else:
+            await self._simulated()
+
+    async def _simulated(self):
+        # Mix shared MACs (30%) with unique WiFi MACs (70%)
+        unique = [f"AA:BB:CC:{i:02X}:{random.randint(0,255):02X}:{random.randint(0,255):02X}"
+                  for i in range(5)]
+        macs = _SHARED_MACS + unique
+        while self._running:
+            mac = random.choice(macs)
+            evt_type = random.choices(
+                ["probe_request", "deauth", "data"],
+                weights=[0.6, 0.1, 0.3]
+            )[0]
+            rssi = random.randint(-90, -30)
+            await self._emit(evt_type, "sim-wifi", 0.7, {
+                "mac": mac, "rssi": rssi,
+                "channel": random.choice([1, 6, 11, 36, 44]),
+            })
+            # Occasionally inject 46.875 Hz clock
+            now = time.time()
+            if self._last_pkt > 0:
+                self._iat_buffer.append(now - self._last_pkt)
+            self._last_pkt = now
+
+            if random.random() < 0.15:
+                await self._emit("congusto_clock", "sim-wifi", 0.9, {
+                    "freq_hz": 46.875, "snr": round(random.uniform(3.1, 8.0), 1),
+                })
+
+            await asyncio.sleep(random.uniform(0.3, 1.5))
+
+    async def _live_capture(self):
+        try:
+            from scapy.all import AsyncSniffer, Dot11ProbeReq, Dot11Deauth
+        except ImportError:
+            log.warning("scapy not available, falling back to simulation")
+            await self._simulated()
+            return
+        log.info("WiFi live capture starting...")
+        # scapy async sniffer would go here for real deployment
+        await self._simulated()
+
+
+# ── BLE ──────────────────────────────────────────────────────────────
+
+class BLEAdapter(BaseAdapter):
+    DOMAIN = "ble"
+
+    async def _run(self):
+        if not self.simulate:
+            await self._live_scan()
+        else:
+            await self._simulated()
+
+    async def _simulated(self):
+        # Mix shared MACs (40%) with unique BLE MACs (60%)
+        unique = [f"FF:EE:DD:{i:02X}:{random.randint(0,255):02X}:{random.randint(0,255):02X}"
+                  for i in range(4)]
+        macs = _SHARED_MACS + unique
+        while self._running:
+            mac = random.choice(macs)
+            rssi = random.randint(-95, -40)
+            adv_type = random.choice(["connectable", "scannable", "non-connectable"])
+            await self._emit("advertisement", "sim-ble", 0.8, {
+                "mac": mac, "rssi": rssi, "adv_type": adv_type,
+                "company_id": random.choice([0x004C, 0x0006, 0x00E0, None]),
+            })
+            await asyncio.sleep(random.uniform(0.5, 2.0))
+
+    async def _live_scan(self):
+        try:
+            from bleak import BleakScanner
+        except ImportError:
+            log.warning("bleak not available, falling back to simulation")
+            await self._simulated()
+            return
+        log.info("BLE live scan starting...")
+        await self._simulated()
+
+
+# ── LTE ──────────────────────────────────────────────────────────────
+
+class LTEAdapter(BaseAdapter):
+    DOMAIN = "lte"
+
+    async def _run(self):
+        if not self.simulate:
+            log.warning("LTE live capture requires LTESniffer — simulating")
+        await self._simulated()
+
+    async def _simulated(self):
+        towers = [f"T{i}" for i in range(1, 8)]
+        plmns = ["712-01", "712-03"]
+        while self._running:
+            evt_type = random.choices(
+                ["attach", "paging", "handoff", "measurement"],
+                weights=[0.2, 0.3, 0.1, 0.4]
+            )[0]
+            tower = random.choice(towers)
+            imsi = f"712{'01' if random.random() > 0.5 else '03'}{random.randint(1000000000,9999999999)}"
+            await self._emit(evt_type, tower, 0.65, {
+                "tower_id": tower,
+                "plmn": random.choice(plmns),
+                "imsi": imsi if evt_type in ("attach", "paging") else None,
+                "earfcn": random.randint(1000, 6000),
+                "rsrp": random.randint(-120, -80),
+                "band": random.choice(["B4", "B7", "B28"]),
+            })
+            await asyncio.sleep(random.uniform(1.0, 4.0))
+
+
+# ── Satellite ────────────────────────────────────────────────────────
+
+class SatelliteAdapter(BaseAdapter):
+    DOMAIN = "satellite"
+
+    SAT_NAMES = [
+        "ISS", "STARLINK-1234", "GLOBALSTAR-M087",
+        "IRIDIUM-33", "USA-224", "COSMOS-2558",
+    ]
+
+    async def _run(self):
+        await self._simulated()
+
+    async def _simulated(self):
+        while self._running:
+            name = random.choice(self.SAT_NAMES)
+            az = random.uniform(0, 360)
+            el = random.uniform(5, 85)
+            is_overhead = el >= SAT_ELEV_MIN
+            is_klein = abs(az - KLEIN_TWIST_DEG) < 2.0
+
+            evt_type = "overhead" if is_overhead else "visible"
+            if is_klein:
+                evt_type = "klein_pass"
+
+            await self._emit(evt_type, name, 0.95, {
+                "satellite_name": name,
+                "azimuth_deg": round(az, 2),
+                "elevation_deg": round(el, 2),
+                "is_overhead": is_overhead,
+                "is_klein_azimuth": is_klein,
+            })
+            await asyncio.sleep(random.uniform(2.0, 6.0))
+
+
+# ── KiwiSDR ──────────────────────────────────────────────────────────
+
+class KiwiSDRAdapter(BaseAdapter):
+    DOMAIN = "sdr"
+
+    async def _run(self):
+        await self._simulated()
+
+    async def _simulated(self):
+        while self._running:
+            freq = random.uniform(0.5, 30.0)  # MHz
+            snr = random.uniform(-5, 25)
+            mode = random.choice(["AM", "SSB", "CW", "NFM"])
+            evt_type = "spectrum" if snr < 15 else "anomaly"
+            await self._emit(evt_type, "sim-kiwisdr", 0.6, {
+                "freq_mhz": round(freq, 3),
+                "snr_db": round(snr, 1),
+                "mode": mode,
+                "bandwidth_khz": random.choice([6, 9, 12, 25]),
+            })
+            await asyncio.sleep(random.uniform(2.0, 6.0))
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# V. CORRELATION ENGINE
+# ═══════════════════════════════════════════════════════════════════════
+
+AlertCallback = Callable[[CorrelationAlert], Coroutine[Any, Any, None]]
+
+
+class SlidingWindow:
+    def __init__(self, max_age: float = 60.0):
+        self.max_age = max_age
+        self.events: deque[KappaEvent] = deque(maxlen=5000)
+
+    def add(self, event: KappaEvent):
+        self.events.append(event)
+        self._prune()
+
+    def _prune(self):
+        cutoff = time.time() - self.max_age
+        while self.events and self.events[0].timestamp < cutoff:
+            self.events.popleft()
+
+    def find(self, **kwargs) -> list[KappaEvent]:
+        self._prune()
+        results = []
+        for evt in self.events:
+            ok = True
+            for k, v in kwargs.items():
+                if k == "event_type":
+                    if evt.event_type != v:
+                        ok = False
+                        break
+                elif evt.metadata.get(k) != v:
+                    ok = False
+                    break
+            if ok:
+                results.append(evt)
+        return results
+
+    def recent(self, seconds: float = 10.0) -> list[KappaEvent]:
+        cutoff = time.time() - seconds
+        return [e for e in self.events if e.timestamp >= cutoff]
+
+    def __len__(self):
+        return len(self.events)
+
+
+class Correlator:
+    def __init__(self, bus: Bus):
+        self.bus = bus
+        self._running = False
+        self._callbacks: list[AlertCallback] = []
+        self.windows = {
+            "wifi": SlidingWindow(60.0),
+            "ble": SlidingWindow(60.0),
+            "lte": SlidingWindow(120.0),
+            "satellite": SlidingWindow(300.0),
+            "sdr": SlidingWindow(60.0),
+        }
+        self._devices: dict[str, DeviceFingerprint] = {}
+        self._cooldowns: dict[str, float] = {}
+        self._kappa_score = 0.0
+        self._score_decay = 0.95
+        self._stats = {
+            "events_processed": 0,
+            "mac_correlations": 0,
+            "congusto_alerts": 0,
+            "stingray_alerts": 0,
+            "handoff_alerts": 0,
+            "satellite_alerts": 0,
+            "total_alerts": 0,
+        }
+
+    async def start(self):
+        self._running = True
+        self.bus.subscribe("kappa/#", self._ingest)
+        asyncio.create_task(self._periodic())
+        asyncio.create_task(self._decay())
+
+    async def stop(self):
+        self._running = False
+
+    def on_alert(self, cb: AlertCallback):
+        self._callbacks.append(cb)
+
+    @property
+    def kappa_score(self):
+        return round(self._kappa_score, 1)
+
+    @property
+    def stats(self):
+        return {
+            **self._stats,
+            "kappa_score": self.kappa_score,
+            "devices_tracked": len(self._devices),
+            "suspicious_devices": sum(1 for d in self._devices.values() if d.is_suspicious),
+            "window_sizes": {k: len(v) for k, v in self.windows.items()},
+        }
+
+    # ── Ingestion ────────────────────────────────────────────────────
+
+    async def _ingest(self, topic: str, event: KappaEvent):
+        self._stats["events_processed"] += 1
+        domain = event.domain
+        if domain in self.windows:
+            self.windows[domain].add(event)
+        mac = (event.metadata.get("mac") or "").upper()
+        if mac:
+            self._track(mac, event)
+        await self._rule_mac(event)
+        await self._rule_congusto(event)
+        await self._rule_stingray(event)
+        await self._rule_satcell(event)
+
+    def _track(self, mac: str, evt: KappaEvent):
+        if mac not in self._devices:
+            self._devices[mac] = DeviceFingerprint(mac=mac)
+        d = self._devices[mac]
+        d.last_seen = evt.timestamp
+        d.domains_seen.add(evt.domain)
+        d.events.append(evt.event_id)
+        if evt.metadata.get("imsi"):
+            d.imsi = evt.metadata["imsi"]
+        if evt.metadata.get("tower_id"):
+            d.tower_ids.append(evt.metadata["tower_id"])
+
+    # ── Rules ────────────────────────────────────────────────────────
+
+    async def _rule_mac(self, event: KappaEvent):
+        """BLE MAC ↔ WiFi MAC within 10s."""
+        mac = (event.metadata.get("mac") or "").upper()
+        if not mac:
+            return
+        other = "wifi" if event.domain == "ble" else ("ble" if event.domain == "wifi" else None)
+        if not other:
+            return
+        matches = self.windows[other].find(mac=mac)
+        for m in matches:
+            dt = abs(event.timestamp - m.timestamp)
+            if dt <= MAC_WINDOW_SEC:
+                self._stats["mac_correlations"] += 1
+                await self._alert(CorrelationAlert(
+                    alert_type="mac_correlation", severity=3,
+                    events=[event, m],
+                    description=f"BLE↔WiFi MAC {mac} correlated ({dt:.1f}s)",
+                    kappa_score=30.0,
+                ))
+                # Check triple
+                lte = self.windows["lte"].recent(IMSI_WINDOW_SEC)
+                paging = [e for e in lte if e.event_type == "paging"]
+                if paging:
+                    sat = [e for e in self.windows["satellite"].recent(60.0)
+                           if e.metadata.get("elevation_deg", 0) >= SAT_ELEV_MIN]
+                    sev = 4 if sat else 3
+                    self._stats["handoff_alerts"] += 1
+                    await self._alert(CorrelationAlert(
+                        alert_type="surveillance_handoff", severity=sev,
+                        events=[event, m, paging[-1]] + (sat[-1:] if sat else []),
+                        description=f"HANDOFF: BLE→WiFi→LTE{'+SAT' if sat else ''} MAC {mac}",
+                        kappa_score=70.0 if sat else 50.0,
+                    ))
+                return
+
+    async def _rule_congusto(self, event: KappaEvent):
+        """46.875 Hz + satellite + BLE → Congusto Protocol."""
+        if event.domain != "wifi" or event.event_type != "congusto_clock":
+            return
+        sat = [e for e in self.windows["satellite"].recent(60.0)
+               if e.metadata.get("elevation_deg", 0) >= SAT_ELEV_MIN]
+        ble = self.windows["ble"].recent(30.0)
+        if sat and ble:
+            self._stats["congusto_alerts"] += 1
+            await self._alert(CorrelationAlert(
+                alert_type="congusto", severity=5,
+                events=[event, sat[-1], ble[-1]],
+                description=(
+                    f"⚡ CONGUSTO: 46.875 Hz (SNR {event.metadata.get('snr','?')}) "
+                    f"+ {sat[-1].source} overhead + {len(ble)} BLE"
+                ),
+                kappa_score=90.0,
+            ))
+        elif sat:
+            await self._alert(CorrelationAlert(
+                alert_type="congusto_partial", severity=3,
+                events=[event, sat[-1]],
+                description=f"46.875 Hz + {sat[-1].source} (no BLE)",
+                kappa_score=40.0,
+            ))
+
+    async def _rule_stingray(self, event: KappaEvent):
+        """BLE recon → WiFi deauth → LTE paging within 30s."""
+        if event.domain != "lte" or event.event_type != "paging":
+            return
+        deauths = self.windows["wifi"].find(event_type="deauth")
+        for da in deauths:
+            dt = event.timestamp - da.timestamp
+            if 0 < dt <= IMSI_WINDOW_SEC:
+                mac = (da.metadata.get("mac") or "").upper()
+                if mac:
+                    ble_b = [e for e in self.windows["ble"].events
+                             if (e.metadata.get("mac") or "").upper() == mac
+                             and e.timestamp < da.timestamp
+                             and da.timestamp - e.timestamp <= MAC_WINDOW_SEC]
+                    if ble_b:
+                        self._stats["stingray_alerts"] += 1
+                        await self._alert(CorrelationAlert(
+                            alert_type="stingray", severity=5,
+                            events=[ble_b[-1], da, event],
+                            description=f"🔴 STINGRAY: BLE→deauth→paging ({dt:.1f}s) MAC {mac}",
+                            kappa_score=85.0,
+                        ))
+                        return
+
+    async def _rule_satcell(self, event: KappaEvent):
+        """Satellite at Klein twist + LTE activity surge."""
+        if event.domain != "satellite":
+            return
+        if not event.metadata.get("is_klein_azimuth"):
+            return
+        lte = self.windows["lte"].recent(30.0)
+        if len(lte) >= 3:
+            self._stats["satellite_alerts"] += 1
+            await self._alert(CorrelationAlert(
+                alert_type="satellite_cellular", severity=4,
+                events=[event] + list(lte[-3:]),
+                description=(
+                    f"🛰️ {event.source} at Klein {event.metadata.get('azimuth_deg','?')}° "
+                    f"+ {len(lte)} LTE events"
+                ),
+                kappa_score=60.0,
+            ))
+
+    # ── Alert dispatch ───────────────────────────────────────────────
+
+    async def _alert(self, alert: CorrelationAlert):
+        now = time.time()
+        last = self._cooldowns.get(alert.alert_type, 0.0)
+        if now - last < ALERT_COOLDOWN:
+            return
+        self._cooldowns[alert.alert_type] = now
+        self._stats["total_alerts"] += 1
+        self._kappa_score = min(100.0, self._kappa_score + alert.kappa_score * 0.3)
+        alert.kappa_score = self._kappa_score
+        for cb in self._callbacks:
+            try:
+                await cb(alert)
+            except Exception as e:
+                log.error(f"Alert callback error: {e}")
+        # Publish on bus
+        evt = KappaEvent(
+            domain="alert", source="correlator",
+            event_type=alert.alert_type, confidence=1.0,
+            metadata={"severity": alert.severity, "description": alert.description,
+                      "kappa_score": round(alert.kappa_score, 1)},
+        )
+        await self.bus.publish(f"kappa/alert/{alert.alert_type}", evt)
+
+    async def _periodic(self):
+        while self._running:
+            await asyncio.sleep(5.0)
+            for mac, dev in list(self._devices.items()):
+                if dev.is_suspicious and dev.cross_domain_count >= 3:
+                    await self._alert(CorrelationAlert(
+                        alert_type="multi_domain_device", severity=3,
+                        description=f"Device {mac}: {dev.cross_domain_count} domains "
+                                    f"({', '.join(dev.domains_seen)})",
+                        kappa_score=40.0,
+                    ))
+
+    async def _decay(self):
+        while self._running:
+            await asyncio.sleep(5.0)
+            self._kappa_score *= self._score_decay
+            if self._kappa_score < 0.1:
+                self._kappa_score = 0.0
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# VI. CLI DASHBOARD
+# ═══════════════════════════════════════════════════════════════════════
+
+BOLD = "\033[1m"; DIM = "\033[2m"; RESET = "\033[0m"
+RED = "\033[91m"; GREEN = "\033[92m"; YELLOW = "\033[93m"
+BLUE = "\033[94m"; MAGENTA = "\033[95m"; CYAN = "\033[96m"
+WHITE = "\033[97m"; BG_RED = "\033[41m"
+CLR = "\033[2J\033[H"
+
+SEV_C = {1: DIM, 2: GREEN, 3: YELLOW, 4: RED, 5: BG_RED + WHITE + BOLD}
+SEV_L = {1: "LOW", 2: "MED", 3: "HIGH", 4: "CRIT", 5: "EMER"}
+
+
+def _bar(v, mx=100.0, w=20):
+    f = int(w * min(v / mx, 1.0))
+    return f"[{'█' * f}{'░' * (w - f)}]"
+
+
+class Dashboard:
+    def __init__(self, correlator: Correlator, json_mode: bool = False):
+        self.correlator = correlator
+        self.json_mode = json_mode
+        self._running = False
+        self._alerts: list[CorrelationAlert] = []
+        self._start = time.time()
+
+    async def start(self):
+        self._running = True
+        self.correlator.on_alert(self._on_alert)
+        if not self.json_mode:
+            asyncio.create_task(self._render_loop())
+
+    async def stop(self):
+        self._running = False
+
+    async def _on_alert(self, alert: CorrelationAlert):
+        self._alerts.append(alert)
+        if len(self._alerts) > 25:
+            self._alerts = self._alerts[-25:]
+        if self.json_mode:
+            print(alert.to_json(), flush=True)
+
+    async def _render_loop(self):
+        while self._running:
+            self._render()
+            await asyncio.sleep(2.0)
+
+    def _render(self):
+        s = self.correlator.stats
+        up = time.time() - self._start
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        ks = s["kappa_score"]
+        kc = GREEN if ks < 30 else (YELLOW if ks < 60 else RED)
+
+        o = [CLR]
+        o.append(f"{BOLD}{CYAN}╔══════════════════════════════════════════════════════════════════╗{RESET}")
+        o.append(f"{BOLD}{CYAN}║  🌀 KAPPA — Multi-Domain RF Intelligence & Correlation Engine  ║{RESET}")
+        o.append(f"{BOLD}{CYAN}╚══════════════════════════════════════════════════════════════════╝{RESET}")
+        o.append("")
+        o.append(f"  {BOLD}κ Score:{RESET} {kc}{ks:5.1f}{RESET} {_bar(ks)}   "
+                 f"{DIM}Uptime: {int(up//60):02d}:{int(up%60):02d}  {now}{RESET}")
+        o.append(f"  {DIM}κ={KAPPA:.4f}  Klein={KLEIN_TWIST_DEG}°  "
+                 f"{GUACIMA_LAT}°N,{abs(GUACIMA_LON)}°W{RESET}")
+        o.append("")
+
+        # Domain windows
+        o.append(f"  {BOLD}Domain Windows{RESET}")
+        o.append(f"  {'─' * 50}")
+        icons = {"wifi": "📶", "ble": "🦷", "lte": "📱", "satellite": "🛰️", "sdr": "📻"}
+        for d, cnt in s.get("window_sizes", {}).items():
+            ic = icons.get(d, "•")
+            c = GREEN if cnt > 0 else DIM
+            o.append(f"    {ic} {c}{d:10s}{RESET} {_bar(cnt, 100, 12)} {cnt:4d}")
+        o.append("")
+
+        # Stats
+        o.append(f"  {BOLD}Correlation Stats{RESET}")
+        o.append(f"  {'─' * 50}")
+        o.append(f"    Events: {BOLD}{s['events_processed']:>6d}{RESET}  "
+                 f"Devices: {BOLD}{s['devices_tracked']:>4d}{RESET}  "
+                 f"Suspicious: {RED}{s['suspicious_devices']:>3d}{RESET}")
+        o.append(f"    MAC: {YELLOW}{s['mac_correlations']:>3d}{RESET}  "
+                 f"Congusto: {MAGENTA}{s['congusto_alerts']:>3d}{RESET}  "
+                 f"Stingray: {RED}{s['stingray_alerts']:>3d}{RESET}  "
+                 f"Sat: {CYAN}{s['satellite_alerts']:>3d}{RESET}  "
+                 f"Total: {BOLD}{s['total_alerts']:>4d}{RESET}")
+        o.append("")
+
+        # Alerts
+        o.append(f"  {BOLD}Recent Alerts{RESET}")
+        o.append(f"  {'─' * 50}")
+        if not self._alerts:
+            o.append(f"    {DIM}Monitoring...{RESET}")
+        for a in reversed(self._alerts[-8:]):
+            ts = datetime.fromtimestamp(a.timestamp).strftime("%H:%M:%S")
+            sc = SEV_C.get(a.severity, "")
+            sl = SEV_L.get(a.severity, "?")
+            o.append(f"    {DIM}{ts}{RESET} {sc}{sl}{RESET} {a.description[:60]}")
+        o.append("")
+        o.append(f"  {DIM}Ctrl+C to stop  |  κ=4/π  |  46.875 Hz=48000/1024{RESET}")
+
+        sys.stdout.write("\n".join(o) + "\n")
+        sys.stdout.flush()
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# VII. MAIN ORCHESTRATOR
+# ═══════════════════════════════════════════════════════════════════════
+
+async def alert_logger(alert: CorrelationAlert):
+    """Persist alerts to JSON lines file."""
+    path = ALERT_DIR / "alerts.jsonl"
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(alert.to_json() + "\n")
+
+
+async def run(args):
+    logging.basicConfig(
+        level=logging.DEBUG if args.verbose else logging.INFO,
+        format="%(asctime)s %(name)-20s %(levelname)-5s %(message)s",
+    )
+    fh = logging.FileHandler(LOG_DIR / "kappa.log", encoding="utf-8")
+    fh.setFormatter(logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s"))
+    logging.getLogger("kappa").addHandler(fh)
+
+    log.info("=" * 60)
+    log.info("KAPPA Multi-Domain RF Intelligence Platform v2.0")
+    log.info(f"Mode: {'LIVE' if args.live else 'SIMULATED'}")
+    log.info("=" * 60)
+
+    bus = Bus()
+    corr = Correlator(bus)
+    corr.on_alert(alert_logger)
+
+    sim = not args.live
+    adapters = {
+        "wifi": WiFiAdapter(bus, simulate=sim),
+        "ble": BLEAdapter(bus, simulate=sim),
+        "lte": LTEAdapter(bus, simulate=sim),
+        "satellite": SatelliteAdapter(bus, simulate=sim),
+        "sdr": KiwiSDRAdapter(bus, simulate=sim),
+    }
+
+    dash = Dashboard(corr, json_mode=args.json)
+
+    await corr.start()
+    for name, adapter in adapters.items():
+        log.info(f"Starting {name}")
+        await adapter.start()
+    await dash.start()
+
+    log.info("All systems online. Ctrl+C to stop.")
+
+    try:
+        while True:
+            await asyncio.sleep(1.0)
+    except (KeyboardInterrupt, asyncio.CancelledError):
+        pass
+
+    await dash.stop()
+    for a in adapters.values():
+        await a.stop()
+    await corr.stop()
+    await bus.close()
+
+    stats = corr.stats
+    log.info(f"Final: {json.dumps(stats)}")
+    if not args.json:
+        print(f"\n{'=' * 40}")
+        print(f"  KAPPA Session Complete")
+        print(f"  Events: {stats['events_processed']}")
+        print(f"  Alerts: {stats['total_alerts']}")
+        print(f"  κ Score: {stats['kappa_score']}")
+        print(f"{'=' * 40}")
+
+
+def main():
+    p = argparse.ArgumentParser(description="KAPPA Multi-Domain RF Intelligence")
+    p.add_argument("--live", action="store_true", help="Live capture mode")
+    p.add_argument("--json", action="store_true", help="JSON-only output (no dashboard)")
+    p.add_argument("-v", "--verbose", action="store_true", help="Debug logging")
+    args = p.parse_args()
+    try:
+        asyncio.run(run(args))
+    except KeyboardInterrupt:
+        print("\nKAPPA terminated.")
+
+
+if __name__ == "__main__":
+    main()

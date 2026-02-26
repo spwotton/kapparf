@@ -44,6 +44,13 @@ const satIcon = new L.DivIcon({
   className: "",
 });
 
+const overheadIcon = new L.DivIcon({
+  html: `<div style="background:#ef4444;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 0 8px rgba(239,68,68,0.7);animation:pulse 2s infinite;"><style>@keyframes pulse{0%,100%{box-shadow:0 0 8px rgba(239,68,68,0.7)}50%{box-shadow:0 0 16px rgba(239,68,68,1)}}</style></div>`,
+  iconSize: [14, 14],
+  iconAnchor: [7, 7],
+  className: "",
+});
+
 const nodeIcon = new L.DivIcon({
   html: `<div style="background:#22c55e;width:12px;height:12px;border-radius:2px;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);"></div>`,
   iconSize: [12, 12],
@@ -95,6 +102,7 @@ export default function MapPage() {
 
   const visibleSats = satellites?.filter(s => s.latitude != null && s.longitude != null) ?? [];
   const activeSats = visibleSats.filter(s => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION);
+  const overheadSats = visibleSats.filter(s => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION);
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-4">
@@ -134,7 +142,7 @@ export default function MapPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-5 gap-3">
         <Card>
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold" data-testid="text-map-flights">{flights?.length ?? 0}</div>
@@ -151,6 +159,12 @@ export default function MapPage() {
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold text-green-600" data-testid="text-map-visible">{activeSats.length}</div>
             <div className="text-xs text-muted-foreground">{t("map.visibleSats")}</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-2xl font-mono font-semibold text-red-600" data-testid="text-map-overhead">{overheadSats.length}</div>
+            <div className="text-xs text-muted-foreground">{t("map.overhead")}</div>
           </CardContent>
         </Card>
         <Card>
@@ -226,25 +240,29 @@ export default function MapPage() {
               pathOptions={{ color: "#94a3b8", weight: 1, dashArray: "6 4", opacity: 0.6 }}
             />
 
-            {showSatellites && visibleSats.map((sat) => (
-              <Marker
-                key={sat.id}
-                position={[sat.latitude!, sat.longitude!]}
-                icon={satIcon}
-              >
-                <Popup>
-                  <div className="text-xs">
-                    <strong>{sat.satelliteName}</strong>
-                    <br />
-                    NORAD: {sat.noradId} | {sat.category}
-                    <br />
-                    El: {sat.elevation?.toFixed(1)} | Az: {sat.azimuth?.toFixed(1)}
-                    <br />
-                    Alt: {sat.altitude?.toFixed(0)} km | Range: {sat.range?.toFixed(0)} km
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+            {showSatellites && visibleSats.map((sat) => {
+              const isOverhead = sat.elevation != null && sat.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION;
+              return (
+                <Marker
+                  key={sat.id}
+                  position={[sat.latitude!, sat.longitude!]}
+                  icon={isOverhead ? overheadIcon : satIcon}
+                >
+                  <Popup>
+                    <div className="text-xs">
+                      <strong>{sat.satelliteName}</strong>
+                      {isOverhead && <span style={{color:"#ef4444",fontWeight:"bold",marginLeft:4}}>OVERHEAD</span>}
+                      <br />
+                      NORAD: {sat.noradId} | {sat.category}
+                      <br />
+                      El: {sat.elevation?.toFixed(1)} | Az: {sat.azimuth?.toFixed(1)}
+                      <br />
+                      Alt: {sat.altitude?.toFixed(0)} km | Range: {sat.range?.toFixed(0)} km
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
 
             {showFlights && flights?.map((f) => {
               if (!f.latitude || !f.longitude) return null;

@@ -10,6 +10,7 @@ import {
   type SatellitePass,
   TLE_CATALOG_GROUPS,
   TLE_CATEGORIES,
+  KAPPA_CONSTANTS,
   type TleCatalogGroup,
 } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
@@ -88,7 +89,8 @@ export default function SatellitesPage() {
     ? satellites
     : satellites?.filter((s) => s.category === categoryFilter);
 
-  const visibleCount = satellites?.filter((s) => s.elevation != null && s.elevation >= 30).length ?? 0;
+  const visibleCount = satellites?.filter((s) => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION).length ?? 0;
+  const overheadCount = satellites?.filter((s) => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION).length ?? 0;
 
   const groupedByCategory: Record<string, TleCatalogGroup[]> = {};
   for (const g of TLE_CATALOG_GROUPS) {
@@ -168,7 +170,7 @@ export default function SatellitesPage() {
         </Card>
       )}
 
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-4 gap-3">
         <Card>
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold" data-testid="text-sat-total">{satellites?.length ?? 0}</div>
@@ -179,6 +181,12 @@ export default function SatellitesPage() {
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold text-green-600" data-testid="text-sat-visible">{visibleCount}</div>
             <div className="text-xs text-muted-foreground">{t("satellites.visibleAbove")}</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-2xl font-mono font-semibold text-red-600" data-testid="text-sat-overhead">{overheadCount}</div>
+            <div className="text-xs text-muted-foreground">{t("satellites.overhead")}</div>
           </CardContent>
         </Card>
         <Card>
@@ -250,7 +258,11 @@ export default function SatellitesPage() {
                 {s.elevation != null ? (
                   <span>
                     {s.elevation.toFixed(1)}&deg;
-                    {s.elevation >= 30 && <Badge variant="default" className="ml-1.5 text-[10px]">{t("satellites.visible")}</Badge>}
+                    {s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION ? (
+                      <Badge variant="destructive" className="ml-1.5 text-[10px]" data-testid={`badge-overhead-${s.id}`}>{t("satellites.overhead")}</Badge>
+                    ) : s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION ? (
+                      <Badge variant="default" className="ml-1.5 text-[10px]">{t("satellites.visible")}</Badge>
+                    ) : null}
                   </span>
                 ) : (
                   <span className="text-muted-foreground">--</span>

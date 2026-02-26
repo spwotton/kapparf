@@ -94,7 +94,7 @@ export type InsertSatellitePass = z.infer<typeof insertSatellitePassSchema>;
 export type SdrNode = typeof sdrNodes.$inferSelect;
 export type InsertSdrNode = z.infer<typeof insertSdrNodeSchema>;
 
-export const DOMAINS = ["wifi", "ble", "lte", "5g", "satellite", "sdr", "elf", "radar", "plc", "isp"] as const;
+export const DOMAINS = ["wifi", "ble", "lte", "5g", "satellite", "sdr", "elf", "radar", "plc", "isp", "drone"] as const;
 
 export interface TleCatalogGroup {
   id: string;
@@ -200,6 +200,7 @@ export const KAPPA_CONSTANTS = {
   OBSERVER_LON: -84.290668,
   OBSERVER_ALT: 0.9,
   MIN_ELEVATION: 30,
+  OVERHEAD_ELEVATION: 75,
   MAC_CORRELATION_WINDOW_S: 10,
   SURVEILLANCE_HANDOFF_WINDOW_S: 30,
   JACO_LAT: 9.6142,
@@ -286,6 +287,19 @@ export const TOOL_CATALOG: ToolEntry[] = [
   { name: "tr069-honeypot", repo: "https://github.com/aatlasis/tr069-honeypot", description: "TR-069 ACS honeypot for detecting ISP management abuse", domain: "isp" },
   { name: "SNMPwn", repo: "https://github.com/hatlord/snmpwn", description: "SNMP credential brute-force and ISP device enumeration", domain: "isp" },
   { name: "Shodan", repo: "https://github.com/achillean/shodan-python", description: "Internet-connected device search — ISP infrastructure mapping", domain: "isp" },
+  { name: "RF-Drone-Detection", repo: "https://github.com/tesorrells/RF-Drone-Detection", description: "RF-based drone detection using SDR and machine learning classifiers", domain: "drone" },
+  { name: "ssm-drone", repo: "https://github.com/adaspera/ssm-drone", description: "State-space model for drone RF signature detection and tracking", domain: "drone" },
+  { name: "Drone-detection-dataset", repo: "https://github.com/DroneDetectionThesis/Drone-detection-dataset", description: "Labeled drone RF signal dataset for training detection models", domain: "drone" },
+  { name: "VisDrone-Dataset", repo: "https://github.com/VisDrone/VisDrone-Dataset", description: "Large-scale visual drone detection benchmark — object detection and tracking", domain: "drone" },
+  { name: "PhastFT", repo: "https://github.com/QuState/PhastFT", description: "High-performance FFT library — quantum-state-inspired fast Fourier transform", domain: "sdr" },
+  { name: "quantum-inspired-dsp", repo: "https://github.com/fgonzalezdelamaza/quantum-inspired-dsp", description: "Quantum-inspired digital signal processing algorithms for RF analysis", domain: "sdr" },
+  { name: "Quantum-Sparse-Coding", repo: "https://github.com/Adi03codes/Quantum-Inspired-Sparse-Speech-Coding-for-Ultra-Low-Power-Assistive-Hearing-Devices", description: "Quantum-inspired sparse coding for ultra-low-power signal processing", domain: "sdr" },
+  { name: "Morserino-32", repo: "https://github.com/oe1wkl/Morserino-32", description: "ESP32-based Morse code trainer/decoder — Marconi-principle RF keying", domain: "sdr" },
+  { name: "MorseCodeWithRF", repo: "https://github.com/Buuhis/MorseCodeWithRF", description: "Morse code communication via RF modules — covert low-rate data channel", domain: "sdr" },
+  { name: "saatja-rpi", repo: "https://github.com/estintax/saatja-rpi", description: "Raspberry Pi RF transmitter — programmable Morse/CW beacon", domain: "sdr" },
+  { name: "urh", repo: "https://github.com/jopohl/urh", description: "Universal Radio Hacker — investigate unknown wireless protocols via SDR", domain: "sdr" },
+  { name: "system-bus-radio", repo: "https://github.com/fulldecent/system-bus-radio", description: "Transmit radio from system bus EM emissions — countermeasure/TEMPEST tool", domain: "sdr" },
+  { name: "qspectrumanalyzer", repo: "https://github.com/xmikos/qspectrumanalyzer", description: "Qt-based spectrum analyzer for RTL-SDR and hackrf_sweep", domain: "sdr" },
 ];
 
 export interface CorrelationRule {
@@ -441,5 +455,29 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     domains: ["ble", "satellite", "radar"],
     windowSeconds: 300,
     condition: "ble.density_jaco > threshold AND satellite.pass(jaco) AND radar.aircraft(jaco_coast) WITHIN 300s",
+  },
+  {
+    id: "drone-rf-detection",
+    name: "Drone RF Signature Detection",
+    description: "RF energy spike in 2.4/5.8 GHz drone control bands with modulation pattern matching DJI/FPV protocols — SDR + BLE correlation for proximity tracking.",
+    domains: ["drone", "sdr", "ble"],
+    windowSeconds: 30,
+    condition: "sdr.freq IN [2400-2483, 5725-5875] AND sdr.modulation_match(drone_profile) AND ble.scan_density_spike WITHIN 30s",
+  },
+  {
+    id: "drone-satellite-overhead",
+    name: "Drone ↔ Satellite Overhead Correlation",
+    description: "Drone RF signature detected while reconnaissance satellite is overhead (>75° elevation) — possible coordinated ISR operation or relay pattern.",
+    domains: ["drone", "satellite", "sdr"],
+    windowSeconds: 120,
+    condition: "drone.rf_detected AND satellite.elevation > 75° WITHIN 120s",
+  },
+  {
+    id: "drone-airport-intrusion",
+    name: "Drone ↔ SJO Airspace Intrusion",
+    description: "Drone RF control signal detected within SJO/MROC TMA while ADS-B shows commercial traffic — potential UAS airspace violation near Juan Santamaria.",
+    domains: ["drone", "radar", "sdr"],
+    windowSeconds: 60,
+    condition: "drone.rf_detected AND radar.aircraft(distance_sjo < 15km) WITHIN 60s",
   },
 ];
