@@ -188,6 +188,7 @@ export type Domain = typeof DOMAINS[number];
 
 export const KAPPA_CONSTANTS = {
   KAPPA: 4 / Math.PI,
+  KAPPA2: Math.pow((1 + Math.sqrt(5)) / 2, 0.75),
   THETA_K: 180 - (Math.atan(4 / Math.PI) * 180 / Math.PI),
   PHI: (1 + Math.sqrt(5)) / 2,
   KAPPA_SECOND: 46.875,
@@ -203,12 +204,78 @@ export const KAPPA_CONSTANTS = {
   OVERHEAD_ELEVATION: 75,
   MAC_CORRELATION_WINDOW_S: 10,
   SURVEILLANCE_HANDOFF_WINDOW_S: 30,
+  KLEIN_TWIST_DEG: 128.23,
+  GIZA_CUTOFF_DEG: 51.77,
+  KLEIN_TOLERANCE_DEG: 2.0,
+  CLOCK_HZ: 48000 / 1024,
+  SCORE_DECAY: 0.95,
+  SCORE_DECAY_INTERVAL_S: 5,
+  ALERT_COOLDOWN_S: 60,
+  EVENING_WINDOW_1_START: 18,
+  EVENING_WINDOW_1_END: 20,
+  EVENING_WINDOW_2_START: 20,
+  EVENING_WINDOW_2_END: 22,
+  CR_UTC_OFFSET: -6,
+  PHI_HARMONIC_1: 46.875 * ((1 + Math.sqrt(5)) / 2),
+  PHI_HARMONIC_2: 46.875 * Math.pow((1 + Math.sqrt(5)) / 2, 2),
+  STINGRAY_CHAIN_WINDOW_S: 30,
+  CONGUSTO_FREQ_HZ: 46.875,
   JACO_LAT: 9.6142,
   JACO_LON: -84.6278,
   SJO_LAT: 9.9939,
   SJO_LON: -84.2088,
   SJO_ICAO: "MROC",
 };
+
+export type ThreatLevel = "NOMINAL" | "ELEVATED" | "HIGH" | "CRITICAL" | "EMERGENCY";
+
+export const THREAT_LEVELS: { level: ThreatLevel; minScore: number; color: string; description: string }[] = [
+  { level: "NOMINAL", minScore: 0, color: "#22c55e", description: "Baseline — no anomalous patterns detected" },
+  { level: "ELEVATED", minScore: 30, color: "#eab308", description: "Minor cross-domain coincidence detected" },
+  { level: "HIGH", minScore: 60, color: "#f97316", description: "Active multi-domain correlation — possible surveillance" },
+  { level: "CRITICAL", minScore: 80, color: "#ef4444", description: "Confirmed pattern match — active SIGINT operation probable" },
+  { level: "EMERGENCY", minScore: 95, color: "#dc2626", description: "Full spectrum engagement — all domains correlated" },
+];
+
+export interface DeviceFingerprint {
+  mac: string;
+  domainsSeen: string[];
+  eventCount: number;
+  firstSeen: number;
+  lastSeen: number;
+  suspicious: boolean;
+  crossDomainCount: number;
+  lastEventType: string;
+  lastDomain: string;
+}
+
+export interface EveningWindow {
+  active: boolean;
+  window: string | null;
+  localTime: string;
+  hoursRemaining: number | null;
+}
+
+export interface KappaStatus {
+  score: number;
+  threatLevel: ThreatLevel;
+  eventsProcessed: number;
+  devicesTracked: number;
+  suspiciousDevices: number;
+  domainWindows: Record<string, number>;
+  correlationCounts: Record<string, number>;
+  eveningWindow: EveningWindow;
+  uptime: number;
+  satOverhead: number;
+  satKlein: number;
+  kleinPasses: number;
+  congustoPartial: number;
+  congustoFull: number;
+  stingrayAlerts: number;
+  phiHarmonics: number;
+  domainPairMatrix: Record<string, number>;
+  recentAlerts: { type: string; timestamp: number; score: number; description: string }[];
+}
 
 export interface AnalysisPoint {
   id: string;
@@ -300,6 +367,18 @@ export const TOOL_CATALOG: ToolEntry[] = [
   { name: "urh", repo: "https://github.com/jopohl/urh", description: "Universal Radio Hacker — investigate unknown wireless protocols via SDR", domain: "sdr" },
   { name: "system-bus-radio", repo: "https://github.com/fulldecent/system-bus-radio", description: "Transmit radio from system bus EM emissions — countermeasure/TEMPEST tool", domain: "sdr" },
   { name: "qspectrumanalyzer", repo: "https://github.com/xmikos/qspectrumanalyzer", description: "Qt-based spectrum analyzer for RTL-SDR and hackrf_sweep", domain: "sdr" },
+  { name: "theHarvester", repo: "https://github.com/laramies/theHarvester", description: "OSINT email, subdomain, and domain harvester for reconnaissance", domain: "wifi" },
+  { name: "Recon-ng", repo: "https://github.com/lanmaster53/recon-ng", description: "Full-featured OSINT reconnaissance framework with modular design", domain: "wifi" },
+  { name: "Kismet", repo: "https://github.com/kismetwireless/kismet", description: "Wireless network detector, sniffer, IDS — hidden SSID detection", domain: "wifi" },
+  { name: "Aircrack-ng", repo: "https://github.com/aircrack-ng/aircrack-ng", description: "WiFi security auditing suite — WEP/WPA cracking, deauth detection", domain: "wifi" },
+  { name: "Wireshark", repo: "https://github.com/wireshark/wireshark", description: "Network protocol analyzer — deep packet inspection for all domains", domain: "wifi" },
+  { name: "Bettercap", repo: "https://github.com/bettercap/bettercap", description: "Network attack/monitoring — ARP spoofing, DNS spoofing, WiFi recon", domain: "wifi" },
+  { name: "Wifite2", repo: "https://github.com/derv82/wifite2", description: "Automated WiFi audit tool — hidden network and WPS attack tool", domain: "wifi" },
+  { name: "nmap", repo: "https://github.com/nmap/nmap", description: "Network scanner and security auditor — port/service/OS detection", domain: "wifi" },
+  { name: "Maltego", repo: "https://github.com/paterva/maltego-trx", description: "OSINT and forensics link analysis — entity relationship graphing", domain: "wifi" },
+  { name: "SpiderFoot", repo: "https://github.com/smicallef/spiderfoot", description: "Automated OSINT collection — 200+ data sources for threat intelligence", domain: "wifi" },
+  { name: "Sherlock", repo: "https://github.com/sherlock-project/sherlock", description: "Hunt usernames across 400+ social networks for OSINT profiling", domain: "wifi" },
+  { name: "FOCA", repo: "https://github.com/ElevenPaths/FOCA", description: "Metadata extraction and network infrastructure analysis tool", domain: "wifi" },
 ];
 
 export interface CorrelationRule {
@@ -479,5 +558,53 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     domains: ["drone", "radar", "sdr"],
     windowSeconds: 60,
     condition: "drone.rf_detected AND radar.aircraft(distance_sjo < 15km) WITHIN 60s",
+  },
+  {
+    id: "hidden-ssid-probe",
+    name: "Hidden SSID Probe Correlation",
+    description: "Hidden SSID AP detected + probe request burst from unknown MAC — possible surveillance access point or covert camera system.",
+    domains: ["wifi", "ble"],
+    windowSeconds: 15,
+    condition: "wifi.ssid == '' AND wifi.probe_burst > 3 AND ble.scan_response WITHIN 15s",
+  },
+  {
+    id: "camera-oui-detection",
+    name: "Surveillance Camera OUI Detection",
+    description: "Network device with camera vendor MAC OUI detected (Hikvision 28:57:BE/C0:56:E3, Dahua 3C:EF:8C, Reolink, TP-Link EC:71:DB) — possible covert surveillance camera on local network.",
+    domains: ["wifi"],
+    windowSeconds: 60,
+    condition: "wifi.mac_oui IN [hikvision, dahua, reolink, tp-link-cam] WITHIN 60s",
+  },
+  {
+    id: "kyndryl-corp-signature",
+    name: "Corporate Management Traffic Pattern",
+    description: "Corporate network management traffic matching Kyndryl/IBM signature — TR-069/SNMP/CWMP patterns from enterprise management infrastructure in residential network.",
+    domains: ["wifi", "isp"],
+    windowSeconds: 30,
+    condition: "wifi.dns_query CONTAINS 'kyndryl|ibm|softlayer' OR isp.cwmp_session WITHIN 30s",
+  },
+  {
+    id: "modbus-46875-injection",
+    name: "Modbus + 46.875 Hz PLC Injection",
+    description: "Modbus TCP (port 502) traffic detected + 46.875 Hz harmonic in power line — possible PLC injection vector via SETECOM/DSE infrastructure.",
+    domains: ["plc", "elf"],
+    windowSeconds: 60,
+    condition: "plc.modbus_tcp(port=502) AND elf.harmonic(46.875Hz) WITHIN 60s",
+  },
+  {
+    id: "csi-multipath-anomaly",
+    name: "WiFi CSI Multipath Anomaly",
+    description: "WiFi Channel State Information multipath profile change indicating structural or through-wall sensing — possible ambient intelligence / passive imaging.",
+    domains: ["wifi", "sdr"],
+    windowSeconds: 10,
+    condition: "wifi.csi_profile_delta > threshold AND sdr.rf_anomaly WITHIN 10s",
+  },
+  {
+    id: "rtsp-onvif-exfil",
+    name: "RTSP/ONVIF Camera Exfiltration",
+    description: "RTSP (port 554) or ONVIF (port 8080) video stream detected + outbound data spike — camera system actively streaming to external endpoint.",
+    domains: ["wifi", "isp"],
+    windowSeconds: 30,
+    condition: "wifi.port IN [554, 8080] AND isp.outbound_spike WITHIN 30s",
   },
 ];

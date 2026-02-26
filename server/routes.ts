@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { kappaEngine } from "./kappa-engine";
 import {
   insertSignalEventSchema,
   insertSdrNodeSchema,
@@ -45,6 +46,7 @@ export async function registerRoutes(
       return res.status(400).json({ error: parsed.error.message });
     }
     const event = await storage.createSignalEvent(parsed.data);
+    kappaEngine.ingest(event);
     res.json(event);
   });
 
@@ -119,6 +121,14 @@ export async function registerRoutes(
     }
 
     res.json({ correlationsFound: newCorrelations.length, correlations: newCorrelations });
+  });
+
+  app.get("/api/kappa/status", (_req, res) => {
+    res.json(kappaEngine.getStatus());
+  });
+
+  app.get("/api/devices", (_req, res) => {
+    res.json(kappaEngine.getDevices());
   });
 
   app.get("/api/satellites", async (_req, res) => {
@@ -224,6 +234,13 @@ export async function registerRoutes(
           results[group.id] = 0;
         }
       }
+
+      const allSats = await storage.getSatellites();
+      const overheadCount = allSats.filter(s => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION).length;
+      const kleinCount = allSats.filter(s =>
+        s.azimuth != null && Math.abs(s.azimuth - KAPPA_CONSTANTS.KLEIN_TWIST_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG
+      ).length;
+      kappaEngine.updateSatelliteState(overheadCount, kleinCount);
 
       res.json({ refreshed: totalCount, groups: results });
     } catch (err) {
@@ -351,6 +368,109 @@ export async function registerRoutes(
     } catch (err) {
       console.error("Flight data error:", err);
       res.status(500).json({ error: "Failed to fetch flight data" });
+    }
+  });
+
+  app.post("/api/osint/lookup", async (req, res) => {
+    const { target } = req.body;
+    if (!target || typeof target !== "string") {
+      return res.status(400).json({ error: "Target hostname or IP required" });
+    }
+
+    try {
+      const dns = await import("dns");
+      const { promisify } = await import("util");
+      const resolve4 = promisify(dns.resolve4);
+      const resolve6 = promisify(dns.resolve6);
+      const resolveMx = promisify(dns.resolveMx);
+      const resolveTxt = promisify(dns.resolveTxt);
+      const resolveNs = promisify(dns.resolveNs);
+      const reverse = promisify(dns.reverse);
+
+      const results: Record<string, unknown> = { target, timestamp: new Date().toISOString() };
+
+      const isIp = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(target);
+
+      if (isIp) {
+        results.type = "ip";
+        results.ip = target;
+        try { results.reverse = await reverse(target); } catch { results.reverse = []; }
+      } else {
+        results.type = "hostname";
+        results.hostname = target;
+        try { results.ipv4 = await resolve4(target); } catch { results.ipv4 = []; }
+        try { results.ipv6 = await resolve6(target); } catch { results.ipv6 = []; }
+        try { results.mx = await resolveMx(target); } catch { results.mx = []; }
+        try { results.ns = await resolveNs(target); } catch { results.ns = []; }
+        try {
+          const txt = await resolveTxt(target);
+          results.txt = txt.map(r => r.join(""));
+        } catch { results.txt = []; }
+      }
+
+      res.json(results);
+    } catch (err) {
+      console.error("OSINT lookup error:", err);
+      res.status(500).json({ error: "Lookup failed" });
+    }
+  });
+
+  const weatherCache: { data: unknown | null; fetchedAt: number } = { data: null, fetchedAt: 0 };
+
+  app.get("/api/weather/radar", async (_req, res) => {
+    const CACHE_TTL = 10 * 60 * 1000;
+    if (weatherCache.data && Date.now() - weatherCache.fetchedAt < CACHE_TTL) {
+      return res.json(weatherCache.data);
+    }
+
+    try {
+      const pointsUrl = `https://api.weather.gov/points/${KAPPA_CONSTANTS.OBSERVER_LAT},${KAPPA_CONSTANTS.OBSERVER_LON}`;
+      const pointsRes = await fetch(pointsUrl, {
+        headers: { "User-Agent": "KAPPA-SIGINT", "Accept": "application/geo+json" },
+      });
+
+      if (!pointsRes.ok) {
+        return res.json({
+          location: "Guácima Abajo, Alajuela",
+          coordinates: { lat: KAPPA_CONSTANTS.OBSERVER_LAT, lon: KAPPA_CONSTANTS.OBSERVER_LON },
+          note: "NWS API unavailable for this location — Costa Rica is outside US NWS coverage",
+          radarStations: [
+            { id: "MLAT", name: "Costa Rica Met Radar", lat: 10.0, lon: -84.2, type: "weather" },
+          ],
+        });
+      }
+
+      const pointsData = await pointsRes.json();
+      const forecastUrl = pointsData.properties?.forecast;
+
+      let forecast = null;
+      if (forecastUrl) {
+        try {
+          const forecastRes = await fetch(forecastUrl, {
+            headers: { "User-Agent": "KAPPA-SIGINT", "Accept": "application/geo+json" },
+          });
+          if (forecastRes.ok) {
+            const forecastData = await forecastRes.json();
+            forecast = forecastData.properties?.periods?.[0] ?? null;
+          }
+        } catch { /* continue */ }
+      }
+
+      const result = {
+        location: "Guácima Abajo, Alajuela",
+        coordinates: { lat: KAPPA_CONSTANTS.OBSERVER_LAT, lon: KAPPA_CONSTANTS.OBSERVER_LON },
+        forecast,
+        radarStations: [
+          { id: "MLAT", name: "Costa Rica Met Radar", lat: 10.0, lon: -84.2, type: "weather" },
+        ],
+      };
+
+      weatherCache.data = result;
+      weatherCache.fetchedAt = Date.now();
+      res.json(result);
+    } catch (err) {
+      console.error("Weather data error:", err);
+      res.status(500).json({ error: "Failed to fetch weather data" });
     }
   });
 

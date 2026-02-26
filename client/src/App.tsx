@@ -16,6 +16,8 @@ import SatellitesPage from "@/pages/satellites";
 import NodesPage from "@/pages/nodes";
 import ToolsPage from "@/pages/tools";
 import MapPage from "@/pages/map";
+import DevicesPage from "@/pages/devices";
+import OsintPage from "@/pages/osint";
 
 function Router() {
   return (
@@ -23,10 +25,12 @@ function Router() {
       <Route path="/" component={DashboardPage} />
       <Route path="/events" component={EventsPage} />
       <Route path="/correlations" component={CorrelationsPage} />
+      <Route path="/devices" component={DevicesPage} />
       <Route path="/satellites" component={SatellitesPage} />
       <Route path="/nodes" component={NodesPage} />
       <Route path="/tools" component={ToolsPage} />
       <Route path="/map" component={MapPage} />
+      <Route path="/osint" component={OsintPage} />
       <Route component={NotFound} />
     </Switch>
   );

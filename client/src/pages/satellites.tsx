@@ -91,6 +91,8 @@ export default function SatellitesPage() {
 
   const visibleCount = satellites?.filter((s) => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION).length ?? 0;
   const overheadCount = satellites?.filter((s) => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION).length ?? 0;
+  const kleinCount = satellites?.filter((s) => s.azimuth != null && Math.abs(s.azimuth - KAPPA_CONSTANTS.KLEIN_TWIST_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG).length ?? 0;
+  const gizaCount = satellites?.filter((s) => s.elevation != null && Math.abs(s.elevation - KAPPA_CONSTANTS.GIZA_CUTOFF_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG).length ?? 0;
 
   const groupedByCategory: Record<string, TleCatalogGroup[]> = {};
   for (const g of TLE_CATALOG_GROUPS) {
@@ -170,7 +172,7 @@ export default function SatellitesPage() {
         </Card>
       )}
 
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
         <Card>
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold" data-testid="text-sat-total">{satellites?.length ?? 0}</div>
@@ -193,6 +195,18 @@ export default function SatellitesPage() {
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold">{new Set(satellites?.map(s => s.category)).size}</div>
             <div className="text-xs text-muted-foreground">{t("satellites.categories")}</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-2xl font-mono font-semibold text-fuchsia-600" data-testid="text-sat-klein">{kleinCount}</div>
+            <div className="text-xs text-muted-foreground">Klein (128.23°)</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-2xl font-mono font-semibold text-amber-600" data-testid="text-sat-giza">{gizaCount}</div>
+            <div className="text-xs text-muted-foreground">Giza (51.77°)</div>
           </CardContent>
         </Card>
       </div>
@@ -263,12 +277,24 @@ export default function SatellitesPage() {
                     ) : s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION ? (
                       <Badge variant="default" className="ml-1.5 text-[10px]">{t("satellites.visible")}</Badge>
                     ) : null}
+                    {s.elevation != null && Math.abs(s.elevation - KAPPA_CONSTANTS.GIZA_CUTOFF_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG && (
+                      <Badge variant="secondary" className="ml-1.5 text-[10px] bg-amber-500/10 text-amber-700 dark:text-amber-400" data-testid={`badge-giza-${s.id}`}>GIZA</Badge>
+                    )}
                   </span>
                 ) : (
                   <span className="text-muted-foreground">--</span>
                 )}
               </span>
-              <span className="font-mono">{s.azimuth != null ? `${s.azimuth.toFixed(1)}\u00B0` : "--"}</span>
+              <span className="font-mono">
+                {s.azimuth != null ? (
+                  <span>
+                    {s.azimuth.toFixed(1)}&deg;
+                    {Math.abs(s.azimuth - KAPPA_CONSTANTS.KLEIN_TWIST_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG && (
+                      <Badge variant="secondary" className="ml-1.5 text-[10px] bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-400" data-testid={`badge-klein-${s.id}`}>KLEIN</Badge>
+                    )}
+                  </span>
+                ) : "--"}
+              </span>
               <span className="font-mono">{s.range != null ? `${s.range.toFixed(0)} km` : "--"}</span>
               <span className="font-mono text-xs">
                 {s.latitude != null && s.longitude != null
