@@ -65,6 +65,11 @@ app.use((req, res, next) => {
 
   await registerRoutes(httpServer, app);
 
+  const { startCollectors } = await import("./collectors");
+  const { startAutoCorrelator } = await import("./auto-correlator");
+  startCollectors();
+  startAutoCorrelator();
+
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";

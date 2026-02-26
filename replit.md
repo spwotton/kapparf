@@ -34,7 +34,28 @@ Real-time correlation engine ported from Python. Key features:
 - `correlations` — cross-domain temporal pattern matches with linked event IDs
 - `satellite_passes` — TLE-based satellite tracking data from CelesTrak (41 catalog groups)
 - `sdr_nodes` — remote SDR receiver configuration (KiwiSDR, etc.)
+- `correlation_feedback` — user star ratings (1-5) and notes for correlations
+- `collection_logs` — auto-collector run logs (events created, duration, status, errors)
 - `users` — authentication (unused currently)
+
+## Autonomous Pipeline (24/7)
+Three auto-collectors start on server boot (`server/collectors.ts`):
+- **Flight Collector** — OpenSky Network flights every 60s for Costa Rica region, creates `radar` domain events
+- **Satellite Collector** — CelesTrak TLEs every 5min, propagates orbits, creates `satellite` domain events for passes >30° elevation
+- **Weather Collector** — NWS api.weather.gov every 10min, creates `elf` domain events
+
+Auto-Correlator (`server/auto-correlator.ts`):
+- Runs every 30s automatically
+- Pulls events from last 5 minutes, runs all 54 CORRELATION_RULES
+- Deduplication via processedPairs Set (10k cache max)
+- Also runs hypervisor overlap detection
+
+LLM Analyst (`server/llm-analyst.ts`):
+- Uses OpenAI gpt-4o-mini via Replit AI Integrations
+- `analyzeCorrelation()` — individual correlation analysis
+- `generateReport()` — multi-correlation intelligence summary
+- `suggestRuleWeights()` — learn from user feedback
+- Rate limited to 10 calls/min, graceful heuristic fallback when LLM unavailable
 
 ## Key API Endpoints
 - `GET /api/kappa/status` — kappa score, threat level, evening window, device tracking, correlation counts
@@ -60,17 +81,27 @@ Real-time correlation engine ported from Python. Key features:
 - `GET /api/congusto/modules` — 7 Congusto-Eitel modules
 - `GET /api/phoenix/countdown` — Phoenix countdown (2012-07-04 to 2037-01-01)
 - `GET /api/finspy/intel` — FinSpy intelligence brief (V1.2 Ghost Protocol + V2.0 Airbnb Ghost)
+- `GET /api/collectors/status` — auto-collector status (flights, satellites, weather)
+- `GET /api/correlations/stats` — auto-correlator stats (cycles, found, rules checked)
+- `GET /api/events/search?q=&domains=&limit=` — full-text event search
+- `POST /api/correlations/:id/feedback` — submit star rating (1-5) + notes
+- `GET /api/correlations/:id/feedback` — feedback for a correlation
+- `GET /api/collection-logs?limit=` — recent collector run logs
+- `GET /api/analysis/correlation/:id` — LLM analysis of specific correlation
+- `GET /api/analysis/report?hours=24` — LLM intelligence report
+- `POST /api/analysis/learn` — trigger LLM learning from feedback
 
 ## Pages
-1. **Dashboard** (`/`) — kappa score gauge (SVG arc), threat level, evening window, observer location, domain bars, correlation stats, alerts, events, Phoenix countdown card
+1. **Dashboard** (`/`) — kappa score gauge, threat level, evening window, observer location, auto-collector status cards, auto-correlator stats, live correlation feed, domain bars, correlation stats, alerts, events, Phoenix countdown
 2. **Events** (`/events`) — multi-domain event feed with domain filter tabs, ingest dialog
-3. **Correlations** (`/correlations`) — correlation results + rule reference + run button
+3. **Correlations** (`/correlations`) — auto-correlation status badge, correlation results with star rating feedback, rule reference, manual run button (secondary)
 4. **Satellites** (`/satellites`) — TLE catalog selector, category filter, Klein/Giza badges
 5. **Devices** (`/devices`) — MAC fingerprint tracking table with suspicious detection
 6. **OSINT** (`/osint`) — DNS probe, hidden network detection, surveillance indicators, camera OUIs, OSINT tools
 7. **Nodes** (`/nodes`) — SDR node cards with add dialog
 8. **Tools** (`/tools`) — 68-tool catalog with domain filtering + live GitHub stars, plus 8 integrated interactive tools (tabbed: Interactive / Catalog)
-9. **Map** (`/map`) — interactive Leaflet map showing observer, Jacó, SJO, satellites, flights, SDR nodes
+9. **Map** (`/map`) — interactive Leaflet map with toggleable layers: flights (altitude-colored), satellites, signal events (domain-colored), correlation lines (severity-colored), SDR nodes, coverage circles
+12. **Intelligence** (`/intelligence`) — LLM analysis reports, collector status, correlator stats, collection logs, learn from feedback
 10. **Karachi** (`/karachi`) — offensive counter-surveillance modules (9 Karachi + FinSpy V1.2 Ghost Protocol + V2.0 Airbnb Ghost/Kyndryl), execution flow, success criteria, hardware/infra layer, Alexanderplatz Protocol, Partytown/Service Worker MITM, V2 deliverables
 11. **Congusto** (`/congusto`) — Virtual Eitel Triode (VET) architecture (Cathode/Grid/Anode), Phoenix countdown, 7 core modules, mathematical constants table, data sources, confidence levels
 

@@ -3,9 +3,13 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
+import { getCollectorStatus } from "./collectors";
+import { getCorrelatorStatus } from "./auto-correlator";
+import { analyzeCorrelation, generateReport, suggestRuleWeights } from "./llm-analyst";
 import {
   insertSignalEventSchema,
   insertSdrNodeSchema,
+  insertCorrelationFeedbackSchema,
   KAPPA_CONSTANTS,
   OMEGA_CHRONOS,
   TOOL_CATALOG,
@@ -804,6 +808,98 @@ export async function registerRoutes(
       kyndrylProfile: KYNDRYL_ZSCALER_PROFILE,
       v2Deliverables: FINSPY_V2_DELIVERABLES,
     });
+  });
+
+  app.get("/api/collectors/status", (_req, res) => {
+    res.json(getCollectorStatus());
+  });
+
+  app.get("/api/correlations/stats", (_req, res) => {
+    res.json(getCorrelatorStatus());
+  });
+
+  app.get("/api/events/search", async (req, res) => {
+    const q = (req.query.q as string) || "";
+    const domainsParam = req.query.domains as string;
+    const limit = parseInt(req.query.limit as string) || 50;
+    const domains = domainsParam ? domainsParam.split(",") : undefined;
+    const events = await storage.searchEvents(q, domains, limit);
+    res.json(events);
+  });
+
+  app.post("/api/correlations/:id/feedback", async (req, res) => {
+    const parsed = insertCorrelationFeedbackSchema.safeParse({
+      correlationId: req.params.id,
+      ...req.body,
+    });
+    if (!parsed.success) {
+      return res.status(400).json({ error: parsed.error.message });
+    }
+    if (parsed.data.rating < 1 || parsed.data.rating > 5) {
+      return res.status(400).json({ error: "Rating must be between 1 and 5" });
+    }
+    const feedback = await storage.createFeedback(parsed.data);
+    res.json(feedback);
+  });
+
+  app.get("/api/correlations/:id/feedback", async (req, res) => {
+    const feedback = await storage.getFeedbackForCorrelation(req.params.id);
+    res.json(feedback);
+  });
+
+  app.get("/api/collection-logs", async (req, res) => {
+    const limit = parseInt(req.query.limit as string) || 50;
+    const logs = await storage.getRecentCollectionLogs(limit);
+    res.json(logs);
+  });
+
+  app.get("/api/analysis/correlation/:id", async (req, res) => {
+    try {
+      const allCorrelations = await storage.getCorrelations();
+      const correlation = allCorrelations.find(c => c.id === req.params.id);
+      if (!correlation) {
+        return res.status(404).json({ error: "Correlation not found" });
+      }
+      const events = await storage.getRecentSignalEvents(100);
+      const linkedEvents = events.filter(e => correlation.eventIds.includes(e.id));
+      const analysis = await analyzeCorrelation(correlation, linkedEvents);
+      res.json(analysis);
+    } catch (err) {
+      console.error("Analysis error:", err);
+      res.status(500).json({ error: "Analysis failed" });
+    }
+  });
+
+  app.get("/api/analysis/report", async (req, res) => {
+    try {
+      const hours = parseInt(req.query.hours as string) || 24;
+      const from = new Date(Date.now() - hours * 3600 * 1000);
+      const allCorrelations = await storage.getCorrelations();
+      const recentCorrelations = allCorrelations.filter(
+        c => new Date(c.timestamp) >= from
+      );
+      const report = await generateReport(recentCorrelations, hours);
+      res.json(report);
+    } catch (err) {
+      console.error("Report error:", err);
+      res.status(500).json({ error: "Report generation failed" });
+    }
+  });
+
+  app.post("/api/analysis/learn", async (_req, res) => {
+    try {
+      const allCorrelations = await storage.getCorrelations();
+      const allFeedback = [];
+      for (const c of allCorrelations.slice(0, 50)) {
+        const fb = await storage.getFeedbackForCorrelation(c.id);
+        allFeedback.push(...fb);
+      }
+      const result = await suggestRuleWeights(allFeedback);
+      res.json(result);
+    } catch (err) {
+      console.error("Learn error:", err);
+      res.status(500).json({ error: "Learning failed" });
+    }
   });
 
   return httpServer;

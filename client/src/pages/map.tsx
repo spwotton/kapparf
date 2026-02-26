@@ -12,18 +12,20 @@ import {
   type SatellitePass,
   type SdrNode,
   type FlightData,
+  type SignalEvent,
+  type Correlation,
 } from "@shared/schema";
-import { Plane, Satellite, Radio } from "lucide-react";
+import { Plane, Satellite, Radio, Activity, Link2, MapPin } from "lucide-react";
 import "leaflet/dist/leaflet.css";
 
 const observerIcon = new L.DivIcon({
-  html: `<div style="background:#ef4444;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 0 6px rgba(0,0,0,0.4);"></div>`,
+  html: `<div style="background:#3b82f6;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 0 6px rgba(0,0,0,0.4);"></div>`,
   iconSize: [14, 14],
   iconAnchor: [7, 7],
   className: "",
 });
 
-const analysisIcon = new L.DivIcon({
+const jacoIcon = new L.DivIcon({
   html: `<div style="background:#f59e0b;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);"></div>`,
   iconSize: [12, 12],
   iconAnchor: [6, 6],
@@ -31,9 +33,16 @@ const analysisIcon = new L.DivIcon({
 });
 
 const sjoIcon = new L.DivIcon({
-  html: `<div style="background:#3b82f6;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:8px;font-weight:bold;">A</span></div>`,
+  html: `<div style="background:#ef4444;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:8px;font-weight:bold;">A</span></div>`,
   iconSize: [14, 14],
   iconAnchor: [7, 7],
+  className: "",
+});
+
+const ti0rcIcon = new L.DivIcon({
+  html: `<div style="background:#22c55e;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);"></div>`,
+  iconSize: [12, 12],
+  iconAnchor: [6, 6],
   className: "",
 });
 
@@ -58,10 +67,38 @@ const nodeIcon = new L.DivIcon({
   className: "",
 });
 
-function flightIcon(heading: number | null) {
-  const rotation = heading ?? 0;
+const domainMarkerColors: Record<string, string> = {
+  wifi: "#22c55e",
+  ble: "#3b82f6",
+  lte: "#ef4444",
+  "5g": "#f97316",
+  satellite: "#a855f7",
+  sdr: "#eab308",
+  elf: "#06b6d4",
+  radar: "#f43f5e",
+  drone: "#ef4444",
+};
+
+function eventIcon(domain: string) {
+  const color = domainMarkerColors[domain] || "#6b7280";
   return new L.DivIcon({
-    html: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${rotation}deg);filter:drop-shadow(0 0 2px rgba(0,0,0,0.5));"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>`,
+    html: `<div style="background:${color};width:10px;height:10px;border-radius:50%;border:1.5px solid white;box-shadow:0 0 3px ${color}80;opacity:0.85;"></div>`,
+    iconSize: [10, 10],
+    iconAnchor: [5, 5],
+    className: "",
+  });
+}
+
+function flightIcon(heading: number | null, altitude: number | null) {
+  const rotation = heading ?? 0;
+  let color = "#f97316";
+  if (altitude != null) {
+    if (altitude < 3000) color = "#22c55e";
+    else if (altitude < 8000) color = "#eab308";
+    else color = "#ef4444";
+  }
+  return new L.DivIcon({
+    html: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${rotation}deg);filter:drop-shadow(0 0 2px rgba(0,0,0,0.5));"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>`,
     iconSize: [18, 18],
     iconAnchor: [9, 9],
     className: "",
@@ -80,15 +117,27 @@ function FitBoundsOnce() {
   return null;
 }
 
+const severityLineColors = ["#6b7280", "#22c55e", "#eab308", "#f97316", "#ef4444", "#991b1b"];
+
+function getPointIcon(id: string) {
+  if (id === "observer") return observerIcon;
+  if (id === "sjo") return sjoIcon;
+  if (id === "ti0rc") return ti0rcIcon;
+  return jacoIcon;
+}
+
 export default function MapPage() {
   const { t } = useI18n();
   const [showSatellites, setShowSatellites] = useState(true);
   const [showFlights, setShowFlights] = useState(true);
   const [showNodes, setShowNodes] = useState(true);
+  const [showEvents, setShowEvents] = useState(true);
+  const [showCorrelations, setShowCorrelations] = useState(true);
+  const [showCoverage, setShowCoverage] = useState(true);
 
   const { data: satellites } = useQuery<SatellitePass[]>({
     queryKey: ["/api/satellites"],
-    refetchInterval: 30000,
+    refetchInterval: 60000,
   });
 
   const { data: nodes } = useQuery<SdrNode[]>({
@@ -97,12 +146,30 @@ export default function MapPage() {
 
   const { data: flights } = useQuery<FlightData[]>({
     queryKey: ["/api/flights"],
-    refetchInterval: 15000,
+    refetchInterval: 30000,
+  });
+
+  const { data: events } = useQuery<SignalEvent[]>({
+    queryKey: ["/api/events", "recent"],
+    refetchInterval: 10000,
+  });
+
+  const { data: correlations } = useQuery<Correlation[]>({
+    queryKey: ["/api/correlations"],
+    refetchInterval: 30000,
   });
 
   const visibleSats = satellites?.filter(s => s.latitude != null && s.longitude != null) ?? [];
   const activeSats = visibleSats.filter(s => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION);
   const overheadSats = visibleSats.filter(s => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION);
+
+  const geoEvents = events?.filter(e => e.latitude != null && e.longitude != null) ?? [];
+
+  const correlationLines = (correlations ?? []).map(c => {
+    const linked = (events ?? []).filter(e => c.eventIds.includes(e.id) && e.latitude && e.longitude);
+    if (linked.length < 2) return null;
+    return { correlation: c, positions: linked.map(e => [e.latitude!, e.longitude!] as [number, number]) };
+  }).filter(Boolean) as { correlation: Correlation; positions: [number, number][] }[];
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-4">
@@ -111,48 +178,45 @@ export default function MapPage() {
           <h1 className="text-2xl font-semibold tracking-tight" data-testid="text-page-title">{t("map.title")}</h1>
           <p className="text-sm text-muted-foreground mt-1">{t("map.description")}</p>
         </div>
-        <div className="flex gap-2 flex-wrap">
-          <Button
-            variant={showSatellites ? "default" : "outline"}
-            size="sm"
-            onClick={() => setShowSatellites(!showSatellites)}
-            data-testid="button-toggle-satellites"
-          >
-            <Satellite className="h-3.5 w-3.5 mr-1" />
-            {t("map.satellites")} {visibleSats.length > 0 && `(${visibleSats.length})`}
-          </Button>
-          <Button
-            variant={showFlights ? "default" : "outline"}
-            size="sm"
-            onClick={() => setShowFlights(!showFlights)}
-            data-testid="button-toggle-flights"
-          >
+        <div className="flex gap-1.5 flex-wrap">
+          <Button variant={showFlights ? "default" : "outline"} size="sm" onClick={() => setShowFlights(!showFlights)} data-testid="button-toggle-flights">
             <Plane className="h-3.5 w-3.5 mr-1" />
-            {t("map.liveFlights")} {flights && `(${flights.length})`}
+            {t("collectors.flights")} {flights && `(${flights.length})`}
           </Button>
-          <Button
-            variant={showNodes ? "default" : "outline"}
-            size="sm"
-            onClick={() => setShowNodes(!showNodes)}
-            data-testid="button-toggle-nodes"
-          >
+          <Button variant={showSatellites ? "default" : "outline"} size="sm" onClick={() => setShowSatellites(!showSatellites)} data-testid="button-toggle-satellites">
+            <Satellite className="h-3.5 w-3.5 mr-1" />
+            {t("collectors.satellites")} ({visibleSats.length})
+          </Button>
+          <Button variant={showEvents ? "default" : "outline"} size="sm" onClick={() => setShowEvents(!showEvents)} data-testid="button-toggle-events">
+            <Activity className="h-3.5 w-3.5 mr-1" />
+            {t("map.events")} ({geoEvents.length})
+          </Button>
+          <Button variant={showCorrelations ? "default" : "outline"} size="sm" onClick={() => setShowCorrelations(!showCorrelations)} data-testid="button-toggle-correlations">
+            <Link2 className="h-3.5 w-3.5 mr-1" />
+            {t("map.correlations")} ({correlationLines.length})
+          </Button>
+          <Button variant={showNodes ? "default" : "outline"} size="sm" onClick={() => setShowNodes(!showNodes)} data-testid="button-toggle-nodes">
             <Radio className="h-3.5 w-3.5 mr-1" />
-            {t("map.nodes")}
+            {t("map.sdr")}
+          </Button>
+          <Button variant={showCoverage ? "default" : "outline"} size="sm" onClick={() => setShowCoverage(!showCoverage)} data-testid="button-toggle-coverage">
+            <MapPin className="h-3.5 w-3.5 mr-1" />
+            {t("map.coverage")}
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-5 gap-3">
+      <div className="grid grid-cols-6 gap-3">
         <Card>
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold" data-testid="text-map-flights">{flights?.length ?? 0}</div>
-            <div className="text-xs text-muted-foreground">{t("map.liveFlights")}</div>
+            <div className="text-xs text-muted-foreground">{t("collectors.flights")}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
             <div className="text-2xl font-mono font-semibold" data-testid="text-map-satellites">{visibleSats.length}</div>
-            <div className="text-xs text-muted-foreground">{t("map.trackedSats")}</div>
+            <div className="text-xs text-muted-foreground">{t("collectors.satellites")}</div>
           </CardContent>
         </Card>
         <Card>
@@ -169,8 +233,14 @@ export default function MapPage() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className="text-2xl font-mono font-semibold">{ANALYSIS_POINTS.length}</div>
-            <div className="text-xs text-muted-foreground">{t("map.analysisPoints")}</div>
+            <div className="text-2xl font-mono font-semibold" data-testid="text-map-events">{geoEvents.length}</div>
+            <div className="text-xs text-muted-foreground">{t("map.events")}</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-2xl font-mono font-semibold">{correlationLines.length}</div>
+            <div className="text-xs text-muted-foreground">{t("map.correlations")}</div>
           </CardContent>
         </Card>
       </div>
@@ -193,7 +263,7 @@ export default function MapPage() {
               <Marker
                 key={point.id}
                 position={[point.lat, point.lon]}
-                icon={point.id === "sjo" ? sjoIcon : point.id === "observer" ? observerIcon : analysisIcon}
+                icon={getPointIcon(point.id)}
               >
                 <Popup>
                   <div className="text-sm">
@@ -207,38 +277,44 @@ export default function MapPage() {
               </Marker>
             ))}
 
-            <Circle
-              center={[KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON]}
-              radius={15000}
-              pathOptions={{ color: "#ef4444", fillColor: "#ef4444", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
-            />
-
-            <Circle
-              center={[KAPPA_CONSTANTS.SJO_LAT, KAPPA_CONSTANTS.SJO_LON]}
-              radius={10000}
-              pathOptions={{ color: "#3b82f6", fillColor: "#3b82f6", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
-            />
-
-            <Circle
-              center={[KAPPA_CONSTANTS.JACO_LAT, KAPPA_CONSTANTS.JACO_LON]}
-              radius={10000}
-              pathOptions={{ color: "#f59e0b", fillColor: "#f59e0b", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
-            />
-
-            <Polyline
-              positions={[
-                [KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON],
-                [KAPPA_CONSTANTS.SJO_LAT, KAPPA_CONSTANTS.SJO_LON],
-              ]}
-              pathOptions={{ color: "#94a3b8", weight: 1, dashArray: "6 4", opacity: 0.6 }}
-            />
-            <Polyline
-              positions={[
-                [KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON],
-                [KAPPA_CONSTANTS.JACO_LAT, KAPPA_CONSTANTS.JACO_LON],
-              ]}
-              pathOptions={{ color: "#94a3b8", weight: 1, dashArray: "6 4", opacity: 0.6 }}
-            />
+            {showCoverage && (
+              <>
+                <Circle
+                  center={[KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON]}
+                  radius={15000}
+                  pathOptions={{ color: "#3b82f6", fillColor: "#3b82f6", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
+                />
+                <Circle
+                  center={[KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON]}
+                  radius={3000}
+                  pathOptions={{ color: "#3b82f6", fillColor: "#3b82f6", fillOpacity: 0.08, weight: 1 }}
+                />
+                <Circle
+                  center={[KAPPA_CONSTANTS.SJO_LAT, KAPPA_CONSTANTS.SJO_LON]}
+                  radius={10000}
+                  pathOptions={{ color: "#ef4444", fillColor: "#ef4444", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
+                />
+                <Circle
+                  center={[KAPPA_CONSTANTS.JACO_LAT, KAPPA_CONSTANTS.JACO_LON]}
+                  radius={10000}
+                  pathOptions={{ color: "#f59e0b", fillColor: "#f59e0b", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
+                />
+                <Polyline
+                  positions={[
+                    [KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON],
+                    [KAPPA_CONSTANTS.SJO_LAT, KAPPA_CONSTANTS.SJO_LON],
+                  ]}
+                  pathOptions={{ color: "#94a3b8", weight: 1, dashArray: "6 4", opacity: 0.6 }}
+                />
+                <Polyline
+                  positions={[
+                    [KAPPA_CONSTANTS.OBSERVER_LAT, KAPPA_CONSTANTS.OBSERVER_LON],
+                    [KAPPA_CONSTANTS.JACO_LAT, KAPPA_CONSTANTS.JACO_LON],
+                  ]}
+                  pathOptions={{ color: "#94a3b8", weight: 1, dashArray: "6 4", opacity: 0.6 }}
+                />
+              </>
+            )}
 
             {showSatellites && visibleSats.map((sat) => {
               const isOverhead = sat.elevation != null && sat.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION;
@@ -270,7 +346,7 @@ export default function MapPage() {
                 <Marker
                   key={f.icao24}
                   position={[f.latitude, f.longitude]}
-                  icon={flightIcon(f.heading)}
+                  icon={flightIcon(f.heading, f.altitude)}
                 >
                   <Popup>
                     <div className="text-xs">
@@ -289,6 +365,40 @@ export default function MapPage() {
                 </Marker>
               );
             })}
+
+            {showEvents && geoEvents.map((evt) => (
+              <Marker
+                key={evt.id}
+                position={[evt.latitude!, evt.longitude!]}
+                icon={eventIcon(evt.domain)}
+              >
+                <Popup>
+                  <div className="text-xs">
+                    <strong>{evt.domain.toUpperCase()}: {evt.eventType}</strong>
+                    <br />
+                    Source: {evt.source}
+                    <br />
+                    Confidence: {(evt.confidence * 100).toFixed(0)}%
+                    {evt.frequency && <><br />Freq: {evt.frequency}</>}
+                    <br />
+                    {new Date(evt.timestamp).toLocaleString()}
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+
+            {showCorrelations && correlationLines.map(({ correlation, positions }) => (
+              <Polyline
+                key={correlation.id}
+                positions={positions}
+                pathOptions={{
+                  color: severityLineColors[correlation.severity] || "#6b7280",
+                  weight: 2,
+                  opacity: 0.7,
+                  dashArray: "4 4",
+                }}
+              />
+            ))}
 
             {showNodes && nodes?.map((node) => (
               <Marker

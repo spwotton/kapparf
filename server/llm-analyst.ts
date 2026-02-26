@@ -1,0 +1,271 @@
+import OpenAI from "openai";
+import { type Correlation, type SignalEvent, type CorrelationFeedback } from "@shared/schema";
+
+let openai: OpenAI | null = null;
+
+function getClient(): OpenAI | null {
+  if (openai) return openai;
+  if (process.env.AI_INTEGRATIONS_OPENAI_API_KEY && process.env.AI_INTEGRATIONS_OPENAI_BASE_URL) {
+    openai = new OpenAI({
+      apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+      baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+    });
+    return openai;
+  }
+  return null;
+}
+
+const callTimestamps: number[] = [];
+const MAX_CALLS_PER_MINUTE = 10;
+
+async function rateLimitedCall<T>(fn: () => Promise<T>): Promise<T> {
+  const now = Date.now();
+  const windowStart = now - 60000;
+  while (callTimestamps.length > 0 && callTimestamps[0] < windowStart) {
+    callTimestamps.shift();
+  }
+  if (callTimestamps.length >= MAX_CALLS_PER_MINUTE) {
+    const waitMs = callTimestamps[0] - windowStart + 100;
+    await new Promise(r => setTimeout(r, waitMs));
+  }
+  callTimestamps.push(Date.now());
+  return fn();
+}
+
+export interface CorrelationAnalysis {
+  significance: string;
+  explanation: string;
+  recommendedActions: string[];
+  patternType: string;
+  confidence: number;
+  fallback?: boolean;
+}
+
+export interface IntelligenceReport {
+  summary: string;
+  trends: string[];
+  anomalies: string[];
+  recommendations: string[];
+  fallback?: boolean;
+}
+
+export interface RuleAdjustment {
+  ruleId: string;
+  suggestedWeight: number;
+  reason: string;
+}
+
+function heuristicAnalysis(correlation: Correlation, events: SignalEvent[]): CorrelationAnalysis {
+  const domains = new Set(events.map(e => e.domain));
+  const severity = correlation.severity;
+  const domainCount = domains.size;
+
+  let significance = "Low";
+  let patternType = "temporal-coincidence";
+
+  if (severity >= 4) {
+    significance = "High";
+    patternType = "multi-domain-correlation";
+  } else if (severity >= 3) {
+    significance = "Medium";
+    patternType = "cross-domain-pattern";
+  }
+
+  if (domainCount >= 3) {
+    significance = "High";
+    patternType = "full-spectrum-correlation";
+  }
+
+  return {
+    significance,
+    explanation: `${domainCount} domain(s) correlated via rule "${correlation.ruleName}" with severity ${severity}/5. Events span ${domains.size} signal domains: ${Array.from(domains).join(", ")}.`,
+    recommendedActions: [
+      "Continue monitoring affected domains",
+      domainCount >= 3 ? "Investigate cross-domain timing patterns" : "Watch for additional domain involvement",
+      severity >= 4 ? "Escalate to active analysis" : "Log for trend analysis",
+    ],
+    patternType,
+    confidence: Math.min(0.95, 0.3 + severity * 0.12 + domainCount * 0.08),
+    fallback: true,
+  };
+}
+
+function heuristicReport(correlations: Correlation[]): IntelligenceReport {
+  const ruleFreq: Record<string, number> = {};
+  let highSeverity = 0;
+  for (const c of correlations) {
+    ruleFreq[c.ruleName] = (ruleFreq[c.ruleName] || 0) + 1;
+    if (c.severity >= 4) highSeverity++;
+  }
+
+  const topRules = Object.entries(ruleFreq).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  return {
+    summary: `${correlations.length} correlations detected. ${highSeverity} high-severity events. Top pattern: ${topRules[0]?.[0] || "none"} (${topRules[0]?.[1] || 0} occurrences).`,
+    trends: topRules.map(([name, count]) => `${name}: ${count} occurrences`),
+    anomalies: highSeverity > 0
+      ? [`${highSeverity} high-severity correlations detected — potential coordinated activity`]
+      : ["No high-severity patterns detected in this window"],
+    recommendations: [
+      "Review top correlation rules for tuning opportunities",
+      highSeverity > 0 ? "Investigate high-severity correlation clusters" : "Continue baseline monitoring",
+    ],
+    fallback: true,
+  };
+}
+
+export async function analyzeCorrelation(
+  correlation: Correlation,
+  events: SignalEvent[]
+): Promise<CorrelationAnalysis> {
+  const client = getClient();
+  if (!client) return heuristicAnalysis(correlation, events);
+
+  try {
+    return await rateLimitedCall(async () => {
+      const response = await client.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "You are a SIGINT analyst. Analyze the correlation and return JSON with fields: significance (string), explanation (string), recommendedActions (string[]), patternType (string), confidence (number 0-1). Be concise and technical.",
+          },
+          {
+            role: "user",
+            content: JSON.stringify({
+              correlation: {
+                ruleName: correlation.ruleName,
+                description: correlation.description,
+                severity: correlation.severity,
+                eventCount: correlation.eventIds.length,
+                metadata: correlation.metadata,
+              },
+              events: events.slice(0, 10).map(e => ({
+                domain: e.domain,
+                source: e.source,
+                eventType: e.eventType,
+                frequency: e.frequency,
+                confidence: e.confidence,
+                timestamp: e.timestamp,
+                metadata: e.metadata,
+              })),
+            }),
+          },
+        ],
+        response_format: { type: "json_object" },
+        max_completion_tokens: 8192,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) return heuristicAnalysis(correlation, events);
+
+      const parsed = JSON.parse(content);
+      return {
+        significance: parsed.significance || "Unknown",
+        explanation: parsed.explanation || "",
+        recommendedActions: parsed.recommendedActions || [],
+        patternType: parsed.patternType || "unknown",
+        confidence: parsed.confidence || 0.5,
+      };
+    });
+  } catch (err) {
+    console.error("[llm-analyst] analyzeCorrelation error:", err);
+    return heuristicAnalysis(correlation, events);
+  }
+}
+
+export async function generateReport(
+  correlations: Correlation[],
+  timeWindowHours: number
+): Promise<IntelligenceReport> {
+  const client = getClient();
+  if (!client) return heuristicReport(correlations);
+
+  try {
+    return await rateLimitedCall(async () => {
+      const response = await client.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "You are a SIGINT intelligence analyst. Generate a report summarizing correlations. Return JSON with: summary (string), trends (string[]), anomalies (string[]), recommendations (string[]). Be concise.",
+          },
+          {
+            role: "user",
+            content: JSON.stringify({
+              timeWindowHours,
+              totalCorrelations: correlations.length,
+              correlations: correlations.slice(0, 50).map(c => ({
+                ruleName: c.ruleName,
+                description: c.description,
+                severity: c.severity,
+                eventCount: c.eventIds.length,
+                timestamp: c.timestamp,
+              })),
+            }),
+          },
+        ],
+        response_format: { type: "json_object" },
+        max_completion_tokens: 8192,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) return heuristicReport(correlations);
+
+      const parsed = JSON.parse(content);
+      return {
+        summary: parsed.summary || "",
+        trends: parsed.trends || [],
+        anomalies: parsed.anomalies || [],
+        recommendations: parsed.recommendations || [],
+      };
+    });
+  } catch (err) {
+    console.error("[llm-analyst] generateReport error:", err);
+    return heuristicReport(correlations);
+  }
+}
+
+export async function suggestRuleWeights(
+  feedback: CorrelationFeedback[]
+): Promise<{ ruleAdjustments: RuleAdjustment[] }> {
+  const client = getClient();
+
+  if (!client || feedback.length === 0) {
+    return { ruleAdjustments: [] };
+  }
+
+  try {
+    return await rateLimitedCall(async () => {
+      const response = await client.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "Analyze user feedback on SIGINT correlations. Return JSON with ruleAdjustments: array of {ruleId: string, suggestedWeight: number 0-2, reason: string}. Weight >1 means increase importance, <1 means decrease.",
+          },
+          {
+            role: "user",
+            content: JSON.stringify({
+              feedback: feedback.slice(0, 100).map(f => ({
+                correlationId: f.correlationId,
+                rating: f.rating,
+                notes: f.notes,
+              })),
+            }),
+          },
+        ],
+        response_format: { type: "json_object" },
+        max_completion_tokens: 8192,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) return { ruleAdjustments: [] };
+
+      return JSON.parse(content);
+    });
+  } catch (err) {
+    console.error("[llm-analyst] suggestRuleWeights error:", err);
+    return { ruleAdjustments: [] };
+  }
+}

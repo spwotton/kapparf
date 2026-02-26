@@ -10,6 +10,9 @@ import {
   type SignalEvent,
   type KappaStatus,
   type PhoenixCountdown,
+  type Correlation,
+  type CollectorStatusType,
+  type CorrelatorStats,
 } from "@shared/schema";
 import {
   MapPin,
@@ -25,6 +28,11 @@ import {
   Zap,
   Eye,
   Flame,
+  Plane,
+  Cloud,
+  Link2,
+  CheckCircle2,
+  XCircle,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
@@ -183,6 +191,29 @@ export default function DashboardPage() {
     refetchInterval: 60000,
   });
 
+  const { data: collectorStatus } = useQuery<Record<string, CollectorStatusType>>({
+    queryKey: ["/api/collectors/status"],
+    refetchInterval: 5000,
+  });
+
+  const { data: correlatorStats } = useQuery<CorrelatorStats>({
+    queryKey: ["/api/correlations/stats"],
+    refetchInterval: 5000,
+  });
+
+  const { data: liveCorrelations } = useQuery<Correlation[]>({
+    queryKey: ["/api/correlations"],
+    refetchInterval: 15000,
+  });
+
+  const collectorIcons: Record<string, typeof Wifi> = {
+    flights: Plane,
+    satellites: Satellite,
+    weather: Cloud,
+  };
+
+  const collectors = collectorStatus ? Object.values(collectorStatus) : [];
+
   const score = kappaStatus?.score ?? 0;
   const threat = kappaStatus?.threatLevel ?? "NOMINAL";
 
@@ -331,6 +362,90 @@ export default function DashboardPage() {
           ) : null}
         </CardContent>
       </Card>
+
+      {collectors.length > 0 && (
+        <Card data-testid="card-collectors">
+          <CardHeader className="pb-3">
+            <div className="flex items-center gap-2">
+              <Activity className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">{t("dashboard.collectors")}</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {collectors.map((c) => {
+                const CIcon = collectorIcons[c.name] || Activity;
+                return (
+                  <div key={c.name} className="border rounded-md p-3 space-y-2" data-testid={`card-collector-${c.name}`}>
+                    <div className="flex items-center gap-2">
+                      <CIcon className="h-3.5 w-3.5 text-muted-foreground" />
+                      <span className="text-sm font-medium capitalize">{c.name}</span>
+                      {c.running ? (
+                        <span className="ml-auto flex items-center gap-1">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                          </span>
+                        </span>
+                      ) : (
+                        <XCircle className="h-3.5 w-3.5 ml-auto text-red-500" />
+                      )}
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>{t("dashboard.eventsCreated")}</span>
+                      <span className="font-mono">{c.eventsCreated}</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>{t("dashboard.lastRun")}</span>
+                      <span className="font-mono">
+                        {c.lastRun ? new Date(c.lastRun).toLocaleTimeString() : "--"}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {correlatorStats && (
+        <Card data-testid="card-auto-correlator">
+          <CardHeader className="pb-3">
+            <div className="flex items-center gap-2">
+              <Link2 className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">{t("dashboard.autoCorrelator")}</CardTitle>
+              {correlatorStats.running && (
+                <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400 text-[10px] ml-auto">
+                  {t("correlations.autoStatus")}
+                </Badge>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-4 gap-3 text-center">
+              <div>
+                <div className="text-lg font-mono font-semibold">{correlatorStats.cycleCount}</div>
+                <div className="text-[10px] text-muted-foreground">{t("dashboard.correlatorCycles")}</div>
+              </div>
+              <div>
+                <div className="text-lg font-mono font-semibold">{correlatorStats.totalCorrelations}</div>
+                <div className="text-[10px] text-muted-foreground">{t("dashboard.correlationsFound")}</div>
+              </div>
+              <div>
+                <div className="text-lg font-mono font-semibold">{correlatorStats.rulesChecked}</div>
+                <div className="text-[10px] text-muted-foreground">{t("dashboard.rulesChecked")}</div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">{t("dashboard.lastRun")}</div>
+                <div className="text-xs font-mono mt-1">
+                  {correlatorStats.lastRun ? new Date(correlatorStats.lastRun).toLocaleTimeString() : "--"}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <Card>
@@ -558,6 +673,43 @@ export default function DashboardPage() {
           </div>
         )}
       </div>
+
+      {liveCorrelations && liveCorrelations.length > 0 && (
+        <div>
+          <h2 className="text-sm font-medium mb-3 flex items-center gap-2">
+            <Link2 className="h-4 w-4 text-muted-foreground" />
+            {t("dashboard.liveCorrelations")}
+          </h2>
+          <div className="space-y-1.5">
+            {liveCorrelations.slice(0, 10).map((c) => {
+              const sevColors = [
+                "",
+                "bg-green-500/10 text-green-700 dark:text-green-400",
+                "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+                "bg-orange-500/10 text-orange-700 dark:text-orange-400",
+                "bg-red-500/10 text-red-700 dark:text-red-400",
+                "bg-red-700/10 text-red-900 dark:text-red-300",
+              ];
+              return (
+                <Card key={c.id} data-testid={`card-live-corr-${c.id}`}>
+                  <CardContent className="py-2.5 flex items-center justify-between gap-3 flex-wrap">
+                    <div className="flex items-center gap-2 min-w-0 flex-1">
+                      <Badge variant="secondary" className={sevColors[c.severity] || ""}>
+                        {c.severity}/5
+                      </Badge>
+                      <span className="text-xs font-medium">{c.ruleName}</span>
+                      <span className="text-xs text-muted-foreground truncate">{c.description}</span>
+                    </div>
+                    <span className="text-[10px] text-muted-foreground font-mono shrink-0">
+                      {new Date(c.timestamp).toLocaleTimeString()}
+                    </span>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

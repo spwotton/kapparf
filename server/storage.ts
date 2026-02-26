@@ -4,10 +4,13 @@ import {
   type Correlation, type InsertCorrelation,
   type SatellitePass, type InsertSatellitePass,
   type SdrNode, type InsertSdrNode,
+  type CorrelationFeedback, type InsertCorrelationFeedback,
+  type CollectionLog, type InsertCollectionLog,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
+  correlationFeedback, collectionLogs,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, sql } from "drizzle-orm";
+import { eq, desc, sql, and, or, ilike, gte, lte } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -26,6 +29,12 @@ export interface IStorage {
   getNodes(): Promise<SdrNode[]>;
   createNode(node: InsertSdrNode): Promise<SdrNode>;
   updateNodeStatus(id: string, status: string): Promise<void>;
+  createFeedback(feedback: InsertCorrelationFeedback): Promise<CorrelationFeedback>;
+  getFeedbackForCorrelation(correlationId: string): Promise<CorrelationFeedback[]>;
+  createCollectionLog(log: InsertCollectionLog): Promise<CollectionLog>;
+  getRecentCollectionLogs(limit: number): Promise<CollectionLog[]>;
+  searchEvents(query: string, domains?: string[], limit?: number): Promise<SignalEvent[]>;
+  getEventsByTimeRange(from: Date, to: Date, domain?: string): Promise<SignalEvent[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -123,6 +132,63 @@ export class DatabaseStorage implements IStorage {
 
   async updateNodeStatus(id: string, status: string): Promise<void> {
     await db.update(sdrNodes).set({ status, lastSeen: new Date() }).where(eq(sdrNodes.id, id));
+  }
+
+  async createFeedback(feedback: InsertCorrelationFeedback): Promise<CorrelationFeedback> {
+    const [created] = await db.insert(correlationFeedback).values(feedback).returning();
+    return created;
+  }
+
+  async getFeedbackForCorrelation(correlationId: string): Promise<CorrelationFeedback[]> {
+    return db.select().from(correlationFeedback)
+      .where(eq(correlationFeedback.correlationId, correlationId))
+      .orderBy(desc(correlationFeedback.createdAt));
+  }
+
+  async createCollectionLog(log: InsertCollectionLog): Promise<CollectionLog> {
+    const [created] = await db.insert(collectionLogs).values(log).returning();
+    return created;
+  }
+
+  async getRecentCollectionLogs(limit: number): Promise<CollectionLog[]> {
+    return db.select().from(collectionLogs)
+      .orderBy(desc(collectionLogs.timestamp))
+      .limit(limit);
+  }
+
+  async searchEvents(query: string, domains?: string[], limit: number = 50): Promise<SignalEvent[]> {
+    const conditions = [];
+    const searchPattern = `%${query}%`;
+    conditions.push(
+      or(
+        ilike(signalEvents.source, searchPattern),
+        ilike(signalEvents.eventType, searchPattern),
+        ilike(signalEvents.domain, searchPattern),
+        sql`${signalEvents.metadata}::text ILIKE ${searchPattern}`
+      )
+    );
+    if (domains && domains.length > 0) {
+      conditions.push(
+        or(...domains.map(d => eq(signalEvents.domain, d)))
+      );
+    }
+    return db.select().from(signalEvents)
+      .where(and(...conditions))
+      .orderBy(desc(signalEvents.timestamp))
+      .limit(limit);
+  }
+
+  async getEventsByTimeRange(from: Date, to: Date, domain?: string): Promise<SignalEvent[]> {
+    const conditions = [
+      gte(signalEvents.timestamp, from),
+      lte(signalEvents.timestamp, to),
+    ];
+    if (domain) {
+      conditions.push(eq(signalEvents.domain, domain));
+    }
+    return db.select().from(signalEvents)
+      .where(and(...conditions))
+      .orderBy(desc(signalEvents.timestamp));
   }
 }
 

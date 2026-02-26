@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
-import { CORRELATION_RULES, type Correlation } from "@shared/schema";
+import { CORRELATION_RULES, type Correlation, type CorrelatorStats } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { Play, Shield, Clock, Link2 } from "lucide-react";
+import { Play, Shield, Clock, Link2, Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const severityColors = [
@@ -18,12 +19,63 @@ const severityColors = [
   "bg-red-700/10 text-red-900 dark:text-red-300",
 ];
 
+function StarRating({ correlationId }: { correlationId: string }) {
+  const { t } = useI18n();
+  const { toast } = useToast();
+  const [hoveredStar, setHoveredStar] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
+
+  const feedbackMutation = useMutation({
+    mutationFn: async (rating: number) => {
+      await apiRequest("POST", `/api/correlations/${correlationId}/feedback`, { rating });
+    },
+    onSuccess: () => {
+      setSubmitted(true);
+      toast({ title: t("correlations.feedbackSubmitted") });
+    },
+  });
+
+  if (submitted) {
+    return <span className="text-xs text-muted-foreground">{t("correlations.feedbackSubmitted")}</span>;
+  }
+
+  return (
+    <div className="flex items-center gap-0.5" data-testid={`rating-${correlationId}`}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          className="p-0.5 hover:scale-110 transition-transform"
+          onMouseEnter={() => setHoveredStar(star)}
+          onMouseLeave={() => setHoveredStar(0)}
+          onClick={() => feedbackMutation.mutate(star)}
+          disabled={feedbackMutation.isPending}
+          data-testid={`button-star-${correlationId}-${star}`}
+        >
+          <Star
+            className={`h-3.5 w-3.5 ${
+              star <= hoveredStar
+                ? "fill-amber-400 text-amber-400"
+                : "text-muted-foreground/40"
+            }`}
+          />
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function CorrelationsPage() {
   const { t } = useI18n();
   const { toast } = useToast();
 
   const { data: correlationsData, isLoading } = useQuery<Correlation[]>({
     queryKey: ["/api/correlations"],
+    refetchInterval: 15000,
+  });
+
+  const { data: correlatorStats } = useQuery<CorrelatorStats>({
+    queryKey: ["/api/correlations/stats"],
+    refetchInterval: 5000,
   });
 
   const runMutation = useMutation({
@@ -46,15 +98,27 @@ export default function CorrelationsPage() {
           <h1 className="text-2xl font-semibold tracking-tight" data-testid="text-page-title">{t("correlations.title")}</h1>
           <p className="text-sm text-muted-foreground mt-1">{t("correlations.description")}</p>
         </div>
-        <Button
-          size="sm"
-          onClick={() => runMutation.mutate()}
-          disabled={runMutation.isPending}
-          data-testid="button-run-correlation"
-        >
-          <Play className={`h-4 w-4 mr-1.5 ${runMutation.isPending ? "animate-spin" : ""}`} />
-          {runMutation.isPending ? t("correlations.running") : t("correlations.run")}
-        </Button>
+        <div className="flex items-center gap-2">
+          {correlatorStats?.running && (
+            <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400" data-testid="badge-auto-correlator">
+              <span className="relative flex h-2 w-2 mr-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+              </span>
+              {t("correlations.autoStatus")}
+            </Badge>
+          )}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => runMutation.mutate()}
+            disabled={runMutation.isPending}
+            data-testid="button-run-correlation"
+          >
+            <Play className={`h-4 w-4 mr-1.5 ${runMutation.isPending ? "animate-spin" : ""}`} />
+            {runMutation.isPending ? t("correlations.running") : t("correlations.manual")}
+          </Button>
+        </div>
       </div>
 
       <Card>
@@ -95,6 +159,9 @@ export default function CorrelationsPage() {
         <h2 className="text-sm font-medium mb-3 flex items-center gap-2">
           <Link2 className="h-4 w-4 text-muted-foreground" />
           {t("correlations.title")}
+          {correlationsData && (
+            <span className="text-xs text-muted-foreground font-normal">({correlationsData.length})</span>
+          )}
         </h2>
         {isLoading ? (
           <div className="space-y-2">
@@ -124,9 +191,12 @@ export default function CorrelationsPage() {
                       </div>
                       <p className="text-sm text-muted-foreground">{c.description}</p>
                     </div>
-                    <span className="text-xs text-muted-foreground font-mono whitespace-nowrap">
-                      {new Date(c.timestamp).toLocaleString()}
-                    </span>
+                    <div className="flex flex-col items-end gap-2 shrink-0">
+                      <span className="text-xs text-muted-foreground font-mono whitespace-nowrap">
+                        {new Date(c.timestamp).toLocaleString()}
+                      </span>
+                      <StarRating correlationId={c.id} />
+                    </div>
                   </div>
                 </CardContent>
               </Card>

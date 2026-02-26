@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
   Sidebar,
@@ -51,6 +51,7 @@ export function AppSidebar() {
     { title: t("nav.karachi"), url: "/karachi", icon: Crosshair },
     { title: t("nav.congusto"), url: "/congusto", icon: FlaskConical },
     { title: t("nav.hypervisor"), url: "/hypervisor", icon: Brain },
+    { title: t("nav.intelligence"), url: "/intelligence", icon: Sparkles },
   ];
 
   const score = kappaStatus?.score ?? 0;

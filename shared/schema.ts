@@ -59,6 +59,24 @@ export const sdrNodes = pgTable("sdr_nodes", {
   lastSeen: timestamp("last_seen"),
 });
 
+export const correlationFeedback = pgTable("correlation_feedback", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  correlationId: text("correlation_id").notNull(),
+  rating: integer("rating").notNull(),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const collectionLogs = pgTable("collection_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  collector: text("collector").notNull(),
+  eventsCreated: integer("events_created").notNull().default(0),
+  durationMs: integer("duration_ms").notNull().default(0),
+  status: text("status").notNull().default("success"),
+  error: text("error"),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -83,6 +101,16 @@ export const insertSdrNodeSchema = createInsertSchema(sdrNodes).omit({
   id: true,
 });
 
+export const insertCorrelationFeedbackSchema = createInsertSchema(correlationFeedback).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertCollectionLogSchema = createInsertSchema(collectionLogs).omit({
+  id: true,
+  timestamp: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type SignalEvent = typeof signalEvents.$inferSelect;
@@ -93,6 +121,28 @@ export type SatellitePass = typeof satellitePasses.$inferSelect;
 export type InsertSatellitePass = z.infer<typeof insertSatellitePassSchema>;
 export type SdrNode = typeof sdrNodes.$inferSelect;
 export type InsertSdrNode = z.infer<typeof insertSdrNodeSchema>;
+export type CorrelationFeedback = typeof correlationFeedback.$inferSelect;
+export type InsertCorrelationFeedback = z.infer<typeof insertCorrelationFeedbackSchema>;
+export type CollectionLog = typeof collectionLogs.$inferSelect;
+export type InsertCollectionLog = z.infer<typeof insertCollectionLogSchema>;
+
+export interface CollectorStatusType {
+  name: string;
+  running: boolean;
+  lastRun: number | null;
+  eventsCreated: number;
+  errors: number;
+  intervalMs: number;
+}
+
+export interface CorrelatorStats {
+  running: boolean;
+  lastRun: number | null;
+  rulesChecked: number;
+  correlationsFound: number;
+  totalCorrelations: number;
+  cycleCount: number;
+}
 
 export const DOMAINS = ["wifi", "ble", "lte", "5g", "satellite", "sdr", "elf", "radar", "plc", "isp", "drone"] as const;
 
@@ -1584,3 +1634,5 @@ export const HYPERVISOR_STREAMS: AnalysisStream[] = [
     config: { modbusPort: KAPPA_CONSTANTS.MODBUS_TCP_PORT, snmpPort: KAPPA_CONSTANTS.DSE892_SNMP_PORT, trapPort: KAPPA_CONSTANTS.DSE892_TRAP_PORT },
   },
 ];
+
+export * from "./models/chat";
