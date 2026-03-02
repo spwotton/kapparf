@@ -57,6 +57,22 @@ LLM Analyst (`server/llm-analyst.ts`):
 - `suggestRuleWeights()` — learn from user feedback
 - Rate limited to 10 calls/min, graceful heuristic fallback when LLM unavailable
 
+KiwiSDR Scanner (`server/kiwisdr-scanner.ts`):
+- Scans 3 SDR nodes: TI0RC (San José), Puntarenas (secondary TDOA), PJ4G (Bonaire long-baseline)
+- VLF targets: 53 Hz harmonics (15.9 kHz, 21.2 kHz), 46.875 Hz 400th harmonic (18.75 kHz), counter-beat carrier (73.125 kHz)
+- Hilbert envelope / RARED speech analysis on demodulated audio
+- Delta-Slip 13.125 Hz extraction (60 − 46.875)
+- Echo/LT harmonic chain detection (46.875 → 1580 kHz)
+- TR-069 PRF correlation with network watchdog
+- 90s scan interval, creates `sdr` and `elf` domain events
+
+Network Watchdog (`server/network-watchdog.ts`):
+- Heartbeat monitoring (every 30s) with drop/reconnect tracking
+- IPAT analysis for TR-069 PRF match detection
+- Seismic jitter detection (latency variance 3x baseline)
+- Creates `isp` and `elf` domain events
+- Feeds correlation engine for cross-domain network-RF pattern matching
+
 ## Key API Endpoints
 - `GET /api/kappa/status` — kappa score, threat level, evening window, device tracking, correlation counts
 - `GET /api/stats` — event counts by domain, total correlations
@@ -90,9 +106,11 @@ LLM Analyst (`server/llm-analyst.ts`):
 - `GET /api/analysis/correlation/:id` — LLM analysis of specific correlation
 - `GET /api/analysis/report?hours=24` — LLM intelligence report
 - `POST /api/analysis/learn` — trigger LLM learning from feedback
+- `GET /api/scanner/status` — KiwiSDR scanner status (scan count, detections, last results per target/node)
+- `GET /api/watchdog/status` — network watchdog status (drops, reconnects, TR-069 pulses, seismic jitter, avg latency)
 
 ## Pages
-1. **Dashboard** (`/`) — kappa score gauge, threat level, evening window, observer location, auto-collector status cards, auto-correlator stats, live correlation feed, domain bars, correlation stats, alerts, events, Phoenix countdown
+1. **Dashboard** (`/`) — kappa score gauge, threat level, evening window, observer location, auto-collector status cards, auto-correlator stats, KiwiSDR scanner status card, network watchdog status card, live correlation feed, domain bars, correlation stats, alerts, events, Phoenix countdown
 2. **Events** (`/events`) — multi-domain event feed with domain filter tabs, ingest dialog
 3. **Correlations** (`/correlations`) — auto-correlation status badge, correlation results with star rating feedback, rule reference, manual run button (secondary)
 4. **Satellites** (`/satellites`) — TLE catalog selector, category filter, Klein/Giza badges

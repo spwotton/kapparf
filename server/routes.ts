@@ -5,6 +5,8 @@ import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
 import { getCollectorStatus } from "./collectors";
 import { getCorrelatorStatus } from "./auto-correlator";
+import { getScannerStatus } from "./kiwisdr-scanner";
+import { getWatchdogStatus } from "./network-watchdog";
 import { analyzeCorrelation, generateReport, suggestRuleWeights } from "./llm-analyst";
 import {
   insertSignalEventSchema,
@@ -816,6 +818,14 @@ export async function registerRoutes(
 
   app.get("/api/correlations/stats", (_req, res) => {
     res.json(getCorrelatorStatus());
+  });
+
+  app.get("/api/scanner/status", (_req, res) => {
+    res.json(getScannerStatus());
+  });
+
+  app.get("/api/watchdog/status", (_req, res) => {
+    res.json(getWatchdogStatus());
   });
 
   app.get("/api/events/search", async (req, res) => {

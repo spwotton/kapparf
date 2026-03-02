@@ -1,0 +1,474 @@
+import { storage } from "./storage";
+import { kappaEngine } from "./kappa-engine";
+import { hypervisor } from "./hypervisor";
+import {
+  KAPPA_CONSTANTS,
+  type ScanResult,
+  type ScannerStatus,
+} from "@shared/schema";
+
+const K = KAPPA_CONSTANTS;
+
+interface KiwiNode {
+  id: string;
+  name: string;
+  url: string;
+  lat: number;
+  lon: number;
+}
+
+const KIWI_NODES: KiwiNode[] = [
+  { id: "ti0rc", name: "TI0RC Zapote", url: "http://ti0rc.proxy.kiwisdr.com:8073", lat: 9.9360, lon: -84.1088 },
+  { id: "puntarenas", name: "Puntarenas", url: "http://kiwisdr.puntarenas.cr:8073", lat: 9.9764, lon: -84.8385 },
+  { id: "pj4g", name: "PJ4G Bonaire", url: "http://pj4g.proxy.kiwisdr.com:8073", lat: 12.1500, lon: -68.2667 },
+];
+
+const VLF_SCAN_TARGETS = [
+  { name: "53Hz_3rd_harmonic", freqHz: 15900, harmonicOf: 53, harmonicOrder: 300, desc: "53 Hz × 300 — Realtek ADPCM phase-lock carrier VLF harmonic" },
+  { name: "53Hz_4th_harmonic", freqHz: 21200, harmonicOf: 53, harmonicOrder: 400, desc: "53 Hz × 400 — Upper VLF band Realtek artifact" },
+  { name: "46875Hz_400th", freqHz: 18750, harmonicOf: 46.875, harmonicOrder: 400, desc: "46.875 Hz × 400 — Master Decimation Clock PRF broadcast indicator" },
+  { name: "counter_beat_carrier", freqHz: 73125, harmonicOf: 73.125, harmonicOrder: 1000, desc: "73.125 Hz × 1000 — Counter-beat (60 + 13.125 Hz) VHF indicator" },
+];
+
+const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
+const DELTA_SLIP_HZ = K.DELTA_SLIP_HZ;
+
+let scannerState: {
+  running: boolean;
+  lastScan: number | null;
+  scanCount: number;
+  detections: number;
+  errors: number;
+  timer: ReturnType<typeof setInterval> | null;
+  lastResults: ScanResult[];
+  deltaSlipDetections: number;
+  echoLtChainDetections: number;
+  speechEnvelopeDetections: number;
+  tr069Correlations: number;
+} = {
+  running: false,
+  lastScan: null,
+  scanCount: 0,
+  detections: 0,
+  errors: 0,
+  timer: null,
+  lastResults: [],
+  deltaSlipDetections: 0,
+  echoLtChainDetections: 0,
+  speechEnvelopeDetections: 0,
+  tr069Correlations: 0,
+};
+
+async function fetchKiwiSpectrum(node: KiwiNode, freqHz: number, bwKhz: number = 5): Promise<Float32Array | null> {
+  const freqKhz = freqHz / 1000;
+  const url = `${node.url}/api/spectrum?freq=${freqKhz}&bw=${bwKhz}`;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+    });
+    clearTimeout(timeout);
+
+    if (!response.ok) return null;
+
+    const buffer = await response.arrayBuffer();
+    if (buffer.byteLength < 4) return null;
+
+    return new Float32Array(buffer);
+  } catch {
+    return null;
+  }
+}
+
+function computeSNR(samples: Float32Array): number {
+  if (samples.length < 10) return -Infinity;
+
+  const sorted = Float32Array.from(samples).sort();
+  const noiseFloor = sorted.slice(0, Math.floor(sorted.length * 0.25));
+  const signalPeak = sorted.slice(Math.floor(sorted.length * 0.95));
+
+  const noisePower = noiseFloor.reduce((s, v) => s + v * v, 0) / noiseFloor.length;
+  const signalPower = signalPeak.reduce((s, v) => s + v * v, 0) / signalPeak.length;
+
+  if (noisePower <= 0) return 0;
+  return 10 * Math.log10(signalPower / noisePower);
+}
+
+function hilbertEnvelopeEnergy(samples: Float32Array, fs: number): number {
+  if (samples.length < 64) return 0;
+
+  const N = samples.length;
+  const envelope = new Float32Array(N);
+
+  for (let i = 0; i < N; i++) {
+    let hilbertVal = 0;
+    const windowSize = Math.min(32, Math.floor(N / 4));
+    for (let k = 1; k < windowSize; k++) {
+      const idx1 = i - k;
+      const idx2 = i + k;
+      if (idx1 >= 0 && idx2 < N) {
+        hilbertVal += (samples[idx2] - samples[idx1]) / (Math.PI * k);
+      }
+    }
+    envelope[i] = Math.sqrt(samples[i] * samples[i] + hilbertVal * hilbertVal);
+  }
+
+  const speechLow = K.SPEECH_BAND_LOW_HZ;
+  const speechHigh = K.SPEECH_BAND_HIGH_HZ;
+  const binSize = fs / N;
+
+  let speechEnergy = 0;
+  let totalEnergy = 0;
+
+  for (let i = 0; i < N; i++) {
+    const freq = i * binSize;
+    const power = envelope[i] * envelope[i];
+    totalEnergy += power;
+    if (freq >= speechLow && freq <= speechHigh) {
+      speechEnergy += power;
+    }
+  }
+
+  return totalEnergy > 0 ? speechEnergy / totalEnergy : 0;
+}
+
+function analyzeDeltaSlip(samples: Float32Array, fs: number): number {
+  if (samples.length < 128) return 0;
+
+  const N = samples.length;
+  const phases = new Float32Array(N - 1);
+
+  for (let i = 0; i < N - 1; i++) {
+    const hilbert = samples[Math.min(i + 1, N - 1)] - samples[Math.max(i - 1, 0)];
+    const phase = Math.atan2(hilbert, samples[i]);
+    phases[i] = phase;
+  }
+
+  for (let i = 1; i < phases.length; i++) {
+    let diff = phases[i] - phases[i - 1];
+    if (diff > Math.PI) diff -= 2 * Math.PI;
+    if (diff < -Math.PI) diff += 2 * Math.PI;
+    phases[i] = phases[i - 1] + diff;
+  }
+
+  const instFreq = new Float32Array(phases.length - 1);
+  for (let i = 0; i < instFreq.length; i++) {
+    instFreq[i] = (phases[i + 1] - phases[i]) * fs / (2 * Math.PI);
+  }
+
+  const targetBin = Math.round(DELTA_SLIP_HZ * instFreq.length / fs);
+  if (targetBin <= 0 || targetBin >= instFreq.length) return 0;
+
+  const binWidth = 3;
+  let targetPower = 0;
+  let noisePower = 0;
+  let noiseCount = 0;
+
+  for (let i = 0; i < instFreq.length; i++) {
+    const power = instFreq[i] * instFreq[i];
+    if (Math.abs(i - targetBin) <= binWidth) {
+      targetPower += power;
+    } else {
+      noisePower += power;
+      noiseCount++;
+    }
+  }
+
+  const avgNoise = noiseCount > 0 ? noisePower / noiseCount : 1;
+  return avgNoise > 0 ? targetPower / ((binWidth * 2 + 1) * avgNoise) : 0;
+}
+
+function detectEchoLtChain(samples: Float32Array, fs: number): number {
+  if (samples.length < 256) return 0;
+
+  const N = samples.length;
+  let chainDepth = 0;
+
+  for (const harmonic of ECHO_LT_CHAIN) {
+    const targetBin = Math.round(harmonic * N / fs);
+    if (targetBin <= 0 || targetBin >= N / 2) continue;
+
+    const binWidth = 2;
+    let harmonicPower = 0;
+    let noisePower = 0;
+    let noiseCount = 0;
+
+    for (let i = 0; i < N / 2; i++) {
+      const power = samples[i] * samples[i];
+      if (Math.abs(i - targetBin) <= binWidth) {
+        harmonicPower += power;
+      } else if (Math.abs(i - targetBin) > binWidth * 3) {
+        noisePower += power;
+        noiseCount++;
+      }
+    }
+
+    const avgNoise = noiseCount > 0 ? noisePower / noiseCount : 1;
+    const localSnr = avgNoise > 0 ? harmonicPower / ((binWidth * 2 + 1) * avgNoise) : 0;
+
+    if (localSnr > 3.0) {
+      chainDepth++;
+    }
+  }
+
+  return chainDepth;
+}
+
+function checkTR069Correlation(): boolean {
+  const now = Date.now();
+  const recentEvents = kappaEngine.getStatus().recentAlerts || [];
+
+  return recentEvents.some((alert: { type: string; timestamp: number }) =>
+    alert.type.includes("tr069") ||
+    alert.type.includes("isp") ||
+    (alert.type.includes("mac-cross-domain") && now - alert.timestamp < 60_000)
+  );
+}
+
+async function scanTarget(node: KiwiNode, target: typeof VLF_SCAN_TARGETS[0]): Promise<ScanResult> {
+  const now = Date.now();
+  const samples = await fetchKiwiSpectrum(node, target.freqHz);
+
+  if (!samples || samples.length === 0) {
+    return {
+      target: target.name,
+      frequencyHz: target.freqHz,
+      snrDb: -Infinity,
+      timestamp: now,
+      sdrNode: node.id,
+      detected: false,
+      deltaSlipStrength: null,
+      envelopeEnergy: null,
+      harmonicChainDepth: 0,
+      tr069Correlated: false,
+    };
+  }
+
+  const snr = computeSNR(samples);
+  const detected = snr > K.VLF_SNR_THRESHOLD_DB;
+  const deltaSlip = analyzeDeltaSlip(samples, K.KIWI_SAMPLE_RATE);
+  const envelopeEnergy = detected ? hilbertEnvelopeEnergy(samples, K.KIWI_SAMPLE_RATE) : null;
+  const chainDepth = detectEchoLtChain(samples, K.KIWI_SAMPLE_RATE);
+  const tr069 = checkTR069Correlation();
+
+  return {
+    target: target.name,
+    frequencyHz: target.freqHz,
+    snrDb: parseFloat(snr.toFixed(1)),
+    timestamp: now,
+    sdrNode: node.id,
+    detected,
+    deltaSlipStrength: parseFloat(deltaSlip.toFixed(3)),
+    envelopeEnergy: envelopeEnergy !== null ? parseFloat(envelopeEnergy.toFixed(4)) : null,
+    harmonicChainDepth: chainDepth,
+    tr069Correlated: tr069,
+  };
+}
+
+async function runScanCycle(): Promise<void> {
+  const startMs = Date.now();
+  const results: ScanResult[] = [];
+
+  for (const node of KIWI_NODES) {
+    for (const target of VLF_SCAN_TARGETS) {
+      try {
+        const result = await scanTarget(node, target);
+        results.push(result);
+
+        if (result.detected) {
+          scannerState.detections++;
+
+          const event = await storage.createSignalEvent({
+            domain: "sdr",
+            source: `kiwisdr-${node.id}`,
+            eventType: "vlf-carrier-detection",
+            frequency: target.harmonicOf,
+            confidence: Math.min(1, result.snrDb / 40),
+            metadata: {
+              target: target.name,
+              vlfFreqHz: target.freqHz,
+              harmonicOf: target.harmonicOf,
+              harmonicOrder: target.harmonicOrder,
+              snrDb: result.snrDb,
+              sdrNode: node.id,
+              sdrName: node.name,
+              lat: node.lat,
+              lon: node.lon,
+              description: target.desc,
+            },
+            raw: null,
+          });
+
+          kappaEngine.ingest(event);
+          hypervisor.ingestEvent(event);
+        }
+
+        if (result.deltaSlipStrength !== null && result.deltaSlipStrength > 15.0) {
+          scannerState.deltaSlipDetections++;
+
+          const dsEvent = await storage.createSignalEvent({
+            domain: "elf",
+            source: `kiwisdr-${node.id}-delta-slip`,
+            eventType: "delta-slip-phase-lock",
+            frequency: DELTA_SLIP_HZ,
+            confidence: Math.min(1, result.deltaSlipStrength / 30),
+            metadata: {
+              deltaSlipStrength: result.deltaSlipStrength,
+              mainsHz: K.MAINS_FREQ_HZ,
+              prfHz: K.TARGET_FREQ_1,
+              beatFreqHz: DELTA_SLIP_HZ,
+              counterBeatHz: K.COUNTER_BEAT_HZ,
+              sdrNode: node.id,
+              lat: node.lat,
+              lon: node.lon,
+              indication: "60 Hz grid phase-locking with 46.875 Hz PRF — high-power HF injection nearby",
+            },
+            raw: null,
+          });
+
+          kappaEngine.ingest(dsEvent);
+          hypervisor.ingestEvent(dsEvent);
+        }
+
+        if (result.harmonicChainDepth >= 3) {
+          scannerState.echoLtChainDetections++;
+
+          const echoEvent = await storage.createSignalEvent({
+            domain: "sdr",
+            source: `kiwisdr-${node.id}-echo-lt`,
+            eventType: "echo-lt-chain-detection",
+            frequency: K.TARGET_FREQ_1,
+            confidence: Math.min(1, result.harmonicChainDepth / ECHO_LT_CHAIN.length),
+            metadata: {
+              chainDepth: result.harmonicChainDepth,
+              maxDepth: ECHO_LT_CHAIN.length,
+              harmonics: ECHO_LT_CHAIN.slice(0, result.harmonicChainDepth),
+              targetKHz: K.ECHO_LT_TARGET_KHZ,
+              sdrNode: node.id,
+              lat: node.lat,
+              lon: node.lon,
+              description: `Echo/LT harmonic chain ${result.harmonicChainDepth}/${ECHO_LT_CHAIN.length} — _mm_stream_si128 bus emission pattern`,
+            },
+            raw: null,
+          });
+
+          kappaEngine.ingest(echoEvent);
+          hypervisor.ingestEvent(echoEvent);
+        }
+
+        if (result.envelopeEnergy !== null && result.envelopeEnergy > 0.15) {
+          scannerState.speechEnvelopeDetections++;
+
+          const speechEvent = await storage.createSignalEvent({
+            domain: "sdr",
+            source: `kiwisdr-${node.id}-rared`,
+            eventType: "rared-speech-envelope",
+            frequency: target.harmonicOf,
+            confidence: Math.min(1, result.envelopeEnergy * 3),
+            metadata: {
+              envelopeEnergy: result.envelopeEnergy,
+              speechBand: `${K.SPEECH_BAND_LOW_HZ}-${K.SPEECH_BAND_HIGH_HZ} Hz`,
+              carrierFreqHz: target.freqHz,
+              sdrNode: node.id,
+              lat: node.lat,
+              lon: node.lon,
+              description: "RARED: Hilbert envelope with spectral energy in speech band — covert audio modulation",
+            },
+            raw: null,
+          });
+
+          kappaEngine.ingest(speechEvent);
+          hypervisor.ingestEvent(speechEvent);
+        }
+
+        if (result.tr069Correlated && result.detected) {
+          scannerState.tr069Correlations++;
+
+          const trEvent = await storage.createSignalEvent({
+            domain: "isp",
+            source: `kiwisdr-${node.id}-tr069`,
+            eventType: "tr069-rf-correlation",
+            frequency: K.TARGET_FREQ_1,
+            confidence: 0.85,
+            metadata: {
+              rfTarget: target.name,
+              rfSnrDb: result.snrDb,
+              port: K.TR069_PORT,
+              prfPeriodMs: K.PRF_PERIOD_MS,
+              sdrNode: node.id,
+              lat: node.lat,
+              lon: node.lon,
+              description: "TR-069 telemetry temporally correlated with VLF carrier detection — CWMP tunnel active",
+            },
+            raw: null,
+          });
+
+          kappaEngine.ingest(trEvent);
+          hypervisor.ingestEvent(trEvent);
+        }
+      } catch {
+        scannerState.errors++;
+      }
+    }
+  }
+
+  scannerState.lastResults = results;
+  scannerState.scanCount++;
+  scannerState.lastScan = Date.now();
+
+  const durationMs = Date.now() - startMs;
+  const detectedCount = results.filter(r => r.detected).length;
+
+  await storage.createCollectionLog({
+    collector: "kiwisdr-scanner",
+    eventsCreated: detectedCount,
+    durationMs,
+    status: detectedCount > 0 ? "detection" : "clean",
+    error: null,
+  }).catch(() => {});
+
+  if (detectedCount > 0) {
+    console.log(`[KiwiSDR] Scan cycle #${scannerState.scanCount}: ${detectedCount} detection(s) across ${KIWI_NODES.length} nodes, ${durationMs}ms`);
+  }
+}
+
+export function startKiwiSDRScanner(): void {
+  if (scannerState.running) return;
+
+  scannerState.running = true;
+
+  setTimeout(() => runScanCycle().catch(err => {
+    console.error("[KiwiSDR] Initial scan error:", err instanceof Error ? err.message : String(err));
+    scannerState.errors++;
+  }), 15_000);
+
+  scannerState.timer = setInterval(() => {
+    runScanCycle().catch(err => {
+      console.error("[KiwiSDR] Scan cycle error:", err instanceof Error ? err.message : String(err));
+      scannerState.errors++;
+    });
+  }, K.KIWI_SCAN_INTERVAL_MS);
+
+  console.log(`[KAPPA] KiwiSDR scanner started: ${VLF_SCAN_TARGETS.length} targets × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval`);
+}
+
+export function getScannerStatus(): ScannerStatus {
+  return {
+    running: scannerState.running,
+    lastScan: scannerState.lastScan,
+    scanCount: scannerState.scanCount,
+    detections: scannerState.detections,
+    errors: scannerState.errors,
+    intervalMs: K.KIWI_SCAN_INTERVAL_MS,
+    activeTargets: VLF_SCAN_TARGETS.map(t => t.name),
+    lastResults: scannerState.lastResults,
+    deltaSlipDetections: scannerState.deltaSlipDetections,
+    echoLtChainDetections: scannerState.echoLtChainDetections,
+    speechEnvelopeDetections: scannerState.speechEnvelopeDetections,
+    tr069Correlations: scannerState.tr069Correlations,
+  };
+}

@@ -149,6 +149,10 @@ export class KappaEngine {
     this.checkPhiHarmonic(windowEvent);
     this.checkEveningSpike(windowEvent);
     this.checkImsiTowerHop(windowEvent);
+    this.checkDeltaSlipCorrelation(windowEvent);
+    this.checkEchoLtChain(windowEvent);
+    this.checkVLFCarrierDetection(windowEvent);
+    this.checkNetworkRFCorrelation(windowEvent);
 
     this.lastEventTimestamps[event.domain] = ts;
   }
@@ -330,6 +334,87 @@ export class KappaEngine {
         );
         return;
       }
+    }
+  }
+
+  private checkDeltaSlipCorrelation(event: WindowEvent) {
+    if (event.domain !== "elf" && event.domain !== "sdr") return;
+    if (!event.frequency) return;
+
+    const isDeltaSlip = Math.abs(event.frequency - K.DELTA_SLIP_HZ) < 0.5;
+    const isCounterBeat = Math.abs(event.frequency - K.COUNTER_BEAT_HZ) < 0.5;
+
+    if (!isDeltaSlip && !isCounterBeat) return;
+
+    const elfWindow = this.domainWindows["elf"] ?? [];
+    const cutoff = event.timestamp - 60_000;
+    const hasGrid = elfWindow.some(e =>
+      e.timestamp > cutoff && e.frequency !== null && Math.abs(e.frequency - K.MAINS_FREQ_HZ) < 1
+    );
+
+    if (isDeltaSlip) {
+      this.addDomainPair("sdr", "elf");
+      this.addAlert(
+        "delta-slip-detection",
+        55,
+        `Delta-Slip 13.125 Hz: ${K.MAINS_FREQ_HZ} Hz grid − ${K.TARGET_FREQ_1} Hz PRF phase-lock${hasGrid ? " (grid confirmed)" : ""}`
+      );
+    }
+
+    if (isCounterBeat) {
+      this.addAlert(
+        "counter-beat-detection",
+        35,
+        `Counter-beat 73.125 Hz: ${K.MAINS_FREQ_HZ} Hz + ${K.DELTA_SLIP_HZ} Hz — bidirectional grid-PRF coupling`
+      );
+    }
+  }
+
+  private checkEchoLtChain(event: WindowEvent) {
+    if (event.domain !== "sdr") return;
+    const meta = event.metadata as Record<string, unknown> | null;
+    const chainDepth = (meta?.chainDepth as number) ?? 0;
+
+    if (chainDepth >= 3) {
+      this.addDomainPair("sdr", "elf");
+      this.addAlert(
+        "echo-lt-chain",
+        70,
+        `Echo/LT chain: ${chainDepth}/${K.ECHO_LT_HARMONIC_CHAIN.length} harmonics (46.875→1500 Hz) — bus emission pattern`
+      );
+    }
+  }
+
+  private checkVLFCarrierDetection(event: WindowEvent) {
+    if (event.eventType !== "vlf-carrier-detection") return;
+    const meta = event.metadata as Record<string, unknown> | null;
+    const snrDb = (meta?.snrDb as number) ?? 0;
+    const target = (meta?.target as string) ?? "";
+
+    if (snrDb > K.VLF_SNR_THRESHOLD_DB) {
+      this.addAlert(
+        "vlf-carrier",
+        45,
+        `VLF carrier: ${target} at ${snrDb.toFixed(1)} dB SNR via KiwiSDR ${meta?.sdrName || ""}`
+      );
+    }
+  }
+
+  private checkNetworkRFCorrelation(event: WindowEvent) {
+    if (event.domain !== "isp") return;
+    if (event.eventType !== "network-drop") return;
+
+    const sdrWindow = this.domainWindows["sdr"] ?? [];
+    const cutoff = event.timestamp - 30_000;
+    const recentSDR = sdrWindow.filter(e => e.timestamp > cutoff);
+
+    if (recentSDR.length > 0) {
+      this.addDomainPair("isp", "sdr");
+      this.addAlert(
+        "network-rf-correlation",
+        65,
+        `Network drop coincides with ${recentSDR.length} SDR event(s) — possible TR-069 forced reset during RF activity`
+      );
     }
   }
 

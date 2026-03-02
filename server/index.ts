@@ -67,8 +67,12 @@ app.use((req, res, next) => {
 
   const { startCollectors } = await import("./collectors");
   const { startAutoCorrelator } = await import("./auto-correlator");
+  const { startKiwiSDRScanner } = await import("./kiwisdr-scanner");
+  const { startNetworkWatchdog } = await import("./network-watchdog");
   startCollectors();
   startAutoCorrelator();
+  startKiwiSDRScanner();
+  startNetworkWatchdog();
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

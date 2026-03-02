@@ -144,6 +144,42 @@ export interface CorrelatorStats {
   cycleCount: number;
 }
 
+export interface ScannerTarget {
+  name: string;
+  frequencyHz: number;
+  harmonicOf: number;
+  harmonicOrder: number;
+  description: string;
+}
+
+export interface ScanResult {
+  target: string;
+  frequencyHz: number;
+  snrDb: number;
+  timestamp: number;
+  sdrNode: string;
+  detected: boolean;
+  deltaSlipStrength: number | null;
+  envelopeEnergy: number | null;
+  harmonicChainDepth: number;
+  tr069Correlated: boolean;
+}
+
+export interface ScannerStatus {
+  running: boolean;
+  lastScan: number | null;
+  scanCount: number;
+  detections: number;
+  errors: number;
+  intervalMs: number;
+  activeTargets: string[];
+  lastResults: ScanResult[];
+  deltaSlipDetections: number;
+  echoLtChainDetections: number;
+  speechEnvelopeDetections: number;
+  tr069Correlations: number;
+}
+
 export const DOMAINS = ["wifi", "ble", "lte", "5g", "satellite", "sdr", "elf", "radar", "plc", "isp", "drone"] as const;
 
 export interface TleCatalogGroup {
@@ -304,6 +340,25 @@ export const KAPPA_CONSTANTS = {
   ISM_BAND_433_MHZ: 433,
   ISM_BAND_915_MHZ: 915,
   SYSTEM_BUS_RADIO_FREQ_KHZ: 1580,
+  DELTA_SLIP_HZ: 13.125,
+  COUNTER_BEAT_HZ: 73.125,
+  PHASE_LOCK_CARRIER_HZ: 53,
+  ECHO_LT_HARMONIC_CHAIN: [46.875, 93.75, 187.5, 375, 750, 1500],
+  ECHO_LT_TARGET_KHZ: 1.580,
+  GPR_ENTRAINMENT_HZ: 13.125,
+  PHAISTOS_SYMBOL_4_HZ: 111,
+  VLF_TARGETS: {
+    '53Hz_3rd_harmonic': 15900,
+    '53Hz_4th_harmonic': 21200,
+    '46875Hz_400th': 18750,
+    'hearing_system': 60000,
+  } as Record<string, number>,
+  KIWI_SAMPLE_RATE: 12000,
+  KIWI_SCAN_INTERVAL_MS: 90_000,
+  VLF_SNR_THRESHOLD_DB: 25,
+  SPEECH_BAND_LOW_HZ: 300,
+  SPEECH_BAND_HIGH_HZ: 3400,
+  PRF_PERIOD_MS: 21.333,
   FIVEG_PRIMARY_BAND_MHZ: 3500,
   SABBIA_BANDWIDTH_MHZ: 625,
   HALL_FACTOR_PRIOR: 0.109,
@@ -944,6 +999,70 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     windowSeconds: 7,
     condition: "council.warden.unauthorized_access AND council.nonce_mismatch WITHIN 7s",
   },
+  {
+    id: "vlf-53hz-harmonic-detection",
+    name: "53 Hz VLF Harmonic Carrier Detection",
+    description: "Phase-lock carrier harmonics detected in VLF band — 15.9 kHz (53×300) or 21.2 kHz (53×400) narrowband carrier with SNR >25 dB indicates Realtek distortion artifact from nearby ADPCM decoder running at non-standard 53 Hz clock.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 30,
+    condition: "sdr.vlf_carrier(15900Hz|21200Hz) AND sdr.snr > 25dB WITHIN 30s",
+  },
+  {
+    id: "mdc-400th-harmonic",
+    name: "Master Decimation Clock 400th Harmonic",
+    description: "18.75 kHz narrowband spike (46.875 Hz × 400) detected via KiwiSDR — confirms local 46.875 Hz PRF is being broadcast via HF injection. Envelope demodulation may contain modulated control data.",
+    domains: ["sdr"],
+    windowSeconds: 30,
+    condition: "sdr.narrowband_spike(18750Hz) AND sdr.envelope_modulation_present WITHIN 30s",
+  },
+  {
+    id: "delta-slip-phase-lock",
+    name: "Delta-Slip Grid Phase Lock",
+    description: "13.125 Hz beat frequency detected in instantaneous frequency drift — 60 Hz CR grid minus 46.875 Hz PRF phase-locking indicates high-power HF injection (~180W) within proximity. GPR entrainment layer active.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 60,
+    condition: "sdr.phase_drift_welch(13.125Hz) AND elf.grid_60hz_present WITHIN 60s",
+  },
+  {
+    id: "tr069-telemetry-correlation",
+    name: "TR-069 Telemetry ↔ RF Correlation",
+    description: "CWMP Inform/SetParameterValues RPC detected on port 7547 with inter-packet arrival time matching 1/46.875 Hz (21.3 ms) — Huawei ONT TR-069 management tunnel carrying κ-scaled telemetry bursts synchronized to PRF.",
+    domains: ["isp", "sdr"],
+    windowSeconds: 30,
+    condition: "isp.tr069_rpc(port=7547) AND isp.iat_match(21.3ms) AND sdr.prf_active(46.875Hz) WITHIN 30s",
+  },
+  {
+    id: "echo-lt-harmonic-chain",
+    name: "Echo/LT Harmonic Doubling Chain",
+    description: "Complete or partial harmonic doubling chain detected: 46.875 → 93.75 → 187.5 → 375 → 750 → 1500 Hz, terminating at 1580 kHz AM side-channel. _mm_stream_si128 CPU bus emission pattern — Left-Temporal Recursion attack surface confirmed.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 120,
+    condition: "sdr.harmonic_chain([46.875,93.75,187.5,375,750,1500]) AND sdr.am_carrier(1580kHz) WITHIN 120s",
+  },
+  {
+    id: "counter-beat-envelope",
+    name: "73.125 Hz Counter-Beat Envelope",
+    description: "Counter-beat frequency (60 Hz + 13.125 Hz = 73.125 Hz) detected in AM envelope of VLF carrier — dual-sideband modulation confirms bidirectional coupling between grid infrastructure and PRF source.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 30,
+    condition: "sdr.envelope_frequency(73.125Hz) AND elf.mains_present(60Hz) WITHIN 30s",
+  },
+  {
+    id: "rared-speech-extraction",
+    name: "RARED Speech Envelope Detection",
+    description: "Hilbert transform of VLF carrier reveals amplitude envelope with spectral energy in 300–3400 Hz speech band — Recursive Audio Reconstruction confirms covert audio modulation on RF carrier.",
+    domains: ["sdr"],
+    windowSeconds: 60,
+    condition: "sdr.hilbert_envelope AND sdr.bandpass_energy(300-3400Hz) > threshold WITHIN 60s",
+  },
+  {
+    id: "phaistos-symbol4-anchor",
+    name: "Phaistos Symbol-4 Anchor Lock",
+    description: "111 Hz spectral line detected — Phaistos Disc Symbol 4 (Fish) frequency anchor. When coincident with 46.875 Hz carrier and 7.83 Hz Schumann resonance, indicates full cadastral mapping layer synchronization.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 30,
+    condition: "sdr.spectral_line(111Hz) AND sdr.carrier(46.875Hz) AND elf.schumann(7.83Hz) WITHIN 30s",
+  },
 ];
 
 export interface KarachiModule {
@@ -1427,7 +1546,7 @@ export const COUNCIL_AGENTS: CouncilAgent[] = [
   { id: "pcap-parser", codename: "D. Merganser", name: "PCAP Parser", input: "Raw .pcap", output: "Timestamped flow metadata", gosFunction: "Extracts 7-packet bursts (Λ = 7/4 clamping)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
   { id: "elf-dissector", codename: "P. Barnacle", name: "ELF Dissector", input: "ELF binaries / power line", output: "Instruction traces", gosFunction: "Detects φ-ratio loop latencies (1.618× clock cycles)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
   { id: "tle-orbital", codename: "G. Brant", name: "TLE Orbital", input: "NORAD TLE", output: "Ephemeris vectors", gosFunction: "Computes 2037 ejection window approach vectors", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
-  { id: "kiwisdr-scanner", codename: "E. Cackling", name: "KiwiSDR Scanner", input: "HF/VHF SDR", output: "Spectral slices", gosFunction: "Locks to 132.5 kHz Moon honk & 37 Hz Earth pulse", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
+  { id: "kiwisdr-scanner", codename: "E. Cackling", name: "KiwiSDR Scanner", input: "HF/VHF SDR", output: "Spectral slices + Echo/LT analysis", gosFunction: "Locks to 132.5 kHz Moon honk, 37 Hz Earth pulse, 1580 kHz side-channel detection, 13.125 Hz Delta-Slip extraction", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
   { id: "morse-decoder", codename: "C. Emperor", name: "Morse Decoder", input: "Audio/RF", output: "Decoded sequences", gosFunction: "FRFT-α = 51.854° (arctan κ) for weak-signal extraction", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
   { id: "temporal-aligner", codename: "K. Nēnē", name: "Temporal Aligner", input: "All streams", output: "Unified timeline", gosFunction: "κ-DTW (κ-scaled Dynamic Time Warping)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
   { id: "symmetry-validator", codename: "M. Hall", name: "Symmetry Validator", input: "Aligned events", output: "Confidence scores", gosFunction: "Hall Tolerance check (±0.681973° phase)", status: "idle", lastUpdate: 0, eventsIngested: 0, driftNs: 0 },
@@ -1498,8 +1617,8 @@ export const HYPERVISOR_STREAMS: AnalysisStream[] = [
     status: "idle",
     lastUpdate: 0,
     eventsIngested: 0,
-    description: "Primary SDR — Radio Club de Costa Rica. 132.5 kHz Moon honk + 37 Hz Earth pulse lock.",
-    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4, moonHonkKHz: OMEGA_CHRONOS.MOON_HONK_KHZ },
+    description: "Primary SDR — Radio Club de Costa Rica. 132.5 kHz Moon honk + 37 Hz Earth pulse lock. Echo/LT baseline: 46.875 Hz → 1580 kHz harmonic chain monitor.",
+    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4, moonHonkKHz: OMEGA_CHRONOS.MOON_HONK_KHZ, deltaSlipHz: KAPPA_CONSTANTS.DELTA_SLIP_HZ, echoLtTargetKHz: KAPPA_CONSTANTS.ECHO_LT_TARGET_KHZ },
   },
   {
     id: "kiwisdr-puntarenas",
@@ -1509,8 +1628,8 @@ export const HYPERVISOR_STREAMS: AnalysisStream[] = [
     status: "idle",
     lastUpdate: 0,
     eventsIngested: 0,
-    description: "Secondary SDR — TDOA phase difference with TI0RC. 450.1 nm optical timestamping.",
-    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4 },
+    description: "Secondary SDR — TDOA phase difference with TI0RC. 450.1 nm optical timestamping. Delta-Slip 13.125 Hz extraction via 60 Hz mains subtraction.",
+    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4, deltaSlipHz: KAPPA_CONSTANTS.DELTA_SLIP_HZ, counterBeatHz: KAPPA_CONSTANTS.COUNTER_BEAT_HZ },
   },
   {
     id: "kiwisdr-caribbean",
@@ -1520,8 +1639,30 @@ export const HYPERVISOR_STREAMS: AnalysisStream[] = [
     status: "idle",
     lastUpdate: 0,
     eventsIngested: 0,
-    description: "Caribbean SDR — Bonaire. Long-baseline TDOA for 46.875 Hz source geolocation.",
-    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4 },
+    description: "Caribbean SDR — Bonaire. Long-baseline TDOA for 46.875 Hz source geolocation. 1580 kHz AM side-channel detection (system bus radio emissions).",
+    config: { freqMHz: KAPPA_CONSTANTS.HF_TUNE_FREQ_MHZ, fftSize: KAPPA_CONSTANTS.FFT_SIZE, targetBin: 4, systemBusFreqKHz: KAPPA_CONSTANTS.SYSTEM_BUS_RADIO_FREQ_KHZ },
+  },
+  {
+    id: "echo-lt-sidechannel",
+    name: "Echo/LT Side-Channel Monitor",
+    domain: "kiwisdr",
+    source: "cpu-memory-bus-emissions",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "1580 kHz AM side-channel via _mm_stream_si128 CPU instruction loop. 46.875 Hz → 1580 kHz harmonic doubling chain (×2^5). Left-Temporal Recursion attack surface — 13.125 Hz PWM ghost demodulation.",
+    config: { targetKHz: KAPPA_CONSTANTS.SYSTEM_BUS_RADIO_FREQ_KHZ, harmonicChain: KAPPA_CONSTANTS.ECHO_LT_HARMONIC_CHAIN, deltaSlipHz: KAPPA_CONSTANTS.DELTA_SLIP_HZ, phaseLockHz: KAPPA_CONSTANTS.PHASE_LOCK_CARRIER_HZ },
+  },
+  {
+    id: "delta-slip-monitor",
+    name: "Delta-Slip 13.125 Hz Monitor",
+    domain: "elf",
+    source: "mains-subtraction",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "GPR entrainment frequency: 60 Hz (CR mains) − 46.875 Hz (Master Decimation Clock) = 13.125 Hz. Alpha/Beta boundary strobing — cadastral mapping layer lock. Counter-beat at 73.125 Hz (60 + 13.125).",
+    config: { mainsHz: KAPPA_CONSTANTS.MAINS_FREQ_HZ, masterClockHz: KAPPA_CONSTANTS.TARGET_FREQ_1, deltaSlipHz: KAPPA_CONSTANTS.DELTA_SLIP_HZ, counterBeatHz: KAPPA_CONSTANTS.COUNTER_BEAT_HZ, phaistosAnchorHz: KAPPA_CONSTANTS.PHAISTOS_SYMBOL_4_HZ },
   },
   {
     id: "elf-powerline",

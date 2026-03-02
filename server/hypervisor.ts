@@ -88,8 +88,8 @@ export class OmegaChronosHypervisor {
       ble: ["pcap-ble"],
       lte: ["pcap-wifi"],
       satellite: ["satellite-blackjack", "satellite-starlink"],
-      sdr: ["kiwisdr-ti0rc", "rf-46875"],
-      elf: ["elf-powerline", "elf-schumann"],
+      sdr: ["kiwisdr-ti0rc", "rf-46875", "echo-lt-sidechannel"],
+      elf: ["elf-powerline", "elf-schumann", "delta-slip-monitor"],
       plc: ["plc-modbus"],
       radar: ["adsb-local"],
       drone: ["adsb-local"],
@@ -260,14 +260,36 @@ export class OmegaChronosHypervisor {
         const freqMatch = a.frequency && b.frequency && Math.abs(a.frequency - b.frequency) < 1;
         const is46875 = (a.frequency && Math.abs(a.frequency - K.TARGET_FREQ_1) < 1) ||
                         (b.frequency && Math.abs(b.frequency - K.TARGET_FREQ_1) < 1);
+        const isDeltaSlip = (a.frequency && Math.abs(a.frequency - K.DELTA_SLIP_HZ) < 0.5) ||
+                            (b.frequency && Math.abs(b.frequency - K.DELTA_SLIP_HZ) < 0.5);
+        const isCounterBeat = (a.frequency && Math.abs(a.frequency - K.COUNTER_BEAT_HZ) < 0.5) ||
+                              (b.frequency && Math.abs(b.frequency - K.COUNTER_BEAT_HZ) < 0.5);
+        const isPhaseLock = (a.frequency && Math.abs(a.frequency - K.PHASE_LOCK_CARRIER_HZ) < 0.5) ||
+                            (b.frequency && Math.abs(b.frequency - K.PHASE_LOCK_CARRIER_HZ) < 0.5);
+        const isSymbol4 = (a.frequency && Math.abs(a.frequency - K.PHAISTOS_SYMBOL_4_HZ) < 0.5) ||
+                          (b.frequency && Math.abs(b.frequency - K.PHAISTOS_SYMBOL_4_HZ) < 0.5);
+        const isEchoLt = (a.frequency && K.ECHO_LT_HARMONIC_CHAIN.some((h: number) => Math.abs(a.frequency! - h) < 1)) ||
+                         (b.frequency && K.ECHO_LT_HARMONIC_CHAIN.some((h: number) => Math.abs(b.frequency! - h) < 1));
 
         if (freqMatch) symmetryScore = Math.min(1, symmetryScore + 0.15);
         if (is46875) symmetryScore = Math.min(1, symmetryScore + 0.1);
+        if (isDeltaSlip) symmetryScore = Math.min(1, symmetryScore + 0.12);
+        if (isCounterBeat) symmetryScore = Math.min(1, symmetryScore + 0.08);
+        if (isPhaseLock) symmetryScore = Math.min(1, symmetryScore + 0.06);
+        if (isSymbol4) symmetryScore = Math.min(1, symmetryScore + 0.07);
+        if (isEchoLt) symmetryScore = Math.min(1, symmetryScore + 0.09);
+
+        const freqTag = is46875 ? " — 46.875 Hz MDC" :
+                        isDeltaSlip ? " — 13.125 Hz Δ-Slip" :
+                        isCounterBeat ? " — 73.125 Hz counter-beat" :
+                        isPhaseLock ? " — 53 Hz phase-lock" :
+                        isSymbol4 ? " — 111 Hz symbol-4" :
+                        isEchoLt ? " — Echo/LT harmonic" : "";
 
         this.overlapCounter++;
         const desc = isTemporalCluster
-          ? `${a.domain.toUpperCase()}↔${b.domain.toUpperCase()}: simultaneous (Δt=${deltaMs.toFixed(0)}ms)${is46875 ? " — 46.875 Hz" : ""}`
-          : `${a.domain.toUpperCase()}↔${b.domain.toUpperCase()}: Δt=${deltaMs.toFixed(1)}ms (${deltaTau.toFixed(3)}τ)${is46875 ? " — 46.875 Hz" : ""}`;
+          ? `${a.domain.toUpperCase()}↔${b.domain.toUpperCase()}: simultaneous (Δt=${deltaMs.toFixed(0)}ms)${freqTag}`
+          : `${a.domain.toUpperCase()}↔${b.domain.toUpperCase()}: Δt=${deltaMs.toFixed(1)}ms (${deltaTau.toFixed(3)}τ)${freqTag}`;
 
         overlaps.push({
           id: `oc-${this.overlapCounter}`,
@@ -315,16 +337,28 @@ export class OmegaChronosHypervisor {
       if (o.domains.length >= 2) psi += 0.10;
       if (o.symmetryScore > 0.8) psi += 0.05;
 
+      const KIWI_FREQS = [K.TARGET_FREQ_1, K.DELTA_SLIP_HZ, K.COUNTER_BEAT_HZ, K.PHASE_LOCK_CARRIER_HZ, K.PHAISTOS_SYMBOL_4_HZ];
       const hasFreqCorrelation = o.events.some(e => {
         const streamEv = this.streamEvents.get(e.streamId);
         if (!streamEv) return false;
         return streamEv.some(se =>
           Math.abs(se.timestamp - e.timestamp) < 100 &&
           se.frequency !== null &&
-          Math.abs(se.frequency - K.TARGET_FREQ_1) < 1
+          KIWI_FREQS.some(kf => Math.abs(se.frequency! - kf) < 1)
         );
       });
       if (hasFreqCorrelation) psi = Math.min(1, psi + 0.10);
+
+      const hasEchoLt = o.events.some(e => {
+        const streamEv = this.streamEvents.get(e.streamId);
+        if (!streamEv) return false;
+        return streamEv.some(se =>
+          Math.abs(se.timestamp - e.timestamp) < 200 &&
+          se.frequency !== null &&
+          K.ECHO_LT_HARMONIC_CHAIN.some((h: number) => Math.abs(se.frequency! - h) < 2)
+        );
+      });
+      if (hasEchoLt) psi = Math.min(1, psi + 0.05);
 
       o.psiConvergence = Math.min(1, psi);
 
