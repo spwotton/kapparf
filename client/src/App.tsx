@@ -23,6 +23,7 @@ import CongustoPage from "@/pages/congusto";
 import HypervisorPage from "@/pages/hypervisor";
 import IntelligencePage from "@/pages/intelligence";
 import LatticePage from "@/pages/lattice";
+import SocialPage from "@/pages/social";
 
 function Router() {
   return (
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/hypervisor" component={HypervisorPage} />
       <Route path="/intelligence" component={IntelligencePage} />
       <Route path="/lattice" component={LatticePage} />
+      <Route path="/social" component={SocialPage} />
       <Route component={NotFound} />
     </Switch>
   );

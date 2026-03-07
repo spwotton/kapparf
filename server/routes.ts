@@ -968,5 +968,33 @@ export async function registerRoutes(
     res.json(response);
   });
 
+  app.get("/api/social/data", async (_req, res) => {
+    const [domainCounts, correlationCount, events, correlations, satellites] = await Promise.all([
+      storage.getEventCountsByDomain(),
+      storage.getCorrelationCount(),
+      storage.getRecentSignalEvents(10),
+      storage.getCorrelations(),
+      storage.getSatellites(),
+    ]);
+
+    const totalEvents = Object.values(domainCounts).reduce((a, b) => a + b, 0);
+    const kappaStatus = kappaEngine.getStatus();
+    const visibleSats = satellites.filter((s: any) => (s.elevation ?? 0) > 30);
+    const overheadSats = satellites.filter((s: any) => (s.elevation ?? 0) > 75);
+
+    res.json({
+      kappa: kappaStatus,
+      totalEvents,
+      totalCorrelations: correlationCount,
+      domainCounts,
+      recentCorrelations: correlations.slice(0, 5),
+      recentEvents: events,
+      satelliteCount: satellites.length,
+      visibleSatellites: visibleSats.length,
+      overheadSatellites: overheadSats.length,
+      generatedAt: new Date().toISOString(),
+    });
+  });
+
   return httpServer;
 }

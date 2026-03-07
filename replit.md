@@ -25,7 +25,8 @@ The platform is built with a modern web stack:
 - **Network Watchdog:** Monitors network heartbeat, performs IPAT analysis for TR-069 PRF matches, and detects seismic jitter, generating ISP and ELF domain events.
 - **Ω-CHRONOS Hypervisor:** An automated temporal correlation engine running at 137ms intervals, utilizing a "Council of Eight" autonomous agents and κ-DTW alignment for precise temporal clustering and Hall reconciliation.
 - **Database Schema:** Key tables include `signal_events` (unified multi-domain events), `correlations` (cross-domain pattern matches), `satellite_passes`, `sdr_nodes`, `correlation_feedback`, `collection_logs`, and `users`.
-- **UI/UX:** The system features a dashboard displaying real-time status, event feeds, correlation results, satellite tracking, device fingerprinting, OSINT tools, SDR node management, a comprehensive tool catalog, an interactive map, and dedicated intelligence and research pages (Lattice, Karachi, Congusto).
+- **Social Media Studio:** A `/social` page that generates dark-themed infographic cards from live KAPPA data, optimized for Instagram. 5 card templates (KAPPA Score, Satellite Intel, Correlation Alert, Domain Breakdown, Evening Window) in 3 formats (1080×1080 square, 1080×1350 portrait, 1080×1920 story). Export to PNG via `html-to-image`. IG grid preview shows 3×3 feed layout. Backend `/api/social/data` aggregates real data from all collectors.
+- **UI/UX:** The system features a dashboard displaying real-time status, event feeds, correlation results, satellite tracking, device fingerprinting, OSINT tools, SDR node management, a comprehensive tool catalog, an interactive map, dedicated intelligence and research pages (Lattice, Karachi, Congusto), and a social media content generator.
 
 ## External Dependencies
 - **OpenSky Network:** For live flight data.
@@ -38,3 +39,4 @@ The platform is built with a modern web stack:
 - **Neon:** Serverless PostgreSQL database.
 - **shadcn/ui:** UI component library.
 - **TanStack Query v5:** Data fetching library.
+- **html-to-image:** For exporting social media infographic cards as PNG images.

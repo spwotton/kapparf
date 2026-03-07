@@ -1,0 +1,59 @@
+
+Databases
+Development Database
+56.25MB / 20GB
+Production Database
+32.14MB / 100GB
+Billing Period
+Renews monthly, Mar 29
+Hours of Compute Used
+0.04 hours
+
+npm run dev
+23m
+ • 
+23 minutes ago
+Port :5000 opened on
+Production
+Status
+Sam published 1 minute ago
+Visibility
+Public
+Domain
+https://rf-observatory-fusion.replit.app
+Type
+Autoscale
+(2 vCPU / 4 GiB RAM / 3 Max)
+See all usage
+Database
+Production database connected
+7e8e091c
+SW
+SamWotton
+Sam
+published 4 days ago
+4116eb00
+SW
+SamWotton
+Sam
+failed to publish 5 days ago
+Saved progress at the end of the loop
+awesome it looks great, but lets make sure theres no mock data. everything must be pulled from the sources we have
+
+i say that because it looks great but it seems like alot of stuff isnt functional yet
+
+i just wanted to make sure these worked but i also want to have like a main autorun type of button that runs a 'full pipeline' and also make sure we have the packet sniffing etc all aligne and correlated with timers or what not. if im off just tell me
+
+i think having like an autorun or correlation that goes every 15 minutes, then ramps up if activity is > x
+
+and i want a close eye on that 6-10 pm window, it seems to get worse every night like clockwork at this time. perhaps later we can build a module that allows for video upload --> no file limit but > x = splits file with ffmpeg or something into chunks --> analyze the video for xx degree rotation or speed, and have timing structure overlay it with the patterns to see, by using the meta data of the video
+
+can you make these file system type headers with sorting?
+
+and / or an 'overhead' sort feature
+
+thank you
+
+You're welcome! The satellites page should feel much more navigable now with those sortable headers and the quick Overhead/Range buttons. Let me know if you need anything else.
+
+can we come up with a social media automation part of this. i need an intelligent way to decentralize and post this information as clearly the interactions happening are 'secret' by US organizations especially the affiliation of LEOLABS and Costa Rica Space Radar, DARPA BLACKJACK / Starlink etc. Can we use the dark theme as like a css style template to make informational instagram posts that look super cool, sort of design it with the IG feed and grid in mind and other formats and imagine the aesthetic affect from the full profile and for individual posts and stories, basically match the aesthetic of the app in light and dark for social posts with cool colored buttons and tabs like pokemon cards. integrate ig or meta auth etc, I really want to start to master social media automation. I have some video pipeline stuff too ill send, maybe we can have a really nice thing. basically i have gemini ultra i can do VEO 3.1 , nano banana 2, have a few hyperobject photos and then veo videos but like stitch them together - i just want everything to look amazing but also be algorithimized. ill attach the meta riemann lattice and some other things too
