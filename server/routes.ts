@@ -35,6 +35,20 @@ import {
   type FlightData,
   type PhoenixCountdown,
 } from "@shared/schema";
+import {
+  LATTICE_CONSTANTS,
+  NIEMEIER_LATTICES,
+  CLOCK_DERIVATION,
+  CLOCK_ADOPTED,
+  DEMODEX_CYCLE,
+  SMC_NODES_DATA,
+  PASQAL_LAYERS_DATA,
+  RIEMANN_PREVIEW,
+  ICOSITETRAGON,
+  MOONSHINE_TOWER,
+  RIEMANN_SONNET,
+  type LatticeAllResponse,
+} from "@shared/lattice-data";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -910,6 +924,22 @@ export async function registerRoutes(
       console.error("Learn error:", err);
       res.status(500).json({ error: "Learning failed" });
     }
+  });
+
+  app.get("/api/lattice/all", (_req, res) => {
+    const response: LatticeAllResponse = {
+      constants: LATTICE_CONSTANTS,
+      niemeier: NIEMEIER_LATTICES,
+      clock: { derivations: CLOCK_DERIVATION, adopted: CLOCK_ADOPTED },
+      demodex: DEMODEX_CYCLE,
+      smc: SMC_NODES_DATA,
+      pasqal: PASQAL_LAYERS_DATA,
+      riemann: RIEMANN_PREVIEW,
+      icositetragon: ICOSITETRAGON,
+      moonshine: MOONSHINE_TOWER,
+      sonnet: RIEMANN_SONNET,
+    };
+    res.json(response);
   });
 
   return httpServer;

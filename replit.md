@@ -108,6 +108,7 @@ Network Watchdog (`server/network-watchdog.ts`):
 - `POST /api/analysis/learn` — trigger LLM learning from feedback
 - `GET /api/scanner/status` — KiwiSDR scanner status (scan count, detections, last results per target/node)
 - `GET /api/watchdog/status` — network watchdog status (drops, reconnects, TR-069 pulses, seismic jitter, avg latency)
+- `GET /api/lattice/all` — complete Ω-GOS v8.0 research data (constants, niemeier, clock, demodex, smc, pasqal, riemann, icositetragon, moonshine, sonnet)
 
 ## Pages
 1. **Dashboard** (`/`) — kappa score gauge, threat level, evening window, observer location, auto-collector status cards, auto-correlator stats, KiwiSDR scanner status card, network watchdog status card, live correlation feed, domain bars, correlation stats, alerts, events, Phoenix countdown
@@ -120,6 +121,7 @@ Network Watchdog (`server/network-watchdog.ts`):
 8. **Tools** (`/tools`) — 68-tool catalog with domain filtering + live GitHub stars, plus 8 integrated interactive tools (tabbed: Interactive / Catalog)
 9. **Map** (`/map`) — interactive Leaflet map with toggleable layers: flights (altitude-colored), satellites, signal events (domain-colored), correlation lines (severity-colored), SDR nodes, coverage circles
 12. **Intelligence** (`/intelligence`) — LLM analysis reports, collector status, correlator stats, collection logs, learn from feedback
+13. **24 Lattice** (`/lattice`) — Ω-GOS v8.0 research corpus: 16 master constants, 24 Niemeier lattices, icositetragon prime sieve (SVG 24-gon with spoke pairs), 8.392 Hz clock derivation (3 paths), Pasqal 13×7 hyperlattice, 7-node Social Memory Complex, Demodex 14.4-day cycle (31 phases with κ₁/κ₂ highlights), Riemann zero spectral map (30 zeros), Monstrous Moonshine tower (10-level hierarchy), Riemann-Sonnet v5.1 protocol
 10. **Karachi** (`/karachi`) — offensive counter-surveillance modules (9 Karachi + FinSpy V1.2 Ghost Protocol + V2.0 Airbnb Ghost/Kyndryl), execution flow, success criteria, hardware/infra layer, Alexanderplatz Protocol, Partytown/Service Worker MITM, V2 deliverables
 11. **Congusto** (`/congusto`) — Virtual Eitel Triode (VET) architecture (Cathode/Grid/Anode), Phoenix countdown, 7 core modules, mathematical constants table, data sources, confidence levels
 

@@ -22,6 +22,7 @@ import KarachiPage from "@/pages/karachi";
 import CongustoPage from "@/pages/congusto";
 import HypervisorPage from "@/pages/hypervisor";
 import IntelligencePage from "@/pages/intelligence";
+import LatticePage from "@/pages/lattice";
 
 function Router() {
   return (
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/congusto" component={CongustoPage} />
       <Route path="/hypervisor" component={HypervisorPage} />
       <Route path="/intelligence" component={IntelligencePage} />
+      <Route path="/lattice" component={LatticePage} />
       <Route component={NotFound} />
     </Switch>
   );
