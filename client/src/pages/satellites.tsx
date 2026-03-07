@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +14,7 @@ import {
   type TleCatalogGroup,
 } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { RefreshCw, ChevronDown, ChevronUp } from "lucide-react";
+import { RefreshCw, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const categoryColors: Record<string, string> = {
@@ -45,12 +45,44 @@ const categoryColors: Record<string, string> = {
 
 const priorityGroups = ["stations", "starlink", "military", "noaa", "goes", "iridium-next", "gpz", "glonass", "galileo", "beidou"];
 
+type SortField = "name" | "noradId" | "category" | "elevation" | "azimuth" | "range" | "subpoint" | "lastUpdate";
+type SortDir = "asc" | "desc";
+
+function compareSats(a: SatellitePass, b: SatellitePass, field: SortField, dir: SortDir): number {
+  const mul = dir === "asc" ? 1 : -1;
+  switch (field) {
+    case "name":
+      return mul * (a.satelliteName ?? "").localeCompare(b.satelliteName ?? "");
+    case "noradId":
+      return mul * ((a.noradId ?? 0) - (b.noradId ?? 0));
+    case "category":
+      return mul * (a.category ?? "").localeCompare(b.category ?? "");
+    case "elevation":
+      return mul * ((a.elevation ?? -999) - (b.elevation ?? -999));
+    case "azimuth":
+      return mul * ((a.azimuth ?? -999) - (b.azimuth ?? -999));
+    case "range":
+      return mul * ((a.range ?? 999999) - (b.range ?? 999999));
+    case "subpoint": {
+      const aLat = a.latitude ?? -999;
+      const bLat = b.latitude ?? -999;
+      return mul * (aLat - bLat);
+    }
+    case "lastUpdate":
+      return mul * (new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime());
+    default:
+      return 0;
+  }
+}
+
 export default function SatellitesPage() {
   const { t } = useI18n();
   const { toast } = useToast();
   const [selectedGroups, setSelectedGroups] = useState<string[]>(["stations", "noaa", "goes", "weather"]);
   const [showCatalog, setShowCatalog] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [sortField, setSortField] = useState<SortField>("elevation");
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
 
   const { data: satellites, isLoading } = useQuery<SatellitePass[]>({
     queryKey: ["/api/satellites"],
@@ -84,10 +116,24 @@ export default function SatellitesPage() {
     }
   };
 
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortDir(field === "name" || field === "category" ? "asc" : "desc");
+    }
+  };
+
   const categories = Object.keys(TLE_CATEGORIES);
   const filteredSatellites = categoryFilter === "all"
     ? satellites
     : satellites?.filter((s) => s.category === categoryFilter);
+
+  const sortedSatellites = useMemo(() => {
+    if (!filteredSatellites) return [];
+    return [...filteredSatellites].sort((a, b) => compareSats(a, b, sortField, sortDir));
+  }, [filteredSatellites, sortField, sortDir]);
 
   const visibleCount = satellites?.filter((s) => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.MIN_ELEVATION).length ?? 0;
   const overheadCount = satellites?.filter((s) => s.elevation != null && s.elevation >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION).length ?? 0;
@@ -99,6 +145,17 @@ export default function SatellitesPage() {
     if (!groupedByCategory[g.category]) groupedByCategory[g.category] = [];
     groupedByCategory[g.category].push(g);
   }
+
+  const columns: { field: SortField; label: string }[] = [
+    { field: "name", label: t("satellites.name") },
+    { field: "noradId", label: t("satellites.norad") },
+    { field: "category", label: t("satellites.category") },
+    { field: "elevation", label: t("satellites.elevation") },
+    { field: "azimuth", label: t("satellites.azimuth") },
+    { field: "range", label: t("satellites.range") },
+    { field: "subpoint", label: t("satellites.subpoint") },
+    { field: "lastUpdate", label: t("satellites.lastUpdate") },
+  ];
 
   return (
     <div className="p-6 max-w-6xl mx-auto space-y-6">
@@ -211,7 +268,7 @@ export default function SatellitesPage() {
         </Card>
       </div>
 
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex gap-2 flex-wrap items-center">
         <Button
           variant={categoryFilter === "all" ? "default" : "outline"}
           size="sm"
@@ -235,40 +292,76 @@ export default function SatellitesPage() {
             </Button>
           );
         })}
+        <div className="ml-auto flex gap-1.5">
+          <Button
+            variant={sortField === "elevation" && sortDir === "desc" ? "default" : "outline"}
+            size="sm"
+            onClick={() => { setSortField("elevation"); setSortDir("desc"); }}
+            data-testid="button-sort-overhead"
+            className="gap-1"
+          >
+            <ArrowUp className="h-3 w-3" />
+            {t("satellites.overhead")}
+          </Button>
+          <Button
+            variant={sortField === "range" && sortDir === "asc" ? "default" : "outline"}
+            size="sm"
+            onClick={() => { setSortField("range"); setSortDir("asc"); }}
+            data-testid="button-sort-closest"
+            className="gap-1"
+          >
+            <ArrowDown className="h-3 w-3" />
+            {t("satellites.range")}
+          </Button>
+        </div>
       </div>
 
       {isLoading ? (
         <div className="space-y-2">
           {[1, 2, 3].map((i) => <Skeleton key={i} className="h-16 w-full" />)}
         </div>
-      ) : !filteredSatellites || filteredSatellites.length === 0 ? (
+      ) : sortedSatellites.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-sm text-muted-foreground">
             {t("satellites.noData")}
           </CardContent>
         </Card>
       ) : (
-        <div className="border rounded-md">
-          <div className="grid grid-cols-8 gap-2 p-3 text-xs font-medium text-muted-foreground border-b">
-            <span>{t("satellites.name")}</span>
-            <span>{t("satellites.norad")}</span>
-            <span>{t("satellites.category")}</span>
-            <span>{t("satellites.elevation")}</span>
-            <span>{t("satellites.azimuth")}</span>
-            <span>{t("satellites.range")}</span>
-            <span>{t("satellites.subpoint")}</span>
-            <span>{t("satellites.lastUpdate")}</span>
+        <div className="border rounded-md overflow-hidden">
+          <div className="grid grid-cols-8 gap-0 border-b bg-muted/50">
+            {columns.map((col) => {
+              const active = sortField === col.field;
+              return (
+                <button
+                  key={col.field}
+                  onClick={() => handleSort(col.field)}
+                  className={`flex items-center gap-1 px-3 py-2.5 text-xs font-medium tracking-wide uppercase transition-colors cursor-pointer select-none text-left ${
+                    active
+                      ? "text-foreground bg-muted"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/80"
+                  }`}
+                  data-testid={`sort-header-${col.field}`}
+                >
+                  <span className="truncate">{col.label}</span>
+                  {active && (
+                    sortDir === "asc"
+                      ? <ArrowUp className="h-3 w-3 shrink-0" />
+                      : <ArrowDown className="h-3 w-3 shrink-0" />
+                  )}
+                </button>
+              );
+            })}
           </div>
-          {filteredSatellites.map((s) => (
-            <div key={s.id} className="grid grid-cols-8 gap-2 p-3 text-sm border-b last:border-b-0 items-center" data-testid={`row-satellite-${s.id}`}>
-              <span className="font-medium truncate" title={s.satelliteName}>{s.satelliteName}</span>
-              <span className="font-mono text-muted-foreground">{s.noradId}</span>
-              <span>
+          {sortedSatellites.map((s) => (
+            <div key={s.id} className="grid grid-cols-8 gap-0 text-sm border-b last:border-b-0 items-center hover:bg-muted/30 transition-colors" data-testid={`row-satellite-${s.id}`}>
+              <span className="px-3 py-2.5 font-medium truncate" title={s.satelliteName}>{s.satelliteName}</span>
+              <span className="px-3 py-2.5 font-mono text-muted-foreground">{s.noradId}</span>
+              <span className="px-3 py-2.5">
                 <Badge variant="secondary" className={`text-[10px] ${categoryColors[s.category] || ""}`}>
                   {TLE_CATEGORIES[s.category] || s.category}
                 </Badge>
               </span>
-              <span className="font-mono">
+              <span className="px-3 py-2.5 font-mono">
                 {s.elevation != null ? (
                   <span>
                     {s.elevation.toFixed(1)}&deg;
@@ -285,7 +378,7 @@ export default function SatellitesPage() {
                   <span className="text-muted-foreground">--</span>
                 )}
               </span>
-              <span className="font-mono">
+              <span className="px-3 py-2.5 font-mono">
                 {s.azimuth != null ? (
                   <span>
                     {s.azimuth.toFixed(1)}&deg;
@@ -295,13 +388,13 @@ export default function SatellitesPage() {
                   </span>
                 ) : "--"}
               </span>
-              <span className="font-mono">{s.range != null ? `${s.range.toFixed(0)} km` : "--"}</span>
-              <span className="font-mono text-xs">
+              <span className="px-3 py-2.5 font-mono">{s.range != null ? `${s.range.toFixed(0)} km` : "--"}</span>
+              <span className="px-3 py-2.5 font-mono text-xs">
                 {s.latitude != null && s.longitude != null
                   ? `${s.latitude.toFixed(1)}°, ${s.longitude.toFixed(1)}°`
                   : "--"}
               </span>
-              <span className="text-xs text-muted-foreground font-mono">
+              <span className="px-3 py-2.5 text-xs text-muted-foreground font-mono">
                 {new Date(s.updatedAt).toLocaleString()}
               </span>
             </div>
