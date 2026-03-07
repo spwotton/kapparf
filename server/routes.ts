@@ -7,7 +7,7 @@ import { getCollectorStatus } from "./collectors";
 import { getCorrelatorStatus } from "./auto-correlator";
 import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
-import { analyzeCorrelation, generateReport, suggestRuleWeights } from "./llm-analyst";
+import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import {
   insertSignalEventSchema,
@@ -994,6 +994,52 @@ export async function registerRoutes(
       overheadSatellites: overheadSats.length,
       generatedAt: new Date().toISOString(),
     });
+  });
+
+  app.post("/api/social/caption", async (req, res) => {
+    try {
+    const { template } = req.body;
+    if (!template || !["kappa", "satellite", "correlation", "domains", "evening"].includes(template)) {
+      return res.status(400).json({ error: "Invalid template" });
+    }
+
+    const [domainCounts, correlationCount, correlations, satellites] = await Promise.all([
+      storage.getEventCountsByDomain(),
+      storage.getCorrelationCount(),
+      storage.getCorrelations(),
+      storage.getSatellites(),
+    ]);
+
+    const totalEvents = Object.values(domainCounts).reduce((a, b) => a + b, 0);
+    const kappaStatus = kappaEngine.getStatus();
+    const activeDomains = Object.entries(domainCounts).filter(([, v]) => v > 0).map(([k]) => k);
+    const topRules = correlations.slice(0, 5).map((c: any) => c.ruleName);
+
+    let threatLevel = "NOMINAL";
+    const score = kappaStatus.score ?? 0;
+    if (score >= 95) threatLevel = "EMERGENCY";
+    else if (score >= 80) threatLevel = "CRITICAL";
+    else if (score >= 60) threatLevel = "HIGH";
+    else if (score >= 30) threatLevel = "ELEVATED";
+
+    const caption = await generateSocialCaption(template, {
+      kappaScore: score,
+      threatLevel,
+      totalEvents,
+      totalCorrelations: correlationCount,
+      satelliteCount: satellites.length,
+      visibleSatellites: satellites.filter((s: any) => (s.elevation ?? 0) > 30).length,
+      overheadSatellites: satellites.filter((s: any) => (s.elevation ?? 0) > 75).length,
+      activeDomains,
+      eveningWindowActive: kappaStatus.eveningWindow?.active ?? false,
+      topCorrelationRules: topRules,
+    });
+
+    res.json(caption);
+    } catch (err) {
+      console.error("[routes] /api/social/caption error:", err);
+      res.status(500).json({ error: "Caption generation failed" });
+    }
   });
 
   return httpServer;

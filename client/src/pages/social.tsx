@@ -1,10 +1,11 @@
 import { useState, useRef, useCallback, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
+import { apiRequest } from "@/lib/queryClient";
 import { THREAT_LEVELS, type KappaStatus, type SignalEvent, type Correlation } from "@shared/schema";
 import {
   Download,
@@ -22,6 +23,9 @@ import {
   Grid3x3,
   LayoutGrid,
   Loader2,
+  Sparkles,
+  Copy,
+  Check,
 } from "lucide-react";
 import { toPng } from "html-to-image";
 
@@ -415,12 +419,39 @@ export default function SocialPage() {
   const [selectedFormat, setSelectedFormat] = useState<CardFormat>("square");
   const [isExporting, setIsExporting] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
+  const [captionData, setCaptionData] = useState<{ caption: string; hashtags: string[]; altText: string; fallback?: boolean } | null>(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const { data: socialData, isLoading } = useQuery<SocialCardData>({
     queryKey: ["/api/social/data"],
     refetchInterval: 30000,
   });
+
+  const captionMutation = useMutation({
+    mutationFn: async (template: string) => {
+      const res = await apiRequest("POST", "/api/social/caption", { template });
+      return res.json();
+    },
+    onSuccess: (data) => setCaptionData(data),
+  });
+
+  const handleCopy = useCallback(async (text: string, field: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    }
+  }, []);
 
   const handleExport = useCallback(async () => {
     if (!cardRef.current) return;
@@ -656,6 +687,116 @@ export default function SocialPage() {
                 <span className="font-mono font-semibold" data-testid="text-social-domains">{Object.keys(cardData.domainCounts).filter(k => cardData.domainCounts[k] > 0).length}</span>
               </div>
               <p className="text-xs text-muted-foreground pt-2 border-t">{t("social.refreshNote")}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                {t("social.aiCaption")}
+              </CardTitle>
+              <CardDescription className="text-xs">{t("social.aiCaptionDesc")}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Button
+                size="sm"
+                className="w-full"
+                onClick={() => captionMutation.mutate(selectedTemplate)}
+                disabled={captionMutation.isPending}
+                data-testid="button-generate-caption"
+              >
+                {captionMutation.isPending ? (
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                ) : (
+                  <Sparkles className="h-4 w-4 mr-2" />
+                )}
+                {captionMutation.isPending ? t("social.generating") : t("social.generateCaption")}
+              </Button>
+
+              {captionMutation.isError && (
+                <p className="text-xs text-destructive font-mono pt-2 border-t" data-testid="text-caption-error">
+                  {t("social.aiFallback")}
+                </p>
+              )}
+
+              {captionData && !captionMutation.isError && (
+                <div className="space-y-3 pt-2 border-t">
+                  {captionData.fallback && (
+                    <p className="text-xs text-amber-500 font-mono" data-testid="text-caption-fallback">{t("social.aiFallback")}</p>
+                  )}
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-medium text-muted-foreground">{t("social.captionResult")}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 px-2"
+                        onClick={() => handleCopy(captionData.caption, "caption")}
+                        data-testid="button-copy-caption"
+                      >
+                        {copiedField === "caption" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                      </Button>
+                    </div>
+                    <p className="text-xs whitespace-pre-line leading-relaxed bg-muted/50 rounded-md p-2 max-h-48 overflow-y-auto" data-testid="text-caption-content">
+                      {captionData.caption}
+                    </p>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-medium text-muted-foreground">{t("social.hashtags")}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 px-2"
+                        onClick={() => handleCopy(captionData.hashtags.join(" "), "hashtags")}
+                        data-testid="button-copy-hashtags"
+                      >
+                        {copiedField === "hashtags" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-1" data-testid="text-hashtags-list">
+                      {captionData.hashtags.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-[10px] font-mono">{tag}</Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-medium text-muted-foreground">{t("social.altText")}</span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="h-6 px-2"
+                        onClick={() => handleCopy(captionData.altText, "alt")}
+                        data-testid="button-copy-alt"
+                      >
+                        {copiedField === "alt" ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+                      </Button>
+                    </div>
+                    <p className="text-xs text-muted-foreground bg-muted/50 rounded-md p-2" data-testid="text-alt-content">
+                      {captionData.altText}
+                    </p>
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full"
+                    onClick={() => handleCopy(
+                      `${captionData.caption}\n\n${captionData.hashtags.join(" ")}`,
+                      "all"
+                    )}
+                    data-testid="button-copy-all"
+                  >
+                    {copiedField === "all" ? <Check className="h-4 w-4 mr-2" /> : <Copy className="h-4 w-4 mr-2" />}
+                    {copiedField === "all" ? t("social.copied") : t("social.copyAll")}
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

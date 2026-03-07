@@ -269,3 +269,120 @@ export async function suggestRuleWeights(
     return { ruleAdjustments: [] };
   }
 }
+
+export interface SocialCaption {
+  caption: string;
+  hashtags: string[];
+  altText: string;
+  fallback?: boolean;
+}
+
+export async function generateSocialCaption(
+  template: string,
+  data: {
+    kappaScore: number;
+    threatLevel: string;
+    totalEvents: number;
+    totalCorrelations: number;
+    satelliteCount: number;
+    visibleSatellites: number;
+    overheadSatellites: number;
+    activeDomains: string[];
+    eveningWindowActive: boolean;
+    topCorrelationRules: string[];
+  }
+): Promise<SocialCaption> {
+  const client = getClient();
+
+  const templateDescriptions: Record<string, string> = {
+    kappa: "KAPPA surveillance intensity score dashboard",
+    satellite: "satellite orbital intelligence tracking",
+    correlation: "cross-domain signal correlation alert",
+    domains: "multi-domain signal event breakdown",
+    evening: "evening window surveillance activity pattern",
+  };
+
+  if (!client) {
+    const desc = templateDescriptions[template] || template;
+    const lines = [
+      `KAPPA SIGINT — ${desc.toUpperCase()}`,
+      "",
+      `Surveillance Index: ${data.kappaScore}/100 (${data.threatLevel})`,
+      `${data.totalEvents} signal events across ${data.activeDomains.length} domains`,
+      `${data.satelliteCount} satellites tracked | ${data.visibleSatellites} visible`,
+      data.eveningWindowActive ? "Evening window ACTIVE — historically elevated pattern" : "",
+      "",
+      "Passive monitoring from 9.9536°N 84.2907°W",
+    ].filter(Boolean);
+
+    return {
+      caption: lines.join("\n"),
+      hashtags: ["#SIGINT", "#OSINT", "#surveillance", "#satellites", "#signals", "#intelligence", "#KAPPA"],
+      altText: `KAPPA ${desc} showing ${data.kappaScore} score with ${data.totalEvents} events`,
+      fallback: true,
+    };
+  }
+
+  try {
+    return await rateLimitedCall(async () => {
+      const response = await client.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `You are a social media content writer for a SIGINT (signal intelligence) research project called KAPPA. The platform passively monitors electromagnetic signals across 11 domains (WiFi, BLE, LTE, Satellite, SDR, ELF, Radar, PLC, ISP, Drone) from Costa Rica.
+
+Write Instagram-optimized content. Be factual, technical but accessible, and compelling. The tone should be serious and informational — like a research lab posting updates, NOT promotional or clickbait.
+
+Return JSON with:
+- caption: string (Instagram caption, 150-300 words, include line breaks for readability, mention specific data points)
+- hashtags: string[] (15-20 relevant hashtags, mix of broad and niche, include #SIGINT #OSINT #KAPPA)
+- altText: string (accessible image description, 1-2 sentences)`,
+          },
+          {
+            role: "user",
+            content: JSON.stringify({
+              cardTemplate: template,
+              templateDescription: templateDescriptions[template],
+              liveData: data,
+            }),
+          },
+        ],
+        response_format: { type: "json_object" },
+        max_completion_tokens: 8192,
+      });
+
+      const content = response.choices[0]?.message?.content;
+      if (!content) throw new Error("Empty LLM response");
+
+      const parsed = JSON.parse(content);
+      const caption = typeof parsed.caption === "string" ? parsed.caption : "";
+      const hashtags = Array.isArray(parsed.hashtags)
+        ? parsed.hashtags.filter((h: unknown) => typeof h === "string").map((h: string) => h.trim())
+        : [];
+      const altText = typeof parsed.altText === "string" ? parsed.altText : "";
+
+      return { caption, hashtags, altText };
+    });
+  } catch (err) {
+    console.error("[llm-analyst] generateSocialCaption error:", err);
+    const desc = templateDescriptions[template] || template;
+    const lines = [
+      `KAPPA SIGINT — ${desc.toUpperCase()}`,
+      "",
+      `Surveillance Index: ${data.kappaScore}/100 (${data.threatLevel})`,
+      `${data.totalEvents} signal events across ${data.activeDomains.length} domains`,
+      `${data.satelliteCount} satellites tracked | ${data.visibleSatellites} visible`,
+      data.eveningWindowActive ? "Evening window ACTIVE — historically elevated pattern" : "",
+      "",
+      "Passive monitoring from 9.9536°N 84.2907°W",
+    ].filter(Boolean);
+
+    return {
+      caption: lines.join("\n"),
+      hashtags: ["#SIGINT", "#OSINT", "#surveillance", "#satellites", "#signals", "#intelligence", "#KAPPA"],
+      altText: `KAPPA ${desc} showing ${data.kappaScore} score with ${data.totalEvents} events`,
+      fallback: true,
+    };
+  }
+}
