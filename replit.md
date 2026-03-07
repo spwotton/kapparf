@@ -1,188 +1,40 @@
 # Project KAPPA — Multi-Domain Signal Intelligence & Correlation Platform
 
 ## Overview
-KAPPA is a software-defined SIGINT platform built with React + Tailwind + TypeScript (frontend), Express (backend), and PostgreSQL (database). It correlates electromagnetic emissions across 11 domains — WiFi, BLE, LTE, 5G, Satellite, SDR, ELF, Radar (ADS-B), PLC, ISP, and Drone — using passive collection tools.
+KAPPA is a software-defined SIGINT platform designed to correlate electromagnetic emissions across 11 domains (WiFi, BLE, LTE, 5G, Satellite, SDR, ELF, Radar, PLC, ISP, and Drone) using passive collection tools. The platform aims to provide real-time threat intelligence and analysis by identifying patterns and anomalies in collected signal data. Its core function is to analyze signal events, generate correlations, and provide an intelligence summary to users, enhancing situational awareness and enabling proactive responses to emerging threats.
 
-**Observer location:** Calle Caballo Real, Guácima Abajo, Alajuela, Costa Rica (9.9536°N, 84.2907°W, 0.9 km alt)
-
-## KAPPA Engine (server/kappa-engine.ts)
-Real-time correlation engine ported from Python. Key features:
-- **Kappa Score:** 0–100 with ×0.95 decay every 5 seconds
-- **Threat Levels:** NOMINAL (<30), ELEVATED (<60), HIGH (<80), CRITICAL (<95), EMERGENCY (≥95)
-- **Constants:** κ = 4/π, Klein Twist = 128.23° (±2°), Giza Cutoff = 51.77°, Clock = 46.875 Hz
-- **Evening Windows:** 18:00–20:00 (I) and 20:00–22:00 (II) CST (UTC-6)
-- **Correlations:** MAC cross-domain, Congusto (full/partial), stingray chain, IMSI tower hop, Klein twist satellite detection, φ-harmonic timing
-- **Device Fingerprinting:** MAC tracked across domains; suspicious = 2+ domains
-
-## Analysis Points
-- **Observer** — Guácima Abajo (9.9536°N, 84.2907°W)
-- **Jacó** — Pacific coast analysis point (9.6142°N, 84.6278°W)
-- **SJO** — Juan Santamaría International Airport, ICAO: MROC (9.9939°N, 84.2088°W)
-- **TI0RC** — Radio Club de Costa Rica KiwiSDR node (9.9360°N, 84.1088°W)
-
-## Architecture
-- **Frontend:** React + Tailwind CSS + shadcn/ui, wouter routing, TanStack Query v5, Leaflet/OpenStreetMap
-- **Backend:** Express.js with typed routes, Drizzle ORM
-- **Database:** PostgreSQL (Neon serverless driver)
-- **i18n:** EN/ES language toggle with localStorage persistence
-- **Theme:** Light/dark toggle, warm neutral Notion-style design
-- **Map:** Leaflet + react-leaflet v4 with OpenStreetMap tiles
-- **Kappa Engine:** In-memory real-time correlator with score decay and device fingerprinting
-
-## Database Tables
-- `signal_events` — unified multi-domain events (wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone)
-- `correlations` — cross-domain temporal pattern matches with linked event IDs
-- `satellite_passes` — TLE-based satellite tracking data from CelesTrak (41 catalog groups)
-- `sdr_nodes` — remote SDR receiver configuration (KiwiSDR, etc.)
-- `correlation_feedback` — user star ratings (1-5) and notes for correlations
-- `collection_logs` — auto-collector run logs (events created, duration, status, errors)
-- `users` — authentication (unused currently)
-
-## Autonomous Pipeline (24/7)
-Three auto-collectors start on server boot (`server/collectors.ts`):
-- **Flight Collector** — OpenSky Network flights every 60s for Costa Rica region, creates `radar` domain events
-- **Satellite Collector** — CelesTrak TLEs every 5min, propagates orbits, creates `satellite` domain events for passes >30° elevation
-- **Weather Collector** — NWS api.weather.gov every 10min, creates `elf` domain events
-
-Auto-Correlator (`server/auto-correlator.ts`):
-- Runs every 30s automatically
-- Pulls events from last 5 minutes, runs all 54 CORRELATION_RULES
-- Deduplication via processedPairs Set (10k cache max)
-- Also runs hypervisor overlap detection
-
-LLM Analyst (`server/llm-analyst.ts`):
-- Uses OpenAI gpt-4o-mini via Replit AI Integrations
-- `analyzeCorrelation()` — individual correlation analysis
-- `generateReport()` — multi-correlation intelligence summary
-- `suggestRuleWeights()` — learn from user feedback
-- Rate limited to 10 calls/min, graceful heuristic fallback when LLM unavailable
-
-KiwiSDR Scanner (`server/kiwisdr-scanner.ts`):
-- Scans 3 SDR nodes: TI0RC (San José), Puntarenas (secondary TDOA), PJ4G (Bonaire long-baseline)
-- VLF targets: 53 Hz harmonics (15.9 kHz, 21.2 kHz), 46.875 Hz 400th harmonic (18.75 kHz), counter-beat carrier (73.125 kHz)
-- Hilbert envelope / RARED speech analysis on demodulated audio
-- Delta-Slip 13.125 Hz extraction (60 − 46.875)
-- Echo/LT harmonic chain detection (46.875 → 1580 kHz)
-- TR-069 PRF correlation with network watchdog
-- 90s scan interval, creates `sdr` and `elf` domain events
-
-Network Watchdog (`server/network-watchdog.ts`):
-- Heartbeat monitoring (every 30s) with drop/reconnect tracking
-- IPAT analysis for TR-069 PRF match detection
-- Seismic jitter detection (latency variance 3x baseline)
-- Creates `isp` and `elf` domain events
-- Feeds correlation engine for cross-domain network-RF pattern matching
-
-## Key API Endpoints
-- `GET /api/kappa/status` — kappa score, threat level, evening window, device tracking, correlation counts
-- `GET /api/stats` — event counts by domain, total correlations
-- `GET/POST /api/events` — signal event CRUD (filterable by ?domain=)
-- `GET /api/events/recent` — last 20 events
-- `GET /api/devices` — tracked device fingerprints
-- `POST /api/osint/lookup` — DNS/reverse lookup for IP or hostname
-- `GET /api/weather/radar` — weather conditions at observer location (NOAA)
-- `POST /api/correlations/run` — execute correlation engine on 5-min window
-- `GET /api/correlations` — list correlation results
-- `GET /api/satellites` — satellite data
-- `GET /api/satellites/groups` — list all 41 TLE catalog groups and categories
-- `POST /api/satellites/refresh` — multi-group TLE refresh from CelesTrak
-- `GET /api/flights` — live flight data from OpenSky Network
-- `GET /api/analysis-points` — observer, Jacó, SJO, TI0RC locations
-- `GET/POST /api/nodes` — SDR node management
-- `GET /api/tools` — tool catalog (68 tools across 11 domains)
-- `GET /api/tools/meta` — live GitHub metadata with 30-min cache
-- `GET /api/rules` — correlation rule definitions
-- `GET /api/karachi/modules` — 9 offensive counter-surveillance modules
-- `GET /api/congusto/architecture` — VET triode architecture (Cathode/Grid/Anode)
-- `GET /api/congusto/modules` — 7 Congusto-Eitel modules
-- `GET /api/phoenix/countdown` — Phoenix countdown (2012-07-04 to 2037-01-01)
-- `GET /api/finspy/intel` — FinSpy intelligence brief (V1.2 Ghost Protocol + V2.0 Airbnb Ghost)
-- `GET /api/collectors/status` — auto-collector status (flights, satellites, weather)
-- `GET /api/correlations/stats` — auto-correlator stats (cycles, found, rules checked)
-- `GET /api/events/search?q=&domains=&limit=` — full-text event search
-- `POST /api/correlations/:id/feedback` — submit star rating (1-5) + notes
-- `GET /api/correlations/:id/feedback` — feedback for a correlation
-- `GET /api/collection-logs?limit=` — recent collector run logs
-- `GET /api/analysis/correlation/:id` — LLM analysis of specific correlation
-- `GET /api/analysis/report?hours=24` — LLM intelligence report
-- `POST /api/analysis/learn` — trigger LLM learning from feedback
-- `GET /api/scanner/status` — KiwiSDR scanner status (scan count, detections, last results per target/node)
-- `GET /api/watchdog/status` — network watchdog status (drops, reconnects, TR-069 pulses, seismic jitter, avg latency)
-- `GET /api/lattice/all` — complete Ω-GOS v8.0 research data (constants, niemeier, clock, demodex, smc, pasqal, riemann, icositetragon, moonshine, sonnet)
-
-## Pages
-1. **Dashboard** (`/`) — kappa score gauge, threat level, evening window, observer location, auto-collector status cards, auto-correlator stats, KiwiSDR scanner status card, network watchdog status card, live correlation feed, domain bars, correlation stats, alerts, events, Phoenix countdown
-2. **Events** (`/events`) — multi-domain event feed with domain filter tabs, ingest dialog
-3. **Correlations** (`/correlations`) — auto-correlation status badge, correlation results with star rating feedback, rule reference, manual run button (secondary)
-4. **Satellites** (`/satellites`) — TLE catalog selector, category filter, Klein/Giza badges
-5. **Devices** (`/devices`) — MAC fingerprint tracking table with suspicious detection
-6. **OSINT** (`/osint`) — DNS probe, hidden network detection, surveillance indicators, camera OUIs, OSINT tools
-7. **Nodes** (`/nodes`) — SDR node cards with add dialog
-8. **Tools** (`/tools`) — 68-tool catalog with domain filtering + live GitHub stars, plus 8 integrated interactive tools (tabbed: Interactive / Catalog)
-9. **Map** (`/map`) — interactive Leaflet map with toggleable layers: flights (altitude-colored), satellites, signal events (domain-colored), correlation lines (severity-colored), SDR nodes, coverage circles
-12. **Intelligence** (`/intelligence`) — LLM analysis reports, collector status, correlator stats, collection logs, learn from feedback
-13. **24 Lattice** (`/lattice`) — Ω-GOS v8.0 research corpus: 16 master constants, 24 Niemeier lattices, icositetragon prime sieve (SVG 24-gon with spoke pairs), 8.392 Hz clock derivation (3 paths), Pasqal 13×7 hyperlattice, 7-node Social Memory Complex, Demodex 14.4-day cycle (31 phases with κ₁/κ₂ highlights), Riemann zero spectral map (30 zeros), Monstrous Moonshine tower (10-level hierarchy), Riemann-Sonnet v5.1 protocol
-10. **Karachi** (`/karachi`) — offensive counter-surveillance modules (9 Karachi + FinSpy V1.2 Ghost Protocol + V2.0 Airbnb Ghost/Kyndryl), execution flow, success criteria, hardware/infra layer, Alexanderplatz Protocol, Partytown/Service Worker MITM, V2 deliverables
-11. **Congusto** (`/congusto`) — Virtual Eitel Triode (VET) architecture (Cathode/Grid/Anode), Phoenix countdown, 7 core modules, mathematical constants table, data sources, confidence levels
-
-## Domains (11)
-wifi, ble, lte, 5g, satellite, sdr, elf, radar, plc, isp, drone
-
-## Correlation Rules (54 active)
-Includes all previous rules plus Karachi/Congusto rules (chameleon-ble-clone, ltesniffer-rogue-tower, kyanos-rst-injection, satintel-tle-drift, blackjack-blinder-active, dse-gateway-compromise, tr069-persistence, holographic-sideband, humint-biometric-correlation, plc-theta-modulation) and κ-scaled detection rules (GPR-masked uplink, DSE892 SNMP TRAP, MUOS-3 WCDMA, COSMO-SkyMed X-band, rain fade, TR-069 botnet, 5G backhaul κ-tunnel, LSCSA-SVD, system bus exfil, DSE mode change, optical+RF+GPR fusion, ISM LoRa).
-
-## κ-Scaled Architecture Constants
-- Masimo Patent: US 5,919,134 / US 6,229,856 B1 (origin of 46.875 Hz)
-- κ harmonics: 93.75 Hz, 140.625 Hz, 187.5 Hz (evade all 60 Hz power grid harmonics)
-- MUOS-3 (NORAD 40374): GEO tactical narrowband, SA-WCDMA noise floor
-- COSMO-SkyMed: X-band (9.6 GHz) SAR, Telespazio cadastral survey cover
-- LSCSA-SVD: Weak signal extraction at -30 dB SNR
-- GPR: Ground Potential Rise masking via DSE892 SNMP TRAP correlation
-- Infrastructure ports: TR-069 (7547), SNMP (161/162), Modbus TCP (502)
-
-## Satellite Tracking
-- **Visible**: elevation > 30° from observer
-- **Overhead**: elevation > 75°
-- **KLEIN**: azimuth within ±2° of 128.23° (Klein twist angle)
-- **GIZA**: elevation within ±2° of 51.77° (Giza cutoff)
-
-## Integrated Interactive Tools (8 tools)
-All live — no mock data. Located on the Tools page under "Interactive" tab.
-1. **HTTP Probe** (Wireshark/Bettercap/tcpdump) — HTTP header analysis, security header audit, latency measurement
-2. **Packet Decoder** (tcpdump/Wireshark/Bettercap) — Decode raw Ethernet/IP/TCP/UDP frames from hex
-3. **Port Scanner** (nmap/Above) — TCP connect scan on 20 common ports with service identification
-4. **DNS Harvester** (theHarvester/SpiderFoot) — DNS records, SOA, MX, TXT, subdomain enumeration
-5. **MAC OUI Lookup** (Wireshark/Bettercap) — Device vendor identification via macvendors.com API
-6. **RF Calculator** (PhastFT/urh) — Frequency/wavelength/harmonics with κ-Clock, Schumann, ISM presets
-7. **ADS-B Decoder** (dump1090/pyModeS) — Decode raw Mode S hex (DF17 Extended Squitter, ICAO, callsign, altitude)
-8. **Morse Code** (ggmorse/Morserino-32) — Encode/decode ITU Morse code
-
-### Backend Endpoints
-- `POST /api/tools/mac-lookup` — MAC OUI vendor lookup (macvendors.com)
-- `POST /api/tools/whois` — DNS harvesting with subdomain enumeration
-- `POST /api/tools/port-scan` — TCP connect port scan
-- `POST /api/tools/http-probe` — HTTP HEAD request with security header analysis
-
-## OSINT Capabilities
-- DNS/reverse lookup (Node.js dns module)
-- Hidden SSID detection techniques
-- Camera vendor OUI database (Hikvision, Dahua, Reolink, TP-Link)
-- Corporate signatures (Kyndryl, IBM, Cisco Meraki)
-- Port signatures (RTSP 554, MQTT 1883, CoAP 5683)
-- Tool references (theHarvester, Maltego, Shodan, Censys, VirusTotal, nmap, Recon-ng)
-
-## Ω-CHRONOS Hypervisor v4.20 (server/hypervisor.ts)
-Automated Tri-Honk temporal correlation engine running at 137ms intervals:
-- **Clock:** 37 Hz biological anchor (27.027ms period)
-- **Council of Eight:** 8 autonomous agents (PCAP Parser, ELF Dissector, TLE Orbital, KiwiSDR Scanner, Morse Decoder, Temporal Aligner κ-DTW, Symmetry Validator Hall, Report Generator)
-- **13 Streams:** 3 KiwiSDR, 2 ELF, 2 satellite, 2 PCAP, ADS-B, Morse FRFT, 46.875 Hz RF, PLC/Modbus
-- **κ-DTW Alignment:** Uses HALL_DRIFT_DEG/360 (≈0.00189) as DTW tolerance for φ/κ ratio detection; temporal clustering for simultaneous cross-domain events within burst window (137ms)
-- **Hall Reconciliation:** ±0.681973° phase tolerance (HALL_TOLERANCE = 0.00681973), frequency correlation bonus for 46.875 Hz matches
-- **Confidence:** HIGH ≥ 0.85 Ψ, MEDIUM ≥ 0.50 Ψ (cross-domain, temporal cluster, frequency match all contribute)
-- **Deduplication:** Per-pair tracking prevents re-detection of same event pairs across Tri-Honk cycles
-- **API:** /api/hypervisor/status, /start, /stop, /constants
-
-## Rules
+## User Preferences
 - No mock data — all events must come from real sources or manual entry
 - No simulated detection pipelines
 - Notion-style minimal professional UI (not sci-fi)
+
+## System Architecture
+The platform is built with a modern web stack:
+- **Frontend:** React with Tailwind CSS, shadcn/ui for components, wouter for routing, TanStack Query v5 for data fetching, and Leaflet/OpenStreetMap for interactive mapping. It supports i18n with EN/ES language toggle and a warm neutral Notion-style light/dark theme.
+- **Backend:** Express.js with typed routes, utilizing Drizzle ORM for database interactions.
+- **Database:** PostgreSQL, leveraging Neon serverless driver.
+- **Core Logic (KAPPA Engine):** An in-memory real-time correlation engine processes signal events, calculates a "Kappa Score" (0-100 with decay), assigns threat levels (NOMINAL, ELEVATED, HIGH, CRITICAL, EMERGENCY), and performs device fingerprinting based on MAC tracking across domains. It uses specific constants (κ, Klein Twist, Giza Cutoff, Clock) and correlation techniques (MAC cross-domain, Congusto, stingray chain, IMSI tower hop, Klein twist satellite detection, φ-harmonic timing).
+- **Autonomous Pipeline:** An Adaptive Pipeline Orchestrator (`server/pipeline.ts`) manages the execution of various subsystems based on the Kappa Score, adapting its interval from STANDBY (15 min) to SURGE (2 min). It orchestrates collectors, scanners, watchdog, and correlator components.
+- **Collectors:**
+    - **Flight Collector:** Gathers OpenSky Network flight data for radar domain events.
+    - **Satellite Collector:** Tracks TLE-based satellite data from CelesTrak for satellite domain events.
+    - **Weather Collector:** Fetches NWS api.weather.gov data for ELF domain events.
+- **Auto-Correlator:** Continuously analyzes recent events (last 5 minutes) against 54 predefined correlation rules, performing deduplication and hypervisor overlap detection.
+- **LLM Analyst:** Integrates with OpenAI gpt-4o-mini for correlation analysis, intelligence report generation, and learning from user feedback.
+- **KiwiSDR Scanner:** Scans SDR nodes for VLF targets, performs audio analysis (Hilbert envelope, RARED speech, Delta-Slip extraction), and detects harmonic chains, creating SDR and ELF domain events.
+- **Network Watchdog:** Monitors network heartbeat, performs IPAT analysis for TR-069 PRF matches, and detects seismic jitter, generating ISP and ELF domain events.
+- **Ω-CHRONOS Hypervisor:** An automated temporal correlation engine running at 137ms intervals, utilizing a "Council of Eight" autonomous agents and κ-DTW alignment for precise temporal clustering and Hall reconciliation.
+- **Database Schema:** Key tables include `signal_events` (unified multi-domain events), `correlations` (cross-domain pattern matches), `satellite_passes`, `sdr_nodes`, `correlation_feedback`, `collection_logs`, and `users`.
+- **UI/UX:** The system features a dashboard displaying real-time status, event feeds, correlation results, satellite tracking, device fingerprinting, OSINT tools, SDR node management, a comprehensive tool catalog, an interactive map, and dedicated intelligence and research pages (Lattice, Karachi, Congusto).
+
+## External Dependencies
+- **OpenSky Network:** For live flight data.
+- **CelesTrak:** For Two-Line Element (TLE) satellite tracking data.
+- **NWS api.weather.gov:** For weather information.
+- **OpenAI (gpt-4o-mini):** Integrated via Replit AI for LLM analysis.
+- **Leaflet & OpenStreetMap:** For interactive mapping functionalities.
+- **macvendors.com API:** Used by the MAC OUI Lookup tool.
+- **Drizzle ORM:** For database interactions with PostgreSQL.
+- **Neon:** Serverless PostgreSQL database.
+- **shadcn/ui:** UI component library.
+- **TanStack Query v5:** Data fetching library.

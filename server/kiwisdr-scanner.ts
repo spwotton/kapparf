@@ -456,6 +456,10 @@ export function startKiwiSDRScanner(): void {
   console.log(`[KAPPA] KiwiSDR scanner started: ${VLF_SCAN_TARGETS.length} targets × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval`);
 }
 
+export async function runScanCycleOnce(): Promise<void> {
+  await runScanCycle();
+}
+
 export function getScannerStatus(): ScannerStatus {
   return {
     running: scannerState.running,

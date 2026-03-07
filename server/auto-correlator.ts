@@ -134,6 +134,11 @@ export function startAutoCorrelator(): void {
   console.log("[KAPPA] Auto-correlator started (30s cycle)");
 }
 
+export async function runCorrelationCycleOnce(): Promise<number> {
+  await runCorrelationCycle();
+  return totalCorrelations;
+}
+
 export function getCorrelatorStatus(): CorrelatorStats {
   return {
     running,

@@ -309,6 +309,29 @@ export function startCollectors(): void {
   console.log("[KAPPA] Auto-collectors started: flights (60s), satellites (5m), weather (10m)");
 }
 
+function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_resolve, reject) =>
+      setTimeout(() => reject(new Error(`[pipeline] ${label} timed out after ${ms}ms`)), ms)
+    ),
+  ]);
+}
+
+const COLLECTOR_TIMEOUT_MS = 30_000;
+
+export async function runAllCollectorsOnce(): Promise<{ flights: number; satellites: number; weather: number }> {
+  const results = { flights: 0, satellites: 0, weather: 0 };
+  try { results.flights = await withTimeout(collectFlights(), COLLECTOR_TIMEOUT_MS, "flights"); } catch (e: any) { console.error("[pipeline] flights:", e.message ?? e); }
+  try { results.satellites = await withTimeout(collectSatellites(), COLLECTOR_TIMEOUT_MS, "satellites"); } catch (e: any) { console.error("[pipeline] satellites:", e.message ?? e); }
+  try { results.weather = await withTimeout(collectWeather(), COLLECTOR_TIMEOUT_MS, "weather"); } catch (e: any) { console.error("[pipeline] weather:", e.message ?? e); }
+  for (const [name, count] of Object.entries(results)) {
+    const s = collectors.get(name);
+    if (s) { s.eventsCreated += count; s.lastRun = Date.now(); }
+  }
+  return results;
+}
+
 export function getCollectorStatus(): Record<string, CollectorStatusType> {
   const result: Record<string, CollectorStatusType> = {};
   for (const c of collectors.values()) {

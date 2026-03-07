@@ -316,6 +316,10 @@ export interface WatchdogStatus {
   recentEvents: NetworkEvent[];
 }
 
+export async function runHeartbeatOnce(): Promise<void> {
+  await runHeartbeatCycle();
+}
+
 export function getWatchdogStatus(): WatchdogStatus {
   const avgLatency = state.latencyHistory.length > 0
     ? Math.round(state.latencyHistory.reduce((s, v) => s + v, 0) / state.latencyHistory.length)

@@ -1,8 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import {
   KAPPA_CONSTANTS,
   DOMAINS,
@@ -48,6 +50,9 @@ import {
   XCircle,
   Scan,
   Network,
+  PlayCircle,
+  Loader2,
+  TrendingUp,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
@@ -231,6 +236,51 @@ export default function DashboardPage() {
     refetchInterval: 10000,
   });
 
+  interface PipelineStatus {
+    running: boolean;
+    mode: string;
+    intervalMs: number;
+    intervalLabel: string;
+    lastRun: number | null;
+    nextRun: number | null;
+    cycleCount: number;
+    consecutiveElevated: number;
+    lastResult: {
+      timestamp: number;
+      durationMs: number;
+      mode: string;
+      collectors: { flights: number; satellites: number; weather: number };
+      correlationsTotal: number;
+      scannerDetections: number;
+      watchdogDrops: number;
+      kappaScore: number;
+      threatLevel: string;
+      eveningWindowActive: boolean;
+      rampedUp: boolean;
+    } | null;
+  }
+
+  const { data: pipelineStatus } = useQuery<PipelineStatus>({
+    queryKey: ["/api/pipeline/status"],
+    refetchInterval: 5000,
+  });
+
+  const pipelineRunMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/pipeline/run");
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/pipeline/status"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/kappa/status"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/collectors/status"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/correlations/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/scanner/status"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/watchdog/status"] });
+    },
+  });
+
   const collectorIcons: Record<string, typeof Wifi> = {
     flights: Plane,
     satellites: Satellite,
@@ -385,6 +435,124 @@ export default function DashboardPage() {
               </div>
             </div>
           ) : null}
+        </CardContent>
+      </Card>
+
+      <Card data-testid="card-pipeline">
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">{t("pipeline.title")}</CardTitle>
+              {pipelineStatus && (
+                <Badge
+                  variant={pipelineStatus.mode === "SURGE" ? "destructive" : pipelineStatus.mode === "ELEVATED" ? "default" : "secondary"}
+                  className="text-[10px] font-mono"
+                  data-testid="badge-pipeline-mode"
+                >
+                  {pipelineStatus.mode} — {pipelineStatus.intervalLabel}
+                </Badge>
+              )}
+              {pipelineStatus?.running && (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+                </span>
+              )}
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={pipelineRunMutation.isPending}
+              onClick={() => pipelineRunMutation.mutate()}
+              data-testid="button-pipeline-run"
+              className="gap-1.5"
+            >
+              {pipelineRunMutation.isPending ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <PlayCircle className="h-3.5 w-3.5" />
+              )}
+              {pipelineRunMutation.isPending ? t("pipeline.running") : t("pipeline.runNow")}
+            </Button>
+          </div>
+          <CardDescription className="text-[11px]">{t("pipeline.subtitle")}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+            <div className="border rounded-md p-2.5">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("pipeline.cycles")}</span>
+              <p className="font-mono font-semibold text-lg" data-testid="text-pipeline-cycles">{pipelineStatus?.cycleCount ?? 0}</p>
+            </div>
+            <div className="border rounded-md p-2.5">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("pipeline.lastSweep")}</span>
+              <p className="font-mono text-sm" data-testid="text-pipeline-last">
+                {pipelineStatus?.lastRun ? new Date(pipelineStatus.lastRun).toLocaleTimeString() : "--"}
+              </p>
+            </div>
+            <div className="border rounded-md p-2.5">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("pipeline.nextSweep")}</span>
+              <p className="font-mono text-sm" data-testid="text-pipeline-next">
+                {pipelineStatus?.nextRun ? new Date(pipelineStatus.nextRun).toLocaleTimeString() : "--"}
+              </p>
+            </div>
+            <div className="border rounded-md p-2.5">
+              <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("pipeline.mode")}</span>
+              <p className="text-sm font-medium" data-testid="text-pipeline-mode-detail">
+                {pipelineStatus?.mode === "SURGE" ? t("pipeline.surge") :
+                 pipelineStatus?.mode === "ELEVATED" ? t("pipeline.elevated") :
+                 pipelineStatus?.mode === "PATROL" ? t("pipeline.patrol") :
+                 t("pipeline.standby")}
+              </p>
+            </div>
+          </div>
+
+          {pipelineStatus?.lastResult && (
+            <div className="border rounded-md p-3 space-y-2" data-testid="card-pipeline-last-result">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <span>Sweep #{pipelineStatus.cycleCount}</span>
+                <span>|</span>
+                <span>{pipelineStatus.lastResult.durationMs}ms</span>
+                <span>|</span>
+                <Badge variant={
+                  pipelineStatus.lastResult.threatLevel === "CRITICAL" || pipelineStatus.lastResult.threatLevel === "EMERGENCY" ? "destructive" :
+                  pipelineStatus.lastResult.threatLevel === "HIGH" ? "default" : "secondary"
+                } className="text-[9px]">
+                  κ {pipelineStatus.lastResult.kappaScore.toFixed(1)} — {pipelineStatus.lastResult.threatLevel}
+                </Badge>
+                {pipelineStatus.lastResult.eveningWindowActive && (
+                  <Badge variant="outline" className="text-[9px]">{t("pipeline.eveningWindow")}</Badge>
+                )}
+                {pipelineStatus.lastResult.rampedUp && (
+                  <Badge className="text-[9px] bg-amber-500">{t("pipeline.rampUp")}</Badge>
+                )}
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 text-xs">
+                <div>
+                  <span className="text-muted-foreground">{t("pipeline.eventsCollected")}</span>
+                  <p className="font-mono font-medium">
+                    {pipelineStatus.lastResult.collectors.flights + pipelineStatus.lastResult.collectors.satellites + pipelineStatus.lastResult.collectors.weather}
+                  </p>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">{t("pipeline.correlations")}</span>
+                  <p className="font-mono font-medium">{pipelineStatus.lastResult.correlationsTotal}</p>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">{t("pipeline.detections")}</span>
+                  <p className="font-mono font-medium">{pipelineStatus.lastResult.scannerDetections}</p>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">{t("pipeline.drops")}</span>
+                  <p className="font-mono font-medium">{pipelineStatus.lastResult.watchdogDrops}</p>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">{t("pipeline.duration")}</span>
+                  <p className="font-mono font-medium">{pipelineStatus.lastResult.durationMs}ms</p>
+                </div>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 

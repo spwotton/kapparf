@@ -8,6 +8,7 @@ import { getCorrelatorStatus } from "./auto-correlator";
 import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
 import { analyzeCorrelation, generateReport, suggestRuleWeights } from "./llm-analyst";
+import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import {
   insertSignalEventSchema,
   insertSdrNodeSchema,
@@ -924,6 +925,31 @@ export async function registerRoutes(
       console.error("Learn error:", err);
       res.status(500).json({ error: "Learning failed" });
     }
+  });
+
+  app.get("/api/pipeline/status", (_req, res) => {
+    res.json(getPipelineStatus());
+  });
+
+  app.post("/api/pipeline/run", async (_req, res) => {
+    try {
+      console.log("[pipeline] Manual full sweep triggered");
+      const result = await runPipelineOnce();
+      res.json(result);
+    } catch (err) {
+      console.error("[pipeline] Manual run error:", err);
+      res.status(500).json({ error: "Pipeline sweep failed" });
+    }
+  });
+
+  app.post("/api/pipeline/start", (_req, res) => {
+    startPipeline();
+    res.json(getPipelineStatus());
+  });
+
+  app.post("/api/pipeline/stop", (_req, res) => {
+    stopPipeline();
+    res.json(getPipelineStatus());
   });
 
   app.get("/api/lattice/all", (_req, res) => {
