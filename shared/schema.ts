@@ -1776,4 +1776,62 @@ export const HYPERVISOR_STREAMS: AnalysisStream[] = [
   },
 ];
 
+export const researchSessions = pgTable("research_sessions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  description: text("description"),
+  status: text("status").notNull().default("active"),
+  context: jsonb("context"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const researchQueries = pgTable("research_queries", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: varchar("session_id").notNull(),
+  layer: integer("layer").notNull().default(1),
+  prompt: text("prompt").notNull(),
+  modelProvider: text("model_provider").notNull(),
+  modelName: text("model_name").notNull(),
+  response: text("response"),
+  metadata: jsonb("metadata"),
+  parentQueryId: varchar("parent_query_id"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const researchFindings = pgTable("research_findings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: varchar("session_id").notNull(),
+  queryId: varchar("query_id"),
+  category: text("category").notNull().default("claim"),
+  title: text("title").notNull(),
+  content: text("content").notNull(),
+  confidence: text("confidence").notNull().default("plausible"),
+  sources: jsonb("sources"),
+  tags: text("tags").array(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertResearchSessionSchema = createInsertSchema(researchSessions).omit({ id: true, createdAt: true, updatedAt: true });
+export const insertResearchQuerySchema = createInsertSchema(researchQueries).omit({ id: true, createdAt: true });
+export const insertResearchFindingSchema = createInsertSchema(researchFindings).omit({ id: true, createdAt: true });
+
+export type ResearchSession = typeof researchSessions.$inferSelect;
+export type InsertResearchSession = z.infer<typeof insertResearchSessionSchema>;
+export type ResearchQuery = typeof researchQueries.$inferSelect;
+export type InsertResearchQuery = z.infer<typeof insertResearchQuerySchema>;
+export type ResearchFinding = typeof researchFindings.$inferSelect;
+export type InsertResearchFinding = z.infer<typeof insertResearchFindingSchema>;
+
+export const TRE_LAYERS = [
+  { id: 1, name: "Lexical", description: "Surface-level keyword extraction, entity recognition, and literal pattern matching" },
+  { id: 2, name: "Semantic", description: "Meaning-level analysis — context, implications, and relational inference" },
+  { id: 3, name: "Narrative", description: "Story-level synthesis — timeline construction, actor networks, and motive analysis" },
+  { id: 4, name: "Cosmic", description: "Meta-pattern recognition — cross-domain resonance, signal topology, and emergence detection" },
+  { id: 5, name: "Axiomatic", description: "First-principles verification — logical consistency, conservation laws, and ground truth anchoring" },
+] as const;
+
+export const RESEARCH_CONFIDENCE_LEVELS = ["verified", "plausible", "unverified", "contradicted"] as const;
+export const RESEARCH_CATEGORIES = ["entity", "event", "claim", "evidence", "signal", "pattern"] as const;
+
 export * from "./models/chat";

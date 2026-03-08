@@ -9,6 +9,14 @@ import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
 import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
+import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
+import { fetchUrl } from "./research-web";
+import {
+  insertResearchSessionSchema,
+  insertResearchQuerySchema,
+  insertResearchFindingSchema,
+  TRE_LAYERS,
+} from "@shared/schema";
 import {
   insertSignalEventSchema,
   insertSdrNodeSchema,
@@ -1039,6 +1047,168 @@ export async function registerRoutes(
     } catch (err) {
       console.error("[routes] /api/social/caption error:", err);
       res.status(500).json({ error: "Caption generation failed" });
+    }
+  });
+
+  app.get("/api/research/models", (_req, res) => {
+    res.json({
+      models: getAvailableModels(),
+      providers: getProviderStatus(),
+      layers: TRE_LAYERS,
+    });
+  });
+
+  app.post("/api/research/sessions", async (req, res) => {
+    try {
+      const parsed = insertResearchSessionSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: parsed.error.message });
+      }
+      const session = await storage.createResearchSession(parsed.data);
+      res.json(session);
+    } catch (err) {
+      console.error("[routes] create research session error:", err);
+      res.status(500).json({ error: "Failed to create session" });
+    }
+  });
+
+  app.get("/api/research/sessions", async (_req, res) => {
+    try {
+      const sessions = await storage.getResearchSessions();
+      res.json(sessions);
+    } catch (err) {
+      console.error("[routes] get research sessions error:", err);
+      res.status(500).json({ error: "Failed to get sessions" });
+    }
+  });
+
+  app.get("/api/research/sessions/:id", async (req, res) => {
+    try {
+      const session = await storage.getResearchSession(req.params.id);
+      if (!session) return res.status(404).json({ error: "Session not found" });
+      const [queries, findings] = await Promise.all([
+        storage.getResearchQueries(session.id),
+        storage.getResearchFindings(session.id),
+      ]);
+      res.json({ session, queries, findings });
+    } catch (err) {
+      console.error("[routes] get research session error:", err);
+      res.status(500).json({ error: "Failed to get session" });
+    }
+  });
+
+  app.post("/api/research/query", async (req, res) => {
+    try {
+      const { sessionId, prompt, provider, model, layer } = req.body;
+      if (!sessionId || !prompt || !provider || !model) {
+        return res.status(400).json({ error: "sessionId, prompt, provider, and model are required" });
+      }
+      if (typeof prompt !== "string" || prompt.length > 50000) {
+        return res.status(400).json({ error: "Prompt must be a string under 50,000 characters" });
+      }
+      if (!["openai", "openrouter", "huggingface"].includes(provider)) {
+        return res.status(400).json({ error: "Invalid provider" });
+      }
+      const queryLayer = typeof layer === "number" && layer >= 1 && layer <= 5 ? layer : 1;
+
+      const session = await storage.getResearchSession(sessionId);
+      if (!session) return res.status(404).json({ error: "Session not found" });
+
+      const result = await queryModel(provider, model, [{ role: "user", content: prompt }], queryLayer);
+
+      const saved = await storage.createResearchQuery({
+        sessionId,
+        layer: queryLayer,
+        prompt,
+        modelProvider: provider,
+        modelName: model,
+        response: result.response || null,
+        metadata: { durationMs: result.durationMs, error: result.error || null },
+      });
+
+      res.json({ query: saved, result });
+    } catch (err) {
+      console.error("[routes] research query error:", err);
+      res.status(500).json({ error: "Query failed" });
+    }
+  });
+
+  app.post("/api/research/query/recursive", async (req, res) => {
+    try {
+      const { sessionId, prompt, layers, preferredModels } = req.body;
+      if (!sessionId || !prompt) {
+        return res.status(400).json({ error: "sessionId and prompt are required" });
+      }
+      if (typeof prompt !== "string" || prompt.length > 50000) {
+        return res.status(400).json({ error: "Prompt must be a string under 50,000 characters" });
+      }
+
+      const session = await storage.getResearchSession(sessionId);
+      if (!session) return res.status(404).json({ error: "Session not found" });
+
+      const validLayers = [1, 2, 3, 4, 5];
+      const layerIds = Array.isArray(layers) ? layers.filter((l: number) => validLayers.includes(l)) : validLayers;
+      const results = await recursiveQuery(prompt, layerIds.length > 0 ? layerIds : validLayers, preferredModels);
+
+      const savedQueries = [];
+      for (const result of results) {
+        const saved = await storage.createResearchQuery({
+          sessionId,
+          layer: result.layer,
+          prompt,
+          modelProvider: result.provider,
+          modelName: result.model,
+          response: result.response || null,
+          metadata: { durationMs: result.durationMs, error: result.error || null, layerName: result.layerName },
+          parentQueryId: savedQueries.length > 0 ? savedQueries[0].id : undefined,
+        });
+        savedQueries.push(saved);
+      }
+
+      res.json({ queries: savedQueries, results });
+    } catch (err) {
+      console.error("[routes] recursive query error:", err);
+      res.status(500).json({ error: "Recursive query failed" });
+    }
+  });
+
+  app.post("/api/research/findings", async (req, res) => {
+    try {
+      const parsed = insertResearchFindingSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: parsed.error.message });
+      }
+      const session = await storage.getResearchSession(parsed.data.sessionId);
+      if (!session) return res.status(404).json({ error: "Session not found" });
+      const finding = await storage.createResearchFinding(parsed.data);
+      res.json(finding);
+    } catch (err) {
+      console.error("[routes] create finding error:", err);
+      res.status(500).json({ error: "Failed to create finding" });
+    }
+  });
+
+  app.get("/api/research/findings/:sessionId", async (req, res) => {
+    try {
+      const findings = await storage.getResearchFindings(req.params.sessionId);
+      res.json(findings);
+    } catch (err) {
+      console.error("[routes] get findings error:", err);
+      res.status(500).json({ error: "Failed to get findings" });
+    }
+  });
+
+  app.post("/api/research/web/fetch", async (req, res) => {
+    try {
+      const { url } = req.body;
+      if (!url || typeof url !== "string") {
+        return res.status(400).json({ error: "URL is required" });
+      }
+      const result = await fetchUrl(url);
+      res.json(result);
+    } catch (err) {
+      console.error("[routes] web fetch error:", err);
+      res.status(500).json({ error: "Fetch failed" });
     }
   });
 

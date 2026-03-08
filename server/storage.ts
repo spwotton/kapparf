@@ -6,8 +6,12 @@ import {
   type SdrNode, type InsertSdrNode,
   type CorrelationFeedback, type InsertCorrelationFeedback,
   type CollectionLog, type InsertCollectionLog,
+  type ResearchSession, type InsertResearchSession,
+  type ResearchQuery, type InsertResearchQuery,
+  type ResearchFinding, type InsertResearchFinding,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
+  researchSessions, researchQueries, researchFindings,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte } from "drizzle-orm";
@@ -35,6 +39,14 @@ export interface IStorage {
   getRecentCollectionLogs(limit: number): Promise<CollectionLog[]>;
   searchEvents(query: string, domains?: string[], limit?: number): Promise<SignalEvent[]>;
   getEventsByTimeRange(from: Date, to: Date, domain?: string): Promise<SignalEvent[]>;
+  createResearchSession(session: InsertResearchSession): Promise<ResearchSession>;
+  getResearchSessions(): Promise<ResearchSession[]>;
+  getResearchSession(id: string): Promise<ResearchSession | undefined>;
+  updateResearchSession(id: string, updates: Partial<InsertResearchSession>): Promise<ResearchSession>;
+  createResearchQuery(query: InsertResearchQuery): Promise<ResearchQuery>;
+  getResearchQueries(sessionId: string): Promise<ResearchQuery[]>;
+  createResearchFinding(finding: InsertResearchFinding): Promise<ResearchFinding>;
+  getResearchFindings(sessionId: string): Promise<ResearchFinding[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -189,6 +201,50 @@ export class DatabaseStorage implements IStorage {
     return db.select().from(signalEvents)
       .where(and(...conditions))
       .orderBy(desc(signalEvents.timestamp));
+  }
+
+  async createResearchSession(session: InsertResearchSession): Promise<ResearchSession> {
+    const [created] = await db.insert(researchSessions).values(session).returning();
+    return created;
+  }
+
+  async getResearchSessions(): Promise<ResearchSession[]> {
+    return db.select().from(researchSessions).orderBy(desc(researchSessions.createdAt));
+  }
+
+  async getResearchSession(id: string): Promise<ResearchSession | undefined> {
+    const [session] = await db.select().from(researchSessions).where(eq(researchSessions.id, id));
+    return session;
+  }
+
+  async updateResearchSession(id: string, updates: Partial<InsertResearchSession>): Promise<ResearchSession> {
+    const [updated] = await db.update(researchSessions)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(researchSessions.id, id))
+      .returning();
+    return updated;
+  }
+
+  async createResearchQuery(query: InsertResearchQuery): Promise<ResearchQuery> {
+    const [created] = await db.insert(researchQueries).values(query).returning();
+    return created;
+  }
+
+  async getResearchQueries(sessionId: string): Promise<ResearchQuery[]> {
+    return db.select().from(researchQueries)
+      .where(eq(researchQueries.sessionId, sessionId))
+      .orderBy(desc(researchQueries.createdAt));
+  }
+
+  async createResearchFinding(finding: InsertResearchFinding): Promise<ResearchFinding> {
+    const [created] = await db.insert(researchFindings).values(finding).returning();
+    return created;
+  }
+
+  async getResearchFindings(sessionId: string): Promise<ResearchFinding[]> {
+    return db.select().from(researchFindings)
+      .where(eq(researchFindings.sessionId, sessionId))
+      .orderBy(desc(researchFindings.createdAt));
   }
 }
 
