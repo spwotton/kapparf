@@ -113,7 +113,17 @@ export default function HypervisorPage() {
     );
   }
 
-  const s = status!;
+  if (!status) {
+    return (
+      <div className="p-6 max-w-6xl mx-auto">
+        <div className="text-center py-12 text-sm text-muted-foreground" data-testid="text-error-state">
+          {t("hypervisor.title")} — {t("hypervisor.waitingForData")}
+        </div>
+      </div>
+    );
+  }
+
+  const s = status;
   const psiPct = s.psiValue * 100;
 
   return (
