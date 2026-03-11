@@ -5,9 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
-import { CORRELATION_RULES, type Correlation, type CorrelatorStats } from "@shared/schema";
+import { CORRELATION_RULES, type Correlation, type CorrelatorStats, type SignalEvent } from "@shared/schema";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import { Play, Shield, Clock, Link2, Star } from "lucide-react";
+import { Play, Shield, Clock, Link2, Star, Activity, BarChart3, RefreshCw, ChevronDown, ChevronUp } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const severityColors = [
@@ -60,6 +60,76 @@ function StarRating({ correlationId }: { correlationId: string }) {
           />
         </button>
       ))}
+    </div>
+  );
+}
+
+const domainColors: Record<string, string> = {
+  wifi: "bg-green-500/10 text-green-700 dark:text-green-400",
+  ble: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+  lte: "bg-red-500/10 text-red-700 dark:text-red-400",
+  "5g": "bg-orange-500/10 text-orange-700 dark:text-orange-400",
+  satellite: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
+  sdr: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+  elf: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400",
+  radar: "bg-rose-500/10 text-rose-700 dark:text-rose-400",
+  plc: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
+  isp: "bg-slate-500/10 text-slate-700 dark:text-slate-400",
+  drone: "bg-red-500/10 text-red-700 dark:text-red-400",
+};
+
+function LinkedEvents({ eventIds, correlationId }: { eventIds: string[]; correlationId: string }) {
+  const { t } = useI18n();
+  const [expanded, setExpanded] = useState(false);
+
+  const { data: events, isLoading } = useQuery<SignalEvent[]>({
+    queryKey: ["/api/events/by-ids", correlationId],
+    queryFn: async () => {
+      const res = await apiRequest("POST", "/api/events/by-ids", { ids: eventIds });
+      return res.json();
+    },
+    enabled: expanded,
+  });
+
+  return (
+    <div className="mt-2" data-testid={`linked-events-${correlationId}`}>
+      <button
+        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+        onClick={() => setExpanded(!expanded)}
+        data-testid={`button-toggle-events-${correlationId}`}
+      >
+        {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+        {eventIds.length} {t("correlations.linkedEvents").toLowerCase()}
+      </button>
+      {expanded && (
+        <div className="mt-2 space-y-1">
+          {isLoading ? (
+            <Skeleton className="h-8 w-full" />
+          ) : events && events.length > 0 ? (
+            events.map((evt) => (
+              <div
+                key={evt.id}
+                className="flex items-center gap-2 text-xs p-1.5 rounded bg-muted/50"
+                data-testid={`linked-event-${evt.id}`}
+              >
+                <Badge variant="secondary" className={`text-[10px] ${domainColors[evt.domain] || ""}`}>
+                  {evt.domain.toUpperCase()}
+                </Badge>
+                <span className="font-medium">{evt.eventType}</span>
+                <span className="text-muted-foreground truncate">{evt.source}</span>
+                {evt.frequency != null && (
+                  <span className="font-mono text-muted-foreground">{evt.frequency} Hz</span>
+                )}
+                <span className="ml-auto text-muted-foreground font-mono whitespace-nowrap">
+                  {new Date(evt.timestamp).toLocaleString()}
+                </span>
+              </div>
+            ))
+          ) : (
+            <span className="text-xs text-muted-foreground">{t("events.noData")}</span>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -120,6 +190,49 @@ export default function CorrelationsPage() {
           </Button>
         </div>
       </div>
+
+      {correlatorStats && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" data-testid="panel-correlator-stats">
+          <Card>
+            <CardContent className="py-3 px-4">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <Activity className="h-3 w-3" />
+                <span>{t("correlations.status")}</span>
+              </div>
+              <span className={`text-sm font-medium ${correlatorStats.running ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}`} data-testid="text-correlator-status">
+                {correlatorStats.running ? t("correlations.running") : t("correlations.stopped")}
+              </span>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="py-3 px-4">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <Shield className="h-3 w-3" />
+                <span>{t("correlations.rulesChecked")}</span>
+              </div>
+              <span className="text-sm font-medium font-mono" data-testid="text-rules-checked">{correlatorStats.rulesChecked}</span>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="py-3 px-4">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <BarChart3 className="h-3 w-3" />
+                <span>{t("correlations.found")}</span>
+              </div>
+              <span className="text-sm font-medium font-mono" data-testid="text-correlations-found">{correlatorStats.totalCorrelations}</span>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="py-3 px-4">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <RefreshCw className="h-3 w-3" />
+                <span>{t("correlations.cycles")}</span>
+              </div>
+              <span className="text-sm font-medium font-mono" data-testid="text-cycle-count">{correlatorStats.cycleCount}</span>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <Card>
         <CardHeader className="pb-3">
@@ -198,6 +311,7 @@ export default function CorrelationsPage() {
                       <StarRating correlationId={c.id} />
                     </div>
                   </div>
+                  <LinkedEvents eventIds={c.eventIds} correlationId={c.id} />
                 </CardContent>
               </Card>
             ))}

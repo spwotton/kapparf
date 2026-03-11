@@ -201,26 +201,18 @@ export default function EventsPage() {
         <IngestDialog />
       </div>
 
-      <div className="flex gap-2 flex-wrap">
-        <Button
-          variant={domainFilter === "all" ? "default" : "outline"}
-          size="sm"
-          onClick={() => setDomainFilter("all")}
-          data-testid="button-filter-all"
-        >
-          {t("events.all")}
-        </Button>
-        {DOMAINS.map((d) => (
-          <Button
-            key={d}
-            variant={domainFilter === d ? "default" : "outline"}
-            size="sm"
-            onClick={() => setDomainFilter(d)}
-            data-testid={`button-filter-${d}`}
-          >
-            {d.toUpperCase()}
-          </Button>
-        ))}
+      <div className="flex items-center gap-2">
+        <Select value={domainFilter} onValueChange={setDomainFilter}>
+          <SelectTrigger className="w-48" data-testid="select-domain-filter">
+            <SelectValue placeholder={t("events.all")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all" data-testid="filter-option-all">{t("events.all")}</SelectItem>
+            {DOMAINS.map((d) => (
+              <SelectItem key={d} value={d} data-testid={`filter-option-${d}`}>{d.toUpperCase()}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       {isLoading ? (

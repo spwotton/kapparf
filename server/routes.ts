@@ -75,12 +75,24 @@ export async function registerRoutes(
 
   app.get("/api/events", async (req, res) => {
     const domain = req.query.domain as string | undefined;
-    const events = await storage.getSignalEvents(domain || undefined);
+    const n = parseInt(req.query.limit as string);
+    const limit = Number.isFinite(n) ? Math.max(1, Math.min(Math.floor(n), 500)) : 200;
+    const events = await storage.getSignalEvents(domain || undefined, limit);
     res.json(events);
   });
 
   app.get("/api/events/recent", async (_req, res) => {
     const events = await storage.getRecentSignalEvents(20);
+    res.json(events);
+  });
+
+  app.post("/api/events/by-ids", async (req, res) => {
+    const { ids } = req.body;
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ error: "ids must be a non-empty array" });
+    }
+    const limitedIds = ids.slice(0, 50);
+    const events = await storage.getSignalEventsByIds(limitedIds);
     res.json(events);
   });
 
@@ -95,8 +107,10 @@ export async function registerRoutes(
     res.json(event);
   });
 
-  app.get("/api/correlations", async (_req, res) => {
-    const results = await storage.getCorrelations();
+  app.get("/api/correlations", async (req, res) => {
+    const n = parseInt(req.query.limit as string);
+    const limit = Number.isFinite(n) ? Math.max(1, Math.min(Math.floor(n), 500)) : 200;
+    const results = await storage.getCorrelations(limit);
     res.json(results);
   });
 

@@ -14,18 +14,19 @@ import {
   researchSessions, researchQueries, researchFindings,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, sql, and, or, ilike, gte, lte } from "drizzle-orm";
+import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  getSignalEvents(domain?: string): Promise<SignalEvent[]>;
+  getSignalEvents(domain?: string, limit?: number): Promise<SignalEvent[]>;
+  getSignalEventsByIds(ids: string[]): Promise<SignalEvent[]>;
   getRecentSignalEvents(limit: number): Promise<SignalEvent[]>;
   createSignalEvent(event: InsertSignalEvent): Promise<SignalEvent>;
   getSignalEventsByWindow(windowSeconds: number): Promise<SignalEvent[]>;
   getEventCountsByDomain(): Promise<Record<string, number>>;
-  getCorrelations(): Promise<Correlation[]>;
+  getCorrelations(limit?: number): Promise<Correlation[]>;
   createCorrelation(correlation: InsertCorrelation): Promise<Correlation>;
   getCorrelationCount(): Promise<number>;
   getSatellites(): Promise<SatellitePass[]>;
@@ -65,11 +66,16 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async getSignalEvents(domain?: string): Promise<SignalEvent[]> {
-    if (domain) {
-      return db.select().from(signalEvents).where(eq(signalEvents.domain, domain)).orderBy(desc(signalEvents.timestamp));
-    }
-    return db.select().from(signalEvents).orderBy(desc(signalEvents.timestamp));
+  async getSignalEvents(domain?: string, limit?: number): Promise<SignalEvent[]> {
+    const query = domain
+      ? db.select().from(signalEvents).where(eq(signalEvents.domain, domain)).orderBy(desc(signalEvents.timestamp))
+      : db.select().from(signalEvents).orderBy(desc(signalEvents.timestamp));
+    return limit ? query.limit(limit) : query;
+  }
+
+  async getSignalEventsByIds(ids: string[]): Promise<SignalEvent[]> {
+    if (ids.length === 0) return [];
+    return db.select().from(signalEvents).where(inArray(signalEvents.id, ids));
   }
 
   async getRecentSignalEvents(limit: number): Promise<SignalEvent[]> {
@@ -101,8 +107,9 @@ export class DatabaseStorage implements IStorage {
     return counts;
   }
 
-  async getCorrelations(): Promise<Correlation[]> {
-    return db.select().from(correlations).orderBy(desc(correlations.timestamp));
+  async getCorrelations(limit?: number): Promise<Correlation[]> {
+    const query = db.select().from(correlations).orderBy(desc(correlations.timestamp));
+    return limit ? query.limit(limit) : query;
   }
 
   async createCorrelation(correlation: InsertCorrelation): Promise<Correlation> {
