@@ -17,6 +17,8 @@ export const signalEvents = pgTable("signal_events", {
   eventType: text("event_type").notNull(),
   frequency: real("frequency"),
   confidence: real("confidence").notNull().default(0.5),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
   metadata: jsonb("metadata"),
   raw: text("raw"),
 });

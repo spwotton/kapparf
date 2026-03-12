@@ -112,7 +112,7 @@ export default function SatellitesPage() {
     if (allSelected) {
       setSelectedGroups((prev) => prev.filter((id) => !ids.includes(id)));
     } else {
-      setSelectedGroups((prev) => [...new Set([...prev, ...ids])]);
+      setSelectedGroups((prev) => Array.from(new Set([...prev, ...ids])));
     }
   };
 
