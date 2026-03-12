@@ -24,7 +24,7 @@ function AddNodeDialog() {
   const [longitude, setLongitude] = useState("");
 
   const mutation = useMutation({
-    mutationFn: (data: Record<string, unknown>) =>
+    mutationFn: (data: { name: string; url: string; location: string; latitude: number; longitude: number; status: string }) =>
       apiRequest("POST", "/api/nodes", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/nodes"] });
@@ -34,7 +34,7 @@ function AddNodeDialog() {
       setLocation("");
       setLatitude("");
       setLongitude("");
-      toast({ title: "Node added" });
+      toast({ title: t("nodes.add") });
     },
     onError: () => {
       toast({ title: t("common.error"), variant: "destructive" });
@@ -78,15 +78,20 @@ function AddNodeDialog() {
           </div>
           <Button
             className="w-full"
-            onClick={() => mutation.mutate({
-              name,
-              url,
-              location,
-              latitude: parseFloat(latitude),
-              longitude: parseFloat(longitude),
-              status: "offline",
-            })}
-            disabled={!name.trim() || !url.trim() || !location.trim() || !latitude || !longitude || mutation.isPending}
+            onClick={() => {
+              const lat = parseFloat(latitude);
+              const lon = parseFloat(longitude);
+              if (isNaN(lat) || isNaN(lon)) return;
+              mutation.mutate({
+                name,
+                url,
+                location,
+                latitude: lat,
+                longitude: lon,
+                status: "offline",
+              });
+            }}
+            disabled={!name.trim() || !url.trim() || !location.trim() || !latitude || !longitude || isNaN(parseFloat(latitude)) || isNaN(parseFloat(longitude)) || mutation.isPending}
             data-testid="button-submit-node"
           >
             {t("nodes.submit")}
@@ -99,7 +104,7 @@ function AddNodeDialog() {
 
 export default function NodesPage() {
   const { t } = useI18n();
-  const { data: nodes, isLoading } = useQuery<SdrNode[]>({
+  const { data: nodes, isLoading, isError } = useQuery<SdrNode[]>({
     queryKey: ["/api/nodes"],
   });
 
@@ -117,6 +122,12 @@ export default function NodesPage() {
         <div className="space-y-2">
           {[1, 2, 3].map((i) => <Skeleton key={i} className="h-20 w-full" />)}
         </div>
+      ) : isError ? (
+        <Card>
+          <CardContent className="py-12 text-center text-sm text-destructive" data-testid="text-nodes-error">
+            {t("common.error")}
+          </CardContent>
+        </Card>
       ) : !nodes || nodes.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-sm text-muted-foreground">

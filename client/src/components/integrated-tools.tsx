@@ -244,7 +244,7 @@ function AdsbDecoderTool() {
             ))}
           </div>
         )}
-        {result?.error && (
+        {result?.error != null && (
           <p className="text-xs text-destructive">{String(result.error)}</p>
         )}
       </CardContent>
@@ -536,19 +536,19 @@ function WhoisTool() {
         </div>
         {result && (
           <div className="space-y-2 text-xs" data-testid="text-whois-result">
-            {result.ipv4 && Array.isArray(result.ipv4) && (result.ipv4 as string[]).length > 0 && (
+            {Array.isArray(result.ipv4) && (result.ipv4 as string[]).length > 0 && (
               <div>
                 <span className="text-muted-foreground">IPv4: </span>
                 <span className="font-mono">{(result.ipv4 as string[]).join(", ")}</span>
               </div>
             )}
-            {result.ns && Array.isArray(result.ns) && (result.ns as string[]).length > 0 && (
+            {Array.isArray(result.ns) && (result.ns as string[]).length > 0 && (
               <div>
                 <span className="text-muted-foreground">NS: </span>
                 <span className="font-mono">{(result.ns as string[]).join(", ")}</span>
               </div>
             )}
-            {result.mx && Array.isArray(result.mx) && (result.mx as { priority: number; exchange: string }[]).length > 0 && (
+            {Array.isArray(result.mx) && (result.mx as { priority: number; exchange: string }[]).length > 0 && (
               <div>
                 <span className="text-muted-foreground">MX: </span>
                 <span className="font-mono">
@@ -556,13 +556,13 @@ function WhoisTool() {
                 </span>
               </div>
             )}
-            {result.soa && (
+            {result.soa != null && (
               <div>
                 <span className="text-muted-foreground">SOA: </span>
                 <span className="font-mono">{(result.soa as { nsname: string }).nsname}</span>
               </div>
             )}
-            {result.txt && Array.isArray(result.txt) && (result.txt as string[]).length > 0 && (
+            {Array.isArray(result.txt) && (result.txt as string[]).length > 0 && (
               <div>
                 <span className="text-muted-foreground block mb-1">TXT Records:</span>
                 {(result.txt as string[]).map((txt, i) => (
@@ -570,7 +570,7 @@ function WhoisTool() {
                 ))}
               </div>
             )}
-            {result.subdomains && Array.isArray(result.subdomains) && (result.subdomains as string[]).length > 0 && (
+            {Array.isArray(result.subdomains) && (result.subdomains as string[]).length > 0 && (
               <div>
                 <span className="text-muted-foreground block mb-1">{t("toolkit.subdomains")} ({(result.subdomains as string[]).length}):</span>
                 <div className="flex gap-1 flex-wrap">

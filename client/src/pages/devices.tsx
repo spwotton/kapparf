@@ -23,7 +23,7 @@ const domainColors: Record<string, string> = {
 export default function DevicesPage() {
   const { t } = useI18n();
 
-  const { data: devices, isLoading } = useQuery<DeviceFingerprint[]>({
+  const { data: devices, isLoading, isError } = useQuery<DeviceFingerprint[]>({
     queryKey: ["/api/devices"],
     refetchInterval: 5000,
   });
@@ -112,6 +112,12 @@ export default function DevicesPage() {
             <Skeleton key={i} className="h-12 w-full" />
           ))}
         </div>
+      ) : isError ? (
+        <Card>
+          <CardContent className="py-12 text-center text-sm text-destructive" data-testid="text-devices-error">
+            {t("common.error")}
+          </CardContent>
+        </Card>
       ) : sortedDevices.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-sm text-muted-foreground">

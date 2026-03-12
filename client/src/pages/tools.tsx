@@ -29,7 +29,7 @@ export default function ToolsPage() {
   const { t } = useI18n();
   const [filter, setFilter] = useState("all");
 
-  const { data: ghMeta, isLoading: metaLoading } = useQuery<ToolGitHubMeta[]>({
+  const { data: ghMeta, isLoading: metaLoading, isError: metaError } = useQuery<ToolGitHubMeta[]>({
     queryKey: ["/api/tools/meta"],
     staleTime: 30 * 60 * 1000,
   });
@@ -37,7 +37,7 @@ export default function ToolsPage() {
   const metaMap = new Map<string, ToolGitHubMeta>();
   ghMeta?.forEach(m => metaMap.set(m.name, m));
 
-  const allDomains = [...DOMAINS, "hardware", "radar", "plc", "isp"] as const;
+  const allDomains = [...DOMAINS, "hardware"] as const;
 
   const filtered: ToolEntry[] = filter === "all"
     ? TOOL_CATALOG
@@ -156,10 +156,11 @@ export default function ToolsPage() {
           </div>
 
           <Card>
-            <CardContent className="py-4 text-xs text-muted-foreground">
+            <CardContent className="py-4 text-xs text-muted-foreground" data-testid="text-tools-summary">
               {TOOL_CATALOG.length} tools cataloged across {allDomains.filter(d => TOOL_CATALOG.some(t => t.domain === d)).length} domains.
-              {ghMeta && ` GitHub metadata loaded for ${ghMeta.length} repositories.`}
+              {ghMeta && ghMeta.length > 0 && ` GitHub metadata loaded for ${ghMeta.length} repositories.`}
               {metaLoading && ` ${t("tools.loadingMeta")}`}
+              {metaError && " GitHub metadata unavailable."}
             </CardContent>
           </Card>
         </TabsContent>
