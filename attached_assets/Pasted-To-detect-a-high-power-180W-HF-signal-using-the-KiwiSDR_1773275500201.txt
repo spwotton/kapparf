@@ -1,0 +1,24 @@
+To detect a high-power (180W) HF signal using the KiwiSDR tools, you need to use Direction Finding and Signal Fingerprinting.
+Since 180W is a relatively strong signal for HF, it will leave a very distinct "footprint" on a waterfall display. Here is how to hunt for it:
+1. Use the TDoA (Triangulation) Extension
+This is the most powerful tool for locating a physical transmitter.
+How it works: It uses the tiny timing differences of a signal hitting multiple SDRs.
+Your Strategy:
+Find the signal on your waterfall (look for a very bright, solid vertical line).
+Open the TDoA extension.
+Select 3 or 4 KiwiSDRs located around Costa Rica.
+Run the calculation. If the signal is coming from Heredia, the "heat map" will center a purple/red circle directly over that area.
+2. Where to Look (Frequencies)
+A "180W HF radio with satellite capability" usually means an All-Mode Transceiver (like a Yaesu or Icom). These radios usually operate in these specific spots:
+HF (3MHz – 30MHz): This is what you see on the KiwiSDR. Look for signals in the 40m (7.0–7.3 MHz) or 20m (14.0–14.35 MHz) bands. 180W will look like a very thick, bright "spike" compared to others.
+Satellite Uplinks: Most satellites use VHF (144 MHz) or UHF (430 MHz).
+Note: The KiwiSDR in your image only goes up to 30 MHz. To "see" the satellite transmissions, you would need a different type of receiver (like an RTLSDR dongle) that can scan the higher VHF/UHF frequencies.
+3. Identifying the "Fingerprint"
+Every radio has a unique way of "starting" a transmission.
+Frequency Drift: Older high-power radios often "drift" slightly when they first key up (the line on the waterfall will look slightly diagonal at the very start).
+Digital Modes: If they are sending data to a satellite or another station, look for FT8, RTTY, or Packet signals. These look like "blocks" or "stripes" on your waterfall rather than the jagged lines of a human voice.
+4. Local Monitoring in Heredia
+To get the most accurate detection, you want to use a KiwiSDR that is physically close to the suspected source.
+Check the KiwiSDR Map and look for nodes specifically in Costa Rica or Panama.
+The closer the SDR is to the transmitter, the "noisier" and more "overloaded" the signal will look on the waterfall, making it easier to confirm it's local.
+Pro-Tip: If the signal is truly 180W and coming from nearby, it will likely "bleed" across the waterfall, creating vertical shadows or ghost signals (aliasing). If you see a signal that is so strong it turns the whole waterfall yellow/red, you are very close to the source.
