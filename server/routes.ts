@@ -7,6 +7,7 @@ import { getCollectorStatus } from "./collectors";
 import { getCorrelatorStatus } from "./auto-correlator";
 import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
+import { getNetworkThreatStatus, processPacket, processBatch, parsePacketLine, type NetworkPacket } from "./network-threat-scanner";
 import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
@@ -863,6 +864,64 @@ export async function registerRoutes(
 
   app.get("/api/watchdog/status", (_req, res) => {
     res.json(getWatchdogStatus());
+  });
+
+  app.get("/api/threat-scanner/status", (_req, res) => {
+    res.json(getNetworkThreatStatus());
+  });
+
+  app.post("/api/threat-scanner/packet", async (req, res) => {
+    const pkt = req.body as NetworkPacket;
+    if (!pkt.srcIp || !pkt.dstIp) {
+      return res.status(400).json({ error: "srcIp and dstIp required" });
+    }
+    pkt.timestamp = pkt.timestamp || Date.now();
+    const threats = await processPacket(pkt);
+    res.json({ threats: threats.length, matches: threats });
+  });
+
+  app.post("/api/threat-scanner/batch", async (req, res) => {
+    const { packets } = req.body;
+    if (!Array.isArray(packets)) {
+      return res.status(400).json({ error: "packets must be an array" });
+    }
+    const result = await processBatch(packets);
+    res.json(result);
+  });
+
+  app.post("/api/threat-scanner/pcap-text", async (req, res) => {
+    const { lines } = req.body;
+    if (!Array.isArray(lines)) {
+      return res.status(400).json({ error: "lines must be an array of strings" });
+    }
+    const packets: NetworkPacket[] = [];
+    for (const line of lines) {
+      const pkt = parsePacketLine(line);
+      if (pkt) packets.push(pkt);
+    }
+    if (packets.length === 0) {
+      return res.json({ processed: 0, threats: 0, matches: [], parsed: 0 });
+    }
+    const result = await processBatch(packets);
+    res.json({ ...result, parsed: packets.length });
+  });
+
+  app.get("/api/riemann-zeros", (_req, res) => {
+    res.json({
+      zeros: KAPPA_CONSTANTS.RIEMANN_ZEROS,
+      metaPlatforms: KAPPA_CONSTANTS.META_PLATFORM_FREQS,
+      triadicHypervisor: KAPPA_CONSTANTS.TRIADIC_HYPERVISOR_MAP,
+      threatIndicators: {
+        suspiciousIps: KAPPA_CONSTANTS.THREAT_INDICATORS.SUSPICIOUS_IPS.length,
+        suspiciousPorts: KAPPA_CONSTANTS.THREAT_INDICATORS.SUSPICIOUS_PORTS.length,
+        protocolAnomalies: KAPPA_CONSTANTS.THREAT_INDICATORS.PROTOCOL_ANOMALIES.length,
+        voiceSignatures: KAPPA_CONSTANTS.THREAT_INDICATORS.VOICE_CORRELATION.hexPayloads.length,
+      },
+    });
+  });
+
+  app.get("/api/threat-indicators", (_req, res) => {
+    res.json(KAPPA_CONSTANTS.THREAT_INDICATORS);
   });
 
   app.get("/api/events/search", async (req, res) => {

@@ -30,6 +30,24 @@ const VLF_SCAN_TARGETS = [
   { name: "counter_beat_carrier", freqHz: 73125, harmonicOf: 73.125, harmonicOrder: 1000, desc: "73.125 Hz × 1000 — Counter-beat (60 + 13.125 Hz) VHF indicator" },
 ];
 
+const RIEMANN_SCAN_TARGETS = K.RIEMANN_ZEROS.map(z => ({
+  name: `riemann_gamma${z.id}`,
+  freqHz: z.freqHz * 100,
+  harmonicOf: z.freqHz,
+  harmonicOrder: 100,
+  desc: `γ${z.id} Zero #${String(z.id).padStart(2, "0")} | Height: ${z.height} | ${z.freqHz}Hz × 100 — ${z.signal}`,
+}));
+
+const META_SCAN_TARGETS = K.META_PLATFORM_FREQS.map(m => ({
+  name: `meta_${m.platform.toLowerCase().replace(/\s+/g, "_")}`,
+  freqHz: m.freqHz * 100,
+  harmonicOf: m.freqHz,
+  harmonicOrder: 100,
+  desc: `Meta ${m.platform} | κ^${m.kappa_power} = ${m.multiplier} | ${m.freqHz}Hz × 100 — ${m.role}`,
+}));
+
+const ALL_SCAN_TARGETS = [...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS];
+
 const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
 const DELTA_SLIP_HZ = K.DELTA_SLIP_HZ;
 
@@ -274,7 +292,7 @@ async function runScanCycle(): Promise<void> {
   const results: ScanResult[] = [];
 
   for (const node of KIWI_NODES) {
-    for (const target of VLF_SCAN_TARGETS) {
+    for (const target of ALL_SCAN_TARGETS) {
       try {
         const result = await scanTarget(node, target);
         results.push(result);
@@ -282,10 +300,15 @@ async function runScanCycle(): Promise<void> {
         if (result.detected) {
           scannerState.detections++;
 
+          const isRiemann = target.name.startsWith("riemann_");
+          const isMeta = target.name.startsWith("meta_");
+          const eventType = isRiemann ? "riemann-zero-detection" : isMeta ? "meta-frequency-detection" : "vlf-carrier-detection";
+          const scanDomain = isRiemann || isMeta ? "elf" : "sdr";
+
           const event = await storage.createSignalEvent({
-            domain: "sdr",
+            domain: scanDomain,
             source: `kiwisdr-${node.id}`,
-            eventType: "vlf-carrier-detection",
+            eventType,
             frequency: target.harmonicOf,
             confidence: Math.min(1, result.snrDb / 40),
             metadata: {
@@ -299,6 +322,8 @@ async function runScanCycle(): Promise<void> {
               lat: node.lat,
               lon: node.lon,
               description: target.desc,
+              ...(isRiemann ? { riemannZero: K.RIEMANN_ZEROS.find(z => z.freqHz === target.harmonicOf) } : {}),
+              ...(isMeta ? { metaPlatform: K.META_PLATFORM_FREQS.find(m => m.freqHz === target.harmonicOf) } : {}),
             },
             raw: null,
           });
@@ -453,7 +478,7 @@ export function startKiwiSDRScanner(): void {
     });
   }, K.KIWI_SCAN_INTERVAL_MS);
 
-  console.log(`[KAPPA] KiwiSDR scanner started: ${VLF_SCAN_TARGETS.length} targets × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval`);
+  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_SCAN_TARGETS.length} VLF + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval`);
 }
 
 export async function runScanCycleOnce(): Promise<void> {
@@ -468,7 +493,7 @@ export function getScannerStatus(): ScannerStatus {
     detections: scannerState.detections,
     errors: scannerState.errors,
     intervalMs: K.KIWI_SCAN_INTERVAL_MS,
-    activeTargets: VLF_SCAN_TARGETS.map(t => t.name),
+    activeTargets: ALL_SCAN_TARGETS.map(t => t.name),
     lastResults: scannerState.lastResults,
     deltaSlipDetections: scannerState.deltaSlipDetections,
     echoLtChainDetections: scannerState.echoLtChainDetections,

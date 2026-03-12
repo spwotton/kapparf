@@ -1,0 +1,2228 @@
+Microsoft Windows [Version 10.0.26100.7462]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\echo>netstat
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State
+  TCP    127.0.0.1:817          kubernetes:2479        ESTABLISHED
+  TCP    127.0.0.1:817          kubernetes:2532        ESTABLISHED
+  TCP    127.0.0.1:817          kubernetes:9763        ESTABLISHED
+  TCP    127.0.0.1:817          kubernetes:22333       ESTABLISHED
+  TCP    127.0.0.1:817          kubernetes:49674       ESTABLISHED
+  TCP    127.0.0.1:817          kubernetes:59904       ESTABLISHED
+  TCP    127.0.0.1:2479         kubernetes:817         ESTABLISHED
+  TCP    127.0.0.1:2532         kubernetes:817         ESTABLISHED
+  TCP    127.0.0.1:9763         kubernetes:817         ESTABLISHED
+  TCP    127.0.0.1:22333        kubernetes:817         ESTABLISHED
+  TCP    127.0.0.1:49674        kubernetes:817         ESTABLISHED
+  TCP    127.0.0.1:59904        kubernetes:817         ESTABLISHED
+  TCP    192.168.24.247:1144    104.18.35.46:https     ESTABLISHED
+  TCP    192.168.24.247:1911    172.64.152.210:https   ESTABLISHED
+  TCP    192.168.24.247:1985    235:https              ESTABLISHED
+  TCP    192.168.24.247:2264    aa1ba9bef7b18c265:https  ESTABLISHED
+  TCP    192.168.24.247:3145    45:https               ESTABLISHED
+  TCP    192.168.24.247:3639    104.18.35.46:https     ESTABLISHED
+  TCP    192.168.24.247:3813    172.64.152.210:https   ESTABLISHED
+  TCP    192.168.24.247:3915    104.18.39.21:https     ESTABLISHED
+  TCP    192.168.24.247:6086    ys-in-f17:https        ESTABLISHED
+  TCP    192.168.24.247:7088    155.102.55.29:https    CLOSE_WAIT
+  TCP    192.168.24.247:7532    104.18.35.46:https     ESTABLISHED
+  TCP    192.168.24.247:7557    104.36.195.1:https     ESTABLISHED
+  TCP    192.168.24.247:9018    28:https               ESTABLISHED
+  TCP    192.168.24.247:9618    104.18.35.46:https     ESTABLISHED
+  TCP    192.168.24.247:9650    dns:https              ESTABLISHED
+  TCP    192.168.24.247:9651    40.126.28.19:https     ESTABLISHED
+  TCP    192.168.24.247:9652    40.126.28.19:https     ESTABLISHED
+^C
+C:\Users\echo>tshark -i 4
+Capturing on 'Wi-Fi'
+    1   0.000000 ba:17:45:e6:fb:c4 → Broadcast    ARP 60 ARP Announcement for 192.168.24.223
+    2   0.051930 yo-in-f95.1e100.net → 192.168.24.247 SKYPE 119 Unknown_0 Unk: 1
+    3   0.086340 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+    4   0.086646 192.168.24.247 → yo-in-f95.1e100.net UDP 74 Session 67396897766766070/42, Control segment
+    5   0.135909 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=1 Ack=776 Win=255 Len=0
+    6   0.189221 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+    7   0.189960 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+    8   0.227194 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+    9   0.227792 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   10   0.239411 192.168.24.247 → dns.google   DNS 110 Standard query 0x2148 PTR 223.24.168.192.in-addr.arpa OPT
+   11   0.242629 192.168.24.247 → 192.168.24.1 DNS 87 Standard query 0xc476 PTR 223.24.168.192.in-addr.arpa
+   12   0.261199 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+   13   0.261334 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+   14   0.275566 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=168 Ack=172 Win=516 Len=0
+   15   0.307181 ba:17:45:e6:fb:c4 → Broadcast    ARP 60 Who has 192.168.24.1? Tell 192.168.24.223
+   16   0.309654   dns.google → 192.168.24.247 DNS 98 Standard query response 0x2148 No such name PTR 223.24.168.192.in-addr.arpa OPT
+   17   0.313612 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=171 Ack=175 Win=16 Len=0
+   18   0.318574 192.168.24.1 → 192.168.24.247 DNS 87 Standard query response 0xc476 No such name PTR 223.24.168.192.in-addr.arpa
+   19   0.332027 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   20   0.332703 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   21   0.340056 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=1 Ack=48 Win=765 Len=0
+   22   0.340056 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=1 Ack=48 Win=957 Len=0
+   23   0.401885 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 404 Application Data
+   24   0.402449 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+   25   0.418352 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=168 Ack=172 Win=16 Len=0
+   26   0.436735 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   27   0.437430 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   28   0.446262 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=48 Ack=351 Win=2046 Len=0
+   29   0.446308 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=48 Ack=355 Win=1023 Len=0
+   30   0.464496 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+   31   0.468385 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   32   0.468766 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+   33   0.469252 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   34   0.494138 192.168.24.247 → dns.google   DNS 98 Standard query 0xa9a8 PTR 95.215.217.172.in-addr.arpa OPT
+   35   0.495737 192.168.24.247 → security.cloudflare-dns.com TCP 66 21758 → domain-s(853) [SYN] Seq=0 Win=65535 Len=0 MSS=1460 WS=256 SACK_PERM
+   36   0.521406 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=168 Ack=172 Win=393 Len=0
+   37   0.552677 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=171 Ack=175 Win=18 Len=0
+   38   0.554657 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=40 Ack=36 Win=27 Len=0
+   39   0.561722   dns.google → 192.168.24.247 DNS 131 Standard query response 0xa9a8 PTR 95.215.217.172.in-addr.arpa PTR yo-in-f95.1e100.net OPT
+   40   0.562749 192.168.24.247 → dns.google   DNS 98 Standard query 0xe7b0 PTR 247.24.168.192.in-addr.arpa OPT
+   41   0.565172 192.168.24.247 → 192.168.24.1 DNS 87 Standard query 0x68f9 PTR 247.24.168.192.in-addr.arpa
+   42   0.578841 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   43   0.579563 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   44   0.583880 security.cloudflare-dns.com → 192.168.24.247 TCP 66 domain-s(853) → 21758 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0 MSS=1440 SACK_PERM WS=8192
+   45   0.583982 192.168.24.247 → security.cloudflare-dns.com TCP 54 21758 → domain-s(853) [ACK] Seq=1 Ack=1 Win=65280 Len=0
+   46   0.584419 192.168.24.247 → security.cloudflare-dns.com SSL 1494
+   47   0.584420 192.168.24.247 → security.cloudflare-dns.com TLSv1.2 94 Client Hello (SNI=cloudflare-dns.com)
+   48   0.629910   dns.google → 192.168.24.247 DNS 98 Standard query response 0xe7b0 No such name PTR 247.24.168.192.in-addr.arpa OPT
+   49   0.631334 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   50   0.632136 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   51   0.632629 192.168.24.247 → dns.google   DNS 96 Standard query 0xc516 PTR 45.191.36.34.in-addr.arpa OPT
+   52   0.634150 192.168.24.247 → security.cloudflare-dns.com TCP 66 11100 → domain-s(853) [SYN] Seq=0 Win=65535 Len=0 MSS=1460 WS=256 SACK_PERM
+   53   0.635017 192.168.24.1 → 192.168.24.247 DNS 87 Standard query response 0x68f9 No such name PTR 247.24.168.192.in-addr.arpa
+   54   0.636729 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+   55   0.665582 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=168 Ack=172 Win=551 Len=0
+   56   0.673556 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 21758 [ACK] Seq=1 Ack=1481 Win=131072 Len=0
+   57   0.673556 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 1494 Server Hello, Change Cipher Spec
+   58   0.674653 security.cloudflare-dns.com → 192.168.24.247 TCP 1494 domain-s(853) → 21758 [PSH, ACK] Seq=1441 Ack=1481 Win=131072 Len=1440
+   59   0.674656 security.cloudflare-dns.com → 192.168.24.247 TCP 1494 domain-s(853) → 21758 [ACK] Seq=2881 Ack=1481 Win=131072 Len=1440
+   60   0.674657 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 89 Application Data
+   61   0.674727 192.168.24.247 → security.cloudflare-dns.com TCP 54 21758 → domain-s(853) [ACK] Seq=1481 Ack=4356 Win=65280 Len=0
+   62   0.678712 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=1 Ack=776 Win=255 Len=0
+   63   0.678713 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 118 Change Cipher Spec, Application Data
+   64   0.678870 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 123 Application Data
+   65   0.696433 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 274 Application Data
+   66   0.715535 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=171 Ack=175 Win=292 Len=0
+   67   0.716814 Ubiquiti_24:8c:76 → Broadcast    ARP 60 Who has 192.168.24.1? Tell 192.168.24.120
+   68   0.721238 security.cloudflare-dns.com → 192.168.24.247 TCP 66 domain-s(853) → 11100 [SYN, ACK] Seq=0 Ack=1 Win=65535 Len=0 MSS=1440 SACK_PERM WS=8192
+   69   0.721337 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1 Ack=1 Win=65280 Len=0
+   70   0.721728 192.168.24.247 → security.cloudflare-dns.com SSL 1494
+   71   0.721728 192.168.24.247 → security.cloudflare-dns.com TLSv1.2 94 Client Hello (SNI=cloudflare-dns.com)
+   72   0.733884   dns.google → 192.168.24.247 DNS 147 Standard query response 0xc516 PTR 45.191.36.34.in-addr.arpa PTR 45.191.36.34.bc.googleusercontent.com OPT
+   73   0.738011 192.168.24.247 → dns.google   DNS 96 Standard query 0x8161 PTR 46.35.18.104.in-addr.arpa OPT
+   74   0.738533 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 121 Application Data
+   75   0.742281 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=1 Ack=221 Win=511 Len=0
+   76   0.766963 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 21758 [ACK] Seq=4356 Ack=1614 Win=131072 Len=0
+   77   0.770821 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 156 Application Data
+   78   0.771246 192.168.24.247 → dns.google   ICMP 376 Destination unreachable (Port unreachable)
+   79   0.771415 192.168.24.247 → dns.google   ICMP 376 Destination unreachable (Port unreachable)
+   80   0.785562 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+   81   0.786191 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+   82   0.809799 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=1 Ack=1481 Win=131072 Len=0
+   83   0.810709 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 1494 Server Hello, Change Cipher Spec
+   84   0.810709 security.cloudflare-dns.com → 192.168.24.247 TCP 1494 domain-s(853) → 11100 [PSH, ACK] Seq=1441 Ack=1481 Win=131072 Len=1440
+   85   0.810714 security.cloudflare-dns.com → 192.168.24.247 TCP 1494 domain-s(853) → 11100 [ACK] Seq=2881 Ack=1481 Win=131072 Len=1440
+   86   0.810714 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 88 Application Data
+   87   0.810837 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1481 Ack=4355 Win=65280 Len=0
+   88   0.814551 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 118 Change Cipher Spec, Application Data
+   89   0.814737 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 121 Application Data
+   90   0.819327 192.168.24.247 → security.cloudflare-dns.com TCP 54 21758 → domain-s(853) [ACK] Seq=1681 Ack=4458 Win=65280 Len=0
+   91   0.821479   dns.google → 192.168.24.247 DNS 158 Standard query response 0x8161 No such name PTR 46.35.18.104.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+   92   0.825123 192.168.24.247 → dns.google   DNS 91 Standard query 0x92b0 PTR 8.8.8.8.in-addr.arpa OPT
+   93   0.827476 192.168.24.247 → dns.google   DNS 96 Standard query 0x8963 PTR 1.24.168.192.in-addr.arpa OPT
+   94   0.831790 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 183 Application Data
+   95   0.835348 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+   96   0.836013 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+   97   0.836529 192.168.24.247 → 192.168.24.1 DNS 85 Standard query 0x9e54 PTR 1.24.168.192.in-addr.arpa
+   98   0.863921 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+   99   0.863988 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=141 Ack=920 Win=4095 Len=0
+  100   0.864669 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=912 Ack=141 Win=2111 Len=0
+  101   0.881506 192.168.24.247 → security.cloudflare-dns.com TCP 54 21758 → domain-s(853) [ACK] Seq=1681 Ack=4587 Win=65280 Len=0
+  102   0.893039   dns.google → 192.168.24.247 DNS 115 Standard query response 0x92b0 PTR 8.8.8.8.in-addr.arpa PTR dns.google OPT
+  103   0.895461   dns.google → 192.168.24.247 DNS 96 Standard query response 0x8963 No such name PTR 1.24.168.192.in-addr.arpa OPT
+  104   0.897542 192.168.24.247 → dns.google   DNS 98 Standard query 0x8b8f PTR 235.109.160.34.in-addr.arpa OPT
+  105   0.898504 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 123 Application Data
+  106   0.902836 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=4355 Ack=1612 Win=131072 Len=0
+  107   0.907323 192.168.24.1 → 192.168.24.247 DNS 85 Standard query response 0x9e54 No such name PTR 1.24.168.192.in-addr.arpa
+  108   0.916558 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=920 Ack=141 Win=637 Len=0
+  109   0.984392 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  110   0.985113 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  111   1.026798 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=4355 Ack=1681 Win=131072 Len=0
+  112   1.030620   dns.google → 192.168.24.247 DNS 151 Standard query response 0x8b8f PTR 235.109.160.34.in-addr.arpa PTR 235.109.160.34.bc.googleusercontent.com OPT
+  113   1.040285 192.168.24.247 → dns.google   DNS 96 Standard query 0x9ef1 PTR 1.195.36.104.in-addr.arpa OPT
+  114   1.040825 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 121 Application Data
+  115   1.068412 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=171 Ack=175 Win=592 Len=0
+  116   1.129277 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=4355 Ack=1748 Win=131072 Len=0
+  117   1.137689 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 198 Application Data
+  118   1.146466   dns.google → 192.168.24.247 DNS 173 Standard query response 0x9ef1 No such name PTR 1.195.36.104.in-addr.arpa SOA pdns80.ultradns.com OPT
+  119   1.150504 192.168.24.247 → dns.google   DNS 91 Standard query 0x2629 PTR 2.1.1.1.in-addr.arpa OPT
+  120   1.173683 192.168.24.247 → dns.google   DNS 98 Standard query 0xe2af PTR 120.24.168.192.in-addr.arpa OPT
+  121   1.175083 192.168.24.247 → 192.168.24.1 DNS 87 Standard query 0x5791 PTR 120.24.168.192.in-addr.arpa
+  122   1.186927 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 172 Application Data
+  123   1.187001 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1748 Ack=4617 Win=65024 Len=0
+  124   1.218209   dns.google → 192.168.24.247 DNS 132 Standard query response 0x2629 PTR 2.1.1.1.in-addr.arpa PTR security.cloudflare-dns.com OPT
+  125   1.218740 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 176 Application Data
+  126   1.250543   dns.google → 192.168.24.247 DNS 98 Standard query response 0xe2af No such name PTR 120.24.168.192.in-addr.arpa OPT
+  127   1.250801 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  128   1.251378 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  129   1.251673 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  130   1.251813 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  131   1.257764 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  132   1.257947 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  133   1.270591 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  134   1.271222 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  135   1.272664 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1748 Ack=4739 Win=65024 Len=0
+  136   1.278706 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  137   1.279276 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  138   1.326887 192.168.24.1 → 192.168.24.247 DNS 87 Standard query response 0x5791 No such name PTR 120.24.168.192.in-addr.arpa
+  139   1.333391 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=1 Ack=48 Win=5215 Len=0
+  140   1.333587 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=1 Ack=48 Win=980 Len=0
+  141   1.335375 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=1 Ack=48 Win=1618 Len=0
+  142   1.337383 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=171 Ack=175 Win=507 Len=0
+  143   1.342299 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=1 Ack=48 Win=943 Len=0
+  144   1.350093 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=912 Ack=141 Win=4061 Len=0
+  145   1.364129 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=171 Ack=175 Win=504 Len=0
+  146   1.370769 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  147   1.392722 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  148   1.393739 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  149   1.409580 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  150   1.422030 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=48 Ack=355 Win=251 Len=0
+  151   1.437996 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=48 Ack=355 Win=254 Len=0
+  152   1.438613 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=48 Ack=355 Win=255 Len=0
+  153   1.453323 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=48 Ack=355 Win=1022 Len=0
+  154   1.591707 192.168.24.247 → dns.google   DNS 96 Standard query 0xe034 PTR 74.204.49.34.in-addr.arpa OPT
+  155   1.592577 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 121 Application Data
+  156   1.638272 192.168.24.247 → dns.google   ICMP 166 Destination unreachable (Port unreachable)
+  157   1.638397 192.168.24.247 → dns.google   ICMP 166 Destination unreachable (Port unreachable)
+  158   1.720754 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=4739 Ack=1815 Win=131072 Len=0
+  159   1.723284   dns.google → 192.168.24.247 DNS 147 Standard query response 0xe034 PTR 74.204.49.34.in-addr.arpa PTR 74.204.49.34.bc.googleusercontent.com OPT
+  160   1.725254 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  161   1.727033 192.168.24.247 → dns.google   DNS 98 Standard query 0xd0f3 PTR 210.152.64.172.in-addr.arpa OPT
+  162   1.727731 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 123 Application Data
+  163   1.765496 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=1 Ack=996 Win=508 Len=0
+  164   1.806590   dns.google → 192.168.24.247 DNS 160 Standard query response 0xd0f3 No such name PTR 210.152.64.172.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+  165   1.814878 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=4739 Ack=1884 Win=131072 Len=0
+  166   1.815258 104.18.39.21 → 192.168.24.247 TLSv1.2 78 Application Data
+  167   1.815436 192.168.24.247 → 104.18.39.21 TLSv1.2 82 Application Data
+  168   1.822413 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 185 Application Data
+  169   1.874800 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1884 Ack=4870 Win=64768 Len=0
+  170   1.886610 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  171   1.898803 104.18.39.21 → 192.168.24.247 TCP 60 https(443) → 42384 [ACK] Seq=25 Ack=29 Win=16 Len=0
+  172   1.936679 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=141 Ack=1687 Win=252 Len=0
+  173   1.972082 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 172 Application Data
+  174   1.972083 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  175   1.972855 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  176   1.992268 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  177   1.993055 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  178   2.010622 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  179   2.011073 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  180   2.011420 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  181   2.011651 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  182   2.014257 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1884 Ack=4988 Win=64768 Len=0
+  183   2.058141 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=171 Ack=175 Win=345 Len=0
+  184   2.078439 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=171 Ack=175 Win=413 Len=0
+  185   2.089751 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 20224 [ACK] Seq=1132 Ack=141 Win=2130 Len=0
+  186   2.098308 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 21354 [ACK] Seq=171 Ack=175 Win=278 Len=0
+  187   2.099366 192.168.24.247 → dns.google   DNS 96 Standard query 0x2eb0 PTR 21.39.18.104.in-addr.arpa OPT
+  188   2.100213 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 121 Application Data
+  189   2.179004   dns.google → 192.168.24.247 DNS 158 Standard query response 0x2eb0 No such name PTR 21.39.18.104.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+  190   2.190696 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 183 Application Data
+  191   2.233770 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=1951 Ack=5117 Win=64768 Len=0
+  192   2.238529 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  193   2.239164 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  194   2.250229 192.168.24.247 → 172.64.152.210 TLSv1.2 97 Application Data
+  195   2.250409 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  196   2.250518 192.168.24.247 → 104.18.35.46 TLSv1.2 97 Application Data
+  197   2.250619 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  198   2.257095 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  199   2.257915 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  200   2.324781 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 39294 [ACK] Seq=168 Ack=172 Win=592 Len=0
+  201   2.329479 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=355 Ack=95 Win=957 Len=0
+  202   2.329479 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=351 Ack=95 Win=765 Len=0
+  203   2.336065 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 9943 [ACK] Seq=1 Ack=44 Win=16 Len=0
+  204   2.336065 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 52896 [ACK] Seq=1 Ack=44 Win=16 Len=0
+  205   2.341524 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 26872 [ACK] Seq=171 Ack=175 Win=465 Len=0
+  206   2.370164 172.64.152.210 → 192.168.24.247 TLSv1.2 93 Application Data
+  207   2.372752 104.18.35.46 → 192.168.24.247 TLSv1.2 93 Application Data
+  208   2.391241 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  209   2.391822 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  210   2.404147 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  211   2.419923 192.168.24.247 → 172.64.152.210 TCP 54 9943 → https(443) [ACK] Seq=44 Ack=40 Win=252 Len=0
+  212   2.419935 192.168.24.247 → 104.18.35.46 TCP 54 52896 → https(443) [ACK] Seq=44 Ack=40 Win=252 Len=0
+  213   2.423037 192.168.24.247 → 104.36.195.1 TLSv1.2 1494
+  214   2.423037 192.168.24.247 → 104.36.195.1 TCP 1494 7557 → https(443) [ACK] Seq=1476 Ack=40 Win=251 Len=1440
+  215   2.423044 192.168.24.247 → 104.36.195.1 TLSv1.2 289 Application Data
+  216   2.436651 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=95 Ack=709 Win=1022 Len=0
+  217   2.436705 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=95 Ack=705 Win=2045 Len=0
+  218   2.451991 192.168.24.247 → 104.36.195.1 TCP 54 26961 → https(443) [ACK] Seq=1 Ack=40 Win=250 Len=0
+  219   2.484285 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  220   2.508393 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=40 Ack=1476 Win=27 Len=0
+  221   2.508394 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=40 Ack=2916 Win=27 Len=0
+  222   2.508394 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=40 Ack=3151 Win=28 Len=0
+  223   2.530554 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=141 Ack=1687 Win=252 Len=0
+  224   2.562380 104.36.195.1 → 192.168.24.247 TLSv1.2 219 Application Data
+  225   2.562381 104.36.195.1 → 192.168.24.247 TLSv1.2 118 Application Data, Application Data
+  226   2.562447 192.168.24.247 → 104.36.195.1 TCP 54 7557 → https(443) [ACK] Seq=3151 Ack=269 Win=250 Len=0
+  227   2.665557 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  228   2.689045 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  229   2.689742 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  230   2.691435 192.168.24.247 → dns.google   ICMP 166 Destination unreachable (Port unreachable)
+  231   2.691560 192.168.24.247 → dns.google   ICMP 166 Destination unreachable (Port unreachable)
+  232   2.720473 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=141 Ack=1703 Win=4092 Len=0
+  233   2.726693 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  234   2.727371 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  235   2.749512 104.18.35.46 → 192.168.24.247 TLSv1.2 78 Application Data
+  236   2.749777 192.168.24.247 → 104.18.35.46 TLSv1.2 82 Application Data
+  237   2.775969 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=335 Ack=343 Win=517 Len=0
+  238   2.813533 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=341 Ack=349 Win=16 Len=0
+  239   2.833328 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  240   2.834075 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  241   2.873345 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 61607 [ACK] Seq=25 Ack=29 Win=16 Len=0
+  242   2.921064 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=335 Ack=343 Win=16 Len=0
+  243   2.936719 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  244   2.937311 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  245   2.968334 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  246   2.968993 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  247   3.022143 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=335 Ack=343 Win=394 Len=0
+  248   3.055782 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=341 Ack=349 Win=18 Len=0
+  249   3.079927 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  250   3.080494 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  251   3.130971 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  252   3.131662 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  253   3.166559 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=335 Ack=343 Win=551 Len=0
+  254   3.215196 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=341 Ack=349 Win=292 Len=0
+  255   3.251686 192.168.24.247 → 104.18.35.46 TLSv1.2 97 Application Data
+  256   3.252016 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  257   3.252135 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  258   3.252223 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  259   3.252306 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  260   3.285667 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  261   3.286414 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  262   3.330350 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=355 Ack=95 Win=1618 Len=0
+  263   3.330351 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=355 Ack=95 Win=5215 Len=0
+  264   3.330909 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=355 Ack=95 Win=980 Len=0
+  265   3.335301 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 51087 [ACK] Seq=1 Ack=44 Win=16 Len=0
+  266   3.335301 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=355 Ack=95 Win=943 Len=0
+  267   3.335704 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  268   3.336375 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  269   3.365240 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  270   3.366176 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=1823 Ack=281 Win=2111 Len=0
+  271   3.367213 104.18.35.46 → 192.168.24.247 TLSv1.2 93 Application Data
+  272   3.392749 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  273   3.394674 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  274   3.404831 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  275   3.407094 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=95 Ack=709 Win=255 Len=0
+  276   3.415346 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=1839 Ack=281 Win=637 Len=0
+  277   3.420686 192.168.24.247 → 104.18.35.46 TCP 54 51087 → https(443) [ACK] Seq=44 Ack=40 Win=252 Len=0
+  278   3.436655 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=95 Ack=707 Win=254 Len=0
+  279   3.436668 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=95 Ack=709 Win=253 Len=0
+  280   3.451932 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=95 Ack=709 Win=1021 Len=0
+  281   3.476405 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  282   3.484610 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  283   3.485249 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  284   3.530919 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=141 Ack=1907 Win=511 Len=0
+  285   3.567984 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=341 Ack=349 Win=592 Len=0
+  286   3.662285 h31.actalis.it → 192.168.24.247 TCP 60 http(80) → 43036 [FIN, ACK] Seq=1 Ack=1 Win=501 Len=0
+  287   3.662376 192.168.24.247 → h31.actalis.it TCP 54 43036 → http(80) [ACK] Seq=1 Ack=2 Win=255 Len=0
+  288   3.662425 192.168.24.247 → h31.actalis.it TCP 54 43036 → http(80) [FIN, ACK] Seq=1 Ack=2 Win=255 Len=0
+  289   3.689501 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  290   3.734678 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=141 Ack=2462 Win=255 Len=0
+  291   3.746380 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  292   3.747170 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  293   3.770558 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  294   3.771301 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  295   3.779635 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  296   3.780349 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  297   3.832862 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=341 Ack=349 Win=507 Len=0
+  298   3.850186 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=2598 Ack=281 Win=4061 Len=0
+  299   3.865804 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=341 Ack=349 Win=504 Len=0
+  300   3.874079 h31.actalis.it → 192.168.24.247 TCP 60 http(80) → 43036 [ACK] Seq=2 Ack=2 Win=501 Len=0
+  301   3.917217 192.168.24.247 → dns.google   DNS 98 Standard query 0xfafa PTR 130.240.70.109.in-addr.arpa OPT
+  302   3.921170 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 123 Application Data
+  303   3.997865   dns.google → 192.168.24.247 DNS 126 Standard query response 0xfafa PTR 130.240.70.109.in-addr.arpa PTR h31.actalis.it OPT
+  304   4.048784 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=5117 Ack=2020 Win=131072 Len=0
+  305   4.236439 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  306   4.250519 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  307   4.250642 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  308   4.254393 192.168.24.247 → yo-in-f95.1e100.net UDP, HiPerConTracer 251 Session 14910/1437, Report segment (SendTTL=29, Round=250)
+  309   4.281418 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=281 Ack=2598 Win=255 Len=0
+  310   4.330717 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=709 Ack=142 Win=957 Len=0
+  311   4.330717 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=705 Ack=142 Win=765 Len=0
+  312   4.360654 yo-in-f95.1e100.net → 192.168.24.247 UDP, HiPerConTracer 70 https(443) → 53373 Len=28 (SendTTL=95, Round=110)
+  313   4.390755 192.168.24.247 → yo-in-f95.1e100.net UDP, HiPerConTracer 74 53373 → https(443) Len=32 (SendTTL=29, Round=250)
+  314   4.393856 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  315   4.393856 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  316   4.412764 yo-in-f95.1e100.net → 192.168.24.247 SKYPE 217 NAT info Unk: 3
+  317   4.412765 yo-in-f95.1e100.net → 192.168.24.247 UDP 63 Session 212543411/1460788, Red data
+  318   4.413084 192.168.24.247 → yo-in-f95.1e100.net UDP, HiPerConTracer 77 53373 → https(443) Len=35 (SendTTL=29, Round=250)
+  319   4.414636 192.168.24.247 → yo-in-f95.1e100.net UDP 537 Session 67396897766766070/247010470, Cancel segment
+  320   4.438694 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=142 Ack=1059 Win=2043 Len=0
+  321   4.438749 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=142 Ack=1063 Win=1021 Len=0
+  322   4.468385 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  323   4.468385 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  324   4.473369 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  325   4.473721 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  326   4.474193 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  327   4.492323 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  328   4.492971 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  329   4.509824 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  330   4.510630 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  331   4.511451 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  332   4.512084 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  333   4.515235 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=281 Ack=2622 Win=4095 Len=0
+  334   4.519388 yo-in-f95.1e100.net → 192.168.24.247 UDP 66 Session 1350794/173971202, Cancel ack segment
+  335   4.523919 yo-in-f95.1e100.net → 192.168.24.247 UDP, HiPerConTracer 70 https(443) → 58373 Len=28 (SendTTL=143, Round=229)
+  336   4.523919 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 151 Application Data
+  337   4.524391 192.168.24.247 → dns.google   ICMP 375 Destination unreachable (Port unreachable)
+  338   4.524506 192.168.24.247 → dns.google   ICMP 375 Destination unreachable (Port unreachable)
+  339   4.559608 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=308 Ack=3186 Win=28 Len=0
+  340   4.560139 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=341 Ack=349 Win=346 Len=0
+  341   4.560850 192.168.24.247 → yo-in-f95.1e100.net UDP 74 Session 67396897766766070/37, Cancel ack segment
+  342   4.575803 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=2020 Ack=5214 Win=64512 Len=0
+  343   4.579078 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=341 Ack=349 Win=413 Len=0
+  344   4.590720 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 20224 [ACK] Seq=2043 Ack=281 Win=2130 Len=0
+  345   4.594985 yo-in-f95.1e100.net → 192.168.24.247 UDP, HiPerConTracer 1035 https(443) → 58373 Len=993 (SendTTL=49, Round=72)
+  346   4.594986 yo-in-f95.1e100.net → 192.168.24.247 UDP 63 Session 113/11, Cancel ack segment
+  347   4.595387 192.168.24.247 → yo-in-f95.1e100.net UDP 77 Session 67396897766766070/1195938, Red data
+  348   4.598510 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 21354 [ACK] Seq=341 Ack=349 Win=279 Len=0
+  349   4.700875 yo-in-f95.1e100.net → 192.168.24.247 UDP 66 Session 126/118, Green data
+  350   4.739092 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  351   4.739786 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  352   4.756868 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  353   4.757626 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  354   4.825917 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 39294 [ACK] Seq=335 Ack=343 Win=592 Len=0
+  355   4.840360 192.168.24.247 → 172.64.153.110 SSL 55
+  356   4.841394 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 26872 [ACK] Seq=341 Ack=349 Win=466 Len=0
+  357   4.858385 192.168.24.247 → 172.64.153.110 SSL 206 Continuation Data
+  358   4.858498 192.168.24.247 → 172.64.153.110 TLSv1.2 93 Application Data
+  359   4.858549 192.168.24.247 → 172.64.153.110 TLSv1.2 101 Application Data
+  360   4.864799 192.168.24.247 → dns.google   TLSv1.2 92 Application Data
+  361   4.864936 192.168.24.247 → dns.google   TLSv1.2 118 Application Data
+  362   4.925487 172.64.153.110 → 192.168.24.247 TCP 66 https(443) → 50060 [ACK] Seq=1 Ack=2 Win=18 Len=0 SLE=1 SRE=2
+  363   4.931887   dns.google → 192.168.24.247 TCP 60 https(443) → 63712 [ACK] Seq=1 Ack=39 Win=1052 Len=0
+  364   4.931887   dns.google → 192.168.24.247 TCP 60 https(443) → 63712 [ACK] Seq=1 Ack=103 Win=1052 Len=0
+  365   4.944425 172.64.153.110 → 192.168.24.247 TCP 60 https(443) → 50060 [ACK] Seq=1 Ack=154 Win=18 Len=0
+  366   4.944425 172.64.153.110 → 192.168.24.247 TCP 60 https(443) → 50060 [ACK] Seq=1 Ack=193 Win=18 Len=0
+  367   4.944425 172.64.153.110 → 192.168.24.247 TLSv1.2 93 Application Data
+  368   4.984723 172.64.153.110 → 192.168.24.247 TCP 60 https(443) → 50060 [ACK] Seq=40 Ack=240 Win=18 Len=0
+  369   4.997982 192.168.24.247 → 172.64.153.110 TCP 54 50060 → https(443) [ACK] Seq=240 Ack=40 Win=255 Len=0
+  370   5.004610   dns.google → 192.168.24.247 TLSv1.2 163 Application Data
+  371   5.004611   dns.google → 192.168.24.247 TLSv1.2 195 Application Data
+  372   5.004611   dns.google → 192.168.24.247 TLSv1.2 85 Application Data
+  373   5.004611   dns.google → 192.168.24.247 TLSv1.2 93 Application Data
+  374   5.004684 192.168.24.247 → dns.google   TCP 54 63712 → https(443) [ACK] Seq=103 Ack=321 Win=253 Len=0
+  375   5.004937 192.168.24.247 → dns.google   TLSv1.2 93 Application Data
+  376   5.071330   dns.google → 192.168.24.247 TCP 60 https(443) → 63712 [ACK] Seq=321 Ack=142 Win=1052 Len=0
+  377   5.098917 172.64.153.110 → 192.168.24.247 TLSv1.2 753 Application Data
+  378   5.098917 172.64.153.110 → 192.168.24.247 TLSv1.2 718 Application Data
+  379   5.098918 172.64.153.110 → 192.168.24.247 TLSv1.2 85 Application Data
+  380   5.099017 192.168.24.247 → 172.64.153.110 TCP 54 50060 → https(443) [ACK] Seq=240 Ack=1434 Win=255 Len=0
+  381   5.100249 192.168.24.247 → 172.64.153.110 TLSv1.2 89 Application Data
+  382   5.186009 172.64.153.110 → 192.168.24.247 TCP 60 https(443) → 50060 [ACK] Seq=1434 Ack=275 Win=18 Len=0
+  383   5.188469 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  384   5.189058 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  385   5.226635 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  386   5.227348 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  387   5.262658 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  388   5.262821 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  389   5.262911 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  390   5.263048 192.168.24.247 → 172.64.152.210 TLSv1.2 97 Application Data
+  391   5.263124 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  392   5.274049 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=502 Ack=514 Win=517 Len=0
+  393   5.276384 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  394   5.284645 192.168.24.247 → dns.google   DNS 98 Standard query 0x467b PTR 110.153.64.172.in-addr.arpa OPT
+  395   5.285817 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 123 Application Data
+  396   5.313586 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=511 Ack=523 Win=16 Len=0
+  397   5.324492 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=281 Ack=2818 Win=508 Len=0
+  398   5.333893 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  399   5.334568 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  400   5.341773 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=707 Ack=142 Win=5215 Len=0
+  401   5.341774 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=709 Ack=142 Win=1618 Len=0
+  402   5.341774 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=709 Ack=142 Win=980 Len=0
+  403   5.347228 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=709 Ack=142 Win=943 Len=0
+  404   5.349170 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → rap-ip(3813) [ACK] Seq=1 Ack=44 Win=16 Len=0
+  405   5.354977 104.18.35.46 → 192.168.24.247 TLSv1.2 78 Application Data
+  406   5.355234 192.168.24.247 → 104.18.35.46 TLSv1.2 82 Application Data
+  407   5.366369   dns.google → 192.168.24.247 DNS 160 Standard query response 0x467b No such name PTR 110.153.64.172.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+  408   5.372973 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=5214 Ack=2089 Win=131072 Len=0
+  409   5.378782 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  410   5.379171 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 185 Application Data
+  411   5.382267 172.64.152.210 → 192.168.24.247 TLSv1.2 93 Application Data
+  412   5.403393 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  413   5.405098 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  414   5.415822 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  415   5.421041 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=502 Ack=514 Win=16 Len=0
+  416   5.432665 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=2089 Ack=5345 Win=64512 Len=0
+  417   5.432685 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=142 Ack=1063 Win=254 Len=0
+  418   5.432747 192.168.24.247 → 172.64.152.210 TCP 54 rap-ip(3813) → https(443) [ACK] Seq=44 Ack=40 Win=1020 Len=0
+  419   5.436838 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  420   5.437492 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  421   5.448716 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=142 Ack=1061 Win=253 Len=0
+  422   5.448721 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=142 Ack=1063 Win=251 Len=0
+  423   5.464228 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=142 Ack=1063 Win=1019 Len=0
+  424   5.469132 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  425   5.469981 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  426   5.480848 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 51087 [ACK] Seq=64 Ack=72 Win=16 Len=0
+  427   5.486588 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  428   5.523345 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=502 Ack=514 Win=394 Len=0
+  429   5.527728 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=281 Ack=3373 Win=252 Len=0
+  430   5.528298 13.58.82.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 18835 [ACK] Seq=1 Ack=1 Win=307 Len=0
+  431   5.528326 192.168.24.247 → 13.58.82.34.bc.googleusercontent.com TCP 54 [TCP ACKed unseen segment] 18835 → https(443) [ACK] Seq=1 Ack=2 Win=254 Len=0
+  432   5.553538 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=511 Ack=523 Win=18 Len=0
+  433   5.562338 104.18.35.46 → 192.168.24.247 TLSv1.2 78 Application Data
+  434   5.562572 192.168.24.247 → 104.18.35.46 TLSv1.2 82 Application Data
+  435   5.579246 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  436   5.579935 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  437   5.635948 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  438   5.636736 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  439   5.671324 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=502 Ack=514 Win=552 Len=0
+  440   5.688706 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 52896 [ACK] Seq=64 Ack=72 Win=16 Len=0
+  441   5.720114 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=511 Ack=523 Win=292 Len=0
+  442   5.785933 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  443   5.786649 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  444   5.839622 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  445   5.840428 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  446   5.864785 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=2734 Ack=421 Win=2111 Len=0
+  447   5.879969 192.168.24.247 → dns.google   ICMP 168 Destination unreachable (Port unreachable)
+  448   5.880096 192.168.24.247 → dns.google   ICMP 168 Destination unreachable (Port unreachable)
+  449   5.919464 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=2758 Ack=421 Win=637 Len=0
+  450   5.984670 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  451   6.002090 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  452   6.004381 192.168.24.247 → dns.google   DNS 95 Standard query 0xec9a PTR 13.58.82.34.in-addr.arpa OPT
+  453   6.005229 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 120 Application Data
+  454   6.035426 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  455   6.041991              →              IEEE 802.15.4 409 Beacon
+  456   6.077437 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=421 Ack=3509 Win=252 Len=0
+  457   6.086185 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=511 Ack=523 Win=592 Len=0
+  458   6.096989   dns.google → 192.168.24.247 DNS 145 Standard query response 0xec9a PTR 13.58.82.34.in-addr.arpa PTR 13.58.82.34.bc.googleusercontent.com OPT
+  459   6.132687 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=5345 Ack=2155 Win=131072 Len=0
+  460   6.250253 192.168.24.247 → 104.18.35.46 TLSv1.2 97 Application Data
+  461   6.250390 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  462   6.250515 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  463   6.250690 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  464   6.251246 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  465   6.262780 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  466   6.270522 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  467   6.271204 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  468   6.279807 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  469   6.280451 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  470   6.312840 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=421 Ack=3541 Win=4092 Len=0
+  471   6.329486 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=1059 Ack=189 Win=765 Len=0
+  472   6.329487 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=1063 Ack=189 Win=957 Len=0
+  473   6.331476 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 170 Application Data
+  474   6.334571 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 61607 [ACK] Seq=25 Ack=72 Win=16 Len=0
+  475   6.336873 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=511 Ack=523 Win=507 Len=0
+  476   6.352915 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=3509 Ack=421 Win=4061 Len=0
+  477   6.365314 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=511 Ack=523 Win=504 Len=0
+  478   6.366863 104.18.35.46 → 192.168.24.247 TLSv1.2 93 Application Data
+  479   6.375265 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=2155 Ack=5461 Win=64256 Len=0
+  480   6.391973 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  481   6.391973 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  482   6.403419 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  483   6.407290 192.168.24.247 → 104.18.35.46 TCP 54 61607 → https(443) [ACK] Seq=72 Ack=64 Win=1020 Len=0
+  484   6.407395 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  485   6.407448 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  486   6.438489 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=189 Ack=1413 Win=2047 Len=0
+  487   6.438546 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=189 Ack=1417 Win=1019 Len=0
+  488   6.490264 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 26961 [ACK] Seq=79 Ack=36 Win=321 Len=0
+  489   6.490264 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 26961 [ACK] Seq=79 Ack=71 Win=321 Len=0
+  490   6.524420 192.168.24.247 → dns.google   DNS 98 Standard query 0x2ae2 PTR 190.24.168.192.in-addr.arpa OPT
+  491   6.525688 192.168.24.247 → 192.168.24.1 DNS 87 Standard query 0x1ffe PTR 190.24.168.192.in-addr.arpa
+  492   6.591747   dns.google → 192.168.24.247 DNS 98 Standard query response 0x2ae2 No such name PTR 190.24.168.192.in-addr.arpa OPT
+  493   6.592811 192.168.24.247 → dns.google   DNS 99 Standard query 0x3c0b PTR 255.255.255.255.in-addr.arpa OPT
+  494   6.593639 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 124 Application Data
+  495   6.602754 192.168.24.1 → 192.168.24.247 DNS 87 Standard query response 0x1ffe No such name PTR 190.24.168.192.in-addr.arpa
+  496   6.661271   dns.google → 192.168.24.247 DNS 167 Standard query response 0x3c0b No such name PTR 255.255.255.255.in-addr.arpa SOA b.in-addr-servers.arpa OPT
+  497   6.681579 security.cloudflare-dns.com → 192.168.24.247 TCP 60 domain-s(853) → 11100 [ACK] Seq=5461 Ack=2225 Win=131072 Len=0
+  498   6.684645 security.cloudflare-dns.com → 192.168.24.247 TLSv1.3 124 Application Data
+  499   6.733976 192.168.24.247 → security.cloudflare-dns.com TCP 54 11100 → domain-s(853) [ACK] Seq=2225 Ack=5531 Win=64256 Len=0
+  500   6.972400 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  501   6.973173 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  502   6.993516 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  503   6.994297 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  504   7.010541 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  505   7.011359 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  506   7.011581 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  507   7.012260 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  508   7.059308 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=511 Ack=523 Win=346 Len=0
+  509   7.075830 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  510   7.075890 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=421 Ack=3729 Win=511 Len=0
+  511   7.080436 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=511 Ack=523 Win=414 Len=0
+  512   7.090857 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 20224 [ACK] Seq=3729 Ack=421 Win=2130 Len=0
+  513   7.099320 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 21354 [ACK] Seq=511 Ack=523 Win=279 Len=0
+  514   7.102252 192.168.24.247 → dns.google   ICMP 168 Destination unreachable (Port unreachable)
+  515   7.102374 192.168.24.247 → dns.google   ICMP 168 Destination unreachable (Port unreachable)
+  516   7.242929 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  517   7.243555 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  518   7.251584 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 100 Application Data
+  519   7.251775 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  520   7.252012 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  521   7.252123 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  522   7.261249 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  523   7.261914 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  524   7.286616 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  525   7.328676 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=421 Ack=4284 Win=255 Len=0
+  526   7.329380 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=1063 Ack=188 Win=1618 Len=0
+  527   7.329380 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 39294 [ACK] Seq=502 Ack=514 Win=592 Len=0
+  528   7.330940 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=1061 Ack=189 Win=5215 Len=0
+  529   7.330941 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=1063 Ack=189 Win=980 Len=0
+  530   7.336268 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=1063 Ack=189 Win=943 Len=0
+  531   7.345636 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 26872 [ACK] Seq=511 Ack=523 Win=466 Len=0
+  532   7.365187 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  533   7.392866 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  534   7.393632 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  535   7.403219 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 405 Application Data
+  536   7.406376 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=189 Ack=1417 Win=253 Len=0
+  537   7.437659 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=189 Ack=1417 Win=255 Len=0
+  538   7.437660 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=189 Ack=1413 Win=251 Len=0
+  539   7.452869 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=188 Ack=1414 Win=1023 Len=0
+  540   7.688731 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  541   7.689402 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  542   7.727617 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  543   7.728375 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  544   7.775364 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=669 Ack=685 Win=517 Len=0
+  545   7.813514 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=681 Ack=697 Win=16 Len=0
+  546   7.835774 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  547   7.836342 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  548   7.836980 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  549   7.889855 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=421 Ack=4284 Win=255 Len=0
+  550   7.905594 yo-in-f95.1e100.net → 192.168.24.247 SKYPE 200 Fragment/Forward/Resend Unk: 3
+  551   7.922720 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=669 Ack=685 Win=16 Len=0
+  552   7.937069 192.168.24.247 → yo-in-f95.1e100.net UDP 74 Session 67396897766766070/9499, Report segment
+  553   7.938288 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  554   7.938840 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  555   7.969464 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  556   7.970095 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  557   8.022264 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=669 Ack=685 Win=394 Len=0
+  558   8.052787 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=681 Ack=697 Win=18 Len=0
+  559   8.064073 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  560   8.080430 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  561   8.081074 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  562   8.110814 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=421 Ack=4324 Win=4095 Len=0
+  563   8.132861 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  564   8.133800 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  565   8.167245 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=669 Ack=685 Win=552 Len=0
+  566   8.217063 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=681 Ack=697 Win=293 Len=0
+  567   8.249767 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  568   8.249914 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  569   8.252160 192.168.24.247 → 104.36.195.1 TLSv1.2 1494
+  570   8.252160 192.168.24.247 → 104.36.195.1 TCP 1494 7557 → https(443) [ACK] Seq=4626 Ack=308 Win=250 Len=1440
+  571   8.252165 192.168.24.247 → 104.36.195.1 TLSv1.2 329 Application Data
+  572   8.252302 192.168.24.247 → 104.36.195.1 TLSv1.2 1494
+  573   8.252303 192.168.24.247 → 104.36.195.1 TLSv1.2 675 Application Data
+  574   8.285345 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  575   8.286137 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  576   8.328752 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=1413 Ack=236 Win=765 Len=0
+  577   8.329445 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=1417 Ack=236 Win=957 Len=0
+  578   8.337446 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  579   8.338208 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  580   8.338838 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=308 Ack=4626 Win=28 Len=0
+  581   8.338838 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=308 Ack=6341 Win=29 Len=0
+  582   8.339168 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=308 Ack=8402 Win=29 Len=0
+  583   8.364602 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=4420 Ack=561 Win=2111 Len=0
+  584   8.390590 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  585   8.391701 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  586   8.395336 104.36.195.1 → 192.168.24.247 TLSv1.2 219 Application Data
+  587   8.395336 104.36.195.1 → 192.168.24.247 TLSv1.2 87 Application Data
+  588   8.395336 104.36.195.1 → 192.168.24.247 TLSv1.2 85 Application Data
+  589   8.395409 192.168.24.247 → 104.36.195.1 TCP 54 7557 → https(443) [ACK] Seq=8402 Ack=537 Win=255 Len=0
+  590   8.396469 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  591   8.396638 Ubiquiti_56:5e:6f → Broadcast    ARP 60 Who has 192.168.24.1? Tell 192.168.24.193
+  592   8.400652 192.168.24.247 → 104.36.195.1 TLSv1.2 1494
+  593   8.400653 192.168.24.247 → 104.36.195.1 TCP 1494 7557 → https(443) [ACK] Seq=9877 Ack=537 Win=255 Len=1440
+  594   8.400659 192.168.24.247 → 104.36.195.1 TLSv1.2 329 Application Data
+  595   8.400752 192.168.24.247 → 104.36.195.1 TLSv1.2 1248 Application Data
+  596   8.416527 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=4460 Ack=561 Win=637 Len=0
+  597   8.440079 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=236 Ack=1767 Win=2046 Len=0
+  598   8.440129 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=236 Ack=1771 Win=1023 Len=0
+  599   8.465642 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  600   8.485744 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  601   8.486382 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  602   8.488006 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=576 Ack=8437 Win=29 Len=0
+  603   8.489170 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=576 Ack=9877 Win=29 Len=0
+  604   8.489171 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=576 Ack=11317 Win=30 Len=0
+  605   8.489171 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=576 Ack=11592 Win=30 Len=0
+  606   8.489171 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=576 Ack=12786 Win=30 Len=0
+  607   8.518045 192.168.24.247 → 104.36.195.1 TCP 54 7557 → https(443) [ACK] Seq=12786 Ack=576 Win=255 Len=0
+  608   8.570519 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=681 Ack=697 Win=592 Len=0
+  609   8.672297 192.168.24.247 → dns.google   DNS 98 Standard query 0x6d85 PTR 193.24.168.192.in-addr.arpa OPT
+  610   8.673717 192.168.24.247 → 192.168.24.1 DNS 87 Standard query 0xe2be PTR 193.24.168.192.in-addr.arpa
+  611   8.739405   dns.google → 192.168.24.247 DNS 98 Standard query response 0x6d85 No such name PTR 193.24.168.192.in-addr.arpa OPT
+  612   8.748330 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  613   8.749051 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  614   8.758331 192.168.24.1 → 192.168.24.247 DNS 87 Standard query response 0xe2be No such name PTR 193.24.168.192.in-addr.arpa
+  615   8.771088 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  616   8.771674 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  617   8.779627 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  618   8.780264 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  619   8.829849 172.64.152.210 → 192.168.24.247 TLSv1.2 78 Application Data
+  620   8.830118 192.168.24.247 → 172.64.152.210 TLSv1.2 82 Application Data
+  621   8.834958 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=681 Ack=697 Win=508 Len=0
+  622   8.850809 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=4420 Ack=561 Win=4061 Len=0
+  623   8.865779 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=681 Ack=697 Win=505 Len=0
+  624   8.876712 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  625   8.924224 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=421 Ack=4504 Win=508 Len=0
+  626   8.957222 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 9943 [ACK] Seq=64 Ack=72 Win=16 Len=0
+  627   9.086738 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  628   9.141491 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=561 Ack=5195 Win=252 Len=0
+  629   9.252603 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  630   9.252756 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  631   9.252855 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  632   9.252946 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  633   9.255286 192.168.24.247 → ya-in-f94.1e100.net SKYPE 1292 Unknown_0
+  634   9.255305 192.168.24.247 → ya-in-f94.1e100.net SKYPE 690 Unknown_0
+  635   9.259121 192.168.24.247 → dns.google   ICMP 168 Destination unreachable (Port unreachable)
+  636   9.259242 192.168.24.247 → dns.google   ICMP 168 Destination unreachable (Port unreachable)
+  637   9.333456 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=1414 Ack=235 Win=1618 Len=0
+  638   9.334177 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=1413 Ack=236 Win=5215 Len=0
+  639   9.334178 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=1417 Ack=236 Win=980 Len=0
+  640   9.335876 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 82 Unknown_0
+  641   9.336156 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=1417 Ack=236 Win=943 Len=0
+  642   9.365587 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  643   9.376700 192.168.24.247 → server-3-171-100-28.iad12.r.cloudfront.net SSL 55
+  644   9.396053 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  645   9.396868 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  646   9.407359 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  647   9.407978 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=236 Ack=1771 Win=251 Len=0
+  648   9.422630 192.168.24.247 → ya-in-f94.1e100.net SKYPE 1292 Unknown_0
+  649   9.438425 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=236 Ack=1771 Win=254 Len=0
+  650   9.438425 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=236 Ack=1767 Win=255 Len=0
+  651   9.453720 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=235 Ack=1768 Win=1022 Len=0
+  652   9.471904 server-3-171-100-28.iad12.r.cloudfront.net → 192.168.24.247 TCP 66 https(443) → 29834 [ACK] Seq=1 Ack=2 Win=142 Len=0 SLE=1 SRE=2
+  653   9.472332 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  654   9.473092 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  655   9.494032 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  656   9.494800 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  657   9.502860 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 84 Unknown_0
+  658   9.503128 192.168.24.247 → ya-in-f94.1e100.net SKYPE 1292 Unknown_0
+  659   9.506379 192.168.24.247 → dns.google   DNS 98 Standard query 0xfc3f PTR 94.219.194.173.in-addr.arpa OPT
+  660   9.511033 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  661   9.511034 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  662   9.511883 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  663   9.512076 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  664   9.513210 192.168.24.247 → dns.google   DNS 96 Standard query 0x8d92 PTR 28.100.171.3.in-addr.arpa OPT
+  665   9.517564 192.168.24.247 → security.cloudflare-dns.com TLSv1.3 121 Application Data
+  666   9.523165 HikvisionDig_1d:1e:a6 → Broadcast    ARP 60 Who has 192.168.24.174? Tell 192.168.24.250
+  667   9.526214 104.36.195.1 → 192.168.24.247 TLSv1.2 225 Application Data
+  668   9.526214 104.36.195.1 → 192.168.24.247 TLSv1.2 87 Application Data
+  669   9.526214 104.36.195.1 → 192.168.24.247 TLSv1.2 85 Application Data
+  670   9.526275 192.168.24.247 → 104.36.195.1 TCP 54 7557 → https(443) [ACK] Seq=12786 Ack=811 Win=254 Len=0
+  671   9.558868 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=681 Ack=697 Win=346 Len=0
+  672   9.573173   dns.google → 192.168.24.247 DNS 131 Standard query response 0xfc3f PTR 94.219.194.173.in-addr.arpa PTR ya-in-f94.1e100.net OPT
+  673   9.580596 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=681 Ack=697 Win=414 Len=0
+  674   9.583874 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 1292 Unknown_0
+  675   9.584392 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 1292 Unknown_0
+  676   9.584968 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 1292 Unknown_0
+  677   9.584968 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 323 Unknown_0
+  678   9.585372 ya-in-f94.1e100.net → 192.168.24.247 UDP, HiPerConTracer 986 https(443) → 55300 Len=944 (SendTTL=201, Round=182)
+  679   9.585372 ya-in-f94.1e100.net → 192.168.24.247 UDP, HiPerConTracer 69 https(443) → 55300 Len=27 (SendTTL=150, Round=10)
+  680   9.585575 192.168.24.247 → ya-in-f94.1e100.net UDP, HiPerConTracer 120 55300 → https(443) Len=78 (SendTTL=1, Round=8)
+  681   9.585684 ya-in-f94.1e100.net → 192.168.24.247 UDP 64 Session 28/3318, Cancel ack segment
+  682   9.585725 192.168.24.247 → ya-in-f94.1e100.net UDP 73 Session 1995560/13830921662, Green data
+  683   9.585803 192.168.24.247 → ya-in-f94.1e100.net UDP 116 Session 1995560/13830921662, Green data
+  684   9.586499 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 545 Payload Unk: c
+684 packets captured
+
+C:\Users\echo>tshark -i 4
+Capturing on 'Wi-Fi'
+    1   0.000000 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=1 Ack=1 Win=251 Len=0
+    2   0.000656 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+    3   0.015019 192.168.24.247 → 172.64.152.210 TCP 54 9943 → https(443) [ACK] Seq=1 Ack=1 Win=251 Len=0
+    4   0.015021 192.168.24.247 → 104.18.35.46 TCP 54 52896 → https(443) [ACK] Seq=1 Ack=1 Win=251 Len=0
+    5   0.031059 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=1 Ack=1 Win=254 Len=0
+    6   0.031061 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=1 Ack=1 Win=251 Len=0
+    7   0.047100 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=1 Ack=355 Win=1022 Len=0
+    8   0.069608 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+    9   0.076796 ya-in-f95.1e100.net → 192.168.24.247 SKYPE 763 Audio Unk: c
+   10   0.109616 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=1 Ack=776 Win=511 Len=0
+   11   0.109704 192.168.24.247 → ya-in-f95.1e100.net DVB-S2 BB  74 DVB-S2 Baseband
+   12   0.252272 192.168.24.247 → dns.google   DNS 110 Standard query 0xaab3 PTR 247.24.168.192.in-addr.arpa OPT
+   13   0.282127 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+   14   0.287952 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   15   0.288552 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   16   0.319335   dns.google → 192.168.24.247 DNS 98 Standard query response 0xaab3 No such name PTR 247.24.168.192.in-addr.arpa OPT
+   17   0.319789 192.168.24.247 → dns.google   DNS 96 Standard query 0xaa15 PTR 74.204.49.34.in-addr.arpa OPT
+   18   0.327518 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   19   0.328177 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   20   0.328903 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=1 Ack=776 Win=252 Len=0
+   21   0.374414 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=168 Ack=172 Win=524 Len=0
+   22   0.412530   dns.google → 192.168.24.247 DNS 147 Standard query response 0xaa15 PTR 74.204.49.34.in-addr.arpa PTR 74.204.49.34.bc.googleusercontent.com OPT
+   23   0.413648 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=171 Ack=175 Win=16 Len=0
+   24   0.501835 192.168.24.247 → dns.google   DNS 96 Standard query 0x91d3 PTR 45.191.36.34.in-addr.arpa OPT
+   25   0.541057 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   26   0.541642 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   27   0.569813 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   28   0.570374 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   29   0.593826   dns.google → 192.168.24.247 DNS 147 Standard query response 0x91d3 PTR 45.191.36.34.in-addr.arpa PTR 45.191.36.34.bc.googleusercontent.com OPT
+   30   0.595190 192.168.24.247 → dns.google   DNS 98 Standard query 0x41cc PTR 210.152.64.172.in-addr.arpa OPT
+   31   0.625485 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=168 Ack=172 Win=401 Len=0
+   32   0.653492 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=171 Ack=175 Win=18 Len=0
+   33   0.674169   dns.google → 192.168.24.247 DNS 160 Standard query response 0x41cc No such name PTR 210.152.64.172.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+   34   0.675798 192.168.24.247 → dns.google   DNS 96 Standard query 0xfd7e PTR 46.35.18.104.in-addr.arpa OPT
+   35   0.679978 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   36   0.680582 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   37   0.754733   dns.google → 192.168.24.247 DNS 158 Standard query response 0xfd7e No such name PTR 46.35.18.104.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+   38   0.757763 192.168.24.247 → dns.google   DNS 98 Standard query 0xf45a PTR 235.109.160.34.in-addr.arpa OPT
+   39   0.760218 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+   40   0.760808 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+   41   0.766569 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=168 Ack=172 Win=559 Len=0
+   42   0.766923 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   43   0.767832 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   44   0.830373 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+   45   0.831608 192.168.24.247 → 104.18.28.226 SSL 55
+   46   0.847026 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+   47   0.847137 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+   48   0.847200 192.168.24.247 → 104.18.35.46 TLSv1.2 97 Application Data
+   49   0.848261 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=168 Ack=172 Win=16 Len=0
+   50   0.850121 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=171 Ack=175 Win=300 Len=0
+   51   0.863129   dns.google → 192.168.24.247 DNS 151 Standard query response 0xf45a PTR 235.109.160.34.in-addr.arpa PTR 235.109.160.34.bc.googleusercontent.com OPT
+   52   0.864757 192.168.24.247 → dns.google   DNS 98 Standard query 0xc31a PTR 95.219.194.173.in-addr.arpa OPT
+   53   0.878277 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=1 Ack=776 Win=252 Len=0
+   54   0.886356 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+   55   0.887043 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+   56   0.917386 104.18.28.226 → 192.168.24.247 TCP 66 https(443) → 31460 [ACK] Seq=1 Ack=2 Win=16 Len=0 SLE=1 SRE=2
+   57   0.927589 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=1 Ack=48 Win=765 Len=0
+   58   0.928457 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=1 Ack=48 Win=957 Len=0
+   59   0.932490   dns.google → 192.168.24.247 DNS 131 Standard query response 0xc31a PTR 95.219.194.173.in-addr.arpa PTR ya-in-f95.1e100.net OPT
+   60   0.933158 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 51087 [ACK] Seq=1 Ack=44 Win=16 Len=0
+   61   0.934870 192.168.24.247 → dns.google   DNS 91 Standard query 0x0866 PTR 8.8.8.8.in-addr.arpa OPT
+   62   0.940341 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+   63   0.940992 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+   64   0.965251 104.18.35.46 → 192.168.24.247 TLSv1.2 93 Application Data
+   65   0.966412 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=912 Ack=141 Win=2111 Len=0
+   66   0.989112 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+   67   0.989936 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+   68   0.998744 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+   69   1.001410   dns.google → 192.168.24.247 DNS 115 Standard query response 0x0866 PTR 8.8.8.8.in-addr.arpa PTR dns.google OPT
+   70   1.018538 192.168.24.247 → 104.18.35.46 TCP 54 51087 → https(443) [ACK] Seq=44 Ack=40 Win=251 Len=0
+   71   1.018857 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=137 Ack=141 Win=622 Len=0
+   72   1.033675 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=48 Ack=355 Win=2045 Len=0
+   73   1.033741 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=48 Ack=355 Win=1023 Len=0
+   74   1.035944  52.96.48.50 → 192.168.24.247 SKYPE 82 Unknown_F Unk: 4
+   75   1.049705 192.168.24.247 → 104.36.195.1 TCP 54 26961 → https(443) [ACK] Seq=1 Ack=40 Win=254 Len=0
+   76   1.057869 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+   77   1.058506 192.168.24.247 → 52.96.48.50  UDP 81 Session 8628/96, Green data
+   78   1.072846 28.106.247.35.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 13969 [ACK] Seq=1 Ack=1 Win=343 Len=0
+   79   1.072880 192.168.24.247 → 28.106.247.35.bc.googleusercontent.com TCP 54 [TCP ACKed unseen segment] 13969 → https(443) [ACK] Seq=1 Ack=2 Win=1020 Len=0
+   80   1.111103 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=141 Ack=920 Win=4092 Len=0
+   81   1.130004 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   82   1.130746 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   83   1.212042 28.106.247.35.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 22634 [ACK] Seq=1 Ack=1 Win=331 Len=0
+   84   1.212042 28.106.247.35.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 9018 [ACK] Seq=1 Ack=1 Win=337 Len=0
+   85   1.212084 192.168.24.247 → 28.106.247.35.bc.googleusercontent.com TCP 54 [TCP ACKed unseen segment] 22634 → https(443) [ACK] Seq=1 Ack=2 Win=254 Len=0
+   86   1.212128 192.168.24.247 → 28.106.247.35.bc.googleusercontent.com TCP 54 [TCP ACKed unseen segment] 9018 → https(443) [ACK] Seq=1 Ack=2 Win=255 Len=0
+   87   1.213669 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=171 Ack=175 Win=592 Len=0
+   88   1.256590 192.168.24.247 → dns.google   DNS 97 Standard query 0x8ffd PTR 226.28.18.104.in-addr.arpa OPT
+   89   1.351406   dns.google → 192.168.24.247 DNS 159 Standard query response 0x8ffd No such name PTR 226.28.18.104.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+   90   1.365793 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+   91   1.366393 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+   92   1.377569 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+   93   1.377570 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+   94   1.378193 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+   95   1.378283 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+   96   1.445332 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=912 Ack=141 Win=4094 Len=0
+   97   1.464363 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=171 Ack=175 Win=511 Len=0
+   98   1.464364 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=171 Ack=175 Win=515 Len=0
+   99   1.489129 28.106.247.35.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 14864 [ACK] Seq=1 Ack=1 Win=318 Len=0
+  100   1.489169 192.168.24.247 → 28.106.247.35.bc.googleusercontent.com TCP 54 [TCP ACKed unseen segment] 14864 → https(443) [ACK] Seq=1 Ack=2 Win=254 Len=0
+  101   1.504829 192.168.24.247 → dns.google   DNS 96 Standard query 0x123b PTR 1.195.36.104.in-addr.arpa OPT
+  102   1.599376   dns.google → 192.168.24.247 DNS 173 Standard query response 0x123b No such name PTR 1.195.36.104.in-addr.arpa SOA pdns80.ultradns.com OPT
+  103   1.603303 192.168.24.247 → dns.google   DNS 95 Standard query 0xcd65 PTR 50.48.96.52.in-addr.arpa OPT
+  104   1.683997   dns.google → 192.168.24.247 DNS 181 Standard query response 0xcd65 No such name PTR 50.48.96.52.in-addr.arpa SOA ns1-01.azure-dns.com OPT
+  105   1.687013 192.168.24.247 → dns.google   DNS 97 Standard query 0xc92f PTR 28.106.247.35.in-addr.arpa OPT
+  106   1.779825   dns.google → 192.168.24.247 DNS 149 Standard query response 0xc92f PTR 28.106.247.35.in-addr.arpa PTR 28.106.247.35.bc.googleusercontent.com OPT
+  107   1.838921 172.64.152.210 → 192.168.24.247 TLSv1.2 78 Application Data
+  108   1.839184 192.168.24.247 → 172.64.152.210 TLSv1.2 82 Application Data
+  109   1.848209 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  110   1.848342 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  111   1.848407 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  112   1.848497 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  113   1.870002 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  114   1.919174 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=1 Ack=1551 Win=508 Len=0
+  115   1.926951 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=355 Ack=48 Win=1618 Len=0
+  116   1.927541 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=1 Ack=48 Win=5215 Len=0
+  117   1.927788 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=1 Ack=48 Win=980 Len=0
+  118   1.932508 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=1 Ack=48 Win=943 Len=0
+  119   1.961686 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  120   1.965465 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → rap-ip(3813) [ACK] Seq=25 Ack=29 Win=16 Len=0
+  121   1.989255 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  122   1.991154 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  123   2.000865 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  124   2.014874 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=48 Ack=355 Win=255 Len=0
+  125   2.030236 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=48 Ack=355 Win=253 Len=0
+  126   2.045615 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=48 Ack=353 Win=255 Len=0
+  127   2.045625 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=48 Ack=709 Win=1021 Len=0
+  128   2.066937 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  129   2.067559 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  130   2.082672 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  131   2.093548 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  132   2.094246 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  133   2.106491 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  134   2.107121 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  135   2.107893 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  136   2.108598 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  137   2.124487 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=141 Ack=1687 Win=255 Len=0
+  138   2.153587 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=171 Ack=175 Win=353 Len=0
+  139   2.180292 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=171 Ack=175 Win=421 Len=0
+  140   2.185857 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 20224 [ACK] Seq=1687 Ack=141 Win=2196 Len=0
+  141   2.195833 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 21354 [ACK] Seq=171 Ack=175 Win=286 Len=0
+  142   2.348052 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  143   2.348680 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  144   2.355497 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  145   2.356135 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  146   2.435037 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 39294 [ACK] Seq=168 Ack=172 Win=592 Len=0
+  147   2.439794 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 26872 [ACK] Seq=171 Ack=175 Win=473 Len=0
+  148   2.630038 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  149   2.673500 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=141 Ack=1687 Win=255 Len=0
+  150   2.789465 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  151   2.790201 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  152   2.827463 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  153   2.828175 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  154   2.843986 192.168.24.247 → 172.64.152.210 TLSv1.2 97 Application Data
+  155   2.844166 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  156   2.844234 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  157   2.860567 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  158   2.877765 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=335 Ack=343 Win=524 Len=0
+  159   2.906059 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=141 Ack=1703 Win=4095 Len=0
+  160   2.915075 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=341 Ack=349 Win=16 Len=0
+  161   2.925378 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=355 Ack=95 Win=957 Len=0
+  162   2.925378 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=355 Ack=95 Win=765 Len=0
+  163   2.930880 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → rap-ip(3813) [ACK] Seq=25 Ack=72 Win=16 Len=0
+  164   2.964601 172.64.152.210 → 192.168.24.247 TLSv1.2 93 Application Data
+  165   2.988729 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  166   2.988729 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  167   3.017118 192.168.24.247 → 172.64.152.210 TCP 54 rap-ip(3813) → https(443) [ACK] Seq=72 Ack=64 Win=1019 Len=0
+  168   3.032582 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=95 Ack=707 Win=2043 Len=0
+  169   3.032640 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=95 Ack=709 Win=1022 Len=0
+  170   3.040451 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  171   3.041091 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  172   3.063359 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  173   3.070017 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  174   3.070362 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  175   3.070821 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  176   3.138385 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=335 Ack=343 Win=401 Len=0
+  177   3.155995 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=341 Ack=349 Win=18 Len=0
+  178   3.158853 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=40 Ack=36 Win=41 Len=0
+  179   3.185693 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  180   3.186423 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  181   3.255304 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  182   3.256169 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  183   3.269855 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  184   3.270568 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  185   3.272618 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=335 Ack=343 Win=559 Len=0
+  186   3.291734 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 274 Application Data
+  187   3.320313 yo-in-f95.1e100.net → 192.168.24.247 SKYPE 120 Payload Unk: 3
+  188   3.342833 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=335 Ack=343 Win=16 Len=0
+  189   3.344220 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=141 Ack=1907 Win=507 Len=0
+  190   3.353794 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=341 Ack=349 Win=300 Len=0
+  191   3.360432 192.168.24.247 → yo-in-f95.1e100.net UDP 75 Session 67396897766766070/12730, Cancel segment
+  192   3.386806 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  193   3.387587 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  194   3.439262 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  195   3.439986 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  196   3.466322 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=1823 Ack=281 Win=2111 Len=0
+  197   3.525102 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=1839 Ack=281 Win=622 Len=0
+  198   3.630933 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  199   3.631650 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  200   3.669926 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  201   3.715349 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=341 Ack=349 Win=592 Len=0
+  202   3.721853 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=141 Ack=2682 Win=511 Len=0
+  203   3.784430 192.168.24.247 → dns.google   DNS 98 Standard query 0xa5b1 PTR 95.215.217.172.in-addr.arpa OPT
+  204   3.847969 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  205   3.848161 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  206   3.848319 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  207   3.848429 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  208   3.848539 192.168.24.247 → 104.18.35.46 TLSv1.2 97 Application Data
+  209   3.848672 192.168.24.247 → whatsapp-cdn-shv-03-mia3.fbcdn.net TLSv1.2 124 Application Data
+  210   3.850001 192.168.24.247 → ya-in-f94.1e100.net UDP 142 Session 2003467/13958, Cancel segment
+  211   3.850164 192.168.24.247 → ya-in-f94.1e100.net UDP 143 Session 2003467/13958, Red data
+  212   3.863997   dns.google → 192.168.24.247 DNS 131 Standard query response 0xa5b1 PTR 95.215.217.172.in-addr.arpa PTR yo-in-f95.1e100.net OPT
+  213   3.868021 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  214   3.868644 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  215   3.877383 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  216   3.877928 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  217   3.878557 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  218   3.878935 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  219   3.880845 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  220   3.926660 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=281 Ack=2598 Win=252 Len=0
+  221   3.926735 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=709 Ack=95 Win=1618 Len=0
+  222   3.927384 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=353 Ack=95 Win=5215 Len=0
+  223   3.927611 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=355 Ack=95 Win=980 Len=0
+  224   3.931823 ya-in-f94.1e100.net → 192.168.24.247 UDP 168 Session 10/546962944060252, Cancel ack segment
+  225   3.931823 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=355 Ack=95 Win=943 Len=0
+  226   3.936752 ya-in-f94.1e100.net → 192.168.24.247 UDP 74 Session 2042922/3, Red data
+  227   3.936752 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 61607 [ACK] Seq=1 Ack=44 Win=16 Len=0
+  228   3.936753 ya-in-f94.1e100.net → 192.168.24.247 SKYPE 128 Payload Unk: f
+  229   3.937061 192.168.24.247 → ya-in-f94.1e100.net UDP 77 Session 2003467/13958, Control segment
+  230   3.947768 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=2598 Ack=281 Win=4094 Len=0
+  231   3.953693 whatsapp-cdn-shv-03-mia3.fbcdn.net → 192.168.24.247 TLSv1.2 126 Application Data
+  232   3.961388 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  233   3.964672 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=341 Ack=349 Win=512 Len=0
+  234   3.966019 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=341 Ack=349 Win=515 Len=0
+  235   3.966019 104.18.35.46 → 192.168.24.247 TLSv1.2 93 Application Data
+  236   3.966299 192.168.24.247 → ya-in-f94.1e100.net UDP 78 Session 2003467/13958, Cancel ack segment
+  237   3.991022 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  238   3.991022 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  239   4.000749 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  240   4.001541 192.168.24.247 → whatsapp-cdn-shv-03-mia3.fbcdn.net TCP 54 56371 → https(443) [ACK] Seq=71 Ack=73 Win=511 Len=0
+  241   4.007811 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=95 Ack=709 Win=254 Len=0
+  242   4.017594 192.168.24.247 → 104.18.35.46 TCP 54 61607 → https(443) [ACK] Seq=44 Ack=40 Win=1019 Len=0
+  243   4.032566 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=95 Ack=709 Win=251 Len=0
+  244   4.032907 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=95 Ack=705 Win=254 Len=0
+  245   4.043094 ya-in-f94.1e100.net → 192.168.24.247 UDP 66 Session 29/496442, Cancel segment
+  246   4.049321 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=95 Ack=1063 Win=1019 Len=0
+  247   4.072340 ya-in-f94.1e100.net → 192.168.24.247 UDP 66 Session 9878/89, Green data
+  248   4.251778 192.168.24.247 → dns.google   DNS 97 Standard query 0x4492 PTR 32.163.144.57.in-addr.arpa OPT
+  249   4.319184   dns.google → 192.168.24.247 DNS 145 Standard query response 0x4492 PTR 32.163.144.57.in-addr.arpa PTR whatsapp-cdn-shv-03-mia3.fbcdn.net OPT
+  250   4.320618 192.168.24.247 → dns.google   DNS 98 Standard query 0xfb67 PTR 94.219.194.173.in-addr.arpa OPT
+  251   4.388461   dns.google → 192.168.24.247 DNS 131 Standard query response 0xfb67 PTR 94.219.194.173.in-addr.arpa PTR ya-in-f94.1e100.net OPT
+  252   4.409481 104.18.39.21 → 192.168.24.247 TLSv1.2 78 Application Data
+  253   4.409726 192.168.24.247 → 104.18.39.21 TLSv1.2 82 Application Data
+  254   4.429896 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  255   4.470028 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=281 Ack=2598 Win=252 Len=0
+  256   4.492987 104.18.39.21 → 192.168.24.247 TCP 60 https(443) → 42384 [ACK] Seq=25 Ack=29 Win=16 Len=0
+  257   4.567194 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  258   4.567926 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  259   4.592181 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  260   4.592829 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  261   4.607117 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  262   4.607797 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  263   4.607852 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  264   4.608486 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  265   4.655493 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=341 Ack=349 Win=353 Len=0
+  266   4.659097 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  267   4.677683 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=341 Ack=349 Win=421 Len=0
+  268   4.685800 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 20224 [ACK] Seq=2818 Ack=281 Win=2196 Len=0
+  269   4.695728 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 21354 [ACK] Seq=341 Ack=349 Win=287 Len=0
+  270   4.706968 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=281 Ack=2622 Win=4092 Len=0
+  271   4.757903 192.168.24.247 → dns.google   DNS 96 Standard query 0x70c2 PTR 21.39.18.104.in-addr.arpa OPT
+  272   4.824614   dns.google → 192.168.24.247 DNS 158 Standard query response 0x70c2 No such name PTR 21.39.18.104.in-addr.arpa SOA cruz.ns.cloudflare.com OPT
+  273   4.846599 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  274   4.847251 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  275   4.847362 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  276   4.848087 192.168.24.247 → ec2-18-97-36-16.compute-1.amazonaws.com TLSv1.2 292 Application Data
+  277   4.848239 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  278   4.855989 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  279   4.856634 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  280   4.926345 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=709 Ack=142 Win=957 Len=0
+  281   4.926716 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=707 Ack=142 Win=765 Len=0
+  282   4.932575 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 39294 [ACK] Seq=335 Ack=343 Win=592 Len=0
+  283   4.941398 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 26872 [ACK] Seq=341 Ack=349 Win=473 Len=0
+  284   4.943297 ec2-18-97-36-16.compute-1.amazonaws.com → 192.168.24.247 TCP 60 https(443) → 13626 [ACK] Seq=1 Ack=239 Win=12322 Len=0
+  285   4.947700 ec2-18-97-36-16.compute-1.amazonaws.com → 192.168.24.247 TLSv1.2 172 Application Data
+  286   4.988938 192.168.24.247 → ec2-18-97-36-16.compute-1.amazonaws.com TCP 54 13626 → https(443) [ACK] Seq=239 Ack=119 Win=250 Len=0
+  287   4.989182 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  288   4.989182 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  289   4.997906 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  290   5.004368 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  291   5.004454 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  292   5.034612 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=142 Ack=1061 Win=1021 Len=0
+  293   5.034703 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=142 Ack=1061 Win=2047 Len=0
+  294   5.087077 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 26961 [ACK] Seq=79 Ack=36 Win=321 Len=0
+  295   5.087077 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 26961 [ACK] Seq=79 Ack=71 Win=321 Len=0
+  296   5.256017 192.168.24.247 → dns.google   DNS 95 Standard query 0x120e PTR 16.36.97.18.in-addr.arpa OPT
+  297   5.290170 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  298   5.290705 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  299   5.327551 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  300   5.328262 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  301   5.344227 104.18.35.46 → 192.168.24.247 TLSv1.2 78 Application Data
+  302   5.344474 192.168.24.247 → 104.18.35.46 TLSv1.2 82 Application Data
+  303   5.375743 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=502 Ack=514 Win=525 Len=0
+  304   5.403184   dns.google → 192.168.24.247 DNS 148 Standard query response 0x120e PTR 16.36.97.18.in-addr.arpa PTR ec2-18-97-36-16.compute-1.amazonaws.com OPT
+  305   5.414278 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=511 Ack=523 Win=16 Len=0
+  306   5.472733 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 61607 [ACK] Seq=64 Ack=72 Win=16 Len=0
+  307   5.472733 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  308   5.519770 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=281 Ack=3593 Win=508 Len=0
+  309   5.540777 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  310   5.541383 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  311   5.574960 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  312   5.575669 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  313   5.625429 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=502 Ack=514 Win=402 Len=0
+  314   5.659313 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=511 Ack=523 Win=18 Len=0
+  315   5.681096 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  316   5.682991 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  317   5.684418 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  318   5.723997 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=281 Ack=3373 Win=255 Len=0
+  319   5.757905 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  320   5.758808 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  321   5.767822 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  322   5.768487 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  323   5.773835 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=502 Ack=514 Win=560 Len=0
+  324   5.775263 Ubiquiti_56:5e:6f → Broadcast    ARP 60 Who has 192.168.24.1? Tell 192.168.24.193
+  325   5.844654 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=502 Ack=514 Win=16 Len=0
+  326   5.848398 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  327   5.848503 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  328   5.848562 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 100 Application Data
+  329   5.848623 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  330   5.851670 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=511 Ack=523 Win=300 Len=0
+  331   5.886424 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  332   5.887108 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  333   5.927061 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=1063 Ack=142 Win=1618 Len=0
+  334   5.928145 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=705 Ack=142 Win=5215 Len=0
+  335   5.928145 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=709 Ack=142 Win=980 Len=0
+  336   5.933562 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=709 Ack=141 Win=943 Len=0
+  337   5.939826 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  338   5.940529 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  339   5.962758 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 407 Application Data
+  340   5.965840 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=2734 Ack=421 Win=2111 Len=0
+  341   5.990039 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  342   5.990829 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  343   6.000715 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  344   6.019462 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=2758 Ack=421 Win=622 Len=0
+  345   6.029564 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=141 Ack=1062 Win=253 Len=0
+  346   6.045014 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=142 Ack=1063 Win=255 Len=0
+  347   6.045015 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=142 Ack=1059 Win=253 Len=0
+  348   6.045052 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=142 Ack=1417 Win=1023 Len=0
+  349   6.136075 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  350   6.136836 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  351   6.220518 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=511 Ack=523 Win=592 Len=0
+  352   6.230043 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  353   6.253478 192.168.24.247 → dns.google   DNS 98 Standard query 0x8274 PTR 193.24.168.192.in-addr.arpa OPT
+  354   6.282287 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=421 Ack=3509 Win=255 Len=0
+  355   6.321410   dns.google → 192.168.24.247 DNS 98 Standard query response 0x8274 No such name PTR 193.24.168.192.in-addr.arpa OPT
+  356   6.366122 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  357   6.366861 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  358   6.379578 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  359   6.380287 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  360   6.380304 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  361   6.380737 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  362   6.444778 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=3509 Ack=421 Win=4094 Len=0
+  363   6.457203 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  364   6.466231 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=511 Ack=523 Win=512 Len=0
+  365   6.466232 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=511 Ack=523 Win=515 Len=0
+  366   6.504122 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=421 Ack=3541 Win=4095 Len=0
+  367   6.849582 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  368   6.849689 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  369   6.928418 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=1061 Ack=189 Win=957 Len=0
+  370   6.928736 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=1061 Ack=189 Win=765 Len=0
+  371   6.990522 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  372   6.990522 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  373   7.036618 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 49388 → https(443) [ACK] Seq=189 Ack=1415 Win=1019 Len=0
+  374   7.036674 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 hsrp(1985) → https(443) [ACK] Seq=189 Ack=1415 Win=2046 Len=0
+  375   7.059105 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  376   7.067500 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  377   7.067837 192.168.24.247 → 104.36.195.1 TLSv1.2 89 Application Data
+  378   7.068390 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  379   7.092244 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  380   7.093005 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  381   7.109088 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  382   7.109088 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  383   7.109730 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  384   7.109837 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  385   7.153880 104.36.195.1 → 192.168.24.247 TCP 60 https(443) → 7557 [ACK] Seq=79 Ack=71 Win=41 Len=0
+  386   7.154536 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → mtp(1911) [ACK] Seq=511 Ack=523 Win=354 Len=0
+  387   7.179131 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 25613 [ACK] Seq=511 Ack=523 Win=422 Len=0
+  388   7.188575 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 20224 [ACK] Seq=3729 Ack=421 Win=2196 Len=0
+  389   7.198658 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 21354 [ACK] Seq=511 Ack=523 Win=287 Len=0
+  390   7.270640 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  391   7.319579 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 20224 → https(443) [ACK] Seq=421 Ack=4504 Win=511 Len=0
+  392   7.351217 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  393   7.351863 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  394   7.366698 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  395   7.367380 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  396   7.438231 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 39294 [ACK] Seq=502 Ack=514 Win=592 Len=0
+  397   7.450191 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 26872 [ACK] Seq=511 Ack=523 Win=474 Len=0
+  398   7.481265 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  399   7.522277 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 11653 → https(443) [ACK] Seq=421 Ack=4284 Win=252 Len=0
+  400   7.600150 192.168.24.247 → dns.google   SSL 55
+  401   7.667959   dns.google → 192.168.24.247 TCP 66 https(443) → 9650 [ACK] Seq=1 Ack=2 Win=1046 Len=0 SLE=1 SRE=2
+  402   7.720863 HikvisionDig_1d:1e:a6 → Broadcast    ARP 60 Who has 192.168.24.174? Tell 192.168.24.250
+  403   7.793682 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  404   7.794262 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  405   7.827647 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  406   7.828233 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  407   7.852811 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  408   7.852941 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  409   7.853012 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  410   7.853068 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 100 Application Data
+  411   7.868361 192.168.24.247 → yr-in-f100.1e100.net UDP 71 Session 14635/4, Report segment
+  412   7.880198 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → fuscript(1144) [ACK] Seq=669 Ack=685 Win=525 Len=0
+  413   7.913691 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → condor(9618) [ACK] Seq=681 Ack=697 Win=16 Len=0
+  414   7.931627 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 44074 [ACK] Seq=1417 Ack=188 Win=1618 Len=0
+  415   7.931628 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → csi-lfap(3145) [ACK] Seq=1063 Ack=189 Win=980 Len=0
+  416   7.931940 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 47722 [ACK] Seq=1059 Ack=189 Win=5215 Len=0
+  417   7.937720 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10648 [ACK] Seq=1062 Ack=188 Win=943 Len=0
+  418   7.949470 104.18.35.46 → 192.168.24.247 TLSv1.2 78 Application Data
+  419   7.949640 192.168.24.247 → 104.18.35.46 TLSv1.2 82 Application Data
+  420   7.962275 192.168.24.247 → dns.google   DNS 91 Standard query 0xca94 PTR 4.4.8.8.in-addr.arpa OPT
+  421   7.966550 74.204.49.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  422   7.974033 yr-in-f100.1e100.net → 192.168.24.247 SKYPE 67 NAT info Unk: f
+  423   7.993354 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 406 Application Data
+  424   7.994598 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  425   8.005451 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 407 Application Data
+  426   8.009695 192.168.24.247 → 74.204.49.34.bc.googleusercontent.com TCP 54 10648 → https(443) [ACK] Seq=188 Ack=1416 Win=251 Len=0
+  427   8.026774 13.58.82.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 18835 [ACK] Seq=1 Ack=1 Win=307 Len=0
+  428   8.026808 192.168.24.247 → 13.58.82.34.bc.googleusercontent.com TCP 54 [TCP ACKed unseen segment] 18835 → https(443) [ACK] Seq=1 Ack=2 Win=254 Len=0
+  429   8.032494 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 829 Application Data
+  430   8.032495   dns.google → 192.168.24.247 DNS 115 Standard query response 0xca94 PTR 4.4.8.8.in-addr.arpa PTR dns.google OPT
+  431   8.034419 192.168.24.247 → dns.google   DNS 98 Standard query 0x267b PTR 250.24.168.192.in-addr.arpa OPT
+  432   8.039498 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 csi-lfap(3145) → https(443) [ACK] Seq=189 Ack=1415 Win=254 Len=0
+  433   8.039499 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 47722 → https(443) [ACK] Seq=189 Ack=1413 Win=251 Len=0
+  434   8.041744 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  435   8.042330 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  436   8.055565 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 44074 → https(443) [ACK] Seq=188 Ack=1770 Win=1022 Len=0
+  437   8.070768 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  438   8.071521 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  439   8.075123 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 51087 [ACK] Seq=64 Ack=72 Win=16 Len=0
+  440   8.086570 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TCP 54 61908 → https(443) [ACK] Seq=421 Ack=4284 Win=252 Len=0
+  441   8.102978   dns.google → 192.168.24.247 DNS 98 Standard query response 0x267b No such name PTR 250.24.168.192.in-addr.arpa OPT
+  442   8.108693 192.168.24.247 → dns.google   DNS 98 Standard query 0x3d84 PTR 100.136.125.74.in-addr.arpa OPT
+  443   8.126319 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 47209 [ACK] Seq=669 Ack=685 Win=402 Len=0
+  444   8.154915 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 53061 [ACK] Seq=681 Ack=697 Win=18 Len=0
+  445   8.184936 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  446   8.185420 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  447   8.187926   dns.google → 192.168.24.247 DNS 132 Standard query response 0x3d84 PTR 100.136.125.74.in-addr.arpa PTR yr-in-f100.1e100.net OPT
+  448   8.196896 104.18.35.46 → 192.168.24.247 TLSv1.2 78 Application Data
+  449   8.197127 192.168.24.247 → 104.18.35.46 TLSv1.2 82 Application Data
+  450   8.257207 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 837 Application Data
+  451   8.259018 104.18.35.46 → 192.168.24.247 TLSv1.2 221 Application Data
+  452   8.259715 192.168.24.247 → 104.18.35.46 TLSv1.2 225 Application Data
+  453   8.268808 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  454   8.269749 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  455   8.270743 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → xap-ha(3639) [ACK] Seq=669 Ack=685 Win=560 Len=0
+  456   8.307241 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=421 Ack=4324 Win=4092 Len=0
+  457   8.323972 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 52896 [ACK] Seq=25 Ack=29 Win=16 Len=0
+  458   8.325974 192.168.24.247 → dns.google   DNS 95 Standard query 0xcdb4 PTR 13.58.82.34.in-addr.arpa OPT
+  459   8.346223 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 50995 [ACK] Seq=669 Ack=685 Win=16 Len=0
+  460   8.353862 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 28211 [ACK] Seq=681 Ack=697 Win=301 Len=0
+  461   8.386415 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  462   8.387155 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  463   8.422190   dns.google → 192.168.24.247 DNS 145 Standard query response 0xcdb4 PTR 13.58.82.34.in-addr.arpa PTR 13.58.82.34.bc.googleusercontent.com OPT
+  464   8.439778 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  465   8.440318 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  466   8.465169 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 61908 [ACK] Seq=4420 Ack=561 Win=2111 Len=0
+  467   8.519427 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 10746 [ACK] Seq=4460 Ack=561 Win=622 Len=0
+  468   8.633303 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  469   8.633876 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  470   8.642479 HikvisionDig_1d:1e:a6 → Broadcast    ARP 60 Who has 192.168.24.174? Tell 192.168.24.250
+  471   8.717397 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 41892 [ACK] Seq=681 Ack=697 Win=592 Len=0
+  472   8.745387              →              IEEE 802.15.4 409 Beacon
+  473   8.799522 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 300 Application Data
+  474   8.854690 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TCP 54 10746 → https(443) [ACK] Seq=561 Ack=4706 Win=4091 Len=0
+  475   8.855029 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  476   8.855126 192.168.24.247 → 235.109.160.34.bc.googleusercontent.com TLSv1.2 101 Application Data
+  477   8.866443 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 190 Application Data
+  478   8.867119 192.168.24.247 → 45.191.36.34.bc.googleusercontent.com TLSv1.2 194 Application Data
+  479   8.877390 172.64.152.210 → 192.168.24.247 TLSv1.2 224 Application Data
+  480   8.878026 192.168.24.247 → 172.64.152.210 TLSv1.2 228 Application Data
+  481   8.879046 104.18.35.46 → 192.168.24.247 TLSv1.2 224 Application Data
+  482   8.879573 192.168.24.247 → 104.18.35.46 TLSv1.2 228 Application Data
+  483   8.933656 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 49388 [ACK] Seq=1415 Ack=236 Win=957 Len=0
+  484   8.934314 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → hsrp(1985) [ACK] Seq=1415 Ack=236 Win=765 Len=0
+  485   8.947956 45.191.36.34.bc.googleusercontent.com → 192.168.24.247 TCP 60 https(443) → 11653 [ACK] Seq=4420 Ack=561 Win=4094 Len=0
+  486   8.963605 172.64.152.210 → 192.168.24.247 TCP 60 https(443) → 51590 [ACK] Seq=681 Ack=697 Win=513 Len=0
+  487   8.964771 104.18.35.46 → 192.168.24.247 TCP 60 https(443) → 7532 [ACK] Seq=681 Ack=697 Win=516 Len=0
+  488   8.996886 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  489   8.996887 235.109.160.34.bc.googleusercontent.com → 192.168.24.247 TLSv1.2 408 Application Data
+  490   8.997673 104.36.195.1 → 192.168.24.247 TLSv1.2 93 Application Data
+  491   9.006441 192.168.24.247 → 104.36.195.1 TLSv1.2 1494
+  492   9.006444 192.168.24.247 → 104.36.195.1 TCP 1494 7557 → https(443) [ACK] Seq=1511 Ack=79 Win=250 Len=1440
+  493   9.006444 192.168.24.247 → 104.36.195.1 TLSv1.2 289 Application Data
+  494   9.010459 192.168.24.247 → dns.google   DNS 98 Standard query 0xd539 PTR 190.24.168.192.in-addr.arpa OPT
+494 packets captured
+
+C:\Users\echo>tshark -i 4 -f "host 192.168.24.247" -T fields -e frame.number -e ip.src -e ip.dst -e frame.len -e data.data
+Capturing on 'Wi-Fi'
+1       104.36.195.1    192.168.24.247  93
+2       192.168.24.247  104.36.195.1    89
+3       34.160.109.235  192.168.24.247  190
+4       192.168.24.247  34.160.109.235  54
+5       172.64.152.210  192.168.24.247  224
+6       192.168.24.247  34.160.109.235  54
+7       34.36.191.45    192.168.24.247  829
+8       172.64.152.210  192.168.24.247  224
+9       104.36.195.1    192.168.24.247  60
+10      104.18.35.46    192.168.24.247  60
+11      34.160.109.235  192.168.24.247  190
+12      104.18.35.46    192.168.24.247  224
+13      192.168.24.247  8.8.8.8 108
+14      192.168.24.247  34.36.191.45    54
+15      192.168.24.247  172.64.152.210  54
+16      192.168.24.247  172.64.152.210  54
+17      192.168.24.247  172.64.152.210  228
+18      192.168.24.247  172.64.152.210  228
+19      192.168.24.247  34.160.109.235  194
+20      192.168.24.247  34.160.109.235  194
+21      192.168.24.247  104.18.35.46    228
+22      8.8.8.8 192.168.24.247  173
+23      192.168.24.247  8.8.8.8 98
+24      104.18.35.46    192.168.24.247  78
+25      192.168.24.247  104.18.35.46    82
+26      34.160.109.235  192.168.24.247  60
+27      34.160.109.235  192.168.24.247  60
+28      172.64.152.210  192.168.24.247  60
+29      172.64.152.210  192.168.24.247  60
+30      104.18.35.46    192.168.24.247  60
+31      34.160.109.235  192.168.24.247  837
+32      8.8.8.8 192.168.24.247  98
+33      192.168.24.247  34.160.109.235  54
+34      104.18.35.46    192.168.24.247  60
+35      104.18.35.46    192.168.24.247  221
+36      192.168.24.247  104.18.35.46    225
+37      104.18.35.46    192.168.24.247  224
+38      192.168.24.247  104.18.35.46    228
+39      192.168.24.247  8.8.8.8 98
+40      104.18.35.46    192.168.24.247  60
+41      104.18.35.46    192.168.24.247  60
+42      8.8.8.8 192.168.24.247  151
+43      192.168.24.247  8.8.8.8 98
+44      8.8.8.8 192.168.24.247  160
+45      192.168.24.247  8.8.8.8 96
+46      8.8.8.8 192.168.24.247  147
+47      192.168.24.247  8.8.8.8 96
+48      8.8.8.8 192.168.24.247  158
+49      192.168.24.247  8.8.8.8 91
+50      104.18.35.46    192.168.24.247  221
+51      192.168.24.247  104.18.35.46    225
+52      104.18.35.46    192.168.24.247  224
+53      192.168.24.247  104.18.35.46    228
+54      192.168.24.247  34.49.204.74    100
+55      192.168.24.247  34.36.191.45    101
+56      192.168.24.247  34.36.191.45    101
+57      192.168.24.247  34.36.191.45    101
+58      192.168.24.247  104.36.195.1    1494
+59      192.168.24.247  104.36.195.1    1494
+60      192.168.24.247  104.36.195.1    329
+61      192.168.24.247  104.36.195.1    1494
+62      192.168.24.247  104.36.195.1    675
+63      8.8.8.8 192.168.24.247  115
+64      104.18.35.46    192.168.24.247  60
+65      104.18.35.46    192.168.24.247  60
+66      34.36.191.45    192.168.24.247  60
+67      34.36.191.45    192.168.24.247  60
+68      34.36.191.45    192.168.24.247  60
+69      34.49.204.74    192.168.24.247  60
+70      104.36.195.1    192.168.24.247  60
+71      104.36.195.1    192.168.24.247  60
+72      104.36.195.1    192.168.24.247  60
+73      34.49.204.74    192.168.24.247  407
+74      34.36.191.45    192.168.24.247  406
+75      34.36.191.45    192.168.24.247  406
+76      104.36.195.1    192.168.24.247  211
+77      104.36.195.1    192.168.24.247  87
+78      104.36.195.1    192.168.24.247  85
+79      192.168.24.247  104.36.195.1    54
+80      34.36.191.45    192.168.24.247  408
+81      192.168.24.247  104.36.195.1    89
+82      192.168.24.247  34.49.204.74    54
+83      192.168.24.247  8.8.8.8 96
+84      192.168.24.247  34.36.191.45    54
+85      192.168.24.247  34.36.191.45    54
+86      104.18.35.46    192.168.24.247  221
+87      192.168.24.247  34.36.191.45    54
+88      34.160.109.235  192.168.24.247  829
+89      104.36.195.1    192.168.24.247  60
+90      192.168.24.247  104.18.35.46    225
+91      104.18.35.46    192.168.24.247  224
+92      192.168.24.247  34.160.109.235  54
+93      8.8.8.8 192.168.24.247  147
+94      192.168.24.247  104.18.35.46    228
+95      104.18.35.46    192.168.24.247  60
+96      104.18.35.46    192.168.24.247  60
+97      104.18.35.46    192.168.24.247  221
+98      192.168.24.247  104.18.35.46    225
+99      34.36.191.45    192.168.24.247  829
+100     104.18.35.46    192.168.24.247  224
+101     192.168.24.247  104.18.35.46    228
+102     34.160.109.235  192.168.24.247  274
+103     104.18.35.46    192.168.24.247  60
+104     192.168.24.247  34.160.109.235  54
+105     192.168.24.247  34.36.191.45    54
+106     104.18.35.46    192.168.24.247  60
+107     34.36.191.45    192.168.24.247  190
+108     192.168.24.247  34.36.191.45    194
+109     104.18.35.46    192.168.24.247  221
+110     192.168.24.247  104.18.35.46    225
+111     34.36.191.45    192.168.24.247  60
+112     104.18.35.46    192.168.24.247  60
+113     104.18.35.46    192.168.24.247  224
+114     192.168.24.247  104.18.35.46    228
+115     34.36.191.45    192.168.24.247  829
+116     192.168.24.247  34.160.109.235  101
+117     104.18.35.46    192.168.24.247  60
+118     34.36.191.45    192.168.24.247  190
+119     192.168.24.247  34.36.191.45    194
+120     172.64.152.210  192.168.24.247  224
+121     192.168.24.247  34.36.191.45    54
+122     192.168.24.247  172.64.152.210  228
+123     34.160.109.235  192.168.24.247  60
+124     104.18.35.46    192.168.24.247  224
+125     192.168.24.247  104.18.35.46    228
+126     34.36.191.45    192.168.24.247  60
+127     172.64.152.210  192.168.24.247  60
+128     34.160.109.235  192.168.24.247  408
+129     104.18.35.46    192.168.24.247  60
+130     34.160.109.235  192.168.24.247  837
+131     192.168.24.247  34.160.109.235  54
+132     192.168.24.247  34.160.109.235  54
+133     140.82.112.21   192.168.24.247  869
+134     192.168.24.247  140.82.112.21   54
+135     192.168.24.247  255.255.255.255 342
+136     34.160.109.235  192.168.24.247  190
+137     192.168.24.247  34.160.109.235  194
+138     192.168.24.247  8.8.8.8 97
+139     172.64.152.210  192.168.24.247  224
+140     192.168.24.247  172.64.152.210  228
+141     172.64.152.210  192.168.24.247  224
+142     192.168.24.247  172.64.152.210  228
+143     34.160.109.235  192.168.24.247  60
+144     34.160.109.235  192.168.24.247  190
+145     192.168.24.247  34.160.109.235  194
+146     104.18.35.46    192.168.24.247  224
+147     192.168.24.247  104.18.35.46    228
+148     8.8.8.8 192.168.24.247  142
+149     192.168.24.247  104.36.195.1    1494
+150     192.168.24.247  104.36.195.1    1494
+151     192.168.24.247  104.36.195.1    329
+152     192.168.24.247  104.36.195.1    1248
+153     192.168.24.247  8.8.8.8 99
+154     172.64.152.210  192.168.24.247  60
+155     34.160.109.235  192.168.24.247  60
+156     172.64.152.210  192.168.24.247  60
+157     104.18.35.46    192.168.24.247  60
+158     8.8.8.8 192.168.24.247  167
+159     104.36.195.1    192.168.24.247  60
+160     104.36.195.1    192.168.24.247  60
+161     104.36.195.1    192.168.24.247  60
+162     104.36.195.1    192.168.24.247  223
+163     104.36.195.1    192.168.24.247  87
+164     104.36.195.1    192.168.24.247  85
+165     192.168.24.247  104.36.195.1    54
+166     192.168.24.247  172.64.152.210  97
+167     192.168.24.247  172.64.152.210  97
+168     192.168.24.247  34.49.204.74    101
+169     192.168.24.247  34.36.191.45    101
+170     192.168.24.247  34.36.191.45    101
+171     192.168.24.247  34.36.191.45    101
+172     34.160.109.235  192.168.24.247  829
+173     104.18.35.46    192.168.24.247  221
+174     192.168.24.247  104.18.35.46    225
+175     104.18.35.46    192.168.24.247  224
+176     192.168.24.247  104.18.35.46    228
+177     192.168.24.247  34.160.109.235  54
+178     34.36.191.45    192.168.24.247  60
+179     34.36.191.45    192.168.24.247  60
+180     34.36.191.45    192.168.24.247  60
+181     34.49.204.74    192.168.24.247  60
+182     172.64.152.210  192.168.24.247  60
+183     172.64.152.210  192.168.24.247  60
+184     104.18.35.46    192.168.24.247  60
+185     34.49.204.74    192.168.24.247  408
+186     172.64.152.210  192.168.24.247  93
+187     172.64.152.210  192.168.24.247  93
+188     104.18.35.46    192.168.24.247  60
+189     34.36.191.45    192.168.24.247  408
+190     34.36.191.45    192.168.24.247  408
+191     34.36.191.45    192.168.24.247  408
+192     192.168.24.247  34.49.204.74    54
+193     192.168.24.247  172.64.152.210  54
+194     192.168.24.247  172.64.152.210  54
+195     192.168.24.247  34.36.191.45    54
+196     192.168.24.247  34.36.191.45    54
+197     104.36.195.1    192.168.24.247  93
+198     192.168.24.247  34.36.191.45    54
+199     192.168.24.247  104.36.195.1    89
+200     34.36.191.45    192.168.24.247  829
+201     192.168.24.247  34.36.191.45    54
+202     104.36.195.1    192.168.24.247  60
+203     104.18.35.46    192.168.24.247  221
+204     192.168.24.247  104.18.35.46    225
+205     104.18.35.46    192.168.24.247  224
+206     192.168.24.247  104.18.35.46    228
+207     104.18.35.46    192.168.24.247  60
+208     104.18.35.46    192.168.24.247  60
+209     140.82.112.21   192.168.24.247  839
+210     192.168.24.247  140.82.112.21   89
+211     192.168.24.247  140.82.112.21   89
+212     140.82.112.21   192.168.24.247  683
+213     192.168.24.247  140.82.112.21   54
+214     104.18.35.46    192.168.24.247  221
+215     192.168.24.247  104.18.35.46    225
+216     34.36.191.45    192.168.24.247  195
+217     140.82.112.21   192.168.24.247  60
+218     104.18.35.46    192.168.24.247  224
+219     192.168.24.247  104.18.35.46    228
+220     192.168.24.247  34.36.191.45    54
+221     104.18.35.46    192.168.24.247  60
+222     34.36.191.45    192.168.24.247  829
+223     104.18.35.46    192.168.24.247  60
+224     192.168.24.247  34.36.191.45    54
+225     104.18.35.46    192.168.24.247  221
+226     192.168.24.247  104.18.35.46    225
+227     104.18.35.46    192.168.24.247  224
+228     192.168.24.247  104.18.35.46    228
+229     34.36.191.45    192.168.24.247  195
+230     104.18.35.46    192.168.24.247  60
+231     192.168.24.247  34.36.191.45    54
+232     34.160.109.235  192.168.24.247  837
+233     192.168.24.247  104.18.35.46    97
+234     192.168.24.247  57.144.163.32   124
+235     192.168.24.247  34.160.109.235  101
+236     104.18.35.46    192.168.24.247  60
+237     192.168.24.247  34.160.109.235  54
+238     34.36.191.45    192.168.24.247  190
+239     192.168.24.247  34.36.191.45    194
+240     104.18.35.46    192.168.24.247  60
+241     34.160.109.235  192.168.24.247  60
+242     57.144.163.32   192.168.24.247  126
+243     104.18.35.46    192.168.24.247  221
+244     192.168.24.247  104.18.35.46    225
+245     104.18.35.46    192.168.24.247  93
+246     34.36.191.45    192.168.24.247  60
+247     104.36.195.1    192.168.24.247  93
+248     192.168.24.247  57.144.163.32   54
+249     192.168.24.247  104.18.35.46    54
+250     34.160.109.235  192.168.24.247  408
+251     192.168.24.247  52.96.48.50     77      50c3346030322266029caf5a78926c09e99a0e76cae9b260acd99d590b418a05497e39
+252     104.18.35.46    192.168.24.247  60
+253     192.168.24.247  34.160.109.235  54
+254     192.168.24.247  104.36.195.1    54
+255     52.96.48.50     192.168.24.247  70
+256     192.168.24.247  8.8.8.8 97
+257     140.82.112.21   192.168.24.247  660
+258     192.168.24.247  140.82.112.21   54
+259     8.8.8.8 192.168.24.247  145
+260     104.18.35.46    192.168.24.247  224
+261     192.168.24.247  104.18.35.46    228
+262     104.18.35.46    192.168.24.247  60
+263     34.36.191.45    192.168.24.247  190
+264     192.168.24.247  34.36.191.45    194
+265     172.64.152.210  192.168.24.247  224
+266     192.168.24.247  172.64.152.210  228
+267     192.168.24.247  8.8.8.8 95
+268     104.18.35.46    192.168.24.247  224
+269     192.168.24.247  104.18.35.46    228
+270     34.36.191.45    192.168.24.247  60
+271     172.64.152.210  192.168.24.247  60
+272     104.18.39.21    192.168.24.247  78
+273     192.168.24.247  104.18.39.21    82
+274     8.8.8.8 192.168.24.247  181
+275     104.18.35.46    192.168.24.247  60
+276     104.18.39.21    192.168.24.247  60
+277     172.64.152.210  192.168.24.247  78
+278     192.168.24.247  172.64.152.210  82
+279     34.160.109.235  192.168.24.247  829
+280     104.18.39.21    192.168.24.247  78
+281     192.168.24.247  104.18.39.21    82
+282     192.168.24.247  34.160.109.235  54
+283     172.64.152.210  192.168.24.247  60
+284     104.18.39.21    192.168.24.247  60
+285     192.168.24.247  172.172.255.218 157
+286     192.168.24.247  34.49.204.74    101
+287     192.168.24.247  34.36.191.45    101
+288     192.168.24.247  34.36.191.45    199
+289     192.168.24.247  34.36.191.45    101
+290     192.168.24.247  34.36.191.45    101
+291     192.168.24.247  34.36.191.45    199
+292     192.168.24.247  34.36.191.45    406
+293     192.168.24.247  34.36.191.45    1082
+294     192.168.24.247  34.36.191.45    406
+295     192.168.24.247  34.36.191.45    1082
+296     192.168.24.247  8.8.8.8 96
+297     34.36.191.45    192.168.24.247  829
+298     172.172.255.218 192.168.24.247  227
+299     34.36.191.45    192.168.24.247  60
+300     34.36.191.45    192.168.24.247  60
+301     34.36.191.45    192.168.24.247  60
+302     34.36.191.45    192.168.24.247  60
+303     34.36.191.45    192.168.24.247  60
+304     34.36.191.45    192.168.24.247  60
+305     34.36.191.45    192.168.24.247  60
+306     34.36.191.45    192.168.24.247  60
+307     34.36.191.45    192.168.24.247  60
+308     34.49.204.74    192.168.24.247  60
+309     192.168.24.247  34.36.191.45    54
+310     8.8.8.8 192.168.24.247  158
+311     192.168.24.247  172.172.255.218 54
+312     34.49.204.74    192.168.24.247  408
+313     192.168.24.247  8.8.8.8 99
+314     34.36.191.45    192.168.24.247  406
+315     34.36.191.45    192.168.24.247  408
+316     34.36.191.45    192.168.24.247  1466
+317     34.36.191.45    192.168.24.247  238
+318     192.168.24.247  34.36.191.45    54
+319     34.36.191.45    192.168.24.247  408
+320     34.36.191.45    192.168.24.247  1466
+321     34.36.191.45    192.168.24.247  232
+322     192.168.24.247  34.36.191.45    54
+323     192.168.24.247  34.49.204.74    54
+324     34.160.109.235  192.168.24.247  190
+325     192.168.24.247  34.160.109.235  194
+326     192.168.24.247  34.36.191.45    54
+327     192.168.24.247  34.36.191.45    54
+328     8.8.8.8 192.168.24.247  185
+329     192.168.24.247  34.36.191.45    54
+330     140.82.112.21   192.168.24.247  661
+331     172.64.152.210  192.168.24.247  224
+332     192.168.24.247  172.64.152.210  228
+333     172.64.152.210  192.168.24.247  224
+334     192.168.24.247  172.64.152.210  228
+335     34.160.109.235  192.168.24.247  60
+336     192.168.24.247  140.82.112.21   54
+337     34.160.109.235  192.168.24.247  190
+338     192.168.24.247  34.160.109.235  194
+339     104.18.35.46    192.168.24.247  224
+340     192.168.24.247  104.18.35.46    228
+341     172.64.152.210  192.168.24.247  60
+342     172.64.152.210  192.168.24.247  60
+343     34.160.109.235  192.168.24.247  60
+344     104.18.35.46    192.168.24.247  60
+345     104.18.35.46    192.168.24.247  221
+346     192.168.24.247  104.18.35.46    225
+347     104.18.35.46    192.168.24.247  224
+348     192.168.24.247  104.18.35.46    228
+349     34.36.191.45    192.168.24.247  829
+350     104.18.35.46    192.168.24.247  60
+351     192.168.24.247  34.36.191.45    54
+352     104.18.35.46    192.168.24.247  60
+353     34.160.109.235  192.168.24.247  837
+354     192.168.24.247  34.160.109.235  54
+355     104.18.35.46    192.168.24.247  221
+356     192.168.24.247  104.18.35.46    225
+357     104.18.35.46    192.168.24.247  224
+358     192.168.24.247  104.18.35.46    228
+359     172.64.152.210  192.168.24.247  78
+360     192.168.24.247  172.64.152.210  82
+361     192.168.24.247  34.160.109.235  101
+362     140.82.112.21   192.168.24.247  634
+363     104.18.35.46    192.168.24.247  60
+364     104.18.35.46    192.168.24.247  60
+365     34.160.109.235  192.168.24.247  60
+366     192.168.24.247  140.82.112.21   54
+367     172.64.152.210  192.168.24.247  60
+368     192.168.24.247  35.247.106.28   55
+369     34.160.109.235  192.168.24.247  195
+370     34.160.109.235  192.168.24.247  408
+371     192.168.24.247  34.82.58.13     55
+372     192.168.24.247  34.160.109.235  54
+373     104.18.35.46    192.168.24.247  221
+374     192.168.24.247  104.18.35.46    225
+375     192.168.24.247  34.160.109.235  54
+376     104.18.35.46    192.168.24.247  224
+377     192.168.24.247  104.18.35.46    228
+378     35.247.106.28   192.168.24.247  66
+379     192.168.24.247  3.161.4.64      55
+380     104.18.35.46    192.168.24.247  60
+381     34.82.58.13     192.168.24.247  66
+382     192.168.24.247  34.149.66.154   55
+383     104.18.35.46    192.168.24.247  60
+384     104.18.35.46    192.168.24.247  221
+385     192.168.24.247  104.18.35.46    225
+386     3.161.4.64      192.168.24.247  66
+387     34.149.66.154   192.168.24.247  66
+388     104.18.35.46    192.168.24.247  224
+389     192.168.24.247  104.18.35.46    228
+390     104.18.35.46    192.168.24.247  60
+391     192.168.24.247  100.25.101.74   55
+392     104.18.35.46    192.168.24.247  60
+393     172.217.215.95  192.168.24.247  119     54ac4c0ef3e59d6a7aa70f826a33b137ba993a50e6dfebe916ed8a97012cb9c303c21ad4ac64e3f55f6d6a115c08cad1d16df70bebd09dc2151d3dce7b9353687d151bcb4a1a818813fbff9ec8
+394     34.36.191.45    192.168.24.247  190
+395     192.168.24.247  8.8.8.8 97
+396     192.168.24.247  34.36.191.45    194
+397     192.168.24.247  172.217.215.95  75      5cf7dca3f1b2e7eb764ca756cdddade57bffc59d54c78852b61ee92ca7ed5178b8
+398     100.25.101.74   192.168.24.247  66
+399     104.18.35.46    192.168.24.247  221
+400     192.168.24.247  104.18.35.46    225
+401     34.160.109.235  192.168.24.247  829
+402     34.36.191.45    192.168.24.247  60
+403     8.8.8.8 192.168.24.247  149
+404     192.168.24.247  8.8.8.8 95
+405     192.168.24.247  34.160.109.235  54
+406     104.18.35.46    192.168.24.247  60
+407     8.8.8.8 192.168.24.247  145
+408     192.168.24.247  8.8.8.8 94
+409     34.36.191.45    192.168.24.247  829
+410     8.8.8.8 192.168.24.247  148
+411     192.168.24.247  104.18.28.226   55
+412     192.168.24.247  8.8.8.8 97
+413     192.168.24.247  34.36.191.45    54
+414     140.82.112.21   192.168.24.247  663
+415     104.18.35.46    192.168.24.247  224
+416     192.168.24.247  173.194.219.95  71      4cebca95ae5605b19909374a60945cc907c601b3bd2a66ed5cce6c8778
+417     192.168.24.247  104.18.35.46    228
+418     104.18.28.226   192.168.24.247  66
+419     8.8.8.8 192.168.24.247  149
+420     192.168.24.247  140.82.112.21   54
+421     192.168.24.247  8.8.8.8 97
+422     192.168.24.247  34.36.191.45    101
+423     192.168.24.247  34.49.204.74    100
+424     192.168.24.247  34.36.191.45    100
+425     192.168.24.247  34.36.191.45    101
+426     104.18.35.46    192.168.24.247  60
+427     34.36.191.45    192.168.24.247  190
+428     192.168.24.247  34.36.191.45    194
+429     172.64.152.210  192.168.24.247  224
+430     192.168.24.247  172.64.152.210  228
+431     173.194.219.95  192.168.24.247  66
+432     34.160.109.235  192.168.24.247  309
+433     34.36.191.45    192.168.24.247  60
+434     34.36.191.45    192.168.24.247  60
+435     34.36.191.45    192.168.24.247  60
+436     104.18.35.46    192.168.24.247  224
+437     192.168.24.247  104.18.35.46    228
+438     34.49.204.74    192.168.24.247  60
+439     192.168.24.247  34.160.109.235  54
+440     8.8.8.8 192.168.24.247  152
+441     34.36.191.45    192.168.24.247  60
+442     192.168.24.247  8.8.8.8 98
+443     172.64.152.210  192.168.24.247  60
+444     34.49.204.74    192.168.24.247  407
+445     34.36.191.45    192.168.24.247  408
+446     34.36.191.45    192.168.24.247  407
+447     192.168.24.247  34.49.204.74    54
+448     34.36.191.45    192.168.24.247  408
+449     104.18.35.46    192.168.24.247  60
+450     8.8.8.8 192.168.24.247  131
+451     192.168.24.247  34.36.191.45    54
+452     192.168.24.247  34.36.191.45    54
+453     104.36.195.1    192.168.24.247  93
+454     192.168.24.247  104.36.195.1    89
+455     192.168.24.247  34.36.191.45    54
+456     192.168.24.247  8.8.8.8 97
+457     104.36.195.1    192.168.24.247  60
+458     8.8.8.8 192.168.24.247  159
+459     192.168.24.247  8.8.8.8 98
+460     34.36.191.45    192.168.24.247  829
+461     8.8.8.8 192.168.24.247  131
+462     192.168.24.247  34.36.191.45    54
+463     140.82.112.21   192.168.24.247  672
+464     192.168.24.247  140.82.112.21   54
+465     34.160.109.235  192.168.24.247  837
+466     192.168.24.247  34.160.109.235  54
+467     34.160.109.235  192.168.24.247  190
+468     192.168.24.247  34.160.109.235  194
+469     172.64.152.210  192.168.24.247  224
+470     192.168.24.247  172.64.152.210  228
+471     172.64.152.210  192.168.24.247  224
+472     192.168.24.247  172.64.152.210  228
+473     34.160.109.235  192.168.24.247  60
+474     34.160.109.235  192.168.24.247  190
+475     192.168.24.247  34.160.109.235  194
+476     104.18.35.46    192.168.24.247  224
+477     192.168.24.247  104.18.35.46    228
+478     172.64.152.210  192.168.24.247  60
+479     172.64.152.210  192.168.24.247  60
+480     34.160.109.235  192.168.24.247  60
+481     104.18.35.46    192.168.24.247  60
+482     192.168.24.247  52.205.43.90    55
+483     192.168.24.247  104.18.35.46    97
+484     192.168.24.247  34.160.109.235  199
+485     192.168.24.247  34.160.109.235  406
+486     192.168.24.247  34.160.109.235  1082
+487     192.168.24.247  34.160.109.235  101
+488     104.18.35.46    192.168.24.247  221
+489     192.168.24.247  104.18.35.46    225
+490     104.18.35.46    192.168.24.247  224
+491     192.168.24.247  104.18.35.46    228
+492     52.205.43.90    192.168.24.247  66
+493     34.160.109.235  192.168.24.247  60
+494     34.160.109.235  192.168.24.247  60
+495     34.160.109.235  192.168.24.247  60
+496     34.160.109.235  192.168.24.247  60
+497     104.18.35.46    192.168.24.247  60
+498     192.168.24.247  8.8.8.8 96
+499     104.18.35.46    192.168.24.247  60
+500     140.82.112.21   192.168.24.247  624
+501     104.18.35.46    192.168.24.247  93
+502     34.160.109.235  192.168.24.247  1466
+503     34.160.109.235  192.168.24.247  230
+504     192.168.24.247  34.160.109.235  54
+505     104.18.35.46    192.168.24.247  60
+506     104.36.195.1    192.168.24.247  93
+507     34.160.109.235  192.168.24.247  408
+508     192.168.24.247  140.82.112.21   54
+509     192.168.24.247  104.36.195.1    89
+510     192.168.24.247  104.18.35.46    54
+511     192.168.24.247  34.160.109.235  54
+512     8.8.8.8 192.168.24.247  150
+513     104.36.195.1    192.168.24.247  60
+514     34.160.109.235  192.168.24.247  829
+515     192.168.24.247  34.160.109.235  54
+516     104.18.35.46    192.168.24.247  221
+517     192.168.24.247  104.18.35.46    225
+518     104.18.35.46    192.168.24.247  224
+519     192.168.24.247  104.18.35.46    228
+520     104.18.35.46    192.168.24.247  60
+521     104.18.35.46    192.168.24.247  60
+522     34.36.191.45    192.168.24.247  829
+523     192.168.24.247  34.36.191.45    54
+524     104.18.35.46    192.168.24.247  221
+525     192.168.24.247  104.18.35.46    225
+526     104.18.35.46    192.168.24.247  224
+527     192.168.24.247  104.18.35.46    228
+528     104.18.35.46    192.168.24.247  60
+529     172.217.215.95  192.168.24.247  203
+530     104.18.35.46    192.168.24.247  60
+531     192.168.24.247  172.217.215.95  75      5df7dca3f1b2e7eb7643a1239c8e0316a9e60bb52836193df19ded108efc784fa0
+532     140.82.112.21   192.168.24.247  669
+533     192.168.24.247  140.82.112.21   89
+534     192.168.24.247  140.82.112.21   89
+535     104.18.35.46    192.168.24.247  221
+536     192.168.24.247  104.18.35.46    225
+537     104.18.35.46    192.168.24.247  224
+538     192.168.24.247  104.18.35.46    228
+539     140.82.112.21   192.168.24.247  60
+540     104.18.35.46    192.168.24.247  60
+541     192.168.24.247  34.36.191.45    101
+542     192.168.24.247  34.49.204.74    101
+543     192.168.24.247  34.36.191.45    101
+544     192.168.24.247  34.36.191.45    101
+545     104.18.35.46    192.168.24.247  60
+546     34.36.191.45    192.168.24.247  190
+547     192.168.24.247  34.36.191.45    194
+548     34.36.191.45    192.168.24.247  60
+549     34.36.191.45    192.168.24.247  60
+550     34.36.191.45    192.168.24.247  60
+551     34.49.204.74    192.168.24.247  60
+552     34.49.204.74    192.168.24.247  408
+553     104.18.35.46    192.168.24.247  221
+554     192.168.24.247  104.18.35.46    225
+555     34.36.191.45    192.168.24.247  60
+556     34.36.191.45    192.168.24.247  426
+557     34.36.191.45    192.168.24.247  408
+558     34.36.191.45    192.168.24.247  408
+559     192.168.24.247  34.49.204.74    54
+560     34.36.191.45    192.168.24.247  829
+561     192.168.24.247  34.36.191.45    54
+562     192.168.24.247  34.36.191.45    54
+563     52.96.48.50     192.168.24.247  82
+564     192.168.24.247  34.36.191.45    54
+565     104.18.35.46    192.168.24.247  60
+566     192.168.24.247  52.96.48.50     81      53c3346030322266029caf5a78926cca64cb916120b65d2f288904db7e78008bb1683cbe71499c
+567     192.168.24.247  34.36.191.45    54
+568     34.160.109.235  192.168.24.247  837
+569     104.18.35.46    192.168.24.247  224
+570     192.168.24.247  104.18.35.46    228
+571     192.168.24.247  34.160.109.235  54
+572     140.82.112.21   192.168.24.247  666
+573     104.18.35.46    192.168.24.247  78
+574     192.168.24.247  104.18.35.46    82
+575     104.18.35.46    192.168.24.247  60
+576     34.36.191.45    192.168.24.247  190
+577     192.168.24.247  34.36.191.45    194
+578     192.168.24.247  140.82.112.21   54
+579     172.64.152.210  192.168.24.247  224
+580     192.168.24.247  172.64.152.210  228
+581     104.18.35.46    192.168.24.247  60
+582     104.18.35.46    192.168.24.247  224
+583     192.168.24.247  104.18.35.46    228
+584     34.36.191.45    192.168.24.247  60
+585     172.64.152.210  192.168.24.247  60
+586     104.18.35.46    192.168.24.247  60
+587     192.168.24.247  34.160.109.235  101
+588     34.160.109.235  192.168.24.247  60
+589     34.160.109.235  192.168.24.247  408
+590     34.160.109.235  192.168.24.247  190
+591     192.168.24.247  34.160.109.235  194
+592     192.168.24.247  34.160.109.235  54
+593     34.160.109.235  192.168.24.247  829
+594     172.64.152.210  192.168.24.247  224
+595     192.168.24.247  172.64.152.210  228
+596     172.64.152.210  192.168.24.247  224
+597     192.168.24.247  172.64.152.210  228
+598     34.160.109.235  192.168.24.247  60
+599     34.160.109.235  192.168.24.247  190
+600     192.168.24.247  34.160.109.235  54
+601     192.168.24.247  34.160.109.235  194
+602     104.18.35.46    192.168.24.247  224
+603     192.168.24.247  104.18.35.46    228
+604     172.64.152.210  192.168.24.247  60
+605     172.64.152.210  192.168.24.247  60
+606     34.160.109.235  192.168.24.247  60
+607     104.18.35.46    192.168.24.247  60
+608     34.36.191.45    192.168.24.247  829
+609     192.168.24.247  34.36.191.45    54
+610     104.18.35.46    192.168.24.247  221
+611     192.168.24.247  104.18.35.46    225
+612     104.18.35.46    192.168.24.247  224
+613     192.168.24.247  104.18.35.46    228
+614     104.18.35.46    192.168.24.247  60
+615     104.18.35.46    192.168.24.247  60
+616     140.82.112.21   192.168.24.247  693
+617     192.168.24.247  140.82.112.21   54
+618     192.168.24.247  172.253.124.17  55
+619     172.253.124.17  192.168.24.247  66
+620     104.18.35.46    192.168.24.247  221
+621     192.168.24.247  104.18.35.46    225
+622     104.18.35.46    192.168.24.247  224
+623     34.36.191.45    192.168.24.247  829
+624     192.168.24.247  104.18.35.46    228
+625     192.168.24.247  34.49.204.74    101
+626     192.168.24.247  34.36.191.45    101
+627     192.168.24.247  172.64.152.210  1292
+628     192.168.24.247  172.64.152.210  1292    5d013be2f5288f3992753bf3f4b58f3fbf6d1df762d46e58aed2bc86c3bb80dd73fd25f222e4102beb4b95df12291830e9e81a066e181048504c270adc18fe77e546465aa337be86ceff48f1dc0131906b70838efab8fcd556e25b231f778988a6b8022e3034fae49aaf08fe87345cb55abf8a7d9d7c97df7157a583c578e1b1b4210920b90f071889a675f53f28f6894f6dd85e2ef1af7b0b142079cc532b9e737fe40be1dfd55a43f44ad348320c0d46cd4d2e386a1fefdbb76420cff1c7e552cc2b8d02fe4f0a5c34fcd60e78e37d64e332155d4d0997aee3f8d9d523744be71067c653261ff10f5d18a9f05e55f2f68cf0ee5268a5440f1ac1eb82bb573d4a2feea3448ab10232a8fd4f2babb23c5a3cb0dad74981d548f0165dc7ff09f7da22fd76b5ed1f9b5b0ccdc8a85ca22d30173917644a1082ff003cdaba02f375a1929333decbec58f21622ffdc4af6aa2a25de892f44882f84b26bee735dbef7b5dd9c78c1fda35150835b05212de715a80c253816bc7ad6ef95e6093402c4e15b521aaa1b230e72366a0e5096b2f0d53f3d03b957b8e09bc9a2c753db4d708685cd507f6bfd970ad03c5727a00d301ed284ecbbe739b46b09d7c43bd95bd128dc3c9b369462a21f8557c98811189b8fa89b1f9fef43171730e780de4cc30df2f868c0f1cd15a315782d20377a61ed9d68fb52aa54fcfbbee62f4d78237b1b61c4f683445f53a967bf4f74bb30acc6ee8f0fddb6d1800d57ebad218f6e11829b716afc8567f5fefc0fa89520c2d332833c38fcb0efac6e7ea8e500b307fe28dc531346f28a8f26f3022172a371f7e8bb531fd812358f340990a34ca84c0bf9b3a0c4479c4d3f86fb7f33a17e971dd8a04bef6ee13dc38a05cb966e18bc68335e70e056ce1843c0e5fdcc13ac597a62e0cf5957ccf6e0f7c24a7d38b49253646429b266c9da15e03419550e2c1a5a7edae24aaeb4cde41ad622e7080f2d140f5ab4101644972f09da9ccaee90b4b90faf482236c4377e3bd78d381f2a05ec0bbf701de5760add53c3dfa112807bf0c28a30d38e64c02a6d5b8ef17c1911a1a446822cd65855c02bcc3337021004b6c593bf9591971979203864daf45b60672b3faeb346903c40b6fb5018f72b85905cad08dd8c2d0b1bf3b4b741d51702e2ac3248fe3ce54eba027beea23aed1a478d1df030cdf816ce33535a875c464001c607b139260d569840210307eb1754b9ffdbffaae1f1c136013e0cabac48bea7b31c1231e51e6d8e9442d5a32696492a4dd670b629ca942510ef7c510b7b82a3a9ec22af28af25942c0f53f53499d5639ad71f735e36f6b58d98d97be4dd46a84ea2e1121459da794fb8fb5bc93ed16c2ec4aaf23902360b3b8380a58c26f50a6e1127da3348bd18ce5a5b642a24174d2c31f5a0152ffcf506f37fe7c248ac2da233ca81f43bf533d87612660a36019d3de003dd7db4a9af4f8e9251dcb564fe5310b2cbf621f53e3d061eb9223070c14ed2337e4f83d793a20de25503cdc19ebe3fb9dd05e5a886299abbf0abc268a8a5aaf2a44c14d44e2cc484072bc5b30ef2234f3c206c121c6a83832f3263e8313fedcdd256db503a8d10e29e45274986165442d8e6ec8ea90cab3de1c6ffca09998f467d6545e9b03960e7a6cc4ab9b56c1cbdb84166d435ec59b2545b23374be9d061f390ad478e9a1d6a72fb35f19b23d6b0c78cd9f8b74dddc6001402926c7475c4313c4053f8ec9399e4ef7cc3ad7bb0fc98
+629     192.168.24.247  172.64.152.210  160     43013be2f5288f3992753bf3f4b58f3fbf6d1df762aeff9af61d92ba3e02ffc97da8c0226fb72da93ecfc190573c341ed86fccbfda88757bb71ab47cdbacffd1a37b434f4a65159e6168cb64ca5a8201834eb0faa47c89065cbdce65b2db9f69ffeec0e58d1d3d57ae6ccff3dedb69aad0c25755be36
+630     192.168.24.247  172.64.152.210  555     41013be2f5288f3992753bf3f4b58f3fbf6d1df7621cf2dc2cdf75bd259f03b6d5f89dc02266c23f345ba17e0bad340e5320d48815338bc9f417a8237186d9286f83741cea545001072a90230001aa473718fd9b24bc4b48ebc885736dc064f288d16f3325cf330bc8ca3390a1c25f47f897c4f6bb53d6639d9a536088007c25ef9b118d5af3e8296d68b15f2aa8ad9f16cc9fc95d654aaece95ebee494f966218250ced29c85fd10c32cec8e992229a6e2ef965629e14a81962db54f1728bd2b317ec5117458c8bf97402c91cdf3534699666e1d947f4ba327946c7f9705be4cf0494aadbadbfce191fc2cb47b5dc9c308158f8d24a673810ca9f311830fefef2dd0859f4965a5c62a250ba5fa2b055e0d195f13b3d08c4fcbbc4f2220d321bb0c085282ab4005c3c8bedc464aadb9222c039284c0bcd913f18895407080391145e085cb22756a90b5b238df92091faff8884bb08e157a462b3a87b2b0127ef73937457a80bfe261eaa707d936419565183b439f9e2a72ccd03feeef2fca31e6a7673dc6a80958563e5340c894bc0643214978c01c505a4f7d9367eb2a8a9c65f5e492c935be4b0f187e199b931dbc7c983ded25c7b28d5c8a0f43aa82c7d4290955ab4596ff27d69cb02c819ab51f8bbac28f0a7ff57c6d25c904fd9b0f0d482f8a33991ac19e4c5b16bc2a992b2c4cee0dc0ad6a294fe5ca6d5ebee8921157b
+631     192.168.24.247  34.36.191.45    100
+632     192.168.24.247  34.36.191.45    101
+633     192.168.24.247  172.64.152.210  1292    5e013be2f5288f3992753bf3f4b58f3fbf6d1df7623cbf2bad3a5db4d5184273277c26a5958819de55158fdb75c659669f34eed7ed1534fd5523e573af98e78a7bb033080fc5f758548dbd18524cd76f795963186d461e39823f5116049d38e0161569b3a3bbc30e9743060b9b0396de251bfdbcbbf25d54b059ee323882c28dbe3eb9d40afe9783435e44ea29b968288b3dda6f6152fe82f40f93f0630f97d630af328954ba3bdb99c2cebd5d520372da175cd73b5fa03a37a3e26dbedec144b8f26cb0970c0ee4aebb8f527aa7977badfefba9299c0fa132d563d1ff253550afc5d2ce70ce369c498de749e3f14b86503dc65661c8b635b872e821bc494f6f8600409b8e0dc30c19a8d4cb26365a8bc19902c8d54eb828fa3b0d11b37cabb4332ea948f511ea3ff3b14010b7b00a3cf68b160496934a2e9cb164b5b259c8c8784e618f1dee9de5b27f74ca1552ad62a54babc77cda6eea75ce79bf5c0e6d024cfca8df0d65722938ff2b0963ce5dff267d4248f8fdfaca7d4d52207a8b9efba1a6c078d70ced177578599f1515d65a1cc168911ebbb27ea8fb017d9d790e1751929d36299c10ed07c47ab11dcc62c78cf5392a3c8cba2bb5f5eb88b96ad56decbc588735b9abee6589bf7fae67f8de55befff27385e940006341ccf688c1298b39064457c9c057716899b3e97053a234f4fc518166ec0ab69a862cc6b885ee805c7c4d5d01d0c5ee585560133ca8f892368274581a164122beed08754c36dc9b9807204735bbe9033eb1b0c112020e25a6b944d3dd50dc946122cf131d6808cb08043f264b312811d310ab9d3b784c8be136821ab8629b051af9b592d89b951c88c6822116597aecd03cc4a96bf796c130a522601c255feb2c54f9bc2f9c048ccfd47a0e16c2ec74893454697f2e249dd4ebc154bdc6ec36a1504c4774f435e5a233a916b19f0955471792dba4c9fe81ab72e54b5708c7d90ad9e2ebef4bf28690b5cfdd659cf99a9b3fcc6269820af55086359f574ccab63d7b013a1f2e8d58ee7081eccab0db3c6380189d99ce384d6a049ee1f1ba4cf2ebfa3510af98b444452188fa810c9103a1b8c74eae97b37303498e160027364d20267b03ce60f0a68bc0dfbe280678514b16837d829a3a6be794add33dcb471685ee817dc5a7016fd9cde38df01d8441aa7312b5cdd4e2318e2ace9f3ef7d88c607a36f77aa6aa699d5f709d1725402f2d0cf7d70ca6e30d7c20df3c5e072a4b30bbb79662968058b08bd719e8d23ddb6349eaabe6ecfcbdb7d881fd27f455e53ab9d64f419178a6de5ebbf0aa4e62bfeab9893ac3794a2389788de6b27d48a9de1079ac23819704f73b272713834394ab2c6c2ced292b62c3c118754a97224e686a39f3101e45f3ded8eac3de5cad48275eecb2e4c838991b66883c50b4a1d48064b797e758834a233a4bb7c3d88fe3eeaac5e2c648c9a6450adc75dd3d496f096ad98491a8e72c838c103acbf715b9b2e39f6320a1a651baf50da41e06f7f54256655d633471bc253f8bce469756d40ace3cf7dfd047c1a043296f838c49f74a5da5f452305f56ba64b9b8d856993bec1c632fd34fb52e3d44d2fa32460bb8949b8e90a7faacac56ae936a2c47419fc0f0d50513f7214f867d1850fedc498c0801e344a040db8148a357f34fa24eaecf003c44d98b8295d578d9362a6163dfc921b30718766a22d440b5cfc14639ab2d18a421f229758f2a29c186d95c8d78b1e97d4fba90c9a2e5
+634     192.168.24.247  172.64.152.210  1292    45013be2f5288f3992753bf3f4b58f3fbf6d1df7626bb8f2b0e2227cbc8b45eaf181914ffef1472b836fe56b8b22857cf74a245e1a39f6ae78af1040211ff213265ccf0b6526700d2bbd79a1717db289b0e923ca860c73993a3a9a46abfe397e78b0541a12bacc1043696ddc5ea15020ca4c8e7b7a50386d76712a052d08df712371e66eac037917b5224a2193c008d0bd0ffd8b54c0ca3b9ff4a47fbbe5458e6b61a3f2d6f4cf18428efb8146c1dfaada312d2823e2dc9e5f66755ab050038d8e7efebd6ce1805a7b7388e69b618139d18fe3275d1ac2d4ceb7cb30bf36a66b5a18796530de48e73700d08a32af437db9474ac64654f3b4c945bfc49ac27a67df9fca2bd3a14808e55f3b779c974d43efa20e48d82d4184b86afc48925d631bd6535d45313f24a0c5aa76b1101c6fc944b17d1ed2d9bc9f05deadec26871eb4ceeceadddb7acceff2aecb3b581ece2c492c4267a00186e3e632e2e118cd6c602194b345d81eb14321551f9aab2d809d7248ea6f4fba329deae4c6a2f7f55d28c6d06ab3dc58b1f911cac477dd37fcc17cac1c1da3b41961dd8eb481c1b62edb646eaf4a079e68e46e29c82aa73d16d86214cf5a45ebd21cc0578b0928174a6020b1809cea0d9fc812a32050600e5bcd08031b382a2da386ad6b2a61dfcbff7efb0b669b2992de0312a6d78625b73aa7a2fc35f3e69ced0a763fecc66c3c67aed0ddaf238c09c0a80e9f6f443e90b98fcafc3a14f53c215d133744d9bd020a6924d2b68f46567df77b60f972646fc8ced32e94a85ffc688e91270dee7b1033df26b79e5a8a68d7a92716563f0086eb807dd6ea7cd6093d444c53b23c956c1e9aff7da282b261f50cafa4e4fd0d534dfd05afa557ac28ee90503ac4df93f8a2a3e968f49c5469dda5b97ba9f009ff6c4ade66034a27468d5920f8a99b95fac484b83498e109267b8153c84a436c432b704355c998e83843d21145cbea6914f239284e51539a481df6e79bf2047d69794bf4a4411f7b6f11847e3c308df4038ca4d81641eeccbc9a87eb4679d18e53b0e55c213b0c1d9624281f5c52b478c7156bcde7f5983e37f219dedc18f26b940dbe4235d8d7b8148b774f8c672e8641143913e18c8138851bb2e9de06742e2cfeae18d87f81d214b1ddfac66c9d8e3d607a718b57ab67c428a47f4a6e786f4d814ed561ee7ac9679c73cc5f8490162a06c48e524a370043da4555f57115380daa9139ced2717d4e0a7e660fcd848cf9b351524fd09d2ead1f852a3f9e117abe69a6770b4482cbe19f3aec043636c81b9454439ffc71f03d491513a71a09ab966dae578308d847251211370f5005bc2d5f503029f2ee1b5e0285cd5bbbe9fec1c5b88cdb40203fa1842f9cf5510d2fb00ca196b29a043c6404bc259901af6dd7d4168e30c68cb072cd35d52c13af5b711fdd8e3e8edc06397e12c9d3a3ef32b5d9cf1db27f31cf8e7a9fe5d025f4803fe2d3c30b24c6157520d3a619c6e3f860527b538bd0192aebacd65126b26f2409684f12c575e11364612af20d1e1943e15d4d562ce425387c69de823ac12f80ef2cb6f48d1ee02c2f70529b81340f5993a90f16d43508a023aa5cc7f1a5ba021fbaa4f17711c91743d14695ff90c85c921f7430311af05f9586d1dae5b2e82d731831717903e9266fc05fbb08cb377d9b5e723f96136114c17bc81be8f5013895141ebd6b777d3f3c485fbc8534cedd662648a5f647195e9f2b0a90b1d6143b85d2c0ed4b
+635     192.168.24.247  172.64.152.210  160     5e013be2f5288f3992753bf3f4b58f3fbf6d1df762e211efb02e4e9b18e29cd285976518c08203d554fee3446a3133719e356c230c792b916395f64a96327bfb23fc55ec8ad31009bda33e38471880dd27dc2a87b237b5ad63714fd091a07fd41ef1f809bd17b2a433aae89d0ead3fe87a91d5976b68
+636     192.168.24.247  172.64.152.210  555     56013be2f5288f3992753bf3f4b58f3fbf6d1df762c11f0e8bfa11b1358e4cc85d94f00079dbcf808a3d5d8aaba9f178cfb664dcd74d350b7460ec5f2edd63a064988977890e46421f41e8bed2de13ab791c53e593bed59ed617120a9c5fdd7b8df1465937aa45137e3f74980c9fb9c6f5f108a828fa249ea82692c12c71ebbbb45fb36cc3450532a0549833090f6014b9f597902573de8faaeb20e111dc731689dfc85741b0676be7b8689dbe4de9ef59ad4d04265f2f78db31a47df9e24c26bc113481b4416716105e707347ee0a89acc85c2f5261810934a037c7ed03193805c3d67384af0c3cffa44ac1b674e320c401887e4f71c83a594ebabfe84d1ddf1008252981e89d7424c0d327a6a09e096b2cfad37c9e80fa4da448dd52cb61a8703e60a9b289f55b98126d0bff680f6a8573d2b67a075fa23a08233a21a8e401aa3e9a5d48956874c914c5552c777f45d963895192da70d79fad1c9bc757f0421b8474aa30dc8007891490d0afd2775d51ac36a3d82756f69eeea6ed54e0f49168f082e236923a9feaec2f9c9ad80661a21fad666effa92c525fc3e5d84798d62121f7d4c9fa63a15a3266fc557b1f84902faf39ed02f6b51e2f3187fa2c9748ac3557e024f4d39f17ead676d446e8e9f1a24b807a2733a996ccb43f78fec80d02e1adb650344645f5eaa751722f5ac2f09bae0671725ea87351979c21184153ce
+637     192.168.24.247  34.36.191.45    54
+638     104.18.35.46    192.168.24.247  60
+639     104.18.35.46    192.168.24.247  60
+640     34.36.191.45    192.168.24.247  60
+641     34.49.204.74    192.168.24.247  60
+642     172.64.152.210  192.168.24.247  66      502789a96f349ec3a5911d6bbb2884ca19baf1d51d28f3c3
+643     172.64.152.210  192.168.24.247  66
+644     34.36.191.45    192.168.24.247  60
+645     34.36.191.45    192.168.24.247  60
+646     172.64.152.210  192.168.24.247  66
+647     172.64.152.210  192.168.24.247  66
+648     34.49.204.74    192.168.24.247  408
+649     172.64.152.210  192.168.24.247  525     5b67fb5d2d61eed452650a5c7340bad85656deba2d84871b2b66201a7a39925f902e2767694647e4491e9ff12e8de2c114d918e2cf43ae9f5ebbd828a4fcb3c783086bb6a823bfdaf222387f7d7307c4139f5817cd4d43f2fb850a62af053aadf2f58fd90f48b422365e463812db1dd33056c867ff9399292422547d99c3fb803c038480c0a9d626f44bd8fc1733cf72ce5f46c7041da2f2b2d7fafe4883cb866ec351f35b5f636cc5baf833d2f8b176dc627a00b6c58cc0c37f1b60ced9b3884294a57aa0d5537b3a683775134256007d9977a423cbdb2f0c965b80fa4afed287ba5d0387cd84a397b2652ebf1ef4785a4a24771819a72ea139c4853616517db4cc9c29ebe98b1028e5992b5df0749fbdb694cd20069cf0395f6fe03d9c6234edd4eb9b5073e453bd6d281b493442c1b750f71a5829d88c13dc3f13e3b2dd324d1a33920eef3819c8ca4e6c838d1a3105b03973eb07b9f88c8b343593f41b7423a878b6248f75014795cb4013ef64d0c331f26be3307db30692375b684743825645595317353f8da7113c1f6688c30b5f0147ae5d1e48f37e755a00c162ea658f2d1783cc03b31d8af8ae4d4f8ad8efc7551f1a79ba59602b588e01cbb50c01a1e47ea9ea90a26ab15cdafc2a5383b458c44294cfa1f5c155d4e5396c42f949e835b4
+650     34.36.191.45    192.168.24.247  408
+651     192.168.24.247  34.49.204.74    54
+652     34.36.191.45    192.168.24.247  405
+653     34.36.191.45    192.168.24.247  408
+654     192.168.24.247  172.64.152.210  87      51013be2f5288f3992753bf3f4b58f3fbf6d1df762e20ba239203d9c6c5158b82d723485cdbeea4b8d5f600856
+655     192.168.24.247  8.8.8.8 98
+656     34.160.109.235  192.168.24.247  837
+657     172.64.152.210  192.168.24.247  528     4270b6c1732ca3434ca7d1aafba6f8258dc1fad230b5fc0ec9cb569c0332cf9daca2529274f1ced784698784088ea2f375f0032544ce1d9243f6d2539a2ed67c8c90bb8f5c8d8337c2d87668ba55f9c9330fb1ec66be7f2b6980ab62357439c726bf60d01a791423ef85b13fc1eb4a024c331e0114dd49ce777ed4a5333723207b83d74962c8535e553848e84fc9ae733237b80f3338c2ed249506a2c6798a13daa2c1c6b6344a1e4863eb2948cadd62582911dabc84c50ef3348716b4031c9f8230752e330f65a023ac0b474e684f6ba1d23a9c572a173935b75677913cc7837b13f2fb456b8ab7518c3b93d42f744293241ffe532b04990765fc499db4430bd49274df5e9c4f453903540a0269c9870912529227f543f079786cae82d4e219415f583d705fbb18b7bcec9a9b3628963e510a9485781727531bb929b79148621df49b7bdcc8c8d985b7309ea6b27bf53a9ec7bd2ff6a03089165a534e36c19bd46908c739c5cb7647e352c0654dd23fb3a9f7fa421eb02193fb83a8b08df74936ba5648f5fa62183f758c944e6e14558dffef00e78b7371475c50eb15c907a6e847c7c9f4ae4e8e4191365fe614cdbfe541b463b78eb60b87ab9bd5ef5583c9bbafe84515e5a836df05aabb52e0c1a1a950a69d2698a5b2e875add2454a9b135cd2e90e8662
+658     192.168.24.247  34.36.191.45    54
+659     192.168.24.247  34.36.191.45    54
+660     192.168.24.247  34.36.191.45    54
+661     104.18.35.46    192.168.24.247  221
+662     192.168.24.247  104.18.35.46    225
+663     104.36.195.1    192.168.24.247  93
+664     192.168.24.247  104.36.195.1    89
+665     192.168.24.247  172.64.152.210  87
+666     192.168.24.247  34.160.109.235  54
+667     8.8.8.8 192.168.24.247  131
+668     104.18.35.46    192.168.24.247  224
+669     192.168.24.247  104.18.35.46    228
+670     104.18.35.46    192.168.24.247  60
+671     104.36.195.1    192.168.24.247  60
+672     104.18.35.46    192.168.24.247  60
+673     104.18.35.46    192.168.24.247  221
+674     192.168.24.247  104.18.35.46    225
+675     104.18.35.46    192.168.24.247  224
+676     192.168.24.247  104.18.35.46    228
+677     104.18.35.46    192.168.24.247  60
+678     140.82.112.21   192.168.24.247  669
+679     104.18.35.46    192.168.24.247  60
+680     192.168.24.247  140.82.112.21   54
+681     34.36.191.45    192.168.24.247  190
+682     192.168.24.247  34.36.191.45    194
+683     104.18.35.46    192.168.24.247  221
+684     192.168.24.247  104.18.35.46    225
+685     34.36.191.45    192.168.24.247  60
+686     104.18.35.46    192.168.24.247  60
+687     104.18.35.46    192.168.24.247  224
+688     192.168.24.247  104.18.35.46    228
+689     173.194.219.95  192.168.24.247  763
+690     192.168.24.247  173.194.219.95  74      50ebca95ae5605b199e003f35b8ed75b98271361d6452300bdd4517961382e14
+691     192.168.24.247  34.160.109.235  101
+692     34.160.109.235  192.168.24.247  829
+693     104.18.35.46    192.168.24.247  60
+694     34.36.191.45    192.168.24.247  190
+695     192.168.24.247  34.36.191.45    194
+696     172.64.152.210  192.168.24.247  224
+697     192.168.24.247  172.64.152.210  228
+698     192.168.24.247  34.160.109.235  54
+699     34.160.109.235  192.168.24.247  60
+700     74.125.136.100  192.168.24.247  78
+701     74.125.136.100  192.168.24.247  199     513ee979c931bb5c9fce26a2dfd785ab70bec935f8dceea202bc1180396845b422d7628e979ba33172739eb80104824b077290a6ac80cfd84b55bb86b2d646535ea6765ad44bb6039b4571e060677fde6aa11c71cce301649f3181993a1f97a999c0012c39e7f063e12a2eb93418b3b610ab7e056c2e4da38395086de352995a7f8d2825536242ee0f9caf3095f5d02426989d1b79eefdf084055b99d6
+702     192.168.24.247  74.125.136.100  505     5bf22b04a4bf0200f8eb761fd2988d172bb5b8de4a7cce3a5e874f7c03c4de77b17d6aee4e090111254977796e54166aa548496c182ba3e007a53cb2429caffe74e8c3f1d18088027363366dae6cd7fbda7be0ff81ab680c57776d4b934f176d64a2a5aa2e27f1ebf14d74d3fa67db890070da6634df1c4104ec4a400588e8185ad4e660288d55c84157a2a638801f777679fab280d84f22e9319ea2812fb321351448db89734cd73c9065a0271bd2e59c335ef25b84dc96e863ae952fdd610f1d8d41c3bf7b7dcbbd61c25d4163605476b87437668093c005a8d77b5943dd51cade162947cf1e6db7594c2c7656bf9a3160671934b2fe3805facd024fce2ba2e744de50abdace8f925692272b9330001d7d2c168b0a9bbdc69f8e91aa7e92ee17b62cb27ecbde6655a4cfaa6c83b2ed66496c5d8ed32992add42b9a2f353dcbaa5252bbc3d28f2d8a6ae6edd5a2dfb3c500e4b21a012e75bf8a8c6250134849e68592a81d223dbdaef92752bd378b0bf6d8d660a95978b56dd9e3bcf79e501bdd53c1e4e84376e280f4c4e6f74af1d7021ecc3447298b857f6d24f30403022e03b0d41c2277842bc37fa033a0a14b4cb89162c9697be21726f312705cbed5515c5a59079029b4cce409733975e6b9
+703     104.18.35.46    192.168.24.247  224
+704     192.168.24.247  104.18.35.46    228
+705     34.36.191.45    192.168.24.247  60
+706     172.64.152.210  192.168.24.247  60
+707     104.18.35.46    192.168.24.247  78
+708     192.168.24.247  104.18.35.46    82
+709     34.160.109.235  192.168.24.247  408
+710     104.36.195.1    192.168.24.247  93
+711     104.18.35.46    192.168.24.247  60
+712     74.125.136.100  192.168.24.247  164
+713     192.168.24.247  34.160.109.235  54
+714     192.168.24.247  104.36.195.1    54
+715     192.168.24.247  74.125.136.100  79      47f22b04a4bf0200f8efd13348c469d426f3d8c16331d80ae5a42ec892ba03946e3766c830
+716     34.36.191.45    192.168.24.247  829
+717     104.18.35.46    192.168.24.247  60
+718     192.168.24.247  34.36.191.45    54
+719     74.125.136.100  192.168.24.247  67      54848b80fadfdfaf95d639f5a921c59082ee9c6b840eb38a74
+720     140.82.112.21   192.168.24.247  616
+721     104.18.35.46    192.168.24.247  78
+722     192.168.24.247  104.18.35.46    82
+723     192.168.24.247  140.82.112.21   54
+724     104.18.35.46    192.168.24.247  60
+725     192.168.24.247  8.8.8.8 98
+726     8.8.8.8 192.168.24.247  132
+727     104.18.39.21    192.168.24.247  78
+728     192.168.24.247  104.18.39.21    82
+729     104.18.39.21    192.168.24.247  60
+730     34.160.109.235  192.168.24.247  190
+731     192.168.24.247  34.160.109.235  194
+732     172.64.152.210  192.168.24.247  224
+733     172.64.152.210  192.168.24.247  224
+734     34.160.109.235  192.168.24.247  60
+735     34.160.109.235  192.168.24.247  190
+736     104.18.35.46    192.168.24.247  224
+737     192.168.24.247  172.64.152.210  54
+738     34.36.191.45    192.168.24.247  829
+739     192.168.24.247  172.64.152.210  228
+740     192.168.24.247  172.64.152.210  228
+741     192.168.24.247  104.18.35.46    228
+742     192.168.24.247  34.160.109.235  194
+743     192.168.24.247  34.36.191.45    54
+744     34.160.109.235  192.168.24.247  60
+745     172.64.152.210  192.168.24.247  60
+746     172.64.152.210  192.168.24.247  60
+747     104.18.35.46    192.168.24.247  60
+748     192.168.24.247  34.49.204.74    101
+749     192.168.24.247  34.36.191.45    101
+750     192.168.24.247  34.36.191.45    101
+751     192.168.24.247  34.36.191.45    101
+752     34.160.109.235  192.168.24.247  837
+753     140.82.112.21   192.168.24.247  666
+754     104.18.35.46    192.168.24.247  221
+755     192.168.24.247  104.18.35.46    225
+756     192.168.24.247  34.160.109.235  54
+757     192.168.24.247  140.82.112.21   54
+758     104.18.35.46    192.168.24.247  224
+759     192.168.24.247  104.18.35.46    228
+760     34.36.191.45    192.168.24.247  60
+761     34.36.191.45    192.168.24.247  60
+762     34.36.191.45    192.168.24.247  60
+763     34.49.204.74    192.168.24.247  60
+764     104.18.35.46    192.168.24.247  60
+765     34.49.204.74    192.168.24.247  408
+766     34.36.191.45    192.168.24.247  404
+767     34.36.191.45    192.168.24.247  408
+768     104.18.35.46    192.168.24.247  60
+769     34.36.191.45    192.168.24.247  408
+770     192.168.24.247  34.49.204.74    54
+771     192.168.24.247  34.36.191.45    54
+772     192.168.24.247  34.36.191.45    54
+773     192.168.24.247  34.36.191.45    54
+774     104.18.35.46    192.168.24.247  221
+775     192.168.24.247  104.18.35.46    225
+776     104.18.35.46    192.168.24.247  224
+777     192.168.24.247  104.18.35.46    228
+778     104.18.35.46    192.168.24.247  60
+779     104.18.35.46    192.168.24.247  60
+780     140.82.112.21   192.168.24.247  599
+781     192.168.24.247  140.82.112.21   54
+782     104.18.35.46    192.168.24.247  221
+783     192.168.24.247  104.18.35.46    225
+784     104.18.35.46    192.168.24.247  224
+785     192.168.24.247  104.18.35.46    228
+786     104.18.35.46    192.168.24.247  60
+787     104.18.35.46    192.168.24.247  60
+788     34.160.109.235  192.168.24.247  829
+789     104.18.35.46    192.168.24.247  221
+790     192.168.24.247  104.18.35.46    225
+791     192.168.24.247  34.160.109.235  54
+792     104.18.35.46    192.168.24.247  224
+793     192.168.24.247  104.18.35.46    228
+794     104.18.35.46    192.168.24.247  60
+795     192.168.24.247  172.64.152.210  97
+796     192.168.24.247  172.64.152.210  97
+797     192.168.24.247  34.160.109.235  101
+798     192.168.24.247  172.64.152.210  1292    5d013be2f5288f3992753bf3f4b58f3fbf6d1df762824a823ce76a4658c5fe549c990058a58e3b6078e176de51fe2a413abb2905b8ed1ed97f3b77d125e7ec3f78a834c67a6353fe513d5308c0e14402a1cd85b43be1130216f23e48f7952120a35686cd0fbf82db9de6cb81362b1a12de9001dba282154401df32ec8502bf26a40b5c66c113edfcb11c41e50b13b22267ce24275105a550b0d869a18d81da47b62c0cb9d99125eab581f81334133cb77505dde2a859ece5bea0fd06ac516311f6803400c0cfb964f1670c03b902e451f040322af975047a0c74b185aa76a6c9975a734bf45b7cd331ba57b45492711eb40ee485a4cdc0ad8f8448b529d0ba2172a7cf335b03693641b164810bed50722a82b0446fe3e2be0436c8d5e07ad5bacfb390c27ca47dd39c2a77fdb0327065d40a93650633b329675fe4b6ae7975f49e6444428cc4133654f539fd5c1ed2ce1add88778775fa6340412af618a7ab20a63b76f0c82ea6583a9b100b9456053c9ee6bec24a51df213eb13690eedf9b49989c5a7c5fe385ce3be650cbd294e5ff39db1a83cfe5d0eacb9dd0e35d1a5bc15396aa8f73114d8cea7b0e172fb8f4d6b337c535f9fcd76b3745649e4145adb8df3e9f3f06f8e56febc79eddfaeb6cc355818513d755bc4e768990d95fb1d8d1ce81655c47a802ecfc7b8a122e2b3ccd647b219858649be01e479ec5dbc19252ce141311cc8439d78149ba284dc334220c8a07470134997da1401ef9a7d13ef4c898d5560683a3080f2eee816ce012edd7369f611b583878c220c8fbcd598761d751b701d677afdb58300677fa6f78b8b1cbf354c70b90f35d310367e14b002567d8131cdf12c03f0ed7835a42ed4ad07e61977b9ceae7ecb84eac7b1485e7b7780836a3f5180d9f860ade22392e5332fa52090248dddb713e33c899ea82f411e147dac76f4faeb602bde89454dacec5007158dece7bd15d3f4b61eef9ef516a81fe16e8b6f75d13ead9b96d2c22cfa9e8a39c5060ba01ef376ba3d5ed75a33b907a0c05e846f86cc991f33a1e52ca36d8be1344f5fedfdf6e76db2909eaa5a668ffcd0fb79fbd1b0af705f52ae3285b43be99e196778db7d978d8e5c23872e429d69252d882c50426f981a509c049a6d772a5b1a23a038d983ade51c93b0ba480d689a21305f9700aae520c04fc677c6f5da0393c56adb8f54d55704ad04dcbff5c5970ef5be1add129c8feed033677a5298e96c458cbe04b542fe656417ff388b392235a2be1509ce38b76d973c056987b925a4fd693bfef3e242fcb879ef01996ae4081b5dcd840bbe81634fb6952b915511571acaf2e7f9d1ccf6847076ddb433e7637480876c5a40e33e8f9340ae22bed92a33841b53b4ff77ff92536d14c5ec5465c73a39eadff27c209b92c9a9f9d32b5513a6107ced50f5ee9c9da1bfa585e2a1705e9915544f6caf9ed14b666f14d8daba75d42b4cdbc3299287096dd9d54d69e2160364a7ef3db77e825f96e448e80c1f7b580d433cd6305d3de1dc8203365f50eddc2de0e7f15bbc8d1125e9ef7c0584d4de2c7b1defd7da6d9c00173fb8792200cb94c1961c35e2aea9c64ad9d5ee7e746766351ad46b8c6540bd5ccf325c3c412973dcddc607ea971600023c78c7086d64b5c218cf615d342d07ac91abfb29e9ffaf47a6fec1ec06af1cee5c177c800efc165e1198a3d5ff7074cd98d2749d6a13ef07b4e969ed132a06ea64af519b3a16932db043b2501d8182017
+799     192.168.24.247  172.64.152.210  1292    45013be2f5288f3992753bf3f4b58f3fbf6d1df762c7044eb0f3fd71e78822db90820952c27b6db01be21971659d3a8b653839a2316c52b83a39da47c5d96dbf20fb0d58aae04ebabf694004f066e2181e564b0510755d5ac0ded5e5d7c20e31d6c8a0afbeb6f39ac507c77b99b77647b7898f2eca1d43ea5c24fa05d85a05a525c53340c2196473b84eca166c477022002e8b016e1fff2d646740c299b5a4b86f1c7022d61734ea573e72cf00bf5301a8f9e51636d6e42a8e2f85e992f4239fe0fea17b1356b7247417037f862328cf974912d99784dba2abac8523887c782237430207d74dfbbe4621687411dcf27fb9478c89384b79027d0a4030c5efd0a8d48cd0325c91c72cc77cbd786f76d256887564749481aaa082bba5f0573240d84d0e31923e6655fd4fa6e9ac537ddc414d1d83ef74ff1d1625b37b93ea93e97bec09799e3670ef96bb35b1b3ae08f228d9898f30104443a70f2179892ffbb8d4f07ad5008fa888b7210f5dd5a4d88bce30c2aba34acf25b3b4167bbbe2cd2825f89cab2e007f73f02093a9f37ed7afca4a678eb57c9f9a69a7f6d9b32adbd135008414804004603a06c8f31dcd2dde3ccac82f1aa6da382e63d78d43dbbad06b3d1f4ba309b5e0a033ba8b8597aba4fc72858ad0436bfb6493c0ee0750d861de2d4395911d00213f22844c19387d1deddaa094054bd78088bbadd32ab10a04a7dcbe03e1b2a40fa6026ecb2dd5290c6634b7f9b91b9c4a5f0f01a4c6073ada4cd6fa85dab1ddf29b7036fd8f6c37213f83364010680f6dc05fe46a5f6040d5ae91bf5aaf4ef284eef2e9ebead7509d468e6025cc66e712576347abf5af32284b12bee2882fde1d75111ae3b84a5f4e4d64077354ee3d3663f499af019d85256a05a3d180cb8936ea9cb1667270e35ead4408465c7cd01b386fc908efe6a0b76ed492966a0221cbe91483d5b99259de03aa096b45a3835141a37dd3a5f7bb7101a9c97135434d81e519575ca876abb7581138749bbbf29e34f0ef22dcd9e3b73d16067befea3bb4bb71dd873a29d4f8d481a928a8ef121fdb8fedbd4591846f32551e9f0cc4fb5a50ed991e6aeff613c88ae62dbae40457afa970882cb474e995d4c64466b8a2c3eae1512ada1de65e21e4faa6b0765627076cbf692d36594dbfd8099c19ec4ec8779c584e994aeb4e31573288996aa67339aa0603a9c7a99dd1c230a974d7460687715995dd74df9c0c3ed91466b6510c881f47ef07d679f37a3d74cfb1700452b3c35140015ca8cd719aaf4103a74faab85bd2087cc30c924f14ee4edc01bca0d6ca9e4d8675bec0e20e53ab1cae297f1335f25d7ec0efa4610cad24f8dc93a2fc8a5a13309b3f2a28ee4fbf9736edee480ef66dec6b5d8e9560c6615d8ea8fd6ef2da5c2521780835a2920eef7737fa4159cee93ff44982789ceb669479c2cd83b8efe19ff6af787ac819b30c7c963a850d88c69d358791c9666b4322fb1f6999d9bacf8fffe0c942f397f390a37ab2de50e59a8c0410bd090815b549be31ca47ac04d8ce0ea28b922cf359a91f7fd6b46e7054c7217ab7113842035847076ae043ca5999c574c0dfd1608888db59853fff4f63648b1c284973eb66f6cdd0893efd0c8ddc8bfc2fd0af992749e95e57784e9a55b3b75fda20434e7e66a301a945a806e66c9840abc9ec12ae6e57edf58afca9e64a7634663c12df4745b2722d7aea288d31aa69c56964f2d37d7e438f8d14172ff9bfc45bc72f74
+800     192.168.24.247  172.64.152.210  160     4d013be2f5288f3992753bf3f4b58f3fbf6d1df7628347b144ffce4f9901e853c5354a3313ccb39ef48dc34a049fdd7d170833d0bbc34571502177ae8abb0aadb2a2351cee30959a57201d40b5094264c9bdeda295c65237abdec14c9e396c31f589265c06ea45235b5ee56e8114d8cf2f0be1d15c0e
+801     192.168.24.247  172.64.152.210  555
+802     104.18.35.46    192.168.24.247  60
+803     34.36.191.45    192.168.24.247  829
+804     34.36.191.45    192.168.24.247  190
+805     192.168.24.247  34.36.191.45    194
+806     192.168.24.247  34.36.191.45    54
+807     34.160.109.235  192.168.24.247  60
+808     172.64.152.210  192.168.24.247  60
+809     172.64.152.210  192.168.24.247  60
+810     172.64.152.210  192.168.24.247  66      519814efe22d01e841c60a3c3abd1369c114baec686ddfd8
+811     172.64.152.210  192.168.24.247  66      47010bf765bf7970c9b507593e8f22894cbb45038fed97dc
+812     172.64.152.210  192.168.24.247  93
+813     34.36.191.45    192.168.24.247  60
+814     104.18.35.46    192.168.24.247  221
+815     172.64.152.210  192.168.24.247  93
+816     192.168.24.247  104.18.35.46    225
+817     172.64.152.210  192.168.24.247  312
+818     34.160.109.235  192.168.24.247  408
+819     192.168.24.247  172.64.152.210  54
+820     192.168.24.247  172.64.152.210  87      5f013be2f5288f3992753bf3f4b58f3fbf6d1df762e0ac643113ee4f2c88d5eff340bf64fcf9a8192e0d3e8ce2
+821     192.168.24.247  172.64.152.210  54
+822     192.168.24.247  34.160.109.235  54
+823     104.18.35.46    192.168.24.247  60
+824     140.82.112.21   192.168.24.247  604
+825     192.168.24.247  140.82.112.21   89
+826     192.168.24.247  140.82.112.21   89
+827     140.82.112.21   192.168.24.247  60
+828     104.18.35.46    192.168.24.247  224
+829     192.168.24.247  104.18.35.46    228
+830     104.18.35.46    192.168.24.247  60
+831     34.36.191.45    192.168.24.247  190
+832     192.168.24.247  34.36.191.45    194
+833     172.64.152.210  192.168.24.247  224
+834     192.168.24.247  172.64.152.210  228
+835     104.18.35.46    192.168.24.247  224
+836     192.168.24.247  104.18.35.46    228
+837     172.217.215.95  192.168.24.247  120
+838     172.217.215.95  192.168.24.247  64      5f60c8944739a030757522ab4b545b423c5813673e84
+839     192.168.24.247  142.251.15.95   322     47e3965705c40f15ee1678c2d1786cee14df11244cb7c5f3b8b140f8d18559d5850c61b3d768416f6c1c39937edb41e74600f3f653a7e36ef034f0145341f40777e4549ebfd4663aaffd2725da53728677f3a0dc90a90acd1f845cd67c5dc9aa2b2a151fc5750a36898452e41445bf58b656ec229dc4291ec966d3838cfb56e54ff040f0a7ddeb902d8d4464b3d72790a35c29edeb7f0df5dc8ce0ba50f3fbbc321ca7e20c3044b75b86d4a1a559f6115399e9133adc4757623014c57d8d98b93ad43c7ae9f57f460be6f97c2c006e8e7bbed92714fcd724369f8b80f78b5aab3f1ea166ed735a3c3cda69050b2af2ad682ea8ccebfdc2b59aa1295a1464b50b62a2ad1ed6496fbad194501a772f2af09b7475a741f3a885
+840     34.36.191.45    192.168.24.247  60
+841     172.64.152.210  192.168.24.247  60
+842     192.168.24.247  172.217.215.95  75      4ff7dca3f1b2e7eb761543f11d040961675dc231e3eb878a80db97803f0d98e587
+843     34.36.191.45    192.168.24.247  829
+844     104.18.35.46    192.168.24.247  60
+845     192.168.24.247  34.36.191.45    54
+846     142.251.15.95   192.168.24.247  138
+847     142.251.15.95   192.168.24.247  63
+848     192.168.24.247  142.251.15.95   77      48e3965705c40f15ee05b9cb2b948cf734a0a4b6c52be9a79421dec11153d18df3d807
+849     192.168.24.247  172.217.215.95  338     46f7dca3f1b2e7eb7668557e0879200fd9eb60edadb16886088da2a85c62f2f3d2f06fbca239a1787ac069853c94c3b36b19f5da22527c457ff99655f361a97116f1b6b01c9b2b3b6630e2ee4c0a2b8f98b4800ac0f7ede26ef17e99035c92abeb93d3deabcdd3e511d599a623998a72b7a39920d848398f90c4261936c4947a956fcbbd67172cf8b1c91e3643807772cf2aca4c52a2fc4e79bc47ef018c23c127da2a4cd7a9420986e07effec63caf3505d57bf21a6f0df6b125beca3cdf62ffa20aebad3db970ce817f2b43dd7caae8f6407702befade9b13d985659b81b985230e61f7d9e22b66421611763d633d22d491cf4a6549672aeee52987a6d4524f67b867f9322c98cdee70ccad633cf5c8ad26c5e8ec885dd95a9668c3caad4c1da11a9372f192753
+850     34.160.109.235  192.168.24.247  837
+851     172.217.215.95  192.168.24.247  71      5172043407bc56579788ba1628b8f10e71fe95fa29816e30a1931eac45
+852     142.251.15.95   192.168.24.247  66
+853     192.168.24.247  172.217.215.95  75
+854     192.168.24.247  34.160.109.235  54
+855     172.217.215.95  192.168.24.247  134
+856     192.168.24.247  172.217.215.95  79      5cf7dca3f1b2e7eb76ba7156a37d5c10d7a3af923683e2cf407c6856d3a5bd51c85e168b9d
+857     192.168.24.247  104.18.35.46    97
+858     192.168.24.247  34.36.191.45    101
+859     192.168.24.247  34.36.191.45    101
+860     192.168.24.247  34.49.204.74    101
+861     192.168.24.247  34.36.191.45    101
+862     192.168.24.247  34.149.66.154   315
+863     192.168.24.247  34.149.66.154   93
+864     192.168.24.247  34.149.66.154   1466
+865     192.168.24.247  34.149.66.154   224
+866     192.168.24.247  8.8.8.8 95
+867     192.168.24.247  8.8.8.8 140
+868     172.217.215.95  192.168.24.247  67      48802187f72269d39a3eb8b5f3b9c1207e3c155a3e78e87951
+869     192.168.24.247  8.8.8.8 97
+870     8.8.8.8 192.168.24.247  60
+871     8.8.8.8 192.168.24.247  60
+872     34.149.66.154   192.168.24.247  60
+873     34.36.191.45    192.168.24.247  60
+874     34.36.191.45    192.168.24.247  60
+875     34.149.66.154   192.168.24.247  60
+876     34.149.66.154   192.168.24.247  60
+877     34.36.191.45    192.168.24.247  60
+878     104.18.35.46    192.168.24.247  60
+879     34.49.204.74    192.168.24.247  60
+880     8.8.8.8 192.168.24.247  130
+881     8.8.8.8 192.168.24.247  147
+882     8.8.8.8 192.168.24.247  156
+883     8.8.8.8 192.168.24.247  85
+884     8.8.8.8 192.168.24.247  93
+885     192.168.24.247  8.8.8.8 54
+886     192.168.24.247  8.8.8.8 93
+887     34.49.204.74    192.168.24.247  408
+888     34.149.66.154   192.168.24.247  93
+889     104.18.35.46    192.168.24.247  93
+890     34.149.66.154   192.168.24.247  212
+891     192.168.24.247  34.149.66.154   54
+892     192.168.24.247  34.149.66.154   89
+893     34.36.191.45    192.168.24.247  406
+894     34.36.191.45    192.168.24.247  408
+895     34.36.191.45    192.168.24.247  408
+896     192.168.24.247  34.49.204.74    54
+897     192.168.24.247  104.18.35.46    54
+898     8.8.8.8 192.168.24.247  60
+899     34.160.109.235  192.168.24.247  190
+900     192.168.24.247  34.160.109.235  194
+901     192.168.24.247  34.36.191.45    54
+902     192.168.24.247  34.36.191.45    54
+903     192.168.24.247  34.36.191.45    54
+904     104.36.195.1    192.168.24.247  93
+905     140.82.112.21   192.168.24.247  605
+906     192.168.24.247  104.36.195.1    89
+907     34.149.66.154   192.168.24.247  60
+908     172.64.152.210  192.168.24.247  224
+909     192.168.24.247  172.64.152.210  228
+910     172.64.152.210  192.168.24.247  224
+911     192.168.24.247  172.64.152.210  228
+912     34.160.109.235  192.168.24.247  60
+913     192.168.24.247  140.82.112.21   54
+914     34.160.109.235  192.168.24.247  190
+915     192.168.24.247  34.160.109.235  194
+916     104.18.35.46    192.168.24.247  224
+917     192.168.24.247  104.18.35.46    228
+918     104.36.195.1    192.168.24.247  60
+919     172.64.152.210  192.168.24.247  60
+920     172.64.152.210  192.168.24.247  60
+921     34.160.109.235  192.168.24.247  60
+922     104.18.35.46    192.168.24.247  60
+923     104.18.35.46    192.168.24.247  221
+924     192.168.24.247  104.18.35.46    225
+925     104.18.35.46    192.168.24.247  224
+926     192.168.24.247  104.18.35.46    228
+927     104.18.35.46    192.168.24.247  60
+928     104.18.35.46    192.168.24.247  60
+929     34.160.109.235  192.168.24.247  829
+930     192.168.24.247  34.160.109.235  54
+931     34.36.191.45    192.168.24.247  829
+932     192.168.24.247  34.36.191.45    54
+933     104.18.35.46    192.168.24.247  221
+934     192.168.24.247  104.18.35.46    225
+935     104.18.35.46    192.168.24.247  224
+936     192.168.24.247  104.18.35.46    228
+937     192.168.24.247  34.160.109.235  101
+938     192.168.24.247  173.194.219.94  1292
+939     192.168.24.247  173.194.219.94  1292
+940     192.168.24.247  173.194.219.94  124
+941     192.168.24.247  173.194.219.94  690
+942     140.82.112.21   192.168.24.247  660
+943     192.168.24.247  140.82.112.21   54
+944     104.18.35.46    192.168.24.247  60
+945     104.18.35.46    192.168.24.247  60
+946     34.160.109.235  192.168.24.247  60
+947     173.194.219.94  192.168.24.247  82
+948     173.194.219.94  192.168.24.247  1292
+949     173.194.219.94  192.168.24.247  1292
+950     173.194.219.94  192.168.24.247  333
+951     173.194.219.94  192.168.24.247  986
+952     192.168.24.247  173.194.219.94  120
+953     192.168.24.247  173.194.219.94  73
+954     173.194.219.94  192.168.24.247  70      474f76de59ca4228893c3bfc652b96036d89dee96673b6bd3bd0c5ba
+955     173.194.219.94  192.168.24.247  559     518904b7831525255c47855985a8dd514ace1cccc708e264c3bc754d387c94414eaab893914d53dda7e253d1fdaa355d0f1d13a0f11e8582b998cd61b2297bc673b208b0ab48f5d9d5c3ae54a84e192a914ded6068c5b562198207772fb26b58e5e92ff0de202a4e53caaa3f80852adc3356065921f6927eb4b9568ea4e12ba77af16d0c598b7c1fcb70c38f09f3964f4eecdc3c7864be464b1151b4d23ff329583f23410fe3f5249fbaac1d126f8310baf65284296ea7dadadd84177896c4222e21fffa283e15c3b1aa8d37b1f2032da6b88269c2891e42528cb86f729fe19aa4f4d29d132fc7127ee6c3e76a20875455c847b5af796c33efb1f378f34453687ef88a4e805854bc839e02f12abd052f57c342a68a0170a615adc8bee1fb342defa28e90501faa2d37e71ba30165ad9b4a3800b5aaa0d0e7b05c0949c0c565566c92d1f715f6986fbac59b2151552872a066398f4cdf0b4cefccdea22069b6ada78522cb915f6c477dba7d4495c142a2c1989b7dd293cf21908ae21b101d43a786ffcca24ed2853cf209e101ffd33a7e89fea73a0b499dbda68b517963a52b8f9611c12ed6742dfa7eb3563c8f1741178a47214da5ce67578e2dc74616d1cb689320a3336815e132e94164eebd0f4797b952f549fa9a7be78f2196d8cc2186f95fbf9fc42772ed71c1201de4631188d6a2731e3047374c981ca604592b8d7a30078fd00d0c
+956     173.194.219.94  192.168.24.247  64
+957     192.168.24.247  173.194.219.94  77
+958     192.168.24.247  8.8.8.8 98
+959     192.168.24.247  173.194.219.94  74
+960     104.36.195.1    192.168.24.247  93
+961     34.160.109.235  192.168.24.247  408
+962     192.168.24.247  104.36.195.1    89
+963     192.168.24.247  104.36.195.1    1494
+964     192.168.24.247  104.36.195.1    1494
+965     192.168.24.247  104.36.195.1    289
+966     173.194.219.94  192.168.24.247  162     5dd9da7f2269873ab8f52b187acbc35bf2f32048255cc1568e4560154848f58c25923b30e9d389601f7d02ac8805a1bf99beefb38777a126944d4254e18a625397a7ebecf7555d8d7b4bdd271f0b4992ac94cd45060d8c255c918fe9ca498ed97e05c9755d522caac80f08f1dfc0a8eb4251b1cb21651209
+967     173.194.219.94  192.168.24.247  65
+968     8.8.8.8 192.168.24.247  131
+969     192.168.24.247  173.194.219.94  74
+970     104.18.35.46    192.168.24.247  221
+971     192.168.24.247  104.18.35.46    225
+972     192.168.24.247  34.160.109.235  54
+973     104.36.195.1    192.168.24.247  60
+974     104.18.35.46    192.168.24.247  224
+975     192.168.24.247  104.18.35.46    228
+976     104.36.195.1    192.168.24.247  60
+977     104.36.195.1    192.168.24.247  60
+978     104.18.35.46    192.168.24.247  60
+979     104.36.195.1    192.168.24.247  249
+980     104.36.195.1    192.168.24.247  87
+981     104.36.195.1    192.168.24.247  85
+982     192.168.24.247  104.36.195.1    54
+983     104.18.35.46    192.168.24.247  60
+984     104.18.35.46    192.168.24.247  221
+985     192.168.24.247  104.18.35.46    225
+986     34.36.191.45    192.168.24.247  829
+987     192.168.24.247  34.36.191.45    54
+988     104.18.35.46    192.168.24.247  224
+989     192.168.24.247  104.18.35.46    228
+990     104.18.35.46    192.168.24.247  60
+991     104.18.35.46    192.168.24.247  60
+992     34.36.191.45    192.168.24.247  190
+993     192.168.24.247  34.36.191.45    194
+994     34.160.109.235  192.168.24.247  837
+995     34.36.191.45    192.168.24.247  60
+996     192.168.24.247  34.160.109.235  54
+997     104.18.35.46    192.168.24.247  221
+998     192.168.24.247  104.18.35.46    225
+999     104.18.35.46    192.168.24.247  60
+999 packets captured
+
+C:\Users\echo>

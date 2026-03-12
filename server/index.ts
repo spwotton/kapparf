@@ -70,11 +70,13 @@ app.use((req, res, next) => {
   const { startKiwiSDRScanner } = await import("./kiwisdr-scanner");
   const { startNetworkWatchdog } = await import("./network-watchdog");
   const { startPipeline } = await import("./pipeline");
+  const { startNetworkThreatScanner } = await import("./network-threat-scanner");
   startCollectors();
   startAutoCorrelator();
   startKiwiSDRScanner();
   startNetworkWatchdog();
   startPipeline();
+  startNetworkThreatScanner();
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

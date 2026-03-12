@@ -646,6 +646,107 @@ def run_scan(scan_wifi_flag=True, scan_ble_flag=True, scan_net_flag=True):
     return all_events
 
 
+def feed_pcap_text(filepath):
+    print(f"[ThreatScan] Feeding pcap text: {filepath}")
+    if not os.path.exists(filepath):
+        print(f"  [!] File not found: {filepath}")
+        return
+
+    with open(filepath, "r", errors="replace") as f:
+        lines = f.readlines()
+
+    batch_size = 100
+    total_threats = 0
+    total_parsed = 0
+
+    for i in range(0, len(lines), batch_size):
+        batch = [l.strip() for l in lines[i:i+batch_size] if l.strip()]
+        if not batch:
+            continue
+
+        url = f"{KAPPA_URL}/api/threat-scanner/pcap-text"
+        data = json.dumps({"lines": batch}).encode("utf-8")
+        req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"}, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                result = json.loads(resp.read().decode())
+                parsed = result.get("parsed", 0)
+                threats = result.get("threats", 0)
+                total_parsed += parsed
+                total_threats += threats
+                if threats > 0:
+                    print(f"  [!] Batch {i//batch_size+1}: {parsed} packets, {threats} threats")
+        except Exception as e:
+            print(f"  [!] Batch {i//batch_size+1} error: {e}")
+
+    print(f"  Total: {total_parsed} packets parsed, {total_threats} threats detected")
+    return total_threats
+
+
+def feed_tshark_live(interface="Wi-Fi", duration=30):
+    print(f"[ThreatScan] Live tshark feed on {interface} ({duration}s)...")
+    cmd = ["tshark", "-i", interface, "-a", f"duration:{duration}", "-T", "fields",
+           "-e", "frame.number", "-e", "frame.time_relative", "-e", "ip.src",
+           "-e", "ip.dst", "-e", "_ws.col.Protocol", "-e", "frame.len",
+           "-e", "_ws.col.Info", "-e", "data.data",
+           "-E", "separator=\t"]
+
+    stdout, stderr, rc = run_cmd(cmd, timeout=duration + 10)
+    if rc != 0:
+        print(f"  [!] tshark failed: {stderr[:200]}")
+        return 0
+
+    packets = []
+    for line in stdout.strip().split("\n"):
+        if not line.strip():
+            continue
+        parts = line.split("\t")
+        if len(parts) < 6:
+            continue
+        try:
+            pkt = {
+                "timestamp": int(time.time() * 1000),
+                "srcIp": parts[2] if len(parts) > 2 else "",
+                "dstIp": parts[3] if len(parts) > 3 else "",
+                "srcPort": None,
+                "dstPort": None,
+                "protocol": parts[4] if len(parts) > 4 else "",
+                "length": int(parts[5]) if len(parts) > 5 and parts[5].isdigit() else 0,
+                "info": parts[6] if len(parts) > 6 else "",
+                "hexPayload": parts[7] if len(parts) > 7 and parts[7] else None,
+            }
+            if pkt["srcIp"] and pkt["dstIp"]:
+                info = pkt["info"]
+                port_match = re.search(r'(\d+)\s*.\s*(\d+)', info)
+                if port_match:
+                    pkt["srcPort"] = int(port_match.group(1))
+                    pkt["dstPort"] = int(port_match.group(2))
+                packets.append(pkt)
+        except Exception:
+            continue
+
+    if not packets:
+        print("  No packets captured")
+        return 0
+
+    url = f"{KAPPA_URL}/api/threat-scanner/batch"
+    data = json.dumps({"packets": packets}).encode("utf-8")
+    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"}, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode())
+            threats = result.get("threats", 0)
+            processed = result.get("processed", 0)
+            print(f"  {processed} packets processed, {threats} threats detected")
+            if threats > 0:
+                for m in result.get("matches", [])[:10]:
+                    print(f"    [{m.get('type','?')}] {m.get('indicator','?')}: {m.get('description','')[:80]}")
+            return threats
+    except Exception as e:
+        print(f"  [!] Batch send error: {e}")
+        return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="KAPPA Local Agent — Multi-Domain SIGINT Collector")
     parser.add_argument("--wifi", action="store_true", help="WiFi scan only")
@@ -656,6 +757,10 @@ def main():
     parser.add_argument("--url", type=str, help="KAPPA server URL")
     parser.add_argument("--lat", type=float, help="Observer latitude")
     parser.add_argument("--lon", type=float, help="Observer longitude")
+    parser.add_argument("--pcap-feed", type=str, help="Feed a pcap text file to threat scanner")
+    parser.add_argument("--threat-scan", action="store_true", help="Live tshark threat scan mode")
+    parser.add_argument("--interface", type=str, default="Wi-Fi", help="Network interface for threat scan")
+    parser.add_argument("--duration", type=int, default=30, help="Capture duration for threat scan")
     args = parser.parse_args()
 
     global KAPPA_URL, OBSERVER_LAT, OBSERVER_LON
@@ -666,7 +771,7 @@ def main():
     if args.lon:
         OBSERVER_LON = args.lon
 
-    scan_all = not (args.wifi or args.ble or args.network)
+    scan_all = not (args.wifi or args.ble or args.network or args.pcap_feed or args.threat_scan)
 
     tools = check_tools()
 
@@ -681,6 +786,25 @@ def main():
         sys.exit(1)
 
     print()
+
+    if args.pcap_feed:
+        feed_pcap_text(args.pcap_feed)
+        return
+
+    if args.threat_scan:
+        if args.continuous:
+            cycle = 0
+            while True:
+                cycle += 1
+                print(f"\n{'='*60}")
+                print(f"Threat scan cycle #{cycle} — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                print(f"{'='*60}")
+                feed_tshark_live(interface=args.interface, duration=args.duration)
+                print(f"\nNext scan in {args.interval}s... (Ctrl+C to stop)")
+                time.sleep(args.interval)
+        else:
+            feed_tshark_live(interface=args.interface, duration=args.duration)
+        return
 
     if args.continuous:
         cycle = 0
