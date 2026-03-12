@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import type { CollectorStatusType, CorrelatorStats } from "@shared/schema";
+import type { CollectorStatusType, CorrelatorStats, CollectionLog } from "@shared/schema";
 import {
   Sparkles,
   FileText,
@@ -34,16 +34,6 @@ interface IntelReport {
   fallback?: boolean;
 }
 
-interface CollectionLog {
-  id: string;
-  collector: string;
-  eventsCreated: number;
-  durationMs: number;
-  status: string;
-  error: string | null;
-  timestamp: string;
-}
-
 const collectorIcons: Record<string, typeof Plane> = {
   flights: Plane,
   satellites: Satellite,
@@ -55,17 +45,17 @@ export default function IntelligencePage() {
   const { toast } = useToast();
   const [report, setReport] = useState<IntelReport | null>(null);
 
-  const { data: collectorStatus } = useQuery<Record<string, CollectorStatusType>>({
+  const { data: collectorStatus, isError: collectorsError } = useQuery<Record<string, CollectorStatusType>>({
     queryKey: ["/api/collectors/status"],
     refetchInterval: 5000,
   });
 
-  const { data: correlatorStats } = useQuery<CorrelatorStats>({
+  const { data: correlatorStats, isError: correlatorError } = useQuery<CorrelatorStats>({
     queryKey: ["/api/correlations/stats"],
     refetchInterval: 5000,
   });
 
-  const { data: collectionLogs, isLoading: logsLoading } = useQuery<CollectionLog[]>({
+  const { data: collectionLogs, isLoading: logsLoading, isError: logsError } = useQuery<CollectionLog[]>({
     queryKey: ["/api/collection-logs"],
     refetchInterval: 10000,
   });
@@ -78,8 +68,12 @@ export default function IntelligencePage() {
     onSuccess: (data) => {
       setReport(data);
     },
-    onError: () => {
-      toast({ title: t("common.error"), variant: "destructive" });
+    onError: (error) => {
+      toast({
+        title: t("common.error"),
+        description: error instanceof Error ? error.message : t("intelligence.reportFailed"),
+        variant: "destructive",
+      });
     },
   });
 
@@ -91,8 +85,12 @@ export default function IntelligencePage() {
     onSuccess: () => {
       toast({ title: t("intelligence.learned") });
     },
-    onError: () => {
-      toast({ title: t("common.error"), variant: "destructive" });
+    onError: (error) => {
+      toast({
+        title: t("common.error"),
+        description: error instanceof Error ? error.message : t("intelligence.learnFailed"),
+        variant: "destructive",
+      });
     },
   });
 
@@ -106,6 +104,12 @@ export default function IntelligencePage() {
         </h1>
         <p className="text-sm text-muted-foreground mt-1">{t("intelligence.subtitle")}</p>
       </div>
+
+      {collectorsError && (
+        <p className="text-sm text-destructive" data-testid="text-collectors-error">
+          {t("common.error")}
+        </p>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {collectors.map((c) => {
@@ -158,6 +162,12 @@ export default function IntelligencePage() {
           );
         })}
       </div>
+
+      {correlatorError && (
+        <p className="text-sm text-destructive" data-testid="text-correlator-error">
+          {t("common.error")}
+        </p>
+      )}
 
       {correlatorStats && (
         <Card data-testid="card-correlator-stats">
@@ -326,9 +336,13 @@ export default function IntelligencePage() {
             <div className="space-y-2">
               {[1, 2, 3].map((i) => <Skeleton key={i} className="h-8 w-full" />)}
             </div>
+          ) : logsError ? (
+            <p className="text-sm text-destructive text-center py-4" data-testid="text-logs-error">
+              {t("common.error")}
+            </p>
           ) : !collectionLogs || collectionLogs.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-4">
-              {t("common.loading")}
+            <p className="text-sm text-muted-foreground text-center py-4" data-testid="text-no-logs">
+              {t("intelligence.noLogs")}
             </p>
           ) : (
             <div className="border rounded-md">

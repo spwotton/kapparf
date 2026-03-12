@@ -70,8 +70,12 @@ export default function OsintPage() {
     onSuccess: (data) => {
       setResult(data);
     },
-    onError: () => {
-      toast({ title: t("common.error"), variant: "destructive" });
+    onError: (error) => {
+      toast({
+        title: t("common.error"),
+        description: error instanceof Error ? error.message : t("osint.lookupFailed"),
+        variant: "destructive",
+      });
     },
   });
 
