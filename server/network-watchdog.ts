@@ -1,7 +1,7 @@
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
-import { KAPPA_CONSTANTS } from "@shared/schema";
+import { KAPPA_CONSTANTS, type WatchdogStatus } from "@shared/schema";
 
 const K = KAPPA_CONSTANTS;
 
@@ -302,18 +302,6 @@ export function startNetworkWatchdog(): void {
   }, HEARTBEAT_INTERVAL_MS);
 
   console.log(`[KAPPA] Network watchdog started: ${HEARTBEAT_TARGETS.length} targets, ${HEARTBEAT_INTERVAL_MS / 1000}s interval`);
-}
-
-export interface WatchdogStatus {
-  running: boolean;
-  networkActive: boolean;
-  lastHeartbeat: number | null;
-  dropCount: number;
-  reconnectCount: number;
-  tr069PulseCount: number;
-  seismicJitterCount: number;
-  avgLatencyMs: number | null;
-  recentEvents: NetworkEvent[];
 }
 
 export async function runHeartbeatOnce(): Promise<void> {

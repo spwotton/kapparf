@@ -16,19 +16,8 @@ import {
   type CollectorStatusType,
   type CorrelatorStats,
   type ScannerStatus,
+  type WatchdogStatus,
 } from "@shared/schema";
-
-interface WatchdogStatus {
-  running: boolean;
-  networkActive: boolean;
-  lastHeartbeat: number | null;
-  dropCount: number;
-  reconnectCount: number;
-  tr069PulseCount: number;
-  seismicJitterCount: number;
-  avgLatencyMs: number | null;
-  recentEvents: { timestamp: number; type: string; target: string; latencyMs: number | null; details: string }[];
-}
 import {
   MapPin,
   Activity,
@@ -211,27 +200,27 @@ export default function DashboardPage() {
     refetchInterval: 60000,
   });
 
-  const { data: collectorStatus } = useQuery<Record<string, CollectorStatusType>>({
+  const { data: collectorStatus, isLoading: collectorsLoading } = useQuery<Record<string, CollectorStatusType>>({
     queryKey: ["/api/collectors/status"],
     refetchInterval: 5000,
   });
 
-  const { data: correlatorStats } = useQuery<CorrelatorStats>({
+  const { data: correlatorStats, isLoading: correlatorLoading } = useQuery<CorrelatorStats>({
     queryKey: ["/api/correlations/stats"],
     refetchInterval: 5000,
   });
 
-  const { data: liveCorrelations } = useQuery<Correlation[]>({
+  const { data: liveCorrelations, isLoading: correlationsLoading } = useQuery<Correlation[]>({
     queryKey: ["/api/correlations"],
     refetchInterval: 15000,
   });
 
-  const { data: scannerStatus } = useQuery<ScannerStatus>({
+  const { data: scannerStatus, isLoading: scannerLoading } = useQuery<ScannerStatus>({
     queryKey: ["/api/scanner/status"],
     refetchInterval: 10000,
   });
 
-  const { data: watchdogStatus } = useQuery<WatchdogStatus>({
+  const { data: watchdogStatus, isLoading: watchdogLoading } = useQuery<WatchdogStatus>({
     queryKey: ["/api/watchdog/status"],
     refetchInterval: 10000,
   });
@@ -260,7 +249,7 @@ export default function DashboardPage() {
     } | null;
   }
 
-  const { data: pipelineStatus } = useQuery<PipelineStatus>({
+  const { data: pipelineStatus, isLoading: pipelineLoading } = useQuery<PipelineStatus>({
     queryKey: ["/api/pipeline/status"],
     refetchInterval: 5000,
   });
@@ -278,6 +267,8 @@ export default function DashboardPage() {
       queryClient.invalidateQueries({ queryKey: ["/api/correlations/stats"] });
       queryClient.invalidateQueries({ queryKey: ["/api/scanner/status"] });
       queryClient.invalidateQueries({ queryKey: ["/api/watchdog/status"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/events"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/correlations"] });
     },
   });
 
@@ -479,6 +470,12 @@ export default function DashboardPage() {
           <CardDescription className="text-[11px]">{t("pipeline.subtitle")}</CardDescription>
         </CardHeader>
         <CardContent>
+          {pipelineLoading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {[1, 2, 3, 4].map((i) => <Skeleton key={i} className="h-16 w-full" />)}
+            </div>
+          ) : (
+            <>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
             <div className="border rounded-md p-2.5">
               <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("pipeline.cycles")}</span>
@@ -553,18 +550,28 @@ export default function DashboardPage() {
               </div>
             </div>
           )}
+            </>
+          )}
         </CardContent>
       </Card>
 
-      {collectors.length > 0 && (
-        <Card data-testid="card-collectors">
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <Activity className="h-4 w-4 text-muted-foreground" />
-              <CardTitle className="text-sm font-medium">{t("dashboard.collectors")}</CardTitle>
+      <Card data-testid="card-collectors">
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Activity className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">{t("dashboard.collectors")}</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {collectorsLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {[1, 2, 3].map((i) => <Skeleton key={i} className="h-24 w-full" />)}
             </div>
-          </CardHeader>
-          <CardContent>
+          ) : collectors.length === 0 ? (
+            <div className="text-xs text-muted-foreground text-center py-4" data-testid="text-collectors-empty">
+              No collectors reporting
+            </div>
+          ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {collectors.map((c) => {
                 const CIcon = collectorIcons[c.name] || Activity;
@@ -598,24 +605,26 @@ export default function DashboardPage() {
                 );
               })}
             </div>
-          </CardContent>
-        </Card>
-      )}
+          )}
+        </CardContent>
+      </Card>
 
-      {correlatorStats && (
-        <Card data-testid="card-auto-correlator">
-          <CardHeader className="pb-3">
-            <div className="flex items-center gap-2">
-              <Link2 className="h-4 w-4 text-muted-foreground" />
-              <CardTitle className="text-sm font-medium">{t("dashboard.autoCorrelator")}</CardTitle>
-              {correlatorStats.running && (
-                <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400 text-[10px] ml-auto">
-                  {t("correlations.autoStatus")}
-                </Badge>
-              )}
-            </div>
-          </CardHeader>
-          <CardContent>
+      <Card data-testid="card-auto-correlator">
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Link2 className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">{t("dashboard.autoCorrelator")}</CardTitle>
+            {correlatorStats?.running && (
+              <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400 text-[10px] ml-auto">
+                {t("correlations.autoStatus")}
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent>
+          {correlatorLoading ? (
+            <Skeleton className="h-16 w-full" />
+          ) : correlatorStats ? (
             <div className="grid grid-cols-4 gap-3 text-center">
               <div>
                 <div className="text-lg font-mono font-semibold">{correlatorStats.cycleCount}</div>
@@ -636,128 +645,150 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </CardContent>
-        </Card>
-      )}
+          ) : (
+            <div className="text-xs text-muted-foreground text-center py-4" data-testid="text-correlator-empty">
+              No correlator data available
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {scannerStatus && (
-          <Card data-testid="card-kiwisdr-scanner">
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-2">
-                <Scan className="h-4 w-4 text-muted-foreground" />
-                <CardTitle className="text-sm font-medium">{t("scanner.title")}</CardTitle>
-                {scannerStatus.running && (
-                  <Badge variant="secondary" className="bg-blue-500/10 text-blue-700 dark:text-blue-400 text-[10px] ml-auto">
-                    {scannerStatus.activeTargets.length} {t("scanner.targets").toLowerCase()}
-                  </Badge>
+        <Card data-testid="card-kiwisdr-scanner">
+          <CardHeader className="pb-3">
+            <div className="flex items-center gap-2">
+              <Scan className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">{t("scanner.title")}</CardTitle>
+              {scannerStatus?.running && (
+                <Badge variant="secondary" className="bg-blue-500/10 text-blue-700 dark:text-blue-400 text-[10px] ml-auto">
+                  {scannerStatus.activeTargets.length} {t("scanner.targets").toLowerCase()}
+                </Badge>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            {scannerLoading ? (
+              <Skeleton className="h-24 w-full" />
+            ) : scannerStatus ? (
+              <>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div>
+                    <div className="text-lg font-mono font-semibold">{scannerStatus.scanCount}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("scanner.scanCount")}</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-mono font-semibold text-amber-600 dark:text-amber-400">{scannerStatus.detections}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("scanner.detections")}</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-mono font-semibold">{scannerStatus.deltaSlipDetections}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("scanner.deltaSlip")}</div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-3 text-center mt-2">
+                  <div>
+                    <div className="text-sm font-mono">{scannerStatus.echoLtChainDetections}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("scanner.echoLt")}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-mono">{scannerStatus.speechEnvelopeDetections}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("scanner.speechEnvelope")}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-mono">{scannerStatus.tr069Correlations}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("scanner.tr069")}</div>
+                  </div>
+                </div>
+                {scannerStatus.lastResults.length === 0 && (
+                  <div className="mt-3 text-xs text-muted-foreground text-center py-2">
+                    {t("scanner.noResults")}
+                  </div>
                 )}
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div>
-                  <div className="text-lg font-mono font-semibold">{scannerStatus.scanCount}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("scanner.scanCount")}</div>
-                </div>
-                <div>
-                  <div className="text-lg font-mono font-semibold text-amber-600 dark:text-amber-400">{scannerStatus.detections}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("scanner.detections")}</div>
-                </div>
-                <div>
-                  <div className="text-lg font-mono font-semibold">{scannerStatus.deltaSlipDetections}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("scanner.deltaSlip")}</div>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-3 text-center mt-2">
-                <div>
-                  <div className="text-sm font-mono">{scannerStatus.echoLtChainDetections}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("scanner.echoLt")}</div>
-                </div>
-                <div>
-                  <div className="text-sm font-mono">{scannerStatus.speechEnvelopeDetections}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("scanner.speechEnvelope")}</div>
-                </div>
-                <div>
-                  <div className="text-sm font-mono">{scannerStatus.tr069Correlations}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("scanner.tr069")}</div>
-                </div>
-              </div>
-              {scannerStatus.lastResults.length === 0 && (
-                <div className="mt-3 text-xs text-muted-foreground text-center py-2">
-                  {t("scanner.noResults")}
-                </div>
-              )}
-              {scannerStatus.lastResults.length > 0 && (
-                <div className="mt-3 space-y-1.5 max-h-28 overflow-y-auto">
-                  {scannerStatus.lastResults.slice(0, 6).map((r, i) => (
-                    <div key={i} className="flex items-center justify-between text-xs border-b border-border/50 pb-1">
-                      <span className="font-mono text-muted-foreground">{r.target}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono">{r.snrDb > -Infinity ? `${r.snrDb} dB` : "--"}</span>
-                        <Badge variant={r.detected ? "default" : "secondary"} className={`text-[9px] ${r.detected ? "bg-red-500/10 text-red-600" : ""}`}>
-                          {r.detected ? t("scanner.detected") : t("scanner.clean")}
-                        </Badge>
+                {scannerStatus.lastResults.length > 0 && (
+                  <div className="mt-3 space-y-1.5 max-h-28 overflow-y-auto">
+                    {scannerStatus.lastResults.slice(0, 6).map((r, i) => (
+                      <div key={i} className="flex items-center justify-between text-xs border-b border-border/50 pb-1">
+                        <span className="font-mono text-muted-foreground">{r.target}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono">{r.snrDb > -Infinity ? `${r.snrDb} dB` : "--"}</span>
+                          <Badge variant={r.detected ? "default" : "secondary"} className={`text-[9px] ${r.detected ? "bg-red-500/10 text-red-600" : ""}`}>
+                            {r.detected ? t("scanner.detected") : t("scanner.clean")}
+                          </Badge>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        )}
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-xs text-muted-foreground text-center py-4" data-testid="text-scanner-empty">
+                No scanner data available
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-        {watchdogStatus && (
-          <Card data-testid="card-network-watchdog">
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-2">
-                <Network className="h-4 w-4 text-muted-foreground" />
-                <CardTitle className="text-sm font-medium">{t("watchdog.title")}</CardTitle>
+        <Card data-testid="card-network-watchdog">
+          <CardHeader className="pb-3">
+            <div className="flex items-center gap-2">
+              <Network className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">{t("watchdog.title")}</CardTitle>
+              {watchdogStatus && (
                 <Badge variant="secondary" className={`text-[10px] ml-auto ${watchdogStatus.networkActive ? "bg-green-500/10 text-green-700 dark:text-green-400" : "bg-red-500/10 text-red-600"}`}>
                   {watchdogStatus.networkActive ? t("watchdog.networkActive") : t("watchdog.networkDown")}
                 </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-4 gap-2 text-center">
-                <div>
-                  <div className="text-lg font-mono font-semibold text-red-500">{watchdogStatus.dropCount}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("watchdog.drops")}</div>
-                </div>
-                <div>
-                  <div className="text-lg font-mono font-semibold text-green-600 dark:text-green-400">{watchdogStatus.reconnectCount}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("watchdog.reconnects")}</div>
-                </div>
-                <div>
-                  <div className="text-lg font-mono font-semibold">{watchdogStatus.tr069PulseCount}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("watchdog.tr069Pulses")}</div>
-                </div>
-                <div>
-                  <div className="text-lg font-mono font-semibold">{watchdogStatus.seismicJitterCount}</div>
-                  <div className="text-[10px] text-muted-foreground">{t("watchdog.seismicJitter")}</div>
-                </div>
-              </div>
-              {watchdogStatus.avgLatencyMs !== null && (
-                <div className="mt-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-                  <span>{t("watchdog.avgLatency")}:</span>
-                  <span className="font-mono font-semibold">{watchdogStatus.avgLatencyMs} ms</span>
-                </div>
               )}
-              {watchdogStatus.recentEvents.length > 0 && (
-                <div className="mt-3 space-y-1.5 max-h-24 overflow-y-auto">
-                  {watchdogStatus.recentEvents.slice(0, 5).map((ev, i) => (
-                    <div key={i} className="flex items-center justify-between text-[11px] border-b border-border/50 pb-1">
-                      <Badge variant="secondary" className={`text-[9px] ${ev.type === "drop" ? "bg-red-500/10 text-red-600" : ev.type === "reconnect" ? "bg-green-500/10 text-green-600" : ev.type === "tr069-pulse" ? "bg-amber-500/10 text-amber-600" : ""}`}>
-                        {t(`watchdog.event.${ev.type}`) || ev.type}
-                      </Badge>
-                      <span className="text-muted-foreground font-mono truncate max-w-[200px]">{ev.details}</span>
-                    </div>
-                  ))}
+            </div>
+          </CardHeader>
+          <CardContent>
+            {watchdogLoading ? (
+              <Skeleton className="h-24 w-full" />
+            ) : watchdogStatus ? (
+              <>
+                <div className="grid grid-cols-4 gap-2 text-center">
+                  <div>
+                    <div className="text-lg font-mono font-semibold text-red-500">{watchdogStatus.dropCount}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("watchdog.drops")}</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-mono font-semibold text-green-600 dark:text-green-400">{watchdogStatus.reconnectCount}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("watchdog.reconnects")}</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-mono font-semibold">{watchdogStatus.tr069PulseCount}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("watchdog.tr069Pulses")}</div>
+                  </div>
+                  <div>
+                    <div className="text-lg font-mono font-semibold">{watchdogStatus.seismicJitterCount}</div>
+                    <div className="text-[10px] text-muted-foreground">{t("watchdog.seismicJitter")}</div>
+                  </div>
                 </div>
-              )}
-            </CardContent>
-          </Card>
-        )}
+                {watchdogStatus.avgLatencyMs !== null && (
+                  <div className="mt-2 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+                    <span>{t("watchdog.avgLatency")}:</span>
+                    <span className="font-mono font-semibold">{watchdogStatus.avgLatencyMs} ms</span>
+                  </div>
+                )}
+                {watchdogStatus.recentEvents.length > 0 && (
+                  <div className="mt-3 space-y-1.5 max-h-24 overflow-y-auto">
+                    {watchdogStatus.recentEvents.slice(0, 5).map((ev, i) => (
+                      <div key={i} className="flex items-center justify-between text-[11px] border-b border-border/50 pb-1">
+                        <Badge variant="secondary" className={`text-[9px] ${ev.type === "drop" ? "bg-red-500/10 text-red-600" : ev.type === "reconnect" ? "bg-green-500/10 text-green-600" : ev.type === "tr069-pulse" ? "bg-amber-500/10 text-amber-600" : ""}`}>
+                          {t(`watchdog.event.${ev.type}`) || ev.type}
+                        </Badge>
+                        <span className="text-muted-foreground font-mono truncate max-w-[200px]">{ev.details}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="text-xs text-muted-foreground text-center py-4" data-testid="text-watchdog-empty">
+                No watchdog data available
+              </div>
+            )}
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -987,12 +1018,22 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {liveCorrelations && liveCorrelations.length > 0 && (
-        <div>
-          <h2 className="text-sm font-medium mb-3 flex items-center gap-2">
-            <Link2 className="h-4 w-4 text-muted-foreground" />
-            {t("dashboard.liveCorrelations")}
-          </h2>
+      <div>
+        <h2 className="text-sm font-medium mb-3 flex items-center gap-2">
+          <Link2 className="h-4 w-4 text-muted-foreground" />
+          {t("dashboard.liveCorrelations")}
+        </h2>
+        {correlationsLoading ? (
+          <div className="space-y-2">
+            {[1, 2, 3].map((i) => <Skeleton key={i} className="h-10 w-full" />)}
+          </div>
+        ) : !liveCorrelations || liveCorrelations.length === 0 ? (
+          <Card>
+            <CardContent className="py-6 text-center text-sm text-muted-foreground" data-testid="text-correlations-empty">
+              {t("dashboard.noCorrelations") || "No live correlations"}
+            </CardContent>
+          </Card>
+        ) : (
           <div className="space-y-1.5">
             {liveCorrelations.slice(0, 10).map((c) => {
               const sevColors = [
@@ -1021,8 +1062,8 @@ export default function DashboardPage() {
               );
             })}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

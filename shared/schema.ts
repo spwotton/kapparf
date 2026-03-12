@@ -1495,6 +1495,18 @@ export interface PhoenixCountdown {
   totalDays: number;
 }
 
+export interface WatchdogStatus {
+  running: boolean;
+  networkActive: boolean;
+  lastHeartbeat: number | null;
+  dropCount: number;
+  reconnectCount: number;
+  tr069PulseCount: number;
+  seismicJitterCount: number;
+  avgLatencyMs: number | null;
+  recentEvents: { timestamp: number; type: string; target: string; latencyMs: number | null; details: string }[];
+}
+
 export type StreamDomain = "kiwisdr" | "elf" | "satellite" | "pcap" | "adsb" | "morse" | "rf" | "plc";
 
 export const OMEGA_CHRONOS = {
