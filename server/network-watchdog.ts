@@ -176,7 +176,7 @@ async function runHeartbeatCycle(): Promise<void> {
         targets: HEARTBEAT_TARGETS.map(t => t.name),
         lat: K.OBSERVER_LAT,
         lon: K.OBSERVER_LON,
-        description: "Network connectivity lost — possible TR-069 forced reset or physical layer disruption",
+        description: "Network connectivity lost — physical layer disruption or ISP-side reset detected",
       },
       raw: null,
     });
@@ -228,20 +228,21 @@ async function runHeartbeatCycle(): Promise<void> {
         type: "tr069-pulse",
         target: "ipat-analysis",
         latencyMs: null,
-        details: `TR-069 pulse detected: IPAT matches ${K.TARGET_FREQ_1} Hz PRF (${ipat.dominantHz?.toFixed(2)} Hz dominant)`,
+        details: `IPAT timing match: heartbeat inter-arrival aligns with ${K.TARGET_FREQ_1} Hz PRF period (${ipat.dominantHz?.toFixed(2)} Hz dominant) — timing coincidence, not packet capture`,
       });
 
       const trEvent = await storage.createSignalEvent({
         domain: "isp",
         source: "network-watchdog-ipat",
-        eventType: "tr069-prf-correlation",
+        eventType: "ipat-prf-timing-match",
         frequency: K.TARGET_FREQ_1,
-        confidence: 0.7,
+        confidence: 0.4,
         metadata: {
           dominantHz: ipat.dominantHz,
           prfTarget: K.TARGET_FREQ_1,
           pulsing: ipat.pulsing,
-          port: K.TR069_PORT,
+          method: "ipat-timing-coincidence",
+          note: "Ping inter-arrival timing matches PRF period. Not actual TR-069/CWMP packet capture.",
           lat: K.OBSERVER_LAT,
           lon: K.OBSERVER_LON,
         },

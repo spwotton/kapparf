@@ -65,17 +65,13 @@ function StarRating({ correlationId }: { correlationId: string }) {
 }
 
 const domainColors: Record<string, string> = {
-  wifi: "bg-green-500/10 text-green-700 dark:text-green-400",
-  ble: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
-  lte: "bg-red-500/10 text-red-700 dark:text-red-400",
-  "5g": "bg-orange-500/10 text-orange-700 dark:text-orange-400",
   satellite: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
   sdr: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
   elf: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400",
   radar: "bg-rose-500/10 text-rose-700 dark:text-rose-400",
-  plc: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
   isp: "bg-slate-500/10 text-slate-700 dark:text-slate-400",
-  drone: "bg-red-500/10 text-red-700 dark:text-red-400",
+  rf: "bg-green-500/10 text-green-700 dark:text-green-400",
+  morse: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
 };
 
 function LinkedEvents({ eventIds, correlationId }: { eventIds: string[]; correlationId: string }) {

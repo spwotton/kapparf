@@ -271,9 +271,8 @@ function DomainCard({ data, format }: { data: SocialCardData; format: CardFormat
   const maxCount = Math.max(...domains.map(([, v]) => v), 1);
 
   const domainColors: Record<string, string> = {
-    wifi: "#22c55e", ble: "#3b82f6", lte: "#ef4444", "5g": "#f97316",
     satellite: "#a882ff", sdr: "#eab308", elf: "#06b6d4", radar: "#f43f5e",
-    plc: "#d97706", isp: "#64748b", drone: "#8b5cf6",
+    isp: "#64748b", rf: "#22c55e", morse: "#d97706",
   };
 
   return (

@@ -41,8 +41,9 @@ async function runCorrelationCycle(): Promise<void> {
 
     for (const rule of CORRELATION_RULES) {
       cycleRulesChecked++;
-      const relevantDomains = rule.domains.filter(d => domainGroups[d]?.length > 0);
-      if (relevantDomains.length < 2) continue;
+      const allDomainsPresent = rule.domains.every(d => domainGroups[d]?.length > 0);
+      if (!allDomainsPresent) continue;
+      const relevantDomains = rule.domains;
 
       const eventSets = relevantDomains.map(d => domainGroups[d]);
       const firstSet = eventSets[0];

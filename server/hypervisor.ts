@@ -84,15 +84,13 @@ export class OmegaChronosHypervisor {
     if (!this.running) return;
 
     const domainStreamMap: Record<string, string[]> = {
-      wifi: ["pcap-wifi"],
-      ble: ["pcap-ble"],
-      lte: ["pcap-wifi"],
       satellite: ["satellite-blackjack", "satellite-starlink"],
       sdr: ["kiwisdr-ti0rc", "rf-46875", "echo-lt-sidechannel"],
       elf: ["elf-powerline", "elf-schumann", "delta-slip-monitor"],
-      plc: ["plc-modbus"],
+      isp: [],
       radar: ["adsb-local"],
-      drone: ["adsb-local"],
+      rf: ["rf-46875"],
+      morse: ["morse-audio"],
     };
 
     const streamIds = domainStreamMap[event.domain] || [];
@@ -122,14 +120,13 @@ export class OmegaChronosHypervisor {
     }
 
     const agentMap: Record<string, string> = {
-      wifi: "pcap-parser",
-      ble: "pcap-parser",
-      lte: "pcap-parser",
       satellite: "tle-orbital",
       sdr: "kiwisdr-scanner",
       elf: "elf-dissector",
-      plc: "elf-dissector",
+      isp: "pcap-parser",
       radar: "pcap-parser",
+      rf: "kiwisdr-scanner",
+      morse: "morse-decoder",
     };
     const agentId = agentMap[event.domain];
     if (agentId) {

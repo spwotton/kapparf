@@ -615,19 +615,18 @@ async function runScanCycle(): Promise<void> {
 
           const trEvent = await storage.createSignalEvent({
             domain: "isp",
-            source: `kiwisdr-${node.id}-tr069`,
-            eventType: "tr069-rf-correlation",
+            source: `kiwisdr-${node.id}-rf-timing`,
+            eventType: "rf-timing-coincidence",
             frequency: K.TARGET_FREQ_1,
-            confidence: 0.85,
+            confidence: 0.5,
             metadata: {
               rfTarget: target.name,
               rfSnrDb: result.snrDb,
-              port: K.TR069_PORT,
               prfPeriodMs: K.PRF_PERIOD_MS,
               sdrNode: node.id,
               lat: node.lat,
               lon: node.lon,
-              description: "TR-069 telemetry temporally correlated with VLF carrier detection — CWMP tunnel active",
+              description: "RF detection temporally coincided with ISP timing pattern — not actual packet capture",
             },
             raw: null,
           });

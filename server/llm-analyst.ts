@@ -330,7 +330,7 @@ export async function generateSocialCaption(
         messages: [
           {
             role: "system",
-            content: `You are a social media content writer for a SIGINT (signal intelligence) research project called KAPPA. The platform passively monitors electromagnetic signals across 11 domains (WiFi, BLE, LTE, Satellite, SDR, ELF, Radar, PLC, ISP, Drone) from Costa Rica.
+            content: `You are a social media content writer for a SIGINT (signal intelligence) research project called KAPPA. The platform passively monitors electromagnetic signals across 7 active domains (Satellite, SDR, ELF, Radar, ISP, RF, Morse) from Costa Rica.
 
 Write Instagram-optimized content. Be factual, technical but accessible, and compelling. The tone should be serious and informational — like a research lab posting updates, NOT promotional or clickbait.
 

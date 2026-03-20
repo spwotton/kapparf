@@ -68,15 +68,13 @@ const nodeIcon = new L.DivIcon({
 });
 
 const domainMarkerColors: Record<string, string> = {
-  wifi: "#22c55e",
-  ble: "#3b82f6",
-  lte: "#ef4444",
-  "5g": "#f97316",
   satellite: "#a855f7",
   sdr: "#eab308",
   elf: "#06b6d4",
   radar: "#f43f5e",
-  drone: "#ef4444",
+  isp: "#64748b",
+  rf: "#22c55e",
+  morse: "#d97706",
 };
 
 function eventIcon(domain: string) {
