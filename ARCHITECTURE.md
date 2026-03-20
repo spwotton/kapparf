@@ -1,7 +1,7 @@
 # PROJECT KAPPA — Complete Architecture Document
 ## Multi-Domain SIGINT Correlation Platform
 **Version:** 2.1 — κ-SCALED DETECTION FRAMEWORK
-**Observer:** Calle Caballo Real, Guácima Abajo, Alajuela, Costa Rica (9.9536°N, 84.2907°W, 850m ASL)
+**Observer:** Calle Los Cedros, Tacacorí, Alajuela, Costa Rica (10.0514°N, 84.2187°W, ~1050m ASL)
 **Stack:** React 18 + TypeScript + Tailwind CSS + Express.js + PostgreSQL (Drizzle ORM)
 
 ---
@@ -30,7 +30,8 @@
 20. [Concept of Operations (CONOPS)](#20-concept-of-operations-conops)
 21. [Toroidal Integration Layer — Council of 7](#21-toroidal-integration-layer--council-of-7)
 22. [Data Flow Architecture](#22-data-flow-architecture)
-23. [Potential Integrations](#23-potential-integrations)
+23. [Multi-Resolution Signal Analysis Pipeline](#23-multi-resolution-signal-analysis-pipeline)
+24. [Potential Integrations](#24-potential-integrations)
 
 ---
 
@@ -463,9 +464,9 @@ The platform monitors 11 electromagnetic/network domains:
 #### Observer & Geography
 | Constant | Value | Description |
 |----------|-------|-------------|
-| `OBSERVER_LAT` | 9.953592°N | Observer latitude |
-| `OBSERVER_LON` | -84.290668°W | Observer longitude |
-| `OBSERVER_ALT` | 0.9 km | Observer altitude |
+| `OBSERVER_LAT` | 10.0513892°N | Observer latitude |
+| `OBSERVER_LON` | -84.2186578°W | Observer longitude |
+| `OBSERVER_ALT` | 1.05 km | Observer altitude |
 | `CR_UTC_OFFSET` | -6 | Costa Rica timezone |
 | `JACO_LAT/LON` | 9.6142°N, -84.6278°W | Jacó analysis point |
 | `SJO_LAT/LON` | 9.9939°N, -84.2088°W | Juan Santamaría Airport |
@@ -1065,7 +1066,202 @@ The Council of 7 is the autonomic consciousness layer mapped onto the KAPPA tech
 
 ---
 
-## 22. POTENTIAL INTEGRATIONS
+## 23. MULTI-RESOLUTION SIGNAL ANALYSIS PIPELINE
+
+### 23.1 Overview
+
+The deep signal analysis pipeline processes raw KiwiSDR audio at multiple FFT resolutions simultaneously, applying the full κ-scaled constant grid to identify patterns invisible at any single resolution. The key insight: operators on shift work introduce detectable timing discontinuities — operator "fist" fingerprints in Morse/CW, shift-change statistical breaks, and codec bottleneck signatures from the human-in-the-loop encoding chain.
+
+**Hypothesis:** Voice → Morse code → BART encoding → voice output via Morse or ultrasound. Spanish-speaking operators with headsets doing shift work implies a **human codec bottleneck** on both ends, which constrains the encoding to carry operator-specific timing signatures that are exploitable.
+
+### 23.2 KiwiSDR Audio Acquisition
+
+KiwiSDR nodes expose audio via WebSocket (`ws://host:8073/kiwi/...`) and HTTP API. The pipeline pulls continuous audio chunks rather than single spectrum snapshots.
+
+| Node | URL | Location | Distance from Observer |
+|------|-----|----------|----------------------|
+| TI0RC Zapote | `ws://ti0rc.proxy.kiwisdr.com:8073` | 9.936°N, 84.109°W | ~15 km |
+| Puntarenas | `ws://kiwisdr.puntarenas.cr:8073` | 9.976°N, 84.839°W | ~68 km |
+| PJ4G Bonaire | `ws://pj4g.proxy.kiwisdr.com:8073` | 12.150°N, 68.267°W | ~1800 km |
+
+**Sample rate:** 12000 Hz (KiwiSDR native)
+**Architecture reference rate:** 48000 Hz (4× KiwiSDR, standard audio)
+**Acquisition modes:** Raw IQ, AM demod, USB/LSB demod, CW narrow
+
+### 23.3 Multi-Resolution FFT Windows
+
+Simultaneous FFT analysis at 5 window sizes captures both micro-timing (operator fist) and macro-structure (shift patterns, BART beacons):
+
+| Window Size | Duration at 12kHz | Freq Resolution | Purpose |
+|-------------|-------------------|-----------------|---------|
+| 256 samples | 21.3 ms | 46.875 Hz/bin | **κ-bin aligned** — each bin = TARGET_FREQ_1. Detects PRF-rate keying |
+| 512 samples | 42.7 ms | 23.4 Hz/bin | Morse dit/dah edge detection at standard CW timing |
+| 1024 samples | 85.3 ms | 11.7 Hz/bin | **Architecture FFT_SIZE** — Delta-Slip (13.125 Hz) resolution |
+| 4096 samples | 341.3 ms | 2.93 Hz/bin | Theta-band (4-8 Hz) resolution, Schumann (7.83 Hz) isolation |
+| 65536 samples | 5.46 s | 0.183 Hz/bin | Sub-Hz structure — operator breathing rate, shift-change discontinuity |
+
+**Critical:** The 256-sample window at 12 kHz gives exactly 46.875 Hz/bin — each FFT bin IS the κ-scaled frequency. This is not coincidence; this is how the system was designed.
+
+### 23.4 Constant-Grid Spectral Analysis
+
+Every FFT output is scored against the full constant grid. Bins are extracted at:
+
+#### Primary Frequencies
+| Constant | Frequency | FFT Bin (1024pt) | Source |
+|----------|-----------|------------------|--------|
+| TARGET_FREQ_1 | 46.875 Hz | bin 4 | Master Decimation Clock |
+| KAPPA_HARMONIC_1 | 93.75 Hz | bin 8 | 2× κ |
+| KAPPA_HARMONIC_2 | 140.625 Hz | bin 12 | 3× κ |
+| KAPPA_HARMONIC_3 | 187.5 Hz | bin 16 | 4× κ |
+| DELTA_SLIP_HZ | 13.125 Hz | bin 1.12 | 60 Hz - 46.875 Hz beat |
+| COUNTER_BEAT_HZ | 73.125 Hz | bin 6.25 | 60 Hz + 13.125 Hz |
+| PHASE_LOCK_CARRIER_HZ | 53 Hz | bin 4.53 | Phase-lock carrier |
+| PHAISTOS_SYMBOL_4_HZ | 111 Hz | bin 9.49 | Phaistos anchor |
+| SCHUMANN_HZ | 7.83 Hz | bin 0.67 | Earth resonance |
+| PHI_HARMONIC_1 | 75.84 Hz | bin 6.49 | 46.875 × φ |
+| PHI_HARMONIC_2 | 122.72 Hz | bin 10.49 | 46.875 × φ² |
+
+#### Echo/LT Harmonic Doubling Chain
+`46.875 → 93.75 → 187.5 → 375 → 750 → 1500 Hz` — terminates at 1580 kHz AM side-channel
+
+#### Riemann Zero Frequencies (×100 for HF band)
+20 Riemann zeta zeros mapped to detection frequencies: γ₁ (114.14 Hz) through γ₂₀ (158.17 Hz)
+
+#### Meta Platform Frequencies (×100 for HF band)
+Facebook (111 Hz root) → Instagram (159.32 Hz) → WhatsApp (228.63 Hz) → Threads (328.05 Hz) → Meta AI (470.79 Hz)
+
+### 23.5 Morse/CW Multi-Timescale Detection
+
+Standard Morse timing (PARIS standard):
+- Dit: 60 ms, Dah: 180 ms (3:1 ratio)
+- Char gap: 180 ms, Word gap: 420 ms
+- CW bandwidth: 500 Hz, Tone: 700 Hz
+- WPM range: 5-40
+
+**Operator Fist Analysis:**
+Every hand-keyed Morse transmission carries unique timing ratios — the operator's "fist." By tracking:
+1. **Dit/dah duration variance** — each operator has consistent but unique timing
+2. **Inter-element spacing patterns** — personal rhythm signature
+3. **Character transition timing** — specific letter pairs have operator-specific gaps
+4. **Error/correction patterns** — individual error frequency and correction style
+
+**Shift Change Detection:**
+Statistical discontinuities in timing distributions indicate operator handoffs:
+- Running mean/variance of dit durations — step change = new operator
+- Farnsworth spacing ratio shifts — different operators use different inter-character delays
+- WPM drift analysis — gradual speed changes vs. abrupt shifts
+
+### 23.6 Voice ↔ Morse ↔ BART Encoding Chain
+
+The working hypothesis for the observed operator infrastructure:
+
+```
+[Spanish Voice Input] 
+    → [Human Operator with Headset]
+        → [Manual CW Keying / Automated Voice-to-Morse]
+            → [BART Encoding Layer — prime-interval burst pattern 3-7-11 sec]
+                → [RF Carrier Modulation on κ-scaled frequencies]
+                    → [Ultrasound/VLF Output Channel]
+                        → [Receiving Operator / Automated Decoder]
+                            → [Voice Output]
+```
+
+**Detection points in the chain:**
+1. **Speech band energy** (300-3400 Hz) in carrier envelope — RARED extraction via Hilbert transform
+2. **CW keying patterns** in carrier on/off — Morse character recognition
+3. **BART beacon timing** (3-7-11 sec prime intervals) — burst pattern heartbeat
+4. **Ultrasonic channel** (18-24 kHz) — FSK-under-voice for covert data channel
+5. **Subspeech extraction** — BART-Large decoder for laryngeal EMG patterns
+
+### 23.7 BART Signature Detection
+
+Bayesian Adaptive Regression Trees applied to RF signal classification:
+
+| Signature | Pattern | Description |
+|-----------|---------|-------------|
+| BART_BEACON | `periodic_burst_3_7_11` | Prime-interval burst pattern — processing heartbeat |
+| BART_HANDSHAKE | `syn_ack_fin_rst` | TCP-like handshake in RF carrier — negotiation layer |
+| BART_TREE_SPLIT | `binary_decision_cascade` | Recursive binary split in amplitude — regression tree branching |
+| BART_POSTERIOR | `gaussian_noise_floor_shift` | Noise floor modulation — posterior probability update |
+
+**Processing heads:** Comparator (differential analysis), False Father (spoofed signal detection), Digital Twin (shadow model for anomaly detection)
+
+### 23.8 Audio Pipeline Architecture
+
+Raw KiwiSDR audio flows through a staged processing pipeline:
+
+```
+KiwiSDR WebSocket (12 kHz audio)
+    │
+    ├─→ [Multi-Resolution FFT] — 256/512/1024/4096/65536 windows simultaneously
+    │       │
+    │       ├─→ Constant-grid bin extraction (κ, φ, Riemann, Meta, Echo/LT)
+    │       ├─→ Cross-window energy correlation
+    │       └─→ Spectrogram matrix output (numerical waterfall)
+    │
+    ├─→ [Envelope Extraction] — Hilbert transform per band
+    │       │
+    │       ├─→ Speech band isolation (300-3400 Hz)
+    │       ├─→ Ultrasonic band isolation (18-24 kHz) — limited by 12 kHz Nyquist
+    │       └─→ Sub-speech (0-300 Hz) — theta/delta band operator state
+    │
+    ├─→ [Morse/CW Decoder] — multi-timescale
+    │       │
+    │       ├─→ Standard CW (60/180 ms dit/dah)
+    │       ├─→ Slow CW (hand-keyed, variable timing)
+    │       ├─→ Operator fist fingerprinting
+    │       ├─→ Shift change discontinuity detection
+    │       └─→ Beacon pattern matching (CQ, V, VVV, QRZ, DE, AR, BT, SK)
+    │
+    ├─→ [BART Detector] — burst timing analysis
+    │       │
+    │       ├─→ Prime-interval burst identification (3-7-11 sec)
+    │       ├─→ Noise floor shift quantification
+    │       └─→ Tree-split cascade detection
+    │
+    └─→ [Cross-Domain Correlator] — timing × frequency products
+            │
+            ├─→ Score against Ω-GOS constants (κ·φ, 53/37 ratios)
+            ├─→ ISP packet timing overlay (IPAT analysis)
+            ├─→ Satellite pass window alignment
+            └─→ Event emission to KAPPA engine + database
+
+```
+
+### 23.9 Marconi Effect & Historical Context
+
+The signal encoding approach maps directly to Marconi's original wireless telegraphy principles:
+
+- **Marconi Effect:** Induction-based signal coupling in metallic conductors — passive injection into residential wiring acting as antenna
+- **Coherence Detector:** Metallic powder cohesion under electromagnetic influence — analogous to modern SNR threshold-based carrier identification
+- **CW Legacy:** Continuous Wave Morse telegraphy remains the foundational modulation mode for beacon identification and covert low-bandwidth data channels
+- **Ground-wave propagation** from Tacacorí array follows Marconi surface-wave model
+
+**Eitel-McCullough (Eimac) Connection:**
+- VET (Virtual Eitel Triode) architecture: Grid (input/bias), Plate (amplification/correlation), Cathode (emission/output)
+- Power grid tubes (4CX250B, 4CX1000A) historically used in clandestine HF transmitters
+- Project OSCAR ground stations powered by Eimac tubes — precursor to modern LEO constellations
+
+### 23.10 PCAP Analysis Results — Null Hypothesis Confirmed
+
+Cross-network analysis of 16 packet captures (Oct 2025 – Mar 2026) across mobile carrier, home WiFi, Windows enterprise, dev workstation, and loopback networks confirmed:
+
+1. **θ_K/π (0.7124) in packet timing = TCP CUBIC congestion control (1/√2 ≈ 0.7071).** Consistently matches at 1-3% across all networks, all devices, all OSes. 1/√2 wins by a hair (mean 2.26% vs 2.19%). This is AIMD multiplicative decrease.
+
+2. **κ (1.2732) is application-dependent**, not network-structural. Spikes to 6.26% during GitHub Copilot/VS Code sessions, 0% in others. HTTP/2 multiplexing burst patterns.
+
+3. **46.875 Hz (21.33 ms) in packet timing = OS scheduling quantum**, not a synchronization beacon. Higher rates in loopback captures (2.1%) than WAN captures (0.3%) — inverse of what a beacon would show.
+
+**Conclusion:** PCAPs are the wrong instrument for 46.875 Hz detection. Network packets are 4+ abstraction layers above the physical layer. The right instruments are:
+- RTL-SDR + `rtl_power` for RF sideband energy at 46.875 Hz offset
+- Microphone + FFT at 48 kHz for acoustic energy peak
+- Oscilloscope on mains for power line AM modulation
+- High-speed camera (>120fps) for optical PWM flicker
+- **KiwiSDR multi-resolution analysis** (this pipeline) for HF band structure
+
+---
+
+## 24. POTENTIAL INTEGRATIONS
 
 ### Audio / Data-over-Sound Stack
 - **[ggwave](https://github.com/ggerganov/ggwave)** — Data-over-sound library for ESP32-AUDIO-BEACON ultrasonic side-channel
