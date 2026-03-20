@@ -35,8 +35,8 @@ import urllib.error
 from datetime import datetime, timezone
 
 KAPPA_URL = os.environ.get("KAPPA_URL", "https://e3c83b39-23b6-4d00-8bcd-067e19790109-00-q2ogrez5zpc7.spock.replit.dev")
-OBSERVER_LAT = 9.983834083892662
-OBSERVER_LON = -84.24968444753229
+OBSERVER_LAT = 10.0513892
+OBSERVER_LON = -84.2186578
 
 def post_event(event):
     url = f"{KAPPA_URL}/api/events"
