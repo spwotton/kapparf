@@ -115,7 +115,7 @@ export function AppSidebar() {
             </Badge>
           )}
         </div>
-        <p className="text-xs text-muted-foreground font-mono">9.9536°N 84.2907°W</p>
+        <p className="text-xs text-muted-foreground font-mono">10.0514°N 84.2187°W</p>
         {phoenixCountdown && (
           <div className="flex items-center justify-between gap-1" data-testid="sidebar-phoenix-countdown">
             <span className="text-xs text-muted-foreground">{t("sidebar.phoenix")}</span>

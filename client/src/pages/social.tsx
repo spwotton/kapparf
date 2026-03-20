@@ -133,7 +133,7 @@ function KappaScoreCard({ data, format }: { data: SocialCardData; format: CardFo
         )}
 
         <div className="flex items-center justify-between border-t border-[#2a2622] pt-[24px]">
-          <span className="text-[#5a5550] font-mono text-[16px]">9.9536°N 84.2907°W</span>
+          <span className="text-[#5a5550] font-mono text-[16px]">10.0514°N 84.2187°W</span>
           <span className="text-[#5a5550] font-mono text-[16px]">{formatTimestamp(data.generatedAt)}</span>
         </div>
       </div>
@@ -195,7 +195,7 @@ function SatelliteCard({ data, format }: { data: SocialCardData; format: CardFor
         </div>
 
         <div className="flex items-center justify-between border-t border-[#2a2622] pt-[24px]">
-          <span className="text-[#5a5550] font-mono text-[16px]">9.9536°N 84.2907°W</span>
+          <span className="text-[#5a5550] font-mono text-[16px]">10.0514°N 84.2187°W</span>
           <span className="text-[#5a5550] font-mono text-[16px]">{formatTimestamp(data.generatedAt)}</span>
         </div>
       </div>
