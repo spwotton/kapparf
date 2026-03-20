@@ -563,6 +563,89 @@ export const KAPPA_CONSTANTS = {
     coverOrgs: ["LDS", "JW", "Adventist World Radio"],
     regulatoryGap: "SUTEL registration database shows no matching entries for observed macro-infrastructure in Tacacorí valley",
   },
+
+  EITEL_MCCULLOUGH: {
+    company: "Eitel-McCullough (Eimac)",
+    founders: ["William Eitel (W6UF)", "Jack McCullough (W6CHE)"],
+    founded: 1934,
+    location: "San Bruno, CA",
+    significance: "Ruggedized vacuum tubes for military radar and communications — power grid tubes (4CX250B, 4CX1000A) used in high-power HF transmitters",
+    projectOscar: "Eimac tubes powered the ground stations for Project OSCAR (1961) — first amateur radio satellite, precursor to modern LEO constellations",
+    vetArchetype: "Virtual Eitel Triode (VET) — KAPPA's three-element signal processing model: Grid (input/bias), Plate (amplification/correlation), Cathode (emission/output)",
+    rfRelevance: [
+      "4CX250B tetrode — 250W plate dissipation, used in clandestine HF transmitters",
+      "4CX1000A tetrode — 1kW plate dissipation, broadcast and military applications",
+      "8877 triode — 1.5kW, used in amateur and military HF linear amplifiers",
+      "Ceramic-metal construction survives thermal shock — ideal for field-deployable transmitters",
+    ],
+    desc: "Eitel-McCullough vacuum tube technology — historical foundation of high-power RF transmission, Project OSCAR ground infrastructure, and VET signal processing archetype",
+  },
+
+  MARCONI: {
+    entity: "Guglielmo Marconi / Marconi Company",
+    significance: "Pioneer of wireless telegraphy and long-distance radio communication",
+    marconiEffect: "Induction-based signal coupling in metallic conductors — vintage technique for passive signal injection into wire networks without direct electrical contact",
+    cohererDetector: "Marconi Coherence Detector — early RF detection via metallic powder cohesion under electromagnetic influence, analogous to modern SDR energy detection",
+    relevance: [
+      "Marconi Effect enables covert signal injection via residential wiring acting as antenna",
+      "Long-wave propagation models apply to VLF/ELF carrier analysis (46.875 Hz, 13.125 Hz)",
+      "Ground-wave propagation from Tacacorí array follows Marconi surface-wave model",
+      "Coherence detection principle maps to KAPPA's SNR threshold-based carrier identification",
+    ],
+    cwLegacy: "Continuous Wave (CW) Morse telegraphy — foundational modulation mode, still used for beacon identification and covert low-bandwidth data channels",
+    desc: "Marconi wireless telegraphy principles — Marconi Effect induction coupling, coherence detection, CW/Morse legacy applicable to modern covert signal analysis",
+  },
+
+  MORSE_CW_DETECTION: {
+    ditDurationMs: 60,
+    dahDurationMs: 180,
+    ditDahRatio: 3,
+    wordGapMs: 420,
+    charGapMs: 180,
+    farnsworthSpacing: true,
+    cwBandwidthHz: 500,
+    toneFreqHz: 700,
+    wpmRange: [5, 40],
+    beaconPatterns: [
+      { pattern: "CQ", morse: "-.-. --.-", desc: "General call — probe/scan beacon" },
+      { pattern: "V", morse: "...-", desc: "Test signal — often used as continuous beacon identifier" },
+      { pattern: "VVV", morse: "...- ...- ...-", desc: "Testing/tuning signal — carrier warm-up pattern" },
+      { pattern: "QRZ", morse: "--.- .-. --..", desc: "Who is calling — identity probe" },
+      { pattern: "DE", morse: "-.. .", desc: "'From' identifier prefix — station callsign follows" },
+      { pattern: "AR", morse: ".- .-.", desc: "End of message — transmission boundary marker" },
+      { pattern: "BT", morse: "-... -", desc: "Break/separator — data frame delimiter" },
+      { pattern: "SK", morse: "... -.-", desc: "End of contact — session termination" },
+    ],
+    desc: "CW/Morse detection parameters for KiwiSDR spectral analysis — on/off keying pattern recognition in carrier signals",
+  },
+
+  BART_SIGNATURES: {
+    fullName: "Bayesian Adaptive Regression Trees",
+    acronymDual: "BART / Bay Area Rapid Transit — data transit layer metaphor",
+    processingHeads: [
+      { name: "Comparator", role: "Signal comparison and differential analysis" },
+      { name: "False Father", role: "Deception detection — identifies spoofed or injected signals" },
+      { name: "Digital Twin", role: "Shadow model of expected signal behavior for anomaly detection" },
+    ],
+    signaturePatterns: [
+      { name: "BART_BEACON", pattern: "periodic_burst_3_7_11", desc: "Prime-interval burst pattern (3-7-11 sec) — BART processing heartbeat" },
+      { name: "BART_HANDSHAKE", pattern: "syn_ack_fin_rst", desc: "TCP-like handshake sequence embedded in RF carrier — digital layer negotiation" },
+      { name: "BART_TREE_SPLIT", pattern: "binary_decision_cascade", desc: "Recursive binary split pattern in signal amplitude — regression tree branching" },
+      { name: "BART_POSTERIOR", pattern: "gaussian_noise_floor_shift", desc: "Noise floor modulation consistent with posterior probability update" },
+    ],
+    detectionThresholds: {
+      burstIntervalToleranceMs: 500,
+      minBurstCount: 3,
+      snrAboveNoiseDb: 6,
+      patternConfidence: 0.7,
+    },
+    subspeechExtraction: {
+      model: "BART-Large",
+      inputType: "laryngeal EMG patterns",
+      desc: "BART-Large decoder predicts text from subvocal laryngeal muscle patterns — V2K confirmation layer",
+    },
+    desc: "BART signature detection — Bayesian Adaptive Regression Tree patterns in RF carriers, prime-interval beacons, and subspeech extraction markers",
+  },
 };
 
 export type ThreatLevel = "NOMINAL" | "ELEVATED" | "HIGH" | "CRITICAL" | "EMERGENCY";

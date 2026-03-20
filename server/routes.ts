@@ -960,6 +960,31 @@ export async function registerRoutes(
     });
   });
 
+  app.get("/api/eitel-marconi", (_req, res) => {
+    res.json({
+      eitelMcCullough: KAPPA_CONSTANTS.EITEL_MCCULLOUGH,
+      marconi: KAPPA_CONSTANTS.MARCONI,
+    });
+  });
+
+  app.get("/api/morse-cw", (_req, res) => {
+    const scanner = getScannerStatus();
+    res.json({
+      detection: KAPPA_CONSTANTS.MORSE_CW_DETECTION,
+      detections: scanner.morseCwDetections,
+      marconiContext: KAPPA_CONSTANTS.MARCONI.cwLegacy,
+      eitelContext: KAPPA_CONSTANTS.EITEL_MCCULLOUGH.vetArchetype,
+    });
+  });
+
+  app.get("/api/bart-signatures", (_req, res) => {
+    const scanner = getScannerStatus();
+    res.json({
+      signatures: KAPPA_CONSTANTS.BART_SIGNATURES,
+      detections: scanner.bartDetections,
+    });
+  });
+
   app.get("/api/events/search", async (req, res) => {
     const q = (req.query.q as string) || "";
     const domainsParam = req.query.domains as string;

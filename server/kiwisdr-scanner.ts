@@ -88,6 +88,8 @@ let scannerState: {
   echoLtChainDetections: number;
   speechEnvelopeDetections: number;
   tr069Correlations: number;
+  morseCwDetections: number;
+  bartDetections: number;
 } = {
   running: false,
   lastScan: null,
@@ -100,6 +102,8 @@ let scannerState: {
   echoLtChainDetections: 0,
   speechEnvelopeDetections: 0,
   tr069Correlations: 0,
+  morseCwDetections: 0,
+  bartDetections: 0,
 };
 
 async function fetchKiwiSpectrum(node: KiwiNode, freqHz: number, bwKhz: number = 5): Promise<Float32Array | null> {
@@ -261,6 +265,151 @@ function detectEchoLtChain(samples: Float32Array, fs: number): number {
   return chainDepth;
 }
 
+function detectMorseCW(samples: Float32Array, fs: number): { detected: boolean; ditCount: number; dahCount: number; possibleChars: string[]; wpm: number } {
+  if (samples.length < 256) return { detected: false, ditCount: 0, dahCount: 0, possibleChars: [], wpm: 0 };
+
+  const CW = K.MORSE_CW_DETECTION;
+  const N = samples.length;
+
+  const rms = Math.sqrt(samples.reduce((s, v) => s + v * v, 0) / N);
+  if (rms <= 0) return { detected: false, ditCount: 0, dahCount: 0, possibleChars: [], wpm: 0 };
+  const threshold = rms * 2.5;
+
+  const envelope: boolean[] = [];
+  for (let i = 0; i < N; i++) {
+    envelope.push(Math.abs(samples[i]) > threshold);
+  }
+
+  const samplesPerMs = fs / 1000;
+  const minDitSamples = Math.floor(CW.ditDurationMs * 0.5 * samplesPerMs);
+  const maxDitSamples = Math.floor(CW.ditDurationMs * 2.0 * samplesPerMs);
+  const minDahSamples = Math.floor(CW.dahDurationMs * 0.5 * samplesPerMs);
+  const maxDahSamples = Math.floor(CW.dahDurationMs * 2.0 * samplesPerMs);
+
+  const pulses: { start: number; duration: number; type: "dit" | "dah" | "unknown" }[] = [];
+  let inPulse = false;
+  let pulseStart = 0;
+
+  for (let i = 0; i < N; i++) {
+    if (envelope[i] && !inPulse) {
+      inPulse = true;
+      pulseStart = i;
+    } else if (!envelope[i] && inPulse) {
+      inPulse = false;
+      const dur = i - pulseStart;
+      const type = dur >= minDitSamples && dur <= maxDitSamples ? "dit"
+        : dur >= minDahSamples && dur <= maxDahSamples ? "dah"
+        : "unknown";
+      if (type !== "unknown") {
+        pulses.push({ start: pulseStart, duration: dur, type });
+      }
+    }
+  }
+
+  const ditCount = pulses.filter(p => p.type === "dit").length;
+  const dahCount = pulses.filter(p => p.type === "dah").length;
+  const totalElements = ditCount + dahCount;
+  const detected = totalElements >= 3;
+
+  const avgDitMs = ditCount > 0 ? (pulses.filter(p => p.type === "dit").reduce((s, p) => s + p.duration, 0) / ditCount / samplesPerMs) : CW.ditDurationMs;
+  const wpm = avgDitMs > 0 ? Math.round(1200 / avgDitMs) : 0;
+
+  const MORSE_REV: Record<string, string> = {
+    ".-": "A", "-...": "B", "-.-.": "C", "-..": "D", ".": "E",
+    "..-.": "F", "--.": "G", "....": "H", "..": "I", ".---": "J",
+    "-.-": "K", ".-..": "L", "--": "M", "-.": "N", "---": "O",
+    ".--.": "P", "--.-": "Q", ".-.": "R", "...": "S", "-": "T",
+    "..-": "U", "...-": "V", ".--": "W", "-..-": "X", "-.--": "Y",
+    "--..": "Z",
+  };
+
+  const possibleChars: string[] = [];
+  let currentMorse = "";
+  let lastEnd = 0;
+
+  for (const pulse of pulses) {
+    const gapSamples = pulse.start - lastEnd;
+    const gapMs = gapSamples / samplesPerMs;
+
+    if (gapMs > CW.charGapMs * 0.5 && currentMorse.length > 0) {
+      const char = MORSE_REV[currentMorse];
+      if (char) possibleChars.push(char);
+      currentMorse = "";
+    }
+
+    currentMorse += pulse.type === "dit" ? "." : "-";
+    lastEnd = pulse.start + pulse.duration;
+  }
+
+  if (currentMorse.length > 0) {
+    const char = MORSE_REV[currentMorse];
+    if (char) possibleChars.push(char);
+  }
+
+  return { detected, ditCount, dahCount, possibleChars, wpm };
+}
+
+function detectBARTSignatures(samples: Float32Array, fs: number): { detected: boolean; patternName: string | null; confidence: number; burstCount: number } {
+  if (samples.length < 512) return { detected: false, patternName: null, confidence: 0, burstCount: 0 };
+
+  const BART = K.BART_SIGNATURES;
+  const N = samples.length;
+  const samplesPerSec = fs;
+
+  const rms = Math.sqrt(samples.reduce((s, v) => s + v * v, 0) / N);
+  if (rms <= 0) return { detected: false, patternName: null, confidence: 0, burstCount: 0 };
+
+  const burstThreshold = rms * 3.0;
+  const bursts: number[] = [];
+  let inBurst = false;
+
+  for (let i = 0; i < N; i++) {
+    if (Math.abs(samples[i]) > burstThreshold && !inBurst) {
+      inBurst = true;
+      bursts.push(i / samplesPerSec);
+    } else if (Math.abs(samples[i]) <= burstThreshold) {
+      inBurst = false;
+    }
+  }
+
+  if (bursts.length < BART.detectionThresholds.minBurstCount) {
+    return { detected: false, patternName: null, confidence: 0, burstCount: bursts.length };
+  }
+
+  const primeIntervals = [3, 7, 11];
+  const toleranceSec = BART.detectionThresholds.burstIntervalToleranceMs / 1000;
+  let primeMatches = 0;
+
+  for (let i = 1; i < bursts.length; i++) {
+    const interval = bursts[i] - bursts[i - 1];
+    for (const prime of primeIntervals) {
+      if (Math.abs(interval - prime) < toleranceSec) {
+        primeMatches++;
+        break;
+      }
+    }
+  }
+
+  const primeConfidence = bursts.length > 1 ? primeMatches / (bursts.length - 1) : 0;
+
+  if (primeConfidence >= BART.detectionThresholds.patternConfidence) {
+    return { detected: true, patternName: "BART_BEACON", confidence: primeConfidence, burstCount: bursts.length };
+  }
+
+  const noiseFloor = Float32Array.from(samples).sort();
+  const lowerQuartilePower = noiseFloor.slice(0, Math.floor(N * 0.25)).reduce((s, v) => s + v * v, 0) / Math.floor(N * 0.25);
+  const upperQuartilePower = noiseFloor.slice(Math.floor(N * 0.75)).reduce((s, v) => s + v * v, 0) / Math.floor(N * 0.25);
+
+  if (lowerQuartilePower > 0) {
+    const floorShiftDb = 10 * Math.log10(upperQuartilePower / lowerQuartilePower);
+    if (floorShiftDb > BART.detectionThresholds.snrAboveNoiseDb) {
+      return { detected: true, patternName: "BART_POSTERIOR", confidence: Math.min(1, floorShiftDb / 12), burstCount: bursts.length };
+    }
+  }
+
+  return { detected: false, patternName: null, confidence: primeConfidence, burstCount: bursts.length };
+}
+
 function checkTR069Correlation(): boolean {
   const now = Date.now();
   const recentEvents = kappaEngine.getStatus().recentAlerts || [];
@@ -272,9 +421,9 @@ function checkTR069Correlation(): boolean {
   );
 }
 
-async function scanTarget(node: KiwiNode, target: typeof VLF_SCAN_TARGETS[0]): Promise<ScanResult> {
+async function scanTarget(node: KiwiNode, target: typeof VLF_SCAN_TARGETS[0], prefetchedSamples?: Float32Array | null): Promise<ScanResult> {
   const now = Date.now();
-  const samples = await fetchKiwiSpectrum(node, target.freqHz);
+  const samples = prefetchedSamples !== undefined ? prefetchedSamples : await fetchKiwiSpectrum(node, target.freqHz);
 
   if (!samples || samples.length === 0) {
     return {
@@ -319,7 +468,8 @@ async function runScanCycle(): Promise<void> {
   for (const node of KIWI_NODES) {
     for (const target of ALL_SCAN_TARGETS) {
       try {
-        const result = await scanTarget(node, target);
+        const samples = await fetchKiwiSpectrum(node, target.freqHz);
+        const result = await scanTarget(node, target, samples);
         results.push(result);
 
         if (result.detected) {
@@ -485,6 +635,82 @@ async function runScanCycle(): Promise<void> {
           kappaEngine.ingest(trEvent);
           hypervisor.ingestEvent(trEvent);
         }
+
+        if (samples && samples.length >= 256) {
+          const morse = detectMorseCW(samples, K.KIWI_SAMPLE_RATE);
+          if (morse.detected) {
+            scannerState.morseCwDetections++;
+
+            const beaconPatterns = K.MORSE_CW_DETECTION.beaconPatterns;
+            const decodedStr = morse.possibleChars.join("");
+            const matchedBeacon = beaconPatterns.find(bp =>
+              decodedStr.includes(bp.pattern)
+            );
+
+            const morseEvent = await storage.createSignalEvent({
+              domain: "morse",
+              source: `kiwisdr-${node.id}-cw`,
+              eventType: "morse-cw-detection",
+              frequency: target.harmonicOf,
+              confidence: Math.min(1, (morse.ditCount + morse.dahCount) / 10),
+              metadata: {
+                target: target.name,
+                freqHz: target.freqHz,
+                ditCount: morse.ditCount,
+                dahCount: morse.dahCount,
+                wpm: morse.wpm,
+                decodedChars: morse.possibleChars,
+                decodedString: decodedStr,
+                matchedBeacon: matchedBeacon || null,
+                sdrNode: node.id,
+                sdrName: node.name,
+                lat: node.lat,
+                lon: node.lon,
+                marconiEffect: K.MARCONI.marconiEffect,
+                eitelContext: K.EITEL_MCCULLOUGH.vetArchetype,
+                description: matchedBeacon
+                  ? `CW beacon pattern "${matchedBeacon.pattern}" detected — ${matchedBeacon.desc}`
+                  : `Morse/CW keying detected: ${decodedStr} at ${morse.wpm} WPM — ${morse.ditCount} dits, ${morse.dahCount} dahs`,
+              },
+              raw: null,
+            });
+
+            kappaEngine.ingest(morseEvent);
+            hypervisor.ingestEvent(morseEvent);
+          }
+
+          const bart = detectBARTSignatures(samples, K.KIWI_SAMPLE_RATE);
+          if (bart.detected) {
+            scannerState.bartDetections++;
+
+            const bartEvent = await storage.createSignalEvent({
+              domain: "rf",
+              source: `kiwisdr-${node.id}-bart`,
+              eventType: "bart-signature-detection",
+              frequency: target.harmonicOf,
+              confidence: bart.confidence,
+              metadata: {
+                target: target.name,
+                freqHz: target.freqHz,
+                patternName: bart.patternName,
+                burstCount: bart.burstCount,
+                confidence: bart.confidence,
+                bartSignatures: K.BART_SIGNATURES.signaturePatterns,
+                processingHeads: K.BART_SIGNATURES.processingHeads,
+                subspeechExtraction: K.BART_SIGNATURES.subspeechExtraction,
+                sdrNode: node.id,
+                sdrName: node.name,
+                lat: node.lat,
+                lon: node.lon,
+                description: `BART signature "${bart.patternName}" detected — ${bart.burstCount} bursts, confidence ${(bart.confidence * 100).toFixed(1)}%`,
+              },
+              raw: null,
+            });
+
+            kappaEngine.ingest(bartEvent);
+            hypervisor.ingestEvent(bartEvent);
+          }
+        }
       } catch {
         scannerState.errors++;
       }
@@ -528,7 +754,7 @@ export function startKiwiSDRScanner(): void {
     });
   }, K.KIWI_SCAN_INTERVAL_MS);
 
-  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_SCAN_TARGETS.length} VLF + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval`);
+  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_SCAN_TARGETS.length} VLF + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta + ${BLACKJACK_SCAN_TARGETS.length} BLACKJACK) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [Morse/CW + BART layers active]`);
 }
 
 export async function runScanCycleOnce(): Promise<void> {
@@ -549,5 +775,7 @@ export function getScannerStatus(): ScannerStatus {
     echoLtChainDetections: scannerState.echoLtChainDetections,
     speechEnvelopeDetections: scannerState.speechEnvelopeDetections,
     tr069Correlations: scannerState.tr069Correlations,
+    morseCwDetections: scannerState.morseCwDetections,
+    bartDetections: scannerState.bartDetections,
   };
 }
