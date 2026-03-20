@@ -496,11 +496,40 @@ export const KAPPA_CONSTANTS = {
   },
 
   BLACKJACK_MANDRAKE: {
-    freqKhz: 2274,
-    freqHz: 2274000,
-    freqMhz: 2.274,
-    band: "120m HF",
-    desc: "BLACKJACK MANDRAKE — clandestine coordination frequency for ground-orbital telemetry synchronization",
+    satellite: {
+      program: "DARPA Blackjack",
+      payloads: ["Mandrake 2A (Able)", "Mandrake 2B (Baker)"],
+      ace: "Autonomous Control Engine",
+      orbit: "LEO",
+      launchDate: "2021-06",
+      desc: "DARPA Blackjack LEO mesh networking constellation — Mandrake 2 technology demo with laser comms and autonomous orbital control",
+    },
+    rfFreqMhz: 2274.0,
+    rfFreqHz: 2274000000,
+    rfBand: "S-band",
+    rfMode: "BPSK/FSK TT&C",
+    downconversion: {
+      loFreqMhz: 2250.0,
+      ifFreqMhz: 24.0,
+      ifFreqKhz: 24000,
+      ifFreqHz: 24000000,
+      desc: "2274 MHz - 2250 MHz LO = 24 MHz IF — within KiwiSDR 0-30 MHz range",
+    },
+    dsp: {
+      fftBins: 1024,
+      binWidthHz: 46.875,
+      sampleRateHz: 48000,
+      decimation: 1,
+      averaging: 4,
+      desc: "1024-bin FFT × 46.875 Hz/bin = 48 kHz baseband — standard KiwiSDR Zoom 10 resolution",
+    },
+    hfMirror: {
+      freqKhz: 2274,
+      freqHz: 2274000,
+      freqMhz: 2.274,
+      band: "120m HF",
+      desc: "HF mirror of S-band downlink designation — direct KiwiSDR scan target",
+    },
     harmonics: [
       { order: 2, freqKhz: 4548, desc: "2nd harmonic — upper HF relay" },
       { order: 3, freqKhz: 6822, desc: "3rd harmonic — 40m band spill" },
@@ -512,7 +541,12 @@ export const KAPPA_CONSTANTS = {
       deltaSlip: 13.125,
       plcCarrier: 60,
     },
-    context: "46.875 Hz × 48.512 ≈ 2274 kHz — BLACKJACK heartbeat signal synchronizing satellite-ground data fusion via HF skip propagation",
+    dopplerLeo: {
+      maxShiftHz: 50000,
+      passWindowMin: 8,
+      desc: "LEO Doppler ±50 kHz — 8 min pass window — requires frequency tracking during overpass",
+    },
+    context: "DARPA Blackjack Mandrake 2 S-band TT&C at 2274 MHz → downconverted to 24 MHz IF for KiwiSDR reception. 46.875 Hz bin width = 48 kHz baseband. HF mirror at 2274 kHz also monitored.",
   },
 
   TACACORI_ARRAY: {

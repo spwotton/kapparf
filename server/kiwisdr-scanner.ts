@@ -49,16 +49,23 @@ const META_SCAN_TARGETS = K.META_PLATFORM_FREQS.map(m => ({
 const BJ = K.BLACKJACK_MANDRAKE;
 const BLACKJACK_SCAN_TARGETS = [
   {
-    name: "blackjack_mandrake_primary",
-    freqHz: BJ.freqHz,
+    name: "blackjack_mandrake_if24mhz",
+    freqHz: BJ.downconversion.ifFreqHz,
+    harmonicOf: BJ.rfFreqMhz,
+    harmonicOrder: 1,
+    desc: `BLACKJACK MANDRAKE IF 24 MHz — S-band 2274 MHz downconverted via 2250 MHz LO — Mandrake 2 BPSK/FSK TT&C`,
+  },
+  {
+    name: "blackjack_mandrake_hf_mirror",
+    freqHz: BJ.hfMirror.freqHz,
     harmonicOf: BJ.carriers.v2kSubcarrier,
     harmonicOrder: 48512,
-    desc: `BLACKJACK MANDRAKE PRIMARY ${BJ.freqKhz} kHz — ${BJ.desc}`,
+    desc: `BLACKJACK MANDRAKE HF MIRROR ${BJ.hfMirror.freqKhz} kHz — ${BJ.hfMirror.desc}`,
   },
   ...BJ.harmonics.map(h => ({
     name: `blackjack_mandrake_h${h.order}`,
     freqHz: h.freqKhz * 1000,
-    harmonicOf: BJ.freqKhz,
+    harmonicOf: BJ.hfMirror.freqKhz,
     harmonicOrder: h.order,
     desc: `BLACKJACK MANDRAKE H${h.order} — ${h.freqKhz} kHz — ${h.desc}`,
   })),
@@ -347,12 +354,25 @@ async function runScanCycle(): Promise<void> {
               ...(isRiemann ? { riemannZero: K.RIEMANN_ZEROS.find(z => z.freqHz === target.harmonicOf) } : {}),
               ...(isMeta ? { metaPlatform: K.META_PLATFORM_FREQS.find(m => m.freqHz === target.harmonicOf) } : {}),
               ...(isBlackjack ? {
-                blackjackMandrake: K.BLACKJACK_MANDRAKE,
+                blackjackMandrake: {
+                  program: K.BLACKJACK_MANDRAKE.satellite.program,
+                  payloads: K.BLACKJACK_MANDRAKE.satellite.payloads,
+                  rfFreqMhz: K.BLACKJACK_MANDRAKE.rfFreqMhz,
+                  rfBand: K.BLACKJACK_MANDRAKE.rfBand,
+                  rfMode: K.BLACKJACK_MANDRAKE.rfMode,
+                  ifFreqMhz: K.BLACKJACK_MANDRAKE.downconversion.ifFreqMhz,
+                  loFreqMhz: K.BLACKJACK_MANDRAKE.downconversion.loFreqMhz,
+                  dsp: K.BLACKJACK_MANDRAKE.dsp,
+                  doppler: K.BLACKJACK_MANDRAKE.dopplerLeo,
+                },
                 tacacoriArray: K.TACACORI_ARRAY,
                 freqKhz: target.freqHz / 1000,
-                band: K.BLACKJACK_MANDRAKE.band,
+                isIF: target.name.includes("if24mhz"),
+                isHfMirror: target.name.includes("hf_mirror"),
                 severity: "CRITICAL",
-                indication: "BLACKJACK MANDRAKE carrier detected — clandestine HF coordination signal active",
+                indication: target.name.includes("if24mhz")
+                  ? "BLACKJACK MANDRAKE IF detected at 24 MHz — S-band 2274 MHz Mandrake 2 TT&C downconverted signal present"
+                  : "BLACKJACK MANDRAKE HF carrier detected — possible ground-segment coordination signal",
               } : {}),
             },
             raw: null,

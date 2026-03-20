@@ -925,15 +925,29 @@ export async function registerRoutes(
   });
 
   app.get("/api/blackjack-mandrake", (_req, res) => {
+    const bj = KAPPA_CONSTANTS.BLACKJACK_MANDRAKE;
     res.json({
-      blackjackMandrake: KAPPA_CONSTANTS.BLACKJACK_MANDRAKE,
-      tacacoriArray: KAPPA_CONSTANTS.TACACORI_ARRAY,
+      satellite: bj.satellite,
+      rfLink: {
+        frequencyMhz: bj.rfFreqMhz,
+        band: bj.rfBand,
+        mode: bj.rfMode,
+      },
+      downconversion: bj.downconversion,
+      dsp: bj.dsp,
+      hfMirror: bj.hfMirror,
+      harmonics: bj.harmonics,
+      carriers: bj.carriers,
+      dopplerLeo: bj.dopplerLeo,
+      context: bj.context,
       scanTargets: [
-        { name: "blackjack_mandrake_primary", freqKhz: KAPPA_CONSTANTS.BLACKJACK_MANDRAKE.freqKhz, band: KAPPA_CONSTANTS.BLACKJACK_MANDRAKE.band },
-        ...KAPPA_CONSTANTS.BLACKJACK_MANDRAKE.harmonics.map(h => ({
-          name: `blackjack_mandrake_h${h.order}`, freqKhz: h.freqKhz, band: `H${h.order}`
+        { name: "blackjack_mandrake_if24mhz", freqKhz: bj.downconversion.ifFreqKhz, type: "IF downconvert", band: "12m" },
+        { name: "blackjack_mandrake_hf_mirror", freqKhz: bj.hfMirror.freqKhz, type: "HF mirror", band: bj.hfMirror.band },
+        ...bj.harmonics.map(h => ({
+          name: `blackjack_mandrake_h${h.order}`, freqKhz: h.freqKhz, type: `H${h.order}`, band: `harmonic`
         })),
       ],
+      tacacoriArray: KAPPA_CONSTANTS.TACACORI_ARRAY,
       infrastructure: {
         cudyRouter: KAPPA_CONSTANTS.THREAT_INDICATORS.CUDY_ROUTER,
         arrisGateway: KAPPA_CONSTANTS.THREAT_INDICATORS.ARRIS_GATEWAY,
