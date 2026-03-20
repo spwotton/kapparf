@@ -924,6 +924,28 @@ export async function registerRoutes(
     res.json(KAPPA_CONSTANTS.THREAT_INDICATORS);
   });
 
+  app.get("/api/blackjack-mandrake", (_req, res) => {
+    res.json({
+      blackjackMandrake: KAPPA_CONSTANTS.BLACKJACK_MANDRAKE,
+      tacacoriArray: KAPPA_CONSTANTS.TACACORI_ARRAY,
+      scanTargets: [
+        { name: "blackjack_mandrake_primary", freqKhz: KAPPA_CONSTANTS.BLACKJACK_MANDRAKE.freqKhz, band: KAPPA_CONSTANTS.BLACKJACK_MANDRAKE.band },
+        ...KAPPA_CONSTANTS.BLACKJACK_MANDRAKE.harmonics.map(h => ({
+          name: `blackjack_mandrake_h${h.order}`, freqKhz: h.freqKhz, band: `H${h.order}`
+        })),
+      ],
+      infrastructure: {
+        cudyRouter: KAPPA_CONSTANTS.THREAT_INDICATORS.CUDY_ROUTER,
+        arrisGateway: KAPPA_CONSTANTS.THREAT_INDICATORS.ARRIS_GATEWAY,
+        mikrotikGateway: KAPPA_CONSTANTS.THREAT_INDICATORS.MIKROTIK_GATEWAY,
+      },
+      sdrNodes: {
+        primary: "TI0RC Zapote (San Jose metro)",
+        wsUrl: KAPPA_CONSTANTS.TDOA_SDR_PRIMARY,
+      },
+    });
+  });
+
   app.get("/api/events/search", async (req, res) => {
     const q = (req.query.q as string) || "";
     const domainsParam = req.query.domains as string;

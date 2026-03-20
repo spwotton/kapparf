@@ -46,7 +46,25 @@ const META_SCAN_TARGETS = K.META_PLATFORM_FREQS.map(m => ({
   desc: `Meta ${m.platform} | κ^${m.kappa_power} = ${m.multiplier} | ${m.freqHz}Hz × 100 — ${m.role}`,
 }));
 
-const ALL_SCAN_TARGETS = [...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS];
+const BJ = K.BLACKJACK_MANDRAKE;
+const BLACKJACK_SCAN_TARGETS = [
+  {
+    name: "blackjack_mandrake_primary",
+    freqHz: BJ.freqHz,
+    harmonicOf: BJ.carriers.v2kSubcarrier,
+    harmonicOrder: 48512,
+    desc: `BLACKJACK MANDRAKE PRIMARY ${BJ.freqKhz} kHz — ${BJ.desc}`,
+  },
+  ...BJ.harmonics.map(h => ({
+    name: `blackjack_mandrake_h${h.order}`,
+    freqHz: h.freqKhz * 1000,
+    harmonicOf: BJ.freqKhz,
+    harmonicOrder: h.order,
+    desc: `BLACKJACK MANDRAKE H${h.order} — ${h.freqKhz} kHz — ${h.desc}`,
+  })),
+];
+
+const ALL_SCAN_TARGETS = [...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS];
 
 const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
 const DELTA_SLIP_HZ = K.DELTA_SLIP_HZ;
@@ -302,8 +320,12 @@ async function runScanCycle(): Promise<void> {
 
           const isRiemann = target.name.startsWith("riemann_");
           const isMeta = target.name.startsWith("meta_");
-          const eventType = isRiemann ? "riemann-zero-detection" : isMeta ? "meta-frequency-detection" : "vlf-carrier-detection";
-          const scanDomain = isRiemann || isMeta ? "elf" : "sdr";
+          const isBlackjack = target.name.startsWith("blackjack_mandrake");
+          const eventType = isBlackjack ? "blackjack-mandrake-detection"
+            : isRiemann ? "riemann-zero-detection"
+            : isMeta ? "meta-frequency-detection"
+            : "vlf-carrier-detection";
+          const scanDomain = isBlackjack ? "rf" : isRiemann || isMeta ? "elf" : "sdr";
 
           const event = await storage.createSignalEvent({
             domain: scanDomain,
@@ -324,6 +346,14 @@ async function runScanCycle(): Promise<void> {
               description: target.desc,
               ...(isRiemann ? { riemannZero: K.RIEMANN_ZEROS.find(z => z.freqHz === target.harmonicOf) } : {}),
               ...(isMeta ? { metaPlatform: K.META_PLATFORM_FREQS.find(m => m.freqHz === target.harmonicOf) } : {}),
+              ...(isBlackjack ? {
+                blackjackMandrake: K.BLACKJACK_MANDRAKE,
+                tacacoriArray: K.TACACORI_ARRAY,
+                freqKhz: target.freqHz / 1000,
+                band: K.BLACKJACK_MANDRAKE.band,
+                severity: "CRITICAL",
+                indication: "BLACKJACK MANDRAKE carrier detected — clandestine HF coordination signal active",
+              } : {}),
             },
             raw: null,
           });

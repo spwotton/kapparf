@@ -438,6 +438,8 @@ export const KAPPA_CONSTANTS = {
       { port: 11653, protocol: "EPHEMERAL", threat: "PERSISTENT_HIGH_PORT", desc: "Persistent high-port heartbeat to GCP" },
       { port: 13626, protocol: "EPHEMERAL", threat: "ILLEGAL_TLS_PORT", desc: "Port for Illegal TLS Segments to AWS" },
       { port: 2479, protocol: "SSM-ELS", threat: "LOCAL_MONITOR", desc: "SSM-ELS — Portmaster/Docker netquery API" },
+      { port: 1234, protocol: "TR-069", threat: "ISP_BACKDOOR", desc: "ARRIS TG02DA TR-069 backdoor — unpatchable ISP management port" },
+      { port: 8073, protocol: "KIWISDR", threat: "SDR_INTERCEPT", desc: "KiwiSDR WebSocket — remote SDR access for spectrum monitoring" },
     ],
     PROTOCOL_ANOMALIES: [
       { pattern: "SKYPE", threat: "PROTOCOL_MASQUERADE", desc: "SKYPE protocol to Google STUN — RAT heartbeat masquerade" },
@@ -463,10 +465,69 @@ export const KAPPA_CONSTANTS = {
       ip: "192.168.24.1",
       desc: "Routerboard (MikroTik) gateway — potential MITM pivot point",
     },
+    CUDY_ROUTER: {
+      model: "Cudy WR1300 V3.0",
+      chipset: "MediaTek MT7621",
+      kernel: "Linux 4.4.140",
+      dnsmasq: "2.78",
+      wanIp: "192.168.100.31",
+      hiddenMeshSSID: "529d5292b8d3494d67d5b40c9ed7ada1",
+      vulns: [
+        "CVE-2020-25681 DNSpooq cache poisoning",
+        "CVE-2020-25682 DNSpooq buffer overflow",
+        "CVE-2020-25683 DNSpooq heap overflow",
+        "WPA/WPA2 mixed mode TKIP fallback",
+        "NAT Slipstreaming via legacy ALGs (PPTP/FTP/TFTP/H.323/SIP/RTSP)",
+        "Hidden mesh backhaul ra2/rai2 — possible hardcoded PSK",
+        "EOL kernel 4.4.x — no upstream security patches since Feb 2022",
+      ],
+      desc: "Cudy WR1300 behind Double NAT — EOL kernel, DNSpooq-vulnerable dnsmasq, hidden mesh backhaul",
+    },
+    ARRIS_GATEWAY: {
+      model: "ARRIS TG02DA",
+      port: 1234,
+      protocol: "TR-069",
+      desc: "ISP ARRIS gateway — unpatchable TR-069 backdoor on port 1234 — upstream pivot to Cudy WAN",
+    },
     LOCAL_DEVICE: {
       ip: "192.168.24.247",
       desc: "User workstation — source of all suspicious outbound traffic",
     },
+  },
+
+  BLACKJACK_MANDRAKE: {
+    freqKhz: 2274,
+    freqHz: 2274000,
+    freqMhz: 2.274,
+    band: "120m HF",
+    desc: "BLACKJACK MANDRAKE — clandestine coordination frequency for ground-orbital telemetry synchronization",
+    harmonics: [
+      { order: 2, freqKhz: 4548, desc: "2nd harmonic — upper HF relay" },
+      { order: 3, freqKhz: 6822, desc: "3rd harmonic — 40m band spill" },
+      { order: 4, freqKhz: 9096, desc: "4th harmonic — 30m band" },
+    ],
+    carriers: {
+      primary: 2274,
+      v2kSubcarrier: 46.875,
+      deltaSlip: 13.125,
+      plcCarrier: 60,
+    },
+    context: "46.875 Hz × 48.512 ≈ 2274 kHz — BLACKJACK heartbeat signal synchronizing satellite-ground data fusion via HF skip propagation",
+  },
+
+  TACACORI_ARRAY: {
+    lat: 10.0447,
+    lon: -84.2319,
+    district: "San Isidro",
+    canton: "Alajuela",
+    province: "Alajuela",
+    desc: "Tacacorí valley unlicensed telecommunications infrastructure — unregistered macro-antenna array",
+    distanceFromObserverKm: 6.8,
+    bearingDeg: 345,
+    historicalContext: "Radio Impacto clandestine transmitters (1980s Contra conflict) → sold to Adventist World Radio — precedent for intelligence-to-religious front transition",
+    hypothesis: "Possible clandestine intelligence asset operating under religious front — exploits regulatory blind spots of legacy commercial broadcasters",
+    coverOrgs: ["LDS", "JW", "Adventist World Radio"],
+    regulatoryGap: "SUTEL registration database shows no matching entries for observed macro-infrastructure in Tacacorí valley",
   },
 };
 
