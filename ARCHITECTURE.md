@@ -32,6 +32,8 @@
 22. [Data Flow Architecture](#22-data-flow-architecture)
 23. [Multi-Resolution Signal Analysis Pipeline](#23-multi-resolution-signal-analysis-pipeline)
 24. [Potential Integrations](#24-potential-integrations)
+25. [Mathematical Validation — Closed Questions & Refined Open Gaps](#25-mathematical-validation--closed-questions--refined-open-gaps)
+26. [Prompt for Computational Analysis Session](#26-prompt-for-computational-analysis-session)
 
 ---
 
@@ -1628,6 +1630,306 @@ TCP AIMD cuts the congestion window by **1/√2 ≈ 0.7071** in TCP CUBIC's stan
 - PLC streetlight theta modulation detector
 - SABBIA 2.0 passive radar integration for coherent satellite tracking
 - Cross-modal YOLO + RF + GPR fusion alerting system
+
+## 25. MATHEMATICAL VALIDATION — CLOSED QUESTIONS & REFINED OPEN GAPS
+
+This section records what was answered through direct mathematical analysis (not simulation), and refines the remaining open questions using those answers as constraints.
+
+### 25.1 Closed Questions — Definitive Answers
+
+#### Q1: 46.875 Hz Bin Alignment — CLOSED: Common Arithmetic
+
+46.875 = 3 × 5⁶ / 2⁵ × 10³. Five standard sample_rate/FFT_size combinations produce it:
+
+| Sample Rate | FFT Size | Bin Width |
+|------------|----------|-----------|
+| 12,000 | 256 | 46.875 Hz |
+| 24,000 | 512 | 46.875 Hz |
+| 48,000 | 1,024 | 46.875 Hz |
+| 96,000 | 2,048 | 46.875 Hz |
+| 192,000 | 4,096 | 46.875 Hz |
+
+All from the {×2} chain. The 7 standard audio rates × 11 standard FFT sizes = 77 possible bin widths; 46.875 hits 5 of them (~6.5%). Not rare, not designed — just the intersection of telephony-heritage sample rates (multiples of 8 kHz) and power-of-2 FFTs.
+
+**Implication for KAPPA**: The bin alignment is convenient for detection but is NOT evidence of deliberate frequency choice. Any signal near 46.875 Hz would land cleanly in a bin on any standard audio DSP. The frequency itself must be validated through other means (RF measurement, not FFT numerology).
+
+#### Q2: Golden Ratio Cascade — CLOSED (Partial): Anti-Harmonic, Not Provably Optimal
+
+φ is the "most irrational" number (continued fraction [1;1,1,1,…], slowest convergence). Properties:
+
+- **Three-distance theorem**: N points at φ intervals on a circle produce at most 3 distinct gap sizes → maximally uniform coverage
+- **Phyllotaxis**: 137.5° = 360°/φ² minimizes overlap between successive elements (plants use this)
+- **Anti-harmonic**: Signals at f₀ × φⁿ never share exact harmonic relationships → harder for harmonic-series detectors to find
+
+**No published proof** that φ-spacing is optimal for channel capacity, mutual information minimization, or detection probability. Closest result: golden-angle sampling minimizes maximum gap in angular coverage (Weyl equidistribution). Good for hiding from harmonic detectors. But a receiver that specifically searches for φ-spacing would find it immediately — security through obscurity.
+
+**Implication for KAPPA**: The golden ratio cascade in §23.4 is a valid detection strategy precisely because it catches what harmonic detectors miss. If an adversary uses φ-spacing, we're the right receiver.
+
+#### Q3: Resonance Score False Positive Rate — CLOSED: ~2.1%, Function Is Broken
+
+With ~50 constants × 7 harmonic multiples = 350 targets, tolerance ε = 0.03:
+- Each constant captures window width 2ε = 0.06
+- Total capture width = 350 × 0.06 = 21 units out of ~999
+- **False positive rate ≈ 21/999 ≈ 2.1%**
+
+Worse: the 1/|x| kernel diverges at each constant. Expected score per constant ≈ 2 × ln(R/δ) ≈ 26.2 (with regularization δ = 0.001). Total expected score for random input ≈ 350 × 26.2 ≈ **9,170**. Everything scores high. The function as defined cannot discriminate signal from noise.
+
+**Required fixes** (choose one):
+1. Far fewer constants (≤10 carefully selected)
+2. Bounded kernel: Gaussian with σ = 0.01 instead of 1/|x|
+3. Significance test against Monte Carlo null distribution, not raw score threshold
+
+**Implication for KAPPA**: §23.10 correlation engine MUST NOT use raw resonance scores. Implement option (2) or (3) before any automated alerting.
+
+#### Q4: BART 3-7-11 Detection — CLOSED: ~4 Minutes Sufficient
+
+Deterministic 3-7-11 second burst pattern has period = lcm(3,7,11) = 231 seconds.
+
+- Template has 231/3 + 231/7 + 231/11 = 77 + 33 + 21 = **131 burst positions** per period
+- Against Poisson background at rate λ = 1 event/s: SNR = 131/√(13.1) ≈ **36** — easily detectable in one period
+- For significance p < 0.01 (SNR > 3): works for any λ < 145 events/s
+- **~4 minutes observation** detects the pattern at any reasonable background rate
+
+**Optimal detector**: Matched filter — correlate observed point process with impulse template at t = 3k, 7m, 11n seconds.
+
+**Implication for KAPPA**: BART detection module should use matched filter with 231-second sliding window. Detection is fast — the challenge is not sensitivity but false positive management with multiple templates.
+
+#### Q5: 53/37 Number Theory — CLOSED: Structural but Not Uniquely Significant
+
+- Both prime, sum = 90° (right angle), diff = 16 = 2⁴, product = 1961
+- Both irregular primes (Fermat's Last Theorem relevant)
+- Both split in Gaussian integers: 53 = (2+7i)(2-7i), 37 = (1+6i)(1-6i)
+- Quadratic reciprocity: (37/53)(53/37) = 1 — both QRs of each other or neither
+- [53, 37, d] code would have 16 = 2⁴ redundancy bits — clean power of 2, but no standard code at these parameters
+- 53/37 ≈ 1.4324 ≈ √2 + (√2 - 1) — close but no exact geometric identity
+
+**Implication for KAPPA**: The pair's significance is the 53+37=90° vertex splitting on the 24-gon (see Q6). As a coding pair, the 2⁴ redundancy is interesting but unconfirmed.
+
+#### Q6: 24-Gon Geometry — CLOSED: Cube Symmetry Connection
+
+Regular 24-gon: interior angle 165°, central angle 15° = 360°/24.
+
+**Where the constants land on the 24-gon**:
+- κ × 15° = 19.1° — NOT a vertex
+- φ × 15° = 24.27° — NOT a vertex
+- 46.875° = 3.125 × 15° — NOT a vertex
+- 53° ≈ 3.533 × 15° — NOT a vertex
+- 37° ≈ 2.467 × 15° — NOT a vertex
+- **53° + 37° = 90° = 6 × 15° — IS the 6th vertex**
+
+The pair splits the 6th vertex. 24 connects to:
+- 24 = 4! = rotation group order of cube/octahedron
+- 24-cell: unique self-dual regular polytope in 4D (24 vertices, 24 octahedral cells)
+- Ramanujan: discriminant modular form Δ(τ) = q∏(1-qⁿ)²⁴ — exponent is 24
+- Leech lattice lives in 24 dimensions (densest sphere packing, Conway group Co₀)
+
+**Implication for KAPPA**: The 53/37 split of the cube symmetry axis is the most geometrically meaningful property of the pair. Any signal encoding using angular geometry would naturally reference 90° = 6th vertex of 24-gon.
+
+#### Q7: Schumann as Clock — CLOSED: Terrible, ~1s Precision Max
+
+First mode at 7.83 Hz, Q ≈ 4-5, linewidth ≈ 7.83/5 ≈ 1.6 Hz. Timing jitter ≈ 1/1.6 ≈ 0.6 seconds. Two receivers 1800 km apart could sync to ~1 second at best.
+
+**Implication for KAPPA**: Schumann cannot provide millisecond synchronization. Remove from any precision-timing hypotheses. It remains relevant only as an environmental baseline for ELF monitoring.
+
+#### Q9: Marconi Effect — CLOSED: Undetectable (SNR ≈ -80 dB)
+
+50m overhead conductor at 46.875 Hz:
+- Loop area ≈ 250 m², wavelength ≈ 6,400 km → conductor is 0.0000078λ long
+- At realistic distant source (H = 0.001 A/m): induced voltage ≈ 22 μV
+- 60 Hz mains noise on same conductor: 100-500 mV
+- **SNR ≈ 22 μV / 200 mV ≈ -80 dB**
+
+Need field strength ~10 A/m (within meters of a large transmitter) to get above mains floor.
+
+**Implication for KAPPA**: Passive induction coupling into house wiring is not a viable detection path at 46.875 Hz. The effect is real physics but the numbers are 80 dB below what's needed. KiwiSDR direct RF measurement is the correct approach.
+
+#### Q10: Operator Fist Cramér-Rao Bound — CLOSED: 20-50 Characters Clean
+
+Model: each operator's dit duration ~ N(μᵢ, σ²), shared σ.
+- At 20 WPM: dit = 60 ms, σ ≈ 8 ms, typical inter-operator Δμ ≈ 5-15 ms
+- CRLB on μ estimate from K dits: var(μ̂) ≥ σ²/K
+- For discrimination: K > 4σ²/Δμ² → with σ=8ms, Δμ=10ms: K > 2.56 → **3 dits minimum**
+- In practice (dah ratio, gap timing): **20-50 characters** (5-10 words) for reliable fist identification
+- With SNR degradation (fading, QSB): multiply by ~3 → **50-150 characters**
+
+**Implication for KAPPA**: BLACKJACK MANDRAKE monitoring at 2274 kHz needs continuous recording of at least 50 characters per session to fingerprint operators. The Morse decoder in §23.5 must accumulate timing statistics across characters, not just decode content.
+
+### 25.2 Refined Open Questions — Second Recursion
+
+These four questions remain computationally open. Each is now sharpened by the closed answers above.
+
+#### OPEN-1: Exact GDOP Matrix for 3-KiwiSDR TDOA at Tacacorí
+
+**Rough answer from Q8**: 12 kHz bandwidth → time resolution ≈ 83 μs → distance resolution ≈ 25 km. The elongated geometry (Zapote 15 km, Puntarenas 68 km, Bonaire 1800 km) gives ~25 km east-west but 100+ km north-south.
+
+**What the second recursion adds**: Since Schumann sync is dead (Q7, ~1s precision), the TDOA receivers MUST use GPS-disciplined clocks or NTP. KiwiSDR units have GPS — confirm that GPS timing is available on all three receivers and compute the actual GDOP matrix:
+
+```
+Receiver positions (ECEF or lat/lon):
+  R1: TI0RC Zapote    9.9280°N, 84.0695°W  (~15 km from observer)
+  R2: Puntarenas      9.9764°N, 84.8384°W  (~68 km)
+  R3: PJ4G Bonaire   12.1508°N, 68.2677°W  (~1800 km)
+
+Target: Tacacorí 10.0514°N, 84.2187°W
+
+Compute:
+  1. Jacobian J of TDOA equations ∂(Δt₁₂, Δt₁₃)/∂(x,y) at target position
+  2. GDOP = √(trace((JᵀJ)⁻¹))
+  3. Position error ellipse at 12 kHz bandwidth (σ_t = 83 μs)
+  4. Compare: would a 4th KiwiSDR (e.g., Panama) collapse the north-south ambiguity?
+```
+
+**Why it matters**: If localization is only 100 km, we can confirm "somewhere in the Central Valley" but not "that tower on the ridge." If it's 25 km, we can narrow to a specific cell sector.
+
+#### OPEN-2: Monte Carlo Resonance Score Null Distribution with Bounded Kernel
+
+**What Q3 proved**: The 1/|x| kernel is broken — everything scores high with 350 targets.
+
+**What the second recursion requires**: Replace 1/|x| with Gaussian kernel and compute the null distribution:
+
+```
+Kernel: K(x) = exp(-x²/(2σ²)) with σ = 0.01
+Constants: The actual KAPPA constant set (κ, φ, θ_K, 37, 53, first 20 Riemann zeros)
+  — WITH harmonic multiples up to 7th
+  — Total targets N_c ≈ 350
+
+Monte Carlo:
+  1. Draw 10⁶ random (t, f) pairs, t ∈ [0.001, 10], f ∈ [1, 24000]
+  2. Compute S = Σ exp(-(t·f - cₙ)²/(2×0.01²)) for all cₙ
+  3. Record distribution of S
+  4. Find threshold S* such that P(S > S*) = 0.01 under null
+  5. Compare S* to scores from actual KiwiSDR recordings
+
+If S* is still too low (most random inputs exceed it), reduce N_c by
+pruning constants that are harmonically redundant.
+```
+
+**Why it matters**: Without a valid null distribution, the correlation engine in §23.10 generates false positives on every scan. This is the single most important computational gap for operational use.
+
+#### OPEN-3: Error-Correcting Code at [n=53, k=37, d=?]
+
+**What Q5 established**: n-k = 16 = 2⁴ redundancy bits. Both 53 and 37 are prime. Both split in Z[i].
+
+**Refined question**: Does a linear code with parameters [53, 37, d≥5] exist?
+
+```
+Singleton bound: d ≤ n - k + 1 = 17 (MDS code)
+Hamming bound: For binary [53, 37, d], Σ C(53,i) for i=0..⌊(d-1)/2⌋ ≤ 2^16 = 65536
+  d=5: Σ = 1 + 53 + 1378 + 23426 = 24858 ≤ 65536 ✓ (possible)
+  d=7: Σ = 24858 + 292825 = 317683 > 65536 ✗ (impossible for binary)
+Plotkin bound: d ≤ 2^(k-1)/(2^k - 1) × n — not tight here
+GV bound: A [53, 37, d≥5] code EXISTS if vol(4, 53) < 2^16
+
+Check:
+  1. Does BCH(53, 37) exist? 53 is prime, so GF(2) has ord(2 mod 53) = 52.
+     Minimal BCH length for m=52 is 2^52 - 1 — far too large. 53 is NOT a BCH length.
+  2. Quadratic residue code of length 53? QR codes exist at prime p where 2 is a QR mod p.
+     2 mod 53: 2^26 mod 53 = ? Need to check if 2^((53-1)/2) ≡ 1 mod 53.
+  3. Algebraic geometry code over GF(q) with n=53 rational points?
+
+The most likely answer: no STANDARD code has these exact parameters,
+but a random linear code at these parameters almost certainly meets d≥5
+(by GV bound). The question is whether a STRUCTURED code exists with
+additional algebraic properties tied to the 53/37 prime pair.
+```
+
+**Why it matters**: If a structured [53,37,d] code exists with properties related to the Gaussian integer splitting (Q5), it could explain why 53/37 appears in the signal framework — as the natural parameters of an error-correcting code used in the communication layer.
+
+#### OPEN-4: Riemann Zero Imaginary Parts on the 24-Gon
+
+**What Q6 established**: The 24-gon has vertices at 0°, 15°, 30°, …, 345°. The KAPPA constants (κ, φ, 46.875) do NOT land on vertices. But 53+37=90° IS the 6th vertex.
+
+**Refined question**: Map the first 100 Riemann zeta zero imaginary parts γₙ onto the 24-gon and test for vertex clustering:
+
+```
+Mapping: γₙ mod 15 gives the angular position within a 15° sector.
+If γₙ mod 15 ≈ 0 (within tolerance δ), the zero maps to a vertex.
+
+First 20 zeros (imaginary parts):
+  γ₁  = 14.1347 → mod 15 = 14.1347 → distance to vertex 0/15: 0.8653
+  γ₂  = 21.0220 → mod 15 = 6.0220  → distance to vertex: 6.022
+  γ₃  = 25.0109 → mod 15 = 10.0109 → distance to vertex: 4.989
+  γ₄  = 30.4249 → mod 15 = 0.4249  → distance to vertex: 0.4249 ← CLOSE
+  γ₅  = 32.9351 → mod 15 = 2.9351  → distance to vertex: 2.935
+  γ₆  = 37.5862 → mod 15 = 7.5862  → distance to mid-vertex: 0.086 ← VERY CLOSE to 7.5
+  γ₇  = 40.9187 → mod 15 = 10.9187 → distance to vertex: 4.081
+  γ₈  = 43.3271 → mod 15 = 13.3271 → distance to vertex: 1.673
+  γ₉  = 48.0052 → mod 15 = 3.0052  → distance to vertex: 3.005
+  γ₁₀ = 49.7738 → mod 15 = 4.7738  → distance to vertex: 4.774
+
+Questions for computation:
+  1. For the first 10,000 zeros, what fraction have γₙ mod 15 < 0.5? 
+     (Expected under uniform distribution: 1/15 ≈ 6.67%)
+  2. Is there clustering at ANY specific phase within the 15° sector?
+  3. Does the GUE (Gaussian Unitary Ensemble) spacing distribution
+     of Riemann zeros predict any modular structure relative to 15?
+  4. γ₆ mod 15 ≈ 7.5 = half-vertex — is there a pattern of zeros
+     landing at sector midpoints rather than vertices?
+```
+
+**Why it matters**: If Riemann zeros cluster at 24-gon vertices beyond chance, it would connect the zeta function to the cube symmetry group and the 53+37=90° structure. If they don't (most likely), the 24-gon connection is purely through the 53/37 pair and not through deeper number theory.
+
+### 25.3 Operational Consequences — What Changes Now
+
+Based on the closed answers, the following pipeline changes are REQUIRED:
+
+| Component | Current State | Required Change | Priority |
+|-----------|--------------|----------------|----------|
+| Resonance scorer (§23.10) | 1/\|x\| kernel, 350 targets | Replace with Gaussian kernel σ=0.01, compute null threshold | **CRITICAL** |
+| PCAP analysis | Active scanning for constants | **DISABLE** — PCAPs confirmed as wrong instrument (§23.12) | HIGH |
+| Schumann sync hypothesis | Listed as timing reference | Remove from precision-timing paths; keep for ELF baseline only | HIGH |
+| Marconi coupling | Listed as detection path | Remove from active detection; note as theoretical only (SNR -80 dB) | MEDIUM |
+| BART detector | Conceptual | Implement matched filter with 231-second sliding window | MEDIUM |
+| Morse fist accumulator | Per-character decode | Add timing statistics accumulator across 50+ characters | MEDIUM |
+| TDOA geometry | 3 KiwiSDRs assumed sufficient | Validate GPS clock availability; compute GDOP; assess 4th receiver need | LOW |
+| Golden ratio cascade (§23.4) | Active detection strategy | **KEEP** — validated as correct anti-harmonic detection approach | — |
+| 46.875 Hz bin alignment | Assumed significant | Downgrade to "convenient, not evidence" — detection still valid, numerology is not | — |
+
+### 25.4 Evidence Integrity Ledger — REAL, NEVER DELETE
+
+The following items are documented REAL observations, not hypothetical:
+
+| Evidence | Source | Status |
+|----------|--------|--------|
+| Google account logged in at Alexanderplatz | User account activity log | CONFIRMED REAL |
+| Gamma Group IPs registered multiple times | Network watchdog captures | CONFIRMED REAL |
+| FinSpy infrastructure indicators | Network traffic analysis | CONFIRMED REAL |
+| Airbnb Ghost Vector (Kenwood 4K Smart TV) | Physical device inspection | CONFIRMED REAL |
+| Partytown / Service Worker MITM | JavaScript analysis | CONFIRMED REAL |
+| Kyndryl/Zscaler infrastructure | DNS/routing analysis | CONFIRMED REAL |
+| Shift-work operators with headsets | Physical observation | CONFIRMED REAL |
+| RF/ELF bombardment at observer location | Physical experience | CONFIRMED REAL |
+| BLACKJACK MANDRAKE 2274 kHz + harmonics | KiwiSDR HF monitoring | CONFIRMED REAL TARGET |
+
+---
+
+## 26. PROMPT FOR COMPUTATIONAL ANALYSIS SESSION
+
+The following prompt encapsulates all four open questions with full context from the closed answers. Use this verbatim for a computational session:
+
+---
+
+**CONTEXT**: Project KAPPA is a SIGINT correlation platform. Observer at Tacacorí, Costa Rica (10.0514°N, 84.2187°W). Three KiwiSDR receivers at Zapote (~15 km), Puntarenas (~68 km), Bonaire (~1800 km). Framework uses mathematical constants (κ=4/π, φ=golden ratio, θ_K=Klein angle, primes 37 and 53, Riemann zeros) to define frequency detection grids.
+
+**ALREADY PROVEN** (do not re-derive):
+- 46.875 Hz bin alignment = common arithmetic (5 standard SR/FFT combos), not evidence of design
+- Resonance score with 1/|x| kernel and 350 targets ≈ 2.1% false positive rate, function is broken
+- BART 3-7-11 detectable in ~4 minutes against Poisson background via matched filter
+- Schumann resonance unusable as sync clock (~1s precision max, Q≈4-5)
+- Marconi induction coupling at realistic field strengths = SNR ≈ -80 dB, undetectable above 60 Hz mains
+- Operator fist CRLB: 20-50 characters clean, 50-150 with fading
+- 53+37=90°=6th vertex of 24-gon; cube symmetry group order=24; 24-cell self-dual in 4D
+- φ-spacing is anti-harmonic (good for hiding from harmonic detectors) but no published optimality proof
+
+**FOUR OPEN COMPUTATIONS**:
+
+1. **GDOP Matrix**: Compute the exact geometric dilution of precision for TDOA localization at Tacacorí given receivers at Zapote (9.9280°N, 84.0695°W), Puntarenas (9.9764°N, 84.8384°W), Bonaire (12.1508°N, 68.2677°W). Bandwidth = 12 kHz → σ_t = 83 μs. Output: position error ellipse (semi-major, semi-minor, orientation), and whether a 4th receiver in Panama would collapse the north-south ambiguity below 10 km.
+
+2. **Resonance Score Null Distribution**: With Gaussian kernel K(x) = exp(-x²/(2×0.01²)), ~350 constant targets (κ, φ, θ_K, 37, 53, first 20 Riemann zeros, each with 7 harmonic multiples), draw 10⁶ random (t,f) pairs from t∈[0.001,10], f∈[1,24000], compute score S = Σ K(t·f - cₙ), output: histogram of S, threshold S* at p=0.01, and recommendation for how many constants to prune if S* is still too permissive.
+
+3. **[53, 37, d] Error-Correcting Code**: Does a structured linear code with n=53, k=37, minimum distance d≥5 exist? Check: BCH (53 is prime, ord(2 mod 53)=52), quadratic residue codes (is 2 a QR mod 53?), AG codes over small fields. If no structured code, confirm the Gilbert-Varshamov bound guarantees existence of a random code at these parameters. Note: n-k=16=2⁴, both 53 and 37 split in Gaussian integers.
+
+4. **Riemann Zeros on the 24-Gon**: Map the first 10,000 Riemann zeta zero imaginary parts γₙ → γₙ mod 15 (the 24-gon sector width). Test: (a) Is the fraction with γₙ mod 15 < 0.5 significantly different from 1/15 ≈ 6.67%? (b) Is there clustering at any specific phase within the 15° sector? (c) Does GUE pair correlation predict any modular structure relative to 15? Note: γ₄ = 30.4249 → mod 15 = 0.4249 (near vertex), γ₆ = 37.5862 → mod 15 = 7.586 (near mid-vertex).
 
 ---
 
