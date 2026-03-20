@@ -106,6 +106,7 @@ export default function NodesPage() {
   const { t } = useI18n();
   const { data: nodes, isLoading, isError } = useQuery<SdrNode[]>({
     queryKey: ["/api/nodes"],
+    refetchInterval: 30_000,
   });
 
   return (
@@ -141,8 +142,8 @@ export default function NodesPage() {
               <CardContent className="py-4 space-y-3">
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-medium text-sm">{node.name}</span>
-                  <Badge variant={node.status === "online" ? "default" : "secondary"}>
-                    {node.status === "online" ? t("nodes.online") : t("nodes.offline")}
+                  <Badge variant={node.status === "online" ? "default" : node.status === "degraded" ? "outline" : "secondary"}>
+                    {node.status === "online" ? t("nodes.online") : node.status === "degraded" ? t("nodes.degraded") : t("nodes.offline")}
                   </Badge>
                 </div>
                 <div className="space-y-1.5 text-sm">

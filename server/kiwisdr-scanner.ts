@@ -737,17 +737,96 @@ async function runScanCycle(): Promise<void> {
   }
 }
 
+function isAllowedKiwiUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return false;
+    const host = parsed.hostname.toLowerCase();
+    if (host === "localhost" || host === "127.0.0.1" || host === "0.0.0.0" || host.startsWith("169.254.") || host.startsWith("10.") || host.startsWith("192.168.") || host.startsWith("172.16.") || host.startsWith("172.17.") || host.startsWith("172.18.") || host.startsWith("172.19.") || host.startsWith("172.2") || host.startsWith("172.3") || host === "metadata.google.internal" || host.endsWith(".internal") || host === "[::1]") return false;
+    if (!host.includes("kiwisdr") && !host.includes("sdr") && !host.endsWith(":8073")) {
+      const port = parsed.port || (parsed.protocol === "https:" ? "443" : "80");
+      if (port !== "8073") return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function pingNode(url: string): Promise<"online" | "degraded" | "offline"> {
+  if (!isAllowedKiwiUrl(url)) return "offline";
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    const resp = await fetch(url, {
+      signal: controller.signal,
+      redirect: "follow",
+      headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+    });
+    clearTimeout(timeout);
+
+    if (resp.ok) {
+      const body = await resp.text();
+      if (body.includes("not online") || body.includes("offline")) {
+        return "degraded";
+      }
+      return "online";
+    }
+
+    if (resp.status === 404) {
+      const body = await resp.text();
+      if (body.includes("not online") || body.includes("offline")) {
+        return "degraded";
+      }
+    }
+
+    if (resp.status >= 200 && resp.status < 500) {
+      return "degraded";
+    }
+    return "offline";
+  } catch {
+    return "offline";
+  }
+}
+
+async function healthCheckNodes(): Promise<void> {
+  const dbNodes = await storage.getNodes();
+
+  const checkedDbIds = new Set<string>();
+
+  for (const node of KIWI_NODES) {
+    const dbNode = dbNodes.find(n => n.url === node.url);
+    if (!dbNode) continue;
+    checkedDbIds.add(dbNode.id);
+
+    const status = await pingNode(node.url);
+    await storage.updateNodeStatus(dbNode.id, status);
+  }
+
+  for (const dbNode of dbNodes) {
+    if (checkedDbIds.has(dbNode.id)) continue;
+
+    const status = await pingNode(dbNode.url);
+    await storage.updateNodeStatus(dbNode.id, status);
+  }
+}
+
 export function startKiwiSDRScanner(): void {
   if (scannerState.running) return;
 
   scannerState.running = true;
 
-  setTimeout(() => runScanCycle().catch(err => {
-    console.error("[KiwiSDR] Initial scan error:", err instanceof Error ? err.message : String(err));
-    scannerState.errors++;
-  }), 15_000);
+  setTimeout(() => {
+    healthCheckNodes().catch(() => {});
+    runScanCycle().catch(err => {
+      console.error("[KiwiSDR] Initial scan error:", err instanceof Error ? err.message : String(err));
+      scannerState.errors++;
+    });
+  }, 15_000);
 
   scannerState.timer = setInterval(() => {
+    healthCheckNodes().catch(() => {});
     runScanCycle().catch(err => {
       console.error("[KiwiSDR] Scan cycle error:", err instanceof Error ? err.message : String(err));
       scannerState.errors++;
