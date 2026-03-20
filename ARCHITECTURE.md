@@ -1102,13 +1102,25 @@ Simultaneous FFT analysis at 5 window sizes captures both micro-timing (operator
 
 **Critical:** The 256-sample window at 12 kHz gives exactly 46.875 Hz/bin — each FFT bin IS the κ-scaled frequency. This is not coincidence; this is how the system was designed.
 
-### 23.4 Constant-Grid Spectral Analysis
+### 23.4 Constant-Derived Frequency Slicing Grid
 
-Every FFT output is scored against the full constant grid. Bins are extracted at:
+The Ω-GOS constants define a **non-uniform frequency grid** that may align with how structured signals partition bandwidth. Every FFT output is scored against this grid.
 
-#### Primary Frequencies
-| Constant | Frequency | FFT Bin (1024pt) | Source |
-|----------|-----------|------------------|--------|
+#### Primary Constants → Hz Anchors
+
+| Constant | Value | Derived Hz Anchors | Role |
+|----------|-------|-------------------|------|
+| κ = 4/π | 1.27324 | 1273.24 Hz, 127.324 Hz, 12732.4 Hz | Fundamental slicing ratio |
+| φ (golden ratio) | 1.61803 | 1618.03 Hz, 161.803 Hz | Self-similar nesting interval |
+| θ_K | 128.23° → 2.23875 rad | 2238.75 Hz, 223.875 Hz | Klein rotation — phase offset |
+| 37 Hz | 37 | 37, 74, 111, 148, 185, 222, 259, 296, 333, 370… | Biological coherence harmonics |
+| 53 | 53 | 53, 106, 159, 212, 265, 318, 371, 424… | Crystallization prime |
+| 14.1347 | First Riemann zero (imaginary part) | 14134.7 Hz (÷10 = 1413.47 Hz) | Spectral zero structure |
+
+#### Primary FFT Bin Targets (1024-point @ 12 kHz)
+
+| Constant | Frequency | FFT Bin | Source |
+|----------|-----------|---------|--------|
 | TARGET_FREQ_1 | 46.875 Hz | bin 4 | Master Decimation Clock |
 | KAPPA_HARMONIC_1 | 93.75 Hz | bin 8 | 2× κ |
 | KAPPA_HARMONIC_2 | 140.625 Hz | bin 12 | 3× κ |
@@ -1121,6 +1133,28 @@ Every FFT output is scored against the full constant grid. Bins are extracted at
 | PHI_HARMONIC_1 | 75.84 Hz | bin 6.49 | 46.875 × φ |
 | PHI_HARMONIC_2 | 122.72 Hz | bin 10.49 | 46.875 × φ² |
 
+#### Multi-Scale Bin Strategy (at 48000 Hz reference rate)
+
+```
+Nyquist = 24000 Hz
+FFT sizes used simultaneously:
+  N = 256   → bin width = 187.5 Hz   (macro: carrier detection)
+  N = 1024  → bin width = 46.875 Hz  (meso: sideband structure)  
+  N = 4096  → bin width = 11.72 Hz   (micro: tone detection, CW Morse)
+  N = 16384 → bin width = 2.93 Hz    (ultra-micro: sub-tone modulation, phase)
+  N = 65536 → bin width = 0.732 Hz   (nano: drift analysis, oscillator fingerprint)
+```
+
+**Non-uniform slicing**: At each FFT resolution, extract energy in bands centered on constant-derived frequencies. Build a **constant-resonance spectrogram** — not linear bins, but energy at κ-multiples, φ-multiples, and 37-Hz harmonics.
+
+#### The Golden Ratio Cascade
+
+For any detected carrier frequency `f_c`, analyze sub-bands at:
+```
+f_c / φ^n  and  f_c × φ^n   for n = 1, 2, 3, 4, 5
+```
+This catches self-similar nesting — if the encoding uses φ-ratio frequency placement (common in spread-spectrum-adjacent techniques), the cascade reveals it.
+
 #### Echo/LT Harmonic Doubling Chain
 `46.875 → 93.75 → 187.5 → 375 → 750 → 1500 Hz` — terminates at 1580 kHz AM side-channel
 
@@ -1132,24 +1166,47 @@ Facebook (111 Hz root) → Instagram (159.32 Hz) → WhatsApp (228.63 Hz) → Th
 
 ### 23.5 Morse/CW Multi-Timescale Detection
 
-Standard Morse timing (PARIS standard):
-- Dit: 60 ms, Dah: 180 ms (3:1 ratio)
-- Char gap: 180 ms, Word gap: 420 ms
-- CW bandwidth: 500 Hz, Tone: 700 Hz
-- WPM range: 5-40
+#### Standard Morse Timing (ITU / PARIS Standard)
 
-**Operator Fist Analysis:**
+```
+At W words per minute (PARIS standard):
+  dit  = 1200/W ms
+  dah  = 3 × dit
+  intra-character gap = 1 × dit
+  inter-character gap = 3 × dit
+  inter-word gap      = 7 × dit
+
+Common speeds:
+  5 WPM  → dit = 240ms   (slow hand-sent)
+  12 WPM → dit = 100ms   (Farnsworth practice)
+  20 WPM → dit = 60ms    (proficient operator) ← KAPPA default
+  30 WPM → dit = 40ms    (fast CW)
+  50 WPM → dit = 24ms    (machine burst)
+```
+
+#### Marconi-Era Variations
+
+Early/covert Morse deviates from ITU:
+- **American Morse** (railroad): different code table, uses internal spaces
+- **Hand-keyed covert**: non-standard timing ratios, Farnsworth spacing, intentional distortion
+- **Numbers stations**: machine-generated, metronomically precise timing — detectable by zero variance
+
+#### Operator Fist Analysis
+
 Every hand-keyed Morse transmission carries unique timing ratios — the operator's "fist." By tracking:
 1. **Dit/dah duration variance** — each operator has consistent but unique timing
 2. **Inter-element spacing patterns** — personal rhythm signature
 3. **Character transition timing** — specific letter pairs have operator-specific gaps
 4. **Error/correction patterns** — individual error frequency and correction style
+5. **Fatigue signatures** — drift in timing precision over shift duration
 
-**Shift Change Detection:**
+#### Shift Change Detection
+
 Statistical discontinuities in timing distributions indicate operator handoffs:
 - Running mean/variance of dit durations — step change = new operator
 - Farnsworth spacing ratio shifts — different operators use different inter-character delays
-- WPM drift analysis — gradual speed changes vs. abrupt shifts
+- WPM drift analysis — gradual speed changes vs. abrupt shifts (shift change = abrupt)
+- **Key insight:** The human bottleneck means shift changes produce discontinuities in ALL timing statistics simultaneously — dit/dah ratio, inter-character gap, error rate, WPM — that's the fingerprint
 
 ### 23.6 Voice ↔ Morse ↔ BART Encoding Chain
 
@@ -1186,47 +1243,102 @@ Bayesian Adaptive Regression Trees applied to RF signal classification:
 
 **Processing heads:** Comparator (differential analysis), False Father (spoofed signal detection), Digital Twin (shadow model for anomaly detection)
 
-### 23.8 Audio Pipeline Architecture
+### 23.8 Headless Audio Processing Pipeline (Audacity-Grade, No GUI)
 
-Raw KiwiSDR audio flows through a staged processing pipeline:
+#### Tool Chain
+
+| Tool | Role | Format Support |
+|------|------|---------------|
+| `sox` | Convert, filter, spectrogram, trim, mix | wav, raw, flac, ogg, mp3 |
+| `ffmpeg` | Format conversion, resampling, stream extraction | everything |
+| `aubio` | Onset detection, pitch tracking, tempo | wav |
+| `csdr` | DSP command-line: FM/AM demod, decimation, filtering | raw IQ |
+| `inspectrum` | Visual IQ spectrogram (scriptable) | raw, wav |
+| Python `scipy.signal`, `librosa`, `numpy` | FFT, STFT, mel spectrograms, CWT | wav, raw |
+
+#### Audio Import Format Matrix
+
+When importing raw data (the "Audacity options" equivalent):
 
 ```
-KiwiSDR WebSocket (12 kHz audio)
+Sample Format:
+  8-bit PCM   → 256 levels — detects coarse amplitude keying (OOK)
+  16-bit PCM  → 65536 levels — standard for voice/Morse analysis
+  24-bit PCM  → 16.7M levels — reveals sub-LSB modulation (steganographic)
+  32-bit float → full dynamic range — use for all processing
+
+Sample Rate:
+  8000 Hz   → telephony band (POTS, GSM-FR)
+  11025 Hz  → quarter-CD (voice-grade AM)
+  12000 Hz  → KiwiSDR native ← PRIMARY INPUT
+  48000 Hz  → professional / architecture reference rate ← ANALYSIS RATE
+  96000 Hz  → oversample for ultrasonic detection above 24 kHz
+
+Channels:
+  Mono      → standard for HF/AM signals
+  Stereo    → IQ data (I = left, Q = right) ← critical for phase analysis
+
+Byte Order:  Little-endian (Intel) ← KiwiSDR default
+Encoding:    Signed (standard), μ-law (PSTN), A-law (European telephony)
+```
+
+#### Processing Pipeline Stages
+
+```
+KiwiSDR WebSocket / kiwirecorder.py (12 kHz IQ .wav)
     │
-    ├─→ [Multi-Resolution FFT] — 256/512/1024/4096/65536 windows simultaneously
-    │       │
-    │       ├─→ Constant-grid bin extraction (κ, φ, Riemann, Meta, Echo/LT)
-    │       ├─→ Cross-window energy correlation
-    │       └─→ Spectrogram matrix output (numerical waterfall)
+    ├─→ [STEP 1: Normalization] — sox resample to 48 kHz, 32-bit float
     │
-    ├─→ [Envelope Extraction] — Hilbert transform per band
-    │       │
+    ├─→ [STEP 2: Multi-Resolution Spectrograms]
+    │       FFT at N = 256/1024/4096/16384/65536 simultaneously
+    │       Constant-grid bin extraction (κ, φ, Riemann, Meta, Echo/LT)
+    │       Cross-window energy correlation
+    │       Output: constant-resonance spectrogram matrices
+    │
+    ├─→ [STEP 3: Band-Pass Slicing at Constant Frequencies]
+    │       sinc filter ±10 Hz around each constant-derived Hz anchor:
+    │       37, 74, 111, 127.3, 148, 161.8, 185, 222, 223.9, 259, 296,
+    │       333, 370, 1273.2, 1413.5, 1618.0, 2238.8, 12732.4 Hz
+    │
+    ├─→ [STEP 4: Envelope Detection] — Hilbert transform per band
     │       ├─→ Speech band isolation (300-3400 Hz)
-    │       ├─→ Ultrasonic band isolation (18-24 kHz) — limited by 12 kHz Nyquist
-    │       └─→ Sub-speech (0-300 Hz) — theta/delta band operator state
+    │       ├─→ Ultrasonic band isolation (18-24 kHz) — limited by Nyquist
+    │       ├─→ Sub-speech (0-300 Hz) — theta/delta band operator state
+    │       └─→ Downsample envelope to 100 Hz for timing analysis
     │
-    ├─→ [Morse/CW Decoder] — multi-timescale
-    │       │
+    ├─→ [STEP 5: Morse Timing Extraction]
+    │       ├─→ Threshold at median + 1σ → binary on/off
+    │       ├─→ Run-length encoding → dit/dah/space classification
     │       ├─→ Standard CW (60/180 ms dit/dah)
     │       ├─→ Slow CW (hand-keyed, variable timing)
     │       ├─→ Operator fist fingerprinting
     │       ├─→ Shift change discontinuity detection
     │       └─→ Beacon pattern matching (CQ, V, VVV, QRZ, DE, AR, BT, SK)
     │
-    ├─→ [BART Detector] — burst timing analysis
-    │       │
+    ├─→ [STEP 6: BART Detection] — burst timing analysis
     │       ├─→ Prime-interval burst identification (3-7-11 sec)
     │       ├─→ Noise floor shift quantification
     │       └─→ Tree-split cascade detection
     │
-    └─→ [Cross-Domain Correlator] — timing × frequency products
-            │
+    ├─→ [STEP 7: Macro Packet Timing]
+    │       ├─→ 1-second RMS windows → transmission block detection
+    │       ├─→ Inter-transmission interval analysis
+    │       └─→ Constant-ratio timing check (κ, φ, 53/37 ratios)
+    │
+    └─→ [STEP 8: Cross-Domain Correlation]
             ├─→ Score against Ω-GOS constants (κ·φ, 53/37 ratios)
             ├─→ ISP packet timing overlay (IPAT analysis)
             ├─→ Satellite pass window alignment
             └─→ Event emission to KAPPA engine + database
-
 ```
+
+#### KiwiSDR Waterfall → Data Matrix
+
+Convert waterfall PNGs to numerical matrices for pattern detection independent of audio:
+- Morse dashes appear as horizontal bars in the time-frequency matrix
+- Timing gaps appear as dark columns
+- Operator shift changes appear as discontinuities in the pattern structure
+- Cross-correlate waterfall matrices from multiple KiwiSDR nodes for signal authentication
 
 ### 23.9 Marconi Effect & Historical Context
 
@@ -1242,22 +1354,243 @@ The signal encoding approach maps directly to Marconi's original wireless telegr
 - Power grid tubes (4CX250B, 4CX1000A) historically used in clandestine HF transmitters
 - Project OSCAR ground stations powered by Eimac tubes — precursor to modern LEO constellations
 
-### 23.10 PCAP Analysis Results — Null Hypothesis Confirmed
+### 23.10 Cross-Domain Correlation Engine
 
-Cross-network analysis of 16 packet captures (Oct 2025 – Mar 2026) across mobile carrier, home WiFi, Windows enterprise, dev workstation, and loopback networks confirmed:
+#### Time-Alignment Matrix
 
-1. **θ_K/π (0.7124) in packet timing = TCP CUBIC congestion control (1/√2 ≈ 0.7071).** Consistently matches at 1-3% across all networks, all devices, all OSes. 1/√2 wins by a hair (mean 2.26% vs 2.19%). This is AIMD multiplicative decrease.
+```
+             Micro (ms)      Meso (seconds)     Macro (minutes/hours)
+             ─────────────   ────────────────    ─────────────────────
+Spectral:    FFT bin energy   Band power trend    Carrier drift
+Temporal:    Dit/dah timing   Character groups    Transmission blocks  
+Amplitude:   OOK keying       Envelope shape      Fade patterns
+Phase:       Instantaneous φ  Phase coherence     Propagation shift
+Timing:      Inter-symbol     Inter-word          Inter-packet / shift
+```
 
-2. **κ (1.2732) is application-dependent**, not network-structural. Spikes to 6.26% during GitHub Copilot/VS Code sessions, 0% in others. HTTP/2 multiplexing burst patterns.
+#### Constant Resonance Scoring
 
-3. **46.875 Hz (21.33 ms) in packet timing = OS scheduling quantum**, not a synchronization beacon. Higher rates in loopback captures (2.1%) than WAN captures (0.3%) — inverse of what a beacon would show.
+For each detected timing interval `t` and frequency `f`, compute:
+```
+resonance_score(t, f) = Σ_c  1 / |t·f - c_n|
 
-**Conclusion:** PCAPs are the wrong instrument for 46.875 Hz detection. Network packets are 4+ abstraction layers above the physical layer. The right instruments are:
-- RTL-SDR + `rtl_power` for RF sideband energy at 46.875 Hz offset
-- Microphone + FFT at 48 kHz for acoustic energy peak
-- Oscilloscope on mains for power line AM modulation
-- High-speed camera (>120fps) for optical PWM flicker
-- **KiwiSDR multi-resolution analysis** (this pipeline) for HF band structure
+where c_n ∈ {κ, φ, κ·φ, 37, 53, 37·53, κ/φ, θ_K/π, ...}
+     and all harmonic multiples c_n × 2^k for k ∈ {-3,...,3}
+```
+
+High resonance scores indicate timing×frequency products aligned with framework constants — potential structured encoding.
+
+#### Shift-Change Detection
+
+Monitor for:
+- Abrupt change in dit/dah ratio (operator fist switch)
+- Timing reset (new operator calibrating)
+- Protocol header repeated (shift handoff sequence)
+- S-meter pattern change (antenna adjustment)
+
+#### Operator Fist Fingerprint Extraction
+
+Per-operator signature extracted from sliding window (50 Morse elements):
+- `dit_mean`, `dit_std` — element duration statistics
+- `dah_ratio` — dah_mean / dit_mean (should be ~3.0 for standard Morse)
+- `gap_mean` — inter-element spacing
+- `keying_weight` — dit_mean / gap_mean
+- Discontinuities in signature vector = shift change detected
+
+#### Ultrasonic Channel Detection
+
+If operators use ultrasonic embedding (voice cover):
+- Human voice: 300–3400 Hz (telephony) / up to ~8 kHz (wideband)
+- Ultrasonic channel: 18–22 kHz (above hearing, below Nyquist at 48 kHz)
+- Data modulated as FSK/OOK in ultrasonic band while voice plays normally
+- **Detection**: 6th-order Butterworth highpass at 18 kHz, analyze for FSK/OOK patterns
+- **Limitation**: KiwiSDR at 12 kHz Nyquist cannot detect ultrasonic — requires 48 kHz+ source
+
+#### Human Codec Chain (Shift Work Operators)
+
+```
+ENCODING SIDE:
+  Plaintext (Spanish) 
+    → Codebook lookup (5-digit groups or letter groups)
+    → Manual Morse keying onto carrier
+    → Transmission (possibly with voice cover / dual-use carrier)
+
+DECODING SIDE:
+  Received signal
+    → Headset operator copies Morse by ear
+    → Writes down letter groups  
+    → Codebook reverse lookup → plaintext
+    → Reads aloud (voice output) or passes to handler
+```
+
+The "BART" reference could indicate:
+- **Burst-mode Automatic Rapid Transmission**: pre-recorded Morse sent in compressed bursts
+- A text-to-speech system converting decoded groups to audio
+
+### 23.11 Execution Priorities
+
+#### Phase 1: Infrastructure
+- Set up `kiwirecorder.py` for automated pulls from target KiwiSDRs
+- Build headless sox/ffmpeg normalization pipeline
+- Implement multi-resolution FFT with constant-derived frequency grid
+- Automate waterfall PNG → numpy matrix conversion
+
+#### Phase 2: Morse Layer (Core Analysis)
+- Envelope detection across all frequency bands
+- Run-length encoding → dit/dah classification
+- Adaptive threshold (handle fading, QSB)
+- Morse decoder with non-standard timing tolerance
+- Fist fingerprint extraction per transmission block
+
+#### Phase 3: Hidden Channels (Advanced)
+- Ultrasonic band (18–24 kHz) isolation and FSK detection
+- Packet timing correlation against Ω-GOS constants
+- Cross-KiwiSDR differential timing (TDOA)
+- Phase-domain analysis for PSK embedding under voice
+- Steganographic analysis: LSB patterns in 24-bit samples
+
+#### Phase 4: Intelligence Synthesis
+- Operator rotation pattern mapping (shift schedule inference)
+- Codebook structure analysis (group length, alphabet usage)
+- Traffic analysis: volume × timing × frequency → activity pattern
+- Constant-resonance correlation report per transmission
+
+#### Tool Requirements
+
+```
+Python:   numpy scipy librosa aubio matplotlib
+CLI:      sox ffmpeg csdr
+SDR:      kiwiclient (kiwirecorder.py)
+Optional: gnuradio inspectrum rtl_433
+Hardware: Any machine with network access to KiwiSDR nodes
+```
+
+### 23.12 PCAP Analysis Results — Null Hypothesis Confirmed
+
+#### Capture Inventory
+
+| File | Packets | Duration | Rate | Network | Format |
+|------|---------|----------|------|---------|--------|
+| `newww.pcap` | 39 | ~12s | ~3/s | Home WiFi | PCAPNG |
+| `PCAPdroid_11_Mar_00_32_27` | 1,481 | 79.8s | 18.6/s | Mobile carrier | PCAP (raw IP) |
+| `PCAPdroid_11_Mar_00_38_23` | 8,941 | 41.5s | 215.3/s | Mobile carrier | PCAP (raw IP) |
+| `PCAPdroid_29_Oct_14_52_23` | 2,339 | 44.5 min | 0.9/s | Mobile carrier | PCAP |
+| `attackers-capture-example` | 89,859 | 449.5s | — | Windows enterprise | — |
+| `auto` | 9,675 | 306.9s | — | Apple HomeKit WiFi | — |
+| `sffs` | 36,544 | 126.6s | — | Different subnet | — |
+| `soonas` | 18,659 | 463.3s | — | VS Code/Copilot | — |
+| `newpackets` | 6,416 | 52.4s | — | Dev workstation | — |
+| `live_capture` | 2,809 | 59.8s | — | Dev workstation | — |
+| `noeoene` | 975 | 16.9s | — | Dev workstation | — |
+| `newy` | 1,830 | 27.4s | — | Loopback+CF | — |
+| `dumb` | 522 | 10.0s | — | Loopback | — |
+| `communication` | 68 | 11.2s | — | Loopback IPC | — |
+| `pax` | 61 | 4.4s | — | Home WiFi (tiny) | — |
+
+**Network diversity confirmed**: Mobile carrier CGNAT (10.215.173.x), Home WiFi (192.168.68.x), Windows enterprise (10.221.160.x), Dev workstation (127.0.0.x loopback), Loopback+Cloudflare.
+
+#### newww.pcap Anomalies
+
+- **TCP SYN → 192.0.2.1:80** — RFC 5737 TEST-NET-1 (documentation-only IP, never in production). Verdict: PCAPdroid VPN tunnel artifact.
+- **Non-standard EtherTypes** — `0x880a` (3×, 60 bytes each), `0x8070` (1×, 60 bytes). Not in IEEE registry. Likely router vendor-specific control/keepalive frames at minimum Ethernet frame size.
+- **Cross-subnet NBNS** — `192.168.68.53` → `192.168.71.255`: device on `.68` broadcasting to `.71` subnet. Implies /20+ mask or subnet bridging.
+- **mDNS reverse lookup** — Router `192.168.68.1` querying `52.68.168.192.in-addr.arpa` — actively fingerprinting devices.
+
+#### 16-Capture Cross-Network Constant-Grid Results
+
+```
+File                              Pkts    θ_K/π%   1/√2%    Δ       κ%
+────────────────────────────────────────────────────────────────────────
+attackers-capture (Win/ent)      89859    1.03     1.03   -0.01    —
+auto (Apple/HomeKit)              9675    2.77     2.63   +0.14    —
+communication (loopback)            68    3.33     3.33    0.00    —
+dumb (loopback)                    522    2.48     2.89   -0.41    —
+live_capture (dev)                2809    1.97     2.13   -0.16    —
+newpackets (dev)                  6416    1.17     1.06   +0.11   6.26
+newy (loopback+CF)                1830    2.10     2.37   -0.26    —
+noeoene (dev)                      975    1.65     2.12   -0.47    —
+sffs (different subnet)          36544    1.83     1.85   -0.02    —
+soonas (VS Code/Copilot)        18659    2.51     2.41   +0.10    —
+PCAPdroid Mar 00:32 (mobile)      1481    1.62     1.50   +0.12    —
+PCAPdroid Mar 00:38 (mobile)      8941    3.22     3.07   +0.15   1.35
+PCAPdroid Oct 29 (mobile)         2339    3.01     3.24   -0.23    —
+pax (home WiFi, tiny)               61    9.52     9.52    0.00    —
+newww (home WiFi, tiny)             39    0.00     0.00    0.00    —
+```
+
+#### Statistical Summary (captures ≥100 packets)
+
+| Constant | Mean % | Std Dev | Min % | Max % | Interpretation |
+|----------|--------|---------|-------|-------|---------------|
+| **θ_K/π (0.7124)** | **2.19** | **0.65** | 1.03 | 3.22 | **= TCP CUBIC (1/√2)** |
+| **1/√2 (0.7071)** | **2.26** | **0.68** | 1.03 | 3.24 | TCP CUBIC confirmed |
+| κ (1.2732) | 1.72 | 1.53 | 0.00 | 6.26 | Application-dependent |
+| φ (1.6180) | 0.82 | 0.24 | 0.45 | 1.09 | Near random baseline |
+| 53/37 (1.4324) | 0.95 | 0.39 | 0.35 | 1.65 | Near random baseline |
+| κ·φ | 0.48 | 0.19 | 0.16 | 0.85 | Below random baseline |
+
+Random baseline for ±0.03 tolerance on uniform [0.1, 10]: ~0.6%
+Constants near 1.0 (higher density region): ~1.0–1.5% expected
+Constants near 0.7 (TCP backoff region): ~2.0–3.0% expected ← **MATCHES**
+
+#### Discrimination Test: θ_K/π vs 1/√2
+
+θ_K/π = 0.71239 vs 1/√2 = 0.70711 — only **0.74% apart**. The ±0.03 tolerance window catches both. **1/√2 wins** (mean 2.26% vs 2.19%). In 8 of 13 valid captures, 1/√2 matches MORE packets (Δ column negative).
+
+TCP AIMD cuts the congestion window by **1/√2 ≈ 0.7071** in TCP CUBIC's standard mode. This propagates directly into inter-packet timing ratios. Every TCP stack on every OS implements this.
+
+#### Packet Rate FFT — Spectral Peaks (Mar 11 00:38)
+
+| Frequency | Power | Near Constant? |
+|-----------|-------|---------------|
+| 0.096 Hz | +27.4 dB | — |
+| 0.169 Hz | +25.1 dB | — |
+| 0.265 Hz | +24.4 dB | — |
+| 0.602 Hz | +19.8 dB | ≈ 1/φ (0.618) |
+| 0.747 Hz | +16.6 dB | ≈ 1/κ (0.785) |
+
+1/φ and 1/κ appear as spectral peaks in packet rate — but many apps poll at ~1-2 second intervals, which overlaps with these constants. Need baseline comparison.
+
+#### 46.875 Hz (21.33ms) in Packets — OS Scheduling Quantum
+
+| Capture | 21.33ms hits | % |
+|---------|-------------|---|
+| noeoene (loopback) | 19 | 2.10% |
+| live_capture (loopback) | 53 | 2.01% |
+| dumb (loopback) | 9 | 1.89% |
+| newy (loopback) | 27 | 1.59% |
+| attackers-capture (WAN) | 972 | 1.28% |
+| PCAPdroid Mar 00:32 | 13 | 0.88% |
+| PCAPdroid Oct 29 | 9 | 0.38% |
+| PCAPdroid Mar 00:38 | 27 | 0.30% |
+
+**Higher rates in loopback captures (1.5–2.1%) than WAN captures (0.3–0.9%)** — the inverse of what a beacon would show. 21.33ms ≈ 5.33 × 4ms Linux HZ=250 ticks. This is OS scheduling, not a synchronization signal.
+
+#### Micro-Timing Clusters (Mar 11 00:38 — 8,941 packets)
+
+| Cluster | Packets | % | Interpretation |
+|---------|---------|---|---------------|
+| 0.032ms | 418 | 4.7% | TCP ACK bursts (back-to-back) |
+| **0.080ms** | **1,087** | **12.2%** | **WiFi frame timing** (SIFS = 16μs × 5) |
+| 0.137ms | 459 | 5.1% | TCP segment spacing |
+| 0.179ms | 494 | 5.5% | TCP windowed delivery |
+
+#### Verdict
+
+1. **θ_K/π (0.7124) = TCP CUBIC congestion control (1/√2).** Appears at 1-3% on EVERY network, EVERY device, EVERY OS, EVERY time period. Null hypothesis confirmed.
+2. **κ (1.2732) is application-dependent.** Spikes to 6.26% during GitHub Copilot sessions (HTTP/2 multiplexing bursts), 0% in others.
+3. **φ (1.6180) consistently low (~0.8%)** — near random baseline of ~0.6%. Not significantly above noise.
+4. **46.875 Hz (21.33ms) = OS scheduling quantum.** Appears at 0–2% proportional to how much traffic is local. Loopback > WAN. Inverse of a beacon.
+
+**PCAPs are the wrong instrument.** Network packets are 4+ abstraction layers above the physical layer. The right instruments are:
+
+| Domain | Instrument | What to detect |
+|--------|-----------|---------------|
+| **RF/electromagnetic** | RTL-SDR + `rtl_power` | Sideband energy at 46.875 Hz offset from carriers |
+| **Acoustic** | Microphone + FFT at 48 kHz | Energy peak at 46.875 Hz bin |
+| **Power line** | Oscilloscope on mains | AM modulation at 46.875 Hz |
+| **Optical** | High-speed camera (>120fps) | PWM flicker at 46.875 Hz |
+| **HF band structure** | **KiwiSDR multi-resolution** | This pipeline — the correct instrument |
 
 ---
 

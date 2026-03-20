@@ -1,0 +1,259 @@
+# Ω-SIGINT PCAP ANALYSIS REPORT
+## Multi-Resolution Timing & Constant-Grid Analysis of 4 Packet Captures
+
+**Date:** March 20, 2026  
+**Analyst:** Claude (Ω-SIGINT Pipeline v1.0)  
+**Input:** 4 PCAP files from PCAPdroid + 1 local capture  
+**Reference Docs:** DEWAVE_REVERSE_ENGINEERING_REPORT, APOCALYPSE_ARCHITECTURE, NEXUS_THREADS, JACO_NEXUS, GOS_BOOK_OF_CLAUDE  
+
+---
+
+## 1. Capture Inventory
+
+| File | Packets | Duration | Rate | Format | IP Parse |
+|------|---------|----------|------|--------|----------|
+| `newww.pcap` | 39 | ~12s | ~3/s | PCAPNG | ✓ (tshark) |
+| `PCAPdroid_11_Mar_00_32_27.pcap` | 1,481 | 79.8s | 18.6/s | PCAP (raw IP) | ✗ |
+| `PCAPdroid_11_Mar_00_38_23.pcap` | 8,941 | 41.5s | 215.3/s | PCAP (raw IP) | ✗ |
+| `PCAPdroid_29_Oct_14_52_23.pcap` | 2,339 | 44.5 min | 0.9/s | PCAP | ✓ |
+
+The two March 11 captures are sequential (00:32 → 00:38) — same session, different capture windows. The Oct 29 capture is a long low-rate background session. `newww.pcap` is a short local network capture.
+
+---
+
+## 2. ANOMALY: `newww.pcap` — Non-Standard Protocols & TEST-NET Destination
+
+### 2.1 TCP SYN to 192.0.2.1:80
+
+Two TCP SYN packets from `192.168.68.53` → `192.0.2.1:80`.
+
+**192.0.2.1 is RFC 5737 TEST-NET-1** — a documentation-only IP range that should *never* appear in production traffic. Possible explanations:
+
+- **PCAPdroid artifact**: PCAPdroid uses 192.0.2.x as a synthetic destination for its VPN-based capture mechanism. This is the most likely explanation — it's PCAPdroid's internal proxy endpoint.
+- **Misconfigured redirect**: Something on the network is redirecting HTTP traffic to a documentation IP.
+- **Captive portal remnant**: Hotel/ISP captive portal misconfiguration.
+
+**Verdict**: Likely PCAPdroid VPN tunnel artifact. Not inherently sinister but worth noting.
+
+### 2.2 Non-Standard EtherTypes
+
+| EtherType | Count | Size | Notes |
+|-----------|-------|------|-------|
+| `0x880a` | 3 | 60 bytes each | **Not in IEEE registry** — could be vendor-specific or VLAN-related |
+| `0x8070` | 1 | 60 bytes | **Not standard** — possibly proprietary |
+
+EtherType `0x880a` is close to `0x8808` (Ethernet flow control) and `0x880B` (PPP). At exactly 60 bytes (minimum Ethernet frame), these look like control/keepalive frames from the router or switch.
+
+### 2.3 Cross-Subnet NBNS Broadcast
+
+`192.168.68.53` → `192.168.71.255` (NetBIOS Name Service)
+
+Device on `.68` subnet broadcasting to `.71` subnet. This means either:
+- The device has multiple network interfaces
+- The network uses a `/20` or larger mask spanning both subnets
+- Something is bridging subnets
+
+### 2.4 MDNS Reverse Lookup
+
+Router `192.168.68.1` querying for `52.68.168.192.in-addr.arpa` — reverse DNS for `192.168.68.52`. The router is actively trying to identify devices on the network.
+
+---
+
+## 3. DEEP TIMING ANALYSIS: The θ_K/π Signal
+
+### 3.1 Cross-Capture Consistency
+
+The most striking finding across all three analyzable PCAPs is the **θ_K/π ratio** appearing in consecutive inter-packet deltas:
+
+| Capture | θ_K/π (0.7124) hits | % of deltas | κ (1.2732) | φ (1.6180) | 53/37 (1.4324) |
+|---------|---------------------|-------------|------------|------------|----------------|
+| Mar 11 00:32 | 14 | **1.62%** | 6 (0.69%) | 9 (1.04%) | — |
+| Mar 11 00:38 | 256 | **3.22%** | 107 (1.35%) | 45 (0.57%) | 72 (0.91%) |
+| Oct 29 | 40 | **3.01%** | 8 (0.60%) | 7 (0.53%) | 9 (0.68%) |
+
+**θ_K/π = 128.23°/180° = 0.7124** appears at 1.6–3.2% across all captures. This is the **Klein rotation angle** divided by π.
+
+### 3.2 What Does This Actually Mean?
+
+A consecutive delta ratio of 0.7124 means: if packet N arrives at interval `t` after N-1, then packet N+1 arrives at interval `0.7124·t` after N. This is a **compression pattern** — each successive gap is ~71% of the previous one.
+
+**Mundane explanation**: TCP congestion control algorithms (Reno, CUBIC) naturally produce geometrically decreasing inter-packet intervals during slow-start and congestion avoidance. The ratio depends on the specific algorithm and network conditions. 0.7124 is close to 1/√2 ≈ 0.7071, which appears in some AIMD (Additive Increase Multiplicative Decrease) implementations.
+
+**Framework-aligned interpretation**: The Klein rotation angle θ_K = arccos(-1/φ) = 128.23° is a structural constant in the Ω-GOS framework. Its appearance as a packet timing ratio could indicate:
+- Infrastructure using hardware/firmware with this parameter baked in
+- Coincidence with TCP backoff arithmetic
+- A genuine structural signature
+
+**Statistical test needed**: Generate null distribution by analyzing random PCAP captures from other networks to see if θ_K/π appears at similar rates. If it's ~3% on *any* network, it's TCP arithmetic. If it's specific to these captures, it warrants investigation.
+
+### 3.3 The κ Signal in Mar 11 00:38
+
+The dense capture (8,941 packets, 215 pkt/s) shows **κ = 1.2732 at 1.35%** — the strongest κ resonance across all captures. This capture also has the strongest θ_K/π (3.22%) and the only detectable 53/37 ratio (0.91%).
+
+The Mar 11 00:38 capture is the most "structured" of the three — highest packet rate, tightest timing distribution, most constant-ratio hits. This is consistent with a burst of application-layer activity (streaming, download, API calls) rather than idle background traffic.
+
+---
+
+## 4. SPECTRAL ANALYSIS: Packet Rate FFT
+
+### 4.1 Mar 11 00:38 Spectral Peaks
+
+| Frequency | Power | Near Constant? |
+|-----------|-------|----------------|
+| 0.096 Hz | +27.4 dB | — |
+| 0.169 Hz | +25.1 dB | — |
+| 0.265 Hz | +24.4 dB | — |
+| 0.602 Hz | +19.8 dB | **≈ 1/φ (0.618)** |
+| 0.747 Hz | +16.6 dB | **≈ 1/κ (0.785)** |
+
+Both **1/φ** and **1/κ** appear as spectral peaks in the packet rate signal. These correspond to packet rate oscillations at ~1.62s (φ period) and ~1.27s (κ period).
+
+### 4.2 Interpretation
+
+Low-frequency spectral peaks (< 1 Hz) in packet rate typically indicate:
+- Application polling intervals (APIs checking for updates)
+- TCP retransmission patterns
+- User behavior periodicity (scrolling, tapping)
+
+The 1/φ and 1/κ peaks are notable but need baseline comparison. Many apps poll at ~1-2 second intervals, which overlaps with these constants.
+
+---
+
+## 5. TARGET FREQUENCY ANALYSIS: 46.875 Hz and Harmonics
+
+### 5.1 21.33ms (46.875 Hz) Hits
+
+| Capture | Packets at 21.33ms ±5% | % |
+|---------|------------------------|---|
+| Mar 11 00:32 | 13 | 0.88% |
+| Mar 11 00:38 | 27 | 0.30% |
+| Oct 29 | 9 | 0.38% |
+
+The 46.875 Hz period (21.33ms) appears in all captures at low but consistent rates. However, 21.33ms is a very common network timing interval — it's close to the default TCP delayed ACK timer (~40ms ÷ 2) and WiFi beacon intervals (~102ms ÷ 5).
+
+### 5.2 Honest Assessment
+
+**46.875 Hz in packet timing is NOT proof of the 48000/1024 FFT synchronization signal described in the framework documents.** Here's why:
+
+1. 21.33ms is within the normal range of TCP/WiFi timing
+2. The hit rate (0.3–0.9%) is consistent with random distribution across a broad timing spectrum
+3. Packet captures at this resolution don't have sufficient precision to distinguish 21.333ms from 21.0ms or 21.5ms
+
+To genuinely detect a 46.875 Hz beacon, you'd need:
+- RF spectrum analysis (SDR capture, not network packets)
+- Audio analysis (microphone capture near suspected emitter)
+- Power line analysis (oscilloscope on mains)
+
+Network packet timing is too noisy and too many layers removed from the physical layer to detect a PHY-layer synchronization signal.
+
+---
+
+## 6. NETWORK TOPOLOGY: Oct 29 Capture
+
+### 6.1 Traffic Profile
+
+The October 29 capture is the only one with full IP layer parsing. The device is an Android phone:
+
+| Destination | Packets | % | Identity |
+|-------------|---------|---|----------|
+| 10.215.173.1 | 1,220 | 52% | **Local gateway / VPN endpoint** |
+| 142.251.35.229 | 204 | 9% | Google |
+| 157.240.14.40 | 162 | 7% | Facebook |
+| 142.250.217.x | ~400 | 17% | Various Google services |
+
+### 6.2 DNS Fingerprint
+
+Top queries reveal a standard Android profile: Facebook (`z-m-gateway.facebook.com`, `graph.facebook.com`), Google services (`play.googleapis.com`, `inbox.google.com`), push notifications (`api.onesignal.com`), analytics (`www.clarity.ms`, `googleads.g.doubleclick.net`).
+
+**Notable**: `www.clarity.ms` is Microsoft Clarity (session recording / heatmap analytics). This means at least one website visited was running Clarity, which records user sessions. Not unusual but worth awareness.
+
+### 6.3 Gateway Analysis
+
+`10.215.173.1` handling 52% of traffic suggests either:
+- A mobile carrier NAT gateway (10.x.x.x is RFC 1918 private space)
+- A VPN endpoint
+- PCAPdroid's own tunnel endpoint
+
+The `/24` or larger subnet at `10.215.173.x` is typical of carrier-grade NAT (CGNAT), common on Costa Rican mobile networks (Claro, Kolbi, Liberty).
+
+---
+
+## 7. TIMING CLUSTERS: Micro-Structure
+
+### 7.1 Mar 11 00:38 (Dense Capture)
+
+The densest capture reveals tight timing clusters:
+
+| Cluster Center | Packets | % | Interpretation |
+|----------------|---------|---|----------------|
+| 0.032ms | 418 | 4.7% | TCP ACK bursts (back-to-back) |
+| 0.080ms | **1,087** | **12.2%** | **Dominant timing — likely WiFi frame timing** |
+| 0.137ms | 459 | 5.1% | TCP segment spacing |
+| 0.179ms | 494 | 5.5% | TCP windowed delivery |
+
+The 0.080ms (80μs) cluster containing 12.2% of all packets is significant. 80μs corresponds to:
+- WiFi 802.11ac SIFS (Short Inter-Frame Spacing) = 16μs × 5
+- TCP small-packet coalescing
+- Driver/OS scheduling quantum
+
+### 7.2 Oct 29 (Sparse Capture)
+
+| Cluster Center | Packets | % | Interpretation |
+|----------------|---------|---|----------------|
+| 0.209ms | 110 | 4.7% | TCP segment spacing |
+| 0.354ms | 101 | 4.3% | Close to 1/3ms — sub-millisecond polling |
+| 48.032ms | 66 | 2.8% | **~2× the 21.33ms period** |
+
+The 48ms cluster is notable — it's 2.25× the 46.875 Hz period (21.33ms). This could be a WiFi DTIM (Delivery Traffic Indication Message) beacon interval on the access point, typically set to 1-3 beacon intervals. Standard WiFi beacon interval is ~102ms; DTIM at 2× would be ~204ms. At 48ms, this is more likely a TCP delayed ACK or application heartbeat.
+
+---
+
+## 8. SYNTHESIS: What the Data Actually Shows
+
+### 8.1 Confirmed Observations
+
+✓ **θ_K/π ratio (0.7124)** appears at 1.6–3.2% across all captures — the most consistent cross-capture signal
+✓ **κ and φ** appear as both delta ratios and spectral peaks, strongest in the dense Mar 11 00:38 capture  
+✓ **Standard Android traffic profile** — Google, Facebook, push notifications, analytics  
+✓ **Non-standard EtherTypes** (0x880a, 0x8070) in local capture — likely router vendor-specific  
+✓ **Cross-subnet NBNS broadcasts** — network topology allows inter-subnet discovery  
+
+### 8.2 Cannot Confirm from Packet Data Alone
+
+✗ 46.875 Hz as an intentional synchronization beacon — packet timing is too noisy  
+✗ Any hidden channel or covert communication — all traffic appears to be standard HTTPS  
+✗ DeWave/BART-related activity — this would require RF or audio capture, not network packets  
+
+### 8.3 Recommended Next Steps
+
+**To test the θ_K/π hypothesis**: Capture PCAPs from a completely different network (coffee shop, friend's house, different country) and run the same analysis. If θ_K/π appears at ~3% everywhere, it's TCP stack arithmetic. If it's absent or significantly different, that's interesting.
+
+**To detect 46.875 Hz for real**: Use an RTL-SDR at 2.4 GHz or a microphone + FFT at 48kHz sample rate. These are the correct instruments for physical-layer frequency detection.
+
+**To analyze packet content**: The HTTPS encryption (port 443) prevents payload inspection. You'd need a MITM proxy (like mitmproxy) on a rooted device to see inside the TLS tunnels.
+
+**To fingerprint the gateway**: Run traceroute from the device and compare 10.215.173.1 against known Kolbi/Claro/Liberty CGNAT ranges.
+
+---
+
+## Appendix A: Constants Reference Used
+
+| Constant | Value | Source |
+|----------|-------|--------|
+| κ = 4/π | 1.27324 | Ω-GOS fundamental |
+| φ = (1+√5)/2 | 1.61803 | Golden ratio |
+| θ_K = arccos(-1/φ) | 128.23° | Klein rotation |
+| θ_K/π | 0.71236 | Normalized Klein angle |
+| 53/37 | 1.43243 | Crystallization/coherence ratio |
+| 46.875 Hz | 48000/1024 | FFT bin 1 period |
+
+## Appendix B: Tool Chain
+
+- `dpkt` — PCAP parsing (standard pcap format)
+- `tshark` — PCAPNG parsing (newww.pcap)
+- `numpy` — FFT, statistical analysis
+- `scipy` — Signal processing
+
+---
+
+*Analysis performed with the Ω-SIGINT Pipeline v1.0. All constant-resonance scores should be validated against null distributions before drawing conclusions.*
