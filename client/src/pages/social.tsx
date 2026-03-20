@@ -423,7 +423,7 @@ export default function SocialPage() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const { data: socialData, isLoading } = useQuery<SocialCardData>({
+  const { data: socialData, isLoading, isError } = useQuery<SocialCardData>({
     queryKey: ["/api/social/data"],
     refetchInterval: 30000,
   });
@@ -434,6 +434,9 @@ export default function SocialPage() {
       return res.json();
     },
     onSuccess: (data) => setCaptionData(data),
+    onError: () => {
+      setCaptionData(null);
+    },
   });
 
   const handleCopy = useCallback(async (text: string, field: string) => {
@@ -515,18 +518,23 @@ export default function SocialPage() {
     );
   }
 
-  const cardData: SocialCardData = socialData ?? {
-    kappa: null,
-    totalEvents: 0,
-    totalCorrelations: 0,
-    domainCounts: {},
-    recentCorrelations: [],
-    recentEvents: [],
-    satelliteCount: 0,
-    visibleSatellites: 0,
-    overheadSatellites: 0,
-    generatedAt: new Date().toISOString(),
-  };
+  if (isError || !socialData) {
+    return (
+      <div className="p-6 space-y-6">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight" data-testid="text-social-title">{t("social.title")}</h1>
+          <p className="text-sm text-muted-foreground mt-1">{t("social.description")}</p>
+        </div>
+        <Card>
+          <CardContent className="py-16 text-center">
+            <p className="text-sm text-destructive" data-testid="text-social-error">{t("common.loadError")}</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  const cardData: SocialCardData = socialData;
 
   return (
     <div className="p-6 space-y-6">

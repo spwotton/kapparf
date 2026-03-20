@@ -74,14 +74,30 @@ function IcositetragonSvg({ primeSpokes, spokePairs, sides = 24 }: { primeSpokes
 export default function LatticePage() {
   const { t } = useI18n();
 
-  const { data, isLoading } = useQuery<LatticeAllResponse>({
+  const { data, isLoading, isError } = useQuery<LatticeAllResponse>({
     queryKey: ["/api/lattice/all"],
   });
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64" data-testid="lattice-loading">
         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  if (isError || !data) {
+    return (
+      <div className="p-6 space-y-6 max-w-7xl mx-auto" data-testid="page-lattice">
+        <div className="space-y-1" data-testid="lattice-header">
+          <h1 className="text-2xl font-semibold tracking-tight">{t("lattice.title")}</h1>
+          <p className="text-sm text-muted-foreground">{t("lattice.subtitle")}</p>
+        </div>
+        <Card>
+          <CardContent className="py-16 text-center">
+            <p className="text-sm text-destructive" data-testid="text-lattice-error">{t("common.loadError")}</p>
+          </CardContent>
+        </Card>
       </div>
     );
   }

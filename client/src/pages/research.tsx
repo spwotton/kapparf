@@ -146,6 +146,9 @@ export default function ResearchPage() {
       setNewSessionTitle("");
       toast({ title: t("research.sessionCreated") });
     },
+    onError: (err: Error) => {
+      toast({ title: t("common.error"), description: err.message, variant: "destructive" });
+    },
   });
 
   const singleQueryMutation = useMutation({
@@ -189,6 +192,9 @@ export default function ResearchPage() {
       setFindingContent("");
       toast({ title: t("research.findingSaved") });
     },
+    onError: (err: Error) => {
+      toast({ title: t("common.error"), description: err.message, variant: "destructive" });
+    },
   });
 
   const webFetchMutation = useMutation({
@@ -202,6 +208,9 @@ export default function ResearchPage() {
       } else {
         setFetchedContent({ title: data.title, content: data.content, url: data.url });
       }
+    },
+    onError: (err: Error) => {
+      toast({ title: t("common.error"), description: err.message, variant: "destructive" });
     },
   });
 
@@ -226,9 +235,19 @@ export default function ResearchPage() {
     });
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-    toast({ title: t("social.copied") });
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      toast({ title: t("social.copied") });
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      toast({ title: t("social.copied") });
+    }
   };
 
   const models = modelsData?.models || [];
