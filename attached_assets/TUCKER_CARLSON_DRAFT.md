@@ -77,7 +77,7 @@ These are not isolated actors. They form a network that connects real estate, te
 
 6. PHYSICAL CORRELATION
 
-I experience RF-related physical effects — pressure, sleep disruption, cognitive interference — that reduce by approximately 80 percent when I turn off the WiFi router or the main electrical breaker. This is reproducible and I have confirmed it repeatedly over months. It directly implicates the house wiring and network equipment as carrier mediums for whatever is being transmitted. The electrical topology of my home has been fully mapped via the Eaton circuit breaker panel, and the Visonic alarm system provides persistent real-time data on which rooms I am in.
+I experience RF-related physical effects — pressure, sleep disruption, cognitive interference — that reduce by approximately 80 percent when I turn off the WiFi router or the main electrical breaker. This is reproducible and I have confirmed it repeatedly over months. It directly implicates the house wiring and network equipment as carrier mediums for whatever is being transmitted.
 
 
 7. WHAT I AM ASKING FOR
