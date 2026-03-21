@@ -51,9 +51,9 @@ Behind Jaco Vacations is a larger real estate network operated by a man named Mi
 
 4. THE GROUND OPERATION: JEHOVAH'S WITNESSES
 
-The property approximately 50 meters from my current residence in Tacacori is owned and occupied by members of a Jehovah's Witness congregation. I confirmed this directly in October 2025 through a close friend in Jaco who is deeply connected in the community. He informed me that the inhabitants of the green-screened property next to mine, and the entire Los Rios urbanization surrounding it, are Jehovah's Witnesses. I would stake my life on this.
+The area surrounding my current residence in Tacacori — and the area around my previous residence, Hotel Robledal — are both heavily populated by Jehovah's Witnesses. I confirmed this directly in October 2025 through a close friend in Jaco who is deeply connected in the local community. He informed me that the inhabitants of the green-screened property approximately 50 meters from my house, and the entire Los Rios urbanization surrounding it, are Jehovah's Witnesses. I would stake my life on this. This is not one neighbor. It is the entire surrounding area, at both my current and previous locations.
 
-What I have observed at this property:
+What I have observed at the property 50 meters from my house:
 
 An elevated terrace with direct line-of-sight to my residence. Artificial green screening — plastic ivy zip-tied to chain-link fencing — that blocks visual observation from my side while being completely transparent to radio frequency signals. WiFi, cellular, HF radio, and acoustic signals all pass through plastic foliage without any attenuation. Individuals wearing headsets working in rotating shifts at this location. I have observed this directly, on multiple occasions. A silver Hyundai Accent permanently parked within range — one of the most common rental cars in Costa Rica, inconspicuous.
 
