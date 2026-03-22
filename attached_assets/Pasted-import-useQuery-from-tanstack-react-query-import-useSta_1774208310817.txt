@@ -1,0 +1,461 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Copy, Check, Globe, Radio, Terminal, Search, Wifi, ExternalLink, Key, ArrowRightLeft } from "lucide-react";
+
+interface Endpoint {
+  method: string;
+  path: string;
+  description: string;
+}
+
+interface SystemReference {
+  name: string;
+  description: string;
+  baseUrl: string;
+  totalEndpoints: number;
+  categories: Record<string, Endpoint[]>;
+}
+
+interface ApiReference {
+  federation: string;
+  version: string;
+  generated: string;
+  systems: {
+    kyma: SystemReference;
+    kappa: SystemReference;
+  };
+  shared_constants: Record<string, string>;
+  integration_guide: Record<string, string>;
+}
+
+function MethodBadge({ method }: { method: string }) {
+  const colors: Record<string, string> = {
+    GET: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300",
+    POST: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300",
+    PUT: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300",
+    DELETE: "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300",
+    PATCH: "bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300",
+  };
+  return (
+    <span className={`inline-block px-2 py-0.5 rounded text-xs font-mono font-bold ${colors[method] || "bg-gray-100 text-gray-800"}`} data-testid={`method-badge-${method}`}>
+      {method}
+    </span>
+  );
+}
+
+function EndpointRow({ endpoint, baseUrl }: { endpoint: Endpoint; baseUrl: string }) {
+  const [copied, setCopied] = useState(false);
+  const fullUrl = `${baseUrl}${endpoint.path}`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(fullUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <div className="flex items-start gap-3 py-2 px-3 rounded-lg hover:bg-muted/50 transition-colors group" data-testid={`endpoint-${endpoint.method}-${endpoint.path.replace(/\//g, "-")}`}>
+      <MethodBadge method={endpoint.method} />
+      <code className="text-sm font-mono flex-1 text-foreground/90 break-all">{endpoint.path}</code>
+      <span className="text-xs text-muted-foreground hidden sm:block max-w-[300px]">{endpoint.description}</span>
+      <button onClick={handleCopy} className="opacity-0 group-hover:opacity-100 transition-opacity" data-testid={`copy-${endpoint.path.replace(/\//g, "-")}`}>
+        {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-muted-foreground" />}
+      </button>
+    </div>
+  );
+}
+
+function SystemPanel({ system, systemKey }: { system: SystemReference; systemKey: string }) {
+  const [search, setSearch] = useState("");
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(Object.keys(system.categories)));
+
+  const toggleCategory = (cat: string) => {
+    setExpandedCategories(prev => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
+  };
+
+  const filteredCategories = Object.entries(system.categories).map(([cat, endpoints]) => ({
+    cat,
+    endpoints: search
+      ? endpoints.filter(e =>
+          e.path.toLowerCase().includes(search.toLowerCase()) ||
+          e.description.toLowerCase().includes(search.toLowerCase())
+        )
+      : endpoints,
+  })).filter(c => c.endpoints.length > 0);
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-3 flex-wrap">
+        <Badge variant="outline" className="text-xs" data-testid={`badge-base-url-${systemKey}`}>{system.baseUrl}</Badge>
+        <Badge variant="secondary" className="text-xs" data-testid={`badge-endpoints-${systemKey}`}>{system.totalEndpoints} endpoints</Badge>
+      </div>
+
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <Input
+          placeholder="Filter endpoints..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="pl-9"
+          data-testid={`search-${systemKey}`}
+        />
+      </div>
+
+      <div className="space-y-3">
+        {filteredCategories.map(({ cat, endpoints }) => (
+          <Card key={cat} className="overflow-hidden">
+            <button
+              onClick={() => toggleCategory(cat)}
+              className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-muted/30 transition-colors"
+              data-testid={`category-toggle-${cat}`}
+            >
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-sm capitalize">{cat.replace(/_/g, " ")}</span>
+                <Badge variant="secondary" className="text-xs">{endpoints.length}</Badge>
+              </div>
+              <span className="text-xs text-muted-foreground">{expandedCategories.has(cat) ? "collapse" : "expand"}</span>
+            </button>
+            {expandedCategories.has(cat) && (
+              <CardContent className="pt-0 pb-2 space-y-0.5">
+                {endpoints.map((endpoint, i) => (
+                  <EndpointRow key={i} endpoint={endpoint} baseUrl={system.baseUrl} />
+                ))}
+              </CardContent>
+            )}
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function ApiReferencePage() {
+  const { data: reference, isLoading } = useQuery<ApiReference>({
+    queryKey: ["/api/v1/reference"],
+  });
+
+  const { data: federationStatus } = useQuery({
+    queryKey: ["/api/v1/federation/status"],
+    refetchInterval: 10000,
+  });
+
+  const [registerName, setRegisterName] = useState("");
+  const [registerResult, setRegisterResult] = useState<any>(null);
+
+  const handleRegister = async () => {
+    if (!registerName.trim()) return;
+    try {
+      const res = await fetch("/api/v1/federation/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: registerName.trim(),
+          type: "custom",
+          capabilities: ["push", "pull", "sync"],
+        }),
+      });
+      const data = await res.json();
+      setRegisterResult(data);
+    } catch (err) {
+      setRegisterResult({ error: String(err) });
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="p-6 max-w-6xl mx-auto space-y-4">
+        <div className="h-8 bg-muted animate-pulse rounded w-64" />
+        <div className="h-4 bg-muted animate-pulse rounded w-96" />
+        <div className="h-64 bg-muted animate-pulse rounded" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-6 max-w-6xl mx-auto space-y-6" data-testid="api-reference-page">
+      <div>
+        <h1 className="text-2xl font-semibold" data-testid="page-title">Federation API Reference</h1>
+        <p className="text-muted-foreground mt-1">
+          Unified endpoint catalog for the KYMA-KAPPA mesh. {reference?.systems.kyma.totalEndpoints ?? 0} KYMA + {reference?.systems.kappa.totalEndpoints ?? 0} KAPPA endpoints.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="pt-4">
+            <div className="flex items-center gap-2 mb-1">
+              <Globe className="w-4 h-4 text-blue-500" />
+              <span className="text-sm font-medium">KYMA Endpoints</span>
+            </div>
+            <p className="text-2xl font-bold" data-testid="kyma-endpoint-count">{reference?.systems.kyma.totalEndpoints ?? 0}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-4">
+            <div className="flex items-center gap-2 mb-1">
+              <Radio className="w-4 h-4 text-green-500" />
+              <span className="text-sm font-medium">KAPPA Endpoints</span>
+            </div>
+            <p className="text-2xl font-bold" data-testid="kappa-endpoint-count">{reference?.systems.kappa.totalEndpoints ?? 0}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-4">
+            <div className="flex items-center gap-2 mb-1">
+              <ArrowRightLeft className="w-4 h-4 text-purple-500" />
+              <span className="text-sm font-medium">Mesh Status</span>
+            </div>
+            <p className="text-sm font-mono" data-testid="mesh-status">{(federationStatus as any)?.meshStatus ?? "loading..."}</p>
+            <p className="text-xs text-muted-foreground mt-1">{(federationStatus as any)?.peerCount ?? 0} peers connected</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="pt-4">
+            <div className="flex items-center gap-2 mb-1">
+              <Wifi className="w-4 h-4 text-amber-500" />
+              <span className="text-sm font-medium">Event Log</span>
+            </div>
+            <p className="text-2xl font-bold" data-testid="event-log-size">{(federationStatus as any)?.eventLogSize ?? 0}</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Tabs defaultValue="kyma">
+        <TabsList data-testid="system-tabs">
+          <TabsTrigger value="kyma" data-testid="tab-kyma">
+            <Globe className="w-4 h-4 mr-1.5" /> KYMA
+          </TabsTrigger>
+          <TabsTrigger value="kappa" data-testid="tab-kappa">
+            <Radio className="w-4 h-4 mr-1.5" /> KAPPA
+          </TabsTrigger>
+          <TabsTrigger value="federation" data-testid="tab-federation">
+            <ArrowRightLeft className="w-4 h-4 mr-1.5" /> Federation
+          </TabsTrigger>
+          <TabsTrigger value="connect" data-testid="tab-connect">
+            <Key className="w-4 h-4 mr-1.5" /> Connect
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="kyma" className="mt-4">
+          {reference?.systems.kyma && (
+            <SystemPanel system={reference.systems.kyma} systemKey="kyma" />
+          )}
+        </TabsContent>
+
+        <TabsContent value="kappa" className="mt-4">
+          {reference?.systems.kappa && (
+            <SystemPanel system={reference.systems.kappa} systemKey="kappa" />
+          )}
+        </TabsContent>
+
+        <TabsContent value="federation" className="mt-4 space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Shared Constants (GOS Substrate)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {reference?.shared_constants && Object.entries(reference.shared_constants).map(([key, value]) => (
+                  <div key={key} className="flex items-start gap-2 p-2 rounded bg-muted/30">
+                    <code className="text-xs font-mono font-bold text-primary min-w-[120px]">{key}</code>
+                    <span className="text-xs text-muted-foreground">{value}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Integration Guide</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {reference?.integration_guide && Object.entries(reference.integration_guide).map(([step, instruction]) => (
+                  <div key={step} className="flex items-start gap-3 p-2 rounded bg-muted/30">
+                    <Badge variant="outline" className="text-xs min-w-[50px] justify-center">{step}</Badge>
+                    <code className="text-xs font-mono text-foreground/80">{instruction}</code>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Connected Peers</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {(federationStatus as any)?.peers?.length > 0 ? (
+                <div className="space-y-2">
+                  {(federationStatus as any).peers.map((peer: any) => (
+                    <div key={peer.id} className="flex items-center gap-3 p-2 rounded bg-muted/30" data-testid={`peer-${peer.id}`}>
+                      <div className={`w-2 h-2 rounded-full ${peer.status === "online" ? "bg-emerald-500" : "bg-gray-400"}`} />
+                      <span className="font-medium text-sm">{peer.name}</span>
+                      <Badge variant="outline" className="text-xs">{peer.type}</Badge>
+                      <span className="text-xs text-muted-foreground ml-auto">{peer.lastSeen ? `Last seen: ${new Date(peer.lastSeen).toLocaleTimeString()}` : "Never"}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">No peers connected yet. Register a peer in the Connect tab.</p>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="connect" className="mt-4 space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">Register a New Peer</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <p className="text-sm text-muted-foreground">
+                Register your RF Observatory, VSC instance, or any external client to join the federation mesh.
+              </p>
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Peer name (e.g. rf-observatory, vsc-claude, phone)"
+                  value={registerName}
+                  onChange={(e) => setRegisterName(e.target.value)}
+                  data-testid="input-peer-name"
+                />
+                <Button onClick={handleRegister} data-testid="button-register">Register</Button>
+              </div>
+
+              {registerResult && (
+                <Card className="mt-3">
+                  <CardContent className="pt-4">
+                    {registerResult.error ? (
+                      <p className="text-sm text-red-500">{registerResult.error}</p>
+                    ) : (
+                      <div className="space-y-2">
+                        <p className="text-sm text-emerald-600 font-medium" data-testid="register-success">{registerResult.message}</p>
+                        <div className="p-3 rounded bg-muted font-mono text-xs space-y-1" data-testid="register-result">
+                          <div><strong>Peer ID:</strong> {registerResult.peer?.id}</div>
+                          <div><strong>API Key:</strong> {registerResult.peer?.apiKey}</div>
+                          <div><strong>Type:</strong> {registerResult.peer?.type}</div>
+                        </div>
+                        <div className="mt-3 space-y-1">
+                          <p className="text-xs font-medium">Quick Start:</p>
+                          <pre className="p-2 rounded bg-muted text-xs font-mono overflow-x-auto" data-testid="curl-example">
+{`# Pull KYMA engine status
+curl -H "Authorization: Bearer ${registerResult.peer?.apiKey || '<key>'}" \\
+  "${reference?.systems.kyma.baseUrl}/api/v1/federation/pull?source=kyma"
+
+# Pull KAPPA status
+curl -H "Authorization: Bearer ${registerResult.peer?.apiKey || '<key>'}" \\
+  "${reference?.systems.kyma.baseUrl}/api/v1/federation/pull?source=kappa"
+
+# Full sync (both systems)
+curl -X POST -H "Authorization: Bearer ${registerResult.peer?.apiKey || '<key>'}" \\
+  "${reference?.systems.kyma.baseUrl}/api/v1/federation/sync"
+
+# Relay to RF Observatory
+curl -X POST -H "Authorization: Bearer ${registerResult.peer?.apiKey || '<key>'}" \\
+  -H "Content-Type: application/json" \\
+  -d '{"target":"kappa","method":"GET","path":"/api/kappa/status"}' \\
+  "${reference?.systems.kyma.baseUrl}/api/v1/federation/relay"
+
+# Push event from VSC
+curl -X POST -H "Authorization: Bearer ${registerResult.peer?.apiKey || '<key>'}" \\
+  -H "Content-Type: application/json" \\
+  -d '{"type":"signal","data":{"domain":"custom","source":"vsc","event_type":"test"}}' \\
+  "${reference?.systems.kyma.baseUrl}/api/v1/federation/push"`}
+                          </pre>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base flex items-center gap-2">
+                <Terminal className="w-4 h-4" /> Python Integration
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <pre className="p-3 rounded bg-muted text-xs font-mono overflow-x-auto" data-testid="python-example">
+{`import requests
+
+KYMA_URL = "${reference?.systems.kyma.baseUrl || 'https://your-kyma.replit.app'}"
+API_KEY = "your_api_key_here"  # From registration above
+
+headers = {"Authorization": f"Bearer {API_KEY}"}
+
+# Full sync — gets KYMA engine + ML + KAPPA status in one call
+sync = requests.post(f"{KYMA_URL}/api/v1/federation/sync", headers=headers)
+print(sync.json())
+
+# Pull specific KYMA endpoint
+engine = requests.get(
+    f"{KYMA_URL}/api/v1/federation/pull",
+    params={"source": "kyma", "endpoint": "/api/engine/latest"},
+    headers=headers
+)
+print(engine.json())
+
+# Pull specific KAPPA endpoint
+kappa = requests.get(
+    f"{KYMA_URL}/api/v1/federation/pull",
+    params={"source": "kappa", "endpoint": "/api/kappa/status"},
+    headers=headers
+)
+print(kappa.json())
+
+# Relay: call any KAPPA endpoint through KYMA
+relay = requests.post(
+    f"{KYMA_URL}/api/v1/federation/relay",
+    json={"target": "kappa", "method": "GET", "path": "/api/satellites"},
+    headers=headers
+)
+print(relay.json())
+
+# Push data from your client
+requests.post(
+    f"{KYMA_URL}/api/v1/federation/push",
+    json={"type": "observation", "data": {"note": "from VSC"}},
+    headers=headers
+)`}
+              </pre>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base flex items-center gap-2">
+                <ExternalLink className="w-4 h-4" /> Direct Access (No Auth)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-3">
+                These KYMA endpoints are directly accessible without federation auth. The RF Observatory endpoints require accessing its URL directly.
+              </p>
+              <div className="space-y-1 text-xs font-mono">
+                <div className="p-1.5 rounded bg-muted">GET {reference?.systems.kyma.baseUrl}/api/engine/status</div>
+                <div className="p-1.5 rounded bg-muted">GET {reference?.systems.kyma.baseUrl}/api/ml/status</div>
+                <div className="p-1.5 rounded bg-muted">GET {reference?.systems.kyma.baseUrl}/api/v1/reference</div>
+                <div className="p-1.5 rounded bg-muted">GET https://rf-observatory-fusion.replit.app/api/kappa/status</div>
+                <div className="p-1.5 rounded bg-muted">GET https://rf-observatory-fusion.replit.app/api/stats</div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}

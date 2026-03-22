@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "zDaxSKuCcHB3e4ieprb38"
+uri = "file://docs/KAPPA-API-REFERENCE.md"
+type = "text"
+title = "KAPPA API Reference (for Kyma Claude)"

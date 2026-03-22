@@ -444,6 +444,15 @@ export class KappaEngine {
     }
   }
 
+  ingestBiometricAlert(corr: { type: string; correlation: number; description: string; biometricValue: number; rfValue: number }) {
+    const scoreAdd = Math.round(corr.correlation * 40);
+    this.addAlert(
+      `bio-${corr.type}`,
+      scoreAdd,
+      `Biometric correlation: ${corr.description}`
+    );
+  }
+
   updateSatelliteState(overhead: number, kleinCount: number) {
     this.satOverhead = overhead;
     const prevKlein = this.satKlein;

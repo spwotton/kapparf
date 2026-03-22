@@ -10,6 +10,7 @@ import { getCorrelatorStatus } from "./auto-correlator";
 import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
 import { getNetworkThreatStatus, processPacket, processBatch, parsePacketLine, type NetworkPacket } from "./network-threat-scanner";
+import { biometricCorrelator, type PhoneSensorReading, type KymaReading } from "./biometric-correlator";
 import { getVisionStatus, getVisionAnalyses, getContextMemory, runVisionOnce } from "./kiwisdr-vision";
 import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
@@ -930,6 +931,141 @@ export async function registerRoutes(
     }
     const result = await processBatch(packets);
     res.json({ ...result, parsed: packets.length });
+  });
+
+  app.post("/api/phone/register", (req, res) => {
+    const { phoneId, os, capabilities } = req.body;
+    if (!phoneId || !os) {
+      return res.status(400).json({ error: "phoneId and os required" });
+    }
+    biometricCorrelator.registerPhone(phoneId, os, capabilities || []);
+    res.json({ registered: true, phoneId });
+  });
+
+  app.post("/api/phone/sensors", (req, res) => {
+    const { readings } = req.body;
+    if (!Array.isArray(readings)) {
+      return res.status(400).json({ error: "readings must be an array" });
+    }
+    let ingested = 0;
+    for (const r of readings) {
+      if (r.sensorType && r.timestamp) {
+        biometricCorrelator.ingestSensor(r as PhoneSensorReading);
+        ingested++;
+      }
+    }
+    res.json({ ingested, total: readings.length });
+  });
+
+  app.post("/api/phone/sensors/single", (req, res) => {
+    const reading = req.body as PhoneSensorReading;
+    if (!reading.sensorType || !reading.timestamp) {
+      return res.status(400).json({ error: "sensorType and timestamp required" });
+    }
+    biometricCorrelator.ingestSensor(reading);
+    res.json({ ingested: true });
+  });
+
+  app.post("/api/phone/pcapdroid", async (req, res) => {
+    const { connections } = req.body;
+    if (!Array.isArray(connections)) {
+      return res.status(400).json({ error: "connections must be an array" });
+    }
+    const packets: NetworkPacket[] = connections.map((c: any) => ({
+      timestamp: c.timestamp || Date.now(),
+      srcIp: c.srcIp || c.src_ip || "",
+      dstIp: c.dstIp || c.dst_ip || "",
+      srcPort: c.srcPort || c.src_port || null,
+      dstPort: c.dstPort || c.dst_port || null,
+      protocol: c.protocol || c.proto || "TCP",
+      length: c.length || c.bytes || 0,
+      info: c.info || c.app || "",
+      hexPayload: c.payload || null,
+    }));
+    const validPackets = packets.filter(p => p.srcIp && p.dstIp);
+    if (validPackets.length === 0) {
+      return res.json({ processed: 0, threats: 0, matches: [] });
+    }
+    const result = await processBatch(validPackets);
+    res.json({ ...result, source: "pcapdroid" });
+  });
+
+  app.post("/api/kyma/frame", (req, res) => {
+    const frame = req.body;
+    if (!frame) {
+      return res.status(400).json({ error: "frame data required" });
+    }
+
+    const signal = frame.signal || {};
+    const kappa = signal.kappa || frame.kappa || {};
+    const affect = {
+      valence: signal.affect_valence ?? 0.5,
+      arousal: signal.affect_arousal ?? 0.3,
+      primary: signal.affect_primary ?? "neutral",
+    };
+
+    const kymaReading: KymaReading = {
+      timestamp: Date.now(),
+      hrv: signal.pll_jitter ? Math.abs(signal.pll_jitter * 1000) : undefined,
+      heartRate: kappa.thoughtRhythm ? Math.round(kappa.thoughtRhythm * 60) : undefined,
+      stress: affect.arousal > 0.7 ? Math.round(affect.arousal * 100) : Math.round(affect.arousal * 50),
+      mood: Math.round(affect.valence * 100),
+      coherence: signal.quantum_coherence ?? signal.doppler_coherence ?? undefined,
+      source: "kyma-engine",
+      sessionId: frame.session_id || undefined,
+    };
+
+    biometricCorrelator.ingestKyma(kymaReading);
+
+    const kappaStatus = kappaEngine.getStatus();
+    res.json({
+      ingested: true,
+      kymaState: {
+        dominantState: frame.decoded?.behavior || frame.dominantState || "unknown",
+        affectValence: affect.valence,
+        affectArousal: affect.arousal,
+        affectPrimary: affect.primary,
+        coherence: kymaReading.coherence,
+        stress: kymaReading.stress,
+        mood: kymaReading.mood,
+      },
+      kappaStatus: {
+        score: kappaStatus.score,
+        threatLevel: kappaStatus.threatLevel,
+        recentAlertCount: kappaStatus.recentAlerts.length,
+      },
+      correlations: biometricCorrelator.getStatus().correlations.slice(0, 5),
+    });
+  });
+
+  app.post("/api/kyma/reading", (req, res) => {
+    const reading = req.body as KymaReading;
+    if (!reading.timestamp) {
+      reading.timestamp = Date.now();
+    }
+    if (!reading.source) {
+      reading.source = "kyma-direct";
+    }
+    biometricCorrelator.ingestKyma(reading);
+    res.json({ ingested: true });
+  });
+
+  app.get("/api/biometric/status", (_req, res) => {
+    res.json(biometricCorrelator.getStatus());
+  });
+
+  app.get("/api/biometric/correlations", (_req, res) => {
+    res.json(biometricCorrelator.getCorrelations());
+  });
+
+  app.get("/api/biometric/kyma/latest", (_req, res) => {
+    const latest = biometricCorrelator.getLatestKyma();
+    res.json(latest || { message: "No Kyma data received yet" });
+  });
+
+  app.get("/api/biometric/kyma/timeline", (req, res) => {
+    const limit = req.query.limit ? parseInt(req.query.limit as string, 10) : 50;
+    res.json(biometricCorrelator.getKymaTimeline(limit));
   });
 
   app.get("/api/vision/status", (_req, res) => {
