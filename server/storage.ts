@@ -9,9 +9,12 @@ import {
   type ResearchSession, type InsertResearchSession,
   type ResearchQuery, type InsertResearchQuery,
   type ResearchFinding, type InsertResearchFinding,
+  type ArtifactScan, type InsertArtifactScan,
+  type AudioFlag, type InsertAudioFlag,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
   researchSessions, researchQueries, researchFindings,
+  artifactScans, audioFlags,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
@@ -48,6 +51,13 @@ export interface IStorage {
   getResearchQueries(sessionId: string): Promise<ResearchQuery[]>;
   createResearchFinding(finding: InsertResearchFinding): Promise<ResearchFinding>;
   getResearchFindings(sessionId: string): Promise<ResearchFinding[]>;
+  createArtifactScan(scan: InsertArtifactScan): Promise<ArtifactScan>;
+  getArtifactScans(limit?: number): Promise<ArtifactScan[]>;
+  getArtifactScan(id: string): Promise<ArtifactScan | undefined>;
+  createAudioFlag(flag: InsertAudioFlag): Promise<AudioFlag>;
+  getAudioFlags(limit?: number): Promise<AudioFlag[]>;
+  getAudioFlagsByTimeRange(from: Date, to: Date): Promise<AudioFlag[]>;
+  getAudioFlagsByLocation(lat: number, lon: number, radiusKm: number): Promise<AudioFlag[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -252,6 +262,51 @@ export class DatabaseStorage implements IStorage {
     return db.select().from(researchFindings)
       .where(eq(researchFindings.sessionId, sessionId))
       .orderBy(desc(researchFindings.createdAt));
+  }
+
+  async createArtifactScan(scan: InsertArtifactScan): Promise<ArtifactScan> {
+    const [created] = await db.insert(artifactScans).values(scan).returning();
+    return created;
+  }
+
+  async getArtifactScans(limit: number = 50): Promise<ArtifactScan[]> {
+    return db.select().from(artifactScans)
+      .orderBy(desc(artifactScans.createdAt))
+      .limit(limit);
+  }
+
+  async getArtifactScan(id: string): Promise<ArtifactScan | undefined> {
+    const [scan] = await db.select().from(artifactScans).where(eq(artifactScans.id, id));
+    return scan;
+  }
+
+  async createAudioFlag(flag: InsertAudioFlag): Promise<AudioFlag> {
+    const [created] = await db.insert(audioFlags).values(flag).returning();
+    return created;
+  }
+
+  async getAudioFlags(limit: number = 100): Promise<AudioFlag[]> {
+    return db.select().from(audioFlags)
+      .orderBy(desc(audioFlags.createdAt))
+      .limit(limit);
+  }
+
+  async getAudioFlagsByTimeRange(from: Date, to: Date): Promise<AudioFlag[]> {
+    return db.select().from(audioFlags)
+      .where(and(gte(audioFlags.createdAt, from), lte(audioFlags.createdAt, to)))
+      .orderBy(desc(audioFlags.createdAt));
+  }
+
+  async getAudioFlagsByLocation(lat: number, lon: number, radiusKm: number): Promise<AudioFlag[]> {
+    const degRadius = radiusKm / 111.32;
+    return db.select().from(audioFlags)
+      .where(and(
+        gte(audioFlags.latitude, lat - degRadius),
+        lte(audioFlags.latitude, lat + degRadius),
+        gte(audioFlags.longitude, lon - degRadius),
+        lte(audioFlags.longitude, lon + degRadius),
+      ))
+      .orderBy(desc(audioFlags.createdAt));
   }
 }
 

@@ -113,6 +113,46 @@ export const insertCollectionLogSchema = createInsertSchema(collectionLogs).omit
   timestamp: true,
 });
 
+export const artifactScans = pgTable("artifact_scans", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  filename: text("filename").notNull(),
+  scanType: text("scan_type").notNull().default("upload"),
+  anomalyScore: real("anomaly_score").notNull().default(0),
+  spokeEdgeCount: integer("spoke_edge_count").notNull().default(0),
+  gapEdgeCount: integer("gap_edge_count").notNull().default(0),
+  base53Entropy: real("base53_entropy").notNull().default(0),
+  cloakedCandidates: integer("cloaked_candidates").notNull().default(0),
+  findings: jsonb("findings"),
+  filterOutputs: jsonb("filter_outputs"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
+  presetName: text("preset_name"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const audioFlags = pgTable("audio_flags", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  audioUrl: text("audio_url").notNull(),
+  startTime: real("start_time").notNull(),
+  duration: real("duration").notNull(),
+  label: text("label").notNull(),
+  base53Score: real("base53_score"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
+  metadata: jsonb("metadata"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertArtifactScanSchema = createInsertSchema(artifactScans).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertAudioFlagSchema = createInsertSchema(audioFlags).omit({
+  id: true,
+  createdAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type SignalEvent = typeof signalEvents.$inferSelect;
@@ -127,6 +167,10 @@ export type CorrelationFeedback = typeof correlationFeedback.$inferSelect;
 export type InsertCorrelationFeedback = z.infer<typeof insertCorrelationFeedbackSchema>;
 export type CollectionLog = typeof collectionLogs.$inferSelect;
 export type InsertCollectionLog = z.infer<typeof insertCollectionLogSchema>;
+export type ArtifactScan = typeof artifactScans.$inferSelect;
+export type InsertArtifactScan = z.infer<typeof insertArtifactScanSchema>;
+export type AudioFlag = typeof audioFlags.$inferSelect;
+export type InsertAudioFlag = z.infer<typeof insertAudioFlagSchema>;
 
 export interface CollectorStatusType {
   name: string;

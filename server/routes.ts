@@ -16,10 +16,16 @@ import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialC
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
 import { fetchUrl } from "./research-web";
+import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetragon-engine";
+import { RESEARCH_CONSTANTS } from "./research-constants";
+import * as jpeg from "jpeg-js";
+import { PNG } from "pngjs";
+import multer from "multer";
 import {
   insertResearchSessionSchema,
   insertResearchQuerySchema,
   insertResearchFindingSchema,
+  insertAudioFlagSchema,
   TRE_LAYERS,
 } from "@shared/schema";
 import {
@@ -1735,12 +1741,20 @@ export async function registerRoutes(
   });
 
   app.get("/api/imagery/file/:filename", (req, res) => {
-    const filePath = nodePath.join(process.cwd(), "attached_assets", "edge_detection", req.params.filename);
+    const basename = nodePath.basename(req.params.filename);
+    if (basename !== req.params.filename || basename.includes("..")) {
+      return res.status(400).json({ error: "Invalid filename" });
+    }
+    const baseDir = nodePath.resolve(process.cwd(), "attached_assets", "edge_detection");
+    const filePath = nodePath.resolve(baseDir, basename);
+    if (!filePath.startsWith(baseDir)) {
+      return res.status(400).json({ error: "Invalid filename" });
+    }
     res.sendFile(filePath);
   });
 
-  app.get("/api/nuforc/sightings", (_req, res) => {
-    const sightings = [
+  function getNuforcSightings() {
+    return [
       { id: "cr-001", date: "2025-09-09T02:49:00", city: "Bribri", state: "Limón Province", country: "Costa Rica", shape: "Circle", summary: "Dog woke me up for bathroom. While waiting for dog, I noticed this in the sky, after watching for a few minutes I retrieved my cell", reported: "2025-09-10", media: true, explanation: "Planet/Star?", lat: 9.6211, lon: -82.8442 },
       { id: "cr-002", date: "2025-07-05T18:00:00", city: "La Fortuna", state: "Alajuela Province", country: "Costa Rica", shape: "Disk", summary: "I was taking pictures of Arenal at sunset; when I downloaded them, I found one photo with a clear, glowing, Saturn/saucer-shaped object", reported: "2025-07-05", media: true, explanation: null, lat: 10.4679, lon: -84.6427 },
       { id: "cr-003", date: "2025-06-04T11:00:00", city: "Santo Domingo", state: "Heredia", country: "Costa Rica", shape: "Other", summary: "I observed an object that at first I thought was a drone; I was looking at the sky because a plane was continuously flying overhead.", reported: "2025-06-22", media: true, explanation: null, lat: 9.9806, lon: -84.0897 },
@@ -1821,6 +1835,10 @@ export async function registerRoutes(
       { id: "ve-011", date: "1974-10-17T15:00:00", city: "Caracas", state: "Miranda", country: "Venezuela", shape: "Triangle", summary: "Huge UFO in the shape of an inverted Aztec/Mayan pyramid (sides with angular steps) that was in stealth-colored material (carbon black)", reported: "2023-09-21", media: true, explanation: null, lat: 10.4806, lon: -66.9036, tier: 1 },
       { id: "ve-012", date: "1886-10-24T23:00:00", city: "Maracaibo (outside of)", state: null, country: "Venezuela", shape: "Light", summary: "Family members, and local vegetation, severely injured (burned?) by a brightly lighted, humming, object.", reported: "2012-08-23", media: false, explanation: null, lat: 10.6427, lon: -71.6125 },
     ];
+  }
+
+  app.get("/api/nuforc/sightings", (_req, res) => {
+    const sightings = getNuforcSightings();
 
     const stats = {
       totalSightings: sightings.length,
@@ -1867,6 +1885,729 @@ export async function registerRoutes(
       .slice(0, 15);
 
     res.json({ sightings, stats });
+  });
+
+  app.get("/api/artifact-hunter/presets", (_req, res) => {
+    res.json({ presets: INVESTIGATION_PRESETS });
+  });
+
+  app.get("/api/artifact-hunter/satellite", async (req, res) => {
+    try {
+      const lat = parseFloat(req.query.lat as string) || 10.0514;
+      const lon = parseFloat(req.query.lon as string) || -84.2187;
+      const zoom = parseInt(req.query.zoom as string) || 6;
+      const layer = (req.query.layer as string) || "MODIS_Terra_CorrectedReflectance_TrueColor";
+      const date = req.query.date as string;
+      const analyze = req.query.analyze !== "false";
+
+      const tileUrl = getNasaGibsUrl(lat, lon, zoom, layer, date);
+
+      let fetchResp: Response | null = null;
+      let tileBuffer: Buffer | null = null;
+      try {
+        fetchResp = await fetch(tileUrl);
+        if (fetchResp.ok) {
+          tileBuffer = Buffer.from(await fetchResp.arrayBuffer());
+        }
+      } catch {
+        fetchResp = null;
+      }
+
+      const preset = INVESTIGATION_PRESETS.find(p =>
+        Math.abs(p.lat - lat) < 0.5 && Math.abs(p.lon - lon) < 0.5
+      );
+
+      let analysisResult: any = null;
+      if (analyze && tileBuffer && tileBuffer.length > 0) {
+        try {
+          const isPNG = tileBuffer[0] === 0x89 && tileBuffer[1] === 0x50;
+          const isJPEG = tileBuffer[0] === 0xFF && tileBuffer[1] === 0xD8;
+
+          let decoded: { width: number; height: number; data: Buffer } | null = null;
+          let tileFormat = "unknown";
+
+          if (isJPEG) {
+            tileFormat = "JPEG";
+            const raw = jpeg.decode(tileBuffer, { useTArray: true, formatAsRGBA: false });
+            decoded = { width: raw.width, height: raw.height, data: Buffer.from(raw.data) };
+          } else if (isPNG) {
+            tileFormat = "PNG";
+            const png = PNG.sync.read(tileBuffer);
+            const rgbBuf = Buffer.alloc(png.width * png.height * 3);
+            for (let i = 0; i < png.width * png.height; i++) {
+              rgbBuf[i * 3] = png.data[i * 4];
+              rgbBuf[i * 3 + 1] = png.data[i * 4 + 1];
+              rgbBuf[i * 3 + 2] = png.data[i * 4 + 2];
+            }
+            decoded = { width: png.width, height: png.height, data: rgbBuf };
+          }
+
+          if (decoded) {
+            const result = analyzeImage(decoded.data, decoded.width, decoded.height, 3);
+            analysisResult = {
+              tileFormat,
+              tileBytes: tileBuffer.length,
+              decodedWidth: decoded.width,
+              decodedHeight: decoded.height,
+              anomalyScore: result.anomalyScore,
+              spokeEdgeCount: result.spokeEdgeCount,
+              gapEdgeCount: result.gapEdgeCount,
+              base53Entropy: result.base53Entropy,
+              cloakedCandidates: result.cloakedCandidates,
+              spokeEdges: result.spokeEdges,
+              gapEdges: result.gapEdges,
+              findings: result.findings,
+              sectorBreakdown: result.sectorBreakdown,
+              filterCount: result.filterOutputs.length,
+              filters: result.filterOutputs.map(f => ({
+                method: f.method,
+                description: f.description,
+              })),
+              overlayPng: result.overlayRGBA ? encodeOverlayPNG(result.overlayRGBA, decoded.width, decoded.height) : null,
+            };
+            if (analysisResult && !analysisResult.error) {
+              try {
+                await storage.createArtifactScan({
+                  filename: `satellite_${lat.toFixed(4)}_${lon.toFixed(4)}.jpg`,
+                  scanType: "satellite",
+                  anomalyScore: result.anomalyScore,
+                  spokeEdgeCount: result.spokeEdgeCount,
+                  gapEdgeCount: result.gapEdgeCount,
+                  base53Entropy: result.base53Entropy,
+                  cloakedCandidates: result.cloakedCandidates,
+                  findings: result.findings,
+                  filterOutputs: result.filterOutputs.map(f => ({ method: f.method, description: f.description })),
+                  latitude: lat,
+                  longitude: lon,
+                  presetName: preset?.id || "custom",
+                });
+              } catch (e) {
+                console.error("[satellite] Failed to persist scan:", e);
+              }
+            }
+          } else {
+            analysisResult = {
+              error: "Tile format not recognized for pixel analysis",
+              tileBytes: tileBuffer.length,
+              tileFormat,
+            };
+          }
+        } catch (e) {
+          analysisResult = { error: "Tile decode/analysis failed", raw: String(e) };
+        }
+      }
+
+      res.json({
+        tileUrl,
+        lat,
+        lon,
+        zoom,
+        layer,
+        tileAvailable: fetchResp?.ok || false,
+        tileSize: tileBuffer?.length || 0,
+        analysis: analysisResult,
+        preset: preset || null,
+        presets: INVESTIGATION_PRESETS,
+        nasaGibsInfo: {
+          service: "NASA GIBS (Global Imagery Browse Services)",
+          layers: [
+            "MODIS_Terra_CorrectedReflectance_TrueColor",
+            "MODIS_Aqua_CorrectedReflectance_TrueColor",
+            "VIIRS_SNPP_CorrectedReflectance_TrueColor",
+            "MODIS_Terra_Land_Surface_Temp_Day",
+          ],
+          note: "Free public tile service — no API key required",
+        },
+      });
+    } catch (err) {
+      res.status(500).json({ error: "Satellite tile fetch failed" });
+    }
+  });
+
+  app.post("/api/artifact-hunter/scan", async (req, res) => {
+    try {
+      const { imageData, width, height, channels, filename, lat, lon, presetName } = req.body;
+
+      if (!imageData || typeof width !== "number" || typeof height !== "number") {
+        return res.status(400).json({ error: "imageData, width (number), and height (number) are required" });
+      }
+
+      if (width < 1 || height < 1 || width > 2048 || height > 2048) {
+        return res.status(400).json({ error: "Dimensions must be between 1 and 2048" });
+      }
+
+      if (width * height > 2048 * 2048) {
+        return res.status(400).json({ error: "Total pixel count exceeds maximum (4,194,304)" });
+      }
+
+      const ch = channels || 4;
+      const buffer = Buffer.from(imageData, "base64");
+      const expectedSize = width * height * ch;
+      if (buffer.length < expectedSize) {
+        return res.status(400).json({ error: `Buffer size ${buffer.length} does not match expected ${expectedSize} (${width}×${height}×${ch})` });
+      }
+      const result = analyzeImage(buffer, width, height, channels || 4);
+
+      const scan = await storage.createArtifactScan({
+        filename: filename || "upload.png",
+        scanType: presetName ? "satellite" : "upload",
+        anomalyScore: result.anomalyScore,
+        spokeEdgeCount: result.spokeEdgeCount,
+        gapEdgeCount: result.gapEdgeCount,
+        base53Entropy: result.base53Entropy,
+        cloakedCandidates: result.cloakedCandidates,
+        findings: result.findings,
+        filterOutputs: result.filterOutputs.map(f => ({
+          method: f.method,
+          description: f.description,
+        })),
+        latitude: lat || null,
+        longitude: lon || null,
+        presetName: presetName || null,
+      });
+
+      const includeImages = req.body.includeImages !== false;
+      const w = width;
+      const h = height;
+
+      res.json({
+        id: scan.id,
+        anomalyScore: result.anomalyScore,
+        spokeEdgeCount: result.spokeEdgeCount,
+        gapEdgeCount: result.gapEdgeCount,
+        base53Entropy: result.base53Entropy,
+        cloakedCandidates: result.cloakedCandidates,
+        spokeEdges: result.spokeEdges,
+        gapEdges: result.gapEdges,
+        findings: result.findings,
+        sectorBreakdown: result.sectorBreakdown,
+        overlayPng: (includeImages && result.overlayRGBA) ? encodeOverlayPNG(result.overlayRGBA, w, h) : null,
+        filterCount: result.filterOutputs.length,
+        filters: result.filterOutputs.map(f => ({
+          method: f.method,
+          description: f.description,
+          stats: computeFilterStats(f.data),
+          imagePng: includeImages ? encodeFilterPNG(f.data, w, h) : null,
+        })),
+      });
+    } catch (err) {
+      console.error("[ArtifactHunter] Scan error:", err);
+      res.status(500).json({ error: "Image scan failed" });
+    }
+  });
+
+  function encodeOverlayPNG(rgba: Uint8Array, width: number, height: number): string {
+    const png = new PNG({ width, height, filterType: -1 });
+    for (let i = 0; i < width * height * 4; i++) {
+      png.data[i] = rgba[i];
+    }
+    const pngBuf = PNG.sync.write(png);
+    return pngBuf.toString("base64");
+  }
+
+  function encodeFilterPNG(data: number[], width: number, height: number): string {
+    const png = new PNG({ width, height, filterType: -1 });
+    for (let i = 0; i < width * height; i++) {
+      const v = Math.min(255, Math.max(0, Math.round(data[i])));
+      png.data[i * 4] = v;
+      png.data[i * 4 + 1] = v;
+      png.data[i * 4 + 2] = v;
+      png.data[i * 4 + 3] = v > 0 ? 255 : 0;
+    }
+    const pngBuf = PNG.sync.write(png);
+    return pngBuf.toString("base64");
+  }
+
+  function computeFilterStats(data: number[]) {
+    let min = Infinity, max = -Infinity, sum = 0, nonzero = 0, hotspot = 0;
+    for (let i = 0; i < data.length; i++) {
+      const v = data[i];
+      if (v < min) min = v;
+      if (v > max) max = v;
+      sum += v;
+      if (v > 0) nonzero++;
+      if (v > 128) hotspot++;
+    }
+    return {
+      min: data.length > 0 ? min : 0,
+      max: data.length > 0 ? max : 0,
+      mean: data.length > 0 ? sum / data.length : 0,
+      nonzeroPixels: nonzero,
+      totalPixels: data.length,
+      hotspotPct: data.length > 0 ? (hotspot / data.length * 100).toFixed(2) : "0.00",
+    };
+  }
+
+  const scanUpload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+  app.post("/api/artifact-hunter/scan/upload", scanUpload.single("image"), async (req, res) => {
+    try {
+      const file = req.file;
+      if (!file) {
+        return res.status(400).json({ error: "No image file provided. Use multipart form field 'image'." });
+      }
+
+      const buf = file.buffer;
+      const isPNG = buf[0] === 0x89 && buf[1] === 0x50;
+      const isJPEG = buf[0] === 0xFF && buf[1] === 0xD8;
+
+      let pixelData: Buffer;
+      let width: number;
+      let height: number;
+
+      if (isJPEG) {
+        const raw = jpeg.decode(buf, { useTArray: true, formatAsRGBA: false });
+        pixelData = Buffer.from(raw.data);
+        width = raw.width;
+        height = raw.height;
+      } else if (isPNG) {
+        const png = PNG.sync.read(buf);
+        const rgbBuf = Buffer.alloc(png.width * png.height * 3);
+        for (let i = 0; i < png.width * png.height; i++) {
+          rgbBuf[i * 3] = png.data[i * 4];
+          rgbBuf[i * 3 + 1] = png.data[i * 4 + 1];
+          rgbBuf[i * 3 + 2] = png.data[i * 4 + 2];
+        }
+        pixelData = rgbBuf;
+        width = png.width;
+        height = png.height;
+      } else {
+        return res.status(400).json({ error: "Unsupported image format. Use JPEG or PNG." });
+      }
+
+      if (width > 2048 || height > 2048 || width * height > 2048 * 2048) {
+        return res.status(400).json({ error: "Image dimensions exceed maximum (2048×2048)" });
+      }
+
+      const result = analyzeImage(pixelData, width, height, 3);
+
+      const latStr = req.body?.lat;
+      const lonStr = req.body?.lon;
+      const lat = latStr ? parseFloat(latStr) : null;
+      const lon = lonStr ? parseFloat(lonStr) : null;
+      const presetName = req.body?.presetName || null;
+
+      const scan = await storage.createArtifactScan({
+        filename: file.originalname || "upload.png",
+        scanType: presetName ? "satellite" : "upload",
+        anomalyScore: result.anomalyScore,
+        spokeEdgeCount: result.spokeEdgeCount,
+        gapEdgeCount: result.gapEdgeCount,
+        base53Entropy: result.base53Entropy,
+        cloakedCandidates: result.cloakedCandidates,
+        findings: result.findings,
+        filterOutputs: result.filterOutputs.map(f => ({
+          method: f.method,
+          description: f.description,
+        })),
+        latitude: lat,
+        longitude: lon,
+        presetName,
+      });
+
+      const includeImages = req.body?.includeImages !== "false";
+
+      res.json({
+        id: scan.id,
+        filename: file.originalname,
+        decodedWidth: width,
+        decodedHeight: height,
+        format: isJPEG ? "JPEG" : "PNG",
+        anomalyScore: result.anomalyScore,
+        spokeEdgeCount: result.spokeEdgeCount,
+        gapEdgeCount: result.gapEdgeCount,
+        base53Entropy: result.base53Entropy,
+        cloakedCandidates: result.cloakedCandidates,
+        spokeEdges: result.spokeEdges,
+        gapEdges: result.gapEdges,
+        findings: result.findings,
+        sectorBreakdown: result.sectorBreakdown,
+        overlayPng: (includeImages && result.overlayRGBA) ? encodeOverlayPNG(result.overlayRGBA, width, height) : null,
+        filterCount: result.filterOutputs.length,
+        filters: result.filterOutputs.map(f => ({
+          method: f.method,
+          description: f.description,
+          stats: computeFilterStats(f.data),
+          imagePng: includeImages ? encodeFilterPNG(f.data, width, height) : null,
+        })),
+      });
+    } catch (err) {
+      console.error("[ArtifactHunter] Upload scan error:", err);
+      res.status(500).json({ error: "Image upload scan failed" });
+    }
+  });
+
+  app.get("/api/artifact-hunter/scans", async (_req, res) => {
+    try {
+      const scans = await storage.getArtifactScans(50);
+      res.json({ scans });
+    } catch (err) {
+      res.status(500).json({ error: "Failed to retrieve scans" });
+    }
+  });
+
+  app.get("/api/artifact-hunter/scans/:id", async (req, res) => {
+    try {
+      const scan = await storage.getArtifactScan(req.params.id);
+      if (!scan) return res.status(404).json({ error: "Scan not found" });
+      res.json(scan);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to retrieve scan" });
+    }
+  });
+
+  app.get("/api/artifact-hunter/audio-archive", (_req, res) => {
+    res.json({
+      archive: {
+        name: "NUFORC Audio Archive (NOUFORS Mirror)",
+        url: "https://www.noufors.com/nuforc_audio_archive.html",
+        years: "1974-1977",
+        description: "Robert Gribble's original UFO hotline recordings — analog telephone captures from the 1970s",
+        base53Analysis: {
+          targetFrequency: 53,
+          harmonics: [106, 159, 212],
+          description: "Base-53 frequency sieve: 53 Hz infrasonic signature from 3I Atlas research. Harmonics at 106, 159, 212 Hz. Phone recordings may contain embedded carrier tones.",
+        },
+      },
+      sampleEntries: [
+        { id: "audio-1974-01", year: 1974, title: "Hotline Recording — Jan 1974", duration: "Unknown", url: "https://www.noufors.com/nuforc_audio_archive.html", analysisNote: "Early analog recording — check for 60Hz mains hum and sub-harmonic patterns" },
+        { id: "audio-1974-06", year: 1974, title: "Hotline Recording — Jun 1974", duration: "Unknown", url: "https://www.noufors.com/nuforc_audio_archive.html", analysisNote: "Potential infrasonic carrier in background noise floor" },
+        { id: "audio-1975-03", year: 1975, title: "Hotline Recording — Mar 1975", duration: "Unknown", url: "https://www.noufors.com/nuforc_audio_archive.html", analysisNote: "Multiple witness calls — compare background environments" },
+        { id: "audio-1976-08", year: 1976, title: "Hotline Recording — Aug 1976", duration: "Unknown", url: "https://www.noufors.com/nuforc_audio_archive.html", analysisNote: "Active flap period — higher call volume" },
+        { id: "audio-1977-11", year: 1977, title: "Hotline Recording — Nov 1977", duration: "Unknown", url: "https://www.noufors.com/nuforc_audio_archive.html", analysisNote: "Final archive year — compare with 1977 seismic data" },
+      ],
+      frequencyBands: [
+        { label: "Base-53 Fundamental", hz: 53, color: "#ff4444", description: "Primary 3I Atlas infrasonic signature" },
+        { label: "2nd Harmonic", hz: 106, color: "#ff8844", description: "First harmonic of 53 Hz base" },
+        { label: "3rd Harmonic", hz: 159, color: "#ffcc44", description: "Second harmonic — audible range. Matches GOS gene range upper bound (159.3 Hz)" },
+        { label: "4th Harmonic", hz: 212, color: "#44ff44", description: "Third harmonic — speech band overlap" },
+        { label: "κ-Carrier", hz: 46.875, color: "#4444ff", description: "KAPPA master clock — 48000/1024 Hz" },
+        { label: "Schumann", hz: 7.83, color: "#aa44ff", description: "Earth Schumann resonance fundamental. 7.83 × 24 sectors = 187.92 Hz ≈ κ-harmonic 3" },
+        { label: "Orch-OR Gamma", hz: 37, color: "#44ffaa", description: "Penrose-Hameroff orchestrated objective reduction — base gamma oscillation in deep meditation/REM" },
+        { label: "Archaeoacoustic", hz: 111, color: "#ff44ff", description: "Universal neolithic chamber resonance (Barabar, Hypogeum, Newgrange). Phaistos disc resonant frequency" },
+        { label: "53×φ (CLOCK gene)", hz: 85.73, color: "#44ddff", description: "53 Hz × golden ratio = 85.73 Hz — matches CLOCK circadian gene at 84.901 Hz (1.0% deviation)" },
+        { label: "Klein Twist", hz: 128.23, color: "#ffaa44", description: "Consciousness twist frequency — GOS Klein bottle non-orientable angle. 180° - 51.84° (Giza slope)" },
+      ],
+    });
+  });
+
+  app.post("/api/artifact-hunter/audio-flags", async (req, res) => {
+    try {
+      const parsed = insertAudioFlagSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Invalid audio flag data", details: parsed.error.issues });
+      }
+      const flag = await storage.createAudioFlag(parsed.data);
+      res.json(flag);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to create audio flag" });
+    }
+  });
+
+  app.get("/api/artifact-hunter/audio-flags", async (_req, res) => {
+    try {
+      const flags = await storage.getAudioFlags(100);
+      res.json({ flags });
+    } catch (err) {
+      res.status(500).json({ error: "Failed to retrieve audio flags" });
+    }
+  });
+
+  app.get("/api/artifact-hunter/seismic", async (_req, res) => {
+    try {
+      let earthquakeData: any = null;
+      try {
+        const resp = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson");
+        if (resp.ok) earthquakeData = await resp.json();
+      } catch { }
+
+      const ovsicoriCams = [
+        { id: "poas-crater", name: "Cráter Volcán Poás", volcano: "Volcán Poás (2,708m)", url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-poas", lat: 10.197, lon: -84.233 },
+        { id: "turrialba", name: "Volcán Turrialba", volcano: "Volcán Turrialba (3,340m)", url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-turrialba", lat: 10.025, lon: -83.767 },
+        { id: "rincon", name: "Volcán Rincón de la Vieja", volcano: "Volcán Rincón de la Vieja (1,916m)", url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-rincon", lat: 10.830, lon: -85.324 },
+      ];
+
+      res.json({
+        earthquakes: earthquakeData,
+        ovsicoriCameras: ovsicoriCams,
+        correlationPresets: [
+          {
+            id: "oumuamua-antarctic",
+            name: "Oumuamua Antarctic Impact Zone",
+            description: "Seismic activity correlation with Oumuamua trajectory endpoint",
+            lat: -72.0,
+            lon: 2.5,
+            timeWindow: "2017-10-01/2018-06-01",
+            radiusKm: 500,
+          },
+          {
+            id: "3i-atlas-window",
+            name: "3I Atlas Observation Windows",
+            description: "Seismic correlation during 3I Atlas active monitoring periods",
+            lat: 10.0514,
+            lon: -84.2187,
+            timeWindow: "2025-01-01/2026-03-22",
+            radiusKm: 200,
+          },
+          {
+            id: "cr-volcanic-corridor",
+            name: "Costa Rica Volcanic Corridor",
+            description: "Central Valley volcanic arc — Poás, Barva, Irazú, Turrialba",
+            lat: 10.1,
+            lon: -84.0,
+            timeWindow: "2020-01-01/2026-03-22",
+            radiusKm: 100,
+          },
+        ],
+        usgsInfo: {
+          feed: "USGS Earthquake Hazards Program",
+          url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson",
+          description: "M2.5+ earthquakes from the past 7 days",
+          updateInterval: "5 minutes",
+        },
+      });
+    } catch (err) {
+      res.status(500).json({ error: "Seismic data fetch failed" });
+    }
+  });
+
+  app.post("/api/artifact-hunter/correlate", async (req, res) => {
+    try {
+      const { lat, lon, time, radiusKm: rawRadius = 500, windowHours: rawWindow = 72 } = req.body;
+      if (lat === undefined || lat === null || lon === undefined || lon === null) {
+        return res.status(400).json({ error: "lat and lon are required" });
+      }
+      const parsedLat = typeof lat === "string" ? parseFloat(lat) : lat;
+      const parsedLon = typeof lon === "string" ? parseFloat(lon) : lon;
+      if (!Number.isFinite(parsedLat) || !Number.isFinite(parsedLon)) {
+        return res.status(400).json({ error: "lat and lon must be valid numbers" });
+      }
+      const radiusKm = Math.max(1, Math.min(Number(rawRadius) || 500, 5000));
+      const windowHours = Math.max(1, Math.min(Number(rawWindow) || 72, 720));
+
+      const centerTime = time ? new Date(time) : new Date();
+      const windowMs = windowHours * 60 * 60 * 1000;
+      const from = new Date(centerTime.getTime() - windowMs);
+      const to = new Date(centerTime.getTime() + windowMs);
+
+      const [nearbyFlags, recentScans] = await Promise.all([
+        storage.getAudioFlagsByLocation(parsedLat, parsedLon, radiusKm),
+        storage.getArtifactScans(20),
+      ]);
+
+      const timeFilteredFlags = nearbyFlags.filter(f =>
+        f.createdAt >= from && f.createdAt <= to
+      );
+
+      const nearbyScans = recentScans.filter(s => {
+        if (s.latitude === null || s.latitude === undefined || s.longitude === null || s.longitude === undefined) return false;
+        const dLat = (s.latitude - parsedLat) * 111.32;
+        const dLon = (s.longitude - parsedLon) * 111.32 * Math.cos(parsedLat * Math.PI / 180);
+        return Math.sqrt(dLat * dLat + dLon * dLon) <= radiusKm;
+      });
+
+      let usgsCorrelation: any[] = [];
+      try {
+        const resp = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson");
+        if (resp.ok) {
+          const data = await resp.json();
+          usgsCorrelation = (data.features || []).filter((f: any) => {
+            const [eLon, eLat] = f.geometry.coordinates;
+            const dLat2 = (eLat - parsedLat) * 111.32;
+            const dLon2 = (eLon - parsedLon) * 111.32 * Math.cos(parsedLat * Math.PI / 180);
+            const dist = Math.sqrt(dLat2 * dLat2 + dLon2 * dLon2);
+            if (dist > radiusKm) return false;
+            const eqTime = new Date(f.properties.time);
+            return eqTime >= from && eqTime <= to;
+          }).map((f: any) => ({
+            id: f.id,
+            magnitude: f.properties.mag,
+            place: f.properties.place,
+            time: f.properties.time,
+            coordinates: f.geometry.coordinates,
+            distanceKm: Math.round(Math.sqrt(
+              Math.pow((f.geometry.coordinates[1] - parsedLat) * 111.32, 2) +
+              Math.pow((f.geometry.coordinates[0] - parsedLon) * 111.32 * Math.cos(parsedLat * Math.PI / 180), 2)
+            ) * 10) / 10,
+          }));
+        }
+      } catch { }
+
+      const nearbySightings = getNuforcSightings().filter((s: any) => {
+        if (!s.lat || !s.lon) return false;
+        const dLat = (s.lat - parsedLat) * 111.32;
+        const dLon = (s.lon - parsedLon) * 111.32 * Math.cos(parsedLat * Math.PI / 180);
+        const dist = Math.sqrt(dLat * dLat + dLon * dLon);
+        if (dist > radiusKm) return false;
+        const sDate = new Date(s.date);
+        return sDate >= from && sDate <= to;
+      }).map((s: any) => ({
+        ...s,
+        distanceKm: Math.round(Math.sqrt(
+          Math.pow((s.lat - parsedLat) * 111.32, 2) +
+          Math.pow((s.lon - parsedLon) * 111.32 * Math.cos(parsedLat * Math.PI / 180), 2)
+        ) * 10) / 10,
+      }));
+
+      const totalCorrelations = usgsCorrelation.length + timeFilteredFlags.length + nearbyScans.length + nearbySightings.length;
+
+      res.json({
+        query: { lat: parsedLat, lon: parsedLon, radiusKm, windowHours, centerTime: centerTime.toISOString() },
+        results: {
+          earthquakes: usgsCorrelation,
+          nuforcSightings: nearbySightings,
+          audioFlags: timeFilteredFlags,
+          artifactScans: nearbyScans,
+          totalCorrelations,
+        },
+      });
+    } catch (err) {
+      res.status(500).json({ error: "Correlation query failed" });
+    }
+  });
+
+  app.get("/api/artifact-hunter/research-constants", (_req, res) => {
+    res.json({
+      constants: RESEARCH_CONSTANTS,
+      crossDomainAnalysis: {
+        summary: "Cross-domain pattern matching between 24-gon base-53 sieve, GOS gene frequencies, archaeoacoustic resonance, BioGeometry BG3, and architectural constants",
+        keyFindings: [
+          "√(G·ħ) × 2π ≈ 53 Hz — quantum gravity root produces the base-53 sieve frequency (0.55% deviation)",
+          "κ × (π/8) = 0.5 — circle-square transformation coupling yields the Riemann critical line position exactly",
+          "arctan(κ) = 51.854° — κ predicts the Great Pyramid slope angle to 0.03% accuracy",
+          "53 Hz × φ (golden ratio) = 85.73 Hz → matches CLOCK circadian gene at 84.901 Hz (1.0% deviation)",
+          "53 Hz × 3 = 159 Hz → matches GOS gene frequency range upper bound (159.3 Hz, 0.19% deviation)",
+          "111 Hz / 53 Hz ≈ 2.094 ≈ 2π/3 → 120° = exactly 8 sectors of the 24-gon",
+          "Schumann (7.83 Hz) × 24 sectors = 187.92 Hz → matches κ-harmonic 3 at 187.5 Hz (0.22% deviation)",
+          "56 Aubrey Holes (Stonehenge) = 53 (base sieve) + 3 (BG3 components) — exact match",
+          "Klein twist (128.23°) + Giza slope (51.77°) = 180° — supplementary identity confirmed",
+          "φ¹⁰ + κ·φ⁵ = 137.11 → matches fine structure constant α⁻¹ (bare) at 137.036 (0.05% deviation)",
+          "κ·φ⁴ = 8.727 M⊕ → matches K2-18b exoplanet mass at 8.63 ± 0.35 M⊕ (98.9% match)",
+          "37 × φ² × κ = 123.3 Hz → Penrose-Hameroff ORCH-OR consciousness frequency (99.97% match)",
+          "Mod-48 spiral growth = 1/cos(π/24) — most circular natural spiral class (hurricane/galaxy arms)",
+          "p² ≡ 1 (mod 24) for all primes p ≥ 5 — Grant's 24-gon prime residue theorem",
+          "Fibonacci digital root has period 24 with antipodal sum 9 — intrinsic 24-fold Fibonacci symmetry",
+          "24-Cell → Cuboctahedron → Icositetragon projection chain: 4D→3D→2D dimensionality reduction preserving 24-fold symmetry",
+          "T=8 + S=6 = 14 = (√14)² cuboctahedron faces → decay constant in Unified RH Framework",
+          "Re(s) = 1/2 = dim(boundary)/dim(bulk) → holographic constraint on critical strip",
+          "1² + 2² + ... + 24² = 70² — only nontrivial solution to squared pyramidal = perfect square",
+          "24-gon sectors (24) = 8 prime spokes × 3 BG3 components — structural isomorphism",
+          "9,600 tectonic-aligned ancient sites globally — matches Göbekli Tepe construction epoch (c. 9600 BCE)",
+        ],
+        sources: [
+          "Robert Grant — Icositetragon (24-gon) Prime Number Sieve Papers (mod-48 spiral, Q-grid, complementary pairs)",
+          "Unified RH Framework — 24-Cell Projection Chain (κ=4/π coupling, √14 decay, Hurwitz lattice)",
+          "Quantum Musical Root — √(G·ħ) × 2π ≈ 53 Hz derivation (Planck-scale gravity → sieve frequency)",
+          "BioGeometry Signatures — Ibrahim Karim, PhD (BG3 centering quality, Physics of Quality)",
+          "GOS Unified Field Theory — Geometric Operating System (Klein twist, holographic compression, Europa scaling)",
+          "Global Archaeoacoustic Catalog — 111 Hz resonance standard across neolithic chambers",
+          "GOS Empirical Validation — Riemann zeta zero analysis, gene frequency correlation",
+          "Monstrous Moonshine — Conway & Norton (c=24, Leech lattice Λ₂₄, j-function, Ramanujan tau)",
+          "Antikythera Mechanism CT reconstruction — Pakzad et al. (2018) PLOS ONE",
+          "Linear B pa-i-to Epigraphic Project — Greco & Flouda (2017) SAIA",
+          "37 AAWSAP-DIRD Documents — FOIA released defense intelligence reference documents",
+        ],
+      },
+    });
+  });
+
+  app.get("/api/artifact-hunter/anomaly-feed", async (_req, res) => {
+    try {
+      const [scans, flags] = await Promise.all([
+        storage.getArtifactScans(20),
+        storage.getAudioFlags(20),
+      ]);
+
+      const feedItems: any[] = [];
+
+      for (const scan of scans) {
+        feedItems.push({
+          type: "artifact_scan",
+          id: scan.id,
+          timestamp: scan.createdAt,
+          score: scan.anomalyScore,
+          summary: `${scan.scanType} scan: ${scan.filename} — anomaly score ${scan.anomalyScore}/100`,
+          details: {
+            spokeEdges: scan.spokeEdgeCount,
+            gapEdges: scan.gapEdgeCount,
+            base53Entropy: scan.base53Entropy,
+            cloakedCandidates: scan.cloakedCandidates,
+          },
+          findings: scan.findings,
+          location: scan.latitude && scan.longitude ? { lat: scan.latitude, lon: scan.longitude } : null,
+        });
+      }
+
+      for (const flag of flags) {
+        feedItems.push({
+          type: "audio_flag",
+          id: flag.id,
+          timestamp: flag.createdAt,
+          score: flag.base53Score || 50,
+          summary: `Audio flag: "${flag.label}" at ${flag.startTime}s (${flag.duration}s duration)`,
+          details: {
+            audioUrl: flag.audioUrl,
+            startTime: flag.startTime,
+            duration: flag.duration,
+            base53Score: flag.base53Score,
+          },
+          location: flag.latitude && flag.longitude ? { lat: flag.latitude, lon: flag.longitude } : null,
+        });
+      }
+
+      const recentSightings = getNuforcSightings()
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 10);
+      for (const s of recentSightings) {
+        feedItems.push({
+          type: "nuforc_sighting",
+          id: s.id,
+          timestamp: new Date(s.date),
+          score: (s as any).tier === 1 ? 85 : 40,
+          summary: `NUFORC: ${s.shape || "Unknown"} sighting near ${s.city || s.country} — "${s.summary?.slice(0, 80)}..."`,
+          details: {
+            shape: s.shape,
+            city: s.city,
+            country: s.country,
+            reported: s.reported,
+            media: s.media,
+          },
+          location: s.lat && s.lon ? { lat: s.lat, lon: s.lon } : null,
+        });
+      }
+
+      let usgsEvents: any[] = [];
+      try {
+        const resp = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson");
+        if (resp.ok) {
+          const data = await resp.json();
+          usgsEvents = (data.features || []).slice(0, 10);
+        }
+      } catch { }
+      for (const eq of usgsEvents) {
+        const mag = eq.properties?.mag || 0;
+        feedItems.push({
+          type: "usgs_earthquake",
+          id: eq.id,
+          timestamp: new Date(eq.properties?.time || Date.now()),
+          score: Math.min(Math.round(mag * 12), 100),
+          summary: `USGS: M${mag.toFixed(1)} earthquake — ${eq.properties?.place || "Unknown location"}`,
+          details: {
+            magnitude: mag,
+            place: eq.properties?.place,
+            depth: eq.geometry?.coordinates?.[2],
+            tsunami: eq.properties?.tsunami,
+            felt: eq.properties?.felt,
+          },
+          location: eq.geometry?.coordinates ? { lat: eq.geometry.coordinates[1], lon: eq.geometry.coordinates[0] } : null,
+        });
+      }
+
+      feedItems.sort((a, b) => (b.score || 0) - (a.score || 0));
+
+      res.json({ feed: feedItems, totalItems: feedItems.length });
+    } catch (err) {
+      res.status(500).json({ error: "Failed to build anomaly feed" });
+    }
   });
 
   return httpServer;
