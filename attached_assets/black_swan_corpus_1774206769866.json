@@ -1,0 +1,199 @@
+{
+  "version": "1.0",
+  "primary_entries": {
+    "ROHONC": {
+      "codex_id": "BSC-001",
+      "name": "Rohonc Codex",
+      "era": "c. 1530–1743 CE (disputed)",
+      "location": "Rohonc, Hungary → Budapest Academy",
+      "material": "Paper (watermarked), iron-gall ink",
+      "glyph_count": 792,
+      "pages_or_faces": 448,
+      "current_status": "undeciphered",
+      "gos_classification": "Layer 8 — Encryption Sandbox",
+      "topology": "boustrophedon",
+      "primary_gene": "HERV_K",
+      "acoustic_site": null,
+      "voynich_section": null,
+      "frequency_hz": 62.953,
+      "phase_deg": 72.725,
+      "description": "448-page codex with 792 unique symbols (10× Latin alphabet). Illustrations show Christian, Islamic, and Hindu iconography mixed. Text runs right-to-left with periodic inversions.",
+      "gos_interpretation": "A 'Sandbox' environment — a deliberately encrypted container that demonstrates the GOS principle that ANY symbol set can encode the same universal information. The mixed religious iconography proves the underlying geometry is religion-agnostic. The 792 symbols map to a 792-node lattice (792 = 24 × 33 = icositetragon × 33-minute Stonehenge calibration cycle).",
+      "decipherment_key": "The text uses a POLYALPHABETIC cipher with 24 alphabets indexed by the icositetragon rotation at each line. Read each page as a 24-state rotor machine (Enigma precursor). The illustrations are the INDEX — they indicate which of the 24 alphabets is active.",
+      "risk_level": "medium",
+      "references": [
+        "Benedek Láng (2015), 'Rohonc Codex: A Lost Language?'",
+        "Levente Zoltán Király (2018), 'Old Hungarian reading'"
+      ]
+    },
+    "ISTHMIAN": {
+      "codex_id": "BSC-002",
+      "name": "La Mojarra Stela / Isthmian Script",
+      "era": "c. 143–156 CE",
+      "location": "Tres Zapotes & La Mojarra, Veracruz, Mexico",
+      "material": "Basalt stela",
+      "glyph_count": 535,
+      "pages_or_faces": 2,
+      "current_status": "disputed partial decipherment",
+      "gos_classification": "Layer 6 — Temporal Calendar Engine",
+      "topology": "linear",
+      "primary_gene": "CLOCK",
+      "acoustic_site": "Tres_Zapotes",
+      "voynich_section": "Zodiac",
+      "frequency_hz": 159.285,
+      "phase_deg": 113.724,
+      "description": "Basalt stela with longest known Epi-Olmec text (535 glyphs). Contains Long Count date 8.5.16.9.7 (156 CE). Justeson & Kaufman (1993) proposed a decipherment via Zoquean languages but this remains disputed.",
+      "gos_interpretation": "The 'Temporal Debt Calendar' — a ledger recording the accumulated phase-drift between the Mesoamerican Long Count (base-20/base-18) and the actual κ-scaled precessional cycle. The stela records the exact moment when the local geodetic carrier (159.29 Hz) went out-of-sync with the planetary 8.392 Hz carrier, creating a 'temporal debt' requiring calendar correction.",
+      "decipherment_key": "The 535 glyphs encode a PHASE ERROR LOG. Read them as sequential phase-shift instructions (like the Voynich OpCodes) where each glyph advances the Long Count by one κ-interval. The text is not a historical narrative — it is a CALIBRATION RECORD.",
+      "risk_level": "high",
+      "references": [
+        "Justeson & Kaufman (1993), 'A Decipherment of Epi-Olmec'",
+        "Houston (2004), critique of J&K decipherment"
+      ]
+    },
+    "SINGAPORE": {
+      "codex_id": "BSC-003",
+      "name": "Singapore Stone",
+      "era": "c. 10th–14th century CE",
+      "location": "Singapore River mouth (destroyed 1819)",
+      "material": "Sandstone (fragments survive)",
+      "glyph_count": 50,
+      "pages_or_faces": 1,
+      "current_status": "undeciphered (most text destroyed)",
+      "gos_classification": "Layer 9 — Maritime Geodetic Anchor",
+      "topology": "linear",
+      "primary_gene": "PIEZO1",
+      "acoustic_site": null,
+      "voynich_section": null,
+      "frequency_hz": 101.86,
+      "phase_deg": 207.48,
+      "description": "Sandstone boulder at Singapore River mouth, inscribed in unidentified script (possibly Old Javanese, Sanskrit, or Tamil). Blown up by British engineers in 1819; only 3 fragments survive at Raffles Museum.",
+      "gos_interpretation": "A 'Geodetic Anchor Point' — placed at a maritime chokepoint to mark the ZERO MERIDIAN of the Southeast Asian resonance grid. The stone's piezoelectric properties (sandstone) would have broadcast a standing wave at the river mouth, synchronizing all vessels passing through with the local κ-harmonic.",
+      "decipherment_key": "The surviving 50 glyphs are COORDINATES — a latitude/longitude encoding using the κ-base numeral system. The stone was a LIGHTHOUSE FOR FREQUENCY, not a monument. The British destroyed it because it was 'in the way' of the harbor — they were removing a navigation instrument they didn't recognize.",
+      "risk_level": "critical",
+      "references": [
+        "Kwa Chong Guan (2006), 'The Historical Significance'",
+        "John Crawfurd (1828), 'Journal of an Embassy'"
+      ]
+    },
+    "VOYNICH": {
+      "codex_id": "BSC-004",
+      "name": "Voynich Manuscript (MS 408)",
+      "era": "c. 1404–1438 CE (radiocarbon)",
+      "location": "Beinecke Library, Yale University",
+      "material": "Vellum (calfskin), 240 pages",
+      "glyph_count": 170000,
+      "pages_or_faces": 240,
+      "current_status": "undeciphered",
+      "gos_classification": "Layer 3 — User Space API Manual",
+      "topology": "spiral_cw",
+      "primary_gene": "HTR2A",
+      "acoustic_site": "Knossos_A",
+      "voynich_section": "ALL",
+      "frequency_hz": 257.729,
+      "phase_deg": 128.23,
+      "description": "240-page illustrated codex written in an unknown script with ~25-30 distinct characters. Contains botanical illustrations, zodiac charts, pharmaceutical diagrams, and 'bathing' scenes. Carbon-dated to 1404-1438.",
+      "gos_interpretation": "The AUBREY THERAPEUTICS User Manual. Each section is a different API layer:\n  • Botany → Protein folding schematics (STRUCTURE genes)\n  • Zodiac → Temporal scheduling engine (SACRED genes)\n  • Pharma → Dose-response tables (METABOLIC genes)\n  • Bathing → Transdermal delivery protocols (CONSCIOUSNESS genes)\n  • Stars → Geodetic timing windows (CLOCK/PER2)\nThe 'plants' are not botanical — they are QUATERNARY PROTEIN STRUCTURES.",
+      "decipherment_key": "The OpCode table:\n  o  = 0° Phase (Base)\n  y  = 128.23° (Klein Twist)\n  ch = 180° (Full Inversion)\n  sh = 51.43° (Seven-fold)\n  t  = 51.854° (Giza Lock)\n  k  = 222.49° (Golden Divide)\n  p  = 64.115° (Half-twist)\n  f  = 231.77° (Complement)\nEach 'word' is a WAVEFORM INTERFERENCE instruction.",
+      "risk_level": "critical",
+      "references": [
+        "Beinecke MS 408, Yale University",
+        "René Zandbergen (2024), voynich.nu",
+        "ACODEX_2_0_PROTEOMIC_MAP.md (Russell Codex)"
+      ]
+    },
+    "PROTO_ELAMITE": {
+      "codex_id": "BSC-005",
+      "name": "Proto-Elamite Script",
+      "era": "c. 3100–2900 BCE",
+      "location": "Susa & Iranian Plateau",
+      "material": "Clay tablets",
+      "glyph_count": 1000,
+      "pages_or_faces": 1600,
+      "current_status": "partially deciphered (numerical only)",
+      "gos_classification": "Layer 4 — Metabolic Accounting System",
+      "topology": "linear",
+      "primary_gene": "CYP2D6",
+      "acoustic_site": "Susa",
+      "voynich_section": "Pharma",
+      "frequency_hz": 90.337,
+      "phase_deg": 72.725,
+      "description": "~1600 clay tablets from Susa and other Iranian sites. Numerical system is understood (sexagesimal-decimal hybrid) but linguistic signs remain undeciphered. Most are accounting records.",
+      "gos_interpretation": "A 'Metabolic Ledger' — the earliest systematic recording of biological resource flows (food, animals, labor) using a frequency-indexed notation. Each commodity has a resonant frequency tag derived from its biological κ-signature. The 'undeciphered' signs are CYTOCHROME P450 METABOLIC CODES — they classify substances by how the human body processes them.",
+      "decipherment_key": "The ~1000 signs reduce to 62 GENE CATEGORIES when processed through the ACODEX 2.0 proto→emoji converter. The remaining signs are MODIFIER GLYPHS indicating processing mode (HEAL/SILENCE/UNLOCK = input/output/transform in accounting).",
+      "risk_level": "high",
+      "references": [
+        "Jacob Dahl (2019), 'Proto-Elamite (CDLI)'",
+        "François Desset (2020), 'Linear Elamite decipherment'"
+      ]
+    }
+  },
+  "tracked_scripts": {
+    "INDUS": {
+      "status": "undeciphered",
+      "glyph_count": 417,
+      "gene": "FOXP2",
+      "risk": "critical"
+    },
+    "LINEAR_A": {
+      "status": "undeciphered",
+      "glyph_count": 90,
+      "gene": "HTT",
+      "risk": "high"
+    },
+    "RONGORONGO": {
+      "status": "undeciphered",
+      "glyph_count": 120,
+      "gene": "CLOCK",
+      "risk": "high"
+    },
+    "VINČA": {
+      "status": "proto-writing",
+      "glyph_count": 210,
+      "gene": null,
+      "risk": "medium"
+    },
+    "BYBLOS": {
+      "status": "undeciphered",
+      "glyph_count": 114,
+      "gene": null,
+      "risk": "medium"
+    },
+    "JIROFT": {
+      "status": "undeciphered",
+      "glyph_count": null,
+      "gene": null,
+      "risk": "medium"
+    },
+    "SHANKHALIPI": {
+      "status": "undeciphered",
+      "glyph_count": null,
+      "gene": null,
+      "risk": "low"
+    },
+    "QUIPU": {
+      "status": "partial",
+      "glyph_count": null,
+      "gene": "PIEZO1",
+      "risk": "high"
+    },
+    "ZAPOTEC": {
+      "status": "undeciphered",
+      "glyph_count": null,
+      "gene": null,
+      "risk": "medium"
+    },
+    "TARTARIA": {
+      "status": "proto-writing",
+      "glyph_count": 20,
+      "gene": null,
+      "risk": "low"
+    }
+  },
+  "coverage": {
+    "total_scripts": 15,
+    "fully_mapped": 5,
+    "gene_linked": 4,
+    "coverage_pct": 60.0
+  }
+}
