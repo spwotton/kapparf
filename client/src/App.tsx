@@ -26,6 +26,7 @@ import LatticePage from "@/pages/lattice";
 import SocialPage from "@/pages/social";
 import ResearchPage from "@/pages/research";
 import ImageryPage from "@/pages/imagery";
+import ConspiracyBoardPage from "@/pages/conspiracy-board";
 
 function Router() {
   return (
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/social" component={SocialPage} />
       <Route path="/research" component={ResearchPage} />
       <Route path="/imagery" component={ImageryPage} />
+      <Route path="/board" component={ConspiracyBoardPage} />
       <Route component={NotFound} />
     </Switch>
   );

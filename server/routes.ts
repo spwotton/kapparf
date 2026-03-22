@@ -1162,6 +1162,44 @@ export async function registerRoutes(
     res.json(response);
   });
 
+  app.get("/api/proxy/usgs-quakes", async (_req, res) => {
+    try {
+      const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson");
+      if (!response.ok) return res.json({ features: [] });
+      const data = await response.json();
+      res.json(data);
+    } catch (e) {
+      res.json({ features: [] });
+    }
+  });
+
+  app.get("/api/proxy/noaa-space-weather", async (_req, res) => {
+    try {
+      const [magField, solarWind, kpIndex] = await Promise.all([
+        fetch("https://services.swpc.noaa.gov/products/summary/solar-wind-mag-field.json").then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch("https://services.swpc.noaa.gov/products/summary/solar-wind-speed.json").then(r => r.ok ? r.json() : null).catch(() => null),
+        fetch("https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json").then(r => r.ok ? r.json() : null).catch(() => null),
+      ]);
+      res.json({ magField, solarWind, kpIndex: kpIndex ? kpIndex.slice(-5) : [] });
+    } catch (e) {
+      res.json({ magField: null, solarWind: null, kpIndex: [] });
+    }
+  });
+
+  app.get("/api/proxy/n2yo-passes", async (req, res) => {
+    try {
+      const { noradId } = req.query;
+      if (!noradId) return res.json({ passes: [] });
+      const observerLat = 10.0513892;
+      const observerLon = -84.2186578;
+      const observerAlt = 1050;
+      const url = `https://api.n2yo.com/rest/v1/satellite/radiopasses/${noradId}/${observerLat}/${observerLon}/${observerAlt}/2/40/&apiKey=`;
+      res.json({ passes: [], note: "N2YO API key required — add N2YO_API_KEY secret" });
+    } catch (e) {
+      res.json({ passes: [] });
+    }
+  });
+
   app.get("/api/social/data", async (_req, res) => {
     const [domainCounts, correlationCount, events, correlations, satellites] = await Promise.all([
       storage.getEventCountsByDomain(),
