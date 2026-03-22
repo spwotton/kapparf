@@ -20,6 +20,21 @@ function pairKey(id1: string, id2: string): string {
   return id1 < id2 ? `${id1}:${id2}` : `${id2}:${id1}`;
 }
 
+const NON_DETECTION_EVENT_TYPES = new Set([
+  "sdr-node-health",
+  "sdr-node-offline",
+  "atmospheric-conditions",
+  "adsb-track",
+  "satellite-pass",
+  "weather-update",
+]);
+
+function isRealDetection(evt: SignalEvent): boolean {
+  if (NON_DETECTION_EVENT_TYPES.has(evt.eventType)) return false;
+  if (evt.confidence !== null && evt.confidence < 0.4) return false;
+  return true;
+}
+
 async function runCorrelationCycle(): Promise<void> {
   try {
     const windowEvents = await storage.getSignalEventsByWindow(600);
@@ -27,11 +42,13 @@ async function runCorrelationCycle(): Promise<void> {
     lastRun = Date.now();
     cycleCount++;
 
-    if (windowEvents.length < 2) {
+    const detectionEvents = windowEvents.filter(isRealDetection);
+
+    if (detectionEvents.length < 2) {
       return;
     }
 
-    const sortedEvents = [...windowEvents].sort((a, b) =>
+    const sortedEvents = [...detectionEvents].sort((a, b) =>
       new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );
 
@@ -161,13 +178,11 @@ async function runCorrelationCycle(): Promise<void> {
       }
     }
 
+    const filtered = windowEvents.length - detectionEvents.length;
     if (cycleCorrelations > 0) {
-      console.log(`[auto-correlator] Cycle ${cycleCount}: ${cycleCorrelations} correlations (${Object.keys(domainGroups).join(", ")} domains active)`);
-    } else {
-      const domainSummary = Object.entries(domainGroups).map(([d, evts]) => `${d}:${evts.length}`).join(" ");
-      if (cycleCount % 10 === 0) {
-        console.log(`[auto-correlator] Cycle ${cycleCount}: 0 correlations — domains: ${domainSummary}`);
-      }
+      console.log(`[auto-correlator] Cycle ${cycleCount}: ${cycleCorrelations} correlations from ${detectionEvents.length} real detections (${filtered} routine events filtered) — ${Object.keys(domainGroups).join(", ")} domains`);
+    } else if (cycleCount % 10 === 0) {
+      console.log(`[auto-correlator] Cycle ${cycleCount}: 0 correlations — ${detectionEvents.length} detections, ${filtered} filtered`);
     }
   } catch (err) {
     console.error("[auto-correlator] Cycle error:", err instanceof Error ? err.message : String(err));

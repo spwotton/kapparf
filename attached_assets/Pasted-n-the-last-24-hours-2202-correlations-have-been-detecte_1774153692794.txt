@@ -1,0 +1,121 @@
+n the last 24 hours, 2202 correlations have been detected, primarily involving the Schumann Resonance Anomaly and Kalenkov Holographic Modulation patterns, indicating a high level of local electromagnetic activity potentially linked to covert communications and synchronization of signals across diverse domains.
+
+Trends
+Increase in Schumann Resonance Anomalies detected, suggesting heightened covert communication activity, especially around 7.83 Hz.
+Frequent occurrences of Kalenkov Holographic Modulation waves, indicating stable operations in HF bands, specifically at 46.875 Hz.
+Correlations among satellite passes and electromagnetic fluctuations, suggesting potential surveillance activity.
+Anomalies
+Repeated detections of BLACKJACK-BLINDER RF Injection patterns, indicative of possible GPS spoofing attempts.
+Isolated cases of ISP Connectivity Disruption patterns amidst electromagnetic events, raising concerns about accessibility and reliability of signal integrity.
+Phase drift detected in crystal synchronization, suggesting potential external tampering.
+Recommendations
+Monitor ELF activity closely for further anomalies and patterns, especially in relation to known covert operations.
+Implement counter-measures to assess and mitigate GPS spoofing efforts associated with the BLACKJACK-BLINDER events.
+Investigate and resolve the underlying causes of ISP disruptions to enhance operational reliability.
+Collection Logs
+50 recent entries
+Collector
+Events
+Duration
+Status
+Time
+kiwisdr-scanner
+0
+22893ms
+clean
+10:27:18 PM
+kiwisdr-scanner
+0
+22449ms
+clean
+10:27:18 PM
+flights
+0
+16401ms
+success
+10:27:11 PM
+kiwisdr-scanner
+0
+66499ms
+clean
+10:26:54 PM
+weather
+1
+56802ms
+success
+10:26:37 PM
+flights
+0
+22701ms
+success
+10:26:07 PM
+kiwisdr-scanner
+0
+57800ms
+clean
+10:25:39 PM
+flights
+0
+16100ms
+success
+10:25:11 PM
+kiwisdr-scanner
+0
+33567ms
+clean
+10:24:30 PM
+kiwisdr-scanner
+0
+27001ms
+clean
+10:24:28 PM
+flights
+0
+16601ms
+success
+10:24:18 PM
+kiwisdr-scanner
+0
+59400ms
+clean
+10:24:10 PM
+kiwisdr-scanner
+0
+150299ms
+clean
+10:24:10 PM
+weather
+0
+188600ms
+success
+10:23:55 PM
+flights
+0
+59100ms
+error
+10:23:49 PM
+kiwisdr-scanner
+0
+30301ms
+clean
+10:22:59 PM
+flights
+0
+19901ms
+success
+10:22:44 PM
+flights
+0
+15301ms
+success
+10:22:16 PM
+kiwisdr-scanner
+0
+54500ms
+clean
+10:22:10 PM
+kiwisdr-scanner
+0
+42600ms
+clean
+10:22:02 PM
