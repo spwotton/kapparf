@@ -11,10 +11,13 @@ import {
   type ResearchFinding, type InsertResearchFinding,
   type ArtifactScan, type InsertArtifactScan,
   type AudioFlag, type InsertAudioFlag,
+  type DeepResearchRun, type InsertDeepResearchRun,
+  type DeepResearchReport, type InsertDeepResearchReport,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
   researchSessions, researchQueries, researchFindings,
   artifactScans, audioFlags,
+  deepResearchRuns, deepResearchReports,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
@@ -58,6 +61,13 @@ export interface IStorage {
   getAudioFlags(limit?: number): Promise<AudioFlag[]>;
   getAudioFlagsByTimeRange(from: Date, to: Date): Promise<AudioFlag[]>;
   getAudioFlagsByLocation(lat: number, lon: number, radiusKm: number): Promise<AudioFlag[]>;
+  createDeepResearchRun(run: InsertDeepResearchRun): Promise<DeepResearchRun>;
+  getDeepResearchRuns(): Promise<DeepResearchRun[]>;
+  getDeepResearchRun(id: string): Promise<DeepResearchRun | undefined>;
+  updateDeepResearchRun(id: string, updates: Partial<DeepResearchRun>): Promise<DeepResearchRun>;
+  createDeepResearchReport(report: InsertDeepResearchReport): Promise<DeepResearchReport>;
+  getDeepResearchReports(runId: string): Promise<DeepResearchReport[]>;
+  updateDeepResearchReport(id: string, updates: Partial<DeepResearchReport>): Promise<DeepResearchReport>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -307,6 +317,47 @@ export class DatabaseStorage implements IStorage {
         lte(audioFlags.longitude, lon + degRadius),
       ))
       .orderBy(desc(audioFlags.createdAt));
+  }
+
+  async createDeepResearchRun(run: InsertDeepResearchRun): Promise<DeepResearchRun> {
+    const [created] = await db.insert(deepResearchRuns).values(run).returning();
+    return created;
+  }
+
+  async getDeepResearchRuns(): Promise<DeepResearchRun[]> {
+    return db.select().from(deepResearchRuns).orderBy(desc(deepResearchRuns.createdAt));
+  }
+
+  async getDeepResearchRun(id: string): Promise<DeepResearchRun | undefined> {
+    const [run] = await db.select().from(deepResearchRuns).where(eq(deepResearchRuns.id, id));
+    return run;
+  }
+
+  async updateDeepResearchRun(id: string, updates: Partial<DeepResearchRun>): Promise<DeepResearchRun> {
+    const [updated] = await db.update(deepResearchRuns)
+      .set(updates)
+      .where(eq(deepResearchRuns.id, id))
+      .returning();
+    return updated;
+  }
+
+  async createDeepResearchReport(report: InsertDeepResearchReport): Promise<DeepResearchReport> {
+    const [created] = await db.insert(deepResearchReports).values(report).returning();
+    return created;
+  }
+
+  async getDeepResearchReports(runId: string): Promise<DeepResearchReport[]> {
+    return db.select().from(deepResearchReports)
+      .where(eq(deepResearchReports.runId, runId))
+      .orderBy(deepResearchReports.createdAt);
+  }
+
+  async updateDeepResearchReport(id: string, updates: Partial<DeepResearchReport>): Promise<DeepResearchReport> {
+    const [updated] = await db.update(deepResearchReports)
+      .set(updates)
+      .where(eq(deepResearchReports.id, id))
+      .returning();
+    return updated;
   }
 }
 

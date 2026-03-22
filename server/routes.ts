@@ -15,6 +15,7 @@ import { getVisionStatus, getVisionAnalyses, getContextMemory, runVisionOnce } f
 import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
+import { executeDeepResearchRun } from "./deep-research";
 import { fetchUrl } from "./research-web";
 import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetragon-engine";
 import { RESEARCH_CONSTANTS } from "./research-constants";
@@ -27,6 +28,7 @@ import {
   insertResearchFindingSchema,
   insertAudioFlagSchema,
   TRE_LAYERS,
+  DEEP_RESEARCH_AGENTS,
 } from "@shared/schema";
 import {
   insertSignalEventSchema,
@@ -1575,6 +1577,49 @@ export async function registerRoutes(
     } catch (err) {
       console.error("[routes] web fetch error:", err);
       res.status(500).json({ error: "Fetch failed" });
+    }
+  });
+
+  app.get("/api/deep-research/agents", (_req, res) => {
+    res.json({ agents: DEEP_RESEARCH_AGENTS.map(a => ({ id: a.id, name: a.name, framework: a.framework, domain: a.domain, icon: a.icon, color: a.color })) });
+  });
+
+  app.post("/api/deep-research/runs", async (req, res) => {
+    try {
+      const { topic } = req.body;
+      if (!topic || typeof topic !== "string" || topic.length > 50000) {
+        return res.status(400).json({ error: "Topic is required (max 50,000 characters)" });
+      }
+      const run = await storage.createDeepResearchRun({ topic, status: "pending", agentsTotal: DEEP_RESEARCH_AGENTS.length, agentsCompleted: 0 });
+      executeDeepResearchRun(run.id, topic).catch(err => {
+        console.error("[routes] deep research execution error:", err);
+      });
+      res.json(run);
+    } catch (err) {
+      console.error("[routes] create deep research run error:", err);
+      res.status(500).json({ error: "Failed to create research run" });
+    }
+  });
+
+  app.get("/api/deep-research/runs", async (_req, res) => {
+    try {
+      const runs = await storage.getDeepResearchRuns();
+      res.json(runs);
+    } catch (err) {
+      console.error("[routes] get deep research runs error:", err);
+      res.status(500).json({ error: "Failed to get runs" });
+    }
+  });
+
+  app.get("/api/deep-research/runs/:id", async (req, res) => {
+    try {
+      const run = await storage.getDeepResearchRun(req.params.id);
+      if (!run) return res.status(404).json({ error: "Run not found" });
+      const reports = await storage.getDeepResearchReports(run.id);
+      res.json({ run, reports });
+    } catch (err) {
+      console.error("[routes] get deep research run error:", err);
+      res.status(500).json({ error: "Failed to get run" });
     }
   });
 
