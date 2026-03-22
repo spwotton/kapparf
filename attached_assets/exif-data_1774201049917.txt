@@ -1,0 +1,104 @@
+EXIF Data Export
+==================================================
+
+
+Camera Information
+------------------
+Make: samsung
+Model: Galaxy A06
+Lens Model: N/A
+Lens Make: N/A
+Serial Number: N/A
+Internal Serial Number: N/A
+Software: N/A
+Firmware Version: N/A
+
+Image Settings
+--------------
+Orientation: right-top
+Exposure Time: [object Object] sec
+F-Number: f/[object Object]
+ISO: N/A
+Focal Length: [object Object] mm
+Focal Length (35mm): [object Object] mm
+Flash: Flash did not fire
+White Balance: Auto white balance
+Exposure Program: N/A
+Exposure Mode: N/A
+Exposure Bias: 0
+Metering Mode: CenterWeightedAverage
+Shutter Speed: N/A
+Aperture: 1.87
+Max Aperture: 2.64
+Brightness: N/A
+Subject Distance: undefined m
+Scene Capture Type: N/A
+Scene Type: N/A
+Gain Control: N/A
+Contrast: N/A
+Saturation: N/A
+Sharpness: N/A
+Light Source: N/A
+Digital Zoom Ratio: N/A
+
+GPS Data
+--------
+Latitude: N/A
+Longitude: N/A
+Altitude: N/A
+Latitude Ref: N/A
+Longitude Ref: N/A
+Altitude Ref: N/A
+GPS Date Stamp: N/A
+GPS Time Stamp: N/A
+GPS Speed: N/A
+GPS Speed Ref: N/A
+GPS Img Direction: N/A
+GPS Img Direction Ref: N/A
+GPS Dest Bearing: N/A
+GPS Dest Bearing Ref: N/A
+
+Date & Time
+-----------
+Date/Time Original: 2026:03:21 10:06:29
+Create Date: N/A
+Modify Date: N/A
+Date/Time Digitized: 2026:03:21 10:06:29
+Sub Sec Time: N/A
+Sub Sec Time Original: 449
+Sub Sec Time Digitized: N/A
+
+Author & Copyright
+------------------
+Artist: N/A
+Copyright: N/A
+Image Description: N/A
+User Comment: N/A
+Maker Note: N/A
+
+Image Properties
+----------------
+Image Width: 8160px
+Image Height: 6120px
+Bits Per Sample: 8
+Samples Per Pixel: N/A
+Color Space: N/A
+Compression: N/A
+Photometric Interpretation: N/A
+Resolution Unit: N/A
+X Resolution: N/A
+Y Resolution: N/A
+YCbCr Positioning: N/A
+Planar Configuration: N/A
+Exif Version: N/A
+FlashPix Version: N/A
+Components Configuration: N/A
+Compressed Bits Per Pixel: N/A
+
+Thumbnail Information
+---------------------
+Thumbnail Offset: N/A
+Thumbnail Length: N/A
+Thumbnail Compression: N/A
+Thumbnail X Resolution: N/A
+Thumbnail Y Resolution: N/A
