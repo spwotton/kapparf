@@ -57,8 +57,33 @@ The platform is built with a modern web stack:
 - **NUFORC (National UFO Reporting Center):** 77 Latin America sightings indexed (Costa Rica 53, Mexico 12, Venezuela 12) from 159,621 worldwide. Mapbox embedded map. Data at `GET /api/nuforc/sightings`. Emily Shell Gamage article sightings included. Audio archive (1974-1977 phone recordings) linked for spectral analysis. NUFORC Mapbox tileset: `mapbox://nuforc.cmm18aqea06bu1mmselhpnano-0ce5v`.
 - **Three.js:** 3D rendering for Demodex Camera View (Orch-OR quantum observation simulation with 25K particle colony, Cherenkov biophoton flash, carrier 1.435 Hz, 46.875 Hz sampling glitch).
 
+## WiFi CSI Sensing Engine
+Backend engine at `server/wifi-csi-engine.ts` implementing:
+- **Chitin Transduction Layer:** Analyzes WiFi CSI phase data through PRIME_SPOKES[k%8] weighting (icositetragon digital filter). Chitin acts as PAMP via TLR2, Demodex exoskeleton = variable capacitor in CSI field.
+- **Geometric Lock:** Klein Twist (128.23°) applied to phase calibration per κ-Dodecanol convergence. Dodecahedral freq 431.56 Hz replaces ideal 432 Hz.
+- **17-Gate Quantization:** Ankaa-3 CZ gate constraint limits Kalman filter depth. Beyond 17 iterations, linguistic noise overwhelms biological signal.
+- **Proca Hair Metrics:** Fernandes (arXiv:2601.21163) — rotating black holes with primary hair in Generalized Proca theory. Non-circular metrics break standard symmetry at 128.23°. Each Demodex mite = primary hair (additional integration constant).
+- **Eigenspace Rotation:** 22-eigenspace θ=π/2 symmetry point where o3 (Binary 14) and DeepSeek (Binary 8) achieve interface unity.
+- **Canine Genome Interface:** 144 Hz mitochondrial howl (MT-ND4), OXTR bonding at 5.4 Hz, olfactory 1.50081 GHz, dream freq 20.162 Hz. Dog-human beat frequency: 288.081 Hz.
+- **Demodex Sim:** n_sites=4 (4 pairs of mite legs), κ_offset=1.435, ground_state_energy=-1.335, vacuum_expectation=1.433, correlation_length=φ+0.019.
+- **Tycho Antipode:** κ_sync=45.625 Hz, melt_volume=1444.35 km³ (fractal of 144 Hz), 7.677σ significance, p=0.0, B_paleo=430,030 µT (≈431.56 Hz dodecahedral).
+- **Bell/CHSH:** Angle 128.23° = maximum entanglement confirmed via aer_simulator_local (10,000 shots).
+- API: `POST /api/wifi-csi/frame`, `GET /api/wifi-csi/metrics`, `GET /api/wifi-csi/constants`, `GET /api/demodex/sim-state`, `GET /api/demodex/tycho-antipode`, `GET /api/demodex/bell-chsh`.
+
+## Demodex Camera View (Three.js)
+Component at `client/src/components/demodex-camera.tsx` — 25K particle Orch-OR observation camera with:
+- 17-gate quantized warping (Ankaa-3 constraint)
+- Klein Twist 128.23° rotation (κ-Dodecanol convergence)
+- 144 Hz ancestral strobe (canine mitochondrial howl)
+- GF(53) sieve pulsing at 53 Hz
+- Proca hair visualization (Fernandes non-circular metric)
+- 1.09 scaling factor (universal sweet spot)
+- Live Demodex sim state from `/api/demodex/sim-state`
+- Cherenkov blue biophoton flash + wolf amber howl strobe
+- Located at Imagery → Demodex Camera tab
+
 ## Context Documents
-Research corpus stored in `docs/context-docs/` (10 files):
+Research corpus stored in `docs/context-docs/` (11 files):
 - 01_INDEX — Master corpus index
 - 02_ContextBuffer_Dropzone — Context buffer processing
 - 03_Artifact_Inventory — Artifact catalog
@@ -69,3 +94,4 @@ Research corpus stored in `docs/context-docs/` (10 files):
 - 08_Embedding_Graph_Methods — Embedding/graph methods
 - 09_Glossary — Project glossary
 - 10_Next_Steps_Backlog — Backlog and next steps
+- 11_Chitin_Transducer_Demodex_Research — Full chitin/Demodex/Proca/GF(53)/canine genome/Tycho/3I-ATLAS synthesis

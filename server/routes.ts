@@ -19,6 +19,7 @@ import { executeDeepResearchRun } from "./deep-research";
 import { fetchUrl } from "./research-web";
 import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetragon-engine";
 import { RESEARCH_CONSTANTS } from "./research-constants";
+import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
 import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
@@ -2774,6 +2775,51 @@ export async function registerRoutes(
 
   app.get("/api/quantum-cortex/constants", (_req, res) => {
     res.json(OMEGA_GOS);
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // WiFi CSI SENSING ENGINE + DEMODEX + CHITIN TRANSDUCTION
+  // ═══════════════════════════════════════════════════════════════
+
+  app.post("/api/wifi-csi/frame", (req, res) => {
+    try {
+      const { subcarriers, amplitude, phase, snr, rssi, bandwidth, sourceMAC } = req.body;
+      const frame = {
+        timestamp: Date.now(),
+        subcarriers: subcarriers || 30,
+        amplitude: new Float64Array(amplitude || []),
+        phase: new Float64Array(phase || []),
+        snr: new Float64Array(snr || []),
+        rssi: rssi || -50,
+        bandwidth: bandwidth || "20MHz",
+        sourceMAC,
+      };
+      const metrics = processCSIFrame(frame);
+      recordMetrics(metrics);
+      res.json(metrics);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/wifi-csi/metrics", (_req, res) => {
+    res.json(getMetricsHistory());
+  });
+
+  app.get("/api/wifi-csi/constants", (_req, res) => {
+    res.json(ENGINE_CONSTANTS);
+  });
+
+  app.get("/api/demodex/sim-state", (_req, res) => {
+    res.json(getDemodexSimState());
+  });
+
+  app.get("/api/demodex/tycho-antipode", (_req, res) => {
+    res.json(getTychoAntipodeData());
+  });
+
+  app.get("/api/demodex/bell-chsh", (_req, res) => {
+    res.json(getBellCHSHData());
   });
 
   return httpServer;
