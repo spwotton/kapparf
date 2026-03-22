@@ -17,7 +17,7 @@ import {
   AlertCircle, Clock, Zap, Search, ExternalLink, Copy, Archive
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import type { ResearchSession, ResearchQuery, ResearchFinding } from "@shared/schema";
+import type { ResearchSession, ResearchQuery, ResearchFinding, SuperpositionStatus } from "@shared/schema";
 
 interface ModelInfo {
   id: string;
@@ -214,6 +214,27 @@ export default function ResearchPage() {
     },
   });
 
+  const cortexProcessMutation = useMutation({
+    mutationFn: async (input: string) => {
+      const res = await apiRequest("POST", "/api/quantum-cortex/process", { input });
+      return res.json();
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/quantum-cortex/status"] });
+      setQueryResults(prev => [{
+        response: data.output || "Cortical processing complete",
+        provider: "quantum-cortex",
+        model: "cortical-stack",
+        layer: 0,
+        timestamp: new Date().toISOString(),
+      }, ...prev]);
+      toast({ title: "Cortical synthesis complete" });
+    },
+    onError: (err: Error) => {
+      toast({ title: t("common.error"), description: err.message, variant: "destructive" });
+    },
+  });
+
   const handleSingleQuery = () => {
     if (!activeSessionId || !queryPrompt || !selectedModel) return;
     const model = modelsData?.models.find(m => m.id === selectedModel);
@@ -249,6 +270,11 @@ export default function ResearchPage() {
       toast({ title: t("social.copied") });
     }
   };
+
+  const { data: cortexStatus } = useQuery<SuperpositionStatus>({
+    queryKey: ["/api/quantum-cortex/status"],
+    refetchInterval: 5000,
+  });
 
   const models = modelsData?.models || [];
   const providers = modelsData?.providers || [];
@@ -361,6 +387,52 @@ export default function ResearchPage() {
               )}
             </CardContent>
           </Card>
+
+          {cortexStatus && (
+            <Card data-testid="card-cortex-research">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Brain className="h-3.5 w-3.5 text-purple-500" />
+                  Quantum Cortex
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-2 text-center text-xs">
+                  <div>
+                    <div className="text-muted-foreground">Status</div>
+                    <Badge
+                      variant="outline"
+                      className={cortexStatus.running
+                        ? "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/30 text-[10px] mt-0.5"
+                        : "bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/30 text-[10px] mt-0.5"
+                      }
+                      data-testid="badge-cortex-research-status"
+                    >
+                      {cortexStatus.running ? "Online" : "Offline"}
+                    </Badge>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground">Nodes</div>
+                    <div className="font-mono font-semibold mt-0.5" data-testid="text-cortex-research-nodes">
+                      {cortexStatus.coherenceMetrics.activeNodes}/{cortexStatus.constants.NODE_COUNT}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground">Ψ Conv.</div>
+                    <div className="font-mono font-semibold mt-0.5" data-testid="text-cortex-research-psi">
+                      {(cortexStatus.coherenceMetrics.psiConvergence * 100).toFixed(1)}%
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-muted-foreground">Cycles</div>
+                    <div className="font-mono font-semibold mt-0.5" data-testid="text-cortex-research-cycles">
+                      {cortexStatus.processingCycleCount}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         <div className="space-y-4">
@@ -456,6 +528,20 @@ export default function ResearchPage() {
                           <><Zap className="h-4 w-4 mr-2" />{t("research.deepResearch")}</>
                         )}
                       </Button>
+                      {cortexStatus?.running && (
+                        <Button
+                          variant="outline"
+                          onClick={() => queryPrompt.trim() && cortexProcessMutation.mutate(`[RESEARCH-QUERY] ${queryPrompt}`)}
+                          disabled={!queryPrompt.trim() || isQuerying || cortexProcessMutation.isPending}
+                          data-testid="button-cortex-process"
+                        >
+                          {cortexProcessMutation.isPending ? (
+                            <><Brain className="h-4 w-4 mr-2 animate-spin" />Cortical...</>
+                          ) : (
+                            <><Brain className="h-4 w-4 mr-2" />Cortex</>
+                          )}
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

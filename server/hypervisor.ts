@@ -28,11 +28,14 @@ const MAX_WINDOW_EVENTS = 500;
 const MAX_OVERLAPS = 100;
 const WINDOW_MS = 300_000;
 
+type BrainstemCallback = (data: { psiValue: number; phiLockRate: number; hallDriftNs: number; triHonkCycles: number }) => void;
+
 export class OmegaChronosHypervisor {
   private startTime = 0;
   private running = false;
   private triHonkCycles = 0;
   private loopTimer: ReturnType<typeof setInterval> | null = null;
+  private brainstemCallback: BrainstemCallback | null = null;
   private agents: CouncilAgent[] = COUNCIL_AGENTS.map(a => ({ ...a }));
   private streams: AnalysisStream[] = HYPERVISOR_STREAMS.map(s => ({ ...s }));
   private streamEvents: Map<string, StreamEvent[]> = new Map();
@@ -46,6 +49,10 @@ export class OmegaChronosHypervisor {
   private dominantFrequency: number | null = null;
   private overlapCounter = 0;
   private seenOverlapPairs = new Set<string>();
+
+  setBrainstemCallback(cb: BrainstemCallback) {
+    this.brainstemCallback = cb;
+  }
 
   start() {
     if (this.running) return;
@@ -173,6 +180,15 @@ export class OmegaChronosHypervisor {
     this.updateAgentStatus(now);
     this.updatePsi();
     this.pruneOldEvents(now);
+
+    if (this.brainstemCallback && this.triHonkCycles % 100 === 0) {
+      this.brainstemCallback({
+        psiValue: this.psiValue,
+        phiLockRate: this.phiLockRate,
+        hallDriftNs: Math.max(...this.agents.map(a => a.driftNs), 0),
+        triHonkCycles: this.triHonkCycles,
+      });
+    }
   }
 
   private checkHallDrift() {

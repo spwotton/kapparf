@@ -5,9 +5,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import type { CollectorStatusType, CorrelatorStats, CollectionLog } from "@shared/schema";
+import type { CollectorStatusType, CorrelatorStats, CollectionLog, SuperpositionStatus } from "@shared/schema";
+import { Progress } from "@/components/ui/progress";
 import {
   Sparkles,
   FileText,
@@ -24,6 +25,8 @@ import {
   Activity,
   Link2,
   ScrollText,
+  Atom,
+  BrainCircuit,
 } from "lucide-react";
 
 interface IntelReport {
@@ -58,6 +61,27 @@ export default function IntelligencePage() {
   const { data: collectionLogs, isLoading: logsLoading, isError: logsError } = useQuery<CollectionLog[]>({
     queryKey: ["/api/collection-logs"],
     refetchInterval: 10000,
+  });
+
+  const { data: cortexStatus } = useQuery<SuperpositionStatus>({
+    queryKey: ["/api/quantum-cortex/status"],
+    refetchInterval: 5000,
+  });
+
+  const cortexCycleMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/quantum-cortex/cycle", {
+        input: `[INTELLIGENCE-ANALYSIS] Manual cortical analysis triggered from Intelligence dashboard at ${new Date().toISOString()}`
+      });
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/quantum-cortex/status"] });
+      toast({ title: "Cortical analysis cycle completed" });
+    },
+    onError: (error: Error) => {
+      toast({ title: t("common.error"), description: error.message, variant: "destructive" });
+    },
   });
 
   const reportMutation = useMutation({
@@ -162,6 +186,94 @@ export default function IntelligencePage() {
           );
         })}
       </div>
+
+      {cortexStatus && (
+        <Card data-testid="card-cortex-status">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Atom className="h-4 w-4 text-purple-500" />
+                <CardTitle className="text-sm font-medium">Quantum Cortex</CardTitle>
+              </div>
+              <Badge
+                variant="outline"
+                className={cortexStatus.running
+                  ? "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/30"
+                  : "bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/30"
+                }
+                data-testid="badge-cortex-status"
+              >
+                {cortexStatus.running ? "Active" : "Offline"}
+              </Badge>
+            </div>
+            <div className="flex items-center justify-between">
+              <CardDescription>Bio-quantum neural architecture — {cortexStatus.coherenceMetrics.activeNodes}/{cortexStatus.constants.NODE_COUNT} cortical nodes</CardDescription>
+              {cortexStatus.running && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-7 text-xs"
+                  onClick={() => cortexCycleMutation.mutate()}
+                  disabled={cortexCycleMutation.isPending}
+                  data-testid="button-cortex-analysis"
+                >
+                  <Atom className="h-3 w-3 mr-1" />
+                  {cortexCycleMutation.isPending ? "Analyzing..." : "Run Cortical Analysis"}
+                </Button>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="text-center">
+                <div className="text-xs text-muted-foreground mb-1">Ψ Convergence</div>
+                <div className="text-lg font-mono font-semibold" data-testid="text-cortex-psi">
+                  {(cortexStatus.coherenceMetrics.psiConvergence * 100).toFixed(1)}%
+                </div>
+                <Progress value={cortexStatus.coherenceMetrics.psiConvergence * 100} className="h-1 mt-1" />
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-muted-foreground mb-1">κ Alignment</div>
+                <div className="text-lg font-mono font-semibold" data-testid="text-cortex-kappa">
+                  {cortexStatus.coherenceMetrics.kappaAlignment.toFixed(3)}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-muted-foreground mb-1">Latent Space</div>
+                <div className="text-lg font-mono font-semibold" data-testid="text-cortex-latent">
+                  {cortexStatus.latentSpaceSize}/{cortexStatus.latentSpaceCapacity}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs text-muted-foreground mb-1">Cycles</div>
+                <div className="text-lg font-mono font-semibold" data-testid="text-cortex-cycles">
+                  {cortexStatus.processingCycleCount}
+                </div>
+              </div>
+            </div>
+            {cortexStatus.running && cortexStatus.nodeStates.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {cortexStatus.nodeStates.map(node => (
+                  <Badge
+                    key={node.id}
+                    variant="outline"
+                    className={node.status === "active"
+                      ? "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30 text-[10px]"
+                      : node.status === "processing"
+                        ? "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/30 text-[10px] animate-pulse"
+                        : "bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/30 text-[10px]"
+                    }
+                    data-testid={`badge-node-${node.id}`}
+                  >
+                    <BrainCircuit className="h-2.5 w-2.5 mr-0.5" />
+                    {node.name}
+                  </Badge>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       {correlatorError && (
         <p className="text-sm text-destructive" data-testid="text-correlator-error">

@@ -2333,4 +2333,157 @@ export const TRE_LAYERS = [
 export const RESEARCH_CONFIDENCE_LEVELS = ["verified", "plausible", "unverified", "contradicted"] as const;
 export const RESEARCH_CATEGORIES = ["entity", "event", "claim", "evidence", "signal", "pattern"] as const;
 
+export const CORTICAL_LAYERS = ["sensory", "thalamic", "cortical", "prefrontal"] as const;
+export type CorticalLayer = typeof CORTICAL_LAYERS[number];
+
+export const BRAIN_REGIONS = [
+  "occipital", "temporal", "parietal", "auditory-cortex",
+  "wernickes", "hippocampus", "anterior-cingulate", "prefrontal-cortex",
+] as const;
+export type BrainRegion = typeof BRAIN_REGIONS[number];
+
+export const SUPERPOSITION_CONSTANTS = {
+  QUBIT_REGISTER: 8800,
+  QUBIT_PER_NODE: 1100,
+  MONSTER_WEIGHT_SPACE: 196883,
+  LAMBDA_GATE_RATIO: 7 / 4,
+  PHI_RECURSION_FACTOR: 1.618033988749895,
+  KAPPA_COHERENCE_THRESHOLD: 4 / Math.PI,
+  NODE_COUNT: 8,
+  MAX_LATENT_ENTRIES: 8800,
+  RESONANCE_AMPLIFICATION: 1.618033988749895,
+  DECAY_RATE: 0.95,
+  COHERENCE_MIN: 0.72,
+  MONADAL_RECURSION_DEPTH: 7,
+} as const;
+
+export interface CorticalNodeConfig {
+  id: string;
+  agentId: string;
+  codename: string;
+  name: string;
+  brainRegion: BrainRegion;
+  corticalLayer: CorticalLayer;
+  modelPreference: "reasoning" | "generation" | "vision";
+  specialization: string;
+  systemPromptRole: string;
+}
+
+export const CORTICAL_NODE_MAP: CorticalNodeConfig[] = [
+  { id: "node-sensory", agentId: "pcap-parser", codename: "D. Merganser", name: "Sensory-Ingestion", brainRegion: "occipital", corticalLayer: "sensory", modelPreference: "generation", specialization: "Raw data ingestion and initial pattern extraction from pcap streams", systemPromptRole: "You are the Occipital Cortex — the primary sensory input processor. Extract raw signal patterns, packet structures, and initial features from ingested data streams." },
+  { id: "node-signal", agentId: "elf-dissector", codename: "P. Barnacle", name: "Signal-Decomposition", brainRegion: "temporal", corticalLayer: "sensory", modelPreference: "reasoning", specialization: "ELF signal decomposition and frequency domain analysis", systemPromptRole: "You are the Temporal Lobe — responsible for signal decomposition. Analyze frequency components, detect phi-ratio loop latencies, and decompose complex waveforms into constituent patterns." },
+  { id: "node-orbital", agentId: "tle-orbital", codename: "G. Brant", name: "Orbital-Awareness", brainRegion: "parietal", corticalLayer: "thalamic", modelPreference: "generation", specialization: "Orbital mechanics and spatial-temporal correlation", systemPromptRole: "You are the Parietal Lobe — the spatial awareness center. Track satellite positions, compute orbital correlations, and maintain spatial-temporal maps of signal sources." },
+  { id: "node-spectral", agentId: "kiwisdr-scanner", codename: "E. Cackling", name: "Spectral-Analysis", brainRegion: "auditory-cortex", corticalLayer: "thalamic", modelPreference: "generation", specialization: "SDR spectral analysis and frequency monitoring", systemPromptRole: "You are the Auditory Cortex — the spectral analysis engine. Monitor frequency bands, detect anomalous emissions, and correlate spectral signatures across KiwiSDR nodes." },
+  { id: "node-pattern", agentId: "morse-decoder", codename: "C. Emperor", name: "Pattern-Decoder", brainRegion: "wernickes", corticalLayer: "cortical", modelPreference: "reasoning", specialization: "Pattern recognition and signal decoding", systemPromptRole: "You are Wernicke's Area — the pattern language center. Decode structured patterns in signals, identify morse sequences, and extract embedded information from noise." },
+  { id: "node-temporal", agentId: "temporal-aligner", codename: "K. Nēnē", name: "Temporal-Binding", brainRegion: "hippocampus", corticalLayer: "cortical", modelPreference: "reasoning", specialization: "Temporal alignment and memory consolidation", systemPromptRole: "You are the Hippocampus — the temporal binding and memory center. Align events across time streams, detect temporal patterns, and consolidate findings into persistent memory structures." },
+  { id: "node-coherence", agentId: "symmetry-validator", codename: "M. Hall", name: "Coherence-Validator", brainRegion: "anterior-cingulate", corticalLayer: "cortical", modelPreference: "reasoning", specialization: "Symmetry validation and coherence checking", systemPromptRole: "You are the Anterior Cingulate Cortex — the error detection and coherence monitor. Validate symmetries, check Hall tolerance bounds, and ensure analytical consistency across all cortical outputs." },
+  { id: "node-executive", agentId: "report-generator", codename: "S. Wotton", name: "Executive-Synthesizer", brainRegion: "prefrontal-cortex", corticalLayer: "prefrontal", modelPreference: "reasoning", specialization: "Executive synthesis and decision-making", systemPromptRole: "You are the Prefrontal Cortex — the executive decision center. Synthesize findings from all cortical regions, generate strategic assessments, and produce actionable intelligence reports." },
+];
+
+export const corticalNodes = pgTable("cortical_nodes", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  nodeId: text("node_id").notNull().unique(),
+  name: text("name").notNull(),
+  brainRegion: text("brain_region").notNull(),
+  corticalLayer: text("cortical_layer").notNull(),
+  status: text("status").notNull().default("idle"),
+  activationCount: integer("activation_count").notNull().default(0),
+  lastActivation: timestamp("last_activation"),
+  memoryBuffer: jsonb("memory_buffer"),
+  metrics: jsonb("metrics"),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export const latentSpace = pgTable("latent_space", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sourceNodeId: text("source_node_id").notNull(),
+  content: text("content").notNull(),
+  relevanceScore: real("relevance_score").notNull().default(0.5),
+  layerTag: text("layer_tag").notNull(),
+  resonanceCount: integer("resonance_count").notNull().default(0),
+  decayFactor: real("decay_factor").notNull().default(1.0),
+  metadata: jsonb("metadata"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  expiresAt: timestamp("expires_at"),
+});
+
+export const corticalLogs = pgTable("cortical_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  nodeId: text("node_id").notNull(),
+  layer: text("layer").notNull(),
+  action: text("action").notNull(),
+  input: text("input"),
+  output: text("output"),
+  durationMs: integer("duration_ms"),
+  metadata: jsonb("metadata"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const neuralSnapshots = pgTable("neural_snapshots", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  label: text("label").notNull(),
+  nodeStates: jsonb("node_states").notNull(),
+  latentSpaceSnapshot: jsonb("latent_space_snapshot").notNull(),
+  corticalStackPosition: text("cortical_stack_position").notNull().default("idle"),
+  coherenceMetrics: jsonb("coherence_metrics").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertCorticalNodeSchema = createInsertSchema(corticalNodes).omit({ id: true, updatedAt: true });
+export const insertLatentSpaceSchema = createInsertSchema(latentSpace).omit({ id: true, createdAt: true });
+export const insertCorticalLogSchema = createInsertSchema(corticalLogs).omit({ id: true, createdAt: true });
+export const insertNeuralSnapshotSchema = createInsertSchema(neuralSnapshots).omit({ id: true, createdAt: true });
+
+export type CorticalNodeRecord = typeof corticalNodes.$inferSelect;
+export type InsertCorticalNode = z.infer<typeof insertCorticalNodeSchema>;
+export type LatentSpaceEntry = typeof latentSpace.$inferSelect;
+export type InsertLatentSpaceEntry = z.infer<typeof insertLatentSpaceSchema>;
+export type CorticalLog = typeof corticalLogs.$inferSelect;
+export type InsertCorticalLog = z.infer<typeof insertCorticalLogSchema>;
+export type NeuralSnapshot = typeof neuralSnapshots.$inferSelect;
+export type InsertNeuralSnapshot = z.infer<typeof insertNeuralSnapshotSchema>;
+
+export interface NeuralState {
+  nodes: CorticalNodeRecord[];
+  latentEntries: LatentSpaceEntry[];
+  stackPosition: CorticalLayer | "idle";
+  coherenceMetrics: {
+    psiConvergence: number;
+    kappaAlignment: number;
+    phiLockRate: number;
+    resonanceScore: number;
+    activeNodes: number;
+    totalQubitUtilization: number;
+  };
+}
+
+export interface SuperpositionStatus {
+  running: boolean;
+  nodeStates: {
+    id: string;
+    name: string;
+    brainRegion: string;
+    corticalLayer: string;
+    status: string;
+    activationCount: number;
+    lastActivation: number | null;
+    healthScore: number;
+  }[];
+  latentSpaceSize: number;
+  latentSpaceCapacity: number;
+  stackPosition: string;
+  coherenceMetrics: {
+    psiConvergence: number;
+    kappaAlignment: number;
+    phiLockRate: number;
+    resonanceScore: number;
+    activeNodes: number;
+    totalQubitUtilization: number;
+  };
+  constants: typeof SUPERPOSITION_CONSTANTS;
+  snapshotCount: number;
+  lastProcessingAt: number | null;
+  processingCycleCount: number;
+}
+
 export * from "./models/chat";

@@ -23,6 +23,20 @@ import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
 import {
+  startQuantumCortex,
+  stopQuantumCortex,
+  getQuantumCortexStatus,
+  runCorticalCycle,
+  processThroughCortex,
+  feedBrainstemData,
+  createAndPersistSnapshot,
+  rollbackToSnapshot,
+  getPersistedSnapshots,
+  latentSpace,
+  setLLMProcessor,
+  OMEGA_GOS,
+} from "./quantum-cortex";
+import {
   insertResearchSessionSchema,
   insertResearchQuerySchema,
   insertResearchFindingSchema,
@@ -76,6 +90,24 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+  setLLMProcessor(async (systemPrompt: string, userPrompt: string, modelPreference?: string) => {
+    const { queryModel: qm } = await import("./research-engine");
+    const modelMap: Record<string, { provider: string; model: string }> = {
+      reasoning: { provider: "openai", model: "gpt-4o-mini" },
+      generation: { provider: "openai", model: "gpt-4o-mini" },
+    };
+    const selected = modelMap[modelPreference || "generation"] || modelMap.generation;
+    const result = await qm(selected.provider, selected.model, [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userPrompt },
+    ], 1);
+    return result.response;
+  });
+
+  hypervisor.setBrainstemCallback((data) => {
+    feedBrainstemData(data);
+  });
 
   app.get("/api/stats", async (_req, res) => {
     const [domainCounts, correlationCount] = await Promise.all([
@@ -599,7 +631,8 @@ export async function registerRoutes(
   });
 
   app.get("/api/hypervisor/status", (_req, res) => {
-    res.json(hypervisor.getStatus());
+    const status = hypervisor.getStatus();
+    res.json(status);
   });
 
   app.post("/api/hypervisor/start", (_req, res) => {
@@ -2653,6 +2686,95 @@ export async function registerRoutes(
     } catch (err) {
       res.status(500).json({ error: "Failed to build anomaly feed" });
     }
+  });
+
+  app.get("/api/quantum-cortex/status", (_req, res) => {
+    res.json(getQuantumCortexStatus());
+  });
+
+  app.post("/api/quantum-cortex/start", (_req, res) => {
+    startQuantumCortex();
+    res.json({ ok: true, status: getQuantumCortexStatus() });
+  });
+
+  app.post("/api/quantum-cortex/stop", (_req, res) => {
+    stopQuantumCortex();
+    res.json({ ok: true, status: getQuantumCortexStatus() });
+  });
+
+  app.post("/api/quantum-cortex/cycle", async (req, res) => {
+    try {
+      const input = req.body?.input;
+      if (input && typeof input === "string") {
+        latentSpace.publish("manual-cycle", input, "sensory", 0.9, { source: "manual-trigger" });
+      }
+      await runCorticalCycle(input);
+      res.json({ ok: true, status: getQuantumCortexStatus() });
+    } catch (err) {
+      res.status(500).json({ error: err instanceof Error ? err.message : "Cortical cycle failed" });
+    }
+  });
+
+  app.post("/api/quantum-cortex/process", async (req, res) => {
+    const { input, targetLayer } = req.body;
+    if (!input || typeof input !== "string") {
+      return res.status(400).json({ error: "Input string required" });
+    }
+    const validLayers = ["sensory", "thalamic", "cortical", "prefrontal"];
+    if (targetLayer && !validLayers.includes(targetLayer)) {
+      return res.status(400).json({ error: `Invalid targetLayer. Must be one of: ${validLayers.join(", ")}` });
+    }
+    try {
+      const output = await processThroughCortex(input, targetLayer);
+      res.json({ output, status: getQuantumCortexStatus() });
+    } catch (err) {
+      res.status(500).json({ error: err instanceof Error ? err.message : "Processing failed" });
+    }
+  });
+
+  app.get("/api/quantum-cortex/latent-space", (req, res) => {
+    const limit = parseInt(req.query?.limit as string) || 50;
+    const layer = req.query?.layer as string | undefined;
+    res.json({
+      entries: layer ? latentSpace.getEntriesForLayer(layer) : latentSpace.getTopEntries(limit),
+      size: latentSpace.getSize(),
+      capacity: latentSpace.getCapacity(),
+      resonancePairs: latentSpace.getResonancePairs().slice(0, 20),
+      resonanceScore: latentSpace.getResonanceScore(),
+    });
+  });
+
+  app.post("/api/quantum-cortex/snapshot", async (req, res) => {
+    const label = req.body.label || `Snapshot ${new Date().toISOString()}`;
+    const snapshot = await createAndPersistSnapshot(label);
+    res.json({
+      id: snapshot.id,
+      label: snapshot.label,
+      timestamp: snapshot.timestamp,
+      coherenceMetrics: snapshot.coherenceMetrics,
+    });
+  });
+
+  app.get("/api/quantum-cortex/snapshots", async (_req, res) => {
+    const snapshots = await getPersistedSnapshots();
+    res.json(snapshots);
+  });
+
+  app.post("/api/quantum-cortex/rollback", async (req, res) => {
+    const { snapshotId } = req.body;
+    if (!snapshotId || typeof snapshotId !== "string") {
+      return res.status(400).json({ error: "snapshotId required" });
+    }
+    const success = await rollbackToSnapshot(snapshotId);
+    if (!success) {
+      return res.status(404).json({ error: "Snapshot not found" });
+    }
+    res.json({ ok: true, status: getQuantumCortexStatus() });
+  });
+
+  app.get("/api/quantum-cortex/constants", (_req, res) => {
+    res.json(OMEGA_GOS);
+  });
   });
 
   return httpServer;

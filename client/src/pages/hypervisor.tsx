@@ -12,6 +12,7 @@ import {
   type HypervisorStatus,
   type CouncilAgent,
   type TimingOverlap,
+  type SuperpositionStatus,
 } from "@shared/schema";
 import {
   Play,
@@ -29,6 +30,7 @@ import {
   XCircle,
   AlertTriangle,
   RefreshCw,
+  Atom,
 } from "lucide-react";
 
 const OC = OMEGA_CHRONOS;
@@ -83,6 +85,11 @@ export default function HypervisorPage() {
   const { data: status, isLoading } = useQuery<HypervisorStatus>({
     queryKey: ["/api/hypervisor/status"],
     refetchInterval: 1000,
+  });
+
+  const { data: cortexStatus } = useQuery<SuperpositionStatus>({
+    queryKey: ["/api/quantum-cortex/status"],
+    refetchInterval: 3000,
   });
 
   const startMutation = useMutation({
@@ -278,6 +285,60 @@ export default function HypervisorPage() {
           </div>
         </CardContent>
       </Card>
+
+      {cortexStatus && (
+        <Card data-testid="card-cortex-brainstem">
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Atom className="w-4 h-4 text-purple-500" />
+                Quantum Cortex (Brainstem Link)
+              </CardTitle>
+              <Badge
+                variant="outline"
+                className={cortexStatus.running
+                  ? "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/30"
+                  : "bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/30"
+                }
+                data-testid="badge-cortex-running"
+              >
+                {cortexStatus.running ? "Cortex Online" : "Cortex Offline"}
+              </Badge>
+            </div>
+            <CardDescription>
+              Brainstem telemetry feeds Ω-CHRONOS data into the cortical latent space
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-3 text-center">
+              <div>
+                <div className="text-xs text-muted-foreground">Ψ Conv.</div>
+                <div className="font-mono font-bold text-sm">{(cortexStatus.coherenceMetrics.psiConvergence * 100).toFixed(1)}%</div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">κ Align</div>
+                <div className="font-mono font-bold text-sm">{cortexStatus.coherenceMetrics.kappaAlignment.toFixed(3)}</div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">φ Lock</div>
+                <div className="font-mono font-bold text-sm">{(cortexStatus.coherenceMetrics.phiLockRate * 100).toFixed(1)}%</div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">Nodes</div>
+                <div className="font-mono font-bold text-sm">{cortexStatus.coherenceMetrics.activeNodes}/{cortexStatus.constants.NODE_COUNT}</div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">Latent</div>
+                <div className="font-mono font-bold text-sm">{cortexStatus.latentSpaceSize}</div>
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">Cycles</div>
+                <div className="font-mono font-bold text-sm">{cortexStatus.processingCycleCount}</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card data-testid="card-streams">
         <CardHeader className="pb-3">

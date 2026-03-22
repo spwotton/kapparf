@@ -13,11 +13,16 @@ import {
   type AudioFlag, type InsertAudioFlag,
   type DeepResearchRun, type InsertDeepResearchRun,
   type DeepResearchReport, type InsertDeepResearchReport,
+  type CorticalNodeRecord, type InsertCorticalNode,
+  type LatentSpaceEntry, type InsertLatentSpaceEntry,
+  type CorticalLog, type InsertCorticalLog,
+  type NeuralSnapshot, type InsertNeuralSnapshot,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
   researchSessions, researchQueries, researchFindings,
   artifactScans, audioFlags,
   deepResearchRuns, deepResearchReports,
+  corticalNodes, latentSpace as latentSpaceTable, corticalLogs, neuralSnapshots,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
@@ -68,6 +73,17 @@ export interface IStorage {
   createDeepResearchReport(report: InsertDeepResearchReport): Promise<DeepResearchReport>;
   getDeepResearchReports(runId: string): Promise<DeepResearchReport[]>;
   updateDeepResearchReport(id: string, updates: Partial<DeepResearchReport>): Promise<DeepResearchReport>;
+  getCorticalNodes(): Promise<CorticalNodeRecord[]>;
+  getCorticalNode(nodeId: string): Promise<CorticalNodeRecord | undefined>;
+  upsertCorticalNode(node: InsertCorticalNode): Promise<CorticalNodeRecord>;
+  getLatentSpaceEntries(limit?: number): Promise<LatentSpaceEntry[]>;
+  createLatentSpaceEntry(entry: InsertLatentSpaceEntry): Promise<LatentSpaceEntry>;
+  clearExpiredLatentEntries(): Promise<void>;
+  createCorticalLog(log: InsertCorticalLog): Promise<CorticalLog>;
+  getRecentCorticalLogs(limit: number): Promise<CorticalLog[]>;
+  createNeuralSnapshot(snapshot: InsertNeuralSnapshot): Promise<NeuralSnapshot>;
+  getNeuralSnapshots(limit?: number): Promise<NeuralSnapshot[]>;
+  getNeuralSnapshot(id: string): Promise<NeuralSnapshot | undefined>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -273,7 +289,6 @@ export class DatabaseStorage implements IStorage {
       .where(eq(researchFindings.sessionId, sessionId))
       .orderBy(desc(researchFindings.createdAt));
   }
-
   async createArtifactScan(scan: InsertArtifactScan): Promise<ArtifactScan> {
     const [created] = await db.insert(artifactScans).values(scan).returning();
     return created;
@@ -358,6 +373,71 @@ export class DatabaseStorage implements IStorage {
       .where(eq(deepResearchReports.id, id))
       .returning();
     return updated;
+  }
+
+  async getCorticalNodes(): Promise<CorticalNodeRecord[]> {
+    return db.select().from(corticalNodes).orderBy(corticalNodes.nodeId);
+  }
+
+  async getCorticalNode(nodeId: string): Promise<CorticalNodeRecord | undefined> {
+    const [node] = await db.select().from(corticalNodes).where(eq(corticalNodes.nodeId, nodeId));
+    return node;
+  }
+
+  async upsertCorticalNode(node: InsertCorticalNode): Promise<CorticalNodeRecord> {
+    const existing = await db.select().from(corticalNodes).where(eq(corticalNodes.nodeId, node.nodeId));
+    if (existing.length > 0) {
+      const [updated] = await db.update(corticalNodes)
+        .set({ ...node, updatedAt: new Date() })
+        .where(eq(corticalNodes.nodeId, node.nodeId))
+        .returning();
+      return updated;
+    }
+    const [created] = await db.insert(corticalNodes).values(node).returning();
+    return created;
+  }
+
+  async getLatentSpaceEntries(limit: number = 100): Promise<LatentSpaceEntry[]> {
+    return db.select().from(latentSpaceTable)
+      .orderBy(desc(latentSpaceTable.createdAt))
+      .limit(limit);
+  }
+
+  async createLatentSpaceEntry(entry: InsertLatentSpaceEntry): Promise<LatentSpaceEntry> {
+    const [created] = await db.insert(latentSpaceTable).values(entry).returning();
+    return created;
+  }
+
+  async clearExpiredLatentEntries(): Promise<void> {
+    await db.delete(latentSpaceTable)
+      .where(sql`${latentSpaceTable.expiresAt} IS NOT NULL AND ${latentSpaceTable.expiresAt} < NOW()`);
+  }
+
+  async createCorticalLog(log: InsertCorticalLog): Promise<CorticalLog> {
+    const [created] = await db.insert(corticalLogs).values(log).returning();
+    return created;
+  }
+
+  async getRecentCorticalLogs(limit: number): Promise<CorticalLog[]> {
+    return db.select().from(corticalLogs)
+      .orderBy(desc(corticalLogs.createdAt))
+      .limit(limit);
+  }
+
+  async createNeuralSnapshot(snapshot: InsertNeuralSnapshot): Promise<NeuralSnapshot> {
+    const [created] = await db.insert(neuralSnapshots).values(snapshot).returning();
+    return created;
+  }
+
+  async getNeuralSnapshots(limit: number = 50): Promise<NeuralSnapshot[]> {
+    return db.select().from(neuralSnapshots)
+      .orderBy(desc(neuralSnapshots.createdAt))
+      .limit(limit);
+  }
+
+  async getNeuralSnapshot(id: string): Promise<NeuralSnapshot | undefined> {
+    const [snapshot] = await db.select().from(neuralSnapshots).where(eq(neuralSnapshots.id, id));
+    return snapshot;
   }
 }
 

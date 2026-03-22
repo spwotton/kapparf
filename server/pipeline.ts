@@ -3,6 +3,7 @@ import { runCorrelationCycleOnce, getCorrelatorStatus } from "./auto-correlator"
 import { runScanCycleOnce, getScannerStatus } from "./kiwisdr-scanner";
 import { runHeartbeatOnce, getWatchdogStatus } from "./network-watchdog";
 import { kappaEngine } from "./kappa-engine";
+import { runCorticalCycle, isRunning as isCortexRunning } from "./quantum-cortex";
 
 export type PipelineMode = "STANDBY" | "PATROL" | "ELEVATED" | "SURGE";
 
@@ -98,22 +99,32 @@ async function runPipelineCycle(): Promise<PipelineResult> {
 
   console.log(`[pipeline] === FULL SWEEP #${state.cycleCount + 1} (${state.mode}) ===`);
 
-  console.log("[pipeline] Stage 1/4: Collectors...");
+  console.log("[pipeline] Stage 1/5: Collectors...");
   const collectorResults = await runAllCollectorsOnce();
   const totalCollected = collectorResults.flights + collectorResults.satellites + collectorResults.weather;
   console.log(`[pipeline] Collected: ${totalCollected} events (flights=${collectorResults.flights}, sats=${collectorResults.satellites}, wx=${collectorResults.weather})`);
 
-  console.log("[pipeline] Stage 2/4: Network watchdog...");
+  console.log("[pipeline] Stage 2/5: Network watchdog...");
   await runHeartbeatOnce();
   const wdStatus = getWatchdogStatus();
 
-  console.log("[pipeline] Stage 3/4: KiwiSDR scan...");
+  console.log("[pipeline] Stage 3/5: KiwiSDR scan...");
   await runScanCycleOnce();
   const scanStatus = getScannerStatus();
 
-  console.log("[pipeline] Stage 4/4: Correlation engine...");
+  console.log("[pipeline] Stage 4/5: Correlation engine...");
   await runCorrelationCycleOnce();
   const corrStatus = getCorrelatorStatus();
+
+  if (isCortexRunning()) {
+    console.log("[pipeline] Stage 5/5: Cortical processing...");
+    try {
+      const kappaSnap = kappaEngine.getStatus();
+      await runCorticalCycle(`[PIPELINE-SWEEP-${state.cycleCount + 1}] κ=${kappaSnap.score.toFixed(1)} ${kappaSnap.threatLevel} | Events=${kappaSnap.eventsProcessed} | Correlations=${corrStatus.totalCorrelations} | Scanner=${scanStatus.detections} detections`);
+    } catch (err) {
+      console.error("[pipeline] Cortical cycle error:", err);
+    }
+  }
 
   const kappaStatus = kappaEngine.getStatus();
   const durationMs = Date.now() - startMs;
