@@ -116,6 +116,11 @@ async function collectFlights(): Promise<number> {
   return created;
 }
 
+const PRIORITY_NORAD_IDS: { noradId: number; name: string; program: string }[] = [
+  { noradId: 48915, name: "YAM-3 (DARPA Blackjack/SDA POET)", program: "CASINO/Blackjack" },
+  { noradId: 55076, name: "YAM-5 (NASA MURI/Kinéis)", program: "CASINO/Loft Orbital" },
+];
+
 async function collectSatellites(): Promise<number> {
   const satellite = await import("satellite.js");
   const priorityGroups = TLE_CATALOG_GROUPS.filter(g =>
@@ -209,6 +214,78 @@ async function collectSatellites(): Promise<number> {
         } catch {
           continue;
         }
+      }
+    } catch {
+      continue;
+    }
+  }
+
+  for (const target of PRIORITY_NORAD_IDS) {
+    try {
+      const tleUrl = `https://celestrak.org/NORAD/elements/gp.php?CATNR=${target.noradId}&FORMAT=tle`;
+      const resp = await fetch(tleUrl);
+      if (!resp.ok) continue;
+      const text = await resp.text();
+      const lines = text.trim().split("\n").map(l => l.trim());
+      if (lines.length < 3 || !lines[1]?.startsWith("1 ") || !lines[2]?.startsWith("2 ")) continue;
+
+      const satrec = satellite.twoline2satrec(lines[1], lines[2]);
+      const now = new Date();
+      const posVel = satellite.propagate(satrec, now);
+      const gmst = satellite.gstime(now);
+      if (!posVel.position || typeof posVel.position === "boolean") continue;
+
+      const observerGd = {
+        longitude: satellite.degreesToRadians(KAPPA_CONSTANTS.OBSERVER_LON),
+        latitude: satellite.degreesToRadians(KAPPA_CONSTANTS.OBSERVER_LAT),
+        height: KAPPA_CONSTANTS.OBSERVER_ALT,
+      };
+      const posEcf = satellite.eciToEcf(posVel.position, gmst);
+      const look = satellite.ecfToLookAngles(observerGd, posEcf);
+      const elev = satellite.radiansToDegrees(look.elevation);
+      const azim = satellite.radiansToDegrees(look.azimuth);
+      const posGd = satellite.eciToGeodetic(posVel.position, gmst);
+
+      await storage.upsertSatellite({
+        satelliteName: target.name,
+        noradId: target.noradId,
+        tleLine1: lines[1],
+        tleLine2: lines[2],
+        elevation: elev,
+        azimuth: azim,
+        range: look.rangeSat,
+        latitude: satellite.radiansToDegrees(posGd.latitude),
+        longitude: satellite.radiansToDegrees(posGd.longitude),
+        altitude: posGd.height,
+        category: "priority-blackjack",
+        passTime: elev >= KAPPA_CONSTANTS.MIN_ELEVATION ? new Date() : null,
+      });
+
+      if (elev >= KAPPA_CONSTANTS.MIN_ELEVATION) {
+        const event = await storage.createSignalEvent({
+          domain: "satellite",
+          source: `priority-tracker-${target.program}`,
+          eventType: "priority-overhead-pass",
+          frequency: null,
+          confidence: elev >= KAPPA_CONSTANTS.OVERHEAD_ELEVATION ? 1.0 : 0.85,
+          latitude: parseFloat(satellite.radiansToDegrees(posGd.latitude).toFixed(4)),
+          longitude: parseFloat(satellite.radiansToDegrees(posGd.longitude).toFixed(4)),
+          metadata: {
+            noradId: target.noradId,
+            name: target.name,
+            program: target.program,
+            elevation: parseFloat(elev.toFixed(2)),
+            azimuth: parseFloat(azim.toFixed(2)),
+            range: parseFloat(look.rangeSat.toFixed(1)),
+            category: "priority-blackjack",
+            alert: "PRIORITY TARGET OVERHEAD — SSC/CASINO/DARPA Blackjack asset",
+          },
+          raw: null,
+        });
+        kappaEngine.ingest(event);
+        hypervisor.ingestEvent(event);
+        created++;
+        console.log(`[KAPPA] PRIORITY: ${target.name} (NORAD ${target.noradId}) overhead — elev ${elev.toFixed(1)}° az ${azim.toFixed(1)}°`);
       }
     } catch {
       continue;

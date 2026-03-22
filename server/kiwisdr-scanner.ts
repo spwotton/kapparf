@@ -106,7 +106,69 @@ const BLACKJACK_SCAN_TARGETS = [
   })),
 ];
 
-const ALL_SCAN_TARGETS = [...VLF_STATION_TARGETS, ...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS, ...RADIO_IMPACTO_SCAN_TARGETS];
+const LEOLABS_SBAND_TARGETS = [
+  {
+    name: "leolabs_cr_radar_2940mhz_if",
+    freqHz: 2940000000 - 2930000000,
+    harmonicOf: 2940,
+    harmonicOrder: 1,
+    desc: "LEOLABS CR Space Radar TX/RX 2940 MHz — S-band phased-array SSA radar (SUTEL authorized, Expediente DNPT-074-2019-2) — 10 MHz IF",
+  },
+  {
+    name: "leolabs_cr_radar_2960mhz_if",
+    freqHz: 2960000000 - 2930000000,
+    harmonicOf: 2960,
+    harmonicOrder: 1,
+    desc: "LEOLABS CR Space Radar TX/RX 2960 MHz — S-band phased-array SSA radar (Filadelfia de Carrillo, Guanacaste) — 30 MHz IF",
+  },
+  {
+    name: "leolabs_cr_radar_hf_mirror_2940",
+    freqHz: 2940000,
+    harmonicOf: 2940,
+    harmonicOrder: 1000,
+    desc: "LEOLABS CR 2940 MHz HF mirror — 2940 kHz (near 100m band) — radar emission propagation check",
+  },
+  {
+    name: "leolabs_cr_radar_hf_mirror_2960",
+    freqHz: 2960000,
+    harmonicOf: 2960,
+    harmonicOrder: 1000,
+    desc: "LEOLABS CR 2960 MHz HF mirror — 2960 kHz (near 100m band) — radar emission propagation check",
+  },
+];
+
+const YAM5_SBAND_TARGETS = [
+  {
+    name: "yam5_experimental_sband_lo",
+    freqHz: 2240000000 - 2230000000,
+    harmonicOf: 2240,
+    harmonicOrder: 1,
+    desc: "YAM-5 (NORAD 55076) Experimental S-Band 2240 MHz — Kinéis RF Space Lab payload — 10 MHz IF downconversion",
+  },
+  {
+    name: "yam5_experimental_sband_hi",
+    freqHz: 2290000000 - 2260000000,
+    harmonicOf: 2290,
+    harmonicOrder: 1,
+    desc: "YAM-5 (NORAD 55076) Experimental S-Band 2290 MHz — Kinéis RF Space Lab payload — 30 MHz IF downconversion",
+  },
+  {
+    name: "yam5_hf_mirror_2240",
+    freqHz: 2240000,
+    harmonicOf: 2240,
+    harmonicOrder: 1000,
+    desc: "YAM-5 2240 MHz HF mirror — 2240 kHz — SSO retrograde orbit experimental S-band",
+  },
+  {
+    name: "yam5_hf_mirror_2290",
+    freqHz: 2290000,
+    harmonicOf: 2290,
+    harmonicOrder: 1000,
+    desc: "YAM-5 2290 MHz HF mirror — 2290 kHz — SSO retrograde orbit experimental S-band",
+  },
+];
+
+const ALL_SCAN_TARGETS = [...VLF_STATION_TARGETS, ...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS, ...RADIO_IMPACTO_SCAN_TARGETS, ...LEOLABS_SBAND_TARGETS, ...YAM5_SBAND_TARGETS];
 
 const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
 const DELTA_SLIP_HZ = K.DELTA_SLIP_HZ;
@@ -1036,7 +1098,7 @@ export function startKiwiSDRScanner(): void {
     });
   }, K.KIWI_SCAN_INTERVAL_MS);
 
-  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_STATION_TARGETS.length} VLF stations + ${VLF_SCAN_TARGETS.length} VLF harmonics + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta + ${BLACKJACK_SCAN_TARGETS.length} BLACKJACK + ${RADIO_IMPACTO_SCAN_TARGETS.length} RADIO IMPACTO 102.3) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [Morse/CW + BART layers active]`);
+  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_STATION_TARGETS.length} VLF stations + ${VLF_SCAN_TARGETS.length} VLF harmonics + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta + ${BLACKJACK_SCAN_TARGETS.length} BLACKJACK + ${RADIO_IMPACTO_SCAN_TARGETS.length} RADIO IMPACTO + ${LEOLABS_SBAND_TARGETS.length} LEOLABS S-band + ${YAM5_SBAND_TARGETS.length} YAM-5 S-band) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [Morse/CW + BART layers active]`);
 }
 
 export async function runScanCycleOnce(): Promise<void> {

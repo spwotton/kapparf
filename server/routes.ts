@@ -1392,5 +1392,48 @@ export async function registerRoutes(
     }
   });
 
+  app.get("/api/intel/ssc-casino", (_req, res) => {
+    const K = KAPPA_CONSTANTS as any;
+    res.json({
+      program: K.SSC_CASINO_INTEL,
+      leolabs: K.LEOLABS_COSTA_RICA,
+      telespazio: K.TELESPAZIO_CR,
+      groundSegment: K.LATAM_GROUND_SEGMENT,
+      govAgreements: K.GOV_AGREEMENTS_LATAM,
+      blackjackMandrake: {
+        satellite: K.BLACKJACK_MANDRAKE.satellite,
+        rfBand: K.BLACKJACK_MANDRAKE.rfBand,
+        rfFreqMhz: K.BLACKJACK_MANDRAKE.rfFreqMhz,
+        context: K.BLACKJACK_MANDRAKE.context,
+      },
+      scanTargets: {
+        leolabsSband: ["2940 MHz TX/RX", "2960 MHz TX/RX"],
+        yam5ExperimentalSband: ["2240-2290 MHz"],
+        priorityNoradIds: [
+          { noradId: 48915, name: "YAM-3", program: "DARPA Blackjack/SDA POET" },
+          { noradId: 55076, name: "YAM-5", program: "NASA MURI/Kinéis" },
+        ],
+      },
+      confidenceRatings: {
+        leolabsFrequencies: "GREEN — SUTEL Expediente DNPT-074-2019-2",
+        yamOrbitalParams: "GREEN — CelesTrak/N2YO verified",
+        temporalCorrelation: "AMBER — LeoLabs operational 2021-04-22 → Blackjack launch 2021-06-30 (68 days)",
+        telespazioCostaRica: "AMBER — entity confirmed, no LeoLabs sub-licensing evidence",
+        groundSegmentUsage: "AMBER — infrastructure documented, specific program attribution unverified",
+        jwLdsProxy: "RED (NEGATIVE) — exhaustive search finds zero evidence",
+      },
+      sources: [
+        "SUTEL Oficio N° 07262-SUTEL-DGC-2024",
+        "SUTEL Expediente Administrativo N° DNPT-074-2019-2",
+        "Registro Nacional — cédula 3-102-784732 (LeoLabs Space Limitada)",
+        "Registro Nacional — cédula 3-012-490070 (Telespazio Argentina S.A.)",
+        "CelesTrak NORAD 48915 (YAM-3), 55076 (YAM-5)",
+        "DARPA Blackjack risk-reduction release (2020)",
+        "SSC CASINO/PredaSAR on-orbit cooperative demo",
+        "CPJ-002-2026 (Poder Generalísimo RTBF circular)",
+      ],
+    });
+  });
+
   return httpServer;
 }
