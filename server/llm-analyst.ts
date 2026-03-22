@@ -266,16 +266,16 @@ export async function generateReport(
 export async function suggestRuleWeights(
   feedback: CorrelationFeedback[]
 ): Promise<{ ruleAdjustments: RuleAdjustment[] }> {
-  const client = getClient();
+  const routed = pickModel("reasoning");
 
-  if (!client || feedback.length === 0) {
+  if (!routed || feedback.length === 0) {
     return { ruleAdjustments: [] };
   }
 
   try {
     return await rateLimitedCall(async () => {
-      const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
+      const response = await routed.client.chat.completions.create({
+        model: routed.model,
         messages: [
           {
             role: "system",
@@ -339,7 +339,9 @@ export async function generateSocialCaption(
     evening: "evening window surveillance activity pattern",
   };
 
-  if (!client) {
+  const routed = pickModel("generation");
+
+  if (!routed) {
     const desc = templateDescriptions[template] || template;
     const lines = [
       `KAPPA SIGINT — ${desc.toUpperCase()}`,
@@ -362,8 +364,8 @@ export async function generateSocialCaption(
 
   try {
     return await rateLimitedCall(async () => {
-      const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
+      const response = await routed.client.chat.completions.create({
+        model: routed.model,
         messages: [
           {
             role: "system",

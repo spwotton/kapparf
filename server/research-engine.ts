@@ -89,7 +89,8 @@ export function getAvailableModels(): ModelInfo[] {
   const hasOpenAI = !!getOpenAIClient();
   if (hasOpenAI) {
     models.push(
-      { id: "openai:gpt-4o", provider: "openai", name: "gpt-4o", displayName: "GPT-4o", available: true },
+      { id: "openai:o3-mini", provider: "openai", name: "o3-mini", displayName: "o3-mini (Reasoning)", available: true },
+      { id: "openai:gpt-4o", provider: "openai", name: "gpt-4o", displayName: "GPT-4o (Vision)", available: true },
       { id: "openai:gpt-4o-mini", provider: "openai", name: "gpt-4o-mini", displayName: "GPT-4o Mini", available: true },
     );
   }
@@ -97,10 +98,14 @@ export function getAvailableModels(): ModelInfo[] {
   const hasOpenRouter = !!getOpenRouterClient();
   if (hasOpenRouter) {
     models.push(
+      { id: "openrouter:openai/o3-mini", provider: "openrouter", name: "openai/o3-mini", displayName: "o3-mini (OR)", available: true },
+      { id: "openrouter:openai/o3", provider: "openrouter", name: "openai/o3", displayName: "o3 (OR)", available: true },
+      { id: "openrouter:deepseek/deepseek-chat-v3-0324", provider: "openrouter", name: "deepseek/deepseek-chat-v3-0324", displayName: "DeepSeek V3 (OR)", available: true },
+      { id: "openrouter:deepseek/deepseek-prover-v2", provider: "openrouter", name: "deepseek/deepseek-prover-v2", displayName: "DeepSeek Prover V2 (OR)", available: true },
+      { id: "openrouter:deepseek/deepseek-r1", provider: "openrouter", name: "deepseek/deepseek-r1", displayName: "DeepSeek R1 (OR)", available: true },
       { id: "openrouter:openai/gpt-4o", provider: "openrouter", name: "openai/gpt-4o", displayName: "GPT-4o (OR)", available: true },
       { id: "openrouter:openai/gpt-4.1", provider: "openrouter", name: "openai/gpt-4.1", displayName: "GPT-4.1 (OR)", available: true },
       { id: "openrouter:openai/o4-mini", provider: "openrouter", name: "openai/o4-mini", displayName: "o4-mini (OR)", available: true },
-      { id: "openrouter:openai/chatgpt-4o-latest", provider: "openrouter", name: "openai/chatgpt-4o-latest", displayName: "ChatGPT-4o Latest (OR)", available: true },
       { id: "openrouter:anthropic/claude-sonnet-4", provider: "openrouter", name: "anthropic/claude-sonnet-4", displayName: "Claude Sonnet 4 (OR)", available: true },
       { id: "openrouter:anthropic/claude-opus-4", provider: "openrouter", name: "anthropic/claude-opus-4", displayName: "Claude Opus 4 (OR)", available: true },
       { id: "openrouter:mistralai/mistral-nemo", provider: "openrouter", name: "mistralai/mistral-nemo", displayName: "Mistral Nemo (OR)", available: true },
