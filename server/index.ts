@@ -72,12 +72,14 @@ app.use((req, res, next) => {
   const { startPipeline } = await import("./pipeline");
   const { startNetworkThreatScanner } = await import("./network-threat-scanner");
   const { hypervisor } = await import("./hypervisor");
+  const { startKiwiVision } = await import("./kiwisdr-vision");
   startCollectors();
   startAutoCorrelator();
   startKiwiSDRScanner();
   startNetworkWatchdog();
   startPipeline();
   startNetworkThreatScanner();
+  startKiwiVision(300_000);
   hypervisor.start();
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 

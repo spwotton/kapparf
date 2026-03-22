@@ -8,6 +8,7 @@ import { getCorrelatorStatus } from "./auto-correlator";
 import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
 import { getNetworkThreatStatus, processPacket, processBatch, parsePacketLine, type NetworkPacket } from "./network-threat-scanner";
+import { getVisionStatus, getVisionAnalyses, getContextMemory, runVisionOnce } from "./kiwisdr-vision";
 import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
@@ -923,6 +924,32 @@ export async function registerRoutes(
     }
     const result = await processBatch(packets);
     res.json({ ...result, parsed: packets.length });
+  });
+
+  app.get("/api/vision/status", (_req, res) => {
+    res.json(getVisionStatus());
+  });
+
+  app.get("/api/vision/analyses", (_req, res) => {
+    res.json(getVisionAnalyses());
+  });
+
+  app.get("/api/vision/context", (_req, res) => {
+    res.json(getContextMemory());
+  });
+
+  app.post("/api/vision/capture", async (req, res) => {
+    try {
+      const { profileId } = req.body || {};
+      const analysis = await runVisionOnce(profileId);
+      if (analysis) {
+        res.json({ success: true, analysis });
+      } else {
+        res.json({ success: false, error: "Capture or analysis failed" });
+      }
+    } catch (err) {
+      res.status(500).json({ success: false, error: err instanceof Error ? err.message : String(err) });
+    }
   });
 
   app.get("/api/riemann-zeros", (_req, res) => {
