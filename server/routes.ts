@@ -381,53 +381,72 @@ export async function registerRoutes(
   const flightCache: { data: FlightData[] | null; fetchedAt: number } = { data: null, fetchedAt: 0 };
 
   app.get("/api/flights", async (_req, res) => {
-    const CACHE_TTL = 15 * 1000;
+    const CACHE_TTL = 30 * 1000;
+    const STALE_TTL = 300 * 1000;
     if (flightCache.data && Date.now() - flightCache.fetchedAt < CACHE_TTL) {
       return res.json(flightCache.data);
     }
 
     try {
-      const latMin = KAPPA_CONSTANTS.JACO_LAT - 0.5;
-      const latMax = KAPPA_CONSTANTS.OBSERVER_LAT + 0.5;
-      const lonMin = KAPPA_CONSTANTS.JACO_LON - 0.5;
-      const lonMax = KAPPA_CONSTANTS.OBSERVER_LON + 0.5;
+      const latCenter = (KAPPA_CONSTANTS.OBSERVER_LAT + KAPPA_CONSTANTS.JACO_LAT) / 2;
+      const lonCenter = (KAPPA_CONSTANTS.OBSERVER_LON + KAPPA_CONSTANTS.JACO_LON) / 2;
+      const latMin = latCenter - 1.5;
+      const latMax = latCenter + 1.5;
+      const lonMin = lonCenter - 1.5;
+      const lonMax = lonCenter + 1.5;
 
       const url = `https://opensky-network.org/api/states/all?lamin=${latMin}&lomin=${lonMin}&lamax=${latMax}&lomax=${lonMax}`;
-      const response = await fetch(url, {
-        headers: { "User-Agent": "KAPPA-SIGINT" },
-      });
 
-      if (!response.ok) {
-        return res.status(502).json({ error: "Failed to fetch flight data from OpenSky Network" });
-      }
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
 
-      const data = await response.json();
-      const flights: FlightData[] = [];
+      try {
+        const response = await fetch(url, {
+          headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+          signal: controller.signal,
+        });
 
-      if (data.states) {
-        for (const s of data.states) {
-          flights.push({
-            icao24: s[0] ?? "",
-            callsign: s[1]?.trim() || null,
-            originCountry: s[2] ?? "",
-            longitude: s[5] ?? null,
-            latitude: s[6] ?? null,
-            altitude: s[7] ?? null,
-            velocity: s[9] ?? null,
-            heading: s[10] ?? null,
-            verticalRate: s[11] ?? null,
-            onGround: s[8] ?? false,
-            squawk: s[14] ?? null,
-          });
+        if (!response.ok) {
+          console.log(`[api/flights] OpenSky HTTP ${response.status}`);
+          if (flightCache.data && Date.now() - flightCache.fetchedAt < STALE_TTL) {
+            return res.json(flightCache.data);
+          }
+          return res.json([]);
         }
-      }
 
-      flightCache.data = flights;
-      flightCache.fetchedAt = Date.now();
-      res.json(flights);
+        const data = await response.json();
+        const flights: FlightData[] = [];
+
+        if (data.states) {
+          for (const s of data.states) {
+            flights.push({
+              icao24: s[0] ?? "",
+              callsign: s[1]?.trim() || null,
+              originCountry: s[2] ?? "",
+              longitude: s[5] ?? null,
+              latitude: s[6] ?? null,
+              altitude: s[7] ?? null,
+              velocity: s[9] ?? null,
+              heading: s[10] ?? null,
+              verticalRate: s[11] ?? null,
+              onGround: s[8] ?? false,
+              squawk: s[14] ?? null,
+            });
+          }
+        }
+
+        flightCache.data = flights;
+        flightCache.fetchedAt = Date.now();
+        res.json(flights);
+      } finally {
+        clearTimeout(timeout);
+      }
     } catch (err) {
-      console.error("Flight data error:", err);
-      res.status(500).json({ error: "Failed to fetch flight data" });
+      console.log(`[api/flights] Error: ${err instanceof Error ? err.message : String(err)}`);
+      if (flightCache.data && Date.now() - flightCache.fetchedAt < 300_000) {
+        return res.json(flightCache.data);
+      }
+      res.json([]);
     }
   });
 

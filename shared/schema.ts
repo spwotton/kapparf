@@ -1032,6 +1032,38 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     windowSeconds: 60,
     condition: "sdr.radio_impacto_detection AND isp.network_drop WITHIN 60s",
   },
+  {
+    id: "satellite-sdr-temporal",
+    name: "Satellite Pass ↔ SDR Activity Coincidence",
+    description: "SDR node activity detected during satellite overhead pass window — temporal coincidence between orbital mechanics and ground-level RF environment change.",
+    domains: ["satellite", "sdr"],
+    windowSeconds: 300,
+    condition: "satellite.elevation > 30° AND sdr.node_event WITHIN 300s",
+  },
+  {
+    id: "satellite-elf-atmospheric",
+    name: "Satellite Pass ↔ ELF/Atmospheric Correlation",
+    description: "Satellite overhead pass coincides with ELF atmospheric measurement window — ionospheric reflection conditions correlated with orbital geometry.",
+    domains: ["satellite", "elf"],
+    windowSeconds: 600,
+    condition: "satellite.pass AND elf.atmospheric_event WITHIN 600s",
+  },
+  {
+    id: "multi-domain-convergence",
+    name: "Multi-Domain Convergence Event",
+    description: "Events from 3+ domains detected within tight temporal window — satellite, SDR, and ELF activity converging simultaneously indicates coordinated surveillance window.",
+    domains: ["satellite", "sdr", "elf"],
+    windowSeconds: 300,
+    condition: "satellite.pass AND sdr.activity AND elf.event WITHIN 300s",
+  },
+  {
+    id: "sdr-node-cluster",
+    name: "Multi-Node SDR Detection Cluster",
+    description: "Multiple KiwiSDR nodes report activity within same temporal window — geographically distributed detection confirms signal is not local interference.",
+    domains: ["sdr"],
+    windowSeconds: 120,
+    condition: "sdr.multi_node_detection >= 2 WITHIN 120s",
+  },
 ];
 
 export interface KarachiModule {

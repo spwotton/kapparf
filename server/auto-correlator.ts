@@ -22,35 +22,86 @@ function pairKey(id1: string, id2: string): string {
 
 async function runCorrelationCycle(): Promise<void> {
   try {
-    const windowEvents = await storage.getSignalEventsByWindow(300);
+    const windowEvents = await storage.getSignalEventsByWindow(600);
+
+    lastRun = Date.now();
+    cycleCount++;
 
     if (windowEvents.length < 2) {
-      lastRun = Date.now();
-      cycleCount++;
       return;
     }
 
+    const sortedEvents = [...windowEvents].sort((a, b) =>
+      new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    );
+
     const domainGroups: Record<string, SignalEvent[]> = {};
-    for (const evt of windowEvents) {
+    for (const evt of sortedEvents) {
       if (!domainGroups[evt.domain]) domainGroups[evt.domain] = [];
       domainGroups[evt.domain].push(evt);
     }
 
     let cycleCorrelations = 0;
     let cycleRulesChecked = 0;
+    const MAX_CORRELATIONS_PER_CYCLE = 20;
 
     for (const rule of CORRELATION_RULES) {
+      if (cycleCorrelations >= MAX_CORRELATIONS_PER_CYCLE) break;
       cycleRulesChecked++;
+
       const allDomainsPresent = rule.domains.every(d => domainGroups[d]?.length > 0);
       if (!allDomainsPresent) continue;
-      const relevantDomains = rule.domains;
 
+      const relevantDomains = rule.domains;
       const eventSets = relevantDomains.map(d => domainGroups[d]);
+
+      if (relevantDomains.length === 1) {
+        const events = eventSets[0];
+        if (events.length < 2) continue;
+
+        for (let i = 0; i < Math.min(events.length - 1, 10); i++) {
+          const evt1 = events[i];
+          const evt2 = events[i + 1];
+          const pk = pairKey(evt1.id, evt2.id);
+          if (processedPairs.has(pk)) continue;
+
+          const t1 = new Date(evt1.timestamp).getTime();
+          const t2 = new Date(evt2.timestamp).getTime();
+          const delta = Math.abs(t2 - t1) / 1000;
+
+          if (delta <= rule.windowSeconds) {
+            await storage.createCorrelation({
+              ruleName: rule.name,
+              description: `[AUTO] ${rule.description} — 2 events within ${delta.toFixed(1)}s`,
+              severity: 2,
+              eventIds: [evt1.id, evt2.id],
+              metadata: {
+                ruleId: rule.id,
+                windowSeconds: rule.windowSeconds,
+                actualDeltaSeconds: delta,
+                domains: relevantDomains,
+                auto: true,
+              },
+            });
+
+            cycleCorrelations++;
+            totalCorrelations++;
+            processedPairs.add(pk);
+
+            if (cycleCorrelations >= MAX_CORRELATIONS_PER_CYCLE) break;
+          }
+        }
+        continue;
+      }
+
       const firstSet = eventSets[0];
       const secondSet = eventSets[1];
 
+      let ruleCorrelations = 0;
       for (const evt1 of firstSet) {
+        if (ruleCorrelations >= 5) break;
         for (const evt2 of secondSet) {
+          if (ruleCorrelations >= 5) break;
           const pk = pairKey(evt1.id, evt2.id);
           if (processedPairs.has(pk)) continue;
 
@@ -71,43 +122,37 @@ async function runCorrelationCycle(): Promise<void> {
               }
             }
 
-            if (linkedIds.length >= 2) {
-              const severity = Math.min(5, Math.max(1, linkedIds.length));
-              await storage.createCorrelation({
-                ruleName: rule.name,
-                description: `[AUTO] ${rule.description} — ${linkedIds.length} events within ${delta.toFixed(1)}s`,
-                severity,
-                eventIds: linkedIds,
-                metadata: {
-                  ruleId: rule.id,
-                  windowSeconds: rule.windowSeconds,
-                  actualDeltaSeconds: delta,
-                  domains: relevantDomains,
-                  auto: true,
-                },
-              });
+            const severity = Math.min(5, Math.max(1, linkedIds.length));
+            await storage.createCorrelation({
+              ruleName: rule.name,
+              description: `[AUTO] ${rule.description} — ${linkedIds.length} events within ${delta.toFixed(1)}s`,
+              severity,
+              eventIds: linkedIds,
+              metadata: {
+                ruleId: rule.id,
+                windowSeconds: rule.windowSeconds,
+                actualDeltaSeconds: delta,
+                domains: relevantDomains,
+                auto: true,
+              },
+            });
 
-              cycleCorrelations++;
-              totalCorrelations++;
+            cycleCorrelations++;
+            totalCorrelations++;
+            ruleCorrelations++;
 
-              for (let i = 0; i < linkedIds.length; i++) {
-                for (let j = i + 1; j < linkedIds.length; j++) {
-                  processedPairs.add(pairKey(linkedIds[i], linkedIds[j]));
-                }
+            for (let i = 0; i < linkedIds.length; i++) {
+              for (let j = i + 1; j < linkedIds.length; j++) {
+                processedPairs.add(pairKey(linkedIds[i], linkedIds[j]));
               }
             }
-
-            break;
           }
         }
-        if (cycleCorrelations > 0) break;
       }
     }
 
     rulesChecked += cycleRulesChecked;
     correlationsFound += cycleCorrelations;
-    lastRun = Date.now();
-    cycleCount++;
 
     if (processedPairs.size > MAX_PAIRS) {
       const entries = Array.from(processedPairs);
@@ -117,10 +162,15 @@ async function runCorrelationCycle(): Promise<void> {
     }
 
     if (cycleCorrelations > 0) {
-      console.log(`[auto-correlator] Cycle ${cycleCount}: ${cycleCorrelations} new correlations found`);
+      console.log(`[auto-correlator] Cycle ${cycleCount}: ${cycleCorrelations} correlations (${Object.keys(domainGroups).join(", ")} domains active)`);
+    } else {
+      const domainSummary = Object.entries(domainGroups).map(([d, evts]) => `${d}:${evts.length}`).join(" ");
+      if (cycleCount % 10 === 0) {
+        console.log(`[auto-correlator] Cycle ${cycleCount}: 0 correlations — domains: ${domainSummary}`);
+      }
     }
   } catch (err) {
-    console.error("[auto-correlator] Error:", err);
+    console.error("[auto-correlator] Cycle error:", err instanceof Error ? err.message : String(err));
   }
 }
 

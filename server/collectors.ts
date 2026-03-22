@@ -21,20 +21,44 @@ interface CollectorState {
 const collectors: Map<string, CollectorState> = new Map();
 
 async function collectFlights(): Promise<number> {
-  const latMin = KAPPA_CONSTANTS.JACO_LAT - 0.5;
-  const latMax = KAPPA_CONSTANTS.OBSERVER_LAT + 0.5;
-  const lonMin = KAPPA_CONSTANTS.JACO_LON - 0.5;
-  const lonMax = KAPPA_CONSTANTS.OBSERVER_LON + 0.5;
+  const latCenter = (KAPPA_CONSTANTS.OBSERVER_LAT + KAPPA_CONSTANTS.JACO_LAT) / 2;
+  const lonCenter = (KAPPA_CONSTANTS.OBSERVER_LON + KAPPA_CONSTANTS.JACO_LON) / 2;
+  const latMin = latCenter - 1.5;
+  const latMax = latCenter + 1.5;
+  const lonMin = lonCenter - 1.5;
+  const lonMax = lonCenter + 1.5;
 
   const url = `https://opensky-network.org/api/states/all?lamin=${latMin}&lomin=${lonMin}&lamax=${latMax}&lomax=${lonMax}`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "KAPPA-SIGINT" },
-  });
 
-  if (!response.ok) return 0;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+      signal: controller.signal,
+    });
+  } catch (err) {
+    clearTimeout(timeout);
+    const msg = err instanceof Error ? err.message : String(err);
+    console.log(`[flights] OpenSky fetch failed: ${msg}`);
+    return 0;
+  }
+  clearTimeout(timeout);
+
+  if (!response.ok) {
+    console.log(`[flights] OpenSky HTTP ${response.status} — ${response.statusText}`);
+    return 0;
+  }
 
   const data = await response.json();
-  if (!data.states) return 0;
+  if (!data.states || data.states.length === 0) {
+    console.log(`[flights] OpenSky returned ${data.states?.length ?? 0} aircraft (box: ${latMin.toFixed(2)},${lonMin.toFixed(2)} → ${latMax.toFixed(2)},${lonMax.toFixed(2)})`);
+    return 0;
+  }
+
+  console.log(`[flights] OpenSky returned ${data.states.length} aircraft`);
 
   let created = 0;
   for (const s of data.states) {
