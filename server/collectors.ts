@@ -48,13 +48,23 @@ async function collectFlights(): Promise<number> {
   clearTimeout(timeout);
 
   if (!response.ok) {
-    console.log(`[flights] OpenSky HTTP ${response.status} — ${response.statusText}`);
+    if (response.status === 429) {
+      console.log(`[flights] OpenSky rate-limited (429) — backing off`);
+    } else {
+      console.log(`[flights] OpenSky HTTP ${response.status} — ${response.statusText}`);
+    }
     return 0;
   }
 
-  const data = await response.json();
+  let data: any;
+  try {
+    data = await response.json();
+  } catch (parseErr) {
+    console.log(`[flights] OpenSky returned non-JSON response`);
+    return 0;
+  }
+
   if (!data.states || data.states.length === 0) {
-    console.log(`[flights] OpenSky returned ${data.states?.length ?? 0} aircraft (box: ${latMin.toFixed(2)},${lonMin.toFixed(2)} → ${latMax.toFixed(2)},${lonMax.toFixed(2)})`);
     return 0;
   }
 
@@ -307,7 +317,7 @@ async function runCollector(name: string, fn: () => Promise<number>): Promise<vo
 
 export function startCollectors(): void {
   const collectorDefs: { name: string; fn: () => Promise<number>; intervalMs: number }[] = [
-    { name: "flights", fn: collectFlights, intervalMs: 60_000 },
+    { name: "flights", fn: collectFlights, intervalMs: 120_000 },
     { name: "satellites", fn: collectSatellites, intervalMs: 300_000 },
     { name: "weather", fn: collectWeather, intervalMs: 600_000 },
   ];
@@ -330,7 +340,7 @@ export function startCollectors(): void {
     state.timer = setInterval(() => runCollector(def.name, def.fn), def.intervalMs);
   }
 
-  console.log("[KAPPA] Auto-collectors started: flights (60s), satellites (5m), weather (10m)");
+  console.log("[KAPPA] Auto-collectors started: flights (2m), satellites (5m), weather (10m)");
 }
 
 function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {

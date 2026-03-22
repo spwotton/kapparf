@@ -23,6 +23,32 @@ const KIWI_NODES: KiwiNode[] = [
   { id: "pj4g", name: "PJ4G Bonaire", url: "http://pj4g.proxy.kiwisdr.com:8073", lat: 12.1500, lon: -68.2667 },
 ];
 
+const VLF_STATION_TARGETS = [
+  { name: "nau_puerto_rico", freqHz: 40750, harmonicOf: 40.75, harmonicOrder: 1, desc: "NAU — US Navy NCTS Aguada, Puerto Rico 40.75 kHz MSK — primary Caribbean/CENTAM VLF nav" },
+  { name: "naa_cutler_maine", freqHz: 24000, harmonicOf: 24.0, harmonicOrder: 1, desc: "NAA — US Navy Cutler, ME 24.0 kHz MSK — Atlantic VLF submarine comms" },
+  { name: "nlk_jim_creek", freqHz: 24800, harmonicOf: 24.8, harmonicOrder: 1, desc: "NLK — US Navy Jim Creek, WA 24.8 kHz MSK — Pacific VLF submarine comms" },
+  { name: "nml_lamoure", freqHz: 25200, harmonicOf: 25.2, harmonicOrder: 1, desc: "NML — US Navy LaMoure, ND 25.2 kHz MSK — Central US VLF transmitter" },
+  { name: "nlm4_norway", freqHz: 23400, harmonicOf: 23.4, harmonicOrder: 1, desc: "NLM4 — Norwegian VLF 23.4 kHz — NATO NICS VLF transmitter" },
+  { name: "hwu_france", freqHz: 18300, harmonicOf: 18.3, harmonicOrder: 1, desc: "HWU — French Navy Rosnay 18.3 kHz MSK — NATO VLF submarine comms" },
+  { name: "hwu_france_20900", freqHz: 20900, harmonicOf: 20.9, harmonicOrder: 1, desc: "HWU — French Navy Rosnay 20.9 kHz alternate — observed on CW skimmer" },
+  { name: "tbb_turkey", freqHz: 26700, harmonicOf: 26.7, harmonicOrder: 1, desc: "TBB — Turkish Navy Bafa 26.7 kHz MSK — NATO/Mediterranean VLF" },
+  { name: "nrk_iceland", freqHz: 37500, harmonicOf: 37.5, harmonicOrder: 1, desc: "NRK — Iceland Grindavik 37.5 kHz CW — NATO North Atlantic VLF" },
+  { name: "nsy_italy", freqHz: 45900, harmonicOf: 45.9, harmonicOrder: 1, desc: "NSY — Italian Navy Niscemi 45.9 kHz MSK — NATO Mediterranean VLF" },
+  { name: "sxa_greece", freqHz: 49000, harmonicOf: 49.0, harmonicOrder: 1, desc: "SXA — Greek Navy Nea Makri 49.0 kHz — NATO VLF transmitter" },
+  { name: "wwvb_nist", freqHz: 60000, harmonicOf: 60.0, harmonicOrder: 1, desc: "WWVB — NIST Fort Collins, CO 60.0 kHz — US time signal (AM phase modulation)" },
+  { name: "msf_uk", freqHz: 60000, harmonicOf: 60.0, harmonicOrder: 1, desc: "MSF — NPL Anthorn, UK 60.0 kHz — UK time signal" },
+  { name: "fug_france", freqHz: 62600, harmonicOf: 62.6, harmonicOrder: 1, desc: "FUG — French Navy Le Blanc 62.6 kHz — VLF utility" },
+  { name: "fta63_france", freqHz: 63000, harmonicOf: 63.0, harmonicOrder: 1, desc: "FTA63 — French Navy Sainte-Assise 63 kHz — VLF time reference" },
+  { name: "alpha_rsdn20_f1", freqHz: 11905, harmonicOf: 11.905, harmonicOrder: 1, desc: "Alpha/RSDN-20 F1 — Russian VLF navigation 11.905 kHz — 3-phase time-multiplexed" },
+  { name: "alpha_rsdn20_f2", freqHz: 12649, harmonicOf: 12.649, harmonicOrder: 1, desc: "Alpha/RSDN-20 F2 — Russian VLF navigation 12.649 kHz" },
+  { name: "alpha_rsdn20_f3", freqHz: 14881, harmonicOf: 14.881, harmonicOrder: 1, desc: "Alpha/RSDN-20 F3 — Russian VLF navigation 14.881 kHz" },
+  { name: "rtz_russia", freqHz: 50000, harmonicOf: 50.0, harmonicOrder: 1, desc: "RTZ — Russian Navy VLF 50.0 kHz — observed CW on TI0RC skimmer" },
+  { name: "ndi_japan", freqHz: 22200, harmonicOf: 22.2, harmonicOrder: 1, desc: "NDI/NDT — Japanese Navy Ebino 22.2 kHz — Pacific VLF" },
+  { name: "vtx_india", freqHz: 18200, harmonicOf: 18.2, harmonicOrder: 1, desc: "VTX — Indian Navy Vijayanarayanam 18.2 kHz — observed on TI0RC waterfall" },
+  { name: "jjy_japan_40", freqHz: 40000, harmonicOf: 40.0, harmonicOrder: 1, desc: "JJY — NICT Japan 40.0 kHz time signal (Fukushima Otakadoya) — trans-Pacific VLF propagation confirmed on TI0RC" },
+  { name: "jjy_japan_60", freqHz: 60000, harmonicOf: 60.0, harmonicOrder: 1, desc: "JJY — NICT Japan 60.0 kHz time signal (Saga Hagane) — Pacific LF propagation indicator" },
+];
+
 const VLF_SCAN_TARGETS = [
   { name: "53Hz_3rd_harmonic", freqHz: 15900, harmonicOf: 53, harmonicOrder: 300, desc: "53 Hz × 300 — Realtek ADPCM phase-lock carrier VLF harmonic" },
   { name: "53Hz_4th_harmonic", freqHz: 21200, harmonicOf: 53, harmonicOrder: 400, desc: "53 Hz × 400 — Upper VLF band Realtek artifact" },
@@ -80,7 +106,7 @@ const BLACKJACK_SCAN_TARGETS = [
   })),
 ];
 
-const ALL_SCAN_TARGETS = [...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS, ...RADIO_IMPACTO_SCAN_TARGETS];
+const ALL_SCAN_TARGETS = [...VLF_STATION_TARGETS, ...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS, ...RADIO_IMPACTO_SCAN_TARGETS];
 
 const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
 const DELTA_SLIP_HZ = K.DELTA_SLIP_HZ;
@@ -622,16 +648,19 @@ async function runScanCycle(): Promise<void> {
         if (result.detected) {
           scannerState.detections++;
 
+          const isVlfStation = VLF_STATION_TARGETS.some(s => s.name === target.name);
           const isRiemann = target.name.startsWith("riemann_");
           const isMeta = target.name.startsWith("meta_");
           const isBlackjack = target.name.startsWith("blackjack_mandrake");
           const isRadioImpacto = target.name.startsWith("radio_impacto");
-          const eventType = isRadioImpacto ? "radio-impacto-fm-detection"
+          const eventType = isVlfStation ? "vlf-station-detection"
+            : isRadioImpacto ? "radio-impacto-fm-detection"
             : isBlackjack ? "blackjack-mandrake-detection"
             : isRiemann ? "riemann-zero-detection"
             : isMeta ? "meta-frequency-detection"
             : "vlf-carrier-detection";
-          const scanDomain = isRadioImpacto ? "sdr" : isBlackjack ? "rf" : isRiemann || isMeta ? "elf" : "sdr";
+          const scanDomain = isVlfStation ? "sdr"
+            : isRadioImpacto ? "sdr" : isBlackjack ? "rf" : isRiemann || isMeta ? "elf" : "sdr";
 
           const event = await storage.createSignalEvent({
             domain: scanDomain,
@@ -650,6 +679,17 @@ async function runScanCycle(): Promise<void> {
               lat: node.lat,
               lon: node.lon,
               description: target.desc,
+              ...(isVlfStation ? {
+                vlfStation: {
+                  stationName: target.name,
+                  freqKHz: target.freqHz / 1000,
+                  category: target.freqHz >= 60000 ? "time-signal" : target.name.includes("alpha") ? "navigation" : "military-vlf",
+                  confirmed: true,
+                  cwSkimmerVerified: "Observed on TI0RC CW_skimmer — CW text decoded at this frequency",
+                },
+                severity: target.name.includes("nau") || target.name.includes("naa") || target.name.includes("nlk") || target.name.includes("nml") ? "HIGH" : "MEDIUM",
+                indication: `VLF station ${target.desc}`,
+              } : {}),
               ...(isRiemann ? { riemannZero: K.RIEMANN_ZEROS.find(z => z.freqHz === target.harmonicOf) } : {}),
               ...(isMeta ? { metaPlatform: K.META_PLATFORM_FREQS.find(m => m.freqHz === target.harmonicOf) } : {}),
               ...(isRadioImpacto ? {
@@ -996,7 +1036,7 @@ export function startKiwiSDRScanner(): void {
     });
   }, K.KIWI_SCAN_INTERVAL_MS);
 
-  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_SCAN_TARGETS.length} VLF + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta + ${BLACKJACK_SCAN_TARGETS.length} BLACKJACK + ${RADIO_IMPACTO_SCAN_TARGETS.length} RADIO IMPACTO 102.3) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [Morse/CW + BART layers active]`);
+  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_STATION_TARGETS.length} VLF stations + ${VLF_SCAN_TARGETS.length} VLF harmonics + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta + ${BLACKJACK_SCAN_TARGETS.length} BLACKJACK + ${RADIO_IMPACTO_SCAN_TARGETS.length} RADIO IMPACTO 102.3) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [Morse/CW + BART layers active]`);
 }
 
 export async function runScanCycleOnce(): Promise<void> {
