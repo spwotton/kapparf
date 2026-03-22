@@ -14,8 +14,9 @@ import {
   Camera, ScanEye, Mountain, Maximize2, RefreshCw, ExternalLink,
   Globe, Radio, MapPin, AlertTriangle, Eye, Satellite, Upload,
   Activity, Waves, Search, ChevronRight, Zap, Shield, FileText,
-  Hexagon, Volume2, Play, Square
+  Hexagon, Volume2, Play, Square, Microscope
 } from "lucide-react";
+import { DemodexCameraView } from "@/components/demodex-camera";
 
 interface ImageAnalysis {
   id: string;
@@ -1630,6 +1631,10 @@ export default function ImageryPage() {
             <FileText className="h-4 w-4 mr-1" />
             Research Analysis
           </TabsTrigger>
+          <TabsTrigger value="demodex" data-testid="tab-demodex">
+            <Microscope className="h-4 w-4 mr-1" />
+            Demodex Camera
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="analysis" className="space-y-4">
@@ -1997,6 +2002,26 @@ export default function ImageryPage() {
 
         <TabsContent value="research" className="space-y-4">
           <ResearchCrossAnalysis />
+        </TabsContent>
+
+        <TabsContent value="demodex" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Microscope className="h-5 w-5 text-purple-500" />
+                Demodex Colony — Orch-OR Observation Camera
+              </CardTitle>
+              <CardDescription>
+                25,000-particle colony simulation. Carrier: 1.435 Hz. Microtubule resonance: 37 Hz.
+                Sampling glitch at 46.875 Hz (2012 fork). Move cursor to observe, click to collapse wavefunction.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="h-[600px]">
+                <DemodexCameraView />
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
       </Tabs>
 

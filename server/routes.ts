@@ -2775,7 +2775,6 @@ export async function registerRoutes(
   app.get("/api/quantum-cortex/constants", (_req, res) => {
     res.json(OMEGA_GOS);
   });
-  });
 
   return httpServer;
 }
