@@ -29,6 +29,7 @@ import DeepResearchPage from "@/pages/deep-research";
 import ImageryPage from "@/pages/imagery";
 import ConspiracyBoardPage from "@/pages/conspiracy-board";
 import SuperpositionPage from "@/pages/superposition";
+import BettercapPage from "@/pages/bettercap";
 
 function Router() {
   return (
@@ -53,6 +54,7 @@ function Router() {
       <Route path="/imagery" component={ImageryPage} />
       <Route path="/board" component={ConspiracyBoardPage} />
       <Route path="/superposition" component={SuperpositionPage} />
+      <Route path="/bettercap" component={BettercapPage} />
       <Route component={NotFound} />
     </Switch>
   );

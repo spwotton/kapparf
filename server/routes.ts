@@ -21,6 +21,7 @@ import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetr
 import { RESEARCH_CONSTANTS } from "./research-constants";
 import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
 import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
+import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
 import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
@@ -2846,6 +2847,62 @@ export async function registerRoutes(
 
   app.get("/api/v1/chitin/lifecycle", (_req, res) => {
     res.json(getLifecycleMap());
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // BETTERCAP BRIDGE — Multi-Instance Management
+  // ═══════════════════════════════════════════════════════════════
+
+  app.get("/api/bettercap/instances", (_req, res) => {
+    res.json(getInstances());
+  });
+
+  app.post("/api/bettercap/instances", (req, res) => {
+    const { name, host, port, scheme, username, password } = req.body;
+    if (!name || !host || !port || !username || !password) {
+      return res.status(400).json({ error: "Missing required fields: name, host, port, username, password" });
+    }
+    const instance = addInstance({ name, host, port, scheme, username, password });
+    res.json(instance);
+  });
+
+  app.delete("/api/bettercap/instances/:id", (req, res) => {
+    const removed = removeInstance(req.params.id);
+    res.json({ ok: removed });
+  });
+
+  app.get("/api/bettercap/instances/:id/session", async (req, res) => {
+    const session = await fetchSession(req.params.id);
+    if (!session) {
+      const inst = getInstance(req.params.id);
+      return res.status(inst ? 502 : 404).json({
+        error: inst ? inst.lastError || "Connection failed" : "Instance not found",
+      });
+    }
+    res.json(session);
+  });
+
+  app.get("/api/bettercap/instances/:id/events", async (req, res) => {
+    const n = parseInt(req.query.n as string) || 50;
+    const events = await fetchEvents(req.params.id, n);
+    res.json(events);
+  });
+
+  app.post("/api/bettercap/instances/:id/command", async (req, res) => {
+    const { cmd } = req.body;
+    if (!cmd) return res.status(400).json({ error: "Missing cmd field" });
+    const result = await sendCommand(req.params.id, cmd);
+    res.json(result);
+  });
+
+  app.get("/api/bettercap/instances/:id/history", (req, res) => {
+    res.json(getCommandHistory(req.params.id));
+  });
+
+  app.get("/api/bettercap/instances/:id/summary", (req, res) => {
+    const summary = getSessionSummary(req.params.id);
+    if (!summary) return res.status(404).json({ error: "No session data" });
+    res.json(summary);
   });
 
   return httpServer;
