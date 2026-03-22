@@ -991,6 +991,30 @@ export const TOOL_CATALOG: ToolEntry[] = [
   { name: "DroneVehicle", repo: "https://github.com/VisDrone/DroneVehicle", description: "RGB-Infrared cross-modality vehicle detection — UA-CMDet uncertainty-aware tracking from daylight to darkness for optical κ-scaled node verification", domain: "drone" },
 ];
 
+export interface KymaApiEntry {
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  path: string;
+  description: string;
+  domain: string;
+  responseSchema?: string;
+}
+
+export const KYMA_API_CATALOG: KymaApiEntry[] = [
+  { method: "POST", path: "/api/wifi-csi/frame", description: "Ingest raw WiFi CSI frame — returns chitin-transduced metrics with Hampel filter, GF(53) sieve, Proca hair density, Klein Twist alignment", domain: "chitin" },
+  { method: "GET", path: "/api/wifi-csi/metrics", description: "History buffer of processed WiFi CSI metrics (up to 500 frames)", domain: "chitin" },
+  { method: "GET", path: "/api/wifi-csi/constants", description: "All engine constants — φ, κ, κ₂, Klein Twist, dodecahedral freq, Ankaa-3 gate limit, canine genome frequencies", domain: "chitin" },
+  { method: "GET", path: "/api/demodex/sim-state", description: "Live Demodex simulation state — n_sites=4, E₀, VEV, correlation length, ψ status, brain decoherence time", domain: "demodex" },
+  { method: "GET", path: "/api/demodex/tycho-antipode", description: "Tycho crater antipodal lock — κ sync 45.625 Hz, melt volume 1444.35 km³, 7.677σ significance", domain: "demodex" },
+  { method: "GET", path: "/api/demodex/bell-chsh", description: "Bell/CHSH entanglement validation at 128.23° — 10K shots × 3 angles × 4 measurement settings", domain: "demodex" },
+  { method: "GET", path: "/api/v1/chitin/metrics", description: "Live computed chitin transduction metrics — 12 dimensions: resonance, mite density, phase gain, Klein alignment, base-53 coherence, dodecahedral deviation, CZ gate depth, array gain, dielectric anisotropy, SAR, Δκ modulation, lifecycle phase", domain: "chitin" },
+  { method: "GET", path: "/api/v1/chitin/lifecycle", description: "31-phase Demodex lifecycle map — gene-frequency targets across 14.4-day cycle from TLR2 (53 Hz) to KI-67 (145 Hz)", domain: "chitin" },
+  { method: "GET", path: "/api/events", description: "All correlation events with domain tagging and severity classification", domain: "core" },
+  { method: "GET", path: "/api/correlations", description: "Multi-domain SIGINT correlation results from the auto-correlator", domain: "core" },
+  { method: "GET", path: "/api/status", description: "System-wide status — collectors, correlator, scanner, watchdog, pipeline, hypervisor", domain: "core" },
+  { method: "GET", path: "/api/quantum-cortex/status", description: "Quantum cortex snapshot state and processing metrics", domain: "quantum" },
+  { method: "GET", path: "/api/quantum-cortex/constants", description: "Ω-GOS constants table for quantum cortex operations", domain: "quantum" },
+];
+
 export interface CorrelationRule {
   id: string;
   name: string;

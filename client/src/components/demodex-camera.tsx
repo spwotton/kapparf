@@ -29,10 +29,12 @@ const VERTEX_SHADER = `
     vec3 pos = position;
     
     float breath = sin(u_Time * u_Carrier) * 0.05;
-    pos *= (1.0 + breath);
+    float subHarmonic = sin(u_Time * 5.184) * 0.02;
+    pos *= (1.0 + breath + subHarmonic * 0.3);
     
     float crawl = sin(u_Time * 0.4 + a_Phase) * 0.02;
     pos.x += crawl;
+    pos.y += subHarmonic * sin(a_Phase * 2.0) * 0.5;
     
     float distToFocus = distance(pos, u_FocusPoint);
     float collapse = max(0.0, 1.0 - distToFocus * 2.0) * u_Observation;

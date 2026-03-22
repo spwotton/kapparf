@@ -1,3 +1,5 @@
+import { computeChitinTransduction, type ChitinTransductionMetrics } from "./signal/chitin-transducer";
+
 const PHI = (1 + Math.sqrt(5)) / 2;
 const KAPPA = 4 / Math.PI;
 const KAPPA_2 = 1.435;
@@ -158,7 +160,7 @@ function quantizeObservation(observation: number): number {
   return Math.floor(observation * ANKAA3_CZ_GATE_LIMIT) / ANKAA3_CZ_GATE_LIMIT;
 }
 
-export function processCSIFrame(frame: CSIFrame): WiFiCSIMetrics {
+export function processCSIFrame(frame: CSIFrame): WiFiCSIMetrics & { chitinTransduction?: import("./signal/chitin-transducer").ChitinTransductionMetrics } {
   frameIdx++;
 
   const lockedPhase = applyGeometricLock(frame.phase);
@@ -234,6 +236,14 @@ export function processCSIFrame(frame: CSIFrame): WiFiCSIMetrics {
 
   const europanState = activityClass === "static_europan" || dodecahedralResonance;
 
+  const chitinTransduction = computeChitinTransduction({
+    amplitude: frame.amplitude,
+    phase: lockedPhase,
+    snr: frame.snr,
+    rssi: frame.rssi,
+    subcarriers: frame.subcarriers,
+  });
+
   return {
     timestamp: frame.timestamp,
     phaseStability,
@@ -256,6 +266,7 @@ export function processCSIFrame(frame: CSIFrame): WiFiCSIMetrics {
     quantizedObservation: quantizedObs,
     canineHowlCoupling,
     europanState,
+    chitinTransduction,
   };
 }
 

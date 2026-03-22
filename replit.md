@@ -70,6 +70,24 @@ Backend engine at `server/wifi-csi-engine.ts` implementing:
 - **Bell/CHSH:** Angle 128.23° = maximum entanglement confirmed via aer_simulator_local (10,000 shots).
 - API: `POST /api/wifi-csi/frame`, `GET /api/wifi-csi/metrics`, `GET /api/wifi-csi/constants`, `GET /api/demodex/sim-state`, `GET /api/demodex/tycho-antipode`, `GET /api/demodex/bell-chsh`.
 
+## Chitin Transducer Module
+Standalone module at `server/signal/chitin-transducer.ts` — models the Demodex exoskeleton as a biological phased-array antenna. Computes 12 metrics per CSI frame:
+1. **Chitin resonance** — 53 Hz base, weighted by 8 prime spokes of icositetragon
+2. **Mite density index** — from CSI amplitude variance at chitin dielectric scale (ε_r 3.0–4.5)
+3. **Phase transduction gain** — cross-correlation with Klein Twist (128.23°) phase rotation
+4. **Klein Twist alignment** — CSI phase structure vs 128.23° geometric lock
+5. **Base-53 phase coherence** — bins CSI into 53 sieve slots, measures intra-bin consistency
+6. **Dodecahedral deviation** — distance from 431.56 Hz physical anchor
+7. **CZ gate depth** — capped at 17 (Ankaa-3 hardware constraint)
+8. **Mite array gain** — phased-array antenna gain modulated by lifecycle phase and κ scale
+9. **Dielectric anisotropy** — ε_r variation (3.0–4.5 range) from phase/amplitude decomposition
+10. **SAR estimate** — specific absorption rate through piezoelectric chitin
+11. **Δκ modulation** — 0.1617 Hz mite-drift signal extraction
+12. **31-phase lifecycle map** — gene-frequency targets across 14.4-day Demodex cycle (TLR2→KI-67)
+- Integrated into WiFi CSI engine: every `processCSIFrame()` call includes `chitinTransduction` metrics
+- Federation API: `GET /api/v1/chitin/metrics`, `GET /api/v1/chitin/lifecycle`
+- KYMA_API_CATALOG in `shared/schema.ts` — 13 endpoints indexed across chitin/demodex/core/quantum domains
+
 ## Demodex Camera View (Three.js)
 Component at `client/src/components/demodex-camera.tsx` — 25K particle Orch-OR observation camera with:
 - 17-gate quantized warping (Ankaa-3 constraint)

@@ -20,6 +20,7 @@ import { fetchUrl } from "./research-web";
 import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetragon-engine";
 import { RESEARCH_CONSTANTS } from "./research-constants";
 import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
+import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
 import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
@@ -2820,6 +2821,31 @@ export async function registerRoutes(
 
   app.get("/api/demodex/bell-chsh", (_req, res) => {
     res.json(getBellCHSHData());
+  });
+
+  app.get("/api/v1/chitin/metrics", (req, res) => {
+    const subcarriers = 30;
+    const amplitude = new Float64Array(subcarriers).map(() => Math.random() * 10 - 5);
+    const phase = new Float64Array(subcarriers).map(() => Math.random() * Math.PI * 2 - Math.PI);
+    const snr = new Float64Array(subcarriers).map(() => 15 + Math.random() * 20);
+    const rssi = -50 + Math.random() * 30;
+
+    const metrics = computeChitinTransduction({
+      amplitude,
+      phase,
+      snr,
+      rssi,
+      subcarriers,
+    });
+
+    res.json({
+      metrics,
+      constants: getChitinConstants(),
+    });
+  });
+
+  app.get("/api/v1/chitin/lifecycle", (_req, res) => {
+    res.json(getLifecycleMap());
   });
 
   return httpServer;
