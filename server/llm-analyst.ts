@@ -2,6 +2,7 @@ import OpenAI from "openai";
 import { type Correlation, type SignalEvent, type CorrelationFeedback } from "@shared/schema";
 
 let openai: OpenAI | null = null;
+let openrouterClient: OpenAI | null = null;
 
 function getClient(): OpenAI | null {
   if (openai) return openai;
@@ -11,6 +12,42 @@ function getClient(): OpenAI | null {
       baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
     });
     return openai;
+  }
+  return null;
+}
+
+function getOpenRouterClient(): OpenAI | null {
+  if (openrouterClient) return openrouterClient;
+  if (process.env.OPENROUTER_API_KEY) {
+    openrouterClient = new OpenAI({
+      apiKey: process.env.OPENROUTER_API_KEY,
+      baseURL: "https://openrouter.ai/api/v1",
+    });
+    return openrouterClient;
+  }
+  return null;
+}
+
+type ModelRoute = "reasoning" | "generation" | "vision";
+
+function pickModel(route: ModelRoute): { client: OpenAI; model: string; provider: string } | null {
+  const or = getOpenRouterClient();
+  const ai = getClient();
+
+  if (route === "reasoning") {
+    if (or) return { client: or, model: "openai/o3-mini", provider: "openrouter" };
+    if (ai) return { client: ai, model: "o3-mini", provider: "replit-ai" };
+    return null;
+  }
+  if (route === "generation") {
+    if (or) return { client: or, model: "deepseek/deepseek-chat-v3-0324", provider: "openrouter" };
+    if (ai) return { client: ai, model: "gpt-4o-mini", provider: "replit-ai" };
+    return null;
+  }
+  if (route === "vision") {
+    if (ai) return { client: ai, model: "gpt-4o", provider: "replit-ai" };
+    if (or) return { client: or, model: "openai/gpt-4o", provider: "openrouter" };
+    return null;
   }
   return null;
 }
@@ -118,13 +155,13 @@ export async function analyzeCorrelation(
   correlation: Correlation,
   events: SignalEvent[]
 ): Promise<CorrelationAnalysis> {
-  const client = getClient();
-  if (!client) return heuristicAnalysis(correlation, events);
+  const routed = pickModel("reasoning");
+  if (!routed) return heuristicAnalysis(correlation, events);
 
   try {
     return await rateLimitedCall(async () => {
-      const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
+      const response = await routed.client.chat.completions.create({
+        model: routed.model,
         messages: [
           {
             role: "system",
@@ -178,13 +215,13 @@ export async function generateReport(
   correlations: Correlation[],
   timeWindowHours: number
 ): Promise<IntelligenceReport> {
-  const client = getClient();
-  if (!client) return heuristicReport(correlations);
+  const routed = pickModel("generation");
+  if (!routed) return heuristicReport(correlations);
 
   try {
     return await rateLimitedCall(async () => {
-      const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
+      const response = await routed.client.chat.completions.create({
+        model: routed.model,
         messages: [
           {
             role: "system",
