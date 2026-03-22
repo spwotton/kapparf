@@ -722,7 +722,7 @@ export interface AnalysisPoint {
 }
 
 export const ANALYSIS_POINTS: AnalysisPoint[] = [
-  { id: "observer", name: "Observer — Guácima Abajo", lat: 9.953592, lon: -84.290668, description: "Calle Caballo Real, Provincia de Alajuela" },
+  { id: "observer", name: "Observer — Tacacorí", lat: 10.0513892, lon: -84.2186578, description: "Casa mirando a la montaña, Calle Los Cedros, Tacacorí, Alajuela 20106" },
   { id: "jaco", name: "Jacó", lat: 9.6142, lon: -84.6278, description: "Pacific coast analysis point, Puntarenas" },
   { id: "sjo", name: "SJO — Juan Santamaría Intl", lat: 9.9939, lon: -84.2088, description: "ICAO: MROC — primary international airport" },
   { id: "ti0rc", name: "TI0RC KiwiSDR", lat: 9.9360, lon: -84.1088, description: "Radio Club de Costa Rica SDR node" },
