@@ -5,3 +5,9 @@
 /attached_assets/Prime-Numbers-and-the-Riemann-Zeta-Function_1773255780126.pdf filter=lfs diff=lfs merge=lfs -text
 /attached_assets/PCAPdroid_11_Mar_00_38_23_1773304356991.pcap filter=lfs diff=lfs merge=lfs -text
 /attached_assets/sffs_1773304368398.pcapng filter=lfs diff=lfs merge=lfs -text
+/attached_assets/edge_detection/circled_view1_edges.png filter=lfs diff=lfs merge=lfs -text
+/attached_assets/edge_detection/circled_view1_emboss.png filter=lfs diff=lfs merge=lfs -text
+/attached_assets/edge_detection/circled_view1_enhanced_edges.png filter=lfs diff=lfs merge=lfs -text
+/attached_assets/edge_detection/circled_view2_edges.png filter=lfs diff=lfs merge=lfs -text
+/attached_assets/edge_detection/circled_view2_emboss.png filter=lfs diff=lfs merge=lfs -text
+/attached_assets/edge_detection/wide_view_emboss.png filter=lfs diff=lfs merge=lfs -text

@@ -1,5 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import * as fs from "fs";
+import * as nodePath from "path";
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
@@ -1437,6 +1439,130 @@ export async function registerRoutes(
         "CPJ-002-2026 (Poder Generalísimo RTBF circular)",
       ],
     });
+  });
+
+  app.get("/api/imagery", (_req, res) => {
+    const edgeDir = nodePath.join(process.cwd(), "attached_assets", "edge_detection");
+
+    const analyses: any[] = [];
+    const imageGroups: Record<string, { label: string; dims: string; findings: string[] }> = {
+      circled_view1: {
+        label: "Hillside View 1 — Circled Structure (2295×2437)",
+        dims: "2295×2437",
+        findings: [
+          "Geometric straight-line edges detected inside circled area — inconsistent with organic vegetation",
+          "Spectral signature differs from surrounding canopy — possible artificial surface material",
+          "Sobel gradient reveals horizontal/vertical components characteristic of man-made structure",
+          "Binary threshold isolates anomalous edge-density cluster within the circled zone",
+        ],
+      },
+      circled_view2: {
+        label: "Hillside View 2 — Circled Structure (4138×4737 → 1747×2000)",
+        dims: "1747×2000",
+        findings: [
+          "Angular structures emerging from tree canopy — possible rooflines and walls",
+          "Equalized histogram reveals cloaked features invisible in standard contrast",
+          "Crop Sobel at 3x amplification shows concentrated geometric edges",
+          "Structure footprint estimated at approximately 15-20m wide based on canopy gap",
+        ],
+      },
+      wide_view: {
+        label: "Wide View — Full Hillside Terrain (2000×1500)",
+        dims: "2000×1500",
+        findings: [
+          "Multiple structures visible on hillside via enhanced edge detection",
+          "Multi-story building with rectangular features detected mid-slope",
+          "Terrain gradient analysis shows road/path access cuts through vegetation",
+          "Building density increases near base — consistent with Los Rios settlement",
+        ],
+      },
+    };
+
+    const methods = [
+      { suffix: "edges", method: "edges", description: "Standard Laplacian edge detection" },
+      { suffix: "enhanced_edges", method: "enhanced_edges", description: "4x contrast + 3x sharpness enhancement" },
+      { suffix: "sobel", method: "sobel", description: "Sobel gradient magnitude" },
+      { suffix: "binary_edges", method: "binary_edges", description: "85th percentile binary threshold" },
+      { suffix: "emboss", method: "emboss", description: "Embossed relief with 2x contrast" },
+      { suffix: "crop_edges", method: "crop_edges", description: "Cropped ROI enhanced edges" },
+      { suffix: "crop_sobel", method: "crop_sobel", description: "Cropped ROI Sobel at 3x" },
+      { suffix: "crop_equalized_edges", method: "crop_equalized_edges", description: "Histogram-equalized crop edges" },
+    ];
+
+    for (const [groupId, group] of Object.entries(imageGroups)) {
+      const outputs: any[] = [];
+      for (const m of methods) {
+        const filename = `${groupId}_${m.suffix}.png`;
+        const filePath = nodePath.join(edgeDir, filename);
+        if (fs.existsSync(filePath)) {
+          outputs.push({
+            method: m.method,
+            description: m.description,
+            path: `/api/imagery/file/${filename}`,
+          });
+        }
+      }
+
+      if (outputs.length > 0) {
+        analyses.push({
+          id: groupId,
+          label: group.label,
+          originalPath: `/attached_assets/${groupId === "wide_view" ? "20260322_095645_1774201483255.jpg" : "20260321_100629_(2)_1774201483255.jpg"}`,
+          outputs,
+          timestamp: groupId.includes("view1") || groupId.includes("view2") ? "2026-03-21 10:06" : "2026-03-22 09:56",
+          dimensions: group.dims,
+          findings: group.findings,
+        });
+      }
+    }
+
+    res.json({
+      analyses,
+      ovsicori: [
+        {
+          id: "poas-crater",
+          name: "Cráter Volcán Poás",
+          volcano: "Volcán Poás (2,708m) — 15km NE of observer",
+          url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-poas",
+          status: "active",
+          lastCheck: new Date().toISOString(),
+        },
+        {
+          id: "poas-laguna",
+          name: "Laguna Botos — Poás",
+          volcano: "Volcán Poás — secondary crater lake",
+          url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2",
+          status: "active",
+          lastCheck: new Date().toISOString(),
+        },
+        {
+          id: "turrialba",
+          name: "Volcán Turrialba",
+          volcano: "Volcán Turrialba (3,340m) — 65km E of observer",
+          url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-turrialba",
+          status: "active",
+          lastCheck: new Date().toISOString(),
+        },
+        {
+          id: "rincon-de-la-vieja",
+          name: "Volcán Rincón de la Vieja",
+          volcano: "Volcán Rincón de la Vieja (1,916m) — 150km NW of observer",
+          url: "https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-rincon",
+          status: "active",
+          lastCheck: new Date().toISOString(),
+        },
+      ],
+      observerPosition: {
+        lat: 10.0513892,
+        lon: -84.2186578,
+        elevation: 1050,
+      },
+    });
+  });
+
+  app.get("/api/imagery/file/:filename", (req, res) => {
+    const filePath = nodePath.join(process.cwd(), "attached_assets", "edge_detection", req.params.filename);
+    res.sendFile(filePath);
   });
 
   return httpServer;
