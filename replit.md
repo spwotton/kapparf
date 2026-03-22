@@ -48,3 +48,4 @@ The platform is built with a modern web stack:
 - **shadcn/ui:** UI component library.
 - **TanStack Query v5:** Data fetching library.
 - **html-to-image:** For exporting social media infographic cards as PNG images.
+- **NUFORC (National UFO Reporting Center):** 77 Latin America sightings indexed (Costa Rica 53, Mexico 12, Venezuela 12) from 159,621 worldwide. Mapbox embedded map. Data at `GET /api/nuforc/sightings`. Emily Shell Gamage article sightings included. Audio archive (1974-1977 phone recordings) linked for spectral analysis. NUFORC Mapbox tileset: `mapbox://nuforc.cmm18aqea06bu1mmselhpnano-0ce5v`.
