@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
 import type { DeviceFingerprint } from "@shared/schema";
-import { Fingerprint, AlertTriangle, Layers } from "lucide-react";
+import { Fingerprint, AlertTriangle, Layers, Satellite, Radio, Globe, Plane, Crosshair, Activity } from "lucide-react";
 
 const domainColors: Record<string, string> = {
   satellite: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
@@ -15,6 +15,38 @@ const domainColors: Record<string, string> = {
   rf: "bg-green-500/10 text-green-700 dark:text-green-400",
   morse: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
 };
+
+function getEntityIcon(id: string) {
+  if (id.startsWith("SAT-")) return <Satellite className="h-3.5 w-3.5 text-purple-500" />;
+  if (id.startsWith("SDR-")) return <Radio className="h-3.5 w-3.5 text-yellow-500" />;
+  if (id.startsWith("NET-")) return <Globe className="h-3.5 w-3.5 text-slate-500" />;
+  if (id.startsWith("ADS-")) return <Plane className="h-3.5 w-3.5 text-rose-500" />;
+  if (id.startsWith("TGT-")) return <Crosshair className="h-3.5 w-3.5 text-red-500" />;
+  if (id.startsWith("SIG-") || id.startsWith("SRC-")) return <Activity className="h-3.5 w-3.5 text-green-500" />;
+  return <Fingerprint className="h-3.5 w-3.5 text-muted-foreground" />;
+}
+
+function getEntityType(id: string): string {
+  if (id.startsWith("SAT-")) return "Satellite";
+  if (id.startsWith("SDR-")) return "SDR Node";
+  if (id.startsWith("NET-")) return "Network";
+  if (id.startsWith("ADS-")) return "Aircraft";
+  if (id.startsWith("TGT-")) return "Target";
+  if (id.startsWith("SIG-")) return "Signal";
+  if (id.startsWith("SRC-")) return "Source";
+  return "Device";
+}
+
+function getEntityLabel(id: string): string {
+  if (id.startsWith("SAT-")) return `NORAD ${id.replace("SAT-", "")}`;
+  if (id.startsWith("SDR-")) return id.replace("SDR-", "").toUpperCase();
+  if (id.startsWith("NET-")) return id.replace("NET-", "");
+  if (id.startsWith("ADS-")) return id.replace("ADS-", "");
+  if (id.startsWith("TGT-")) return id.replace("TGT-", "");
+  if (id.startsWith("SIG-")) return id.replace("SIG-", "");
+  if (id.startsWith("SRC-")) return id.replace("SRC-", "");
+  return id;
+}
 
 export default function DevicesPage() {
   const { t } = useI18n();
@@ -27,7 +59,7 @@ export default function DevicesPage() {
   const sortedDevices = devices
     ? [...devices].sort((a, b) => {
         if (a.suspicious !== b.suspicious) return a.suspicious ? -1 : 1;
-        return b.crossDomainCount - a.crossDomainCount;
+        return b.crossDomainCount - a.crossDomainCount || b.eventCount - a.eventCount;
       })
     : [];
 
@@ -76,7 +108,7 @@ export default function DevicesPage() {
             {isLoading ? (
               <Skeleton className="h-8 w-20" />
             ) : (
-              <div className="text-3xl font-mono font-semibold tabular-nums" data-testid="text-suspicious-count">
+              <div className={`text-3xl font-mono font-semibold tabular-nums ${suspiciousCount > 0 ? "text-red-600" : ""}`} data-testid="text-suspicious-count">
                 {suspiciousCount}
               </div>
             )}
@@ -123,7 +155,7 @@ export default function DevicesPage() {
       ) : (
         <div className="border rounded-md overflow-x-auto">
           <div className="grid grid-cols-7 gap-2 p-3 text-xs font-medium text-muted-foreground border-b min-w-[700px]">
-            <span>{t("devices.mac")}</span>
+            <span>Entity</span>
             <span>{t("devices.domainsSeen")}</span>
             <span>{t("devices.eventCount")}</span>
             <span>{t("devices.crossDomain")}</span>
@@ -137,9 +169,17 @@ export default function DevicesPage() {
               className="grid grid-cols-7 gap-2 p-3 text-sm border-b last:border-b-0 items-center min-w-[700px]"
               data-testid={`row-device-${index}`}
             >
-              <span className="font-mono text-xs truncate" title={device.mac}>
-                {device.mac.substring(0, 11)}
-              </span>
+              <div className="flex items-center gap-1.5 min-w-0">
+                {getEntityIcon(device.mac)}
+                <div className="min-w-0">
+                  <div className="font-mono text-xs truncate" title={device.mac}>
+                    {getEntityLabel(device.mac)}
+                  </div>
+                  <div className="text-[10px] text-muted-foreground">
+                    {getEntityType(device.mac)}
+                  </div>
+                </div>
+              </div>
               <div className="flex gap-1 flex-wrap">
                 {device.domainsSeen.map((d) => (
                   <Badge

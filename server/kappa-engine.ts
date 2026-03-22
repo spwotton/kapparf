@@ -55,6 +55,27 @@ function extractTowerId(event: SignalEvent): string | null {
   return null;
 }
 
+function extractEntityId(event: SignalEvent): string | null {
+  const meta = event.metadata as Record<string, unknown> | null;
+  if (!meta) return null;
+
+  if (meta.noradId) return `SAT-${meta.noradId}`;
+  if (meta.nodeId && typeof meta.nodeId === "string") return `SDR-${meta.nodeId}`;
+  if (meta.node && typeof meta.node === "string") return `SDR-${meta.node}`;
+  if (meta.sdrNode && typeof meta.sdrNode === "string") return `SDR-${meta.sdrNode}`;
+  if (meta.ip && typeof meta.ip === "string") return `NET-${meta.ip}`;
+  if (meta.targetIp && typeof meta.targetIp === "string") return `NET-${meta.targetIp}`;
+  if (meta.callsign && typeof meta.callsign === "string") return `ADS-${meta.callsign}`;
+  if (meta.icao24 && typeof meta.icao24 === "string") return `ADS-${meta.icao24}`;
+  if (meta.target && typeof meta.target === "string") return `TGT-${meta.target}`;
+  if (meta.host && typeof meta.host === "string") return `NET-${meta.host}`;
+
+  if (event.source && event.frequency) return `SIG-${event.source}-${Math.round(event.frequency)}`;
+  if (event.source) return `SRC-${event.source}`;
+
+  return null;
+}
+
 export class KappaEngine {
   private score = 0;
   private startTime = Date.now();
@@ -141,6 +162,11 @@ export class KappaEngine {
 
     if (mac) {
       this.trackDevice(mac, event.domain, event.eventType, ts);
+    }
+
+    const entityId = extractEntityId(event);
+    if (entityId && !mac) {
+      this.trackDevice(entityId, event.domain, event.eventType, ts);
     }
 
     this.checkMacCrossDomain(windowEvent);
