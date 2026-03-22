@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
-import { getCollectorStatus } from "./collectors";
+import { getCollectorStatus, getTLEConsistencyStatus } from "./collectors";
 import { getCorrelatorStatus } from "./auto-correlator";
 import { getScannerStatus } from "./kiwisdr-scanner";
 import { getWatchdogStatus } from "./network-watchdog";
@@ -872,6 +872,10 @@ export async function registerRoutes(
 
   app.get("/api/collectors/status", (_req, res) => {
     res.json(getCollectorStatus());
+  });
+
+  app.get("/api/tle/consistency", (_req, res) => {
+    res.json(getTLEConsistencyStatus());
   });
 
   app.get("/api/correlations/stats", (_req, res) => {

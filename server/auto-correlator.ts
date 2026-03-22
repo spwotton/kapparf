@@ -16,6 +16,10 @@ let timer: ReturnType<typeof setInterval> | null = null;
 const processedPairs = new Set<string>();
 const MAX_PAIRS = 10000;
 
+const RULES_REQUIRING_SPECIALIZED_LOGIC = new Set([
+  "satintel-tle-drift",
+]);
+
 function pairKey(id1: string, id2: string): string {
   return id1 < id2 ? `${id1}:${id2}` : `${id2}:${id1}`;
 }
@@ -65,6 +69,8 @@ async function runCorrelationCycle(): Promise<void> {
     for (const rule of CORRELATION_RULES) {
       if (cycleCorrelations >= MAX_CORRELATIONS_PER_CYCLE) break;
       cycleRulesChecked++;
+
+      if (RULES_REQUIRING_SPECIALIZED_LOGIC.has(rule.id)) continue;
 
       const allDomainsPresent = rule.domains.every(d => domainGroups[d]?.length > 0);
       if (!allDomainsPresent) continue;

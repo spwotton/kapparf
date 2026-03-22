@@ -121,6 +121,171 @@ const PRIORITY_NORAD_IDS: { noradId: number; name: string; program: string }[] =
   { noradId: 55076, name: "YAM-5 (NASA MURI/Kinéis)", program: "CASINO/Loft Orbital" },
 ];
 
+interface TLEHistoryEntry {
+  tleLine1: string;
+  tleLine2: string;
+  meanMotion: number;
+  meanAnomaly: number;
+  epochTimestamp: number;
+  fetchedAt: number;
+  elevation: number;
+}
+
+const tleHistory: Map<number, TLEHistoryEntry> = new Map();
+
+const TLE_SPOOF_THRESHOLDS = {
+  DELTA_N_REV_PER_DAY: 0.05,
+  DELTA_M_DEG: 5.0,
+  ELEVATION_OFFSET_DEG: 10.0,
+  MIN_EPOCH_GAP_MS: 60_000,
+};
+
+function parseTLEFields(line2: string): { meanMotion: number; meanAnomaly: number } | null {
+  try {
+    const meanAnomaly = parseFloat(line2.substring(43, 51).trim());
+    const meanMotion = parseFloat(line2.substring(52, 63).trim());
+    if (isNaN(meanMotion) || isNaN(meanAnomaly)) return null;
+    return { meanMotion, meanAnomaly };
+  } catch {
+    return null;
+  }
+}
+
+function parseTLEEpoch(line1: string): number | null {
+  try {
+    const yearStr = line1.substring(18, 20).trim();
+    const dayStr = line1.substring(20, 32).trim();
+    let year = parseInt(yearStr, 10);
+    if (year < 57) year += 2000; else year += 1900;
+    const dayOfYear = parseFloat(dayStr);
+    const jan1 = new Date(Date.UTC(year, 0, 1));
+    return jan1.getTime() + (dayOfYear - 1) * 86400000;
+  } catch {
+    return null;
+  }
+}
+
+async function checkTLEConsistency(
+  sat: typeof import("satellite.js"),
+  noradId: number,
+  satName: string,
+  newLine1: string,
+  newLine2: string,
+  currentElevation: number,
+): Promise<void> {
+  const newFields = parseTLEFields(newLine2);
+  if (!newFields) return;
+
+  const newEpoch = parseTLEEpoch(newLine1);
+  if (!newEpoch) return;
+
+  const now = Date.now();
+  const prev = tleHistory.get(noradId);
+
+  tleHistory.set(noradId, {
+    tleLine1: newLine1,
+    tleLine2: newLine2,
+    meanMotion: newFields.meanMotion,
+    meanAnomaly: newFields.meanAnomaly,
+    epochTimestamp: newEpoch,
+    fetchedAt: now,
+    elevation: currentElevation,
+  });
+
+  if (!prev) return;
+
+  const epochGap = Math.abs(newEpoch - prev.epochTimestamp);
+  if (epochGap < TLE_SPOOF_THRESHOLDS.MIN_EPOCH_GAP_MS) return;
+
+  const deltaN = Math.abs(newFields.meanMotion - prev.meanMotion);
+  const deltaM = Math.abs(newFields.meanAnomaly - prev.meanAnomaly);
+  if (deltaM > 180) {
+    const adjustedDeltaM = 360 - deltaM;
+    if (adjustedDeltaM < TLE_SPOOF_THRESHOLDS.DELTA_M_DEG) return;
+  }
+
+  let elevationOffset = 0;
+  try {
+    const prevSatrec = sat.twoline2satrec(prev.tleLine1, prev.tleLine2);
+    const currentTime = new Date();
+    const prevPosVel = sat.propagate(prevSatrec, currentTime);
+    if (prevPosVel.position && typeof prevPosVel.position !== "boolean") {
+      const gmst = sat.gstime(currentTime);
+      const observerGd = {
+        longitude: sat.degreesToRadians(KAPPA_CONSTANTS.OBSERVER_LON),
+        latitude: sat.degreesToRadians(KAPPA_CONSTANTS.OBSERVER_LAT),
+        height: KAPPA_CONSTANTS.OBSERVER_ALT,
+      };
+      const prevEcf = sat.eciToEcf(prevPosVel.position, gmst);
+      const prevLook = sat.ecfToLookAngles(observerGd, prevEcf);
+      const prevPredictedElev = sat.radiansToDegrees(prevLook.elevation);
+      elevationOffset = Math.abs(currentElevation - prevPredictedElev);
+    }
+  } catch {
+    elevationOffset = 0;
+  }
+
+  const nExceeded = deltaN > TLE_SPOOF_THRESHOLDS.DELTA_N_REV_PER_DAY;
+  const mExceeded = deltaM > TLE_SPOOF_THRESHOLDS.DELTA_M_DEG;
+  const elevExceeded = elevationOffset > TLE_SPOOF_THRESHOLDS.ELEVATION_OFFSET_DEG;
+
+  if (!nExceeded && !mExceeded && !elevExceeded) return;
+
+  const severity = (nExceeded ? 1 : 0) + (mExceeded ? 1 : 0) + (elevExceeded ? 2 : 0);
+  const indicators: string[] = [];
+  if (nExceeded) indicators.push(`Δn=${deltaN.toFixed(4)} rev/day (threshold ${TLE_SPOOF_THRESHOLDS.DELTA_N_REV_PER_DAY})`);
+  if (mExceeded) indicators.push(`ΔM=${deltaM.toFixed(2)}° (threshold ${TLE_SPOOF_THRESHOLDS.DELTA_M_DEG}°)`);
+  if (elevExceeded) indicators.push(`elevation offset=${elevationOffset.toFixed(1)}° (threshold ${TLE_SPOOF_THRESHOLDS.ELEVATION_OFFSET_DEG}°)`);
+
+  const event = await storage.createSignalEvent({
+    domain: "satellite",
+    source: "tle-consistency-checker",
+    eventType: "tle-spoof-detection",
+    frequency: null,
+    confidence: Math.min(1.0, 0.4 + severity * 0.15),
+    latitude: parseFloat(KAPPA_CONSTANTS.OBSERVER_LAT.toFixed(4)),
+    longitude: parseFloat(KAPPA_CONSTANTS.OBSERVER_LON.toFixed(4)),
+    metadata: {
+      noradId,
+      satName,
+      deltaN: parseFloat(deltaN.toFixed(6)),
+      deltaM: parseFloat(deltaM.toFixed(4)),
+      elevationOffset: parseFloat(elevationOffset.toFixed(2)),
+      previousMeanMotion: prev.meanMotion,
+      newMeanMotion: newFields.meanMotion,
+      previousMeanAnomaly: prev.meanAnomaly,
+      newMeanAnomaly: newFields.meanAnomaly,
+      epochGapHours: parseFloat((epochGap / 3600000).toFixed(2)),
+      previousEpoch: new Date(prev.epochTimestamp).toISOString(),
+      newEpoch: new Date(newEpoch).toISOString(),
+      indicators,
+      thresholds: TLE_SPOOF_THRESHOLDS,
+    },
+    raw: `PREVIOUS TLE:\n${prev.tleLine1}\n${prev.tleLine2}\n\nNEW TLE:\n${newLine1}\n${newLine2}`,
+  });
+
+  kappaEngine.ingest(event);
+  hypervisor.ingestEvent(event);
+
+  await storage.createCorrelation({
+    ruleName: "SATINTEL-SPOOF TLE Drift",
+    description: `[TLE-CHECK] NORAD ${noradId} (${satName}) — ${indicators.join("; ")}`,
+    severity: Math.min(5, severity + 1),
+    eventIds: [event.id],
+    metadata: {
+      ruleId: "satintel-tle-drift",
+      checker: "tle-consistency",
+      noradId,
+      deltaN,
+      deltaM,
+      elevationOffset,
+      auto: true,
+    },
+  });
+
+  console.log(`[TLE-CHECK] SPOOF DETECTED: NORAD ${noradId} (${satName}) — ${indicators.join("; ")}`);
+}
+
 async function collectSatellites(): Promise<number> {
   const satellite = await import("satellite.js");
   const priorityGroups = TLE_CATALOG_GROUPS.filter(g =>
@@ -131,7 +296,10 @@ async function collectSatellites(): Promise<number> {
 
   for (const group of priorityGroups) {
     try {
-      const response = await fetch(group.url);
+      const ctrl = new AbortController();
+      const tmo = setTimeout(() => ctrl.abort(), 15000);
+      const response = await fetch(group.url, { signal: ctrl.signal });
+      clearTimeout(tmo);
       if (!response.ok) continue;
 
       const text = await response.text();
@@ -187,6 +355,8 @@ async function collectSatellites(): Promise<number> {
             passTime: elevation >= KAPPA_CONSTANTS.MIN_ELEVATION ? new Date() : null,
           });
 
+          await checkTLEConsistency(satellite, noradId, name.trim(), line1, line2, elevation);
+
           if (elevation >= KAPPA_CONSTANTS.MIN_ELEVATION) {
             const event = await storage.createSignalEvent({
               domain: "satellite",
@@ -223,7 +393,10 @@ async function collectSatellites(): Promise<number> {
   for (const target of PRIORITY_NORAD_IDS) {
     try {
       const tleUrl = `https://celestrak.org/NORAD/elements/gp.php?CATNR=${target.noradId}&FORMAT=tle`;
-      const resp = await fetch(tleUrl);
+      const pCtrl = new AbortController();
+      const pTmo = setTimeout(() => pCtrl.abort(), 10000);
+      const resp = await fetch(tleUrl, { signal: pCtrl.signal });
+      clearTimeout(pTmo);
       if (!resp.ok) continue;
       const text = await resp.text();
       const lines = text.trim().split("\n").map(l => l.trim());
@@ -260,6 +433,8 @@ async function collectSatellites(): Promise<number> {
         category: "priority-blackjack",
         passTime: elev >= KAPPA_CONSTANTS.MIN_ELEVATION ? new Date() : null,
       });
+
+      await checkTLEConsistency(satellite, target.noradId, target.name, lines[1], lines[2], elev);
 
       if (elev >= KAPPA_CONSTANTS.MIN_ELEVATION) {
         const event = await storage.createSignalEvent({
@@ -441,6 +616,43 @@ export async function runAllCollectorsOnce(): Promise<{ flights: number; satelli
     if (s) { s.eventsCreated += count; s.lastRun = Date.now(); }
   }
   return results;
+}
+
+export function getTLEConsistencyStatus(): {
+  trackedSatellites: number;
+  thresholds: typeof TLE_SPOOF_THRESHOLDS;
+  history: Array<{
+    noradId: number;
+    meanMotion: number;
+    meanAnomaly: number;
+    elevation: number;
+    epochTimestamp: number;
+    fetchedAt: number;
+  }>;
+} {
+  const history: Array<{
+    noradId: number;
+    meanMotion: number;
+    meanAnomaly: number;
+    elevation: number;
+    epochTimestamp: number;
+    fetchedAt: number;
+  }> = [];
+  for (const [noradId, entry] of tleHistory) {
+    history.push({
+      noradId,
+      meanMotion: entry.meanMotion,
+      meanAnomaly: entry.meanAnomaly,
+      elevation: entry.elevation,
+      epochTimestamp: entry.epochTimestamp,
+      fetchedAt: entry.fetchedAt,
+    });
+  }
+  return {
+    trackedSatellites: tleHistory.size,
+    thresholds: TLE_SPOOF_THRESHOLDS,
+    history,
+  };
 }
 
 export function getCollectorStatus(): Record<string, CollectorStatusType> {
