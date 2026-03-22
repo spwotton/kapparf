@@ -117,10 +117,26 @@ function FitBoundsOnce() {
 
 const severityLineColors = ["#6b7280", "#22c55e", "#eab308", "#f97316", "#ef4444", "#991b1b"];
 
+const radioImpactoIcon = new L.DivIcon({
+  html: `<div style="background:#dc2626;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 6px rgba(220,38,38,0.6);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:7px;font-weight:bold;">FM</span></div>`,
+  iconSize: [14, 14],
+  iconAnchor: [7, 7],
+  className: "",
+});
+
+const hotelRobledalIcon = new L.DivIcon({
+  html: `<div style="background:#f59e0b;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 0 4px rgba(245,158,11,0.5);"></div>`,
+  iconSize: [12, 12],
+  iconAnchor: [6, 6],
+  className: "",
+});
+
 function getPointIcon(id: string) {
   if (id === "observer") return observerIcon;
   if (id === "sjo") return sjoIcon;
   if (id === "ti0rc") return ti0rcIcon;
+  if (id === "radio-impacto") return radioImpactoIcon;
+  if (id === "hotel-robledal") return hotelRobledalIcon;
   return jacoIcon;
 }
 

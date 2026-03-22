@@ -85,11 +85,11 @@ export class OmegaChronosHypervisor {
 
     const domainStreamMap: Record<string, string[]> = {
       satellite: ["satellite-blackjack", "satellite-starlink"],
-      sdr: ["kiwisdr-ti0rc", "rf-46875", "echo-lt-sidechannel"],
+      sdr: ["kiwisdr-ti0rc", "rf-46875", "echo-lt-sidechannel", "radio-impacto-102fm"],
       elf: ["elf-powerline", "elf-schumann", "delta-slip-monitor"],
       isp: [],
       radar: ["adsb-local"],
-      rf: ["rf-46875"],
+      rf: ["rf-46875", "radio-impacto-102fm"],
       morse: ["morse-audio"],
     };
 

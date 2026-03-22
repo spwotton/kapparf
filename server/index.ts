@@ -71,12 +71,15 @@ app.use((req, res, next) => {
   const { startNetworkWatchdog } = await import("./network-watchdog");
   const { startPipeline } = await import("./pipeline");
   const { startNetworkThreatScanner } = await import("./network-threat-scanner");
+  const { hypervisor } = await import("./hypervisor");
   startCollectors();
   startAutoCorrelator();
   startKiwiSDRScanner();
   startNetworkWatchdog();
   startPipeline();
   startNetworkThreatScanner();
+  hypervisor.start();
+  console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

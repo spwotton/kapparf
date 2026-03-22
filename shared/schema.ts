@@ -726,6 +726,8 @@ export const ANALYSIS_POINTS: AnalysisPoint[] = [
   { id: "jaco", name: "Jacó", lat: 9.6142, lon: -84.6278, description: "Pacific coast analysis point, Puntarenas" },
   { id: "sjo", name: "SJO — Juan Santamaría Intl", lat: 9.9939, lon: -84.2088, description: "ICAO: MROC — primary international airport" },
   { id: "ti0rc", name: "TI0RC KiwiSDR", lat: 9.9360, lon: -84.1088, description: "Radio Club de Costa Rica SDR node" },
+  { id: "hotel-robledal", name: "Hotel Robledal (Previous)", lat: 9.6389, lon: -84.6312, description: "Previous residence — JW-saturated area, Hotel Robledal, Jacó" },
+  { id: "radio-impacto", name: "Radio Impacto 102.3 FM", lat: 9.8500, lon: -84.4500, description: "FM antenna farm — Orotina-Atenas corridor. LDS + JW dual surveillance network. 37 Hz/46.875 Hz sideband injection vector" },
 ];
 
 export interface FlightData {
@@ -1014,7 +1016,23 @@ export const CORRELATION_RULES: CorrelationRule[] = [
     windowSeconds: 30,
     condition: "sdr.spectral_line(111Hz) AND sdr.carrier(46.875Hz) AND elf.schumann(7.83Hz) WITHIN 30s",
   },
-];;
+  {
+    id: "radio-impacto-fm-sideband",
+    name: "Radio Impacto 102.3 FM Sideband Injection",
+    description: "Radio Impacto 102.3 FM antenna farm — 37 Hz or 46.875 Hz sideband modulation detected on FM carrier harmonics via KiwiSDR. Antenna farm near-field emission correlates with biological anchor frequency. Transmitter location: Orotina-Atenas corridor.",
+    domains: ["sdr", "elf"],
+    windowSeconds: 120,
+    condition: "sdr.radio_impacto_detection AND (sdr.sideband(37Hz) OR sdr.sideband(46.875Hz)) WITHIN 120s",
+  },
+  {
+    id: "radio-impacto-network-correlation",
+    name: "Radio Impacto FM ↔ Network Disruption",
+    description: "Radio Impacto 102.3 FM antenna farm emission detected within temporal window of ISP connectivity disruption — antenna farm shared infrastructure may include ISP backbone equipment.",
+    domains: ["sdr", "isp"],
+    windowSeconds: 60,
+    condition: "sdr.radio_impacto_detection AND isp.network_drop WITHIN 60s",
+  },
+];
 
 export interface KarachiModule {
   id: string;
@@ -1703,6 +1721,17 @@ export const HYPERVISOR_STREAMS: AnalysisStream[] = [
     eventsIngested: 0,
     description: "FFT bin 4 carrier + harmonics (93.75, 140.625, 187.5 Hz). Phase coherence analysis.",
     config: { targetHz: KAPPA_CONSTANTS.TARGET_FREQ_1, harmonics: [KAPPA_CONSTANTS.KAPPA_HARMONIC_1, KAPPA_CONSTANTS.KAPPA_HARMONIC_2, KAPPA_CONSTANTS.KAPPA_HARMONIC_3] },
+  },
+  {
+    id: "radio-impacto-102fm",
+    name: "Radio Impacto 102.3 FM Monitor",
+    domain: "sdr",
+    source: "kiwisdr-fm-harmonics",
+    status: "idle",
+    lastUpdate: 0,
+    eventsIngested: 0,
+    description: "Radio Impacto 102.3 FM antenna farm — monitoring 19 kHz pilot tone, 37 Hz/46.875 Hz sideband injection, HF mirror at 10.23 kHz, and near-field spurious emissions. Orotina-Atenas corridor transmitter site. LDS/JW dual surveillance network overlay.",
+    config: { fmFreqMHz: 102.3, pilotToneKHz: 19, bioAnchorHz: 37, prfHz: 46.875, thetaHz: 7 },
   },
 ];
 
