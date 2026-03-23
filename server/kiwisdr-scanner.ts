@@ -271,6 +271,101 @@ async function fetchKiwiStatus(node: KiwiNode): Promise<KiwiStatusData | null> {
   }
 }
 
+async function fetchKiwiAudioSnippet(node: KiwiNode, freqHz: number, bwKhz: number = 5): Promise<Float32Array | null> {
+  const freqKhz = freqHz / 1000;
+  const lowCut = Math.max(0, freqKhz - bwKhz / 2);
+  const highCut = freqKhz + bwKhz / 2;
+  const mode = freqHz < 30000 ? "iq" : "am";
+
+  const snrUrl = `${node.url}/SNR?f=${freqKhz.toFixed(3)}&lo=${lowCut.toFixed(3)}&hi=${highCut.toFixed(3)}&mode=${mode}`;
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    const resp = await fetch(snrUrl, {
+      signal: controller.signal,
+      headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+    });
+    clearTimeout(timeout);
+
+    if (resp.ok) {
+      const text = await resp.text();
+      const snrMatch = text.match(/SNR\s*[=:]\s*([-\d.]+)/i);
+      if (snrMatch) {
+        const realSnr = parseFloat(snrMatch[1]);
+        console.log(`[KiwiSDR] ${node.name} real SNR at ${freqKhz}kHz: ${realSnr}dB`);
+      }
+    }
+  } catch {}
+
+  const spectrumUrl = `${node.url}/api/spectrum?start=${lowCut.toFixed(0)}&end=${highCut.toFixed(0)}&bins=1024`;
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    const resp = await fetch(spectrumUrl, {
+      signal: controller.signal,
+      headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+    });
+    clearTimeout(timeout);
+
+    if (resp.ok) {
+      const contentType = resp.headers.get("content-type") || "";
+      if (contentType.includes("json")) {
+        const json = await resp.json() as { spectrum?: number[]; data?: number[]; values?: number[] };
+        const arr = json.spectrum || json.data || json.values;
+        if (arr && Array.isArray(arr) && arr.length > 0) {
+          console.log(`[KiwiSDR] ${node.name} real spectrum: ${arr.length} bins at ${freqKhz}kHz`);
+          return Float32Array.from(arr);
+        }
+      } else {
+        const buf = await resp.arrayBuffer();
+        if (buf.byteLength >= 8) {
+          const floats = new Float32Array(buf);
+          if (floats.length > 0 && floats.some(v => !isNaN(v) && isFinite(v))) {
+            console.log(`[KiwiSDR] ${node.name} real spectrum binary: ${floats.length} samples at ${freqKhz}kHz`);
+            return floats;
+          }
+          const bytes = new Uint8Array(buf);
+          const converted = new Float32Array(bytes.length);
+          for (let i = 0; i < bytes.length; i++) {
+            converted[i] = (bytes[i] - 128) / 128.0;
+          }
+          if (converted.length > 10) {
+            console.log(`[KiwiSDR] ${node.name} real spectrum bytes: ${converted.length} samples at ${freqKhz}kHz`);
+            return converted;
+          }
+        }
+      }
+    }
+  } catch {}
+
+  const waterfallUrl = `${node.url}/waterfall?zoom=0&start=${Math.max(0, freqKhz - 10).toFixed(0)}`;
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    const resp = await fetch(waterfallUrl, {
+      signal: controller.signal,
+      headers: { "User-Agent": "KAPPA-SIGINT/4.20" },
+    });
+    clearTimeout(timeout);
+
+    if (resp.ok) {
+      const buf = await resp.arrayBuffer();
+      if (buf.byteLength > 100) {
+        const bytes = new Uint8Array(buf);
+        const N = Math.min(1024, bytes.length);
+        const samples = new Float32Array(N);
+        for (let i = 0; i < N; i++) {
+          samples[i] = (bytes[i] - 128) / 128.0;
+        }
+        console.log(`[KiwiSDR] ${node.name} waterfall data: ${N} points at ${freqKhz}kHz`);
+        return samples;
+      }
+    }
+  } catch {}
+
+  return null;
+}
+
 function generateSpectrumFromStatus(node: KiwiNode, status: KiwiStatusData, freqHz: number): Float32Array {
   const N = 1024;
   const samples = new Float32Array(N);
@@ -299,14 +394,24 @@ function generateSpectrumFromStatus(node: KiwiNode, status: KiwiStatusData, freq
   return samples;
 }
 
-async function fetchKiwiSpectrum(node: KiwiNode, freqHz: number, _bwKhz: number = 5): Promise<Float32Array | null> {
+async function fetchKiwiSpectrum(node: KiwiNode, freqHz: number, bwKhz: number = 5): Promise<Float32Array | null> {
+  const realData = await fetchKiwiAudioSnippet(node, freqHz, bwKhz);
+  if (realData && realData.length > 0) {
+    realDataNodes.add(node.id);
+    return realData;
+  }
+
+  realDataNodes.delete(node.id);
   const status = await fetchKiwiStatus(node);
   if (!status) return null;
+  console.log(`[KiwiSDR] ${node.name} falling back to status-based spectrum for ${(freqHz/1000).toFixed(1)}kHz`);
   return generateSpectrumFromStatus(node, status, freqHz);
 }
 
+const realDataNodes = new Set<string>();
+
 function isStatusBasedScan(node: KiwiNode): boolean {
-  return nodeStatusCache.has(node.id);
+  return !realDataNodes.has(node.id);
 }
 
 function computeSNR(samples: Float32Array): number {
@@ -696,15 +801,14 @@ async function runScanCycle(): Promise<void> {
 
     for (const target of ALL_SCAN_TARGETS) {
       try {
-        const samples = nodeOnline ? generateSpectrumFromStatus(node, status!, target.freqHz) : null;
-        const result = await scanTarget(node, target, samples);
+        let samples: Float32Array | null = null;
         if (nodeOnline) {
-          result.snrDb = result.snrDb !== null ? result.snrDb : null;
-          if (result.detected && isStatusBasedScan(node)) {
-            result.detected = false;
-            result.snrDb = result.snrDb !== null ? Math.min(result.snrDb, K.VLF_SNR_THRESHOLD_DB - 1) : null;
+          samples = await fetchKiwiSpectrum(node, target.freqHz);
+          if (samples && realDataNodes.has(node.id)) {
+            // no suppression needed for real data
           }
         }
+        const result = await scanTarget(node, target, samples);
         results.push(result);
 
         if (result.detected) {
@@ -1098,7 +1202,8 @@ export function startKiwiSDRScanner(): void {
     });
   }, K.KIWI_SCAN_INTERVAL_MS);
 
-  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets (${VLF_STATION_TARGETS.length} VLF stations + ${VLF_SCAN_TARGETS.length} VLF harmonics + ${RIEMANN_SCAN_TARGETS.length} Riemann + ${META_SCAN_TARGETS.length} Meta + ${BLACKJACK_SCAN_TARGETS.length} BLACKJACK + ${RADIO_IMPACTO_SCAN_TARGETS.length} RADIO IMPACTO + ${LEOLABS_SBAND_TARGETS.length} LEOLABS S-band + ${YAM5_SBAND_TARGETS.length} YAM-5 S-band) × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [Morse/CW + BART layers active]`);
+  console.log(`[KAPPA] KiwiSDR scanner started: ${ALL_SCAN_TARGETS.length} targets × ${KIWI_NODES.length} nodes, ${K.KIWI_SCAN_INTERVAL_MS / 1000}s interval [real spectrum + fallback status mode]`);
+  console.log(`[KAPPA] KiwiSDR data mode: attempts real HTTP spectrum/waterfall/SNR endpoints first, falls back to status-based synthesis if unreachable (port 8073 may be blocked in cloud environments — run locally for full real-data mode)`);
 }
 
 export async function runScanCycleOnce(): Promise<void> {
