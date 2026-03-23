@@ -6,3 +6,9 @@ id = "zDaxSKuCcHB3e4ieprb38"
 uri = "file://docs/KAPPA-API-REFERENCE.md"
 type = "text"
 title = "KAPPA API Reference (for Kyma Claude)"
+
+[[outputs]]
+id = "d_jhTmfNmGcu1vDcQyL67"
+uri = "file://docs/DERECHOS_LEGALES_CR.md"
+type = "text"
+title = "Derechos del Detenido — Costa Rica (Spanish Legal Rights)"
