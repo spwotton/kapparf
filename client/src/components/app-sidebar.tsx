@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles, Hexagon, Image, Microscope, ScanEye, Network, Orbit, Atom, Radio } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles, Hexagon, Image, Microscope, ScanEye, Network, Orbit, Atom, Radio, BookOpen } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
   Sidebar,
@@ -60,6 +60,7 @@ export function AppSidebar() {
     { title: t("nav.board"), url: "/board", icon: Network },
     { title: t("nav.superposition"), url: "/superposition", icon: Atom },
     { title: "Bettercap", url: "/bettercap", icon: Radio },
+    { title: "Research Cortex", url: "/cortex", icon: BookOpen },
   ];
 
   const score = kappaStatus?.score ?? 0;

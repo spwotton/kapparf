@@ -22,6 +22,10 @@ import { RESEARCH_CONSTANTS } from "./research-constants";
 import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
 import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
 import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
+import {
+  indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
+  createDocument, executeSynthesisRun, getSynthesisRun, exportCorpus, getExportFormats,
+} from "./research-cortex";
 import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
@@ -2903,6 +2907,89 @@ export async function registerRoutes(
     const summary = getSessionSummary(req.params.id);
     if (!summary) return res.status(404).json({ error: "No session data" });
     res.json(summary);
+  });
+
+  app.get("/api/research-cortex/status", (_req, res) => {
+    res.json(getCortexStatus());
+  });
+
+  app.post("/api/research-cortex/index", async (_req, res) => {
+    try {
+      const result = await indexAllDocuments();
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/research-cortex/claims", (req, res) => {
+    const { docId, category, search } = req.query;
+    res.json(getClaims({
+      docId: docId as string | undefined,
+      category: category as string | undefined,
+      search: search as string | undefined,
+    }));
+  });
+
+  app.get("/api/research-cortex/documents/:docId", (req, res) => {
+    const doc = getDocumentContent(req.params.docId);
+    if (!doc) return res.status(404).json({ error: "Document not found" });
+    res.json(doc);
+  });
+
+  app.put("/api/research-cortex/documents/:docId", (req, res) => {
+    const { content } = req.body;
+    if (!content) return res.status(400).json({ error: "Missing content" });
+    const ok = writeDocumentContent(req.params.docId, content);
+    if (!ok) return res.status(404).json({ error: "Document not found" });
+    res.json({ success: true });
+  });
+
+  app.post("/api/research-cortex/documents", (req, res) => {
+    const { filename, content } = req.body;
+    if (!filename || !content) return res.status(400).json({ error: "Missing filename or content" });
+    const doc = createDocument(filename, content);
+    res.json(doc);
+  });
+
+  app.post("/api/research-cortex/synthesize", async (req, res) => {
+    const { topic, facetCount, includeDialogue } = req.body;
+    if (!topic) return res.status(400).json({ error: "Missing topic" });
+    try {
+      const run = await executeSynthesisRun(topic, facetCount || 12, includeDialogue !== false);
+      res.json({ runId: run.id, status: run.status, facetCount: run.facets.length });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/research-cortex/synthesis/:runId", (req, res) => {
+    const run = getSynthesisRun(req.params.runId);
+    if (!run) return res.status(404).json({ error: "Synthesis run not found" });
+    res.json(run);
+  });
+
+  app.get("/api/research-cortex/export/:format", (req, res) => {
+    const format = req.params.format as "markdown" | "json" | "latex";
+    if (!["markdown", "json", "latex"].includes(format)) {
+      return res.status(400).json({ error: "Invalid format. Use: markdown, json, latex" });
+    }
+    const exported = exportCorpus(format);
+    if (format === "json") {
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Content-Disposition", `attachment; filename="kappa-cortex-export.json"`);
+    } else if (format === "latex") {
+      res.setHeader("Content-Type", "text/plain");
+      res.setHeader("Content-Disposition", `attachment; filename="kappa-cortex-export.tex"`);
+    } else {
+      res.setHeader("Content-Type", "text/markdown");
+      res.setHeader("Content-Disposition", `attachment; filename="kappa-cortex-export.md"`);
+    }
+    res.send(exported);
+  });
+
+  app.get("/api/research-cortex/formats", (_req, res) => {
+    res.json(getExportFormats());
   });
 
   return httpServer;
