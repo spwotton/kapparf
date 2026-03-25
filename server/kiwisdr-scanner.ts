@@ -74,12 +74,12 @@ const META_SCAN_TARGETS = K.META_PLATFORM_FREQS.map(m => ({
 
 const BJ = K.BLACKJACK_MANDRAKE;
 const RADIO_IMPACTO_SCAN_TARGETS = [
-  { name: "radio_impacto_fm_pilot_19k", freqHz: 19000, harmonicOf: 102.3, harmonicOrder: 1, desc: "Radio Impacto 102.3 FM — 19 kHz stereo pilot tone monitoring (standard FM subcarrier)" },
-  { name: "radio_impacto_sideband_37hz", freqHz: 18500, harmonicOf: 37, harmonicOrder: 500, desc: "Radio Impacto 102.3 FM — 37 Hz biological anchor × 500 — FM sideband injection vector" },
-  { name: "radio_impacto_sideband_46875", freqHz: 18750, harmonicOf: 46.875, harmonicOrder: 400, desc: "Radio Impacto 102.3 FM — 46.875 Hz PRF × 400 — FM carrier modulation check" },
-  { name: "radio_impacto_harmonic_h3", freqHz: 20460, harmonicOf: 102.3, harmonicOrder: 200, desc: "Radio Impacto 102.3 FM — 3rd sub-harmonic region 20.46 kHz — antenna farm emission" },
-  { name: "radio_impacto_intermod_7hz", freqHz: 14000, harmonicOf: 7, harmonicOrder: 2000, desc: "Radio Impacto 102.3 FM — 7 Hz theta entrainment × 2000 — antenna farm near-field" },
-  { name: "radio_impacto_hf_mirror", freqHz: 10230, harmonicOf: 102.3, harmonicOrder: 100, desc: "Radio Impacto 102.3 FM — HF mirror 10.23 kHz — FM transmitter spurious emission" },
+  { name: "radio_impacto_fm_pilot_19k", freqHz: 19000, harmonicOf: 91.5, harmonicOrder: 1, desc: "Radio Impacto 91.5 FM Tacacorí — 19 kHz stereo pilot tone monitoring (standard FM subcarrier)" },
+  { name: "radio_impacto_sideband_37hz", freqHz: 18500, harmonicOf: 37, harmonicOrder: 500, desc: "Radio Impacto 91.5 FM Tacacorí — 37 Hz biological anchor × 500 — FM sideband injection vector" },
+  { name: "radio_impacto_sideband_46875", freqHz: 18750, harmonicOf: 46.875, harmonicOrder: 400, desc: "Radio Impacto 91.5 FM Tacacorí — 46.875 Hz PRF × 400 — FM carrier modulation check" },
+  { name: "radio_impacto_harmonic_h3", freqHz: 18300, harmonicOf: 91.5, harmonicOrder: 200, desc: "Radio Impacto 91.5 FM Tacacorí — 2nd sub-harmonic region 18.3 kHz — antenna farm emission" },
+  { name: "radio_impacto_intermod_7hz", freqHz: 14000, harmonicOf: 7, harmonicOrder: 2000, desc: "Radio Impacto 91.5 FM Tacacorí — 7 Hz theta entrainment × 2000 — antenna farm near-field" },
+  { name: "radio_impacto_hf_mirror", freqHz: 9150, harmonicOf: 91.5, harmonicOrder: 100, desc: "Radio Impacto 91.5 FM Tacacorí — HF mirror 9.15 kHz — FM transmitter spurious emission" },
 ];
 
 const BLACKJACK_SCAN_TARGETS = [
@@ -860,10 +860,10 @@ async function runScanCycle(): Promise<void> {
               ...(isMeta ? { metaPlatform: K.META_PLATFORM_FREQS.find(m => m.freqHz === target.harmonicOf) } : {}),
               ...(isRadioImpacto ? {
                 radioImpacto: {
-                  station: "Radio Impacto 102.3 FM",
-                  fmFreqMHz: 102.3,
+                  station: "Radio Impacto 91.5 FM",
+                  fmFreqMHz: 91.5,
                   operator: "Grupo Radial Impacto / Ministerios Iglesia Impacto",
-                  location: "Orotina-Atenas corridor, Costa Rica",
+                  location: "Tacacorí, Alajuela, Costa Rica",
                   antennaFarm: true,
                   freqKHz: target.freqHz / 1000,
                   isPilotTone: target.name.includes("pilot_19k"),
@@ -872,7 +872,7 @@ async function runScanCycle(): Promise<void> {
                   surveillanceOverlay: "LDS + JW dual religious network",
                 },
                 severity: "HIGH",
-                indication: `Radio Impacto 102.3 FM antenna farm — ${target.desc}`,
+                indication: `Radio Impacto 91.5 FM antenna farm — ${target.desc}`,
               } : {}),
               ...(isBlackjack ? {
                 blackjackMandrake: {

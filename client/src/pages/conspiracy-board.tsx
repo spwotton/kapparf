@@ -116,7 +116,7 @@ function makeNodes(): BoardNode[] {
     { id: "finspy", label: "FinSpy/Gamma", category: "surveillance", detail: "Gamma Group infrastructure. FinSpy deployment confirmed. IP forensics traced. Alexanderplatz Google session. The digital Stasi.", radius: 26 },
     { id: "jw_post", label: "JW Listening Post", category: "surveillance", detail: "Los Rios shift workers. Hotel Robledal JW-saturated. Territory cards. Monthly service reports = continuous HUMINT flow. Clandestine network resilience (Stasi-tested).", radius: 24 },
     { id: "lds", label: "LDS Network", category: "surveillance", detail: "CIA-friendly (Utah-Mormon corridor). Area Books with addresses. Ward → Stake → Area hierarchy. Combined with JW = 100% neighborhood coverage.", radius: 22 },
-    { id: "radio_impacto", label: "Radio Impacto", category: "surveillance", detail: "102.3 FM. Ministerios Iglesia Impacto. 50-100m towers. 10-50kW transmitters. 19kHz pilot × 2.46 ≈ 46.75 Hz. Sideband injection vector.", radius: 24 },
+    { id: "radio_impacto", label: "Radio Impacto", category: "surveillance", detail: "91.5 FM Tacacorí. Ministerios Iglesia Impacto. 50-100m towers. 10-50kW transmitters. 19kHz pilot × 2.46 ≈ 46.75 Hz. Sideband injection vector. AWB/CIA infrastructure overlay.", radius: 24 },
     { id: "kyndryl", label: "Kyndryl/Zscaler", category: "surveillance", detail: "Service worker 8.3MB. Jorge Jimenez Navarro. FSLN/SVR hybrid HUMINT operation. Safe house. Drone Ventura MX infrastructure.", radius: 24 },
     { id: "tr069", label: "TR-069 Reset", category: "surveillance", detail: "CWMP TCP :7547. 2026-01-30 reset event. Ghost Deco node. Fiber splice box NAP/Colilla 21/06/25. Partytown/Zscaler injection.", radius: 20 },
 
