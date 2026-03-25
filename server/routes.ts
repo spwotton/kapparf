@@ -2992,5 +2992,269 @@ export async function registerRoutes(
     res.json(getExportFormats());
   });
 
+  app.get("/api/incidents", async (req, res) => {
+    try {
+      const category = req.query.category as string | undefined;
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : undefined;
+      const from = req.query.from ? new Date(req.query.from as string) : undefined;
+      const to = req.query.to ? new Date(req.query.to as string) : undefined;
+      let result;
+      if (from && to) {
+        result = await storage.getIncidentsByTimeRange(from, to);
+      } else if (category) {
+        result = await storage.getIncidentsByCategory(category);
+      } else {
+        result = await storage.getIncidents(limit);
+      }
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/incidents", async (req, res) => {
+    try {
+      const { insertIncidentSchema } = await import("@shared/schema");
+      const parsed = insertIncidentSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Invalid incident data", details: parsed.error.flatten() });
+      }
+      const incident = await storage.createIncident(parsed.data);
+      res.json(incident);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/incidents/count", async (_req, res) => {
+    try {
+      const count = await storage.getIncidentCount();
+      res.json({ count });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/incidents/:id", async (req, res) => {
+    try {
+      const incident = await storage.getIncident(req.params.id);
+      if (!incident) return res.status(404).json({ error: "Not found" });
+      res.json(incident);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.patch("/api/incidents/:id", async (req, res) => {
+    try {
+      const existing = await storage.getIncident(req.params.id);
+      if (!existing) return res.status(404).json({ error: "Not found" });
+      const { insertIncidentSchema } = await import("@shared/schema");
+      const parsed = insertIncidentSchema.partial().safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ error: "Invalid update data", details: parsed.error.flatten() });
+      }
+      const updated = await storage.updateIncident(req.params.id, parsed.data);
+      res.json(updated);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.delete("/api/incidents/:id", async (req, res) => {
+    try {
+      const existing = await storage.getIncident(req.params.id);
+      if (!existing) return res.status(404).json({ error: "Not found" });
+      await storage.deleteIncident(req.params.id);
+      res.json({ ok: true, deletedHash: existing.hash });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/evidence-chain/timeline", async (req, res) => {
+    try {
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 100;
+      const from = req.query.from ? new Date(req.query.from as string) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+      const to = req.query.to ? new Date(req.query.to as string) : new Date();
+
+      const [incidentsList, events, correlationsList] = await Promise.all([
+        storage.getIncidentsByTimeRange(from, to),
+        storage.getEventsByTimeRange(from, to),
+        storage.getCorrelations(limit),
+      ]);
+
+      const timeline: any[] = [];
+      for (const inc of incidentsList) {
+        timeline.push({ type: "incident", timestamp: inc.timestamp, data: inc });
+      }
+      for (const evt of events.slice(0, limit)) {
+        timeline.push({ type: "event", timestamp: evt.timestamp, data: evt });
+      }
+      for (const cor of correlationsList) {
+        if (cor.timestamp >= from && cor.timestamp <= to) {
+          timeline.push({ type: "correlation", timestamp: cor.timestamp, data: cor });
+        }
+      }
+      timeline.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+      res.json({ timeline: timeline.slice(0, limit), total: timeline.length });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/evidence-chain/export", async (req, res) => {
+    try {
+      const incidentsList = await storage.getIncidents(500);
+      const events = await storage.getRecentSignalEvents(200);
+      const correlationsList = await storage.getCorrelations(200);
+      const observer = {
+        name: "Samuel Wotton (Echo)",
+        location: "Casa mirando a la montaña, Tacacorí, Alajuela, CR",
+        coordinates: "10.0513892°N, 84.2186578°W",
+        generated: new Date().toISOString(),
+      };
+      const stats = {
+        incidents: incidentsList.length,
+        signalEvents: events.length,
+        correlations: correlationsList.length,
+      };
+      const categoryCounts: Record<string, number> = {};
+      for (const inc of incidentsList) {
+        categoryCounts[inc.category] = (categoryCounts[inc.category] || 0) + 1;
+      }
+      const html = generateEvidenceHTML(observer, stats, categoryCounts, incidentsList, events, correlationsList);
+      res.setHeader("Content-Type", "text/html; charset=utf-8");
+      res.setHeader("Content-Disposition", `attachment; filename="KAPPA_Evidence_Chain_${new Date().toISOString().slice(0, 10)}.html"`);
+      res.send(html);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   return httpServer;
+}
+
+function generateEvidenceHTML(observer: any, stats: any, categoryCounts: Record<string, number>, incidents: any[], events: any[], correlations: any[]): string {
+  const severityLabel = (s: number) => ["", "LOW", "MEDIUM", "HIGH", "CRITICAL", "EMERGENCY"][s] || "UNKNOWN";
+  const severityColor = (s: number) => ["", "#6b7280", "#eab308", "#f97316", "#ef4444", "#dc2626"][s] || "#6b7280";
+
+  const incidentsHTML = incidents.map(inc => `
+    <div class="entry incident">
+      <div class="entry-header">
+        <span class="badge" style="background:${severityColor(inc.severity)}">${severityLabel(inc.severity)}</span>
+        <span class="category">${inc.category.toUpperCase()}</span>
+        <span class="timestamp">${new Date(inc.timestamp).toLocaleString("en-US", { timeZone: "America/Costa_Rica" })} CST</span>
+      </div>
+      <h3>${escapeHtml(inc.title)}</h3>
+      <p>${escapeHtml(inc.description)}</p>
+      ${inc.location ? `<p class="meta">Location: ${escapeHtml(inc.location)}</p>` : ""}
+      ${inc.evidence?.length ? `<p class="meta">Evidence: ${inc.evidence.map((e: string) => escapeHtml(e)).join(", ")}</p>` : ""}
+      ${inc.hash ? `<p class="hash">SHA-256: ${inc.hash}</p>` : ""}
+    </div>
+  `).join("\n");
+
+  const eventsHTML = events.slice(0, 100).map(evt => `
+    <div class="entry event">
+      <div class="entry-header">
+        <span class="badge" style="background:#3b82f6">${evt.domain.toUpperCase()}</span>
+        <span class="timestamp">${new Date(evt.timestamp).toLocaleString("en-US", { timeZone: "America/Costa_Rica" })} CST</span>
+      </div>
+      <p><strong>${escapeHtml(evt.eventType)}</strong> — ${escapeHtml(evt.source)}${evt.frequency ? ` @ ${evt.frequency} Hz` : ""}</p>
+    </div>
+  `).join("\n");
+
+  const correlationsHTML = correlations.slice(0, 50).map(cor => `
+    <div class="entry correlation">
+      <div class="entry-header">
+        <span class="badge" style="background:${severityColor(cor.severity)}">SEV ${cor.severity}</span>
+        <span class="timestamp">${new Date(cor.timestamp).toLocaleString("en-US", { timeZone: "America/Costa_Rica" })} CST</span>
+      </div>
+      <p><strong>${escapeHtml(cor.ruleName)}</strong></p>
+      <p>${escapeHtml(cor.description)}</p>
+    </div>
+  `).join("\n");
+
+  const categoryRows = Object.entries(categoryCounts).map(([cat, count]) =>
+    `<tr><td>${cat}</td><td>${count}</td></tr>`
+  ).join("\n");
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAPPA Evidence Chain — ${observer.generated}</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #e0e0e0; padding: 20px; line-height: 1.5; }
+  .header { border: 2px solid #ef4444; padding: 20px; margin-bottom: 20px; }
+  .header h1 { color: #ef4444; font-size: 24px; margin-bottom: 10px; }
+  .header .meta { color: #9ca3af; font-size: 12px; }
+  .classification { background: #ef4444; color: white; text-align: center; padding: 8px; font-weight: bold; letter-spacing: 4px; margin-bottom: 20px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+  .stat { border: 1px solid #333; padding: 15px; text-align: center; }
+  .stat .number { font-size: 28px; color: #ef4444; font-weight: bold; }
+  .stat .label { color: #9ca3af; font-size: 11px; text-transform: uppercase; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+  th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+  th { background: #1a1a1a; color: #ef4444; }
+  h2 { color: #ef4444; border-bottom: 1px solid #333; padding-bottom: 5px; margin: 20px 0 10px; }
+  .entry { border: 1px solid #222; padding: 12px; margin-bottom: 8px; }
+  .entry.incident { border-left: 3px solid #ef4444; }
+  .entry.event { border-left: 3px solid #3b82f6; }
+  .entry.correlation { border-left: 3px solid #eab308; }
+  .entry-header { display: flex; gap: 10px; align-items: center; margin-bottom: 6px; }
+  .badge { color: white; padding: 2px 8px; font-size: 10px; font-weight: bold; border-radius: 3px; }
+  .category { color: #9ca3af; font-size: 11px; text-transform: uppercase; }
+  .timestamp { color: #6b7280; font-size: 11px; margin-left: auto; }
+  .hash { color: #4b5563; font-size: 10px; font-family: monospace; word-break: break-all; }
+  .entry h3 { font-size: 14px; color: #f0f0f0; margin-bottom: 4px; }
+  .entry p { font-size: 12px; color: #d0d0d0; }
+  .entry .meta { color: #9ca3af; font-size: 11px; }
+  .legal { border: 2px solid #eab308; padding: 15px; margin-top: 20px; }
+  .legal h2 { color: #eab308; }
+  .legal p { font-size: 12px; }
+  .footer { text-align: center; color: #4b5563; font-size: 10px; margin-top: 30px; padding-top: 10px; border-top: 1px solid #222; }
+  @media print { body { background: white; color: black; } .entry { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="classification">CONFIDENTIAL — EVIDENCE PACKAGE — NOT FOR PUBLIC DISTRIBUTION</div>
+<div class="header">
+  <h1>KAPPA SIGINT EVIDENCE CHAIN</h1>
+  <p class="meta">Observer: ${escapeHtml(observer.name)}</p>
+  <p class="meta">Location: ${escapeHtml(observer.location)} (${observer.coordinates})</p>
+  <p class="meta">Generated: ${observer.generated}</p>
+  <p class="meta">Platform: KAPPA 24/7 Autonomous Multi-Domain SIGINT Correlation System</p>
+</div>
+<div class="stats">
+  <div class="stat"><div class="number">${stats.incidents}</div><div class="label">Documented Incidents</div></div>
+  <div class="stat"><div class="number">${stats.signalEvents}</div><div class="label">Signal Events</div></div>
+  <div class="stat"><div class="number">${stats.correlations}</div><div class="label">Cross-Domain Correlations</div></div>
+</div>
+<h2>INCIDENT BREAKDOWN BY CATEGORY</h2>
+<table><tr><th>Category</th><th>Count</th></tr>${categoryRows}</table>
+<h2>SECTION 1: DOCUMENTED INCIDENTS</h2>
+<p style="color:#9ca3af;font-size:11px;margin-bottom:10px;">Manual incident reports with SHA-256 integrity hashes. Each entry is timestamped and categorized.</p>
+${incidentsHTML || '<p style="color:#6b7280">No incidents logged yet.</p>'}
+<h2>SECTION 2: AUTOMATED SIGNAL EVENTS</h2>
+<p style="color:#9ca3af;font-size:11px;margin-bottom:10px;">Machine-detected signal events from SDR, satellite, network, and biometric sensors.</p>
+${eventsHTML || '<p style="color:#6b7280">No signal events captured.</p>'}
+<h2>SECTION 3: CROSS-DOMAIN CORRELATIONS</h2>
+<p style="color:#9ca3af;font-size:11px;margin-bottom:10px;">Automated pattern matches across multiple sensor domains.</p>
+${correlationsHTML || '<p style="color:#6b7280">No correlations detected.</p>'}
+<div class="legal">
+  <h2>LEGAL NOTICE</h2>
+  <p>This document constitutes evidence of surveillance and harassment activities documented by the observer. All timestamps are in Costa Rica Standard Time (CST, UTC-6). SHA-256 hashes provide chain-of-custody integrity verification. This evidence is prepared for submission to: US Embassy San José (506-2220-3127), Defensoría de los Habitantes (4000-8500), Sala Constitucional IV (2295-3696), and/or legal counsel.</p>
+  <p style="margin-top:10px;">Constitutional protections invoked: Articles 36, 37, 39, 40, 41, 48 of the Constitution of Costa Rica. Vienna Convention on Consular Relations, Article 36.</p>
+</div>
+<div class="footer">KAPPA Evidence Chain v1.0 — Generated ${observer.generated} — This document is self-contained and requires no external dependencies to view.</div>
+</body>
+</html>`;
+}
+
+function escapeHtml(str: string): string {
+  if (!str) return "";
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }

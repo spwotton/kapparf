@@ -32,6 +32,7 @@ import SuperpositionPage from "@/pages/superposition";
 import BettercapPage from "@/pages/bettercap";
 import ResearchCortexPage from "@/pages/research-cortex";
 import NetworkForensicsPage from "@/pages/network-forensics";
+import EvidenceChainPage from "@/pages/evidence-chain";
 
 function Router() {
   return (
@@ -59,6 +60,7 @@ function Router() {
       <Route path="/bettercap" component={BettercapPage} />
       <Route path="/cortex" component={ResearchCortexPage} />
       <Route path="/forensics" component={NetworkForensicsPage} />
+      <Route path="/evidence" component={EvidenceChainPage} />
       <Route component={NotFound} />
     </Switch>
   );

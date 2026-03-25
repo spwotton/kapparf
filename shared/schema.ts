@@ -113,6 +113,45 @@ export const insertCollectionLogSchema = createInsertSchema(collectionLogs).omit
   timestamp: true,
 });
 
+export const incidents = pgTable("incidents", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+  category: text("category").notNull(),
+  severity: integer("severity").notNull().default(3),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  location: text("location"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
+  evidence: text("evidence").array(),
+  linkedEventIds: text("linked_event_ids").array(),
+  linkedCorrelationIds: text("linked_correlation_ids").array(),
+  tags: text("tags").array(),
+  status: text("status").notNull().default("documented"),
+  hash: text("hash"),
+});
+
+export const insertIncidentSchema = createInsertSchema(incidents).omit({
+  id: true,
+  hash: true,
+});
+
+export type Incident = typeof incidents.$inferSelect;
+export type InsertIncident = z.infer<typeof insertIncidentSchema>;
+
+export const INCIDENT_CATEGORIES = [
+  { id: "network", label: "Network Disruption", icon: "Wifi" },
+  { id: "surveillance", label: "Physical Surveillance", icon: "Eye" },
+  { id: "electronic", label: "Electronic Harassment", icon: "Radio" },
+  { id: "religious", label: "JW/LDS Activity", icon: "Church" },
+  { id: "drone", label: "Drone/Aerial", icon: "Plane" },
+  { id: "device", label: "Device Tampering", icon: "Smartphone" },
+  { id: "acoustic", label: "Acoustic/Infrasound", icon: "Volume2" },
+  { id: "infrastructure", label: "Infrastructure", icon: "Building" },
+  { id: "legal", label: "Legal/Institutional", icon: "Scale" },
+  { id: "other", label: "Other", icon: "AlertTriangle" },
+] as const;
+
 export const artifactScans = pgTable("artifact_scans", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   filename: text("filename").notNull(),

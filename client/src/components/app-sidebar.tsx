@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles, Hexagon, Image, Microscope, ScanEye, Network, Orbit, Atom, Radio, BookOpen, Shield } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles, Hexagon, Image, Microscope, ScanEye, Network, Orbit, Atom, Radio, BookOpen, Shield, FileWarning } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
   Sidebar,
@@ -62,6 +62,7 @@ export function AppSidebar() {
     { title: "Bettercap", url: "/bettercap", icon: Radio },
     { title: "Research Cortex", url: "/cortex", icon: BookOpen },
     { title: "Forensics", url: "/forensics", icon: Shield },
+    { title: "Evidence Chain", url: "/evidence", icon: FileWarning },
   ];
 
   const score = kappaStatus?.score ?? 0;

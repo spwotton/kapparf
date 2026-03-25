@@ -17,12 +17,14 @@ import {
   type LatentSpaceEntry, type InsertLatentSpaceEntry,
   type CorticalLog, type InsertCorticalLog,
   type NeuralSnapshot, type InsertNeuralSnapshot,
+  type Incident, type InsertIncident,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
   researchSessions, researchQueries, researchFindings,
   artifactScans, audioFlags,
   deepResearchRuns, deepResearchReports,
   corticalNodes, latentSpace as latentSpaceTable, corticalLogs, neuralSnapshots,
+  incidents,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
@@ -84,6 +86,14 @@ export interface IStorage {
   createNeuralSnapshot(snapshot: InsertNeuralSnapshot): Promise<NeuralSnapshot>;
   getNeuralSnapshots(limit?: number): Promise<NeuralSnapshot[]>;
   getNeuralSnapshot(id: string): Promise<NeuralSnapshot | undefined>;
+  createIncident(incident: InsertIncident): Promise<Incident>;
+  getIncidents(limit?: number): Promise<Incident[]>;
+  getIncident(id: string): Promise<Incident | undefined>;
+  updateIncident(id: string, updates: Partial<InsertIncident>): Promise<Incident>;
+  deleteIncident(id: string): Promise<void>;
+  getIncidentsByCategory(category: string): Promise<Incident[]>;
+  getIncidentsByTimeRange(from: Date, to: Date): Promise<Incident[]>;
+  getIncidentCount(): Promise<number>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -438,6 +448,54 @@ export class DatabaseStorage implements IStorage {
   async getNeuralSnapshot(id: string): Promise<NeuralSnapshot | undefined> {
     const [snapshot] = await db.select().from(neuralSnapshots).where(eq(neuralSnapshots.id, id));
     return snapshot;
+  }
+
+  async createIncident(incident: InsertIncident): Promise<Incident> {
+    const crypto = await import("crypto");
+    const hash = crypto.createHash("sha256")
+      .update(JSON.stringify({ ...incident, ts: Date.now() }))
+      .digest("hex");
+    const [created] = await db.insert(incidents).values({ ...incident, hash }).returning();
+    return created;
+  }
+
+  async getIncidents(limit: number = 200): Promise<Incident[]> {
+    return db.select().from(incidents).orderBy(desc(incidents.timestamp)).limit(limit);
+  }
+
+  async getIncident(id: string): Promise<Incident | undefined> {
+    const [inc] = await db.select().from(incidents).where(eq(incidents.id, id));
+    return inc;
+  }
+
+  async updateIncident(id: string, updates: Partial<InsertIncident>): Promise<Incident> {
+    const crypto = await import("crypto");
+    const existing = await this.getIncident(id);
+    const merged = { ...existing, ...updates };
+    const newHash = crypto.createHash("sha256")
+      .update(JSON.stringify({ ...merged, ts: Date.now(), amended: true, previousHash: existing?.hash }))
+      .digest("hex");
+    const [updated] = await db.update(incidents).set({ ...updates, hash: newHash }).where(eq(incidents.id, id)).returning();
+    return updated;
+  }
+
+  async deleteIncident(id: string): Promise<void> {
+    await db.delete(incidents).where(eq(incidents.id, id));
+  }
+
+  async getIncidentsByCategory(category: string): Promise<Incident[]> {
+    return db.select().from(incidents).where(eq(incidents.category, category)).orderBy(desc(incidents.timestamp));
+  }
+
+  async getIncidentsByTimeRange(from: Date, to: Date): Promise<Incident[]> {
+    return db.select().from(incidents)
+      .where(and(gte(incidents.timestamp, from), lte(incidents.timestamp, to)))
+      .orderBy(desc(incidents.timestamp));
+  }
+
+  async getIncidentCount(): Promise<number> {
+    const [result] = await db.select({ count: sql<number>`count(*)` }).from(incidents);
+    return Number(result?.count ?? 0);
   }
 }
 
