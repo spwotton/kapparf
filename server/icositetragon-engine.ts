@@ -450,7 +450,7 @@ export const INVESTIGATION_PRESETS = [
   {
     id: "3i-atlas-cr",
     name: "3I Atlas — Costa Rica Corridor",
-    description: "Primary 3I Atlas observation zone: La Guácima to Tacacorí corridor",
+    description: "Primary 3I Atlas observation zone: Tacacorí, Calle Los Cedros, Alajuela 20106",
     lat: 10.0514,
     lon: -84.2187,
     zoom: 8,

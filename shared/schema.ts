@@ -922,7 +922,7 @@ export interface AnalysisPoint {
 }
 
 export const ANALYSIS_POINTS: AnalysisPoint[] = [
-  { id: "observer", name: "Observer — Tacacorí", lat: 10.0513892, lon: -84.2186578, description: "Casa mirando a la montaña, Calle Los Cedros, Tacacorí, Alajuela 20106" },
+  { id: "observer", name: "Observer — Tacacorí", lat: 10.0513892, lon: -84.2186578, description: "Calle Los Cedros, última casa a la izquierda, Tacacorí, Alajuela 20106" },
   { id: "jaco", name: "Jacó", lat: 9.6142, lon: -84.6278, description: "Pacific coast analysis point, Puntarenas" },
   { id: "sjo", name: "SJO — Juan Santamaría Intl", lat: 9.9939, lon: -84.2088, description: "ICAO: MROC — primary international airport" },
   { id: "ti0rc", name: "TI0RC KiwiSDR", lat: 9.9360, lon: -84.1088, description: "Radio Club de Costa Rica SDR node" },
@@ -1431,7 +1431,7 @@ export const VET_ARCHITECTURE: VetElement[] = [
     role: "Control / Modulation",
     element: "grid",
     implementation: "Node.js event engine — satellite look angles and trigger windows",
-    description: "Control layer that computes real-time satellite elevation/azimuth for La Guacima observer. Triggers analysis windows when elevation exceeds 30°. Runs every 10 seconds, managing temporal correlation gates.",
+    description: "Control layer that computes real-time satellite elevation/azimuth for Tacacorí observer. Triggers analysis windows when elevation exceeds 30°. Runs every 10 seconds, managing temporal correlation gates.",
   },
   {
     id: "anode",

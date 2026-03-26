@@ -188,7 +188,7 @@ function SatelliteCard({ data, format }: { data: SocialCardData; format: CardFor
                 <span className="text-[#e8e4de] font-mono text-[20px]">SIGINT CATEGORIES</span>
               </div>
               <div className="text-[#7a746a] font-mono text-[18px] leading-relaxed">
-                CelesTrak TLE-based tracking from Guacima Abajo observer point. All satellite positions computed from real orbital elements.
+                CelesTrak TLE-based tracking from Tacacorí observer point. All satellite positions computed from real orbital elements.
               </div>
             </div>
           )}
@@ -383,7 +383,7 @@ function EveningWindowCard({ data, format }: { data: SocialCardData; format: Car
             <div className="w-full max-w-[700px] bg-[#1c1a17] rounded-[16px] p-[40px] border border-[#2a2622]">
               <div className="text-[20px] text-[#7a746a] font-mono mb-[16px]">18:00 — 22:00 CST (UTC-6)</div>
               <div className="text-[18px] text-[#5a5550] font-mono leading-relaxed">
-                Historically elevated signal activity observed during this window. Pipeline ramps to ELEVATED mode automatically. Guacima Abajo, Costa Rica.
+                Historically elevated signal activity observed during this window. Pipeline ramps to ELEVATED mode automatically. Tacacorí, Alajuela, Costa Rica.
               </div>
             </div>
           )}

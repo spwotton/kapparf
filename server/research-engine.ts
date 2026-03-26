@@ -140,7 +140,7 @@ LAYER DESCRIPTION: ${layerDesc}
 
 OPERATIONAL CONTEXT:
 - Project KAPPA — multi-domain SIGINT correlation platform
-- Observer: 9.9536°N, 84.2907°W (Guácima Abajo, Alajuela, Costa Rica)
+- Observer: 10.0514°N, 84.2187°W (Calle Los Cedros, Tacacorí, Alajuela 20106, Costa Rica)
 - κ constant: 4/π ≈ 1.273 | Atlas Clock: 46.875 Hz (48000/1024)
 - Conservation: Ψ(t) = A(t)·N(t) ≡ 1
 

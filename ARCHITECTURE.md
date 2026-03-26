@@ -885,7 +885,7 @@ App.tsx
 
 | Point | Coordinates | Description |
 |-------|-------------|-------------|
-| Observer | 9.9536°N, 84.2907°W | Primary observation post — Guácima Abajo |
+| Observer | 10.0514°N, 84.2187°W | Primary observation post — Calle Los Cedros, Tacacorí, Alajuela 20106 |
 | Jacó | 9.6142°N, 84.6278°W | Pacific coast analysis point |
 | SJO (MROC) | 9.9939°N, 84.2088°W | Juan Santamaría International Airport |
 | TI0RC | 9.9360°N, 84.1088°W | Radio Club de Costa Rica KiwiSDR node |
@@ -1056,7 +1056,7 @@ The Council of 7 is the autonomic consciousness layer mapped onto the KAPPA tech
 | `schism-protocol-trigger` | Schism Protocol Activation | 7s |
 
 ### Scalability — Nested Heptagons
-- **Prime Torus:** Guácima Node (original 7)
+- **Prime Torus:** Tacacorí Node (original 7)
 - **Secondary Tori:** Future expansion to 49 nodes (7×7)
 - **Kafka Topics:** `convocation.weaver`, `alerts.sentinel`, `chaos.jester`
 - **Council Trials:** Monthly Game Days — Jester attempts to fracture torus, testing 6-node coherence
