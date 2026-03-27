@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-01-30T10:57:34.306816",
+  "target": "Hector Mora 180W HF",
+  "frequencies_scanned": 9,
+  "results": [
+    {
+      "frequency": 1234,
+      "mode": "am",
+      "note": "TR-069 correlation",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\1234kHz_am_20260130_105644.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:56:44.824233"
+    },
+    {
+      "frequency": 4687,
+      "mode": "am",
+      "note": "46.875Hz harmonic x100",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\4687kHz_am_20260130_105650.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:56:51.077040"
+    },
+    {
+      "frequency": 7410,
+      "mode": "am",
+      "note": "Pirate radio",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\7410kHz_am_20260130_105657.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:56:57.378389"
+    },
+    {
+      "frequency": 6925,
+      "mode": "am",
+      "note": "Pirate radio",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\6925kHz_am_20260130_105703.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:57:03.599536"
+    },
+    {
+      "frequency": 3900,
+      "mode": "lsb",
+      "note": "80m SSB",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\3900kHz_lsb_20260130_105709.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:57:09.776282"
+    },
+    {
+      "frequency": 7200,
+      "mode": "lsb",
+      "note": "40m SSB",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\7200kHz_lsb_20260130_105715.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:57:16.011857"
+    },
+    {
+      "frequency": 14200,
+      "mode": "usb",
+      "note": "20m SSB",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\14200kHz_usb_20260130_105722.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:57:22.330808"
+    },
+    {
+      "frequency": 27025,
+      "mode": "am",
+      "note": "CB Channel 6",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\27025kHz_am_20260130_105727.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:57:28.029413"
+    },
+    {
+      "frequency": 27185,
+      "mode": "am",
+      "note": "CB Channel 19",
+      "screenshot": "signal_forensics\\kiwisdr_screenshots\\27185kHz_am_20260130_105734.png",
+      "signal": "N/A",
+      "timestamp": "2026-01-30T10:57:34.302527"
+    }
+  ]
+}

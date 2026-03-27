@@ -1,0 +1,2869 @@
+{
+  "pcap": "qrf_output\\demo_traffic.pcap",
+  "timestamp": "2026-03-04T08:05:47.587767+00:00",
+  "flows": [
+    {
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "packets": 100,
+      "bytes": 10400,
+      "duration": 2970.0,
+      "ports": [
+        49152,
+        8443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 2,
+      "bytes": 1740,
+      "duration": 3.1188042163848877,
+      "ports": [
+        18347,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 536,
+      "duration": 0.0,
+      "ports": [
+        355,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1440,
+      "duration": 0.0,
+      "ports": [
+        443,
+        13829
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 136,
+      "duration": 0.0,
+      "ports": [
+        39298,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 351,
+      "duration": 0.0,
+      "ports": [
+        42633,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 180,
+      "duration": 0.0,
+      "ports": [
+        443,
+        22949
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 239,
+      "duration": 0.0,
+      "ports": [
+        47082,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 967,
+      "duration": 0.0,
+      "ports": [
+        32475,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 407,
+      "duration": 0.0,
+      "ports": [
+        10675,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 228,
+      "duration": 0.0,
+      "ports": [
+        443,
+        54087
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 246,
+      "duration": 0.0,
+      "ports": [
+        443,
+        63292
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 292,
+      "duration": 0.0,
+      "ports": [
+        52081,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 339,
+      "duration": 0.0,
+      "ports": [
+        29394,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1401,
+      "duration": 0.0,
+      "ports": [
+        22107,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 104,
+      "duration": 0.0,
+      "ports": [
+        443,
+        4596
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 402,
+      "duration": 0.0,
+      "ports": [
+        443,
+        52668
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 454,
+      "duration": 0.0,
+      "ports": [
+        3400,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 528,
+      "duration": 0.0,
+      "ports": [
+        9307,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1440,
+      "duration": 0.0,
+      "ports": [
+        443,
+        23239
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 225,
+      "duration": 0.0,
+      "ports": [
+        47481,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1440,
+      "duration": 0.0,
+      "ports": [
+        10617,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 548,
+      "duration": 0.0,
+      "ports": [
+        443,
+        19612
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 104,
+      "duration": 0.0,
+      "ports": [
+        443,
+        20278
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 842,
+      "duration": 0.0,
+      "ports": [
+        443,
+        17807
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 600,
+      "duration": 0.0,
+      "ports": [
+        443,
+        8108
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 190,
+      "duration": 0.0,
+      "ports": [
+        443,
+        18276
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1265,
+      "duration": 0.0,
+      "ports": [
+        25162,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 203,
+      "duration": 0.0,
+      "ports": [
+        24392,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 347,
+      "duration": 0.0,
+      "ports": [
+        443,
+        3540
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1068,
+      "duration": 0.0,
+      "ports": [
+        443,
+        21302
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 203,
+      "duration": 0.0,
+      "ports": [
+        443,
+        7517
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 191,
+      "duration": 0.0,
+      "ports": [
+        62209,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 477,
+      "duration": 0.0,
+      "ports": [
+        443,
+        19294
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 151,
+      "duration": 0.0,
+      "ports": [
+        39818,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 792,
+      "duration": 0.0,
+      "ports": [
+        44291,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 595,
+      "duration": 0.0,
+      "ports": [
+        443,
+        50932
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 635,
+      "duration": 0.0,
+      "ports": [
+        443,
+        22511
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 132,
+      "duration": 0.0,
+      "ports": [
+        51923,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 879,
+      "duration": 0.0,
+      "ports": [
+        2073,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1440,
+      "duration": 0.0,
+      "ports": [
+        443,
+        40068
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 462,
+      "duration": 0.0,
+      "ports": [
+        443,
+        28021
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 612,
+      "duration": 0.0,
+      "ports": [
+        16267,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 1440,
+      "duration": 0.0,
+      "ports": [
+        8482,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 509,
+      "duration": 0.0,
+      "ports": [
+        443,
+        59941
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 713,
+      "duration": 0.0,
+      "ports": [
+        443,
+        9381
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 142,
+      "duration": 0.0,
+      "ports": [
+        31891,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 412,
+      "duration": 0.0,
+      "ports": [
+        443,
+        33703
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 281,
+      "duration": 0.0,
+      "ports": [
+        48667,
+        443
+      ]
+    },
+    {
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "packets": 1,
+      "bytes": 385,
+      "duration": 0.0,
+      "ports": [
+        443,
+        30855
+      ]
+    }
+  ],
+  "resonances": [
+    {
+      "freq": 3423.779296875,
+      "q": 79.5,
+      "energy_db": -95.93198764487968,
+      "phase_coh": 0.03540622171016681,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 3617.578125,
+      "q": 56.0,
+      "energy_db": -88.14065224963898,
+      "phase_coh": 0.018564630058613692,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 3897.509765625,
+      "q": 90.5,
+      "energy_db": -98.96156208400063,
+      "phase_coh": 0.04637962735303275,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 4177.44140625,
+      "q": 97.0,
+      "energy_db": -88.88140606115871,
+      "phase_coh": 0.021767403458554893,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 4844.970703125,
+      "q": 75.0,
+      "energy_db": -96.87847968029332,
+      "phase_coh": 0.05296452437163081,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 5146.435546875,
+      "q": 79.66666666666667,
+      "energy_db": -97.7705998753732,
+      "phase_coh": 0.055770556311057144,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 5426.3671875,
+      "q": 126.0,
+      "energy_db": -98.01362136801617,
+      "phase_coh": 0.018571772981593113,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 5986.23046875,
+      "q": 92.66666666666667,
+      "energy_db": -96.64545057944333,
+      "phase_coh": 0.017156626902396898,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          8443
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 6459.9609375,
+      "q": 150.0,
+      "energy_db": -46.55716006660402,
+      "phase_coh": 0.004954004066186584,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          8443
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 7493.5546875,
+      "q": 116.0,
+      "energy_db": -99.46711114419176,
+      "phase_coh": 0.05402325681553941,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 7881.15234375,
+      "q": 122.0,
+      "energy_db": -84.34111517169602,
+      "phase_coh": 0.02111274699637252,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 8074.951171875,
+      "q": 187.5,
+      "energy_db": -99.19910034898255,
+      "phase_coh": 0.06241099649164259,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 8182.6171875,
+      "q": 126.66666666666667,
+      "energy_db": -91.77395212221013,
+      "phase_coh": 0.0052609589226752795,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 8462.548828125,
+      "q": 196.5,
+      "energy_db": -97.250275289619,
+      "phase_coh": 0.0070434271475711034,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 8742.48046875,
+      "q": 135.33333333333334,
+      "energy_db": -91.20790535489412,
+      "phase_coh": 0.03603491631433545,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 8936.279296875,
+      "q": 138.33333333333334,
+      "energy_db": -92.40768315280297,
+      "phase_coh": 0.0035347894371712384,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 9323.876953125,
+      "q": 144.33333333333334,
+      "energy_db": -98.57601938758313,
+      "phase_coh": 0.002783367590749131,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 9496.142578125,
+      "q": 147.0,
+      "energy_db": -94.67829855568495,
+      "phase_coh": 0.00508949908801692,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 9603.80859375,
+      "q": 223.0,
+      "energy_db": -94.54600912751152,
+      "phase_coh": 0.0328625844929024,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 9776.07421875,
+      "q": 151.33333333333334,
+      "energy_db": -93.25642400967645,
+      "phase_coh": 0.005973414125953861,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 10077.5390625,
+      "q": 156.0,
+      "energy_db": -95.83572097082435,
+      "phase_coh": 0.030625354435797888,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 10163.671875,
+      "q": 157.33333333333334,
+      "energy_db": -95.63952462581027,
+      "phase_coh": 0.02928972024407322,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 10357.470703125,
+      "q": 240.5,
+      "energy_db": -86.54312797103229,
+      "phase_coh": 0.036840830304604895,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 10465.13671875,
+      "q": 162.0,
+      "energy_db": -94.14898620488508,
+      "phase_coh": 0.007779698390904468,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 10917.333984375,
+      "q": 169.0,
+      "energy_db": -94.6734382958769,
+      "phase_coh": 0.012976483514097468,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 11218.798828125,
+      "q": 173.66666666666666,
+      "energy_db": -86.82945096119488,
+      "phase_coh": 0.02903891875557148,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 11498.73046875,
+      "q": 267.0,
+      "energy_db": -77.96918886398998,
+      "phase_coh": 0.026171440239491948,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 11778.662109375,
+      "q": 182.33333333333334,
+      "energy_db": -74.21627720216405,
+      "phase_coh": 0.0030089357762575655,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 12080.126953125,
+      "q": 187.0,
+      "energy_db": -77.02592754019071,
+      "phase_coh": 0.004350726275897816,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 12360.05859375,
+      "q": 287.0,
+      "energy_db": -47.6248510758135,
+      "phase_coh": 0.008643642397944152,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 12639.990234375,
+      "q": 293.5,
+      "energy_db": -31.87854601174595,
+      "phase_coh": 0.007204542368108228,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 13027.587890625,
+      "q": 302.5,
+      "energy_db": -98.75167199661993,
+      "phase_coh": 0.000994486628332032,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 13221.38671875,
+      "q": 204.66666666666666,
+      "energy_db": -62.95777861873737,
+      "phase_coh": 0.006682160013809625,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 13393.65234375,
+      "q": 311.0,
+      "energy_db": -96.71258849053135,
+      "phase_coh": 0.013225136382710235,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 13501.318359375,
+      "q": 209.0,
+      "energy_db": -80.14661918067394,
+      "phase_coh": 0.0074618392120702065,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 13781.25,
+      "q": 320.0,
+      "energy_db": -88.47582996915884,
+      "phase_coh": 0.010950623337063314,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          49152
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 14061.181640625,
+      "q": 217.66666666666666,
+      "energy_db": -83.66403513696704,
+      "phase_coh": 0.02033794872854175,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 14254.98046875,
+      "q": 220.66666666666666,
+      "energy_db": -95.63894824366261,
+      "phase_coh": 0.03130450693765335,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 14362.646484375,
+      "q": 222.33333333333334,
+      "energy_db": -95.07571525931515,
+      "phase_coh": 0.020182097562264405,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 14642.578125,
+      "q": 340.0,
+      "energy_db": -92.57606069557683,
+      "phase_coh": 0.01762194270020091,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 14814.84375,
+      "q": 229.33333333333334,
+      "energy_db": -98.9993014060526,
+      "phase_coh": 0.01090954333539393,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 14922.509765625,
+      "q": 346.5,
+      "energy_db": -89.45505254456377,
+      "phase_coh": 0.037019639290170166,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 15116.30859375,
+      "q": 234.0,
+      "energy_db": -97.26166870152505,
+      "phase_coh": 0.02020862365584999,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 15783.837890625,
+      "q": 366.5,
+      "energy_db": -89.89754393356067,
+      "phase_coh": 0.00859655927804954,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 16063.76953125,
+      "q": 373.0,
+      "energy_db": -93.15341680105338,
+      "phase_coh": 0.029746439236775436,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 16257.568359375,
+      "q": 251.66666666666666,
+      "energy_db": -89.69277435793738,
+      "phase_coh": 0.015199269281073586,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 16343.701171875,
+      "q": 253.0,
+      "energy_db": -97.87001097321152,
+      "phase_coh": 0.01730350196889333,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 16537.5,
+      "q": 384.0,
+      "energy_db": -94.66623687138744,
+      "phase_coh": 0.05924500304966281,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 16645.166015625,
+      "q": 257.6666666666667,
+      "energy_db": -98.17602640964837,
+      "phase_coh": 0.024219419519730015,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 16817.431640625,
+      "q": 390.5,
+      "energy_db": -87.69650307655724,
+      "phase_coh": 0.005077781587337689,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 17097.36328125,
+      "q": 264.6666666666667,
+      "energy_db": -87.15269787125875,
+      "phase_coh": 0.03293814848263956,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 17398.828125,
+      "q": 269.3333333333333,
+      "energy_db": -92.60224159748662,
+      "phase_coh": 0.019638447791212463,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 17678.759765625,
+      "q": 410.5,
+      "energy_db": -75.08316613712701,
+      "phase_coh": 0.0200566823420166,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 17958.69140625,
+      "q": 417.0,
+      "energy_db": -84.9694202996061,
+      "phase_coh": 0.02400969592501616,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 18540.087890625,
+      "q": 287.0,
+      "energy_db": -59.90527096359052,
+      "phase_coh": 0.004684066883441749,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 18820.01953125,
+      "q": 437.0,
+      "energy_db": -39.02674715260304,
+      "phase_coh": 0.046015775911368156,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 19099.951171875,
+      "q": 443.5,
+      "energy_db": -46.54854930164586,
+      "phase_coh": 0.002458315163163553,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 19379.8828125,
+      "q": 300.0,
+      "energy_db": -66.36195515156682,
+      "phase_coh": 0.0037186324580397827,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 19573.681640625,
+      "q": 454.5,
+      "energy_db": -98.14877617165239,
+      "phase_coh": 0.019615948984786736,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 19681.34765625,
+      "q": 304.6666666666667,
+      "energy_db": -82.41576332684599,
+      "phase_coh": 0.029683840364954046,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 19961.279296875,
+      "q": 463.5,
+      "energy_db": -82.47681741310929,
+      "phase_coh": 0.013380979644575585,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 20241.2109375,
+      "q": 313.3333333333333,
+      "energy_db": -81.19329680706817,
+      "phase_coh": 0.020911967898907154,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 20435.009765625,
+      "q": 316.3333333333333,
+      "energy_db": -100.19558613729893,
+      "phase_coh": 0.016970574983787075,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 20822.607421875,
+      "q": 322.3333333333333,
+      "energy_db": -95.87324512020245,
+      "phase_coh": 0.025738775787599262,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 21102.5390625,
+      "q": 490.0,
+      "energy_db": -84.32315685750471,
+      "phase_coh": 0.038839323923645225,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 21382.470703125,
+      "q": 331.0,
+      "energy_db": -99.57571296756412,
+      "phase_coh": 0.038660459120246495,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 21662.40234375,
+      "q": 335.3333333333333,
+      "energy_db": -93.87273051347579,
+      "phase_coh": 0.013501684486706826,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 21856.201171875,
+      "q": 507.5,
+      "energy_db": -99.56049222232589,
+      "phase_coh": 0.007484944716478222,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 21963.8671875,
+      "q": 340.0,
+      "energy_db": -88.32244295525945,
+      "phase_coh": 0.017797400228562927,
+      "threat": 0.5,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 3703.7109375,
+      "q": 57.333333333333336,
+      "energy_db": -92.86685984458515,
+      "phase_coh": 0.03387673796093498,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 4285.107421875,
+      "q": 66.33333333333333,
+      "energy_db": -89.48734245647417,
+      "phase_coh": 0.030962118000107328,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 4457.373046875,
+      "q": 69.0,
+      "energy_db": -80.76310056236214,
+      "phase_coh": 0.021850574422932145,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 4758.837890625,
+      "q": 73.66666666666667,
+      "energy_db": -88.99529612628822,
+      "phase_coh": 0.016907703648607584,
+      "threat": 0.4,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 5038.76953125,
+      "q": 117.0,
+      "energy_db": -89.46382974529692,
+      "phase_coh": 0.01679936035877003,
+      "threat": 0.4,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 5598.6328125,
+      "q": 86.66666666666667,
+      "energy_db": -80.90603583300863,
+      "phase_coh": 0.008554714066388325,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 5900.09765625,
+      "q": 91.33333333333333,
+      "energy_db": -67.61299488557687,
+      "phase_coh": 0.007050313189214832,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 6180.029296875,
+      "q": 143.5,
+      "energy_db": -40.152086884989124,
+      "phase_coh": 0.0006456386112359729,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          8443
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 6739.892578125,
+      "q": 104.33333333333333,
+      "energy_db": -73.9576163796388,
+      "phase_coh": 0.015445866724098001,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          8443
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 7041.357421875,
+      "q": 109.0,
+      "energy_db": -67.12352988494112,
+      "phase_coh": 0.010213588225924605,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          8443
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 7127.490234375,
+      "q": 110.33333333333333,
+      "energy_db": -98.69924278965834,
+      "phase_coh": 0.025749322936548635,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [
+          8443
+        ],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 7321.2890625,
+      "q": 170.0,
+      "energy_db": -74.11170826864684,
+      "phase_coh": 0.007513859250324798,
+      "threat": 0.4,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 2863.916015625,
+      "q": 44.333333333333336,
+      "energy_db": -98.17633608603293,
+      "phase_coh": 0.040020353459418796,
+      "threat": 0.35,
+      "class": "UNKNOWN",
+      "harmonics": 1,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 2756.25,
+      "q": 64.0,
+      "energy_db": -95.69313160915934,
+      "phase_coh": 0.002084009651587946,
+      "threat": 0.3,
+      "class": "BENIGN_BROWSING",
+      "harmonics": 6,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 1141.259765625,
+      "q": 26.5,
+      "energy_db": -79.30632805645601,
+      "phase_coh": 0.02592673943074139,
+      "threat": 0.25,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 1421.19140625,
+      "q": 22.0,
+      "energy_db": -74.2866819285596,
+      "phase_coh": 0.015294895747172342,
+      "threat": 0.25,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 1894.921875,
+      "q": 44.0,
+      "energy_db": -99.65965732693363,
+      "phase_coh": 0.015198952145812844,
+      "threat": 0.25,
+      "class": "UNKNOWN",
+      "harmonics": 3,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 2002.587890625,
+      "q": 31.0,
+      "energy_db": -83.5193570481473,
+      "phase_coh": 0.011254019596274405,
+      "threat": 0.25,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 2562.451171875,
+      "q": 39.666666666666664,
+      "energy_db": -84.72116054825246,
+      "phase_coh": 0.0079283894774654,
+      "threat": 0.25,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 3143.84765625,
+      "q": 48.666666666666664,
+      "energy_db": -90.13972107142999,
+      "phase_coh": 0.015373284704869088,
+      "threat": 0.25,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 1614.990234375,
+      "q": 25.0,
+      "energy_db": -97.65535051335142,
+      "phase_coh": 0.015277511848022157,
+      "threat": 0.15,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 5,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 1722.65625,
+      "q": 26.666666666666668,
+      "energy_db": -81.48370104691,
+      "phase_coh": 0.021207763716674082,
+      "threat": 0.15,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 5,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 581.396484375,
+      "q": 9.0,
+      "energy_db": -73.89527852663349,
+      "phase_coh": 0.012300702461163335,
+      "threat": 0.1,
+      "class": "BENIGN_STREAMING",
+      "harmonics": 4,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 861.328125,
+      "q": 13.333333333333334,
+      "energy_db": -66.84889592359914,
+      "phase_coh": 0.04801234298527932,
+      "threat": 0.0,
+      "class": "BENIGN_BROWSING",
+      "harmonics": 6,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "185.220.100.252",
+        "contributing_ports": [],
+        "packet_count": 100,
+        "flow_duration": 2970.0
+      }
+    },
+    {
+      "freq": 8742.48046875,
+      "q": 58.0,
+      "energy_db": -112.9843455759421,
+      "phase_coh": 0.9097652249502384,
+      "threat": 0.75,
+      "class": "UNKNOWN",
+      "harmonics": 2,
+      "mapping": {
+        "src_ip": "192.168.1.100",
+        "dst_ip": "142.250.80.46",
+        "contributing_ports": [
+          18347
+        ],
+        "packet_count": 2,
+        "flow_duration": 3.1188042163848877
+      }
+    }
+  ],
+  "ai_assessment": null,
+  "rules": [
+    {
+      "id": "QRF-53df4f719120",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=79.5, phase_coh=0.04, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-93bbe224c0ab",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=56.0, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-1770b670da25",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=90.5, phase_coh=0.05, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-15bf086dca54",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=97.0, phase_coh=0.02, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-7ac552163bdb",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=75.0, phase_coh=0.05, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-03f85efe0323",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=79.7, phase_coh=0.06, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-fde4fcd3f1b6",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=126.0, phase_coh=0.02, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-fcd711bff25e",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=92.7, phase_coh=0.02, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-9b8671d0ee49",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=150.0, phase_coh=0.00, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-adbf475fb0ff",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=116.0, phase_coh=0.05, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-9ec5b8c78b91",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=122.0, phase_coh=0.02, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-9520782deebf",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=187.5, phase_coh=0.06, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-11c4c1e69225",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=126.7, phase_coh=0.01, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-cf022c155588",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=196.5, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-04170f826149",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=135.3, phase_coh=0.04, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-91b8608faf06",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=138.3, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-bb62f3b1650f",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=144.3, phase_coh=0.00, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-4478f455bc3e",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=147.0, phase_coh=0.01, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-02000c95eee2",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=223.0, phase_coh=0.03, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-b398d472eaaf",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=151.3, phase_coh=0.01, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-ff80f2de13dc",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=156.0, phase_coh=0.03, harmonics=2, threat=0.50"
+    },
+    {
+      "id": "QRF-d6efa96b601c",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=157.3, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-c11e8ec1255e",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=240.5, phase_coh=0.04, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-3c3a992c188e",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=162.0, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-ff497b80629a",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=169.0, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-3a3ec377831f",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=173.7, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-29e2c641869e",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=267.0, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-25a3bf4f8fcf",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=182.3, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-4556e798c6e7",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=187.0, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-9d854c044c82",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=287.0, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-f3d6fe180d67",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=293.5, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-5d4482cb6308",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=302.5, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-5c5a79368c5f",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=204.7, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-a72396e55486",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=311.0, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-c1461b3debec",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=209.0, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-9e5d16dbde4a",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=320.0, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-34e854643c75",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=217.7, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-ea23772a3ae9",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=220.7, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-60254a29865a",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=222.3, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-03bcc46b7f8f",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=340.0, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-b25e64566eac",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=229.3, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-fc0c098e759f",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=346.5, phase_coh=0.04, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-4c5d7347d1b6",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=234.0, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-9ced41aaa586",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=366.5, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-b69a3ba78c1b",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=373.0, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-c10911e236a0",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=251.7, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-79272c02d201",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=253.0, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-2aef79069b25",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=384.0, phase_coh=0.06, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-d0b281b6d09d",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=257.7, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-02dd79584431",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=390.5, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-7f9ee62ac8db",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=264.7, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-0d959e05082e",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=269.3, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-dc3d69a961e3",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=410.5, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-4223508f9046",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=417.0, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-5ecf0d9c3972",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=287.0, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-e0621ed9d556",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=437.0, phase_coh=0.05, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-a9ebdca3f9f9",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=443.5, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-0f29742802c3",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=300.0, phase_coh=0.00, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-d386ae36b4bc",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=454.5, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-e9f135c92bc2",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=304.7, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-071d1b9faa87",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=463.5, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-cb4dc0b737c5",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=313.3, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-5774e5f021f8",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=316.3, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-771fb0c628ac",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=322.3, phase_coh=0.03, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-6c4da3bef9e3",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=490.0, phase_coh=0.04, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-294d9b5e6992",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=331.0, phase_coh=0.04, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-ae1bddfcef49",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=335.3, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-e9ebd61829cc",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=507.5, phase_coh=0.01, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-a166e174a5e8",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.5,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=340.0, phase_coh=0.02, harmonics=1, threat=0.50"
+    },
+    {
+      "id": "QRF-f258e0060656",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=57.3, phase_coh=0.03, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-fe8a4870f95a",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=66.3, phase_coh=0.03, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-c23b0fe9a9cd",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=69.0, phase_coh=0.02, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-ae86f5aeb7fc",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: BENIGN_STREAMING \u2014 Q=73.7, phase_coh=0.02, harmonics=4, threat=0.40"
+    },
+    {
+      "id": "QRF-0321084ee81a",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: BENIGN_STREAMING \u2014 Q=117.0, phase_coh=0.02, harmonics=4, threat=0.40"
+    },
+    {
+      "id": "QRF-923c15731791",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=86.7, phase_coh=0.01, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-4c317c6cd438",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=91.3, phase_coh=0.01, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-f045f22e6a83",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=143.5, phase_coh=0.00, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-c825db623995",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=104.3, phase_coh=0.02, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-e94a46923d52",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=109.0, phase_coh=0.01, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-f0474d4a2b14",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=110.3, phase_coh=0.03, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-94ab8109130d",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.4,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=170.0, phase_coh=0.01, harmonics=3, threat=0.40"
+    },
+    {
+      "id": "QRF-e057a1ee719a",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.35,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=44.3, phase_coh=0.04, harmonics=1, threat=0.35"
+    },
+    {
+      "id": "QRF-46dc6232981b",
+      "action": "ALERT",
+      "src": "192.168.1.100",
+      "dst": "185.220.100.252",
+      "port": "49152",
+      "confidence": 0.3,
+      "reason": "Resonance detection: BENIGN_BROWSING \u2014 Q=64.0, phase_coh=0.00, harmonics=6, threat=0.30"
+    },
+    {
+      "id": "QRF-06c67116a008",
+      "action": "BLOCK",
+      "src": "192.168.1.100",
+      "dst": "142.250.80.46",
+      "port": "18347",
+      "confidence": 0.75,
+      "reason": "Resonance detection: UNKNOWN \u2014 Q=58.0, phase_coh=0.91, harmonics=2, threat=0.75"
+    }
+  ],
+  "spectrograms": {
+    "standard": "qrf_output\\spectrograms\\mixed_traffic_spectrogram.png",
+    "resonance": "qrf_output\\spectrograms\\mixed_traffic_resonance_map.png",
+    "phase": "qrf_output\\spectrograms\\mixed_traffic_phase_coherence.png",
+    "kappa": "qrf_output\\spectrograms\\mixed_traffic_kappa_energy.png",
+    "suspicious_0_192.168.1.100_standard": "qrf_output\\spectrograms\\suspicious_0_192.168.1.100_spectrogram.png",
+    "suspicious_0_192.168.1.100_resonance": "qrf_output\\spectrograms\\suspicious_0_192.168.1.100_resonance_map.png",
+    "suspicious_0_192.168.1.100_phase": "qrf_output\\spectrograms\\suspicious_0_192.168.1.100_phase_coherence.png",
+    "suspicious_0_192.168.1.100_kappa": "qrf_output\\spectrograms\\suspicious_0_192.168.1.100_kappa_energy.png",
+    "suspicious_1_192.168.1.100_standard": "qrf_output\\spectrograms\\suspicious_1_192.168.1.100_spectrogram.png",
+    "suspicious_1_192.168.1.100_resonance": "qrf_output\\spectrograms\\suspicious_1_192.168.1.100_resonance_map.png",
+    "suspicious_1_192.168.1.100_phase": "qrf_output\\spectrograms\\suspicious_1_192.168.1.100_phase_coherence.png",
+    "suspicious_1_192.168.1.100_kappa": "qrf_output\\spectrograms\\suspicious_1_192.168.1.100_kappa_energy.png"
+  }
+}

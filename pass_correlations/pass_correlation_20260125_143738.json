@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-01-25T14:37:38.118590",
+  "target": {
+    "lat": 10.0167,
+    "lon": -84.2167
+  },
+  "satellites_tracked": 11,
+  "geo_starers": [
+    "GAOFEN-4",
+    "TIANLIAN-1-04",
+    "TIANLIAN-2-01",
+    "SHIJIAN-21",
+    "SHIJIAN-17"
+  ],
+  "leo_periodic": [
+    "GAOFEN-3",
+    "GAOFEN-12",
+    "GAOFEN-7",
+    "GAOFEN-2",
+    "YAOGAN-31A",
+    "YAOGAN-33"
+  ],
+  "attack_events_found": 5,
+  "attack_events": [
+    {
+      "time": "2026-01-25 03:52:00",
+      "event": "OUTLET_CAMERAS_SUSPECTED",
+      "source": "attack_log"
+    },
+    {
+      "time": "2026-01-25 03:58:00",
+      "event": "VOICE_CONTENT_PATTERN",
+      "source": "attack_log"
+    },
+    {
+      "time": "2026-01-25 04:01:00",
+      "event": "OUTLET_ANOMALY_CLARIFICATION",
+      "source": "attack_log"
+    },
+    {
+      "time": "2026-01-25 04:05:00",
+      "event": "PROPERTY_INFRASTRUCTURE_DESCRIPTION",
+      "source": "attack_log"
+    },
+    {
+      "time": "2026-01-25 04:12:00",
+      "event": "ICE_MACHINE_ANOMALY",
+      "source": "attack_log"
+    }
+  ],
+  "hypothesis": "PLC injection via power line, timing coordinated by satellite surveillance"
+}

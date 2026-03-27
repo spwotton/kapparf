@@ -1,0 +1,6649 @@
+{
+  "dse": [
+    {
+      "file": "ContextBuffer\\claudy.txt",
+      "file_hash": "b539ad4c0397",
+      "match_count": 2,
+      "sample_lines": [
+        419,
+        447
+      ]
+    },
+    {
+      "file": "ContextBuffer\\europe.txt",
+      "file_hash": "6547b69cd17e",
+      "match_count": 22,
+      "sample_lines": [
+        5,
+        6,
+        344
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Skip to main contentAccessibility h.txt",
+      "file_hash": "eef6ec95de1b",
+      "match_count": 55,
+      "sample_lines": [
+        5,
+        6,
+        681
+      ]
+    },
+    {
+      "file": "ContextBuffer\\3019 TRADING LLC Operating Agreement.eml",
+      "file_hash": "62e1422cba3e",
+      "match_count": 9,
+      "sample_lines": [
+        1484,
+        3407,
+        3752,
+        3775,
+        3991
+      ]
+    },
+    {
+      "file": "ContextBuffer\\bank statements.eml",
+      "file_hash": "f9bd35c0407f",
+      "match_count": 554,
+      "sample_lines": [
+        7,
+        576,
+        648,
+        846,
+        933
+      ]
+    },
+    {
+      "file": "ContextBuffer\\recent_emails_combined.eml",
+      "file_hash": "679bc55b1a6d",
+      "match_count": 564,
+      "sample_lines": [
+        179,
+        3238,
+        3807,
+        3879,
+        4077
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Voided check.eml",
+      "file_hash": "c638681a6264",
+      "match_count": 1,
+      "sample_lines": [
+        178
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\0912fae8dc4379d0\\text.txt",
+      "file_hash": "3ac927f7a795",
+      "match_count": 1,
+      "sample_lines": [
+        540
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 1,
+      "sample_lines": [
+        7854
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 2,
+      "sample_lines": [
+        3713,
+        11381
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\text.txt",
+      "file_hash": "073fc41a35c6",
+      "match_count": 4,
+      "sample_lines": [
+        718,
+        7807,
+        10350,
+        10725
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\text.txt",
+      "file_hash": "f9f30721d579",
+      "match_count": 1,
+      "sample_lines": [
+        1295
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\text.txt",
+      "file_hash": "88c29ce4d9a7",
+      "match_count": 4,
+      "sample_lines": [
+        125,
+        880,
+        881,
+        883
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\text.txt",
+      "file_hash": "e07c0c17c8c1",
+      "match_count": 1,
+      "sample_lines": [
+        264
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\text.txt",
+      "file_hash": "27bc865195e6",
+      "match_count": 4,
+      "sample_lines": [
+        362,
+        830,
+        2352,
+        2488
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a972ac18302c4cdc\\text.txt",
+      "file_hash": "06d06ef93c9c",
+      "match_count": 4,
+      "sample_lines": [
+        9,
+        88,
+        191,
+        244
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 2,
+      "sample_lines": [
+        3650,
+        11266
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e1cbdb9bc9a1f4d7\\text.txt",
+      "file_hash": "77787a865c58",
+      "match_count": 62,
+      "sample_lines": [
+        791,
+        71960,
+        72051,
+        72074,
+        72187
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e2d8c4eccb66c35d\\text.txt",
+      "file_hash": "050eb9dfbc12",
+      "match_count": 2,
+      "sample_lines": [
+        419,
+        447
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\0912fae8dc4379d0\\chunks.jsonl",
+      "file_hash": "f82916955df2",
+      "match_count": 1,
+      "sample_lines": [
+        29
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\chunks.jsonl",
+      "file_hash": "d96b07c1a7a0",
+      "match_count": 1,
+      "sample_lines": [
+        140
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\chunks.jsonl",
+      "file_hash": "f5871b5c409b",
+      "match_count": 1,
+      "sample_lines": [
+        220
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\chunks.jsonl",
+      "file_hash": "8e281ee8f2fd",
+      "match_count": 38,
+      "sample_lines": [
+        45,
+        46,
+        47,
+        49,
+        50
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\chunks.jsonl",
+      "file_hash": "23a901fa7d59",
+      "match_count": 1,
+      "sample_lines": [
+        39
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 7,
+      "sample_lines": [
+        55,
+        62,
+        67,
+        101,
+        102
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\chunks.jsonl",
+      "file_hash": "e2ce99810619",
+      "match_count": 2,
+      "sample_lines": [
+        18,
+        42
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\chunks.jsonl",
+      "file_hash": "c5d8945da4a1",
+      "match_count": 6,
+      "sample_lines": [
+        8,
+        13,
+        17,
+        18,
+        33
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 2,
+      "sample_lines": [
+        227,
+        699
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\chunks.jsonl",
+      "file_hash": "05afc1ec3187",
+      "match_count": 1,
+      "sample_lines": [
+        114
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\chunks.jsonl",
+      "file_hash": "8aa487344302",
+      "match_count": 60,
+      "sample_lines": [
+        9,
+        15,
+        16,
+        34,
+        35
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 1,
+      "sample_lines": [
+        130
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\chunks.jsonl",
+      "file_hash": "6695f23ec715",
+      "match_count": 5,
+      "sample_lines": [
+        44,
+        526,
+        730,
+        757,
+        758
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\chunks.jsonl",
+      "file_hash": "f4799c599489",
+      "match_count": 1,
+      "sample_lines": [
+        52
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\chunks.jsonl",
+      "file_hash": "4d45d90c5dda",
+      "match_count": 5,
+      "sample_lines": [
+        12,
+        83,
+        84
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\chunks.jsonl",
+      "file_hash": "e6e0088235f6",
+      "match_count": 1,
+      "sample_lines": [
+        11
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\chunks.jsonl",
+      "file_hash": "435386b256fd",
+      "match_count": 5,
+      "sample_lines": [
+        13,
+        14,
+        30,
+        82,
+        88
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\chunks.jsonl",
+      "file_hash": "160260ee5199",
+      "match_count": 1,
+      "sample_lines": [
+        795
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 5,
+      "sample_lines": [
+        14,
+        165,
+        393,
+        695
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 2,
+      "sample_lines": [
+        225,
+        693
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\chunks.jsonl",
+      "file_hash": "a51f142c68cd",
+      "match_count": 11,
+      "sample_lines": [
+        1,
+        2,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e1cbdb9bc9a1f4d7\\chunks.jsonl",
+      "file_hash": "eb58dc3655c3",
+      "match_count": 62,
+      "sample_lines": [
+        34,
+        1864,
+        1868,
+        1870,
+        1877
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e2d8c4eccb66c35d\\chunks.jsonl",
+      "file_hash": "2189bc68c693",
+      "match_count": 2,
+      "sample_lines": [
+        28,
+        29
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 2,
+      "sample_lines": [
+        548,
+        577
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\chunks.jsonl",
+      "file_hash": "dc6db787a82e",
+      "match_count": 3,
+      "sample_lines": [
+        594,
+        595
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 92,
+      "sample_lines": [
+        8,
+        39,
+        115,
+        118,
+        131
+      ]
+    }
+  ],
+  "ice": [
+    {
+      "file": "ContextBuffer\\claudy.txt",
+      "file_hash": "b539ad4c0397",
+      "match_count": 8,
+      "sample_lines": [
+        3,
+        7,
+        41,
+        153,
+        479
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 4,
+      "sample_lines": [
+        17,
+        53,
+        93,
+        113
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 4,
+      "sample_lines": [
+        17,
+        53,
+        93,
+        113
+      ]
+    },
+    {
+      "file": "ContextBuffer\\europe.txt",
+      "file_hash": "6547b69cd17e",
+      "match_count": 94,
+      "sample_lines": [
+        4,
+        5,
+        11,
+        27,
+        31
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Skip to main contentAccessibility h.txt",
+      "file_hash": "eef6ec95de1b",
+      "match_count": 177,
+      "sample_lines": [
+        4,
+        5,
+        11,
+        27,
+        31
+      ]
+    },
+    {
+      "file": "ContextBuffer\\troubleshooting_logs_system_Last 90 days.txt",
+      "file_hash": "88deac98ed71",
+      "match_count": 153,
+      "sample_lines": [
+        2,
+        5,
+        8,
+        11,
+        14
+      ]
+    },
+    {
+      "file": "ContextBuffer\\3019 TRADING LLC Operating Agreement.eml",
+      "file_hash": "62e1422cba3e",
+      "match_count": 7,
+      "sample_lines": [
+        2959,
+        3602,
+        4191,
+        5078,
+        6611
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Action Required - Merchant Account.eml",
+      "file_hash": "2db61de36ed2",
+      "match_count": 8,
+      "sample_lines": [
+        179,
+        224,
+        280,
+        327,
+        708
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Any Questions_.eml",
+      "file_hash": "21300a0247ea",
+      "match_count": 8,
+      "sample_lines": [
+        71,
+        72,
+        80,
+        97,
+        700
+      ]
+    },
+    {
+      "file": "ContextBuffer\\bank statements.eml",
+      "file_hash": "f9bd35c0407f",
+      "match_count": 400,
+      "sample_lines": [
+        83,
+        188,
+        2465,
+        3214,
+        3462
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Click here to sign New Client Precheck Form - Merchant Account.eml",
+      "file_hash": "71465cd54967",
+      "match_count": 2,
+      "sample_lines": [
+        205,
+        258
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Intro.eml",
+      "file_hash": "b6064980dc46",
+      "match_count": 1,
+      "sample_lines": [
+        20
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Merchant Account for KNNutrition.com.eml",
+      "file_hash": "43c4ecfa93c7",
+      "match_count": 6,
+      "sample_lines": [
+        27,
+        53,
+        74,
+        155,
+        213
+      ]
+    },
+    {
+      "file": "ContextBuffer\\recent_emails_combined.eml",
+      "file_hash": "679bc55b1a6d",
+      "match_count": 436,
+      "sample_lines": [
+        650,
+        1590,
+        1671,
+        1738,
+        2311
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Underwriting Reply.eml",
+      "file_hash": "5b8bdebcaca0",
+      "match_count": 3,
+      "sample_lines": [
+        21,
+        102,
+        169
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Voided check.eml",
+      "file_hash": "c638681a6264",
+      "match_count": 1,
+      "sample_lines": [
+        649
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\05a505e07750a8cc\\text.txt",
+      "file_hash": "5e7c67a4a8e6",
+      "match_count": 465,
+      "sample_lines": [
+        8,
+        17,
+        18,
+        107,
+        108
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\text.txt",
+      "file_hash": "72e0c387b031",
+      "match_count": 29,
+      "sample_lines": [
+        13,
+        79,
+        182,
+        219,
+        393
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\0912fae8dc4379d0\\text.txt",
+      "file_hash": "3ac927f7a795",
+      "match_count": 30,
+      "sample_lines": [
+        2,
+        9,
+        14,
+        29,
+        69
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\10db8f57e95be413\\text.txt",
+      "file_hash": "2aca9beff69e",
+      "match_count": 425,
+      "sample_lines": [
+        29,
+        31,
+        34,
+        76,
+        142
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\17b651f674e547cd\\text.txt",
+      "file_hash": "90b02d2ce3f9",
+      "match_count": 2,
+      "sample_lines": [
+        484
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\18950ccebacb43ba\\text.txt",
+      "file_hash": "d2fcc7daf4aa",
+      "match_count": 41,
+      "sample_lines": [
+        12,
+        42,
+        44,
+        55,
+        57
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\text.txt",
+      "file_hash": "34e3e170b5fe",
+      "match_count": 25,
+      "sample_lines": [
+        199,
+        307,
+        312,
+        319,
+        320
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\text.txt",
+      "file_hash": "78235b3f2d0f",
+      "match_count": 175,
+      "sample_lines": [
+        103,
+        106,
+        107,
+        109,
+        124
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\text.txt",
+      "file_hash": "6476ca1f7524",
+      "match_count": 354,
+      "sample_lines": [
+        3,
+        8,
+        12,
+        16,
+        20
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\text.txt",
+      "file_hash": "1c78200346ec",
+      "match_count": 167,
+      "sample_lines": [
+        49,
+        76,
+        161,
+        247,
+        291
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\text.txt",
+      "file_hash": "e31a57c6c409",
+      "match_count": 71,
+      "sample_lines": [
+        36,
+        38,
+        39,
+        57,
+        61
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\2a028d98866db2a2\\text.txt",
+      "file_hash": "54843486a36c",
+      "match_count": 2,
+      "sample_lines": [
+        71,
+        75
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 226,
+      "sample_lines": [
+        58,
+        63,
+        112,
+        116,
+        120
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e86d9313bbb39b3\\text.txt",
+      "file_hash": "f4f98be55356",
+      "match_count": 14,
+      "sample_lines": [
+        18,
+        19,
+        20,
+        40,
+        41
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\text.txt",
+      "file_hash": "e2e953ae96b3",
+      "match_count": 120,
+      "sample_lines": [
+        19,
+        28,
+        48,
+        49,
+        102
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\text.txt",
+      "file_hash": "51e154ee02d2",
+      "match_count": 6,
+      "sample_lines": [
+        363,
+        720,
+        776,
+        802,
+        826
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\54aee9bcb04ddc39\\text.txt",
+      "file_hash": "cbb5e145dbf0",
+      "match_count": 43,
+      "sample_lines": [
+        2,
+        11,
+        14,
+        15,
+        20
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\text.txt",
+      "file_hash": "f7a649a5d42a",
+      "match_count": 36,
+      "sample_lines": [
+        377,
+        775,
+        1947,
+        2841,
+        2870
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 290,
+      "sample_lines": [
+        70,
+        194,
+        419,
+        437,
+        459
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\text.txt",
+      "file_hash": "fb6061feb60a",
+      "match_count": 19,
+      "sample_lines": [
+        21,
+        100,
+        148,
+        307,
+        314
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5f4f95f7d71162d8\\text.txt",
+      "file_hash": "2736162885b8",
+      "match_count": 353,
+      "sample_lines": [
+        7,
+        8,
+        11,
+        17,
+        18
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\text.txt",
+      "file_hash": "848e92cbb490",
+      "match_count": 17,
+      "sample_lines": [
+        82,
+        193,
+        346,
+        546,
+        553
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\text.txt",
+      "file_hash": "162824a1dd70",
+      "match_count": 138,
+      "sample_lines": [
+        82,
+        134,
+        251,
+        387,
+        1147
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\63cd2292ad226522\\text.txt",
+      "file_hash": "83273c92fa3d",
+      "match_count": 2,
+      "sample_lines": [
+        60,
+        109
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\64dfce6d1ee14f00\\text.txt",
+      "file_hash": "033a3a0816f1",
+      "match_count": 10,
+      "sample_lines": [
+        75,
+        118,
+        278,
+        298,
+        299
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\66c16e35ae71a292\\text.txt",
+      "file_hash": "8c4b9f6fb831",
+      "match_count": 153,
+      "sample_lines": [
+        2,
+        5,
+        8,
+        11,
+        14
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\text.txt",
+      "file_hash": "b34ea847569c",
+      "match_count": 63,
+      "sample_lines": [
+        24,
+        80,
+        84,
+        95,
+        97
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6d1f6ab616ec2edd\\text.txt",
+      "file_hash": "7810f5319884",
+      "match_count": 62,
+      "sample_lines": [
+        16,
+        40,
+        41,
+        55,
+        64
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\744211e9b5dfd2fb\\text.txt",
+      "file_hash": "4539a8bb5e3d",
+      "match_count": 3,
+      "sample_lines": [
+        138,
+        473,
+        475
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\77d2c49fba777e6e\\text.txt",
+      "file_hash": "833d07804407",
+      "match_count": 15,
+      "sample_lines": [
+        326,
+        332,
+        476,
+        720,
+        1044
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\77f5ac5d76742bee\\text.txt",
+      "file_hash": "b00f6c057b06",
+      "match_count": 4,
+      "sample_lines": [
+        178,
+        180,
+        214,
+        219
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\text.txt",
+      "file_hash": "073fc41a35c6",
+      "match_count": 787,
+      "sample_lines": [
+        45,
+        67,
+        68,
+        76,
+        88
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7b1b3b7e8469a7e0\\text.txt",
+      "file_hash": "7bf259c6c5d0",
+      "match_count": 25,
+      "sample_lines": [
+        14,
+        80,
+        98,
+        139,
+        188
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\text.txt",
+      "file_hash": "f9f30721d579",
+      "match_count": 88,
+      "sample_lines": [
+        9,
+        65,
+        142,
+        157,
+        182
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8543cca71e4a4967\\text.txt",
+      "file_hash": "915ad4cc31aa",
+      "match_count": 28,
+      "sample_lines": [
+        84,
+        88,
+        89,
+        100,
+        107
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\text.txt",
+      "file_hash": "88c29ce4d9a7",
+      "match_count": 105,
+      "sample_lines": [
+        10,
+        11,
+        38,
+        39,
+        71
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8995b45d7cd7d3e1\\text.txt",
+      "file_hash": "d0bf444ec146",
+      "match_count": 11,
+      "sample_lines": [
+        30,
+        31,
+        32,
+        41,
+        42
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\text.txt",
+      "file_hash": "b11483b6b8aa",
+      "match_count": 36,
+      "sample_lines": [
+        357,
+        762,
+        1882,
+        2653,
+        2681
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8ec3d08ad4deb9c1\\text.txt",
+      "file_hash": "527e9ec2526e",
+      "match_count": 11,
+      "sample_lines": [
+        20,
+        24,
+        25,
+        26,
+        142
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\91f5bf96bd03e8a9\\text.txt",
+      "file_hash": "5d11c3f3ab9f",
+      "match_count": 5,
+      "sample_lines": [
+        47,
+        54,
+        99,
+        278,
+        298
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\text.txt",
+      "file_hash": "e07c0c17c8c1",
+      "match_count": 79,
+      "sample_lines": [
+        8,
+        21,
+        33,
+        47,
+        74
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\92a3616ead919181\\text.txt",
+      "file_hash": "3c0754390d61",
+      "match_count": 24,
+      "sample_lines": [
+        397,
+        427,
+        430,
+        615,
+        705
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\text.txt",
+      "file_hash": "ac5887c3025c",
+      "match_count": 95,
+      "sample_lines": [
+        243,
+        258,
+        270,
+        282,
+        414
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\text.txt",
+      "file_hash": "237f92ae12f0",
+      "match_count": 1,
+      "sample_lines": [
+        21
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\text.txt",
+      "file_hash": "27bc865195e6",
+      "match_count": 69,
+      "sample_lines": [
+        5,
+        15,
+        128,
+        135,
+        141
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a2b1dc190b848a3\\text.txt",
+      "file_hash": "cfffd6b1def8",
+      "match_count": 7,
+      "sample_lines": [
+        179,
+        713,
+        1779,
+        3515,
+        3985
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a8d3a3f165ba766c\\text.txt",
+      "file_hash": "011d11413fe6",
+      "match_count": 23,
+      "sample_lines": [
+        19,
+        41,
+        147,
+        148,
+        175
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a917dde0bccb8ad7\\text.txt",
+      "file_hash": "368105c97d08",
+      "match_count": 7,
+      "sample_lines": [
+        38,
+        45,
+        87,
+        159,
+        665
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a972ac18302c4cdc\\text.txt",
+      "file_hash": "06d06ef93c9c",
+      "match_count": 5,
+      "sample_lines": [
+        76,
+        88,
+        168,
+        201
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\aad5cde6d72ad219\\text.txt",
+      "file_hash": "fd20d2a5dd3d",
+      "match_count": 1,
+      "sample_lines": [
+        25
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\text.txt",
+      "file_hash": "b4eef57e757e",
+      "match_count": 146,
+      "sample_lines": [
+        145,
+        159,
+        246,
+        308,
+        343
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\text.txt",
+      "file_hash": "2091ecfdd027",
+      "match_count": 123,
+      "sample_lines": [
+        90,
+        129,
+        189,
+        276,
+        1007
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\text.txt",
+      "file_hash": "4f553747ed00",
+      "match_count": 602,
+      "sample_lines": [
+        3,
+        4,
+        37,
+        39,
+        44
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c36ccd75e6a52fa8\\text.txt",
+      "file_hash": "c01ded4468c8",
+      "match_count": 5,
+      "sample_lines": [
+        1243,
+        1271,
+        1618,
+        1621
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\text.txt",
+      "file_hash": "6d025e6dbdbe",
+      "match_count": 180,
+      "sample_lines": [
+        3,
+        4,
+        36,
+        55,
+        122
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 290,
+      "sample_lines": [
+        31,
+        150,
+        375,
+        393,
+        415
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\text.txt",
+      "file_hash": "684f0515ea44",
+      "match_count": 8,
+      "sample_lines": [
+        285,
+        338,
+        363,
+        432,
+        491
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca5d8c491145ef4e\\text.txt",
+      "file_hash": "d565e3f2d0aa",
+      "match_count": 5,
+      "sample_lines": [
+        11,
+        340,
+        480,
+        572,
+        774
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cc87f93e93b72fec\\text.txt",
+      "file_hash": "2877d6a0abbc",
+      "match_count": 19,
+      "sample_lines": [
+        207,
+        214,
+        231,
+        391,
+        409
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cda49efb2dd662fa\\text.txt",
+      "file_hash": "3d48c5f1a70e",
+      "match_count": 1,
+      "sample_lines": [
+        77
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ceb69d0a00fd8cb7\\text.txt",
+      "file_hash": "5fa207b8b2dd",
+      "match_count": 4,
+      "sample_lines": [
+        36,
+        42,
+        272,
+        326
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e0517dd1b112cf84\\text.txt",
+      "file_hash": "e7cd84326190",
+      "match_count": 3,
+      "sample_lines": [
+        164,
+        180
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e1cbdb9bc9a1f4d7\\text.txt",
+      "file_hash": "77787a865c58",
+      "match_count": 338,
+      "sample_lines": [
+        520,
+        791,
+        1851,
+        1944,
+        3096
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e2d8c4eccb66c35d\\text.txt",
+      "file_hash": "050eb9dfbc12",
+      "match_count": 8,
+      "sample_lines": [
+        3,
+        7,
+        41,
+        153,
+        479
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 147,
+      "sample_lines": [
+        102,
+        126,
+        145,
+        175,
+        180
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\text.txt",
+      "file_hash": "145c920a641c",
+      "match_count": 222,
+      "sample_lines": [
+        54,
+        55,
+        102,
+        105,
+        136
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e86c792eb1261afc\\text.txt",
+      "file_hash": "ad1a1286a122",
+      "match_count": 11,
+      "sample_lines": [
+        15,
+        47,
+        48,
+        50,
+        169
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ed653964e6bf9c2c\\text.txt",
+      "file_hash": "fc48ecf5b102",
+      "match_count": 1,
+      "sample_lines": [
+        26
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 414,
+      "sample_lines": [
+        149,
+        152,
+        157,
+        288,
+        323
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f9aa1160383a5258\\text.txt",
+      "file_hash": "db70f7439298",
+      "match_count": 5,
+      "sample_lines": [
+        74,
+        80,
+        93,
+        174,
+        435
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\text.txt",
+      "file_hash": "25ae0fec92bf",
+      "match_count": 37,
+      "sample_lines": [
+        409,
+        794,
+        1937,
+        2946,
+        2974
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ffc72b157d5f57e2\\text.txt",
+      "file_hash": "d5600e34bd7e",
+      "match_count": 3,
+      "sample_lines": [
+        50,
+        51,
+        193
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\05a505e07750a8cc\\chunks.jsonl",
+      "file_hash": "24fca13a661b",
+      "match_count": 508,
+      "sample_lines": [
+        1,
+        4,
+        5,
+        8,
+        9
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\chunks.jsonl",
+      "file_hash": "3bb317edf306",
+      "match_count": 32,
+      "sample_lines": [
+        1,
+        3,
+        12,
+        15,
+        16
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\0912fae8dc4379d0\\chunks.jsonl",
+      "file_hash": "f82916955df2",
+      "match_count": 31,
+      "sample_lines": [
+        1,
+        3,
+        5,
+        11,
+        12
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\10db8f57e95be413\\chunks.jsonl",
+      "file_hash": "bffc869e6ea4",
+      "match_count": 471,
+      "sample_lines": [
+        1,
+        4,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\17b651f674e547cd\\chunks.jsonl",
+      "file_hash": "572ffea27bf1",
+      "match_count": 2,
+      "sample_lines": [
+        31
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\18950ccebacb43ba\\chunks.jsonl",
+      "file_hash": "46037efbcac4",
+      "match_count": 46,
+      "sample_lines": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\chunks.jsonl",
+      "file_hash": "d96b07c1a7a0",
+      "match_count": 25,
+      "sample_lines": [
+        7,
+        12,
+        13,
+        14,
+        27
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\chunks.jsonl",
+      "file_hash": "f5871b5c409b",
+      "match_count": 192,
+      "sample_lines": [
+        4,
+        5,
+        7,
+        22,
+        30
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\chunks.jsonl",
+      "file_hash": "8e281ee8f2fd",
+      "match_count": 401,
+      "sample_lines": [
+        1,
+        2,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\chunks.jsonl",
+      "file_hash": "23a901fa7d59",
+      "match_count": 180,
+      "sample_lines": [
+        3,
+        4,
+        9,
+        15,
+        18
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\chunks.jsonl",
+      "file_hash": "f8e1eaa43425",
+      "match_count": 79,
+      "sample_lines": [
+        3,
+        4,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\2a028d98866db2a2\\chunks.jsonl",
+      "file_hash": "e55c73490b20",
+      "match_count": 2,
+      "sample_lines": [
+        4,
+        5
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 248,
+      "sample_lines": [
+        3,
+        6,
+        21,
+        22,
+        26
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e86d9313bbb39b3\\chunks.jsonl",
+      "file_hash": "b981c7e1ba6f",
+      "match_count": 17,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\chunks.jsonl",
+      "file_hash": "e2ce99810619",
+      "match_count": 138,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\chunks.jsonl",
+      "file_hash": "c5d8945da4a1",
+      "match_count": 6,
+      "sample_lines": [
+        13,
+        26,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\54aee9bcb04ddc39\\chunks.jsonl",
+      "file_hash": "39352576a36c",
+      "match_count": 49,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\chunks.jsonl",
+      "file_hash": "f8600acef755",
+      "match_count": 37,
+      "sample_lines": [
+        16,
+        35,
+        86,
+        118,
+        119
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 322,
+      "sample_lines": [
+        2,
+        3,
+        10,
+        23,
+        24
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\chunks.jsonl",
+      "file_hash": "05afc1ec3187",
+      "match_count": 22,
+      "sample_lines": [
+        1,
+        2,
+        6,
+        21,
+        35
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5f4f95f7d71162d8\\chunks.jsonl",
+      "file_hash": "6346f187e165",
+      "match_count": 392,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\chunks.jsonl",
+      "file_hash": "8aa487344302",
+      "match_count": 17,
+      "sample_lines": [
+        3,
+        13,
+        27,
+        47,
+        48
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\chunks.jsonl",
+      "file_hash": "b13c71179c11",
+      "match_count": 149,
+      "sample_lines": [
+        5,
+        8,
+        14,
+        23,
+        69
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\63cd2292ad226522\\chunks.jsonl",
+      "file_hash": "132ca32791d5",
+      "match_count": 2,
+      "sample_lines": [
+        2,
+        3
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\64dfce6d1ee14f00\\chunks.jsonl",
+      "file_hash": "430490361258",
+      "match_count": 12,
+      "sample_lines": [
+        4,
+        9,
+        19,
+        21,
+        23
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 70,
+      "sample_lines": [
+        2,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6d1f6ab616ec2edd\\chunks.jsonl",
+      "file_hash": "901d389d6e27",
+      "match_count": 69,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        4,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\744211e9b5dfd2fb\\chunks.jsonl",
+      "file_hash": "f03cfd48c140",
+      "match_count": 4,
+      "sample_lines": [
+        9,
+        10,
+        27
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\77d2c49fba777e6e\\chunks.jsonl",
+      "file_hash": "bf31cbb513d0",
+      "match_count": 20,
+      "sample_lines": [
+        17,
+        18,
+        23,
+        34,
+        46
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\77f5ac5d76742bee\\chunks.jsonl",
+      "file_hash": "9f4f6fcee876",
+      "match_count": 5,
+      "sample_lines": [
+        5,
+        6,
+        8
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\chunks.jsonl",
+      "file_hash": "6695f23ec715",
+      "match_count": 864,
+      "sample_lines": [
+        4,
+        5,
+        6,
+        7,
+        11
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7b1b3b7e8469a7e0\\chunks.jsonl",
+      "file_hash": "d5710e2de8fc",
+      "match_count": 29,
+      "sample_lines": [
+        1,
+        6,
+        7,
+        9,
+        12
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\chunks.jsonl",
+      "file_hash": "f4799c599489",
+      "match_count": 105,
+      "sample_lines": [
+        1,
+        2,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8543cca71e4a4967\\chunks.jsonl",
+      "file_hash": "885dee76aabb",
+      "match_count": 33,
+      "sample_lines": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\chunks.jsonl",
+      "file_hash": "4d45d90c5dda",
+      "match_count": 116,
+      "sample_lines": [
+        1,
+        3,
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8995b45d7cd7d3e1\\chunks.jsonl",
+      "file_hash": "e24015e1c2d0",
+      "match_count": 13,
+      "sample_lines": [
+        2,
+        3,
+        4,
+        5,
+        9
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\chunks.jsonl",
+      "file_hash": "b661fa324b33",
+      "match_count": 39,
+      "sample_lines": [
+        16,
+        35,
+        86,
+        118,
+        119
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8ec3d08ad4deb9c1\\chunks.jsonl",
+      "file_hash": "3845e9b009ca",
+      "match_count": 13,
+      "sample_lines": [
+        1,
+        2,
+        10,
+        24,
+        25
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\91f5bf96bd03e8a9\\chunks.jsonl",
+      "file_hash": "8ce6919391e7",
+      "match_count": 5,
+      "sample_lines": [
+        4,
+        6,
+        13,
+        15
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\chunks.jsonl",
+      "file_hash": "e6e0088235f6",
+      "match_count": 87,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\92a3616ead919181\\chunks.jsonl",
+      "file_hash": "da2da4ad4b4d",
+      "match_count": 28,
+      "sample_lines": [
+        22,
+        24,
+        32,
+        33,
+        37
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\chunks.jsonl",
+      "file_hash": "d91493e50dc8",
+      "match_count": 111,
+      "sample_lines": [
+        14,
+        15,
+        16,
+        17,
+        24
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\chunks.jsonl",
+      "file_hash": "833cd7f90998",
+      "match_count": 1,
+      "sample_lines": [
+        1
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\chunks.jsonl",
+      "file_hash": "435386b256fd",
+      "match_count": 77,
+      "sample_lines": [
+        1,
+        5,
+        6,
+        7,
+        9
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a2b1dc190b848a3\\chunks.jsonl",
+      "file_hash": "51fd46ae977c",
+      "match_count": 7,
+      "sample_lines": [
+        2,
+        6,
+        13,
+        25,
+        29
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a8d3a3f165ba766c\\chunks.jsonl",
+      "file_hash": "27e8022d7cc7",
+      "match_count": 25,
+      "sample_lines": [
+        1,
+        2,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a917dde0bccb8ad7\\chunks.jsonl",
+      "file_hash": "7b35ec4fc499",
+      "match_count": 10,
+      "sample_lines": [
+        3,
+        4,
+        6,
+        7,
+        11
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\aad5cde6d72ad219\\chunks.jsonl",
+      "file_hash": "e63bc8e9ca2c",
+      "match_count": 1,
+      "sample_lines": [
+        1
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\chunks.jsonl",
+      "file_hash": "160260ee5199",
+      "match_count": 163,
+      "sample_lines": [
+        8,
+        9,
+        14,
+        17,
+        18
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\chunks.jsonl",
+      "file_hash": "e05ce3c33664",
+      "match_count": 136,
+      "sample_lines": [
+        5,
+        8,
+        11,
+        16,
+        62
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\chunks.jsonl",
+      "file_hash": "133192138fb3",
+      "match_count": 676,
+      "sample_lines": [
+        1,
+        5,
+        6,
+        8,
+        11
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c36ccd75e6a52fa8\\chunks.jsonl",
+      "file_hash": "836d57362326",
+      "match_count": 5,
+      "sample_lines": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 199,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        6,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 327,
+      "sample_lines": [
+        2,
+        9,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\chunks.jsonl",
+      "file_hash": "a51f142c68cd",
+      "match_count": 9,
+      "sample_lines": [
+        10,
+        12,
+        13,
+        15,
+        17
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca5d8c491145ef4e\\chunks.jsonl",
+      "file_hash": "f9bc3d3a4af5",
+      "match_count": 5,
+      "sample_lines": [
+        1,
+        26,
+        37,
+        44,
+        59
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cc87f93e93b72fec\\chunks.jsonl",
+      "file_hash": "61056159e5a5",
+      "match_count": 22,
+      "sample_lines": [
+        9,
+        10,
+        11,
+        16,
+        17
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cda49efb2dd662fa\\chunks.jsonl",
+      "file_hash": "ddc3941b8808",
+      "match_count": 1,
+      "sample_lines": [
+        5
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ceb69d0a00fd8cb7\\chunks.jsonl",
+      "file_hash": "09bbfffcf288",
+      "match_count": 6,
+      "sample_lines": [
+        1,
+        2,
+        17,
+        21,
+        22
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e0517dd1b112cf84\\chunks.jsonl",
+      "file_hash": "f157e72ba06d",
+      "match_count": 4,
+      "sample_lines": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e1cbdb9bc9a1f4d7\\chunks.jsonl",
+      "file_hash": "eb58dc3655c3",
+      "match_count": 383,
+      "sample_lines": [
+        22,
+        34,
+        67,
+        69,
+        70
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e2d8c4eccb66c35d\\chunks.jsonl",
+      "file_hash": "2189bc68c693",
+      "match_count": 9,
+      "sample_lines": [
+        1,
+        3,
+        13,
+        30,
+        31
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 166,
+      "sample_lines": [
+        5,
+        6,
+        8,
+        10,
+        11
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\chunks.jsonl",
+      "file_hash": "dc6db787a82e",
+      "match_count": 241,
+      "sample_lines": [
+        3,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e86c792eb1261afc\\chunks.jsonl",
+      "file_hash": "827930e61836",
+      "match_count": 11,
+      "sample_lines": [
+        1,
+        3,
+        9,
+        10,
+        12
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ed653964e6bf9c2c\\chunks.jsonl",
+      "file_hash": "f50d84dc7de8",
+      "match_count": 1,
+      "sample_lines": [
+        3
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 462,
+      "sample_lines": [
+        4,
+        5,
+        11,
+        13,
+        15
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f9aa1160383a5258\\chunks.jsonl",
+      "file_hash": "683f9376734e",
+      "match_count": 6,
+      "sample_lines": [
+        4,
+        5,
+        6,
+        10,
+        24
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\chunks.jsonl",
+      "file_hash": "956e4f49017d",
+      "match_count": 42,
+      "sample_lines": [
+        18,
+        38,
+        93,
+        138,
+        140
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ffc72b157d5f57e2\\chunks.jsonl",
+      "file_hash": "7965c20c4523",
+      "match_count": 4,
+      "sample_lines": [
+        3,
+        4,
+        12
+      ]
+    }
+  ],
+  "sim": [
+    {
+      "file": "ContextBuffer\\claudy.txt",
+      "file_hash": "b539ad4c0397",
+      "match_count": 19,
+      "sample_lines": [
+        61,
+        123,
+        124,
+        151,
+        186
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ContextBuffer\\europe.txt",
+      "file_hash": "6547b69cd17e",
+      "match_count": 80,
+      "sample_lines": [
+        6,
+        77,
+        151,
+        339,
+        344
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Skip to main contentAccessibility h.txt",
+      "file_hash": "eef6ec95de1b",
+      "match_count": 204,
+      "sample_lines": [
+        6,
+        77,
+        151,
+        339,
+        344
+      ]
+    },
+    {
+      "file": "ContextBuffer\\3019 TRADING LLC Operating Agreement.eml",
+      "file_hash": "62e1422cba3e",
+      "match_count": 4,
+      "sample_lines": [
+        3622,
+        8153,
+        8415,
+        8953
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Any Questions_.eml",
+      "file_hash": "21300a0247ea",
+      "match_count": 55,
+      "sample_lines": [
+        25,
+        157,
+        160,
+        163,
+        218
+      ]
+    },
+    {
+      "file": "ContextBuffer\\bank statements.eml",
+      "file_hash": "f9bd35c0407f",
+      "match_count": 313,
+      "sample_lines": [
+        454,
+        588,
+        711,
+        1129,
+        1515
+      ]
+    },
+    {
+      "file": "ContextBuffer\\recent_emails_combined.eml",
+      "file_hash": "679bc55b1a6d",
+      "match_count": 373,
+      "sample_lines": [
+        955,
+        3685,
+        3819,
+        3942,
+        4360
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Voided check.eml",
+      "file_hash": "c638681a6264",
+      "match_count": 1,
+      "sample_lines": [
+        954
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\05a505e07750a8cc\\text.txt",
+      "file_hash": "5e7c67a4a8e6",
+      "match_count": 150,
+      "sample_lines": [
+        23,
+        27,
+        211,
+        259,
+        286
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\text.txt",
+      "file_hash": "72e0c387b031",
+      "match_count": 56,
+      "sample_lines": [
+        259,
+        264,
+        266,
+        268,
+        364
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\0912fae8dc4379d0\\text.txt",
+      "file_hash": "3ac927f7a795",
+      "match_count": 25,
+      "sample_lines": [
+        125,
+        172,
+        174,
+        183,
+        184
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\10db8f57e95be413\\text.txt",
+      "file_hash": "2aca9beff69e",
+      "match_count": 106,
+      "sample_lines": [
+        293,
+        460,
+        609,
+        695,
+        822
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\17b651f674e547cd\\text.txt",
+      "file_hash": "90b02d2ce3f9",
+      "match_count": 4,
+      "sample_lines": [
+        143,
+        195,
+        218,
+        251
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\18950ccebacb43ba\\text.txt",
+      "file_hash": "d2fcc7daf4aa",
+      "match_count": 2,
+      "sample_lines": [
+        430,
+        805
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\text.txt",
+      "file_hash": "34e3e170b5fe",
+      "match_count": 64,
+      "sample_lines": [
+        423,
+        442,
+        453,
+        597,
+        881
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\text.txt",
+      "file_hash": "78235b3f2d0f",
+      "match_count": 182,
+      "sample_lines": [
+        203,
+        214,
+        215,
+        216,
+        253
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\text.txt",
+      "file_hash": "6476ca1f7524",
+      "match_count": 15,
+      "sample_lines": [
+        84,
+        100,
+        124,
+        210,
+        470
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\text.txt",
+      "file_hash": "1c78200346ec",
+      "match_count": 64,
+      "sample_lines": [
+        204,
+        515,
+        531,
+        604,
+        614
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\text.txt",
+      "file_hash": "e31a57c6c409",
+      "match_count": 7,
+      "sample_lines": [
+        32,
+        325,
+        326,
+        328,
+        332
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 115,
+      "sample_lines": [
+        377,
+        1113,
+        1132,
+        1166,
+        1317
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e86d9313bbb39b3\\text.txt",
+      "file_hash": "f4f98be55356",
+      "match_count": 1,
+      "sample_lines": [
+        170
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\text.txt",
+      "file_hash": "e2e953ae96b3",
+      "match_count": 3,
+      "sample_lines": [
+        1542,
+        1767,
+        1768
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\text.txt",
+      "file_hash": "51e154ee02d2",
+      "match_count": 4,
+      "sample_lines": [
+        142,
+        239,
+        575,
+        594
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\54aee9bcb04ddc39\\text.txt",
+      "file_hash": "cbb5e145dbf0",
+      "match_count": 21,
+      "sample_lines": [
+        35,
+        74,
+        95,
+        153,
+        158
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\text.txt",
+      "file_hash": "f7a649a5d42a",
+      "match_count": 16,
+      "sample_lines": [
+        761,
+        919,
+        1020,
+        1854,
+        2816
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 31,
+      "sample_lines": [
+        1025,
+        1168,
+        1263,
+        2239,
+        2851
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\text.txt",
+      "file_hash": "fb6061feb60a",
+      "match_count": 4,
+      "sample_lines": [
+        639,
+        913,
+        1607,
+        1986
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5f4f95f7d71162d8\\text.txt",
+      "file_hash": "2736162885b8",
+      "match_count": 6,
+      "sample_lines": [
+        64,
+        65,
+        375,
+        642,
+        727
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\text.txt",
+      "file_hash": "848e92cbb490",
+      "match_count": 16,
+      "sample_lines": [
+        331,
+        379,
+        444,
+        445,
+        447
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\text.txt",
+      "file_hash": "162824a1dd70",
+      "match_count": 22,
+      "sample_lines": [
+        192,
+        1030,
+        1053,
+        1378,
+        1421
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\64dfce6d1ee14f00\\text.txt",
+      "file_hash": "033a3a0816f1",
+      "match_count": 2,
+      "sample_lines": [
+        99,
+        314
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\text.txt",
+      "file_hash": "b34ea847569c",
+      "match_count": 14,
+      "sample_lines": [
+        171,
+        391,
+        477,
+        1188,
+        1570
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6d1f6ab616ec2edd\\text.txt",
+      "file_hash": "7810f5319884",
+      "match_count": 5,
+      "sample_lines": [
+        51,
+        77,
+        848,
+        949,
+        981
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\744211e9b5dfd2fb\\text.txt",
+      "file_hash": "4539a8bb5e3d",
+      "match_count": 3,
+      "sample_lines": [
+        104,
+        120,
+        509
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\77d2c49fba777e6e\\text.txt",
+      "file_hash": "833d07804407",
+      "match_count": 39,
+      "sample_lines": [
+        3,
+        16,
+        26,
+        43,
+        231
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7a57c69ccae01f55\\text.txt",
+      "file_hash": "968ac4352758",
+      "match_count": 2,
+      "sample_lines": [
+        97,
+        165
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\text.txt",
+      "file_hash": "073fc41a35c6",
+      "match_count": 76,
+      "sample_lines": [
+        565,
+        612,
+        1175,
+        1768,
+        1929
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7b1b3b7e8469a7e0\\text.txt",
+      "file_hash": "7bf259c6c5d0",
+      "match_count": 6,
+      "sample_lines": [
+        81,
+        210,
+        220,
+        309,
+        363
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\text.txt",
+      "file_hash": "f9f30721d579",
+      "match_count": 17,
+      "sample_lines": [
+        377,
+        588,
+        654,
+        684,
+        686
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8543cca71e4a4967\\text.txt",
+      "file_hash": "915ad4cc31aa",
+      "match_count": 34,
+      "sample_lines": [
+        41,
+        224,
+        326,
+        336,
+        367
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\text.txt",
+      "file_hash": "88c29ce4d9a7",
+      "match_count": 6,
+      "sample_lines": [
+        20,
+        171,
+        173,
+        329,
+        406
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8995b45d7cd7d3e1\\text.txt",
+      "file_hash": "d0bf444ec146",
+      "match_count": 1,
+      "sample_lines": [
+        78
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\text.txt",
+      "file_hash": "b11483b6b8aa",
+      "match_count": 16,
+      "sample_lines": [
+        748,
+        896,
+        995,
+        1792,
+        2628
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8b81aa48f6558d34\\text.txt",
+      "file_hash": "b21751093437",
+      "match_count": 2,
+      "sample_lines": [
+        54,
+        183
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8ec3d08ad4deb9c1\\text.txt",
+      "file_hash": "527e9ec2526e",
+      "match_count": 4,
+      "sample_lines": [
+        148,
+        150,
+        221,
+        392
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\91f5bf96bd03e8a9\\text.txt",
+      "file_hash": "5d11c3f3ab9f",
+      "match_count": 3,
+      "sample_lines": [
+        197,
+        239,
+        323
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\text.txt",
+      "file_hash": "e07c0c17c8c1",
+      "match_count": 34,
+      "sample_lines": [
+        332,
+        488,
+        620,
+        622,
+        633
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\92a3616ead919181\\text.txt",
+      "file_hash": "3c0754390d61",
+      "match_count": 2,
+      "sample_lines": [
+        1493,
+        1494
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\text.txt",
+      "file_hash": "ac5887c3025c",
+      "match_count": 51,
+      "sample_lines": [
+        699,
+        725,
+        1087,
+        1211,
+        1517
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\text.txt",
+      "file_hash": "27bc865195e6",
+      "match_count": 12,
+      "sample_lines": [
+        664,
+        784,
+        928,
+        1609,
+        1879
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a2b1dc190b848a3\\text.txt",
+      "file_hash": "cfffd6b1def8",
+      "match_count": 1,
+      "sample_lines": [
+        3055
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a8d3a3f165ba766c\\text.txt",
+      "file_hash": "011d11413fe6",
+      "match_count": 3,
+      "sample_lines": [
+        50,
+        68,
+        1034
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a917dde0bccb8ad7\\text.txt",
+      "file_hash": "368105c97d08",
+      "match_count": 10,
+      "sample_lines": [
+        43,
+        119,
+        386,
+        406,
+        414
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a972ac18302c4cdc\\text.txt",
+      "file_hash": "06d06ef93c9c",
+      "match_count": 1,
+      "sample_lines": [
+        205
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\text.txt",
+      "file_hash": "b4eef57e757e",
+      "match_count": 66,
+      "sample_lines": [
+        306,
+        369,
+        426,
+        470,
+        577
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b576b1adf477cb07\\text.txt",
+      "file_hash": "1e03c3617e22",
+      "match_count": 2,
+      "sample_lines": [
+        14,
+        144
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\text.txt",
+      "file_hash": "2091ecfdd027",
+      "match_count": 53,
+      "sample_lines": [
+        169,
+        220,
+        824,
+        826,
+        924
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\text.txt",
+      "file_hash": "4f553747ed00",
+      "match_count": 31,
+      "sample_lines": [
+        239,
+        276,
+        598,
+        655,
+        1154
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c36ccd75e6a52fa8\\text.txt",
+      "file_hash": "c01ded4468c8",
+      "match_count": 2,
+      "sample_lines": [
+        324,
+        1618
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\text.txt",
+      "file_hash": "6d025e6dbdbe",
+      "match_count": 58,
+      "sample_lines": [
+        184,
+        327,
+        779,
+        1006,
+        1084
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 31,
+      "sample_lines": [
+        976,
+        1115,
+        1210,
+        2186,
+        2794
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\text.txt",
+      "file_hash": "684f0515ea44",
+      "match_count": 6,
+      "sample_lines": [
+        111,
+        341,
+        379,
+        501,
+        788
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca5d8c491145ef4e\\text.txt",
+      "file_hash": "d565e3f2d0aa",
+      "match_count": 11,
+      "sample_lines": [
+        178,
+        201,
+        290,
+        346,
+        349
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cc87f93e93b72fec\\text.txt",
+      "file_hash": "2877d6a0abbc",
+      "match_count": 3,
+      "sample_lines": [
+        155,
+        214,
+        225
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cda49efb2dd662fa\\text.txt",
+      "file_hash": "3d48c5f1a70e",
+      "match_count": 1,
+      "sample_lines": [
+        56
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ceb69d0a00fd8cb7\\text.txt",
+      "file_hash": "5fa207b8b2dd",
+      "match_count": 26,
+      "sample_lines": [
+        149,
+        157,
+        171,
+        180,
+        184
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e0517dd1b112cf84\\text.txt",
+      "file_hash": "e7cd84326190",
+      "match_count": 2,
+      "sample_lines": [
+        38,
+        69
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e2d8c4eccb66c35d\\text.txt",
+      "file_hash": "050eb9dfbc12",
+      "match_count": 19,
+      "sample_lines": [
+        61,
+        123,
+        124,
+        151,
+        186
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 49,
+      "sample_lines": [
+        69,
+        74,
+        278,
+        1371,
+        1407
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\text.txt",
+      "file_hash": "145c920a641c",
+      "match_count": 58,
+      "sample_lines": [
+        227,
+        525,
+        887,
+        1314,
+        1324
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e86c792eb1261afc\\text.txt",
+      "file_hash": "ad1a1286a122",
+      "match_count": 2,
+      "sample_lines": [
+        26,
+        185
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ed653964e6bf9c2c\\text.txt",
+      "file_hash": "fc48ecf5b102",
+      "match_count": 5,
+      "sample_lines": [
+        128,
+        160,
+        279,
+        289,
+        306
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 122,
+      "sample_lines": [
+        513,
+        805,
+        1240,
+        1333,
+        1563
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\text.txt",
+      "file_hash": "25ae0fec92bf",
+      "match_count": 18,
+      "sample_lines": [
+        769,
+        785,
+        927,
+        1024,
+        1861
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ffc72b157d5f57e2\\text.txt",
+      "file_hash": "d5600e34bd7e",
+      "match_count": 11,
+      "sample_lines": [
+        8,
+        87,
+        121,
+        141,
+        204
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\05a505e07750a8cc\\chunks.jsonl",
+      "file_hash": "24fca13a661b",
+      "match_count": 163,
+      "sample_lines": [
+        1,
+        12,
+        16,
+        18,
+        31
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\chunks.jsonl",
+      "file_hash": "3bb317edf306",
+      "match_count": 62,
+      "sample_lines": [
+        20,
+        30,
+        49,
+        50,
+        72
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\0912fae8dc4379d0\\chunks.jsonl",
+      "file_hash": "f82916955df2",
+      "match_count": 26,
+      "sample_lines": [
+        8,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\10db8f57e95be413\\chunks.jsonl",
+      "file_hash": "bffc869e6ea4",
+      "match_count": 116,
+      "sample_lines": [
+        20,
+        31,
+        38,
+        43,
+        44
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\17b651f674e547cd\\chunks.jsonl",
+      "file_hash": "572ffea27bf1",
+      "match_count": 4,
+      "sample_lines": [
+        12,
+        15,
+        17,
+        19
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\18950ccebacb43ba\\chunks.jsonl",
+      "file_hash": "46037efbcac4",
+      "match_count": 2,
+      "sample_lines": [
+        32,
+        65
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\chunks.jsonl",
+      "file_hash": "d96b07c1a7a0",
+      "match_count": 72,
+      "sample_lines": [
+        23,
+        25,
+        27,
+        41,
+        54
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\chunks.jsonl",
+      "file_hash": "f5871b5c409b",
+      "match_count": 209,
+      "sample_lines": [
+        11,
+        12,
+        13,
+        17,
+        33
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\chunks.jsonl",
+      "file_hash": "8e281ee8f2fd",
+      "match_count": 16,
+      "sample_lines": [
+        25,
+        31,
+        40,
+        41,
+        70
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\chunks.jsonl",
+      "file_hash": "23a901fa7d59",
+      "match_count": 71,
+      "sample_lines": [
+        12,
+        31,
+        32,
+        36,
+        37
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\chunks.jsonl",
+      "file_hash": "f8e1eaa43425",
+      "match_count": 7,
+      "sample_lines": [
+        3,
+        27,
+        28,
+        38
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 129,
+      "sample_lines": [
+        20,
+        21,
+        62,
+        63,
+        65
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e86d9313bbb39b3\\chunks.jsonl",
+      "file_hash": "b981c7e1ba6f",
+      "match_count": 1,
+      "sample_lines": [
+        12
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\chunks.jsonl",
+      "file_hash": "e2ce99810619",
+      "match_count": 3,
+      "sample_lines": [
+        79,
+        90
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\chunks.jsonl",
+      "file_hash": "c5d8945da4a1",
+      "match_count": 5,
+      "sample_lines": [
+        5,
+        9,
+        21,
+        22
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\54aee9bcb04ddc39\\chunks.jsonl",
+      "file_hash": "39352576a36c",
+      "match_count": 24,
+      "sample_lines": [
+        2,
+        3,
+        6,
+        7,
+        12
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\chunks.jsonl",
+      "file_hash": "f8600acef755",
+      "match_count": 17,
+      "sample_lines": [
+        34,
+        43,
+        50,
+        80,
+        116
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 34,
+      "sample_lines": [
+        60,
+        69,
+        70,
+        76,
+        138
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\chunks.jsonl",
+      "file_hash": "05afc1ec3187",
+      "match_count": 4,
+      "sample_lines": [
+        39,
+        53,
+        88,
+        111
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5f4f95f7d71162d8\\chunks.jsonl",
+      "file_hash": "6346f187e165",
+      "match_count": 6,
+      "sample_lines": [
+        6,
+        35,
+        61,
+        69,
+        103
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\chunks.jsonl",
+      "file_hash": "8aa487344302",
+      "match_count": 19,
+      "sample_lines": [
+        26,
+        30,
+        31,
+        37,
+        53
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\chunks.jsonl",
+      "file_hash": "b13c71179c11",
+      "match_count": 26,
+      "sample_lines": [
+        11,
+        63,
+        64,
+        84,
+        87
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\64dfce6d1ee14f00\\chunks.jsonl",
+      "file_hash": "430490361258",
+      "match_count": 2,
+      "sample_lines": [
+        6,
+        22
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 14,
+      "sample_lines": [
+        19,
+        29,
+        31,
+        61,
+        75
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6d1f6ab616ec2edd\\chunks.jsonl",
+      "file_hash": "901d389d6e27",
+      "match_count": 6,
+      "sample_lines": [
+        2,
+        3,
+        5,
+        49,
+        56
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\744211e9b5dfd2fb\\chunks.jsonl",
+      "file_hash": "f03cfd48c140",
+      "match_count": 4,
+      "sample_lines": [
+        7,
+        8,
+        9,
+        30
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\77d2c49fba777e6e\\chunks.jsonl",
+      "file_hash": "bf31cbb513d0",
+      "match_count": 41,
+      "sample_lines": [
+        1,
+        2,
+        4,
+        13,
+        15
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7a57c69ccae01f55\\chunks.jsonl",
+      "file_hash": "7cb5404f2556",
+      "match_count": 3,
+      "sample_lines": [
+        5,
+        9,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\chunks.jsonl",
+      "file_hash": "6695f23ec715",
+      "match_count": 83,
+      "sample_lines": [
+        31,
+        35,
+        76,
+        120,
+        131
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7b1b3b7e8469a7e0\\chunks.jsonl",
+      "file_hash": "d5710e2de8fc",
+      "match_count": 6,
+      "sample_lines": [
+        7,
+        18,
+        19,
+        25,
+        29
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\chunks.jsonl",
+      "file_hash": "f4799c599489",
+      "match_count": 19,
+      "sample_lines": [
+        15,
+        23,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8543cca71e4a4967\\chunks.jsonl",
+      "file_hash": "885dee76aabb",
+      "match_count": 35,
+      "sample_lines": [
+        3,
+        16,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\chunks.jsonl",
+      "file_hash": "4d45d90c5dda",
+      "match_count": 6,
+      "sample_lines": [
+        2,
+        16,
+        32,
+        39,
+        78
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8995b45d7cd7d3e1\\chunks.jsonl",
+      "file_hash": "e24015e1c2d0",
+      "match_count": 1,
+      "sample_lines": [
+        6
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\chunks.jsonl",
+      "file_hash": "b661fa324b33",
+      "match_count": 17,
+      "sample_lines": [
+        34,
+        43,
+        50,
+        81,
+        116
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8b81aa48f6558d34\\chunks.jsonl",
+      "file_hash": "be8cea25eeb5",
+      "match_count": 3,
+      "sample_lines": [
+        2,
+        3,
+        8
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8ec3d08ad4deb9c1\\chunks.jsonl",
+      "file_hash": "3845e9b009ca",
+      "match_count": 4,
+      "sample_lines": [
+        10,
+        15,
+        26
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\91f5bf96bd03e8a9\\chunks.jsonl",
+      "file_hash": "8ce6919391e7",
+      "match_count": 3,
+      "sample_lines": [
+        10,
+        11,
+        16
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\chunks.jsonl",
+      "file_hash": "e6e0088235f6",
+      "match_count": 38,
+      "sample_lines": [
+        14,
+        19,
+        24,
+        25,
+        30
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\92a3616ead919181\\chunks.jsonl",
+      "file_hash": "da2da4ad4b4d",
+      "match_count": 3,
+      "sample_lines": [
+        74,
+        75
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\chunks.jsonl",
+      "file_hash": "d91493e50dc8",
+      "match_count": 61,
+      "sample_lines": [
+        39,
+        40,
+        41,
+        64,
+        72
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\chunks.jsonl",
+      "file_hash": "435386b256fd",
+      "match_count": 12,
+      "sample_lines": [
+        24,
+        28,
+        33,
+        56,
+        65
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a2b1dc190b848a3\\chunks.jsonl",
+      "file_hash": "51fd46ae977c",
+      "match_count": 1,
+      "sample_lines": [
+        22
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a8d3a3f165ba766c\\chunks.jsonl",
+      "file_hash": "27e8022d7cc7",
+      "match_count": 3,
+      "sample_lines": [
+        3,
+        4,
+        39
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a917dde0bccb8ad7\\chunks.jsonl",
+      "file_hash": "7b35ec4fc499",
+      "match_count": 12,
+      "sample_lines": [
+        4,
+        9,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\chunks.jsonl",
+      "file_hash": "160260ee5199",
+      "match_count": 72,
+      "sample_lines": [
+        17,
+        21,
+        24,
+        26,
+        27
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b576b1adf477cb07\\chunks.jsonl",
+      "file_hash": "e352ee3ce808",
+      "match_count": 2,
+      "sample_lines": [
+        2,
+        5
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\chunks.jsonl",
+      "file_hash": "e05ce3c33664",
+      "match_count": 64,
+      "sample_lines": [
+        10,
+        13,
+        50,
+        51,
+        56
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\chunks.jsonl",
+      "file_hash": "133192138fb3",
+      "match_count": 33,
+      "sample_lines": [
+        26,
+        30,
+        61,
+        67,
+        110
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c36ccd75e6a52fa8\\chunks.jsonl",
+      "file_hash": "836d57362326",
+      "match_count": 3,
+      "sample_lines": [
+        3,
+        9,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 63,
+      "sample_lines": [
+        10,
+        22,
+        59,
+        79,
+        85
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 36,
+      "sample_lines": [
+        59,
+        60,
+        69,
+        75,
+        136
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\chunks.jsonl",
+      "file_hash": "a51f142c68cd",
+      "match_count": 6,
+      "sample_lines": [
+        4,
+        12,
+        13,
+        17,
+        27
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca5d8c491145ef4e\\chunks.jsonl",
+      "file_hash": "f9bc3d3a4af5",
+      "match_count": 11,
+      "sample_lines": [
+        14,
+        15,
+        22,
+        27,
+        28
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cc87f93e93b72fec\\chunks.jsonl",
+      "file_hash": "61056159e5a5",
+      "match_count": 3,
+      "sample_lines": [
+        7,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cda49efb2dd662fa\\chunks.jsonl",
+      "file_hash": "ddc3941b8808",
+      "match_count": 1,
+      "sample_lines": [
+        4
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ceb69d0a00fd8cb7\\chunks.jsonl",
+      "file_hash": "09bbfffcf288",
+      "match_count": 28,
+      "sample_lines": [
+        9,
+        10,
+        11,
+        12,
+        16
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e0517dd1b112cf84\\chunks.jsonl",
+      "file_hash": "f157e72ba06d",
+      "match_count": 2,
+      "sample_lines": [
+        4,
+        7
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e2d8c4eccb66c35d\\chunks.jsonl",
+      "file_hash": "2189bc68c693",
+      "match_count": 21,
+      "sample_lines": [
+        4,
+        8,
+        10,
+        13,
+        17
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 55,
+      "sample_lines": [
+        2,
+        3,
+        19,
+        20,
+        103
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\chunks.jsonl",
+      "file_hash": "dc6db787a82e",
+      "match_count": 64,
+      "sample_lines": [
+        13,
+        29,
+        51,
+        76,
+        77
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e86c792eb1261afc\\chunks.jsonl",
+      "file_hash": "827930e61836",
+      "match_count": 2,
+      "sample_lines": [
+        2,
+        10
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ed653964e6bf9c2c\\chunks.jsonl",
+      "file_hash": "f50d84dc7de8",
+      "match_count": 6,
+      "sample_lines": [
+        13,
+        16,
+        24,
+        25,
+        27
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 132,
+      "sample_lines": [
+        22,
+        37,
+        55,
+        59,
+        71
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\chunks.jsonl",
+      "file_hash": "956e4f49017d",
+      "match_count": 20,
+      "sample_lines": [
+        36,
+        37,
+        46,
+        53,
+        88
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ffc72b157d5f57e2\\chunks.jsonl",
+      "file_hash": "7965c20c4523",
+      "match_count": 11,
+      "sample_lines": [
+        1,
+        6,
+        8,
+        9,
+        12
+      ]
+    }
+  ],
+  "setecom": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\text.txt",
+      "file_hash": "72e0c387b031",
+      "match_count": 2,
+      "sample_lines": [
+        3080,
+        3084
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\2120074a7837b9e9\\text.txt",
+      "file_hash": "08c0f8fdbd95",
+      "match_count": 2,
+      "sample_lines": [
+        11,
+        24
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\text.txt",
+      "file_hash": "51e154ee02d2",
+      "match_count": 2,
+      "sample_lines": [
+        902,
+        903
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\text.txt",
+      "file_hash": "f7a649a5d42a",
+      "match_count": 1,
+      "sample_lines": [
+        4536
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 1,
+      "sample_lines": [
+        10458
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\text.txt",
+      "file_hash": "fb6061feb60a",
+      "match_count": 1,
+      "sample_lines": [
+        1394
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\63cd2292ad226522\\text.txt",
+      "file_hash": "83273c92fa3d",
+      "match_count": 8,
+      "sample_lines": [
+        1,
+        7,
+        50,
+        110,
+        160
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\73be53944b35f435\\text.txt",
+      "file_hash": "c3b765c05211",
+      "match_count": 5,
+      "sample_lines": [
+        1,
+        7,
+        35,
+        51,
+        70
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\text.txt",
+      "file_hash": "b11483b6b8aa",
+      "match_count": 1,
+      "sample_lines": [
+        4283
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\text.txt",
+      "file_hash": "237f92ae12f0",
+      "match_count": 4,
+      "sample_lines": [
+        2,
+        4,
+        15,
+        20
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a972ac18302c4cdc\\text.txt",
+      "file_hash": "06d06ef93c9c",
+      "match_count": 9,
+      "sample_lines": [
+        1,
+        5,
+        9,
+        44,
+        48
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\text.txt",
+      "file_hash": "6d025e6dbdbe",
+      "match_count": 1,
+      "sample_lines": [
+        5519
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 1,
+      "sample_lines": [
+        10350
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\text.txt",
+      "file_hash": "684f0515ea44",
+      "match_count": 2,
+      "sample_lines": [
+        360,
+        362
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\text.txt",
+      "file_hash": "25ae0fec92bf",
+      "match_count": 1,
+      "sample_lines": [
+        4517
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\chunks.jsonl",
+      "file_hash": "3bb317edf306",
+      "match_count": 2,
+      "sample_lines": [
+        183,
+        184
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\2120074a7837b9e9\\chunks.jsonl",
+      "file_hash": "e4a65100b0d2",
+      "match_count": 2,
+      "sample_lines": [
+        1
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\chunks.jsonl",
+      "file_hash": "c5d8945da4a1",
+      "match_count": 2,
+      "sample_lines": [
+        32
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\chunks.jsonl",
+      "file_hash": "f8600acef755",
+      "match_count": 2,
+      "sample_lines": [
+        169,
+        170
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 1,
+      "sample_lines": [
+        642
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\chunks.jsonl",
+      "file_hash": "05afc1ec3187",
+      "match_count": 2,
+      "sample_lines": [
+        75,
+        76
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\63cd2292ad226522\\chunks.jsonl",
+      "file_hash": "132ca32791d5",
+      "match_count": 9,
+      "sample_lines": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\chunks.jsonl",
+      "file_hash": "b661fa324b33",
+      "match_count": 1,
+      "sample_lines": [
+        169
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\chunks.jsonl",
+      "file_hash": "833cd7f90998",
+      "match_count": 4,
+      "sample_lines": [
+        1
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 1,
+      "sample_lines": [
+        431
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 1,
+      "sample_lines": [
+        636
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\chunks.jsonl",
+      "file_hash": "a51f142c68cd",
+      "match_count": 2,
+      "sample_lines": [
+        13
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\chunks.jsonl",
+      "file_hash": "956e4f49017d",
+      "match_count": 1,
+      "sample_lines": [
+        190
+      ]
+    }
+  ],
+  "hector mora": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    }
+  ],
+  "jean solis": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        55
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        55
+      ]
+    }
+  ],
+  "marjorie alfaro": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        55
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        55
+      ]
+    }
+  ],
+  "genesis peralta": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        52
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        52
+      ]
+    }
+  ],
+  "jaco": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        54
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        54
+      ]
+    },
+    {
+      "file": "ContextBuffer\\europe.txt",
+      "file_hash": "6547b69cd17e",
+      "match_count": 1,
+      "sample_lines": [
+        339
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Skip to main contentAccessibility h.txt",
+      "file_hash": "eef6ec95de1b",
+      "match_count": 5,
+      "sample_lines": [
+        339,
+        681
+      ]
+    },
+    {
+      "file": "ContextBuffer\\3019 TRADING LLC Operating Agreement.eml",
+      "file_hash": "62e1422cba3e",
+      "match_count": 1,
+      "sample_lines": [
+        3747
+      ]
+    },
+    {
+      "file": "ContextBuffer\\bank statements.eml",
+      "file_hash": "f9bd35c0407f",
+      "match_count": 22,
+      "sample_lines": [
+        12953,
+        21310,
+        41835,
+        63727,
+        68516
+      ]
+    },
+    {
+      "file": "ContextBuffer\\recent_emails_combined.eml",
+      "file_hash": "679bc55b1a6d",
+      "match_count": 23,
+      "sample_lines": [
+        16184,
+        24541,
+        45066,
+        66958,
+        71747
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\10db8f57e95be413\\text.txt",
+      "file_hash": "2aca9beff69e",
+      "match_count": 2,
+      "sample_lines": [
+        8876,
+        8882
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 62,
+      "sample_lines": [
+        359,
+        1284,
+        1768,
+        1820,
+        1845
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\text.txt",
+      "file_hash": "073fc41a35c6",
+      "match_count": 1,
+      "sample_lines": [
+        5675
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\text.txt",
+      "file_hash": "e07c0c17c8c1",
+      "match_count": 3,
+      "sample_lines": [
+        1671,
+        1685,
+        2778
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\text.txt",
+      "file_hash": "ac5887c3025c",
+      "match_count": 2,
+      "sample_lines": [
+        10019,
+        10020
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\text.txt",
+      "file_hash": "27bc865195e6",
+      "match_count": 1,
+      "sample_lines": [
+        1467
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\text.txt",
+      "file_hash": "b4eef57e757e",
+      "match_count": 1,
+      "sample_lines": [
+        9178
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 62,
+      "sample_lines": [
+        315,
+        1231,
+        1713,
+        1765,
+        1790
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca5d8c491145ef4e\\text.txt",
+      "file_hash": "d565e3f2d0aa",
+      "match_count": 2,
+      "sample_lines": [
+        152,
+        725
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\text.txt",
+      "file_hash": "145c920a641c",
+      "match_count": 1,
+      "sample_lines": [
+        2849
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 2,
+      "sample_lines": [
+        15694,
+        29720
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\10db8f57e95be413\\chunks.jsonl",
+      "file_hash": "bffc869e6ea4",
+      "match_count": 2,
+      "sample_lines": [
+        603
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 67,
+      "sample_lines": [
+        19,
+        20,
+        77,
+        107,
+        108
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\chunks.jsonl",
+      "file_hash": "6695f23ec715",
+      "match_count": 1,
+      "sample_lines": [
+        378
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9239e083d2908294\\chunks.jsonl",
+      "file_hash": "e6e0088235f6",
+      "match_count": 3,
+      "sample_lines": [
+        58,
+        85
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\chunks.jsonl",
+      "file_hash": "d91493e50dc8",
+      "match_count": 2,
+      "sample_lines": [
+        612
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\9a1d966271d6dc20\\chunks.jsonl",
+      "file_hash": "435386b256fd",
+      "match_count": 1,
+      "sample_lines": [
+        51
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\chunks.jsonl",
+      "file_hash": "160260ee5199",
+      "match_count": 1,
+      "sample_lines": [
+        564
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 69,
+      "sample_lines": [
+        19,
+        76,
+        106,
+        107,
+        110
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca5d8c491145ef4e\\chunks.jsonl",
+      "file_hash": "f9bc3d3a4af5",
+      "match_count": 2,
+      "sample_lines": [
+        12,
+        56
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\chunks.jsonl",
+      "file_hash": "dc6db787a82e",
+      "match_count": 1,
+      "sample_lines": [
+        167
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 2,
+      "sample_lines": [
+        655,
+        1289
+      ]
+    }
+  ],
+  "gsm": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 1,
+      "sample_lines": [
+        53
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Skip to main contentAccessibility h.txt",
+      "file_hash": "eef6ec95de1b",
+      "match_count": 54,
+      "sample_lines": [
+        681
+      ]
+    },
+    {
+      "file": "ContextBuffer\\3019 TRADING LLC Operating Agreement.eml",
+      "file_hash": "62e1422cba3e",
+      "match_count": 8,
+      "sample_lines": [
+        2851,
+        4455,
+        4722,
+        5389,
+        5846
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Any Questions_.eml",
+      "file_hash": "21300a0247ea",
+      "match_count": 6,
+      "sample_lines": [
+        22,
+        741,
+        757,
+        1529,
+        1547
+      ]
+    },
+    {
+      "file": "ContextBuffer\\bank statements.eml",
+      "file_hash": "f9bd35c0407f",
+      "match_count": 673,
+      "sample_lines": [
+        695,
+        1524,
+        1716,
+        3074,
+        3626
+      ]
+    },
+    {
+      "file": "ContextBuffer\\recent_emails_combined.eml",
+      "file_hash": "679bc55b1a6d",
+      "match_count": 691,
+      "sample_lines": [
+        690,
+        691,
+        1008,
+        1111,
+        3926
+      ]
+    },
+    {
+      "file": "ContextBuffer\\Voided check.eml",
+      "file_hash": "c638681a6264",
+      "match_count": 4,
+      "sample_lines": [
+        689,
+        690,
+        1007,
+        1110
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\text.txt",
+      "file_hash": "e2e953ae96b3",
+      "match_count": 1,
+      "sample_lines": [
+        613
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\54aee9bcb04ddc39\\text.txt",
+      "file_hash": "cbb5e145dbf0",
+      "match_count": 2,
+      "sample_lines": [
+        449,
+        450
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\text.txt",
+      "file_hash": "848e92cbb490",
+      "match_count": 2,
+      "sample_lines": [
+        1291,
+        1859
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\text.txt",
+      "file_hash": "b34ea847569c",
+      "match_count": 1,
+      "sample_lines": [
+        4281
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e1cbdb9bc9a1f4d7\\text.txt",
+      "file_hash": "77787a865c58",
+      "match_count": 6,
+      "sample_lines": [
+        71960,
+        83761,
+        89982,
+        90197,
+        160462
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 11,
+      "sample_lines": [
+        145,
+        5389,
+        5790,
+        5803,
+        5806
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\chunks.jsonl",
+      "file_hash": "e2ce99810619",
+      "match_count": 1,
+      "sample_lines": [
+        32
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\54aee9bcb04ddc39\\chunks.jsonl",
+      "file_hash": "39352576a36c",
+      "match_count": 2,
+      "sample_lines": [
+        32
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\chunks.jsonl",
+      "file_hash": "8aa487344302",
+      "match_count": 2,
+      "sample_lines": [
+        110,
+        161
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 1,
+      "sample_lines": [
+        178
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e1cbdb9bc9a1f4d7\\chunks.jsonl",
+      "file_hash": "eb58dc3655c3",
+      "match_count": 6,
+      "sample_lines": [
+        1864,
+        2479,
+        2824,
+        2837,
+        4764
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 13,
+      "sample_lines": [
+        8,
+        374,
+        406,
+        407,
+        408
+      ]
+    }
+  ],
+  "infrastructure": [
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen (1).txt",
+      "file_hash": "2ea73213a897",
+      "match_count": 3,
+      "sample_lines": [
+        53,
+        108,
+        122
+      ]
+    },
+    {
+      "file": "ContextBuffer\\EMAIL_to_Geoffrey_Cahen.txt",
+      "file_hash": "68a014e4f050",
+      "match_count": 3,
+      "sample_lines": [
+        53,
+        108,
+        122
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\text.txt",
+      "file_hash": "e31a57c6c409",
+      "match_count": 19,
+      "sample_lines": [
+        79,
+        146,
+        157,
+        193,
+        256
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5f4f95f7d71162d8\\text.txt",
+      "file_hash": "2736162885b8",
+      "match_count": 1,
+      "sample_lines": [
+        1356
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\text.txt",
+      "file_hash": "162824a1dd70",
+      "match_count": 1,
+      "sample_lines": [
+        7058
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\64dfce6d1ee14f00\\text.txt",
+      "file_hash": "033a3a0816f1",
+      "match_count": 4,
+      "sample_lines": [
+        69,
+        71,
+        318,
+        329
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\text.txt",
+      "file_hash": "073fc41a35c6",
+      "match_count": 2,
+      "sample_lines": [
+        6446,
+        9417
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\text.txt",
+      "file_hash": "4f553747ed00",
+      "match_count": 26,
+      "sample_lines": [
+        535,
+        546,
+        550,
+        1296,
+        1301
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c36ccd75e6a52fa8\\text.txt",
+      "file_hash": "c01ded4468c8",
+      "match_count": 2,
+      "sample_lines": [
+        322,
+        324
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cda49efb2dd662fa\\text.txt",
+      "file_hash": "3d48c5f1a70e",
+      "match_count": 1,
+      "sample_lines": [
+        93
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\chunks.jsonl",
+      "file_hash": "f8e1eaa43425",
+      "match_count": 21,
+      "sample_lines": [
+        7,
+        13,
+        14,
+        16,
+        21
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5f4f95f7d71162d8\\chunks.jsonl",
+      "file_hash": "6346f187e165",
+      "match_count": 1,
+      "sample_lines": [
+        121
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\chunks.jsonl",
+      "file_hash": "b13c71179c11",
+      "match_count": 1,
+      "sample_lines": [
+        415
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\64dfce6d1ee14f00\\chunks.jsonl",
+      "file_hash": "430490361258",
+      "match_count": 4,
+      "sample_lines": [
+        4,
+        22,
+        23
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\chunks.jsonl",
+      "file_hash": "6695f23ec715",
+      "match_count": 2,
+      "sample_lines": [
+        420,
+        665
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\chunks.jsonl",
+      "file_hash": "133192138fb3",
+      "match_count": 27,
+      "sample_lines": [
+        55,
+        56,
+        125,
+        126,
+        185
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c36ccd75e6a52fa8\\chunks.jsonl",
+      "file_hash": "836d57362326",
+      "match_count": 2,
+      "sample_lines": [
+        2,
+        3
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\cda49efb2dd662fa\\chunks.jsonl",
+      "file_hash": "ddc3941b8808",
+      "match_count": 1,
+      "sample_lines": [
+        6
+      ]
+    }
+  ],
+  "generador": [
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\text.txt",
+      "file_hash": "72e0c387b031",
+      "match_count": 13,
+      "sample_lines": [
+        870,
+        876,
+        994,
+        1249,
+        1252
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\text.txt",
+      "file_hash": "34e3e170b5fe",
+      "match_count": 5,
+      "sample_lines": [
+        431,
+        562,
+        3780,
+        3782,
+        3801
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\text.txt",
+      "file_hash": "78235b3f2d0f",
+      "match_count": 1,
+      "sample_lines": [
+        6881
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\text.txt",
+      "file_hash": "1c78200346ec",
+      "match_count": 2,
+      "sample_lines": [
+        2359,
+        12133
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 6,
+      "sample_lines": [
+        4306,
+        12596,
+        12598,
+        12600,
+        12603
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\text.txt",
+      "file_hash": "51e154ee02d2",
+      "match_count": 1,
+      "sample_lines": [
+        900
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\text.txt",
+      "file_hash": "f7a649a5d42a",
+      "match_count": 3,
+      "sample_lines": [
+        584,
+        898
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\text.txt",
+      "file_hash": "848e92cbb490",
+      "match_count": 1,
+      "sample_lines": [
+        1611
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\text.txt",
+      "file_hash": "b34ea847569c",
+      "match_count": 8,
+      "sample_lines": [
+        368,
+        2324,
+        2470,
+        2483,
+        2829
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\73be53944b35f435\\text.txt",
+      "file_hash": "c3b765c05211",
+      "match_count": 2,
+      "sample_lines": [
+        76,
+        81
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\text.txt",
+      "file_hash": "b11483b6b8aa",
+      "match_count": 3,
+      "sample_lines": [
+        559,
+        872
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\text.txt",
+      "file_hash": "ac5887c3025c",
+      "match_count": 1,
+      "sample_lines": [
+        1539
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\text.txt",
+      "file_hash": "237f92ae12f0",
+      "match_count": 2,
+      "sample_lines": [
+        4,
+        16
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\a972ac18302c4cdc\\text.txt",
+      "file_hash": "06d06ef93c9c",
+      "match_count": 5,
+      "sample_lines": [
+        9,
+        159,
+        191,
+        193,
+        244
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\text.txt",
+      "file_hash": "6d025e6dbdbe",
+      "match_count": 2,
+      "sample_lines": [
+        5522,
+        8212
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 1,
+      "sample_lines": [
+        5447
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 4,
+      "sample_lines": [
+        10368,
+        14446,
+        26325,
+        32286
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\text.txt",
+      "file_hash": "25ae0fec92bf",
+      "match_count": 3,
+      "sample_lines": [
+        603,
+        904
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\076d93e4e49dc884\\chunks.jsonl",
+      "file_hash": "3bb317edf306",
+      "match_count": 13,
+      "sample_lines": [
+        64,
+        72,
+        88,
+        89,
+        160
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\chunks.jsonl",
+      "file_hash": "d96b07c1a7a0",
+      "match_count": 6,
+      "sample_lines": [
+        24,
+        37,
+        168,
+        169
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1e381e438cc8f277\\chunks.jsonl",
+      "file_hash": "f5871b5c409b",
+      "match_count": 1,
+      "sample_lines": [
+        639
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\chunks.jsonl",
+      "file_hash": "23a901fa7d59",
+      "match_count": 2,
+      "sample_lines": [
+        146,
+        746
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 7,
+      "sample_lines": [
+        257,
+        795,
+        796
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4f5bbe970c2a5212\\chunks.jsonl",
+      "file_hash": "c5d8945da4a1",
+      "match_count": 1,
+      "sample_lines": [
+        32
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\chunks.jsonl",
+      "file_hash": "f8600acef755",
+      "match_count": 5,
+      "sample_lines": [
+        26,
+        27,
+        42
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\chunks.jsonl",
+      "file_hash": "8aa487344302",
+      "match_count": 1,
+      "sample_lines": [
+        139
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 9,
+      "sample_lines": [
+        29,
+        111,
+        112,
+        119,
+        120
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\chunks.jsonl",
+      "file_hash": "b661fa324b33",
+      "match_count": 4,
+      "sample_lines": [
+        26,
+        41,
+        42
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\chunks.jsonl",
+      "file_hash": "d91493e50dc8",
+      "match_count": 1,
+      "sample_lines": [
+        92
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\chunks.jsonl",
+      "file_hash": "833cd7f90998",
+      "match_count": 2,
+      "sample_lines": [
+        1
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 2,
+      "sample_lines": [
+        431,
+        656
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 1,
+      "sample_lines": [
+        379
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 4,
+      "sample_lines": [
+        449,
+        600,
+        1127,
+        1424
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\chunks.jsonl",
+      "file_hash": "956e4f49017d",
+      "match_count": 5,
+      "sample_lines": [
+        28,
+        29,
+        44
+      ]
+    }
+  ],
+  "movistar": [
+    {
+      "file": "ProcessedDocuments\\18950ccebacb43ba\\text.txt",
+      "file_hash": "d2fcc7daf4aa",
+      "match_count": 1,
+      "sample_lines": [
+        304
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\text.txt",
+      "file_hash": "34e3e170b5fe",
+      "match_count": 1,
+      "sample_lines": [
+        4538
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\text.txt",
+      "file_hash": "6476ca1f7524",
+      "match_count": 1,
+      "sample_lines": [
+        434
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\text.txt",
+      "file_hash": "e31a57c6c409",
+      "match_count": 4,
+      "sample_lines": [
+        510,
+        622,
+        693,
+        694
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\27fc17d0bb4844ba\\text.txt",
+      "file_hash": "62b830bf5240",
+      "match_count": 5,
+      "sample_lines": [
+        213,
+        216,
+        218,
+        220,
+        222
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4c03a0ac78ff81af\\text.txt",
+      "file_hash": "fc5ab50f385f",
+      "match_count": 4,
+      "sample_lines": [
+        68,
+        69,
+        72,
+        73
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\text.txt",
+      "file_hash": "e2e953ae96b3",
+      "match_count": 1,
+      "sample_lines": [
+        47
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\text.txt",
+      "file_hash": "848e92cbb490",
+      "match_count": 1,
+      "sample_lines": [
+        1190
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\79405a4684449087\\text.txt",
+      "file_hash": "f5d54eec9e94",
+      "match_count": 6,
+      "sample_lines": [
+        13,
+        15,
+        29,
+        30,
+        34
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\aad5cde6d72ad219\\text.txt",
+      "file_hash": "fd20d2a5dd3d",
+      "match_count": 14,
+      "sample_lines": [
+        64,
+        65,
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\text.txt",
+      "file_hash": "4f553747ed00",
+      "match_count": 4,
+      "sample_lines": [
+        2934,
+        3314,
+        3316,
+        3321
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 1,
+      "sample_lines": [
+        2078
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 9,
+      "sample_lines": [
+        4632,
+        5403,
+        5406,
+        5412,
+        5491
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\18950ccebacb43ba\\chunks.jsonl",
+      "file_hash": "46037efbcac4",
+      "match_count": 1,
+      "sample_lines": [
+        20
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1b0d7590356debab\\chunks.jsonl",
+      "file_hash": "d96b07c1a7a0",
+      "match_count": 1,
+      "sample_lines": [
+        193
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\chunks.jsonl",
+      "file_hash": "8e281ee8f2fd",
+      "match_count": 1,
+      "sample_lines": [
+        136
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\chunks.jsonl",
+      "file_hash": "f8e1eaa43425",
+      "match_count": 4,
+      "sample_lines": [
+        43,
+        52,
+        57
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\27fc17d0bb4844ba\\chunks.jsonl",
+      "file_hash": "56c118298ac8",
+      "match_count": 5,
+      "sample_lines": [
+        3
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4c03a0ac78ff81af\\chunks.jsonl",
+      "file_hash": "c0adcd02eb1c",
+      "match_count": 4,
+      "sample_lines": [
+        2
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\4e9ecfbd94f800dc\\chunks.jsonl",
+      "file_hash": "e2ce99810619",
+      "match_count": 1,
+      "sample_lines": [
+        3
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\603c3b2f4010bd03\\chunks.jsonl",
+      "file_hash": "8aa487344302",
+      "match_count": 1,
+      "sample_lines": [
+        100
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\79405a4684449087\\chunks.jsonl",
+      "file_hash": "bab3a3ba3658",
+      "match_count": 6,
+      "sample_lines": [
+        1,
+        2
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\aad5cde6d72ad219\\chunks.jsonl",
+      "file_hash": "e63bc8e9ca2c",
+      "match_count": 15,
+      "sample_lines": [
+        2,
+        3
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\chunks.jsonl",
+      "file_hash": "133192138fb3",
+      "match_count": 5,
+      "sample_lines": [
+        285,
+        322,
+        323
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 1,
+      "sample_lines": [
+        140
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 10,
+      "sample_lines": [
+        206,
+        207,
+        222,
+        223,
+        224
+      ]
+    }
+  ],
+  "heredia": [
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\text.txt",
+      "file_hash": "6476ca1f7524",
+      "match_count": 6,
+      "sample_lines": [
+        399,
+        470,
+        489,
+        519,
+        579
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\text.txt",
+      "file_hash": "1c78200346ec",
+      "match_count": 33,
+      "sample_lines": [
+        141,
+        823,
+        850,
+        860,
+        882
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 38,
+      "sample_lines": [
+        121,
+        2471,
+        2480,
+        3028,
+        4083
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\text.txt",
+      "file_hash": "f7a649a5d42a",
+      "match_count": 4,
+      "sample_lines": [
+        3530,
+        4278,
+        4749,
+        5316
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 35,
+      "sample_lines": [
+        193,
+        262,
+        478,
+        1540,
+        1873
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\text.txt",
+      "file_hash": "fb6061feb60a",
+      "match_count": 5,
+      "sample_lines": [
+        279,
+        345,
+        422,
+        2475,
+        2478
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\text.txt",
+      "file_hash": "162824a1dd70",
+      "match_count": 17,
+      "sample_lines": [
+        183,
+        830,
+        831,
+        908,
+        1056
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\text.txt",
+      "file_hash": "b34ea847569c",
+      "match_count": 56,
+      "sample_lines": [
+        16,
+        115,
+        162,
+        219,
+        223
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\text.txt",
+      "file_hash": "b11483b6b8aa",
+      "match_count": 4,
+      "sample_lines": [
+        3210,
+        4025,
+        4501,
+        5119
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\text.txt",
+      "file_hash": "ac5887c3025c",
+      "match_count": 41,
+      "sample_lines": [
+        448,
+        803,
+        1212,
+        1213,
+        1249
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\text.txt",
+      "file_hash": "b4eef57e757e",
+      "match_count": 71,
+      "sample_lines": [
+        1058,
+        1124,
+        1125,
+        1127,
+        1218
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\text.txt",
+      "file_hash": "2091ecfdd027",
+      "match_count": 46,
+      "sample_lines": [
+        150,
+        560,
+        1720,
+        1924,
+        1949
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\text.txt",
+      "file_hash": "4f553747ed00",
+      "match_count": 8,
+      "sample_lines": [
+        1654,
+        1849,
+        2598,
+        2866,
+        2987
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\text.txt",
+      "file_hash": "6d025e6dbdbe",
+      "match_count": 2,
+      "sample_lines": [
+        6070,
+        9054
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 35,
+      "sample_lines": [
+        149,
+        218,
+        434,
+        1487,
+        1818
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\text.txt",
+      "file_hash": "684f0515ea44",
+      "match_count": 1,
+      "sample_lines": [
+        1047
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 9,
+      "sample_lines": [
+        130,
+        2530,
+        2546,
+        2595,
+        2607
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\text.txt",
+      "file_hash": "145c920a641c",
+      "match_count": 60,
+      "sample_lines": [
+        1341,
+        1345,
+        1347,
+        1348,
+        1357
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 23,
+      "sample_lines": [
+        1940,
+        1968,
+        2492,
+        2814,
+        3156
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\text.txt",
+      "file_hash": "25ae0fec92bf",
+      "match_count": 4,
+      "sample_lines": [
+        3468,
+        4277,
+        4749,
+        5363
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\chunks.jsonl",
+      "file_hash": "8e281ee8f2fd",
+      "match_count": 8,
+      "sample_lines": [
+        124,
+        143,
+        144,
+        146,
+        151
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\chunks.jsonl",
+      "file_hash": "23a901fa7d59",
+      "match_count": 36,
+      "sample_lines": [
+        8,
+        49,
+        50,
+        51,
+        52
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 40,
+      "sample_lines": [
+        6,
+        142,
+        177,
+        244,
+        281
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\chunks.jsonl",
+      "file_hash": "f8600acef755",
+      "match_count": 4,
+      "sample_lines": [
+        142,
+        163,
+        175,
+        191
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 38,
+      "sample_lines": [
+        9,
+        10,
+        14,
+        27,
+        93
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5e18df6443de4363\\chunks.jsonl",
+      "file_hash": "05afc1ec3187",
+      "match_count": 5,
+      "sample_lines": [
+        20,
+        23,
+        27,
+        129
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\chunks.jsonl",
+      "file_hash": "b13c71179c11",
+      "match_count": 20,
+      "sample_lines": [
+        10,
+        50,
+        51,
+        55,
+        64
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 62,
+      "sample_lines": [
+        1,
+        14,
+        15,
+        19,
+        21
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\chunks.jsonl",
+      "file_hash": "b661fa324b33",
+      "match_count": 5,
+      "sample_lines": [
+        140,
+        162,
+        175,
+        190,
+        191
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\chunks.jsonl",
+      "file_hash": "d91493e50dc8",
+      "match_count": 45,
+      "sample_lines": [
+        26,
+        46,
+        72,
+        74,
+        91
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\chunks.jsonl",
+      "file_hash": "160260ee5199",
+      "match_count": 80,
+      "sample_lines": [
+        59,
+        63,
+        69,
+        70,
+        81
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\chunks.jsonl",
+      "file_hash": "e05ce3c33664",
+      "match_count": 50,
+      "sample_lines": [
+        9,
+        34,
+        108,
+        121,
+        122
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\chunks.jsonl",
+      "file_hash": "133192138fb3",
+      "match_count": 9,
+      "sample_lines": [
+        160,
+        179,
+        253,
+        278,
+        279
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 2,
+      "sample_lines": [
+        474,
+        730
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 38,
+      "sample_lines": [
+        9,
+        13,
+        14,
+        27,
+        92
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\chunks.jsonl",
+      "file_hash": "a51f142c68cd",
+      "match_count": 1,
+      "sample_lines": [
+        37
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 9,
+      "sample_lines": [
+        7,
+        178,
+        180,
+        184,
+        185
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\chunks.jsonl",
+      "file_hash": "dc6db787a82e",
+      "match_count": 69,
+      "sample_lines": [
+        77,
+        78,
+        82,
+        84,
+        85
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 27,
+      "sample_lines": [
+        86,
+        87,
+        88,
+        112,
+        126
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\chunks.jsonl",
+      "file_hash": "956e4f49017d",
+      "match_count": 4,
+      "sample_lines": [
+        161,
+        183,
+        196,
+        211
+      ]
+    }
+  ],
+  "guanacaste": [
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\text.txt",
+      "file_hash": "6476ca1f7524",
+      "match_count": 3,
+      "sample_lines": [
+        470,
+        519,
+        756
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\text.txt",
+      "file_hash": "1c78200346ec",
+      "match_count": 15,
+      "sample_lines": [
+        3511,
+        4863,
+        6162,
+        6188,
+        6328
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 25,
+      "sample_lines": [
+        2688,
+        3409,
+        3412,
+        3518,
+        7324
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\text.txt",
+      "file_hash": "f7a649a5d42a",
+      "match_count": 5,
+      "sample_lines": [
+        3858,
+        4458,
+        4703,
+        5420,
+        5666
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 74,
+      "sample_lines": [
+        203,
+        244,
+        265,
+        376,
+        711
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\text.txt",
+      "file_hash": "162824a1dd70",
+      "match_count": 9,
+      "sample_lines": [
+        15,
+        21,
+        327,
+        333,
+        2235
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\text.txt",
+      "file_hash": "b34ea847569c",
+      "match_count": 3,
+      "sample_lines": [
+        323,
+        2983,
+        2989
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\text.txt",
+      "file_hash": "b11483b6b8aa",
+      "match_count": 5,
+      "sample_lines": [
+        3570,
+        4188,
+        4458,
+        5270,
+        5568
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\text.txt",
+      "file_hash": "ac5887c3025c",
+      "match_count": 55,
+      "sample_lines": [
+        631,
+        632,
+        1141,
+        3088,
+        4896
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\text.txt",
+      "file_hash": "b4eef57e757e",
+      "match_count": 13,
+      "sample_lines": [
+        1500,
+        1501,
+        6060,
+        6087,
+        6304
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\text.txt",
+      "file_hash": "2091ecfdd027",
+      "match_count": 24,
+      "sample_lines": [
+        1974,
+        4979,
+        5227,
+        5232,
+        5254
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\text.txt",
+      "file_hash": "4f553747ed00",
+      "match_count": 3,
+      "sample_lines": [
+        1849,
+        3042,
+        5960
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\text.txt",
+      "file_hash": "6d025e6dbdbe",
+      "match_count": 8,
+      "sample_lines": [
+        107,
+        792,
+        795,
+        820,
+        1580
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 74,
+      "sample_lines": [
+        159,
+        200,
+        221,
+        332,
+        662
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\text.txt",
+      "file_hash": "684f0515ea44",
+      "match_count": 1,
+      "sample_lines": [
+        357
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 12,
+      "sample_lines": [
+        6008,
+        6020,
+        6059,
+        6338,
+        6365
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\text.txt",
+      "file_hash": "145c920a641c",
+      "match_count": 39,
+      "sample_lines": [
+        2450,
+        2778,
+        2783,
+        2877,
+        2882
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 10,
+      "sample_lines": [
+        1938,
+        1967,
+        3224,
+        3255,
+        8100
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\text.txt",
+      "file_hash": "25ae0fec92bf",
+      "match_count": 5,
+      "sample_lines": [
+        3809,
+        4439,
+        4707,
+        5513,
+        5809
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\1f8d1e5d37a20813\\chunks.jsonl",
+      "file_hash": "8e281ee8f2fd",
+      "match_count": 4,
+      "sample_lines": [
+        143,
+        144,
+        151,
+        222
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\232482d574d02a2c\\chunks.jsonl",
+      "file_hash": "23a901fa7d59",
+      "match_count": 15,
+      "sample_lines": [
+        220,
+        304,
+        386,
+        387,
+        396
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 27,
+      "sample_lines": [
+        155,
+        201,
+        207,
+        208,
+        449
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5ad024211cfecd71\\chunks.jsonl",
+      "file_hash": "f8600acef755",
+      "match_count": 5,
+      "sample_lines": [
+        151,
+        167,
+        174,
+        194,
+        201
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 81,
+      "sample_lines": [
+        10,
+        13,
+        14,
+        21,
+        41
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\chunks.jsonl",
+      "file_hash": "b13c71179c11",
+      "match_count": 10,
+      "sample_lines": [
+        1,
+        19,
+        20,
+        137,
+        292
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\6a4c7584965880b6\\chunks.jsonl",
+      "file_hash": "59120002fbe5",
+      "match_count": 3,
+      "sample_lines": [
+        26,
+        140,
+        141
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8adf7e151ce50ded\\chunks.jsonl",
+      "file_hash": "b661fa324b33",
+      "match_count": 6,
+      "sample_lines": [
+        149,
+        166,
+        167,
+        174,
+        194
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\936fba21ae9d1952\\chunks.jsonl",
+      "file_hash": "d91493e50dc8",
+      "match_count": 58,
+      "sample_lines": [
+        36,
+        67,
+        193,
+        308,
+        516
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b04f4ddb0a5f8857\\chunks.jsonl",
+      "file_hash": "160260ee5199",
+      "match_count": 14,
+      "sample_lines": [
+        87,
+        372,
+        373,
+        374,
+        387
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\b93551145f78fccc\\chunks.jsonl",
+      "file_hash": "e05ce3c33664",
+      "match_count": 27,
+      "sample_lines": [
+        124,
+        315,
+        331,
+        332,
+        333
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ba4ee079eaa1a973\\chunks.jsonl",
+      "file_hash": "133192138fb3",
+      "match_count": 3,
+      "sample_lines": [
+        179,
+        295,
+        569
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3b72b9de4360d9f\\chunks.jsonl",
+      "file_hash": "4b924f7ad3ef",
+      "match_count": 8,
+      "sample_lines": [
+        5,
+        60,
+        62,
+        124,
+        125
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 81,
+      "sample_lines": [
+        10,
+        12,
+        13,
+        14,
+        20
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ca07f6b653c8fd31\\chunks.jsonl",
+      "file_hash": "a51f142c68cd",
+      "match_count": 1,
+      "sample_lines": [
+        13
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 12,
+      "sample_lines": [
+        425,
+        426,
+        429,
+        446,
+        448
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e82db88d6059bac4\\chunks.jsonl",
+      "file_hash": "dc6db787a82e",
+      "match_count": 44,
+      "sample_lines": [
+        142,
+        163,
+        169,
+        230,
+        241
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 11,
+      "sample_lines": [
+        86,
+        87,
+        88,
+        146,
+        147
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\ff9df1c58feab2de\\chunks.jsonl",
+      "file_hash": "956e4f49017d",
+      "match_count": 5,
+      "sample_lines": [
+        170,
+        187,
+        195,
+        215,
+        223
+      ]
+    }
+  ],
+  "liberty": [
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\text.txt",
+      "file_hash": "e31a57c6c409",
+      "match_count": 1,
+      "sample_lines": [
+        668
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 1,
+      "sample_lines": [
+        10315
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\text.txt",
+      "file_hash": "073fc41a35c6",
+      "match_count": 3,
+      "sample_lines": [
+        7679,
+        8891,
+        9213
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\824cf6a14d730d36\\text.txt",
+      "file_hash": "355b694e4dd9",
+      "match_count": 4,
+      "sample_lines": [
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\text.txt",
+      "file_hash": "f9f30721d579",
+      "match_count": 1,
+      "sample_lines": [
+        18
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\text.txt",
+      "file_hash": "88c29ce4d9a7",
+      "match_count": 1,
+      "sample_lines": [
+        394
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 1,
+      "sample_lines": [
+        10205
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\text.txt",
+      "file_hash": "f5cafdd6f54a",
+      "match_count": 43,
+      "sample_lines": [
+        2120,
+        2130,
+        2134,
+        2142,
+        2145
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\chunks.jsonl",
+      "file_hash": "f8e1eaa43425",
+      "match_count": 1,
+      "sample_lines": [
+        55
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 1,
+      "sample_lines": [
+        633
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\7aa2083a390c0288\\chunks.jsonl",
+      "file_hash": "6695f23ec715",
+      "match_count": 3,
+      "sample_lines": [
+        515,
+        614,
+        646
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\824cf6a14d730d36\\chunks.jsonl",
+      "file_hash": "66c39a605b19",
+      "match_count": 4,
+      "sample_lines": [
+        2
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\82b838754ddd9597\\chunks.jsonl",
+      "file_hash": "f4799c599489",
+      "match_count": 1,
+      "sample_lines": [
+        1
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\8888397875742a02\\chunks.jsonl",
+      "file_hash": "4d45d90c5dda",
+      "match_count": 1,
+      "sample_lines": [
+        38
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 1,
+      "sample_lines": [
+        627
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\e5ac3c4be7b344b1\\chunks.jsonl",
+      "file_hash": "77510f3768a4",
+      "match_count": 50,
+      "sample_lines": [
+        144,
+        145,
+        146,
+        147,
+        148
+      ]
+    }
+  ],
+  "telefonica": [
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\text.txt",
+      "file_hash": "e31a57c6c409",
+      "match_count": 1,
+      "sample_lines": [
+        710
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 1,
+      "sample_lines": [
+        771
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\aad5cde6d72ad219\\text.txt",
+      "file_hash": "fd20d2a5dd3d",
+      "match_count": 2,
+      "sample_lines": [
+        81,
+        82
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 1,
+      "sample_lines": [
+        722
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\text.txt",
+      "file_hash": "25ac091e8522",
+      "match_count": 1,
+      "sample_lines": [
+        5394
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\25acb42c8816c7e9\\chunks.jsonl",
+      "file_hash": "f8e1eaa43425",
+      "match_count": 1,
+      "sample_lines": [
+        58
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 2,
+      "sample_lines": [
+        44,
+        45
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\aad5cde6d72ad219\\chunks.jsonl",
+      "file_hash": "e63bc8e9ca2c",
+      "match_count": 2,
+      "sample_lines": [
+        2
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 1,
+      "sample_lines": [
+        44
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\f2219150c7e2c868\\chunks.jsonl",
+      "file_hash": "35be249a2be7",
+      "match_count": 2,
+      "sample_lines": [
+        221,
+        222
+      ]
+    }
+  ],
+  "valeska": [
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\text.txt",
+      "file_hash": "4b1f01113c35",
+      "match_count": 1,
+      "sample_lines": [
+        5423
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 1,
+      "sample_lines": [
+        9478
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\text.txt",
+      "file_hash": "162824a1dd70",
+      "match_count": 1,
+      "sample_lines": [
+        1272
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 1,
+      "sample_lines": [
+        9374
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\47198be1ad71e00c\\chunks.jsonl",
+      "file_hash": "47d6c3247e9d",
+      "match_count": 1,
+      "sample_lines": [
+        328
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 1,
+      "sample_lines": [
+        581
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\62fc0485b55d09b4\\chunks.jsonl",
+      "file_hash": "b13c71179c11",
+      "match_count": 2,
+      "sample_lines": [
+        77,
+        78
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 1,
+      "sample_lines": [
+        576
+      ]
+    }
+  ],
+  "los rios": [
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\text.txt",
+      "file_hash": "d4faccbaa6c8",
+      "match_count": 1,
+      "sample_lines": [
+        4790
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\text.txt",
+      "file_hash": "4f82d0a0060c",
+      "match_count": 1,
+      "sample_lines": [
+        4720
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\5d0e7218a9fef948\\chunks.jsonl",
+      "file_hash": "61c37a87e010",
+      "match_count": 1,
+      "sample_lines": [
+        293
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\c3dad15f311eb438\\chunks.jsonl",
+      "file_hash": "b79a3e5c7530",
+      "match_count": 1,
+      "sample_lines": [
+        290
+      ]
+    }
+  ],
+  "setecom s.a.": [
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\text.txt",
+      "file_hash": "237f92ae12f0",
+      "match_count": 1,
+      "sample_lines": [
+        20
+      ]
+    },
+    {
+      "file": "ProcessedDocuments\\97b413789768a2cd\\chunks.jsonl",
+      "file_hash": "833cd7f90998",
+      "match_count": 1,
+      "sample_lines": [
+        1
+      ]
+    }
+  ]
+}

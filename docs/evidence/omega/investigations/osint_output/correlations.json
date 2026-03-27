@@ -1,0 +1,32 @@
+{
+  "Marjorie Alfaro": {
+    "Jean Solis": 2,
+    "Michael Greenfield": 2,
+    "Genesis Peralta": 2
+  },
+  "Jean Solis": {
+    "Marjorie Alfaro": 2,
+    "Michael Greenfield": 2,
+    "Genesis Peralta": 2
+  },
+  "Michael Greenfield": {
+    "Marjorie Alfaro": 2,
+    "Jean Solis": 2,
+    "Genesis Peralta": 2
+  },
+  "Genesis Peralta": {
+    "Marjorie Alfaro": 2,
+    "Jean Solis": 2,
+    "Michael Greenfield": 2
+  },
+  "R Herrera": {
+    "Los Rios": 4,
+    "Pasti": 2
+  },
+  "Los Rios": {
+    "R Herrera": 4
+  },
+  "Pasti": {
+    "R Herrera": 2
+  }
+}

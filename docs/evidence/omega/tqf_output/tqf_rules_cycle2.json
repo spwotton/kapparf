@@ -1,0 +1,662 @@
+[
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.143",
+    "dst_ip": "39.244.107.123",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.167",
+    "dst_ip": "34.125.130.169",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.145",
+    "dst_ip": "30.138.6.181",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.167",
+    "dst_ip": "233.217.123.196",
+    "dst_port": "443",
+    "verdict": "malicious",
+    "consensus": 0.391,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.193",
+    "dst_ip": "105.44.95.24",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.146",
+    "dst_ip": "42.181.43.107",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.190",
+    "dst_ip": "106.247.28.251",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.162",
+    "dst_ip": "88.35.27.93",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.192",
+    "dst_ip": "5.141.253.147",
+    "dst_port": "443",
+    "verdict": "malicious",
+    "consensus": 0.391,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.174",
+    "dst_ip": "157.103.138.133",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.158",
+    "dst_ip": "130.185.231.84",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.120",
+    "dst_ip": "129.137.191.182",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.128",
+    "dst_ip": "247.243.97.205",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.141",
+    "dst_ip": "248.63.21.148",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.154",
+    "dst_ip": "156.13.152.250",
+    "dst_port": "443",
+    "verdict": "malicious",
+    "consensus": 0.391,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.108",
+    "dst_ip": "192.247.25.106",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.168",
+    "dst_ip": "17.3.14.235",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.141",
+    "dst_ip": "218.220.100.84",
+    "dst_port": "8080",
+    "verdict": "suspicious",
+    "consensus": 0.586,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.101",
+    "dst_ip": "4.18.130.131",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "192.168.1.136",
+    "dst_ip": "227.183.224.149",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.581,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "22",
+    "verdict": "suspicious",
+    "consensus": 0.937,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "23",
+    "verdict": "suspicious",
+    "consensus": 0.557,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "80",
+    "verdict": "suspicious",
+    "consensus": 0.939,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "443",
+    "verdict": "suspicious",
+    "consensus": 0.561,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "445",
+    "verdict": "suspicious",
+    "consensus": 0.567,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "3389",
+    "verdict": "suspicious",
+    "consensus": 0.55,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "5900",
+    "verdict": "suspicious",
+    "consensus": 0.936,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "ALERT",
+    "src_ip": "185.220.100.252",
+    "dst_ip": "192.168.1.100",
+    "dst_port": "8443",
+    "verdict": "suspicious",
+    "consensus": 0.566,
+    "bg_correction": {
+      "detected_shape": "laser",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "185.220.100.252",
+    "dst_port": "8443",
+    "verdict": "malicious",
+    "consensus": 0.64,
+    "bg_correction": {
+      "detected_shape": "dipole",
+      "prescribed_inverse": "concentric_circles",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  },
+  {
+    "action": "BLOCK",
+    "src_ip": "192.168.1.100",
+    "dst_ip": "8.8.8.8",
+    "dst_port": "53",
+    "verdict": "malicious",
+    "consensus": 0.476,
+    "bg_correction": {
+      "detected_shape": "horn",
+      "prescribed_inverse": "l_shape",
+      "correction_frequency_hz": 7.87,
+      "correction_angle_deg": 19.098593171027442
+    },
+    "analysts": 5
+  }
+]

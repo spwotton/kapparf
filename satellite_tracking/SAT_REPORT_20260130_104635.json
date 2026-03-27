@@ -1,0 +1,157 @@
+{
+  "timestamp": "2026-01-30T10:46:35.932999",
+  "location": {
+    "lat": 9.9535043,
+    "lon": -84.2908709
+  },
+  "muos": {
+    "MUOS-1": {
+      "lon": -72.0,
+      "elevation": 71.5,
+      "azimuth": 231.6,
+      "status": "GEO_ALWAYS_VISIBLE"
+    },
+    "MUOS-2": {
+      "lon": -177.0,
+      "elevation": -5.2,
+      "azimuth": 275.0,
+      "status": "BELOW_HORIZON"
+    },
+    "MUOS-3": {
+      "lon": -100.0,
+      "elevation": 58.3,
+      "azimuth": 255.0,
+      "status": "GEO_ALWAYS_VISIBLE"
+    },
+    "MUOS-4": {
+      "lon": 75.0,
+      "elevation": -15.0,
+      "azimuth": 90.0,
+      "status": "BELOW_HORIZON"
+    },
+    "MUOS-5": {
+      "lon": -72.0,
+      "elevation": 71.5,
+      "azimuth": 231.6,
+      "status": "GEO_ALWAYS_VISIBLE"
+    }
+  },
+  "leo_overhead": [
+    {
+      "name": "NAVSTAR 46 (USA 145)",
+      "elevation": 77.6,
+      "azimuth": 124.0,
+      "distance_km": 20569.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "USA 285",
+      "elevation": 72.3,
+      "azimuth": 187.7,
+      "distance_km": 35509.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "AEHF-4 (USA 288)",
+      "elevation": 67.0,
+      "azimuth": 122.7,
+      "distance_km": 36005.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "USA 176 (DSP 22)",
+      "elevation": 60.8,
+      "azimuth": 210.5,
+      "distance_km": 36465.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "NAVSTAR 71 (USA 256)",
+      "elevation": 57.7,
+      "azimuth": 229.5,
+      "distance_km": 20915.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "USA 99 (MILSTAR-1 1)",
+      "elevation": 57.5,
+      "azimuth": 192.5,
+      "distance_km": 36628.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "NUSAT-48 (HENRIETTA LE*)",
+      "elevation": 51.9,
+      "azimuth": 266.7,
+      "distance_km": 593.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "WGS F5 (USA 243)",
+      "elevation": 51.4,
+      "azimuth": 105.6,
+      "distance_km": 36989.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "USA 134",
+      "elevation": 48.8,
+      "azimuth": 233.4,
+      "distance_km": 37131.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "SBIRS GEO-2 (USA 241)",
+      "elevation": 46.9,
+      "azimuth": 110.7,
+      "distance_km": 37273.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "NAVSTAR 52 (USA 168)",
+      "elevation": 44.6,
+      "azimuth": 152.7,
+      "distance_km": 22210.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "USA 159 (DSP 21)",
+      "elevation": 43.6,
+      "azimuth": 117.0,
+      "distance_km": 37508.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "NAVSTAR 77 (USA 289)",
+      "elevation": 43.3,
+      "azimuth": 179.3,
+      "distance_km": 21682.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "NAVSTAR 56 (USA 180)",
+      "elevation": 43.2,
+      "azimuth": 95.0,
+      "distance_km": 21510.0,
+      "type": "CLASSIFIED"
+    },
+    {
+      "name": "USA 167",
+      "elevation": 42.6,
+      "azimuth": 248.5,
+      "distance_km": 37574.0,
+      "type": "CLASSIFIED"
+    }
+  ],
+  "correlation": {
+    "timestamp": "2026-01-30T10:46:35.932405",
+    "muos_visible": [
+      "MUOS-1",
+      "MUOS-3",
+      "MUOS-5"
+    ],
+    "muos_elevation": 71.5,
+    "signal_active": true,
+    "potential_relay": true
+  }
+}
