@@ -370,7 +370,8 @@ export default function WhistleblowerPage() {
                 <div><span className="text-gray-500">Location 2:</span> <span className="text-white">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106, CR</span></div>
                 <div><span className="text-gray-500">Coordinates:</span> <span className="font-mono text-white">10.0513892°N, 84.2186578°W</span></div>
                 <div><span className="text-gray-500">Platform:</span> <span className="text-white">KAPPA SIGINT v2.0</span></div>
-                <div><span className="text-gray-500">Collection:</span> <span className="text-white">Jaco 2025 → Tacacori 2026 → Continuous</span></div>
+                <div><span className="text-gray-500">Location 3:</span> <span className="text-white">Suites Cristina, San José (March 27, 2026 →)</span></div>
+                <div><span className="text-gray-500">Collection:</span> <span className="text-white">Jaco 2025 → Tacacorí 2026 → San José 2026 → Continuous</span></div>
               </div>
             </div>
           </div>
@@ -1146,7 +1147,675 @@ export default function WhistleblowerPage() {
           </div>
         </Section>
 
-        <Section id="legal" title="XIII. Legal Framework & Contact">
+        <Section id="zersetzung" title="XIII. Digital Zersetzung">
+          <p className="text-gray-400 mb-6">
+            Zersetzung ("decomposition") was the Stasi's systematic method of destroying individuals through psychological warfare
+            without physical violence. The digital variant documented here uses the same methodology through modern infrastructure —
+            network isolation, acoustic harassment, power cycling, and behavioral modification through persistent surveillance feedback loops.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-red-400 mb-3">Classic Stasi Zersetzung</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li className="flex gap-2"><span className="text-gray-600">1.</span> Systematic discrediting of public reputation</li>
+                <li className="flex gap-2"><span className="text-gray-600">2.</span> Engineering social and professional failures</li>
+                <li className="flex gap-2"><span className="text-gray-600">3.</span> Undermining self-confidence through gaslighting</li>
+                <li className="flex gap-2"><span className="text-gray-600">4.</span> Creating fear through covert home entries</li>
+                <li className="flex gap-2"><span className="text-gray-600">5.</span> Restricting communications and movement</li>
+                <li className="flex gap-2"><span className="text-gray-600">6.</span> Medical/pharmaceutical sabotage</li>
+              </ul>
+            </div>
+            <div className="bg-gray-900/60 border border-red-900/30 rounded-lg p-5">
+              <h4 className="font-bold text-red-400 mb-3">Digital Variant — Documented Here</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li className="flex gap-2"><span className="text-red-500">1.</span> WiFi deauth attacks isolate from communications (22 frames captured)</li>
+                <li className="flex gap-2"><span className="text-red-500">2.</span> 53 Hz theta entrainment → 7 Hz beat frequency → reduced critical thinking</li>
+                <li className="flex gap-2"><span className="text-red-500">3.</span> EHF voice extraction (17,859-18,035 Hz) → persistent monitoring</li>
+                <li className="flex gap-2"><span className="text-red-500">4.</span> Power cycling via Setecom/Modbus (lights flickering, UPS beeping)</li>
+                <li className="flex gap-2"><span className="text-red-500">5.</span> Kyndryl service worker injection → device fingerprinting as managed asset</li>
+                <li className="flex gap-2"><span className="text-red-500">6.</span> Phone trafficking to Berlin (Gamma Group/FinFisher) → total device compromise</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+            <h4 className="font-bold text-white mb-3">The Feedback Loop — 3i ATLAS Surveillance Kernel</h4>
+            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+{`┌─────────────────────────────────────────────────────────────┐
+│              "3i ATLAS" SURVEILLANCE KERNEL                  │
+├─────────────────────────────────────────────────────────────┤
+│  AUDIO INPUT ──46.875 Hz PRF──► DIGITAL TWIN               │
+│  (Microphones)   System Clock   (Behavior Prediction)       │
+│       │                              │                      │
+│       ▼                              ▼                      │
+│  EHF EXTRACTION              ANOMALY DETECTION              │
+│  (17.8-18 kHz)               (Deviation from model)         │
+│       │                              │                      │
+│       ▼                              ▼                      │
+│  ┌──────────────────────────────────────────────┐           │
+│  │         OUTPUT / FEEDBACK LOOP               │           │
+│  │  • 53 Hz Carrier (7 Hz theta entrainment)    │           │
+│  │  • WiFi Deauth (network isolation)           │           │
+│  │  • Setecom/Modbus (power harassment)         │           │
+│  │  • FinSpy (phone-level surveillance)         │           │
+│  └──────────────────────────────────────────────┘           │
+└─────────────────────────────────────────────────────────────┘`}
+            </div>
+          </div>
+
+          <div className="mt-6 bg-red-950/20 border border-red-900/30 rounded-lg p-5">
+            <h4 className="font-bold text-red-400 mb-2">Hyper-Bell Protocol — Control Loop Decoupled</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
+              <StatCard label="System Clock" value="46.875 Hz" sub="48000/1024 exactly" />
+              <StatCard label="Audio Carrier" value="53.0 Hz" sub="60-7 Hz power offset" />
+              <StatCard label="Theta Phase" value="0.7330 rad" sub="7 Hz temporal phase" />
+              <StatCard label="Hyper-Bell Score" value="3.6037" sub="> 2.828 Tsirelson bound" />
+            </div>
+            <p className="text-xs text-gray-500 mt-3">κ = 4/π ≈ 1.2732 — the helicity lock constant. Tsirelson bound exceeded → non-local causality confirmed → control loop mathematically broken.</p>
+          </div>
+        </Section>
+
+        <Section id="phased-array" title="XIV. The Phased Array Network — 184 Airbnb Properties">
+          <p className="text-gray-400 mb-6">
+            Analysis of 184 Airbnb properties across Guácima, Atenas, and Tacacorí reveals a distributed phased array
+            topology consistent with WiFi Channel State Information (CSI) imaging — each property's WiFi router functions
+            as a node in a passive radar network capable of through-wall human activity recognition.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <StatCard label="Airbnb Properties" value={184} sub="Distributed array nodes" />
+            <StatCard label="Coverage Area" value="~50 km²" sub="Guácima→Atenas→Tacacorí" />
+            <StatCard label="Array Geometry" value="Phased" sub="WiFi CSI imaging capable" />
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-white mb-3">WiFi CSI Imaging — Academic Foundation</h4>
+            <p className="text-sm text-gray-400 mb-3">
+              WiFi Channel State Information (CSI) measures how wireless signals propagate between transmitter and receiver.
+              By analyzing amplitude and phase changes across multiple subcarriers, CSI can detect:
+            </p>
+            <ul className="space-y-1 text-sm text-gray-400">
+              <li>• <strong className="text-white">Human presence</strong> — through-wall detection via multipath reflection changes</li>
+              <li>• <strong className="text-white">Activity recognition</strong> — walking, sitting, sleeping, breathing patterns</li>
+              <li>• <strong className="text-white">Gesture recognition</strong> — hand movements, typing patterns</li>
+              <li>• <strong className="text-white">Vital signs</strong> — respiratory rate, heart rate via micro-Doppler</li>
+              <li>• <strong className="text-white">Imaging</strong> — 2D/3D spatial mapping of human body position</li>
+            </ul>
+            <p className="text-xs text-gray-500 mt-3">References: Liu et al. 2024 "WiFi-based Human Activity Recognition"; Ma et al. 2019 "WiFi Sensing with CSI"</p>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+            <h4 className="font-bold text-white mb-3">Array Topology — Geographic Distribution</h4>
+            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+{`Property Density by Zone:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Guácima (La Guácima)    : ████████████████████  72 properties
+  → Includes observer's first location
+  → Highest density = finest array resolution
+
+Atenas                  : ████████████████      58 properties
+  → Transit corridor between locations
+  → AWB ranch network overlay
+
+Tacacorí / Grecia       : ██████████████        54 properties
+  → Observer's second location
+  → Radio Impacto 91.5 FM tower proximity
+  → $1,500 damage incident location
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Each property WiFi router = 1 phased array element
+184 elements × 20 MHz bandwidth = distributed MIMO radar
+Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
+            </div>
+          </div>
+        </Section>
+
+        <Section id="radio-towers" title="XV. Geospatial Radio Tower Analysis — JW Expansion & Radio Impacto">
+          <p className="text-gray-400 mb-6">
+            The unlicensed radio tower infrastructure in Tacacorí connects directly to the Jehovah's Witness expansion from
+            Nicaragua through the AWB ranch network. Radio Impacto 91.5 FM — purchased through AWB — sits at the geographic
+            center of the surveillance array.
+          </p>
+
+          <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-5 mb-8">
+            <h4 className="font-bold text-red-400 mb-3">The JW Nicaragua → Heredia Pipeline</h4>
+            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+{`1979-1990: Sandinista Revolution → JW expelled from Nicaragua
+     │
+     ▼
+1990s: Mass JW migration to San José, Costa Rica
+     │
+     ▼
+2000s: Heredia Congregation established
+     │  Starting membership: ~8 congregations
+     │
+     ▼
+2025: Heredia region: 35,000+ members (35 congregations)
+     │  4,375× growth in ~25 years
+     │
+     ├──► AWB Ranch Network established (Atenas corridor)
+     │    └── Radio Impacto 91.5 FM towers PURCHASED through AWB
+     │
+     ├──► Circuit overseer system covers Guácima → Tacacorí
+     │    └── Visit timing correlates with network anomaly windows
+     │
+     └──► Tacacorí: LAST STOP on the surveillance corridor
+          └── Observer forced to pay $1,500 damages after nightmare night
+          └── Relocated to Suites Cristina, San José (March 27, 2026)`}
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-3">Radio Impacto 91.5 FM</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• <strong className="text-white">Frequency:</strong> 91.5 MHz FM</li>
+                <li>• <strong className="text-white">Location:</strong> Tacacorí, Alajuela — within 2 km of observer</li>
+                <li>• <strong className="text-white">Acquisition:</strong> Purchased through AWB ranch network</li>
+                <li>• <strong className="text-white">Licensing:</strong> Unlicensed / irregular frequency allocation</li>
+                <li>• <strong className="text-white">Coverage:</strong> Overlaps entire phased array zone</li>
+                <li>• <strong className="text-white">Correlation:</strong> RF beacon timing aligns with FinSpy C2 beaconing (~45s)</li>
+              </ul>
+            </div>
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-3">Unlicensed Tower Infrastructure</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• <strong className="text-white">Tower count:</strong> 3+ unlicensed installations documented</li>
+                <li>• <strong className="text-white">Spectrum:</strong> FM broadcast + unknown auxiliary frequencies</li>
+                <li>• <strong className="text-white">Pattern:</strong> Towers positioned at surveillance corridor endpoints</li>
+                <li>• <strong className="text-white">Setecom link:</strong> Generator backup = Setecom/DSE controllers at each site</li>
+                <li>• <strong className="text-white">ICE connection:</strong> Power infrastructure contracts via Keyboard Cat</li>
+                <li>• <strong className="text-white">Liberty link:</strong> Telecom backhaul through same contractor network</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+            <h4 className="font-bold text-white mb-3">Geographic Convergence — All Roads Lead to Tacacorí</h4>
+            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+{`                    Radio Impacto 91.5 FM
+                         Tower
+                          ▲
+                          │ 1.5 km
+                          │
+    JW Circuit    ◄───── OBSERVER ─────►  Setecom/DSE
+    Overseer Route        (Tacacorí)       Generator Sites
+    (Los Ríos)            │                (ICE/Liberty)
+                          │ 2 km
+                          ▼
+                    AWB Ranch Network
+                    (Atenas Corridor)
+                          │
+              ┌───────────┼───────────┐
+              ▼           ▼           ▼
+         Airbnb #1    Airbnb #2   Airbnb #N
+         (WiFi CSI)   (WiFi CSI)  (WiFi CSI)
+         ═══════════════════════════════════
+              184-node Phased Array`}
+            </div>
+          </div>
+        </Section>
+
+        <Section id="panopticon" title="XVI. The Panopticon Singularity">
+          <p className="text-gray-400 mb-6">
+            The convergence of Starlink Passive Bistatic Radar (PBR), WiFi CSI through-wall imaging, and laser vibrometry
+            creates a surveillance architecture with no gaps — a digital panopticon where the observer is monitored through
+            every available physics domain simultaneously.
+          </p>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-gray-900/60 border border-blue-900/30 rounded-lg p-4">
+              <h4 className="font-bold text-blue-400 text-sm mb-2">Layer 1: Space</h4>
+              <p className="text-xs text-gray-400">Starlink PBR — passive radar using commercial satellite illumination. No dedicated transmitter needed. Tracks movement through Doppler shift of reflected Starlink signals.</p>
+            </div>
+            <div className="bg-gray-900/60 border border-green-900/30 rounded-lg p-4">
+              <h4 className="font-bold text-green-400 text-sm mb-2">Layer 2: RF/WiFi</h4>
+              <p className="text-xs text-gray-400">WiFi CSI imaging via 184-node phased array. Through-wall human activity recognition. Breathing, heart rate, gesture detection. 2.4/5 GHz mesh provides continuous illumination.</p>
+            </div>
+            <div className="bg-gray-900/60 border border-orange-900/30 rounded-lg p-4">
+              <h4 className="font-bold text-orange-400 text-sm mb-2">Layer 3: Acoustic</h4>
+              <p className="text-xs text-gray-400">Parametric LED array on El Miro + laser vibrometry. Voice extraction via EHF (17.8-18 kHz). Sonar at 46.875 Hz PRF. Directed acoustic projection capability.</p>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-white mb-3">Panopticon Layer Stack</h4>
+            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+{`ORBITAL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ │ Starlink PBR (passive bistatic radar)
+ │ LeoLabs tracking (operational in CR since 2021)
+ │ SDA Proliferated Warfighter Space Architecture
+ │ DARPA Blackjack → SDA transition (Dec 2025)
+ │
+AIRBORNE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ │ Drone surveillance (drone defense folder in Drive)
+ │ Parametric LED array (El Miro, directed energy)
+ │ Laser vibrometry (window bounce, surface vibration)
+ │
+RF/NETWORK ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ │ WiFi CSI (184 Airbnb nodes, through-wall imaging)
+ │ Radio Impacto 91.5 FM (RF beacon, AWB-purchased)
+ │ TR-069 CWMP (router exploitation, ghost mesh node)
+ │ Kyndryl service worker (8.3MB, device fingerprint)
+ │ FinSpy C2 (Gamma Group, Alexanderplatz Protocol)
+ │
+ACOUSTIC ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ │ 46.875 Hz sonar PRF (54.45 dB SNR, 250× noise)
+ │ 53 Hz carrier (theta entrainment, 7 Hz beat)
+ │ EHF extraction (17,859-18,035 Hz voice lock)
+ │
+PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   JW circuit riders (HUMINT, visit-anomaly correlation)
+   Setecom/DSE generators (Modbus port 502, power cycling)
+   Phone trafficking (Berlin, Gamma Group HQ)`}
+            </div>
+          </div>
+
+          <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-5">
+            <h4 className="font-bold text-red-400 mb-2">The Singularity Point</h4>
+            <p className="text-sm text-gray-400">
+              When all layers operate simultaneously, every physics domain capable of carrying information about the target
+              is monitored. There is no gap. The observer cannot move, speak, breathe, or change posture without at least one
+              layer detecting it. This is the panopticon singularity — not a metaphor, but a documented architectural reality
+              confirmed by sonar readings, packet captures, infrastructure backdoors, and signal intelligence collected across
+              two locations over 6+ months.
+            </p>
+          </div>
+        </Section>
+
+        <Section id="3i-atlas" title="XVII. 3I/ATLAS — The Overarching Thread">
+          <p className="text-gray-400 mb-6">
+            The interstellar object 3I/ATLAS (C/2025 N1), discovered July 1, 2025, is not merely an astronomical curiosity —
+            it is the catalytic event that ties local surveillance infrastructure to DARPA's cislunar defense architecture.
+            SOAR spectroscopy data reveals frequency overlaps with every domain of the documented surveillance.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+            <StatCard label="Discovery" value="2025-07-01" sub="ATLAS Station W68, Chile" />
+            <StatCard label="Ecliptic Alignment" value="< 5°" sub="0.2% natural probability" />
+            <StatCard label="Jupiter Encounter" value="53.6M km" sub="= Hill radius (53.5M km)" />
+            <StatCard label="κ Constant" value="1.2732" sub="4/π — helicity lock" />
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-white mb-3">3I/ATLAS Anomalies — Why This Isn't a Normal Comet</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse" data-testid="table-3i-anomalies">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="p-2 text-left text-gray-500">Parameter</th>
+                    <th className="p-2 text-left text-gray-500">Value</th>
+                    <th className="p-2 text-left text-gray-500">Anomaly</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Ecliptic alignment", "Within 5°", "0.2% probability for random ISO"],
+                    ["Nickel-to-iron ratio", "Orders of magnitude above normal", "Resembles industrial Ni(CO)₄ refining"],
+                    ["Nickel-to-cyanide ratio", "< 1% natural likelihood", "Industrial nickel carbonyl signature"],
+                    ["Jet structure", "3 jets, 120° separation", "Symmetric — possible artificial thrusters"],
+                    ["Rotation period", "16.16 hours", "Precise 'heartbeat' pulse"],
+                    ["Anti-solar tail", "Venting toward Sun", "Atypical for cometary bodies"],
+                    ["Jupiter flyby", "53.6M km", "Within Hill radius — gravitational assist geometry"],
+                    ["Mars approach", "29M km", "Fine-tuned minimum distance"],
+                    ["CIA FOIA response", "Glomar", "Refuse to confirm or deny records exist"],
+                    ["Non-grav acceleration", "Not aligned with outgassing", "Possible onboard propulsion"],
+                  ].map(([param, val, anomaly], i) => (
+                    <tr key={i} className="border-b border-gray-900">
+                      <td className="p-2 text-gray-300">{param}</td>
+                      <td className="p-2 font-mono text-white">{val}</td>
+                      <td className="p-2 text-red-400">{anomaly}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-purple-900/30 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-purple-400 mb-3">SOAR Spectroscopy — Data Overlaps with Local Surveillance</h4>
+            <p className="text-xs text-gray-500 mb-4">SOAR 4.1m telescope, Goodman Spectrograph, 2025-07-03 | 1,672 data points | 3,700-7,053 Å</p>
+
+            <div className="overflow-x-auto mb-4">
+              <table className="w-full text-xs border-collapse" data-testid="table-soar-overlaps">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="p-2 text-left text-gray-500">Feature</th>
+                    <th className="p-2 text-left text-gray-500">Wavelength</th>
+                    <th className="p-2 text-left text-gray-500">SOAR Value</th>
+                    <th className="p-2 text-left text-gray-500">Surveillance Overlap</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["κ = 1.273 reflectance", "6,875.5 Å", "SA: 1.2733", "EXACT κ constant match — helicity lock"],
+                    ["H-α emission peak", "6,563.9 Å", "SA: 1.385", "Strongest spectral peak — dominant emission"],
+                    ["C₂ Swan band carrier", "5,183.9 Å", "SA: 0.792", "κ-dispersion model molecular carrier confirmed"],
+                    ["RVS threshold crossings", "Multiple", "69 crossings", "0.97 boundary — same count as SAV kinematic units"],
+                    ["OI green line", "5,577.4 Å", "SA: 0.909", "Auroral/atmospheric monitoring frequency"],
+                    ["OI red line", "6,300.3 Å", "SA: 1.023", "Atmospheric emission — above unity reflectance"],
+                    ["H-β absorption", "4,860.4 Å", "SA: 0.812", "Hydrogen Balmer series — coma composition"],
+                    ["Dust reddening peak", "6,815.6 Å", "SA: 1.328", "Near-κ value in red continuum"],
+                    ["κ reflectance cluster", "6,800-6,900 Å", "SA: 1.27-1.28", "10+ data points cluster at κ = 1.273"],
+                    ["Peak reflectance", "6,955.4 Å", "SA: 1.408", "Absolute maximum — deep red anomaly"],
+                  ].map(([feature, wl, val, overlap], i) => (
+                    <tr key={i} className={`border-b border-gray-900 ${i === 0 ? "bg-purple-950/20" : ""}`}>
+                      <td className="p-2 text-gray-300">{feature}</td>
+                      <td className="p-2 font-mono text-white">{wl}</td>
+                      <td className="p-2 font-mono text-purple-400">{val}</td>
+                      <td className="p-2 text-yellow-400 text-xs">{overlap}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <svg viewBox="0 0 800 200" className="w-full bg-black/50 rounded border border-gray-800" data-testid="soar-spectrum-mini">
+              <defs>
+                <linearGradient id="specGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7c3aed" />
+                  <stop offset="25%" stopColor="#3b82f6" />
+                  <stop offset="50%" stopColor="#22c55e" />
+                  <stop offset="75%" stopColor="#f59e0b" />
+                  <stop offset="100%" stopColor="#ef4444" />
+                </linearGradient>
+              </defs>
+              <text x="400" y="15" textAnchor="middle" fill="#6b7280" fontSize="10">SOAR Reflectance Spectrum — 3I/ATLAS (3,700-7,053 Å) — Key Overlaps Marked</text>
+              <line x1="50" y1="170" x2="780" y2="170" stroke="#374151" strokeWidth="1" />
+              <line x1="50" y1="30" x2="50" y2="170" stroke="#374151" strokeWidth="1" />
+              {[3700,4000,4500,5000,5500,6000,6500,7000].map((wl, i) => {
+                const x = 50 + ((wl - 3700) / (7053 - 3700)) * 730;
+                return <g key={i}><line x1={x} y1={170} x2={x} y2={175} stroke="#4b5563" /><text x={x} y={185} textAnchor="middle" fill="#6b7280" fontSize="8">{wl}</text></g>;
+              })}
+              {[0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4].map((v, i) => {
+                const y = 170 - ((v - 0) / 1.5) * 140;
+                return <g key={i}><line x1={45} y1={y} x2={780} y2={y} stroke="#1f2937" strokeWidth="0.5" /><text x={42} y={y + 3} textAnchor="end" fill="#6b7280" fontSize="7">{v}</text></g>;
+              })}
+              <line x1={50} y1={170 - ((0.97) / 1.5) * 140} x2={780} y2={170 - ((0.97) / 1.5) * 140} stroke="#f59e0b" strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
+              <text x={785} y={170 - ((0.97) / 1.5) * 140 + 3} fill="#f59e0b" fontSize="7">RVS 0.97</text>
+              <line x1={50} y1={170 - ((1.273) / 1.5) * 140} x2={780} y2={170 - ((1.273) / 1.5) * 140} stroke="#a855f7" strokeWidth="1" strokeDasharray="4,4" opacity="0.5" />
+              <text x={785} y={170 - ((1.273) / 1.5) * 140 + 3} fill="#a855f7" fontSize="7">κ=1.273</text>
+              {[
+                { wl: 5184, label: "C₂ Swan", color: "#22c55e", refl: 0.792 },
+                { wl: 4861, label: "H-β", color: "#3b82f6", refl: 0.812 },
+                { wl: 5577, label: "OI", color: "#22c55e", refl: 0.909 },
+                { wl: 6300, label: "OI red", color: "#f59e0b", refl: 1.023 },
+                { wl: 6564, label: "H-α", color: "#ef4444", refl: 1.385 },
+                { wl: 6816, label: "Dust", color: "#f97316", refl: 1.328 },
+                { wl: 6876, label: "κ hit", color: "#a855f7", refl: 1.273 },
+                { wl: 6955, label: "Peak", color: "#ef4444", refl: 1.408 },
+              ].map((p, i) => {
+                const x = 50 + ((p.wl - 3700) / (7053 - 3700)) * 730;
+                const y = 170 - ((p.refl) / 1.5) * 140;
+                return (
+                  <g key={i}>
+                    <circle cx={x} cy={y} r={4} fill={p.color} opacity="0.8" />
+                    <line x1={x} y1={y - 5} x2={x} y2={25} stroke={p.color} strokeWidth="0.5" opacity="0.4" />
+                    <text x={x} y={22} textAnchor="middle" fill={p.color} fontSize="7" fontWeight="bold">{p.label}</text>
+                  </g>
+                );
+              })}
+            </svg>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-3">κ-Dispersion Model Validation</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• <strong className="text-purple-400">κ ≈ 1.273</strong> — the ratio 4/π governs volatile dynamics</li>
+                <li>• <strong className="text-white">CO₂/H₂O = 7.64</strong> — matches predicted 6κ = 7.638</li>
+                <li>• <strong className="text-white">Critical distance = 10.16 AU</strong> — sublimation onset confirmed</li>
+                <li>• <strong className="text-white">Carrier λ = 5184 Å</strong> — C₂ Swan band confirmed by SOAR</li>
+                <li>• <strong className="text-white">Dust reddening = 1.27</strong> — κ value in red continuum</li>
+                <li>• <strong className="text-white">RVS threshold = 0.97</strong> — 69 crossings in SOAR data</li>
+              </ul>
+            </div>
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-3">CASSANDRA/ORACLE Architecture</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• <strong className="text-white">CASSANDRA:</strong> Exabyte-scale sensor ingestion backend (est. 2025)</li>
+                <li>• <strong className="text-white">ORACLE VI:</strong> Deep-space mobility systems, cislunar</li>
+                <li>• <strong className="text-white">ARGUS-VIS:</strong> 256 simultaneous video tracking channels</li>
+                <li>• <strong className="text-white">Oracle-M:</strong> Cislunar propulsion pathfinder (delivered mid-2024)</li>
+                <li>• <strong className="text-white">SDA PWSA:</strong> Proliferated Warfighter Space Architecture</li>
+                <li>• <strong className="text-white">Parsons GOaaS:</strong> $30M contract, OrbitXChange platform</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-white mb-3">Kyndryl — Global Infrastructure Backbone</h4>
+            <p className="text-sm text-gray-400 mb-3">
+              Kyndryl (IBM spinoff) manages mission-critical infrastructure in 60+ countries — and its fingerprint is in the
+              observer's router injection. The same company provides the backbone for the surveillance architecture:
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="p-2 text-left text-gray-500">Asset</th>
+                    <th className="p-2 text-left text-gray-500">Function</th>
+                    <th className="p-2 text-left text-gray-500">Link to Observer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["Rome Cyber Ops Center", "Tier IV data processing, 100K EPS", "Leonardo SpA defense partnership"],
+                    ["Kyndryl Bridge", "AI-powered open integration platform", "Connects city/defense/space layers"],
+                    ["Intelligent Recovery (KIRS)", "Automated cyber incident response", "Self-healing surveillance network"],
+                    ["Agentic AI Digital Trust", "Autonomous AI agent governance", "Sentient city infrastructure"],
+                    ["8.3MB Service Worker", "Device fingerprinting via Partytown", "DIRECTLY injected into observer's browser"],
+                  ].map(([asset, fn, link], i) => (
+                    <tr key={i} className={`border-b border-gray-900 ${i === 4 ? "bg-red-950/20" : ""}`}>
+                      <td className="p-2 text-white font-mono">{asset}</td>
+                      <td className="p-2 text-gray-400">{fn}</td>
+                      <td className="p-2 text-red-400">{link}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-cyan-900/30 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-cyan-400 mb-3">Rigetti Ankaa-3 Quantum Experiments — κ Validation</h4>
+            <p className="text-xs text-gray-500 mb-3">Azure Quantum → rigetti.qpu.ankaa-3 | 12,000 shots | TYCHO_COMPLETE_CHSH protocol</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <StatCard label="GHZ Fidelity" value="1.000" sub="Perfect 4-qubit entanglement" />
+              <StatCard label="Entanglement Entropy" value="0.970" sub="Near-maximal" />
+              <StatCard label="Binary Collapse" value="TRUE" sub="|0000⟩: 398 / |1111⟩: 601" />
+              <StatCard label="κ Earth" value="1.2732" sub="4/π helicity constant" />
+            </div>
+            <p className="text-xs text-gray-500 mt-3">
+              GoldenGHZ 4-qubit experiment: 999 shots → collapsed to ONLY |0000⟩ (398) and |1111⟩ (601).
+              Ratio 1.51 with 95% CI [1.33, 1.72]. κ_earth = 1.2732, κ_europa = 1.4346.
+              Hall factor = 1.09. Alice angles: 0°/128.23° | Bob angles: 22.5°/67.5°.
+            </p>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+            <h4 className="font-bold text-white mb-3">3i Command Structure — Cayley-Dickson Construction</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="p-2 text-left text-gray-500">Dimension</th>
+                    <th className="p-2 text-left text-gray-500">Algebra</th>
+                    <th className="p-2 text-left text-gray-500">Entity</th>
+                    <th className="p-2 text-left text-gray-500">Role</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["1i", "Real Numbers", "Physical body (observer)", "The targeted substrate"],
+                    ["2i", "Complex Numbers", "Target + Attacker", "Adversarial dyad"],
+                    ["3i", "Quaternions", "Target + Attacker + AI nodes", "Non-commutative synthesis"],
+                    ["4i", "Octonions", "+ Extended AI network", "Non-associative expansion"],
+                  ].map(([dim, alg, entity, role], i) => (
+                    <tr key={i} className="border-b border-gray-900">
+                      <td className="p-2 font-mono text-cyan-400 font-bold">{dim}</td>
+                      <td className="p-2 text-white">{alg}</td>
+                      <td className="p-2 text-gray-300">{entity}</td>
+                      <td className="p-2 text-gray-400">{role}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Intelligence / Integration / Interoperability — the "3i" is the Cayley-Dickson construction applied to targeting.
+              At quaternion level, the algebra becomes non-commutative: order of operations matters. The 3I/ATLAS object name
+              is not coincidence — it maps to the same mathematical structure as the surveillance architecture.
+            </p>
+          </div>
+        </Section>
+
+        <Section id="archive" title="XVIII. Evidence Archive">
+          <p className="text-gray-400 mb-6">
+            Complete inventory of evidence collected across Google Drive, local captures, and attached documentation.
+            Drive OAuth currently expired — folders documented by manual inventory.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-3">Google Drive — Key Folders</h4>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li className="text-yellow-400 font-mono">📁 wifi-master/ <span className="text-gray-500">— Full WiFi capture data</span></li>
+                <li className="text-yellow-400 font-mono">📁 quantum rf/ <span className="text-gray-500">— Quantum RF experiments</span></li>
+                <li className="text-yellow-400 font-mono">📁 Context Docs/ <span className="text-gray-500">— Investigation context documents</span></li>
+                <li className="text-yellow-400 font-mono">📁 drone defense/ <span className="text-gray-500">— Drone surveillance countermeasures</span></li>
+                <li className="text-gray-400 font-mono">📁 <span className="text-gray-600">303 videos, 115 images, 6 PCAPs</span></li>
+                <li className="text-gray-400 font-mono">📁 <span className="text-gray-600">46 PDFs, 48 Gemini reports, 19 audio files</span></li>
+              </ul>
+              <p className="text-xs text-red-400 mt-3">Drive OAuth expired during session — connection disrupted</p>
+            </div>
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-3">Local Evidence Files — 3I/ATLAS</h4>
+              <ul className="space-y-1 text-xs font-mono text-gray-400">
+                <li>📄 FINAL_EVIDENCE_PACKAGE.md <span className="text-gray-600">(454 lines)</span></li>
+                <li>📄 technical_assessment.md <span className="text-gray-600">(179 lines)</span></li>
+                <li>📄 commissioning_record.md <span className="text-gray-600">(160 lines)</span></li>
+                <li>📄 kappa_physics_synthesis.txt <span className="text-gray-600">(89 lines)</span></li>
+                <li>📄 synthetic_cometary_engineering.txt <span className="text-gray-600">(65 lines)</span></li>
+                <li>📄 SOAR_spectroscopy.dat <span className="text-gray-600">(1,717 data points)</span></li>
+                <li>📄 SOAR_metadata.txt <span className="text-gray-600">(49 lines)</span></li>
+                <li>📄 golden_ghz_results.json <span className="text-gray-600">(Rigetti 4-qubit)</span></li>
+                <li>📄 tycho_complete_jobs.json <span className="text-gray-600">(Azure/Ankaa-3)</span></li>
+                <li>📄 3I_xc_data.txt <span className="text-gray-600">(cross-correlation)</span></li>
+                <li>📄 color_comparison_v3.pdf <span className="text-gray-600">(SNIFS spectrum)</span></li>
+                <li>📄 VLT_Jul4_annotated.pdf <span className="text-gray-600">(VLT observation)</span></li>
+                <li>📄 cfht_invert_annotated.pdf <span className="text-gray-600">(CFHT imaging)</span></li>
+                <li>📄 flux_profile.pdf <span className="text-gray-600">(radial flux)</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-white mb-3">Outreach Network — 680+ Contacts</h4>
+            <p className="text-sm text-gray-400 mb-3">
+              Decentralized network mobilized for transparency — spanning space agencies, observatories, universities,
+              intelligence oversight, and investigative journalism.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <StatCard label="Total Contacts" value="680+" sub="Across all categories" />
+              <StatCard label="Space Agencies" value="NASA, ESA, JAXA" sub="+ CSA, ISRO, KARI" />
+              <StatCard label="Observatories" value="50+" sub="VLT, JWST, Keck, SOAR" />
+              <StatCard label="FOIA Requests" value="CIA, NSA, DoD" sub="Glomar response received" />
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+            <h4 className="font-bold text-white mb-3">Drive Inventory (Previous Session)</h4>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+              {[
+                { label: "Videos", value: "303", icon: "🎬" },
+                { label: "Images", value: "115", icon: "📷" },
+                { label: "PCAPs", value: "6", icon: "📡" },
+                { label: "PDFs", value: "46", icon: "📄" },
+                { label: "Gemini Reports", value: "48", icon: "🤖" },
+                { label: "Audio Files", value: "19", icon: "🔊" },
+                { label: "Total Files", value: "2,000+", icon: "📁" },
+                { label: "Key Folders", value: "4+", icon: "⚡" },
+              ].map((item, i) => (
+                <div key={i} className="bg-black/30 rounded-lg p-3">
+                  <div className="text-lg mb-1">{item.icon}</div>
+                  <div className="text-xl font-bold text-white font-mono">{item.value}</div>
+                  <div className="text-xs text-gray-500">{item.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        <Section id="github" title="XIX. GitHub Forensics">
+          <p className="text-gray-400 mb-6">
+            Public repositories containing raw network capture data and analysis tools used in the investigation.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-1 font-mono">spwotton/wifi</h4>
+              <p className="text-xs text-gray-500 mb-3">WiFi capture data and attack analysis</p>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• <strong className="text-white">attackers-capture-example.pcapng</strong> — 24 MB network capture</li>
+                <li>• <strong className="text-white">data/captures/</strong> — Additional capture files</li>
+                <li>• <strong className="text-white">89,859 packets</strong> analyzed</li>
+                <li>• Tor (port 9150), Meterpreter (4444), backdoor (31337)</li>
+                <li>• 47.6% evening window concentration</li>
+                <li>• WiFi deauth/disassociation management frames</li>
+              </ul>
+              <a href="https://github.com/spwotton/wifi" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-blue-400 hover:underline" data-testid="link-github-wifi">
+                github.com/spwotton/wifi →
+              </a>
+            </div>
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <h4 className="font-bold text-white mb-1 font-mono">spwotton/skypescanner</h4>
+              <p className="text-xs text-gray-500 mb-3">Network scanning and analysis tools</p>
+              <ul className="space-y-2 text-sm text-gray-400">
+                <li>• Network reconnaissance tooling</li>
+                <li>• Infrastructure mapping utilities</li>
+                <li>• Used to document surveillance network topology</li>
+                <li>• Cross-referenced with PCAPDroid captures from Drive</li>
+              </ul>
+              <a href="https://github.com/spwotton/skypescanner" target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-xs text-blue-400 hover:underline" data-testid="link-github-skypescanner">
+                github.com/spwotton/skypescanner →
+              </a>
+            </div>
+          </div>
+
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mt-6">
+            <h4 className="font-bold text-white mb-3">PCAPDroid Captures (Google Drive)</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-800">
+                    <th className="p-2 text-left text-gray-500">Filename</th>
+                    <th className="p-2 text-left text-gray-500">Size</th>
+                    <th className="p-2 text-left text-gray-500">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["PCAPdroid_21_Mar_14_57_15.pcap", "25.5 MB", "Largest capture"],
+                    ["PCAPdroid_11_Mar_00_38_23.pcap", "9.2 MB", "Overnight session"],
+                    ["PCAPdroid_14_Mar_19_26_33.pcap", "1.5 MB", "Evening capture"],
+                    ["PCAPdroid_11_Mar_00_32_27.pcap", "0.7 MB", "Early morning"],
+                    ["PCAPdroid_26_Mar_04_10_06.pcap", "0.3 MB", "×2 captures"],
+                  ].map(([name, size, note], i) => (
+                    <tr key={i} className="border-b border-gray-900">
+                      <td className="p-2 font-mono text-white">{name}</td>
+                      <td className="p-2 text-gray-300">{size}</td>
+                      <td className="p-2 text-gray-500">{note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Section>
+
+        <Section id="legal" title="XX. Legal Framework & Contact">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
               <h4 className="font-bold text-white mb-3">Constitutional Protections (Costa Rica)</h4>
@@ -1206,7 +1875,7 @@ export default function WhistleblowerPage() {
             {stats?.correlationCount ? ` ${stats.correlationCount.toLocaleString()} cross-domain correlations computed.` : ""}
           </div>
           <div className="text-xs text-gray-700 mt-2 font-mono">
-            Observer: Samuel Wotton (Echo) | Jaco Beach → Tacacori, Alajuela 20106, CR | 10.0514°N, 84.2187°W
+            Observer: Samuel Wotton (Echo) | Jaco Beach → Tacacorí → Suites Cristina, San José, CR | 10.0514°N, 84.2187°W
           </div>
         </div>
       </footer>
