@@ -255,6 +255,13 @@ export default function WhistleblowerPage() {
     { id: "pcap", label: "Packet Captures" },
     { id: "timeline", label: "Timeline" },
     { id: "evidence", label: "Visual Evidence" },
+    { id: "zersetzung", label: "Digital Zersetzung" },
+    { id: "phased-array", label: "Phased Array" },
+    { id: "radio-towers", label: "Radio Towers" },
+    { id: "panopticon", label: "Panopticon" },
+    { id: "3i-atlas", label: "3I/ATLAS" },
+    { id: "archive", label: "Evidence Archive" },
+    { id: "github", label: "GitHub Forensics" },
     { id: "legal", label: "Legal Framework" },
   ];
 

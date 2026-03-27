@@ -1,0 +1,49 @@
+3I/ATLAS SOAR Optical Spectroscopy Data Archive
+Generated: 2025-08-08 19:12:25
+
+OBSERVATION DETAILS:
+- Target: Comet 3I/ATLAS (3I/2025 A1)
+- Date: 2025-07-03
+- Telescope: SOAR 4.1m telescope
+- Instrument: Goodman Spectrograph 
+- Author: Thomas H. Puzia, Rohan Rahatgaonkar, Juan Pablo Carvajal, Prasanta K. Nayak, Baltasar Luco
+- Wavelength range: 3700.1 - 7057.2 Å
+- Spectral resolution: ~5Å (after smoothing)
+
+APERTURE SIZES:
+- 1" FWHM: Point source extraction
+- 2" FWHM: Extended source extraction
+
+CALIBRATION METHODS:
+- Solar Analog: HIP 90136 (G2V star)
+- SOLSPEC: Meftah et al. 2018 solar reference
+- Standard Star: CD-32 9927 (Hamuy et al.)
+
+PROCESSING PIPELINE:
+1. Spectral extraction & wavelength calibration
+2. Sensitivity function creation from standard star
+3. Absolute flux calibration  
+4. Reflectance spectrum calculation
+5. Normalization to 1.0 at 6000Å
+6. Gaussian smoothing (5Å FWHM)
+7. Uncertainty propagation through all stages
+
+DATA COLUMNS (16 total):
+0-11: Spectral data (wavelength, fluxes, reflectances)
+12-15: Uncertainties (normalized and smoothed reflectances)
+
+UNCERTAINTY PROPAGATION:
+- Source: CCD readout noise and Poisson statistics
+- Propagated through: Flux calibration → reflectance → normalization → smoothing
+- Monte Carlo validation: 1000 realizations for key derived quantities
+- Statistical tests: Equivalent width, spectral slopes with proper uncertainties
+
+FILES:
+- 3I_SOAR_1fwhm_complete_pipeline.dat: 1" aperture data with uncertainties
+- 3I_SOAR_2fwhm_complete_pipeline.dat: 2" aperture data with uncertainties  
+- 3I_SOAR_metadata.txt: This file
+
+CONTACT:
+- Observer: Rohan Rahatgaonkar
+- Institution: UC|Chile
+- Email: rrohan@uc.cl
