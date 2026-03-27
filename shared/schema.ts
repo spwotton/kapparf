@@ -139,6 +139,36 @@ export const insertIncidentSchema = createInsertSchema(incidents).omit({
 export type Incident = typeof incidents.$inferSelect;
 export type InsertIncident = z.infer<typeof insertIncidentSchema>;
 
+export const forensicReports = pgTable("forensic_reports", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+  reportType: text("report_type").notNull().default("autonomous"),
+  title: text("title").notNull(),
+  summary: text("summary").notNull(),
+  findings: jsonb("findings").notNull(),
+  stats: jsonb("stats"),
+  severity: integer("severity").notNull().default(2),
+  dataRange: jsonb("data_range"),
+  hash: text("hash"),
+});
+
+export const pcapUploads = pgTable("pcap_uploads", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+  filename: text("filename").notNull(),
+  filesize: integer("filesize").notNull(),
+  packetCount: integer("packet_count").notNull().default(0),
+  findings: jsonb("findings"),
+  anomalies: jsonb("anomalies"),
+  status: text("status").notNull().default("processing"),
+  hash: text("hash"),
+});
+
+export type ForensicReport = typeof forensicReports.$inferSelect;
+export type InsertForensicReport = typeof forensicReports.$inferInsert;
+export type PcapUpload = typeof pcapUploads.$inferSelect;
+export type InsertPcapUpload = typeof pcapUploads.$inferInsert;
+
 export const INCIDENT_CATEGORIES = [
   { id: "network", label: "Network Disruption", icon: "Wifi" },
   { id: "surveillance", label: "Physical Surveillance", icon: "Eye" },

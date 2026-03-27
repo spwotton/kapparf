@@ -33,6 +33,7 @@ import BettercapPage from "@/pages/bettercap";
 import ResearchCortexPage from "@/pages/research-cortex";
 import NetworkForensicsPage from "@/pages/network-forensics";
 import EvidenceChainPage from "@/pages/evidence-chain";
+import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
 
 function Router() {
   return (
@@ -61,6 +62,7 @@ function Router() {
       <Route path="/cortex" component={ResearchCortexPage} />
       <Route path="/forensics" component={NetworkForensicsPage} />
       <Route path="/evidence" component={EvidenceChainPage} />
+      <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
       <Route component={NotFound} />
     </Switch>
   );

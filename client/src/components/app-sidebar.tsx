@@ -62,6 +62,7 @@ export function AppSidebar() {
     { title: "Bettercap", url: "/bettercap", icon: Radio },
     { title: "Research Cortex", url: "/cortex", icon: BookOpen },
     { title: "Forensics", url: "/forensics", icon: Shield },
+    { title: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
     { title: "Evidence Chain", url: "/evidence", icon: FileWarning },
   ];
 

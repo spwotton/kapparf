@@ -30,6 +30,10 @@ import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
 import {
+  runForensicAnalysis, analyzePcap, scanGitHubRepos, getForensicReports,
+  getPcapUploads, startHypervisor, stopHypervisor, getHypervisorStatus,
+} from "./forensic-hypervisor";
+import {
   startQuantumCortex,
   stopQuantumCortex,
   getQuantumCortexStatus,
@@ -3131,6 +3135,86 @@ export async function registerRoutes(
       res.status(500).json({ error: err.message });
     }
   });
+
+  const pcapUpload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 100 * 1024 * 1024 } });
+
+  app.get("/api/hypervisor/status", (_req, res) => {
+    res.json(getHypervisorStatus());
+  });
+
+  app.post("/api/hypervisor/start", (_req, res) => {
+    startHypervisor(30);
+    res.json({ status: "started", interval: "30min" });
+  });
+
+  app.post("/api/hypervisor/stop", (_req, res) => {
+    stopHypervisor();
+    res.json({ status: "stopped" });
+  });
+
+  app.post("/api/hypervisor/run", async (_req, res) => {
+    try {
+      const result = await runForensicAnalysis();
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/hypervisor/reports", async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 20;
+      const reports = await getForensicReports(limit);
+      res.json(reports);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/hypervisor/pcaps", async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit as string) || 50;
+      const uploads = await getPcapUploads(limit);
+      res.json(uploads);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/hypervisor/pcap/upload", pcapUpload.single("pcap"), async (req, res) => {
+    try {
+      const file = req.file;
+      if (!file) return res.status(400).json({ error: "No PCAP file provided" });
+      const analysis = await analyzePcap(file.buffer, file.originalname || "upload.pcap");
+      const crypto = await import("crypto");
+      const hash = crypto.createHash("sha256").update(file.buffer).digest("hex");
+      const { db: dbInst } = await import("./db");
+      const { pcapUploads: pcapTable } = await import("@shared/schema");
+      await dbInst.insert(pcapTable).values({
+        filename: file.originalname || "upload.pcap",
+        filesize: file.size,
+        packetCount: analysis.packetCount,
+        findings: analysis as any,
+        anomalies: analysis.anomalies,
+        status: "complete",
+        hash,
+      });
+      res.json(analysis);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/hypervisor/github/scan", async (_req, res) => {
+    try {
+      const results = await scanGitHubRepos();
+      res.json(results);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  startHypervisor(30);
 
   return httpServer;
 }
