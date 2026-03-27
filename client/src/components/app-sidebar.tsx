@@ -64,6 +64,7 @@ export function AppSidebar() {
     { title: "Forensics", url: "/forensics", icon: Shield },
     { title: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
     { title: "Evidence Chain", url: "/evidence", icon: FileWarning },
+    { title: "CIAJW Public", url: "/ciajw", icon: Shield },
   ];
 
   const score = kappaStatus?.score ?? 0;
