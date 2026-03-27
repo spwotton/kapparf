@@ -1,0 +1,643 @@
+1
+The Wave Theory of Constants
+Robert E. Grant
+Strathspey Crown Holdings, Crown Sterling. Newport Beach, California, USA.
+Abstract
+Guided by the wave theory of numbers, we examine the fundamental constants of nature through the unique characteristics of its
+wave-matrix. The fractal nature of the matrix, with its 12-based periodicity, forms the kernels from which constants are generated
+thus enabling a better understanding of their origin as well as their unique numerical sequencing. Additionally, the inherent
+numerical and geometrical symmetries of the matrix will prove to be a powerful tool for discovering new fundamental constants
+not yet known to the scientific community.
+I. INTRODUCTION
+Most of the fundamental laws of nature rest upon
+a set of constants that govern their behavior and,
+consequently, determine the physical reality of
+the universe1,2
+.
+Still, there is no well-understood theory capable
+of explaining why these specific numbers became
+so fundamental to nature. One example to
+consider is the fine structure constant (α ≈ 137)
+described by the American physicist Richard P.
+Feynman as ‘a magic number that comes to us
+with no understanding by man. You might say the
+‘hand of God’ wrote that number, and ‘we don’t
+know how He pushed his pencil.’
+ 3
+
+Thus, finding the origin and reasoning behind
+these constants will open the doors for a much
+better understanding of the physical world and
+will enable science to cross boundaries never
+thought possible before.
+The wave theory of numbers4
+ have been
+developed to address this specific issue, among
+many others. Established upon the natural
+correspondence between numbers and the wave
+phenomenon, the wave/particle duality5
+manifested by light, elementary particles, etc., is
+generalized to accommodate the abstract
+numerical domain as well.
+The advantage of this novel perspective is it
+enables the creation of a fundamental numberbased interference pattern, a numeric wavematrix that can correlate different physical
+phenomena in ways that are not readily apparent
+nor feasible through other theories.
+This paper will demonstrate how mathematical
+and physical constants emerge as combinations of
+numeric amplitudes and phases embedded within
+the wave matrix’ own fractal fabric.
+This novel approach will enable a better
+understanding of the origin and structure of these
+constants. Furthermore, it has the capacity for
+discovering new ones that have not been yet
+identified.
+II. NUMERICAL WAVES AND
+NUMBERS-INVERSE ANALYSES
+There are countless numbers that exhibit wavelike behavior within their structure, especially
+irrational and transcendental ones.
+One perfect example is the remainder formed by
+taking the inverse of number 7: ଵ
+଻
+= 0. 148257 …
+The wavy nature of 148257 is illustrated by
+plotting its individual digits repeatedly, as shown
+below.
+2
+Fig.1: The wave-like nature of the remainder of 1/7 (148257)
+emerging from plotting its individual digits, and for three
+consecutive cycles.
+The inverse operation is unique as it is not only
+an excellent method for creating remainders of
+infinite wave-like sequences, but also because
+when applied twice, it reverses or cancels its
+previous action; reproducing the original number
+again, e.g. ଵ
+଻
+= 0.148257 … and ଵ
+଴.ଵସ଼ଶହ଻…
+= 7.
+No other arithmetic operation creates similar
+effects.
+In this respect, the inverse process works like a
+mathematical mirror; reflecting back and forth
+between the number and its inverse, ad infinitum.
+Some numbers (x) have unique relationships with
+their inverses (1/x). The best example is the
+golden ratio6
+ Φ = 1.618… with its (1/x) value
+returning itself minus 1:
+1
+஍
+= 0.618…= Φ − 1= φ.
+Another unique example is the square root of 10.
+This is because its inverse returns the same
+number, only one order of magnitude smaller.
+√10 మ = 3.162277 … and ଵ
+ଷ.ଵ଺ଶଶ଻଻
+=
+0.3162277 …
+The inverse value of π, ଵ
+஠
+= 0.318 …, is another
+very useful constant we always use, such as when
+we find the radius of a circle from its area or
+circumference for example.
+Interestingly, the average of π and 10/ π is very
+close to √10 మ
+, with the trivial difference being
+around 0.2%: గା
+భబ
+ಘ
+ଶ
+= 3.16234 …
+Due to their polar nature, numbers and their
+inverses form two opposing, as well as
+complementary, sine/cosine wave-fronts as
+shown below.
+Fig.2: Two sine/cosine wave-fronts made by numbers and
+their respective inverses around the vicinity of number 3.
+The two waves intersect at the node 3.16235… where x and
+1/x match up, except for their decimal point.
+These two sinusoidal waves get closer and closer
+to each other until they cross at a point where the
+two values of x and 1/x become identical, as in the
+case of √10 మ
+ and its inverse (identical in their
+numerical sequencing, not in their relative
+magnitude).
+The crossing point creates a singularity node
+where x and 1/x flip and continue along the wave
+pattern till the next node, which happens at √100 మ
+and its inverse (not shown), where they flip again
+and so on, very similar to the helical form of a
+DNA strand.
+The nodes get further and further away as the
+ratio between the singularity number and its
+inverse increases from 10 to 100 to 1000, etc.
+The first 12 digits of the decimal system lie at the
+heart of the wave theory of numbers as we explain
+in the next section.
+Along with their 1/x aspects, they generate one
+complete sine/cosine wave-front as shown in
+figure (3) below. (A more detailed image is
+available in Appendix A). Also indicated on the
+figure are some fundamental constants and their
+1/x values.
+When x ≥ 1, 1/x will distribute uniformly,
+matching up with their x values. However, as we
+pass 1 toward 0, 1/x will get larger and larger
+diverging as we get closer to 0, eventually
+reaching infinity at 0. Thus, the relative distances
+between the 1/x numbers will get smaller and
+smaller with all numbers from 1 to ∞ packed
+3
+within just one-twelfth quadrant of the whole
+circle.
+In other words, new complete x-numbers are
+generated within a 1/12 part of the 1/x wave; a
+wave within a wave in an infinite fractal.
+(Interestingly, it is known that the infinite sum of
+all natural numbers is equal to the unexpected
+value of −
+ଵ
+ଵଶ
+, first proven by Euler7
+. Thus,
+number 12 has a unique status among the rest,
+especially in its 1/x form.)
+Fig.3: The sine/cosine wave pattern created by the first 12
+numbers (x/1) and their inverses (1/x). Also indicated are
+some fundamental constants and their respective 1/x values.
+Numbers across number 6 on both circles add up to 12 as
+indicated for number 1 and 11.
+One important property of this specific numeric
+wave formation is that across the node of 6,
+numbers complement each other to an exact 12.
+For example, by drawing a line from any number
+on the wave-front such that it passes through the
+node, the line will hit a second number where
+both add up to 12, as for 1 and 11 (indicated in
+the figure), 10 and 2, 4 and 8, etc.
+This specific complementary property applies to
+rational as well as irrational numbers, including
+the fundamental constants. Therefore, it will be
+used extensively in identifying the various
+constants of the wave-matrix, as explained in the
+next section.
+III. THE WAVE MATRIX AND THE
+EMERGENCE OF FUNDAMENTAL
+CONSTANTS
+In the wave theory of numbers4
+, the numerical
+wave matrix is built upon the interference pattern
+generated from two point-like sources that create
+an infinite fractal of interfering circular waves
+having a periodicity of number 12 and its
+multiples.
+This pattern is shown in figure (4) below and it
+can be accessed with greater details in Appendix
+B. 111 F D# EAC GAGDGap Note# FD#11 10 9 8 7 6 5 4 3 2 19 6 3π/e-2Φ π1/π Φ2φ2Φφ Φ e-2/(1/π) 1/ππ Φ 3.81966... 3.18309... 2.81718... 2.18281... 1.81690... 1.18053... 0.77215... 1/π 4.83333... 4.22784... 1-ef NewCα φ2ρ √25.18444... Φ° Φ° C C-16.18033... 5.77213... φΦ γ 7.18281... 6.81690... e-2 Gr 1-Φ° 8.19886... 7.81718... New√φ 9.22784... 8.78410... C° 9.82111... 10.18333... 11.18333... 10.82222... √Φ
+396° 378° 360° 342° 324° 306° 288° 270° 252° 234° 216° 198° 180° 162° 144° 126° 108° 90° 72° 54° 36° 0.84707... 1.29508...CΦ 0.19290... 0.20703... 0.23652... 0.26180... 0.314590.35496... 0.45812... 0.55038... Φπ New√ΦΦ 2√3
+γ New0.10836... 0.11354... 0.12220... 0.12792... 0.13922... 0.14669... 0.16180... 0.17324... e - 2 New1-Φ° Φ° 2√1/π New2 0.08941... 0.09240... 0.09819... 0.10182... √Φ
+11 10 8 7 5 421C# F E
+# G G
+# C A F#DD#x 1/x φ√e-2
+Fig.4: The numerical wave matrix. On the top row we find
+the numbers that bound the main 11 digits and their
+constants’ affiliations. Next are the degree references for the
+main digits followed by their musical notes’ assignments. At
+the bottom of the chart, we find the 1/x values of the top row
+along with their constants’ affiliations.
+However, before we start examining this
+numerical matrix, we need first to elaborate on
+two important points.
+First, we are all used to considering numbers like
+3.14, 0.134, 31.4, etc. to be different from each
+other, especially number 3.14, which in this
+example relates to π, which is used to calculate
+many mathematical and physical qualities,
+whereas the rest are not.
+The same thing can be said about any other
+number, especially those that have unique
+mathematical properties such as e, Φ, etc.
+While the decimal point is of importance in
+determining the magnitude of numbers, still it is
+4
+a relative quality. In other words, when we say
+that the speed of light C = 3×108
+ m/s, the 108
+factor indicates how fast light is compared to a
+speed of 1 m/s for example, or to the speed of
+sound, being around 343 m/s.
+However, in this frame of units, the decimal point
+changes as the scale while the main number will
+not. So, for C again, if we were to use Km/s
+instead, the factor will reduce to 105
+ while the
+principle integer 3 will remain the same.
+Similarly, we can use 3.14… for π, or 10×.314…
+or 0.1×31.4…, etc.
+In other words fundamental constants are unique
+to the universe mainly for their numerical
+sequencing much more than for their relative
+magnitudes. The decimal point only creates
+fractals of the same number.
+Therefore we will handle numbers with some
+liberty in regards to their decimal point.
+The second point concerns the numbers used to
+reference the various constants of nature. In
+general, fundamental constants have specific
+numeric references. For example, 3.14159… is
+the familiar form for π. However, we have
+already shown that 1/π = 0.3183… is a different
+reference to the same constant, as 0.31415…,
+31.415… etc. Similarly, Φ = 1.618 and 1/Φ =
+0.618 = φ are both valid references to the same
+constant.
+There are many other ways to reference constants
+depending on what mathematical operation we
+apply to them, such as squaring, square or cube
+roots, exponentials, etc.
+One important method is to convert the decimal
+reference of the constant into an angular one that
+positions it around a unitary circle, as explained
+in reference8
+.
+So for a number like φ = 0.618… we find its
+angular reference by multiplying it by 360°:
+0.618… × 360° = 222.48°…
+This new reference of Φ (222.48°) is no less
+informative than its formal value. In fact, this
+angular method is crucial in discovering the
+quadrant-relationships constants have with each
+other (more about this transformation in the next
+sections).
+By explaining these two points, we hope to
+remove any ambiguity that might arise from our
+constants assignments policy, as many of the
+constants we are going to encounter across the
+wave-matrix will appear in one form or the other,
+however, all can be traced back to their familiar
+values.
+Let’s start exploring the wave pattern of figure
+(4).
+The pattern is made of 11 numbers, with the 12th
+initializing the beginning of another cycle or
+fractal, being higher octave of number 1.
+Thus the pattern is centered around number 6
+which works as a geometrical mirror across
+which numbers add up to 12: 1+11, 2+10, 3+9,
+etc. (This is the same complementary behavior
+exhibited by the 12-based sine/cosine wave we
+explained in the previous section).
+Almost all fundamental constants are irrational or
+transcendental, like π or e. Consequently each
+constant can be written as a principle integer
+representing its particle-like aspect, an amplitude,
+plus a sequence of randomly fluctuating digits
+representing its wave-like aspect, a phase4
+.
+So a number like π = 3.14159… can be
+decomposed into an amplitude of 3 and a phase
+of .14159… as shown in figure (5) below.
+Fig.5: Number π expressed in a wave/particle fashion; the
+sum of an integer amplitude (3) and a phase of 14159…
+By the same token, the golden ratio Φ = 1.618…
+emerges from number 1 by adding a phase of
+5
+0.618… which is also the value of its inverse:
+Φ = 1 + 1/Φ.
+The square root of 2 (√2) emerges from the same
+number 1 by the addition of a different phase,
+0.4142…
+Thus, in theory, any number can be a potential
+amplitude for constants; we only need to attach a
+proper phase to transform it from its static form
+to a wave-like dynamic one.
+Similarly, each of the 12 integers that define the
+periodicity of the numerical wave, works as a
+potential amplitude surrounded by a couple, or
+more, of mathematical and physical constants
+that emanate from these amplitudes as shown on
+the top part of the numerical matrix in figure (4).
+And as every number has its own 1/x aspect, the
+bottom part of the pattern is reserved for the
+inverse of the amplitude numbers and their
+corresponding potential constants.
+Starting with the mirror-number 6, the two
+surrounding constants are ϕ − 1 = φ = 0.618…
+or 6.18… (as we agreed on the irrelevance of the
+decimal point), and Euler-Mascheroni9
+ γ =
+5.77… (formal value is 0.577… )
+(Notice the mirror can be any fractal of 6: 60 or
+0.6 or 0.06, etc. as shown in figure (6) below for
+the case of number 60 where it is surrounded by
+the fractals of Φ and γ also.)
+The inverse aspects of these two constants are φ
+and 0.17324… which is almost identical to √3.
+As explained earlier, number pairs on both sides
+of the central mirror (number 6) complete each
+other to 12, which also applies to the constants
+surrounding these numbers. So φ + γ should equal
+12 also, which is, in fact, the case: 6.18… +
+5.77… = 12.
+Moving to number 7, its two bounding constants
+are 𝑒 − 2 = 7.18… and Gr = 6.8169… = e/Φ
+which is a new constant (labeled Grant Constant)
+that is being investigated at the moment for its
+profound relationship to time.
+Fig.6: Numbers 60 or 600 or 0.6 etc. create the same
+mirroring effect number 6 does. For the case of 60, it will
+also be surrounded by fractals of Φ and γ as indicated.
+The 1/x aspects of these numbers are 0.13922,
+being the inverse of 𝑒 − 2, and 0.14669, which is
+a new constant that has not been identified yet.
+Number 5, on the other side of the mirror, is
+surrounded by constants that are the
+complementary pairs of those surrounding 7,
+being 12 – 6.8169… = 5.1844… and 12 –
+7.1828... = 4.8333…
+These two constants represent the speed of light
+(in miles/sec) C and C-1, respectively. This is
+because 0.5184 × 360 = 186.624, and 4.8333 is
+just 1 – 0.51844…
+Their inverse aspects are 0.19290… and 0.20703,
+being √𝑒 − 2 య
+ and γ respectively.
+Moving to number 4, it is bounded to the left by
+𝜌 = 4.227 … = 10 − 5.7721 … (a fractal of γ)
+and to the right we have 3.819 … = 𝜑
+ଶ × 10 with
+𝜑 = 0.618 …
+Their inverses are 0.2365…, which is a new
+constant, and 0.2618… being a fractal value of
+ϕ
+ଶ
+.
+On the other side of the mirror, number 8 is
+bounded by 12 – 4.2278… = 7.8128… = ඥ𝜑.
+6
+The values of their corresponding inverses,
+0.1279… and 0.1222…, are new constants.
+The table below lists the rest of the periodicity
+numbers and the constants that bound them along
+with their identities.
+
+CONSTANTS 1 11 2 10 3 9
+X Left 1.180 11.183 2.1828 10.183 3.183 9.227
+Identity New New New New 1/π New
+X Right 0.772 10.822 1.810 9.8211 2.817 8.784
+Identity New New C New ef New
+1/X Left 0.847 0.089 0.4581 0.0981 0.3145 0.1083
+Identity New New √Φ New π New
+1/X Right 1.295 0.092 0.5503 0.1018 0.3549 0.1135
+Identity New New Φ New New New
+
+Therefore, the structure of the numerical wavematrix, along with its unique symmetries, enable
+the positioning of the fundamental constants
+around their proper amplitudes, which work as
+point-like sources from which emanate the
+numerical phases that endow the constants with
+their unique numerical and mathematical
+properties.
+For each main digit of the periodicity, there is a
+specific musical tone assigned to it, explained in
+greater details in reference 4. Basically, the 12-
+based periodicity of the wave-matrix is matched
+to the 12-notes of the musical octave, thus
+illustrating the correlation between numbers,
+music, as well as geometry, as each note
+corresponds to a specific polygonal geometry, as
+explained in reference 10.
+The whole system therefore is a vibrating matrix
+of numbers, sounds, as well as geometry, that
+manifests into physical reality via the constants
+and their phases, and via musical tones and their
+frequencies.
+IV. CONSTANTS TRANSFORMATION
+AND UNITY
+As argued above, the many mathematical and
+physical constants are simple reflections or
+transformations of each other.
+Therefore there must be some basic mathematical
+operation that is capable of transforming one
+constant into another, and vice versa.
+One such operation we have already seen is
+related to the 12-based complementary property
+of the wave pattern; where the sum of each two
+constants paired around number 6 is equal to 12.
+Another transformation is the inverse operation,
+where numbers on the upper part of the wave
+pattern are inverted to generate those at the
+bottom part.
+A third method originates from the quadrant
+symmetry that constants exhibit when
+transformed into angular references across a unit
+circle, as explained in detail in reference8
+.
+By positioning a constant at a specific angle
+around a circle, three other angular references are
+automatically determined, as explained in figure
+(7) below, which illustrates the complementary
+angular relationship between the four elements of
+a quadrant set.
+Fig.7: The definition of the quadrant angular complementary
+relationship between a set of four numbers.
+For example, the angle of 261.8° corresponds to
+Φ2
+ = 2.618. The complementary value of this
+angle across the north/east axis is 98.2°.
+By normalizing these values with respect to the
+360° of a full circle, their sum will equal to 1:
+ଶ଺ଵ.଼
+ଷ଺଴
+= 0.72722 and ଽ଼.ଶ
+ଷ଺଴
+= 0.27277.
+What is interesting is that the value of 0.272 is
+nothing but ඥϕ − 1. Therefore, we have Φ2 on
+7
+the left quadrant, while on the right quadrant it is
+ඥϕ.
+These two opposing aspects, square and square
+root, create an action/reaction dynamic across the
+two sides of the circle.
+The quadrant complementary value of 261.8°
+across the east/west axis is 278.2°. ଶ଻଼.ଶ
+ଷ଺଴
+=
+0.77277. This angular reference is related to π
+through the following relation: (1 +
+0.77277)
+ଶ = 𝜋.
+The final angle of this quadrant set is 81.8° with
+଼ଵ.଼
+ଷ଺଴
+= 0.22722. Now, 0.22722 × 432° =
+98.16, and ଽ଼.ଵ଺
+ଷ଺଴
+= 0.273 = ସ
+గ
+− 1.
+The above quadrant set, along with its
+corresponding angular and constants references,
+is shown below in figure (8).
+Fig.8: One quadrant set corresponding to the two constants
+π and Φ and their mirror images.
+We used the angular reference of 432°, along
+with 360°, due to its connection to the tuning
+frequency of 432Hz, which has been shown to be
+crucial in illustrating the geometrical aspects of
+the 12 notes of the octave10,4. Consequently, this
+angular reference is also very important for
+detecting the various numbers/constants
+relationships.
+The table below illustrates how some of the most
+fundamental constants can be derived from each
+other by using very simple mathematical
+operations.
+CONSTANT SYMBOL CALCULATION VALUE
+LIGHT SPEED C
+(mile/sec) (
+𝑒
+𝜋
++ 1) × 10ହ 186.525
+EULER e 9 − 2 × 𝜋 2.71681
+FINE
+STRUCTURE α 137.5 − ඨ(
+𝜑 × 360
+1000 ) 137.036
+PI π Φଶ ×
+432
+360
+3.14150
+EULERMASCHERONI γ ቀ
+Φ
+10 × 360ቁ − (1 − ටቀ
+𝜑 × 360
+1000 ቁ)
+10ଶ
+0.57721
+1/PHI 𝜑 ቀ
+𝑒 − 1
+10 × 360ቁ −
+√𝐶(
+𝑘𝑚
+𝑠
+)
+10ସ
+10ଶ
+0.61803
+PLANCK
+LENGTH pl
+√10 + 3
+10 + 1 1.61622
+From all the above, it would not be that farfetched to speculate that there is, in reality,
+only one constant, with all others being
+nothing but simple transformations of it,
+transformations that rest upon the various
+symmetries of the numerical wave matrix,
+along with the quadrant angular references of
+these constants and their 1/x aspects.
+One perfect candidate for this quintessential
+constant is the golden ratio Φ and its inverse
+φ, as they both reside at the core of the wave
+matrix, emanating from the central mirror of
+number 6. It is a constant that defines
+everything in nature from the geometry of the
+farthest galaxies to the proportions and
+growth-rates of all living things, to the energy
+levels of tiniest atoms11, etc.
+It definitely deserves to be referred to as the
+primordial constant; the first one to be
+generated and the origin of all other
+constants.
+IV. CONCLUSION
+When treating numbers as wave generators,
+similar to point-like sources, they create a
+numerical interference pattern of fractal nature,
+labeled here the wave-matrix.
+8
+By decomposing the fundamental constants that
+govern the physical laws, along with their inverse
+values (1/x), into integer amplitudes and phases
+of trailing digits, we are able to couple them to
+the numeric periodicity of the wave-matrix,
+which rewards us with a much deeper
+understanding of the origin of these constants as
+well as their numerical structure and how they all
+relate to each other.
+Additionally, the unique symmetries of the wave
+matrix enable the discovery of many unknown
+fundamental constants while at the same time
+emphasizing their unity and oneness. More work
+is needed to identify the properties of these new
+constants and to what branch of science they
+pertain.
+APPENDIX
+A- Larger rendering of figure (3)
+9
+B- Larger rendering of figure (4)
+111 F D# E AC G A G D Gap Note# F D #
+11 10 9 8 7 6 5 4 3 2 19 6 3
+π/e-2 Φ π
+1/π
+Φ
+2 φ
+2 Φ
+φ
+Φ e-2/(1/π) 1/ππ Φ 3.81966... 3.18309... 2.81718... 2.18281... 1.81690... 1.18053... 0.77215...
+1/π 4.83333... 4.22784... 1-ef NewCα
+ φ2
+ρ √25.18444... Φ° Φ°
+C C-1 6.18033... 5.77213... φ Φ γ 7.18281... 6.81690... e-2 Gr 1-Φ° 8.19886... 7.81718... New √φ 9.22784... 8.78410... C° 11.18333... 10.82222... 10.18333... 9.82111...
+√Φ
+396° 378° 360° 342° 324° 306° 288° 270° 252° 234° 216° 198° 180° 162° 144° 126° 108° 90° 72° 54° 36° 0.84707... 1.29508...CΦ 0.19290... 0.20703... 0.23652... 0.26180... 0.31459 0.35496... 0.45812... 0.55038... Φπ New√ΦΦ 2 √3 γ New 0.10836... 0.11354... 0.12220... 0.12792... 0.13922... 0.14669... 0.16180... 0.17324... e - 2 New
+1-Φ° Φ° 2√1/π New 2 0.08941... 0.09240... 0.09819... 0.10182...
+√Φ
+11 10 8 7 5 4 2 1C
+# F E
+# G G
+# C A F# DD#
+x
+1/x φ √e-2
+References
+[1] Martin Rees. Just Six Numbers: The Deep
+Forces That Shape the Universe. Basic Books
+(2001).
+[2] Savely G. Karshenboim. Fundamental
+Physical Constants: Looking from Different
+Angles. arXiv:physics/0506173 (2005).
+[3] R.P. Feynman. QED: The Strange Theory of
+Light and Matter. Princeton University Press
+(1985).
+[4] Robert E. Grant & Talal Ghannam. The Wave
+Theory of Numbers. www.Archive.org,
+ark:/13960/t2n66811t (2019).
+[5] Brian Greene. The Elegant Universe:
+Superstrings Hidden Dimensions and The Quest
+For The Ultimate. WW Norton, 2nd edition
+(2010).
+[6] Mario Livio. The Golden Ratio: The Story of
+PHI, the World's Most Astonishing Number.
+Broadway Books, Reprint edition (2003)
+[7] Lepowsky, J., Naihuan Jing, and Kailash C.
+Misra. Vertex operator algebras and the zeta
+function. Contemporary Mathematics. Vol. 248,
+(1999).
+[8] Robert E. Grant & Talal Ghannam. Four-Fold
+Mirror-Symmetry Inherent to the Icositetragon
+Distribution of Numbers. www.Archive.org,
+ark:/13960/t5w745v3w (2018).
+[9] Duane W. DeTemple. A Quicker
+Convergence to Euler's Constant. The American
+Mathematical Monthly, Vol. 100, No. 5 (1993).
+[10] Robert E. Grant & Talal Ghannam. Precise
+Geometrical Correspondence to the Perfect 5th
+Tuned to the 432Hz Frequency. (Awaiting
+Journal Approval).
+[11] Talal Ghannam. The Mystery of Numbers:
+Revealed through their Digital Root.
+CreateSpace, 2nd edition (2012). 

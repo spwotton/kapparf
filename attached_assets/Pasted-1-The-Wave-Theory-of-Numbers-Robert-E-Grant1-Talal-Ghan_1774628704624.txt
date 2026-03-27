@@ -1,0 +1,639 @@
+1
+The Wave Theory of Numbers
+Robert E. Grant1
+, Talal Ghannam2
+1Strathspey Crown Holdings, Crown Sterling. Newport Beach, California, USA.
+2Crown Sterling, Newport Beach, California, USA.
+Abstract
+The concept of waves is very fundamental to classical and modern physics alike, being essential in describing light, sound, and
+elementary particles, among many other phenomena. In this paper, we show that the wave/particle duality is a phenomenon
+manifested not only in the physical world and the mathematics that describes it but also in the simple numbers that form the basic
+matrix upon which most of our sciences rest. We will also show how this wave-based approach to numbers could be essential to
+our understanding of the mathematical and physical constants that govern the physical laws as well as the natural elements emerging
+from them.
+I. INTRODUCTION
+Waves are one of the most studied natural
+phenomena and in most scientific fields. This is
+due to their ubiquitous presence everywhere in
+the world around us, from the macrocosmic to the
+microcosmic levels.
+The most common form of waves is the one
+observed on water surfaces, mostly due to the
+mechanical forces that winds exert on surfaces
+like seas, lakes, ponds, etc. Simply drop a stone
+into still water and you will generate circular
+waves that expand outwardly from the center
+(where the stone was dropped).
+Sound also propagates in the form of waves that
+travel by compression and expansion of air
+molecules1
+.
+Waves emanating from two or more sources
+interfere with each other creating a pattern of
+alternating light and dark regions, being the result
+of the constructive and destructive interference
+between the troughs and crests of the waves.
+When troughs meet troughs (or crests meet
+crests) they add up constructively. When a trough
+and crest meet they add up destructively,
+canceling each other out.
+This pattern is one of the main proofs of the
+wave-like nature of light, as demonstrated by
+Young’s famous double-slit experiment2
+.
+In fact, interference patterns are the hallmark of
+waves propagation and one of the most important
+tools used by scientists allowing them to measure
+important qualities such as the frequencies of the
+interfered waves, the speeds of their sources, the
+distances of these sources, among many other
+properties of interest.
+Fig.1: A sketch by Thomas Young illustrating light
+diffraction-interference pattern.
+At the beginning of the 20th century, it became
+evident that the classical mathematical models
+used in physics for centuries are inadequate to
+explain the new observations and discoveries the
+experimental physicists were making.
+The breakthrough came in 1913 when Niels Bohr,
+a Danish physicist, suggested a novel way to look
+at the orbits of the electron around the proton in
+the hydrogen atom; instead of a continuum of
+possible energy states, only discrete or quantized
+ones are allowed3
+. The success of his model in
+predicting the atomic spectrum of the hydrogen
+2
+atom was the spark that ignited the quantum
+mechanics revolution.
+Another breakthrough came from the French
+physicist Louis De Broglie who suggested that
+particles may also behave like waves inside the
+atoms; exhibiting wavelengths and frequencies
+just like sound and light do4
+.
+This theory explained many observations and
+opened the door into an exciting new reality that
+is, however, not easy to comprehend nor to
+visualize5
+.
+The wave-particle duality was confirmed in 1927
+when a different type of Young’s double-slit
+experiment was performed, the DavissonGermer6
+ experiment, where interference
+diffraction patterns were observed from a stream
+of electrons (instead of light.)
+Previously, in 1905, Albert Einstein had
+suggested in his photo-electric paper7
+ that light is
+made of discrete wave packets of energy called
+photons. Thus, light also behaves either like a
+wave or as a point-like entity, depending on the
+observation or the experiment performed.
+Consequently, the term particle/wave duality was
+coined to describe this mysterious phenomenon.
+But where does this duality come from? And to
+what level do its ramifications reach? We
+definitely can’t feel it in our macrocosmic level.
+Maybe we need to go to smaller levels to detect
+its origin, smaller even than the fundamental
+particles themselves.
+There are many levels below that of the
+elementary particles. For example, protons and
+neutrons are believed to be made of even smaller
+entities called quarks, three of them in each8
+. And
+in String Theory9
+, everything, including quarks,
+is supposed to be made of tiny vibrating strings,
+which is the most fundamental level physicist
+have theorized.
+But there is still a more fundamental level; that of
+the physical and mathematical constants which
+govern space and natural forces, such as Pi, Euler
+number, fine structure constant, to mention a few.
+II. THE PARTICLE-ASPECT OF
+NUMBERS
+The idea behind atoms goes way back to the 5th
+century BC, where the Greek philosopher
+Leucippus10 thought matter to be continuously
+devisable until one reaches a point where it
+cannot be divided anymore: the size of atoms.
+By the beginning of the twentieth century, atoms
+were found to be made of even smaller entities,
+called elementary particles, mainly the electron,
+the proton, and the neutron.
+Consequently the field of quantum mechanics
+emerged whereby physicists had a mathematical
+framework able to describe these particles and
+their interactions.
+By assigning specific numbers to these particles,
+called Quantum Numbers11, physicists were able
+to describe their quantum states. These quantum
+numbers are conserved and dictate how the
+particles behave and whether a certain reaction is
+allowed or not.
+For example, in the beta-decay, where a neutron
+decays into a proton, an electron, and an
+antineutrino, the quantum charge number should
+be conserved before and after the interaction:
+𝑛
+଴
+ → 𝑝
+ା + 𝑒
+ି + 𝜐 .
+And we see that 0 = 1 – 1 + 0, as the proton is
+considered positive, the electron negative, and the
+antineutrino carries no charge, just like the
+neutron.
+There are many other qualities assigned to
+particles, such as angular momentum, principle
+quantum number, spin, etc. and most of them are
+described by sets of integers either discrete (i.e.
+similar to [-1, 0, 1] as in the charge number for
+example) or continuous, as in the principle
+quantum number [1, 2, 3...]
+But we are not constrained to use these specific
+numbers only. We can use numbers from 1 to 9
+to describe the elementary particles and their
+3
+behaviors, requiring the implementation of the
+digital root math12
+.
+For example, if we assign particles the numbers
+shown in the table below, we find that these
+numbers also satisfy the beta-decay, and any
+elementary reaction, as follows: 1 = 2 + 3 +5 = 10
+and the digital root of 10 = 1.
+PARTICLE ANTI-PARTICLE
+𝒏
+𝟎 → 𝟏 𝑛
+଴ → 8
+𝒑
+ା → 𝟐 𝑝
+ି → 7
+𝒆
+ି → 𝟑 𝑒
+ା → 6
+𝝊 → 𝟐 𝜐 → 2
+The numbers assignment is chosen such that each
+particle, when added to its antiparticle, results in
+the number 9, which is equivalent to 0 in the
+digital root math. However, number 9 is not 0 or
+nothingness, and this is where the two systems
+differ; as when a particle and antiparticle unite,
+they annihilate each other in a great burst of
+energy. This is exactly what number 9 is telling
+us here: that the unification results in energy, not
+0 (as the numbers 1 and -1 produce).
+Therefore numbers can enact the role of particles
+perfectly (and energy, as in number 9). They even
+dictate how particles interact and behave. In a
+sense, it is from the properties of numbers that the
+physical reality inherits its fundamental laws.
+III. THE WAVE ASPECT OF
+NUMBERS
+As illustrated above, particles and numbers are
+different manifestations of the same point-like
+aspects.
+However, as we have shown above, this pointlike aspect is not the only one that particles
+exhibit; they have a wave-like nature that is as
+fundamental as the point-like one, described by
+wave-equations, such as Schrödinger’s
+equation11, interpreted as a probability density
+spread over spacetime, communicating a physical
+meaning only when squared.
+There are two main types of numbers: integers
+and non-integers (floats).
+Integer numbers are exact, with no commas or
+leftovers. So, an integer would be something like
+1, 2, 3, 564, 9845603, etc.
+By contrast, non-integer or float would be
+something like 5.65, or 2.7182818…
+For the case of floats, there are several types.
+There are those that are rational, having few
+numbers for their remainders or where the
+remainder repeats indefinitely in a specific
+pattern, like 1/7 = 0.142857142857…
+And there are irrational numbers, being those
+numbers where their remainders repeat in a
+completely random fashion, but still are the
+solution of some algebraic equation, such as the
+golden section Phi13
+.
+On the far extreme, we have transcendental
+numbers, where their remainders repeat
+indefinitely in a string of random digits. Unlike
+transcendental numbers, however, they solve no
+known algebraic equation, such as π or Euler
+number e.
+The ratio 1/7 is particularly interesting as it seems
+to capture the essence of the wave. This is
+because the repeated pattern of its remainder
+[142857] mimics a wave when plotted
+individually, and more so collectively, as shown
+in figure (2) below.
+Fig.2: The wave-like nature of the remainder of 1/7.
+In fact, taking the inverse of numbers is the
+simplest mathematical way to create repeated
+patterns, for example, 1/6 = 0.16666…, or 1/273
+= 0.00366300366300… etc.
+Natural numbers [0, 1, 2, … ∞] only increase in
+magnitude and, consequently, no wave-like
+behavior is observed. However, looking at their
+4
+digital roots exposes a wave-pattern embedded
+underneath.
+So, when numbers from 1 to infinity are
+distributed, let’s say within three columns, we
+find that the digital roots of the numbers in each
+column repeats indefinitely, as shown in the table
+below.
+NATURAL NUMBERS DIGITAL ROOT
+1 2 3 1 2 3
+4 5 6 4 5 6
+7 8 9 7 8 9
+10 11 12 1 2 3
+13 14 15 4 5 6
+16 17 18 7 8 9
+… … … … … …
+The 1st column’s digital root repeats in the
+sequence [1, 4, 7]. This sequence resembles a
+wave, just like 1/7 does. It’s the same for the other
+two columns made up of [2, 5, 8] and [3, 6, 9].
+Therefore, in principle, numbers do observe some
+form of a numerical wave-like pattern. We can
+say that numbers carry certain frequencies, either
+individually, as in their repeating remainders, or
+collectively, as in their digital roots.
+If this wave-like essence is related to the same
+one we observe everywhere in nature, it should
+also exhibit some of its properties. And there is
+no property of waves more fundamental than
+interference.
+IV. NUMBERS’ INTERFERENCE AND
+PATTERNS
+One of the most basic interference patterns is the
+one generated from two point-like sources
+propagating circular waves. The emerging pattern
+is similar to that of the two-slit experiment
+(Figure 1) reproduced in greater detail below:
+0 1 72 3 4 5 6 891011120 6 12 18 24Fig.3: (top) Interference pattern from two point-like sources.
+(Middle) The same interference pattern magnified to
+illustrate the 12-based fractal nature of the pattern. (Bottom)
+Digital rendering of the interference pattern for a scale from
+0 to 12.
+From the above pattern, we notice that the waves’
+interference creates periodic self-similar fractals
+with intervals obeying multiples of 12, depending
+on the level of the fractal. Moreover, the pattern
+is built on doubling principles where each circle
+encompasses an even number of smaller circles
+inside it in a hierarchal fashion.
+On closer inspection (Figure 4), we see that the
+numerical wave matrix is scalable to numbers
+from 1 to 10 as well as from to 100, or to 2000,
+etc. For our case, we look at a range from 1 to 121
+for reasons explained shortly.
+The numbers on the horizontal axis are
+referenced by their digital roots instead of their
+original full values for better illustration of the
+patterns of the wave matrix.
+Note how the matrix is symmetric around number
+60, especially when it comes to prime numbers.
+Prime numbers are divisible by themselves and
+number 1 only. The Fundamental Theorem14 of
+Arithmetic states that any integer >1 can be
+expressed as the unique product of two or more
+primes. In this sense, prime numbers can be
+considered the main block upon which all other
+5
+numbers are built, giving them a special status
+among the rest.
+Fig.4: An illustration of the wave matrix generated from
+two-point-like interfering sources and for a scale between 0
+and 121, along with prime and Quasi-prime symmetry,
+angular references, and musical notes correspondences.
+(Please refer to Appendix A for a more detailed explanation.)
+So, starting with number 60, the two numbers
+bounding it (59 and 61) are both prime numbers.
+Going further to numbers 54 and 66, we find
+another symmetry emerging with 53 and 67 being
+primes and 55 and 65 not. (We label these nonprime numbers Quasi Primes, being the product
+of prime numbers that are ≥ 5, thus excluding 2
+and 3. Please refer to reference 15 for more
+information on these numbers15.)
+Numbers 47 and 49 to the left skip their matching
+pair and match up instead with the next pair of 77
+and 79, while 71 and 73, both prime, match up
+with 41 and 43, also primes. These four pairs
+form an offset that creates a kind of momentum
+around number 60.
+Further out, we get the symmetry back with pairs
+35 and 37 matching up with 83 and 85.
+When we reach numbers 30 on the left and 90 on
+the right, we lose our reflection symmetry for the
+pairs [29, 31] and [89, 91]. This is because, at 90
+we have reached the fractal limit of our 9-base
+system, starting with 9, then 90, then 900, etc.
+Therefore, the break in symmetry here indicates
+the end of one cycle and the beginning of another.
+(We are working in a 9-based system not a 10-
+based one because 10 is reducible to 1 in the
+digital root math, and hence we have 9 numbers
+only, from 1 to 9.)
+One other cycle is at number 24, where twin
+primes appearance on both sides of numbers that
+are multiples of 6 breaks and the first quasi-prime
+number appears, being number 25.
+At 114 we get another break of symmetry, paving
+the way for the appearance of the first quasiprime pair of [119, 121] and with the cycle
+finishing at 120, as in a full octave.
+With the 12-based fractal of the wave matrix, we
+can superimpose the 12 notes of the octave on the
+pattern as if the interference is generated by
+sound waves, as shown in figure (4) above.
+We used the notes of the major 5th octave with the
+note A5 tuned to the standard pitch of 432Hz. This
+is because by using this tuning value, we get a
+perfect correspondence between the angular
+reference of the notes’ and the internal angles of
+specific polygons as explained in detail in
+reference 16.
+Therefore the wave interference pattern is a
+unifying matrix where numbers, as well as
+geometry and sound, can all be manifested and
+expressed, enabling us, in return, to find new
+connections between these various disciplines,
+from music to the fundamental elements of
+nature.
+V. WAVE INTERFERENCE AND THE
+EMERGENCE OF FUNDAMENTAL
+CONSTANTS
+The geometry of the wave matrix is essentially a
+numbering or a measuring system which
+determines the scale at which the physical
+qualities that emanates from these waves work at.
+For example, if we to consider these waves of
+electromagnetic nature, emanating from the
+fluctuation of the zero-point energy17, then their
+interference pattern would set the scale that
+controls many physical laws and qualities, such
+as the speed of light. In another non-vacuum
+medium, the scale will change depending on the
+6
+structure of the medium and the speed of light
+will change accordingly.
+We can also think of each point on the wave
+matrix as an individual number-source generating
+its own propagating numerical waves. This logic
+is synonymous with the Huygens–Fresnel
+Principle18 which is very powerful in explaining
+many properties of light that are not explainable
+using the single source model alone.
+Therefore, mathematical constants, such as π or
+e, can be decomposed into specific integers plus
+a wave. For example, the constant π = 3.14592…
+is partitioned into 3, representing the particle
+aspect of the number or its amplitude, plus a
+remainder of 0.141592…
+To make the concept more comprehensible, we
+use the approximate ratio of 22/7 = 3.142857…
+which is equivalent to 3 (amplitude) + 1/7
+(phase). The same logic applies to Euler number
+e = 2.718… which can be expressed as 19/7 =
+2.714285… = 2 + 5/7, with 2 being the amplitude
+and 5/7 being the phase.
+Fig.5: Number π expressed in a wave/particle fashion; the
+sum of an integer amplitude of 3 and a phase of 1/7.
+In this respect, each number on the wave matrix
+form a seed or a kernel around which
+mathematical and physical constants grow
+through the addition of a phase.
+By deducing the mechanism through which the
+phases are generated, we can start predicting the
+values of other constants that are not yet
+identified. This is being investigated at the
+moment and will be discussed in the next paper.
+The above reasoning invites a more geometrical
+approach to the mathematical and physical
+constants, being natural separations of the waves.
+For example, number π emanates from the waveseparation of unity in the ratios of 3 and 4 as
+illustrated in the image below to the left. The
+remainder can be generated from the same
+process; endless doubling or separation of the
+circular waves. And so is for the rest of the
+mathematical constants; emerging from the
+overlapping or separation of propagating waves.
+Fig.6: Mathematical constants represented as doubling of
+waves/circles: for π (left), and for the standard tuning of
+432Hz (right).
+This is a powerful representation that transforms
+the abstract numerical constants into more
+comprehensible forms having unique wave-like
+signatures. This could very well be how these
+constants are communicated to the universe as
+well as the mechanism by which it governs its
+physical laws
+VI. THE PERIODIC WAVE OF
+ELEMENTS
+The natural elements comprising our universe are
+listed in a linear fashion in the Periodic Table of
+Elements, first introduced by the Russian chemist
+Dmitri Mendeleev in 1869. This table of 14-18
+columns or families categorize the elements
+based on their atomic number (the number of
+protons in the nucleus) and their chemical
+properties.
+Applying the wave theory to the numerical
+references of the elements (i.e. their atomic
+numbers) will separate these elements into their
+respective families more naturally than the linear
+method does.
+7
+As shown in figure (7) below, we start with
+hydrogen, the simplest element, forming the first
+wave/circle. (For better visualization, please refer
+to Appendix B.)
+Hydrogen initiates the binary doubling of the first
+wave into 2 smaller ones, followed by 4 and then
+8. These 8 circles are superimposed sine/cosine
+waves with one wave corresponding to the
+elements from He to Ne, while the other
+corresponding to elements from Ne to Ar. (Some
+elements appear on both sides of the wave matrix
+because it is a fractal configuration; when one
+cycle finishes, an exactly similar one starts.)
+Fig.7: The wave-based table of elements along with their
+respective families (shaded areas) and their musical
+notes/geometry correspondences. (Please refer to Appendix
+B for a more detailed explanation.)
+By continuing the octave doubling, elements line
+up perfectly in a manner that reflects their
+respective families, such as Metals, Lanthanoids,
+Acteonids, etc. with noble gases positioning
+themselves on both sides of the wave matrix,
+being the chemically inert members of the
+elements. The more we move closer toward the
+center or the peak of the wave the more active and
+isotopic the elements become.
+Next comes carbon whose family obeys the
+following sequence: Si, Ge, Sn, and finally Pb.
+Each element is positioned at a specific point or
+node that is determined by the interference of two
+waves. These waves emanate from the doubling
+of the previous one, representing the preceding
+element that initiates the doubling and the
+emergence of the next octave elements, and so on.
+Recalling how the wave matrix corresponded to
+musical notes and geometry, we can therefore
+associate each element with a specific frequency
+and shape.
+So for carbon, it corresponds to note C# of 540Hz
+as well as to the hexagon, which is a very
+appropriate shape as carbon chains usually take
+the form of hexagons in organic materials.
+The correspondences of the rest of the elements
+are illustrated in Appendix B.
+A consequence of the above wave-doubling
+configuration concerns the counter-intuitive
+conclusion of missing elements on the hydrogen
+level (or even above this level) such that when
+doubled, will generate the next octave of the
+carbon level.
+By following this logic to its narrowing
+conclusion, 19 extra elements (3 noble gases, 8
+standard elements, and 8 isotopes) need to be
+added to the already known 118 of them, totaling
+to 137, the same number that Richard Feynman,
+the famous American physicist, already
+suggested19 for the total number of elements (and
+also a well-known prime value encoding the finestructure constant.)
+Whatever the nature of these suggested new
+elements may be, if any, the wave-based
+configuration introduces a novel perspective to
+the elements and their families that may lead to a
+better understanding of their numerical
+construction as well as their geometrical and
+acoustic quintessence.
+IV. CONCLUSION
+Integrating the wave/particle aspect with integers
+and their fractions creates a novel and holistic
+approach to the physical world.
+8
+Treating numbers as natural wave generators, as
+well as separators, sets a scale which extends our
+reach into the most fundamental levels of many
+branches of science and thus provides us with the
+necessary knowledge to fathom the intricate
+relationships between these branches and to
+discover some of their hidden peculiarities.
+APPENDIX
+A- Larger rendering of Figure (4) with
+further explanation.
+On the main horizontal axis of the wave
+interference matrix, we find the digital roots of
+numbers from 1 to 121. listed on top of them
+primes and Quasi-primes numbers positioned in a
+symmetrical pattern around 60 as explained
+above. (Number 60 can also be 6, 0.6 or 600, etc.
+as the whole pattern is of fractal nature.) Above
+the level of prime numbers, we have numbers’
+angular references as a fraction of 360◦
+ and 432◦
+.
+So, above 60 we have 0.6×360◦
+ = 216◦
+ while 288◦
+is just 0.8×360◦
+ and so on. We use the decimal
+fraction of the numbers as to maintain the degree
+references within the 360◦ circle.
+Notice how the cycle ends at 120, corresponding
+to 432◦
+, which is the same value for the
+Pythagorean tuning.
+The axis below the digital root numbers is the 1/x
+reference of the numbers along with their degree
+references. So, 1/6 = 0.166… and 0.166×432◦ =
+72◦
+, and so is the case for the rest of the numbers
+(the 1/x analysis is essential for our next paper
+where we discuss the emergence of the
+fundamental constants from the wave matrix).
+The top rows are reserved for the corresponding
+12 musical notes and their degrees of reference.
+B- Larger rendering of Figure (7) with an
+explanation.
+The wave-based periodic table of elements
+rests on the wave-doubling principle, with
+each element initializing the doubling of the
+wave, which in returns, produces more
+elements that initiate more doubling and so
+on. Each node corresponds to specific
+elements along with a specific musical note
+and geometry, as shown at the bottom of the
+image.
+The shaded areas represent the chemical
+families of the elements, such as metals,
+weak metal, lanthanoids, and actinoids.
+
+9
+References
+[1] David R. Dowling. Revealing hidden
+information with quadratic products of acoustic
+field amplitudes. Phys. Rev. Fluids 3 (2018).
+[2] Young, Thomas. Bakerian Lecture:
+Experiments and calculations relative to physical
+optics. Philosophical Transactions of the Royal
+Society. 94: 1–16 (1804).
+[3] Niels Bohr. On the Constitution of Atoms and
+Molecules. Niels Bohr, 1913-2013. Springer
+(2013).
+[4] P. Weinberger. Revisiting Louis de Broglie's
+famous 1924 paper in the Philosophical
+Magazine. Philosophical Magazine Letters
+(2006).
+[5] Feynman, R. QED: The Strange Theory of
+Light and Matter. Penguin (1990).
+[6] Davisson, C. J.; Germer, L. H. Reflection of
+Electrons by a Crystal of Nickel. Proceedings of
+the National Academy of Sciences of the United
+States of America. 14 (4) (1928).
+[7] Einstein, A. On a Heuristic Point of View
+about the Creation and Conversion of Light.
+Annalen der Physik 17 (1905).
+[8] B. Povh, C. Scholz, K. Rith, and F. Zetsche.
+Particles and Nuclei. Springer (2008).
+[9] Michael B. Green, John H. Schwarz, Edward
+Witten. Superstring Theory. Cambridge
+University Press (2012).
+[10] C.C.W. Taylor. The Atomists: Leucippus
+and Democritus. Phoenix Presocractic Series
+(2010).
+[11] Eugen Merzbacher. Quantum Mechanics.
+Wiley, 3rd edition, (1997).
+[12] Talal Ghannam. The Mystery of Numbers:
+Revealed through their Digital Root, 2nd Edition.
+CreateSpace (2012).
+10
+[13] John Michell and Alan Brown. How the
+world is made. Inner Traditions (2009).
+[14] Lindemann, F. A. The Unique Factorization
+of a Positive Integer. Quart. J. Math. 4 (1933).
+[15] Robert E. Grant and Talal Ghannam.
+Accurate and Infinite Prime Prediction from
+Novel Quasi-Prime Analytical Methodology
+(2019).
+[16] Robert E. Grant and Talal Ghannam. Music:
+The Unification of Sound, Numbers, and
+Geometry (2019). (Awaiting Journal Aproval).
+[17] Harold E. Puthoff. Source of Vacuum
+Electromagnetic Zero-Point Energy. Physical
+Review A 40(9):4857-4862 (1989).
+[18] David A. B. Miller. Huygens's Wave
+Propagation Principle Corrected. Optics Letters
+16 (1991).
+[19] Hans Eggenkamp. The Geochemistry of
+Stable Chlorine and Bromine Isotopes. Springer
+(2014). 
