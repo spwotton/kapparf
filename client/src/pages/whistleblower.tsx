@@ -262,6 +262,7 @@ export default function WhistleblowerPage() {
     { id: "3i-atlas", label: "3I/ATLAS" },
     { id: "archive", label: "Evidence Archive" },
     { id: "github", label: "GitHub Forensics" },
+    { id: "cdmx-nexus", label: "CDMX Nexus" },
     { id: "legal", label: "Legal Framework" },
   ];
 
@@ -1815,7 +1816,264 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
           </div>
         </Section>
 
-        <Section id="legal" title="XX. Legal Framework & Contact">
+        <Section id="cdmx-nexus" title="XXI. The CDMX Nexus — Mexico City Convergence">
+          <div className="bg-red-950/20 border border-red-900/40 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-300">
+              <strong className="text-red-400">Pattern:</strong> Nearly every actor in this network has documented connections to
+              Ciudad de México (CDMX). JW/LDS Latin America HQ is in CDMX. The Telefonica → Liberty acquisition chain traces
+              through Spain. Multiple surveillance-adjacent actors traveled to or operate from CDMX in overlapping timeframes.
+            </p>
+          </div>
+
+          <h4 className="text-white font-bold mb-4 text-lg">Telecom Acquisition Chain</h4>
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <div className="flex flex-wrap items-center gap-2 text-sm font-mono mb-3">
+              <span className="bg-blue-900/40 px-3 py-1 rounded text-blue-300">Telefonica (Spain)</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-yellow-900/40 px-3 py-1 rounded text-yellow-300">Sold LATAM ops</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-red-900/40 px-3 py-1 rounded text-red-300">Liberty Latin America</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-purple-900/40 px-3 py-1 rounded text-purple-300">Liberty CR (Costa Rica ISP)</span>
+            </div>
+            <p className="text-xs text-gray-500">
+              Parent company now based in Spain. Connector Pepe (former Telefonica) transitions into Liberty CR.
+              His partner, high-ranking Liberty CR executive, lives in Alajuela — same province as Tacacorí surveillance location.
+            </p>
+          </div>
+
+          <h4 className="text-white font-bold mb-4 text-lg">CDMX Actor Convergence Map</h4>
+          <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full" />
+                <span className="text-white font-bold text-sm">Connector Pepe</span>
+                <span className="text-xs text-gray-500">(Jean Picado Solis)</span>
+              </div>
+              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+                <li>• Former Telefonica employee → Liberty CR transition</li>
+                <li>• = "Jenn Solis" — bartender connection in CDMX</li>
+                <li>• Partner: Liberty CR executive in Alajuela</li>
+                <li>• OSINT correlation: 2× link to Doja Cat VZ, Grumpy Cat CPA, Doge Landlord</li>
+                <li>• Residential IP hijacking via Liberty CR infrastructure</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full" />
+                <span className="text-white font-bold text-sm">Doge Landlord</span>
+                <span className="text-xs text-gray-500">(Marjorie Alfaro)</span>
+              </div>
+              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+                <li>• Senior position at Liberty CR</li>
+                <li>• Lives in Alajuela province</li>
+                <li>• Partner of Connector Pepe (Jean Solis)</li>
+                <li>• OSINT: 2× correlation with every major network actor</li>
+                <li>• Aperture Price operator — Liberty IP synchronization</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 bg-orange-500 rounded-full" />
+                <span className="text-white font-bold text-sm">Doja Cat VZ</span>
+                <span className="text-xs text-gray-500">(Genesis Peralta)</span>
+              </div>
+              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+                <li>• CDMX trip 2019 — cross-border activity period</li>
+                <li>• Same timeframe as Grumpy Cat CPA company formation</li>
+                <li>• OSINT: 2× correlation with Connector Pepe, Doge Landlord, Grumpy Cat CPA</li>
+                <li>• Venezuelan SIM proxies documented</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+                <span className="text-white font-bold text-sm">Salsa Cat</span>
+                <span className="text-xs text-gray-500">(Lucia Soto)</span>
+              </div>
+              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+                <li>• CDMX trip: wedding for Carolina Soto</li>
+                <li>• Partner: Deal Frog (Leo Orozco) — controller/dealer</li>
+                <li>• Friends with Ghost Rat (danish2210/danich2210) fake IG profile</li>
+                <li>• Soto family network spans CR ↔ CDMX</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full" />
+                <span className="text-white font-bold text-sm">Deal Frog</span>
+                <span className="text-xs text-gray-500">(Leo Orozco)</span>
+              </div>
+              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+                <li>• Controller/dealer role</li>
+                <li>• CDMX trip with Salsa Cat for Soto wedding</li>
+                <li>• Friends with Ghost Rat fake IG profile</li>
+                <li>• Operational handler function documented</li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-3 h-3 bg-purple-500 rounded-full" />
+                <span className="text-white font-bold text-sm">Ghost Rat</span>
+                <span className="text-xs text-gray-500">(danish2210 / danich2210 / l3monrat)</span>
+              </div>
+              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+                <li>• Lahore, Pakistan — remote operator</li>
+                <li>• Fake IG profile: "Guzman-Calderon" — AI-generated photos</li>
+                <li>• Friends with Salsa Cat &amp; Deal Frog on fake IG</li>
+                <li>• GitHub: l3monrat — follows geerlingguy (Raspberry Pi, ESP32, offline GPS)</li>
+                <li>• Follows "Drone Ventura MX" + tax school (IDEF/ISAF)</li>
+                <li>• ESP32 + no-internet GPS = mesh surveillance hardware</li>
+              </ul>
+            </div>
+          </div>
+
+          <h4 className="text-white font-bold mb-4 text-lg">The Soto Network</h4>
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <div className="grid grid-cols-3 gap-3 text-center text-xs">
+              <div className="bg-gray-800/60 rounded p-3">
+                <div className="text-white font-bold">Salsa Cat</div>
+                <div className="text-gray-500">Lucia Soto</div>
+                <div className="text-yellow-400 mt-1">CDMX wedding attendee</div>
+              </div>
+              <div className="bg-gray-800/60 rounded p-3">
+                <div className="text-white font-bold">Wedding Cake Cat</div>
+                <div className="text-gray-500">Carolina Soto</div>
+                <div className="text-yellow-400 mt-1">CDMX wedding — the event</div>
+              </div>
+              <div className="bg-gray-800/60 rounded p-3">
+                <div className="text-white font-bold">Side Eye Chloe</div>
+                <div className="text-gray-500">Diana Soto</div>
+                <div className="text-yellow-400 mt-1">Father: Scott Ryan (US)</div>
+              </div>
+            </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Three Soto-surname actors form a family cluster with cross-border US/CR ties. 
+              Carolina Soto's CDMX wedding served as a convergence event bringing CR-based actors into Mexico.
+              Diana Soto's father Scott Ryan provides the US connection point.
+            </p>
+          </div>
+
+          <h4 className="text-white font-bold mb-4 text-lg">JW/LDS CDMX Command Node</h4>
+          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+            <p className="text-sm text-gray-400 mb-3">
+              JW/LDS Latin America headquarters is located in Ciudad de México. The Nicaragua expulsion
+              (Sandinista government) → CDMX relocation → Costa Rica expansion pipeline runs directly
+              through this command node.
+            </p>
+            <div className="flex flex-wrap items-center gap-2 text-sm font-mono">
+              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">Nicaragua (expelled)</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-red-900/40 px-3 py-1 rounded text-red-300 font-bold">CDMX HQ</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">San José</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">Heredia (8→35K+)</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">AWB/Radio Impacto</span>
+              <span className="text-gray-600">→</span>
+              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">Tacacorí endpoint</span>
+            </div>
+          </div>
+
+          <h4 className="text-white font-bold mb-4 text-lg">Ghost Rat Technical Profile</h4>
+          <div className="bg-gray-900/60 border border-red-900/40 rounded-lg p-5">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <h5 className="text-red-400 font-bold text-sm mb-2">Digital Footprint</h5>
+                <ul className="text-xs text-gray-400 space-y-1">
+                  <li>• <strong className="text-white">GitHub:</strong> danish2210 / l3monrat</li>
+                  <li>• <strong className="text-white">Instagram:</strong> danich2210 (fake profile)</li>
+                  <li>• <strong className="text-white">Fake name:</strong> "Guzman-Calderon"</li>
+                  <li>• <strong className="text-white">Location:</strong> Lahore, Pakistan</li>
+                  <li>• <strong className="text-white">Profile photos:</strong> AI-generated</li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="text-red-400 font-bold text-sm mb-2">Follows / Interests</h5>
+                <ul className="text-xs text-gray-400 space-y-1">
+                  <li>• <strong className="text-white">geerlingguy:</strong> Raspberry Pi, ESP32, offline GPS hardware</li>
+                  <li>• <strong className="text-white">Drone Ventura MX:</strong> Mexican drone operations</li>
+                  <li>• <strong className="text-white">Tax school:</strong> IDEF/ISAF (financial operations training)</li>
+                  <li>• <strong className="text-white">Hardware profile:</strong> ESP32 + no-internet GPS = mesh surveillance nodes</li>
+                  <li>• <strong className="text-white">Operational link:</strong> Friends with Salsa Cat &amp; Deal Frog via fake IG</li>
+                </ul>
+              </div>
+            </div>
+            <div className="mt-4 bg-red-950/30 border border-red-900/30 rounded p-3">
+              <p className="text-xs text-red-300">
+                <strong>Assessment:</strong> Ghost Rat profile matches a remote technical operator providing mesh surveillance 
+                hardware expertise (ESP32/RPi offline GPS nodes) from Pakistan, connected to CDMX drone operations,
+                with social engineering cover via AI-generated IG profiles linked to Salsa Cat and Deal Frog.
+                The "Guzman-Calderon" alias and "Drone Ventura MX" follow point to Mexican cartel-adjacent operational cover.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 bg-gray-900/60 border border-yellow-900/40 rounded-lg p-5">
+            <h4 className="text-yellow-400 font-bold mb-3">OSINT Correlation Matrix (from omega evidence)</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs" data-testid="table-cdmx-correlations">
+                <thead>
+                  <tr className="border-b border-gray-700">
+                    <th className="text-left py-2 text-gray-400">Actor A</th>
+                    <th className="text-left py-2 text-gray-400">Actor B</th>
+                    <th className="text-center py-2 text-gray-400">Correlation Strength</th>
+                    <th className="text-left py-2 text-gray-400">CDMX Link</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-300">
+                  <tr className="border-b border-gray-800">
+                    <td className="py-2">Doge Landlord (Marjorie)</td>
+                    <td>Connector Pepe (Jean Solis)</td>
+                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-yellow-400">Liberty CR + Telefonica Spain</td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="py-2">Doge Landlord (Marjorie)</td>
+                    <td>Doja Cat VZ (Genesis)</td>
+                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-yellow-400">Genesis CDMX 2019</td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="py-2">Connector Pepe (Jean Solis)</td>
+                    <td>Grumpy Cat CPA (Greenfield)</td>
+                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-yellow-400">Financial ops timing</td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="py-2">Doja Cat VZ (Genesis)</td>
+                    <td>Grumpy Cat CPA (Greenfield)</td>
+                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-yellow-400">2019 company formation</td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="py-2">R Herrera</td>
+                    <td>Los Rios</td>
+                    <td className="text-center text-red-400 font-bold">4</td>
+                    <td className="text-yellow-400">JW congregation anchor</td>
+                  </tr>
+                  <tr className="border-b border-gray-800">
+                    <td className="py-2">R Herrera</td>
+                    <td>Pasti</td>
+                    <td className="text-center text-orange-400 font-bold">2</td>
+                    <td className="text-yellow-400">Operational support</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-gray-500 mt-3 font-mono">
+              Source: docs/evidence/omega/investigations/osint_output/correlations.json — automated OSINT engine analysis
+            </p>
+          </div>
+        </Section>
+
+        <Section id="legal" title="XXII. Legal Framework & Contact">
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
               <h4 className="font-bold text-white mb-3">Constitutional Protections (Costa Rica)</h4>
