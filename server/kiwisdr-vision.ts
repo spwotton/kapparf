@@ -203,21 +203,23 @@ async function captureKiwiSDR(profile: CaptureProfile): Promise<CaptureResult> {
         "--no-sandbox",
         "--disable-setuid-sandbox",
         "--disable-dev-shm-usage",
-        "--disable-gpu",
         "--no-first-run",
         "--no-zygote",
         "--single-process",
         "--disable-extensions",
+        "--disable-background-timer-throttling",
+        "--disable-renderer-backgrounding",
+        "--disable-backgrounding-occluded-windows",
       ],
     });
 
     const context = await browser.newContext({
-      viewport: { width: 1280, height: 900 },
-      userAgent: "KAPPA-SIGINT-Vision/1.0",
+      viewport: { width: 1400, height: 900 },
+      userAgent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     });
 
     const page = await context.newPage();
-    page.setDefaultTimeout(30000);
+    page.setDefaultTimeout(60000);
 
     let url = `${KIWI_BASE}/?f=${profile.freqKHz}/${profile.mode}&z=${profile.zoom}`;
     if (profile.ext) {
@@ -226,17 +228,77 @@ async function captureKiwiSDR(profile: CaptureProfile): Promise<CaptureResult> {
 
     console.log(`[KiwiVision] Navigating to ${profile.label}: ${url}`);
 
-    await page.goto(url, { waitUntil: "networkidle", timeout: 45000 }).catch(() => {
-      return page.goto(url, { waitUntil: "domcontentloaded", timeout: 30000 });
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+
+    console.log(`[KiwiVision] Page loaded, waiting for KiwiSDR WebSocket connection...`);
+
+    await page.waitForFunction(() => {
+      const wf = document.getElementById("id-waterfall-container") ||
+                 document.getElementById("id-waterfall-canvas") ||
+                 document.querySelector("canvas.waterfall") ||
+                 document.querySelector("canvas#id-wf-canvas") ||
+                 document.querySelector("canvas");
+      return wf !== null;
+    }, { timeout: 30000 }).catch(() => {
+      console.log(`[KiwiVision] No waterfall canvas detected, continuing with timeout wait...`);
     });
 
-    await page.waitForTimeout(profile.durationMs);
+    await page.waitForTimeout(8000);
+
+    const hasWaterfall = await page.evaluate(() => {
+      const canvases = document.querySelectorAll("canvas");
+      for (const c of canvases) {
+        if (c.width > 100 && c.height > 50) {
+          const ctx = c.getContext("2d");
+          if (ctx) {
+            const data = ctx.getImageData(0, 0, Math.min(c.width, 100), Math.min(c.height, 100)).data;
+            let nonBlack = 0;
+            for (let i = 0; i < data.length; i += 4) {
+              if (data[i] > 5 || data[i+1] > 5 || data[i+2] > 5) nonBlack++;
+            }
+            if (nonBlack > 100) return true;
+          }
+        }
+      }
+      return false;
+    }).catch(() => false);
+
+    if (!hasWaterfall) {
+      console.log(`[KiwiVision] Waterfall not rendering yet, giving extra time (${profile.durationMs}ms)...`);
+      await page.waitForTimeout(profile.durationMs);
+    } else {
+      console.log(`[KiwiVision] Waterfall active! Collecting spectrogram for ${profile.durationMs}ms...`);
+      await page.waitForTimeout(profile.durationMs);
+    }
+
+    try {
+      await page.evaluate(() => {
+        const sel = '.w3-modal, .modal, [id*="overlay"], [id*="splash"], [class*="popup"]';
+        const toRemove = document.querySelectorAll(sel);
+        toRemove.forEach(el => (el as HTMLElement).style.display = "none");
+      });
+    } catch {}
 
     await page.screenshot({
       path: screenshotPath,
       fullPage: false,
       type: "png",
     });
+
+    const pageInfo = await page.evaluate(() => {
+      const canvases = document.querySelectorAll("canvas");
+      const wsState = (window as any).kiwi_ws_state || "unknown";
+      return {
+        canvasCount: canvases.length,
+        canvasSizes: Array.from(canvases).map(c => `${c.width}x${c.height}`),
+        title: document.title,
+        wsState,
+        bodyClasses: document.body.className,
+        visibleText: document.body.innerText?.substring(0, 200) || "",
+      };
+    }).catch(() => ({ canvasCount: 0, canvasSizes: [] as string[], title: "", wsState: "error", bodyClasses: "", visibleText: "" }));
+
+    console.log(`[KiwiVision] Page state: ${pageInfo.canvasCount} canvases (${pageInfo.canvasSizes.join(", ")}), title="${pageInfo.title}", waterfall=${hasWaterfall}`);
 
     await browser.close();
     browser = null;
@@ -305,9 +367,9 @@ async function analyzeCapture(capture: CaptureResult): Promise<VisionAnalysis | 
 
     const systemPrompt = `You are KAPPA SIGINT Vision Analyst — an expert radio frequency signals intelligence analyst specializing in VLF/LF military, navigation, and time signal analysis.
 
-You are analyzing a screenshot from a KiwiSDR (Software Defined Radio) web interface located at TI0RC Zapote, Costa Rica (9.936°N, 84.109°W).
+You are analyzing a screenshot from a KiwiSDR (Software Defined Radio) web interface located at TI0RC, RADIOCLUB COSTA RICA, San José (9.936°N, 84.109°W).
 
-Observer location: Tacacorí, Alajuela, CR (10.0513892°N, 84.2186578°W, ~1050m ASL).
+Observer location: Aparthotel Suites Cristina, Sabana Norte, San José, CR (9.9352°N, 84.1094°W) — ~100m from the TI0RC antenna/giant radio tower, 300m north of ICE building.
 
 CONTEXT: This is part of Project KAPPA — a 24/7 autonomous SIGINT correlation platform monitoring for:
 - Surveillance infrastructure (FinSpy/Gamma Group, IMSI catchers)
