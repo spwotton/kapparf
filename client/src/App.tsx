@@ -35,6 +35,7 @@ import NetworkForensicsPage from "@/pages/network-forensics";
 import EvidenceChainPage from "@/pages/evidence-chain";
 import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
 import WhistleblowerPage from "@/pages/whistleblower";
+import MemoryCortexPage from "@/pages/memory-cortex";
 
 function Router() {
   return (
@@ -65,6 +66,7 @@ function Router() {
       <Route path="/evidence" component={EvidenceChainPage} />
       <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
       <Route path="/ciajw" component={WhistleblowerPage} />
+      <Route path="/memory" component={MemoryCortexPage} />
       <Route component={NotFound} />
     </Switch>
   );

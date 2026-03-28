@@ -93,6 +93,16 @@ Autonomous Playwright-based system that captures real spectrograms from TI0RC Ki
 - `loginAlreadyHandled` flag prevents re-entering callsign after initial login
 - Chromium path: `/nix/store/12iaw5ng4xvxxffm381lgxlh1ysh0bl4-playwright-browsers/chromium-1134/chrome-linux/chrome`
 
+## Memory Cortex (pgvector)
+- **Engine:** `server/memory-cortex.ts` — semantic vector memory with OpenAI/HuggingFace embeddings
+- **DB Table:** `memory_vectors` — pgvector 0.8.0, 1536-dim embeddings, IVFFlat index
+- **Embedding cascade:** text-embedding-3-small → text-embedding-ada-002 → OpenRouter → HuggingFace all-MiniLM-L6-v2 (padded to 1536)
+- **Categories:** quantum_circuit, mathematical_proof, signal_intelligence, surveillance_evidence, kappa_constant, frequency_analysis, network_forensics, gos_framework, research_finding, decision, code_change, correlation, whistleblower, session_context
+- **API Routes:** GET /api/memory/stats, GET /api/memory/list, POST /api/memory/store, POST /api/memory/search, POST /api/memory/recall, POST /api/memory/ingest, GET /api/memory/:id, DELETE /api/memory/:id, PATCH /api/memory/:id/importance
+- **Frontend:** `/memory` — Memory Cortex page with semantic search, store, ingest, browse
+- **Auto-ingest:** Parses quantum circuit JSON, null hypothesis controls, GoldenGHZ, zeta proofs, Riemann validation, PASQAL configs, satellite data
+- **Contextual Recall:** `contextualRecall(query)` returns formatted context block for LLM augmentation
+
 ## Active Subsystems (auto-start on boot)
 | Subsystem | Interval | File |
 |-----------|----------|------|

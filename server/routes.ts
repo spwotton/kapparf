@@ -34,6 +34,10 @@ import {
   getPcapUploads, startHypervisor, stopHypervisor, getHypervisorStatus,
 } from "./forensic-hypervisor";
 import {
+  storeMemory, searchMemory, getMemoryById, deleteMemory, updateMemoryImportance,
+  getMemoryStats, listMemories, ingestAllQuantumFiles, contextualRecall, MEMORY_CATEGORIES,
+} from "./memory-cortex";
+import {
   startQuantumCortex,
   stopQuantumCortex,
   getQuantumCortexStatus,
@@ -3215,6 +3219,110 @@ export async function registerRoutes(
   });
 
   startHypervisor(30);
+
+  // ============== MEMORY CORTEX ==============
+
+  app.get("/api/memory/stats", async (_req, res) => {
+    try {
+      const stats = await getMemoryStats();
+      res.json(stats);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/memory/categories", (_req, res) => {
+    res.json(MEMORY_CATEGORIES);
+  });
+
+  app.get("/api/memory/list", async (req, res) => {
+    try {
+      const { category, limit, offset, sort } = req.query;
+      const result = await listMemories({
+        category: category as string | undefined,
+        limit: limit ? parseInt(limit as string) : 50,
+        offset: offset ? parseInt(offset as string) : 0,
+        sort: sort as string | undefined,
+      });
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/memory/store", async (req, res) => {
+    try {
+      const { category, title, content, metadata, source, importance } = req.body;
+      if (!category || !title || !content) {
+        return res.status(400).json({ error: "category, title, and content are required" });
+      }
+      const memory = await storeMemory(category, title, content, metadata, source, importance ?? 0.5);
+      res.json(memory);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/memory/search", async (req, res) => {
+    try {
+      const { query, limit, category, minImportance, threshold } = req.body;
+      if (!query) return res.status(400).json({ error: "query is required" });
+      const results = await searchMemory(query, { limit, category, minImportance, threshold });
+      res.json(results);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/memory/recall", async (req, res) => {
+    try {
+      const { query, maxTokens } = req.body;
+      if (!query) return res.status(400).json({ error: "query is required" });
+      const context = await contextualRecall(query, maxTokens);
+      res.json({ context });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/memory/:id", async (req, res) => {
+    try {
+      const memory = await getMemoryById(req.params.id);
+      if (!memory) return res.status(404).json({ error: "Memory not found" });
+      res.json(memory);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.delete("/api/memory/:id", async (req, res) => {
+    try {
+      const deleted = await deleteMemory(req.params.id);
+      res.json({ deleted });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.patch("/api/memory/:id/importance", async (req, res) => {
+    try {
+      const { importance } = req.body;
+      if (importance === undefined) return res.status(400).json({ error: "importance is required" });
+      const updated = await updateMemoryImportance(req.params.id, importance);
+      res.json({ updated });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/memory/ingest", async (_req, res) => {
+    try {
+      const results = await ingestAllQuantumFiles();
+      res.json(results);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 
   return httpServer;
 }
