@@ -956,7 +956,7 @@ export const ANALYSIS_POINTS: AnalysisPoint[] = [
   { id: "tacacori-prev", name: "Tacacorí (Previous)", lat: 10.0513892, lon: -84.2186578, description: "Previous residence — Calle Los Cedros, Tacacorí, Alajuela 20106" },
   { id: "jaco", name: "Jacó", lat: 9.6142, lon: -84.6278, description: "Pacific coast analysis point, Puntarenas" },
   { id: "sjo", name: "SJO — Juan Santamaría Intl", lat: 9.9939, lon: -84.2088, description: "ICAO: MROC — primary international airport" },
-  { id: "ti0rc", name: "TI0RC KiwiSDR", lat: 9.9360, lon: -84.1088, description: "Radio Club de Costa Rica SDR node" },
+  { id: "ti0rc", name: "TI0RC KiwiSDR", lat: 9.9360, lon: -84.1088, description: "Radio Club de Costa Rica SDR node — ~100m from observer at Suites Cristina. Public: http://ti0rc.proxy.kiwisdr.com:8073" },
   { id: "hotel-robledal", name: "Hotel Robledal (Previous)", lat: 9.6389, lon: -84.6312, description: "Previous residence — JW-saturated area, Hotel Robledal, Jacó" },
   { id: "radio-impacto", name: "Radio Impacto 91.5 FM", lat: 10.0514, lon: -84.2187, description: "FM antenna farm — Tacacorí, Alajuela. LDS + JW dual surveillance network. 37 Hz/46.875 Hz sideband injection vector. AWB/CIA infrastructure overlay" },
 ];
