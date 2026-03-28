@@ -94,13 +94,15 @@ Autonomous Playwright-based system that captures real spectrograms from TI0RC Ki
 - Chromium path: `/nix/store/12iaw5ng4xvxxffm381lgxlh1ysh0bl4-playwright-browsers/chromium-1134/chrome-linux/chrome`
 
 ## Memory Cortex (pgvector)
-- **Engine:** `server/memory-cortex.ts` — semantic vector memory with OpenAI/HuggingFace embeddings
+- **Engine:** `server/memory-cortex.ts` — semantic vector memory with multi-provider embeddings
 - **DB Table:** `memory_vectors` — pgvector 0.8.0, 1536-dim embeddings, IVFFlat index
-- **Embedding cascade:** text-embedding-3-small → text-embedding-ada-002 → OpenRouter → HuggingFace all-MiniLM-L6-v2 (padded to 1536)
+- **Embedding cascade:** text-embedding-3-small → text-embedding-ada-002 → OpenRouter text-embedding-3-small → HuggingFace all-MiniLM-L6-v2 (padded to 1536). Replit AI integration doesn't support /embeddings endpoint, so cascade falls through to OpenRouter (working).
 - **Categories:** quantum_circuit, mathematical_proof, signal_intelligence, surveillance_evidence, kappa_constant, frequency_analysis, network_forensics, gos_framework, research_finding, decision, code_change, correlation, whistleblower, session_context
 - **API Routes:** GET /api/memory/stats, GET /api/memory/list, POST /api/memory/store, POST /api/memory/search, POST /api/memory/recall, POST /api/memory/ingest, GET /api/memory/:id, DELETE /api/memory/:id, PATCH /api/memory/:id/importance
-- **Frontend:** `/memory` — Memory Cortex page with semantic search, store, ingest, browse
-- **Auto-ingest:** Parses quantum circuit JSON, null hypothesis controls, GoldenGHZ, zeta proofs, Riemann validation, PASQAL configs, satellite data
+- **Kyma Bridge:** GET /api/kyma/status, GET /api/kyma/latest, GET /api/kyma/frames, GET /api/kyma/resonome, GET /api/kyma/ml, POST /api/kyma/ingest-resonome, POST /api/kyma/collector/start, POST /api/kyma/collector/stop
+- **Kyma Collector:** Auto-starts on boot (60s interval). Pulls live frames from `https://thought-stream-samwotton.replit.app`. Only stores SIGNIFICANT frames (Bell S > 2.82, aperture locked, high Kalman confidence, rotation tilt near 128.23°, META+turbulent states). Classifies importance based on quantum coherence indicators.
+- **Frontend:** `/memory` — Memory Cortex page with semantic search, store, ingest, browse, live Kyma status panel
+- **Auto-ingest:** Parses quantum circuit JSON, null hypothesis controls, GoldenGHZ, zeta proofs, Riemann validation, PASQAL configs, satellite data, Kyma resonome (62 genes in 13 categories)
 - **Contextual Recall:** `contextualRecall(query)` returns formatted context block for LLM augmentation
 
 ## Active Subsystems (auto-start on boot)

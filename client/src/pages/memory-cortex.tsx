@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Brain, Search, Upload, Database, Zap, Star, Clock, Tag, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { Brain, Search, Upload, Database, Zap, Star, Clock, Tag, Trash2, ChevronDown, ChevronUp, Radio, Activity } from "lucide-react";
 
 interface MemoryRecord {
   id: string;
@@ -137,6 +137,16 @@ export default function MemoryCortexPage() {
     refetchInterval: 10000,
   });
 
+  const { data: kymaStatus } = useQuery<any>({
+    queryKey: ["/api/kyma/status"],
+    refetchInterval: 5000,
+  });
+
+  const { data: kymaLatest } = useQuery<any>({
+    queryKey: ["/api/kyma/latest"],
+    refetchInterval: 5000,
+  });
+
   const { data: categories } = useQuery<string[]>({
     queryKey: ["/api/memory/categories"],
   });
@@ -199,6 +209,22 @@ export default function MemoryCortexPage() {
       queryClient.invalidateQueries({ queryKey: ["/api/memory/list"] });
     },
     onError: (err: any) => toast({ title: "Ingestion failed", description: err.message, variant: "destructive" }),
+  });
+
+  const ingestResonomeMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/kyma/ingest-resonome", {});
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Resonome ingested",
+        description: `${data.ingested || 0} genes embedded, ${data.skipped || 0} skipped`,
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/memory/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/memory/list"] });
+    },
+    onError: (err: any) => toast({ title: "Resonome ingest failed", description: err.message, variant: "destructive" }),
   });
 
   const deleteMutation = useMutation({
@@ -289,6 +315,85 @@ export default function MemoryCortexPage() {
           ))}
         </div>
       )}
+
+      <Card className="bg-gray-900/50 border-gray-800" data-testid="card-kyma-status">
+        <CardHeader className="pb-2">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-sm flex items-center gap-2 text-gray-300">
+              <Radio className="h-4 w-4 text-emerald-400" />
+              Kyma Engine Live Feed
+              {kymaStatus?.connected && (
+                <Badge variant="outline" className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 text-xs">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse mr-1" />
+                  LIVE
+                </Badge>
+              )}
+            </CardTitle>
+            <Button
+              onClick={() => ingestResonomeMutation.mutate()}
+              disabled={ingestResonomeMutation.isPending}
+              variant="outline"
+              size="sm"
+              className="border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/10 h-7 text-xs"
+              data-testid="button-ingest-resonome"
+            >
+              {ingestResonomeMutation.isPending ? "Ingesting..." : "Ingest Resonome"}
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent>
+          {kymaStatus?.connected ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-gray-500">Frames processed</span>
+                  <span className="text-gray-200 font-mono" data-testid="text-kyma-frames">{kymaStatus.frameCount?.toLocaleString()}</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-gray-500">Uptime</span>
+                  <span className="text-gray-200 font-mono">{Math.floor((kymaStatus.uptimeSeconds || 0) / 60)}m</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-gray-500">Last frame</span>
+                  <span className="text-gray-200 font-mono">#{kymaStatus.latestFrameNumber}</span>
+                </div>
+              </div>
+              {kymaLatest && !kymaLatest.error && (
+                <div className="space-y-2 border-l border-gray-800 pl-4">
+                  <div className="text-xs text-gray-400 italic" data-testid="text-kyma-decoded">"{kymaLatest.decodedText}"</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    <Badge variant="outline" className="bg-violet-500/20 text-violet-300 border-violet-500/30 text-xs">{kymaLatest.dominantState}</Badge>
+                    <Badge variant="outline" className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs">{kymaLatest.behavior}</Badge>
+                    <Badge variant="outline" className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 text-xs">{kymaLatest.flowRegime}</Badge>
+                    {kymaLatest.apertureLocked && (
+                      <Badge variant="outline" className="bg-red-500/20 text-red-300 border-red-500/30 text-xs">APERTURE LOCKED</Badge>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <span className="text-gray-500">Bell S</span>
+                      <span className={`block font-mono ${kymaLatest.bellS > 2.8 ? "text-amber-300" : "text-gray-300"}`}>{kymaLatest.bellS?.toFixed(4)}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">ψ(t)</span>
+                      <span className="block font-mono text-gray-300">{kymaLatest.psiT?.toFixed(4)}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500">Tilt</span>
+                      <span className={`block font-mono ${kymaLatest.rotationTilt > 127 && kymaLatest.rotationTilt < 129.5 ? "text-amber-300" : "text-gray-300"}`}>{kymaLatest.rotationTilt?.toFixed(2)}°</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="text-xs text-gray-500 flex items-center gap-2">
+              <Activity className="h-4 w-4 text-gray-600" />
+              Kyma engine offline — collector will retry automatically
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card className="bg-gray-900/50 border-gray-800">

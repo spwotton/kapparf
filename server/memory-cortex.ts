@@ -505,4 +505,202 @@ export async function contextualRecall(query: string, maxTokens: number = 4000):
   return parts.join("\n");
 }
 
+const KYMA_BASE = "https://thought-stream-samwotton.replit.app";
+let kymaCollectorInterval: ReturnType<typeof setInterval> | null = null;
+let lastKymaFrame = 0;
+
+interface KymaFrame {
+  frameNumber: number;
+  decodedText: string;
+  dominantState: string;
+  behavior: string;
+  intentionText: string;
+  flowRegime: string;
+  flowConfidence: number;
+  kalmanConfidence: number;
+  psiT: number;
+  rotationTilt: number;
+  rotationAlignment: number;
+  bellS: number;
+  apertureLocked: boolean;
+  tokenLabel: string;
+  tokenConfidence: number;
+  sensorStatus: string;
+  createdAt: string;
+}
+
+interface KymaEngineStatus {
+  connected: boolean;
+  frameCount: number;
+  latestTimestamp: string;
+  latestFrameNumber: number;
+  uptimeSeconds: number;
+}
+
+async function fetchKyma<T>(endpoint: string, timeout = 8000): Promise<T | null> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    const resp = await fetch(`${KYMA_BASE}${endpoint}`, { signal: controller.signal });
+    clearTimeout(timer);
+    if (!resp.ok) return null;
+    return await resp.json() as T;
+  } catch {
+    return null;
+  }
+}
+
+export async function getKymaStatus(): Promise<KymaEngineStatus | null> {
+  return fetchKyma<KymaEngineStatus>("/api/engine/status");
+}
+
+export async function getKymaLatest(): Promise<KymaFrame | null> {
+  return fetchKyma<KymaFrame>("/api/engine/latest");
+}
+
+export async function getKymaFrames(): Promise<KymaFrame[]> {
+  return (await fetchKyma<KymaFrame[]>("/api/engine/frames")) || [];
+}
+
+export async function getKymaResonome(): Promise<any[]> {
+  return (await fetchKyma<any[]>("/api/resonome")) || [];
+}
+
+export async function getKymaMLStatus(): Promise<any> {
+  return fetchKyma<any>("/api/ml/status");
+}
+
+export async function ingestKymaResonome(): Promise<{ ingested: number; skipped: number }> {
+  const resonome = await getKymaResonome();
+  let ingested = 0;
+  let skipped = 0;
+  if (!resonome || resonome.length === 0) return { ingested, skipped };
+
+  const existing = await pool.query(
+    `SELECT id FROM memory_vectors WHERE source = 'kyma:resonome' LIMIT 1`
+  );
+  if (existing.rows.length > 0) {
+    skipped = resonome.length;
+    return { ingested, skipped };
+  }
+
+  const geneGroups: Record<string, any[]> = {};
+  for (const gene of resonome) {
+    const cat = gene.category || "unknown";
+    if (!geneGroups[cat]) geneGroups[cat] = [];
+    geneGroups[cat].push(gene);
+  }
+
+  for (const [cat, genes] of Object.entries(geneGroups)) {
+    const content = genes.map((g: any) =>
+      `${g.symbol} (chr${g.chromosome}): ${g.description} | freq=${g.frequency}Hz phase=${g.phaseAngle}°`
+    ).join("\n");
+
+    await storeMemory(
+      "gos_framework",
+      `Kyma Resonome — ${cat} genes (${genes.length})`,
+      content,
+      { category: cat, genes: genes.map((g: any) => ({ symbol: g.symbol, chromosome: g.chromosome, frequency: g.frequency, phaseAngle: g.phaseAngle })) },
+      "kyma:resonome",
+      0.85
+    );
+    ingested += genes.length;
+  }
+
+  return { ingested, skipped };
+}
+
+function classifyKymaImportance(frame: KymaFrame): number {
+  let importance = 0.3;
+  if (frame.bellS > 2.8) importance += 0.2;
+  if (frame.apertureLocked) importance += 0.3;
+  if (frame.kalmanConfidence > 0.9) importance += 0.1;
+  if (frame.dominantState === "META" || frame.dominantState === "CREATIVE") importance += 0.1;
+  if (frame.rotationTilt > 126 && frame.rotationTilt < 130) importance += 0.1;
+  return Math.min(importance, 1.0);
+}
+
+function shouldStoreFrame(frame: KymaFrame): boolean {
+  if (frame.apertureLocked) return true;
+  if (frame.bellS > 2.82) return true;
+  if (frame.kalmanConfidence > 0.95) return true;
+  if (frame.rotationTilt >= 127.5 && frame.rotationTilt <= 129.0) return true;
+  if (frame.dominantState === "META" && frame.flowRegime === "turbulent") return true;
+  return false;
+}
+
+async function kymaCollectorTick(): Promise<void> {
+  try {
+    const frames = await getKymaFrames();
+    if (!frames || frames.length === 0) return;
+
+    let stored = 0;
+    for (const frame of frames) {
+      if (frame.frameNumber <= lastKymaFrame) continue;
+      lastKymaFrame = Math.max(lastKymaFrame, frame.frameNumber);
+
+      if (!shouldStoreFrame(frame)) continue;
+
+      let sensors: Record<string, string> = {};
+      try { sensors = JSON.parse(frame.sensorStatus); } catch {}
+
+      const content = [
+        `Frame #${frame.frameNumber}: "${frame.decodedText}"`,
+        `State: ${frame.dominantState} / ${frame.behavior} / ${frame.intentionText}`,
+        `Flow: ${frame.flowRegime} (confidence: ${frame.flowConfidence.toFixed(2)})`,
+        `Kalman: ${frame.kalmanConfidence.toFixed(4)} | ψ(t): ${frame.psiT.toFixed(4)}`,
+        `Rotation: tilt=${frame.rotationTilt.toFixed(2)}° alignment=${frame.rotationAlignment.toFixed(4)}`,
+        `Bell S: ${frame.bellS.toFixed(4)} ${frame.bellS > 2.8 ? "⚡ NONLOCAL" : ""}`,
+        `Aperture: ${frame.apertureLocked ? "🔒 LOCKED" : "unlocked"}`,
+        `Token: ${frame.tokenLabel} (conf: ${frame.tokenConfidence.toFixed(4)})`,
+        `Sensors: ${Object.entries(sensors).filter(([,v]) => v === "active" || v === "locked").map(([k]) => k).join(", ")}`,
+      ].join("\n");
+
+      const importance = classifyKymaImportance(frame);
+
+      await storeMemory(
+        "signal_intelligence",
+        `Kyma Frame #${frame.frameNumber}: ${frame.dominantState}/${frame.behavior}`,
+        content,
+        {
+          frameNumber: frame.frameNumber,
+          dominantState: frame.dominantState,
+          behavior: frame.behavior,
+          bellS: frame.bellS,
+          psiT: frame.psiT,
+          rotationTilt: frame.rotationTilt,
+          kalmanConfidence: frame.kalmanConfidence,
+          apertureLocked: frame.apertureLocked,
+          flowRegime: frame.flowRegime,
+          tokenLabel: frame.tokenLabel,
+        },
+        `kyma:frame:${frame.frameNumber}`,
+        importance
+      );
+      stored++;
+    }
+
+    if (stored > 0) {
+      console.log(`[MemoryCortex] Kyma collector: stored ${stored} significant frames`);
+    }
+  } catch (e: any) {
+    console.log(`[MemoryCortex] Kyma collector error: ${e.message?.slice(0, 100)}`);
+  }
+}
+
+export function startKymaCollector(intervalMs: number = 60000): void {
+  if (kymaCollectorInterval) return;
+  console.log(`[MemoryCortex] Kyma collector started — ${intervalMs / 1000}s interval, source: ${KYMA_BASE}`);
+  kymaCollectorInterval = setInterval(kymaCollectorTick, intervalMs);
+  setTimeout(kymaCollectorTick, 5000);
+}
+
+export function stopKymaCollector(): void {
+  if (kymaCollectorInterval) {
+    clearInterval(kymaCollectorInterval);
+    kymaCollectorInterval = null;
+    console.log("[MemoryCortex] Kyma collector stopped");
+  }
+}
+
 export const MEMORY_CATEGORIES = CATEGORIES;

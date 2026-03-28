@@ -36,6 +36,8 @@ import {
 import {
   storeMemory, searchMemory, getMemoryById, deleteMemory, updateMemoryImportance,
   getMemoryStats, listMemories, ingestAllQuantumFiles, contextualRecall, MEMORY_CATEGORIES,
+  getKymaStatus, getKymaLatest, getKymaFrames, getKymaResonome, getKymaMLStatus,
+  ingestKymaResonome, startKymaCollector, stopKymaCollector,
 } from "./memory-cortex";
 import {
   startQuantumCortex,
@@ -3323,6 +3325,82 @@ export async function registerRoutes(
       res.status(500).json({ error: err.message });
     }
   });
+
+  // ============== KYMA ENGINE BRIDGE ==============
+
+  app.get("/api/kyma/status", async (_req, res) => {
+    try {
+      const status = await getKymaStatus();
+      res.json(status || { connected: false, error: "Kyma engine unreachable" });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/kyma/latest", async (_req, res) => {
+    try {
+      const frame = await getKymaLatest();
+      res.json(frame || { error: "No frame available" });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/kyma/frames", async (_req, res) => {
+    try {
+      const frames = await getKymaFrames();
+      res.json(frames);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/kyma/resonome", async (_req, res) => {
+    try {
+      const resonome = await getKymaResonome();
+      res.json(resonome);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/kyma/ml", async (_req, res) => {
+    try {
+      const ml = await getKymaMLStatus();
+      res.json(ml || { error: "ML status unavailable" });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/kyma/ingest-resonome", async (_req, res) => {
+    try {
+      const result = await ingestKymaResonome();
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/kyma/collector/start", async (_req, res) => {
+    try {
+      startKymaCollector(60000);
+      res.json({ status: "started", interval: "60s" });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/kyma/collector/stop", async (_req, res) => {
+    try {
+      stopKymaCollector();
+      res.json({ status: "stopped" });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  startKymaCollector(60000);
 
   return httpServer;
 }
