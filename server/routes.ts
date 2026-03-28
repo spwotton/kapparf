@@ -565,7 +565,7 @@ export async function registerRoutes(
 
       if (!pointsRes.ok) {
         return res.json({
-          location: "Calle Los Cedros, Tacacorí, Alajuela 20106",
+          location: "Hotel Suites Cristina, San José, Costa Rica",
           coordinates: { lat: KAPPA_CONSTANTS.OBSERVER_LAT, lon: KAPPA_CONSTANTS.OBSERVER_LON },
           note: "NWS API unavailable for this location — Costa Rica is outside US NWS coverage",
           radarStations: [
@@ -591,7 +591,7 @@ export async function registerRoutes(
       }
 
       const result = {
-        location: "Calle Los Cedros, Tacacorí, Alajuela 20106",
+        location: "Hotel Suites Cristina, San José, Costa Rica",
         coordinates: { lat: KAPPA_CONSTANTS.OBSERVER_LAT, lon: KAPPA_CONSTANTS.OBSERVER_LON },
         forecast,
         radarStations: [
@@ -3114,8 +3114,8 @@ export async function registerRoutes(
       const correlationsList = await storage.getCorrelations(200);
       const observer = {
         name: "Samuel Wotton (Echo)",
-        location: "Calle Los Cedros, última casa a la izquierda, Tacacorí, Alajuela 20106, CR",
-        coordinates: "10.0513892°N, 84.2186578°W",
+        location: "Hotel Suites Cristina, San José, Costa Rica — adjacent to ICE",
+        coordinates: "9.9281°N, 84.0907°W",
         generated: new Date().toISOString(),
       };
       const stats = {
