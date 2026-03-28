@@ -32,17 +32,17 @@ export default function ForensicHypervisorPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [expandedFindings, setExpandedFindings] = useState<Set<string>>(new Set());
 
-  const { data: status } = useQuery({
+  const { data: status } = useQuery<any>({
     queryKey: ["/api/hypervisor/status"],
     refetchInterval: 10000,
   });
 
-  const { data: reports, isLoading: reportsLoading } = useQuery({
+  const { data: reports, isLoading: reportsLoading } = useQuery<any[]>({
     queryKey: ["/api/hypervisor/reports"],
     refetchInterval: 30000,
   });
 
-  const { data: pcaps, isLoading: pcapsLoading } = useQuery({
+  const { data: pcaps, isLoading: pcapsLoading } = useQuery<any[]>({
     queryKey: ["/api/hypervisor/pcaps"],
     refetchInterval: 15000,
   });

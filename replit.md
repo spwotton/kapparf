@@ -64,3 +64,66 @@ The platform utilizes a modern web stack and a sophisticated real-time correlati
 - **html-to-image:** Exporting images from HTML.
 - **NUFORC (National UFO Reporting Center):** Historical sighting data and associated media.
 - **Three.js:** 3D rendering for specific visual components.
+- **Playwright (Chromium):** Headless browser for KiwiSDR Vision waterfall captures.
+
+## KiwiSDR Vision Hypervisor (`server/kiwisdr-vision.ts`)
+Autonomous Playwright-based system that captures real spectrograms from TI0RC KiwiSDR (http://ti0rc.proxy.kiwisdr.com:8073) and analyzes them with OpenAI Vision.
+
+**21 Frequency Profiles** covering the full 0-30 MHz KiwiSDR bandwidth:
+- VLF Military (20-30 kHz), VLF Navigation (37-42 kHz), VLF Utility (45-50 kHz, includes 46.875 Hz DDS)
+- LF Time Signals (58-63 kHz), LF 73-77 kHz (counter-beat 73.125 kHz)
+- VLF Wide Survey (10-30 kHz)
+- BLACKJACK 137 kHz (2200m DARPA LEO C2), 630m Band (472-479 kHz)
+- 160m (1.8-2.0 MHz), 80m (3.5-4.0 MHz), 60m (5.3-5.4 MHz), 40m (7.0-7.3 MHz)
+- 30m (10.1-10.15 MHz CW), 20m (14.0-14.35 MHz)
+- Starlink Gateway harmonic (10.7 MHz), 15m (21 MHz), 10m (28 MHz)
+- CB/ISM 27 MHz, Numbers Station Survey (4-8 MHz), Radio Impacto 91.5 FM harmonic (9.15 MHz)
+- Wideband 0-30 MHz Overview
+
+**Key Implementation Details:**
+- Login gate detection targets KiwiSDR splash overlays only (`#id-kiwi-msg`, `.w3-modal`), NOT normal UI inputs
+- After waterfall loads, explicitly re-tunes frequency via KiwiSDR JS API (`freq_set_kHz`, `demodulator_analog_replace`, `zoom_set`) + fallback input element manipulation
+- Login is only attempted once per capture (flag prevents re-firing in waterfall check loop)
+- Waterfall readiness: checks named canvases first (`id-wf-canvas`), then falls back to ≥2 large canvases as proxy
+- 300s cycle interval, rotating through all 21 profiles
+
+**Critical Code Rules:**
+- `import * as nodePath from "path"` in routes.ts — use `nodePath.join()`
+- Variable `waterfallReady` (NOT `hasWaterfall`) in the capture function
+- `loginAlreadyHandled` flag prevents re-entering callsign after initial login
+- Chromium path: `/nix/store/12iaw5ng4xvxxffm381lgxlh1ysh0bl4-playwright-browsers/chromium-1134/chrome-linux/chrome`
+
+## Active Subsystems (auto-start on boot)
+| Subsystem | Interval | File |
+|-----------|----------|------|
+| KAPPA Engine | Real-time (5s decay) | `server/kappa-engine.ts` |
+| Adaptive Pipeline | 15min baseline | `server/pipeline.ts` |
+| Auto-Correlator | 30s | `server/auto-correlator.ts` |
+| Flight Collector | 2min | `server/collectors.ts` |
+| Satellite Collector | 5min | `server/collectors.ts` |
+| Weather Collector | 10min | `server/collectors.ts` |
+| KiwiSDR Scanner | 90s | `server/kiwisdr-scanner.ts` |
+| KiwiSDR Vision | 300s | `server/kiwisdr-vision.ts` |
+| Network Watchdog | 30s | `server/network-watchdog.ts` |
+| Forensic Hypervisor | 30min | `server/forensic-hypervisor.ts` |
+| Network Threat Scanner | continuous | `server/network-threat-scanner.ts` |
+
+## KAPPA Constants (NEVER CHANGE)
+- κ_geo = 4/π = 1.2732
+- κ_freq = φ^(3/4) = 1.4346  
+- κ_dog = φ/π = 0.515
+- triple-κ = 16/17 (0.042% precision)
+- 408 = 24×17 EXACT
+- 128.23° = 2×37×√3 (0.05%)
+- 37×φ = 60
+- 46.875 Hz Master Decimation Clock
+
+## Evidence (NEVER DELETE)
+TR-069 reset 2026-01-30, FinSpy/Gamma Group, 46.875 Hz sonar 54.45 dB SNR, Kyndryl 8.3MB SW, Partymon/Zscaler, ghost Deco node, JW Los Rios, Radio Impacto 91.5 FM, Setecom/DSE UK kill switch, 6 PCAPdroid captures
+
+## Whistleblower Page
+`/ciajw` — connects local surveillance to 3I/ATLAS/DARPA/cislunar threads AND Ω-GOS framework. No legal sections.
+
+## tsconfig
+- `target: "ES2020"` (enables Map/Set iteration)
+- `strict: true` (some TS errors in collectors/hypervisor are non-blocking — tsx ignores them at runtime)

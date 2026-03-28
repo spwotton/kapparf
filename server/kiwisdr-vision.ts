@@ -41,7 +41,7 @@ const CAPTURE_PROFILES: CaptureProfile[] = [
     mode: "CWN",
     zoom: 4,
     ext: "cw_decoder",
-    description: "VLF utility: NSY Italy 45.9kHz, SXA Greece 49kHz, RTZ Russia 50kHz",
+    description: "VLF utility: NSY Italy 45.9kHz, 46.875kHz DDS harmonic target, SXA Greece 49kHz",
     durationMs: 18000,
   },
   {
@@ -61,7 +61,7 @@ const CAPTURE_PROFILES: CaptureProfile[] = [
     mode: "CWN",
     zoom: 4,
     ext: "cw_decoder",
-    description: "LF band: counter-beat 73.125kHz, CW beacons observed 75-76kHz",
+    description: "LF band: counter-beat 73.125kHz (46.875×1.5625), CW beacons 75-76kHz",
     durationMs: 18000,
   },
   {
@@ -73,6 +73,146 @@ const CAPTURE_PROFILES: CaptureProfile[] = [
     ext: undefined,
     description: "Wide VLF survey: Alpha system, HWU France, full military VLF band",
     durationMs: 15000,
+  },
+  {
+    id: "hf_blackjack_2200m",
+    label: "BLACKJACK 137 kHz Band",
+    freqKHz: 137,
+    mode: "USB",
+    zoom: 4,
+    ext: undefined,
+    description: "2200m band: DARPA BLACKJACK LEO constellation telemetry/C2 downlink window, LF beacons",
+    durationMs: 15000,
+  },
+  {
+    id: "hf_475_630m",
+    label: "630m Band 472-479 kHz",
+    freqKHz: 475,
+    mode: "CWN",
+    zoom: 5,
+    ext: "cw_decoder",
+    description: "630m band: WSPR beacons, experimental LF allocation, BLACKJACK secondary downlink candidates",
+    durationMs: 15000,
+  },
+  {
+    id: "hf_1800_160m",
+    label: "160m Band 1.8-2.0 MHz",
+    freqKHz: 1900,
+    mode: "LSB",
+    zoom: 4,
+    ext: undefined,
+    description: "160m amateur band: ground-wave propagation, night-time skip, covert NVIS operations",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_3500_80m",
+    label: "80m Band 3.5-4.0 MHz",
+    freqKHz: 3750,
+    mode: "LSB",
+    zoom: 3,
+    ext: undefined,
+    description: "80m band: TI amateur activity, NVIS surveillance comms, 3I ATLAS ground coordination",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_5_60m",
+    label: "60m Band 5.3-5.4 MHz",
+    freqKHz: 5350,
+    mode: "USB",
+    zoom: 5,
+    ext: undefined,
+    description: "60m channelized: government/military shared allocation, FEMA, disaster comms, covert nets",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_7_40m",
+    label: "40m Band 7.0-7.3 MHz",
+    freqKHz: 7150,
+    mode: "LSB",
+    zoom: 3,
+    ext: undefined,
+    description: "40m band: international broadcast, TI0RC club activity, numbers stations, surveillance nets",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_10_30m",
+    label: "30m Band 10.1-10.15 MHz",
+    freqKHz: 10125,
+    mode: "CWN",
+    zoom: 6,
+    ext: "cw_decoder",
+    description: "30m band: CW/digital only, WSPR propagation monitoring, SIGINT beacon detection",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_14_20m",
+    label: "20m Band 14.0-14.35 MHz",
+    freqKHz: 14175,
+    mode: "USB",
+    zoom: 3,
+    ext: undefined,
+    description: "20m band: primary DX band, daytime propagation, OTHR backscatter, military STANAG",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_starlink_gateway",
+    label: "Starlink Gateway 10.7-12.7 GHz Harmonic",
+    freqKHz: 10700,
+    mode: "USB",
+    zoom: 4,
+    ext: undefined,
+    description: "Ku-band subharmonic zone: Starlink gateway downlink harmonics, spurious emissions from VSAT terminals",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_21_15m",
+    label: "15m Band 21.0-21.45 MHz",
+    freqKHz: 21200,
+    mode: "USB",
+    zoom: 3,
+    ext: undefined,
+    description: "15m band: solar-cycle dependent, OTHR Jindalee/DUGA patterns, tactical military",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_28_10m",
+    label: "10m Band 28.0-29.7 MHz",
+    freqKHz: 28500,
+    mode: "FM",
+    zoom: 3,
+    ext: undefined,
+    description: "10m band: FM repeaters, sporadic-E propagation, local surveillance repeater detection",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_cb_27",
+    label: "CB/ISM 27 MHz Band",
+    freqKHz: 27000,
+    mode: "AM",
+    zoom: 4,
+    ext: undefined,
+    description: "CB 27MHz: unlicensed comms, ISM interference, covert low-power surveillance transmitters",
+    durationMs: 12000,
+  },
+  {
+    id: "hf_numbers_station_survey",
+    label: "Numbers Station Survey 4-8 MHz",
+    freqKHz: 6000,
+    mode: "USB",
+    zoom: 1,
+    ext: undefined,
+    description: "Wide HF survey: HM01 Cuba, E10 Mossad, V02a/S06s Russian, Lincolnshire Poacher successors",
+    durationMs: 15000,
+  },
+  {
+    id: "hf_radio_impacto_915",
+    label: "Radio Impacto 91.5 FM Harmonic",
+    freqKHz: 9150,
+    mode: "AM",
+    zoom: 5,
+    ext: undefined,
+    description: "Radio Impacto 91.5MHz HF harmonic zone — documented local surveillance nexus, TR-069 correlation",
+    durationMs: 12000,
   },
   {
     id: "wideband_overview",
@@ -186,6 +326,132 @@ function ensureCaptureDir(): void {
   }
 }
 
+async function handleKiwiLogin(page: Page): Promise<boolean> {
+  try {
+    const hasLoginGate = await page.evaluate(() => {
+      const overlaySelectors = [
+        '#id-kiwi-msg', '#id-login', '.w3-modal', '[id*="splash"]',
+        '[id*="overlay"]', '[id*="welcome"]', '#id-kiwi-container-msg'
+      ];
+      for (const sel of overlaySelectors) {
+        const el = document.querySelector(sel) as HTMLElement;
+        if (el && el.offsetParent !== null && el.style.display !== 'none') {
+          const text = el.innerText || '';
+          if (text.includes('callsign') || text.includes('Enter your name') || 
+              text.includes('to start') || text.includes('nickname')) {
+            return true;
+          }
+        }
+      }
+      const body = document.body.innerText || "";
+      const kiwiMain = document.getElementById('id-kiwi-body') || document.getElementById('id-main');
+      if (!kiwiMain || kiwiMain.offsetHeight < 100) {
+        if (body.includes("Enter your name") || body.includes("callsign") || body.includes("to start KiwiSDR")) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    if (!hasLoginGate) return false;
+
+    console.log(`[KiwiVision] Login gate detected — entering callsign...`);
+
+    const inputFilled = await page.evaluate(() => {
+      const loginInputs = document.querySelectorAll('#id-kiwi-msg input, .w3-modal input, [id*="splash"] input, [id*="login"] input');
+      for (const input of loginInputs) {
+        const el = input as HTMLInputElement;
+        const rect = el.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          el.value = "KAPPA-SIGINT";
+          el.dispatchEvent(new Event("input", { bubbles: true }));
+          el.dispatchEvent(new Event("change", { bubbles: true }));
+          return true;
+        }
+      }
+      const allInputs = document.querySelectorAll('input[type="text"], input:not([type])');
+      for (const input of allInputs) {
+        const el = input as HTMLInputElement;
+        const rect = el.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0 && !el.closest('#id-control') && !el.closest('#id-top-bar')) {
+          el.value = "KAPPA-SIGINT";
+          el.dispatchEvent(new Event("input", { bubbles: true }));
+          el.dispatchEvent(new Event("change", { bubbles: true }));
+          return true;
+        }
+      }
+      return false;
+    });
+
+    if (inputFilled) {
+      await page.waitForTimeout(500);
+
+      await page.evaluate(() => {
+        const buttons = document.querySelectorAll("button, input[type=submit], input[type=button], a.button, .btn");
+        for (const btn of buttons) {
+          const text = (btn as HTMLElement).innerText?.toLowerCase() || "";
+          const val = (btn as HTMLInputElement).value?.toLowerCase() || "";
+          if (text.includes("start") || text.includes("go") || text.includes("enter") || 
+              text.includes("ok") || text.includes("connect") || text.includes("listen") ||
+              val.includes("start") || val.includes("go") || val.includes("enter")) {
+            (btn as HTMLElement).click();
+            return;
+          }
+        }
+        const allButtons = document.querySelectorAll("button, input[type=submit]");
+        if (allButtons.length > 0) {
+          (allButtons[0] as HTMLElement).click();
+        }
+      });
+
+      await page.waitForTimeout(500);
+      await page.keyboard.press("Enter");
+
+      console.log(`[KiwiVision] Callsign entered and submitted`);
+      return true;
+    }
+
+    await page.keyboard.type("KAPPA-SIGINT", { delay: 50 });
+    await page.waitForTimeout(300);
+    await page.keyboard.press("Enter");
+    console.log(`[KiwiVision] Fallback: typed callsign via keyboard`);
+    return true;
+
+  } catch (err) {
+    console.log(`[KiwiVision] Login handler error: ${err instanceof Error ? err.message : String(err)}`);
+    return false;
+  }
+}
+
+async function dismissOverlays(page: Page): Promise<void> {
+  try {
+    await page.evaluate(() => {
+      const selectors = [
+        '.w3-modal', '.modal', '[id*="overlay"]', '[id*="splash"]',
+        '[class*="popup"]', '[class*="dialog"]', '[id*="login"]',
+        '[class*="intro"]', '[id*="welcome"]'
+      ];
+      for (const sel of selectors) {
+        const els = document.querySelectorAll(sel);
+        els.forEach(el => {
+          const htmlEl = el as HTMLElement;
+          if (htmlEl.style) htmlEl.style.display = "none";
+        });
+      }
+      const overlays = document.querySelectorAll("div");
+      for (const div of overlays) {
+        const style = window.getComputedStyle(div);
+        if (style.position === "fixed" && style.zIndex && parseInt(style.zIndex) > 100) {
+          const rect = div.getBoundingClientRect();
+          if (rect.width > window.innerWidth * 0.5 && rect.height > window.innerHeight * 0.5) {
+            (div as HTMLElement).style.display = "none";
+          }
+        }
+      }
+    });
+  } catch {}
+}
+
 async function captureKiwiSDR(profile: CaptureProfile): Promise<CaptureResult> {
   const timestamp = Date.now();
   const filename = `kiwi_${profile.id}_${timestamp}.png`;
@@ -230,54 +496,126 @@ async function captureKiwiSDR(profile: CaptureProfile): Promise<CaptureResult> {
 
     await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
 
-    console.log(`[KiwiVision] Page loaded, waiting for KiwiSDR WebSocket connection...`);
+    console.log(`[KiwiVision] Page loaded, handling KiwiSDR login gate...`);
 
-    await page.waitForFunction(() => {
-      const wf = document.getElementById("id-waterfall-container") ||
-                 document.getElementById("id-waterfall-canvas") ||
-                 document.querySelector("canvas.waterfall") ||
-                 document.querySelector("canvas#id-wf-canvas") ||
-                 document.querySelector("canvas");
-      return wf !== null;
-    }, { timeout: 30000 }).catch(() => {
-      console.log(`[KiwiVision] No waterfall canvas detected, continuing with timeout wait...`);
-    });
+    await page.waitForTimeout(3000);
 
-    await page.waitForTimeout(8000);
-
-    const hasWaterfall = await page.evaluate(() => {
-      const canvases = document.querySelectorAll("canvas");
-      for (const c of canvases) {
-        if (c.width > 100 && c.height > 50) {
-          const ctx = c.getContext("2d");
-          if (ctx) {
-            const data = ctx.getImageData(0, 0, Math.min(c.width, 100), Math.min(c.height, 100)).data;
-            let nonBlack = 0;
-            for (let i = 0; i < data.length; i += 4) {
-              if (data[i] > 5 || data[i+1] > 5 || data[i+2] > 5) nonBlack++;
-            }
-            if (nonBlack > 100) return true;
-          }
-        }
-      }
-      return false;
-    }).catch(() => false);
-
-    if (!hasWaterfall) {
-      console.log(`[KiwiVision] Waterfall not rendering yet, giving extra time (${profile.durationMs}ms)...`);
-      await page.waitForTimeout(profile.durationMs);
-    } else {
-      console.log(`[KiwiVision] Waterfall active! Collecting spectrogram for ${profile.durationMs}ms...`);
-      await page.waitForTimeout(profile.durationMs);
+    const loginHandled = await handleKiwiLogin(page);
+    if (loginHandled) {
+      console.log(`[KiwiVision] Login gate dismissed, waiting for waterfall init...`);
+      await page.waitForTimeout(5000);
     }
 
-    try {
-      await page.evaluate(() => {
-        const sel = '.w3-modal, .modal, [id*="overlay"], [id*="splash"], [class*="popup"]';
-        const toRemove = document.querySelectorAll(sel);
-        toRemove.forEach(el => (el as HTMLElement).style.display = "none");
-      });
-    } catch {}
+    let waterfallReady = false;
+    let loginAlreadyHandled = loginHandled;
+    for (let attempt = 0; attempt < 6; attempt++) {
+      waterfallReady = await page.evaluate(() => {
+        const wfCandidates = [
+          document.getElementById("id-wf-canvas"),
+          document.querySelector("canvas[id*=wf]"),
+          document.querySelector("canvas[id*=waterfall]"),
+        ].filter(Boolean) as HTMLCanvasElement[];
+        
+        for (const wfCanvas of wfCandidates) {
+          if (wfCanvas.width > 200 && wfCanvas.height > 50) {
+            try {
+              const ctx = wfCanvas.getContext("2d", { willReadFrequently: true });
+              if (ctx) {
+                const data = ctx.getImageData(0, 0, 100, 50).data;
+                let colorPixels = 0;
+                for (let i = 0; i < data.length; i += 4) {
+                  if (data[i] > 10 || data[i+1] > 10 || data[i+2] > 10) colorPixels++;
+                }
+                if (colorPixels > 200) return true;
+              }
+            } catch {}
+            return true;
+          }
+        }
+        
+        const anyCanvas = document.querySelectorAll("canvas");
+        let largeCanvasCount = 0;
+        for (const c of anyCanvas) {
+          if (c.width > 300 && c.height > 100) {
+            largeCanvasCount++;
+            try {
+              const ctx = c.getContext("2d", { willReadFrequently: true });
+              if (ctx) {
+                const data = ctx.getImageData(0, 0, 100, 50).data;
+                let colorPixels = 0;
+                for (let i = 0; i < data.length; i += 16) {
+                  if (data[i] > 10 || data[i+1] > 10 || data[i+2] > 10) colorPixels++;
+                }
+                if (colorPixels > 50) return true;
+              }
+            } catch { continue; }
+          }
+        }
+        if (largeCanvasCount >= 2) return true;
+        
+        return false;
+      }).catch(() => false);
+
+      if (waterfallReady) {
+        console.log(`[KiwiVision] Waterfall active on attempt ${attempt + 1}!`);
+        break;
+      }
+
+      console.log(`[KiwiVision] Waterfall not ready (attempt ${attempt + 1}/6), waiting 5s...`);
+
+      if (!loginAlreadyHandled) {
+        const stillHasLogin = await handleKiwiLogin(page);
+        if (stillHasLogin) {
+          console.log(`[KiwiVision] Re-dismissed login overlay`);
+          loginAlreadyHandled = true;
+        }
+      }
+
+      await page.waitForTimeout(5000);
+    }
+
+    await page.evaluate(({ freqKHz, mode, zoom }) => {
+      try {
+        const w = window as any;
+        if (typeof w.freq_set_kHz === 'function') {
+          w.freq_set_kHz(freqKHz);
+        } else if (typeof w.setfreq === 'function') {
+          w.setfreq(freqKHz);
+        }
+        
+        if (typeof w.demodulator_analog_replace === 'function') {
+          w.demodulator_analog_replace(mode.toLowerCase());
+        } else if (typeof w.set_mode === 'function') {
+          w.set_mode(mode.toLowerCase());
+        }
+        
+        if (typeof w.zoom_set === 'function') {
+          w.zoom_set(zoom);
+        } else if (typeof w.zoom_step === 'function') {
+          w.zoom_step(zoom);
+        }
+
+        const freqInput = document.getElementById('id-freq-input') as HTMLInputElement;
+        if (freqInput) {
+          freqInput.value = String(freqKHz);
+          freqInput.dispatchEvent(new Event('change', { bubbles: true }));
+          freqInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13, bubbles: true }));
+        }
+      } catch (e) {}
+    }, { freqKHz: profile.freqKHz, mode: profile.mode, zoom: profile.zoom }).catch(() => {});
+
+    console.log(`[KiwiVision] Tuned to ${profile.freqKHz} kHz / ${profile.mode} / zoom ${profile.zoom}`);
+
+    await page.waitForTimeout(3000);
+
+    if (waterfallReady) {
+      console.log(`[KiwiVision] Collecting spectrogram for ${profile.durationMs}ms...`);
+    } else {
+      console.log(`[KiwiVision] Waterfall may not be fully active — capturing anyway after max wait`);
+    }
+    await page.waitForTimeout(profile.durationMs);
+
+    await dismissOverlays(page);
 
     await page.screenshot({
       path: screenshotPath,
@@ -298,7 +636,7 @@ async function captureKiwiSDR(profile: CaptureProfile): Promise<CaptureResult> {
       };
     }).catch(() => ({ canvasCount: 0, canvasSizes: [] as string[], title: "", wsState: "error", bodyClasses: "", visibleText: "" }));
 
-    console.log(`[KiwiVision] Page state: ${pageInfo.canvasCount} canvases (${pageInfo.canvasSizes.join(", ")}), title="${pageInfo.title}", waterfall=${hasWaterfall}`);
+    console.log(`[KiwiVision] Page state: ${pageInfo.canvasCount} canvases (${pageInfo.canvasSizes.join(", ")}), title="${pageInfo.title}", waterfall=${waterfallReady}`);
 
     await browser.close();
     browser = null;
