@@ -398,9 +398,9 @@ export const KAPPA_CONSTANTS = {
   HALL_MULTIPLIER: 1.598,
   FFT_SIZE: 1024,
   SAMPLE_RATE: 48000,
-  OBSERVER_LAT: 9.9281,
-  OBSERVER_LON: -84.0907,
-  OBSERVER_ALT: 1.17,
+  OBSERVER_LAT: 9.9352,
+  OBSERVER_LON: -84.1094,
+  OBSERVER_ALT: 1.15,
   MIN_ELEVATION: 30,
   OVERHEAD_ELEVATION: 75,
   MAC_CORRELATION_WINDOW_S: 10,
@@ -952,7 +952,7 @@ export interface AnalysisPoint {
 }
 
 export const ANALYSIS_POINTS: AnalysisPoint[] = [
-  { id: "observer", name: "Observer — Suites Cristina, San José", lat: 9.9281, lon: -84.0907, description: "Hotel Suites Cristina, San José — adjacent to ICE (Instituto Costarricense de Electricidad)" },
+  { id: "observer", name: "Observer — Suites Cristina, San José", lat: 9.9352, lon: -84.1094, description: "Aparthotel Suites Cristina, Sabana Norte, San José — 300m north of ICE building, Calle Luisa" },
   { id: "tacacori-prev", name: "Tacacorí (Previous)", lat: 10.0513892, lon: -84.2186578, description: "Previous residence — Calle Los Cedros, Tacacorí, Alajuela 20106" },
   { id: "jaco", name: "Jacó", lat: 9.6142, lon: -84.6278, description: "Pacific coast analysis point, Puntarenas" },
   { id: "sjo", name: "SJO — Juan Santamaría Intl", lat: 9.9939, lon: -84.2088, description: "ICAO: MROC — primary international airport" },

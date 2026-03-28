@@ -3114,8 +3114,8 @@ export async function registerRoutes(
       const correlationsList = await storage.getCorrelations(200);
       const observer = {
         name: "Samuel Wotton (Echo)",
-        location: "Hotel Suites Cristina, San José, Costa Rica — adjacent to ICE",
-        coordinates: "9.9281°N, 84.0907°W",
+        location: "Aparthotel Suites Cristina, Sabana Norte, San José — 300m north of ICE building",
+        coordinates: "9.9352°N, 84.1094°W",
         generated: new Date().toISOString(),
       };
       const stats = {
