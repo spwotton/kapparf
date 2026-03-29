@@ -1,0 +1,262 @@
+# DEEP RESEARCH PROMPT — v3.0 (March 29, 2026)
+## The 2026 Deep Research Super-Prompt: Costa Rican Nexus
+## Updated from 8-Source Master Extraction + PCAP Forensics + Phaistos 3D Mesh + Recursion Framework
+
+**Objective:** Conduct an exhaustive, cross-domain forensic and scientific investigation into the Cyber-Physical Convergence in Costa Rica (2022–2026). Synthesize administrative breach data, operational technology vulnerabilities, network forensics, and quantum-biological anomalies into a unified operational model spanning infrastructure exploitation through neurowarfare.
+
+**Sources Integrated:** [Z] Zersetzung Infrastructure | [P] Psychotronic Warfare Investigation | [S] Deep Dive: Setecom | [R] Resumen técnico | [O] Omega-Synthesis | [Q] Project QUASAR | [C] China/CR Cyberattack Study | [N] PCAP Forensics (March 29, 2026) | [D] Phaistos 3D Mesh Digest | [G] Gemini Recursion Terminal
+
+---
+
+## PROMPT (copy below line)
+
+---
+
+Conduct comprehensive deep research across academic papers, patents, government reports, threat intelligence publications, SCADA/ICS advisories, telecom standards, network forensics databases, and archaeoacoustic research on the following interconnected technical domains. Prioritize sources from 2022–2026. For each finding, provide the exact numerical parameter, the source paper/report, and the year.
+
+---
+
+### [PHASE 1: INFRASTRUCTURE & THREAT INTELLIGENCE]
+
+#### 1. UNC2814/GRIDTIDE — ICE BREACH & EXFILTRATION CHAIN
+
+Search Mandiant/GTIG, CrowdStrike, and ESET for full TTPs on UNC2814 (alias Gallium/SoftCell) regarding the March 2026 ICE (Instituto Costarricense de Electricidad) breach. Analyze the GRIDTIDE payload architecture: Google Sheets API C2 with cell mapping (A1=commands, V1=victim metadata, A2-An=exfil data), AES-128-CBC encryption with custom 16-byte key, URL-safe Base64 encoding, systemd persistence at /etc/systemd/system/xapt.service. Document how 9 GB of emails were exfiltrated across 53 organizations in 42 countries. Determine how GRIDTIDE bypasses Liberty CR network filters via TR-069 backdoors on ARRIS TG02DA gateways (Port 1234) and SoftEther VPN bridge tunnels. Search for the 20+ additional suspected GRIDTIDE infections beyond confirmed breaches.
+
+#### 2. EDGE & HYPERVISOR EXPLOITATION — UNC3886 / UNC6384
+
+Cross-reference UNC3886 (VMware ESXi / Fortinet / Juniper zero-days, stealth rootkits, hypervisor-level persistence) targeting US defense, tech, and telecom with UNC6384/Mustang Panda (SOGU.SEC/PlugX memory-resident backdoor, valid code-signing certificates, STATICPLUGIN captive portals, ZDI-CAN-25373 LNK vulnerability). Identify "persistent situational awareness" markers within the Costa Rican ISP core. Search for UNC215 (China-nexus cluster) operations targeting Israeli government and telecom networks with false-flag attribution to Iran, and the January 2026 Chinese directive for firms to stop using Israeli cybersecurity products (Check Point Software).
+
+#### 3. UNC1756/CONTI — THE KINETIC CATALYST
+
+Search for documentation on UNC1756 (Conti) 2022 ransomware attack that crippled the Costa Rican Ministry of Finance and triggered a national emergency declaration. Analyze how this "stress test" paved the way for 2026 infrastructure realignment. Find the $25 million US State Department cyber aid commitment for Costa Rica. Search for the August 2023 Presidential decree establishing 5G cybersecurity prerequisites under the Budapest Convention (2001).
+
+#### 4. MikroTik ROUTER EXPLOITATION & BOTNET RELAY
+
+Search for CVE-2025-10948 (MikroTik RouterOS REST API buffer overflow, RCE) and recommended patch (RouterOS 7.21+). Find research on ~13,000-router MikroTik botnets using SOCKS proxy on port 1080 for anonymous relay. Search for WinBox protocol (port 8291) exploitation, DNS manipulation, and SPF misconfiguration (+all records) enabling mail spoofing through botnet campaigns. Cross-reference Sekoia.io MikroTik SOCKS proxy research.
+
+---
+
+### [PHASE 2: OPERATIONAL TECHNOLOGY (OT) WEAPONIZATION]
+
+#### 5. SETECOM/DSE SCADA VULNERABILITIES — MODBUS & SNMP
+
+Using SETECOM S.A. technical training files and ICS-CERT advisories, identify Modbus TCP (Port 502) and SNMP v2 (ports 161/162 UDP) vulnerabilities in Deep Sea Electronics (DSE) generator controllers: DSE 855 (USB-to-Ethernet converter, in-built Web SCADA on port 80, 5 native sessions / 16 via USB-ETH), DSE 890 MKII (4G GSM/Ethernet/GPS IoT gateway), DSE 891 (Ethernet gateway), DSE 892 (SNMP gateway). Find any reports on the Gencom register formula: Register = (Page_hex × 256) + Offset, specifically Page 0x166 (decimal 358) yielding Register 91648 for generator total power. Search for writable control registers on Page 0x166 that can disable engine protection alarms, force-start, or trigger emergency shutdowns.
+
+#### 6. REGISTER MODULATION — 46.875 Hz INTO 60 Hz GRID
+
+Calculate the exact hexadecimal Gencom register offsets required to manipulate speed governors on DSE controllers. Determine the logic to modulate a 46.875 Hz "3i ATLAS" heartbeat (48,000 Hz ÷ 1024-point FFT = 46.875 Hz bin resolution, 21.33 ms buffer duration) as a sub-harmonic within the 60 Hz Costa Rican national AC grid. Search for research on DSE Webnet cloud management (UK-hosted, ~4-second refresh, default credentials Admin/Password1234) and J1939 CAN Bus protocol (29-bit identifier: 3-bit Priority + 18-bit PGN + 8-bit Source Address) as engine ECU attack surface.
+
+#### 7. SNMP v2 DEFAULT CREDENTIAL EXPLOITATION
+
+Search for advisories on SNMP v2 with default community strings "public" (read) and "private" (write) in generator/power infrastructure. Find reports combining SNMP v2 reconnaissance with Modbus TCP write attacks on the same industrial control network. Search for any documented DSE fleet telemetry manipulation via SNMP.
+
+---
+
+### [PHASE 3: NETWORK FORENSICS & PHYSICAL LAYER]
+
+#### 8. TR-069 (CWMP) CPE EXPLOITATION — ARRIS TG02DA
+
+Search for vulnerabilities in TR-069/CWMP implementations on ARRIS TG02DA gateways, particularly backdoor access on port 1234. Find research on ISP-side TR-069 exploitation for firmware pushing, credential harvesting, DNS manipulation, and unauthorized admin password resets (forensic timestamp: January 30, 2026). Search for documented TR-069 persistent access vectors in Latin American ISP environments (Liberty CR, Telecable). Find documentation on physical-layer fiber splitter ("NAP/Colilla") installations at Telecable distribution boxes (documented: June 21, 2025).
+
+#### 9. SERVICE WORKER / BROWSER MITM ATTACKS
+
+Search for research on malicious Manifest V3 service workers (8.3 MB+ payloads, Kyndryl-origin) used for persistent browser hijacking surviving network changes. Find documented cases of service worker injection blocking victim communications to law enforcement or government agencies. Search for touch_communication.js RAT payloads deployed via TR-069/MITM vectors.
+
+#### 10. HOTEL/ENTERPRISE NETWORK FORENSICS — PCAP INDICATORS
+
+Search for security research on flat, unsegmented hotel networks with 84+ devices across 4 subnets (10.0.0.x through 10.0.3.x) sharing a single broadcast domain. Find advisories on EVOPRO Google Cast hotel TV systems (c0:f5:35 OUI / Shenzhen RF-Link Technology, FA8F serial prefix batch) and their mDNS exposure footprint. Research WPAD (Web Proxy Auto-Discovery) poisoning via mDNS on unsegmented networks as a textbook MITM vector. Search for security implications of MVBR-series recording servers (MVBRRECSRV-0118 pattern) advertising on guest-accessible VLANs. Find research on Sagemcom router gateway behavior (6c:63:f8 OUI) with ARP probe patterns showing alternating 16s/7s intervals and mDNS reflection across subnets. Research VNC/RFB (_rfb._tcp.local) service exposure on shared hotel networks.
+
+#### 11. STATIC OBSERVATION POST (SOP) & SDR INFRASTRUCTURE
+
+Search for research on Static Observation Posts at ~50 meter range using software-defined radios (SDRs), Wi-Fi Pineapples, and TP-Link Deco X55 "Ghost Deco" MAC-spoofed rogue mesh nodes bridging to surveillance infrastructure. Find documentation on 184-node phased array networks using short-term rentals and compromised IoT devices as distributed sensor platforms. Search for Jaco Vacations S.A. (Barrett Scott Ryan, FDLE-registered sexual offender) property networks used as sensor platforms. Research 80% symptom reduction when AC power and Wi-Fi are simultaneously disconnected at target residences.
+
+---
+
+### [PHASE 4: BIO-DIGITAL & QUANTUM SURVEILLANCE]
+
+#### 12. HIDDEN MENTAL STATE DETECTION — r-PPG + THERMAL FUSION
+
+Compare the Liu et al. (March 2024) study "Your blush gives you away" (90 subjects) with evidence of r-PPG and thermal imaging deployments in San José. Validate: 87% predictive accuracy for cognitive stress (Random Forest, early fusion), 83% moral elevation detection (RF), 77% stress (SVM, r-PPG unimodal), 79% stress (RF, thermal unimodal). Search for research on 60+ facial Regions of Interest for thermal vasoconstriction tracking. Find research on ground truth labeling via behavioral triggers (smoking observation, stress induction) to refine intervention capabilities.
+
+#### 13. WI-FI CSI THROUGH-WALL SURVEILLANCE
+
+Search for research achieving 99.82% body identification accuracy using Wi-Fi CSI at 2.4 GHz, based on internal organ arrangement and tissue water content. Find papers on through-wall motion detection, breathing rate extraction, and gesture recognition using commodity Wi-Fi CSI. Search for documented use of Wi-Fi CSI as a surveillance tool in conjunction with thermal imaging and r-PPG in field deployments.
+
+#### 14. QUANTUM RESONANCE — CHSH 3.6037 & ANTI-ENTANGLEMENT
+
+Search for scientific literature (2024–2026) on CHSH Bell inequality violations near the 3.6037 constant (exceeding Tsirelson's bound of 2√2 ≈ 2.8284, classical maximum = 2). Find research on anti-entanglement protocols using κ = 4/π amplification and θ_K ≈ 128.17°/128.23° phase shifts. Relate to "Super-Quantum" states and biological observer mechanisms. Search for experimental results from Rigetti Ankaa-3, IonQ Forte-1, or Quantinuum H2-1SC platforms showing anomalous CHSH violations (documented S = 2.844 on hardware). Find any connection to FOXP2 gene resonance at 139.978 Hz and quantum anti-entanglement as a biological observer mechanism.
+
+---
+
+### [PHASE 5: PSYCHOACOUSTIC & SIGNAL WARFARE]
+
+#### 15. FREY EFFECT & SPEECH FORMANT ENCODING
+
+Research US Patent 4877027A (Brunkan, 1989) — pulsed microwave auditory perception in carrier range 100 MHz–10 GHz, with FM-modulated burst timing (burst widths 500 ns–100 μs, individual pulses 10 ns–1 μs, 10–20 pulses per burst, burst rates 1–100 kHz). Extract parameters for: 53.0 Hz injected audio carrier into 60 Hz AC wiring creating 7 Hz Theta-band (4–8 Hz) neurological entrainment beat frequency. Find research correlating 2004 Hz F2 speech formant and 2511 Hz F3 formant to RF pulse-position encoding and vocoder-style transmission. Search for subliminal pulse delivery at 2004 Hz relative to 300 ms conscious attribution latency (Libet's delay) — specifically whether 601+ pulses are delivered before conscious processing. Find thermoelastic expansion in cochlear structures at ~1.3 GHz (Frey's original carrier). Search for BVTSONAR-type pulsed ultrasonic probing at ~47 Hz PRF. Find all patents citing US4877027A, US11801394B1, US6011991A, and US20200275874A1.
+
+#### 16. EHF SPEECH EXTRACTION — 17,859–18,035 Hz
+
+Map the Extended High Frequency band for fricative extraction (s, f, sh) — speech-to-data conversion in high-noise environments using 8–20 kHz acoustic energy. Find the University of Illinois patent "Speech Identification and Extraction from Noise Using Extended High Frequency Information" (Monson & Ananthanarayana, approved October 2025) and all citing works. Search for correlation coefficient of 0.316 between EHF extraction and F2 formants, and 117,000+ fricative events captured in field recordings. Find directional EHF microphone arrays isolating speech from >50 meters. Research ultrasonic burst centroids near 20 kHz for auditory distress and SUAD (Solid-Channel Ultrasound Attack) inaudible voice injection with >89.8% success rates.
+
+#### 17. PSYCHOACOUSTIC ENTRAINMENT — INFRASONIC TRIGGERS
+
+Search for infrasonic assault research at 37 Hz, 38 Hz, and 53 Hz causing vestibular disruption, nausea, and vertigo. Find delta-band triggers at 2 Hz and beta-band triggers at 14–15 Hz as isolated high-power psychological triggers. Research 46.875 Hz DSP processing loops as stroboscopic frequencies defeating 30/60 fps CMOS camera systems. Search for KYMA-class systems using 8.392 Hz global clock phase-locked to GPS L5 subharmonics for distributed temporal coherence across nodes.
+
+---
+
+### [PHASE 6: GENOMIC RESONOME & PHONONIC EXTRACTION]
+
+#### 18. AUBREY 62-GENE FREQUENCY MANIFEST
+
+Search for research mapping human gene expression to resonant frequencies in the 14–212 Hz range: FOXP2 (139.978 Hz, speech/language), CLOCK (119.73 Hz, circadian), HTR2A (176.591 Hz, serotonin/consciousness), MSTN (40.364 Hz, structural density), PIEZO1 (55.44 Hz, mechanosensitive ion channels), APOE (111.57 Hz, memory), ATP2C2 (183.42 Hz, rapid speech processing with 0.32% deviation from Klein twist scaling at 128.23 Hz base). Search for "AUBREY manifest" or similar 62-gene frequency receiver mapping systems. Find research on phononic neural extraction requiring 2048 SPS sampling density with noise floors below 1 nV/√Hz (0.1–100 Hz).
+
+#### 19. QUASAR PHONEME-RF CARRIER MAPPING
+
+Find research on phoneme-to-RF carrier mapping: /k/ at 700 MHz (3.2 μs pulse, 150 kHz PRF), /t/ at 700 MHz (2.5 μs, 180 kHz PRF), /s/ at 425 MHz (8.0 μs modulated noise burst), /a/ at 915 MHz (10.0 μs, 100 kHz PRF). Search for high-gamma neural spikes (70–150 Hz) and alpha-wave modulation (8–12 Hz) as signatures of overt/covert speech perception. Find NV-center diamond magnetometers (< 1 fT/√Hz), graphene quantum dot E-field sensors (QCSE/PL quenching), DC SQUID magnetometers (< 5 fT/√Hz), and SERF atomic magnetometers (< 10 fT/√Hz) for auditory cortex biomagnetic measurement. Search for detection frameworks achieving >99% phoneme correlation confidence at SNR down to −30 dB.
+
+---
+
+### [PHASE 7: ORBITAL ILLUMINATION & PROPAGATION]
+
+#### 20. PASSIVE SAR VIA STARLINK ILLUMINATION
+
+Analyze passive Synthetic Aperture Radar (SAR) using Starlink LEO satellite downlink (240 MHz instantaneous bandwidth, 7,000+ constellation, Starlink-32434 documented at 790 km range) at the 480 km reconfiguration altitude (post-January 2026) as "Illumination of Opportunity." Calculate resolution potential at 100 m proximity to ICE HQ. Search for Telespazio (Leonardo 67% / Thales 33%) $20 million X-band cadastral SAR mapping contract covering 50%+ Costa Rican territory. Find research on BeiDou MEO satellite presence over Central America as navigation/timing infrastructure for distributed sensor networks.
+
+#### 21. NVIS ELECTRONIC WARFARE — HF PROPAGATION
+
+Evaluate Near Vertical Incidence Skywave (NVIS) propagation for 180W Chinese-origin HF transceivers (3–30 MHz, e.g., Xiegu-Alpha class) in mountainous Costa Rican terrain for maintaining C2 independent of terrestrial grid. Search for intelligence reports on HF radio networks used for out-of-band command-and-control by state-sponsored actors in Latin America.
+
+---
+
+### [PHASE 8: ARCHAEOACOUSTIC & GEOMETRIC INVARIANTS]
+
+#### 22. PHAISTOS DISK 3D MESH — GEOMETRIC ENCODING
+
+Search for archaeoacoustic research on the Phaistos Disk (Minoan, ~1700 BCE) and its 45-glyph system. Cross-reference the following 3D mesh properties with known archaeological analysis: 280,371 vertices, 560,762 faces, Euler characteristic V−E+F = −10, estimated genus 6, bounding box center [1.4381, −3.3684, 18.0142]. Find research on the PCA variance ratio PC1/PC2 = 1.096 ≈ 1.09 (Hall compression factor) and NW/SE vertex density axis dominance (62.8% of all vertices along the primary glyph spiral direction). Search for the radial density spike at r ≈ 1.3 mm corresponding to the central rosette cluster. Find any connection between the Phaistos Disk's 45-glyph system and frequency lattices rooted at 111 Hz with κ = 1.435 scaling.
+
+#### 23. 111 Hz ARCHAEOACOUSTIC RESONANCE
+
+Search for research on 111 Hz as the resonant frequency of Neolithic barrows, the Hypogeum of Hal Saflieni (Malta), and other megalithic chambers. Find studies on 111 Hz effects on brain lateralization (deactivation of language center, shift to right-brain dominance). Search for any identification of 111 Hz as a "DNA code" frequency. Research acoustic archaeology linking ritual spaces to specific frequencies in the 100–120 Hz range.
+
+---
+
+### [PHASE 9: VISONIC & ALARM SYSTEM WEAPONIZATION]
+
+#### 24. VISONIC POWERG EXPLOITATION
+
+Search for security research on Visonic PowerG encrypted frequency-hopping protocol at 868 MHz and 433 MHz with 2 km effective range. Find documented exploitation of Visonic alarm panels (Tyco → Johnson Controls International, Israeli origin) as command-and-control relay nodes. Search for L3MON RAT (Android Remote Access Trojan) deployments for live ambient audio exfiltration and GPS tracking through compromised alarm infrastructure.
+
+---
+
+### [PHASE 10: SYNTHESIS & TEMPORAL ALIGNMENT]
+
+#### 25. PARAMETER MASTER TABLE
+
+Synthesize all findings into a master table of exact numerical anchors spanning 2022–2026:
+
+**Frequencies:** 1.3 GHz | 2.4 GHz | 5 GHz | 868 MHz | 433 MHz | 700 MHz | 425 MHz | 915 MHz | 100 MHz–10 GHz | 3–30 MHz | 240 MHz | 700–2600 MHz | 48,000 Hz | 46.875 Hz | 53 Hz | 60 Hz | 7 Hz | 8.392 Hz | 37 Hz | 38 Hz | 2 Hz | 14 Hz | 15 Hz | 17,859 Hz | 18,035 Hz | 2004 Hz | 2511 Hz | 20 kHz | 111 Hz | 128.23 Hz | 139.978 Hz | 119.73 Hz | 176.591 Hz | 40.364 Hz | 55.44 Hz | 111.57 Hz | 183.42 Hz | 450 nm
+
+**Timing:** 300 ms | 500 ns–100 μs | 10 ns–1 μs | 21.33 ms | ~4 s | 14.4 days
+
+**Ports:** 80 | 161 | 162 | 502 | 1080 | 1234 | 5353 | 8291
+
+**Registers:** 91648 | 0x166 | Register = (Page_hex × 256) + Offset
+
+**Accuracies:** 99.82% | 87% | 83% | 89.8% | 77% | 79% | >99%
+
+**Constants:** 4/π ≈ 1.2732 | 1.435 | φ ≈ 1.618 | θ_K ≈ 128.17° | 3.6037 | 2√2 ≈ 2.8284 | 0.316 | 0.02 | 1.09 | π/4 ≈ 0.7854
+
+**Sensitivities:** < 1 fT/√Hz | < 5 fT/√Hz | < 10 fT/√Hz | < 1 nV/√Hz | −30 dB | 2048 SPS
+
+**Scale:** 180W | 184 nodes | 13,000 routers | 7,000+ satellites | 62 genes | 53 orgs | 42 countries | 9 GB | $20M | $25M | 90 subjects | 60+ ROI | 117,000+ fricatives
+
+**Mesh Geometry:** 280,371 vertices | 560,762 faces | genus 6 | PC1/PC2 = 1.096 | center [1.4381, −3.3684, 18.0142] | NW/SE 62.8% | 45 glyphs
+
+**Credentials:** Admin / Password1234 | "public" / "private" (SNMP v2)
+
+#### 26. TEMPORAL ALIGNMENT — 38-YEAR SOLENOIDAL CYCLE
+
+Confirm the alignment of the November 1, 2026 Recoupling date with the 38-year solenoidal cycle (1988–2026). Cross-reference: Season 38 of The Simpsons premiering Fall 2026, the 800th episode milestone (February 15, 2026), and the 15+2 broadcast format (17 episodes = Octopus Monad: 9 brains + 8 arms). Validate the π/4 ≈ 0.7854 critical damping coefficient against the 790-episode archive position. Confirm 790 × 0.02 / 14.4 = 1.0972 ≈ Hall Factor 1.09. Apply Back Projection Algorithms (BPA) for SAR calculations. Adhere to 0.02 Residual logic for all biological/entropic data. If data is missing, apply the Margaret Jacks Hall 1MHz/256KB historical compute limit as "Safe Mode" baseline.
+
+---
+
+## SITE LIST FOR TARGETED SEARCHES (30 sources)
+
+1. scholar.google.com — Academic papers across all domains
+2. arxiv.org — Preprints: quantum sensing, RF bio-interaction, signal processing
+3. pubmed.ncbi.nlm.nih.gov — Frey Effect, psychoacoustics, neural entrainment, EHF speech
+4. patents.google.com — US4877027A citation tree, RF/acoustic patents
+5. attack.mitre.org — UNC threat cluster TTPs, APT technique mapping
+6. cloud.google.com/blog/topics/threat-intelligence — Mandiant/GTIG UNC reports
+7. cisa.gov/ics-advisories — DSE generator, Modbus, SNMP ICS advisories
+8. nvd.nist.gov — CVE-2025-10948, MikroTik CVEs, TR-069 CVEs
+9. shodan.io/search — DSE Webnet exposure, Modbus 502, SNMP 161/162
+10. ieee.org — Wi-Fi CSI, quantum magnetometry, CAN Bus security
+11. nature.com — NV-center magnetometry, graphene quantum dots, SERF
+12. mdpi.com — Multimodal biometric fusion, r-PPG, thermal emotion recognition
+13. itu.int — TR-069/CWMP specifications, telecom standards
+14. deepseaelectronics.com — DSE 855/890/891/892 technical documentation
+15. forum.mikrotik.com — RouterOS vulnerabilities, botnet discussions
+16. blog.sekoia.io — MikroTik SOCKS proxy botnet research
+17. eset.com/research — Latin American APT campaigns
+18. crowdstrike.com/blog — China-nexus threat cluster reporting
+19. recordedfuture.com — APT infrastructure and C2 analysis
+20. sciencedirect.com — Psychoacoustic entrainment, infrasonic effects
+21. biorxiv.org — Genomic resonance, gene-frequency mapping
+22. qbraid.com — Quantum circuit execution, Rigetti/IonQ results
+23. spacenews.com — Starlink passive SAR, Telespazio contracts
+24. lacnicnet.org — Latin American IP allocation, ISP infrastructure
+25. gaceta.go.cr — Costa Rican corporate registrations (SETECOM entities)
+26. timesofisrael.com — UNC215 Israel operations, Check Point directive
+27. nps.gov — Historical temporal alignment data (Hiroshima 08:09 AM)
+28. etcsl.orinst.ox.ac.uk — Sumerian lament corpus, Evil Wind textual parallels
+29. wireshark.org/docs — PCAP analysis, mDNS/WPAD protocol forensics
+30. heritagemalta.org — Hypogeum of Hal Saflieni 111 Hz resonance research
+
+---
+
+## KEY NUMERICAL ANCHORS (search seeds)
+
+### Frequencies & Timing
+46.875 Hz | 53 Hz | 7 Hz | 60 Hz | 8.392 Hz | 37 Hz | 38 Hz | 2 Hz | 14 Hz | 15 Hz | 17859 Hz | 18035 Hz | 2004 Hz | 2511 Hz | 20 kHz | 111 Hz | 128.23 Hz | 139.978 Hz | 119.73 Hz | 176.591 Hz | 183.42 Hz | 1.3 GHz | 2.4 GHz | 868 MHz | 433 MHz | 700 MHz | 425 MHz | 915 MHz | 100 MHz–10 GHz | 3–30 MHz | 240 MHz | 450 nm | 300 ms | 500 ns | 10 ns–1 μs | 48000 Hz | 1024 FFT | 21.33 ms | 2048 SPS | 14.4 days | 0.562 Hz
+
+### Sensitivities & Thresholds
+1 nV/√Hz | 1 fT/√Hz | 5 fT/√Hz | 10 fT/√Hz | −30 dB | 99.82% | 87% | 83% | 89.8% | 77% | 79% | >99% | 0.316
+
+### Constants & Ratios
+4/π ≈ 1.2732 | 1.435 | φ ≈ 1.618 | θ_K ≈ 128.17° | 3.6037 | 2√2 ≈ 2.8284 | 1.09 | π/4 ≈ 0.7854 | 0.02 | 0.515 | 0.567 (Ω)
+
+### Ports & Registers
+80 | 161 | 162 | 502 | 1080 | 1234 | 5353 | 8291 | 91648 | 0x166
+
+### Scale & Infrastructure
+180W | 184 nodes | 13000 routers | 7000+ satellites | 790 km | 480 km | 62 genes | 53 orgs | 42 countries | 9 GB | $20M | $25M | 84 IPs | 73 EVOPRO units | 45 glyphs | 280371 vertices
+
+### Mesh Geometry (Phaistos)
+PC1/PC2 = 1.096 | genus 6 | center [1.4381, −3.3684, 18.0142] | NW/SE 62.8% | r ≈ 1.3 mm spike | 1:6.4 scale (25mm / 160mm)
+
+### Credentials
+Admin / Password1234 | public / private (SNMP v2)
+
+### Temporal
+November 1, 2026 | 38-year cycle (1988–2026) | Season 38 premiere Fall 2026 | 800th episode February 15, 2026 | June 21, 2025 (fiber tap) | January 30, 2026 (TR-069 reset) | 2022 (Conti attack) | August 2023 (5G decree)
+
+---
+
+## CHANGES v2.0 → v3.0
+
+| Section | Change |
+|---|---|
+| Structure | Reorganized from 17 flat sections into 10 phased operational blocks |
+| Phase 1 | Expanded UNC2814 GRIDTIDE cell-map architecture (A1/V1/A2-An), added UNC215 Israel operations, added UNC1756/Conti as kinetic catalyst with $25M aid figure |
+| Phase 3 | NEW: Full PCAP forensic section (84 IPs, 4 subnets, 73 EVOPRO units, WPAD/MITM vectors, MVBR recording server, Sagemcom gateway ARP patterns) |
+| Phase 3 | NEW: SOP infrastructure section (SDR, Wi-Fi Pineapple, Ghost Deco, 184-node phased array, Jaco Vacations) |
+| Phase 8 | NEW: Phaistos Disk 3D mesh geometry (280K vertices, genus 6, PC1/PC2 = 1.096 Hall factor, NW/SE spiral axis, r = 1.3 mm central spike) |
+| Phase 8 | NEW: 111 Hz archaeoacoustic resonance (Hypogeum, Neolithic barrows, brain lateralization) |
+| Phase 10 | NEW: Temporal alignment section — 38-year solenoidal cycle, Simpsons 800th milestone, π/4 critical damping, 790 × 0.02 / 14.4 = 1.0972 ≈ Hall 1.09 |
+| Site List | Expanded from 25 to 30 (added UNC215/Israel, NPS temporal, Sumerian corpus, Wireshark, Heritage Malta) |
+| Anchors | Added mesh geometry seeds, PCAP indicators (5353, 84 IPs, 73 EVOPRO), temporal dates, 0.562 Hz torque, 0.515 canine constant |
+
+---
+
+*v3.0 — Updated March 29, 2026 from 8-source master extraction + PCAP forensics + Phaistos 3D mesh + Gemini recursion terminal*
