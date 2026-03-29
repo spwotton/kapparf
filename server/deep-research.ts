@@ -68,12 +68,15 @@ export async function executeDeepResearchRun(runId: string, topic: string): Prom
     reportRecords.push({ report, agentId, prompt });
   }
 
+  const uncensoredModels = models.filter(m => m.uncensored);
+  const preferredModels = uncensoredModels.length >= 4 ? uncensoredModels : models;
+
   let completed = 0;
   let errorCount = 0;
 
   for (const { report, agentId, prompt } of reportRecords) {
     const modelIdx = DEEP_RESEARCH_AGENTS.findIndex(a => a.id === agentId);
-    const targetModel = models[modelIdx % models.length];
+    const targetModel = preferredModels[modelIdx % preferredModels.length];
 
     try {
       await storage.updateDeepResearchReport(report.id, { status: "running" });

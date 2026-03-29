@@ -98,22 +98,20 @@ export function getAvailableModels(): ModelInfo[] {
   const hasOpenRouter = !!getOpenRouterClient();
   if (hasOpenRouter) {
     models.push(
-      { id: "openrouter:openai/o3-mini", provider: "openrouter", name: "openai/o3-mini", displayName: "o3-mini (OR)", available: true },
-      { id: "openrouter:openai/o3", provider: "openrouter", name: "openai/o3", displayName: "o3 (OR)", available: true },
-      { id: "openrouter:deepseek/deepseek-chat-v3-0324", provider: "openrouter", name: "deepseek/deepseek-chat-v3-0324", displayName: "DeepSeek V3 (OR)", available: true },
-      { id: "openrouter:deepseek/deepseek-prover-v2", provider: "openrouter", name: "deepseek/deepseek-prover-v2", displayName: "DeepSeek Prover V2 (OR)", available: true },
-      { id: "openrouter:deepseek/deepseek-r1", provider: "openrouter", name: "deepseek/deepseek-r1", displayName: "DeepSeek R1 (OR)", available: true },
-      { id: "openrouter:openai/gpt-4o", provider: "openrouter", name: "openai/gpt-4o", displayName: "GPT-4o (OR)", available: true },
+      { id: "openrouter:deepseek/deepseek-r1", provider: "openrouter", name: "deepseek/deepseek-r1", displayName: "DeepSeek R1 (OR)", available: true, uncensored: true },
+      { id: "openrouter:deepseek/deepseek-chat-v3-0324", provider: "openrouter", name: "deepseek/deepseek-chat-v3-0324", displayName: "DeepSeek V3 (OR)", available: true, uncensored: true },
+      { id: "openrouter:google/gemini-2.5-pro-preview", provider: "openrouter", name: "google/gemini-2.5-pro-preview", displayName: "Gemini 2.5 Pro (OR)", available: true },
+      { id: "openrouter:google/gemini-2.5-flash-preview", provider: "openrouter", name: "google/gemini-2.5-flash-preview", displayName: "Gemini 2.5 Flash (OR)", available: true },
+      { id: "openrouter:mistralai/mistral-large", provider: "openrouter", name: "mistralai/mistral-large", displayName: "Mistral Large (OR)", available: true, uncensored: true },
+      { id: "openrouter:mistralai/mistral-nemo", provider: "openrouter", name: "mistralai/mistral-nemo", displayName: "Mistral Nemo (OR)", available: true, uncensored: true },
+      { id: "openrouter:qwen/qwen-2.5-72b-instruct", provider: "openrouter", name: "qwen/qwen-2.5-72b-instruct", displayName: "Qwen 2.5 72B (OR)", available: true, uncensored: true },
+      { id: "openrouter:qwen/qwen-2.5-coder-32b-instruct", provider: "openrouter", name: "qwen/qwen-2.5-coder-32b-instruct", displayName: "Qwen 2.5 Coder 32B (OR)", available: true, uncensored: true },
+      { id: "openrouter:moonshotai/kimi-k2", provider: "openrouter", name: "moonshotai/kimi-k2", displayName: "Kimi K2 (OR)", available: true, uncensored: true },
+      { id: "openrouter:meta-llama/llama-3.1-405b-instruct", provider: "openrouter", name: "meta-llama/llama-3.1-405b-instruct", displayName: "Llama 3.1 405B (OR)", available: true, uncensored: true },
+      { id: "openrouter:nousresearch/hermes-3-llama-3.1-405b", provider: "openrouter", name: "nousresearch/hermes-3-llama-3.1-405b", displayName: "Hermes 3 405B (OR)", available: true, uncensored: true },
       { id: "openrouter:openai/gpt-4.1", provider: "openrouter", name: "openai/gpt-4.1", displayName: "GPT-4.1 (OR)", available: true },
       { id: "openrouter:openai/o4-mini", provider: "openrouter", name: "openai/o4-mini", displayName: "o4-mini (OR)", available: true },
       { id: "openrouter:anthropic/claude-sonnet-4", provider: "openrouter", name: "anthropic/claude-sonnet-4", displayName: "Claude Sonnet 4 (OR)", available: true },
-      { id: "openrouter:anthropic/claude-opus-4", provider: "openrouter", name: "anthropic/claude-opus-4", displayName: "Claude Opus 4 (OR)", available: true },
-      { id: "openrouter:mistralai/mistral-nemo", provider: "openrouter", name: "mistralai/mistral-nemo", displayName: "Mistral Nemo (OR)", available: true },
-      { id: "openrouter:mistralai/mistral-large", provider: "openrouter", name: "mistralai/mistral-large", displayName: "Mistral Large (OR)", available: true },
-      { id: "openrouter:google/gemini-2.5-pro-preview", provider: "openrouter", name: "google/gemini-2.5-pro-preview", displayName: "Gemini 2.5 Pro (OR)", available: true },
-      { id: "openrouter:meta-llama/llama-3.1-405b-instruct", provider: "openrouter", name: "meta-llama/llama-3.1-405b-instruct", displayName: "Llama 3.1 405B (OR)", available: true },
-      { id: "openrouter:nousresearch/hermes-3-llama-3.1-405b", provider: "openrouter", name: "nousresearch/hermes-3-llama-3.1-405b", displayName: "Hermes 3 405B (OR)", available: true, uncensored: true },
-      { id: "openrouter:cognitivecomputations/dolphin-llama-3.1-405b", provider: "openrouter", name: "cognitivecomputations/dolphin-llama-3.1-405b", displayName: "Dolphin 405B (OR)", available: true, uncensored: true },
     );
   }
 

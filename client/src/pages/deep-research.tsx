@@ -13,7 +13,8 @@ import type { LucideIcon } from "lucide-react";
 import {
   Brain, Send, Copy, Download, Clock, AlertCircle, CheckCircle2,
   ChevronDown, ChevronUp, Loader2, Hexagon, Moon, GitBranch,
-  RotateCcw, AudioWaveform, Waves, Orbit, Shield, Sparkles
+  RotateCcw, AudioWaveform, Waves, Orbit, Shield, Sparkles,
+  FileText, FileImage, FileType, Clipboard
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { DeepResearchRun, DeepResearchReport } from "@shared/schema";
@@ -80,15 +81,116 @@ function ReportCard({ report, agents }: { report: DeepResearchReport; agents: Ag
     }
   };
 
-  const exportMarkdown = (report: DeepResearchReport) => {
-    const content = `# ${report.agentName}\n## Framework: ${report.frameworkName}\n\n---\n\n${report.response || "No response"}`;
-    const blob = new Blob([content], { type: "text/markdown" });
+  const downloadFile = (content: string, filename: string, mimeType: string) => {
+    const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${report.agentId}-report.md`;
+    a.download = filename;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  const exportMarkdown = (report: DeepResearchReport) => {
+    const content = `# ${report.agentName}\n## Framework: ${report.frameworkName}\n\n---\n\n${report.response || "No response"}`;
+    downloadFile(content, `${report.agentId}-report.md`, "text/markdown");
+  };
+
+  const exportTxt = (report: DeepResearchReport) => {
+    const content = `${report.agentName}\nFramework: ${report.frameworkName}\n${"=".repeat(60)}\n\n${report.response || "No response"}`;
+    downloadFile(content, `${report.agentId}-report.txt`, "text/plain");
+  };
+
+  const exportPdf = (report: DeepResearchReport) => {
+    const win = window.open("", "_blank");
+    if (!win) return;
+    const escaped = (report.response || "No response").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    win.document.write(`<!DOCTYPE html><html><head><title>${report.agentName}</title>
+      <style>body{font-family:monospace;padding:40px;max-width:800px;margin:0 auto;font-size:13px;line-height:1.6;color:#111}
+      h1{font-size:18px;border-bottom:2px solid #333;padding-bottom:8px}h2{font-size:14px;color:#555}
+      pre{white-space:pre-wrap;word-wrap:break-word}
+      @media print{body{padding:20px}}</style></head>
+      <body><h1>${report.agentName}</h1><h2>Framework: ${report.frameworkName}</h2>
+      <p style="font-size:11px;color:#888">${report.modelName ? `Model: ${report.modelName} | ` : ""}${report.durationMs ? `Duration: ${(report.durationMs / 1000).toFixed(1)}s` : ""}</p>
+      <hr/><pre>${escaped}</pre></body></html>`);
+    win.document.close();
+    setTimeout(() => { win.print(); }, 500);
+  };
+
+  const exportImage = (report: DeepResearchReport, format: "png" | "jpg") => {
+    const text = report.response || "No response";
+    const lines = text.split("\n");
+    const lineHeight = 20;
+    const padding = 48;
+    const maxCharWidth = 100;
+    const wrappedLines: string[] = [];
+    for (const line of lines) {
+      if (line.length <= maxCharWidth) {
+        wrappedLines.push(line);
+      } else {
+        for (let i = 0; i < line.length; i += maxCharWidth) {
+          wrappedLines.push(line.slice(i, i + maxCharWidth));
+        }
+      }
+    }
+    const headerLines = 4;
+    const totalLines = wrappedLines.length + headerLines;
+    const canvasWidth = 900;
+    const canvasHeight = Math.max(400, totalLines * lineHeight + padding * 2 + 60);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.fillStyle = "#0a0a0a";
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+    const borderColor = agent?.color || "#888";
+    ctx.fillStyle = borderColor;
+    ctx.fillRect(0, 0, 4, canvasHeight);
+
+    ctx.fillStyle = borderColor;
+    ctx.font = "bold 18px monospace";
+    ctx.fillText(report.agentName, padding, padding);
+
+    ctx.fillStyle = "#888";
+    ctx.font = "13px monospace";
+    ctx.fillText(`Framework: ${report.frameworkName}`, padding, padding + 24);
+    ctx.fillText(
+      `${report.modelName ? `Model: ${report.modelName} | ` : ""}${report.durationMs ? `${(report.durationMs / 1000).toFixed(1)}s` : ""}`,
+      padding, padding + 44
+    );
+
+    ctx.fillStyle = "#444";
+    ctx.fillRect(padding, padding + 56, canvasWidth - padding * 2, 1);
+
+    ctx.fillStyle = "#e0e0e0";
+    ctx.font = "13px monospace";
+    let y = padding + 80;
+    for (const line of wrappedLines) {
+      if (line.startsWith("#")) {
+        ctx.fillStyle = borderColor;
+        ctx.font = "bold 14px monospace";
+        ctx.fillText(line, padding, y);
+        ctx.fillStyle = "#e0e0e0";
+        ctx.font = "13px monospace";
+      } else {
+        ctx.fillText(line, padding, y);
+      }
+      y += lineHeight;
+    }
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${report.agentId}-report.${format}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }, format === "png" ? "image/png" : "image/jpeg", 0.95);
   };
 
   return (
@@ -139,21 +241,39 @@ function ReportCard({ report, agents }: { report: DeepResearchReport; agents: Ag
           )}
           {report.status === "completed" && report.response && (
             <>
-              <div className="flex gap-2 justify-end">
-                <Button variant="ghost" size="sm" onClick={() => copyToClipboard(report.response!)} data-testid={`button-copy-${report.agentId}`}>
-                  <Copy className="h-3.5 w-3.5 mr-1.5" />
-                  Copy
-                </Button>
-                <Button variant="ghost" size="sm" onClick={() => exportMarkdown(report)} data-testid={`button-export-${report.agentId}`}>
-                  <Download className="h-3.5 w-3.5 mr-1.5" />
-                  Export MD
-                </Button>
-              </div>
               <ScrollArea className="max-h-[600px]">
                 <div className="text-sm whitespace-pre-wrap leading-relaxed text-foreground/90 font-mono bg-muted/30 rounded p-4" data-testid={`text-response-${report.agentId}`}>
                   {report.response}
                 </div>
               </ScrollArea>
+              <div className="flex items-center gap-1 pt-1 border-t border-border/50 flex-wrap" data-testid={`export-toolbar-${report.agentId}`}>
+                <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => copyToClipboard(report.response!)} data-testid={`button-copy-${report.agentId}`}>
+                  <Clipboard className="h-3.5 w-3.5 mr-1" />
+                  Copy
+                </Button>
+                <Separator orientation="vertical" className="h-4 mx-0.5" />
+                <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => exportMarkdown(report)} data-testid={`button-export-md-${report.agentId}`}>
+                  <FileText className="h-3.5 w-3.5 mr-1" />
+                  MD
+                </Button>
+                <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => exportTxt(report)} data-testid={`button-export-txt-${report.agentId}`}>
+                  <FileType className="h-3.5 w-3.5 mr-1" />
+                  TXT
+                </Button>
+                <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => exportPdf(report)} data-testid={`button-export-pdf-${report.agentId}`}>
+                  <Download className="h-3.5 w-3.5 mr-1" />
+                  PDF
+                </Button>
+                <Separator orientation="vertical" className="h-4 mx-0.5" />
+                <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => exportImage(report, "png")} data-testid={`button-export-png-${report.agentId}`}>
+                  <FileImage className="h-3.5 w-3.5 mr-1" />
+                  PNG
+                </Button>
+                <Button variant="ghost" size="sm" className="h-8 text-xs" onClick={() => exportImage(report, "jpg")} data-testid={`button-export-jpg-${report.agentId}`}>
+                  <FileImage className="h-3.5 w-3.5 mr-1" />
+                  JPG
+                </Button>
+              </div>
             </>
           )}
           {report.status === "pending" && (
@@ -230,18 +350,24 @@ export default function DeepResearchPage() {
     }
   };
 
-  const exportAllReports = () => {
-    if (!runDetail?.reports) return;
-    const all = runDetail.reports
-      .filter(r => r.status === "completed" && r.response)
-      .map(r => `# ${r.agentName}\n## Framework: ${r.frameworkName}\n\n---\n\n${r.response}`)
-      .join("\n\n═══════════════════════════════════════\n\n");
-    const header = `# Hypervisor Deep Research Report\n## Topic: ${runDetail.run.topic}\n## Date: ${new Date(runDetail.run.createdAt).toISOString()}\n## Agents: ${runDetail.run.agentsTotal}\n\n═══════════════════════════════════════\n\n`;
-    const blob = new Blob([header + all], { type: "text/markdown" });
+  const getAllReportsContent = () => {
+    if (!runDetail?.reports) return { md: "", txt: "" };
+    const completedReports = runDetail.reports.filter(r => r.status === "completed" && r.response);
+    const md = `# Hypervisor Deep Research Report\n## Topic: ${runDetail.run.topic}\n## Date: ${new Date(runDetail.run.createdAt).toISOString()}\n## Agents: ${runDetail.run.agentsTotal}\n\n` +
+      completedReports.map(r => `# ${r.agentName}\n## Framework: ${r.frameworkName}\n\n---\n\n${r.response}`).join("\n\n═══════════════════════════════════════\n\n");
+    const txt = `Hypervisor Deep Research Report\nTopic: ${runDetail.run.topic}\nDate: ${new Date(runDetail.run.createdAt).toISOString()}\nAgents: ${runDetail.run.agentsTotal}\n${"=".repeat(60)}\n\n` +
+      completedReports.map(r => `${r.agentName}\nFramework: ${r.frameworkName}\n${"=".repeat(60)}\n\n${r.response}`).join(`\n\n${"=".repeat(60)}\n\n`);
+    return { md, txt };
+  };
+
+  const exportAllReports = (format: "md" | "txt") => {
+    const { md, txt } = getAllReportsContent();
+    const content = format === "md" ? md : txt;
+    const blob = new Blob([content], { type: format === "md" ? "text/markdown" : "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `deep-research-${runDetail.run.id.slice(0, 8)}.md`;
+    a.download = `deep-research-${runDetail?.run.id.slice(0, 8)}.${format}`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -412,15 +538,19 @@ export default function DeepResearchPage() {
                       );
                     })}
                   </div>
-                  {runDetail.run.status === "completed" && (
-                    <div className="flex gap-2 pt-1">
-                      <Button variant="outline" size="sm" onClick={copyAllReports} data-testid="button-copy-all">
-                        <Copy className="h-3.5 w-3.5 mr-1.5" />
+                  {(runDetail.run.status === "completed" || runDetail.run.status === "partial") && (
+                    <div className="flex items-center gap-1 pt-1 flex-wrap">
+                      <Button variant="outline" size="sm" className="h-8 text-xs" onClick={copyAllReports} data-testid="button-copy-all">
+                        <Clipboard className="h-3.5 w-3.5 mr-1" />
                         Copy All
                       </Button>
-                      <Button variant="outline" size="sm" onClick={exportAllReports} data-testid="button-export-all">
-                        <Download className="h-3.5 w-3.5 mr-1.5" />
-                        Export All (MD)
+                      <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => exportAllReports("md")} data-testid="button-export-all-md">
+                        <FileText className="h-3.5 w-3.5 mr-1" />
+                        MD
+                      </Button>
+                      <Button variant="outline" size="sm" className="h-8 text-xs" onClick={() => exportAllReports("txt")} data-testid="button-export-all-txt">
+                        <FileType className="h-3.5 w-3.5 mr-1" />
+                        TXT
                       </Button>
                     </div>
                   )}
