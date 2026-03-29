@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles, Hexagon, Image, Microscope, ScanEye, Network, Orbit, Atom, Radio, BookOpen, Shield, FileWarning, Database } from "lucide-react";
+import { LayoutDashboard, Activity, Link2, Satellite, Server, Wrench, MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles, Hexagon, Image, Microscope, ScanEye, Network, Orbit, Atom, Radio, BookOpen, Shield, FileWarning, Database, Globe } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
   Sidebar,
@@ -65,6 +65,7 @@ export function AppSidebar() {
     { title: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
     { title: "Evidence Chain", url: "/evidence", icon: FileWarning },
     { title: "Memory Cortex", url: "/memory", icon: Database },
+    { title: "Gallium / China", url: "/gallium", icon: Globe },
     { title: "CIAJW Public", url: "/ciajw", icon: Shield },
   ];
 
