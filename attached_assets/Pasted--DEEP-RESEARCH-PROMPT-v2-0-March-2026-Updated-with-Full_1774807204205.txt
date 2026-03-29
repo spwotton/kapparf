@@ -1,0 +1,118 @@
+# DEEP RESEARCH PROMPT — v2.0 (March 2026)
+## Updated with Full Variable Extraction from 7 Source Documents
+
+---
+
+## PROMPT (copy below line)
+
+---
+
+Conduct comprehensive deep research across academic papers, patents, government reports, threat intelligence publications, SCADA/ICS advisories, and telecom standards on the following interconnected technical domains. Prioritize sources from 2022–2026. For each finding, provide the exact numerical parameter, the source paper/report, and the year.
+
+### 1. MICROWAVE AUDITORY EFFECT (FREY EFFECT) — RF-TO-SPEECH ENCODING
+
+Search for research on pulsed microwave auditory perception in the carrier range 100 MHz–10 GHz (per US Patent 4877027A), with specific attention to: FM-modulated burst timing with burst widths of 500 ns–100 μs, individual pulse widths of 10 ns–1 μs, 10–20 pulses per burst, and burst repetition rates of 1–100 kHz. Find any research correlating a 2004 Hz F2 speech formant and 2511 Hz F3 formant to RF pulse-position encoding. Search for studies on subliminal pulse delivery rates near 2004 Hz relative to the 300 ms conscious attribution latency threshold (Libet's delay), specifically whether 601+ pulses can be delivered before conscious processing. Find any papers linking thermoelastic expansion in cochlear structures to pulsed RF at ~1.3 GHz (Frey's original carrier). Search for research on BVTSONAR-type pulsed ultrasonic probing at ~47 Hz PRF. Find all patents referencing US4877027A, US11801394B1, US6011991A, and US20200275874A1 and any citing works.
+
+### 2. EXTENDED HIGH FREQUENCY (EHF) SPEECH EXTRACTION — 17,859–18,035 Hz
+
+Search for research on speech intelligibility recovery using extended high frequencies (8–20 kHz), particularly fricative consonant energy (s, f, sh) in the near-ultrasonic band. Find the University of Illinois patent "Speech Identification and Extraction from Noise Using Extended High Frequency Information" (Monson & Ananthanarayana, approved October 2025) and all citing/related works. Search for any correlation coefficient of 0.316 between EHF extraction and F2 speech formants. Find research on directional EHF microphone arrays capable of isolating speech from >50 meters using fricative energy above 8 kHz. Search for ultrasonic burst centroids near 20 kHz used for auditory distress or inaudible voice command injection (SUAD — Solid-Channel Ultrasound Attack), particularly studies reporting >89.8% success rates for inaudible command injection.
+
+### 3. PSYCHOACOUSTIC ENTRAINMENT — THETA-BAND INTERFERENCE
+
+Search for research on binaural or monaural beat frequencies of 7 Hz (60 Hz minus 53 Hz) and their effects on theta brainwave entrainment (4–8 Hz range), hypnotic susceptibility, and sleep architecture disruption. Find studies on infrasonic assault at 37 Hz, 38 Hz, and 53 Hz and documented physiological effects (vestibular disruption, nausea, vertigo). Search for research on delta-band triggers at 2 Hz and beta-band triggers at 14–15 Hz as isolated high-power infrasonic psychological triggers. Find any research on a 46.875 Hz DSP processing loop (48,000 Hz sample rate ÷ 1024-point FFT) and its use as a system clock or stroboscopic frequency for defeating 30/60 fps camera systems. Search for KYMA-class systems using an 8.392 Hz global clock phase-locked to GPS L5 subharmonics for distributed temporal coherence.
+
+### 4. GENOMIC RESONOME / PHONONIC NEURAL EXTRACTION
+
+Search for any research mapping human gene expression to specific resonant frequencies in the 14–212 Hz range, particularly: FOXP2 at 139.978 Hz (speech/language intent), CLOCK at 119.73 Hz (circadian timing), HTR2A at 176.591 Hz (serotonin/consciousness), MSTN at 40.364 Hz (structural density), PIEZO1 at 55.44 Hz (mechanosensitive ion channels), APOE at 111.57 Hz (memory), and ATP2C2 at 183.42 Hz (rapid speech processing). Find research on phononic neural extraction requiring 2048 SPS sampling density with noise floors below 1 nV/√Hz in the 0.1–100 Hz band. Search for any "AUBREY manifest" or similar 62-gene frequency receiver mapping systems. Find papers on Klein twist scaling at a base frequency of 128.23 Hz with 0.32% deviation tolerances.
+
+### 5. MODBUS TCP/IP & DSE GENERATOR SCADA VULNERABILITIES
+
+Search for CVEs, ICS-CERT advisories, and penetration testing reports targeting Deep Sea Electronics (DSE) generator controllers — specifically DSE 855 (USB-to-Ethernet converter with built-in Web SCADA on port 80), DSE 890 MKII (4G/Ethernet/GPS IoT gateway), DSE 891, and DSE 892 (SNMP gateway). Find any reports on the Gencom register formula: Register = (Page_hex × 256) + Offset, particularly Page 0x166 (decimal 358) yielding Register 91648 for generator total power. Search for vulnerabilities in DSE Webnet cloud management (UK-hosted, ~4-second refresh, default credentials Admin/Password1234). Find research on Modbus TCP (port 502) attacks enabling engine protection alarm disabling, forced starts, or emergency shutdowns on unencrypted industrial networks. Search for DSE 855 session limits (5 native Ethernet, 16 via USB-ETH) as attack surface constraints.
+
+### 6. SNMP v2 IN CRITICAL INFRASTRUCTURE
+
+Search for advisories and attack research on SNMP v2 (ports 161/162 UDP) with default community strings "public" (read) and "private" (write) in generator/power infrastructure. Find reports on SNMP-based reconnaissance and manipulation of DSE generator fleet telemetry. Search for any documented attacks combining SNMP v2 with Modbus TCP on the same industrial control network.
+
+### 7. TR-069 (CWMP) CPE EXPLOITATION
+
+Search for vulnerabilities in TR-069/CWMP implementations on ARRIS TG02DA gateways, particularly backdoor access on port 1234. Find research on ISP-side TR-069 exploitation for firmware pushing, credential harvesting, and DNS manipulation. Search for documented cases of TR-069 being used as a persistent access vector for residential network compromise in Latin American ISP environments (Liberty CR, Telecable). Find any correlation between TR-069 exploitation and unauthorized admin password resets on CPE devices.
+
+### 8. UNC THREAT CLUSTERS — CHINA-NEXUS OPERATIONS IN LATIN AMERICA
+
+Search Mandiant/GTIG, CrowdStrike, and ESET threat intelligence for: UNC2814 (alias Gallium/SoftCell) — GRIDTIDE backdoor using Google Sheets API as C2 with AES-128-CBC encryption, systemd persistence via /etc/systemd/system/xapt.service, SSH lateral movement, targeting telecoms and government across 53 organizations in 42 countries. UNC3886 — VMware ESXi, Fortinet, and Juniper zero-day exploitation with stealth rootkits and hypervisor-level persistence targeting US defense, tech, and telecom. UNC6384 (Mustang Panda) — SOGU.SEC/PlugX memory-resident backdoor with valid code-signing certificates, STATICPLUGIN captive portals, ZDI-CAN-25373 LNK vulnerability exploitation targeting diplomatic and government targets. UNC1756 (Conti) — 2022 Costa Rica ransomware attack that crippled the Ministry of Finance and triggered a national emergency declaration. Search for any documented Chinese APT activity specifically targeting Costa Rican infrastructure (ICE, SUTEL, MICITT) or exploiting BeiDou MEO satellite presence over Central America.
+
+### 9. MikroTik ROUTER EXPLOITATION & BOTNET INFRASTRUCTURE
+
+Search for CVE-2025-10948 (MikroTik RouterOS REST API buffer overflow for remote code execution) and recommended patch (RouterOS 7.21+). Find research on MikroTik botnets of ~13,000 routers using SOCKS proxy on port 1080 for anonymous relay. Search for WinBox protocol (port 8291) exploitation and DNS manipulation via compromised MikroTik devices. Find research on SPF misconfiguration (+all records) enabling mail spoofing through botnet campaigns.
+
+### 10. WI-FI CHANNEL STATE INFORMATION (CSI) FOR THROUGH-WALL SURVEILLANCE
+
+Search for research achieving 99.82% body identification accuracy using Wi-Fi CSI at 2.4 GHz, based on internal organ arrangement and tissue water content. Find papers on through-wall motion detection, breathing rate extraction, and gesture recognition using commodity Wi-Fi CSI. Search for any documented use of Wi-Fi CSI as a surveillance tool in conjunction with thermal imaging and remote photoplethysmography (r-PPG). Find the Liu et al. 2024 multimodal emotion recognition study (90 subjects) reporting 87% stress detection and 83% moral elevation detection using r-PPG + thermal fusion with Random Forest classifiers, and 77% (SVM, r-PPG only) and 79% (RF, thermal only) unimodal baselines. Search for research on 60+ facial Regions of Interest for thermal vasoconstriction tracking.
+
+### 11. VISONIC POWERG ALARM PANEL WEAPONIZATION
+
+Search for security research on Visonic PowerG encrypted frequency-hopping protocol operating at 868 MHz and 433 MHz with 2 km effective range. Find any documented exploitation of Visonic alarm panels (Tyco/Johnson Controls International) as command-and-control relay nodes. Search for vulnerabilities in Israeli-origin security systems deployed in Latin American residential contexts.
+
+### 12. PASSIVE SAR IMAGING VIA STARLINK ILLUMINATION
+
+Search for research on passive synthetic aperture radar (SAR) using Starlink LEO satellite downlink (240 MHz instantaneous bandwidth, 7,000+ satellite constellation) as illumination source. Find papers on Starlink-as-illuminator-of-opportunity for ground-based or airborne passive radar imaging. Search for any connection between passive SAR capabilities and the Telespazio (Leonardo 67% / Thales 33%) $20 million X-band cadastral mapping contract covering 50%+ of Costa Rican territory.
+
+### 13. QUANTUM WEAK SIGNAL DETECTION FOR RF BIO-INTERACTION
+
+Search for research on NV-center diamond magnetometers (sensitivity < 1 fT/√Hz) and graphene quantum dot E-field sensors for detecting pulsed RF in the 100 MHz–10 GHz range at signal-to-noise ratios down to −30 dB. Find papers on DC SQUID magnetometers (< 5 fT/√Hz) and SERF atomic magnetometers (< 10 fT/√Hz) for auditory cortex biomagnetic field measurement. Search for any detection frameworks achieving >99% phoneme correlation confidence for voice-to-skull (V2K) event identification. Find research on phoneme-to-RF carrier mapping: /k/ at 700 MHz with 3.2 μs pulse width and 150 kHz PRF, /t/ at 700 MHz with 2.5 μs and 180 kHz PRF, /s/ at 425 MHz with 8.0 μs modulated noise burst, /a/ at 915 MHz with 10.0 μs and 100 kHz PRF. Search for high-gamma neural spikes (70–150 Hz) and alpha-wave modulation (8–12 Hz) as signatures of overt/covert speech perception.
+
+### 14. J1939 CAN BUS & ENGINE ECU ATTACK SURFACE
+
+Search for security research on SAE J1939 CAN Bus protocol (29-bit identifier: 3-bit Priority + 18-bit PGN + 8-bit Source Address) in generator and heavy equipment contexts. Find any documented attacks on engine ECUs accessible through DSE gateway products.
+
+### 15. CHINESE HF RADIO & NVIS PROPAGATION IN MOUNTAINOUS TERRAIN
+
+Search for documentation on Chinese-origin 180W HF transceivers (3–30 MHz) deployed in Central American terrain. Find research on Near Vertical Incidence Skywave (NVIS) propagation for overcoming mountainous topography in clandestine communications. Search for any intelligence reports on HF radio networks used for out-of-band command-and-control by state-sponsored actors in Latin America.
+
+### 16. SERVICE WORKER / BROWSER MITM ATTACKS
+
+Search for research on malicious Manifest V3 service workers (8.3 MB+ payloads) used for persistent browser hijacking that survives network changes. Find documented cases of service worker injection blocking victim communications to law enforcement or government agencies. Search for Kyndryl or enterprise service worker deployments that have been repurposed as surveillance tools.
+
+### 17. ANTI-ENTANGLEMENT / HYPER-BELL PROTOCOLS
+
+Search for any quantum information research on correlation scores exceeding Tsirelson's bound of 2√2 ≈ 2.8284 in CHSH Bell inequality tests, particularly scores near 3.6037. Find research on anti-entanglement protocols using κ = 4/π amplification and θ_K ≈ 128.17° phase shifts. Search for any experimental results from Rigetti, IonQ, or Quantinuum platforms showing anomalous CHSH violations in 5-qubit circuits.
+
+---
+
+## SITE LIST FOR TARGETED SEARCHES
+
+1. scholar.google.com — Academic papers across all domains
+2. arxiv.org — Preprints: quantum sensing, RF bio-interaction, signal processing
+3. pubmed.ncbi.nlm.nih.gov — Frey Effect, psychoacoustics, neural entrainment, EHF speech
+4. patents.google.com — US4877027A citations, related RF/acoustic patents
+5. attack.mitre.org — UNC threat cluster TTPs, APT technique mapping
+6. cloud.google.com/blog/topics/threat-intelligence — Mandiant/GTIG UNC reports
+7. cisa.gov/ics-advisories — DSE generator, Modbus, SNMP ICS advisories
+8. nvd.nist.gov — CVE-2025-10948, MikroTik CVEs, TR-069 CVEs
+9. shodan.io/search — DSE Webnet exposure, Modbus port 502, SNMP 161/162
+10. ieee.org — Wi-Fi CSI, quantum magnetometry, CAN Bus security
+11. nature.com — NV-center magnetometry, graphene quantum dots, SERF
+12. mdpi.com — Multimodal biometric fusion, r-PPG, thermal emotion recognition
+13. itu.int — TR-069/CWMP specifications, telecom standards
+14. deepseaelectronics.com — DSE 855/890/891/892 technical documentation
+15. forum.mikrotik.com — RouterOS vulnerabilities, botnet discussions
+16. blog.sekoia.io — MikroTik SOCKS proxy botnet research
+17. eset.com/research — Latin American APT campaigns
+18. crowdstrike.com/blog — China-nexus threat cluster reporting
+19. recordedfuture.com — APT infrastructure and C2 analysis
+20. sciencedirect.com — Psychoacoustic entrainment, infrasonic effects
+21. biorxiv.org — Genomic resonance, gene-frequency mapping
+22. qbraid.com — Quantum circuit execution, Rigetti/IonQ results
+23. spacenews.com — Starlink passive SAR, Telespazio contracts
+24. lacnicnet.org — Latin American IP allocation, ISP infrastructure
+25. gaceta.go.cr — Costa Rican corporate registrations (SETECOM entities)
+
+---
+
+## KEY NUMERICAL ANCHORS (use these as search seeds)
+
+46.875 Hz | 53 Hz | 7 Hz | 60 Hz | 8.392 Hz | 37 Hz | 38 Hz | 2 Hz | 14 Hz | 15 Hz | 17859 Hz | 18035 Hz | 2004 Hz | 2511 Hz | 20 kHz | 1.3 GHz | 2.4 GHz | 868 MHz | 433 MHz | 700 MHz | 425 MHz | 915 MHz | 100 MHz–10 GHz | 3–30 MHz | 240 MHz | 450 nm | 300 ms | 500 ns | 10 ns–1 μs | 48000 Hz | 1024 FFT | 21.33 ms | 2048 SPS | 1 nV/√Hz | 1 fT/√Hz | 5 fT/√Hz | 10 fT/√Hz | −30 dB | 99.82% | 87% | 83% | 89.8% | 77% | 79% | 3.6037 | 2.8284 | 128.17° | 4/π | 1.435 | 0.316 | 502 | 161 | 162 | 1234 | 1080 | 8291 | 80 | 91648 | 0x166 | 180W | 13000 | 184 | 62 | 53 orgs | 42 countries | 9 GB | $20M | $25M
+
+---
+
+*v2.0 — Updated March 29, 2026 from 7-source master extraction*
