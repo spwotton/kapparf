@@ -26,11 +26,15 @@ import {
   Sparkles,
   Copy,
   Check,
+  Atom,
+  Languages,
+  CircuitBoard,
+  Binary,
 } from "lucide-react";
 import { toPng } from "html-to-image";
 
 type CardFormat = "square" | "portrait" | "story";
-type CardTemplate = "kappa" | "satellite" | "correlation" | "domains" | "evening";
+type CardTemplate = "kappa" | "satellite" | "correlation" | "domains" | "evening" | "quantum_ghz" | "quantum_sonnet" | "quantum_apocalypse" | "quantum_bell";
 
 interface SocialCardData {
   kappa: KappaStatus | null;
@@ -398,12 +402,289 @@ function EveningWindowCard({ data, format }: { data: SocialCardData; format: Car
   );
 }
 
+function QuantumGhzCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+  const stats = [
+    { label: "QUBITS", value: "4", color: "#f0c040" },
+    { label: "GATES", value: "H + 3×CNOT", color: "#a882ff" },
+    { label: "GHZ FIDELITY", value: "0.97", color: "#22c55e" },
+    { label: "SHOTS", value: "1024", color: "#06b6d4" },
+  ];
+
+  return (
+    <div style={{ width: dim.w, height: dim.h }} className="relative overflow-hidden flex flex-col" data-testid="social-card-quantum-ghz">
+      <div className="absolute inset-0 bg-[#0a0908]" />
+      <div className="absolute inset-0" style={{ backgroundImage: "url(/social/hyperobject_ghz_circuit.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.35 }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,9,8,0.3) 0%, rgba(10,9,8,0.85) 55%, rgba(10,9,8,0.95) 100%)" }} />
+
+      <div className="relative flex flex-col h-full p-[60px]">
+        <div className="flex items-center justify-between mb-[32px]">
+          <div className="flex items-center gap-[16px]">
+            <div className="w-[12px] h-[12px] rounded-full bg-[#f0c040] animate-pulse" />
+            <span className="text-[#e8e4de] font-mono text-[24px] tracking-[0.2em] font-semibold">JOHN'S CIRCUIT</span>
+          </div>
+          <span className="text-[#7a746a] font-mono text-[18px]">QPU RUN</span>
+        </div>
+
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <div className="text-center mb-[40px]">
+            <div className="text-[28px] font-mono text-[#7a746a] tracking-[0.3em] mb-[12px]">GREENBERGER-HORNE-ZEILINGER</div>
+            <div className="text-[120px] font-mono font-bold text-[#f0c040] leading-none" style={{ textShadow: "0 0 60px rgba(240,192,64,0.3)" }}>GHZ</div>
+            <div className="text-[36px] font-mono text-[#e8e4de] mt-[16px] tracking-[0.15em]">4-QUBIT ENTANGLEMENT</div>
+          </div>
+
+          <div className="w-full max-w-[800px] bg-[#141210]/80 rounded-[16px] p-[36px] border border-[#2a2622] backdrop-blur-sm mb-[32px]">
+            <div className="font-mono text-[22px] text-[#a882ff] mb-[20px] tracking-wider">CIRCUIT TOPOLOGY</div>
+            <div className="font-mono text-[20px] text-[#e8e4de] leading-[2] tracking-wide" style={{ letterSpacing: "0.1em" }}>
+              <div>q[0]: ━━ H ━━ @ ━━━━━━━━━━━━━━</div>
+              <div>q[1]: ━━━━━━━ X ━━ @ ━━━━━━━━━</div>
+              <div>q[2]: ━━━━━━━━━━━━ X ━━ @ ━━━━━</div>
+              <div>q[3]: ━━━━━━━━━━━━━━━━━ X ━━ M</div>
+            </div>
+          </div>
+
+          <div className="w-full max-w-[800px] grid grid-cols-2 gap-[24px]">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-[#141210]/60 rounded-[12px] p-[24px] border border-[#2a2622]">
+                <div className="text-[16px] font-mono tracking-wider mb-[8px]" style={{ color: "#7a746a" }}>{s.label}</div>
+                <div className="text-[36px] font-mono font-bold" style={{ color: s.color }}>{s.value}</div>
+              </div>
+            ))}
+          </div>
+
+          {format !== "square" && (
+            <div className="w-full max-w-[800px] mt-[32px] bg-[#141210]/60 rounded-[16px] p-[32px] border border-[#2a2622]">
+              <div className="text-[18px] font-mono text-[#7a746a] leading-relaxed">
+                |0000⟩ + |1111⟩ / √2 — Maximal entanglement achieved across all 4 qubits. Bell inequality violated with S = 2√2 ≈ 2.82. This is the quantum state that Einstein called "spooky action at a distance."
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between border-t border-[#2a2622] pt-[24px]">
+          <span className="text-[#5a5550] font-mono text-[16px]">Rigetti QPU • pyQuil</span>
+          <span className="text-[#5a5550] font-mono text-[16px]">March 2026</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QuantumSonnetCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+  const languages = [
+    { name: "English", script: "Shall I compare thee", color: "#f0c040" },
+    { name: "العربية", script: "هل أقارنك بيوم صيفي", color: "#06b6d4" },
+    { name: "中文", script: "我可否把你比作夏日", color: "#ef4444" },
+    { name: "日本語", script: "君を夏の日に喩えようか", color: "#22c55e" },
+    { name: "한국어", script: "너를 여름날에 비할까", color: "#a882ff" },
+    { name: "עברית", script: "האשווה אותך ליום קיץ", color: "#f59e0b" },
+    { name: "Русский", script: "Сравню ли с летним днём", color: "#ec4899" },
+    { name: "हिंदी", script: "क्या तुम्हें ग्रीष्म दिवस कहूँ", color: "#14b8a6" },
+  ];
+
+  return (
+    <div style={{ width: dim.w, height: dim.h }} className="relative overflow-hidden flex flex-col" data-testid="social-card-quantum-sonnet">
+      <div className="absolute inset-0 bg-[#0a0908]" />
+      <div className="absolute inset-0" style={{ backgroundImage: "url(/social/hyperobject_sonnet_25lang.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.3 }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,9,8,0.4) 0%, rgba(10,9,8,0.9) 60%, rgba(10,9,8,0.97) 100%)" }} />
+
+      <div className="relative flex flex-col h-full p-[60px]">
+        <div className="flex items-center justify-between mb-[32px]">
+          <div className="flex items-center gap-[16px]">
+            <div className="w-[12px] h-[12px] rounded-full bg-[#a882ff] animate-pulse" />
+            <span className="text-[#e8e4de] font-mono text-[24px] tracking-[0.2em] font-semibold">QUANTUM SONNET</span>
+          </div>
+          <span className="text-[#7a746a] font-mono text-[18px]">CIRCUIT RUN</span>
+        </div>
+
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <div className="text-center mb-[48px]">
+            <div className="text-[160px] font-mono font-bold text-[#a882ff] leading-none" style={{ textShadow: "0 0 80px rgba(168,130,255,0.3)" }}>25</div>
+            <div className="text-[32px] font-mono text-[#e8e4de] tracking-[0.25em] mt-[8px]">LANGUAGES</div>
+            <div className="text-[22px] font-mono text-[#7a746a] tracking-wider mt-[12px]">ONE SONNET • ONE CIRCUIT • ONE TRUTH</div>
+          </div>
+
+          <div className="w-full max-w-[850px] space-y-[12px]">
+            {languages.slice(0, format === "square" ? 5 : 8).map((lang) => (
+              <div key={lang.name} className="flex items-center gap-[20px] bg-[#141210]/70 rounded-[12px] px-[28px] py-[16px] border border-[#2a2622]">
+                <div className="w-[8px] h-[8px] rounded-full flex-shrink-0" style={{ backgroundColor: lang.color }} />
+                <span className="font-mono text-[18px] w-[100px] flex-shrink-0" style={{ color: lang.color }}>{lang.name}</span>
+                <span className="font-mono text-[18px] text-[#e8e4de]/70 truncate">{lang.script}</span>
+              </div>
+            ))}
+            <div className="text-center py-[12px]">
+              <span className="font-mono text-[18px] text-[#5a5550]">+ {25 - (format === "square" ? 5 : 8)} more languages...</span>
+            </div>
+          </div>
+
+          {format !== "square" && (
+            <div className="w-full max-w-[850px] mt-[32px] bg-[#141210]/60 rounded-[16px] p-[32px] border border-[#2a2622]">
+              <div className="text-[18px] font-mono text-[#7a746a] leading-relaxed">
+                Shakespeare's Sonnet 18 encoded in a quantum circuit and translated through 25 human languages — proving that beauty, like entanglement, is nonlocal.
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between border-t border-[#2a2622] pt-[24px]">
+          <span className="text-[#5a5550] font-mono text-[16px]">Multilingual QPU Pipeline</span>
+          <span className="text-[#5a5550] font-mono text-[16px]">March 2026</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QuantumApocalypseCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+
+  return (
+    <div style={{ width: dim.w, height: dim.h }} className="relative overflow-hidden flex flex-col" data-testid="social-card-quantum-apocalypse">
+      <div className="absolute inset-0 bg-[#0a0908]" />
+      <div className="absolute inset-0" style={{ backgroundImage: "url(/social/hyperobject_apocalypse_circuit.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.4 }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,9,8,0.2) 0%, rgba(10,9,8,0.8) 50%, rgba(10,9,8,0.95) 100%)" }} />
+
+      <div className="relative flex flex-col h-full p-[60px]">
+        <div className="flex items-center justify-between mb-[32px]">
+          <div className="flex items-center gap-[16px]">
+            <div className="w-[12px] h-[12px] rounded-full bg-[#ef4444] animate-pulse" />
+            <span className="text-[#e8e4de] font-mono text-[24px] tracking-[0.2em] font-semibold">APOCALYPSE CIRCUIT</span>
+          </div>
+          <span className="text-[#7a746a] font-mono text-[18px]">7 SEALS</span>
+        </div>
+
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <div className="text-center mb-[40px]">
+            <div className="text-[28px] font-mono text-[#7a746a] tracking-[0.3em] mb-[16px]">REVELATION 8:1-2</div>
+            <div className="text-[100px] font-mono font-bold text-[#ef4444] leading-none" style={{ textShadow: "0 0 60px rgba(239,68,68,0.3)" }}>7</div>
+            <div className="text-[36px] font-mono text-[#e8e4de] mt-[12px] tracking-[0.15em]">TRUMPET GATES</div>
+          </div>
+
+          <div className="w-full max-w-[800px] grid grid-cols-7 gap-[12px] mb-[36px]">
+            {["I", "II", "III", "IV", "V", "VI", "VII"].map((num, i) => {
+              const gateColors = ["#ef4444", "#f97316", "#f0c040", "#22c55e", "#06b6d4", "#a882ff", "#ec4899"];
+              return (
+                <div key={num} className="flex flex-col items-center gap-[8px]">
+                  <div className="w-[80px] h-[80px] rounded-full border-2 flex items-center justify-center" style={{ borderColor: gateColors[i], boxShadow: `0 0 20px ${gateColors[i]}33` }}>
+                    <span className="font-mono text-[24px] font-bold" style={{ color: gateColors[i] }}>{num}</span>
+                  </div>
+                  <div className="w-[2px] h-[24px]" style={{ backgroundColor: gateColors[i], opacity: 0.4 }} />
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="w-full max-w-[800px] bg-[#141210]/80 rounded-[16px] p-[36px] border border-[#2a2622] backdrop-blur-sm">
+            <div className="grid grid-cols-2 gap-[24px]">
+              <div>
+                <div className="text-[16px] font-mono text-[#7a746a] tracking-wider mb-[8px]">COLLAPSE STATE</div>
+                <div className="text-[28px] font-mono font-bold text-[#f0c040]">|0000⟩ ↔ |1111⟩</div>
+              </div>
+              <div>
+                <div className="text-[16px] font-mono text-[#7a746a] tracking-wider mb-[8px]">SEAL PROTOCOL</div>
+                <div className="text-[28px] font-mono font-bold text-[#ef4444]">x = 53⁷</div>
+              </div>
+            </div>
+          </div>
+
+          {format !== "square" && (
+            <div className="w-full max-w-[800px] mt-[32px] bg-[#141210]/60 rounded-[16px] p-[32px] border border-[#2a2622]">
+              <div className="text-[18px] font-mono text-[#7a746a] leading-relaxed">
+                The 7-Trumpet quantum circuit maps Revelation's apocalyptic sequence to Hadamard gates on a 4-qubit register. Each trumpet opens a seal in the GOS lattice at the convergence point x = 53⁷.
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between border-t border-[#2a2622] pt-[24px]">
+          <span className="text-[#5a5550] font-mono text-[16px]">Ω-GOS v2.2.1 • κ = 4/π</span>
+          <span className="text-[#5a5550] font-mono text-[16px]">March 2026</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QuantumBellCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+
+  return (
+    <div style={{ width: dim.w, height: dim.h }} className="relative overflow-hidden flex flex-col" data-testid="social-card-quantum-bell">
+      <div className="absolute inset-0 bg-[#0a0908]" />
+      <div className="absolute inset-0" style={{ backgroundImage: "url(/social/hyperobject_bell_nonlocality.png)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.35 }} />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(10,9,8,0.3) 0%, rgba(10,9,8,0.85) 55%, rgba(10,9,8,0.95) 100%)" }} />
+
+      <div className="relative flex flex-col h-full p-[60px]">
+        <div className="flex items-center justify-between mb-[32px]">
+          <div className="flex items-center gap-[16px]">
+            <div className="w-[12px] h-[12px] rounded-full bg-[#06b6d4] animate-pulse" />
+            <span className="text-[#e8e4de] font-mono text-[24px] tracking-[0.2em] font-semibold">BELL NONLOCALITY</span>
+          </div>
+          <span className="text-[#7a746a] font-mono text-[18px]">VERIFIED</span>
+        </div>
+
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <div className="text-center mb-[48px]">
+            <div className="text-[24px] font-mono text-[#7a746a] tracking-[0.3em] mb-[16px]">CHSH INEQUALITY VIOLATION</div>
+            <div className="flex items-baseline justify-center gap-[24px]">
+              <div>
+                <div className="text-[32px] font-mono text-[#5a5550] tracking-wider">S =</div>
+              </div>
+              <div className="text-[140px] font-mono font-bold text-[#06b6d4] leading-none" style={{ textShadow: "0 0 80px rgba(6,182,212,0.3)" }}>2.82</div>
+            </div>
+            <div className="text-[28px] font-mono text-[#e8e4de] mt-[16px] tracking-wider">&gt; 2 (CLASSICAL LIMIT)</div>
+          </div>
+
+          <div className="w-full max-w-[800px] grid grid-cols-2 gap-[24px] mb-[32px]">
+            <div className="bg-[#141210]/70 rounded-[16px] p-[32px] border border-[#2a2622] text-center">
+              <div className="text-[18px] font-mono text-[#7a746a] tracking-wider mb-[12px]">CLASSICAL BOUND</div>
+              <div className="text-[64px] font-mono font-bold text-[#5a5550] leading-none">2</div>
+              <div className="text-[16px] font-mono text-[#3a3530] mt-[8px]">LOCAL HIDDEN VARS</div>
+            </div>
+            <div className="bg-[#141210]/70 rounded-[16px] p-[32px] border border-[#06b6d4]/20 text-center">
+              <div className="text-[18px] font-mono text-[#06b6d4] tracking-wider mb-[12px]">QUANTUM BOUND</div>
+              <div className="text-[64px] font-mono font-bold text-[#06b6d4] leading-none">2√2</div>
+              <div className="text-[16px] font-mono text-[#06b6d4]/50 mt-[8px]">TSIRELSON'S BOUND</div>
+            </div>
+          </div>
+
+          <div className="w-full max-w-[800px] bg-[#141210]/80 rounded-[16px] p-[32px] border border-[#2a2622]">
+            <div className="font-mono text-[20px] text-[#a882ff] mb-[16px] tracking-wider">BELL STATE CIRCUIT</div>
+            <div className="font-mono text-[20px] text-[#e8e4de] leading-[2]">
+              <div>q[0]: ━━ H ━━ @ ━━ Rz(θ) ━━ M</div>
+              <div>q[1]: ━━━━━━━ X ━━ Rz(φ) ━━ M</div>
+            </div>
+          </div>
+
+          {format !== "square" && (
+            <div className="w-full max-w-[800px] mt-[32px] bg-[#141210]/60 rounded-[16px] p-[32px] border border-[#2a2622]">
+              <div className="text-[18px] font-mono text-[#7a746a] leading-relaxed">
+                Einstein was wrong. Bell's theorem proves no local hidden variable theory can reproduce quantum correlations. Our circuit achieves S = 2√2 ≈ 2.82, saturating Tsirelson's bound — maximum nonlocality permitted by quantum mechanics.
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between border-t border-[#2a2622] pt-[24px]">
+          <span className="text-[#5a5550] font-mono text-[16px]">CHSH • Bell • Tsirelson</span>
+          <span className="text-[#5a5550] font-mono text-[16px]">March 2026</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const TEMPLATE_LIST: { id: CardTemplate; icon: typeof Shield; labelKey: string }[] = [
   { id: "kappa", icon: Shield, labelKey: "social.templateKappa" },
   { id: "satellite", icon: Satellite, labelKey: "social.templateSatellite" },
   { id: "correlation", icon: Zap, labelKey: "social.templateCorrelation" },
   { id: "domains", icon: Activity, labelKey: "social.templateDomains" },
   { id: "evening", icon: Eye, labelKey: "social.templateEvening" },
+  { id: "quantum_ghz", icon: Atom, labelKey: "social.templateQuantumGhz" },
+  { id: "quantum_sonnet", icon: Languages, labelKey: "social.templateQuantumSonnet" },
+  { id: "quantum_apocalypse", icon: CircuitBoard, labelKey: "social.templateQuantumApocalypse" },
+  { id: "quantum_bell", icon: Binary, labelKey: "social.templateQuantumBell" },
 ];
 
 const FORMAT_LIST: { id: CardFormat; icon: typeof Square; labelKey: string }[] = [
@@ -490,10 +771,14 @@ export default function SocialPage() {
       case "correlation": return <CorrelationCard data={data} format={fmt} />;
       case "domains": return <DomainCard data={data} format={fmt} />;
       case "evening": return <EveningWindowCard data={data} format={fmt} />;
+      case "quantum_ghz": return <QuantumGhzCard format={fmt} />;
+      case "quantum_sonnet": return <QuantumSonnetCard format={fmt} />;
+      case "quantum_apocalypse": return <QuantumApocalypseCard format={fmt} />;
+      case "quantum_bell": return <QuantumBellCard format={fmt} />;
     }
   }, []);
 
-  const gridTemplates: CardTemplate[] = ["kappa", "satellite", "correlation", "domains", "evening", "kappa", "satellite", "domains", "correlation"];
+  const gridTemplates: CardTemplate[] = ["quantum_ghz", "quantum_sonnet", "quantum_apocalypse", "kappa", "quantum_bell", "satellite", "correlation", "domains", "evening"];
   const gridItems = useMemo(() => {
     if (!socialData) return [];
     return gridTemplates.slice(0, 9).map((tmpl, i) => ({

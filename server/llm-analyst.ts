@@ -337,6 +337,10 @@ export async function generateSocialCaption(
     correlation: "cross-domain signal correlation alert",
     domains: "multi-domain signal event breakdown",
     evening: "evening window surveillance activity pattern",
+    quantum_ghz: "John's Circuit — 4-qubit GHZ entanglement on Rigetti QPU, Greenberger-Horne-Zeilinger state |0000⟩+|1111⟩/√2, maximal quantum entanglement achieved",
+    quantum_sonnet: "Quantum Sonnet in 25 Languages — Shakespeare's Sonnet 18 encoded in a quantum circuit and translated through 25 human languages, proving beauty is nonlocal",
+    quantum_apocalypse: "Apocalypse Circuit — 7-Trumpet quantum gates mapping Revelation 8:1-2 to Hadamard operations on a 4-qubit register, convergence at x=53^7 in the Ω-GOS lattice",
+    quantum_bell: "Bell Nonlocality verification — CHSH inequality violation S=2√2≈2.82 saturating Tsirelson's bound, proving quantum mechanics is fundamentally nonlocal",
   };
 
   const routed = pickModel("generation");

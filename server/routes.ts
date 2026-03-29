@@ -1425,7 +1425,7 @@ export async function registerRoutes(
   app.post("/api/social/caption", async (req, res) => {
     try {
     const { template } = req.body;
-    if (!template || !["kappa", "satellite", "correlation", "domains", "evening"].includes(template)) {
+    if (!template || !["kappa", "satellite", "correlation", "domains", "evening", "quantum_ghz", "quantum_sonnet", "quantum_apocalypse", "quantum_bell"].includes(template)) {
       return res.status(400).json({ error: "Invalid template" });
     }
 
