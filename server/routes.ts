@@ -14,6 +14,7 @@ import { biometricCorrelator, type PhoneSensorReading, type KymaReading } from "
 import { getVisionStatus, getVisionAnalyses, getContextMemory, runVisionOnce } from "./kiwisdr-vision";
 import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
+import { runSyncCapture, getSyncCaptureStatus, getSyncCaptureHistory, getScreenshotFiles, getScanResultFiles } from "./sync-capture";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
 import { executeDeepResearchRun } from "./deep-research";
 import { fetchUrl } from "./research-web";
@@ -1338,6 +1339,49 @@ export async function registerRoutes(
   app.post("/api/pipeline/stop", (_req, res) => {
     stopPipeline();
     res.json(getPipelineStatus());
+  });
+
+  app.get("/api/kiwisdr-screenshots/:filename", (req, res) => {
+    const filename = req.params.filename;
+    if (!filename || filename.includes("..") || filename.includes("/")) {
+      return res.status(400).json({ error: "Invalid filename" });
+    }
+    const filepath = nodePath.join(process.cwd(), "kiwisdr_screenshots", filename);
+    if (!fs.existsSync(filepath)) {
+      return res.status(404).json({ error: "File not found" });
+    }
+    const ext = nodePath.extname(filename).toLowerCase();
+    const mimeMap: Record<string, string> = { ".png": "image/png", ".jpg": "image/jpeg", ".json": "application/json" };
+    res.setHeader("Content-Type", mimeMap[ext] || "application/octet-stream");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    fs.createReadStream(filepath).pipe(res);
+  });
+
+  app.get("/api/sync-capture/status", (_req, res) => {
+    res.json(getSyncCaptureStatus());
+  });
+
+  app.get("/api/sync-capture/history", (_req, res) => {
+    res.json(getSyncCaptureHistory());
+  });
+
+  app.get("/api/sync-capture/screenshots", (_req, res) => {
+    res.json(getScreenshotFiles());
+  });
+
+  app.get("/api/sync-capture/scan-results", (_req, res) => {
+    res.json(getScanResultFiles());
+  });
+
+  app.post("/api/sync-capture/fire", async (_req, res) => {
+    try {
+      console.log("[SYNC-CAPTURE] Manual fire triggered via API");
+      const result = await runSyncCapture();
+      res.json(result);
+    } catch (err) {
+      console.error("[SYNC-CAPTURE] Fire error:", err);
+      res.status(500).json({ error: "Synchronized capture failed" });
+    }
   });
 
   app.get("/api/lattice/all", (_req, res) => {
