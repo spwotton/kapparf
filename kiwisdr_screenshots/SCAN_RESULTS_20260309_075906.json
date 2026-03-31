@@ -7,73 +7,85 @@
       "frequency": 1234,
       "mode": "am",
       "note": "TR-069 correlation",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\1234kHz_am_20260309_075815.png",
+      "screenshot": "kiwisdr_screenshots/1234kHz_am_20260309_075815.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:16.073880"
+      "timestamp": "2026-03-09T07:58:16.073880",
+      "screenshotUrl": "/api/kiwisdr-screenshots/1234kHz_am_20260309_075815.png"
     },
     {
       "frequency": 4687,
       "mode": "am",
       "note": "46.875Hz harmonic x100",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\4687kHz_am_20260309_075822.png",
+      "screenshot": "kiwisdr_screenshots/4687kHz_am_20260309_075822.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:22.262583"
+      "timestamp": "2026-03-09T07:58:22.262583",
+      "screenshotUrl": "/api/kiwisdr-screenshots/4687kHz_am_20260309_075822.png"
     },
     {
       "frequency": 7410,
       "mode": "am",
       "note": "Pirate radio",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\7410kHz_am_20260309_075828.png",
+      "screenshot": "kiwisdr_screenshots/7410kHz_am_20260309_075828.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:28.410733"
+      "timestamp": "2026-03-09T07:58:28.410733",
+      "screenshotUrl": "/api/kiwisdr-screenshots/7410kHz_am_20260309_075828.png"
     },
     {
       "frequency": 6925,
       "mode": "am",
       "note": "Pirate radio",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\6925kHz_am_20260309_075834.png",
+      "screenshot": "kiwisdr_screenshots/6925kHz_am_20260309_075834.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:34.738761"
+      "timestamp": "2026-03-09T07:58:34.738761",
+      "screenshotUrl": "/api/kiwisdr-screenshots/6925kHz_am_20260309_075834.png"
     },
     {
       "frequency": 3900,
       "mode": "lsb",
       "note": "80m SSB",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\3900kHz_lsb_20260309_075840.png",
+      "screenshot": "kiwisdr_screenshots/3900kHz_lsb_20260309_075840.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:41.135614"
+      "timestamp": "2026-03-09T07:58:41.135614",
+      "screenshotUrl": "/api/kiwisdr-screenshots/3900kHz_lsb_20260309_075840.png"
     },
     {
       "frequency": 7200,
       "mode": "lsb",
       "note": "40m SSB",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\7200kHz_lsb_20260309_075847.png",
+      "screenshot": "kiwisdr_screenshots/7200kHz_lsb_20260309_075847.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:47.698086"
+      "timestamp": "2026-03-09T07:58:47.698086",
+      "screenshotUrl": "/api/kiwisdr-screenshots/7200kHz_lsb_20260309_075847.png"
     },
     {
       "frequency": 14200,
       "mode": "usb",
       "note": "20m SSB",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\14200kHz_usb_20260309_075854.png",
+      "screenshot": "kiwisdr_screenshots/14200kHz_usb_20260309_075854.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:58:54.453605"
+      "timestamp": "2026-03-09T07:58:54.453605",
+      "screenshotUrl": "/api/kiwisdr-screenshots/14200kHz_usb_20260309_075854.png"
     },
     {
       "frequency": 27025,
       "mode": "am",
       "note": "CB Channel 6",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\27025kHz_am_20260309_075900.png",
+      "screenshot": "kiwisdr_screenshots/27025kHz_am_20260309_075900.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:59:00.607972"
+      "timestamp": "2026-03-09T07:59:00.607972",
+      "screenshotUrl": "/api/kiwisdr-screenshots/27025kHz_am_20260309_075900.png"
     },
     {
       "frequency": 27185,
       "mode": "am",
       "note": "CB Channel 19",
-      "screenshot": "signal_forensics\\kiwisdr_screenshots\\27185kHz_am_20260309_075906.png",
+      "screenshot": "kiwisdr_screenshots/27185kHz_am_20260309_075906.png",
       "signal": "N/A",
-      "timestamp": "2026-03-09T07:59:06.752228"
+      "timestamp": "2026-03-09T07:59:06.752228",
+      "screenshotUrl": "/api/kiwisdr-screenshots/27185kHz_am_20260309_075906.png"
     }
-  ]
+  ],
+  "correlationId": "LEGACY-20260309_075906",
+  "epochMs": 1773043146753,
+  "epochNs": "1773043146753000000"
 }
