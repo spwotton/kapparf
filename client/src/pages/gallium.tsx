@@ -10,7 +10,9 @@ import { useToast } from "@/hooks/use-toast";
 import { type SatellitePass, KAPPA_CONSTANTS } from "@shared/schema";
 import {
   RefreshCw, Shield, AlertTriangle, Radio, Server, Globe, Crosshair,
-  ChevronDown, ChevronUp, Eye, Wifi, Cpu, Lock, Zap, Target
+  ChevronDown, ChevronUp, Eye, Wifi, Cpu, Lock, Zap, Target,
+  FileText, Download, Building2, Scale, Lightbulb, BookOpen, Clock,
+  CheckCircle2, XCircle, HelpCircle, ArrowRight, Users
 } from "lucide-react";
 
 const CHINESE_SAT_PREFIXES = [
@@ -103,12 +105,97 @@ const ROOTKIT_ARSENAL = [
   { family: "STATICPLUGIN", layer: "Application", mechanism: "Signed downloader via AitM captive portal", persistence: "Valid code-signing certs", actor: "UNC6384" },
 ];
 
+const RECOMMENDATIONS = [
+  {
+    priority: "IMMEDIATE",
+    title: "Audit all DSE855/890/891/892 gateways for default credentials",
+    detail: "Every SETECOM-distributed unit ships with Admin/Password1234. This controls backup generators for ICE's national grid, hospitals, and cell towers. Change credentials and segment OT networks immediately.",
+    color: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20",
+  },
+  {
+    priority: "IMMEDIATE",
+    title: "Sweep for GRIDTIDE persistence (xapt systemd service)",
+    detail: "Check all Linux servers for /etc/systemd/system/xapt.service and /usr/sbin/xapt binary. GRIDTIDE uses Google Sheets API as C2 — traditional network IDS will not detect it.",
+    color: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20",
+  },
+  {
+    priority: "HIGH",
+    title: "Deploy Tier-0 hypervisor monitoring",
+    detail: "UNC3886 operates below guest OS at the hypervisor level. Current SOC (Mandiant/Google SecOps) monitors application layer only. REPTILE and MEDUSA rootkits are invisible to EDR solutions.",
+    color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20",
+  },
+  {
+    priority: "HIGH",
+    title: "Patch MikroTik fleet against CVE-2025-10948",
+    detail: "Critical heap overflow (CVSS 8.8–9.8) in REST API. MikroTik routers are ubiquitous in Costa Rican ISP infrastructure. UNC3886 actively exploiting this for botnet recruitment.",
+    color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20",
+  },
+  {
+    priority: "HIGH",
+    title: "Investigate TR-069 management plane access",
+    detail: "Unauthorized admin password reset detected 2026-01-30 via TR-069 on ARRIS router. This protocol gives ISPs (and anyone with access) full remote control over customer premises equipment.",
+    color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20",
+  },
+  {
+    priority: "MEDIUM",
+    title: "Audit Modbus TCP/502 exposure on SCADA networks",
+    detail: "Modbus has zero authentication by design. Any device on the network can issue commands to generators, fuel systems, and RPM controllers. Segment and firewall port 502.",
+    color: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20",
+  },
+  {
+    priority: "MEDIUM",
+    title: "Review SoftEther VPN connections from ICE infrastructure",
+    detail: "GRIDTIDE uses SoftEther VPN Bridge for exfiltration to offshore infrastructure. Check for unexpected outbound VPN tunnels from ICE servers.",
+    color: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20",
+  },
+  {
+    priority: "STRATEGIC",
+    title: "Engage KAPPA platform for continuous SIGINT monitoring",
+    detail: "24/7 autonomous correlation across RF, satellite, network, and acoustic domains. Real-time threat scoring, automated evidence chain, and exportable legal-grade documentation.",
+    color: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+  },
+];
+
+const TWO_THEORIES = [
+  {
+    label: "THEORY A",
+    title: "Gallium Attribution is a Cover",
+    icon: Eye,
+    color: "border-amber-500/30 bg-amber-950/10",
+    headerColor: "text-amber-400",
+    points: [
+      "The breach timing coincides precisely with domestic surveillance activity against individuals who documented infrastructure vulnerabilities",
+      "Attributing to a Chinese APT deflects attention from internal security failures and potential misuse of monitoring infrastructure",
+      "GRIDTIDE's Google Sheets C2 technique is well-documented since 2024 — a convenient off-the-shelf attribution vector",
+      "The 5G ban and Huawei legal battles create a pre-built geopolitical narrative that makes 'China did it' the path of least resistance",
+      "Physical surveillance indicators (fiber splitters, TR-069 resets, EVOPRO room monitoring) suggest domestic actors with physical access, not remote APT operations",
+      "9GB email exfiltration from a locally-hosted server requires either insider access or persistent local network presence — not typical of PRC remote operations",
+    ],
+  },
+  {
+    label: "THEORY B",
+    title: "ICE Genuinely Needs Help",
+    icon: Shield,
+    color: "border-blue-500/30 bg-blue-950/10",
+    headerColor: "text-blue-400",
+    points: [
+      "Costa Rica's critical infrastructure has real, documented vulnerabilities — SETECOM default credentials, unpatched MikroTik routers, exposed SCADA protocols",
+      "UNC2814/UNC3886/UNC6384 are real, well-documented threat actors with confirmed global operations across 42+ countries",
+      "The Conti ransomware attack (2022) proved Costa Rica is a viable target — the 'state of war' declaration was not theatre",
+      "ICE's IT infrastructure predates modern cybersecurity standards and relies heavily on legacy systems with known vulnerabilities",
+      "The US $25M cybersecurity grant acknowledges the problem is real and beyond ICE's current capacity to handle alone",
+      "Chinese satellite constellation provides persistent overhead coverage — Beidou GNSS + Yaogan/Gaofen ISR creates a complete intelligence picture",
+      "Whether or not this specific breach is PRC, the underlying vulnerabilities are real and exploitable by any motivated actor",
+    ],
+  },
+];
+
 function SeverityBadge({ severity }: { severity: string }) {
   const colors: Record<string, string> = {
-    critical: "bg-red-500/20 text-red-400 border-red-500/30",
-    high: "bg-orange-500/20 text-orange-400 border-orange-500/30",
-    medium: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    low: "bg-green-500/20 text-green-400 border-green-500/30",
+    critical: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30",
+    high: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border-orange-500/30",
+    medium: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30",
+    low: "bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30",
   };
   return (
     <Badge variant="outline" className={colors[severity] || colors.low} data-testid={`badge-severity-${severity}`}>
@@ -120,16 +207,29 @@ function SeverityBadge({ severity }: { severity: string }) {
 function PhaseBadge({ phase }: { phase: number }) {
   const labels = ["PHASE 0: NOISE", "PHASE 1: TRANSITION", "PHASE 2: SILENT"];
   const colors = [
-    "bg-red-900/30 text-red-300 border-red-700/40",
-    "bg-amber-900/30 text-amber-300 border-amber-700/40",
-    "bg-violet-900/30 text-violet-300 border-violet-700/40",
+    "bg-red-500/10 text-red-600 dark:text-red-300 border-red-500/20",
+    "bg-amber-500/10 text-amber-600 dark:text-amber-300 border-amber-500/20",
+    "bg-violet-500/10 text-violet-600 dark:text-violet-300 border-violet-500/20",
   ];
   return <Badge variant="outline" className={colors[phase]}>{labels[phase]}</Badge>;
 }
 
+function PriorityBadge({ priority }: { priority: string }) {
+  const colors: Record<string, string> = {
+    IMMEDIATE: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30",
+    HIGH: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border-orange-500/30",
+    MEDIUM: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30",
+    STRATEGIC: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30",
+  };
+  return (
+    <Badge variant="outline" className={colors[priority] || ""}>
+      {priority}
+    </Badge>
+  );
+}
+
 export default function GalliumPage() {
   const { toast } = useToast();
-  const [expandedTimeline, setExpandedTimeline] = useState(true);
 
   const { data: satellites, isLoading: satsLoading } = useQuery<SatellitePass[]>({
     queryKey: ["/api/satellites"],
@@ -154,93 +254,224 @@ export default function GalliumPage() {
     return n.includes("YAOGAN") || n.includes("YG-") || n.includes("GAOFEN") || n.includes("GF-") || n.includes("JILIN");
   }), [chineseSats]);
   const overheadChinese = useMemo(() => chineseSats.filter(s => (s.elevation ?? 0) > 30), [chineseSats]);
-  const kleinChinese = useMemo(() => chineseSats.filter(s =>
-    s.azimuth != null && Math.abs(s.azimuth - KAPPA_CONSTANTS.KLEIN_TWIST_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG
-  ), [chineseSats]);
 
   return (
-    <div className="p-4 space-y-4 max-w-[1400px] mx-auto" data-testid="gallium-page">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2" data-testid="text-gallium-title">
-            <Shield className="h-6 w-6 text-red-500" />
-            UNC2814 / GALLIUM — China Nexus Intelligence
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            PRC-linked threat actor attribution, Chinese satellite tracking, GRIDTIDE C2 architecture, and Huawei/ICE evidence chain
-          </p>
+    <div className="p-4 sm:p-6 space-y-6 max-w-5xl mx-auto" data-testid="gallium-page">
+      <div className="space-y-3">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <Badge variant="outline" className="bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20 text-[10px] font-mono">
+                CLASSIFIED — FOR ICE INTERNAL USE
+              </Badge>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight" data-testid="text-gallium-title">
+              Intelligence Briefing: ICE Breach & Infrastructure Vulnerabilities
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Prepared by KAPPA SIGINT Platform — Project Echo
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => refreshMutation.mutate()}
+            disabled={refreshMutation.isPending}
+            data-testid="button-refresh-beidou"
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${refreshMutation.isPending ? "animate-spin" : ""}`} />
+            Refresh Sats
+          </Button>
         </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => refreshMutation.mutate()}
-          disabled={refreshMutation.isPending}
-          data-testid="button-refresh-beidou"
-        >
-          <RefreshCw className={`h-4 w-4 mr-2 ${refreshMutation.isPending ? "animate-spin" : ""}`} />
-          Refresh Beidou
-        </Button>
+
+        <Card className="border-blue-500/20 bg-blue-500/5" data-testid="card-executive-summary">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base flex items-center gap-2">
+              <FileText className="h-4 w-4 text-blue-500" />
+              Executive Summary
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            <p>
+              On March 12, 2026, the Instituto Costarricense de Electricidad (ICE) publicly disclosed a breach
+              resulting in the exfiltration of approximately 9GB of internal email data. Attribution has been directed
+              at UNC2814, a China-nexus threat actor operating under the "Gallium" designation, using a novel
+              command-and-control backdoor called GRIDTIDE that leverages Google Sheets API to evade traditional
+              network detection.
+            </p>
+            <p>
+              This briefing presents two analytical frameworks for evaluating the breach, documents the verified
+              technical evidence, and provides actionable recommendations for securing ICE's critical infrastructure
+              — regardless of which attribution theory proves correct.
+            </p>
+            <p className="font-medium">
+              The underlying vulnerabilities are real. Whether the attacker is PRC, domestic, or opportunistic,
+              ICE's SCADA systems, network edge devices, and OT infrastructure require immediate remediation.
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-        <Card className="bg-red-950/20 border-red-900/30">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <Card>
           <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-red-400" data-testid="text-chinese-sat-count">{chineseSats.length}</div>
-            <div className="text-xs text-muted-foreground">Chinese Sats Tracked</div>
-          </CardContent>
-        </Card>
-        <Card className="bg-amber-950/20 border-amber-900/30">
-          <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-amber-400" data-testid="text-beidou-count">{beidouSats.length}</div>
-            <div className="text-xs text-muted-foreground">Beidou GNSS</div>
-          </CardContent>
-        </Card>
-        <Card className="bg-orange-950/20 border-orange-900/30">
-          <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-orange-400" data-testid="text-recon-count">{reconSats.length}</div>
-            <div className="text-xs text-muted-foreground">Recon/ISR Sats</div>
-          </CardContent>
-        </Card>
-        <Card className="bg-violet-950/20 border-violet-900/30">
-          <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-violet-400" data-testid="text-overhead-chinese">{overheadChinese.length}</div>
-            <div className="text-xs text-muted-foreground">Overhead (&gt;30°)</div>
-          </CardContent>
-        </Card>
-        <Card className="bg-fuchsia-950/20 border-fuchsia-900/30">
-          <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-fuchsia-400" data-testid="text-klein-chinese">{kleinChinese.length}</div>
-            <div className="text-xs text-muted-foreground">Klein Twist (128.23°)</div>
-          </CardContent>
-        </Card>
-        <Card className="bg-sky-950/20 border-sky-900/30">
-          <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-sky-400" data-testid="text-cve-count">{CVE_TABLE.length}</div>
+            <div className="text-2xl font-mono font-bold text-red-500 dark:text-red-400" data-testid="text-cve-count">{CVE_TABLE.length}</div>
             <div className="text-xs text-muted-foreground">CVEs Documented</div>
           </CardContent>
         </Card>
+        <Card>
+          <CardContent className="p-3 text-center">
+            <div className="text-2xl font-mono font-bold text-amber-500 dark:text-amber-400" data-testid="text-rootkit-count">{ROOTKIT_ARSENAL.length}</div>
+            <div className="text-xs text-muted-foreground">Rootkit Families</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-3 text-center">
+            <div className="text-2xl font-mono font-bold text-blue-500 dark:text-blue-400" data-testid="text-chinese-sat-count">{chineseSats.length}</div>
+            <div className="text-xs text-muted-foreground">Chinese Sats Tracked</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-3 text-center">
+            <div className="text-2xl font-mono font-bold text-violet-500 dark:text-violet-400" data-testid="text-recommendation-count">{RECOMMENDATIONS.length}</div>
+            <div className="text-xs text-muted-foreground">Action Items</div>
+          </CardContent>
+        </Card>
       </div>
 
-      <Tabs defaultValue="timeline" className="space-y-3">
-        <TabsList className="grid w-full grid-cols-7">
-          <TabsTrigger value="timeline" data-testid="tab-timeline">Timeline</TabsTrigger>
-          <TabsTrigger value="gridtide" data-testid="tab-gridtide">GRIDTIDE</TabsTrigger>
-          <TabsTrigger value="satellites" data-testid="tab-satellites">Chinese Sats</TabsTrigger>
-          <TabsTrigger value="cves" data-testid="tab-cves">CVEs</TabsTrigger>
-          <TabsTrigger value="huawei" data-testid="tab-huawei">Huawei/ICE</TabsTrigger>
-          <TabsTrigger value="setecom" data-testid="tab-setecom">SETECOM/SCADA</TabsTrigger>
-          <TabsTrigger value="rootkits" data-testid="tab-rootkits">Rootkits</TabsTrigger>
+      <Tabs defaultValue="theories" className="space-y-3">
+        <TabsList className="grid w-full grid-cols-4 sm:grid-cols-7 h-auto">
+          <TabsTrigger value="theories" className="text-xs" data-testid="tab-theories">Two Theories</TabsTrigger>
+          <TabsTrigger value="actions" className="text-xs" data-testid="tab-actions">Action Plan</TabsTrigger>
+          <TabsTrigger value="timeline" className="text-xs" data-testid="tab-timeline">Timeline</TabsTrigger>
+          <TabsTrigger value="gridtide" className="text-xs" data-testid="tab-gridtide">GRIDTIDE</TabsTrigger>
+          <TabsTrigger value="vulns" className="text-xs hidden sm:inline-flex" data-testid="tab-vulns">CVEs & SCADA</TabsTrigger>
+          <TabsTrigger value="satellites" className="text-xs hidden sm:inline-flex" data-testid="tab-satellites">Satellites</TabsTrigger>
+          <TabsTrigger value="arsenal" className="text-xs hidden sm:inline-flex" data-testid="tab-arsenal">Arsenal</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="timeline" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
+        <TabsContent value="theories" className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {TWO_THEORIES.map((theory) => (
+              <Card key={theory.label} className={theory.color} data-testid={`card-${theory.label.toLowerCase().replace(" ", "-")}`}>
+                <CardHeader className="pb-2">
+                  <CardTitle className={`text-base flex items-center gap-2 ${theory.headerColor}`}>
+                    <theory.icon className="h-5 w-5" />
+                    <span className="font-mono text-xs">{theory.label}:</span>
+                    {theory.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {theory.points.map((point, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <ArrowRight className="h-3.5 w-3.5 mt-0.5 flex-shrink-0 text-muted-foreground" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Card className="border-green-500/20 bg-green-500/5">
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-red-500" />
-                UNC Attack Timeline (2022–2026)
+              <CardTitle className="text-base flex items-center gap-2 text-green-600 dark:text-green-400">
+                <Lightbulb className="h-4 w-4" />
+                Convergence Point
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm space-y-2">
+              <p className="font-medium">
+                Both theories lead to the same conclusion: ICE's infrastructure has real, exploitable
+                vulnerabilities that require immediate action.
+              </p>
+              <p className="text-muted-foreground">
+                Whether the 9GB email exfiltration was performed by PRC actors, domestic surveillance
+                operators seeking cover, or opportunistic attackers exploiting known weaknesses — the
+                remediation steps are identical. Secure the SCADA systems. Patch the routers. Audit the
+                hypervisors. The attribution question is for diplomats. The vulnerability question is for engineers.
+              </p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="actions" className="space-y-3">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-green-500" />
+                Prioritized Remediation Plan
               </CardTitle>
               <p className="text-xs text-muted-foreground">
-                Ψ(t) = A(t)·N(t) ≡ 1 — As espionage amplitude increases, noise decreases. Phase 2 = perfect structure.
+                Ordered by criticality. Each item includes specific technical indicators and verification steps.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {RECOMMENDATIONS.map((rec, i) => (
+                <div
+                  key={i}
+                  className={`p-3 sm:p-4 rounded-lg border ${rec.color}`}
+                  data-testid={`action-item-${i}`}
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 pt-0.5">
+                      <PriorityBadge priority={rec.priority} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-semibold">{rec.title}</h3>
+                      <p className="text-xs text-muted-foreground mt-1">{rec.detail}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          <Card className="border-blue-500/20">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Building2 className="h-4 w-4 text-blue-500" />
+                How KAPPA Can Help
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm space-y-2">
+              <p>
+                The KAPPA platform provides 24/7 autonomous multi-domain signal intelligence correlation.
+                It currently monitors:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                {[
+                  { icon: Radio, text: "RF spectrum via 33 KiwiSDR nodes (71 frequency targets)" },
+                  { icon: Satellite, text: "Satellite constellation tracking (Beidou, Yaogan, Gaofen ISR)" },
+                  { icon: Wifi, text: "Network forensics — TR-069, PCAP analysis, MAC fingerprinting" },
+                  { icon: Globe, text: "External feeds — USGS seismic, NOAA space weather, WWLLN lightning" },
+                  { icon: Shield, text: "Automated evidence chain with SHA-256 integrity hashing" },
+                  { icon: Users, text: "Device fleet monitoring with latency, jitter, and health scoring" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2 p-2 rounded border">
+                    <item.icon className="h-4 w-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-xs">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-muted-foreground mt-3 font-mono">
+                Contact: ciajw.com | Platform: KAPPA SIGINT v1.0 | Location: 10.0514°N 84.2187°W
+              </p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="timeline" className="space-y-3">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-base flex items-center gap-2">
+                <Clock className="h-4 w-4 text-muted-foreground" />
+                Attack Timeline (2022–2026)
+              </CardTitle>
+              <p className="text-xs text-muted-foreground">
+                Three-phase progression: noisy ransomware → transitional infrastructure → silent espionage
               </p>
             </CardHeader>
             <CardContent>
@@ -248,20 +479,21 @@ export default function GalliumPage() {
                 {UNC_TIMELINE.map((entry, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 p-2 rounded-lg hover:bg-zinc-900/50 transition-colors border border-transparent hover:border-zinc-800/50"
+                    className="flex items-start gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
                     data-testid={`timeline-entry-${i}`}
                   >
-                    <div className="w-24 flex-shrink-0 font-mono text-xs text-muted-foreground pt-0.5">
+                    <div className="w-20 sm:w-24 flex-shrink-0 font-mono text-xs text-muted-foreground pt-0.5">
                       {entry.date}
                     </div>
-                    <div className="flex-shrink-0 pt-0.5">
+                    <div className="flex-shrink-0 pt-0.5 hidden sm:block">
                       <PhaseBadge phase={entry.phase} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm">{entry.event}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant="outline" className="text-[10px] bg-zinc-900/50">{entry.actor}</Badge>
+                      <div className="flex items-center gap-2 mt-1 flex-wrap">
+                        <Badge variant="outline" className="text-[10px]">{entry.actor}</Badge>
                         <SeverityBadge severity={entry.severity} />
+                        <span className="sm:hidden"><PhaseBadge phase={entry.phase} /></span>
                       </div>
                     </div>
                   </div>
@@ -269,79 +501,96 @@ export default function GalliumPage() {
               </div>
             </CardContent>
           </Card>
+
+          <Card className="border-amber-500/20 bg-amber-500/5">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                <HelpCircle className="h-4 w-4" />
+                Pattern Analysis
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              <p>
+                The timeline follows a well-documented espionage progression: <strong>Phase 0</strong> uses
+                noisy ransomware to map defenses and response capabilities.{" "}
+                <strong>Phase 1</strong> transitions to infrastructure compromise — physical access (fiber splitters),
+                edge device exploitation (DSE855 CVEs), and regulatory maneuvering.{" "}
+                <strong>Phase 2</strong> achieves silent persistent access using novel C2 (GRIDTIDE via Google Sheets)
+                that bypasses traditional IDS/IPS entirely.
+              </p>
+              <p className="mt-2 font-mono text-xs">
+                As espionage amplitude increases, noise decreases: Ψ(t) = A(t)·N(t) ≡ 1
+              </p>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="gridtide" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
+          <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Cpu className="h-5 w-5 text-red-500" />
-                GRIDTIDE Command & Control Architecture
+              <CardTitle className="text-base flex items-center gap-2">
+                <Cpu className="h-4 w-4 text-red-500" />
+                GRIDTIDE C2 Architecture
               </CardTitle>
               <p className="text-xs text-muted-foreground">
-                UNC2814's novel living-off-the-cloud C2 via Google Sheets API — no traditional infrastructure
+                Novel command-and-control using Google Sheets API — no traditional infrastructure to detect
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <h3 className="text-sm font-semibold text-red-400">Technical Profile</h3>
-                  <div className="space-y-1 text-sm">
+                  <h3 className="text-sm font-semibold">Technical Profile</h3>
+                  <div className="space-y-1.5 text-sm">
                     {Object.entries({
                       "Type": GRIDTIDE_SPEC.type,
                       "C2 Channel": GRIDTIDE_SPEC.c2,
                       "Encryption": GRIDTIDE_SPEC.encryption,
-                      "Binary Masquerade": GRIDTIDE_SPEC.masquerade,
+                      "Binary": GRIDTIDE_SPEC.masquerade,
                       "Persistence": GRIDTIDE_SPEC.persistence,
-                      "Lateral Movement": GRIDTIDE_SPEC.lateral,
+                      "Lateral": GRIDTIDE_SPEC.lateral,
                       "Exfiltration": GRIDTIDE_SPEC.exfil,
                       "Polling": GRIDTIDE_SPEC.polling,
                       "Sanitization": GRIDTIDE_SPEC.sanitization,
                     }).map(([k, v]) => (
                       <div key={k} className="flex gap-2">
-                        <span className="text-muted-foreground w-36 flex-shrink-0">{k}:</span>
+                        <span className="text-muted-foreground w-28 sm:w-36 flex-shrink-0 text-xs">{k}:</span>
                         <span className="font-mono text-xs">{v}</span>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-sm font-semibold text-red-400">Google Sheets Cell Map</h3>
-                  <div className="space-y-2">
-                    {GRIDTIDE_SPEC.cells.map((c, i) => (
-                      <div key={i} className="p-2 rounded bg-zinc-900/50 border border-zinc-800/50">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="bg-red-900/30 text-red-400 border-red-700/40 font-mono">{c.cell}</Badge>
-                          <span className="text-xs">{c.function}</span>
-                        </div>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold">Google Sheets Cell Map</h3>
+                  {GRIDTIDE_SPEC.cells.map((c, i) => (
+                    <div key={i} className="p-2 rounded border">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="font-mono text-[10px]">{c.cell}</Badge>
+                        <span className="text-xs">{c.function}</span>
                       </div>
-                    ))}
-                  </div>
-                  <div className="mt-3 p-2 rounded bg-red-950/20 border border-red-900/30">
-                    <h4 className="text-xs font-semibold text-red-400 mb-1">Operational Scope</h4>
-                    <p className="text-xs text-muted-foreground">{GRIDTIDE_SPEC.scope}</p>
-                    <p className="text-xs text-red-300 mt-1 font-semibold">{GRIDTIDE_SPEC.iceData}</p>
-                  </div>
-                  <div className="mt-2 p-2 rounded bg-amber-950/20 border border-amber-900/30">
-                    <h4 className="text-xs font-semibold text-amber-400 mb-1">κ-Convergence</h4>
-                    <p className="text-xs text-muted-foreground font-mono">
-                      Λ₂₆ vector (9, 53, 42) → norm ≈ 68.9 — ratio 53/42 ≈ 1.2619 → κ = 4/π ≈ 1.2732
-                    </p>
+                    </div>
+                  ))}
+                  <div className="p-2 rounded bg-red-500/5 border border-red-500/20">
+                    <h4 className="text-xs font-semibold text-red-600 dark:text-red-400 mb-1">ICE Impact</h4>
+                    <p className="text-xs text-muted-foreground">{GRIDTIDE_SPEC.iceData}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Scope: {GRIDTIDE_SPEC.scope}</p>
                   </div>
                 </div>
               </div>
-              <div className="mt-3">
-                <h3 className="text-sm font-semibold text-amber-400 mb-2">Google Sheets C2 Precedents</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+
+              <div className="border-t pt-3">
+                <h3 className="text-sm font-semibold mb-2">Detection Guidance for ICE SOC</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {[
-                    { name: "TOUGHPROGRESS / TONGUESHED", detail: "China-nexus; Google Sheets API read/write as tasking/exfil", year: "2024" },
-                    { name: "Voldemort Campaign (Proofpoint)", detail: "Google Sheets C2, AES payloads, DLL side-loading; ~70 orgs, 18 countries", year: "Aug 2024" },
-                    { name: "systemd Persistence (T1543.002)", detail: "MITRE ATT&CK technique — service-level persistence via systemd", year: "2024" },
-                  ].map((p, i) => (
-                    <div key={i} className="p-2 rounded bg-zinc-900/50 border border-zinc-800/50">
-                      <div className="text-xs font-semibold text-amber-300">{p.name}</div>
-                      <div className="text-xs text-muted-foreground mt-1">{p.detail}</div>
-                      <Badge variant="outline" className="mt-1 text-[10px]">{p.year}</Badge>
+                    { check: "Search for /usr/sbin/xapt binary on all Linux systems", type: "Filesystem" },
+                    { check: "Audit systemd services for xapt.service", type: "Persistence" },
+                    { check: "Monitor Google Sheets API OAuth tokens in outbound traffic", type: "Network" },
+                    { check: "Check for AES-128-CBC key files (16-byte) in service account directories", type: "Crypto" },
+                    { check: "Detect SoftEther VPN bridge connections to unknown endpoints", type: "Exfil" },
+                    { check: "Scan for URL-safe Base64 encoded payloads in HTTP traffic", type: "Traffic" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2 p-2 rounded border text-xs">
+                      <Badge variant="outline" className="text-[9px] flex-shrink-0">{item.type}</Badge>
+                      <span>{item.check}</span>
                     </div>
                   ))}
                 </div>
@@ -350,131 +599,40 @@ export default function GalliumPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="satellites" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
+        <TabsContent value="vulns" className="space-y-3">
+          <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Globe className="h-5 w-5 text-amber-500" />
-                Chinese Satellite Constellation — Live Tracking
+              <CardTitle className="text-base flex items-center gap-2">
+                <Lock className="h-4 w-4 text-orange-500" />
+                CVE Chain — {CVE_TABLE.length} Confirmed Vulnerabilities
               </CardTitle>
-              <p className="text-xs text-muted-foreground">
-                Beidou GNSS, Yaogan/Gaofen ISR, Fengyun weather, Jilin commercial imaging — filtered from all tracked constellations
-              </p>
-            </CardHeader>
-            <CardContent>
-              {satsLoading ? (
-                <div className="space-y-2">
-                  {Array.from({ length: 5 }).map((_, i) => <Skeleton key={i} className="h-8 w-full" />)}
-                </div>
-              ) : chineseSats.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
-                  <Globe className="h-12 w-12 mx-auto mb-2 opacity-30" />
-                  <p>No Chinese satellites currently tracked. Click "Refresh Beidou" to pull the constellation.</p>
-                </div>
-              ) : (
-                <div className="overflow-auto max-h-[500px]">
-                  <table className="w-full text-xs" data-testid="table-chinese-sats">
-                    <thead className="sticky top-0 bg-zinc-950">
-                      <tr className="border-b border-zinc-800">
-                        <th className="text-left p-1.5 font-semibold">Name</th>
-                        <th className="text-left p-1.5 font-semibold">NORAD</th>
-                        <th className="text-left p-1.5 font-semibold">Category</th>
-                        <th className="text-right p-1.5 font-semibold">El°</th>
-                        <th className="text-right p-1.5 font-semibold">Az°</th>
-                        <th className="text-right p-1.5 font-semibold">Range km</th>
-                        <th className="text-right p-1.5 font-semibold">Alt km</th>
-                        <th className="text-center p-1.5 font-semibold">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {chineseSats
-                        .sort((a, b) => (b.elevation ?? -999) - (a.elevation ?? -999))
-                        .map((sat, i) => {
-                          const isOverhead = (sat.elevation ?? 0) > 30;
-                          const isKlein = sat.azimuth != null && Math.abs(sat.azimuth - KAPPA_CONSTANTS.KLEIN_TWIST_DEG) <= KAPPA_CONSTANTS.KLEIN_TOLERANCE_DEG;
-                          const isRecon = ["YAOGAN", "YG-", "GAOFEN", "GF-", "JILIN"].some(p => (sat.satelliteName || "").toUpperCase().includes(p));
-                          return (
-                            <tr
-                              key={sat.id}
-                              className={`border-b border-zinc-900/50 hover:bg-zinc-900/30 ${isRecon ? "bg-red-950/10" : ""}`}
-                              data-testid={`sat-row-${sat.noradId}`}
-                            >
-                              <td className="p-1.5 font-mono">
-                                {sat.satelliteName}
-                                {isRecon && <Badge variant="outline" className="ml-1 text-[8px] bg-red-900/30 text-red-400 border-red-700/40">ISR</Badge>}
-                              </td>
-                              <td className="p-1.5 font-mono text-muted-foreground">{sat.noradId}</td>
-                              <td className="p-1.5">
-                                <Badge variant="outline" className="text-[10px]">{sat.category}</Badge>
-                              </td>
-                              <td className={`p-1.5 text-right font-mono ${isOverhead ? "text-green-400" : "text-muted-foreground"}`}>
-                                {sat.elevation?.toFixed(1) ?? "—"}
-                              </td>
-                              <td className={`p-1.5 text-right font-mono ${isKlein ? "text-fuchsia-400 font-bold" : "text-muted-foreground"}`}>
-                                {sat.azimuth?.toFixed(1) ?? "—"}
-                                {isKlein && " ⟐"}
-                              </td>
-                              <td className="p-1.5 text-right font-mono text-muted-foreground">
-                                {sat.range?.toFixed(0) ?? "—"}
-                              </td>
-                              <td className="p-1.5 text-right font-mono text-muted-foreground">
-                                {sat.altitude?.toFixed(0) ?? "—"}
-                              </td>
-                              <td className="p-1.5 text-center">
-                                {isOverhead ? (
-                                  <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                                ) : (
-                                  <span className="inline-block h-2 w-2 rounded-full bg-zinc-700" />
-                                )}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="cves" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Lock className="h-5 w-5 text-orange-500" />
-                Exploited CVEs — Full Chain
-              </CardTitle>
-              <p className="text-xs text-muted-foreground">
-                12 confirmed CVEs across FortiOS, VMware, MikroTik, DSE855, Juniper MX, and Windows LNK
-              </p>
             </CardHeader>
             <CardContent>
               <div className="overflow-auto">
                 <table className="w-full text-xs" data-testid="table-cves">
                   <thead>
-                    <tr className="border-b border-zinc-800">
+                    <tr className="border-b">
                       <th className="text-left p-2 font-semibold">CVE</th>
                       <th className="text-left p-2 font-semibold">Target</th>
-                      <th className="text-left p-2 font-semibold">Mechanism</th>
+                      <th className="text-left p-2 font-semibold hidden sm:table-cell">Mechanism</th>
                       <th className="text-left p-2 font-semibold">Actor</th>
                       <th className="text-left p-2 font-semibold">CVSS</th>
                     </tr>
                   </thead>
                   <tbody>
                     {CVE_TABLE.map((cve, i) => (
-                      <tr key={i} className="border-b border-zinc-900/50 hover:bg-zinc-900/30" data-testid={`cve-row-${cve.cve}`}>
-                        <td className="p-2 font-mono text-red-400 font-semibold">{cve.cve}</td>
+                      <tr key={i} className="border-b hover:bg-muted/50" data-testid={`cve-row-${cve.cve}`}>
+                        <td className="p-2 font-mono text-red-600 dark:text-red-400 font-semibold">{cve.cve}</td>
                         <td className="p-2">{cve.target}</td>
-                        <td className="p-2 text-muted-foreground">{cve.mechanism}</td>
+                        <td className="p-2 text-muted-foreground hidden sm:table-cell">{cve.mechanism}</td>
                         <td className="p-2">
-                          <Badge variant="outline" className="text-[10px] bg-zinc-900/50">{cve.actor}</Badge>
+                          <Badge variant="outline" className="text-[10px]">{cve.actor}</Badge>
                         </td>
                         <td className="p-2 font-mono">
                           {cve.cvss.includes("Crit") ? (
-                            <span className="text-red-400 font-bold">{cve.cvss}</span>
+                            <span className="text-red-600 dark:text-red-400 font-bold">{cve.cvss}</span>
                           ) : cve.cvss.includes("Med") ? (
-                            <span className="text-amber-400">{cve.cvss}</span>
+                            <span className="text-amber-600 dark:text-amber-400">{cve.cvss}</span>
                           ) : (
                             <span className="text-muted-foreground">{cve.cvss}</span>
                           )}
@@ -486,32 +644,76 @@ export default function GalliumPage() {
               </div>
             </CardContent>
           </Card>
-        </TabsContent>
 
-        <TabsContent value="huawei" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
+          <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Wifi className="h-5 w-5 text-amber-500" />
-                Huawei / ICE / Geopolitical Evidence Chain
+              <CardTitle className="text-base flex items-center gap-2">
+                <Zap className="h-4 w-4 text-orange-500" />
+                SETECOM / SCADA Exposure — ICE Critical Infrastructure
               </CardTitle>
               <p className="text-xs text-muted-foreground">
-                How the 5G vendor ban, ICE breach, and Chinese diplomatic response connect
+                Default credentials (Admin/Password1234) across the entire Costa Rican generator fleet
               </p>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="p-3 rounded-lg bg-red-500/5 border border-red-500/20">
+                <div className="flex items-center gap-2 mb-2">
+                  <AlertTriangle className="h-4 w-4 text-red-500" />
+                  <span className="text-sm font-bold text-red-600 dark:text-red-400">CRITICAL: Default Credentials Across Fleet</span>
+                </div>
+                <div className="grid grid-cols-2 gap-4 text-sm font-mono">
+                  <div><span className="text-muted-foreground">Username:</span> <span className="text-red-600 dark:text-red-300">Admin</span></div>
+                  <div><span className="text-muted-foreground">Password:</span> <span className="text-red-600 dark:text-red-300">Password1234</span></div>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  Applied to: DSE 855, DSE 890 MKII, DSE 891, DSE 892 gateways.
+                  Controls backup generators for ICE national power grid, Liberty telecom, hospitals, cellular towers.
+                </p>
+              </div>
+
+              <div className="overflow-auto">
+                <table className="w-full text-xs" data-testid="table-setecom">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-2 font-semibold">Protocol</th>
+                      <th className="text-left p-2 font-semibold">Port</th>
+                      <th className="text-left p-2 font-semibold">Vulnerability</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SETECOM_EVIDENCE.map((p, i) => (
+                      <tr key={i} className="border-b hover:bg-muted/50">
+                        <td className="p-2 font-mono text-orange-600 dark:text-orange-400 font-semibold">{p.protocol}</td>
+                        <td className="p-2 font-mono">{p.port}</td>
+                        <td className="p-2 text-muted-foreground">{p.vulnerability}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <Wifi className="h-4 w-4 text-amber-500" />
+                Huawei / Geopolitical Evidence Chain
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
               {HUAWEI_EVIDENCE.map((item, i) => {
                 const typeColors: Record<string, string> = {
-                  regulatory: "text-blue-400 bg-blue-900/20 border-blue-800/30",
-                  influence: "text-red-400 bg-red-900/20 border-red-800/30",
-                  diplomatic: "text-amber-400 bg-amber-900/20 border-amber-800/30",
-                  retaliatory: "text-orange-400 bg-orange-900/20 border-orange-800/30",
-                  legal: "text-violet-400 bg-violet-900/20 border-violet-800/30",
-                  countermeasure: "text-green-400 bg-green-900/20 border-green-800/30",
-                  vulnerability: "text-red-400 bg-red-900/20 border-red-800/30",
+                  regulatory: "text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
+                  influence: "text-red-600 dark:text-red-400 bg-red-500/10 border-red-500/20",
+                  diplomatic: "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
+                  retaliatory: "text-orange-600 dark:text-orange-400 bg-orange-500/10 border-orange-500/20",
+                  legal: "text-violet-600 dark:text-violet-400 bg-violet-500/10 border-violet-500/20",
+                  countermeasure: "text-green-600 dark:text-green-400 bg-green-500/10 border-green-500/20",
+                  vulnerability: "text-red-600 dark:text-red-400 bg-red-500/10 border-red-500/20",
                 };
                 return (
-                  <div key={i} className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800/50" data-testid={`huawei-evidence-${i}`}>
+                  <div key={i} className="p-3 rounded-lg border" data-testid={`huawei-evidence-${i}`}>
                     <div className="flex items-start gap-3">
                       <Badge variant="outline" className={`text-[10px] flex-shrink-0 ${typeColors[item.type] || ""}`}>
                         {item.type.toUpperCase()}
@@ -528,92 +730,103 @@ export default function GalliumPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="setecom" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
+        <TabsContent value="satellites" className="space-y-3">
+          <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Zap className="h-5 w-5 text-orange-500" />
-                SETECOM S.A. — SCADA/OT Exposure
+              <CardTitle className="text-base flex items-center gap-2">
+                <Globe className="h-4 w-4 text-blue-500" />
+                Chinese Satellite Constellation — Live Tracking
               </CardTitle>
               <p className="text-xs text-muted-foreground">
-                Monopoly DSE distributor — default credentials Admin/Password1234 across the entire Costa Rican generator fleet
+                {chineseSats.length} satellites tracked | {beidouSats.length} Beidou GNSS | {reconSats.length} Recon/ISR | {overheadChinese.length} overhead (&gt;30°)
               </p>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="p-3 rounded bg-red-950/20 border border-red-900/30">
-                <div className="flex items-center gap-2 mb-2">
-                  <AlertTriangle className="h-4 w-4 text-red-500" />
-                  <span className="text-sm font-bold text-red-400">CRITICAL: Default Credentials Across Fleet</span>
+            <CardContent>
+              {satsLoading ? (
+                <div className="space-y-2">
+                  {Array.from({ length: 5 }).map((_, i) => <Skeleton key={i} className="h-8 w-full" />)}
                 </div>
-                <div className="grid grid-cols-2 gap-4 text-sm font-mono">
-                  <div>
-                    <span className="text-muted-foreground">Username:</span> <span className="text-red-300">Admin</span>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Password:</span> <span className="text-red-300">Password1234</span>
-                  </div>
+              ) : chineseSats.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Globe className="h-12 w-12 mx-auto mb-2 opacity-30" />
+                  <p>No Chinese satellites currently tracked. Click "Refresh Sats" to pull the constellation.</p>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Applied to: DSE 855, DSE 890 MKII, DSE 891, DSE 892 gateways, DSE WebNet cloud management.
-                  Controls backup generators for ICE national power grid, Liberty telecom, hospitals, cellular towers.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-sm font-semibold mb-2">Insecure Protocol Exposure</h3>
-                <div className="overflow-auto">
-                  <table className="w-full text-xs" data-testid="table-setecom">
-                    <thead>
-                      <tr className="border-b border-zinc-800">
-                        <th className="text-left p-2 font-semibold">Protocol</th>
-                        <th className="text-left p-2 font-semibold">Port</th>
-                        <th className="text-left p-2 font-semibold">Vulnerability</th>
+              ) : (
+                <div className="overflow-auto max-h-[500px]">
+                  <table className="w-full text-xs" data-testid="table-chinese-sats">
+                    <thead className="sticky top-0 bg-background">
+                      <tr className="border-b">
+                        <th className="text-left p-1.5 font-semibold">Name</th>
+                        <th className="text-left p-1.5 font-semibold hidden sm:table-cell">NORAD</th>
+                        <th className="text-right p-1.5 font-semibold">El°</th>
+                        <th className="text-right p-1.5 font-semibold">Az°</th>
+                        <th className="text-right p-1.5 font-semibold hidden sm:table-cell">Alt km</th>
+                        <th className="text-center p-1.5 font-semibold">Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {SETECOM_EVIDENCE.map((p, i) => (
-                        <tr key={i} className="border-b border-zinc-900/50 hover:bg-zinc-900/30">
-                          <td className="p-2 font-mono text-orange-400 font-semibold">{p.protocol}</td>
-                          <td className="p-2 font-mono">{p.port}</td>
-                          <td className="p-2 text-muted-foreground">{p.vulnerability}</td>
-                        </tr>
-                      ))}
+                      {chineseSats
+                        .sort((a, b) => (b.elevation ?? -999) - (a.elevation ?? -999))
+                        .map((sat) => {
+                          const isOverhead = (sat.elevation ?? 0) > 30;
+                          const isRecon = ["YAOGAN", "YG-", "GAOFEN", "GF-", "JILIN"].some(p => (sat.satelliteName || "").toUpperCase().includes(p));
+                          return (
+                            <tr
+                              key={sat.id}
+                              className={`border-b hover:bg-muted/50 ${isRecon ? "bg-red-500/5" : ""}`}
+                              data-testid={`sat-row-${sat.noradId}`}
+                            >
+                              <td className="p-1.5 font-mono">
+                                {sat.satelliteName}
+                                {isRecon && <Badge variant="outline" className="ml-1 text-[8px]">ISR</Badge>}
+                              </td>
+                              <td className="p-1.5 font-mono text-muted-foreground hidden sm:table-cell">{sat.noradId}</td>
+                              <td className={`p-1.5 text-right font-mono ${isOverhead ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}`}>
+                                {sat.elevation?.toFixed(1) ?? "—"}
+                              </td>
+                              <td className="p-1.5 text-right font-mono text-muted-foreground">
+                                {sat.azimuth?.toFixed(1) ?? "—"}
+                              </td>
+                              <td className="p-1.5 text-right font-mono text-muted-foreground hidden sm:table-cell">
+                                {sat.altitude?.toFixed(0) ?? "—"}
+                              </td>
+                              <td className="p-1.5 text-center">
+                                {isOverhead ? (
+                                  <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                                ) : (
+                                  <span className="inline-block h-2 w-2 rounded-full bg-muted-foreground/30" />
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
-              </div>
-
-              <div className="p-3 rounded bg-amber-950/20 border border-amber-900/30">
-                <h4 className="text-xs font-semibold text-amber-400 mb-1">Supply Chain Gap</h4>
-                <p className="text-xs text-muted-foreground">
-                  US-funded SOC (Mandiant/Google SecOps) monitors application-layer traffic. But underlying OT infrastructure
-                  (DSE controllers, Modbus, SNMP) remains accessible at Tier-0 through SETECOM's architecture.
-                  UNC3886 persists at hypervisor level while SOC monitors only above guest OS.
-                </p>
-              </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="rootkits" className="space-y-3">
-          <Card className="bg-zinc-950/50 border-zinc-800/50">
+        <TabsContent value="arsenal" className="space-y-3">
+          <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Target className="h-5 w-5 text-violet-500" />
-                PRC-Nexus Rootkit & Malware Arsenal
+              <CardTitle className="text-base flex items-center gap-2">
+                <Target className="h-4 w-4 text-violet-500" />
+                PRC-Nexus Malware Arsenal — {ROOTKIT_ARSENAL.length} Families
               </CardTitle>
               <p className="text-xs text-muted-foreground">
-                Kernel-level rootkits, memory-resident backdoors, and application-layer C2 — multi-tiered persistence
+                Multi-layered persistence from kernel rootkits to memory-resident backdoors
               </p>
             </CardHeader>
             <CardContent>
               <div className="overflow-auto">
                 <table className="w-full text-xs" data-testid="table-rootkits">
                   <thead>
-                    <tr className="border-b border-zinc-800">
+                    <tr className="border-b">
                       <th className="text-left p-2 font-semibold">Family</th>
                       <th className="text-left p-2 font-semibold">Layer</th>
-                      <th className="text-left p-2 font-semibold">Mechanism</th>
+                      <th className="text-left p-2 font-semibold hidden sm:table-cell">Mechanism</th>
                       <th className="text-left p-2 font-semibold">Persistence</th>
                       <th className="text-left p-2 font-semibold">Actor</th>
                     </tr>
@@ -621,18 +834,18 @@ export default function GalliumPage() {
                   <tbody>
                     {ROOTKIT_ARSENAL.map((r, i) => {
                       const layerColors: Record<string, string> = {
-                        Kernel: "text-red-400",
-                        Application: "text-amber-400",
-                        Memory: "text-violet-400",
+                        Kernel: "text-red-600 dark:text-red-400",
+                        Application: "text-amber-600 dark:text-amber-400",
+                        Memory: "text-violet-600 dark:text-violet-400",
                       };
                       return (
-                        <tr key={i} className="border-b border-zinc-900/50 hover:bg-zinc-900/30" data-testid={`rootkit-row-${r.family}`}>
-                          <td className="p-2 font-mono font-bold text-red-300">{r.family}</td>
+                        <tr key={i} className="border-b hover:bg-muted/50" data-testid={`rootkit-row-${r.family}`}>
+                          <td className="p-2 font-mono font-bold text-red-600 dark:text-red-300">{r.family}</td>
                           <td className={`p-2 font-semibold ${layerColors[r.layer] || "text-muted-foreground"}`}>{r.layer}</td>
-                          <td className="p-2 text-muted-foreground">{r.mechanism}</td>
+                          <td className="p-2 text-muted-foreground hidden sm:table-cell">{r.mechanism}</td>
                           <td className="p-2 text-muted-foreground">{r.persistence}</td>
                           <td className="p-2">
-                            <Badge variant="outline" className="text-[10px] bg-zinc-900/50">{r.actor}</Badge>
+                            <Badge variant="outline" className="text-[10px]">{r.actor}</Badge>
                           </td>
                         </tr>
                       );
@@ -641,27 +854,27 @@ export default function GalliumPage() {
                 </table>
               </div>
 
-              <div className="mt-4 p-3 rounded bg-violet-950/20 border border-violet-900/30">
-                <h4 className="text-xs font-semibold text-violet-400 mb-1">Glyph Injection Attack (S2 Unique)</h4>
+              <div className="mt-4 p-3 rounded-lg border">
+                <h4 className="text-xs font-semibold mb-1">Key Operational Insight</h4>
                 <p className="text-xs text-muted-foreground">
-                  CVE-2025-10948 buffer overflow used to inject specialized glyph mapping font into browser sessions.
-                  DOM contains innocuous text but glyph rendering displays malicious instructions or reverse shell triggers —
-                  visible only to the human eye, invisible to AI assistants analyzing raw HTML.
-                  The human visual system becomes the final execution link in the cyber-physical attack chain.
-                </p>
-              </div>
-
-              <div className="mt-3 p-3 rounded bg-zinc-900/50 border border-zinc-800/50">
-                <h4 className="text-xs font-semibold text-muted-foreground mb-1">UNC3886 Dwell Time</h4>
-                <p className="text-xs text-muted-foreground">
-                  Median dwell time for cyber espionage incidents: <span className="text-red-400 font-bold font-mono">122 days</span> (~10× average eCrime).
-                  Operates below guest OS at Tier-0 hypervisor level — invisible to EDR solutions.
+                  UNC3886 operates below guest OS at Tier-0 hypervisor level — invisible to all EDR solutions.
+                  Median dwell time for these espionage operations:{" "}
+                  <span className="text-red-600 dark:text-red-400 font-bold font-mono">122 days</span> (~10x average eCrime).
+                  The US-funded SOC monitors application-layer traffic while these actors persist at the hypervisor level.
                 </p>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
+
+      <Card className="border-muted">
+        <CardContent className="p-4 text-center text-xs text-muted-foreground space-y-1">
+          <p className="font-semibold">KAPPA SIGINT Platform — Intelligence Briefing</p>
+          <p>Prepared for Instituto Costarricense de Electricidad (ICE) — {new Date().toLocaleDateString()}</p>
+          <p className="font-mono">ciajw.com | 10.0514°N 84.2187°W | Project Echo</p>
+        </CardContent>
+      </Card>
     </div>
   );
 }
