@@ -21,6 +21,36 @@ const KIWI_NODES: KiwiNode[] = [
   { id: "ti0rc", name: "TI0RC Zapote", url: "http://ti0rc.proxy.kiwisdr.com:8073", lat: 9.9360, lon: -84.1088 },
   { id: "puntarenas", name: "Puntarenas", url: "http://kiwisdr.puntarenas.cr:8073", lat: 9.9764, lon: -84.8385 },
   { id: "pj4g", name: "PJ4G Bonaire", url: "http://pj4g.proxy.kiwisdr.com:8073", lat: 12.1500, lon: -68.2667 },
+  { id: "panama-city", name: "Panama City", url: "http://hp1av.proxy.kiwisdr.com:8073", lat: 9.0000, lon: -79.5000 },
+  { id: "colombia-bogota", name: "Bogotá HK4", url: "http://hk4.proxy.kiwisdr.com:8073", lat: 4.7110, lon: -74.0721 },
+  { id: "venezuela-caracas", name: "Caracas YV5", url: "http://yv5.proxy.kiwisdr.com:8073", lat: 10.4806, lon: -66.9036 },
+  { id: "mexico-guadalajara", name: "Guadalajara XE2", url: "http://xe2at.proxy.kiwisdr.com:8073", lat: 20.6597, lon: -103.3496 },
+  { id: "mexico-cdmx", name: "Mexico City XE1", url: "http://xe1rcs.proxy.kiwisdr.com:8073", lat: 19.4326, lon: -99.1332 },
+  { id: "puerto-rico", name: "Puerto Rico NP4", url: "http://np4a.proxy.kiwisdr.com:8073", lat: 18.2208, lon: -66.5901 },
+  { id: "trinidad", name: "Trinidad 9Y4", url: "http://9y4.proxy.kiwisdr.com:8073", lat: 10.6918, lon: -61.2225 },
+  { id: "florida-miami", name: "South Florida", url: "http://w4ax.proxy.kiwisdr.com:8073", lat: 26.1224, lon: -80.1373 },
+  { id: "texas", name: "Texas W5", url: "http://w5.proxy.kiwisdr.com:8073", lat: 29.7604, lon: -95.3698 },
+  { id: "peru-lima", name: "Lima OA4", url: "http://oa4.proxy.kiwisdr.com:8073", lat: -12.0464, lon: -77.0428 },
+  { id: "ecuador-quito", name: "Quito HC1", url: "http://hc1.proxy.kiwisdr.com:8073", lat: -0.1807, lon: -78.4678 },
+  { id: "brazil-saopaulo", name: "São Paulo PY2", url: "http://py2gn.proxy.kiwisdr.com:8073", lat: -23.5505, lon: -46.6333 },
+  { id: "chile-santiago", name: "Santiago CE3", url: "http://ce3.proxy.kiwisdr.com:8073", lat: -33.4489, lon: -70.6693 },
+  { id: "argentina-buenosaires", name: "Buenos Aires LU", url: "http://lu4aa.proxy.kiwisdr.com:8073", lat: -34.6037, lon: -58.3816 },
+  { id: "guatemala", name: "Guatemala TG9", url: "http://tg9.proxy.kiwisdr.com:8073", lat: 14.6349, lon: -90.5069 },
+  { id: "honduras", name: "Honduras HR", url: "http://hr2.proxy.kiwisdr.com:8073", lat: 14.0723, lon: -87.1921 },
+  { id: "nicaragua", name: "Nicaragua YN", url: "http://yn.proxy.kiwisdr.com:8073", lat: 12.1149, lon: -86.2362 },
+  { id: "jamaica", name: "Jamaica 6Y5", url: "http://6y5.proxy.kiwisdr.com:8073", lat: 18.1096, lon: -77.2975 },
+  { id: "dominican-rep", name: "Dominican Republic HI", url: "http://hi8.proxy.kiwisdr.com:8073", lat: 18.4861, lon: -69.9312 },
+  { id: "cuba-havana", name: "Cuba CO2", url: "http://co2.proxy.kiwisdr.com:8073", lat: 23.1136, lon: -82.3666 },
+  { id: "guadeloupe", name: "Guadeloupe FG", url: "http://fg8oj.proxy.kiwisdr.com:8073", lat: 16.2650, lon: -61.5510 },
+  { id: "hawaii", name: "Hawaii KH6", url: "http://kh6.proxy.kiwisdr.com:8073", lat: 21.3069, lon: -157.8583 },
+  { id: "california", name: "California W6", url: "http://w6.proxy.kiwisdr.com:8073", lat: 37.7749, lon: -122.4194 },
+  { id: "new-zealand", name: "New Zealand ZL", url: "http://zl2sft.proxy.kiwisdr.com:8073", lat: -41.2865, lon: 174.7762 },
+  { id: "uk-cambridge", name: "UK Cambridge G4", url: "http://g4fph.proxy.kiwisdr.com:8073", lat: 52.2053, lon: 0.1218 },
+  { id: "netherlands", name: "Netherlands PA", url: "http://pa0rdt.proxy.kiwisdr.com:8073", lat: 52.3676, lon: 4.9041 },
+  { id: "japan-tokyo", name: "Tokyo JA1", url: "http://ja1.proxy.kiwisdr.com:8073", lat: 35.6762, lon: 139.6503 },
+  { id: "australia-sydney", name: "Sydney VK2", url: "http://vk2.proxy.kiwisdr.com:8073", lat: -33.8688, lon: 151.2093 },
+  { id: "south-africa", name: "South Africa ZS", url: "http://zs6bkw.proxy.kiwisdr.com:8073", lat: -26.2041, lon: 28.0473 },
+  { id: "india-mumbai", name: "Mumbai VU2", url: "http://vu2.proxy.kiwisdr.com:8073", lat: 19.0760, lon: 72.8777 },
 ];
 
 const VLF_STATION_TARGETS = [
@@ -169,6 +199,14 @@ const YAM5_SBAND_TARGETS = [
 ];
 
 const ALL_SCAN_TARGETS = [...VLF_STATION_TARGETS, ...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS, ...RADIO_IMPACTO_SCAN_TARGETS, ...LEOLABS_SBAND_TARGETS, ...YAM5_SBAND_TARGETS];
+
+const PRIORITY_NODE_IDS = new Set(["ti0rc", "puntarenas", "pj4g", "panama-city", "guatemala", "honduras", "nicaragua", "colombia-bogota"]);
+const TDOA_CORE_TARGETS = [...VLF_STATION_TARGETS, ...BLACKJACK_SCAN_TARGETS];
+
+function getNodeTargets(nodeId: string): typeof ALL_SCAN_TARGETS {
+  if (PRIORITY_NODE_IDS.has(nodeId)) return ALL_SCAN_TARGETS;
+  return TDOA_CORE_TARGETS;
+}
 
 const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
 const DELTA_SLIP_HZ = K.DELTA_SLIP_HZ;
@@ -799,7 +837,8 @@ async function runScanCycle(): Promise<void> {
       hypervisor.ingestEvent(offlineEvent);
     }
 
-    for (const target of ALL_SCAN_TARGETS) {
+    const nodeTargets = getNodeTargets(node.id);
+    for (const target of nodeTargets) {
       try {
         let samples: Float32Array | null = null;
         if (nodeOnline) {

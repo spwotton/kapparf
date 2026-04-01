@@ -19,7 +19,7 @@ The platform utilizes a modern web stack and a sophisticated real-time correlati
 - **Collectors:** Gathers data from OpenSky Network (flight), CelesTrak (satellite TLEs), and NWS api.weather.gov (weather).
 - **Auto-Correlator:** Continuously analyzes events against 22 correlation rules, performing deduplication, hypervisor overlap detection, and TLE Consistency Checks.
 - **LLM Analyst:** Integrates OpenAI gpt-4o-mini for correlation analysis and intelligence report generation.
-- **KiwiSDR Scanner:** Scans 71 targets across SDR nodes, employing various analysis layers.
+- **KiwiSDR Scanner:** Scans 71 targets across 33 KiwiSDR nodes (8 priority Central America/Caribbean, 25 global TDOA), employing tiered analysis — priority nodes get full 71-target scans, global nodes scan VLF stations + Blackjack for TDOA correlation. Auto-discovers new nodes within 2000km of San José.
 - **SSC-CASINO/DARPA Blackjack Intel:** Ingests OSINT on key satellites and associated ground infrastructure.
 - **Network Threat Scanner:** Performs real-time packet analysis for suspicious activity and tracks router vulnerabilities.
 - **BLACKJACK MANDRAKE:** Monitors a clandestine HF coordination frequency.
@@ -62,3 +62,5 @@ The platform utilizes a modern web stack and a sophisticated real-time correlati
 - **NUFORC (National UFO Reporting Center):** Historical sighting data.
 - **Three.js:** 3D rendering.
 - **Playwright (Chromium):** Headless browser for KiwiSDR Vision.
+- **Heartbeat Tracker:** External device monitoring via heartbeat-tracker-monitor.replit.app — polls status/stats, shows device fleet with latency/jitter/uptime, agent downloads. Wired through `/api/tracker/*` routes.
+- **External Data Feeds:** Autonomous 120s-cycle ingestion from USGS earthquakes, IRIS FDSN regional seismic, NOAA SWPC (Kp index, X-ray flux, solar wind magnetic/plasma), GeoNet NZ seismic, WWLLN lightning, and KiwiSDR public node discovery. All events flow into KAPPA engine + hypervisor.

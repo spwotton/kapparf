@@ -54,6 +54,7 @@ import {
   setLLMProcessor,
   OMEGA_GOS,
 } from "./quantum-cortex";
+import { startExternalFeeds, getExternalFeedStatus } from "./external-feeds";
 import {
   startHeartbeatClient, getTrackerStatus, getTrackerStats,
   getTrackerDevices, getTrackerDevice, getTrackerAlerts, getActiveAlerts,
@@ -3375,6 +3376,14 @@ export async function registerRoutes(
     } catch (err: any) {
       res.status(500).json({ error: err.message });
     }
+  });
+
+  // ============== EXTERNAL DATA FEEDS ==============
+
+  startExternalFeeds();
+
+  app.get("/api/feeds/status", (_req, res) => {
+    res.json(getExternalFeedStatus());
   });
 
   // ============== HEARTBEAT TRACKER ==============
