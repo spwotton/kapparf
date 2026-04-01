@@ -36,6 +36,7 @@ The platform utilizes a modern web stack and a sophisticated real-time correlati
 - **WiFi CSI Sensing Engine:** Analyzes WiFi CSI phase data using a "Chitin Transduction Layer" with specific mathematical models to extract biological signals.
 - **Chitin Transducer Module:** Models Demodex exoskeleton as a biological phased-array antenna, computing 12 metrics per CSI frame.
 - **Research Cortex:** Backend engine that auto-indexes documentation, extracting and categorizing claims for analysis, synthesis, and export.
+- **Network Analysis:** HUMINT correlation page with 25+ persons, 14+ locations, 14+ companies, 21+ evidence items organized into 3 clusters (Honey Trap, Property Placement, ISP/Infrastructure). Searchable/filterable by threat level with connection matrix. Integrates intelligence from 24+ uploaded dossiers including Mora Connection, Investigation Context, DARPA Blackjack, Chinese Threat, Greenwald Real Estate, and SETECOM/DSE infrastructure analysis.
 - **Network Forensics:** Page with 12 real forensic checks based on documented indicators.
 - **Evidence Chain:** Legal-grade incident documentation system with manual logging, SHA-256 integrity hashing, unified timeline, and HTML export.
 - **Demodex Camera View (Three.js):** 3D rendering component simulating Orch-OR quantum observation.
