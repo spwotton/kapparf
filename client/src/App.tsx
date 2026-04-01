@@ -9,6 +9,7 @@ import { HeaderControls } from "@/components/header-controls";
 import { ThemeProvider } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
 import NotFound from "@/pages/not-found";
+import CommandCenterPage from "@/pages/command-center";
 import DashboardPage from "@/pages/overview";
 import EventsPage from "@/pages/events";
 import CorrelationsPage from "@/pages/correlations";
@@ -41,7 +42,8 @@ import GalliumPage from "@/pages/gallium";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={DashboardPage} />
+      <Route path="/" component={CommandCenterPage} />
+      <Route path="/dashboard" component={DashboardPage} />
       <Route path="/events" component={EventsPage} />
       <Route path="/correlations" component={CorrelationsPage} />
       <Route path="/devices" component={DevicesPage} />
@@ -85,7 +87,7 @@ function App() {
                 <AppSidebar />
                 <div className="flex flex-col flex-1 min-w-0">
                   <HeaderControls />
-                  <main className="flex-1 overflow-auto">
+                  <main className="flex-1 overflow-auto min-h-0">
                     <Router />
                   </main>
                 </div>

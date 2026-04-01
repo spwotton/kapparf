@@ -11,7 +11,8 @@ KAPPA is a software-defined Signal Intelligence (SIGINT) platform designed to co
 ## System Architecture
 The platform utilizes a modern web stack and a sophisticated real-time correlation engine for multi-domain signal intelligence.
 
-- **Frontend:** React with Tailwind CSS, shadcn/ui, wouter for routing, TanStack Query v5 for data fetching, and Leaflet/OpenStreetMap for mapping. Supports i18n and a Notion-style light/dark theme.
+- **Frontend:** React with Tailwind CSS, shadcn/ui, wouter for routing, TanStack Query v5 for data fetching, and Leaflet/OpenStreetMap for mapping. Supports i18n and a Notion-style light/dark theme. Mobile-first responsive design.
+- **Navigation:** Consolidated sidebar with 7 collapsible groups (COMMAND, MONITOR, SIGINT, FORENSICS, INTELLIGENCE, OPERATIONS, PUBLIC). Command Center (/) is the main landing page with a chat/command interface and live data feed. Old dashboard moved to /dashboard.
 - **Backend:** Express.js with typed routes and Drizzle ORM.
 - **Database:** PostgreSQL, leveraging Neon serverless driver.
 - **KAPPA Engine:** An in-memory real-time correlation engine calculating a "Kappa Score" (0-100), assigning threat levels, and performing device fingerprinting using specific constants and correlation techniques.
