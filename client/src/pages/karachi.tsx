@@ -569,7 +569,7 @@ export default function KarachiPage() {
     { num: 2, title: t("karachi.response"), desc: t("karachi.responseDesc"), module: "LTESNIFFER-NG" },
     { num: 3, title: t("karachi.persistence"), desc: t("karachi.persistenceDesc"), module: "DSE-WEBNET-RCE" },
     { num: 4, title: t("karachi.corruption"), desc: t("karachi.corruptionDesc"), module: "SATINTEL-SPOOF" },
-    { num: 5, title: t("karachi.injection"), desc: t("karachi.injectionDesc"), module: "BLACKJACK-BLINDER" },
+    { num: 5, title: t("karachi.injection"), desc: t("karachi.injectionDesc"), module: "SATINTEL-SPOOF" },
   ];
 
   const successCriteria = [
