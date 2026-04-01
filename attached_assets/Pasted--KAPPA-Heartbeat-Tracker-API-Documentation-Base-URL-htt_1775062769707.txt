@@ -1,0 +1,146 @@
+
+# KAPPA Heartbeat Tracker — API Documentation
+
+Base URL: `https://<your-domain>/api`
+
+All endpoints return JSON. Content-Type for POST requests: `application/json`.
+
+---
+
+## Table of Contents
+
+1. [Health](#health)
+2. [Devices](#devices)
+3. [Heartbeat](#heartbeat)
+4. [Sensors](#sensors)
+5. [Alerts](#alerts)
+6. [Uptime History](#uptime-history)
+7. [Sensor Thresholds](#sensor-thresholds)
+8. [KAPPA System](#kappa-system)
+9. [Agent Scripts](#agent-scripts)
+10. [WebSocket Protocol](#websocket-protocol)
+11. [Database Schema](#database-schema)
+12. [Background Jobs](#background-jobs)
+13. [Error Handling](#error-handling)
+
+---
+
+## Health
+
+### `GET /healthz`
+
+Returns server health status.
+
+**Response:**
+```json
+{ "status": "ok" }
+```
+
+---
+
+## Devices
+
+### `POST /devices/register`
+
+Register a new device or update an existing one. Sets device status to online.
+
+**Request Body:**
+```json
+{
+  "deviceId": "echo-pc",          // required, unique identifier
+  "name": "Echo Desktop",         // required, display name
+  "type": "pc",                   // required, one of: "pc", "phone", "sensor", "iot"
+  "os": "windows",                // required, e.g. "windows", "linux", "android", "macos"
+  "capabilities": ["cpu", "memory", "disk"],  // optional, string array
+  "metadata": {                   // optional, arbitrary JSON
+    "hostname": "ECHO-PC",
+
+Add system monitoring for uptime, latency, and jitter
+KAPPA Device Monitor
+Website
+Optimized Agent memory
+Want users to get these changes? Republish this App.
+build a full blown api to communicate with the main part of the app
+
+i didnt realize u already built one lol sorry
+
+No worries at all! The API is already fully built and running. You've got 18 endpoints covering devices, heartbeats, sensors, alerts, commands, system status, and agent script downloads — plus WebSocket support for real-time device communication.
+
+Everything's live and working. Would you like to make any changes or additions to it, or is there something else you'd like to work on?
+
+did u make a documentation
+
+Not yet — would you like me to create one? I can put together a full API documentation page covering all 18 endpoints, request/response formats, WebSocket protocol, and agent script usage. Just let me know!
+
+just to pass to the other claude in the other replit
+
+KAPPA API Documentation
+Text
+# KAPPA Heartbeat Tracker — API Documentation Base URL: `https://<your-domain>/api`...
+all set thanks
+
+You're all set! The API docs are ready for you to pass along. Good luck wiring it up on the KAPPA side.
+
+anything that woudl make this more robust for you? external data or math?
+
+Good question. A few things that would make the heartbeat tracker genuinely more useful:
+
+Latency calculation — right now latency_ms in heartbeats is always null. If agents send their local timestamp in heartbeats, the server can compute one-way latency (clock drift aside) and flag anomalies.
+
+Uptime history over time — the current 24h uptime stat is a snapshot. A simple time-series rollup (hourly uptime buckets) would let you chart uptime trends and detect degradation patterns.
+
+Heartbeat jitter detection — instead of just timeout/no-timeout, tracking the standard deviation of heartbeat intervals per device would catch unstable connections before they fully drop.
+
+Sensor threshold alerts — right now alerts only fire on timeout/reconnect. Auto-alerting when a sensor value (CPU, temp, battery) crosses a configurable threshold would catch problems proactively.
+
+Device geolocation — if agents send lat/lon (the phone agent already has access via Termux), storing and exposing coordinates lets KAPPA plot devices on a map.
+
+Want me to build any of these in? The jitter detection and sensor threshold alerts would probably give you the most operational value with the least effort.
+
+"Good feedback from the other Claude. Let me answer that and finish wiring the KAPPA integration at the same time.
+
+First, let me add the heartbeat tracker routes to KAPPA, then I'll address the robustness improvements." - You
+
+KAPPA API Documentation (Updated)
+Text
+# KAPPA Heartbeat Tracker — API Documentation Base URL: `https://<your-domain>/api`...
+ok cool is there anything you can think of to strengthen this server functionality:
+
+"The other Claude is building enhancements on the tracker side (geolocation, webhooks, health scoring, command audit log, bulk status). Let me update KAPPA's heartbeat client to consume these new endpoints as they come online."
+
+Good — the other Claude on KAPPA is ready to consume the new endpoints. Let me finish building them out so everything is live when it connects.
+
+Now update the kappa route with health scoring, command audit log, and bulk status:
+
+Now add the webhook management routes:
+
+Now wire webhooks into the background jobs (alert dispatching) and update the route index:
+
+Now add webhook dispatch calls to the timeout and jitter alert creation in background.ts:
+
+Now add webhook dispatch to the threshold alerts too:
+
+Now update the routes index and also add webhook dispatch to the WebSocket connection for reconnect events:
+
+Now add webhook dispatch to the WebSocket handler for reconnect events:
+
+Now add webhook dispatch for WebSocket reconnect and disconnect events:
+
+Also add webhook dispatch for WS reconnect events and update the WebSocket register handler to accept lat/lon:
+
+Now let me verify the webhooks lib exists and has the right exports:
+
+Good — the webhooks lib looks solid. Now let me also check that the commandLogTable is properly exported from the DB schema:
+
+Good — all schema files are properly exported. Now let me also check the @workspace/db main export to make sure commandLogTable and webhooksTable are available:
+
+Good — export * from "./schema" re-exports everything. Let me restart the API server and check for issues:
+
+API server compiled and started cleanly — no errors. Let me quickly verify the new endpoints work:
+
+All three new endpoints are responding correctly:
+
+/api/kappa/bulk — returns all devices with health scores, levels, latency, jitter, alert counts
+/api/webhooks — returns empty array (no webhooks configured yet)
+/api/devices/map — returns geo-enabled devices (none have lat/lon yet)
+Let me also test the health endpoint for a specific device and the location update:
