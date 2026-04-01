@@ -14,6 +14,11 @@ export interface TrackerDevice {
   registeredAt: string;
   lastHeartbeat: string | null;
   lastDisconnect: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  healthScore: number | null;
+  jitterMs: number | null;
+  uptimePct24h: number | null;
 }
 
 export interface TrackerDeviceDetail extends TrackerDevice {
@@ -209,4 +214,70 @@ export function getTrackerDashboardUrl(): string {
 
 export function getWebSocketUrl(deviceId: string): string {
   return `wss://heartbeat-tracker-monitor.replit.app/ws?deviceId=${deviceId}`;
+}
+
+export interface BulkDeviceStatus {
+  deviceId: string;
+  online: boolean;
+  lastHeartbeat: string | null;
+  healthScore: number | null;
+  latencyMs: number | null;
+  jitterMs: number | null;
+  latitude: number | null;
+  longitude: number | null;
+}
+
+export interface CommandLogEntry {
+  id: string;
+  deviceId: string;
+  command: string;
+  args: Record<string, unknown>;
+  sentAt: string;
+  result: string | null;
+  respondedAt: string | null;
+}
+
+export interface UptimeHistoryEntry {
+  hour: string;
+  onlineMinutes: number;
+  totalMinutes: number;
+  uptimePct: number;
+}
+
+export async function getBulkStatus(): Promise<BulkDeviceStatus[]> {
+  return await fetchJSON<BulkDeviceStatus[]>("/devices/bulk-status") || [];
+}
+
+export async function getDeviceHealthScore(deviceId: string): Promise<{ healthScore: number; factors: Record<string, number> } | null> {
+  return fetchJSON(`/devices/${deviceId}/health`);
+}
+
+export async function getCommandLog(deviceId?: string, limit = 50): Promise<CommandLogEntry[]> {
+  const params = new URLSearchParams();
+  if (deviceId) params.set("deviceId", deviceId);
+  params.set("limit", String(limit));
+  return await fetchJSON<CommandLogEntry[]>(`/commands/log?${params}`) || [];
+}
+
+export async function getUptimeHistory(deviceId: string, hours = 48): Promise<UptimeHistoryEntry[]> {
+  return await fetchJSON<UptimeHistoryEntry[]>(`/uptime/${deviceId}/history?hours=${hours}`) || [];
+}
+
+export async function getSensorThresholds(deviceId: string): Promise<Record<string, { min?: number; max?: number }>> {
+  return await fetchJSON<Record<string, { min?: number; max?: number }>>(`/sensors/${deviceId}/thresholds`) || {};
+}
+
+export async function setSensorThreshold(deviceId: string, sensorType: string, min?: number, max?: number): Promise<boolean> {
+  const result = await postJSON<{ ok: boolean }>(`/sensors/${deviceId}/thresholds`, { sensorType, min, max });
+  return result?.ok || false;
+}
+
+export async function registerWebhook(url: string, events: string[]): Promise<boolean> {
+  const result = await postJSON<{ id: string }>("/webhooks", { url, events });
+  return !!result?.id;
+}
+
+export async function updateDeviceLocation(deviceId: string, lat: number, lon: number): Promise<boolean> {
+  const result = await postJSON<{ updated: boolean }>(`/devices/${deviceId}/location`, { latitude: lat, longitude: lon });
+  return result?.updated || false;
 }

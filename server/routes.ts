@@ -61,6 +61,9 @@ import {
   acknowledgeAlert, getDeviceSensors, getDeviceLatestSensors,
   getHeartbeatHistory, sendDeviceCommand, getAgentScriptUrl,
   getTrackerDashboardUrl, getWebSocketUrl,
+  getBulkStatus, getDeviceHealthScore, getCommandLog,
+  getUptimeHistory, getSensorThresholds, setSensorThreshold,
+  updateDeviceLocation,
 } from "./heartbeat-client";
 import {
   insertResearchSessionSchema,
@@ -3503,6 +3506,78 @@ export async function registerRoutes(
       dashboard: getTrackerDashboardUrl(),
       websocket: "wss://heartbeat-tracker-monitor.replit.app/ws?deviceId=YOUR_DEVICE_ID",
     });
+  });
+
+  app.get("/api/tracker/bulk-status", async (_req, res) => {
+    try {
+      const statuses = await getBulkStatus();
+      res.json(statuses);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/devices/:deviceId/health", async (req, res) => {
+    try {
+      const health = await getDeviceHealthScore(req.params.deviceId);
+      if (!health) return res.status(404).json({ error: "Device not found or health unavailable" });
+      res.json(health);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/commands/log", async (req, res) => {
+    try {
+      const log = await getCommandLog(
+        req.query.deviceId as string,
+        req.query.limit ? parseInt(req.query.limit as string) : 50
+      );
+      res.json(log);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/uptime/:deviceId/history", async (req, res) => {
+    try {
+      const hours = req.query.hours ? parseInt(req.query.hours as string) : 48;
+      const history = await getUptimeHistory(req.params.deviceId, hours);
+      res.json(history);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/sensors/:deviceId/thresholds", async (req, res) => {
+    try {
+      const thresholds = await getSensorThresholds(req.params.deviceId);
+      res.json(thresholds);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/tracker/sensors/:deviceId/thresholds", async (req, res) => {
+    try {
+      const { sensorType, min, max } = req.body;
+      if (!sensorType) return res.status(400).json({ error: "sensorType required" });
+      const ok = await setSensorThreshold(req.params.deviceId, sensorType, min, max);
+      res.json({ ok });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/tracker/devices/:deviceId/location", async (req, res) => {
+    try {
+      const { latitude, longitude } = req.body;
+      if (latitude == null || longitude == null) return res.status(400).json({ error: "latitude and longitude required" });
+      const updated = await updateDeviceLocation(req.params.deviceId, latitude, longitude);
+      res.json({ updated });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
   });
 
   // ============== KYMA ENGINE BRIDGE ==============

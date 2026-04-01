@@ -635,12 +635,20 @@ function HeartbeatPanel() {
                       <span className="text-sm font-medium truncate">{device.name || device.deviceId || device.id}</span>
                       <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400 text-xs">Online</Badge>
                       {device.type && <Badge variant="outline" className="text-xs">{device.type}</Badge>}
+                      {device.healthScore != null && (
+                        <Badge variant={device.healthScore >= 80 ? "secondary" : device.healthScore >= 50 ? "outline" : "destructive"} className="text-xs font-mono">
+                          HP:{device.healthScore}
+                        </Badge>
+                      )}
                     </div>
                     <div className="flex gap-4 mt-1 text-xs text-muted-foreground">
                       {device.latency_ms != null && <span>Latency: {device.latency_ms}ms</span>}
-                      {device.jitter_ms != null && <span>Jitter: {device.jitter_ms.toFixed(1)}ms</span>}
-                      {device.uptime_24h != null && <span>Uptime: {device.uptime_24h.toFixed(1)}%</span>}
+                      {(device.jitterMs ?? device.jitter_ms) != null && <span>Jitter: {(device.jitterMs ?? device.jitter_ms).toFixed(1)}ms</span>}
+                      {(device.uptimePct24h ?? device.uptime_24h) != null && <span>Uptime: {(device.uptimePct24h ?? device.uptime_24h).toFixed(1)}%</span>}
                       {device.lastHeartbeat && <span>Last: {new Date(device.lastHeartbeat).toLocaleTimeString()}</span>}
+                      {device.latitude != null && device.longitude != null && (
+                        <span className="text-violet-500">{device.latitude.toFixed(4)}, {device.longitude.toFixed(4)}</span>
+                      )}
                     </div>
                   </div>
                 </div>
