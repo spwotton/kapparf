@@ -12,3 +12,9 @@ id = "d_jhTmfNmGcu1vDcQyL67"
 uri = "file://docs/DERECHOS_LEGALES_CR.md"
 type = "text"
 title = "Derechos del Detenido — Costa Rica (Spanish Legal Rights)"
+
+[[outputs]]
+id = "A2ehrH6rgh_NCdK2pGgiC"
+uri = "file://attached_assets/KAPPA-HEARTBEAT-TRACKER-SPEC.md"
+type = "text"
+title = "KAPPA Heartbeat Tracker — Standalone App Spec"
