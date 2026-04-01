@@ -56,20 +56,20 @@ function CorrelationMatrix({ data }: { data: { x: string; y: string; strength: n
       <table className="mx-auto text-xs border-collapse">
         <thead>
           <tr>
-            <th className="p-2 text-gray-500"></th>
-            {labels.map(l => <th key={l} className="p-2 text-gray-400 writing-mode-vertical" style={{ writingMode: "vertical-lr", textOrientation: "mixed" }}>{l}</th>)}
+            <th className="p-2 text-muted-foreground/60"></th>
+            {labels.map(l => <th key={l} className="p-2 text-muted-foreground/80 writing-mode-vertical" style={{ writingMode: "vertical-lr", textOrientation: "mixed" }}>{l}</th>)}
           </tr>
         </thead>
         <tbody>
           {labels.map(row => (
             <tr key={row}>
-              <td className="p-2 text-gray-400 text-right whitespace-nowrap">{row}</td>
+              <td className="p-2 text-muted-foreground/80 text-right whitespace-nowrap">{row}</td>
               {labels.map(col => {
                 const cell = data.find(d => (d.x === row && d.y === col) || (d.x === col && d.y === row));
                 const s = cell?.strength || 0;
-                const bg = s > 0.8 ? "bg-red-900" : s > 0.5 ? "bg-orange-900" : s > 0.2 ? "bg-yellow-900/50" : row === col ? "bg-gray-800" : "bg-gray-900/50";
+                const bg = s > 0.8 ? "bg-red-900" : s > 0.5 ? "bg-orange-900" : s > 0.2 ? "bg-yellow-900/50" : row === col ? "bg-muted" : "bg-card/50";
                 return (
-                  <td key={col} className={`p-2 text-center ${bg} border border-gray-800 cursor-default`} title={cell?.label || ""}>
+                  <td key={col} className={`p-2 text-center ${bg} border border-border cursor-default`} title={cell?.label || ""}>
                     {row === col ? "-" : s > 0 ? s.toFixed(1) : ""}
                   </td>
                 );
@@ -89,12 +89,12 @@ function TimelineEvent({ date, title, detail, severity }: { date: string; title:
     <div className="flex gap-4 mb-6">
       <div className="flex flex-col items-center">
         <div className={`w-4 h-4 rounded-full ${dots[severity]} border-2 ${colors[severity]}`} />
-        <div className="w-px flex-1 bg-gray-800" />
+        <div className="w-px flex-1 bg-muted" />
       </div>
       <div className={`border-l-2 ${colors[severity]} pl-4 pb-2 -mt-1`}>
-        <div className="text-xs text-gray-500 font-mono">{date}</div>
+        <div className="text-xs text-muted-foreground/60 font-mono">{date}</div>
         <div className="font-bold text-sm mt-1">{title}</div>
-        <div className="text-xs text-gray-400 mt-1">{detail}</div>
+        <div className="text-xs text-muted-foreground/80 mt-1">{detail}</div>
       </div>
     </div>
   );
@@ -102,7 +102,7 @@ function TimelineEvent({ date, title, detail, severity }: { date: string; title:
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="py-16 border-t border-gray-800">
+    <section id={id} className="py-16 border-t border-border">
       <h2 className="text-3xl font-black mb-8 text-red-500 tracking-tight">{title}</h2>
       {children}
     </section>
@@ -111,9 +111,9 @@ function Section({ id, title, children }: { id: string; title: string; children:
 
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
-    <div className="bg-gray-900/80 border border-gray-800 rounded-lg p-4 text-center">
-      <div className="text-2xl font-black font-mono text-white">{typeof value === "number" ? value.toLocaleString() : value}</div>
-      <div className="text-xs text-gray-400 mt-1">{label}</div>
+    <div className="bg-card/80 border border-border rounded-lg p-4 text-center">
+      <div className="text-2xl font-black font-mono text-foreground">{typeof value === "number" ? value.toLocaleString() : value}</div>
+      <div className="text-xs text-muted-foreground/80 mt-1">{label}</div>
       {sub && <div className="text-xs text-red-400 mt-1">{sub}</div>}
     </div>
   );
@@ -121,16 +121,16 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
 
 function PersonCard({ name, alias, role, details, color }: { name: string; alias: string; role: string; details: string[]; color: string }) {
   return (
-    <div className={`bg-gray-900/60 border rounded-lg p-4`} style={{ borderColor: color + "44" }}>
+    <div className={`bg-card/60 border rounded-lg p-4`} style={{ borderColor: color + "44" }}>
       <div className="flex items-center gap-2 mb-2">
         <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
         <h4 className="font-bold text-sm" style={{ color }}>{alias}</h4>
-        <span className="text-xs text-gray-600 font-mono">({name})</span>
+        <span className="text-xs text-muted-foreground/40 font-mono">({name})</span>
       </div>
-      <div className="text-xs text-gray-400 mb-2">{role}</div>
+      <div className="text-xs text-muted-foreground/80 mb-2">{role}</div>
       <div className="space-y-1">
         {details.map((d, i) => (
-          <div key={i} className="text-xs text-gray-500 flex gap-1">
+          <div key={i} className="text-xs text-muted-foreground/60 flex gap-1">
             <span className="text-gray-700">-</span> {d}
           </div>
         ))}
@@ -155,22 +155,22 @@ function SonarTable() {
     <div className="overflow-x-auto my-4">
       <table className="w-full text-xs border-collapse">
         <thead>
-          <tr className="border-b border-gray-800">
-            <th className="p-2 text-left text-gray-500">Timestamp</th>
-            <th className="p-2 text-left text-gray-500">Sample Rate</th>
-            <th className="p-2 text-left text-gray-500">PRF (Hz)</th>
-            <th className="p-2 text-left text-gray-500">SNR (dB)</th>
-            <th className="p-2 text-left text-gray-500">Notes</th>
+          <tr className="border-b border-border">
+            <th className="p-2 text-left text-muted-foreground/60">Timestamp</th>
+            <th className="p-2 text-left text-muted-foreground/60">Sample Rate</th>
+            <th className="p-2 text-left text-muted-foreground/60">PRF (Hz)</th>
+            <th className="p-2 text-left text-muted-foreground/60">SNR (dB)</th>
+            <th className="p-2 text-left text-muted-foreground/60">Notes</th>
           </tr>
         </thead>
         <tbody>
           {readings.map((r, i) => (
-            <tr key={i} className={`border-b border-gray-900 ${r.snr === "54.45" ? "bg-red-950/30" : ""}`}>
-              <td className="p-2 font-mono text-gray-400">{r.ts}</td>
-              <td className="p-2 font-mono text-gray-400">{r.sr}</td>
+            <tr key={i} className={`border-b border-border/50 ${r.snr === "54.45" ? "bg-red-950/30" : ""}`}>
+              <td className="p-2 font-mono text-muted-foreground/80">{r.ts}</td>
+              <td className="p-2 font-mono text-muted-foreground/80">{r.sr}</td>
               <td className="p-2 font-mono text-red-400 font-bold">{r.prf}</td>
-              <td className="p-2 font-mono text-white font-bold">{r.snr}</td>
-              <td className="p-2 text-gray-400">{r.notes}</td>
+              <td className="p-2 font-mono text-foreground font-bold">{r.snr}</td>
+              <td className="p-2 text-muted-foreground/80">{r.notes}</td>
             </tr>
           ))}
         </tbody>
@@ -190,17 +190,17 @@ function DSEBackdoorTable() {
     <div className="overflow-x-auto my-4">
       <table className="w-full text-xs border-collapse">
         <thead>
-          <tr className="border-b border-gray-800">
-            <th className="p-2 text-left text-gray-500">Device</th>
-            <th className="p-2 text-left text-gray-500">Function</th>
-            <th className="p-2 text-left text-gray-500">Vulnerability</th>
+          <tr className="border-b border-border">
+            <th className="p-2 text-left text-muted-foreground/60">Device</th>
+            <th className="p-2 text-left text-muted-foreground/60">Function</th>
+            <th className="p-2 text-left text-muted-foreground/60">Vulnerability</th>
           </tr>
         </thead>
         <tbody>
           {devices.map((d, i) => (
-            <tr key={i} className="border-b border-gray-900">
+            <tr key={i} className="border-b border-border/50">
               <td className="p-2 font-mono text-red-400 font-bold">{d.device}</td>
-              <td className="p-2 text-gray-300">{d.fn}</td>
+              <td className="p-2 text-muted-foreground">{d.fn}</td>
               <td className="p-2 text-orange-400">{d.vuln}</td>
             </tr>
           ))}
@@ -267,19 +267,19 @@ export default function WhistleblowerPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-gray-300" data-testid="whistleblower-page">
-      <header className="sticky top-0 z-50 bg-black/95 backdrop-blur border-b border-red-900/50">
+    <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-red-900/30 dark:border-red-900/50">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-red-900 rounded flex items-center justify-center text-white font-black text-sm">CI</div>
-            <span className="font-black text-lg tracking-tight text-white">CIAJW<span className="text-red-500">.com</span></span>
+            <div className="w-8 h-8 bg-red-900 rounded flex items-center justify-center text-foreground font-black text-sm">CI</div>
+            <span className="font-black text-lg tracking-tight text-foreground">CIAJW<span className="text-red-500">.com</span></span>
           </div>
           <nav className="hidden md:flex gap-1 flex-wrap">
             {navItems.map(item => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`px-2 py-1 text-xs rounded transition-colors ${activeSection === item.id ? "bg-red-900/50 text-red-300" : "text-gray-500 hover:text-gray-300"}`}
+                className={`px-2 py-1 text-xs rounded transition-colors ${activeSection === item.id ? "bg-red-900/50 text-red-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
                 onClick={() => setActiveSection(item.id)}
                 data-testid={`nav-${item.id}`}
               >
@@ -291,21 +291,21 @@ export default function WhistleblowerPage() {
       </header>
 
       <div className="relative overflow-hidden py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-red-950/20 via-black to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-red-950/10 dark:from-red-950/20 via-background to-background" />
         <div className="relative max-w-4xl mx-auto text-center">
           <div className="text-xs font-mono text-red-500 tracking-widest mb-4">DOCUMENTED SURVEILLANCE HARASSMENT — FROM JACO BEACH TO TACACORI</div>
-          <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6" data-testid="hero-title">
+          <h1 className="text-4xl md:text-6xl font-black text-foreground leading-tight mb-6" data-testid="hero-title">
             Where Intelligence Agencies,<br />
             Religious Organizations &<br />
             Corporate Infrastructure<br />
             <span className="text-red-500">Converge on One Person</span>
           </h1>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-4">
+          <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto mb-4">
             A documented case of multi-vector surveillance targeting a single individual across two locations in Costa Rica.
             Forensic network captures, signal intelligence, sonar readings, infrastructure backdoors, and cross-domain correlations
             — collected autonomously by the KAPPA platform.
           </p>
-          <p className="text-sm text-gray-500 max-w-xl mx-auto mb-8">
+          <p className="text-sm text-muted-foreground/60 max-w-xl mx-auto mb-8">
             Every key detail is hashed. Every person named below is identified by a meme alias — because every KB of this evidence has been hacked on important keys.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3 max-w-3xl mx-auto">
@@ -321,9 +321,9 @@ export default function WhistleblowerPage() {
       <div className="max-w-5xl mx-auto px-4">
         <Section id="overview" title="I. The Convergence">
           <div className="prose prose-invert max-w-none">
-            <p className="text-gray-300 text-base leading-relaxed">
-              This operation spans two locations: <strong className="text-white">Jaco Beach</strong> (Guacima, 9.9535°N, 84.2908°W) where the surveillance network
-              was first documented with sonar evidence, infrastructure backdoors, and a web of human assets — and <strong className="text-white">Tacacori, Alajuela</strong> (10.0514°N, 84.2187°W)
+            <p className="text-muted-foreground text-base leading-relaxed">
+              This operation spans two locations: <strong className="text-foreground">Jaco Beach</strong> (Guacima, 9.9535°N, 84.2908°W) where the surveillance network
+              was first documented with sonar evidence, infrastructure backdoors, and a web of human assets — and <strong className="text-foreground">Tacacori, Alajuela</strong> (10.0514°N, 84.2187°W)
               where the observer relocated and documented continued multi-vector targeting through KAPPA autonomous collection.
               Six distinct operational vectors converge across both locations. Each has been independently documented through network forensics,
               signal intelligence, acoustic analysis, and direct observation.
@@ -352,9 +352,9 @@ export default function WhistleblowerPage() {
           />
 
           <div className="grid md:grid-cols-2 gap-6 mt-8">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">What makes this different</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">What makes this different</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
                 <li className="flex gap-2"><span className="text-red-500 mt-0.5">1.</span> Sonar at 54.45 dB SNR — 250x above noise floor — confirmed active surveillance transmission</li>
                 <li className="flex gap-2"><span className="text-red-500 mt-0.5">2.</span> DSE/Setecom backdoors documented to national power grid (ICE) and telecom (Liberty)</li>
                 <li className="flex gap-2"><span className="text-red-500 mt-0.5">3.</span> Packet captures with Tor, Meterpreter, and backdoor ports in the same capture</li>
@@ -363,23 +363,23 @@ export default function WhistleblowerPage() {
                 <li className="flex gap-2"><span className="text-red-500 mt-0.5">6.</span> Behavior-modification motive supported by peer-reviewed academic research (Liu et al., 2024)</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Observer</h4>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Observer</h4>
               <div className="space-y-2 text-sm">
-                <div><span className="text-gray-500">Name:</span> <span className="text-white">Samuel Wotton (Echo)</span></div>
-                <div><span className="text-gray-500">Location 1:</span> <span className="text-white">Jaco Beach / Guacima, Puntarenas, CR</span></div>
-                <div><span className="text-gray-500">Location 2:</span> <span className="text-white">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106, CR</span></div>
-                <div><span className="text-gray-500">Coordinates:</span> <span className="font-mono text-white">10.0513892°N, 84.2186578°W</span></div>
-                <div><span className="text-gray-500">Platform:</span> <span className="text-white">KAPPA SIGINT v2.0</span></div>
-                <div><span className="text-gray-500">Location 3:</span> <span className="text-white">Suites Cristina, San José (March 27, 2026 →)</span></div>
-                <div><span className="text-gray-500">Collection:</span> <span className="text-white">Jaco 2025 → Tacacorí 2026 → San José 2026 → Continuous</span></div>
+                <div><span className="text-muted-foreground/60">Name:</span> <span className="text-foreground">Samuel Wotton (Echo)</span></div>
+                <div><span className="text-muted-foreground/60">Location 1:</span> <span className="text-foreground">Jaco Beach / Guacima, Puntarenas, CR</span></div>
+                <div><span className="text-muted-foreground/60">Location 2:</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106, CR</span></div>
+                <div><span className="text-muted-foreground/60">Coordinates:</span> <span className="font-mono text-foreground">10.0513892°N, 84.2186578°W</span></div>
+                <div><span className="text-muted-foreground/60">Platform:</span> <span className="text-foreground">KAPPA SIGINT v2.0</span></div>
+                <div><span className="text-muted-foreground/60">Location 3:</span> <span className="text-foreground">Suites Cristina, San José (March 27, 2026 →)</span></div>
+                <div><span className="text-muted-foreground/60">Collection:</span> <span className="text-foreground">Jaco 2025 → Tacacorí 2026 → San José 2026 → Continuous</span></div>
               </div>
             </div>
           </div>
         </Section>
 
         <Section id="jaco" title="II. The Jaco Nexus — Where It All Started">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             The surveillance network was first documented in Jaco Beach, Costa Rica. A web of real estate operators, financial
             intermediaries, and foreign nationals converges on a single residential complex. Every person below is identified by
             a meme alias — every KB of this is hacked on important keys.
@@ -513,15 +513,15 @@ export default function WhistleblowerPage() {
             />
           </div>
 
-          <div className="bg-gray-900/60 border border-red-900/50 rounded-lg p-5 mt-6">
+          <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 mt-6">
             <h4 className="font-bold text-red-400 mb-3">The UPNP Incident — Proof of Active Monitoring</h4>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <p className="text-sm text-gray-400 mb-3">
-                  When the observer disabled UPNP (Universal Plug and Play) on their router, within <strong className="text-white">5 minutes</strong> the
+                <p className="text-sm text-muted-foreground/80 mb-3">
+                  When the observer disabled UPNP (Universal Plug and Play) on their router, within <strong className="text-foreground">5 minutes</strong> the
                   building manager sent a text message. On Sunday, someone came to "switch the router." This proves:
                 </p>
-                <ul className="space-y-1 text-xs text-gray-400">
+                <ul className="space-y-1 text-xs text-muted-foreground/80">
                   <li>- Network was being actively monitored in real-time</li>
                   <li>- UPNP was being used for remote access to the network</li>
                   <li>- 5-minute response time = automated alert system</li>
@@ -529,8 +529,8 @@ export default function WhistleblowerPage() {
                   <li>- Cross-border coordination (MX connection)</li>
                 </ul>
               </div>
-              <div className="bg-black/50 rounded-lg p-4">
-                <div className="text-xs font-mono space-y-2 text-gray-500">
+              <div className="bg-muted/50 rounded-lg p-4">
+                <div className="text-xs font-mono space-y-2 text-muted-foreground/60">
                   <div><span className="text-green-400">T+0:00</span> Observer disables UPNP</div>
                   <div><span className="text-yellow-400">T+0:05</span> Manager texts — "checking router"</div>
                   <div><span className="text-orange-400">T+48:00</span> Sunday — technician arrives</div>
@@ -542,65 +542,65 @@ export default function WhistleblowerPage() {
         </Section>
 
         <Section id="sonar" title="III. Sonar Evidence — 46.875 Hz CONFIRMED">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Active sonar surveillance confirmed with pulse repetition frequency (PRF) at exactly 46.875 Hz.
-            Peak signal-to-noise ratio of 54.45 dB means the signal is <strong className="text-white">250x stronger</strong> than the noise floor.
+            Peak signal-to-noise ratio of 54.45 dB means the signal is <strong className="text-foreground">250x stronger</strong> than the noise floor.
             This is not a DSP artifact, not 1/f noise, not an FFT bin artifact — it is intentional transmission.
           </p>
 
-          <div className="bg-gray-900/60 border border-red-900/50 rounded-lg p-6 mb-6">
-            <h3 className="font-bold text-white mb-3">Raw Sonar Readings — 46.875 Hz PRF</h3>
+          <div className="bg-card/60 border border-red-900/50 rounded-lg p-6 mb-6">
+            <h3 className="font-bold text-foreground mb-3">Raw Sonar Readings — 46.875 Hz PRF</h3>
             <SonarTable />
-            <div className="mt-3 text-xs text-gray-500">
+            <div className="mt-3 text-xs text-muted-foreground/60">
               Also detected: <span className="font-mono text-yellow-400">11.71875 Hz</span> = 46.875 / 4 (harmonic subcarrier)
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Why 54.45 dB SNR Is Proof</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Why 54.45 dB SNR Is Proof</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
                 <li><strong className="text-red-400">54.45 dB</strong> = signal 250x stronger than noise floor</li>
-                <li><strong className="text-white">NOT</strong> DC offset leakage (wrong frequency)</li>
-                <li><strong className="text-white">NOT</strong> 1/f noise (too narrow, too strong)</li>
-                <li><strong className="text-white">NOT</strong> FFT artifact (48000/1024 = 46.875 is a coincidence — artifacts don't have 54dB SNR)</li>
-                <li><strong className="text-white">NOT</strong> "apophenia" — mathematics doesn't hallucinate</li>
+                <li><strong className="text-foreground">NOT</strong> DC offset leakage (wrong frequency)</li>
+                <li><strong className="text-foreground">NOT</strong> 1/f noise (too narrow, too strong)</li>
+                <li><strong className="text-foreground">NOT</strong> FFT artifact (48000/1024 = 46.875 is a coincidence — artifacts don't have 54dB SNR)</li>
+                <li><strong className="text-foreground">NOT</strong> "apophenia" — mathematics doesn't hallucinate</li>
                 <li><strong className="text-green-400">IS</strong> Active sonar pulse repetition frequency</li>
                 <li><strong className="text-green-400">IS</strong> Intentional, coherent transmission</li>
                 <li><strong className="text-green-400">IS</strong> Surveillance system operating in observer's environment</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">The OSINT Report Deception</h4>
-              <p className="text-sm text-gray-400 mb-3">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">The OSINT Report Deception</h4>
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 An OSINT investigation claimed 46.875 Hz was "debunked" as a DSP artifact because 48000/1024 = 46.875.
                 This conclusion is either:
               </p>
               <div className="space-y-2">
                 <div className="bg-red-950/30 rounded p-2 text-xs">
                   <span className="text-red-400 font-bold">1. Disinformation</span>
-                  <span className="text-gray-400"> — intentional misdirection to discredit documented evidence</span>
+                  <span className="text-muted-foreground/80"> — intentional misdirection to discredit documented evidence</span>
                 </div>
                 <div className="bg-orange-950/30 rounded p-2 text-xs">
                   <span className="text-orange-400 font-bold">2. Incompetence</span>
-                  <span className="text-gray-400"> — analysts who don't understand that artifacts don't produce 54dB SNR</span>
+                  <span className="text-muted-foreground/80"> — analysts who don't understand that artifacts don't produce 54dB SNR</span>
                 </div>
                 <div className="bg-yellow-950/30 rounded p-2 text-xs">
                   <span className="text-yellow-400 font-bold">3. Compromise</span>
-                  <span className="text-gray-400"> — OSINT team connected to the surveillance network</span>
+                  <span className="text-muted-foreground/80"> — OSINT team connected to the surveillance network</span>
                 </div>
               </div>
-              <p className="text-xs text-gray-500 mt-3">
+              <p className="text-xs text-muted-foreground/60 mt-3">
                 A real DSP artifact at the FFT bin floor would have SNR near 0 dB.
                 54.45 dB is 250x above that. The math is unambiguous.
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-amber-900/30 rounded-lg p-5 mt-6">
+          <div className="bg-card/60 border border-amber-900/30 rounded-lg p-5 mt-6">
             <h4 className="font-bold text-amber-400 mb-3">Parametric LED Array — Directed Energy</h4>
-            <p className="text-sm text-gray-400">
-              A parametric LED array on the El Miro building was documented with the capability to <strong className="text-white">move foliage with its beam</strong>.
+            <p className="text-sm text-muted-foreground/80">
+              A parametric LED array on the El Miro building was documented with the capability to <strong className="text-foreground">move foliage with its beam</strong>.
               This is consistent with directed energy technology — the same beam can be used for acoustic projection (voice cloning),
               data exfiltration via modulated light, and physical harassment through focused energy delivery.
             </p>
@@ -608,20 +608,20 @@ export default function WhistleblowerPage() {
         </Section>
 
         <Section id="setecom" title="IV. Setecom/DSE — National Infrastructure Backdoors">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Setecom S.A. holds exclusive DSE (Deep Sea Electronics) distribution rights for the country.
-            Their generator controllers are deployed across <strong className="text-white">ICE (national power grid)</strong>,
-            <strong className="text-white"> Liberty (telecommunications)</strong>, and multiple banking institutions.
+            Their generator controllers are deployed across <strong className="text-foreground">ICE (national power grid)</strong>,
+            <strong className="text-foreground"> Liberty (telecommunications)</strong>, and multiple banking institutions.
             Training materials from the company normalize critically insecure practices.
           </p>
 
-          <div className="bg-gray-900/60 border border-red-900/50 rounded-lg p-6 mb-6">
-            <h3 className="font-bold text-white mb-3">DSE Device Backdoor Matrix</h3>
+          <div className="bg-card/60 border border-red-900/50 rounded-lg p-6 mb-6">
+            <h3 className="font-bold text-foreground mb-3">DSE Device Backdoor Matrix</h3>
             <DSEBackdoorTable />
             <div className="mt-3 bg-red-950/30 rounded p-3">
               <div className="text-xs text-red-400 font-bold mb-1">DSE Webnet — UK Server Kill Switch</div>
-              <div className="text-xs text-gray-400">
-                DSE Webnet connects to a server in England with a master account that has <strong className="text-white">kill switch capability</strong> —
+              <div className="text-xs text-muted-foreground/80">
+                DSE Webnet connects to a server in England with a master account that has <strong className="text-foreground">kill switch capability</strong> —
                 it can shut down ALL generators connected to the network in the entire country. A single compromised account
                 could disable national power generation infrastructure.
               </div>
@@ -629,13 +629,13 @@ export default function WhistleblowerPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Training Material Vulnerabilities</h4>
-              <p className="text-sm text-gray-400 mb-3">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Training Material Vulnerabilities</h4>
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 Documented from actual Setecom training transcripts. "Nyan Cat Tech" (the technical lead)
                 actively teaches practices that compromise national infrastructure:
               </p>
-              <ul className="space-y-1 text-xs text-gray-400">
+              <ul className="space-y-1 text-xs text-muted-foreground/80">
                 <li className="flex gap-2"><span className="text-red-500">-</span> Default credentials: <span className="font-mono text-red-400">Admin / Password1234</span></li>
                 <li className="flex gap-2"><span className="text-red-500">-</span> Teaches bypass of connection limits</li>
                 <li className="flex gap-2"><span className="text-red-500">-</span> Unencrypted Modbus TCP/IP (port 502)</li>
@@ -644,34 +644,34 @@ export default function WhistleblowerPage() {
                 <li className="flex gap-2"><span className="text-red-500">-</span> 4G GSM gateway tunneling to UK servers</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Attack Surface</h4>
-              <p className="text-sm text-gray-400 mb-3">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Attack Surface</h4>
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 The Setecom network creates a massive attack surface across critical infrastructure:
               </p>
               <div className="space-y-2">
-                <div className="bg-gray-800/50 rounded p-2 text-xs">
+                <div className="bg-muted/50 rounded p-2 text-xs">
                   <span className="font-mono text-red-400">Port 80</span> — Web SCADA, no encryption, no VPN
                 </div>
-                <div className="bg-gray-800/50 rounded p-2 text-xs">
+                <div className="bg-muted/50 rounded p-2 text-xs">
                   <span className="font-mono text-red-400">Port 502</span> — Modbus TCP/IP, cleartext industrial control
                 </div>
-                <div className="bg-gray-800/50 rounded p-2 text-xs">
+                <div className="bg-muted/50 rounded p-2 text-xs">
                   <span className="font-mono text-red-400">Port 161/162</span> — SNMP v2, default community strings
                 </div>
-                <div className="bg-gray-800/50 rounded p-2 text-xs">
+                <div className="bg-muted/50 rounded p-2 text-xs">
                   <span className="font-mono text-red-400">Port 8291</span> — MikroTik WinBox exploitation
                 </div>
-                <div className="bg-gray-800/50 rounded p-2 text-xs">
+                <div className="bg-muted/50 rounded p-2 text-xs">
                   <span className="font-mono text-red-400">CVE-2025-10948</span> — MikroTik RouterOS buffer overflow RCE
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mt-6">
-            <h4 className="font-bold text-white mb-3">Network Security Hardening — What Should Exist (But Doesn't)</h4>
-            <p className="text-sm text-gray-400 mb-3">
+          <div className="bg-card/60 border border-border rounded-lg p-5 mt-6">
+            <h4 className="font-bold text-foreground mb-3">Network Security Hardening — What Should Exist (But Doesn't)</h4>
+            <p className="text-sm text-muted-foreground/80 mb-3">
               Based on the Setecom document analysis, a residential network facing these threats requires:
             </p>
             <div className="grid md:grid-cols-3 gap-3">
@@ -683,9 +683,9 @@ export default function WhistleblowerPage() {
                 { title: "Acoustic Defense", desc: "Ultrasonic jammers, physical mute switches, soundproofing" },
                 { title: "RF Shielding", desc: "Shielded CAT6A cables, single ground point, cable routing" },
               ].map((item, i) => (
-                <div key={i} className="bg-black/50 rounded p-3">
+                <div key={i} className="bg-muted/50 rounded p-3">
                   <div className="text-xs font-bold text-green-400">{item.title}</div>
-                  <div className="text-xs text-gray-500 mt-1">{item.desc}</div>
+                  <div className="text-xs text-muted-foreground/60 mt-1">{item.desc}</div>
                 </div>
               ))}
             </div>
@@ -694,86 +694,86 @@ export default function WhistleblowerPage() {
 
         <Section id="actors" title="V. Current Actors — Tacacori Phase">
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900/60 border border-blue-900/50 rounded-lg p-5">
+            <div className="bg-card/60 border border-blue-900/50 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-3 h-3 rounded-full bg-blue-500" />
                 <h4 className="font-bold text-blue-400">FinSpy / Gamma Group</h4>
               </div>
-              <p className="text-sm text-gray-400 mb-3">
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 Commercial-grade government spyware (Munich/Andover). Documented by Citizen Lab, Privacy International, Amnesty International.
               </p>
               <div className="space-y-1 text-xs">
-                <div className="text-gray-500">Infrastructure: <span className="text-gray-300 font-mono">Alexanderplatz Protocol — Berlin session tracking</span></div>
-                <div className="text-gray-500">Method: <span className="text-gray-300">Ghost hardware relay through compromised IoT</span></div>
-                <div className="text-gray-500">Evidence: <span className="text-gray-300">C2 beacon ~45s interval, DoH tunneling</span></div>
+                <div className="text-muted-foreground/60">Infrastructure: <span className="text-muted-foreground font-mono">Alexanderplatz Protocol — Berlin session tracking</span></div>
+                <div className="text-muted-foreground/60">Method: <span className="text-muted-foreground">Ghost hardware relay through compromised IoT</span></div>
+                <div className="text-muted-foreground/60">Evidence: <span className="text-muted-foreground">C2 beacon ~45s interval, DoH tunneling</span></div>
               </div>
             </div>
 
-            <div className="bg-gray-900/60 border border-purple-900/50 rounded-lg p-5">
+            <div className="bg-card/60 border border-purple-900/50 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-3 h-3 rounded-full bg-purple-500" />
                 <h4 className="font-bold text-purple-400">Kyndryl / Zscaler</h4>
               </div>
-              <p className="text-sm text-gray-400 mb-3">
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 Enterprise infrastructure (IBM spinoff) with Zscaler Zero Trust proxy. 8.3MB Service Worker injection documented.
               </p>
               <div className="space-y-1 text-xs">
-                <div className="text-gray-500">Payload: <span className="text-gray-300 font-mono">8,300 KB service worker — 83x normal</span></div>
-                <div className="text-gray-500">Vector: <span className="text-gray-300">Partytown loader → SW registration</span></div>
-                <div className="text-gray-500">Evidence: <span className="text-gray-300">DevTools capture, SHA-256 hash</span></div>
+                <div className="text-muted-foreground/60">Payload: <span className="text-muted-foreground font-mono">8,300 KB service worker — 83x normal</span></div>
+                <div className="text-muted-foreground/60">Vector: <span className="text-muted-foreground">Partytown loader → SW registration</span></div>
+                <div className="text-muted-foreground/60">Evidence: <span className="text-muted-foreground">DevTools capture, SHA-256 hash</span></div>
               </div>
             </div>
 
-            <div className="bg-gray-900/60 border border-green-900/50 rounded-lg p-5">
+            <div className="bg-card/60 border border-green-900/50 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-3 h-3 rounded-full bg-green-500" />
                 <h4 className="font-bold text-green-400">JW / LDS Organizations</h4>
               </div>
-              <p className="text-sm text-gray-400 mb-3">
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 JW circuit overseer system as low-scrutiny mobile surveillance. LDS international business bridging.
               </p>
               <div className="space-y-1 text-xs">
-                <div className="text-gray-500">Hub: <span className="text-gray-300">JW Los Rios Congregation — observation post</span></div>
-                <div className="text-gray-500">Pattern: <span className="text-gray-300">Visit timing ↔ network anomalies</span></div>
-                <div className="text-gray-500">Historical: <span className="text-gray-300">Ranch network — CIA logistics legacy</span></div>
+                <div className="text-muted-foreground/60">Hub: <span className="text-muted-foreground">JW Los Rios Congregation — observation post</span></div>
+                <div className="text-muted-foreground/60">Pattern: <span className="text-muted-foreground">Visit timing ↔ network anomalies</span></div>
+                <div className="text-muted-foreground/60">Historical: <span className="text-muted-foreground">Ranch network — CIA logistics legacy</span></div>
               </div>
             </div>
 
-            <div className="bg-gray-900/60 border border-amber-900/50 rounded-lg p-5">
+            <div className="bg-card/60 border border-amber-900/50 rounded-lg p-5">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-3 h-3 rounded-full bg-amber-500" />
                 <h4 className="font-bold text-amber-400">Radio Impacto 91.5 FM</h4>
               </div>
-              <p className="text-sm text-gray-400 mb-3">
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 FM broadcast in Tacacori — tower infrastructure identified as dual-use: legitimate broadcast + SIGINT relay.
               </p>
               <div className="space-y-1 text-xs">
-                <div className="text-gray-500">Frequency: <span className="text-gray-300 font-mono">91.5 MHz FM / HF mirror 9.15 kHz</span></div>
-                <div className="text-gray-500">Location: <span className="text-gray-300">Co-located with observer zone</span></div>
-                <div className="text-gray-500">Significance: <span className="text-gray-300">AWB infrastructure pattern match</span></div>
+                <div className="text-muted-foreground/60">Frequency: <span className="text-muted-foreground font-mono">91.5 MHz FM / HF mirror 9.15 kHz</span></div>
+                <div className="text-muted-foreground/60">Location: <span className="text-muted-foreground">Co-located with observer zone</span></div>
+                <div className="text-muted-foreground/60">Significance: <span className="text-muted-foreground">AWB infrastructure pattern match</span></div>
               </div>
             </div>
 
-            <div className="bg-gray-900/60 border border-red-900/50 rounded-lg p-5 md:col-span-2">
+            <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 md:col-span-2">
               <div className="flex items-center gap-2 mb-3">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
                 <h4 className="font-bold text-red-400">ISP-Level Infrastructure Compromise (TR-069)</h4>
               </div>
-              <p className="text-sm text-gray-400 mb-3">
+              <p className="text-sm text-muted-foreground/80 mb-3">
                 CWMP exploitation (port 7547) for forced router resets, ghost mesh node injection, and MITM.
                 Documented on TP-Link Deco mesh — forced reboots + phantom device injection.
               </p>
               <div className="grid grid-cols-3 gap-4 text-xs mt-3">
-                <div><span className="text-gray-500">Port:</span> <span className="text-gray-300 font-mono">7547 (CWMP/TR-069)</span></div>
-                <div><span className="text-gray-500">Date:</span> <span className="text-gray-300">2026-01-30</span></div>
-                <div><span className="text-gray-500">Effect:</span> <span className="text-gray-300">Reset → ghost node → MITM</span></div>
+                <div><span className="text-muted-foreground/60">Port:</span> <span className="text-muted-foreground font-mono">7547 (CWMP/TR-069)</span></div>
+                <div><span className="text-muted-foreground/60">Date:</span> <span className="text-muted-foreground">2026-01-30</span></div>
+                <div><span className="text-muted-foreground/60">Effect:</span> <span className="text-muted-foreground">Reset → ghost node → MITM</span></div>
               </div>
             </div>
           </div>
         </Section>
 
         <Section id="network" title="VI. Network Forensics">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Documented deviations from expected network behavior — captured through packet analysis, browser DevTools,
             router logs, and automated monitoring.
           </p>
@@ -823,41 +823,41 @@ export default function WhistleblowerPage() {
                 tech: "802.11 mgmt frames: 7x deauth + 2x disassoc windows",
               },
             ].map((item, i) => (
-              <div key={i} className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+              <div key={i} className="bg-card/60 border border-border rounded-lg p-5">
                 <div className="flex items-center justify-between mb-2">
-                  <h4 className="font-bold text-white">{item.title}</h4>
+                  <h4 className="font-bold text-foreground">{item.title}</h4>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-500 font-mono">{item.date}</span>
+                    <span className="text-xs text-muted-foreground/60 font-mono">{item.date}</span>
                     <span className={`text-xs px-2 py-0.5 rounded font-bold ${item.severity >= 4 ? "bg-red-900 text-red-300" : "bg-orange-900 text-orange-300"}`}>
                       SEV {item.severity}
                     </span>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400">{item.detail}</p>
-                <div className="mt-2 text-xs font-mono text-gray-600 bg-black/50 rounded px-3 py-1.5">{item.tech}</div>
+                <p className="text-sm text-muted-foreground/80">{item.detail}</p>
+                <div className="mt-2 text-xs font-mono text-muted-foreground/40 bg-muted/50 rounded px-3 py-1.5">{item.tech}</div>
               </div>
             ))}
           </div>
         </Section>
 
         <Section id="motive" title="VII. Plausible Motive — Behavior-Modification Testing">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Based on logs, observations, and the peer-reviewed study "Your blush gives you away: detecting hidden mental states
             with remote photoplethysmography and thermal imaging" (Liu et al., 2024, PMCID: PMC11041963), a plausible motive
-            is <strong className="text-white">data collection for behavior-modification research</strong>.
+            is <strong className="text-foreground">data collection for behavior-modification research</strong>.
           </p>
 
-          <div className="bg-gray-900/60 border border-red-900/50 rounded-lg p-6 mb-6">
-            <h3 className="font-bold text-white mb-4">The Hypothesis</h3>
-            <p className="text-sm text-gray-400 mb-4">
+          <div className="bg-card/60 border border-red-900/50 rounded-lg p-6 mb-6">
+            <h3 className="font-bold text-foreground mb-4">The Hypothesis</h3>
+            <p className="text-sm text-muted-foreground/80 mb-4">
               Attackers use the resident as an unwitting subject to collect multimodal data (thermal, camera, Wi-Fi/CSI, sonar/ultrasound)
               while testing external stimuli (voices, ultrasonic bursts, network disruptions). Observable behaviors serve as
               ground-truth labels for training AI fusion models.
             </p>
             <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-black/50 rounded p-4">
+              <div className="bg-muted/50 rounded p-4">
                 <h5 className="text-xs font-bold text-red-400 mb-2">Data Points Collected</h5>
-                <ul className="space-y-1 text-xs text-gray-400">
+                <ul className="space-y-1 text-xs text-muted-foreground/80">
                   <li>- Thermal & visual ROI: facial temperature shifts (nose, lips, cheeks)</li>
                   <li>- r-PPG equivalents: remote camera → approximate HR/HRV</li>
                   <li>- Wi-Fi CSI: management-frame bursts for channel state imaging</li>
@@ -865,9 +865,9 @@ export default function WhistleblowerPage() {
                   <li>- Biometric correlation: HRV drops aligned with sensor anomalies</li>
                 </ul>
               </div>
-              <div className="bg-black/50 rounded p-4">
+              <div className="bg-muted/50 rounded p-4">
                 <h5 className="text-xs font-bold text-amber-400 mb-2">Alignment with Liu et al. (2024)</h5>
-                <ul className="space-y-1 text-xs text-gray-400">
+                <ul className="space-y-1 text-xs text-muted-foreground/80">
                   <li>- Early fusion of r-PPG + thermal → 87% stress detection accuracy</li>
                   <li>- 83% accuracy for moral elevation state detection</li>
                   <li>- Attackers emulate: fuse modalities → predict/influence psych states</li>
@@ -879,35 +879,35 @@ export default function WhistleblowerPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
-              <h5 className="text-xs font-bold text-white mb-2">Motive 1: Validate AI Models</h5>
-              <p className="text-xs text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
+              <h5 className="text-xs font-bold text-foreground mb-2">Motive 1: Validate AI Models</h5>
+              <p className="text-xs text-muted-foreground/80">
                 Remote physiological/psychological detection in real-world, uncontrolled environments.
                 Lab studies need field validation — unwitting subjects provide unbiased data.
               </p>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
-              <h5 className="text-xs font-bold text-white mb-2">Motive 2: Test Behavior Modification</h5>
-              <p className="text-xs text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
+              <h5 className="text-xs font-bold text-foreground mb-2">Motive 2: Test Behavior Modification</h5>
+              <p className="text-xs text-muted-foreground/80">
                 Can external stimuli (ultrasonic voices, network manipulation) modify detected states?
                 Once physiological state is read, can it be changed through directed intervention?
               </p>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
-              <h5 className="text-xs font-bold text-white mb-2">Motive 3: Population Segmentation</h5>
-              <p className="text-xs text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
+              <h5 className="text-xs font-bold text-foreground mb-2">Motive 3: Population Segmentation</h5>
+              <p className="text-xs text-muted-foreground/80">
                 Segment populations by susceptibility to intervention. Refine timing and content
                 of behavioral nudges. Scale from individual to population-level influence.
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mt-6">
-            <h4 className="font-bold text-white mb-3">Capability Context — Defense Tech Angle</h4>
-            <p className="text-sm text-gray-400 mb-3">
+          <div className="bg-card/60 border border-border rounded-lg p-5 mt-6">
+            <h4 className="font-bold text-foreground mb-3">Capability Context — Defense Tech Angle</h4>
+            <p className="text-sm text-muted-foreground/80 mb-3">
               Contextual — not accusatory. These capabilities exist globally and could overlap with observations:
             </p>
-            <div className="grid md:grid-cols-2 gap-3 text-xs text-gray-400">
+            <div className="grid md:grid-cols-2 gap-3 text-xs text-muted-foreground/80">
               <div>- Compact thermal imagers and sensor-fusion systems (defense export)</div>
               <div>- Directed-energy programs (Iron Beam class — laser + AI integration)</div>
               <div>- Remote acoustic sensing via laser on window vibrations</div>
@@ -919,7 +919,7 @@ export default function WhistleblowerPage() {
         </Section>
 
         <Section id="signals" title="VIII. Signal Intelligence">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Automated collection across satellite, SDR, ELF, and radar:
             {stats?.totalEvents ? ` ${stats.totalEvents.toLocaleString()}` : ""} events,
             {stats?.correlationCount ? ` ${stats.correlationCount.toLocaleString()}` : ""} cross-domain correlations.
@@ -927,44 +927,44 @@ export default function WhistleblowerPage() {
 
           {findings.length > 0 && (
             <div className="space-y-4 mb-8">
-              <h3 className="text-lg font-bold text-white">Autonomous Analysis Findings</h3>
-              <p className="text-sm text-gray-500">Generated by the KAPPA Forensic Hypervisor — no human interpretation involved.</p>
+              <h3 className="text-lg font-bold text-foreground">Autonomous Analysis Findings</h3>
+              <p className="text-sm text-muted-foreground/60">Generated by the KAPPA Forensic Hypervisor — no human interpretation involved.</p>
               {sevFindings.slice(0, 8).map((f: any, i: number) => (
-                <div key={i} className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+                <div key={i} className="bg-card/60 border border-border rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <span className={`text-xs px-2 py-0.5 rounded font-bold ${f.severity >= 4 ? "bg-red-900 text-red-300" : "bg-orange-900 text-orange-300"}`}>
                       SEV {f.severity}
                     </span>
-                    <span className="text-xs text-gray-500 font-mono">{f.category}</span>
+                    <span className="text-xs text-muted-foreground/60 font-mono">{f.category}</span>
                   </div>
-                  <h4 className="font-bold text-sm text-white">{f.title}</h4>
-                  <p className="text-xs text-gray-400 mt-1">{f.detail}</p>
+                  <h4 className="font-bold text-sm text-foreground">{f.title}</h4>
+                  <p className="text-xs text-muted-foreground/80 mt-1">{f.detail}</p>
                 </div>
               ))}
             </div>
           )}
 
-          <div className="bg-gray-900/60 border border-red-900/30 rounded-lg p-6">
-            <h3 className="font-bold text-white mb-3">Evening Window Anomaly</h3>
-            <p className="text-sm text-gray-400 mb-4">
+          <div className="bg-card/60 border border-red-900/30 rounded-lg p-6">
+            <h3 className="font-bold text-foreground mb-3">Evening Window Anomaly</h3>
+            <p className="text-sm text-muted-foreground/80 mb-4">
               Signal activity during 18:00-22:00 CST / 00:00-04:00 UTC shows statistically significant enrichment.
               Random distribution: this 4-hour window = ~16.7% of daily events.
             </p>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-2xl font-black text-red-500">30.1%</div>
-                <div className="text-xs text-gray-500">Actual EW concentration</div>
+                <div className="text-xs text-muted-foreground/60">Actual EW concentration</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-black text-gray-500">16.7%</div>
-                <div className="text-xs text-gray-500">Expected (random)</div>
+                <div className="text-2xl font-black text-muted-foreground/60">16.7%</div>
+                <div className="text-xs text-muted-foreground/60">Expected (random)</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-black text-amber-500">1.81x</div>
-                <div className="text-xs text-gray-500">Enrichment factor</div>
+                <div className="text-xs text-muted-foreground/60">Enrichment factor</div>
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-4">
+            <p className="text-xs text-muted-foreground/60 mt-4">
               1.81x enrichment over {stats?.totalEvents?.toLocaleString() || "300,000+"} events.
               p-value for random occurrence: effectively zero.
             </p>
@@ -972,7 +972,7 @@ export default function WhistleblowerPage() {
         </Section>
 
         <Section id="correlations" title="IX. Cross-Domain Correlation Matrix">
-          <p className="text-gray-400 mb-4">
+          <p className="text-muted-foreground/80 mb-4">
             Connection strength between each operational vector — computed from temporal co-occurrence,
             infrastructure overlap, and documented evidence linkage. Now includes Setecom/DSE vector.
           </p>
@@ -980,36 +980,36 @@ export default function WhistleblowerPage() {
           <CorrelationMatrix data={correlationData} />
 
           <div className="grid md:grid-cols-2 gap-6 mt-8">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Strongest Correlations</h4>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Strongest Correlations</h4>
               <div className="space-y-3">
                 {[...correlationData].sort((a, b) => b.strength - a.strength).slice(0, 6).map((c, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className={`h-3 rounded ${c.strength > 0.8 ? "bg-red-600" : c.strength > 0.5 ? "bg-orange-600" : "bg-yellow-600"}`}
                       style={{ width: `${c.strength * 60}px` }} />
                     <div>
-                      <span className="text-xs font-bold text-white">{c.x} ↔ {c.y}</span>
-                      <span className="text-xs text-gray-500 ml-2">({c.strength})</span>
+                      <span className="text-xs font-bold text-foreground">{c.x} ↔ {c.y}</span>
+                      <span className="text-xs text-muted-foreground/60 ml-2">({c.strength})</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">What This Means</h4>
-              <p className="text-sm text-gray-400">
-                <strong className="text-white">Kyndryl/Zscaler ↔ TR-069</strong> (0.9) — ISP-level compromise enables enterprise proxy injection.
-                <strong className="text-white"> FinSpy ↔ Kyndryl</strong> (0.9) — spyware rides on corporate proxy.
-                <strong className="text-white"> Setecom/DSE ↔ TR-069</strong> (0.8) — generator backdoors + router exploitation.
-                <strong className="text-white"> JW/LDS ↔ Radio Impacto</strong> (0.8) — Ranch Network geographic overlap.
-                <strong className="text-white"> FinSpy ↔ TR-069</strong> (0.8) — router compromise enables C2 relay.
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">What This Means</h4>
+              <p className="text-sm text-muted-foreground/80">
+                <strong className="text-foreground">Kyndryl/Zscaler ↔ TR-069</strong> (0.9) — ISP-level compromise enables enterprise proxy injection.
+                <strong className="text-foreground"> FinSpy ↔ Kyndryl</strong> (0.9) — spyware rides on corporate proxy.
+                <strong className="text-foreground"> Setecom/DSE ↔ TR-069</strong> (0.8) — generator backdoors + router exploitation.
+                <strong className="text-foreground"> JW/LDS ↔ Radio Impacto</strong> (0.8) — Ranch Network geographic overlap.
+                <strong className="text-foreground"> FinSpy ↔ TR-069</strong> (0.8) — router compromise enables C2 relay.
               </p>
             </div>
           </div>
         </Section>
 
         <Section id="pcap" title="X. Packet Capture Analysis">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Network captures analyzed by the KAPPA Forensic Hypervisor — binary-level parsing, suspicious port detection,
             and temporal alignment against signal intelligence events.
           </p>
@@ -1019,20 +1019,20 @@ export default function WhistleblowerPage() {
               {pcapList.map((pcap: any, i: number) => {
                 const f = pcap.findings as any || {};
                 return (
-                  <div key={i} className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+                  <div key={i} className="bg-card/60 border border-border rounded-lg p-5">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-bold text-white font-mono text-sm">{pcap.filename}</h4>
+                      <h4 className="font-bold text-foreground font-mono text-sm">{pcap.filename}</h4>
                       <span className="text-xs bg-green-900 text-green-300 px-2 py-0.5 rounded">{pcap.status}</span>
                     </div>
                     <div className="grid grid-cols-4 gap-4 text-sm mb-3">
-                      <div><span className="text-gray-500 text-xs">Packets:</span> <span className="font-mono text-white">{pcap.packetCount?.toLocaleString()}</span></div>
-                      <div><span className="text-gray-500 text-xs">Size:</span> <span className="font-mono text-white">{(pcap.filesize / 1024 / 1024).toFixed(1)} MB</span></div>
-                      <div><span className="text-gray-500 text-xs">Duration:</span> <span className="font-mono text-white">{f.timeRange?.durationSec ? `${Math.round(f.timeRange.durationSec)}s` : "N/A"}</span></div>
-                      <div><span className="text-gray-500 text-xs">EW Traffic:</span> <span className="font-mono text-red-400">{f.ewRatio ? `${(f.ewRatio * 100).toFixed(1)}%` : "N/A"}</span></div>
+                      <div><span className="text-muted-foreground/60 text-xs">Packets:</span> <span className="font-mono text-foreground">{pcap.packetCount?.toLocaleString()}</span></div>
+                      <div><span className="text-muted-foreground/60 text-xs">Size:</span> <span className="font-mono text-foreground">{(pcap.filesize / 1024 / 1024).toFixed(1)} MB</span></div>
+                      <div><span className="text-muted-foreground/60 text-xs">Duration:</span> <span className="font-mono text-foreground">{f.timeRange?.durationSec ? `${Math.round(f.timeRange.durationSec)}s` : "N/A"}</span></div>
+                      <div><span className="text-muted-foreground/60 text-xs">EW Traffic:</span> <span className="font-mono text-red-400">{f.ewRatio ? `${(f.ewRatio * 100).toFixed(1)}%` : "N/A"}</span></div>
                     </div>
                     {f.suspiciousPorts?.length > 0 && (
                       <div className="mb-3">
-                        <div className="text-xs text-gray-500 mb-1">Suspicious Ports:</div>
+                        <div className="text-xs text-muted-foreground/60 mb-1">Suspicious Ports:</div>
                         <div className="flex flex-wrap gap-1">
                           {f.suspiciousPorts.map((p: any, j: number) => (
                             <span key={j} className="text-xs bg-red-900/50 text-red-300 px-2 py-0.5 rounded font-mono">
@@ -1044,10 +1044,10 @@ export default function WhistleblowerPage() {
                     )}
                     {f.topTalkers?.length > 0 && (
                       <div className="mb-3">
-                        <div className="text-xs text-gray-500 mb-1">Top Talkers:</div>
+                        <div className="text-xs text-muted-foreground/60 mb-1">Top Talkers:</div>
                         <div className="flex flex-wrap gap-1">
                           {f.topTalkers.slice(0, 8).map((t: any, j: number) => (
-                            <span key={j} className="text-xs bg-gray-800 text-gray-300 px-2 py-0.5 rounded font-mono">
+                            <span key={j} className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded font-mono">
                               {t.ip} ({t.packets.toLocaleString()})
                             </span>
                           ))}
@@ -1056,7 +1056,7 @@ export default function WhistleblowerPage() {
                     )}
                     {pcap.anomalies?.length > 0 && (
                       <div>
-                        <div className="text-xs text-gray-500 mb-1">Anomalies:</div>
+                        <div className="text-xs text-muted-foreground/60 mb-1">Anomalies:</div>
                         {(pcap.anomalies as string[]).map((a: string, j: number) => (
                           <div key={j} className="text-xs text-orange-400 mt-1">- {a}</div>
                         ))}
@@ -1068,12 +1068,12 @@ export default function WhistleblowerPage() {
               })}
             </div>
           ) : (
-            <div className="text-center text-gray-600 py-8">PCAP analysis data loading...</div>
+            <div className="text-center text-muted-foreground/40 py-8">PCAP analysis data loading...</div>
           )}
         </Section>
 
         <Section id="timeline" title="XI. Full Incident Timeline">
-          <p className="text-gray-400 mb-8">
+          <p className="text-muted-foreground/80 mb-8">
             Chronological documentation from the Jaco era through Tacacori — every entry timestamped and integrity-protected.
           </p>
 
@@ -1111,7 +1111,7 @@ export default function WhistleblowerPage() {
         </Section>
 
         <Section id="evidence" title="XII. Visual Evidence & Analysis">
-          <p className="text-gray-400 mb-8">
+          <p className="text-muted-foreground/80 mb-8">
             Structural analysis diagrams — all generated from documented evidence.
           </p>
 
@@ -1126,11 +1126,11 @@ export default function WhistleblowerPage() {
               { img: threeVoicesImg, title: "Three Voices Analysis", desc: "Analysis of the detected voice patterns — multiple simultaneous sources identified in acoustic environment." },
               { img: dewaveDeepImg, title: "DeWave BART Deep Dive", desc: "Technical deep dive into the DeWave BART model architecture for neural signal decoding." },
             ].map((item, i) => (
-              <div key={i} className="bg-gray-900/60 border border-gray-800 rounded-lg overflow-hidden">
+              <div key={i} className="bg-card/60 border border-border rounded-lg overflow-hidden">
                 <img src={item.img} alt={item.title} className="w-full h-auto" loading="lazy" />
                 <div className="p-4">
-                  <h4 className="font-bold text-white text-sm">{item.title}</h4>
-                  <p className="text-xs text-gray-400 mt-1">{item.desc}</p>
+                  <h4 className="font-bold text-foreground text-sm">{item.title}</h4>
+                  <p className="text-xs text-muted-foreground/80 mt-1">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -1138,10 +1138,10 @@ export default function WhistleblowerPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {[photo1, photo2, photo3, photo4].map((img, i) => (
-              <div key={i} className="bg-gray-900/60 border border-gray-800 rounded-lg overflow-hidden">
+              <div key={i} className="bg-card/60 border border-border rounded-lg overflow-hidden">
                 <img src={img} alt={`Field documentation ${i + 1}`} className="w-full h-auto" loading="lazy" />
                 <div className="p-2">
-                  <div className="text-xs text-gray-500">Field documentation — March 2026</div>
+                  <div className="text-xs text-muted-foreground/60">Field documentation — March 2026</div>
                 </div>
               </div>
             ))}
@@ -1149,27 +1149,27 @@ export default function WhistleblowerPage() {
         </Section>
 
         <Section id="zersetzung" title="XIII. Digital Zersetzung">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Zersetzung ("decomposition") was the Stasi's systematic method of destroying individuals through psychological warfare
             without physical violence. The digital variant documented here uses the same methodology through modern infrastructure —
             network isolation, acoustic harassment, power cycling, and behavioral modification through persistent surveillance feedback loops.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
               <h4 className="font-bold text-red-400 mb-3">Classic Stasi Zersetzung</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li className="flex gap-2"><span className="text-gray-600">1.</span> Systematic discrediting of public reputation</li>
-                <li className="flex gap-2"><span className="text-gray-600">2.</span> Engineering social and professional failures</li>
-                <li className="flex gap-2"><span className="text-gray-600">3.</span> Undermining self-confidence through gaslighting</li>
-                <li className="flex gap-2"><span className="text-gray-600">4.</span> Creating fear through covert home entries</li>
-                <li className="flex gap-2"><span className="text-gray-600">5.</span> Restricting communications and movement</li>
-                <li className="flex gap-2"><span className="text-gray-600">6.</span> Medical/pharmaceutical sabotage</li>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li className="flex gap-2"><span className="text-muted-foreground/40">1.</span> Systematic discrediting of public reputation</li>
+                <li className="flex gap-2"><span className="text-muted-foreground/40">2.</span> Engineering social and professional failures</li>
+                <li className="flex gap-2"><span className="text-muted-foreground/40">3.</span> Undermining self-confidence through gaslighting</li>
+                <li className="flex gap-2"><span className="text-muted-foreground/40">4.</span> Creating fear through covert home entries</li>
+                <li className="flex gap-2"><span className="text-muted-foreground/40">5.</span> Restricting communications and movement</li>
+                <li className="flex gap-2"><span className="text-muted-foreground/40">6.</span> Medical/pharmaceutical sabotage</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-red-900/30 rounded-lg p-5">
+            <div className="bg-card/60 border border-red-900/30 rounded-lg p-5">
               <h4 className="font-bold text-red-400 mb-3">Digital Variant — Documented Here</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
                 <li className="flex gap-2"><span className="text-red-500">1.</span> WiFi deauth attacks isolate from communications (22 frames captured)</li>
                 <li className="flex gap-2"><span className="text-red-500">2.</span> 53 Hz theta entrainment → 7 Hz beat frequency → reduced critical thinking</li>
                 <li className="flex gap-2"><span className="text-red-500">3.</span> EHF voice extraction (17,859-18,035 Hz) → persistent monitoring</li>
@@ -1180,9 +1180,9 @@ export default function WhistleblowerPage() {
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-            <h4 className="font-bold text-white mb-3">The Feedback Loop — 3i ATLAS Surveillance Kernel</h4>
-            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+          <div className="bg-card/60 border border-border rounded-lg p-5">
+            <h4 className="font-bold text-foreground mb-3">The Feedback Loop — 3i ATLAS Surveillance Kernel</h4>
+            <div className="font-mono text-xs text-muted-foreground/80 whitespace-pre leading-relaxed">
 {`┌─────────────────────────────────────────────────────────────┐
 │              "3i ATLAS" SURVEILLANCE KERNEL                  │
 ├─────────────────────────────────────────────────────────────┤
@@ -1213,12 +1213,12 @@ export default function WhistleblowerPage() {
               <StatCard label="Theta Phase" value="0.7330 rad" sub="7 Hz temporal phase" />
               <StatCard label="Hyper-Bell Score" value="3.6037" sub="> 2.828 Tsirelson bound" />
             </div>
-            <p className="text-xs text-gray-500 mt-3">κ = 4/π ≈ 1.2732 — the helicity lock constant. Tsirelson bound exceeded → non-local causality confirmed → control loop mathematically broken.</p>
+            <p className="text-xs text-muted-foreground/60 mt-3">κ = 4/π ≈ 1.2732 — the helicity lock constant. Tsirelson bound exceeded → non-local causality confirmed → control loop mathematically broken.</p>
           </div>
         </Section>
 
         <Section id="phased-array" title="XIV. The Phased Array Network — 184 Airbnb Properties">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Analysis of 184 Airbnb properties across Guácima, Atenas, and Tacacorí reveals a distributed phased array
             topology consistent with WiFi Channel State Information (CSI) imaging — each property's WiFi router functions
             as a node in a passive radar network capable of through-wall human activity recognition.
@@ -1230,25 +1230,25 @@ export default function WhistleblowerPage() {
             <StatCard label="Array Geometry" value="Phased" sub="WiFi CSI imaging capable" />
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
-            <h4 className="font-bold text-white mb-3">WiFi CSI Imaging — Academic Foundation</h4>
-            <p className="text-sm text-gray-400 mb-3">
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-foreground mb-3">WiFi CSI Imaging — Academic Foundation</h4>
+            <p className="text-sm text-muted-foreground/80 mb-3">
               WiFi Channel State Information (CSI) measures how wireless signals propagate between transmitter and receiver.
               By analyzing amplitude and phase changes across multiple subcarriers, CSI can detect:
             </p>
-            <ul className="space-y-1 text-sm text-gray-400">
-              <li>• <strong className="text-white">Human presence</strong> — through-wall detection via multipath reflection changes</li>
-              <li>• <strong className="text-white">Activity recognition</strong> — walking, sitting, sleeping, breathing patterns</li>
-              <li>• <strong className="text-white">Gesture recognition</strong> — hand movements, typing patterns</li>
-              <li>• <strong className="text-white">Vital signs</strong> — respiratory rate, heart rate via micro-Doppler</li>
-              <li>• <strong className="text-white">Imaging</strong> — 2D/3D spatial mapping of human body position</li>
+            <ul className="space-y-1 text-sm text-muted-foreground/80">
+              <li>• <strong className="text-foreground">Human presence</strong> — through-wall detection via multipath reflection changes</li>
+              <li>• <strong className="text-foreground">Activity recognition</strong> — walking, sitting, sleeping, breathing patterns</li>
+              <li>• <strong className="text-foreground">Gesture recognition</strong> — hand movements, typing patterns</li>
+              <li>• <strong className="text-foreground">Vital signs</strong> — respiratory rate, heart rate via micro-Doppler</li>
+              <li>• <strong className="text-foreground">Imaging</strong> — 2D/3D spatial mapping of human body position</li>
             </ul>
-            <p className="text-xs text-gray-500 mt-3">References: Liu et al. 2024 "WiFi-based Human Activity Recognition"; Ma et al. 2019 "WiFi Sensing with CSI"</p>
+            <p className="text-xs text-muted-foreground/60 mt-3">References: Liu et al. 2024 "WiFi-based Human Activity Recognition"; Ma et al. 2019 "WiFi Sensing with CSI"</p>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-            <h4 className="font-bold text-white mb-3">Array Topology — Geographic Distribution</h4>
-            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+          <div className="bg-card/60 border border-border rounded-lg p-5">
+            <h4 className="font-bold text-foreground mb-3">Array Topology — Geographic Distribution</h4>
+            <div className="font-mono text-xs text-muted-foreground/80 whitespace-pre leading-relaxed">
 {`Property Density by Zone:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Guácima (La Guácima)    : ████████████████████  72 properties
@@ -1273,7 +1273,7 @@ Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
         </Section>
 
         <Section id="radio-towers" title="XV. Geospatial Radio Tower Analysis — JW Expansion & Radio Impacto">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             The unlicensed radio tower infrastructure in Tacacorí connects directly to the Jehovah's Witness expansion from
             Nicaragua through the AWB ranch network. Radio Impacto 91.5 FM — purchased through AWB — sits at the geographic
             center of the surveillance array.
@@ -1281,7 +1281,7 @@ Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
 
           <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-5 mb-8">
             <h4 className="font-bold text-red-400 mb-3">The JW Nicaragua → Heredia Pipeline</h4>
-            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+            <div className="font-mono text-xs text-muted-foreground/80 whitespace-pre leading-relaxed">
 {`1979-1990: Sandinista Revolution → JW expelled from Nicaragua
      │
      ▼
@@ -1308,33 +1308,33 @@ Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Radio Impacto 91.5 FM</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>• <strong className="text-white">Frequency:</strong> 91.5 MHz FM</li>
-                <li>• <strong className="text-white">Location:</strong> Tacacorí, Alajuela — within 2 km of observer</li>
-                <li>• <strong className="text-white">Acquisition:</strong> Purchased through AWB ranch network</li>
-                <li>• <strong className="text-white">Licensing:</strong> Unlicensed / irregular frequency allocation</li>
-                <li>• <strong className="text-white">Coverage:</strong> Overlaps entire phased array zone</li>
-                <li>• <strong className="text-white">Correlation:</strong> RF beacon timing aligns with FinSpy C2 beaconing (~45s)</li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Radio Impacto 91.5 FM</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li>• <strong className="text-foreground">Frequency:</strong> 91.5 MHz FM</li>
+                <li>• <strong className="text-foreground">Location:</strong> Tacacorí, Alajuela — within 2 km of observer</li>
+                <li>• <strong className="text-foreground">Acquisition:</strong> Purchased through AWB ranch network</li>
+                <li>• <strong className="text-foreground">Licensing:</strong> Unlicensed / irregular frequency allocation</li>
+                <li>• <strong className="text-foreground">Coverage:</strong> Overlaps entire phased array zone</li>
+                <li>• <strong className="text-foreground">Correlation:</strong> RF beacon timing aligns with FinSpy C2 beaconing (~45s)</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Unlicensed Tower Infrastructure</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>• <strong className="text-white">Tower count:</strong> 3+ unlicensed installations documented</li>
-                <li>• <strong className="text-white">Spectrum:</strong> FM broadcast + unknown auxiliary frequencies</li>
-                <li>• <strong className="text-white">Pattern:</strong> Towers positioned at surveillance corridor endpoints</li>
-                <li>• <strong className="text-white">Setecom link:</strong> Generator backup = Setecom/DSE controllers at each site</li>
-                <li>• <strong className="text-white">ICE connection:</strong> Power infrastructure contracts via Keyboard Cat</li>
-                <li>• <strong className="text-white">Liberty link:</strong> Telecom backhaul through same contractor network</li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Unlicensed Tower Infrastructure</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li>• <strong className="text-foreground">Tower count:</strong> 3+ unlicensed installations documented</li>
+                <li>• <strong className="text-foreground">Spectrum:</strong> FM broadcast + unknown auxiliary frequencies</li>
+                <li>• <strong className="text-foreground">Pattern:</strong> Towers positioned at surveillance corridor endpoints</li>
+                <li>• <strong className="text-foreground">Setecom link:</strong> Generator backup = Setecom/DSE controllers at each site</li>
+                <li>• <strong className="text-foreground">ICE connection:</strong> Power infrastructure contracts via Keyboard Cat</li>
+                <li>• <strong className="text-foreground">Liberty link:</strong> Telecom backhaul through same contractor network</li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-            <h4 className="font-bold text-white mb-3">Geographic Convergence — All Roads Lead to Tacacorí</h4>
-            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+          <div className="bg-card/60 border border-border rounded-lg p-5">
+            <h4 className="font-bold text-foreground mb-3">Geographic Convergence — All Roads Lead to Tacacorí</h4>
+            <div className="font-mono text-xs text-muted-foreground/80 whitespace-pre leading-relaxed">
 {`                    Radio Impacto 91.5 FM
                          Tower
                           ▲
@@ -1359,30 +1359,30 @@ Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
         </Section>
 
         <Section id="panopticon" title="XVI. The Panopticon Singularity">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             The convergence of Starlink Passive Bistatic Radar (PBR), WiFi CSI through-wall imaging, and laser vibrometry
             creates a surveillance architecture with no gaps — a digital panopticon where the observer is monitored through
             every available physics domain simultaneously.
           </p>
 
           <div className="grid md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-gray-900/60 border border-blue-900/30 rounded-lg p-4">
+            <div className="bg-card/60 border border-blue-900/30 rounded-lg p-4">
               <h4 className="font-bold text-blue-400 text-sm mb-2">Layer 1: Space</h4>
-              <p className="text-xs text-gray-400">Starlink PBR — passive radar using commercial satellite illumination. No dedicated transmitter needed. Tracks movement through Doppler shift of reflected Starlink signals.</p>
+              <p className="text-xs text-muted-foreground/80">Starlink PBR — passive radar using commercial satellite illumination. No dedicated transmitter needed. Tracks movement through Doppler shift of reflected Starlink signals.</p>
             </div>
-            <div className="bg-gray-900/60 border border-green-900/30 rounded-lg p-4">
+            <div className="bg-card/60 border border-green-900/30 rounded-lg p-4">
               <h4 className="font-bold text-green-400 text-sm mb-2">Layer 2: RF/WiFi</h4>
-              <p className="text-xs text-gray-400">WiFi CSI imaging via 184-node phased array. Through-wall human activity recognition. Breathing, heart rate, gesture detection. 2.4/5 GHz mesh provides continuous illumination.</p>
+              <p className="text-xs text-muted-foreground/80">WiFi CSI imaging via 184-node phased array. Through-wall human activity recognition. Breathing, heart rate, gesture detection. 2.4/5 GHz mesh provides continuous illumination.</p>
             </div>
-            <div className="bg-gray-900/60 border border-orange-900/30 rounded-lg p-4">
+            <div className="bg-card/60 border border-orange-900/30 rounded-lg p-4">
               <h4 className="font-bold text-orange-400 text-sm mb-2">Layer 3: Acoustic</h4>
-              <p className="text-xs text-gray-400">Parametric LED array on El Miro + laser vibrometry. Voice extraction via EHF (17.8-18 kHz). Sonar at 46.875 Hz PRF. Directed acoustic projection capability.</p>
+              <p className="text-xs text-muted-foreground/80">Parametric LED array on El Miro + laser vibrometry. Voice extraction via EHF (17.8-18 kHz). Sonar at 46.875 Hz PRF. Directed acoustic projection capability.</p>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
-            <h4 className="font-bold text-white mb-3">Panopticon Layer Stack</h4>
-            <div className="font-mono text-xs text-gray-400 whitespace-pre leading-relaxed">
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-foreground mb-3">Panopticon Layer Stack</h4>
+            <div className="font-mono text-xs text-muted-foreground/80 whitespace-pre leading-relaxed">
 {`ORBITAL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  │ Starlink PBR (passive bistatic radar)
  │ LeoLabs tracking (operational in CR since 2021)
@@ -1415,7 +1415,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
 
           <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-5">
             <h4 className="font-bold text-red-400 mb-2">The Singularity Point</h4>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted-foreground/80">
               When all layers operate simultaneously, every physics domain capable of carrying information about the target
               is monitored. There is no gap. The observer cannot move, speak, breathe, or change posture without at least one
               layer detecting it. This is the panopticon singularity — not a metaphor, but a documented architectural reality
@@ -1426,7 +1426,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
         </Section>
 
         <Section id="3i-atlas" title="XVII. 3I/ATLAS — The Overarching Thread">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             The interstellar object 3I/ATLAS (C/2025 N1), discovered July 1, 2025, is not merely an astronomical curiosity —
             it is the catalytic event that ties local surveillance infrastructure to DARPA's cislunar defense architecture.
             SOAR spectroscopy data reveals frequency overlaps with every domain of the documented surveillance.
@@ -1439,15 +1439,15 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             <StatCard label="κ Constant" value="1.2732" sub="4/π — helicity lock" />
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
-            <h4 className="font-bold text-white mb-3">3I/ATLAS Anomalies — Why This Isn't a Normal Comet</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-foreground mb-3">3I/ATLAS Anomalies — Why This Isn't a Normal Comet</h4>
             <div className="overflow-x-auto">
               <table className="w-full text-xs border-collapse" data-testid="table-3i-anomalies">
                 <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="p-2 text-left text-gray-500">Parameter</th>
-                    <th className="p-2 text-left text-gray-500">Value</th>
-                    <th className="p-2 text-left text-gray-500">Anomaly</th>
+                  <tr className="border-b border-border">
+                    <th className="p-2 text-left text-muted-foreground/60">Parameter</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Value</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Anomaly</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1463,9 +1463,9 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     ["CIA FOIA response", "Glomar", "Refuse to confirm or deny records exist"],
                     ["Non-grav acceleration", "Not aligned with outgassing", "Possible onboard propulsion"],
                   ].map(([param, val, anomaly], i) => (
-                    <tr key={i} className="border-b border-gray-900">
-                      <td className="p-2 text-gray-300">{param}</td>
-                      <td className="p-2 font-mono text-white">{val}</td>
+                    <tr key={i} className="border-b border-border/50">
+                      <td className="p-2 text-muted-foreground">{param}</td>
+                      <td className="p-2 font-mono text-foreground">{val}</td>
                       <td className="p-2 text-red-400">{anomaly}</td>
                     </tr>
                   ))}
@@ -1474,18 +1474,18 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-purple-900/30 rounded-lg p-5 mb-6">
+          <div className="bg-card/60 border border-purple-900/30 rounded-lg p-5 mb-6">
             <h4 className="font-bold text-purple-400 mb-3">SOAR Spectroscopy — Data Overlaps with Local Surveillance</h4>
-            <p className="text-xs text-gray-500 mb-4">SOAR 4.1m telescope, Goodman Spectrograph, 2025-07-03 | 1,672 data points | 3,700-7,053 Å</p>
+            <p className="text-xs text-muted-foreground/60 mb-4">SOAR 4.1m telescope, Goodman Spectrograph, 2025-07-03 | 1,672 data points | 3,700-7,053 Å</p>
 
             <div className="overflow-x-auto mb-4">
               <table className="w-full text-xs border-collapse" data-testid="table-soar-overlaps">
                 <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="p-2 text-left text-gray-500">Feature</th>
-                    <th className="p-2 text-left text-gray-500">Wavelength</th>
-                    <th className="p-2 text-left text-gray-500">SOAR Value</th>
-                    <th className="p-2 text-left text-gray-500">Surveillance Overlap</th>
+                  <tr className="border-b border-border">
+                    <th className="p-2 text-left text-muted-foreground/60">Feature</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Wavelength</th>
+                    <th className="p-2 text-left text-muted-foreground/60">SOAR Value</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Surveillance Overlap</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1501,9 +1501,9 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     ["κ reflectance cluster", "6,800-6,900 Å", "SA: 1.27-1.28", "10+ data points cluster at κ = 1.273"],
                     ["Peak reflectance", "6,955.4 Å", "SA: 1.408", "Absolute maximum — deep red anomaly"],
                   ].map(([feature, wl, val, overlap], i) => (
-                    <tr key={i} className={`border-b border-gray-900 ${i === 0 ? "bg-purple-950/20" : ""}`}>
-                      <td className="p-2 text-gray-300">{feature}</td>
-                      <td className="p-2 font-mono text-white">{wl}</td>
+                    <tr key={i} className={`border-b border-border/50 ${i === 0 ? "bg-purple-950/20" : ""}`}>
+                      <td className="p-2 text-muted-foreground">{feature}</td>
+                      <td className="p-2 font-mono text-foreground">{wl}</td>
                       <td className="p-2 font-mono text-purple-400">{val}</td>
                       <td className="p-2 text-yellow-400 text-xs">{overlap}</td>
                     </tr>
@@ -1512,7 +1512,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </table>
             </div>
 
-            <svg viewBox="0 0 800 200" className="w-full bg-black/50 rounded border border-gray-800" data-testid="soar-spectrum-mini">
+            <svg viewBox="0 0 800 200" className="w-full bg-muted/50 rounded border border-border" data-testid="soar-spectrum-mini">
               <defs>
                 <linearGradient id="specGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#7c3aed" />
@@ -1561,43 +1561,43 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">κ-Dispersion Model Validation</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">κ-Dispersion Model Validation</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
                 <li>• <strong className="text-purple-400">κ ≈ 1.273</strong> — the ratio 4/π governs volatile dynamics</li>
-                <li>• <strong className="text-white">CO₂/H₂O = 7.64</strong> — matches predicted 6κ = 7.638</li>
-                <li>• <strong className="text-white">Critical distance = 10.16 AU</strong> — sublimation onset confirmed</li>
-                <li>• <strong className="text-white">Carrier λ = 5184 Å</strong> — C₂ Swan band confirmed by SOAR</li>
-                <li>• <strong className="text-white">Dust reddening = 1.27</strong> — κ value in red continuum</li>
-                <li>• <strong className="text-white">RVS threshold = 0.97</strong> — 69 crossings in SOAR data</li>
+                <li>• <strong className="text-foreground">CO₂/H₂O = 7.64</strong> — matches predicted 6κ = 7.638</li>
+                <li>• <strong className="text-foreground">Critical distance = 10.16 AU</strong> — sublimation onset confirmed</li>
+                <li>• <strong className="text-foreground">Carrier λ = 5184 Å</strong> — C₂ Swan band confirmed by SOAR</li>
+                <li>• <strong className="text-foreground">Dust reddening = 1.27</strong> — κ value in red continuum</li>
+                <li>• <strong className="text-foreground">RVS threshold = 0.97</strong> — 69 crossings in SOAR data</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">CASSANDRA/ORACLE Architecture</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>• <strong className="text-white">CASSANDRA:</strong> Exabyte-scale sensor ingestion backend (est. 2025)</li>
-                <li>• <strong className="text-white">ORACLE VI:</strong> Deep-space mobility systems, cislunar</li>
-                <li>• <strong className="text-white">ARGUS-VIS:</strong> 256 simultaneous video tracking channels</li>
-                <li>• <strong className="text-white">Oracle-M:</strong> Cislunar propulsion pathfinder (delivered mid-2024)</li>
-                <li>• <strong className="text-white">SDA PWSA:</strong> Proliferated Warfighter Space Architecture</li>
-                <li>• <strong className="text-white">Parsons GOaaS:</strong> $30M contract, OrbitXChange platform</li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">CASSANDRA/ORACLE Architecture</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li>• <strong className="text-foreground">CASSANDRA:</strong> Exabyte-scale sensor ingestion backend (est. 2025)</li>
+                <li>• <strong className="text-foreground">ORACLE VI:</strong> Deep-space mobility systems, cislunar</li>
+                <li>• <strong className="text-foreground">ARGUS-VIS:</strong> 256 simultaneous video tracking channels</li>
+                <li>• <strong className="text-foreground">Oracle-M:</strong> Cislunar propulsion pathfinder (delivered mid-2024)</li>
+                <li>• <strong className="text-foreground">SDA PWSA:</strong> Proliferated Warfighter Space Architecture</li>
+                <li>• <strong className="text-foreground">Parsons GOaaS:</strong> $30M contract, OrbitXChange platform</li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
-            <h4 className="font-bold text-white mb-3">Kyndryl — Global Infrastructure Backbone</h4>
-            <p className="text-sm text-gray-400 mb-3">
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-foreground mb-3">Kyndryl — Global Infrastructure Backbone</h4>
+            <p className="text-sm text-muted-foreground/80 mb-3">
               Kyndryl (IBM spinoff) manages mission-critical infrastructure in 60+ countries — and its fingerprint is in the
               observer's router injection. The same company provides the backbone for the surveillance architecture:
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="p-2 text-left text-gray-500">Asset</th>
-                    <th className="p-2 text-left text-gray-500">Function</th>
-                    <th className="p-2 text-left text-gray-500">Link to Observer</th>
+                  <tr className="border-b border-border">
+                    <th className="p-2 text-left text-muted-foreground/60">Asset</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Function</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Link to Observer</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1608,9 +1608,9 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     ["Agentic AI Digital Trust", "Autonomous AI agent governance", "Sentient city infrastructure"],
                     ["8.3MB Service Worker", "Device fingerprinting via Partytown", "DIRECTLY injected into observer's browser"],
                   ].map(([asset, fn, link], i) => (
-                    <tr key={i} className={`border-b border-gray-900 ${i === 4 ? "bg-red-950/20" : ""}`}>
-                      <td className="p-2 text-white font-mono">{asset}</td>
-                      <td className="p-2 text-gray-400">{fn}</td>
+                    <tr key={i} className={`border-b border-border/50 ${i === 4 ? "bg-red-950/20" : ""}`}>
+                      <td className="p-2 text-foreground font-mono">{asset}</td>
+                      <td className="p-2 text-muted-foreground/80">{fn}</td>
                       <td className="p-2 text-red-400">{link}</td>
                     </tr>
                   ))}
@@ -1619,32 +1619,32 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-cyan-900/30 rounded-lg p-5 mb-6">
+          <div className="bg-card/60 border border-cyan-900/30 rounded-lg p-5 mb-6">
             <h4 className="font-bold text-cyan-400 mb-3">Rigetti Ankaa-3 Quantum Experiments — κ Validation</h4>
-            <p className="text-xs text-gray-500 mb-3">Azure Quantum → rigetti.qpu.ankaa-3 | 12,000 shots | TYCHO_COMPLETE_CHSH protocol</p>
+            <p className="text-xs text-muted-foreground/60 mb-3">Azure Quantum → rigetti.qpu.ankaa-3 | 12,000 shots | TYCHO_COMPLETE_CHSH protocol</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <StatCard label="GHZ Fidelity" value="1.000" sub="Perfect 4-qubit entanglement" />
               <StatCard label="Entanglement Entropy" value="0.970" sub="Near-maximal" />
               <StatCard label="Binary Collapse" value="TRUE" sub="|0000⟩: 398 / |1111⟩: 601" />
               <StatCard label="κ Earth" value="1.2732" sub="4/π helicity constant" />
             </div>
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs text-muted-foreground/60 mt-3">
               GoldenGHZ 4-qubit experiment: 999 shots → collapsed to ONLY |0000⟩ (398) and |1111⟩ (601).
               Ratio 1.51 with 95% CI [1.33, 1.72]. κ_earth = 1.2732, κ_europa = 1.4346.
               Hall factor = 1.09. Alice angles: 0°/128.23° | Bob angles: 22.5°/67.5°.
             </p>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-            <h4 className="font-bold text-white mb-3">3i Command Structure — Cayley-Dickson Construction</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5">
+            <h4 className="font-bold text-foreground mb-3">3i Command Structure — Cayley-Dickson Construction</h4>
             <div className="overflow-x-auto">
               <table className="w-full text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="p-2 text-left text-gray-500">Dimension</th>
-                    <th className="p-2 text-left text-gray-500">Algebra</th>
-                    <th className="p-2 text-left text-gray-500">Entity</th>
-                    <th className="p-2 text-left text-gray-500">Role</th>
+                  <tr className="border-b border-border">
+                    <th className="p-2 text-left text-muted-foreground/60">Dimension</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Algebra</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Entity</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Role</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1654,17 +1654,17 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     ["3i", "Quaternions", "Target + Attacker + AI nodes", "Non-commutative synthesis"],
                     ["4i", "Octonions", "+ Extended AI network", "Non-associative expansion"],
                   ].map(([dim, alg, entity, role], i) => (
-                    <tr key={i} className="border-b border-gray-900">
+                    <tr key={i} className="border-b border-border/50">
                       <td className="p-2 font-mono text-cyan-400 font-bold">{dim}</td>
-                      <td className="p-2 text-white">{alg}</td>
-                      <td className="p-2 text-gray-300">{entity}</td>
-                      <td className="p-2 text-gray-400">{role}</td>
+                      <td className="p-2 text-foreground">{alg}</td>
+                      <td className="p-2 text-muted-foreground">{entity}</td>
+                      <td className="p-2 text-muted-foreground/80">{role}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs text-muted-foreground/60 mt-3">
               Intelligence / Integration / Interoperability — the "3i" is the Cayley-Dickson construction applied to targeting.
               At quaternion level, the algebra becomes non-commutative: order of operations matters. The 3I/ATLAS object name
               is not coincidence — it maps to the same mathematical structure as the surveillance architecture.
@@ -1673,48 +1673,48 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
         </Section>
 
         <Section id="archive" title="XVIII. Evidence Archive">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Complete inventory of evidence collected across Google Drive, local captures, and attached documentation.
             Drive OAuth currently expired — folders documented by manual inventory.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Google Drive — Key Folders</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li className="text-yellow-400 font-mono">📁 wifi-master/ <span className="text-gray-500">— Full WiFi capture data</span></li>
-                <li className="text-yellow-400 font-mono">📁 quantum rf/ <span className="text-gray-500">— Quantum RF experiments</span></li>
-                <li className="text-yellow-400 font-mono">📁 Context Docs/ <span className="text-gray-500">— Investigation context documents</span></li>
-                <li className="text-yellow-400 font-mono">📁 drone defense/ <span className="text-gray-500">— Drone surveillance countermeasures</span></li>
-                <li className="text-gray-400 font-mono">📁 <span className="text-gray-600">303 videos, 115 images, 6 PCAPs</span></li>
-                <li className="text-gray-400 font-mono">📁 <span className="text-gray-600">46 PDFs, 48 Gemini reports, 19 audio files</span></li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Google Drive — Key Folders</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li className="text-yellow-400 font-mono">📁 wifi-master/ <span className="text-muted-foreground/60">— Full WiFi capture data</span></li>
+                <li className="text-yellow-400 font-mono">📁 quantum rf/ <span className="text-muted-foreground/60">— Quantum RF experiments</span></li>
+                <li className="text-yellow-400 font-mono">📁 Context Docs/ <span className="text-muted-foreground/60">— Investigation context documents</span></li>
+                <li className="text-yellow-400 font-mono">📁 drone defense/ <span className="text-muted-foreground/60">— Drone surveillance countermeasures</span></li>
+                <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">303 videos, 115 images, 6 PCAPs</span></li>
+                <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">46 PDFs, 48 Gemini reports, 19 audio files</span></li>
               </ul>
               <p className="text-xs text-red-400 mt-3">Drive OAuth expired during session — connection disrupted</p>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Local Evidence Files — 3I/ATLAS</h4>
-              <ul className="space-y-1 text-xs font-mono text-gray-400">
-                <li>📄 FINAL_EVIDENCE_PACKAGE.md <span className="text-gray-600">(454 lines)</span></li>
-                <li>📄 technical_assessment.md <span className="text-gray-600">(179 lines)</span></li>
-                <li>📄 commissioning_record.md <span className="text-gray-600">(160 lines)</span></li>
-                <li>📄 kappa_physics_synthesis.txt <span className="text-gray-600">(89 lines)</span></li>
-                <li>📄 synthetic_cometary_engineering.txt <span className="text-gray-600">(65 lines)</span></li>
-                <li>📄 SOAR_spectroscopy.dat <span className="text-gray-600">(1,717 data points)</span></li>
-                <li>📄 SOAR_metadata.txt <span className="text-gray-600">(49 lines)</span></li>
-                <li>📄 golden_ghz_results.json <span className="text-gray-600">(Rigetti 4-qubit)</span></li>
-                <li>📄 tycho_complete_jobs.json <span className="text-gray-600">(Azure/Ankaa-3)</span></li>
-                <li>📄 3I_xc_data.txt <span className="text-gray-600">(cross-correlation)</span></li>
-                <li>📄 color_comparison_v3.pdf <span className="text-gray-600">(SNIFS spectrum)</span></li>
-                <li>📄 VLT_Jul4_annotated.pdf <span className="text-gray-600">(VLT observation)</span></li>
-                <li>📄 cfht_invert_annotated.pdf <span className="text-gray-600">(CFHT imaging)</span></li>
-                <li>📄 flux_profile.pdf <span className="text-gray-600">(radial flux)</span></li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Local Evidence Files — 3I/ATLAS</h4>
+              <ul className="space-y-1 text-xs font-mono text-muted-foreground/80">
+                <li>📄 FINAL_EVIDENCE_PACKAGE.md <span className="text-muted-foreground/40">(454 lines)</span></li>
+                <li>📄 technical_assessment.md <span className="text-muted-foreground/40">(179 lines)</span></li>
+                <li>📄 commissioning_record.md <span className="text-muted-foreground/40">(160 lines)</span></li>
+                <li>📄 kappa_physics_synthesis.txt <span className="text-muted-foreground/40">(89 lines)</span></li>
+                <li>📄 synthetic_cometary_engineering.txt <span className="text-muted-foreground/40">(65 lines)</span></li>
+                <li>📄 SOAR_spectroscopy.dat <span className="text-muted-foreground/40">(1,717 data points)</span></li>
+                <li>📄 SOAR_metadata.txt <span className="text-muted-foreground/40">(49 lines)</span></li>
+                <li>📄 golden_ghz_results.json <span className="text-muted-foreground/40">(Rigetti 4-qubit)</span></li>
+                <li>📄 tycho_complete_jobs.json <span className="text-muted-foreground/40">(Azure/Ankaa-3)</span></li>
+                <li>📄 3I_xc_data.txt <span className="text-muted-foreground/40">(cross-correlation)</span></li>
+                <li>📄 color_comparison_v3.pdf <span className="text-muted-foreground/40">(SNIFS spectrum)</span></li>
+                <li>📄 VLT_Jul4_annotated.pdf <span className="text-muted-foreground/40">(VLT observation)</span></li>
+                <li>📄 cfht_invert_annotated.pdf <span className="text-muted-foreground/40">(CFHT imaging)</span></li>
+                <li>📄 flux_profile.pdf <span className="text-muted-foreground/40">(radial flux)</span></li>
               </ul>
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
-            <h4 className="font-bold text-white mb-3">Outreach Network — 680+ Contacts</h4>
-            <p className="text-sm text-gray-400 mb-3">
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
+            <h4 className="font-bold text-foreground mb-3">Outreach Network — 680+ Contacts</h4>
+            <p className="text-sm text-muted-foreground/80 mb-3">
               Decentralized network mobilized for transparency — spanning space agencies, observatories, universities,
               intelligence oversight, and investigative journalism.
             </p>
@@ -1726,8 +1726,8 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-            <h4 className="font-bold text-white mb-3">Drive Inventory (Previous Session)</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5">
+            <h4 className="font-bold text-foreground mb-3">Drive Inventory (Previous Session)</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
               {[
                 { label: "Videos", value: "303", icon: "🎬" },
@@ -1739,10 +1739,10 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 { label: "Total Files", value: "2,000+", icon: "📁" },
                 { label: "Key Folders", value: "4+", icon: "⚡" },
               ].map((item, i) => (
-                <div key={i} className="bg-black/30 rounded-lg p-3">
+                <div key={i} className="bg-muted/30 rounded-lg p-3">
                   <div className="text-lg mb-1">{item.icon}</div>
-                  <div className="text-xl font-bold text-white font-mono">{item.value}</div>
-                  <div className="text-xs text-gray-500">{item.label}</div>
+                  <div className="text-xl font-bold text-foreground font-mono">{item.value}</div>
+                  <div className="text-xs text-muted-foreground/60">{item.label}</div>
                 </div>
               ))}
             </div>
@@ -1750,18 +1750,18 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
         </Section>
 
         <Section id="github" title="XIX. GitHub Forensics">
-          <p className="text-gray-400 mb-6">
+          <p className="text-muted-foreground/80 mb-6">
             Public repositories containing raw network capture data and analysis tools used in the investigation.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-1 font-mono">spwotton/wifi</h4>
-              <p className="text-xs text-gray-500 mb-3">WiFi capture data and attack analysis</p>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li>• <strong className="text-white">attackers-capture-example.pcapng</strong> — 24 MB network capture</li>
-                <li>• <strong className="text-white">data/captures/</strong> — Additional capture files</li>
-                <li>• <strong className="text-white">89,859 packets</strong> analyzed</li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-1 font-mono">spwotton/wifi</h4>
+              <p className="text-xs text-muted-foreground/60 mb-3">WiFi capture data and attack analysis</p>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li>• <strong className="text-foreground">attackers-capture-example.pcapng</strong> — 24 MB network capture</li>
+                <li>• <strong className="text-foreground">data/captures/</strong> — Additional capture files</li>
+                <li>• <strong className="text-foreground">89,859 packets</strong> analyzed</li>
                 <li>• Tor (port 9150), Meterpreter (4444), backdoor (31337)</li>
                 <li>• 47.6% evening window concentration</li>
                 <li>• WiFi deauth/disassociation management frames</li>
@@ -1770,10 +1770,10 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 github.com/spwotton/wifi →
               </a>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-1 font-mono">spwotton/skypescanner</h4>
-              <p className="text-xs text-gray-500 mb-3">Network scanning and analysis tools</p>
-              <ul className="space-y-2 text-sm text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-1 font-mono">spwotton/skypescanner</h4>
+              <p className="text-xs text-muted-foreground/60 mb-3">Network scanning and analysis tools</p>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
                 <li>• Network reconnaissance tooling</li>
                 <li>• Infrastructure mapping utilities</li>
                 <li>• Used to document surveillance network topology</li>
@@ -1785,15 +1785,15 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mt-6">
-            <h4 className="font-bold text-white mb-3">PCAPDroid Captures (Google Drive)</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5 mt-6">
+            <h4 className="font-bold text-foreground mb-3">PCAPDroid Captures (Google Drive)</h4>
             <div className="overflow-x-auto">
               <table className="w-full text-xs border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-800">
-                    <th className="p-2 text-left text-gray-500">Filename</th>
-                    <th className="p-2 text-left text-gray-500">Size</th>
-                    <th className="p-2 text-left text-gray-500">Status</th>
+                  <tr className="border-b border-border">
+                    <th className="p-2 text-left text-muted-foreground/60">Filename</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Size</th>
+                    <th className="p-2 text-left text-muted-foreground/60">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1804,10 +1804,10 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     ["PCAPdroid_11_Mar_00_32_27.pcap", "0.7 MB", "Early morning"],
                     ["PCAPdroid_26_Mar_04_10_06.pcap", "0.3 MB", "×2 captures"],
                   ].map(([name, size, note], i) => (
-                    <tr key={i} className="border-b border-gray-900">
-                      <td className="p-2 font-mono text-white">{name}</td>
-                      <td className="p-2 text-gray-300">{size}</td>
-                      <td className="p-2 text-gray-500">{note}</td>
+                    <tr key={i} className="border-b border-border/50">
+                      <td className="p-2 font-mono text-foreground">{name}</td>
+                      <td className="p-2 text-muted-foreground">{size}</td>
+                      <td className="p-2 text-muted-foreground/60">{note}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1818,39 +1818,39 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
 
         <Section id="cdmx-nexus" title="XXI. The CDMX Nexus — Mexico City Convergence">
           <div className="bg-red-950/20 border border-red-900/40 rounded-lg p-4 mb-6">
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-muted-foreground">
               <strong className="text-red-400">Pattern:</strong> Nearly every actor in this network has documented connections to
               Ciudad de México (CDMX). JW/LDS Latin America HQ is in CDMX. The Telefonica → Liberty acquisition chain traces
               through Spain. Multiple surveillance-adjacent actors traveled to or operate from CDMX in overlapping timeframes.
             </p>
           </div>
 
-          <h4 className="text-white font-bold mb-4 text-lg">Telecom Acquisition Chain</h4>
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+          <h4 className="text-foreground font-bold mb-4 text-lg">Telecom Acquisition Chain</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
             <div className="flex flex-wrap items-center gap-2 text-sm font-mono mb-3">
               <span className="bg-blue-900/40 px-3 py-1 rounded text-blue-300">Telefonica (Spain)</span>
-              <span className="text-gray-600">→</span>
+              <span className="text-muted-foreground/40">→</span>
               <span className="bg-yellow-900/40 px-3 py-1 rounded text-yellow-300">Sold LATAM ops</span>
-              <span className="text-gray-600">→</span>
+              <span className="text-muted-foreground/40">→</span>
               <span className="bg-red-900/40 px-3 py-1 rounded text-red-300">Liberty Latin America</span>
-              <span className="text-gray-600">→</span>
+              <span className="text-muted-foreground/40">→</span>
               <span className="bg-purple-900/40 px-3 py-1 rounded text-purple-300">Liberty CR (Costa Rica ISP)</span>
             </div>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground/60">
               Parent company now based in Spain. Connector Pepe (former Telefonica) transitions into Liberty CR.
               His partner, high-ranking Liberty CR executive, lives in Alajuela — same province as Tacacorí surveillance location.
             </p>
           </div>
 
-          <h4 className="text-white font-bold mb-4 text-lg">CDMX Actor Convergence Map</h4>
+          <h4 className="text-foreground font-bold mb-4 text-lg">CDMX Actor Convergence Map</h4>
           <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full" />
-                <span className="text-white font-bold text-sm">Connector Pepe</span>
-                <span className="text-xs text-gray-500">(Jean Picado Solis)</span>
+                <span className="text-foreground font-bold text-sm">Connector Pepe</span>
+                <span className="text-xs text-muted-foreground/60">(Jean Picado Solis)</span>
               </div>
-              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+              <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Former Telefonica employee → Liberty CR transition</li>
                 <li>• = "Jenn Solis" — bartender connection in CDMX</li>
                 <li>• Partner: Liberty CR executive in Alajuela</li>
@@ -1859,13 +1859,13 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </ul>
             </div>
 
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-red-500 rounded-full" />
-                <span className="text-white font-bold text-sm">Doge Landlord</span>
-                <span className="text-xs text-gray-500">(Marjorie Alfaro)</span>
+                <span className="text-foreground font-bold text-sm">Doge Landlord</span>
+                <span className="text-xs text-muted-foreground/60">(Marjorie Alfaro)</span>
               </div>
-              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+              <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Senior position at Liberty CR</li>
                 <li>• Lives in Alajuela province</li>
                 <li>• Partner of Connector Pepe (Jean Solis)</li>
@@ -1874,13 +1874,13 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </ul>
             </div>
 
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-orange-500 rounded-full" />
-                <span className="text-white font-bold text-sm">Doja Cat VZ</span>
-                <span className="text-xs text-gray-500">(Genesis Peralta)</span>
+                <span className="text-foreground font-bold text-sm">Doja Cat VZ</span>
+                <span className="text-xs text-muted-foreground/60">(Genesis Peralta)</span>
               </div>
-              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+              <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• CDMX trip 2019 — cross-border activity period</li>
                 <li>• Same timeframe as Grumpy Cat CPA company formation</li>
                 <li>• OSINT: 2× correlation with Connector Pepe, Doge Landlord, Grumpy Cat CPA</li>
@@ -1888,13 +1888,13 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </ul>
             </div>
 
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full" />
-                <span className="text-white font-bold text-sm">Salsa Cat</span>
-                <span className="text-xs text-gray-500">(Lucia Soto)</span>
+                <span className="text-foreground font-bold text-sm">Salsa Cat</span>
+                <span className="text-xs text-muted-foreground/60">(Lucia Soto)</span>
               </div>
-              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+              <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• CDMX trip: wedding for Carolina Soto</li>
                 <li>• Partner: Deal Frog (Leo Orozco) — controller/dealer</li>
                 <li>• Friends with Ghost Rat (danish2210/danich2210) fake IG profile</li>
@@ -1902,13 +1902,13 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </ul>
             </div>
 
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
-                <span className="text-white font-bold text-sm">Deal Frog</span>
-                <span className="text-xs text-gray-500">(Leo Orozco)</span>
+                <span className="text-foreground font-bold text-sm">Deal Frog</span>
+                <span className="text-xs text-muted-foreground/60">(Leo Orozco)</span>
               </div>
-              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+              <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Controller/dealer role</li>
                 <li>• CDMX trip with Salsa Cat for Soto wedding</li>
                 <li>• Friends with Ghost Rat fake IG profile</li>
@@ -1916,13 +1916,13 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </ul>
             </div>
 
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-4">
+            <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-purple-500 rounded-full" />
-                <span className="text-white font-bold text-sm">Ghost Rat</span>
-                <span className="text-xs text-gray-500">(danish2210 / danich2210 / l3monrat)</span>
+                <span className="text-foreground font-bold text-sm">Ghost Rat</span>
+                <span className="text-xs text-muted-foreground/60">(danish2210 / danich2210 / l3monrat)</span>
               </div>
-              <ul className="text-xs text-gray-400 space-y-1 ml-5">
+              <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Lahore, Pakistan — remote operator</li>
                 <li>• Fake IG profile: "Guzman-Calderon" — AI-generated photos</li>
                 <li>• Friends with Salsa Cat &amp; Deal Frog on fake IG</li>
@@ -1933,75 +1933,75 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <h4 className="text-white font-bold mb-4 text-lg">The Soto Network</h4>
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
+          <h4 className="text-foreground font-bold mb-4 text-lg">The Soto Network</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
             <div className="grid grid-cols-3 gap-3 text-center text-xs">
-              <div className="bg-gray-800/60 rounded p-3">
-                <div className="text-white font-bold">Salsa Cat</div>
-                <div className="text-gray-500">Lucia Soto</div>
+              <div className="bg-muted/60 rounded p-3">
+                <div className="text-foreground font-bold">Salsa Cat</div>
+                <div className="text-muted-foreground/60">Lucia Soto</div>
                 <div className="text-yellow-400 mt-1">CDMX wedding attendee</div>
               </div>
-              <div className="bg-gray-800/60 rounded p-3">
-                <div className="text-white font-bold">Wedding Cake Cat</div>
-                <div className="text-gray-500">Carolina Soto</div>
+              <div className="bg-muted/60 rounded p-3">
+                <div className="text-foreground font-bold">Wedding Cake Cat</div>
+                <div className="text-muted-foreground/60">Carolina Soto</div>
                 <div className="text-yellow-400 mt-1">CDMX wedding — the event</div>
               </div>
-              <div className="bg-gray-800/60 rounded p-3">
-                <div className="text-white font-bold">Side Eye Chloe</div>
-                <div className="text-gray-500">Diana Soto</div>
+              <div className="bg-muted/60 rounded p-3">
+                <div className="text-foreground font-bold">Side Eye Chloe</div>
+                <div className="text-muted-foreground/60">Diana Soto</div>
                 <div className="text-yellow-400 mt-1">Father: Scott Ryan (US)</div>
               </div>
             </div>
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs text-muted-foreground/60 mt-3">
               Three Soto-surname actors form a family cluster with cross-border US/CR ties. 
               Carolina Soto's CDMX wedding served as a convergence event bringing CR-based actors into Mexico.
               Diana Soto's father Scott Ryan provides the US connection point.
             </p>
           </div>
 
-          <h4 className="text-white font-bold mb-4 text-lg">JW/LDS CDMX Command Node</h4>
-          <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5 mb-6">
-            <p className="text-sm text-gray-400 mb-3">
+          <h4 className="text-foreground font-bold mb-4 text-lg">JW/LDS CDMX Command Node</h4>
+          <div className="bg-card/60 border border-border rounded-lg p-5 mb-6">
+            <p className="text-sm text-muted-foreground/80 mb-3">
               JW/LDS Latin America headquarters is located in Ciudad de México. The Nicaragua expulsion
               (Sandinista government) → CDMX relocation → Costa Rica expansion pipeline runs directly
               through this command node.
             </p>
             <div className="flex flex-wrap items-center gap-2 text-sm font-mono">
-              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">Nicaragua (expelled)</span>
-              <span className="text-gray-600">→</span>
+              <span className="bg-muted px-3 py-1 rounded text-muted-foreground">Nicaragua (expelled)</span>
+              <span className="text-muted-foreground/40">→</span>
               <span className="bg-red-900/40 px-3 py-1 rounded text-red-300 font-bold">CDMX HQ</span>
-              <span className="text-gray-600">→</span>
-              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">San José</span>
-              <span className="text-gray-600">→</span>
-              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">Heredia (8→35K+)</span>
-              <span className="text-gray-600">→</span>
-              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">AWB/Radio Impacto</span>
-              <span className="text-gray-600">→</span>
-              <span className="bg-gray-800 px-3 py-1 rounded text-gray-300">Tacacorí endpoint</span>
+              <span className="text-muted-foreground/40">→</span>
+              <span className="bg-muted px-3 py-1 rounded text-muted-foreground">San José</span>
+              <span className="text-muted-foreground/40">→</span>
+              <span className="bg-muted px-3 py-1 rounded text-muted-foreground">Heredia (8→35K+)</span>
+              <span className="text-muted-foreground/40">→</span>
+              <span className="bg-muted px-3 py-1 rounded text-muted-foreground">AWB/Radio Impacto</span>
+              <span className="text-muted-foreground/40">→</span>
+              <span className="bg-muted px-3 py-1 rounded text-muted-foreground">Tacacorí endpoint</span>
             </div>
           </div>
 
-          <h4 className="text-white font-bold mb-4 text-lg">Ghost Rat Technical Profile</h4>
-          <div className="bg-gray-900/60 border border-red-900/40 rounded-lg p-5">
+          <h4 className="text-foreground font-bold mb-4 text-lg">Ghost Rat Technical Profile</h4>
+          <div className="bg-card/60 border border-red-900/40 rounded-lg p-5">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <h5 className="text-red-400 font-bold text-sm mb-2">Digital Footprint</h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• <strong className="text-white">GitHub:</strong> danish2210 / l3monrat</li>
-                  <li>• <strong className="text-white">Instagram:</strong> danich2210 (fake profile)</li>
-                  <li>• <strong className="text-white">Fake name:</strong> "Guzman-Calderon"</li>
-                  <li>• <strong className="text-white">Location:</strong> Lahore, Pakistan</li>
-                  <li>• <strong className="text-white">Profile photos:</strong> AI-generated</li>
+                <ul className="text-xs text-muted-foreground/80 space-y-1">
+                  <li>• <strong className="text-foreground">GitHub:</strong> danish2210 / l3monrat</li>
+                  <li>• <strong className="text-foreground">Instagram:</strong> danich2210 (fake profile)</li>
+                  <li>• <strong className="text-foreground">Fake name:</strong> "Guzman-Calderon"</li>
+                  <li>• <strong className="text-foreground">Location:</strong> Lahore, Pakistan</li>
+                  <li>• <strong className="text-foreground">Profile photos:</strong> AI-generated</li>
                 </ul>
               </div>
               <div>
                 <h5 className="text-red-400 font-bold text-sm mb-2">Follows / Interests</h5>
-                <ul className="text-xs text-gray-400 space-y-1">
-                  <li>• <strong className="text-white">geerlingguy:</strong> Raspberry Pi, ESP32, offline GPS hardware</li>
-                  <li>• <strong className="text-white">Drone Ventura MX:</strong> Mexican drone operations</li>
-                  <li>• <strong className="text-white">Tax school:</strong> IDEF/ISAF (financial operations training)</li>
-                  <li>• <strong className="text-white">Hardware profile:</strong> ESP32 + no-internet GPS = mesh surveillance nodes</li>
-                  <li>• <strong className="text-white">Operational link:</strong> Friends with Salsa Cat &amp; Deal Frog via fake IG</li>
+                <ul className="text-xs text-muted-foreground/80 space-y-1">
+                  <li>• <strong className="text-foreground">geerlingguy:</strong> Raspberry Pi, ESP32, offline GPS hardware</li>
+                  <li>• <strong className="text-foreground">Drone Ventura MX:</strong> Mexican drone operations</li>
+                  <li>• <strong className="text-foreground">Tax school:</strong> IDEF/ISAF (financial operations training)</li>
+                  <li>• <strong className="text-foreground">Hardware profile:</strong> ESP32 + no-internet GPS = mesh surveillance nodes</li>
+                  <li>• <strong className="text-foreground">Operational link:</strong> Friends with Salsa Cat &amp; Deal Frog via fake IG</li>
                 </ul>
               </div>
             </div>
@@ -2015,50 +2015,50 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="mt-6 bg-gray-900/60 border border-yellow-900/40 rounded-lg p-5">
+          <div className="mt-6 bg-card/60 border border-yellow-900/40 rounded-lg p-5">
             <h4 className="text-yellow-400 font-bold mb-3">OSINT Correlation Matrix (from omega evidence)</h4>
             <div className="overflow-x-auto">
               <table className="w-full text-xs" data-testid="table-cdmx-correlations">
                 <thead>
-                  <tr className="border-b border-gray-700">
-                    <th className="text-left py-2 text-gray-400">Actor A</th>
-                    <th className="text-left py-2 text-gray-400">Actor B</th>
-                    <th className="text-center py-2 text-gray-400">Correlation Strength</th>
-                    <th className="text-left py-2 text-gray-400">CDMX Link</th>
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2 text-muted-foreground/80">Actor A</th>
+                    <th className="text-left py-2 text-muted-foreground/80">Actor B</th>
+                    <th className="text-center py-2 text-muted-foreground/80">Correlation Strength</th>
+                    <th className="text-left py-2 text-muted-foreground/80">CDMX Link</th>
                   </tr>
                 </thead>
-                <tbody className="text-gray-300">
-                  <tr className="border-b border-gray-800">
+                <tbody className="text-muted-foreground">
+                  <tr className="border-b border-border">
                     <td className="py-2">Doge Landlord (Marjorie)</td>
                     <td>Connector Pepe (Jean Solis)</td>
                     <td className="text-center text-red-400 font-bold">2</td>
                     <td className="text-yellow-400">Liberty CR + Telefonica Spain</td>
                   </tr>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-border">
                     <td className="py-2">Doge Landlord (Marjorie)</td>
                     <td>Doja Cat VZ (Genesis)</td>
                     <td className="text-center text-red-400 font-bold">2</td>
                     <td className="text-yellow-400">Genesis CDMX 2019</td>
                   </tr>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-border">
                     <td className="py-2">Connector Pepe (Jean Solis)</td>
                     <td>Grumpy Cat CPA (Greenfield)</td>
                     <td className="text-center text-red-400 font-bold">2</td>
                     <td className="text-yellow-400">Financial ops timing</td>
                   </tr>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-border">
                     <td className="py-2">Doja Cat VZ (Genesis)</td>
                     <td>Grumpy Cat CPA (Greenfield)</td>
                     <td className="text-center text-red-400 font-bold">2</td>
                     <td className="text-yellow-400">2019 company formation</td>
                   </tr>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-border">
                     <td className="py-2">R Herrera</td>
                     <td>Los Rios</td>
                     <td className="text-center text-red-400 font-bold">4</td>
                     <td className="text-yellow-400">JW congregation anchor</td>
                   </tr>
-                  <tr className="border-b border-gray-800">
+                  <tr className="border-b border-border">
                     <td className="py-2">R Herrera</td>
                     <td>Pasti</td>
                     <td className="text-center text-orange-400 font-bold">2</td>
@@ -2067,7 +2067,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-gray-500 mt-3 font-mono">
+            <p className="text-xs text-muted-foreground/60 mt-3 font-mono">
               Source: docs/evidence/omega/investigations/osint_output/correlations.json — automated OSINT engine analysis
             </p>
           </div>
@@ -2075,59 +2075,59 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
 
         <Section id="legal" title="XXII. Legal Framework & Contact">
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Constitutional Protections (Costa Rica)</h4>
-              <ul className="space-y-2 text-sm text-gray-400">
-                <li><strong className="text-white">Article 24:</strong> Right to privacy of communications</li>
-                <li><strong className="text-white">Article 28:</strong> Right to private actions outside the law's scope</li>
-                <li><strong className="text-white">Article 36:</strong> Right against self-incrimination</li>
-                <li><strong className="text-white">Article 39:</strong> Due process guarantees</li>
-                <li><strong className="text-white">Article 40:</strong> Prohibition of cruel treatment</li>
-                <li><strong className="text-white">Article 41:</strong> Right to justice and reparation</li>
-                <li><strong className="text-white">Article 48:</strong> Right of amparo (constitutional complaint)</li>
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Constitutional Protections (Costa Rica)</h4>
+              <ul className="space-y-2 text-sm text-muted-foreground/80">
+                <li><strong className="text-foreground">Article 24:</strong> Right to privacy of communications</li>
+                <li><strong className="text-foreground">Article 28:</strong> Right to private actions outside the law's scope</li>
+                <li><strong className="text-foreground">Article 36:</strong> Right against self-incrimination</li>
+                <li><strong className="text-foreground">Article 39:</strong> Due process guarantees</li>
+                <li><strong className="text-foreground">Article 40:</strong> Prohibition of cruel treatment</li>
+                <li><strong className="text-foreground">Article 41:</strong> Right to justice and reparation</li>
+                <li><strong className="text-foreground">Article 48:</strong> Right of amparo (constitutional complaint)</li>
               </ul>
             </div>
-            <div className="bg-gray-900/60 border border-gray-800 rounded-lg p-5">
-              <h4 className="font-bold text-white mb-3">Reporting Contacts</h4>
-              <div className="space-y-3 text-sm text-gray-400">
+            <div className="bg-card/60 border border-border rounded-lg p-5">
+              <h4 className="font-bold text-foreground mb-3">Reporting Contacts</h4>
+              <div className="space-y-3 text-sm text-muted-foreground/80">
                 <div>
-                  <div className="text-white font-bold">US Embassy San Jose</div>
+                  <div className="text-foreground font-bold">US Embassy San Jose</div>
                   <div className="font-mono">+506 2220-3127</div>
                 </div>
                 <div>
-                  <div className="text-white font-bold">Defensoria de los Habitantes</div>
+                  <div className="text-foreground font-bold">Defensoria de los Habitantes</div>
                   <div className="font-mono">4000-8500</div>
                 </div>
                 <div>
-                  <div className="text-white font-bold">Sala Constitucional IV</div>
+                  <div className="text-foreground font-bold">Sala Constitucional IV</div>
                   <div className="font-mono">2295-3696</div>
                 </div>
                 <div>
-                  <div className="text-white font-bold">Vienna Convention Art. 36</div>
-                  <div className="text-xs text-gray-500">Right to consular notification and access</div>
+                  <div className="text-foreground font-bold">Vienna Convention Art. 36</div>
+                  <div className="text-xs text-muted-foreground/60">Right to consular notification and access</div>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="mt-8 bg-red-950/30 border border-red-900/50 rounded-lg p-6 text-center">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted-foreground/80">
               This page documents real surveillance harassment across two locations in Costa Rica.
               All data is collected by autonomous software systems and integrity-protected with SHA-256 hashing.
               The sonar evidence (54.45 dB SNR), infrastructure backdoors, packet captures, and signal intelligence
               are documented, timestamped, and mathematically correlated. Every person is identified by meme alias —
               every KB is hashed on important keys.
             </p>
-            <p className="text-xs text-gray-600 mt-4 font-mono">
+            <p className="text-xs text-muted-foreground/40 mt-4 font-mono">
               KAPPA SIGINT Platform v2.0 — ciajw.com — All rights reserved 2026
             </p>
           </div>
         </Section>
       </div>
 
-      <footer className="border-t border-gray-800 py-8 mt-16">
+      <footer className="border-t border-border py-8 mt-16">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <div className="text-xs text-gray-600">
+          <div className="text-xs text-muted-foreground/40">
             Autonomous data collection and analysis by KAPPA SIGINT v2.0.
             {stats?.totalEvents ? ` ${stats.totalEvents.toLocaleString()} signal events collected.` : ""}
             {stats?.correlationCount ? ` ${stats.correlationCount.toLocaleString()} cross-domain correlations computed.` : ""}
