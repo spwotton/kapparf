@@ -55,6 +55,13 @@ import {
   OMEGA_GOS,
 } from "./quantum-cortex";
 import {
+  startHeartbeatClient, getTrackerStatus, getTrackerStats,
+  getTrackerDevices, getTrackerDevice, getTrackerAlerts, getActiveAlerts,
+  acknowledgeAlert, getDeviceSensors, getDeviceLatestSensors,
+  getHeartbeatHistory, sendDeviceCommand, getAgentScriptUrl,
+  getTrackerDashboardUrl, getWebSocketUrl,
+} from "./heartbeat-client";
+import {
   insertResearchSessionSchema,
   insertResearchQuerySchema,
   insertResearchFindingSchema,
@@ -3368,6 +3375,125 @@ export async function registerRoutes(
     } catch (err: any) {
       res.status(500).json({ error: err.message });
     }
+  });
+
+  // ============== HEARTBEAT TRACKER ==============
+
+  startHeartbeatClient();
+
+  app.get("/api/tracker/status", (_req, res) => {
+    res.json(getTrackerStatus());
+  });
+
+  app.get("/api/tracker/stats", (_req, res) => {
+    res.json(getTrackerStats());
+  });
+
+  app.get("/api/tracker/devices", async (req, res) => {
+    try {
+      const type = req.query.type as string | undefined;
+      const online = req.query.online !== undefined ? req.query.online === "true" : undefined;
+      const devices = await getTrackerDevices({ type, online });
+      res.json(devices);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/devices/:deviceId", async (req, res) => {
+    try {
+      const device = await getTrackerDevice(req.params.deviceId);
+      if (!device) return res.status(404).json({ error: "Device not found" });
+      res.json(device);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/alerts", async (req, res) => {
+    try {
+      const alerts = await getTrackerAlerts({
+        deviceId: req.query.deviceId as string,
+        severity: req.query.severity ? parseInt(req.query.severity as string) : undefined,
+        acknowledged: req.query.acknowledged !== undefined ? req.query.acknowledged === "true" : undefined,
+        limit: req.query.limit ? parseInt(req.query.limit as string) : undefined,
+      });
+      res.json(alerts);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/alerts/active", async (_req, res) => {
+    try {
+      const alerts = await getActiveAlerts();
+      res.json(alerts);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/tracker/alerts/:id/acknowledge", async (req, res) => {
+    try {
+      const result = await acknowledgeAlert(req.params.id);
+      res.json({ acknowledged: result });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/sensors/:deviceId", async (req, res) => {
+    try {
+      const readings = await getDeviceSensors(req.params.deviceId, {
+        type: req.query.type as string,
+        hours: req.query.hours ? parseInt(req.query.hours as string) : undefined,
+        limit: req.query.limit ? parseInt(req.query.limit as string) : undefined,
+      });
+      res.json(readings);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/sensors/:deviceId/latest", async (req, res) => {
+    try {
+      const latest = await getDeviceLatestSensors(req.params.deviceId);
+      res.json(latest);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/heartbeat/:deviceId/history", async (req, res) => {
+    try {
+      const hours = req.query.hours ? parseInt(req.query.hours as string) : 24;
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 1000;
+      const history = await getHeartbeatHistory(req.params.deviceId, hours, limit);
+      res.json(history);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/tracker/command", async (req, res) => {
+    try {
+      const { deviceId, command, args } = req.body;
+      if (!deviceId || !command) return res.status(400).json({ error: "deviceId and command required" });
+      const result = await sendDeviceCommand(deviceId, command, args);
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/tracker/agent-urls", (_req, res) => {
+    res.json({
+      pc: getAgentScriptUrl("pc"),
+      phone: getAgentScriptUrl("phone"),
+      bash: getAgentScriptUrl("bash"),
+      dashboard: getTrackerDashboardUrl(),
+      websocket: "wss://heartbeat-tracker-monitor.replit.app/ws?deviceId=YOUR_DEVICE_ID",
+    });
   });
 
   // ============== KYMA ENGINE BRIDGE ==============

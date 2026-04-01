@@ -10,7 +10,8 @@ import { useI18n } from "@/lib/i18n";
 import type { DeviceFingerprint } from "@shared/schema";
 import {
   Fingerprint, AlertTriangle, Layers, Satellite, Radio, Globe, Plane, Crosshair, Activity,
-  Smartphone, Wifi, Brain, Copy, Check, Download, QrCode, Zap, Heart, Compass, ThermometerSun
+  Smartphone, Wifi, Brain, Copy, Check, Download, QrCode, Zap, Heart, Compass, ThermometerSun,
+  Monitor, Bell, BellOff, Cpu, Clock, Signal, ExternalLink
 } from "lucide-react";
 
 const domainColors: Record<string, string> = {
@@ -507,6 +508,256 @@ function BiometricPanel() {
   );
 }
 
+function HeartbeatPanel() {
+  const { data: trackerStatus } = useQuery<{
+    devices: any[];
+    onlineCount: number;
+    alerts: any[];
+    recentHeartbeats: Record<string, any>;
+    serverUptime: number;
+    lastFetch: number;
+    trackerUrl: string;
+    polling: boolean;
+  }>({
+    queryKey: ["/api/tracker/status"],
+    refetchInterval: 5000,
+  });
+
+  const { data: trackerStats } = useQuery<{
+    total: number;
+    online: number;
+    offline: number;
+    byType: Record<string, number>;
+    uptimePercent24h: number;
+    lastFetch: number;
+  }>({
+    queryKey: ["/api/tracker/stats"],
+    refetchInterval: 5000,
+  });
+
+  const { data: activeAlerts } = useQuery<any[]>({
+    queryKey: ["/api/tracker/alerts/active"],
+    refetchInterval: 8000,
+  });
+
+  const devices = trackerStatus?.devices || [];
+  const onlineDevices = devices.filter((d: any) => d.online);
+  const offlineDevices = devices.filter((d: any) => !d.online);
+
+  const formatUptime = (seconds: number) => {
+    if (!seconds) return "0s";
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    if (h > 0) return `${h}h ${m}m`;
+    if (m > 0) return `${m}m ${s}s`;
+    return `${s}s`;
+  };
+
+  const getDeviceTypeIcon = (type: string) => {
+    switch (type) {
+      case "pc": return <Monitor className="w-4 h-4 text-blue-500" />;
+      case "phone": return <Smartphone className="w-4 h-4 text-green-500" />;
+      case "sensor": return <ThermometerSun className="w-4 h-4 text-amber-500" />;
+      case "iot": return <Cpu className="w-4 h-4 text-violet-500" />;
+      default: return <Signal className="w-4 h-4 text-muted-foreground" />;
+    }
+  };
+
+  return (
+    <div className="space-y-4" data-testid="heartbeat-panel">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-lg font-bold font-mono text-blue-500" data-testid="stat-tracker-total">
+              {trackerStats?.total ?? 0}
+            </div>
+            <div className="text-[10px] text-muted-foreground">Total Devices</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-lg font-bold font-mono text-green-500" data-testid="stat-tracker-online">
+              {trackerStats?.online ?? 0}
+            </div>
+            <div className="text-[10px] text-muted-foreground">Online</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-lg font-bold font-mono text-red-500" data-testid="stat-tracker-offline">
+              {trackerStats?.offline ?? 0}
+            </div>
+            <div className="text-[10px] text-muted-foreground">Offline</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-lg font-bold font-mono text-amber-500" data-testid="stat-tracker-alerts">
+              {activeAlerts?.length ?? 0}
+            </div>
+            <div className="text-[10px] text-muted-foreground">Active Alerts</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="py-3 text-center">
+            <div className="text-lg font-bold font-mono" data-testid="stat-tracker-uptime">
+              {trackerStats?.uptimePercent24h ? `${trackerStats.uptimePercent24h.toFixed(1)}%` : "—"}
+            </div>
+            <div className="text-[10px] text-muted-foreground">24h Uptime</div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <div className={`w-2 h-2 rounded-full ${trackerStatus?.polling ? "bg-green-500 animate-pulse" : "bg-red-500"}`} />
+        <span>Tracker: {trackerStatus?.trackerUrl || "Not connected"}</span>
+        <span className="ml-auto">
+          Server uptime: {trackerStatus?.serverUptime ? formatUptime(trackerStatus.serverUptime) : "—"}
+        </span>
+      </div>
+
+      {devices.length > 0 ? (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <Signal className="w-4 h-4 text-blue-500" />
+              Device Fleet ({devices.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {onlineDevices.map((device: any) => (
+                <div key={device.id || device.deviceId} className="flex items-center gap-3 p-3 rounded-lg bg-green-500/5 border border-green-500/20" data-testid={`tracker-device-${device.id || device.deviceId}`}>
+                  {getDeviceTypeIcon(device.type)}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium truncate">{device.name || device.deviceId || device.id}</span>
+                      <Badge variant="secondary" className="bg-green-500/10 text-green-700 dark:text-green-400 text-xs">Online</Badge>
+                      {device.type && <Badge variant="outline" className="text-xs">{device.type}</Badge>}
+                    </div>
+                    <div className="flex gap-4 mt-1 text-xs text-muted-foreground">
+                      {device.latency_ms != null && <span>Latency: {device.latency_ms}ms</span>}
+                      {device.jitter_ms != null && <span>Jitter: {device.jitter_ms.toFixed(1)}ms</span>}
+                      {device.uptime_24h != null && <span>Uptime: {device.uptime_24h.toFixed(1)}%</span>}
+                      {device.lastHeartbeat && <span>Last: {new Date(device.lastHeartbeat).toLocaleTimeString()}</span>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {offlineDevices.map((device: any) => (
+                <div key={device.id || device.deviceId} className="flex items-center gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/20 opacity-60" data-testid={`tracker-device-${device.id || device.deviceId}`}>
+                  {getDeviceTypeIcon(device.type)}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium truncate">{device.name || device.deviceId || device.id}</span>
+                      <Badge variant="destructive" className="text-xs">Offline</Badge>
+                      {device.type && <Badge variant="outline" className="text-xs">{device.type}</Badge>}
+                    </div>
+                    <div className="flex gap-4 mt-1 text-xs text-muted-foreground">
+                      {device.lastHeartbeat && <span>Last seen: {new Date(device.lastHeartbeat).toLocaleString()}</span>}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card>
+          <CardContent className="py-8 text-center">
+            <Signal className="w-8 h-8 mx-auto text-muted-foreground/40 mb-2" />
+            <p className="text-sm text-muted-foreground">
+              No devices registered yet. Deploy agents from the tracker dashboard to start monitoring.
+            </p>
+            <a
+              href="https://heartbeat-tracker-monitor.replit.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs text-blue-500 hover:text-blue-600 mt-2"
+              data-testid="link-tracker-dashboard"
+            >
+              <ExternalLink className="w-3 h-3" /> Open Tracker Dashboard
+            </a>
+          </CardContent>
+        </Card>
+      )}
+
+      {activeAlerts && activeAlerts.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <Bell className="w-4 h-4 text-red-500" />
+              Active Alerts ({activeAlerts.length})
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2 max-h-[300px] overflow-y-auto">
+              {activeAlerts.map((alert: any, i: number) => (
+                <div key={alert.id || i} className="flex items-start gap-3 p-2 rounded bg-red-500/5 text-xs" data-testid={`tracker-alert-${i}`}>
+                  <Badge
+                    variant={alert.severity >= 3 ? "destructive" : "secondary"}
+                    className="text-xs min-w-[50px] justify-center"
+                  >
+                    {alert.severity >= 4 ? "CRIT" : alert.severity >= 3 ? "HIGH" : alert.severity >= 2 ? "MED" : "LOW"}
+                  </Badge>
+                  <div className="flex-1">
+                    <p className="text-foreground/90">{alert.message || alert.type || "Alert"}</p>
+                    <p className="text-muted-foreground mt-0.5">
+                      {alert.deviceId && <span className="font-mono">{alert.deviceId}</span>}
+                      {alert.timestamp && <span className="ml-2">{new Date(alert.timestamp).toLocaleString()}</span>}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base flex items-center gap-2">
+            <Zap className="w-4 h-4 text-amber-500" />
+            Agent Downloads
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <a href="https://heartbeat-tracker-monitor.replit.app/api/agents/pc" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors" data-testid="link-agent-pc">
+              <Monitor className="w-4 h-4 text-blue-500" />
+              <div>
+                <div className="text-sm font-medium">PC Agent</div>
+                <div className="text-xs text-muted-foreground">Windows/Mac/Linux</div>
+              </div>
+              <ExternalLink className="w-3 h-3 ml-auto text-muted-foreground" />
+            </a>
+            <a href="https://heartbeat-tracker-monitor.replit.app/api/agents/phone" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors" data-testid="link-agent-phone">
+              <Smartphone className="w-4 h-4 text-green-500" />
+              <div>
+                <div className="text-sm font-medium">Phone Agent</div>
+                <div className="text-xs text-muted-foreground">Termux / Android</div>
+              </div>
+              <ExternalLink className="w-3 h-3 ml-auto text-muted-foreground" />
+            </a>
+            <a href="https://heartbeat-tracker-monitor.replit.app/api/agents/bash" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors" data-testid="link-agent-bash">
+              <Cpu className="w-4 h-4 text-violet-500" />
+              <div>
+                <div className="text-sm font-medium">Bash Agent</div>
+                <div className="text-xs text-muted-foreground">Headless / IoT</div>
+              </div>
+              <ExternalLink className="w-3 h-3 ml-auto text-muted-foreground" />
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
 export default function DevicesPage() {
   const { t } = useI18n();
 
@@ -547,6 +798,9 @@ export default function DevicesPage() {
           </TabsTrigger>
           <TabsTrigger value="biometric" data-testid="tab-biometric">
             <Heart className="w-4 h-4 mr-1.5" /> Biometric
+          </TabsTrigger>
+          <TabsTrigger value="heartbeat" data-testid="tab-heartbeat">
+            <Signal className="w-4 h-4 mr-1.5" /> Heartbeat
           </TabsTrigger>
         </TabsList>
 
@@ -695,6 +949,10 @@ export default function DevicesPage() {
 
         <TabsContent value="biometric" className="mt-4">
           <BiometricPanel />
+        </TabsContent>
+
+        <TabsContent value="heartbeat" className="mt-4">
+          <HeartbeatPanel />
         </TabsContent>
       </Tabs>
     </div>
