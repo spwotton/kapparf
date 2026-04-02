@@ -112,7 +112,6 @@ const navGroups: NavGroup[] = [
       { title: "Karachi", url: "/karachi", icon: Crosshair },
       { title: "Congusto", url: "/congusto", icon: FlaskConical },
       { title: "ICE Briefing", url: "/gallium", icon: Globe },
-      { title: "Network Analysis", url: "/network-analysis", icon: Network },
       { title: "Board", url: "/board", icon: Network },
       { title: "Social", url: "/social", icon: Image },
       { title: "Tools", url: "/tools", icon: Wrench },

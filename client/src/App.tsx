@@ -38,7 +38,6 @@ import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
 import WhistleblowerPage from "@/pages/whistleblower";
 import MemoryCortexPage from "@/pages/memory-cortex";
 import GalliumPage from "@/pages/gallium";
-import NetworkAnalysisPage from "@/pages/network-analysis";
 
 function Router() {
   return (
@@ -72,7 +71,6 @@ function Router() {
       <Route path="/ciajw" component={WhistleblowerPage} />
       <Route path="/memory" component={MemoryCortexPage} />
       <Route path="/gallium" component={GalliumPage} />
-      <Route path="/network-analysis" component={NetworkAnalysisPage} />
       <Route component={NotFound} />
     </Switch>
   );
