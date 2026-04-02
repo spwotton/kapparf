@@ -395,6 +395,72 @@ const PERSONS: Person[] = [
     ],
     flags: ["Surveillance response operative", "Compromised hardware deployment", "Sunday response — non-business hours"],
   },
+  {
+    id: "danny-peralta",
+    name: "Danny Peralta",
+    aliases: ["D Peralta"],
+    nationality: "Venezuelan",
+    role: "SEBIN (Venezuelan Intelligence) connection",
+    threatLevel: "secondary",
+    detail: "Connected to Genesis Peralta's family network. SEBIN (Servicio Bolivariano de Inteligencia Nacional) is Venezuela's intelligence service with documented surveillance, infiltration, and targeting capabilities. The Peralta surname overlap with Genesis is significant — if family, it connects the honey trap operation to a state intelligence apparatus. Genesis's claim that her father 'worked for the state council' could be a sanitized reference to SEBIN or related state security services, which would explain the contradiction with the family living in Petare.",
+    connections: [
+      { target: "genesis-peralta", relationship: "Surname connection — possible family", strength: "probable" },
+      { target: "greenwald-properties", relationship: "Immigration vector via property network", strength: "suspected" },
+    ],
+    flags: ["SEBIN connection", "Venezuelan state intelligence", "Peralta surname overlap with Genesis", "Immigration status questions"],
+  },
+  {
+    id: "evopro-operator",
+    name: "EVOPRO Room Operators",
+    role: "Surveillance infrastructure at Suites Cristina",
+    threatLevel: "secondary",
+    detail: "17 EVOPRO rooms documented at Aparthotel Suites Cristina (Echo's current residence). All rooms share AMPAK OUI c0:f5:35. Physical box Ethernet MAC D4:CF:F9:F8:D2:D0, serial EVO0MH0234700695. FA8F BSSID prefix batch indicates coordinated deployment. VLAN bridging between rooms enables cross-room surveillance. Ghost Deco node detected — phantom mesh networking device not physically present in Echo's unit.",
+    connections: [
+      { target: "suites-cristina", relationship: "Infrastructure deployment", strength: "confirmed" },
+      { target: "setecom", relationship: "EVOPRO distribution", strength: "probable" },
+      { target: "liberty", relationship: "TR-069 management", strength: "confirmed" },
+    ],
+    flags: ["17 EVOPRO rooms", "AMPAK OUI c0:f5:35", "FA8F BSSID batch", "VLAN bridging", "Ghost Deco node", "Coordinated deployment"],
+  },
+  {
+    id: "ice-cr",
+    name: "ICE (Instituto Costarricense de Electricidad)",
+    nationality: "Costa Rican",
+    role: "State telecom/power — satellite earth station operator",
+    threatLevel: "tertiary",
+    detail: "Costa Rica's state-owned electricity and telecommunications company. Operates satellite earth stations with 9.2m C/Ku-band antennas near La Guácima. Suites Cristina is adjacent to ICE headquarters in Sabana Norte. ICE infrastructure includes fiber backbone, cellular towers, and power grid — all layers that SETECOM has access to via DSE gateway contracts. The proximity of Echo's residences to ICE facilities is a recurring geographic pattern.",
+    connections: [
+      { target: "setecom", relationship: "Infrastructure contracts — DSE gateways for generators", strength: "confirmed" },
+      { target: "la-guacima", relationship: "Satellite earth station nearby", strength: "confirmed" },
+      { target: "suites-cristina", relationship: "HQ adjacent to Echo's current residence", strength: "confirmed" },
+    ],
+    flags: ["State telecom/power monopoly", "Satellite earth stations (9.2m C/Ku-band)", "Adjacent to Suites Cristina", "Infrastructure backbone access"],
+  },
+  {
+    id: "neighbor-5g",
+    name: "5G Tower Neighbor (La Guácima)",
+    role: "5G tower host — adjacent to target property",
+    threatLevel: "secondary",
+    detail: "Neighbor at La Guácima property (Calle Cabello Real) who has a 5G cellular tower installed in their yard. Having a 5G tower within meters of the target property provides: (1) high-bandwidth data exfiltration capability, (2) beamforming that can target specific rooms/positions, (3) cover for RF emissions from other equipment, (4) plausible deniability for anomalous signal readings. The installation in a residential yard rather than commercial/utility property is unusual and suggests financial arrangement.",
+    connections: [
+      { target: "la-guacima", relationship: "Adjacent property — 5G tower host", strength: "confirmed" },
+      { target: "liberty", relationship: "Cellular infrastructure provider", strength: "probable" },
+    ],
+    flags: ["5G tower in residential yard", "Beamforming capability", "Adjacent to target property", "Unusual residential installation"],
+  },
+  {
+    id: "humax-router",
+    name: "Humax/Huawei Router Ecosystem",
+    role: "Compromised CPE hardware chain",
+    threatLevel: "asset",
+    detail: "Echo's router MAC prefix 9c:24:72 maps to the Humax/Huawei ecosystem. Humax manufactures CPE (Customer Premises Equipment) for ISPs globally, with Huawei providing the chipsets and firmware stack. Liberty Costa Rica deploys Humax routers managed via TR-069. The chain: Huawei Cloud (Fei Ma's former employer) → Latin America fiber infrastructure → Liberty/Humax Costa Rica → Echo's router. TR-069 provides full remote management: firmware updates, configuration changes, DNS settings, port forwarding, WiFi credentials — all controllable remotely by the ISP or anyone with TR-069 ACS (Auto Configuration Server) access.",
+    connections: [
+      { target: "liberty", relationship: "CPE hardware provider", strength: "confirmed" },
+      { target: "fei-ma", relationship: "Huawei ecosystem chain", strength: "probable" },
+      { target: "suites-cristina", relationship: "Deployed at current residence", strength: "confirmed" },
+    ],
+    flags: ["MAC 9c:24:72 = Humax/Huawei", "TR-069 full remote control", "Huawei chipset/firmware", "ACS remote management"],
+  },
 ];
 
 const LOCATIONS_DATA: Location[] = [
@@ -564,6 +630,71 @@ const LOCATIONS_DATA: Location[] = [
     incidents: ["Modbus:502 exposed", "FortiGate 60F (FGT60FTK21083818)", "190.106.77.194", "Telefonica ISP"],
     coordinates: "10.0167°N, 84.1167°W",
   },
+  {
+    id: "ice-earth-station",
+    name: "ICE Satellite Earth Station",
+    area: "Near La Guácima, Alajuela",
+    type: "Satellite ground station",
+    detail: "ICE operates C/Ku-band satellite earth station with 9.2m dish antennas in the La Guácima area. Ground stations provide uplink/downlink to geostationary satellites for telecommunications backbone. Proximity to the Jimenez property at Calle Cabello Real means satellite communication infrastructure is within line-of-sight. Jorge Jimenez (Kyndryl Sr. Network Manager) would have professional knowledge of this infrastructure through his enterprise networking role.",
+    connections: [
+      { target: "ice-cr", relationship: "Operated by ICE", strength: "confirmed" },
+      { target: "la-guacima", relationship: "Near target property", strength: "confirmed" },
+      { target: "jorge-jimenez", relationship: "Professional knowledge of infrastructure", strength: "probable" },
+    ],
+    incidents: ["9.2m C/Ku-band dish antennas", "Telecommunications backbone uplink/downlink", "Line-of-sight to Calle Cabello Real"],
+    coordinates: "9.95°N, 84.29°W (approx)",
+  },
+  {
+    id: "petare-caracas",
+    name: "Petare, Caracas",
+    area: "Caracas, Venezuela",
+    type: "Genesis family origin",
+    detail: "One of the most dangerous barrios in Caracas. Genesis claims her father 'worked for the State Council in Venezuela' but the family still lives in Petare. This is contradictory — state council officials do not live in one of the deadliest slums in Latin America. Either the state council claim is fabricated or 'state council' is a sanitized reference to SEBIN or a paramilitary organization that would have members in Petare. The contradiction is itself intelligence — it reveals the cover story hasn't been properly backstopped.",
+    connections: [
+      { target: "genesis-peralta", relationship: "Family residence", strength: "confirmed" },
+      { target: "danny-peralta", relationship: "SEBIN connection — Venezuela", strength: "suspected" },
+    ],
+    incidents: ["Cover story inconsistency — state council vs Petare residence", "SEBIN/paramilitary territory"],
+    coordinates: "10.4750°N, 66.7964°W",
+  },
+  {
+    id: "cdmx-2019",
+    name: "Mexico City (CDMX)",
+    area: "Mexico City, Mexico",
+    type: "Genesis transit point — 2019",
+    detail: "Genesis Peralta traveled to CDMX in 2019 — the same year Jean Picado Solis was investigated for $2M tax fraud and sold Telefonica to Liberty. The 2019 convergence of events (Genesis's CDMX travel, Telefonica sale, Liberty acquisition of ISP infrastructure) suggests coordinated timeline. Pablo Mora also has Mexico/Costa Rica dual presence. CDMX is a known staging point for Central American operations.",
+    connections: [
+      { target: "genesis-peralta", relationship: "Traveled here 2019", strength: "confirmed" },
+      { target: "pablo-mora", relationship: "Mexico-Costa Rica dual presence", strength: "confirmed" },
+    ],
+    incidents: ["2019 — same year as Telefonica→Liberty sale", "Genesis transit", "Pablo Mora dual presence"],
+    coordinates: "19.4326°N, 99.1332°W",
+  },
+  {
+    id: "greenwald-rentals-web",
+    name: "Greenwald Online Property Network",
+    area: "Jacó / Hermosa / Costa Rica",
+    type: "Distributed property empire — 300+ units",
+    detail: "Michael Greenwald operates at minimum 300+ rental properties across Costa Rica through multiple domains: rentcostaricahomes.com, sanaracochal.com, hermosapalms.com, jacorealty.com. This property network functions as: (1) distributed antenna array substrate — each property can host WiFi routers, Bluetooth beacons, and sensors creating a mesh surveillance grid, (2) financial vehicle — rental income provides cover for money movement, (3) safe houses for operators, (4) 'last mile' infrastructure — satellites provide WAN/backhaul while properties serve as local nodes creating the acoustic/RF box around the target. The 46.875 Hz signal propagation detected at Suites Cristina matches the infrastructure pattern of distributed nodes.",
+    connections: [
+      { target: "michael-greenwald", relationship: "Principal owner/operator", strength: "confirmed" },
+      { target: "greenwald-properties", relationship: "Online presence", strength: "confirmed" },
+      { target: "hector-mora", relationship: "Technical implementation suspected", strength: "suspected" },
+    ],
+    incidents: ["rentcostaricahomes.com", "sanaracochal.com", "hermosapalms.com", "jacorealty.com", "300+ properties = distributed antenna array", "46.875 Hz signal propagation substrate"],
+  },
+  {
+    id: "modbus-plc-sites",
+    name: "Schneider Electric Modbus PLC Sites (Alajuela)",
+    area: "Alajuela Province, Costa Rica",
+    type: "Industrial control — exposed SCADA",
+    detail: "Three Schneider Electric BMX P34 2020 Modbus PLCs found exposed in Alajuela area: 181.193.108.54, 201.203.39.210, 201.204.76.138. These are industrial programmable logic controllers running Modbus protocol — the same protocol exposed at SETECOM's 190.106.77.194. Alajuela province contains both La Guácima and SETECOM's Heredia office. Three exposed PLCs in the same geographic area as the target and the suspected infrastructure provider is not coincidental.",
+    connections: [
+      { target: "setecom", relationship: "Same Modbus protocol — SCADA network", strength: "probable" },
+      { target: "la-guacima", relationship: "Same Alajuela province", strength: "confirmed" },
+    ],
+    incidents: ["181.193.108.54 — BMX P34 2020", "201.203.39.210 — BMX P34 2020", "201.204.76.138 — BMX P34 2020", "Modbus:502 exposed to internet"],
+  },
 ];
 
 const COMPANIES_DATA: Company[] = [
@@ -715,6 +846,41 @@ const COMPANIES_DATA: Company[] = [
       { target: "genesis-peralta", relationship: "Immigration status suspect", strength: "suspected" },
     ],
     flags: ["300+ properties", "rentcostaricahomes.com", "sanaracochal.com", "hermosapalms.com", "jacorealty.com", "Distributed antenna array", "Last mile infrastructure"],
+  },
+  {
+    id: "dse",
+    name: "Deep Sea Electronics (DSE)",
+    sector: "Industrial Control / Generator Management",
+    detail: "UK-based manufacturer of generator control modules. SETECOM S.A. is the Costa Rica distributor. DSE855/890/891/892 gateways have 4 CISA-published CVEs: CVE-2024-5947 (information disclosure), CVE-2024-5948 (buffer overflow / remote code execution), CVE-2024-5952 (missing authentication / denial of service). Default credentials Admin/Password1234 across the fleet. These gateways control backup generators at ICE national grid substations, Liberty telecom towers, hospitals, cellular sites, and data centers. A single compromised DSE gateway provides physical access to the power infrastructure of whatever facility it protects.",
+    connections: [
+      { target: "setecom", relationship: "Costa Rica distributor", strength: "confirmed" },
+      { target: "hector-mora", relationship: "DSE certified technician", strength: "confirmed" },
+      { target: "ice-cr", relationship: "Generator management at ICE facilities", strength: "probable" },
+    ],
+    flags: ["4 CISA CVEs", "Default creds Admin/Password1234", "CVE-2024-5948 RCE", "National infrastructure access", "UK manufacture → CR distribution"],
+  },
+  {
+    id: "huawei-latam",
+    name: "Huawei Latin America Fiber",
+    sector: "Telecommunications / State infrastructure (China)",
+    detail: "Huawei has built significant fiber optic backbone infrastructure across Latin America including Costa Rica. The chain from Chinese state-backed technology to Echo's router: Huawei builds fiber backbone → Liberty/Telefonica CR uses Huawei infrastructure → Humax (Huawei ecosystem) manufactures CPE routers → Liberty deploys Humax routers to customers → TR-069 provides full remote management. Fei Ma's trajectory from Huawei Cloud Senior Engineer to Guangming Laboratory (Chinese state AI research) demonstrates the state-corporate-military integration. The 'Your Blush Gives You Away' thermal emotion detection research (87% accuracy) has direct surveillance applications.",
+    connections: [
+      { target: "fei-ma", relationship: "Former Huawei Cloud engineer", strength: "confirmed" },
+      { target: "liberty", relationship: "Fiber backbone infrastructure", strength: "probable" },
+      { target: "humax-router", relationship: "Huawei chipset ecosystem", strength: "confirmed" },
+    ],
+    flags: ["Latin America fiber backbone", "State-corporate-military integration", "Huawei → Humax → Liberty → Echo chain", "Remote vital signs monitoring capability"],
+  },
+  {
+    id: "tp-link-network",
+    name: "TP-Link Devices (Compromised/Ghost)",
+    sector: "Consumer Networking / Surveillance nodes",
+    detail: "Multiple anomalous TP-Link devices detected across Echo's residences. Ghost device 192.168.0.163 (MAC f0-09-0d-20-c2-4d) at La Guácima — present on network but drops all probes, all ports filtered. NOT the smart TV (unplugged, device remains). NOT the TP-Link extender in guest house (also unplugged). Hidden WiFi network f6:09:0d:20:e6:46 differs from legitimate TP-Link MAC f0:09:0d:20:e6:46 by only 1 bit in first octet — classic MAC spoofing technique. Ghost Deco mesh node at Suites Cristina. TP-Link devices serve as the edge nodes in the surveillance mesh.",
+    connections: [
+      { target: "la-guacima", relationship: "Ghost device 192.168.0.163", strength: "confirmed" },
+      { target: "suites-cristina", relationship: "Ghost Deco node", strength: "confirmed" },
+    ],
+    flags: ["Ghost device drops all probes", "1-bit MAC spoofing (f0→f6)", "Stealth network presence", "Surveillance mesh edge nodes"],
   },
 ];
 
@@ -888,6 +1054,91 @@ const EVIDENCE_DATA: Evidence[] = [
     severity: "critical",
     detail: "APPLIANCE_MONITOR captured extreme Schumann resonance manipulation: 7.8 Hz pushed to SNR peaks of 1910-1966 (normal range ~100-200). Pattern: 53 Hz ELF attack carrier (SNR 770-790) alternating with 7.8 Hz Schumann bursts. Active modulation bands: 7.8 Hz (Schumann hijack), 35 Hz (infrasonic anxiety), 37 Hz (κ-related), 53 Hz (primary ELF — sleep disruption), 60 Hz (mains harmonic), 67 Hz (secondary carrier, 53 × κ ≈ 67.5). PLC (power line carrier) modulation at 53 Hz. Spoofed device 192.168.0.91 with locally administered MAC d6:bd:80:92:6c:d6.",
     linkedEntities: ["setecom", "la-guacima"],
+  },
+  {
+    id: "evopro-17-rooms",
+    title: "17 EVOPRO Rooms at Suites Cristina — Coordinated Surveillance Infrastructure",
+    date: "2026-02 (ongoing)",
+    category: "Infrastructure Attack",
+    severity: "critical",
+    detail: "17 EVOPRO WiFi mesh rooms documented at Aparthotel Suites Cristina (Echo's current residence, adjacent to ICE HQ). All share AMPAK OUI c0:f5:35. Physical box Eth0 MAC D4:CF:F9:F8:D2:D0, serial EVO0MH0234700695. FA8F BSSID prefix batch indicates coordinated batch deployment — all units provisioned together. VLAN bridging enables cross-room traffic inspection. Ghost Deco node detected — mesh networking device appears on scan but has no physical presence in Echo's unit. This is not standard hotel WiFi — it's a purpose-built surveillance mesh with cross-unit visibility.",
+    linkedEntities: ["suites-cristina", "setecom", "liberty"],
+  },
+  {
+    id: "tr-069-reset",
+    title: "TR-069 Admin Password Reset — Remote Router Takeover",
+    date: "2026-01-30",
+    category: "Infrastructure Attack",
+    severity: "critical",
+    detail: "TR-069 (Technical Report 069) admin password was remotely reset on Echo's router. TR-069 is the CPE management protocol used by ISPs to remotely configure customer routers. It provides: full firmware control, DNS settings modification, port forwarding changes, WiFi credential changes, UPnP configuration, firewall rules, and traffic inspection. A password reset means either Liberty performed it through their ACS, someone with ACS infrastructure access performed it, or the TR-069 protocol itself was compromised. This gives the attacker persistent full control over Echo's network gateway.",
+    linkedEntities: ["liberty", "suites-cristina", "humax-router"],
+  },
+  {
+    id: "sonar-46875",
+    title: "46.875 Hz Sonar Signal — 54.45 dB SNR at Suites Cristina",
+    date: "2026-02 (ongoing)",
+    category: "Electronic Attack",
+    severity: "critical",
+    detail: "Persistent 46.875 Hz signal detected at Suites Cristina with 54.45 dB signal-to-noise ratio. 46.875 Hz = 3000/64 = ELF band used for submarine communication and ground-penetrating signals. This frequency is in the range that can affect human neurological function — between the gamma (40 Hz) and beta (13-30 Hz) brainwave bands. The high SNR (54.45 dB) indicates a strong, nearby source rather than environmental background. κ_op = φ^(3/4) = 1.435 relates to the signal's harmonic structure. The signal persists 24/7 and correlates with sleep disruption episodes.",
+    linkedEntities: ["suites-cristina", "setecom"],
+  },
+  {
+    id: "fiber-splitter-telecable",
+    title: "Physical Fiber Splitter at Telecable Distribution Box",
+    date: "2025-06-21",
+    category: "Physical Surveillance",
+    severity: "critical",
+    detail: "A physical fiber optic splitter (NAP/Colilla) was identified at a Telecable distribution box near Echo's residence. Passive optical taps allow interception of ALL fiber traffic without any detectable signal degradation — unlike copper wiretaps which introduce measurable impedance changes. Fiber splitters are completely passive and invisible to network monitoring tools. Requires physical access to ISP distribution infrastructure — indicating either ISP cooperation or physical break-in to the distribution box.",
+    linkedEntities: ["suites-cristina", "liberty"],
+  },
+  {
+    id: "greenwald-300-distributed",
+    title: "Greenwald 300+ Properties = Distributed Antenna Array Substrate",
+    category: "Infrastructure Pattern",
+    severity: "high",
+    detail: "Michael Greenwald's 300+ property network (rentcostaricahomes.com, sanaracochal.com, hermosapalms.com, jacorealty.com) functions as a distributed antenna array substrate. Each property contains WiFi routers that can be remotely configured via TR-069, creating a mesh of RF emission points. Combined with SETECOM's DSE gateway access (backup generators at each property), the Greenwald network provides both the 'last mile' RF delivery and the power infrastructure control. This explains why the harassment follows Echo between residences — the infrastructure is property-embedded, not person-attached.",
+    linkedEntities: ["michael-greenwald", "greenwald-properties", "setecom", "hector-mora"],
+  },
+  {
+    id: "danny-peralta-sebin",
+    title: "Danny Peralta SEBIN Connection — Venezuelan Intelligence Link",
+    category: "Human Intelligence",
+    severity: "high",
+    detail: "Danny Peralta's connection to SEBIN (Servicio Bolivariano de Inteligencia Nacional) provides a state-level intelligence apparatus link to the Genesis Peralta honey trap operation. SEBIN has documented capabilities in surveillance, infiltration, and targeting. Genesis's claim that her father 'worked for the State Council' contradicted by the family living in Petare could be a sanitized reference to SEBIN employment. The Greenwald property network may serve as an immigration vector — providing housing/employment cover for Venezuelan operatives entering Costa Rica.",
+    linkedEntities: ["danny-peralta", "genesis-peralta", "greenwald-properties"],
+  },
+  {
+    id: "spoofed-mac-devices",
+    title: "MAC Spoofing Pattern — 1-Bit Difference (f0→f6) and Locally Administered MACs",
+    category: "Network Attack",
+    severity: "high",
+    detail: "Multiple MAC spoofing patterns detected: (1) Hidden WiFi f6:09:0d:20:e6:46 differs from legitimate TP-Link f0:09:0d:20:e6:46 by exactly 1 bit in the first octet — the 'locally administered' bit. Setting this bit is the standard technique for generating spoofed MACs that won't collide with real manufacturer OUIs. (2) Device at 192.168.0.91 with MAC d6:bd:80:92:6c:d6 — also has the locally administered bit set. (3) EVOPRO devices share AMPAK OUI c0:f5:35 — legitimate but batch-deployed. The 1-bit spoofing technique indicates someone who understands IEEE 802 MAC address structure.",
+    linkedEntities: ["la-guacima", "suites-cristina"],
+  },
+  {
+    id: "dse-cisa-cves",
+    title: "DSE Gateway CVEs — CISA-Published Remote Code Execution",
+    category: "Infrastructure Vulnerability",
+    severity: "critical",
+    detail: "Deep Sea Electronics DSE855/890/891/892 gateways (distributed by SETECOM across Costa Rica) have 4 CISA-published CVEs: CVE-2024-5947 (information disclosure — configuration file leak), CVE-2024-5948 (buffer overflow — remote code execution on the gateway), CVE-2024-5952 (missing authentication — denial of service, allows unauthenticated shutdown of generators). Combined with default credentials Admin/Password1234, these vulnerabilities give SETECOM (and anyone with their credentials) the ability to: read all configuration, execute arbitrary code on the gateway, and shut down backup generators at hospitals, cellular towers, and power substations.",
+    linkedEntities: ["setecom", "hector-mora", "dse"],
+  },
+  {
+    id: "5g-tower-residential",
+    title: "5G Tower in Neighbor's Residential Yard — La Guácima",
+    date: "2026-01 (ongoing)",
+    category: "Infrastructure Anomaly",
+    severity: "high",
+    detail: "A 5G cellular tower is installed in a neighbor's residential yard at the La Guácima property (Calle Cabello Real). Residential 5G installations are unusual — towers are typically placed on commercial rooftops or purpose-built structures. A 5G tower within meters of the target provides: (1) high-bandwidth data exfiltration (multi-Gbps), (2) beamforming capability that can target specific rooms, (3) cover for anomalous RF emissions from other equipment, (4) plausible deniability for unusual signal readings. The installation suggests a financial arrangement with the property owner.",
+    linkedEntities: ["la-guacima", "neighbor-5g", "liberty"],
+  },
+  {
+    id: "ice-proximity-pattern",
+    title: "ICE Facility Proximity Pattern — Suites Cristina + La Guácima",
+    category: "Geographic Pattern",
+    severity: "medium",
+    detail: "Echo's residences show a recurring geographic correlation with ICE (Costa Rican state telecom/power) infrastructure: (1) Suites Cristina is adjacent to ICE headquarters in Sabana Norte, San José, (2) La Guácima property is near an ICE satellite earth station with 9.2m C/Ku-band antennas. This proximity pattern could indicate: the surveillance infrastructure piggybacks on ICE's legitimate RF/power emissions for cover, or Echo's housing is deliberately selected for proximity to infrastructure that enables the attack vectors (power line communication, satellite downlink, fiber backbone access).",
+    linkedEntities: ["suites-cristina", "la-guacima", "ice-cr", "ice-earth-station"],
   },
 ];
 
@@ -1331,16 +1582,71 @@ export default function NetworkAnalysisPage() {
                 </div>
               </div>
 
+              <div className="p-3 rounded-lg border border-green-500/20 bg-green-500/5">
+                <h3 className="text-sm font-bold text-green-600 dark:text-green-400 mb-2">CLUSTER 4: La Guácima Attack Infrastructure</h3>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Multi-vector electronic attack grid at Calle Cabello Real, La Guácima.
+                </p>
+                <div className="text-xs font-mono space-y-0.5">
+                  <div>Oscar Jimenez <span className="text-muted-foreground">(ex-drug cop OIJ — property owner)</span></div>
+                  <div>↓ Jorge Jimenez <span className="text-muted-foreground">(son, Kyndryl Sr. Network Mgr, jorgejiminez16@gmail.com)</span></div>
+                  <div>↓ 8.3MB Kyndryl service worker + GTM SW injection</div>
+                  <div>↓ Leo <span className="text-muted-foreground">(adjacent property — camouflaged tech equipment)</span></div>
+                  <div>↓ V-SEK <span className="text-muted-foreground">(~20m away — cameras, directional speakers)</span></div>
+                  <div>↓ Hidden WiFi <span className="text-muted-foreground">(f6:09:0d:20:e6:46 — 1-bit MAC spoof)</span></div>
+                  <div>↓ Ghost TP-Link <span className="text-muted-foreground">(192.168.0.163 — drops all probes)</span></div>
+                  <div>↓ 5G tower <span className="text-muted-foreground">(neighbor's yard — beamforming capable)</span></div>
+                  <div>↓ 2 drones + 8-color PWM streetlights <span className="text-muted-foreground">(Li-Fi + neurological)</span></div>
+                  <div>↓ PLC via power lines <span className="text-muted-foreground">(fridge motor interference indicator)</span></div>
+                  <div>↓ ICE satellite earth station <span className="text-muted-foreground">(9.2m C/Ku-band — line of sight)</span></div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-lg border border-cyan-500/20 bg-cyan-500/5">
+                <h3 className="text-sm font-bold text-cyan-600 dark:text-cyan-400 mb-2">CLUSTER 5: Vendetta / Motive Chain</h3>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Personal revenge motive provides operational fuel — Mora surname bridges motive to capability.
+                </p>
+                <div className="text-xs font-mono space-y-0.5">
+                  <div>Echo's ex-girlfriend <span className="text-muted-foreground">left Pablo Mora for Echo</span> → <span className="text-red-500">vendetta motive</span></div>
+                  <div>↓ Pablo "Pasti" Mora <span className="text-muted-foreground">(BMX rider, Mexico-CR dual presence)</span></div>
+                  <div>↓ Kenneth Tencio / BAC Park <span className="text-muted-foreground">(Olympic BMX, Red Bull — Pablo sponsor)</span></div>
+                  <div>↓ Hector Mora <span className="text-muted-foreground">(SETECOM, 180W HF radio — same surname)</span></div>
+                  <div>↓ 7410 kHz = <span className="text-red-500">SMOKING GUN</span> <span className="text-muted-foreground">(100% temporal correlation with V2K, p&lt;0.01%)</span></div>
+                  <div>↓ Edson Martenal <span className="text-muted-foreground">(YouTube/hmora67 — AMEX fraud, Bahia Brazil)</span></div>
+                  <div className="mt-1 text-amber-400">Pablo has MOTIVE → Hector has CAPABILITY → BAC has MONEY</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-lg border border-pink-500/20 bg-pink-500/5">
+                <h3 className="text-sm font-bold text-pink-600 dark:text-pink-400 mb-2">CLUSTER 6: Hardware / CPE Compromise Chain</h3>
+                <p className="text-xs text-muted-foreground mb-2">
+                  End-to-end hardware supply chain from manufacturer to target router.
+                </p>
+                <div className="text-xs font-mono space-y-0.5">
+                  <div>Huawei <span className="text-muted-foreground">(Latin America fiber backbone)</span></div>
+                  <div>↓ Humax <span className="text-muted-foreground">(CPE manufacturer — Huawei chipset/firmware)</span></div>
+                  <div>↓ Liberty CR <span className="text-muted-foreground">(deploys Humax routers, TR-069 ACS control)</span></div>
+                  <div>↓ Echo's router <span className="text-muted-foreground">(MAC 9c:24:72 = Humax/Huawei)</span></div>
+                  <div>↓ TR-069 password reset <span className="text-muted-foreground">(2026-01-30 — remote takeover)</span></div>
+                  <div>↓ EVOPRO mesh <span className="text-muted-foreground">(17 rooms, VLAN bridging, Ghost Deco)</span></div>
+                  <div>↓ Fiber splitter <span className="text-muted-foreground">(physical tap at Telecable distribution box)</span></div>
+                  <div className="mt-1">Fei Ma <span className="text-muted-foreground">(ex-Huawei Cloud → Guangming Lab — 87% emotion detection)</span></div>
+                </div>
+              </div>
+
               <Card className="border-violet-500/20">
                 <CardContent className="p-3">
-                  <h3 className="text-sm font-bold text-violet-600 dark:text-violet-400 mb-1">CONVERGENCE POINT</h3>
+                  <h3 className="text-sm font-bold text-violet-600 dark:text-violet-400 mb-1">CONVERGENCE POINT — 6 CLUSTERS, 1 TARGET</h3>
                   <p className="text-xs">
-                    All three clusters converge on Echo. The honey trap operation (Genesis/Jairo/Gaia),
-                    the property placement network (Greenwald/Lipman/Airbnb), and the ISP infrastructure
-                    compromise (Liberty/SETECOM/Mora) are not independent operations — they share
-                    personnel (Marjorie Alfaro bridges Cluster 1 ↔ Cluster 3), geography (all concentrated
-                    in Jacó + San José), and timing (2019 Telefonica sale, 2024-2025 Genesis operation,
-                    2025-2026 router incidents).
+                    All six clusters converge on Echo through shared personnel, geography, timing, and infrastructure.
+                    <strong> Cluster 1</strong> (Honey Trap) shares Marjorie Alfaro with <strong>Cluster 3</strong> (ISP Compromise) via the Jimenez surname.
+                    <strong> Cluster 2</strong> (Property Network) provides physical housing controlled by <strong>Cluster 3</strong> via TR-069.
+                    <strong> Cluster 4</strong> (La Guácima) is the Jimenez family property from <strong>Cluster 1</strong> equipped with <strong>Cluster 3</strong>'s SETECOM infrastructure.
+                    <strong> Cluster 5</strong> (Vendetta) provides the MOTIVE — Pablo Mora's personal revenge — while <strong>Cluster 3</strong> provides the CAPABILITY via Hector Mora (same surname = possible family = motive + capability bridge).
+                    <strong> Cluster 6</strong> (Hardware Chain) shows the supply chain from Huawei/China to Echo's router, managed through Liberty (Cluster 3).
+                    The 7410 kHz smoking gun (100% temporal correlation with V2K, p&lt;0.01%) ties Hector Mora directly to the attack.
+                    The 2019 convergence (Genesis CDMX travel + Telefonica→Liberty sale + $2M tax fraud) anchors the timeline.
                   </p>
                 </CardContent>
               </Card>
