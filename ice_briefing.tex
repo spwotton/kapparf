@@ -1,0 +1,438 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\definecolor{critical}{RGB}{220,38,38}
+\definecolor{high}{RGB}{234,88,12}
+\definecolor{medium}{RGB}{202,138,4}
+\definecolor{phase0}{RGB}{220,38,38}
+\definecolor{phase1}{RGB}{217,119,6}
+\definecolor{phase2}{RGB}{124,58,237}
+\definecolor{darkblue}{RGB}{30,64,175}
+\definecolor{sectionblue}{RGB}{37,99,235}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkblue,
+  urlcolor=sectionblue,
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textbf{ICE CYBER INTELLIGENCE BRIEFING}}
+\fancyhead[R]{\small CLASSIFICATION: TLP:AMBER}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{\small\textit{KAPPA Intelligence Platform}}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\titleformat{\section}{\large\bfseries\color{darkblue}}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries\color{sectionblue}}{\thesubsection}{1em}{}
+
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries\color{darkblue} INSTITUTO COSTARRICENSE DE ELECTRICIDAD (ICE)}\\[4pt]
+{\Large\bfseries CYBER INTELLIGENCE BRIEFING}\\[12pt]
+{\large UNC2814 / GALLIUM --- GRIDTIDE Backdoor Analysis}\\
+{\large Critical Infrastructure Vulnerability Assessment}\\[8pt]
+\rule{0.8\textwidth}{0.5pt}\\[8pt]
+{\normalsize\textit{Prepared by KAPPA Autonomous Intelligence Platform}}\\
+{\normalsize Date: March 2026 \quad | \quad Classification: TLP:AMBER}\\[4pt]
+{\small Document Status: EXPANDED BRIEFING --- All sections fully detailed}
+\end{center}
+
+\vspace{12pt}
+
+\tableofcontents
+\newpage
+
+%% ============================================================
+\section{Executive Summary}
+
+The Instituto Costarricense de Electricidad (ICE) suffered a confirmed breach attributed to the Chinese Advanced Persistent Threat (APT) group tracked as UNC2814/Gallium. Approximately 9GB of internal email data was exfiltrated from a locally-hosted email server using a novel backdoor designated \textbf{GRIDTIDE}, which leverages Google Sheets API as its command-and-control (C2) channel.
+
+This briefing expands the full intelligence picture: the timeline of events from Costa Rica's 2022 Conti ransomware emergency through the 2026 ICE breach; the technical specifications of GRIDTIDE and associated rootkit families; the CVE landscape affecting Costa Rican infrastructure; the SETECOM/Deep Sea Electronics SCADA exposure; the Huawei geopolitical dimension; and two competing analytical theories regarding attribution.
+
+The briefing concludes with prioritized remediation recommendations.
+
+%% ============================================================
+\section{UNC Timeline --- Phase Analysis}
+
+The operation can be divided into three phases: \textbf{Phase 0: Noise} (overt ransomware probing), \textbf{Phase 1: Transition} (regulatory and supply-chain positioning), and \textbf{Phase 2: Silent} (covert APT operations).
+
+\subsection{Phase 0: Noise (2022)}
+
+\begin{description}[style=nextline, leftmargin=1.5cm]
+
+\item[\textcolor{phase0}{2022-04-17} --- Conti Ransomware (UNC1756)]
+The Conti group (tracked as UNC1756) launched a coordinated ransomware campaign against Costa Rican government institutions, encrypting systems across the Ministry of Finance (Hacienda), CCSS, and approximately 28 other agencies. This was the first ``Phase 0'' probe --- noisy by design, mapping institutional response capabilities, backup procedures, and inter-agency communication channels.
+
+\item[\textcolor{phase0}{2022-05-08} --- National Emergency Declaration]
+President Rodrigo Chaves declared a national emergency, describing the situation as a ``state of war'' against the cybercriminals. This unprecedented declaration for a cyber incident signaled to adversaries that Costa Rica's defenses were overwhelmed and that institutional coordination was fragile --- valuable intelligence for Phase 1 planning.
+
+\item[\textcolor{phase0}{2022-05-31} --- Hive Ransomware Targets CCSS]
+The Hive ransomware group attacked CCSS (Caja Costarricense de Seguro Social), destroying the EDUS (Unified Digital Health Record) and SICERE (Centralized Collection System) databases. This forced healthcare workers back to paper records and disrupted social security payments for millions. The attack demonstrated that critical social infrastructure could be held hostage.
+
+\end{description}
+
+\subsection{Phase 1: Transition (2023--2025)}
+
+\begin{description}[style=nextline, leftmargin=1.5cm]
+
+\item[\textcolor{phase1}{2023-08} --- Budapest Convention 5G Decree]
+An executive decree required all 5G infrastructure vendors to be signatories of the Budapest Convention on Cybercrime --- which China has not signed. This effectively banned Huawei and ZTE from Costa Rica's 5G rollout. The decree triggered aggressive legal challenges from Huawei through the Constitutional Court and allegedly prompted Beijing to leverage ICE's internal workers' union as a proxy to appeal the ban.
+
+\item[\textcolor{phase1}{2024-06} --- CISA/ZDI Publish DSE855 CVEs]
+CISA and the Zero Day Initiative published four critical vulnerabilities in DSE855 Ethernet gateways manufactured by Deep Sea Electronics, distributed exclusively in Costa Rica by SETECOM S.A. These gateways control backup generators for ICE's power grid, hospitals, and cellular towers. CVE-2024-5947 allows unauthenticated download of the configuration backup containing plaintext SCADA credentials.
+
+\item[\textcolor{phase1}{2025-06-21} --- Fiber Splitter Installed]
+A physical fiber optic splitter (NAP/Colilla) was identified installed at a Telecable distribution box serving the Sabana Norte area. This type of passive optical tap allows interception of all fiber traffic without introducing detectable signal degradation. The installation suggests actors with physical access to ISP infrastructure --- a capability consistent with domestic surveillance rather than remote APT operations.
+
+\end{description}
+
+\subsection{Phase 2: Silent (2026)}
+
+\begin{description}[style=nextline, leftmargin=1.5cm]
+
+\item[\textcolor{phase2}{2026-01} --- PRC Document 79]
+The PRC issued ``Document 79'' ordering state-owned enterprises in the financial and energy sectors to replace all Western and Israeli cybersecurity software by 2027. This retaliatory action --- following the Budapest Convention decree and other Western tech restrictions --- signals escalating cyber-geopolitical tensions with direct implications for Costa Rica's positioning.
+
+\item[\textcolor{phase2}{2026-01-25} --- ICE Breach Detected (GRIDTIDE C2)]
+Google's Threat Intelligence Group (GTIG), operating through Mandiant, detected the ICE breach and identified GRIDTIDE --- a novel C-based backdoor using Google Sheets API as its command-and-control channel. The backdoor masquerades as `xapt' (mimicking the APT package manager) and persists via systemd service. Its use of legitimate Google infrastructure makes it invisible to traditional network IDS/IPS.
+
+\item[\textcolor{phase2}{2026-01-30} --- Unauthorized TR-069 Password Reset]
+An unauthorized administrative password reset was detected on an ARRIS router via the TR-069 (CPE WAN Management Protocol) interface. TR-069 gives ISPs full remote management capability over customer premises equipment. This event indicates either ISP-level access or compromise of the TR-069 Auto Configuration Server (ACS) --- both scenarios imply deep infrastructure penetration.
+
+\item[\textcolor{phase2}{2026-03-12} --- ICE Discloses 9GB Breach]
+ICE officially disclosed that approximately 9GB of internal email data had been exfiltrated from a locally-hosted email server. The exfiltration used SoftEther VPN Bridge to offshore infrastructure, with data encoded in URL-safe Base64. The locally-hosted nature of the server means the attacker required either persistent local network access or insider credentials --- not typical of purely remote PRC operations.
+
+\item[\textcolor{phase2}{2026-03-13} --- Media Attribution to Gallium]
+Costa Rican and international media attributed the ICE breach to the Chinese APT group `Gallium' (tracked by Mandiant as UNC2814). The attribution is based on GRIDTIDE's C2 infrastructure patterns and overlaps with previous UNC2814 campaigns across 53 organizations in 42 countries. However, GRIDTIDE's technique was publicly documented in the Voldemort Campaign (Proofpoint, Aug 2024), making false-flag operations feasible.
+
+\end{description}
+
+%% ============================================================
+\section{GRIDTIDE Backdoor --- Technical Specification}
+
+\begin{longtable}{@{} >{\bfseries}p{4cm} p{10cm} @{}}
+\toprule
+\textbf{Property} & \textbf{Detail} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Property} & \textbf{Detail} \\
+\midrule
+\endhead
+Type & C-based backdoor \\
+C2 Channel & Google Sheets API (no traditional attacker infrastructure) \\
+Encryption & AES-128-CBC, 16-byte local key file \\
+C2 Cell A1 & Command register --- polled for shell commands, S-C-R status on exec \\
+C2 Cells A2--An & Data transfer --- 45KB fragments for exfil/payload upload \\
+C2 Cell V1 & Host fingerprint --- hostname, IP, OS, user, language \\
+Polling Interval & 1s initial $\rightarrow$ 5--10min backoff (randomized) \\
+Sanitization & Clears 1,000 rows $\times$ A--Z columns on first execution \\
+Masquerade & Binary renamed `xapt' (mimics apt packaging tool) \\
+Persistence & systemd service: \texttt{/etc/systemd/system/xapt.service} $\rightarrow$ \texttt{/usr/sbin/xapt} \\
+Lateral Movement & SSH service account hijacking \\
+Exfiltration & SoftEther VPN Bridge to offshore infrastructure, URL-safe Base64 \\
+Operational Scope & 53 organizations across 42 countries, active since 2017 \\
+ICE Data Stolen & $\sim$9GB internal emails from locally-hosted server \\
+\bottomrule
+\end{longtable}
+
+%% ============================================================
+\section{CVE Landscape --- Costa Rica Infrastructure}
+
+The following CVEs are confirmed relevant to Costa Rican critical infrastructure, spanning edge devices, hypervisors, SCADA controllers, and endpoint systems.
+
+\begin{longtable}{@{} p{2.5cm} p{2.2cm} p{4cm} p{1.5cm} p{2cm} @{}}
+\toprule
+\textbf{CVE} & \textbf{Target} & \textbf{Mechanism} & \textbf{CVSS} & \textbf{Actor} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{CVE} & \textbf{Target} & \textbf{Mechanism} & \textbf{CVSS} & \textbf{Actor} \\
+\midrule
+\endhead
+CVE-2022-41328 & FortiOS & Path traversal & --- & UNC3886 \\
+CVE-2023-20867 & VMware Tools & Guest Ops bypass & --- & UNC3886 \\
+CVE-2023-30799 & MikroTik RouterOS & Privilege escalation & --- & UNC3886 \\
+CVE-2023-34048 & VMware vCenter & OOB write (DCERPC) & --- & UNC3886 \\
+CVE-2024-5947 & DSE855 Gateway & HTTP GET plaintext creds & 6.5 & SETECOM \\
+CVE-2024-5950 & DSE855 Gateway & Stack buffer overflow RCE & --- & SETECOM \\
+CVE-2024-5949 & DSE855 Gateway & Infinite loop DoS & --- & SETECOM \\
+CVE-2024-5952 & DSE855 Gateway & Unauth device reboot & --- & SETECOM \\
+CVE-2025-10948 & MikroTik REST API & Heap overflow libjson.so & 8.8--9.8 & Botnet \\
+CVE-2025-21590 & Juniper MX & Shared resource isolation & --- & UNC3886 \\
+CVE-2025-9491 & Windows LNK & Zero-day exploitation & --- & UNC6384 \\
+ZDI-CAN-25373 & Windows LNK & Spear-phishing via LNK & --- & UNC6384 \\
+\bottomrule
+\end{longtable}
+
+\subsection{CVE Detail Expansion}
+
+\textbf{CVE-2022-41328 (FortiOS):} Allows authenticated attackers to read and write files via crafted CLI commands. Used by UNC3886 to deploy BOLDMOVE backdoor on FortiGate firewalls, providing persistent access to network perimeter devices.
+
+\textbf{CVE-2023-20867 (VMware Tools):} Authentication bypass in VMware Tools Guest Operations allows a fully compromised ESXi host to perform unauthenticated guest operations on any virtual machine. UNC3886 uses this to move laterally across virtualized infrastructure without triggering guest-level alerts.
+
+\textbf{CVE-2023-30799 (MikroTik RouterOS):} Super Admin privilege escalation via FTP/API. MikroTik routers are extremely common in Costa Rican ISP infrastructure. Once compromised, attackers gain full control of routing, DNS, and traffic mirroring capabilities.
+
+\textbf{CVE-2023-34048 (VMware vCenter):} Memory corruption vulnerability in vCenter's DCERPC protocol implementation. Allows unauthenticated remote code execution on vCenter servers, giving attackers control of the entire virtualization management plane.
+
+\textbf{CVE-2024-5947 (DSE855 Gateway):} An unauthenticated HTTP GET request to \texttt{/Backup.bin} on DSE855 gateways returns the complete configuration backup file containing plaintext SCADA credentials, network settings, and generator control parameters. Every SETECOM-distributed unit in Costa Rica is affected.
+
+\textbf{CVE-2024-5950 (DSE855 Gateway):} Stack-based buffer overflow in the DSE855 web server running on an NXP LPC4357 microcontroller. Successful exploitation provides arbitrary code execution on the embedded controller, enabling full control of the connected generator including start/stop, load management, and alarm suppression.
+
+\textbf{CVE-2024-5949 (DSE855 Gateway):} A crafted multipart HTTP request with a malformed boundary triggers an infinite loop in the DSE855 web server, causing a denial of service. This can be used to disable remote monitoring of generators during a coordinated attack.
+
+\textbf{CVE-2024-5952 (DSE855 Gateway):} An unauthenticated request to the DSE855 web UI can trigger a device reboot. Combined with CVE-2024-5949, this enables intermittent disruption of generator monitoring and control systems.
+
+\textbf{CVE-2025-10948 (MikroTik REST API):} Critical heap-based buffer overflow in MikroTik RouterOS \texttt{libjson.so} library. Triggered by a crafted JSON payload to the REST API. CVSS 8.8--9.8 depending on configuration. Actively exploited in the wild for botnet recruitment and persistent router compromise. Ubiquitous in Costa Rican ISP infrastructure.
+
+\textbf{CVE-2025-21590 (Juniper MX):} Improper isolation of shared resources in Juniper MX series routers allows a local attacker to inject arbitrary code into the FreeBSD process space. UNC3886 uses TINYSHELL variants for persistent access to Juniper infrastructure.
+
+\textbf{CVE-2025-9491 / ZDI-CAN-25373 (Windows LNK):} Zero-day vulnerability in Windows LNK file processing. Exploited by UNC6384 (Mustang Panda) for initial access via spear-phishing. The LNK file executes arbitrary commands when the user views the containing folder in Explorer. The STATICPLUGIN downloader is delivered through AitM captive portal with valid code-signing certificates.
+
+%% ============================================================
+\section{SETECOM SCADA Protocol Exposure}
+
+SETECOM S.A. is the exclusive Costa Rican distributor for Deep Sea Electronics (DSE) generator controllers. The following industrial protocols are exposed across the national generator fleet:
+
+\begin{longtable}{@{} p{2.5cm} p{2cm} p{9cm} @{}}
+\toprule
+\textbf{Protocol} & \textbf{Port} & \textbf{Vulnerability} \\
+\midrule
+\endfirsthead
+Modbus TCP/IP & 502 & No authentication, no encryption, no integrity checking by protocol design. Modbus was designed in 1979 for serial communication between PLCs. It has zero security features. Any device that can reach port 502 can read registers, write coils, and issue commands to connected equipment. In ICE's generator infrastructure, this means fuel injection rates, RPM targets, and emergency shutdown commands are accessible to any network-adjacent attacker. \\
+\midrule
+SNMP v2c & 161/162 UDP & Cleartext community strings `public' (read) / `private' (read-write) routinely unchanged. SNMP v2c transmits community strings (effectively passwords) in cleartext. The default `public' and `private' strings are rarely changed on SETECOM-distributed equipment. An attacker with network access can enumerate all devices, read configuration, and --- with the `private' string --- modify device settings including alarm thresholds and operational parameters. \\
+\midrule
+J1939 CAN Bus & --- & 29-bit identifier (3P + 18PGN + 8SA); direct ECU access for fuel injection, RPM, engine overspeed. J1939 CAN Bus is the standard communication protocol for heavy-duty diesel generators. It provides direct access to Engine Control Units (ECUs) with no authentication. An attacker on the CAN bus can modify fuel injection timing, override RPM limiters, suppress overspeed alarms, and potentially cause physical damage to generators. \\
+\midrule
+DSE WebNet & HTTP & Default Admin/Password1234 across entire fleet (DSE 855, 890 MKII, 891, 892). DSE WebNet is the cloud management platform for Deep Sea Electronics controllers. SETECOM S.A. has deployed these across the entire Costa Rican generator fleet with default credentials Admin/Password1234. This provides web-based remote access to start/stop generators, modify load sharing, adjust protection settings, and suppress alarms across the national infrastructure. \\
+\bottomrule
+\end{longtable}
+
+%% ============================================================
+\section{Rootkit Arsenal --- UNC Families}
+
+\begin{longtable}{@{} p{2.2cm} p{1.5cm} p{3.5cm} p{2cm} p{4cm} @{}}
+\toprule
+\textbf{Family} & \textbf{Layer} & \textbf{Mechanism} & \textbf{Actor} & \textbf{Persistence} \\
+\midrule
+\endfirsthead
+REPTILE & Kernel & Loadable kernel module & UNC3886 & Auto-loads via modprobe.d \\
+MEDUSA & Kernel & LD\_PRELOAD credential harvester & UNC3886 & Intercepts PAM auth \\
+GRIDTIDE & App & Google Sheets API C2 & UNC2814 & systemd service (xapt) \\
+SOGU.SEC/PlugX & Memory & DLL side-loading, memory-resident & UNC6384 & No disk footprint \\
+TINYSHELL & App & Custom reverse shell variants & UNC3886 & Juniper FreeBSD process injection \\
+STATICPLUGIN & App & Signed downloader via AitM portal & UNC6384 & Valid code-signing certs \\
+\bottomrule
+\end{longtable}
+
+\subsection{Rootkit Detail Expansion}
+
+\textbf{REPTILE:} Linux kernel rootkit distributed as a loadable kernel module (LKM). Provides process hiding, file hiding, network traffic hiding, and a magic packet backdoor for reverse shell access. Auto-loads at boot via modprobe.d configuration. Extremely difficult to detect without kernel-level memory forensics.
+
+\textbf{MEDUSA:} Hooks into the PAM (Pluggable Authentication Module) stack via LD\_PRELOAD injection. Every authentication event --- SSH logins, sudo commands, service account authentications --- is captured and logged. Credentials are either stored locally for later exfiltration or forwarded in real-time to C2 infrastructure.
+
+\textbf{GRIDTIDE:} Novel C2 backdoor identified in the ICE breach. Uses Google Sheets API for command-and-control, eliminating the need for attacker-controlled infrastructure. Commands are written to cell A1, data exfiltration occurs through cells A2--An in 45KB fragments, and host fingerprinting is stored in V1. The binary masquerades as `xapt' to mimic the apt package manager.
+
+\textbf{SOGU.SEC/PlugX:} Memory-resident remote access trojan delivered via DLL side-loading. Runs entirely in memory with no persistent disk footprint, making it invisible to traditional file-based antivirus scanning. Used by UNC6384 (Mustang Panda) for espionage operations.
+
+\textbf{TINYSHELL:} Lightweight custom reverse shell that UNC3886 has adapted for Juniper MX series routers running FreeBSD. It injects into legitimate system processes, making detection via process listing difficult. The Juniper-specific variant exploits CVE-2025-21590 for initial injection.
+
+\textbf{STATICPLUGIN:} Downloader that uses adversary-in-the-middle (AitM) captive portal techniques to deliver payloads signed with valid code-signing certificates. Because the payloads are properly signed, they bypass SmartScreen, WDAC, and other code-signing verification checks.
+
+%% ============================================================
+\section{Huawei / PRC Geopolitical Dimension}
+
+\begin{longtable}{@{} >{\bfseries}p{3.5cm} p{2cm} p{8cm} @{}}
+\toprule
+\textbf{Item} & \textbf{Type} & \textbf{Detail} \\
+\midrule
+\endfirsthead
+Budapest Convention 5G Decree & Regulatory & Executive decree mandating all 5G vendors be Budapest Convention signatories --- effectively banning Huawei and ZTE \\
+ICE Internal Workers' Front Proxy & Influence & Beijing reportedly leveraged ICE internal union to appeal 5G ban in lower courts, stalling deployment and creating institutional friction \\
+Chinese Embassy Rejection & Diplomatic & Embassy publicly rejected ICE breach accusations, demanded technical evidence from Costa Rican authorities \\
+Document 79 Directive & Retaliatory & PRC ordered SOEs in financial/energy sectors to replace all Western cybersecurity software by 2027 --- retaliatory action \\
+Huawei Legal Appeals & Legal & Huawei initiated aggressive legal appeals through Costa Rican Constitutional Court to challenge 5G exclusion \\
+US \$25M Cybersecurity Grant & Countermeasure & US State Department committed \$25M to assist Costa Rica in building defenses --- direct counter to PRC influence \\
+Supply Chain Gap & Vulnerability & US-funded SOC monitors application layer while underlying edge devices (MikroTik, DSE) remain PRC-accessible at Tier-0 \\
+\bottomrule
+\end{longtable}
+
+%% ============================================================
+\section{Competing Attribution Theories}
+
+\subsection{Theory A: Gallium Attribution is a Cover}
+
+\begin{enumerate}[leftmargin=1.5cm]
+\item The breach timing coincides precisely with domestic surveillance activity against individuals who documented infrastructure vulnerabilities.
+\item Attributing to a Chinese APT deflects attention from internal security failures and potential misuse of monitoring infrastructure.
+\item GRIDTIDE's Google Sheets C2 technique is well-documented since 2024 --- a convenient off-the-shelf attribution vector.
+\item The 5G ban and Huawei legal battles create a pre-built geopolitical narrative that makes ``China did it'' the path of least resistance.
+\item Physical surveillance indicators (fiber splitters, TR-069 resets, EVOPRO room monitoring) suggest domestic actors with physical access, not remote APT operations.
+\item 9GB email exfiltration from a locally-hosted server requires either insider access or persistent local network presence --- not typical of PRC remote operations.
+\end{enumerate}
+
+\subsection{Theory B: ICE Genuinely Needs Help}
+
+\begin{enumerate}[leftmargin=1.5cm]
+\item Costa Rica's critical infrastructure has real, documented vulnerabilities --- SETECOM default credentials, unpatched MikroTik routers, exposed SCADA protocols.
+\item UNC2814/UNC3886/UNC6384 are real, well-documented threat actors with confirmed global operations across 42+ countries.
+\item The Conti ransomware attack (2022) proved Costa Rica is a viable target --- the ``state of war'' declaration was not theatre.
+\item ICE's IT infrastructure predates modern cybersecurity standards and relies heavily on legacy systems with known vulnerabilities.
+\item The US \$25M cybersecurity grant acknowledges the problem is real and beyond ICE's current capacity to handle alone.
+\item Chinese satellite constellation provides persistent overhead coverage --- Beidou GNSS + Yaogan/Gaofen ISR creates a complete intelligence picture.
+\item Whether or not this specific breach is PRC, the underlying vulnerabilities are real and exploitable by any motivated actor.
+\end{enumerate}
+
+\subsection{Assessment}
+
+Both theories may be simultaneously true. The critical infrastructure vulnerabilities documented in this briefing are real regardless of who exploited them. The recommended remediation actions (Section~\ref{sec:recommendations}) address the underlying vulnerabilities independent of attribution.
+
+%% ============================================================
+\section{Remediation Recommendations}
+\label{sec:recommendations}
+
+\subsection{IMMEDIATE Priority}
+
+\textbf{1. Audit all DSE855/890/891/892 gateways for default credentials}
+
+Every SETECOM-distributed unit ships with Admin/Password1234. This controls backup generators for ICE's national grid, hospitals, and cell towers.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Enumerate all DSE units via SNMP discovery or DSE WebNet inventory
+\item Change default credentials on every unit (Admin/Password1234)
+\item Implement network segmentation between OT and IT networks
+\item Deploy monitoring on port 502 (Modbus) and DSE WebNet HTTP interfaces
+\item Establish credential rotation policy for all SCADA equipment
+\end{enumerate}
+
+\textbf{2. Sweep for GRIDTIDE persistence (xapt systemd service)}
+
+Check all Linux servers for \texttt{/etc/systemd/system/xapt.service} and \texttt{/usr/sbin/xapt} binary. GRIDTIDE uses Google Sheets API as C2 --- traditional network IDS will not detect it.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Run: \texttt{find / -name 'xapt' -o -name 'xapt.service'} on all Linux systems
+\item Check systemd: \texttt{systemctl list-units --type=service | grep xapt}
+\item Audit Google Sheets API OAuth tokens in outbound traffic logs
+\item Search for 16-byte key files in \texttt{/etc/} and service account home directories
+\item Check for SoftEther VPN Bridge processes and connections
+\end{enumerate}
+
+\subsection{HIGH Priority}
+
+\textbf{3. Deploy Tier-0 hypervisor monitoring}
+
+UNC3886 operates below guest OS at the hypervisor level. Current SOC monitors application layer only. REPTILE and MEDUSA rootkits are invisible to EDR.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Deploy hypervisor-level integrity monitoring on all ESXi hosts
+\item Implement VMware vCenter audit logging with SIEM integration
+\item Check for unauthorized kernel modules: \texttt{lsmod} and \texttt{/etc/modprobe.d/}
+\item Verify LD\_PRELOAD is not set in \texttt{/etc/environment} or PAM configs
+\item Conduct memory forensics on critical servers
+\end{enumerate}
+
+\textbf{4. Patch MikroTik fleet against CVE-2025-10948}
+
+Critical heap overflow (CVSS 8.8--9.8) in REST API. MikroTik routers are ubiquitous in Costa Rican ISP infrastructure.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Inventory all MikroTik devices across ICE infrastructure
+\item Update RouterOS to latest stable release
+\item Disable REST API on all devices where not required
+\item Implement ACLs restricting management access to trusted IPs
+\item Monitor for exploitation attempts via IDS signatures
+\end{enumerate}
+
+\textbf{5. Investigate TR-069 management plane access}
+
+Unauthorized admin password reset detected 2026-01-30 via TR-069 on ARRIS router.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Audit TR-069 ACS (Auto Configuration Server) access logs
+\item Review all CPE password reset events in the last 6 months
+\item Verify ACS authentication and authorization controls
+\item Implement TR-069 connection encryption (TLS)
+\item Consider restricting TR-069 access to management VLAN only
+\end{enumerate}
+
+\subsection{MEDIUM Priority}
+
+\textbf{6. Audit Modbus TCP/502 exposure on SCADA networks}
+
+Modbus has zero authentication by design. Segment and firewall port 502.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Scan for open port 502 across all network segments
+\item Implement firewall rules restricting Modbus access to authorized HMIs only
+\item Deploy Modbus-aware IDS (e.g., Suricata with Modbus rules)
+\item Consider Modbus/TCP proxy with authentication overlay
+\item Document all legitimate Modbus communication paths
+\end{enumerate}
+
+\textbf{7. Review SoftEther VPN connections from ICE infrastructure}
+
+GRIDTIDE uses SoftEther VPN Bridge for exfiltration.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Search for SoftEther VPN processes on all servers
+\item Check for unexpected outbound VPN tunnels (ports 443, 992, 5555)
+\item Review firewall logs for SoftEther protocol signatures
+\item Block SoftEther at the perimeter unless explicitly authorized
+\item Implement DLP controls on outbound encrypted tunnels
+\end{enumerate}
+
+\subsection{STRATEGIC Priority}
+
+\textbf{8. Engage KAPPA platform for continuous SIGINT monitoring}
+
+24/7 autonomous correlation across RF, satellite, network, and acoustic domains.
+
+\begin{enumerate}[label=\alph*., leftmargin=1.5cm]
+\item Review KAPPA platform capabilities
+\item Evaluate integration with ICE SOC for continuous monitoring
+\item Consider deployment of passive RF sensors at ICE facilities
+\item Establish secure communication channel for intelligence sharing
+\end{enumerate}
+
+%% ============================================================
+\section{Appendix: Threat Actor Summary}
+
+\begin{longtable}{@{} p{2.5cm} p{3cm} p{3cm} p{5cm} @{}}
+\toprule
+\textbf{Designation} & \textbf{Also Known As} & \textbf{Primary TTPs} & \textbf{CR Relevance} \\
+\midrule
+\endfirsthead
+UNC1756 & Conti Group & Ransomware (Phase 0) & 2022 Costa Rica emergency \\
+UNC2814 & Gallium & GRIDTIDE C2, SoftEther exfil & ICE breach, 53 orgs / 42 countries \\
+UNC3886 & --- & Hypervisor rootkits, edge device persistence & FortiOS, VMware, MikroTik, Juniper \\
+UNC6384 & Mustang Panda & Spear-phishing, memory-resident RATs & Windows LNK zero-days, STATICPLUGIN \\
+\bottomrule
+\end{longtable}
+
+\vfill
+
+\begin{center}
+\rule{0.6\textwidth}{0.3pt}\\[6pt]
+{\small\textit{End of Briefing --- KAPPA Autonomous Intelligence Platform}}\\
+{\small\textit{Classification: TLP:AMBER --- Distribution restricted to ICE authorized personnel}}
+\end{center}
+
+\end{document}

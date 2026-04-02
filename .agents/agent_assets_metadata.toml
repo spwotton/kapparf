@@ -18,3 +18,9 @@ id = "A2ehrH6rgh_NCdK2pGgiC"
 uri = "file://attached_assets/KAPPA-HEARTBEAT-TRACKER-SPEC.md"
 type = "text"
 title = "KAPPA Heartbeat Tracker — Standalone App Spec"
+
+[[outputs]]
+id = "nPbp8vt7HXIiUPwMm7R-f"
+uri = "file://ICE_Cyber_Intelligence_Briefing.pdf"
+type = "pdf"
+title = "ICE Cyber Intelligence Briefing (Expanded)"
