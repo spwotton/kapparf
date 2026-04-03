@@ -39,73 +39,101 @@ function heading(t, level) {
   const sz = sizes[level] || 12;
   need(sz + 20);
   if (level === 1) doc.moveDown(0.8); else doc.moveDown(0.5);
-  doc.font('Helvetica-Bold').fontSize(sz).fillColor(level === 1 ? C.sec : C.dk).text(t, ML, doc.y, { width: W });
+  const startY = doc.y;
+  doc.font('Helvetica-Bold').fontSize(sz).fillColor(level === 1 ? C.sec : C.dk);
+  const textH = doc.heightOfString(t, { width: W });
+  doc.text(t, ML, startY, { width: W });
   if (level === 1) {
-    const ly = doc.y + 2;
+    const ly = startY + textH + 2;
     doc.moveTo(ML, ly).lineTo(ML + W, ly).strokeColor(C.sec).lineWidth(0.8).stroke();
     doc.y = ly + 8;
   } else {
-    doc.y += 4;
+    doc.y = startY + textH + 4;
   }
 }
 
 function para(t) {
-  need(15);
-  doc.font('Helvetica').fontSize(9).fillColor(C.tx).text(t, ML, doc.y, { width: W, lineGap: 2.5 });
-  doc.y += 4;
+  doc.font('Helvetica').fontSize(9).fillColor(C.tx);
+  const h = doc.heightOfString(t, { width: W, lineGap: 2.5 });
+  need(h + 4);
+  const startY = doc.y;
+  doc.text(t, ML, startY, { width: W, lineGap: 2.5 });
+  doc.y = startY + h + 4;
 }
 
 function bullet(t, indent) {
   const ind = indent || 0;
-  need(12);
   doc.font('Helvetica').fontSize(8.5).fillColor(C.tx);
-  doc.text('•', ML + ind, doc.y, { continued: true, width: 10 });
-  doc.text('  ' + t, { width: W - ind - 12, lineGap: 2 });
-  doc.y += 2;
+  const bw = W - ind - 15;
+  const h = doc.heightOfString(t, { width: bw, lineGap: 2 });
+  need(h + 2);
+  const startY = doc.y;
+  doc.text('\u2022', ML + ind, startY, { width: 10 });
+  doc.text(t, ML + ind + 12, startY, { width: bw, lineGap: 2 });
+  doc.y = startY + h + 2;
 }
 
 function label(k, v) {
-  need(14);
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.mu).text(k + ': ', ML, doc.y, { continued: true });
-  doc.font('Helvetica').fillColor(C.tx).text(v, { width: W - 10, lineGap: 2 });
-  doc.y += 2;
+  doc.font('Helvetica-Bold').fontSize(8.5);
+  const kw = doc.widthOfString(k + ': ');
+  const vw = W - kw - 5;
+  doc.font('Helvetica').fontSize(8.5);
+  const h = doc.heightOfString(v, { width: vw, lineGap: 2 });
+  need(h + 2);
+  const startY = doc.y;
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.mu).text(k + ': ', ML, startY, { width: kw + 5 });
+  doc.font('Helvetica').fillColor(C.tx).text(v, ML + kw, startY, { width: vw, lineGap: 2 });
+  doc.y = startY + h + 2;
 }
 
 function critBox(t) {
-  need(40);
-  const x = ML;
-  const boxW = W;
   doc.font('Helvetica').fontSize(8.5);
-  const h = doc.heightOfString(t, { width: boxW - 20 }) + 14;
-  doc.rect(x, doc.y, boxW, h).fillAndStroke('#fef2f2', C.crit);
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.crit).text('CRITICAL', x + 8, doc.y + 4, { continued: true });
-  doc.font('Helvetica').fillColor(C.tx).text('  ' + t, { width: boxW - 80, lineGap: 2 });
-  doc.y += h + 6;
+  const labelW = 65;
+  const textW = W - labelW - 16;
+  const h = Math.max(doc.heightOfString(t, { width: textW, lineGap: 2 }), 12) + 14;
+  need(h + 6);
+  const startY = doc.y;
+  doc.rect(ML, startY, W, h).fillAndStroke('#fef2f2', C.crit);
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.crit).text('CRITICAL', ML + 8, startY + 6, { width: labelW });
+  doc.font('Helvetica').fillColor(C.tx).text(t, ML + 8 + labelW, startY + 6, { width: textW, lineGap: 2 });
+  doc.y = startY + h + 6;
 }
 
 function infoBox(title, t) {
-  need(40);
+  doc.font('Helvetica-Bold').fontSize(8.5);
+  const titleH = doc.heightOfString(title, { width: W - 16 });
   doc.font('Helvetica').fontSize(8.5);
-  const h = doc.heightOfString(t, { width: W - 20 }) + 20;
-  doc.rect(ML, doc.y, W, h).fillAndStroke(C.bg, C.bdr);
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.sec).text(title, ML + 8, doc.y + 5, { width: W - 16 });
-  doc.font('Helvetica').fillColor(C.tx).text(t, ML + 8, doc.y + 2, { width: W - 20, lineGap: 2 });
-  doc.y += h + 6;
+  const textH = doc.heightOfString(t, { width: W - 20, lineGap: 2 });
+  const h = titleH + textH + 18;
+  need(h + 6);
+  const startY = doc.y;
+  doc.rect(ML, startY, W, h).fillAndStroke(C.bg, C.bdr);
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.sec).text(title, ML + 8, startY + 6, { width: W - 16 });
+  doc.font('Helvetica').fillColor(C.tx).text(t, ML + 8, startY + 6 + titleH + 4, { width: W - 20, lineGap: 2 });
+  doc.y = startY + h + 6;
 }
 
 function tableRow(cols, widths, bold, bg) {
-  need(16);
-  const rowH = 14;
+  const font = bold ? 'Helvetica-Bold' : 'Helvetica';
+  doc.font(font).fontSize(7.5);
+  let maxH = 12;
+  cols.forEach((col, i) => {
+    const ch = doc.heightOfString(String(col), { width: widths[i] - 6 });
+    if (ch > maxH) maxH = ch;
+  });
+  const rowH = maxH + 4;
+  need(rowH + 2);
+  const startY = doc.y;
   if (bg) {
-    doc.rect(ML, doc.y - 1, W, rowH).fill(bg);
+    doc.rect(ML, startY - 1, W, rowH).fill(bg);
   }
   let x = ML;
-  const font = bold ? 'Helvetica-Bold' : 'Helvetica';
+  const textColor = bold ? '#ffffff' : C.tx;
   cols.forEach((col, i) => {
-    doc.font(font).fontSize(7.5).fillColor(bold ? C.thd : C.tx).text(String(col), x + 3, doc.y + 1, { width: widths[i] - 6 });
+    doc.font(font).fontSize(7.5).fillColor(textColor).text(String(col), x + 3, startY + 2, { width: widths[i] - 6 });
     x += widths[i];
   });
-  doc.y += rowH;
+  doc.y = startY + rowH;
 }
 
 function separator() {
