@@ -291,8 +291,11 @@ function CorrelationExplorer({ correlations, events }: {
     if (!correlations) return [];
     return correlations
       .filter(c => {
-        if (search && !c.type.toLowerCase().includes(search.toLowerCase()) && !c.description.toLowerCase().includes(search.toLowerCase())) return false;
-        if (domainFilter !== "all" && !c.domains.includes(domainFilter)) return false;
+        const meta = c.metadata as Record<string, unknown> | null;
+        const cType = (meta?.type as string) ?? c.ruleName;
+        const cDomains = (meta?.domains as string[]) ?? [];
+        if (search && !cType.toLowerCase().includes(search.toLowerCase()) && !c.description.toLowerCase().includes(search.toLowerCase())) return false;
+        if (domainFilter !== "all" && !cDomains.includes(domainFilter)) return false;
         return true;
       })
       .slice(0, 50);
@@ -301,7 +304,7 @@ function CorrelationExplorer({ correlations, events }: {
   const allDomains = useMemo(() => {
     if (!correlations) return [];
     const domains = new Set<string>();
-    correlations.forEach(c => c.domains.forEach(d => domains.add(d)));
+    correlations.forEach(c => ((c.metadata as Record<string, unknown> | null)?.domains as string[] ?? []).forEach((d: string) => domains.add(d)));
     return Array.from(domains).sort();
   }, [correlations]);
 
@@ -416,13 +419,13 @@ function CorrelationExplorer({ correlations, events }: {
                 ) : filteredCorrelations.map((c) => (
                   <div key={c.id} className="text-xs p-1.5 rounded hover:bg-muted/50" data-testid={`explorer-corr-${c.id}`}>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-semibold text-[10px]">{c.type}</span>
+                      <span className="font-mono font-semibold text-[10px]">{(c.metadata as Record<string, unknown> | null)?.type as string ?? c.ruleName}</span>
                       <Badge variant="outline" className="text-[8px]">
-                        {(c.confidence * 100).toFixed(0)}%
+                        {(((c.metadata as Record<string, unknown> | null)?.confidence as number) ?? 0 * 100).toFixed(0)}%
                       </Badge>
                     </div>
                     <div className="flex items-center gap-1 mt-0.5 flex-wrap">
-                      {c.domains.map(d => (
+                      {((c.metadata as Record<string, unknown> | null)?.domains as string[] ?? []).map((d: string) => (
                         <Badge key={d} variant="secondary" className="text-[8px] h-3.5 px-1">{d}</Badge>
                       ))}
                       <span className="text-[9px] text-muted-foreground font-mono ml-auto">

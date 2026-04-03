@@ -148,13 +148,13 @@ function LiveFeed({ events, correlations, expanded, onToggle }: {
                     <Icon className="h-3 w-3 mt-0.5 text-muted-foreground flex-shrink-0" />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1 flex-wrap">
-                        <Badge variant="outline" className="text-[8px] px-1 h-3.5">{evt.domain}</Badge>
-                        <span className="font-mono truncate">{evt.source}</span>
+                        <Badge variant="outline" className="text-[8px] px-1 h-3.5">{String(evt.domain)}</Badge>
+                        <span className="font-mono truncate">{String(evt.source)}</span>
                       </div>
-                      {evt.metadata && (
+                      {evt.metadata != null && (
                         <p className="text-muted-foreground truncate mt-0.5">
                           {typeof evt.metadata === "object" 
-                            ? (evt.metadata as Record<string, unknown>).description as string || (evt.metadata as Record<string, unknown>).type as string || JSON.stringify(evt.metadata).slice(0, 80)
+                            ? String((evt.metadata as Record<string, unknown>).description ?? (evt.metadata as Record<string, unknown>).type ?? JSON.stringify(evt.metadata)).slice(0, 80)
                             : String(evt.metadata).slice(0, 80)}
                         </p>
                       )}
@@ -178,8 +178,8 @@ function LiveFeed({ events, correlations, expanded, onToggle }: {
                     data-testid={`feed-correlation-${c.id}`}
                   >
                     <Zap className="h-3 w-3 text-amber-500 flex-shrink-0" />
-                    <span className="font-mono text-[10px]">{c.type}</span>
-                    <span className="text-muted-foreground">conf: {(c.confidence * 100).toFixed(0)}%</span>
+                    <span className="font-mono text-[10px]">{(c.metadata as Record<string, unknown>)?.type as string ?? c.ruleName}</span>
+                    <span className="text-muted-foreground">conf: {(((c.metadata as Record<string, unknown>)?.confidence as number ?? 0) * 100).toFixed(0)}%</span>
                   </div>
                 ))}
               </>
@@ -314,18 +314,18 @@ export default function CommandCenterPage() {
         addMessage("system", "No active correlations.");
       } else {
         const lines = corrs.map((c) =>
-          `${c.type} — conf: ${(c.confidence * 100).toFixed(0)}% — ${c.domains.join(",")}`
+          `${(c.metadata as Record<string, unknown>)?.type ?? c.ruleName} — conf: ${(((c.metadata as Record<string, unknown>)?.confidence as number ?? 0) * 100).toFixed(0)}% — ${((c.metadata as Record<string, unknown>)?.domains as string[] ?? []).join(",")}`
         );
         addMessage("system", `Active correlations:\n${lines.join("\n")}`);
       }
     } else if (lower === "threats" || lower === "t") {
       const score = kappaStatus?.score ?? 0;
       const threat = kappaStatus?.threatLevel ?? "NOMINAL";
-      const alerts = kappaStatus?.alerts ?? [];
+      const alerts = kappaStatus?.recentAlerts ?? [];
       if (alerts.length === 0) {
         addMessage("system", `Threat level: ${threat} (κ=${score.toFixed(1)})\nNo active alerts.`);
       } else {
-        const lines = alerts.map((a: { type: string; message: string }) => `⚠ [${a.type}] ${a.message}`);
+        const lines = alerts.map((a) => `⚠ [${a.type}] ${a.description}`);
         addMessage("alert", `Threat level: ${threat} (κ=${score.toFixed(1)})\n${lines.join("\n")}`, { type: "threat", score });
       }
     } else if (lower === "feed") {

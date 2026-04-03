@@ -769,7 +769,7 @@ export default function DashboardPage() {
                     {watchdogStatus.recentEvents.slice(0, 5).map((ev, i) => (
                       <div key={i} className="flex items-center justify-between text-[11px] border-b border-border/50 pb-1">
                         <Badge variant="secondary" className={`text-[9px] ${ev.type === "drop" ? "bg-red-500/10 text-red-600" : ev.type === "reconnect" ? "bg-green-500/10 text-green-600" : ev.type === "tr069-pulse" ? "bg-amber-500/10 text-amber-600" : ""}`}>
-                          {t(`watchdog.event.${ev.type}`) || ev.type}
+                          {(t as (k: string) => string)(`watchdog.event.${ev.type}`) || ev.type}
                         </Badge>
                         <span className="text-muted-foreground font-mono truncate max-w-[200px]">{ev.details}</span>
                       </div>
@@ -1025,7 +1025,7 @@ export default function DashboardPage() {
         ) : !liveCorrelations || liveCorrelations.length === 0 ? (
           <Card>
             <CardContent className="py-6 text-center text-sm text-muted-foreground" data-testid="text-correlations-empty">
-              {t("dashboard.noCorrelations") || "No live correlations"}
+              {"No live correlations"}
             </CardContent>
           </Card>
         ) : (

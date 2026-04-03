@@ -226,7 +226,8 @@ export default function ResearchPage() {
         provider: "quantum-cortex",
         model: "cortical-stack",
         layer: 0,
-        timestamp: new Date().toISOString(),
+        layerName: "cortical",
+        durationMs: 0,
       }, ...prev]);
       toast({ title: "Cortical synthesis complete" });
     },
