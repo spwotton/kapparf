@@ -53,109 +53,123 @@ function getThreatColor(score: number): string {
   return THREAT_LEVELS[0].color;
 }
 
+interface NavItem {
+  titleKey: string;
+  fallback: string;
+  url: string;
+  icon: typeof Terminal;
+}
+
 interface NavGroup {
-  label: string;
-  items: { title: string; url: string; icon: typeof Terminal }[];
+  labelKey: string;
+  fallbackLabel: string;
+  items: NavItem[];
 }
 
 const navGroups: NavGroup[] = [
   {
-    label: "COMMAND",
+    labelKey: "sidebar.command", fallbackLabel: "COMMAND",
     items: [
-      { title: "Command Center", url: "/", icon: Terminal },
-      { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+      { titleKey: "sidebar.commandCenter", fallback: "Command Center", url: "/", icon: Terminal },
+      { titleKey: "sidebar.dashboard", fallback: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
     ],
   },
   {
-    label: "MONITOR",
+    labelKey: "sidebar.monitor", fallbackLabel: "MONITOR",
     items: [
-      { title: "Events", url: "/events", icon: Activity },
-      { title: "Correlations", url: "/correlations", icon: Link2 },
-      { title: "Hypervisor", url: "/hypervisor", icon: Brain },
-      { title: "Map", url: "/map", icon: MapIcon },
+      { titleKey: "sidebar.events", fallback: "Events", url: "/events", icon: Activity },
+      { titleKey: "sidebar.correlations", fallback: "Correlations", url: "/correlations", icon: Link2 },
+      { titleKey: "sidebar.hypervisor", fallback: "Hypervisor", url: "/hypervisor", icon: Brain },
+      { titleKey: "sidebar.map", fallback: "Map", url: "/map", icon: MapIcon },
     ],
   },
   {
-    label: "SIGINT",
+    labelKey: "sidebar.sigint", fallbackLabel: "SIGINT",
     items: [
-      { title: "KiwiSDR Nodes", url: "/nodes", icon: Server },
-      { title: "Satellites", url: "/satellites", icon: Satellite },
-      { title: "Lattice", url: "/lattice", icon: Hexagon },
-      { title: "Superposition", url: "/superposition", icon: Atom },
+      { titleKey: "sidebar.kiwiNodes", fallback: "KiwiSDR Nodes", url: "/nodes", icon: Server },
+      { titleKey: "sidebar.satellites", fallback: "Satellites", url: "/satellites", icon: Satellite },
+      { titleKey: "sidebar.lattice", fallback: "Lattice", url: "/lattice", icon: Hexagon },
+      { titleKey: "sidebar.superposition", fallback: "Superposition", url: "/superposition", icon: Atom },
     ],
   },
   {
-    label: "FORENSICS",
+    labelKey: "sidebar.forensics", fallbackLabel: "FORENSICS",
     items: [
-      { title: "Devices", url: "/devices", icon: Fingerprint },
-      { title: "Bettercap", url: "/bettercap", icon: Radio },
-      { title: "Network Forensics", url: "/forensics", icon: Shield },
-      { title: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
-      { title: "Evidence Chain", url: "/evidence", icon: FileWarning },
+      { titleKey: "sidebar.devices", fallback: "Devices", url: "/devices", icon: Fingerprint },
+      { titleKey: "sidebar.bettercap", fallback: "Bettercap", url: "/bettercap", icon: Radio },
+      { titleKey: "sidebar.networkForensics", fallback: "Network Forensics", url: "/forensics", icon: Shield },
+      { titleKey: "sidebar.forensicHypervisor", fallback: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
+      { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence", icon: FileWarning },
     ],
   },
   {
-    label: "INTELLIGENCE",
+    labelKey: "sidebar.intelligence", fallbackLabel: "INTELLIGENCE",
     items: [
-      { title: "OSINT", url: "/osint", icon: Search },
-      { title: "Intel Reports", url: "/intelligence", icon: Sparkles },
-      { title: "Research", url: "/research", icon: Microscope },
-      { title: "Deep Research", url: "/deep-research", icon: Orbit },
-      { title: "Research Cortex", url: "/cortex", icon: BookOpen },
-      { title: "Memory Cortex", url: "/memory", icon: Database },
-      { title: "Imagery", url: "/imagery", icon: ScanEye },
+      { titleKey: "sidebar.osint", fallback: "OSINT", url: "/osint", icon: Search },
+      { titleKey: "sidebar.intelReports", fallback: "Intel Reports", url: "/intelligence", icon: Sparkles },
+      { titleKey: "sidebar.research", fallback: "Research", url: "/research", icon: Microscope },
+      { titleKey: "sidebar.deepResearch", fallback: "Deep Research", url: "/deep-research", icon: Orbit },
+      { titleKey: "sidebar.researchCortex", fallback: "Research Cortex", url: "/cortex", icon: BookOpen },
+      { titleKey: "sidebar.memoryCortex", fallback: "Memory Cortex", url: "/memory", icon: Database },
+      { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },
     ],
   },
   {
-    label: "OPERATIONS",
+    labelKey: "sidebar.operations", fallbackLabel: "OPERATIONS",
     items: [
-      { title: "Karachi", url: "/karachi", icon: Crosshair },
-      { title: "Congusto", url: "/congusto", icon: FlaskConical },
-      { title: "ICE Briefing", url: "/gallium", icon: Globe },
-      { title: "Board", url: "/board", icon: Network },
-      { title: "Social", url: "/social", icon: Image },
-      { title: "Tools", url: "/tools", icon: Wrench },
+      { titleKey: "sidebar.karachi", fallback: "Karachi", url: "/karachi", icon: Crosshair },
+      { titleKey: "sidebar.congusto", fallback: "Congusto", url: "/congusto", icon: FlaskConical },
+      { titleKey: "sidebar.iceBriefing", fallback: "ICE Briefing", url: "/gallium", icon: Globe },
+      { titleKey: "sidebar.board", fallback: "Board", url: "/board", icon: Network },
+      { titleKey: "sidebar.social", fallback: "Social", url: "/social", icon: Image },
+      { titleKey: "sidebar.tools", fallback: "Tools", url: "/tools", icon: Wrench },
     ],
   },
   {
-    label: "PUBLIC",
+    labelKey: "sidebar.public", fallbackLabel: "PUBLIC",
     items: [
-      { title: "CIAJW Public", url: "/ciajw", icon: Shield },
+      { titleKey: "sidebar.ciajwPublic", fallback: "CIAJW Public", url: "/ciajw", icon: Shield },
     ],
   },
 ];
 
 function CollapsibleGroup({ group, location }: { group: NavGroup; location: string }) {
+  const { t } = useI18n();
   const hasActive = group.items.some((item) => location === item.url);
-  const [open, setOpen] = useState(hasActive || group.label === "COMMAND");
+  const [open, setOpen] = useState(hasActive || group.fallbackLabel === "COMMAND");
+
+  const groupLabel = t(group.labelKey as any) !== group.labelKey ? t(group.labelKey as any) : group.fallbackLabel;
 
   return (
     <SidebarGroup>
       <button
         onClick={() => setOpen((p) => !p)}
         className="flex items-center justify-between w-full px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold text-muted-foreground hover:text-foreground transition-colors"
-        data-testid={`nav-group-${group.label.toLowerCase()}`}
+        data-testid={`nav-group-${group.fallbackLabel.toLowerCase()}`}
       >
-        <span>{group.label}</span>
+        <span>{groupLabel}</span>
         <ChevronRight className={`h-3 w-3 transition-transform duration-200 ${open ? "rotate-90" : ""}`} />
       </button>
       {open && (
         <SidebarGroupContent>
           <SidebarMenu>
-            {group.items.map((item) => (
-              <SidebarMenuItem key={item.url}>
-                <SidebarMenuButton
-                  asChild
-                  data-active={location === item.url}
-                  data-testid={`nav-${item.url.replace("/", "") || "command-center"}`}
-                >
-                  <Link href={item.url}>
-                    <item.icon className="h-4 w-4" />
-                    <span className="text-sm">{item.title}</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+            {group.items.map((item) => {
+              const itemTitle = t(item.titleKey as any) !== item.titleKey ? t(item.titleKey as any) : item.fallback;
+              return (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton
+                    asChild
+                    data-active={location === item.url}
+                    data-testid={`nav-${item.url.replace("/", "") || "command-center"}`}
+                  >
+                    <Link href={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span className="text-sm">{itemTitle}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
           </SidebarMenu>
         </SidebarGroupContent>
       )}
