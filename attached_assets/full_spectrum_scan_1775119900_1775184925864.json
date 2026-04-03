@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-04-02T02:51:40.019746",
+  "scan_type": "FULL_SPECTRUM",
+  "freq_range": [
+    100000000.0,
+    110000000.0
+  ],
+  "steps": 50,
+  "kappa": 1.2732,
+  "data_source": "synthetic",
+  "anomalies": [],
+  "peak_freq": 107253371.32272625
+}

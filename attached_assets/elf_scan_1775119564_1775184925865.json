@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-04-02T02:46:04.075421",
+  "scan_type": "ELF",
+  "duration": 30,
+  "kappa": 1.2732,
+  "data_source": "synthetic",
+  "peaks": [
+    {
+      "freq": 50.0,
+      "magnitude": 35995240.14923749
+    }
+  ],
+  "dominant_freq": 50.0
+}
