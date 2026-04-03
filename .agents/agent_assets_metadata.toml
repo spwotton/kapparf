@@ -24,3 +24,9 @@ id = "nPbp8vt7HXIiUPwMm7R-f"
 uri = "file://ICE_Cyber_Intelligence_Briefing.pdf"
 type = "pdf"
 title = "ICE Cyber Intelligence Briefing (Expanded) — 7 pages"
+
+[[outputs]]
+id = "OeuhqGMIxIJQ-6yJS9174"
+uri = "file://KAPPA_Full_Intelligence_Report.pdf"
+type = "pdf"
+title = "KAPPA Full Intelligence Report — Cross-Domain Analysis"
