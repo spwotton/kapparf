@@ -1003,6 +1003,40 @@ export async function registerRoutes(
     res.json({ ...result, parsed: packets.length });
   });
 
+  app.get("/api/rf-scans", (_req, res) => {
+    const elfScans = [
+      { id: "elf-1", timestamp: "2026-04-02T02:41:45", scanType: "ELF", duration: 30, kappa: 1.2732, dataSource: "synthetic", dominantFreq: 50.0, peakMagnitude: 35993879, findings: ["Dominant 50 Hz — NOT Costa Rica 60 Hz mains", "κ-harmonic at 63.66 Hz", "φ-harmonic at 80.9 Hz"] },
+      { id: "elf-2", timestamp: "2026-04-02T02:46:04", scanType: "ELF", duration: 30, kappa: 1.2732, dataSource: "synthetic", dominantFreq: 50.0, peakMagnitude: 35995240, findings: ["50 Hz magnitude +0.004%", "Signal coherence confirmed"] },
+      { id: "elf-3", timestamp: "2026-04-02T02:51:17", scanType: "ELF", duration: 30, kappa: 1.2732, dataSource: "synthetic", dominantFreq: 50.0, peakMagnitude: 35995108, findings: ["50 Hz stable < 0.004% across 10 min", "Coherent oscillator confirmed"] },
+    ];
+    const fullSpectrum = { timestamp: "2026-04-02T02:51:40", scanType: "FULL_SPECTRUM", freqRange: [100e6, 110e6], steps: 50, kappa: 1.2732, peakFreq: 107253371, anomalies: 0 };
+    const pcapSummary = {
+      totalPackets: 470964, duration: "23h33m", captureDate: "2026-04-02",
+      majorSpike: { window: "06:30-06:35", packets: 244795, pps: 815 },
+      hipercontracer: { total: 20821, peakHour: "06:00", peakCount: 7444 },
+      epdg: { domain: "epdg.epc.mnc004.mcc712.pub.3gppnetwork.org", cname: "epdg2.mobilecore.llagroup.com", ip: "201.224.137.32", operator: "Liberty Latin America" },
+      burstWindows: [
+        { window: "22:00-22:59", packets: 75205 },
+        { window: "01:00-01:59", packets: 58357 },
+        { window: "06:00-06:59", packets: 263456 },
+        { window: "08:00-08:59", packets: 22086 },
+      ],
+      anomalous50Hz: true,
+      costaRicaMainsHz: 60,
+    };
+    res.json({ elfScans, fullSpectrum, pcapSummary, crossDomainCorrelation: { antiCorrelation: "Network SILENT during Schumann (04:04-04:14, 4 packets) while ELF attacks active", frequencyChain: ["7.8 Hz Schumann", "46.875 Hz V2K", "50 Hz anomalous", "53 Hz PLC", "60 Hz mains", "4687 kHz HF harmonic", "7410 kHz Mora 40m"] } });
+  });
+
+  app.get("/api/rf-scans/scripts/:name", (req, res) => {
+    const { name } = req.params;
+    const allowed = ["rf_spectrum_pipeline.py", "kiwi_raw_scanner.py"];
+    if (!allowed.includes(name)) {
+      return res.status(404).json({ error: "Script not found" });
+    }
+    const filepath = nodePath.join(process.cwd(), name);
+    res.download(filepath, name);
+  });
+
   app.post("/api/phone/register", (req, res) => {
     const { phoneId, os, capabilities } = req.body;
     if (!phoneId || !os) {
