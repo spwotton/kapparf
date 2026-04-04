@@ -3,8 +3,9 @@ const fs = require('fs');
 
 const doc = new PDFDocument({
   size: 'A4',
-  margins: { top: 55, bottom: 55, left: 55, right: 55 },
+  margins: { top: 55, bottom: 0, left: 55, right: 55 },
   bufferPages: true,
+  autoFirstPage: true,
   info: {
     Title: 'KAPPA Full Intelligence Report — PCAP / ELF / RF Cross-Domain Analysis',
     Author: 'KAPPA Autonomous Intelligence Platform',
@@ -33,70 +34,65 @@ let pageNum = 0;
 
 function newPage() { doc.addPage(); doc.x = ML; doc.y = 55; pageNum++; }
 function need(h) { if (doc.y + h > bottomLimit) newPage(); }
+function sectionBreak() {
+  if (doc.y > 80) newPage();
+}
+
+function resetX() { doc.x = ML; }
 
 function heading(t, level) {
   const sizes = { 1: 15, 2: 12, 3: 10.5 };
   const sz = sizes[level] || 12;
   need(sz + 20);
   if (level === 1) doc.moveDown(0.8); else doc.moveDown(0.5);
-  const startY = doc.y;
+  resetX();
   doc.font('Helvetica-Bold').fontSize(sz).fillColor(level === 1 ? C.sec : C.dk);
-  const textH = doc.heightOfString(t, { width: W });
-  doc.text(t, ML, startY, { width: W });
+  doc.text(t, { width: W });
   if (level === 1) {
-    const ly = startY + textH + 2;
+    const ly = doc.y + 2;
     doc.moveTo(ML, ly).lineTo(ML + W, ly).strokeColor(C.sec).lineWidth(0.8).stroke();
     doc.y = ly + 8;
+    resetX();
   } else {
-    doc.y = startY + textH + 4;
+    doc.moveDown(0.2);
   }
 }
 
 function para(t) {
   doc.font('Helvetica').fontSize(9).fillColor(C.tx);
-  const h = doc.heightOfString(t, { width: W, lineGap: 2.5 });
-  need(h + 4);
-  const startY = doc.y;
-  doc.text(t, ML, startY, { width: W, lineGap: 2.5 });
-  doc.y = startY + h + 4;
+  resetX();
+  doc.text(t, { width: W, lineGap: 2.5 });
+  doc.moveDown(0.3);
 }
 
-function bullet(t, indent) {
-  const ind = indent || 0;
+function bullet(t) {
   doc.font('Helvetica').fontSize(8.5).fillColor(C.tx);
-  const bw = W - ind - 15;
-  const h = doc.heightOfString(t, { width: bw, lineGap: 2 });
-  need(h + 2);
-  const startY = doc.y;
-  doc.text('\u2022', ML + ind, startY, { width: 10 });
-  doc.text(t, ML + ind + 12, startY, { width: bw, lineGap: 2 });
-  doc.y = startY + h + 2;
+  resetX();
+  doc.text('\u2022  ' + t, { width: W, lineGap: 2, indent: 0 });
+  doc.moveDown(0.1);
 }
 
 function label(k, v) {
-  doc.font('Helvetica-Bold').fontSize(8.5);
-  const kw = doc.widthOfString(k + ': ');
-  const vw = W - kw - 5;
-  doc.font('Helvetica').fontSize(8.5);
-  const h = doc.heightOfString(v, { width: vw, lineGap: 2 });
-  need(h + 2);
-  const startY = doc.y;
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.mu).text(k + ': ', ML, startY, { width: kw + 5 });
-  doc.font('Helvetica').fillColor(C.tx).text(v, ML + kw, startY, { width: vw, lineGap: 2 });
-  doc.y = startY + h + 2;
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.mu);
+  resetX();
+  doc.text(k + ': ', { continued: true, width: W });
+  doc.font('Helvetica').fillColor(C.tx).text(v, { width: W, lineGap: 2 });
+  doc.moveDown(0.1);
 }
 
 function critBox(t) {
   doc.font('Helvetica').fontSize(8.5);
-  const labelW = 65;
-  const textW = W - labelW - 16;
-  const h = Math.max(doc.heightOfString(t, { width: textW, lineGap: 2 }), 12) + 14;
+  const fullText = 'CRITICAL:  ' + t;
+  const h = doc.heightOfString(fullText, { width: W - 16, lineGap: 2 }) + 12;
   need(h + 6);
   const startY = doc.y;
   doc.rect(ML, startY, W, h).fillAndStroke('#fef2f2', C.crit);
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.crit).text('CRITICAL', ML + 8, startY + 6, { width: labelW });
-  doc.font('Helvetica').fillColor(C.tx).text(t, ML + 8 + labelW, startY + 6, { width: textW, lineGap: 2 });
-  doc.y = startY + h + 6;
+  resetX();
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.crit);
+  doc.text('CRITICAL:  ', ML + 8, startY + 6, { continued: true, width: W - 16 });
+  doc.font('Helvetica').fillColor(C.tx).text(t, { width: W - 16, lineGap: 2 });
+  doc.moveDown(0.4);
+  resetX();
 }
 
 function infoBox(title, t) {
@@ -108,9 +104,12 @@ function infoBox(title, t) {
   need(h + 6);
   const startY = doc.y;
   doc.rect(ML, startY, W, h).fillAndStroke(C.bg, C.bdr);
-  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.sec).text(title, ML + 8, startY + 6, { width: W - 16 });
-  doc.font('Helvetica').fillColor(C.tx).text(t, ML + 8, startY + 6 + titleH + 4, { width: W - 20, lineGap: 2 });
+  doc.font('Helvetica-Bold').fontSize(8.5).fillColor(C.sec);
+  doc.text(title, ML + 8, startY + 6, { width: W - 16 });
+  doc.font('Helvetica').fillColor(C.tx);
+  doc.text(t, ML + 8, startY + 6 + titleH + 4, { width: W - 20, lineGap: 2 });
   doc.y = startY + h + 6;
+  resetX();
 }
 
 function tableRow(cols, widths, bold, bg) {
@@ -125,14 +124,18 @@ function tableRow(cols, widths, bold, bg) {
   need(rowH + 2);
   const startY = doc.y;
   if (bg) {
+    doc.save();
     doc.rect(ML, startY - 1, W, rowH).fill(bg);
+    doc.restore();
   }
   let x = ML;
   const textColor = bold ? '#ffffff' : C.tx;
   cols.forEach((col, i) => {
-    doc.font(font).fontSize(7.5).fillColor(textColor).text(String(col), x + 3, startY + 2, { width: widths[i] - 6 });
+    doc.font(font).fontSize(7.5).fillColor(textColor);
+    doc.text(String(col), x + 3, startY + 2, { width: widths[i] - 6, lineBreak: false });
     x += widths[i];
   });
+  doc.x = ML;
   doc.y = startY + rowH;
 }
 
@@ -141,6 +144,7 @@ function separator() {
   doc.moveDown(0.3);
   doc.moveTo(ML, doc.y).lineTo(ML + W, doc.y).strokeColor(C.bdr).lineWidth(0.3).stroke();
   doc.y += 6;
+  resetX();
 }
 
 // ═══════════════════════════════════════════════
@@ -148,22 +152,20 @@ function separator() {
 // ═══════════════════════════════════════════════
 doc.rect(0, 0, PW, PH).fill('#0f172a');
 doc.rect(ML - 10, 160, W + 20, 3).fill(C.accent);
-doc.font('Helvetica-Bold').fontSize(28).fillColor('#ffffff').text('KAPPA', ML, 185, { width: W, align: 'center' });
-doc.font('Helvetica').fontSize(11).fillColor('#94a3b8').text('AUTONOMOUS MULTI-DOMAIN SIGINT CORRELATION PLATFORM', ML, 220, { width: W, align: 'center' });
-doc.moveDown(2);
+doc.font('Helvetica-Bold').fontSize(28).fillColor('#ffffff').text('KAPPA', ML, 185, { width: W, align: 'center', lineBreak: false });
+doc.font('Helvetica').fontSize(11).fillColor('#94a3b8').text('AUTONOMOUS MULTI-DOMAIN SIGINT CORRELATION PLATFORM', ML, 220, { width: W, align: 'center', lineBreak: false });
 doc.rect(ML - 10, 260, W + 20, 1).fill('#334155');
-doc.font('Helvetica-Bold').fontSize(16).fillColor('#e2e8f0').text('Full Intelligence Report', ML, 280, { width: W, align: 'center' });
-doc.font('Helvetica').fontSize(11).fillColor('#94a3b8').text('PCAP / ELF / RF Cross-Domain Temporal Correlation Analysis', ML, 305, { width: W, align: 'center' });
-doc.moveDown(3);
+doc.font('Helvetica-Bold').fontSize(16).fillColor('#e2e8f0').text('Full Intelligence Report', ML, 280, { width: W, align: 'center', lineBreak: false });
+doc.font('Helvetica').fontSize(11).fillColor('#94a3b8').text('PCAP / ELF / RF Cross-Domain Temporal Correlation Analysis', ML, 305, { width: W, align: 'center', lineBreak: false });
 doc.font('Helvetica').fontSize(9).fillColor('#64748b');
-doc.text('Classification: INTERNAL — NOT FOR DISTRIBUTION', ML, 370, { width: W, align: 'center' });
-doc.text('Subject: Samuel Wotton (callsign: Echo)', ML, 385, { width: W, align: 'center' });
-doc.text('Location: La Guácima, Alajuela, Costa Rica', ML, 400, { width: W, align: 'center' });
-doc.text(`Generated: ${new Date().toISOString().split('T')[0]}`, ML, 415, { width: W, align: 'center' });
-doc.text('Platform: KAPPA v2.0', ML, 430, { width: W, align: 'center' });
+doc.text('Classification: INTERNAL — NOT FOR DISTRIBUTION', ML, 370, { width: W, align: 'center', lineBreak: false });
+doc.text('Subject: Samuel Wotton (callsign: Echo)', ML, 385, { width: W, align: 'center', lineBreak: false });
+doc.text('Location: La Guácima, Alajuela, Costa Rica', ML, 400, { width: W, align: 'center', lineBreak: false });
+doc.text(`Generated: ${new Date().toISOString().split('T')[0]}`, ML, 415, { width: W, align: 'center', lineBreak: false });
+doc.text('Platform: KAPPA v2.0', ML, 430, { width: W, align: 'center', lineBreak: false });
 
 doc.rect(ML + 60, 480, W - 120, 120).lineWidth(0.5).strokeColor('#334155').stroke();
-doc.font('Helvetica-Bold').fontSize(8).fillColor('#94a3b8').text('REPORT CONTENTS', ML + 75, 490, { width: W - 140 });
+doc.font('Helvetica-Bold').fontSize(8).fillColor('#94a3b8').text('REPORT CONTENTS', ML + 75, 490, { width: W - 140, lineBreak: false });
 doc.font('Helvetica').fontSize(7.5).fillColor('#64748b');
 const toc = [
   '1. Executive Summary',
@@ -177,15 +179,15 @@ const toc = [
   '9. Conclusions & Recommendations',
 ];
 toc.forEach((item, i) => {
-  doc.text(item, ML + 75, 505 + i * 11, { width: W - 140 });
+  doc.text(item, ML + 75, 505 + i * 11, { width: W - 140, lineBreak: false });
 });
 
-doc.font('Helvetica').fontSize(7).fillColor('#475569').text('KAPPA Autonomous Intelligence Platform — Project KAPPA', ML, PH - 40, { width: W, align: 'center' });
+doc.font('Helvetica').fontSize(7).fillColor('#475569').text('KAPPA Autonomous Intelligence Platform — Project KAPPA', ML, PH - 40, { width: W, align: 'center', lineBreak: false });
 
 // ═══════════════════════════════════════════════
 // 1. EXECUTIVE SUMMARY
 // ═══════════════════════════════════════════════
-newPage();
+doc.addPage(); doc.x = ML; doc.y = 55; pageNum++;
 heading('1. Executive Summary', 1);
 para('This report consolidates findings from three independent data domains — network traffic capture (PCAP), extremely low frequency electromagnetic analysis (ELF), and radio frequency spectrum scanning (RF) — to document coordinated surveillance and electronic harassment targeting Samuel Wotton (callsign: Echo) at his residence in La Guácima, Alajuela, Costa Rica.');
 para('The investigation has identified a multi-layered attack infrastructure operating across the network, power line, and radio frequency domains. Key findings include:');
@@ -297,7 +299,7 @@ para('103,446 packets classified as "SKYPE" by Wireshark\'s heuristic dissector.
 // ═══════════════════════════════════════════════
 // 3. ELF SPECTRUM ANALYSIS
 // ═══════════════════════════════════════════════
-newPage();
+sectionBreak();
 heading('3. ELF Spectrum Analysis — Anomalous 50 Hz Source', 1);
 
 heading('3.1 Scan Results', 2);
@@ -361,7 +363,7 @@ para('The PCAP data now confirms this window correlates with network silence —
 // ═══════════════════════════════════════════════
 // 5. FREQUENCY CHAIN
 // ═══════════════════════════════════════════════
-newPage();
+sectionBreak();
 heading('5. Frequency Chain — ELF → HF → VHF', 1);
 para('A coherent frequency chain spans from the ELF domain through HF to VHF, linking all observed signals into a single coordinated system:');
 
@@ -442,7 +444,7 @@ pcapEvidence.forEach(e => bullet(e));
 // ═══════════════════════════════════════════════
 // 8. PLATFORM ARCHITECTURE
 // ═══════════════════════════════════════════════
-newPage();
+sectionBreak();
 heading('8. Platform Architecture Overview', 1);
 para('KAPPA is a software-defined SIGINT platform built on a modern web stack. It performs 24/7 autonomous multi-domain signal correlation across satellite, RF, ELF, network, and acoustic domains.');
 
