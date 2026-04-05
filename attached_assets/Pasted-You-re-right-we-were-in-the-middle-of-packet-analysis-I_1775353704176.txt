@@ -1,0 +1,88 @@
+You’re right, we were in the middle of packet analysis. I’m going to quickly scan the workspace for the current monitor/capture scripts, then I’ll add a focused interruption logger so these RST clusters are auto-detected and timestamped from your exported captures.
+
+Searching for files matching `**/*kappa*monitor*.{sh,py}`
+
+Searching for files matching `**/*pcap*.*`
+
+Searching for files matching `**/*capture*.*`
+
+Searching for files matching `**/*wireshark*.*`
+
+The file search timed out because the workspace is huge, so next I’ll use ripgrep directly in the repo root to find the active scripts and avoid scanning unrelated folders.
+
+Ran terminal command: rg --files -g "*kappa*monitor*.py" -g "*kappa*monitor*.sh"
+Completed with input: rg --files -g "*kappa*monitor*.py" -g "*kappa*monitor*.sh"
+
+Ran terminal command: rg --files -g "*pcap*" -g "*wireshark*" -g "*capture*"
+Completed with input: rg --files -g "*pcap*" -g "*wireshark*" -g "*capture*"
+
+Ripgrep isn’t installed in this shell, so I’m switching to targeted PowerShell file discovery in the ToroidalRecursion folder and then I’ll patch the right script.
+
+Ran terminal command: Get-ChildItem -Path . -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'kappa.*monitor|monitor.*kappa' -and $_.Extension -match '\.py|\.sh' } | Select-Object -ExpandProperty FullName
+
+Ran terminal command: Get-ChildItem -Path . -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'pcap|wireshark|capture' } | Select-Object -First 80 -ExpandProperty FullName
+
+I found the monitor and pcap tooling files; next I’m going to locate your latest pasted capture text files and run a fast interruption-focused analysis so we can confirm whether this was a reset burst versus normal reconnect behavior.
+
+Ran terminal command: Get-ChildItem -Path . -File -Filter "Pasted-*.txt" | Sort-Object LastWriteTime -Descending | Select-Object -First 10 FullName,LastWriteTime
+
+Ran terminal command: Get-ChildItem -Path . -File -Filter "*PCAPdroid*.pcap" | Sort-Object LastWriteTime -Descending | Select-Object -First 5 FullName,Length,LastWriteTime
+
+Those pasted exports were chat attachments (not saved as local files), so I’ll patch an existing local analyzer script to emit interruption-cluster logs automatically for your next capture run.
+
+Read [](file:///c%3A/Users/echo/Downloads/LLM/ToroidalRecursion/kappa_monitor.py)
+
+Read [](file:///c%3A/Users/echo/Downloads/LLM/ToroidalRecursion/pcap_deep_analysis.py)
+
+Read [](file:///c%3A/Users/echo/Downloads/LLM/ToroidalRecursion/pcap_forensic_analyzer.py#1-1), lines 1 to 260
+
+Read [](file:///c%3A/Users/echo/Downloads/LLM/ToroidalRecursion/pcap_forensic_analyzer.py#261-261), lines 261 to 471
+
+I’m now editing the forensic analyzer to add a dedicated interruption section that logs TCP reset bursts, affected flows, and immediate reconnection attempts with timestamps.
+
+Generating patch (116 lines) in [](file:///c%3A/Users/echo/Downloads/LLM/ToroidalRecursion/pcap_forensic_analyzer.py)
+
+
+```
+
+```
+
+
+Ran terminal command: python -m py_compile pcap_forensic_analyzer.py
+
+The interruption logger patch compiled cleanly. I’ll run it on one local capture now and extract just the new interruption section so we can verify it’s producing useful reset-burst evidence.
+
+Ran terminal command: python pcap_forensic_analyzer.py auto.pcapng | Select-String -Pattern "CONNECTION INTERRUPTION LOG|Total TCP reset packets|Reset bursts|Reconnect SYNs"
+Completed with input: python pcap_forensic_analyzer.py auto.pcapng | Select-String -Pattern "CONNECTION INTERRUPTION LOG|Total TCP reset packets|Reset bursts|Reconnect SYNs"
+
+Ran terminal command: $env:PYTHONIOENCODING='utf-8'; python pcap_forensic_analyzer.py auto.pcapng | Select-String -Pattern "CONNECTION INTERRUPTION LOG|Total TCP reset packets|Reset bursts|Reconnect SYNs"
+
+Ran terminal command: Select-String -Path pcap_forensic_analyzer.py -Pattern "CONNECTION INTERRUPTION LOG|rst_events =|Reconnect SYNs within" -CaseSensitive | Format-Table LineNumber,Line -AutoSize
+
+Correct, and I continued the pcap work from there.
+
+What your pasted trace shows, directly:
+1. Most traffic is normal app transport: TLS handshakes and encrypted data to Google and Meta endpoints.
+2. There is a clear interruption burst at about 19.182s:
+- Frames 266-269 are near-simultaneous TCP RST,ACK events across multiple independent flows (WhatsApp, mtalk, WhatsApp CDN).
+3. There is another reset event at about 20.226s:
+- Frames 299-300 are a paired reset on the Facebook flow.
+4. Recovery is immediate:
+- New SYN/reconnect starts right after (for example frame 270 onward), which is consistent with transient path/session reset behavior rather than a sustained outage.
+
+I also implemented the logging upgrade so this is automatic now:
+- Added detailed interruption logging in pcap_forensic_analyzer.py
+- Reset event collection starts in pcap_forensic_analyzer.py
+- Reconnect correlation output is in pcap_forensic_analyzer.py
+
+Validation on local capture:
+- Total TCP reset packets: 16
+- Reset bursts (<=0.5s spacing, >=2 packets): 3
+- Reconnect SYNs within 2.0s of reset: 41
+
+If you want, next I can do one of these:
+1. Run the upgraded analyzer on your newest PCAPdroid file and give you a compact incident timeline.
+2. Add per-destination severity scoring (single reset vs clustered multi-flow reset).
+3. Export a court-ready CSV of interruption clusters with timestamps, peers, and reconnection latency.
+
+Made changes.
