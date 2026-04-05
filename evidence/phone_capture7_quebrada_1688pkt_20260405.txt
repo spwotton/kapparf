@@ -1,0 +1,1687 @@
+1	0.000000	10.215.173.1	10.215.173.2	DNS	116	Standard query 0x28b1 A z-m-gateway.facebook.com
+2	0.016820	10.215.173.2	10.215.173.1	DNS	160	Standard query response 0x28b1 A z-m-gateway.facebook.com CNAME dgw-mini.c10r.facebook.com A 157.240.14.40
+3	0.049953	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	108	50286 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2048868075 TSecr=0 WS=1024
+4	0.101534	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	96	https(443) → 50286 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+5	0.101975	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+6	0.106134	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	304	Client Hello (SNI=z-m-gateway.facebook.com)
+7	0.106618	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=1 Ack=216 Win=1047552 Len=0
+8	0.156500	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	1468	Server Hello, Change Cipher Spec, Application Data
+9	0.156914	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=216 Ack=1381 Win=86016 Len=0
+10	0.156958	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	2000	Application Data, Application Data
+11	0.157226	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=216 Ack=3292 Win=105472 Len=0
+12	0.183444	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	92	Change Cipher Spec
+13	0.183526	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	156	Application Data
+14	0.183833	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3292 Ack=291 Win=1047552 Len=0
+15	0.218449	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	140	Application Data
+16	0.218502	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	140	Application Data
+17	0.218543	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+18	0.218767	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3292 Ack=434 Win=1047552 Len=0
+19	0.218867	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	876	Application Data
+20	0.218899	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	1260	Application Data
+21	0.218978	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3292 Ack=2396 Win=1045504 Len=0
+22	0.231839	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	268	Application Data
+23	0.232494	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	160	Application Data
+24	0.232766	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=2396 Ack=3545 Win=109568 Len=0
+25	0.232904	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+26	0.233053	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3545 Ack=2433 Win=1045504 Len=0
+27	0.270195	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	132	Application Data
+28	0.307275	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	304	Application Data, Application Data
+29	0.307506	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=2433 Ack=3804 Win=113664 Len=0
+30	5.441259	10.215.173.1	10.215.173.2	DNS	128	Standard query 0x78fb A firebaseinstallations.googleapis.com
+31	5.469099	10.215.173.2	10.215.173.1	DNS	336	Standard query response 0x78fb A firebaseinstallations.googleapis.com A 142.250.64.170 A 142.251.35.234 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.202 A 142.250.64.234 A 142.250.217.170 A 142.250.217.202 A 142.250.217.234 A 192.178.50.42 A 172.217.15.202 A 142.250.64.138
+32	5.499368	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	48406 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=466047171 TSecr=0 WS=1024
+33	5.577319	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 48406 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+34	5.578367	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	48406 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+35	6.052878	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	48406 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 36]
+36	6.053978	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	92	Client Hello (SNI=firebaseinstallations.googleapis.com)
+37	6.058043	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 48406 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+38	6.120560	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	4588	Server Hello, Change Cipher Spec, Application Data
+39	6.142509	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	48406 → https(443) [ACK] Seq=518 Ack=4500 Win=86016 Len=0
+40	6.288923	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	152	Change Cipher Spec, Application Data
+41	6.289490	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 48406 [ACK] Seq=4500 Ack=582 Win=1047552 Len=0
+42	6.308380	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	1288	Application Data
+43	6.309652	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 48406 [ACK] Seq=4500 Ack=1784 Win=1046528 Len=0
+44	6.397489	10.215.173.1	10.215.173.2	DNS	124	Standard query 0xf31b A notifications-pa.googleapis.com
+45	6.409015	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1368	Application Data, Application Data, Application Data
+46	6.409390	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	48406 → https(443) [ACK] Seq=1784 Ack=5782 Win=105472 Len=0
+47	6.410510	10.215.173.2	10.215.173.1	DNS	316	Standard query response 0xf31b A notifications-pa.googleapis.com A 172.217.2.202 A 172.217.15.202 A 142.250.64.170 A 142.251.35.234 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.202 A 142.250.217.170 A 142.250.217.202 A 142.250.217.234 A 192.178.50.42
+48	6.423454	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	108	53478 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3599452801 TSecr=0 WS=1024
+49	6.475546	appsgenaiserver-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 53478 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+50	6.476376	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	88	53478 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+51	6.479765	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	600	53478 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 52]
+52	6.479924	10.215.173.1	appsgenaiserver-pa.googleapis.com	TLSv1.3	92	Client Hello (SNI=notifications-pa.googleapis.com)
+53	6.480137	appsgenaiserver-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 53478 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+54	6.541652	appsgenaiserver-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Server Hello, Change Cipher Spec
+55	6.542662	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	88	53478 → https(443) [ACK] Seq=518 Ack=2801 Win=86016 Len=0
+56	6.542981	appsgenaiserver-pa.googleapis.com	10.215.173.1	TLSv1.3	1788	Application Data
+57	6.543150	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	88	53478 → https(443) [ACK] Seq=518 Ack=4501 Win=91136 Len=0
+58	6.555086	10.215.173.1	appsgenaiserver-pa.googleapis.com	TLSv1.3	152	Change Cipher Spec, Application Data
+59	6.555243	appsgenaiserver-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 53478 [ACK] Seq=4501 Ack=582 Win=1047552 Len=0
+60	6.558082	10.215.173.1	appsgenaiserver-pa.googleapis.com	TLSv1.3	1968	Application Data
+61	6.558374	appsgenaiserver-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 53478 [ACK] Seq=4501 Ack=2464 Win=1046528 Len=0
+62	6.751966	appsgenaiserver-pa.googleapis.com	10.215.173.1	TLSv1.3	1644	Application Data, Application Data
+63	6.752367	appsgenaiserver-pa.googleapis.com	10.215.173.1	TLSv1.3	116	Application Data
+64	6.759378	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	88	53478 → https(443) [ACK] Seq=2464 Ack=6085 Win=111616 Len=0
+65	7.522101	10.215.173.1	appsgenaiserver-pa.googleapis.com	TLSv1.3	1968	Application Data
+66	7.523088	appsgenaiserver-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 53478 [ACK] Seq=6085 Ack=4346 Win=1046528 Len=0
+67	7.785101	appsgenaiserver-pa.googleapis.com	10.215.173.1	TLSv1.3	1028	Application Data
+68	7.786048	appsgenaiserver-pa.googleapis.com	10.215.173.1	TLSv1.3	116	Application Data
+69	7.786773	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	88	53478 → https(443) [ACK] Seq=4346 Ack=7054 Win=116736 Len=0
+70	12.117915	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 15064/120, Green data
+71	12.127379	192.168.50.216	play-fe.googleapis.com	UDP	684	Session 15064/120, Red data
+72	12.128119	192.168.50.216	play-fe.googleapis.com	UDP	228	Session 15064/120, Red data
+73	12.129031	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Control segment
+74	12.175570	play-fe.googleapis.com	192.168.50.216	SKYPE	100	NAT repeat
+75	12.176912	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 18/1292463456, Control segment
+76	12.202839	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Cancel segment
+77	12.283826	play-fe.googleapis.com	192.168.50.216	UDP	752	Session 3988/1277678, Green data
+78	12.284933	play-fe.googleapis.com	192.168.50.216	UDP	212	Session 190299302/15548, Cancel segment
+79	12.286905	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Red data
+80	12.360845	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 113/100, Control segment
+81	13.662231	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+82	13.665678	192.168.50.216	play-fe.googleapis.com	UDP	376	Session 1926538/190364, Cancel ack segment
+83	13.665818	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Red data
+84	13.665981	192.168.50.216	play-fe.googleapis.com	UDP	652	Session 1926538/190364, Report ack segment
+85	13.719454	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 16532466232/11995, Green data
+86	13.719790	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Unknown_F Unk: b
+87	13.745879	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel ack segment
+88	14.027513	10.215.173.1	10.215.173.2	DNS	108	Standard query 0xae7b A www.clarity.ms
+89	14.032391	192.168.50.216	play-fe.googleapis.com	UDP	212	Session 15064/120, Cancel segment
+90	14.032537	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Cancel ack segment
+91	14.037994	10.215.173.2	10.215.173.1	DNS	232	Standard query response 0xae7b A www.clarity.ms CNAME tm-clarity-tag.trafficmanager.net CNAME vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com A 4.153.187.221
+92	14.072238	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	108	56076 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2346483402 TSecr=0 WS=1024
+93	14.081702	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 61938818/480, Red data
+94	14.107985	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Red data
+95	14.147992	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	96	https(443) → 56076 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+96	14.151031	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+97	14.155673	play-fe.googleapis.com	192.168.50.216	UDP	1320	Protocol Error
+98	14.156433	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 15544/113, Red data
+99	14.156566	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	1324	https(443) → 59647 Len=1250 (SendTTL=139, Round=139)
+100	14.156728	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Payload Unk: 6
+101	14.156982	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Red data
+102	14.157127	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Red data
+103	14.157222	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 21/705517, Cancel ack segment
+104	14.157339	play-fe.googleapis.com	192.168.50.216	SKYPE	540	NAT repeat
+105	14.157416	play-fe.googleapis.com	192.168.50.216	UDP	192	Session 127315907/35, Cancel segment
+106	14.158867	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	600	56076 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 107]
+107	14.159183	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TLSv1.2	92	Client Hello (SNI=www.clarity.ms)
+108	14.159663	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 56076 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+109	14.165263	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Report segment
+110	14.174155	play-fe.googleapis.com	192.168.50.216	SKYPE	692	Payload Unk: f
+111	14.175586	play-fe.googleapis.com	192.168.50.216	SKYPE	188	Payload Unk: 6
+112	14.176608	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Cancel ack segment
+113	14.192624	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Report ack segment
+114	14.230071	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	1528	Server Hello
+115	14.230301	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=518 Ack=1441 Win=86016 Len=0
+116	14.231331	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 885617/5, Green data
+117	14.231442	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	3720	Certificate, Server Key Exchange, Server Hello Done
+118	14.233801	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=518 Ack=5073 Win=105472 Len=0
+119	14.240635	play-fe.googleapis.com	192.168.50.216	SKYPE	96	Unknown_F Unk: e
+120	14.241306	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Control segment
+121	14.252961	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 4/110, Report ack segment
+122	14.298308	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TLSv1.2	180	Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message
+123	14.299007	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 56076 [ACK] Seq=5073 Ack=611 Win=1047552 Len=0
+124	14.368582	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	376	New Session Ticket, Change Cipher Spec, Encrypted Handshake Message
+125	14.368759	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=611 Ack=5363 Win=112640 Len=0
+126	14.378964	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TLSv1.2	352	Application Data
+127	14.379243	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 56076 [ACK] Seq=5363 Ack=876 Win=1047552 Len=0
+128	14.450271	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	800	Application Data
+129	14.491861	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=876 Ack=6074 Win=120832 Len=0
+130	14.777480	192.168.50.216	play-fe.googleapis.com	UDP	148	Session 1926538/190364, Red data
+131	14.778182	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Green data
+132	14.778449	192.168.50.216	play-fe.googleapis.com	UDP	684	Session 1926538/190364, Control segment
+133	14.832072	play-fe.googleapis.com	192.168.50.216	SKYPE	104	Unknown_0 Unk: 9
+134	14.854102	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Audio Unk: 8
+135	14.859910	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel ack segment
+136	15.122884	192.168.50.216	play-fe.googleapis.com	UDP	200	Session 1926538/190364, Green data
+137	15.196866	play-fe.googleapis.com	192.168.50.216	SKYPE	104	NAT repeat Unk: e
+138	15.224266	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel segment
+139	15.253384	play-fe.googleapis.com	192.168.50.216	SKYPE	648	Audio Unk: b
+140	15.253630	play-fe.googleapis.com	192.168.50.216	UDP	152	Session 2827076/9616, Green data
+141	15.254185	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Red data
+142	15.329546	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 36/60, Red data
+143	15.416692	play-fe.googleapis.com	192.168.50.216	UDP	1320	Session 82/2200, Red data
+144	15.417811	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 12/938453, Green data
+145	15.417954	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 11580/15168, Green data
+146	15.418005	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 24/24187045, Control segment
+147	15.418044	play-fe.googleapis.com	192.168.50.216	UDP	780	Session 30/60, Red data, range 63-123 [Unfinished LTP Block] 
+148	15.418076	play-fe.googleapis.com	192.168.50.216	UDP	116	Session 6887410220658377196/22, Green data
+149	15.419809	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Green data
+150	15.419983	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Green data
+151	15.420075	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Control segment
+152	15.493683	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Audio Unk: f
+153	16.229285	10.215.173.1	10.215.173.2	DNS	120	Standard query 0x702d A googleads.g.doubleclick.net
+154	16.237427	10.215.173.2	10.215.173.1	DNS	136	Standard query response 0x702d A googleads.g.doubleclick.net A 142.250.217.194
+155	16.252229	10.215.173.1	googleads.g.doubleclick.net	TCP	108	55252 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2459299772 TSecr=0 WS=1024
+156	16.302618	googleads.g.doubleclick.net	10.215.173.1	TCP	96	https(443) → 55252 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+157	16.302947	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+158	16.317239	10.215.173.1	googleads.g.doubleclick.net	TCP	600	55252 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 162]
+159	16.317558	10.215.173.1	googleads.g.doubleclick.net	TCP	600	[TCP Window Full] 55252 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 162]
+160	16.317805	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+161	16.317990	10.215.173.1	googleads.g.doubleclick.net	TCP	600	55252 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 162]
+162	16.318061	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	352	Client Hello (SNI=googleads.g.doubleclick.net)
+163	16.318476	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=1 Ack=1802 Win=1046528 Len=0
+164	16.378533	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	2888	Server Hello, Change Cipher Spec
+165	16.379046	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [ACK] Seq=1802 Ack=2801 Win=86016 Len=0
+166	16.379109	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	2936	Application Data
+167	16.379351	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [ACK] Seq=1802 Ack=5651 Win=105472 Len=0
+168	16.399079	192.168.50.216	play-fe.googleapis.com	UDP	232	Session 15064/120, Cancel ack segment
+169	16.400226	192.168.50.216	play-fe.googleapis.com	UDP	164	Session 15064/120, Red data
+170	16.400389	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Cancel segment
+171	16.400490	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Green data
+172	16.422250	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	160	Change Cipher Spec, Application Data
+173	16.422538	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=5651 Ack=1876 Win=1047552 Len=0
+174	16.435843	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	180	Application Data
+175	16.436142	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=5651 Ack=1968 Win=1047552 Len=0
+176	16.449635	play-fe.googleapis.com	192.168.50.216	SKYPE	104	Audio Unk: 7
+177	16.449826	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Unknown_0 Unk: c
+178	16.464214	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	988	Application Data
+179	16.464429	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=5651 Ack=2867 Win=1046528 Len=0
+180	16.474816	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	1072	Application Data, Application Data
+181	16.475091	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [ACK] Seq=2867 Ack=6635 Win=111616 Len=0
+182	16.476262	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Green data
+183	16.477479	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	120	Application Data
+184	16.477801	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=6635 Ack=2898 Win=1047552 Len=0
+185	16.483976	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	120	Application Data
+186	16.511762	play-fe.googleapis.com	192.168.50.216	UDP	208	Session 61/56408640, Green data
+187	16.511958	play-fe.googleapis.com	192.168.50.216	SKYPE	180	Audio Unk: f
+188	16.512721	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Report segment
+189	16.523158	play-fe.googleapis.com	192.168.50.216	SKYPE	180	Payload Unk: 9
+190	16.523380	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	156	https(443) → 47199 Len=82 (SendTTL=186, Round=71)
+191	16.524970	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Red data
+192	16.526606	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	512	Application Data
+193	16.526758	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [ACK] Seq=2898 Ack=7090 Win=117760 Len=0
+194	16.532969	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	124	Application Data
+195	16.533167	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	128	Application Data
+196	16.533447	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7090 Ack=2972 Win=1047552 Len=0
+197	16.573446	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Payload Unk: 6
+198	17.380280	10.215.173.1	googleads.g.doubleclick.net	SKYPE	1324	Unknown_0
+199	17.385534	10.215.173.1	googleads.g.doubleclick.net	SKYPE	1324	Unknown_0
+200	17.385987	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	284	Application Data
+201	17.386199	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7090 Ack=3170 Win=1047552 Len=0
+202	17.434088	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	224	Application Data
+203	17.438225	googleads.g.doubleclick.net	10.215.173.1	SKYPE	116	Unknown_0
+204	17.438542	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+205	17.438619	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+206	17.438681	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+207	17.438729	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	128	Application Data
+208	17.438818	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7228 Ack=3209 Win=1047552 Len=0
+209	17.438862	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	124	Application Data
+210	17.438889	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7228 Ack=3244 Win=1047552 Len=0
+211	17.442500	10.215.173.1	googleads.g.doubleclick.net	SKYPE	1324	Unknown_0
+212	17.450509	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+213	17.450625	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+214	17.450792	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+215	17.453944	10.215.173.1	googleads.g.doubleclick.net	SKYPE	116	Unknown_0
+216	17.456030	10.215.173.1	googleads.g.doubleclick.net	SKYPE	116	Unknown_0
+217	17.492214	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	376	Application Data
+218	17.493094	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7228 Ack=3531 Win=1047552 Len=0
+219	17.495561	googleads.g.doubleclick.net	10.215.173.1	SKYPE	212	Unknown_0
+220	17.502498	10.215.173.1	googleads.g.doubleclick.net	SKYPE	240	Unknown_0
+221	17.557168	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1044	Unknown_F Unk: 9
+222	17.557434	googleads.g.doubleclick.net	10.215.173.1	UDP	196	Session 64/29021151686, Green data
+223	17.559741	10.215.173.1	googleads.g.doubleclick.net	UDP	108	Session 203365032/57, Cancel segment
+224	17.560046	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	540	Application Data, Application Data
+225	17.560324	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	156	Application Data, Application Data
+226	17.561288	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [ACK] Seq=3531 Ack=7750 Win=129024 Len=0
+227	17.568804	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	128	Application Data
+228	17.569116	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7750 Ack=3570 Win=1047552 Len=0
+229	17.580610	googleads.g.doubleclick.net	10.215.173.1	SKYPE	100	NAT info Unk: 2
+230	19.858487	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	120	Encrypted Alert
+231	19.859543	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=876 Ack=6105 Win=120832 Len=0
+232	19.859611	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 56076 [FIN, ACK] Seq=6105 Ack=876 Win=1048576 Len=0
+233	19.905068	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [ACK] Seq=876 Ack=6106 Win=120832 Len=0
+234	21.822393	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	48406 → https(443) [RST, ACK] Seq=1784 Ack=5782 Win=105472 Len=0
+235	21.822557	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 48406 [RST, ACK] Seq=5782 Ack=1784 Win=64512 Len=0
+236	21.825504	10.215.173.1	appsgenaiserver-pa.googleapis.com	TCP	88	53478 → https(443) [RST, ACK] Seq=4346 Ack=7054 Win=116736 Len=0
+237	21.825634	appsgenaiserver-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 53478 [RST, ACK] Seq=7054 Ack=4346 Win=64512 Len=0
+238	24.650530	10.215.173.1	googleads.g.doubleclick.net	TCP	88	55252 → https(443) [FIN, ACK] Seq=3570 Ack=7750 Win=129024 Len=0
+239	24.651043	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [ACK] Seq=7750 Ack=3571 Win=1047552 Len=0
+240	24.667788	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	56076 → https(443) [RST, ACK] Seq=876 Ack=6106 Win=120832 Len=0
+241	24.724957	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 55252 [FIN, ACK] Seq=7750 Ack=3571 Win=1048576 Len=0
+242	24.876059	192.168.50.216	play-fe.googleapis.com	UDP	168	Session 1926538/190364, Control segment
+243	24.877707	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Red data
+244	24.879584	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+245	24.879939	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+246	24.880299	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+247	24.880559	192.168.50.216	play-fe.googleapis.com	UDP	228	Session 1926538/190364, Control segment
+248	24.929138	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 4/1602503, Green data
+249	24.929398	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 205065701/11817, Green data
+250	24.929583	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 41/28, Report ack segment
+251	24.955567	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Red data
+252	25.007183	play-fe.googleapis.com	192.168.50.216	SKYPE	740	NAT repeat Unk: a
+253	25.009252	play-fe.googleapis.com	192.168.50.216	SKYPE	116	Audio Unk: f
+254	25.016872	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Cancel segment
+255	25.090785	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 8137/40, Green data
+256	25.217582	192.168.50.216	play-fe.googleapis.com	UDP	496	Session 15064/120, Red data
+257	25.218126	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Report segment
+258	25.273813	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 14792/9961, Green data
+259	25.302297	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Report ack segment
+260	25.352925	play-fe.googleapis.com	192.168.50.216	SKYPE	808	Payload Unk: f
+261	25.354700	play-fe.googleapis.com	192.168.50.216	UDP	188	Session 43/123, Report ack segment
+262	25.359803	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Cancel ack segment
+263	25.433376	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Unknown_0 Unk: d
+264	26.408647	192.168.50.216	play-fe.googleapis.com	UDP	148	Session 1926538/190364, Report ack segment
+265	26.411356	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Cancel segment
+266	26.421240	192.168.50.216	play-fe.googleapis.com	UDP	920	Session 1926538/190364, Cancel ack segment
+267	26.422182	192.168.50.216	play-fe.googleapis.com	UDP	360	Session 15064/120, Report ack segment
+268	26.423457	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Control segment
+269	26.462231	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 107/46, Cancel ack segment
+270	26.473344	play-fe.googleapis.com	192.168.50.216	SKYPE	104	Fragment/Forward/Resend
+271	26.488344	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Red data
+272	26.496224	play-fe.googleapis.com	192.168.50.216	SKYPE	100	NAT repeat Unk: 6
+273	26.499077	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Red data
+274	26.561619	play-fe.googleapis.com	192.168.50.216	SKYPE	1320	Audio
+275	26.564126	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 4/9561, Report ack segment
+276	26.564314	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	1324	https(443) → 47199 Len=1250 (SendTTL=237, Round=150)
+277	26.564395	play-fe.googleapis.com	192.168.50.216	SKYPE	424	Audio Unk: 6
+278	26.564460	play-fe.googleapis.com	192.168.50.216	BFCP	188	ChairActionAck[Malformed Packet]
+279	26.572654	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Cancel ack segment
+280	26.573087	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Cancel segment
+281	26.597022	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Red data
+282	26.652070	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 122/30, Report ack segment
+283	26.903897	play-fe.googleapis.com	192.168.50.216	SKYPE	1320	NAT info Unk: 4
+284	26.904635	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Payload Unk: e
+285	26.904848	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 505144/5061, Red data
+286	26.904996	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 117/88, Red data
+287	26.905113	play-fe.googleapis.com	192.168.50.216	SKYPE	340	Fragment/Forward/Resend Unk: 9
+288	26.905207	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	292	https(443) → 59647 Len=217 (SendTTL=179, Round=183)
+289	26.914150	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Red data
+290	26.914465	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Control segment
+291	26.914641	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Control segment
+292	26.988524	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	100	https(443) → 59647 Len=24 (SendTTL=148, Round=4)
+293	27.047641	192.168.50.216	play-fe.googleapis.com	UDP	160	Session 1926538/190364, Red data
+294	27.048451	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Red data, range 33522629573-33522629666 [Unfinished LTP Block] 
+295	27.048829	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+296	27.049138	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Cancel ack segment
+297	27.049422	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Cancel segment
+298	27.049706	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+299	27.049953	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data, range 1919960-1919978 [Unfinished LTP Block] 
+300	27.050194	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+301	27.050427	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+302	27.050643	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+303	27.050853	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+304	27.051060	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+305	27.052623	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Green data
+306	27.053687	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+307	27.053998	192.168.50.216	play-fe.googleapis.com	UDP	636	Session 1926538/190364, Cancel segment
+308	27.054452	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Control segment
+309	27.054891	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+310	27.055108	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+311	27.055234	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Report ack segment
+312	27.058457	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+313	27.058641	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+314	27.058873	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+315	27.059030	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+316	27.059191	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+317	27.059391	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+318	27.062249	192.168.50.216	play-fe.googleapis.com	UDP	1324	Protocol Error
+319	27.062865	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+320	27.063505	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+321	27.063913	192.168.50.216	play-fe.googleapis.com	UDP	668	Session 1926538/190364, Red data
+322	27.064222	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Green data
+323	27.064353	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+324	27.065776	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Cancel ack segment
+325	27.066068	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Control segment
+326	27.066258	192.168.50.216	play-fe.googleapis.com	UDP	1212	Session 1926538/190364, Green data
+327	27.100095	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	104	https(443) → 59647 Len=27 (SendTTL=63, Round=222)
+328	27.100804	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 123/15486, Cancel ack segment
+329	27.101208	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 15148/2984, Green data
+330	27.101375	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Audio Unk: e
+331	27.101466	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 1050/51, Green data
+332	27.101543	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Unknown_F Unk: d
+333	27.104437	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Audio Unk: 7
+334	27.104748	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Fragment/Forward/Resend Unk: f
+335	27.104874	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 32/1131390993, Red data
+336	27.108182	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 1445012/795611, Green data
+337	27.108356	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 120/64080434, Red data
+338	27.108448	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Payload Unk: 3
+339	27.114082	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Unknown_0 Unk: 2
+340	27.114935	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Fragment/Forward/Resend Unk: 3
+341	27.115161	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 14897/72, Red data
+342	27.115259	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Audio Unk: 9
+343	27.115325	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 101/122695430, Control segment
+344	27.115389	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 16350/13158, Green data
+345	27.115453	play-fe.googleapis.com	192.168.50.216	SKYPE	100	NAT info Unk: 4
+346	27.118790	192.168.50.216	play-fe.googleapis.com	UDP	676	Session 1926538/190364, Control segment
+347	27.192508	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 114/923325, Red data
+348	27.208210	192.168.50.216	play-fe.googleapis.com	UDP	148	Session 1926538/190364, Cancel segment
+349	27.209029	192.168.50.216	play-fe.googleapis.com	UDP	1320	Session 1926538/190364, Report ack segment
+350	27.209215	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Red data
+351	27.209342	192.168.50.216	play-fe.googleapis.com	UDP	1324	Session 1926538/190364, Cancel ack segment
+352	27.209420	192.168.50.216	play-fe.googleapis.com	UDP	1296	Session 1926538/190364, Red data
+353	27.238111	play-fe.googleapis.com	192.168.50.216	SKYPE	1320	Payload Unk: 4
+354	27.238327	play-fe.googleapis.com	192.168.50.216	UDP	196	Session 1358703/54, Cancel ack segment
+355	27.238463	play-fe.googleapis.com	192.168.50.216	UDP	288	Session 15/107, Green data
+356	27.239438	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Cancel ack segment
+357	27.256723	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 23/1904949, Report segment
+358	27.256914	play-fe.googleapis.com	192.168.50.216	SKYPE	100	Fragment/Forward/Resend Unk: 9
+359	27.257471	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Report segment
+360	27.281907	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	100	https(443) → 59647 Len=25 (SendTTL=197, Round=67)
+361	27.312796	play-fe.googleapis.com	192.168.50.216	SKYPE	100	NAT repeat Unk: f
+362	27.390506	192.168.50.216	play-fe.googleapis.com	UDP	168	Session 15064/120, Cancel segment
+363	27.390791	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Red data
+364	27.442222	play-fe.googleapis.com	192.168.50.216	SKYPE	104	NAT repeat
+365	27.468629	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Green data
+366	27.510798	play-fe.googleapis.com	192.168.50.216	SKYPE	208	NAT info Unk: 8
+367	27.512224	play-fe.googleapis.com	192.168.50.216	UDP	156	Session 1595143/83, Red data
+368	27.517831	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Green data
+369	27.596735	play-fe.googleapis.com	192.168.50.216	SKYPE	100	NAT repeat Unk: 2
+370	27.792969	192.168.50.216	play-fe.googleapis.com	UDP	168	Session 15064/120, Cancel ack segment
+371	27.797417	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Cancel ack segment
+372	27.817415	play-fe.googleapis.com	192.168.50.216	UDP	1320	Session 2/261165236710000, Cancel ack segment
+373	27.817916	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 4351821/5, Report segment
+374	27.818134	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Fragment/Forward/Resend Unk: a
+375	27.818301	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	NAT repeat Unk: 9
+376	27.818478	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 1338460/1786264, Green data
+377	27.818634	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 61/942864, Control segment
+378	27.818777	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	NAT repeat Unk: 3
+379	27.818933	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	1324	https(443) → 59647 Len=1250 (SendTTL=5, Round=241)
+380	27.819041	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 55/33, Control segment
+381	27.819137	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 52358291/6108844802, Red data
+382	27.821092	play-fe.googleapis.com	192.168.50.216	UDP	196	Session 9738/674648, Red data
+383	27.821195	play-fe.googleapis.com	192.168.50.216	UDP	312	Session 112/10, Green data
+384	27.821226	play-fe.googleapis.com	192.168.50.216	SKYPE	1320	Payload Unk: d
+385	27.821537	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 1000974/113, Cancel segment
+386	27.822211	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	1324	https(443) → 59647 Len=1250 (SendTTL=62, Round=235)
+387	27.827317	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 1926538/190364, Green data
+388	27.828529	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Red data
+389	27.829919	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Report ack segment
+390	27.834647	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Green data
+391	27.834757	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel ack segment
+392	27.834783	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel segment
+393	27.834809	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel segment
+394	27.834843	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 1169944/1665, Cancel segment
+395	27.835438	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel ack segment
+396	27.835531	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 7/259899868380406, Green data
+397	27.835623	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 122/94, Red data
+398	27.835659	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Audio Unk: c
+399	27.835691	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 76/120, Green data
+400	27.835764	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Payload Unk: 6
+401	27.835797	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	NAT info Unk: e
+402	27.835829	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 20974290505/13104, Red data
+403	27.835866	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 1470079/2076, Cancel ack segment
+404	27.835893	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Payload Unk: b
+405	27.835923	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Fragment/Forward/Resend Unk: 8
+406	27.836924	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Red data
+407	27.837214	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel ack segment
+408	27.837635	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 25/107, Green data
+409	27.838102	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	1324	https(443) → 59647 Len=1250 (SendTTL=33, Round=102)
+410	27.839926	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	NAT info Unk: 9
+411	27.840035	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Fragment/Forward/Resend Unk: c
+412	27.841370	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Green data
+413	27.842160	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Unknown_0 Unk: b
+414	27.842261	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Audio Unk: 2
+415	27.845356	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Audio Unk: 7
+416	27.845842	play-fe.googleapis.com	192.168.50.216	SKYPE	1324	Unknown_0 Unk: b
+417	27.846492	play-fe.googleapis.com	192.168.50.216	UDP	104	Session 117/60, Cancel ack segment
+418	27.851008	play-fe.googleapis.com	192.168.50.216	UDP	1324	Session 15386/5297, Cancel ack segment
+419	27.851157	play-fe.googleapis.com	192.168.50.216	UDP	496	Session 1861400/73, Control segment
+420	27.857139	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Cancel segment
+421	27.869611	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 1926538/190364, Green data
+422	27.872964	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Report segment
+423	27.902240	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 3164/1349, Cancel segment
+424	27.910123	play-fe.googleapis.com	192.168.50.216	SKYPE	180	Payload Unk: d
+425	27.910599	play-fe.googleapis.com	192.168.50.216	UDP	156	Session 118/7439, Cancel segment
+426	27.912024	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Control segment
+427	27.986073	play-fe.googleapis.com	192.168.50.216	UDP	100	Session 905/64, Report ack segment
+428	41.449355	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	108	52944 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2346510616 TSecr=0 WS=1024
+429	41.542673	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	96	https(443) → 52944 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+430	41.543370	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+431	41.554362	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	600	52944 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 432]
+432	41.571872	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TLSv1.2	92	Client Hello (SNI=www.clarity.ms)
+433	41.572848	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 52944 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+434	41.642304	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	1528	Server Hello
+435	41.642985	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=518 Ack=1441 Win=86016 Len=0
+436	41.643106	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	2744	https(443) → 52944 [PSH, ACK] Seq=1441 Ack=518 Win=1048576 Len=2656 [TCP PDU reassembled in 438]
+437	41.643501	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=518 Ack=4097 Win=105472 Len=0
+438	41.644103	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	1064	Certificate, Server Key Exchange, Server Hello Done
+439	41.646943	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=518 Ack=5073 Win=111616 Len=0
+440	41.684604	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TLSv1.2	180	Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message
+441	41.684921	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 52944 [ACK] Seq=5073 Ack=611 Win=1047552 Len=0
+442	41.756125	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	376	New Session Ticket, Change Cipher Spec, Encrypted Handshake Message
+443	41.756562	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=611 Ack=5363 Win=116736 Len=0
+444	41.774998	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TLSv1.2	352	Application Data
+445	41.776781	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 52944 [ACK] Seq=5363 Ack=876 Win=1047552 Len=0
+446	41.845908	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	800	Application Data
+447	41.892054	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=876 Ack=6074 Win=121856 Len=0
+448	44.448101	10.215.173.1	googleads.g.doubleclick.net	TCP	108	47636 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2459327939 TSecr=0 WS=1024
+449	44.507848	googleads.g.doubleclick.net	10.215.173.1	TCP	96	https(443) → 47636 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+450	44.508124	10.215.173.1	googleads.g.doubleclick.net	TCP	88	47636 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+451	44.544565	10.215.173.1	googleads.g.doubleclick.net	TCP	600	47636 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 455]
+452	44.544878	10.215.173.1	googleads.g.doubleclick.net	TCP	600	[TCP Window Full] 47636 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 455]
+453	44.545650	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+454	44.545824	10.215.173.1	googleads.g.doubleclick.net	TCP	600	47636 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 455]
+455	44.545921	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	288	Client Hello (SNI=googleads.g.doubleclick.net)
+456	44.546508	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=1 Ack=1738 Win=1046528 Len=0
+457	44.610311	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	5736	Server Hello, Change Cipher Spec, Application Data
+458	44.613412	10.215.173.1	googleads.g.doubleclick.net	TCP	88	47636 → https(443) [ACK] Seq=1738 Ack=5651 Win=86016 Len=0
+459	44.729635	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	160	Change Cipher Spec, Application Data
+460	44.730773	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=5651 Ack=1812 Win=1047552 Len=0
+461	44.759646	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	180	Application Data
+462	44.764023	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=5651 Ack=1904 Win=1047552 Len=0
+463	44.780043	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	1072	Application Data, Application Data
+464	44.780396	10.215.173.1	googleads.g.doubleclick.net	TCP	88	47636 → https(443) [ACK] Seq=1904 Ack=6635 Win=97280 Len=0
+465	44.808692	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	120	Application Data
+466	44.808809	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	120	Application Data
+467	44.809136	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=6666 Ack=1935 Win=1047552 Len=0
+468	44.846813	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	988	Application Data
+469	44.847420	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=6666 Ack=2834 Win=1047552 Len=0
+470	44.913185	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	512	Application Data
+471	44.931917	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	124	Application Data
+472	44.932017	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	128	Application Data
+473	44.935207	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=7090 Ack=2908 Win=1047552 Len=0
+474	45.366796	10.215.173.1	10.215.173.2	DNS	124	Standard query 0x2f22 A firebaselogging.googleapis.com
+475	45.377061	10.215.173.2	10.215.173.1	DNS	300	Standard query response 0x2f22 A firebaselogging.googleapis.com A 192.178.50.42 A 142.250.64.138 A 142.250.64.170 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.202 A 142.250.64.234 A 142.250.217.170 A 142.250.217.202 A 142.250.217.234
+476	45.399174	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	49330 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3433551514 TSecr=0 WS=1024
+477	45.411031	192.168.50.216	play-fe.googleapis.com	UDP	164	Session 15064/120, Red data
+478	45.412846	192.168.50.216	play-fe.googleapis.com	UDP	164	Session 15064/120, Red data
+479	45.413530	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Green data
+480	45.413755	192.168.50.216	play-fe.googleapis.com	UDP	104	Session 15064/120, Red data
+481	45.454026	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 49330 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+482	45.455786	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	49330 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+483	45.465652	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	49330 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 484]
+484	45.465827	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	92	Client Hello (SNI=firebaselogging.googleapis.com)
+485	45.466105	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	104	https(443) → 47199 Len=28 (SendTTL=212, Round=213)
+486	45.466522	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 49330 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+487	45.466628	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	100	https(443) → 47199 Len=23 (SendTTL=207, Round=44)
+488	45.493238	192.168.50.216	play-fe.googleapis.com	UDP	108	Session 15064/120, Red data
+489	45.524257	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	4588	Server Hello, Change Cipher Spec, Application Data
+490	45.524648	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	49330 → https(443) [ACK] Seq=518 Ack=4501 Win=86016 Len=0
+491	45.529207	play-fe.googleapis.com	192.168.50.216	SKYPE	208	Unknown_0 Unk: 2
+492	45.529350	play-fe.googleapis.com	192.168.50.216	UDP	156	Session 37/57, Control segment
+493	45.530728	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Control segment
+494	45.536078	play-fe.googleapis.com	192.168.50.216	UDP	180	Session 12/5731, Control segment
+495	45.536217	play-fe.googleapis.com	192.168.50.216	DVB-S2 BB 	156	DVB-S2 Baseband 
+496	45.539141	192.168.50.216	play-fe.googleapis.com	UDP	112	Session 15064/120, Green data
+497	45.545823	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	152	Change Cipher Spec, Application Data
+498	45.546087	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 49330 [ACK] Seq=4501 Ack=582 Win=1047552 Len=0
+499	45.550158	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	1076	Application Data
+500	45.550510	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 49330 [ACK] Seq=4501 Ack=1570 Win=1046528 Len=0
+501	45.589983	play-fe.googleapis.com	192.168.50.216	UDP, HiPerConTracer	100	https(443) → 47199 Len=23 (SendTTL=76, Round=2)
+502	45.615376	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1208	Application Data, Application Data, Application Data
+503	45.657466	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	49330 → https(443) [ACK] Seq=1570 Ack=5622 Win=95232 Len=0
+504	46.613657	10.215.173.1	googleads.g.doubleclick.net	SKYPE	1324	Unknown_0
+505	46.621905	10.215.173.1	googleads.g.doubleclick.net	SKYPE	1324	Unknown_0
+506	46.622567	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	460	Application Data
+507	46.623419	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=7090 Ack=3282 Win=1047552 Len=0
+508	46.673831	googleads.g.doubleclick.net	10.215.173.1	SKYPE	116	Unknown_0
+509	46.674620	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+510	46.674704	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+511	46.674739	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+512	46.680227	10.215.173.1	googleads.g.doubleclick.net	SKYPE	1324	Unknown_0
+513	46.686983	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+514	46.687141	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+515	46.687198	googleads.g.doubleclick.net	10.215.173.1	SKYPE	1324	Unknown_0
+516	46.688898	10.215.173.1	googleads.g.doubleclick.net	SKYPE	116	Unknown_0
+517	46.691358	10.215.173.1	googleads.g.doubleclick.net	SKYPE	116	Unknown_0
+518	46.694577	googleads.g.doubleclick.net	10.215.173.1	TLSv1.3	608	Application Data, Application Data, Application Data, Application Data
+519	46.703375	10.215.173.1	googleads.g.doubleclick.net	TLSv1.3	128	Application Data
+520	46.704787	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [ACK] Seq=7612 Ack=3321 Win=1047552 Len=0
+521	46.727929	googleads.g.doubleclick.net	10.215.173.1	SKYPE	220	Unknown_0
+522	46.735425	10.215.173.1	googleads.g.doubleclick.net	SKYPE	244	Unknown_0
+523	46.783762	googleads.g.doubleclick.net	10.215.173.1	UDP	1044	Session 9000/62, Green data
+524	46.784278	googleads.g.doubleclick.net	10.215.173.1	SKYPE	196	Audio Unk: 6
+525	46.788751	10.215.173.1	googleads.g.doubleclick.net	UDP	108	Session 204292095/13419, Cancel ack segment
+526	46.808266	googleads.g.doubleclick.net	10.215.173.1	UDP	100	Session 118/30, Red data
+527	47.138079	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TLSv1.2	120	Encrypted Alert
+528	47.138701	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=876 Ack=6105 Win=121856 Len=0
+529	47.138742	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	10.215.173.1	TCP	88	https(443) → 52944 [FIN, ACK] Seq=6105 Ack=876 Win=1048576 Len=0
+530	47.180005	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [ACK] Seq=876 Ack=6106 Win=121856 Len=0
+531	50.829324	10.215.173.1	googleads.g.doubleclick.net	TCP	88	47636 → https(443) [RST, ACK] Seq=3321 Ack=7612 Win=119808 Len=0
+532	50.829757	googleads.g.doubleclick.net	10.215.173.1	TCP	88	https(443) → 47636 [RST, ACK] Seq=7612 Ack=3321 Win=64512 Len=0
+533	50.831137	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	49330 → https(443) [RST, ACK] Seq=1570 Ack=5622 Win=95232 Len=0
+534	50.833833	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 49330 [RST, ACK] Seq=5622 Ack=1570 Win=64512 Len=0
+535	52.728303	10.215.173.1	vmss-clarity-tag-eus2.eastus2.cloudapp.azure.com	TCP	88	52944 → https(443) [RST, ACK] Seq=876 Ack=6106 Win=121856 Len=0
+536	57.155959	10.215.173.1	10.215.173.2	DNS	112	Standard query 0xeb45 A play.googleapis.com
+537	57.168145	10.215.173.2	10.215.173.1	DNS	176	Standard query response 0xeb45 A play.googleapis.com A 216.239.38.223 A 216.239.36.223 A 216.239.32.223 A 216.239.34.223
+538	57.185928	10.215.173.1	play.googleapis.com	TCP	108	51178 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=1332237175 TSecr=0 WS=1024
+539	57.236060	play.googleapis.com	10.215.173.1	TCP	96	https(443) → 51178 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+540	57.236452	10.215.173.1	play.googleapis.com	TCP	88	51178 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+541	57.243281	10.215.173.1	play.googleapis.com	TCP	600	51178 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 542]
+542	57.244081	10.215.173.1	play.googleapis.com	TLSv1.3	92	Client Hello (SNI=play.googleapis.com)
+543	57.244757	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+544	57.306988	play.googleapis.com	10.215.173.1	TLSv1.3	4588	Server Hello, Change Cipher Spec, Application Data
+545	57.307327	10.215.173.1	play.googleapis.com	TCP	88	51178 → https(443) [ACK] Seq=518 Ack=4500 Win=86016 Len=0
+546	57.324807	10.215.173.1	play.googleapis.com	TLSv1.3	152	Change Cipher Spec, Application Data
+547	57.325071	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [ACK] Seq=4500 Ack=582 Win=1047552 Len=0
+548	57.327187	10.215.173.1	play.googleapis.com	TLSv1.3	304	Application Data
+549	57.327439	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [ACK] Seq=4500 Ack=798 Win=1047552 Len=0
+550	57.412771	play.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+551	57.420006	play.googleapis.com	10.215.173.1	TLSv1.3	512	Application Data, Application Data, Application Data
+552	57.428802	10.215.173.1	play.googleapis.com	TCP	88	51178 → https(443) [ACK] Seq=798 Ack=6323 Win=114688 Len=0
+553	57.473073	10.215.173.1	play.googleapis.com	TLSv1.3	1964	Application Data
+554	57.476020	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [ACK] Seq=6323 Ack=2676 Win=1046528 Len=0
+555	57.577516	play.googleapis.com	10.215.173.1	TLSv1.3	1056	Application Data, Application Data, Application Data
+556	57.580123	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [FIN, ACK] Seq=7292 Ack=2676 Win=1048576 Len=0
+557	57.589905	10.215.173.1	play.googleapis.com	TLSv1.3	112	Application Data
+558	57.589979	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [ACK] Seq=7293 Ack=2700 Win=64512 Len=0
+559	57.590404	10.215.173.1	play.googleapis.com	TCP	88	51178 → https(443) [FIN, ACK] Seq=2700 Ack=7293 Win=123904 Len=0
+560	57.590427	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 51178 [ACK] Seq=7293 Ack=2701 Win=64512 Len=0
+561	60.312659	10.215.173.1	10.215.173.2	DNS	112	Standard query 0xb1cc HTTPS clients2.google.com
+562	60.336646	10.215.173.1	10.215.173.2	DNS	112	Standard query 0x2b7f A clients2.google.com
+563	60.338848	10.215.173.2	10.215.173.1	DNS	188	Standard query response 0xb1cc HTTPS clients2.google.com CNAME clients.l.google.com SOA ns1.google.com
+564	60.344754	10.215.173.2	10.215.173.1	DNS	152	Standard query response 0x2b7f A clients2.google.com CNAME clients.l.google.com A 192.178.50.46
+565	60.374622	10.215.173.1	clients.l.google.com	TCP	108	41262 → http(80) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2409367573 TSecr=0 WS=1024
+566	60.390357	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+567	60.390833	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3804 Ack=2470 Win=1047552 Len=0
+568	60.430556	clients.l.google.com	10.215.173.1	TCP	96	http(80) → 41262 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+569	60.430754	10.215.173.1	clients.l.google.com	TCP	88	41262 → http(80) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+570	60.442672	10.215.173.1	clients.l.google.com	HTTP	500	GET /time/1/current?cup2key=9:WUj5UD83azB-sf7KX5APZV-RAnSNOCgt4_t0jIWFWsc&cup2hreq=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 HTTP/1.1 
+571	60.445662	clients.l.google.com	10.215.173.1	TCP	88	http(80) → 41262 [ACK] Seq=1 Ack=412 Win=1047552 Len=0
+572	60.477895	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+573	60.514836	clients.l.google.com	10.215.173.1	TCP	1224	http(80) → 41262 [PSH, ACK] Seq=1 Ack=412 Win=1048576 Len=1135 [TCP PDU reassembled in 575]
+574	60.516115	10.215.173.1	clients.l.google.com	TCP	88	41262 → http(80) [ACK] Seq=412 Ack=1136 Win=86016 Len=0
+575	60.516167	clients.l.google.com	10.215.173.1	HTTP/JSON	108	HTTP/1.1 200 OK , JSON (application/json)
+576	60.516415	10.215.173.1	clients.l.google.com	TCP	88	41262 → http(80) [ACK] Seq=412 Ack=1156 Win=86016 Len=0
+577	60.519936	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=2470 Ack=3845 Win=113664 Len=0
+578	60.589672	10.215.173.1	clients.l.google.com	TCP	88	41262 → http(80) [FIN, ACK] Seq=412 Ack=1156 Win=86016 Len=0
+579	60.589845	clients.l.google.com	10.215.173.1	TCP	88	http(80) → 41262 [ACK] Seq=1156 Ack=413 Win=1047552 Len=0
+580	60.642679	clients.l.google.com	10.215.173.1	TCP	88	http(80) → 41262 [FIN, ACK] Seq=1156 Ack=413 Win=1048576 Len=0
+581	61.244341	10.215.173.1	10.215.173.2	DNS	112	Standard query 0xb4c0 HTTPS accounts.google.com
+582	61.251609	10.215.173.1	10.215.173.2	DNS	112	Standard query 0x214c A accounts.google.com
+583	61.258430	10.215.173.2	10.215.173.1	DNS	164	Standard query response 0xb4c0 HTTPS accounts.google.com SOA ns1.google.com
+584	61.258846	10.215.173.2	10.215.173.1	DNS	128	Standard query response 0x214c A accounts.google.com A 192.178.219.84
+585	61.321252	10.215.173.1	accounts.google.com	SKYPE	1324	Unknown_0
+586	61.330279	10.215.173.1	accounts.google.com	SKYPE	1324	Unknown_0
+587	61.332029	10.215.173.1	10.215.173.2	DNS	108	Standard query 0xdb6e HTTPS www.google.com
+588	61.338538	10.215.173.1	10.215.173.2	DNS	108	Standard query 0x8b1b A www.google.com
+589	61.342012	10.215.173.2	10.215.173.1	DNS	132	Standard query response 0xdb6e HTTPS www.google.com HTTPS
+590	61.342920	10.215.173.2	10.215.173.1	DNS	124	Standard query response 0x8b1b A www.google.com A 142.250.217.164
+591	61.356610	10.215.173.1	www.google.com	SKYPE	1324	Unknown_0
+592	61.360056	10.215.173.1	www.google.com	SKYPE	1324	Unknown_0
+593	61.392747	accounts.google.com	10.215.173.1	SKYPE	116	Unknown_0
+594	61.393507	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+595	61.393599	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+596	61.393657	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+597	61.394323	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+598	61.394391	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+599	61.394438	accounts.google.com	10.215.173.1	SKYPE	868	Unknown_0
+600	61.409435	10.215.173.1	accounts.google.com	SKYPE	1324	Unknown_0
+601	61.411296	www.google.com	10.215.173.1	SKYPE	116	Unknown_0
+602	61.411672	10.215.173.1	accounts.google.com	SKYPE	116	Unknown_0
+603	61.412557	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+604	61.412869	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+605	61.413012	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+606	61.414217	10.215.173.1	accounts.google.com	SKYPE	116	Unknown_0
+607	61.420695	10.215.173.1	www.google.com	SKYPE	1324	Unknown_0
+608	61.426612	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+609	61.426758	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+610	61.426799	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+611	61.429136	10.215.173.1	accounts.google.com	TCP	108	36596 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3349209488 TSecr=0 WS=1024
+612	61.433305	10.215.173.1	www.google.com	SKYPE	116	Unknown_0
+613	61.433602	10.215.173.1	www.google.com	SKYPE	116	Unknown_0
+614	61.441406	10.215.173.1	www.google.com	TCP	108	40894 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=1465775240 TSecr=0 WS=1024
+615	61.444623	10.215.173.1	accounts.google.com	SKYPE	160	Unknown_0
+616	61.449754	10.215.173.1	accounts.google.com	SKYPE	148	Fragment/Forward/Resend Unk: a
+617	61.450787	10.215.173.1	accounts.google.com	SKYPE	108	Fragment/Forward/Resend Unk: a
+618	61.457567	10.215.173.1	accounts.google.com	SKYPE	1320	Fragment/Forward/Resend Unk: a
+619	61.462814	10.215.173.1	accounts.google.com	SKYPE	1324	Fragment/Forward/Resend Unk: a
+620	61.463112	10.215.173.1	accounts.google.com	SKYPE	176	Fragment/Forward/Resend Unk: a
+621	61.472598	www.google.com	10.215.173.1	SKYPE	944	Unknown_0
+622	61.483393	10.215.173.1	www.google.com	SKYPE	116	Unknown_0
+623	61.486742	10.215.173.1	www.google.com	SKYPE	112	Unknown_0
+624	61.488912	accounts.google.com	10.215.173.1	TCP	96	https(443) → 36596 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+625	61.489221	www.google.com	10.215.173.1	TCP	96	https(443) → 40894 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+626	61.489351	10.215.173.1	accounts.google.com	TCP	88	36596 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+627	61.489363	10.215.173.1	www.google.com	TCP	88	40894 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+628	61.506247	10.215.173.1	accounts.google.com	TCP	600	36596 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 632]
+629	61.506543	10.215.173.1	accounts.google.com	TCP	600	[TCP Window Full] 36596 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 632]
+630	61.506796	accounts.google.com	10.215.173.1	TCP	88	https(443) → 36596 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+631	61.506942	10.215.173.1	accounts.google.com	TCP	600	36596 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 632]
+632	61.507061	10.215.173.1	accounts.google.com	TLSv1.3	376	Client Hello (SNI=accounts.google.com)
+633	61.507371	accounts.google.com	10.215.173.1	TCP	88	https(443) → 36596 [ACK] Seq=1 Ack=1826 Win=1046528 Len=0
+634	61.507624	accounts.google.com	10.215.173.1	UDP	1028	Session 96/12067, Cancel ack segment
+635	61.507704	accounts.google.com	10.215.173.1	SKYPE	196	Unknown_0 Unk: 4
+636	61.510020	10.215.173.1	www.google.com	TCP	600	40894 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 640]
+637	61.510213	10.215.173.1	www.google.com	TCP	600	[TCP Window Full] 40894 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 640]
+638	61.510361	www.google.com	10.215.173.1	TCP	88	https(443) → 40894 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+639	61.510485	10.215.173.1	www.google.com	TCP	600	40894 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 640]
+640	61.510538	10.215.173.1	www.google.com	TLSv1.3	276	Client Hello (SNI=www.google.com)
+641	61.510811	www.google.com	10.215.173.1	TCP	88	https(443) → 40894 [ACK] Seq=1 Ack=1725 Win=1046528 Len=0
+642	61.513034	10.215.173.1	accounts.google.com	SKYPE	108	Fragment/Forward/Resend Unk: a
+643	61.521960	accounts.google.com	10.215.173.1	UDP	100	Session 63/16138, Cancel ack segment
+644	61.526682	accounts.google.com	10.215.173.1	SKYPE	104	Audio
+645	61.538050	www.google.com	10.215.173.1	SKYPE	116	Unknown_0
+646	61.539641	10.215.173.1	accounts.google.com	TCP	88	36596 → https(443) [FIN, ACK] Seq=1826 Ack=1 Win=65536 Len=0
+647	61.539853	accounts.google.com	10.215.173.1	TCP	88	https(443) → 36596 [ACK] Seq=1 Ack=1827 Win=1046528 Len=0
+648	61.540194	10.215.173.1	www.google.com	TCP	88	40894 → https(443) [FIN, ACK] Seq=1725 Ack=1 Win=65536 Len=0
+649	61.540578	www.google.com	10.215.173.1	TCP	88	https(443) → 40894 [ACK] Seq=1 Ack=1726 Win=1046528 Len=0
+650	61.543245	10.215.173.1	www.google.com	TCP	108	40898 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=1465775342 TSecr=0 WS=1024
+651	61.549434	accounts.google.com	10.215.173.1	SKYPE	1320	Unknown_0
+652	61.549706	accounts.google.com	10.215.173.1	UDP	1324	Session 37/13472, Green data
+653	61.549859	accounts.google.com	10.215.173.1	UDP, HiPerConTracer	1232	https(443) → 51995 Len=1156 (SendTTL=120, Round=167)
+654	61.551805	10.215.173.1	www.google.com	SKYPE	160	Unknown_0
+655	61.552662	10.215.173.1	www.google.com	UDP	148	Session 14436/15616, Green data
+656	61.556468	10.215.173.1	accounts.google.com	SKYPE	108	Fragment/Forward/Resend Unk: a
+657	61.560031	10.215.173.1	accounts.google.com	SKYPE	112	Fragment/Forward/Resend Unk: a
+658	61.560692	10.215.173.1	www.google.com	UDP	108	Session 14436/15616, Cancel ack segment
+659	61.561784	10.215.173.1	www.google.com	UDP	1320	Session 14436/15616, Green data
+660	61.562040	10.215.173.1	www.google.com	UDP	424	Session 14436/15616, Red data
+661	61.563617	accounts.google.com	10.215.173.1	TLSv1.3	1488	Server Hello, Change Cipher Spec
+662	61.564407	10.215.173.1	accounts.google.com	TCP	88	36596 → https(443) [RST] Seq=1827 Win=0 Len=0
+663	61.564560	accounts.google.com	10.215.173.1	TCP	88	https(443) → 36596 [RST, ACK] Seq=1401 Ack=1827 Win=64512 Len=0
+664	61.566942	www.google.com	10.215.173.1	TLSv1.3	1488	Server Hello, Change Cipher Spec
+665	61.567389	10.215.173.1	www.google.com	TCP	88	40894 → https(443) [RST] Seq=1726 Win=0 Len=0
+666	61.567422	www.google.com	10.215.173.1	TCP	88	https(443) → 40894 [RST, ACK] Seq=1401 Ack=1726 Win=64512 Len=0
+667	61.599827	www.google.com	10.215.173.1	TCP	96	https(443) → 40898 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+668	61.600043	10.215.173.1	www.google.com	TCP	88	40898 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+669	61.603475	www.google.com	10.215.173.1	SKYPE	1076	Unknown_0 Unk: 2
+670	61.603575	www.google.com	10.215.173.1	SKYPE	196	Payload Unk: 8
+671	61.603754	10.215.173.1	www.google.com	TCP	600	40898 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 675]
+672	61.604022	10.215.173.1	www.google.com	TCP	600	[TCP Window Full] 40898 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 675]
+673	61.604265	www.google.com	10.215.173.1	TCP	88	https(443) → 40898 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+674	61.604440	10.215.173.1	www.google.com	TCP	600	40898 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 675]
+675	61.604606	10.215.173.1	www.google.com	TLSv1.3	308	Client Hello (SNI=www.google.com)
+676	61.604988	www.google.com	10.215.173.1	TCP	88	https(443) → 40898 [ACK] Seq=1 Ack=1757 Win=1046528 Len=0
+677	61.608474	10.215.173.1	www.google.com	UDP	108	Session 14436/15616, Red data
+678	61.613376	10.215.173.1	www.google.com	UDP	108	Session 14436/15616, Red data
+679	61.615255	www.google.com	10.215.173.1	UDP, HiPerConTracer	100	https(443) → 40226 Len=23 (SendTTL=83, Round=250)
+680	61.639393	www.google.com	10.215.173.1	UDP	104	Session 82/54, Cancel segment
+681	61.640214	10.215.173.1	www.google.com	UDP	108	Session 14436/15616, Red data
+682	61.646844	www.google.com	10.215.173.1	UDP, HiPerConTracer	996	https(443) → 40226 Len=919 (SendTTL=210, Round=37)
+683	61.647969	accounts.google.com	10.215.173.1	UDP	100	Session 0/120, Green data, range 171528507-171528513 [Unfinished LTP Block] 
+684	61.648047	www.google.com	10.215.173.1	SKYPE	276	Audio Unk: e
+685	61.651225	10.215.173.1	www.google.com	UDP	112	Session 14436/15616, Cancel segment
+686	61.670215	www.google.com	10.215.173.1	TLSv1.3	1488	Server Hello, Change Cipher Spec
+687	61.670565	10.215.173.1	www.google.com	TCP	88	40898 → https(443) [ACK] Seq=1757 Ack=1401 Win=86016 Len=0
+688	61.670600	www.google.com	10.215.173.1	TCP	1488	https(443) → 40898 [PSH, ACK] Seq=1401 Ack=1757 Win=1048576 Len=1400 [TCP PDU reassembled in 690]
+689	61.670665	10.215.173.1	www.google.com	TCP	88	40898 → https(443) [ACK] Seq=1757 Ack=2801 Win=105472 Len=0
+690	61.670724	www.google.com	10.215.173.1	TLSv1.3	2668	Application Data
+691	61.670829	10.215.173.1	www.google.com	TCP	88	40898 → https(443) [ACK] Seq=1757 Ack=5383 Win=125952 Len=0
+692	61.682214	10.215.173.1	www.google.com	TLSv1.3	160	Change Cipher Spec, Application Data
+693	61.682466	www.google.com	10.215.173.1	TCP	88	https(443) → 40898 [ACK] Seq=5383 Ack=1831 Win=1047552 Len=0
+694	61.701373	10.215.173.1	www.google.com	TCP	88	40898 → https(443) [FIN, ACK] Seq=1831 Ack=5383 Win=125952 Len=0
+695	61.701509	www.google.com	10.215.173.1	TCP	88	https(443) → 40898 [ACK] Seq=5383 Ack=1832 Win=1047552 Len=0
+696	61.727496	www.google.com	10.215.173.1	UDP	100	Session 10566/9912, Green data
+697	61.755463	www.google.com	10.215.173.1	TLSv1.3	1104	Application Data, Application Data
+698	61.755969	10.215.173.1	www.google.com	TCP	88	40898 → https(443) [RST] Seq=1832 Win=0 Len=0
+699	61.756060	www.google.com	10.215.173.1	TCP	88	https(443) → 40898 [RST, ACK] Seq=6399 Ack=1832 Win=64512 Len=0
+700	69.824672	10.215.173.1	10.215.173.2	DNS	128	Standard query 0x19b9 HTTPS optimizationguide-pa.googleapis.com
+701	69.833185	10.215.173.1	10.215.173.2	DNS	128	Standard query 0xa32d A optimizationguide-pa.googleapis.com
+702	69.839063	10.215.173.2	10.215.173.1	DNS	184	Standard query response 0x19b9 HTTPS optimizationguide-pa.googleapis.com SOA ns1.google.com
+703	69.843245	10.215.173.2	10.215.173.1	DNS	320	Standard query response 0xa32d A optimizationguide-pa.googleapis.com A 142.250.64.202 A 142.250.217.170 A 142.250.217.202 A 142.250.217.234 A 192.178.50.42 A 172.217.2.202 A 172.217.15.202 A 142.250.64.170 A 142.251.35.234 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202
+704	69.850236	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	45716 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3664970382 TSecr=0 WS=1024
+705	69.901214	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 45716 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+706	69.901960	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45716 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+707	69.905530	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	45716 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 711]
+708	69.906212	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	[TCP Window Full] 45716 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 711]
+709	69.906573	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+710	69.906879	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	45716 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 711]
+711	69.906989	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	360	Client Hello (SNI=optimizationguide-pa.googleapis.com)
+712	69.907831	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [ACK] Seq=1 Ack=1810 Win=1046528 Len=0
+713	69.970010	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	5852	Server Hello, Change Cipher Spec, Application Data
+714	69.970905	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45716 → https(443) [ACK] Seq=1810 Ack=5767 Win=86016 Len=0
+715	69.993295	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Change Cipher Spec, Application Data
+716	69.994351	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [ACK] Seq=5767 Ack=1884 Win=1047552 Len=0
+717	69.996756	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	180	Application Data
+718	69.997231	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [ACK] Seq=5767 Ack=1976 Win=1047552 Len=0
+719	70.000037	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	488	Application Data
+720	70.000402	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [ACK] Seq=5767 Ack=2376 Win=1047552 Len=0
+721	70.000605	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	1792	Application Data
+722	70.001059	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [ACK] Seq=5767 Ack=4081 Win=1045504 Len=0
+723	70.034887	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45716 → https(443) [RST, ACK] Seq=4081 Ack=5767 Win=86016 Len=0
+724	70.035212	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45716 [RST, ACK] Seq=5767 Ack=4081 Win=64512 Len=0
+725	120.505888	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+726	120.507317	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3845 Ack=2507 Win=1047552 Len=0
+727	120.619549	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+728	120.619836	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=2507 Ack=3886 Win=113664 Len=0
+729	180.625210	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+730	180.633551	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [ACK] Seq=3886 Ack=2544 Win=1047552 Len=0
+731	180.723569	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+732	180.724116	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	50286 → https(443) [ACK] Seq=2544 Ack=3927 Win=113664 Len=0
+733	236.406872	10.215.173.1	10.215.173.2	DNS	112	Standard query 0xd636 A graph.facebook.com
+734	236.429485	10.215.173.2	10.215.173.1	DNS	152	Standard query response 0xd636 A graph.facebook.com CNAME star.c10r.facebook.com A 157.240.14.15
+735	236.450200	10.215.173.1	star.c10r.facebook.com	TCP	108	55914 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=1589539536 TSecr=0 WS=1024
+736	236.506739	star.c10r.facebook.com	10.215.173.1	TCP	96	https(443) → 55914 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+737	236.507336	10.215.173.1	star.c10r.facebook.com	TCP	88	55914 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+738	236.530467	10.215.173.1	star.c10r.facebook.com	TCP	600	55914 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 739]
+739	236.531357	10.215.173.1	star.c10r.facebook.com	TLSv1.3	92	Client Hello (SNI=graph.facebook.com)
+740	236.532428	star.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 55914 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+741	236.580995	star.c10r.facebook.com	10.215.173.1	TLSv1.3	2848	Server Hello, Change Cipher Spec, Application Data, Application Data
+742	236.582689	10.215.173.1	star.c10r.facebook.com	TCP	88	55914 → https(443) [ACK] Seq=518 Ack=2761 Win=86016 Len=0
+743	236.582751	star.c10r.facebook.com	10.215.173.1	TLSv1.3	624	Application Data
+744	236.582937	10.215.173.1	star.c10r.facebook.com	TCP	88	55914 → https(443) [ACK] Seq=518 Ack=3298 Win=91136 Len=0
+745	236.606411	10.215.173.1	star.c10r.facebook.com	TLSv1.3	152	Change Cipher Spec, Application Data
+746	236.606642	star.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 55914 [ACK] Seq=3298 Ack=582 Win=1047552 Len=0
+747	236.612720	10.215.173.1	star.c10r.facebook.com	TLSv1.3	1112	Application Data
+748	236.612964	star.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 55914 [ACK] Seq=3298 Ack=1608 Win=1046528 Len=0
+749	236.655893	star.c10r.facebook.com	10.215.173.1	TLSv1.3	272	Application Data
+750	236.699982	10.215.173.1	star.c10r.facebook.com	TCP	88	55914 → https(443) [ACK] Seq=1608 Ack=3483 Win=97280 Len=0
+751	236.744346	star.c10r.facebook.com	10.215.173.1	TLSv1.3	1044	Application Data
+752	236.744665	10.215.173.1	star.c10r.facebook.com	TCP	88	55914 → https(443) [ACK] Seq=1608 Ack=4439 Win=102400 Len=0
+753	236.745636	10.215.173.1	star.c10r.facebook.com	TCP	88	55914 → https(443) [FIN, ACK] Seq=1608 Ack=4439 Win=102400 Len=0
+754	236.745768	star.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 55914 [ACK] Seq=4439 Ack=1609 Win=1047552 Len=0
+755	236.793535	star.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 55914 [FIN, ACK] Seq=4439 Ack=1609 Win=1048576 Len=0
+756	240.303484	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 50286 [RST, ACK] Seq=3927 Ack=2544 Win=64512 Len=0
+757	241.836949	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	108	36632 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2049109884 TSecr=0 WS=1024
+758	242.018680	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	96	https(443) → 36632 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+759	242.019006	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+760	242.023548	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	304	Client Hello (SNI=z-m-gateway.facebook.com)
+761	242.024247	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=1 Ack=216 Win=1047552 Len=0
+762	242.992000	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	1468	Server Hello, Change Cipher Spec, Application Data
+763	242.992867	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=216 Ack=1381 Win=86016 Len=0
+764	243.039326	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	2000	Application Data, Application Data
+765	243.039628	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=216 Ack=3292 Win=105472 Len=0
+766	243.062031	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	92	Change Cipher Spec
+767	243.062079	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	156	Application Data
+768	243.062227	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3292 Ack=291 Win=1047552 Len=0
+769	243.082679	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	140	Application Data
+770	243.082722	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	140	Application Data
+771	243.082817	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3292 Ack=397 Win=1047552 Len=0
+772	243.082883	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+773	243.082899	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	876	Application Data
+774	243.082948	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	1260	Application Data
+775	243.083040	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3292 Ack=2396 Win=1045504 Len=0
+776	243.112330	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	340	Application Data, Application Data
+777	243.112891	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+778	243.113202	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3545 Ack=2433 Win=1045504 Len=0
+779	243.131539	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	152	Application Data, Application Data
+780	243.170509	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	304	Application Data, Application Data
+781	243.170688	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=2433 Ack=3826 Win=113664 Len=0
+782	288.805752	10.215.173.1	10.215.173.2	DNS	112	Standard query 0x8415 A play.googleapis.com
+783	288.843703	10.215.173.2	10.215.173.1	DNS	176	Standard query response 0x8415 A play.googleapis.com A 216.239.32.223 A 216.239.36.223 A 216.239.38.223 A 216.239.34.223
+784	288.855232	10.215.173.1	play.googleapis.com	TCP	108	53920 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=224810142 TSecr=0 WS=1024
+785	288.909278	play.googleapis.com	10.215.173.1	TCP	96	https(443) → 53920 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+786	288.910039	10.215.173.1	play.googleapis.com	TCP	88	53920 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+787	288.938701	10.215.173.1	play.googleapis.com	TCP	600	53920 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 788]
+788	288.939219	10.215.173.1	play.googleapis.com	TLSv1.3	92	Client Hello (SNI=play.googleapis.com)
+789	288.940123	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+790	288.998447	play.googleapis.com	10.215.173.1	TLSv1.3	4588	Server Hello, Change Cipher Spec, Application Data
+791	288.999855	10.215.173.1	play.googleapis.com	TCP	88	53920 → https(443) [ACK] Seq=518 Ack=4502 Win=86016 Len=0
+792	289.030777	10.215.173.1	play.googleapis.com	TLSv1.3	152	Change Cipher Spec, Application Data
+793	289.031176	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [ACK] Seq=4502 Ack=582 Win=1047552 Len=0
+794	289.037852	10.215.173.1	play.googleapis.com	TLSv1.3	304	Application Data
+795	289.038276	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [ACK] Seq=4502 Ack=798 Win=1047552 Len=0
+796	289.119503	play.googleapis.com	10.215.173.1	TLSv1.3	1800	Application Data, Application Data, Application Data, Application Data
+797	289.144304	10.215.173.1	play.googleapis.com	TLSv1.3	3748	Application Data
+798	289.145456	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [ACK] Seq=6214 Ack=4458 Win=1044480 Len=0
+799	289.263044	play.googleapis.com	10.215.173.1	TLSv1.3	1232	Application Data, Application Data, Application Data
+800	289.263499	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [FIN, ACK] Seq=7357 Ack=4458 Win=1048576 Len=0
+801	289.267961	10.215.173.1	play.googleapis.com	TLSv1.3	112	Application Data
+802	289.268057	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [ACK] Seq=7358 Ack=4482 Win=64512 Len=0
+803	289.268429	10.215.173.1	play.googleapis.com	TCP	88	53920 → https(443) [FIN, ACK] Seq=4482 Ack=7358 Win=104448 Len=0
+804	289.268456	play.googleapis.com	10.215.173.1	TCP	88	https(443) → 53920 [ACK] Seq=7358 Ack=4483 Win=64512 Len=0
+805	303.174883	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+806	303.176584	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3826 Ack=2470 Win=1047552 Len=0
+807	303.267166	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+808	303.325269	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=2470 Ack=3867 Win=113664 Len=0
+809	363.271318	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+810	363.272649	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3867 Ack=2507 Win=1047552 Len=0
+811	363.369168	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+812	363.369695	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=2507 Ack=3908 Win=113664 Len=0
+813	423.377799	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+814	423.379974	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3908 Ack=2544 Win=1047552 Len=0
+815	423.673579	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+816	423.673821	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=2544 Ack=3949 Win=113664 Len=0
+817	483.680756	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+818	483.681876	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3949 Ack=2581 Win=1047552 Len=0
+819	484.091505	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+820	484.092307	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=2581 Ack=3990 Win=113664 Len=0
+821	591.912266	10.215.173.1	dgw-mini.c10r.facebook.com	TLSv1.3	124	Application Data
+822	591.913301	dgw-mini.c10r.facebook.com	10.215.173.1	TCP	88	https(443) → 36632 [ACK] Seq=3990 Ack=2618 Win=1047552 Len=0
+823	591.999743	dgw-mini.c10r.facebook.com	10.215.173.1	TLSv1.3	128	Application Data
+824	592.000132	10.215.173.1	dgw-mini.c10r.facebook.com	TCP	88	36632 → https(443) [ACK] Seq=2618 Ack=4031 Win=113664 Len=0
+825	603.948794	10.215.173.1	10.215.173.2	DNS	108	Standard query 0xa7c2 A inbox.google.com
+826	603.954836	10.215.173.1	10.215.173.2	DNS	128	Standard query 0xfe52 A appsgrowthpromo-pa.googleapis.com
+827	603.957617	10.215.173.1	10.215.173.2	DNS	120	Standard query 0x502a A taskassist-pa.googleapis.com
+828	603.960625	10.215.173.2	10.215.173.1	DNS	124	Standard query response 0xa7c2 A inbox.google.com A 142.251.35.229
+829	603.963442	10.215.173.2	10.215.173.1	DNS	320	Standard query response 0xfe52 A appsgrowthpromo-pa.googleapis.com A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.234 A 142.250.217.170 A 142.250.217.202 A 142.250.217.234 A 192.178.50.42 A 172.217.2.202 A 172.217.15.202 A 142.250.64.138 A 142.251.35.234
+830	603.967113	10.215.173.2	10.215.173.1	DNS	344	Standard query response 0x502a A taskassist-pa.googleapis.com A 142.250.217.202 A 142.250.217.234 A 192.178.50.42 A 172.217.2.202 A 172.217.15.202 A 142.250.64.138 A 142.250.64.170 A 142.251.35.234 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.202 A 142.250.64.234 A 142.250.217.170
+831	603.981146	10.215.173.1	inbox.google.com	TCP	108	59590 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3499334441 TSecr=0 WS=1024
+832	603.986064	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	37012 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2591809269 TSecr=0 WS=1024
+833	603.989347	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	38960 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3433754599 TSecr=0 WS=1024
+834	604.033087	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 37012 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+835	604.033262	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	37012 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+836	604.033291	inbox.google.com	10.215.173.1	TCP	96	https(443) → 59590 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+837	604.033373	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+838	604.035398	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	37012 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 842]
+839	604.035940	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	[TCP Window Full] 37012 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 842]
+840	604.036121	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+841	604.036229	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	37012 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 842]
+842	604.036284	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	328	Client Hello (SNI=appsgrowthpromo-pa.googleapis.com)
+843	604.036518	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=1 Ack=1776 Win=1046528 Len=0
+844	604.036583	10.215.173.1	inbox.google.com	TCP	600	59590 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 848]
+845	604.036683	10.215.173.1	inbox.google.com	TCP	600	[TCP Window Full] 59590 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 848]
+846	604.036782	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+847	604.036855	10.215.173.1	inbox.google.com	TCP	600	59590 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 848]
+848	604.036884	10.215.173.1	inbox.google.com	TLSv1.3	276	Client Hello (SNI=inbox.google.com)
+849	604.037003	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=1 Ack=1727 Win=1046528 Len=0
+850	604.040430	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 38960 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+851	604.040851	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+852	604.042344	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	38960 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 856]
+853	604.042612	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	[TCP Window Full] 38960 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 856]
+854	604.042933	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+855	604.043158	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	38960 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 856]
+856	604.043325	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	384	Client Hello (SNI=taskassist-pa.googleapis.com)
+857	604.043800	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=1 Ack=1835 Win=1046528 Len=0
+858	604.095948	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Server Hello, Change Cipher Spec
+859	604.096271	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	37012 → https(443) [ACK] Seq=1776 Ack=2801 Win=86016 Len=0
+860	604.097884	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	3052	Application Data
+861	604.098011	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	37012 → https(443) [ACK] Seq=1776 Ack=5765 Win=105472 Len=0
+862	604.111952	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	5844	Server Hello, Change Cipher Spec, Application Data
+863	604.112573	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [ACK] Seq=1835 Ack=5759 Win=86016 Len=0
+864	604.112626	inbox.google.com	10.215.173.1	TLSv1.3	5460	Server Hello, Change Cipher Spec, Application Data
+865	604.113114	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=1727 Ack=5373 Win=86016 Len=0
+866	604.127697	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Change Cipher Spec, Application Data
+867	604.127966	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=5765 Ack=1850 Win=1047552 Len=0
+868	604.129772	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	180	Application Data
+869	604.129990	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=5765 Ack=1942 Win=1047552 Len=0
+870	604.130178	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	728	Application Data
+871	604.130353	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=5765 Ack=2581 Win=1047552 Len=0
+872	604.130742	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	132	Application Data
+873	604.130904	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=5765 Ack=2626 Win=1047552 Len=0
+874	604.138672	10.215.173.1	inbox.google.com	TLSv1.3	160	Change Cipher Spec, Application Data
+875	604.138927	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=5373 Ack=1801 Win=1047552 Len=0
+876	604.140063	10.215.173.1	inbox.google.com	TLSv1.3	180	Application Data
+877	604.140304	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=5373 Ack=1893 Win=1047552 Len=0
+878	604.141792	10.215.173.1	inbox.google.com	TLSv1.3	1600	Application Data
+879	604.142231	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=5373 Ack=3404 Win=1046528 Len=0
+880	604.142985	10.215.173.1	inbox.google.com	TLSv1.3	628	Application Data
+881	604.143432	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=5373 Ack=3943 Win=1045504 Len=0
+882	604.150181	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Change Cipher Spec, Application Data
+883	604.150534	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=5759 Ack=1909 Win=1047552 Len=0
+884	604.150693	10.215.173.1	inbox.google.com	TLSv1.3	144	Application Data
+885	604.150793	10.215.173.1	inbox.google.com	TLSv1.3	376	Application Data
+886	604.150876	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	180	Application Data
+887	604.151239	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=5373 Ack=4288 Win=1045504 Len=0
+888	604.151461	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=5759 Ack=2001 Win=1047552 Len=0
+889	604.151591	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	724	Application Data
+890	604.151654	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+891	604.151780	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=5759 Ack=2707 Win=1047552 Len=0
+892	604.151880	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+893	604.151916	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+894	604.151934	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+895	604.151954	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+896	604.151970	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+897	604.152122	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=5759 Ack=3062 Win=1046528 Len=0
+898	604.160434	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+899	604.160494	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+900	604.160506	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+901	604.160514	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+902	604.160521	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+903	604.160527	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+904	604.160534	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+905	604.160704	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=5759 Ack=3321 Win=1046528 Len=0
+906	604.174006	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1116	Application Data, Application Data, Application Data
+907	604.175064	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	120	Application Data
+908	604.175202	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=6792 Ack=2657 Win=1047552 Len=0
+909	604.188691	inbox.google.com	10.215.173.1	TLSv1.3	1080	Application Data, Application Data, Application Data
+910	604.189191	10.215.173.1	inbox.google.com	TLSv1.3	120	Application Data
+911	604.189447	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=6366 Ack=4319 Win=1045504 Len=0
+912	604.199713	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1072	Application Data, Application Data
+913	604.199861	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [ACK] Seq=3321 Ack=6745 Win=97280 Len=0
+914	604.200364	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	120	Application Data
+915	604.200614	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=6745 Ack=3352 Win=1046528 Len=0
+916	604.206331	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	428	Application Data, Application Data, Application Data, Application Data
+917	604.208008	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	120	Application Data
+918	604.221701	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+919	604.222900	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [ACK] Seq=7131 Ack=2696 Win=1047552 Len=0
+920	604.249816	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [ACK] Seq=3352 Ack=6776 Win=97280 Len=0
+921	604.256880	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	1324	Unknown_0
+922	604.270595	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	1324	Unknown_0
+923	604.271156	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+924	604.271355	inbox.google.com	10.215.173.1	TLSv1.3	6932	Application Data, Application Data, Application Data, Application Data, Application Data
+925	604.271603	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2596	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+926	604.271754	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+927	604.271813	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+928	604.272069	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9286 Ack=3460 Win=1047552 Len=0
+929	604.272159	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=4319 Ack=14612 Win=130048 Len=0
+930	604.272174	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [ACK] Seq=3460 Ack=9286 Win=108544 Len=0
+931	604.274270	inbox.google.com	10.215.173.1	TLSv1.3	1948	Application Data, Application Data
+932	604.274644	inbox.google.com	10.215.173.1	TLSv1.3	320	Application Data, Application Data
+933	604.277676	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=4319 Ack=16706 Win=157696 Len=0
+934	604.282735	10.215.173.1	inbox.google.com	TLSv1.3	128	Application Data
+935	604.282812	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+936	604.283237	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=16706 Ack=4358 Win=1047552 Len=0
+937	604.283799	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9286 Ack=3499 Win=1047552 Len=0
+938	604.322705	10.215.173.1	10.215.173.2	DNS	108	Standard query 0x9c1b A mail.google.com
+939	604.337507	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	116	Unknown_0
+940	604.337935	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+941	604.338375	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+942	604.338622	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+943	604.339009	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9286 Ack=3570 Win=1047552 Len=0
+944	604.339134	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+945	604.339269	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+946	604.339440	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+947	604.339484	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+948	604.339507	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+949	604.340023	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9286 Ack=3854 Win=1047552 Len=0
+950	604.340429	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+951	604.340626	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	1324	Unknown_0
+952	604.340964	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+953	604.341131	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+954	604.341684	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9286 Ack=3996 Win=1047552 Len=0
+955	604.341984	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+956	604.342150	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+957	604.343713	10.215.173.2	10.215.173.1	DNS	124	Standard query response 0x9c1b A mail.google.com A 142.250.217.229
+958	604.347037	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	116	Unknown_0
+959	604.347310	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+960	604.347358	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+961	604.347381	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+962	604.347403	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+963	604.347423	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+964	604.347442	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+965	604.347462	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+966	604.347487	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	116	Unknown_0
+967	604.347805	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9286 Ack=4255 Win=1047552 Len=0
+968	604.348965	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	448	Application Data, Application Data, Application Data, Application Data
+969	604.362250	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+970	604.363537	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9645 Ack=4294 Win=1047552 Len=0
+971	604.368207	10.215.173.1	mail.google.com	TCP	108	39340 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=4221505599 TSecr=0 WS=1024
+972	604.376418	inbox.google.com	10.215.173.1	TLSv1.3	3748	Application Data, Application Data, Application Data
+973	604.378735	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Application Data
+974	604.378791	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	124	Application Data
+975	604.378827	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+976	604.379952	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=9645 Ack=4402 Win=1047552 Len=0
+977	604.380059	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+978	604.380186	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=4358 Ack=25966 Win=190464 Len=0
+979	604.381422	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+980	604.384027	inbox.google.com	10.215.173.1	TLSv1.3	2296	Application Data, Application Data, Application Data
+981	604.384212	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=4358 Ack=30974 Win=201728 Len=0
+982	604.385067	10.215.173.1	inbox.google.com	TLSv1.3	128	Application Data
+983	604.386085	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=30974 Ack=4397 Win=1047552 Len=0
+984	604.394501	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	260	Unknown_0
+985	604.398522	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	244	Unknown_0
+986	604.423025	mail.google.com	10.215.173.1	TCP	96	https(443) → 39340 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+987	604.423466	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+988	604.425512	10.215.173.1	mail.google.com	TCP	600	39340 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 992]
+989	604.425846	10.215.173.1	mail.google.com	TCP	600	[TCP Window Full] 39340 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 992]
+990	604.426255	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+991	604.426543	10.215.173.1	mail.google.com	TCP	600	39340 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 992]
+992	604.426703	10.215.173.1	mail.google.com	TLSv1.3	340	Client Hello (SNI=mail.google.com)
+993	604.427035	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=1 Ack=1790 Win=1046528 Len=0
+994	604.433323	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2032	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+995	604.440250	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+996	604.440423	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [ACK] Seq=11590 Ack=4441 Win=1047552 Len=0
+997	604.451746	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1044	Payload Unk: f
+998	604.451957	peoplestack-pa.googleapis.com	10.215.173.1	UDP	196	Session 92/3635, Red data
+999	604.452668	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	356	Application Data, Application Data, Application Data
+1000	604.454096	10.215.173.1	peoplestack-pa.googleapis.com	UDP	108	Session 244221281/125, Red data
+1001	604.475757	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	100	Audio Unk: c
+1002	604.493842	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [ACK] Seq=4441 Ack=11857 Win=143360 Len=0
+1003	604.495540	mail.google.com	10.215.173.1	TLSv1.3	1488	Server Hello, Change Cipher Spec
+1004	604.496015	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=1790 Ack=1401 Win=86016 Len=0
+1005	604.496998	mail.google.com	10.215.173.1	TLSv1.3	4056	Application Data
+1006	604.497308	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=1790 Ack=5370 Win=105472 Len=0
+1007	604.513751	10.215.173.1	mail.google.com	TLSv1.3	160	Change Cipher Spec, Application Data
+1008	604.514671	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=5370 Ack=1864 Win=1047552 Len=0
+1009	604.519280	10.215.173.1	mail.google.com	TLSv1.3	180	Application Data
+1010	604.519695	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=5370 Ack=1956 Win=1047552 Len=0
+1011	604.521694	10.215.173.1	mail.google.com	TLSv1.3	876	Application Data
+1012	604.524390	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=5370 Ack=2743 Win=1047552 Len=0
+1013	604.524534	10.215.173.1	mail.google.com	TLSv1.3	412	Application Data
+1014	604.524698	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=5370 Ack=3066 Win=1046528 Len=0
+1015	604.561913	mail.google.com	10.215.173.1	TLSv1.3	1048	Application Data, Application Data
+1016	604.564236	10.215.173.1	mail.google.com	TLSv1.3	120	Application Data
+1017	604.564781	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=6330 Ack=3097 Win=1046528 Len=0
+1018	604.568016	mail.google.com	10.215.173.1	TLSv1.3	120	Application Data
+1019	604.591362	mail.google.com	10.215.173.1	TLSv1.3	684	Application Data, Application Data, Application Data, Application Data
+1020	604.592322	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=3097 Ack=6958 Win=121856 Len=0
+1021	604.593236	10.215.173.1	mail.google.com	TLSv1.3	128	Application Data
+1022	604.594665	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=6958 Ack=3136 Win=1047552 Len=0
+1023	604.686596	10.215.173.1	10.215.173.2	DNS	124	Standard query 0x669c A peoplestack-pa.googleapis.com
+1024	604.699763	10.215.173.1	inbox.google.com	TLSv1.3	1288	Application Data
+1025	604.699863	10.215.173.1	inbox.google.com	TLSv1.3	380	Application Data
+1026	604.699894	10.215.173.1	inbox.google.com	TLSv1.3	1596	Application Data
+1027	604.703370	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=30974 Ack=7400 Win=1045504 Len=0
+1028	604.703475	10.215.173.1	inbox.google.com	TLSv1.3	144	Application Data
+1029	604.703567	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=30974 Ack=7457 Win=1045504 Len=0
+1030	604.706840	10.215.173.2	10.215.173.1	DNS	332	Standard query response 0x669c A peoplestack-pa.googleapis.com A 142.250.217.234 A 192.178.50.42 A 172.217.15.202 A 142.250.64.138 A 142.250.64.170 A 142.251.35.234 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.202 A 142.250.64.234 A 142.250.217.170 A 142.250.217.202
+1031	604.720101	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	1324	Unknown_0
+1032	604.727828	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	1324	Unknown_0
+1033	604.729415	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	45604 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2510442528 TSecr=0 WS=1024
+1034	604.766719	10.215.173.1	mail.google.com	TLSv1.3	324	Application Data
+1035	604.767165	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=6958 Ack=3374 Win=1047552 Len=0
+1036	604.767983	10.215.173.1	mail.google.com	TLSv1.3	1584	Application Data
+1037	604.768251	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=6958 Ack=4869 Win=1046528 Len=0
+1038	604.774794	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	116	Unknown_0
+1039	604.776329	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1040	604.776506	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1041	604.776621	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1042	604.778488	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	1324	Unknown_0
+1043	604.780655	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 45604 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+1044	604.780855	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45604 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+1045	604.782498	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	45604 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1049]
+1046	604.782930	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45604 [ACK] Seq=1 Ack=513 Win=1047552 Len=0
+1047	604.783574	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	45604 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1049]
+1048	604.783755	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	45604 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1049]
+1049	604.783870	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	292	Client Hello (SNI=peoplestack-pa.googleapis.com)
+1050	604.784326	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45604 [ACK] Seq=1 Ack=1740 Win=1046528 Len=0
+1051	604.787693	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1052	604.788553	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1053	604.790030	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	116	Unknown_0
+1054	604.790171	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1055	604.792174	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	116	Unknown_0
+1056	604.817746	inbox.google.com	10.215.173.1	TLSv1.3	1836	Application Data, Application Data
+1057	604.818886	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1058	604.819162	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7457 Ack=34124 Win=212992 Len=0
+1059	604.819899	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1060	604.822544	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1061	604.822933	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7457 Ack=39724 Win=224256 Len=0
+1062	604.824124	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	264	Unknown_0
+1063	604.825013	inbox.google.com	10.215.173.1	TLSv1.3	836	Application Data, Application Data
+1064	604.826210	10.215.173.1	inbox.google.com	TLSv1.3	128	Application Data
+1065	604.826283	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	116	Unknown_0
+1066	604.826506	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=40472 Ack=7496 Win=1047552 Len=0
+1067	604.834259	10.215.173.1	peoplestack-pa.googleapis.com	SKYPE	160	Unknown_0
+1068	604.835313	10.215.173.1	peoplestack-pa.googleapis.com	UDP	148	Session 2008464/31, Red data
+1069	604.837734	10.215.173.1	peoplestack-pa.googleapis.com	UDP	928	Session 2008464/31, Cancel segment
+1070	604.837962	10.215.173.1	peoplestack-pa.googleapis.com	UDP	108	Session 2008464/31, Cancel segment
+1071	604.845799	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Server Hello, Change Cipher Spec
+1072	604.846202	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45604 → https(443) [ACK] Seq=1740 Ack=1401 Win=86016 Len=0
+1073	604.846256	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	4448	Application Data
+1074	604.846436	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45604 → https(443) [ACK] Seq=1740 Ack=5761 Win=105472 Len=0
+1075	604.848394	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Change Cipher Spec, Application Data
+1076	604.848614	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45604 [ACK] Seq=5761 Ack=1814 Win=1047552 Len=0
+1077	604.878618	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1048	Payload Unk: 9
+1078	604.878798	peoplestack-pa.googleapis.com	10.215.173.1	UDP	196	Session 11/1997510, Cancel segment
+1079	604.879359	10.215.173.1	peoplestack-pa.googleapis.com	UDP	108	Session 2008464/31, Cancel segment
+1080	604.882954	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	104	NAT repeat Unk: 1
+1081	604.896694	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1076	Application Data, Application Data
+1082	604.910050	10.215.173.1	peoplestack-pa.googleapis.com	UDP	108	Session 2008464/31, Cancel ack segment
+1083	604.910632	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	100	Unknown_0 Unk: 2
+1084	604.929422	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	1320	Audio Unk: b
+1085	604.931685	peoplestack-pa.googleapis.com	10.215.173.1	UDP	1324	Session 61/72, Cancel ack segment
+1086	604.931879	peoplestack-pa.googleapis.com	10.215.173.1	UDP	1324	Session 5025/69, Red data
+1087	604.932808	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 2008464/31, Cancel segment
+1088	604.934365	peoplestack-pa.googleapis.com	10.215.173.1	UDP	604	Session 116/7535, Green data
+1089	604.935590	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 2008464/31, Red data
+1090	604.937904	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45604 → https(443) [ACK] Seq=1814 Ack=6749 Win=114688 Len=0
+1091	604.979930	peoplestack-pa.googleapis.com	10.215.173.1	UDP	100	Session 36/5548, Red data
+1092	605.019397	inbox.google.com	10.215.173.1	TLSv1.3	1840	Application Data, Application Data
+1093	605.020031	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1094	605.020236	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=43626 Win=240640 Len=0
+1095	605.020277	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1096	605.021036	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1097	605.021379	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=46426 Win=246784 Len=0
+1098	605.022630	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1099	605.024929	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1100	605.025151	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=52026 Win=286720 Len=0
+1101	605.028462	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1102	605.030799	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1103	605.031204	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=56226 Win=312320 Len=0
+1104	605.031770	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1105	605.033568	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1106	605.033927	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=60426 Win=334848 Len=0
+1107	605.035211	inbox.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data, Application Data
+1108	605.036714	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1109	605.037021	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=64626 Win=360448 Len=0
+1110	605.037072	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1111	605.039707	inbox.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1112	605.044075	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=7496 Ack=67426 Win=365568 Len=0
+1113	605.044111	inbox.google.com	10.215.173.1	TLSv1.3	2336	Application Data, Application Data, Application Data, Application Data
+1114	605.045159	10.215.173.1	inbox.google.com	TLSv1.3	128	Application Data
+1115	605.045430	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=69673 Ack=7535 Win=1047552 Len=0
+1116	605.508304	mail.google.com	10.215.173.1	TLSv1.3	1560	Application Data, Application Data
+1117	605.509562	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1118	605.510634	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=9829 Win=161792 Len=0
+1119	605.510708	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1120	605.512315	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1121	605.512504	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=14029 Win=201728 Len=0
+1122	605.512546	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1123	605.515333	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1124	605.515617	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=18229 Win=241664 Len=0
+1125	605.517989	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1126	605.521442	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1127	605.521878	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=23829 Win=281600 Len=0
+1128	605.522319	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1129	605.524622	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1130	605.524915	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=29429 Win=320512 Len=0
+1131	605.527267	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1132	605.529223	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1133	605.529391	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=35029 Win=360448 Len=0
+1134	605.539919	mail.google.com	10.215.173.1	TLSv1.3	7088	Application Data, Application Data, Application Data, Application Data, Application Data
+1135	605.556662	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1136	605.556839	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=44829 Win=394240 Len=0
+1137	605.557876	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1138	605.560342	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1139	605.560509	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=50429 Win=405504 Len=0
+1140	605.562775	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1141	605.564683	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1142	605.565417	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=56029 Win=416768 Len=0
+1143	605.566997	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1144	605.569512	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1145	605.569743	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=61629 Win=428032 Len=0
+1146	605.572429	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1147	605.574289	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1148	605.574584	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=67229 Win=439296 Len=0
+1149	605.577111	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1150	605.579209	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1151	605.579376	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=72829 Win=450560 Len=0
+1152	605.581555	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1153	605.584928	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1154	605.585106	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=78429 Win=461824 Len=0
+1155	605.586354	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1156	605.589222	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1157	605.589395	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=84029 Win=473088 Len=0
+1158	605.591138	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1159	605.591497	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1160	605.591642	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=86829 Win=481280 Len=0
+1161	605.593530	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1162	605.595454	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1163	605.595641	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=92429 Win=521216 Len=0
+1164	605.597696	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1165	605.598064	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1166	605.598166	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=95229 Win=529408 Len=0
+1167	605.600818	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1168	605.602326	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1169	605.602584	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=100829 Win=569344 Len=0
+1170	605.605169	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1171	605.608017	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data, Application Data
+1172	605.608339	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=106429 Win=609280 Len=0
+1173	605.608889	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1174	605.610970	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1175	605.611241	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=112029 Win=649216 Len=0
+1176	605.611295	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1177	605.613458	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1178	605.617255	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=117629 Win=655360 Len=0
+1179	605.617392	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1180	605.618327	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1181	605.618997	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=128829 Win=671744 Len=0
+1182	605.619580	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1183	605.619768	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1184	605.620191	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1185	605.621965	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1186	605.622222	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1187	605.623654	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=137229 Win=663552 Len=0
+1188	605.623824	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1189	605.624825	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1190	605.625693	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=142829 Win=666624 Len=0
+1191	605.625760	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1192	605.626894	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1193	605.627988	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1194	605.629446	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1195	605.630971	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1196	605.631888	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=156829 Win=669696 Len=0
+1197	605.632941	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1198	605.634087	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1199	605.634263	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=165229 Win=684032 Len=0
+1200	605.636729	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1201	605.639405	10.215.173.1	peoplestack-pa.googleapis.com	UDP	964	Session 244221281/125, Red data
+1202	605.640566	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1203	605.640769	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=176429 Win=692224 Len=0
+1204	605.641710	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1205	605.642091	10.215.173.1	peoplestack-pa.googleapis.com	UDP	196	Session 244221281/125, Control segment
+1206	605.642299	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1207	605.642859	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=182029 Win=692224 Len=0
+1208	605.643334	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1209	605.643522	10.215.173.1	peoplestack-pa.googleapis.com	UDP	120	Session 244221281/125, Report segment
+1210	605.644279	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Cancel segment
+1211	605.644482	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data, Application Data
+1212	605.644963	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=187629 Win=698368 Len=0
+1213	605.645707	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1214	605.646576	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1215	605.646848	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=193229 Win=698368 Len=0
+1216	605.648190	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1217	605.649522	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1218	605.650806	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1219	605.651711	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1220	605.653507	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1221	605.654833	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=210029 Win=692224 Len=0
+1222	605.654887	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1223	605.656097	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1224	605.656606	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=215629 Win=692224 Len=0
+1225	605.657419	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1226	605.658578	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1227	605.658954	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=224029 Win=692224 Len=0
+1228	605.659412	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1229	605.663332	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1230	605.663480	mail.google.com	10.215.173.1	TLSv1.3	9888	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1231	605.663646	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=238029 Win=717824 Len=0
+1232	605.663671	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1233	605.664184	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1234	605.664531	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=243629 Win=743424 Len=0
+1235	605.665078	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1236	605.666640	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1237	605.668935	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1238	605.670535	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1239	605.670815	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1240	605.674831	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1241	605.675126	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=278789 Win=769024 Len=0
+1242	605.675195	mail.google.com	10.215.173.1	TLSv1.3	9728	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1243	605.676667	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1244	605.677130	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=292629 Win=804864 Len=0
+1245	605.677166	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1246	605.677547	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1247	605.680310	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1248	605.680494	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=306789 Win=820224 Len=0
+1249	605.680525	mail.google.com	10.215.173.1	TLSv1.3	2728	Application Data, Application Data
+1250	605.680927	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1251	605.682235	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1252	605.682819	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1253	605.683853	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1254	605.685131	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1255	605.686682	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1256	605.688612	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1257	605.689341	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1258	605.691512	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1259	605.691918	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1260	605.692274	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1261	605.692464	mail.google.com	10.215.173.1	TLSv1.3	1488	Application Data
+1262	605.694202	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1263	605.694931	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	104	Audio Unk: 2
+1264	605.696382	mail.google.com	10.215.173.1	TLSv1.3	8488	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1265	605.697268	peoplestack-pa.googleapis.com	10.215.173.1	UDP	100	Session 40/12, Cancel ack segment
+1266	605.697541	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1267	605.697896	mail.google.com	10.215.173.1	TLSv1.3	9888	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1268	605.698642	mail.google.com	10.215.173.1	TLSv1.3	4288	Application Data, Application Data, Application Data
+1269	605.699097	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1270	605.700029	mail.google.com	10.215.173.1	TLSv1.3	7088	Application Data, Application Data, Application Data, Application Data, Application Data
+1271	605.700860	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1272	605.702968	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1273	605.703154	mail.google.com	10.215.173.1	TLSv1.3	4128	Application Data, Application Data, Application Data
+1274	605.703820	mail.google.com	10.215.173.1	TLSv1.3	5688	Application Data, Application Data, Application Data, Application Data
+1275	605.704659	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1276	605.705060	mail.google.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1277	605.706392	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=439629 Win=688128 Len=0
+1278	605.708329	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1279	605.708503	mail.google.com	10.215.173.1	TLSv1.3	1328	Application Data
+1280	605.708564	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=450829 Win=707584 Len=0
+1281	605.711250	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1282	605.711419	mail.google.com	10.215.173.1	TLSv1.3	6928	Application Data, Application Data, Application Data, Application Data, Application Data
+1283	605.715248	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1284	605.715977	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1285	605.724073	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1286	605.724233	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1287	605.724316	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1288	605.724414	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1289	605.724499	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1290	605.724593	mail.google.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1291	605.724667	mail.google.com	10.215.173.1	TLSv1.3	7616	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1292	605.732322	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [ACK] Seq=4869 Ack=554839 Win=830464 Len=0
+1293	605.732355	peoplestack-pa.googleapis.com	10.215.173.1	UDP	272	Session 96/84, Red data
+1294	605.732457	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	96	NAT repeat Unk: 3
+1295	605.733296	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Cancel ack segment
+1296	605.734757	10.215.173.1	peoplestack-pa.googleapis.com	UDP	804	Session 244221281/125, Report ack segment
+1297	605.738371	10.215.173.1	peoplestack-pa.googleapis.com	UDP	136	Session 244221281/125, Red data
+1298	605.756445	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Red data
+1299	605.765554	peoplestack-pa.googleapis.com	10.215.173.1	UDP, HiPerConTracer	168	https(443) → 56185 Len=94 (SendTTL=226, Round=222)
+1300	605.765950	peoplestack-pa.googleapis.com	10.215.173.1	UDP	184	Session 125/1594545, Cancel ack segment
+1301	605.775587	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Control segment
+1302	605.775858	10.215.173.1	peoplestack-pa.googleapis.com	UDP	120	Session 244221281/125, Green data
+1303	605.778042	10.215.173.1	mail.google.com	TLSv1.3	128	Application Data
+1304	605.778315	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [ACK] Seq=554839 Ack=4908 Win=1047552 Len=0
+1305	605.779521	10.215.173.1	peoplestack-pa.googleapis.com	UDP	800	Session 244221281/125, Green data
+1306	605.786565	peoplestack-pa.googleapis.com	10.215.173.1	UDP	104	Session 13116/22, Report ack segment
+1307	605.793536	10.215.173.1	peoplestack-pa.googleapis.com	UDP	140	Session 244221281/125, Red data
+1308	605.793842	10.215.173.1	peoplestack-pa.googleapis.com	UDP	120	Session 244221281/125, Red data
+1309	605.808962	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	104	NAT info Unk: e
+1310	605.815587	10.215.173.1	peoplestack-pa.googleapis.com	UDP	116	Session 244221281/125, Green data
+1311	605.828337	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	100	Unknown_F Unk: 8
+1312	605.850211	peoplestack-pa.googleapis.com	10.215.173.1	UDP	104	Session 1237850/258798492, Report ack segment
+1313	605.859442	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	132	NAT info Unk: a
+1314	605.859586	peoplestack-pa.googleapis.com	10.215.173.1	UDP	96	Session 107/88319836054497, Cancel ack segment
+1315	605.862521	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Red data
+1316	605.893253	10.215.173.1	peoplestack-pa.googleapis.com	UDP	108	Session 244221281/125, Green data
+1317	605.895944	peoplestack-pa.googleapis.com	10.215.173.1	UDP	100	Session 88477206/15440, Control segment
+1318	605.931533	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	168	NAT info Unk: 6
+1319	605.931851	peoplestack-pa.googleapis.com	10.215.173.1	UDP, HiPerConTracer	280	https(443) → 56185 Len=206 (SendTTL=31, Round=251)
+1320	605.940227	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Report segment
+1321	605.951880	peoplestack-pa.googleapis.com	10.215.173.1	UDP, HiPerConTracer	128	https(443) → 56185 Len=51 (SendTTL=16, Round=45)
+1322	605.952747	peoplestack-pa.googleapis.com	10.215.173.1	UDP	96	Session 4972/107, Report segment
+1323	605.965825	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	160	NAT info Unk: b
+1324	605.969394	peoplestack-pa.googleapis.com	10.215.173.1	UDP	148	Session 15057/95, Cancel ack segment
+1325	605.972635	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Red data
+1326	605.973917	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Red data
+1327	606.000820	10.215.173.1	10.215.173.2	DNS	128	Standard query 0x3150 A appsgenaiserver-pa.googleapis.com
+1328	606.006950	10.215.173.1	10.215.173.2	DNS	108	Standard query 0xf97f A ssl.gstatic.com
+1329	606.010364	10.215.173.2	10.215.173.1	DNS	320	Standard query response 0x3150 A appsgenaiserver-pa.googleapis.com A 142.250.217.170 A 142.250.217.202 A 142.250.217.234 A 192.178.50.42 A 172.217.2.202 A 172.217.15.202 A 142.251.35.234 A 142.251.34.138 A 192.178.50.74 A 172.217.165.202 A 142.250.64.202 A 142.250.64.234
+1330	606.014947	10.215.173.2	10.215.173.1	DNS	124	Standard query response 0xf97f A ssl.gstatic.com A 142.250.217.227
+1331	606.017844	10.215.173.1	peoplestack-pa.googleapis.com	UDP	192	Session 244221281/125, Cancel segment
+1332	606.018072	peoplestack-pa.googleapis.com	10.215.173.1	UDP	100	Session 5748/127, Cancel segment
+1333	606.025717	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Green data
+1334	606.031042	10.215.173.1	ssl.gstatic.com	TCP	108	41212 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=2829744823 TSecr=0 WS=1024
+1335	606.042562	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	100	NAT info Unk: 4
+1336	606.078722	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	104	Audio Unk: 8
+1337	606.088715	ssl.gstatic.com	10.215.173.1	TCP	96	https(443) → 41212 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+1338	606.089158	10.215.173.1	ssl.gstatic.com	TCP	88	41212 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+1339	606.104635	10.215.173.1	peoplestack-pa.googleapis.com	UDP	108	Session 244221281/125, Green data
+1340	606.112328	10.215.173.1	ssl.gstatic.com	TCP	600	41212 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1341]
+1341	606.112734	10.215.173.1	ssl.gstatic.com	TLSv1.3	92	Client Hello (SNI=ssl.gstatic.com)
+1342	606.113437	ssl.gstatic.com	10.215.173.1	TCP	88	https(443) → 41212 [ACK] Seq=1 Ack=518 Win=1047552 Len=0
+1343	606.122245	peoplestack-pa.googleapis.com	10.215.173.1	SKYPE	488	Unknown_0 Unk: e
+1344	606.122684	peoplestack-pa.googleapis.com	10.215.173.1	UDP, HiPerConTracer	200	https(443) → 56185 Len=125 (SendTTL=159, Round=31)
+1345	606.123959	10.215.173.1	peoplestack-pa.googleapis.com	UDP	112	Session 244221281/125, Red data
+1346	606.177062	ssl.gstatic.com	10.215.173.1	TLSv1.3	4228	Server Hello, Change Cipher Spec, Application Data
+1347	606.177782	10.215.173.1	ssl.gstatic.com	TCP	88	41212 → https(443) [ACK] Seq=518 Ack=4141 Win=86016 Len=0
+1348	606.198221	10.215.173.1	ssl.gstatic.com	TLSv1.3	152	Change Cipher Spec, Application Data
+1349	606.198499	ssl.gstatic.com	10.215.173.1	TCP	88	https(443) → 41212 [ACK] Seq=4141 Ack=582 Win=1047552 Len=0
+1350	606.203043	peoplestack-pa.googleapis.com	10.215.173.1	UDP	100	Session 120/38, Red data
+1351	606.206138	10.215.173.1	ssl.gstatic.com	TLSv1.3	432	Application Data
+1352	606.206427	ssl.gstatic.com	10.215.173.1	TCP	88	https(443) → 41212 [ACK] Seq=4141 Ack=928 Win=1047552 Len=0
+1353	606.266013	ssl.gstatic.com	10.215.173.1	TLSv1.3	948	Application Data, Application Data
+1354	606.312311	10.215.173.1	ssl.gstatic.com	TCP	88	41212 → https(443) [ACK] Seq=928 Ack=5001 Win=94208 Len=0
+1355	606.348715	10.215.173.1	10.215.173.2	DNS	124	Standard query 0x65ac A peoplestack-pa.googleapis.com
+1356	606.360680	10.215.173.2	10.215.173.1	DNS	332	Standard query response 0x65ac A peoplestack-pa.googleapis.com A 142.250.217.202 A 142.250.217.170 A 142.250.64.234 A 142.250.64.202 A 172.217.165.202 A 192.178.50.74 A 142.251.34.138 A 142.251.35.234 A 142.250.64.170 A 142.250.64.138 A 172.217.15.202 A 192.178.50.42 A 142.250.217.234
+1357	606.376494	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	38970 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3433756993 TSecr=0 WS=1024
+1358	606.425256	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 38970 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+1359	606.425641	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38970 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+1360	606.427679	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	38970 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1364]
+1361	606.428070	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	[TCP Window Full] 38970 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1364]
+1362	606.428431	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38970 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+1363	606.428736	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	38970 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1364]
+1364	606.429028	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	324	Client Hello (SNI=peoplestack-pa.googleapis.com)
+1365	606.429552	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38970 [ACK] Seq=1 Ack=1772 Win=1046528 Len=0
+1366	606.486300	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	5848	Server Hello, Change Cipher Spec, Application Data
+1367	606.486847	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38970 → https(443) [ACK] Seq=1772 Ack=5762 Win=86016 Len=0
+1368	606.509950	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Change Cipher Spec, Application Data
+1369	606.510001	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	180	Application Data
+1370	606.510011	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	1116	Application Data
+1371	606.510034	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+1372	606.510042	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	120	Application Data
+1373	606.512222	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38970 [ACK] Seq=5762 Ack=3038 Win=1046528 Len=0
+1374	606.554815	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1108	Application Data, Application Data, Application Data
+1375	606.555380	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	120	Application Data
+1376	606.555500	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38970 [ACK] Seq=6781 Ack=3069 Win=1047552 Len=0
+1377	606.560878	10.215.173.1	inbox.google.com	TLSv1.3	844	Application Data
+1378	606.561058	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=69673 Ack=8290 Win=1047552 Len=0
+1379	606.562066	10.215.173.1	inbox.google.com	TLSv1.3	440	Application Data
+1380	606.565197	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=69673 Ack=8641 Win=1046528 Len=0
+1381	606.694040	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	3012	Application Data, Application Data, Application Data
+1382	606.695352	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2288	Application Data, Application Data
+1383	606.695928	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	148	Application Data
+1384	606.696161	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38970 → https(443) [ACK] Seq=3069 Ack=11907 Win=120832 Len=0
+1385	606.699078	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+1386	606.699361	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38970 [ACK] Seq=11968 Ack=3108 Win=1047552 Len=0
+1387	606.724198	10.215.173.1	peoplestack-pa.googleapis.com	TCP	108	38978 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=3433757343 TSecr=0 WS=1024
+1388	606.773414	peoplestack-pa.googleapis.com	10.215.173.1	TCP	96	https(443) → 38978 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+1389	606.773901	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+1390	606.775371	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	38978 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1394]
+1391	606.775655	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	[TCP Window Full] 38978 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1394]
+1392	606.776134	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+1393	606.776357	10.215.173.1	peoplestack-pa.googleapis.com	TCP	600	38978 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1394]
+1394	606.776492	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	324	Client Hello (SNI=peoplestack-pa.googleapis.com)
+1395	606.776912	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=1 Ack=1772 Win=1046528 Len=0
+1396	606.828249	inbox.google.com	10.215.173.1	TLSv1.3	1568	Application Data, Application Data
+1397	606.829342	inbox.google.com	10.215.173.1	TLSv1.3	728	Application Data, Application Data, Application Data
+1398	606.829670	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=8641 Ack=71795 Win=410624 Len=0
+1399	606.830290	10.215.173.1	inbox.google.com	TLSv1.3	128	Application Data
+1400	606.830458	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=71795 Ack=8680 Win=1047552 Len=0
+1401	606.832385	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Server Hello, Change Cipher Spec
+1402	606.832817	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=1772 Ack=1401 Win=86016 Len=0
+1403	606.832875	peoplestack-pa.googleapis.com	10.215.173.1	TCP	1488	https(443) → 38978 [PSH, ACK] Seq=1401 Ack=1772 Win=1048576 Len=1400 [TCP PDU reassembled in 1405]
+1404	606.833008	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=1772 Ack=2801 Win=105472 Len=0
+1405	606.833746	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	3048	Application Data
+1406	606.833971	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=1772 Ack=5762 Win=125952 Len=0
+1407	606.844292	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	160	Change Cipher Spec, Application Data
+1408	606.844583	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=5762 Ack=1846 Win=1047552 Len=0
+1409	606.844912	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	180	Application Data
+1410	606.845055	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=5762 Ack=1938 Win=1047552 Len=0
+1411	606.845290	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	1116	Application Data
+1412	606.845437	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=5762 Ack=2968 Win=1046528 Len=0
+1413	606.845755	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+1414	606.845906	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=5762 Ack=3010 Win=1046528 Len=0
+1415	606.846002	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	120	Application Data
+1416	606.846064	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=5762 Ack=3041 Win=1046528 Len=0
+1417	606.892273	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1108	Application Data, Application Data, Application Data
+1418	606.893022	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	120	Application Data
+1419	606.893304	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=6781 Ack=3072 Win=1047552 Len=0
+1420	606.943454	10.215.173.1	inbox.google.com	TLSv1.3	1128	Application Data
+1421	606.943741	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=71795 Ack=9720 Win=1046528 Len=0
+1422	606.944071	10.215.173.1	inbox.google.com	TLSv1.3	244	Application Data
+1423	606.944262	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=71795 Ack=9875 Win=1046528 Len=0
+1424	607.047091	inbox.google.com	10.215.173.1	TLSv1.3	1524	Application Data, Application Data
+1425	607.047834	inbox.google.com	10.215.173.1	TLSv1.3	128	Application Data
+1426	607.049021	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [ACK] Seq=9875 Ack=73271 Win=430080 Len=0
+1427	607.049059	10.215.173.1	inbox.google.com	TLSv1.3	128	Application Data
+1428	607.049334	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [ACK] Seq=73271 Ack=9914 Win=1047552 Len=0
+1429	607.996498	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1430	607.997519	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	10048	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1431	607.997804	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=26701 Win=172032 Len=0
+1432	607.997869	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	9692	Application Data, Application Data, Application Data, Application Data, Application Data, Application Data, Application Data
+1433	608.021082	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1434	608.021352	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=37707 Win=210944 Len=0
+1435	608.039585	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1436	608.040556	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1437	608.040723	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=43307 Win=236544 Len=0
+1438	608.047498	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1439	608.048825	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	7088	Application Data, Application Data, Application Data, Application Data, Application Data
+1440	608.049451	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=51707 Win=262144 Len=0
+1441	608.049527	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1442	608.051208	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data, Application Data
+1443	608.051862	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=57307 Win=281600 Len=0
+1444	608.053435	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1445	608.054887	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1446	608.055177	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=60107 Win=290816 Len=0
+1447	608.055883	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1448	608.056013	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1449	608.056103	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=62907 Win=295936 Len=0
+1450	608.057574	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1451	608.059717	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1452	608.059977	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=67107 Win=321536 Len=0
+1453	608.060033	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1454	608.062133	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1455	608.062370	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=71307 Win=344064 Len=0
+1456	608.064313	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data, Application Data
+1457	608.066253	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1458	608.066434	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=76907 Win=384000 Len=0
+1459	608.068575	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1460	608.068713	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1461	608.068784	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=79707 Win=392192 Len=0
+1462	608.070825	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1463	608.073089	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1464	608.073288	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=85307 Win=432128 Len=0
+1465	608.075060	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1466	608.075264	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1467	608.075416	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=88107 Win=440320 Len=0
+1468	608.077796	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1469	608.078066	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1470	608.078187	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=90907 Win=446464 Len=0
+1471	608.079233	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1472	608.082950	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1473	608.083232	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=93707 Win=451584 Len=0
+1474	608.083288	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1475	608.083560	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1476	608.083923	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=97907 Win=475136 Len=0
+1477	608.090278	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1478	608.091261	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1479	608.091493	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=103507 Win=514048 Len=0
+1480	608.094150	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data, Application Data
+1481	608.095598	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1482	608.095970	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=107707 Win=539648 Len=0
+1483	608.096021	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1484	608.098410	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1485	608.098573	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=111907 Win=563200 Len=0
+1486	608.100095	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1487	608.104369	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1488	608.104656	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=117507 Win=602112 Len=0
+1489	608.104715	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1490	608.104931	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1491	608.105055	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=120307 Win=611328 Len=0
+1492	608.106778	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1493	608.109156	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1494	608.109312	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=124507 Win=636928 Len=0
+1495	608.109947	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1496	608.111013	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1497	608.111296	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=128707 Win=659456 Len=0
+1498	608.113706	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1499	608.115626	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1500	608.115785	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=134307 Win=669696 Len=0
+1501	608.117783	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1502	608.119850	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1503	608.120095	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=139907 Win=669696 Len=0
+1504	608.122298	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1505	608.124108	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1506	608.124258	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=144107 Win=670720 Len=0
+1507	608.124549	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1488	Application Data
+1508	608.126796	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	2888	Application Data, Application Data
+1509	608.127215	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [ACK] Seq=3072 Ack=148307 Win=670720 Len=0
+1510	608.128852	peoplestack-pa.googleapis.com	10.215.173.1	TLSv1.3	1108	Application Data, Application Data, Application Data
+1511	608.136659	10.215.173.1	peoplestack-pa.googleapis.com	TLSv1.3	128	Application Data
+1512	608.136831	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [ACK] Seq=149328 Ack=3111 Win=1047552 Len=0
+1513	608.699980	10.215.173.1	10.215.173.2	DNS	112	Standard query 0x6d47 HTTPS accounts.google.com
+1514	608.706957	10.215.173.1	10.215.173.2	DNS	112	Standard query 0x0839 A accounts.google.com
+1515	608.713999	10.215.173.2	10.215.173.1	DNS	164	Standard query response 0x6d47 HTTPS accounts.google.com SOA ns1.google.com
+1516	608.718242	10.215.173.2	10.215.173.1	DNS	128	Standard query response 0x0839 A accounts.google.com A 192.178.219.84
+1517	608.767702	10.215.173.1	accounts.google.com	SKYPE	1324	Unknown_0
+1518	608.774444	10.215.173.1	accounts.google.com	SKYPE	1324	Unknown_0
+1519	608.776715	10.215.173.1	10.215.173.2	DNS	108	Standard query 0x6f32 HTTPS www.google.com
+1520	608.782196	10.215.173.1	10.215.173.2	DNS	108	Standard query 0x4d6d A www.google.com
+1521	608.786931	10.215.173.2	10.215.173.1	DNS	124	Standard query response 0x4d6d A www.google.com A 142.250.217.164
+1522	608.788156	10.215.173.2	10.215.173.1	DNS	132	Standard query response 0x6f32 HTTPS www.google.com HTTPS
+1523	608.794287	10.215.173.1	www.google.com	SKYPE	1324	Unknown_0
+1524	608.797749	10.215.173.1	www.google.com	SKYPE	1324	Unknown_0
+1525	608.839102	accounts.google.com	10.215.173.1	SKYPE	116	Unknown_0
+1526	608.840275	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1527	608.840426	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1528	608.840512	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1529	608.840595	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1530	608.840729	accounts.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1531	608.840811	accounts.google.com	10.215.173.1	SKYPE	872	Unknown_0
+1532	608.844811	10.215.173.1	accounts.google.com	SKYPE	1324	Unknown_0
+1533	608.846692	10.215.173.1	accounts.google.com	SKYPE	116	Unknown_0
+1534	608.847474	www.google.com	10.215.173.1	SKYPE	116	Unknown_0
+1535	608.848448	10.215.173.1	accounts.google.com	SKYPE	116	Unknown_0
+1536	608.849246	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1537	608.849419	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1538	608.849514	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1539	608.851319	10.215.173.1	www.google.com	SKYPE	1324	Unknown_0
+1540	608.859760	10.215.173.1	accounts.google.com	SKYPE	160	Unknown_0
+1541	608.861264	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1542	608.861399	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1543	608.861490	www.google.com	10.215.173.1	SKYPE	1324	Unknown_0
+1544	608.862681	10.215.173.1	accounts.google.com	UDP	148	Session 243737546/709, Cancel ack segment
+1545	608.863964	10.215.173.1	www.google.com	SKYPE	116	Unknown_0
+1546	608.867116	10.215.173.1	accounts.google.com	UDP	1320	Session 243737546/709, Cancel segment
+1547	608.868076	10.215.173.1	accounts.google.com	UDP	1324	Session 243737546/709, Control segment
+1548	608.868251	10.215.173.1	accounts.google.com	UDP	176	Session 243737546/709, Cancel ack segment
+1549	608.868342	10.215.173.1	www.google.com	SKYPE	116	Unknown_0
+1550	608.898904	10.215.173.1	www.google.com	TCP	108	44280 → https(443) [SYN] Seq=0 Win=65535 Len=0 MSS=9960 SACK_PERM TSval=1466274879 TSecr=0 WS=1024
+1551	608.903018	www.google.com	10.215.173.1	SKYPE	928	Unknown_0
+1552	608.904716	10.215.173.1	www.google.com	SKYPE	116	Unknown_0
+1553	608.909263	10.215.173.1	www.google.com	SKYPE	160	Unknown_0
+1554	608.910254	10.215.173.1	www.google.com	UDP	148	Session 1865943/4072712811, Cancel ack segment
+1555	608.912561	10.215.173.1	www.google.com	UDP	1320	Session 1865943/4072712811, Report ack segment
+1556	608.913019	10.215.173.1	www.google.com	UDP	424	Session 3947/113, Cancel ack segment
+1557	608.924528	accounts.google.com	10.215.173.1	SKYPE	1028	Audio Unk: e
+1558	608.925073	accounts.google.com	10.215.173.1	SKYPE	196	Payload Unk: 9
+1559	608.925855	10.215.173.1	accounts.google.com	UDP	108	Session 243737546/709, Red data
+1560	608.931420	accounts.google.com	10.215.173.1	UDP	100	Session 23/944793, Control segment
+1561	608.931610	accounts.google.com	10.215.173.1	SKYPE	104	Payload Unk: d
+1562	608.955760	accounts.google.com	10.215.173.1	UDP	1320	Session 79/2016253, Report ack segment
+1563	608.956078	accounts.google.com	10.215.173.1	UDP	1320	Session 6916/5216, Cancel segment
+1564	608.956309	www.google.com	10.215.173.1	TCP	96	https(443) → 44280 [SYN, ACK] Seq=0 Ack=1 Win=1024 Len=0 MSS=9960 WS=1024
+1565	608.956650	10.215.173.1	www.google.com	TCP	88	44280 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=0
+1566	608.956707	accounts.google.com	10.215.173.1	UDP	716	Session 64/100, Red data
+1567	608.957482	10.215.173.1	accounts.google.com	UDP	108	Session 243737546/709, Report segment
+1568	608.957980	www.google.com	10.215.173.1	UDP, HiPerConTracer	1076	https(443) → 47159 Len=1001 (SendTTL=203, Round=118)
+1569	608.958150	www.google.com	10.215.173.1	SKYPE	196	Audio Unk: 6
+1570	608.959246	10.215.173.1	accounts.google.com	UDP	112	Session 243737546/709, Cancel segment
+1571	608.960524	www.google.com	10.215.173.1	SKYPE	100	Fragment/Forward/Resend Unk: 5
+1572	608.978384	10.215.173.1	www.google.com	TCP	600	44280 → https(443) [ACK] Seq=1 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1577]
+1573	608.978786	10.215.173.1	www.google.com	TCP	600	[TCP Window Full] 44280 → https(443) [PSH, ACK] Seq=513 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1577]
+1574	608.979839	www.google.com	10.215.173.1	TCP	88	https(443) → 44280 [ACK] Seq=1 Ack=1025 Win=1047552 Len=0
+1575	608.980138	10.215.173.1	www.google.com	UDP	108	Session 1865943/4072712811, Report ack segment
+1576	608.980539	10.215.173.1	www.google.com	TCP	600	44280 → https(443) [ACK] Seq=1025 Ack=1 Win=65536 Len=512 [TCP PDU reassembled in 1577]
+1577	608.980765	10.215.173.1	www.google.com	TLSv1.3	308	Client Hello (SNI=www.google.com)
+1578	608.981902	www.google.com	10.215.173.1	TCP	88	https(443) → 44280 [ACK] Seq=1 Ack=1757 Win=1046528 Len=0
+1579	608.986166	www.google.com	10.215.173.1	SKYPE	104	Audio Unk: c
+1580	608.995375	www.google.com	10.215.173.1	SKYPE	996	NAT repeat Unk: 5
+1581	608.996650	10.215.173.1	www.google.com	UDP	112	Protocol Error
+1582	608.996833	www.google.com	10.215.173.1	UDP	148	Session 1530/42, Green data
+1583	609.025306	10.215.173.1	www.google.com	DVB-S2 BB 	108	DVB-S2 Baseband 
+1584	609.050088	www.google.com	10.215.173.1	TLSv1.3	2888	Server Hello, Change Cipher Spec
+1585	609.050557	10.215.173.1	www.google.com	TCP	88	44280 → https(443) [ACK] Seq=1757 Ack=2801 Win=86016 Len=0
+1586	609.050597	accounts.google.com	10.215.173.1	UDP	100	Session 76/60, Red data
+1587	609.050704	www.google.com	10.215.173.1	TLSv1.3	2668	Application Data
+1588	609.050824	10.215.173.1	www.google.com	TCP	88	44280 → https(443) [ACK] Seq=1757 Ack=5381 Win=91136 Len=0
+1589	609.056317	10.215.173.1	www.google.com	TLSv1.3	160	Change Cipher Spec, Application Data
+1590	609.056577	www.google.com	10.215.173.1	TCP	88	https(443) → 44280 [ACK] Seq=5381 Ack=1831 Win=1047552 Len=0
+1591	609.069665	www.google.com	10.215.173.1	UDP	100	Session 3529/1885, Red data
+1592	612.417206	10.215.173.1	www.google.com	TCP	88	44280 → https(443) [RST, ACK] Seq=1831 Ack=5381 Win=91136 Len=0
+1593	612.417754	www.google.com	10.215.173.1	TCP	88	https(443) → 44280 [RST, ACK] Seq=5381 Ack=1831 Win=64512 Len=0
+1594	626.819103	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38970 → https(443) [RST, ACK] Seq=3108 Ack=11968 Win=120832 Len=0
+1595	626.819547	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38970 [RST, ACK] Seq=11968 Ack=3108 Win=64512 Len=0
+1596	626.820135	10.215.173.1	inbox.google.com	TCP	88	59590 → https(443) [RST, ACK] Seq=9914 Ack=73271 Win=430080 Len=0
+1597	626.820293	inbox.google.com	10.215.173.1	TCP	88	https(443) → 59590 [RST, ACK] Seq=73271 Ack=9914 Win=64512 Len=0
+1598	626.820563	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	37012 → https(443) [RST, ACK] Seq=2696 Ack=7131 Win=117760 Len=0
+1599	626.820690	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 37012 [RST, ACK] Seq=7131 Ack=2696 Win=64512 Len=0
+1600	626.820918	10.215.173.1	mail.google.com	TCP	88	39340 → https(443) [RST, ACK] Seq=4908 Ack=554839 Win=830464 Len=0
+1601	626.821049	mail.google.com	10.215.173.1	TCP	88	https(443) → 39340 [RST, ACK] Seq=554839 Ack=4908 Win=64512 Len=0
+1602	626.821255	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38978 → https(443) [RST, ACK] Seq=3111 Ack=149328 Win=670720 Len=0
+1603	626.821372	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38978 [RST, ACK] Seq=149328 Ack=3111 Win=64512 Len=0
+1604	626.821564	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	38960 → https(443) [RST, ACK] Seq=4441 Ack=11857 Win=143360 Len=0
+1605	626.821736	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 38960 [RST, ACK] Seq=11857 Ack=4441 Win=64512 Len=0
+1606	626.821929	10.215.173.1	peoplestack-pa.googleapis.com	TCP	88	45604 → https(443) [RST, ACK] Seq=1814 Ack=6749 Win=114688 Len=0
+1607	626.822036	peoplestack-pa.googleapis.com	10.215.173.1	TCP	88	https(443) → 45604 [RST, ACK] Seq=6749 Ack=1814 Win=64512 Len=0
+1608	626.822207	10.215.173.1	ssl.gstatic.com	TCP	88	41212 → https(443) [RST, ACK] Seq=928 Ack=5001 Win=94208 Len=0
+1609	626.822336	ssl.gstatic.com	10.215.173.1	TCP	88	https(443) → 41212 [RST, ACK] Seq=5001 Ack=928 Win=64512 Len=0
+1610	643.134307	10.215.173.1	10.215.173.2	DNS	116	Standard query 0x3c62 A play-fe.googleapis.com
+1611	643.145915	10.215.173.2	10.215.173.1	DNS	132	Standard query response 0x3c62 A play-fe.googleapis.com A 142.250.217.174
+1612	643.173160	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1613	643.176221	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1614	643.176663	10.215.173.1	play-fe.googleapis.com	SKYPE	156	Unknown_0
+1615	643.220625	play-fe.googleapis.com	10.215.173.1	SKYPE	116	Unknown_0
+1616	643.220932	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1617	643.233371	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1618	643.233500	play-fe.googleapis.com	10.215.173.1	SKYPE	364	Unknown_0
+1619	643.233534	play-fe.googleapis.com	10.215.173.1	SKYPE	1032	Payload Unk: 9
+1620	643.235076	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1621	643.236569	10.215.173.1	play-fe.googleapis.com	SKYPE	156	Unknown_0
+1622	643.236708	10.215.173.1	play-fe.googleapis.com	SKYPE	108	NAT info Unk: e
+1623	643.239561	10.215.173.1	play-fe.googleapis.com	SKYPE	1320	NAT info Unk: e
+1624	643.240343	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	NAT info Unk: e
+1625	643.240485	10.215.173.1	play-fe.googleapis.com	SKYPE	760	NAT info Unk: e
+1626	643.240606	10.215.173.1	play-fe.googleapis.com	SKYPE	108	NAT info Unk: e
+1627	643.245170	play-fe.googleapis.com	10.215.173.1	SKYPE	100	NAT repeat Unk: e
+1628	643.279332	play-fe.googleapis.com	10.215.173.1	UDP, HiPerConTracer	196	https(443) → 50603 Len=120 (SendTTL=142, Round=105)
+1629	643.285558	play-fe.googleapis.com	10.215.173.1	UDP	100	Session 196976834/116, Report segment
+1630	643.285634	play-fe.googleapis.com	10.215.173.1	SKYPE	100	Unknown_F Unk: 9
+1631	643.285666	play-fe.googleapis.com	10.215.173.1	UDP	104	Session 220225929/527476, Red data
+1632	643.286283	10.215.173.1	play-fe.googleapis.com	SKYPE	108	NAT info Unk: e
+1633	643.309626	play-fe.googleapis.com	10.215.173.1	SKYPE	100	Payload Unk: 8
+1634	643.368865	play-fe.googleapis.com	10.215.173.1	SKYPE	1320	Unknown_0 Unk: 8
+1635	643.369090	play-fe.googleapis.com	10.215.173.1	SKYPE	588	NAT info Unk: 2
+1636	643.369175	play-fe.googleapis.com	10.215.173.1	UDP	256	Session 99/769574, Control segment
+1637	643.370302	10.215.173.1	play-fe.googleapis.com	SKYPE	112	NAT info Unk: e
+1638	643.397142	10.215.173.1	play-fe.googleapis.com	SKYPE	112	NAT info Unk: e
+1639	643.439349	play-fe.googleapis.com	10.215.173.1	UDP	100	Session 117/5393, Green data
+1640	643.468309	play-fe.googleapis.com	10.215.173.1	SKYPE	100	Payload
+1641	644.042692	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1642	644.046243	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1643	644.046499	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1644	644.046935	10.215.173.1	play-fe.googleapis.com	SKYPE	152	Unknown_0
+1645	644.097738	play-fe.googleapis.com	10.215.173.1	SKYPE	116	Unknown_0
+1646	644.098294	play-fe.googleapis.com	10.215.173.1	SKYPE	116	Unknown_0
+1647	644.098379	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1648	644.098474	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1649	644.110163	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Unknown_0
+1650	644.110510	play-fe.googleapis.com	10.215.173.1	SKYPE	368	Unknown_0
+1651	644.110626	play-fe.googleapis.com	10.215.173.1	UDP, HiPerConTracer	1032	https(443) → 44345 Len=956 (SendTTL=139, Round=221)
+1652	644.110709	play-fe.googleapis.com	10.215.173.1	SKYPE	100	NAT repeat Unk: 1
+1653	644.113720	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Unknown_0
+1654	644.114144	10.215.173.1	play-fe.googleapis.com	SKYPE	156	Unknown_0
+1655	644.114262	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1656	644.114700	10.215.173.1	play-fe.googleapis.com	SKYPE	1320	Audio Unk: a
+1657	644.114832	10.215.173.1	play-fe.googleapis.com	SKYPE	1104	Audio Unk: a
+1658	644.114953	10.215.173.1	play-fe.googleapis.com	SKYPE	1320	Audio Unk: a
+1659	644.115038	10.215.173.1	play-fe.googleapis.com	SKYPE	1324	Audio Unk: a
+1660	644.115139	10.215.173.1	play-fe.googleapis.com	SKYPE	676	Audio Unk: a
+1661	644.124104	play-fe.googleapis.com	10.215.173.1	UDP	100	Session 162559634/8952, Red data
+1662	644.161991	play-fe.googleapis.com	10.215.173.1	SKYPE	196	Unknown_0 Unk: d
+1663	644.162811	play-fe.googleapis.com	10.215.173.1	UDP, HiPerConTracer	104	https(443) → 44345 Len=29 (SendTTL=211, Round=161)
+1664	644.162924	play-fe.googleapis.com	10.215.173.1	SKYPE	100	Fragment/Forward/Resend Unk: 4
+1665	644.163461	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1666	644.656739	play-fe.googleapis.com	10.215.173.1	SKYPE	1320	Audio Unk: 4
+1667	644.657147	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Payload Unk: 3
+1668	644.657334	play-fe.googleapis.com	10.215.173.1	UDP	1324	Session 83/44, Control segment
+1669	644.657504	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	NAT info Unk: 5
+1670	644.657783	play-fe.googleapis.com	10.215.173.1	UDP	1324	Session 37/122, Red data, range 486629503244054-486629503244351 [Unfinished LTP Block] 
+1671	644.657974	play-fe.googleapis.com	10.215.173.1	UDP	1324	Session 15209/78, Red data
+1672	644.658138	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	Payload Unk: 9
+1673	644.658299	play-fe.googleapis.com	10.215.173.1	SKYPE	1324	NAT repeat Unk: c
+1674	644.658488	play-fe.googleapis.com	10.215.173.1	UDP	1324	Session 90/14913, Cancel ack segment
+1675	644.658654	play-fe.googleapis.com	10.215.173.1	UDP	1324	Session 67/148835831, Cancel ack segment
+1676	644.658815	play-fe.googleapis.com	10.215.173.1	SKYPE	1224	Unknown_F Unk: 3
+1677	644.659001	play-fe.googleapis.com	10.215.173.1	SKYPE	312	NAT repeat Unk: d
+1678	644.659161	10.215.173.1	play-fe.googleapis.com	SKYPE	112	Audio Unk: a
+1679	644.659458	play-fe.googleapis.com	10.215.173.1	UDP	1320	Session 15/1023430, Red data
+1680	644.659633	play-fe.googleapis.com	10.215.173.1	UDP	300	Session 5734/1676584, Cancel ack segment
+1681	644.660247	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1682	644.660669	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1683	644.665187	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1684	644.665731	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1685	644.666308	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1686	644.667621	10.215.173.1	play-fe.googleapis.com	SKYPE	108	Audio Unk: a
+1687	644.732713	play-fe.googleapis.com	10.215.173.1	SKYPE	100	Fragment/Forward/Resend Unk: d

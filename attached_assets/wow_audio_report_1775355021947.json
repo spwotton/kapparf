@@ -1,0 +1,14 @@
+{
+  "pcap": "wow.pcapng",
+  "wav": "wow_extracted.wav",
+  "samples": 11395636,
+  "duration_seconds": 237.40908333333334,
+  "sample_rate": 48000,
+  "limit_packets": 50000,
+  "rms": 0.5772868394851685,
+  "max_freq": 0.0,
+  "max_mag": 29107.2734375,
+  "narrowband_peaks": [],
+  "ultrasonic_mean_mag": 1722.1588134765625,
+  "spectrum_png": "wow_extracted.spectrum.png"
+}
