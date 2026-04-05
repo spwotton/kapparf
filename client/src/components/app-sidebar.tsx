@@ -214,7 +214,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="px-0">
         {navGroups.map((group) => (
-          <CollapsibleGroup key={group.label} group={group} location={location} />
+          <CollapsibleGroup key={group.fallbackLabel} group={group} location={location} />
         ))}
       </SidebarContent>
       <SidebarFooter className="p-3 space-y-1.5">
