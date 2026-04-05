@@ -23,6 +23,7 @@ import { RESEARCH_CONSTANTS } from "./research-constants";
 import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
 import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
 import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
+import { getLocalSession, getLocalEvents, executeLocalCommand } from "./bettercap/local-cap";
 import {
   indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
   createDocument, executeSynthesisRun, getSynthesisRun, exportCorpus, getExportFormats,
@@ -2957,7 +2958,22 @@ export async function registerRoutes(
   // ═══════════════════════════════════════════════════════════════
 
   app.get("/api/bettercap/instances", (_req, res) => {
-    res.json(getInstances());
+    const instances = getInstances();
+    const hasLocal = instances.some((i: any) => i.id === "kappa-local");
+    if (!hasLocal) {
+      instances.unshift({
+        id: "kappa-local",
+        name: "KAPPA LocalCap",
+        host: "localhost",
+        port: 0,
+        scheme: "local",
+        username: "kappa",
+        password: "",
+        connected: true,
+        lastError: null,
+      });
+    }
+    res.json(instances);
   });
 
   app.post("/api/bettercap/instances", (req, res) => {
@@ -2975,6 +2991,9 @@ export async function registerRoutes(
   });
 
   app.get("/api/bettercap/instances/:id/session", async (req, res) => {
+    if (req.params.id === "kappa-local") {
+      return res.json(getLocalSession());
+    }
     const session = await fetchSession(req.params.id);
     if (!session) {
       const inst = getInstance(req.params.id);
@@ -2986,6 +3005,9 @@ export async function registerRoutes(
   });
 
   app.get("/api/bettercap/instances/:id/events", async (req, res) => {
+    if (req.params.id === "kappa-local") {
+      return res.json(getLocalEvents());
+    }
     const n = parseInt(req.query.n as string) || 50;
     const events = await fetchEvents(req.params.id, n);
     res.json(events);
@@ -2994,15 +3016,30 @@ export async function registerRoutes(
   app.post("/api/bettercap/instances/:id/command", async (req, res) => {
     const { cmd } = req.body;
     if (!cmd) return res.status(400).json({ error: "Missing cmd field" });
+    if (req.params.id === "kappa-local") {
+      return res.json(executeLocalCommand(cmd));
+    }
     const result = await sendCommand(req.params.id, cmd);
     res.json(result);
   });
 
   app.get("/api/bettercap/instances/:id/history", (req, res) => {
+    if (req.params.id === "kappa-local") {
+      return res.json([]);
+    }
     res.json(getCommandHistory(req.params.id));
   });
 
   app.get("/api/bettercap/instances/:id/summary", (req, res) => {
+    if (req.params.id === "kappa-local") {
+      const s = getLocalSession();
+      return res.json({
+        hosts: s.lan.hosts.length,
+        aps: s.wifi.aps.length,
+        ble: s.ble.devices.length,
+        packets: s.packets,
+      });
+    }
     const summary = getSessionSummary(req.params.id);
     if (!summary) return res.status(404).json({ error: "No session data" });
     res.json(summary);
