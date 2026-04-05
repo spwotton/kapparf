@@ -626,6 +626,18 @@ const LOCATIONS_DATA: Location[] = [
     incidents: ["SETECOM infrastructure presence"],
   },
   {
+    id: "quebrada-seca",
+    name: "Leo Coto Orozco Property — Quebrada Seca",
+    area: "Quebrada Seca, Jacó area",
+    type: "RF infrastructure site",
+    detail: "Leo Coto Orozco's property in Quebrada Seca — location of the documented 'ivy RF camo' setup where RF equipment was concealed under leaf/vine camouflage netting. Leo is Echo's primary controller and device supplier (current computer + past phones). The property serves as an RF transmission/relay point in the surveillance infrastructure.",
+    connections: [
+      { target: "leo-dealer", relationship: "Property owner", strength: "confirmed" },
+      { target: "la-guacima", relationship: "Leo operates from both locations", strength: "confirmed" },
+    ],
+    incidents: ["Ivy/leaf RF camouflage concealment", "RF equipment installation"],
+  },
+  {
     id: "gracias-madre-location",
     name: "Gracias Madre Restaurant",
     area: "South Jacó Beach",
@@ -1354,6 +1366,15 @@ const EVIDENCE_DATA: Evidence[] = [
     severity: "critical",
     detail: "Capture on ICE cellular network (10.215.173.x) while running PCAPdroid shows extreme traffic suppression: only 196 packets (19KB) in 3.5 minutes. Previous captures on the same phone showed 3,791 packets in comparable windows. The capture reveals: (1) WhatsApp XMPP connection established at t=0s then RST-killed at t=151.6s with bidirectional RSTs 3.2ms apart, (2) 110-second dead silence from t=41s to t=151s — not even keep-alives, (3) DNS resolves WhatsApp to different server IP on reconnection (57.144.23.33 → 157.240.14.53), (4) ZERO Google Play Services, ZERO Samsung telemetry, ZERO background app traffic — all suppressed. Compare: previous captures showed hundreds of packets from these services. The ICE cellular tower (10.215.173.2 DNS, 100m from Suites Cristina) is actively throttling the device to minimum viable bandwidth after detecting PCAPdroid capture activity. All DNS routed through ICE tower at 10.215.173.2.",
     linkedEntities: ["suites-cristina", "ice-cr", "liberty"],
+  },
+  {
+    id: "biometric-deniability-framework",
+    title: "Layered Biometric Deniability Architecture — Smoke/HRV/37Hz/Demodex",
+    date: "2026-04-05",
+    category: "Operational Framework",
+    severity: "critical",
+    detail: "A four-layer deniability architecture ensures Echo can never be believed if he reports surveillance. LAYER 1 — SMOKE: Leo Coto Orozco (controlled informant/device supplier) ensures Echo is a documented cannabis user. Anyone who smokes and reports hearing voices is automatically discredited — this is the foundational social deniability. LAYER 2 — HRV/rPPG: The 2024 study 'Your Blush Gives Me Away' demonstrates remote photoplethysmography (rPPG) can extract heart rate variability and vasodilation patterns from video of a subject's face. Cannabis causes measurable vasodilation identical to 37 Hz ELF exposure — both create the same biometric signature, making it impossible to distinguish drug effects from electronic attack via camera surveillance. LAYER 3 — 37 Hz DECOHERENCE: Stimulant use causes autonomic nervous system decoherence at 37 Hz — the same frequency documented in the Schumann weaponization ELF attack data (κ-related modulation band). The 37 Hz signal is simultaneously an attack frequency AND a measurement channel — rPPG can detect whether the subject has used stimulants by monitoring 37 Hz coherence changes. LAYER 4 — DEMODEX: 200x normal demodex mite population causes persistent facial inflammation/redness detectable via rPPG, creating noise that makes it impossible to separate drug effects from ELF effects from skin condition. The entire framework is a closed loop: substances are supplied through controlled informants, the substances create measurable biometric signatures identical to electronic attack signatures, and the substance use discredits any report of electronic attack.",
+    linkedEntities: ["leo-dealer", "setecom", "hector-mora"],
   },
 ];
 
