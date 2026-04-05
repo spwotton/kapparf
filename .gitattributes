@@ -51,3 +51,5 @@ attached_assets/tshark_20260326_000008_1774627072731.zip filter=lfs diff=lfs mer
 /attached_assets/Pasted-No-Time-Source-Destination-Protocol-Length-Info-1-0-000_1775352576967.txt filter=lfs diff=lfs merge=lfs -text
 /evidence/wireshark_full_116k_20260405.txt filter=lfs diff=lfs merge=lfs -text
 /attached_assets/Pasted--Packet-0-from-C-Users-echo-AppData-Local-Temp-wireshar_1775353387684.txt filter=lfs diff=lfs merge=lfs -text
+/attached_assets/Pasted-1-0-000000-e3c83b39-23b6-4d00-8bcd-067e19790109-00-q2og_1775353622543.txt filter=lfs diff=lfs merge=lfs -text
+/evidence/desktop_capture2_76k_20260405.txt filter=lfs diff=lfs merge=lfs -text
