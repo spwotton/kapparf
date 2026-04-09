@@ -243,6 +243,8 @@ export default function WhistleblowerPage() {
     { x: "JW/LDS", y: "Setecom/DSE", strength: 0.3, label: "Geographic proximity, timing overlap" },
   ];
 
+  const [bannerOpen, setBannerOpen] = useState(false);
+
   const navItems = [
     { id: "overview", label: "Overview" },
     { id: "jaco", label: "The Jaco Nexus" },
@@ -269,6 +271,80 @@ export default function WhistleblowerPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
+      <div
+        className="relative z-50 bg-red-600 cursor-pointer select-none"
+        onClick={() => setBannerOpen(!bannerOpen)}
+        data-testid="security-banner"
+      >
+        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-white flex-shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span className="text-white text-sm font-bold tracking-wide">IF YOU ARE BEING SURVEILLED — CLICK HERE TO PROTECT YOUR DEVICE NOW</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`w-4 h-4 text-white flex-shrink-0 transition-transform duration-300 ${bannerOpen ? "rotate-180" : ""}`}><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div className={`overflow-hidden transition-all duration-500 ease-in-out ${bannerOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}>
+          <div className="bg-black/95 border-t border-red-500/30 px-4 py-8">
+            <div className="max-w-4xl mx-auto space-y-6">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl font-black text-white mb-2">Immediate Device Hardening</h2>
+                <p className="text-red-300 text-sm">If you suspect surveillance on your network, these steps encrypt your traffic and close common attack ports.</p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl">🐧</span>
+                    <h3 className="text-white font-bold text-lg">Linux</h3>
+                  </div>
+                  <p className="text-red-300 text-xs mb-3">One command. Run in terminal after every boot:</p>
+                  <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all mb-3">
+                    wget https://ciajw.com/scripts/harden.sh -O ~/harden.sh && sudo bash ~/harden.sh
+                  </div>
+                  <p className="text-muted-foreground/60 text-xs">Enables firewall, blocks 17 surveillance ports (Modbus, TR-069, Meterpreter, SNMP, backdoors), disables mDNS/UPnP discovery, installs Cloudflare WARP encrypted VPN tunnel. You become invisible on any hostile network.</p>
+                </div>
+
+                <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl">🪟</span>
+                    <h3 className="text-white font-bold text-lg">Windows</h3>
+                  </div>
+                  <p className="text-red-300 text-xs mb-3">Run in PowerShell as Administrator:</p>
+                  <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all space-y-1">
+                    <div>Set-NetFirewallProfile -All -Enabled True -DefaultInboundAction Block</div>
+                    <div className="text-muted-foreground/40 mt-1"># Then install Cloudflare WARP:</div>
+                    <div>winget install Cloudflare.Warp</div>
+                  </div>
+                  <p className="text-muted-foreground/60 text-xs mt-3">Enables Windows Firewall on all profiles, blocks all unsolicited inbound. Cloudflare WARP encrypts all traffic through Cloudflare's tunnel. Open WARP app after install and click connect.</p>
+                </div>
+
+                <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-2xl">🍎</span>
+                    <h3 className="text-white font-bold text-lg">macOS</h3>
+                  </div>
+                  <p className="text-red-300 text-xs mb-3">Run in Terminal:</p>
+                  <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all space-y-1">
+                    <div>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on</div>
+                    <div>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall on</div>
+                    <div className="text-muted-foreground/40 mt-1"># Then install WARP:</div>
+                    <div>brew install cloudflare-warp</div>
+                  </div>
+                  <p className="text-muted-foreground/60 text-xs mt-3">Enables macOS Application Firewall, blocks all incoming connections. Cloudflare WARP encrypts your tunnel. If no brew, download WARP from 1.1.1.1.</p>
+                </div>
+              </div>
+
+              <div className="bg-red-950/40 border border-red-500/30 rounded-lg p-4 text-center">
+                <p className="text-red-300 text-sm font-bold mb-1">Why this matters</p>
+                <p className="text-muted-foreground/70 text-xs leading-relaxed max-w-2xl mx-auto">
+                  Hotel/public WiFi access points (like UniFi) give network operators full visibility into your traffic — every domain you visit, every connection you make.
+                  Surveillance operators use ports like SNMP (161), Modbus (502), TR-069 (7547), and mDNS (5353) to discover, fingerprint, and attack your device.
+                  A VPN tunnel + firewall blocks all of it. Your device becomes a black box on their network.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-red-900/30 dark:border-red-900/50">
         <div className="max-w-6xl mx-auto px-4 py-2">
           <nav className="flex gap-1 flex-wrap justify-center">
