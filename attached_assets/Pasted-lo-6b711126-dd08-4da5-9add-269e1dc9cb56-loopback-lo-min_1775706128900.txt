@@ -1,0 +1,30 @@
+lo                    6b711126-dd08-4da5-9add-269e1dc9cb56  loopback  lo        
+mint@mint:~$ # Quick Cloudflare WARP (free, encrypted tunnel)
+curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+sudo apt update && sudo apt install cloudflare-warp -y
+warp-cli registration new
+warp-cli connect
+deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ zara main
+Ign:1 cdrom://Linux Mint 22.2 _Zara_ - Release amd64 20250828 noble InRelease
+Err:2 cdrom://Linux Mint 22.2 _Zara_ - Release amd64 20250828 noble Release
+  Please use apt-cdrom to make this CD-ROM recognized by APT. apt-get update cannot be used to add new CD-ROMs
+Ign:3 http://packages.linuxmint.com zara InRelease
+Hit:4 http://packages.linuxmint.com zara Release                               
+Hit:5 http://archive.ubuntu.com/ubuntu noble InRelease                         
+Hit:6 http://security.ubuntu.com/ubuntu noble-security InRelease               
+Ign:7 https://pkg.cloudflareclient.com zara InRelease                          
+Hit:9 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+Err:10 https://pkg.cloudflareclient.com zara Release
+  404  Not Found [IP: 104.16.192.82 443]
+Hit:11 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Reading package lists... Done
+E: The repository 'cdrom://Linux Mint 22.2 _Zara_ - Release amd64 20250828 noble Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+E: The repository 'https://pkg.cloudflareclient.com zara Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+warp-cli: command not found
+warp-cli: command not found
+mint@mint:~$ 
