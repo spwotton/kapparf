@@ -1735,7 +1735,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 <li className="text-yellow-400 font-mono">📁 quantum rf/ <span className="text-muted-foreground/60">— Quantum RF experiments</span></li>
                 <li className="text-yellow-400 font-mono">📁 Context Docs/ <span className="text-muted-foreground/60">— Investigation context documents</span></li>
                 <li className="text-yellow-400 font-mono">📁 drone defense/ <span className="text-muted-foreground/60">— Drone surveillance countermeasures</span></li>
-                <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">303 videos, 115 images, 6 PCAPs</span></li>
+                <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">303 videos, 115 images, 33 PCAPs</span></li>
                 <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">46 PDFs, 48 Gemini reports, 19 audio files</span></li>
               </ul>
               <p className="text-xs text-red-400 mt-3">Drive OAuth expired during session — connection disrupted</p>
@@ -1781,7 +1781,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               {[
                 { label: "Videos", value: "303", icon: "🎬" },
                 { label: "Images", value: "115", icon: "📷" },
-                { label: "PCAPs", value: "6", icon: "📡" },
+                { label: "PCAPs", value: "33", icon: "📡" },
                 { label: "PDFs", value: "46", icon: "📄" },
                 { label: "Gemini Reports", value: "48", icon: "🤖" },
                 { label: "Audio Files", value: "19", icon: "🔊" },
@@ -1847,11 +1847,16 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 </thead>
                 <tbody>
                   {[
-                    ["PCAPdroid_21_Mar_14_57_15.pcap", "25.5 MB", "Largest capture"],
+                    ["PCAPdroid_21_Mar_14_57_15.pcap", "25.5 MB", "Largest capture — full session"],
+                    ["PCAPdroid_23_Oct_22_17_24.pcap", "10.6 MB", "October evening session"],
                     ["PCAPdroid_11_Mar_00_38_23.pcap", "9.2 MB", "Overnight session"],
-                    ["PCAPdroid_14_Mar_19_26_33.pcap", "1.5 MB", "Evening capture"],
+                    ["PCAPdroid_24_Oct_23_32_12.pcap", "6.4 MB", "Late October night"],
+                    ["PCAPdroid_04_Apr_19_34_20.pcap", "3.5 MB", "April 4 evening session"],
+                    ["PCAPdroid_29_Oct_14_52_23.pcap", "1.4 MB", "October afternoon"],
                     ["PCAPdroid_11_Mar_00_32_27.pcap", "0.7 MB", "Early morning"],
                     ["PCAPdroid_26_Mar_04_10_06.pcap", "0.3 MB", "×2 captures"],
+                    ["PCAPdroid_23_Oct_14_19_32.pcap", "0.1 MB", "October quick capture"],
+                    ["PCAPdroid_04_Apr_19_26_08.pcap", "0.1 MB", "April 4 short burst"],
                   ].map(([name, size, note], i) => (
                     <tr key={i} className="border-b border-border/50">
                       <td className="p-2 font-mono text-foreground">{name}</td>
