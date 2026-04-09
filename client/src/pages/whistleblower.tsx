@@ -363,12 +363,20 @@ export default function WhistleblowerPage() {
               <h4 className="font-bold text-foreground mb-3">Observer</h4>
               <div className="space-y-2 text-sm">
                 <div><span className="text-muted-foreground/60">Name:</span> <span className="text-foreground">Samuel Wotton (Echo)</span></div>
-                <div><span className="text-muted-foreground/60">Jaco Phase:</span> <span className="text-foreground">Breakwater Point, Casa Rexa (#42 Ricos y Famosos), Greenwald houses (with/without Peralta), and others — at least a dozen Jaco-area locations</span></div>
-                <div><span className="text-muted-foreground/60">Tacacori Phase:</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106, CR</span></div>
-                <div><span className="text-muted-foreground/60">Coordinates:</span> <span className="font-mono text-foreground">10.0513892°N, 84.2186578°W</span></div>
                 <div><span className="text-muted-foreground/60">Platform:</span> <span className="text-foreground">KAPPA SIGINT v2.0</span></div>
-                <div><span className="text-muted-foreground/60">Location 3:</span> <span className="text-foreground">Suites Cristina, San José (March 27, 2026 →)</span></div>
-                <div><span className="text-muted-foreground/60">Collection:</span> <span className="text-foreground">Jaco 2025 → Tacacorí 2026 → San José 2026 → Continuous</span></div>
+                <div className="pt-2 border-t border-border/50 mt-2">
+                  <span className="text-muted-foreground/60 text-xs font-mono block mb-1.5">LOCATION PROGRESSION</span>
+                  <div className="space-y-1.5 text-xs">
+                    <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">JACO</span> <span className="text-foreground">Breakwater Point, Casa Rexa (#42 Ricos y Famosos), Greenwald houses (with/without Peralta), and others — at least a dozen Jaco-area locations (2025)</span></div>
+                    <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">Q.SECA</span> <span className="text-foreground">Quebrada Seca — Oct 14, 2025: "Elimination by simulation" agent day, consciousness duplication event</span></div>
+                    <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">CONDO</span> <span className="text-foreground">Condominio Naz — the day his mother died. Additional condo in same period</span></div>
+                    <div className="flex gap-2"><span className="text-yellow-400 font-mono shrink-0 w-16">GUACIMA</span> <span className="text-foreground">Guacima — early months of 2026</span></div>
+                    <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">ROBLEDAL</span> <span className="text-foreground">Hotel Robledal — fled after police incident triggered by Kyndryl text injection. Doppler/mm-wave dome on roof documented</span></div>
+                    <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">TACACORI</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106 — $1,500 in damage</span></div>
+                    <div className="flex gap-2"><span className="text-cyan-400 font-mono shrink-0 w-16">CURRENT</span> <span className="text-foreground">Suites Cristina, Sabana Norte, San José — adjacent to ICE HQ (March 31, 2026 →)</span></div>
+                  </div>
+                </div>
+                <div><span className="text-muted-foreground/60">Collection:</span> <span className="text-foreground">Jaco 2025 → Quebrada Seca → Condos → Guacima → Robledal → Tacacorí → San José 2026 → Continuous</span></div>
               </div>
             </div>
           </div>
