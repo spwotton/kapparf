@@ -1,0 +1,42 @@
+ Check established connections right now
+sudo ss -tnp state established
+
+# Check who's on your network
+sudo arp -a^C
+[1]+  Exit 1                  sudo tshark -i wlan0 -f "subtype deauth or subtype disassoc" -w ~/deauth_capture_$(date +%Y%m%d_%H%M%S).pcapng
+mint@mint:~$ # Capture deauth frames in background
+sudo tshark -i wlan0 -f "subtype deauth or subtype disassoc" -w ~/deauth_capture_$(date +%Y%m%d_%H%M%S).pcapng &
+
+# Check what just happened to your WiFi
+dmesg | tail -30 | grep -iE 'deauth|disassoc|disconnect|wlan|wifi'
+journalctl -u NetworkManager --since "10 minutes ago" --no-pager | tail -30
+
+# Check established connections right now
+sudo ss -tnp state established
+
+# Check who's on your network
+sudo arp -a
+[1] 14106
+-- No entries --
+Running as user "root" and group "root". This could be dangerous.
+Recv-Q     Send-Q         Local Address:Port              Peer Address:Port     Process                                                                         
+0          0                 10.0.1.254:42780            34.107.243.93:443       users:(("firefox-bin",pid=2930,fd=154))                                        
+0          0                 10.0.1.254:35100           142.250.176.74:443       users:(("firefox-bin",pid=2930,fd=162))                                        
+0          0                 10.0.1.254:58126            44.208.123.48:443       users:(("firefox-bin",pid=2930,fd=33))                                         
+0          0                 10.0.1.254:47246              57.144.22.1:443       users:(("firefox-bin",pid=2930,fd=159))                                        
+0          0                 10.0.1.254:45210           172.64.152.210:443       users:(("firefox-bin",pid=2930,fd=146))                                        
+0          0                 10.0.1.254:46040           34.160.109.235:443       users:(("firefox-bin",pid=2930,fd=252))                                        
+0          170               10.0.1.254:54848             104.18.35.46:443       users:(("firefox-bin",pid=2930,fd=164))                                        
+0          0                 10.0.1.254:41704             104.18.35.46:443       users:(("firefox-bin",pid=2930,fd=157))                                        
+0          0                 10.0.1.254:46028           34.160.109.235:443       users:(("firefox-bin",pid=2930,fd=221))                                        
+0          0                 10.0.1.254:43168              34.82.58.13:443       users:(("firefox-bin",pid=2930,fd=292))                                        
+0          0                 10.0.1.254:60010             104.18.35.46:443       users:(("firefox-bin",pid=2930,fd=141))                                        
+0          0                 10.0.1.254:55766           142.250.176.78:443       users:(("firefox-bin",pid=2930,fd=155))                                        
+0          0                 10.0.1.254:52832            34.149.66.154:443       users:(("firefox-bin",pid=2930,fd=231))                                        
+0          0                 10.0.1.254:52238              34.82.58.13:443       users:(("firefox-bin",pid=2930,fd=113))                                        
+0          0                 10.0.1.254:57426          172.217.204.157:443       users:(("firefox-bin",pid=2930,fd=121))                                        
+0          0                 10.0.1.254:59070           35.224.251.249:443       users:(("firefox-bin",pid=2930,fd=153))                                        
+0          0                 10.0.1.254:41696             104.18.35.46:443       users:(("firefox-bin",pid=2930,fd=144))                                        
+unifi.localdomain (10.0.0.1) at 6c:63:f8:eb:9c:13 [ether] on wlp0s20f3
+mint@mint:~$ Capturing on 'wlan0'
+tshark: The capture session could not be initiated due to error getting information on pipe or socket: Permission denied.
