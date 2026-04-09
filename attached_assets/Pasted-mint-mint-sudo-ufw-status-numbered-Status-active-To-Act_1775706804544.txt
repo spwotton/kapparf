@@ -1,0 +1,39 @@
+mint@mint:~$ sudo ufw status numbered
+Status: active
+
+     To                         Action      From
+     --                         ------      ----
+[ 1] 10000:65535/tcp            DENY IN     Anywhere                  
+[ 2] 10000:65535/udp            DENY IN     Anywhere                  
+[ 3] 161:162/udp                DENY IN     Anywhere                  
+[ 4] 502                        DENY IN     Anywhere                  
+[ 5] 7547                       DENY IN     Anywhere                  
+[ 6] 4444                       DENY IN     Anywhere                  
+[ 7] 9050:9150/tcp              DENY IN     Anywhere                  
+[ 8] 9050:9150/udp              DENY IN     Anywhere                  
+[ 9] 31337                      DENY IN     Anywhere                  
+[10] 1080                       DENY IN     Anywhere                  
+[11] 3128                       DENY IN     Anywhere                  
+[12] 8080                       DENY IN     Anywhere                  
+[13] 4443                       DENY IN     Anywhere                  
+[14] 8443                       DENY IN     Anywhere                  
+[15] 817                        DENY IN     Anywhere                  
+[16] 5353                       DENY IN     Anywhere                  
+[17] 1900                       DENY IN     Anywhere                  
+[18] 10000:65535/tcp (v6)       DENY IN     Anywhere (v6)             
+[19] 10000:65535/udp (v6)       DENY IN     Anywhere (v6)             
+[20] 161:162/udp (v6)           DENY IN     Anywhere (v6)             
+[21] 502 (v6)                   DENY IN     Anywhere (v6)             
+[22] 7547 (v6)                  DENY IN     Anywhere (v6)             
+[23] 4444 (v6)                  DENY IN     Anywhere (v6)             
+[24] 9050:9150/tcp (v6)         DENY IN     Anywhere (v6)             
+[25] 9050:9150/udp (v6)         DENY IN     Anywhere (v6)             
+[26] 31337 (v6)                 DENY IN     Anywhere (v6)             
+[27] 1080 (v6)                  DENY IN     Anywhere (v6)             
+[28] 3128 (v6)                  DENY IN     Anywhere (v6)             
+[29] 8080 (v6)                  DENY IN     Anywhere (v6)             
+[30] 4443 (v6)                  DENY IN     Anywhere (v6)             
+[31] 8443 (v6)                  DENY IN     Anywhere (v6)             
+[32] 817 (v6)                   DENY IN     Anywhere (v6)             
+[33] 5353 (v6)                  DENY IN     Anywhere (v6)             
+[34] 1900 (v6)                  DENY IN     Anywhere (v6)  
