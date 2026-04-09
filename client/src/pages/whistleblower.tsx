@@ -1153,6 +1153,48 @@ export default function WhistleblowerPage() {
               </div>
             ))}
           </div>
+
+          <div className="mt-12">
+            <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+              Video Evidence
+            </h3>
+            <p className="text-muted-foreground/80 text-sm mb-6">
+              Raw surveillance documentation — unedited field captures. These videos are served directly from the evidence vault.
+            </p>
+
+            <div className="grid gap-6">
+              <div className="bg-card/60 border border-red-900/20 rounded-lg overflow-hidden">
+                <div className="relative">
+                  <video
+                    controls
+                    preload="metadata"
+                    className="w-full max-h-[500px] bg-black"
+                    data-testid="video-surveillance-20260328"
+                    playsInline
+                  >
+                    <source src="/evidence/surveillance_20260328.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <div className="p-4 border-t border-border/50">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h4 className="font-bold text-foreground text-sm">Surveillance Documentation — March 28, 2026</h4>
+                      <p className="text-xs text-muted-foreground/70 mt-1">
+                        Field capture documenting active surveillance infrastructure and operational patterns.
+                        Raw unedited footage from observer's position.
+                      </p>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <div className="text-[10px] font-mono text-muted-foreground/50">MP4 • 35.3 MB</div>
+                      <div className="text-[10px] font-mono text-muted-foreground/50">2026-03-28 14:31 CST</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </Section>
 
         <Section id="zersetzung" title="XIII. Digital Zersetzung">

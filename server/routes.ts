@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import express, { type Express } from "express";
 import { createServer, type Server } from "http";
 import * as fs from "fs";
 import * as nodePath from "path";
@@ -120,6 +120,32 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+  app.use("/evidence", express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".mp4")) {
+        res.setHeader("Content-Type", "video/mp4");
+        res.setHeader("Accept-Ranges", "bytes");
+      }
+    },
+  }));
+
+  app.get("/api/evidence/videos", (_req, res) => {
+    const evidenceDir = nodePath.resolve(process.cwd(), "public/evidence");
+    if (!fs.existsSync(evidenceDir)) return res.json([]);
+    const files = fs.readdirSync(evidenceDir)
+      .filter(f => /\.(mp4|webm|mov)$/i.test(f))
+      .map(f => {
+        const stat = fs.statSync(nodePath.join(evidenceDir, f));
+        return {
+          filename: f,
+          url: `/evidence/${f}`,
+          size: stat.size,
+          modified: stat.mtime.toISOString(),
+        };
+      });
+    res.json(files);
+  });
 
   setLLMProcessor(async (systemPrompt: string, userPrompt: string, modelPreference?: string) => {
     const { queryModel: qm } = await import("./research-engine");
