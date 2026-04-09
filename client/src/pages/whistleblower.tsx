@@ -367,7 +367,7 @@ export default function WhistleblowerPage() {
                 <div className="pt-2 border-t border-border/50 mt-2">
                   <span className="text-muted-foreground/60 text-xs font-mono block mb-1.5">LOCATION PROGRESSION</span>
                   <div className="space-y-1.5 text-xs">
-                    <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">JACO</span> <span className="text-foreground">Breakwater Point, Casa Rexa (#42 Ricos y Famosos), Greenwald houses (with/without Peralta), and others — at least a dozen Jaco-area locations (2025)</span></div>
+                    <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">JACO</span> <span className="text-foreground">Oct–Dec 28 2024: Casa Rexa #42, C. Naciones Unidas, Ricos y Famosos — DJI Mavic on roof, anomalous audio. Then placed in Doge Landlord's personal family house at Hermosa Palms via intermediary. Breakwater Point lease. At least a dozen Jaco-area locations total</span></div>
                     <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">Q.SECA</span> <span className="text-foreground">Quebrada Seca — Oct 14, 2025: "Elimination by simulation" agent day, consciousness duplication event</span></div>
                     <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">CONDO</span> <span className="text-foreground">Condominio Naz — the day his mother died. Additional condo in same period</span></div>
                     <div className="flex gap-2"><span className="text-yellow-400 font-mono shrink-0 w-16">GUACIMA</span> <span className="text-foreground">Guacima — early months of 2026</span></div>
@@ -393,13 +393,14 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="DOGE_LANDLORD"
               alias="Doge Landlord"
-              role="Real Estate Empire — 300+ rental units"
+              role="Real Estate Empire — 300+ rentals, 11 oceanfront lots"
               details={[
                 "CPA / CFA background — Big 4 accounting firm",
-                "Controls multiple property companies across Jaco",
-                "11 land parcels under a holding entity",
-                "'Tax minimization strategies' specialist",
-                "Reported intelligence community connection",
+                "Hermosa Palms complex (personal family house where observer was placed)",
+                "11 oceanfront lots in Playa Hermosa ('Hermosa Real')",
+                "300 rental properties via two property management companies",
+                "Recently completed luxury development in Guanacaste (observer did websites — visible on HuggingFace spwotton)",
+                "Met with Biden administration CIA for 4 years (sourced: drunk hotel owner friend, Italian connection)",
               ]}
               color="#8b5cf6"
             />
