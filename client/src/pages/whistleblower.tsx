@@ -290,7 +290,7 @@ export default function WhistleblowerPage() {
       <div className="relative overflow-hidden py-20 px-4">
         <div className="absolute inset-0 bg-gradient-to-b from-red-950/10 dark:from-red-950/20 via-background to-background" />
         <div className="relative max-w-4xl mx-auto text-center">
-          <div className="text-xs font-mono text-red-500 tracking-widest mb-4">DOCUMENTED SURVEILLANCE HARASSMENT — FROM JACO BEACH TO TACACORI</div>
+          <div className="text-xs font-mono text-red-500 tracking-widest mb-4">DOCUMENTED SURVEILLANCE HARASSMENT — AT LEAST A DOZEN LOCATIONS ACROSS COSTA RICA</div>
           <h1 className="text-4xl md:text-6xl font-black text-foreground leading-tight mb-6" data-testid="hero-title">
             Where Intelligence Agencies,<br />
             Religious Organizations &<br />
@@ -298,7 +298,7 @@ export default function WhistleblowerPage() {
             <span className="text-red-500">Converge on One Person</span>
           </h1>
           <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto mb-4">
-            A documented case of multi-vector surveillance targeting a single individual across two locations in Costa Rica.
+            A documented case of multi-vector surveillance targeting a single individual across at least a dozen locations in Costa Rica.
             Forensic network captures, signal intelligence, sonar readings, infrastructure backdoors, and cross-domain correlations
             — collected autonomously by the KAPPA platform.
           </p>
@@ -319,16 +319,15 @@ export default function WhistleblowerPage() {
         <Section id="overview" title="I. The Convergence">
           <div className="prose prose-invert max-w-none">
             <p className="text-muted-foreground text-base leading-relaxed">
-              This operation spans two locations: <strong className="text-foreground">Jaco Beach</strong> (Guacima, 9.9535°N, 84.2908°W) where the surveillance network
-              was first documented with sonar evidence, infrastructure backdoors, and a web of human assets — and <strong className="text-foreground">Tacacori, Alajuela</strong> (10.0514°N, 84.2187°W)
+              This operation spans at least a dozen locations including <strong className="text-foreground">Breakwater Point Jaco</strong>, <strong className="text-foreground">Jaco Vacations #42 Casa Rexa in Ricos y Famosos</strong>, <strong className="text-foreground">Mike Greenwald's houses</strong> (with and without Peralta), and <strong className="text-foreground">Tacacori, Alajuela</strong> (10.0514°N, 84.2187°W)
               where the observer relocated and documented continued multi-vector targeting through KAPPA autonomous collection.
-              Six distinct operational vectors converge across both locations. Each has been independently documented through network forensics,
+              Six distinct operational vectors converge across these locations. Each has been independently documented through network forensics,
               signal intelligence, acoustic analysis, and direct observation.
             </p>
           </div>
 
           <VennDiagram
-            title="Operational Vector Convergence — Both Locations"
+            title="Operational Vector Convergence — All Locations"
             sets={[
               {
                 label: "CYBER / CORPORATE",
@@ -364,8 +363,8 @@ export default function WhistleblowerPage() {
               <h4 className="font-bold text-foreground mb-3">Observer</h4>
               <div className="space-y-2 text-sm">
                 <div><span className="text-muted-foreground/60">Name:</span> <span className="text-foreground">Samuel Wotton (Echo)</span></div>
-                <div><span className="text-muted-foreground/60">Location 1:</span> <span className="text-foreground">Jaco Beach / Guacima, Puntarenas, CR</span></div>
-                <div><span className="text-muted-foreground/60">Location 2:</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106, CR</span></div>
+                <div><span className="text-muted-foreground/60">Jaco Phase:</span> <span className="text-foreground">Breakwater Point, Casa Rexa (#42 Ricos y Famosos), Greenwald houses (with/without Peralta), and others — at least a dozen Jaco-area locations</span></div>
+                <div><span className="text-muted-foreground/60">Tacacori Phase:</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106, CR</span></div>
                 <div><span className="text-muted-foreground/60">Coordinates:</span> <span className="font-mono text-foreground">10.0513892°N, 84.2186578°W</span></div>
                 <div><span className="text-muted-foreground/60">Platform:</span> <span className="text-foreground">KAPPA SIGINT v2.0</span></div>
                 <div><span className="text-muted-foreground/60">Location 3:</span> <span className="text-foreground">Suites Cristina, San José (March 27, 2026 →)</span></div>
