@@ -42,7 +42,8 @@ import GalliumPage from "@/pages/gallium";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={CommandCenterPage} />
+      <Route path="/" component={WhistleblowerPage} />
+      <Route path="/command" component={CommandCenterPage} />
       <Route path="/dashboard" component={DashboardPage} />
       <Route path="/events" component={EventsPage} />
       <Route path="/correlations" component={CorrelationsPage} />
@@ -68,7 +69,6 @@ function Router() {
       <Route path="/forensics" component={NetworkForensicsPage} />
       <Route path="/evidence" component={EvidenceChainPage} />
       <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
-      <Route path="/ciajw" component={WhistleblowerPage} />
       <Route path="/memory" component={MemoryCortexPage} />
       <Route path="/gallium" component={GalliumPage} />
       <Route component={NotFound} />

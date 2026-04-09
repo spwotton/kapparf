@@ -268,18 +268,14 @@ export default function WhistleblowerPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-red-900/30 dark:border-red-900/50">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-red-900 rounded flex items-center justify-center text-foreground font-black text-sm">CI</div>
-            <span className="font-black text-lg tracking-tight text-foreground">CIAJW<span className="text-red-500">.com</span></span>
-          </div>
-          <nav className="hidden md:flex gap-1 flex-wrap">
+      <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-red-900/30 dark:border-red-900/50">
+        <div className="max-w-6xl mx-auto px-4 py-2">
+          <nav className="flex gap-1 flex-wrap justify-center">
             {navItems.map(item => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`px-2 py-1 text-xs rounded transition-colors ${activeSection === item.id ? "bg-red-900/50 text-red-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
+                className={`px-2 py-1 text-xs font-sans rounded transition-colors ${activeSection === item.id ? "bg-red-900/50 text-red-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
                 onClick={() => setActiveSection(item.id)}
                 data-testid={`nav-${item.id}`}
               >
@@ -288,7 +284,7 @@ export default function WhistleblowerPage() {
             ))}
           </nav>
         </div>
-      </header>
+      </div>
 
       <div className="relative overflow-hidden py-20 px-4">
         <div className="absolute inset-0 bg-gradient-to-b from-red-950/10 dark:from-red-950/20 via-background to-background" />

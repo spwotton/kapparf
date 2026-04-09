@@ -68,9 +68,18 @@ interface NavGroup {
 
 const navGroups: NavGroup[] = [
   {
+    labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
+    items: [
+      { titleKey: "sidebar.ciajwHome", fallback: "CIAJW Home", url: "/", icon: Shield },
+      { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence", icon: FileWarning },
+      { titleKey: "sidebar.networkForensics", fallback: "Network Forensics", url: "/forensics", icon: Network },
+      { titleKey: "sidebar.board", fallback: "Board", url: "/board", icon: Globe },
+    ],
+  },
+  {
     labelKey: "sidebar.command", fallbackLabel: "COMMAND",
     items: [
-      { titleKey: "sidebar.commandCenter", fallback: "Command Center", url: "/", icon: Terminal },
+      { titleKey: "sidebar.commandCenter", fallback: "Command Center", url: "/command", icon: Terminal },
       { titleKey: "sidebar.dashboard", fallback: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
     ],
   },
@@ -84,22 +93,20 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
+    labelKey: "sidebar.forensics", fallbackLabel: "FORENSICS",
+    items: [
+      { titleKey: "sidebar.devices", fallback: "Devices", url: "/devices", icon: Fingerprint },
+      { titleKey: "sidebar.bettercap", fallback: "Bettercap", url: "/bettercap", icon: Radio },
+      { titleKey: "sidebar.forensicHypervisor", fallback: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
+    ],
+  },
+  {
     labelKey: "sidebar.sigint", fallbackLabel: "SIGINT",
     items: [
       { titleKey: "sidebar.kiwiNodes", fallback: "KiwiSDR Nodes", url: "/nodes", icon: Server },
       { titleKey: "sidebar.satellites", fallback: "Satellites", url: "/satellites", icon: Satellite },
       { titleKey: "sidebar.lattice", fallback: "Lattice", url: "/lattice", icon: Hexagon },
       { titleKey: "sidebar.superposition", fallback: "Superposition", url: "/superposition", icon: Atom },
-    ],
-  },
-  {
-    labelKey: "sidebar.forensics", fallbackLabel: "FORENSICS",
-    items: [
-      { titleKey: "sidebar.devices", fallback: "Devices", url: "/devices", icon: Fingerprint },
-      { titleKey: "sidebar.bettercap", fallback: "Bettercap", url: "/bettercap", icon: Radio },
-      { titleKey: "sidebar.networkForensics", fallback: "Network Forensics", url: "/forensics", icon: Shield },
-      { titleKey: "sidebar.forensicHypervisor", fallback: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
-      { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence", icon: FileWarning },
     ],
   },
   {
@@ -120,15 +127,8 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.karachi", fallback: "Karachi", url: "/karachi", icon: Crosshair },
       { titleKey: "sidebar.congusto", fallback: "Congusto", url: "/congusto", icon: FlaskConical },
       { titleKey: "sidebar.iceBriefing", fallback: "ICE Briefing", url: "/gallium", icon: Globe },
-      { titleKey: "sidebar.board", fallback: "Board", url: "/board", icon: Network },
       { titleKey: "sidebar.social", fallback: "Social", url: "/social", icon: Image },
       { titleKey: "sidebar.tools", fallback: "Tools", url: "/tools", icon: Wrench },
-    ],
-  },
-  {
-    labelKey: "sidebar.public", fallbackLabel: "PUBLIC",
-    items: [
-      { titleKey: "sidebar.ciajwPublic", fallback: "CIAJW Public", url: "/ciajw", icon: Shield },
     ],
   },
 ];
@@ -136,7 +136,7 @@ const navGroups: NavGroup[] = [
 function CollapsibleGroup({ group, location }: { group: NavGroup; location: string }) {
   const { t } = useI18n();
   const hasActive = group.items.some((item) => location === item.url);
-  const [open, setOpen] = useState(hasActive || group.fallbackLabel === "COMMAND");
+  const [open, setOpen] = useState(hasActive || group.fallbackLabel === "EVIDENCE");
 
   const groupLabel = t(group.labelKey as any) !== group.labelKey ? t(group.labelKey as any) : group.fallbackLabel;
 
@@ -205,10 +205,10 @@ export function AppSidebar() {
             style={{ backgroundColor: threatColor }}
           />
           <span className="text-base font-bold tracking-tight" data-testid="text-app-title">
-            KAPPA
+            CIAJW
           </span>
           <span className="text-[10px] text-muted-foreground font-mono" data-testid="text-app-subtitle">
-            SIGINT
+            KAPPA SIGINT
           </span>
         </div>
       </SidebarHeader>
