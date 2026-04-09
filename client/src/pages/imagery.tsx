@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
+import { ZoomableImage } from "@/components/zoomable-image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -298,12 +299,12 @@ function SatelliteHunterTab() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div className="rounded-lg overflow-hidden border bg-black">
                       <span className="text-[10px] text-muted-foreground block p-1 bg-background/80">Original Tile</span>
-                      <img src={satData.tileUrl} alt="Satellite tile" className="w-full max-h-[400px] object-contain" data-testid="img-satellite-tile" />
+                      <ZoomableImage src={satData.tileUrl} alt="Satellite tile" className="w-full max-h-[400px] object-contain" />
                     </div>
                     {satData.analysis?.overlayPng && (
                       <div className="rounded-lg overflow-hidden border bg-black border-yellow-500/30">
                         <span className="text-[10px] text-amber-400 block p-1 bg-background/80">24-gon Anomaly Overlay</span>
-                        <img src={`data:image/png;base64,${satData.analysis.overlayPng}`} alt="24-gon overlay" className="w-full max-h-[400px] object-contain" data-testid="img-satellite-overlay" />
+                        <ZoomableImage src={`data:image/png;base64,${satData.analysis.overlayPng}`} alt="24-gon overlay" className="w-full max-h-[400px] object-contain" />
                       </div>
                     )}
                   </div>

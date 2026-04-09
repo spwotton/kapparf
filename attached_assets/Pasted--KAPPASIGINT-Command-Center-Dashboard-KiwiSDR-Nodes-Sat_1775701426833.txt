@@ -1,0 +1,126 @@
+
+KAPPASIGINT
+
+Command Center
+
+    Dashboard
+
+KiwiSDR Nodes
+Satellites
+Lattice
+
+    Superposition
+
+Devices
+Bettercap
+Network Forensics
+Forensic Hypervisor
+
+    Evidence Chain
+
+OSINT
+Intel Reports
+Research
+Deep Research
+Research Cortex
+Memory Cortex
+
+    Imagery
+
+    CIAJW Public
+
+32κ
+EW II
+
+10.0514°N 84.2187°W
+Phoenix56.2%
+Forensic Hypervisor
+
+Autonomous SIGINT pattern mining • PCAP temporal alignment • Cross-domain correlation
+ACTIVE
+Engine
+ONLINE
+Run Analysis Now
+Upload PCAP
+GitHub PCAPs
+EMERGENCY
+correlation-cluster
+Correlation Rule: SATINTEL-SPOOF TLE Drift
+29,623 hits, avg severity 2.00, max severity 5. Active from 2026-03-22 04:03:07.203708 to 2026-04-05 06:55:42.808989.
+CRITICAL
+high-severity-cluster
+High-Severity Cluster: SATINTEL-SPOOF TLE Drift
+40 severity 3+ hits for "SATINTEL-SPOOF TLE Drift". Most recent: Thu Apr 02 2026 15:56:58 GMT+0000 (Coordinated Universal Time). This rule consistently triggers at elevated severity — investigate the underlying signal pattern.
+CRITICAL
+high-severity-cluster
+High-Severity Cluster: BLACKJACK-BLINDER RF Injection
+8 severity 3+ hits for "BLACKJACK-BLINDER RF Injection". Most recent: Tue Mar 31 2026 11:42:08 GMT+0000 (Coordinated Universal Time). This rule consistently triggers at elevated severity — investigate the underlying signal pattern.
+HIGH
+temporal-pattern
+Evening Window Signal Enrichment
+Events during 18:00-22:00 CST (00:00-04:00 UTC) show 1.23x enrichment over baseline. 93,827 events in EW vs 458,697 total. Expected 16.7%, actual 20.5%. Average confidence in EW: 0.643
+HIGH
+burst-detection
+Signal Burst Events Detected
+20 hourly windows with >500 events detected. Largest burst: 3,450 events at 2026-03-31 00:00:00. Bursts indicate coordinated multi-source activity or systematic scanning.
+HIGH
+correlation-cluster
+Correlation Rule: BLACKJACK-BLINDER RF Injection
+7,101 hits, avg severity 2.60, max severity 3. Active from 2026-03-04 04:35:59.976666 to 2026-03-31 11:42:08.208212.
+HIGH
+correlation-cluster
+Correlation Rule: HUMINT Biometric Event Correlation
+2,971 hits, avg severity 2.64, max severity 3. Active from 2026-03-04 04:36:00.377782 to 2026-04-02 04:01:51.750679.
+HIGH
+correlation-cluster
+Correlation Rule: Multi-Domain Convergence Event
+5 hits, avg severity 2.80, max severity 3. Active from 2026-03-22 04:19:38.268644 to 2026-04-02 04:01:52.226943.
+HIGH
+satellite-correlation
+Satellite Pass Signal Coincidences
+64,797 correlations link satellite passes with ground-level signal activity across 8 rule types. Top: IPAT Timing ↔ Satellite Pass Coincidence (32,624 hits). This indicates potential satellite-mediated signal relay or coordinated timing.
+HIGH
+sdr-high-confidence
+High-Confidence SDR Detections
+30 SDR detections with confidence >0.80. Top: rared-speech-envelope from kiwisdr-ti0rc-rared @ 133.45 Hz (conf: 1). These represent the most reliable signal detections.
+MEDIUM
+correlation-cluster
+Correlation Rule: IPAT Timing ↔ Satellite Pass Coincidence
+32,624 hits, avg severity 2.00, max severity 2. Active from 2026-03-20 01:38:17.94374 to 2026-04-05 04:15:58.412216.
+MEDIUM
+correlation-cluster
+Correlation Rule: Satellite Pass ↔ ELF/Atmospheric Correlation
+27,783 hits, avg severity 2.00, max severity 2. Active from 2026-03-22 04:03:14.213162 to 2026-04-05 07:05:37.910783.
+MEDIUM
+correlation-cluster
+Correlation Rule: Schumann Resonance Anomaly
+8,397 hits, avg severity 2.00, max severity 2. Active from 2026-03-22 04:03:10.803077 to 2026-04-02 04:01:51.659521.
+MEDIUM
+correlation-cluster
+Correlation Rule: Kalenkov Holographic Modulation
+7,712 hits, avg severity 2.00, max severity 2. Active from 2026-03-22 04:04:06.603582 to 2026-04-02 04:01:51.705004.
+MEDIUM
+correlation-cluster
+Correlation Rule: PLC Theta-Band Modulation
+3,647 hits, avg severity 2.00, max severity 2. Active from 2026-03-04 04:27:54.57685 to 2026-03-20 01:40:13.958993.
+MEDIUM
+correlation-cluster
+Correlation Rule: LSCSA-SVD Weak Signal Extraction
+3,400 hits, avg severity 2.00, max severity 2. Active from 2026-03-22 04:19:37.812562 to 2026-04-02 04:01:51.93259.
+MEDIUM
+correlation-cluster
+Correlation Rule: System Bus Radio Exfiltration
+3,175 hits, avg severity 2.00, max severity 2. Active from 2026-03-30 19:16:59.469041 to 2026-03-31 11:34:59.266601.
+MEDIUM
+correlation-cluster
+Correlation Rule: ISP Connectivity Disruption Pattern
+2,347 hits, avg severity 2.00, max severity 2. Active from 2026-03-22 04:03:16.603266 to 2026-04-09 02:02:14.211206.
+MEDIUM
+correlation-cluster
+Correlation Rule: MUOS-3 WCDMA Heartbeat Detection
+2,189 hits, avg severity 2.00, max severity 2. Active from 2026-03-22 04:04:15.904049 to 2026-04-02 04:01:51.795225.
+MEDIUM
+domain-analysis
+Domain Activity Distribution
+6 active domains. Satellite dominates at 28.6%. Top non-satellite: sdr with 256,333 events (55.9%, avg conf: 0.549).
+

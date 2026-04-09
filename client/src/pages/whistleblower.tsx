@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { ZoomableImage } from "@/components/zoomable-image";
 import nexusImg from "@assets/complete_nexus_all_threads_1774025171694.png";
 import confirmedImg from "@assets/jaco_nexus_confirmed_evidence_1774025171697.png";
 import apocalypseImg from "@assets/apocalypse_architecture_1774025171693.png";
@@ -1123,7 +1124,7 @@ export default function WhistleblowerPage() {
               { img: dewaveDeepImg, title: "DeWave BART Deep Dive", desc: "Technical deep dive into the DeWave BART model architecture for neural signal decoding." },
             ].map((item, i) => (
               <div key={i} className="bg-card/60 border border-border rounded-lg overflow-hidden">
-                <img src={item.img} alt={item.title} className="w-full h-auto" loading="lazy" />
+                <ZoomableImage src={item.img} alt={item.title} className="w-full h-auto" />
                 <div className="p-4">
                   <h4 className="font-bold text-foreground text-sm">{item.title}</h4>
                   <p className="text-xs text-muted-foreground/80 mt-1">{item.desc}</p>
@@ -1135,7 +1136,7 @@ export default function WhistleblowerPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {[photo1, photo2, photo3, photo4].map((img, i) => (
               <div key={i} className="bg-card/60 border border-border rounded-lg overflow-hidden">
-                <img src={img} alt={`Field documentation ${i + 1}`} className="w-full h-auto" loading="lazy" />
+                <ZoomableImage src={img} alt={`Field documentation ${i + 1}`} className="w-full h-auto" />
                 <div className="p-2">
                   <div className="text-xs text-muted-foreground/60">Field documentation — March 2026</div>
                 </div>
