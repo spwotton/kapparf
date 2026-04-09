@@ -407,8 +407,9 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="CONNECTOR_PEPE"
               alias="Connector Pepe"
-              role="The 400-Name Hub — Links everyone"
+              role="The 400-Name Hub — Always in the blue shirt, biggest 'camera' in Jaco"
               details={[
+                "Professional photography Instagram — you know the one",
                 "Observer formerly lived in his condo at Breakwater Point",
                 "OSINT search on any name combination = 400+ results",
                 "All roads lead back to this node",
@@ -504,15 +505,16 @@ export default function WhistleblowerPage() {
               color="#ec4899"
             />
             <PersonCard
-              name="STONKS_GUY"
-              alias="Stonks Guy"
-              role="Network Ghost — Former Telecom"
+              name="TELECOM_DADDY"
+              alias="Telecom Daddy"
+              role="Network Ghost — The one who knows all the infrastructure"
               details={[
-                "Former major telecom company employee",
+                "Former major telecom company employee — you know which one",
                 "IP/phone appeared on observer's network",
                 "Tax fraud allegations",
                 "OSINT: 'Negative Intelligence' classification",
                 "Silent partner / fixer role suspected",
+                "Daddy knows where the cables go",
               ]}
               color="#6366f1"
             />
