@@ -38,43 +38,82 @@ sudo ufw deny in to any port 817
 sudo ufw deny in to any port 5353
 sudo ufw deny in to any port 1900
 
-echo "[6/8] Installing Cloudflare WARP VPN..."
-if ! command -v warp-cli &> /dev/null; then
-    echo "       WARP not found — installing..."
-    curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ noble main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
-    sudo sed -i '/cdrom/d' /etc/apt/sources.list
-    sudo apt update && sudo apt install cloudflare-warp -y
-    echo "       Waiting for WARP service to start..."
-    sleep 3
+echo "[6/8] Installing VPN..."
+VPN_CONNECTED=false
+
+if command -v mullvad &> /dev/null; then
+    echo "       Mullvad already installed"
 else
-    echo "       WARP already installed"
+    echo "       Installing Mullvad VPN (primary — no account, no email, no logs)..."
+    wget -q https://mullvad.net/en/download/app/deb/latest -O /tmp/mullvad.deb 2>/dev/null
+    if [ -f /tmp/mullvad.deb ]; then
+        sudo dpkg -i /tmp/mullvad.deb 2>/dev/null
+        sudo apt --fix-broken install -y 2>/dev/null
+        rm -f /tmp/mullvad.deb
+    else
+        echo "       Mullvad download failed — will fall back to Cloudflare WARP"
+    fi
 fi
 
-echo "[7/8] Registering & connecting WARP..."
-sudo systemctl start warp-svc 2>/dev/null
-sleep 2
+if command -v mullvad &> /dev/null; then
+    echo "       Mullvad found — checking status..."
+    MULLVAD_STATUS=$(mullvad status 2>&1 || true)
+    if echo "$MULLVAD_STATUS" | grep -qi "connected"; then
+        echo "       Mullvad already connected"
+        VPN_CONNECTED=true
+    else
+        echo ""
+        echo "  ================================================"
+        echo "  MULLVAD SETUP — You need an account number."
+        echo "  Go to: https://mullvad.net/en/account/create"
+        echo "  No email needed. Just get the number."
+        echo "  Then run:"
+        echo "    mullvad account login YOUR_ACCOUNT_NUMBER"
+        echo "    mullvad connect"
+        echo "  ================================================"
+        echo ""
+    fi
+fi
 
-WARP_STATUS=$(warp-cli status 2>&1 || true)
-if echo "$WARP_STATUS" | grep -qi "registration missing"; then
-    echo "       Registering new WARP account..."
-    yes | warp-cli registration new 2>/dev/null
+if [ "$VPN_CONNECTED" = false ]; then
+    echo "       Setting up Cloudflare WARP as fallback VPN..."
+    if ! command -v warp-cli &> /dev/null; then
+        echo "       WARP not found — installing..."
+        curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ noble main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+        sudo sed -i '/cdrom/d' /etc/apt/sources.list
+        sudo apt update && sudo apt install cloudflare-warp -y
+        sleep 3
+    else
+        echo "       WARP already installed"
+    fi
+
+    echo "[7/8] Connecting WARP VPN..."
+    sudo systemctl start warp-svc 2>/dev/null
     sleep 2
-else
-    echo "       WARP already registered"
-fi
 
-WARP_STATUS=$(warp-cli status 2>&1 || true)
-if echo "$WARP_STATUS" | grep -qi "disconnected"; then
-    echo "       Connecting WARP tunnel..."
-    warp-cli connect 2>/dev/null
-    sleep 3
-elif echo "$WARP_STATUS" | grep -qi "connected"; then
-    echo "       WARP already connected"
-else
-    echo "       Attempting WARP connection..."
-    warp-cli connect 2>/dev/null
-    sleep 3
+    WARP_STATUS=$(warp-cli status 2>&1 || true)
+    if echo "$WARP_STATUS" | grep -qi "registration missing"; then
+        echo "       Registering new WARP account..."
+        yes | warp-cli registration new 2>/dev/null
+        sleep 2
+    else
+        echo "       WARP already registered"
+    fi
+
+    WARP_STATUS=$(warp-cli status 2>&1 || true)
+    if echo "$WARP_STATUS" | grep -qi "disconnected"; then
+        echo "       Connecting WARP tunnel..."
+        warp-cli connect 2>/dev/null
+        sleep 3
+    elif echo "$WARP_STATUS" | grep -qi "connected"; then
+        echo "       WARP already connected"
+        VPN_CONNECTED=true
+    else
+        echo "       Attempting WARP connection..."
+        warp-cli connect 2>/dev/null
+        sleep 3
+    fi
 fi
 
 echo "[8/8] Verifying..."
@@ -82,10 +121,17 @@ echo ""
 echo "--- UFW STATUS ---"
 sudo ufw status numbered
 echo ""
-echo "--- WARP STATUS ---"
-warp-cli status 2>/dev/null || echo "WARP issue — try manually: warp-cli registration new && warp-cli connect"
+echo "--- VPN STATUS ---"
+if command -v mullvad &> /dev/null; then
+    echo "Mullvad:"
+    mullvad status 2>/dev/null || echo "  Not connected"
+fi
+if command -v warp-cli &> /dev/null; then
+    echo "WARP:"
+    warp-cli status 2>/dev/null || echo "  Not connected"
+fi
 echo ""
-echo "--- YOUR PUBLIC IP (should be Cloudflare, not your ISP) ---"
+echo "--- YOUR PUBLIC IP (should NOT be your ISP) ---"
 curl -s --max-time 5 ifconfig.me 2>/dev/null || echo "Could not check IP"
 echo ""
 echo "--- NETWORK INTERFACE ---"
@@ -95,9 +141,14 @@ echo "========================================="
 echo "  HARDENING COMPLETE — You are a ghost."
 echo "========================================="
 echo ""
-echo "  If WARP shows 'Disconnected', run:"
+echo "  RECOMMENDED: Switch to Mullvad VPN"
+echo "  https://mullvad.net — No email, no logs"
+echo "  5 EUR/month, accepts cash & crypto"
+echo ""
+echo "  Setup: mullvad account login YOUR_NUMBER"
+echo "         mullvad connect"
+echo ""
+echo "  If using WARP fallback and disconnected:"
 echo "    warp-cli registration new"
 echo "    warp-cli connect"
-echo ""
-echo "  Verify with: warp-cli status"
 echo "========================================="

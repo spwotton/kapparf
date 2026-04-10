@@ -299,7 +299,7 @@ export default function WhistleblowerPage() {
                   <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all mb-3">
                     wget https://ciajw.com/scripts/harden.sh -O ~/harden.sh && sudo bash ~/harden.sh
                   </div>
-                  <p className="text-muted-foreground/60 text-xs">Enables firewall, blocks 17 surveillance ports (Modbus, TR-069, Meterpreter, SNMP, backdoors), disables mDNS/UPnP discovery, installs Cloudflare WARP encrypted VPN tunnel. You become invisible on any hostile network.</p>
+                  <p className="text-muted-foreground/60 text-xs">Enables firewall, blocks 17 surveillance ports (Modbus, TR-069, Meterpreter, SNMP, backdoors), disables mDNS/UPnP discovery, installs Mullvad VPN (primary) or Cloudflare WARP (fallback). You become invisible on any hostile network.</p>
                 </div>
 
                 <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
@@ -310,10 +310,12 @@ export default function WhistleblowerPage() {
                   <p className="text-red-300 text-xs mb-3">Run in PowerShell as Administrator:</p>
                   <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all space-y-1">
                     <div>Set-NetFirewallProfile -All -Enabled True -DefaultInboundAction Block</div>
-                    <div className="text-muted-foreground/40 mt-1"># Then install Cloudflare WARP:</div>
+                    <div className="text-muted-foreground/40 mt-1"># Install Mullvad VPN (recommended):</div>
+                    <div>winget install MullvadVPN.Mullvad</div>
+                    <div className="text-muted-foreground/40 mt-1"># Or Cloudflare WARP (free fallback):</div>
                     <div>winget install Cloudflare.Warp</div>
                   </div>
-                  <p className="text-muted-foreground/60 text-xs mt-3">Enables Windows Firewall on all profiles, blocks all unsolicited inbound. Cloudflare WARP encrypts all traffic through Cloudflare's tunnel. Open WARP app after install and click connect.</p>
+                  <p className="text-muted-foreground/60 text-xs mt-3">Enables Windows Firewall on all profiles, blocks all unsolicited inbound. Mullvad VPN (mullvad.net) is recommended — no email, no logs, 5 EUR/month, accepts crypto/cash. Cloudflare WARP is a free fallback.</p>
                 </div>
 
                 <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
@@ -325,10 +327,12 @@ export default function WhistleblowerPage() {
                   <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all space-y-1">
                     <div>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on</div>
                     <div>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall on</div>
-                    <div className="text-muted-foreground/40 mt-1"># Then install WARP:</div>
+                    <div className="text-muted-foreground/40 mt-1"># Install Mullvad VPN (recommended):</div>
+                    <div>brew install mullvadvpn</div>
+                    <div className="text-muted-foreground/40 mt-1"># Or Cloudflare WARP (free fallback):</div>
                     <div>brew install cloudflare-warp</div>
                   </div>
-                  <p className="text-muted-foreground/60 text-xs mt-3">Enables macOS Application Firewall, blocks all incoming connections. Cloudflare WARP encrypts your tunnel. If no brew, download WARP from 1.1.1.1.</p>
+                  <p className="text-muted-foreground/60 text-xs mt-3">Enables macOS Application Firewall, blocks all incoming connections. Mullvad VPN (mullvad.net) is recommended — no email, no logs, accepts crypto/cash. If no brew, download from mullvad.net or 1.1.1.1 for WARP.</p>
                 </div>
               </div>
 
