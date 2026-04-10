@@ -1,0 +1,75 @@
+&& sudo dpkg -i mullvad.deb && sudo apt --fix-broken install -y
+--2026-04-10 22:05:24--  https://mullvad.net/en/download/app/deb/latest
+Resolving mullvad.net (mullvad.net)... 45.83.223.209
+Connecting to mullvad.net (mullvad.net)|45.83.223.209|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://cdn.mullvad.net/app/desktop/releases/2026.1/MullvadVPN-2026.1_amd64.deb [following]
+--2026-04-10 22:05:25--  https://cdn.mullvad.net/app/desktop/releases/2026.1/MullvadVPN-2026.1_amd64.deb
+Resolving cdn.mullvad.net (cdn.mullvad.net)... 45.149.104.1
+Connecting to cdn.mullvad.net (cdn.mullvad.net)|45.149.104.1|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 107905778 (103M) [application/octet-stream]
+Saving to: ‘mullvad.deb’
+
+mullvad.deb         100%[===================>] 102.91M  6.90MB/s    in 16s     
+
+2026-04-10 22:05:42 (6.35 MB/s) - ‘mullvad.deb’ saved [107905778/107905778]
+
+Selecting previously unselected package mullvad-vpn.
+(Reading database ... 495045 files and directories currently installed.)
+Preparing to unpack mullvad.deb ...
+Unpacking mullvad-vpn (2026.1) ...
+Setting up mullvad-vpn (2026.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/mullvad-daemon.service → /usr/lib/systemd/system/mullvad-daemon.service.
+Created symlink /etc/systemd/system/mullvad-daemon.service.wants/mullvad-early-boot-blocking.service → /usr/lib/systemd/system/mullvad-early-boot-blocking.service.
+Creating apparmor profile
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1) ...
+Processing triggers for gnome-menus (3.36.0-1.1ubuntu3) ...
+Processing triggers for mate-menus (1.26.1+mint1) ...
+Processing triggers for desktop-file-utils (0.27-2build1) ...
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+0 upgraded, 0 newly installed, 0 to remove and 405 not upgraded.
+mint@mint:~$ mullvad connect
+Warning: You are not logged in to an account.
+Mullvad is blocking all network traffic until you perform one of the following actions:
+
+1. Login to a Mullvad account with available time/credits.
+2. Disconnect from Mullvad VPN. This can either be done from the CLI or the Mullvad App.
+
+For more information, try 'mullvad account -h' or 'mullvad disconnect -h'
+mint@mint:~$ mullvad account -h
+Control and display information about your Mullvad account
+
+Usage: mullvad account <COMMAND>
+
+Commands:
+  create         Create and log in on a new account
+  login          Log in on an account
+  logout         Log out of the current account
+  get            Display information about the current account
+  list-devices   List devices associated with an account
+  revoke-device  Revoke a device associated with an account
+  redeem         Redeem a voucher
+  help           Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version
+mint@mint:~$ mullvad account create
+New account created!
+Mullvad account:    5123444366591405
+Expires at:         2026-04-10 22:07:11 +00:00
+Device name:        Spicy Hawk
+mint@mint:~$ mullvad account login 5123444366591405
+Mullvad account "5123444366591405" set
+mint@mint:~$ mullvad connect
+mint@mint:~$ mullvad get
+error: unrecognized subcommand 'get'
+
+Usage: mullvad <COMMAND>
+
+For more information, try '--help'.
+mint@mint:~$ 
