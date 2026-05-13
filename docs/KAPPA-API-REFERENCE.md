@@ -2,8 +2,7 @@
 
 **Base URL:** `https://e3c83b39-23b6-4d00-8bcd-067e19790109-00-q2ogrez5zpc7.spock.replit.dev`
 **System:** 24/7 autonomous multi-domain SIGINT correlation platform
-**Observer:** Tacacorí, Alajuela, CR (10.0513892°N, 84.2186578°W)
-
+**Observer:** jaco hotel pochote grande
 ---
 
 ## Core Constants
