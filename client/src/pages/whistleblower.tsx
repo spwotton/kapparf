@@ -120,22 +120,33 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
   );
 }
 
-function RedactedName({ name, className = "" }: { name: string; className?: string }) {
+function RedactedName({ name, className = "", full = false }: { name: string; className?: string; full?: boolean }) {
   const words = name.split(" ");
   return (
     <span className={`font-mono tracking-tight ${className}`}>
       {words.map((word, i) => {
         const first = word[0] ?? "";
-        const blocks = "█".repeat(Math.max(word.length - 1, 1));
+        const restBlocks = "█".repeat(Math.max(word.length - 1, 1));
+        const fullBlocks = "█".repeat(Math.max(word.length, 1));
         return (
           <span key={i}>
             {i > 0 && " "}
-            <span className="text-amber-300">{first}</span>
-            <span
-              className="text-amber-900/70 select-none"
-              style={{ userSelect: "none", pointerEvents: "none", letterSpacing: "0.05em" }}
-              aria-hidden="true"
-            >{blocks}</span>
+            {full ? (
+              <span
+                className="text-amber-900/70 select-none"
+                style={{ userSelect: "none", pointerEvents: "none", letterSpacing: "0.05em" }}
+                aria-hidden="true"
+              >{fullBlocks}</span>
+            ) : (
+              <>
+                <span className="text-amber-300">{first}</span>
+                <span
+                  className="text-amber-900/70 select-none"
+                  style={{ userSelect: "none", pointerEvents: "none", letterSpacing: "0.05em" }}
+                  aria-hidden="true"
+                >{restBlocks}</span>
+              </>
+            )}
           </span>
         );
       })}
@@ -2072,7 +2083,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• CDMX trip: wedding for Carolina Soto</li>
-                <li>• Partner: Deal Frog (<RedactedName name="Leo Orozco" />) — controller/dealer</li>
+                <li>• Partner: Deal Frog (<RedactedName name="Leo Orozco" full />) — controller/dealer</li>
                 <li>• Friends with Ghost Rat (danish2210/danich2210) fake IG profile</li>
                 <li>• Soto family network spans CR ↔ CDMX</li>
               </ul>
@@ -2082,7 +2093,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Deal Frog</span>
-                <span className="text-xs text-muted-foreground/60">(<RedactedName name="Leo Orozco" />)</span>
+                <span className="text-xs text-muted-foreground/60">(<RedactedName name="Leo Orozco" full />)</span>
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Controller/dealer role</li>
