@@ -3858,10 +3858,24 @@ export async function registerRoutes(
     try {
       const locations = req.query.locations as string;
       if (!locations) return res.status(400).json({ error: "locations required" });
-      const url = `https://api.opentopodata.org/v1/srtm90m?locations=${encodeURIComponent(locations)}`;
-      const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
-      if (!r.ok) return res.status(r.status).json({ error: "upstream error" });
-      const data = await r.json();
+      const googleKey = process.env.GOOGLE_MAPS_API_KEY;
+      let data: any;
+      if (googleKey) {
+        const url = `https://maps.googleapis.com/maps/api/elevation/json?locations=${encodeURIComponent(locations.replace(/\|/g, "|"))}&key=${googleKey}`;
+        const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+        if (r.ok) {
+          const gData = await r.json();
+          if (gData.status === "OK" && gData.results) {
+            data = { results: gData.results.map((p: any) => ({ elevation: p.elevation, location: p.location })) };
+          }
+        }
+      }
+      if (!data) {
+        const url = `https://api.opentopodata.org/v1/srtm90m?locations=${encodeURIComponent(locations)}`;
+        const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+        if (r.ok) data = await r.json();
+      }
+      if (!data) return res.status(502).json({ error: "elevation upstream error" });
       res.json(data);
     } catch (e) {
       res.status(500).json({ error: String(e) });
@@ -3871,7 +3885,10 @@ export async function registerRoutes(
   app.get("/api/terrain/tile/:z/:y/:x", async (req, res) => {
     try {
       const { z, y, x } = req.params;
-      const url = `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
+      const googleKey = process.env.GOOGLE_MAPS_API_KEY;
+      const url = googleKey
+        ? `https://mt0.google.com/vt/lyrs=y&x=${x}&y=${y}&z=${z}&key=${googleKey}`
+        : `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
       const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
       if (!r.ok) return res.status(r.status).send("tile error");
       const buf = Buffer.from(await r.arrayBuffer());
@@ -3881,6 +3898,10 @@ export async function registerRoutes(
     } catch (e) {
       res.status(500).send(String(e));
     }
+  });
+
+  app.get("/api/terrain/maps-key-status", (_req, res) => {
+    res.json({ hasKey: !!process.env.GOOGLE_MAPS_API_KEY });
   });
 
   // OpenSky Jacó AOR — live aircraft within bounding box (~25km radius around Jacó)

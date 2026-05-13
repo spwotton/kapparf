@@ -130,7 +130,7 @@ const TARGETS: Target[] = [
   { id: "crane",      label: "CRANE-ALPHA — CALLE DANKERS",   lat: 9.621,  lon: -84.6295, elevM: 8,   type: "crane",    color: 0xffaa00, desc: "Construction crane • Suspected surveillance relay" },
   { id: "elmiro",     label: "EL MIRO RADAR DOME",            lat: 9.617,  lon: -84.623,  elevM: 110, type: "radar",    color: 0xff3333, desc: "Hillside • Full valley LOS • Suspected phased-array" },
   { id: "breakwater", label: "BREAKWATER 4G TOWER",           lat: 9.626,  lon: -84.641,  elevM: 6,   type: "cell",     color: 0xaa44ff, desc: "Punta de Jacó headland • 4G/LTE • 9.7GHz" },
-  { id: "hermosa",    label: "HERMOSA PALMS — OPS BASE",      lat: 9.6142, lon: -84.6278, elevM: 4,   type: "ops",      color: 0xff6644, desc: "Michael G████████ complex • Hermosa Real estate origin" },
+  { id: "hermosa",    label: "HERMOSA PALMS — OPS BASE",      lat: 9.5588, lon: -84.6519, elevM: 4,   type: "ops",      color: 0xff6644, desc: "Michael G████████ complex • Playa Hermosa • 7.3km SSW of ECHO position" },
 ];
 
 // ─── Threat helpers ───────────────────────────────────────────────────────────
@@ -382,9 +382,71 @@ function buildTDOALayer(scene: THREE.Scene): THREE.Group {
   scene.add(g); return g;
 }
 
+// Scene terrain bounds (CENTER.lat ±0.04° → ±55.6 scene units; use 52 as safe clamp)
+const TERRAIN_HALF_Z = 52;
+const TERRAIN_HALF_X = 70;
+
 function buildLandmark(scene: THREE.Scene, t: Target): THREE.Group {
-  const [x, bY, z] = latLonToScene(t.lat, t.lon, t.elevM);
+  const [rawX, bY, rawZ] = latLonToScene(t.lat, t.lon, t.elevM);
+
+  // Detect distant target (outside scene terrain bounds)
+  const isDistant = Math.abs(rawX) > TERRAIN_HALF_X || Math.abs(rawZ) > TERRAIN_HALF_Z;
+
+  let x = rawX, z = rawZ;
+  if (isDistant) {
+    // Clamp proportionally to terrain edge so direction is preserved
+    const scaleX = Math.abs(rawX) > TERRAIN_HALF_X ? TERRAIN_HALF_X / Math.abs(rawX) : 1;
+    const scaleZ = Math.abs(rawZ) > TERRAIN_HALF_Z ? TERRAIN_HALF_Z / Math.abs(rawZ) : 1;
+    const scale = Math.min(scaleX, scaleZ) * 0.93;
+    x = rawX * scale;
+    z = rawZ * scale;
+  }
+
   const group = new THREE.Group(); group.position.set(x, bY, z);
+
+  if (isDistant) {
+    // Tall beacon pylon
+    const mastMat = new THREE.MeshStandardMaterial({ color: t.color, emissive: t.color, emissiveIntensity: 0.4, metalness: 0.6, roughness: 0.4 });
+    const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.3, 32, 6), mastMat);
+    mast.position.y = 16; group.add(mast);
+
+    // Strobe beacon at top
+    const strobe = new THREE.Mesh(new THREE.SphereGeometry(0.7, 8, 8), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.9 }));
+    strobe.position.y = 32.5; (strobe as any)._isBeacon = true; group.add(strobe);
+
+    // Directional arrow pointing toward actual (clamped → real) location
+    const dx = rawX - x, dz = rawZ - z;
+    const dLen = Math.sqrt(dx * dx + dz * dz);
+    if (dLen > 0.01) {
+      const nx = dx / dLen, nz = dz / dLen;
+      const arrowYaw = Math.atan2(nx, nz);
+      const arrowGroup = new THREE.Group();
+      arrowGroup.position.set(nx * 4, 28, nz * 4);
+      arrowGroup.rotation.y = arrowYaw;
+      // Stem
+      const stem = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.5, 9), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.85 }));
+      stem.position.z = -4.5; arrowGroup.add(stem);
+      // Head
+      const head = new THREE.Mesh(new THREE.ConeGeometry(1.8, 4.5, 8), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.95 }));
+      head.rotation.x = -Math.PI / 2; head.position.z = -10; arrowGroup.add(head);
+      group.add(arrowGroup);
+    }
+
+    // Pulsing base ring
+    const ring = new THREE.Mesh(new THREE.RingGeometry(3.5, 4.5, 32), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.25, side: THREE.DoubleSide }));
+    ring.rotation.x = -Math.PI / 2; ring.position.y = 0.1; (ring as any)._isPulse = true; group.add(ring);
+
+    // Second ring (range indicator — 7km)
+    const ring2 = new THREE.Mesh(new THREE.RingGeometry(6, 7, 48), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.1, side: THREE.DoubleSide }));
+    ring2.rotation.x = -Math.PI / 2; ring2.position.y = 0.05; group.add(ring2);
+
+    const pin = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 8), new THREE.MeshBasicMaterial({ color: t.color }));
+    pin.position.y = -0.3; group.add(pin);
+
+    (group as any)._target = t; (group as any)._isDistant = true;
+    scene.add(group); return group;
+  }
+
   if (t.type === "observer") {
     const bGeo = new THREE.BoxGeometry(3, 4, 2.5);
     const bMat = new THREE.MeshStandardMaterial({ color: 0x112233, emissive: 0x00ffcc, emissiveIntensity: 0.15, transparent: true, opacity: 0.9 });
@@ -852,7 +914,14 @@ export default function JacoMapPage() {
               <MapPin className={`h-3.5 w-3.5 shrink-0 ${TARGET_COLOR[t.type]}`}/>
               <span className={`text-xs font-mono font-bold leading-tight ${TARGET_COLOR[t.type]}`}>{t.label.split("—")[0].trim()}</span>
             </div>
-            <div className="text-[10px] text-gray-500 font-mono mt-0.5 ml-5">{t.lat.toFixed(4)}°N {Math.abs(t.lon).toFixed(4)}°W · +{t.elevM}m</div>
+            <div className="text-[10px] text-gray-500 font-mono mt-0.5 ml-5 flex items-center gap-1.5">
+              {t.lat.toFixed(4)}°N {Math.abs(t.lon).toFixed(4)}°W · +{t.elevM}m
+              {t.id === "hermosa" && (
+                <span className="inline-flex items-center gap-0.5 bg-orange-500/15 border border-orange-500/30 text-orange-400 rounded px-1 py-0 text-[9px] font-bold tracking-wider">
+                  7.3km SSW · PLAYA HERMOSA
+                </span>
+              )}
+            </div>
           </button>
         ))}
         <div className="border-t border-white/8 pt-2 space-y-1.5 mt-1">
