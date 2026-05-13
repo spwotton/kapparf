@@ -78,6 +78,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.cristina", fallback: "Suites Cristina", url: "/cristina", icon: Building2 },
       { titleKey: "sidebar.jaco", fallback: "Jacó Valley 3D", url: "/jaco", icon: Globe },
       { titleKey: "sidebar.droneIntel", fallback: "C-UAS Intel Library", url: "/drone-intel", icon: Shield },
+      { titleKey: "sidebar.game", fallback: "Drone Dogfight", url: "/game", icon: Crosshair },
     ],
   },
   {

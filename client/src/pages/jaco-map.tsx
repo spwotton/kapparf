@@ -7,7 +7,7 @@ import {
   Radio, RotateCcw, ZoomIn, ZoomOut, Crosshair,
   AlertTriangle, Wifi, MapPin, Layers,
   Satellite, Activity, Shield, Zap, Signal,
-  X, Flag, Download, Clock,
+  X, Flag, Download, Clock, Moon, Sun, Waves, FlaskConical,
 } from "lucide-react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -389,7 +389,7 @@ function buildLandmark(scene: THREE.Scene, t: Target): THREE.Group {
     const bGeo = new THREE.BoxGeometry(3, 4, 2.5);
     const bMat = new THREE.MeshStandardMaterial({ color: 0x112233, emissive: 0x00ffcc, emissiveIntensity: 0.15, transparent: true, opacity: 0.9 });
     const bld = new THREE.Mesh(bGeo, bMat); bld.position.y = 2; group.add(bld);
-    group.add(Object.assign(new THREE.LineSegments(new THREE.EdgesGeometry(bGeo), new THREE.LineBasicMaterial({ color: t.color, transparent: true, opacity: 0.7 })), { position: new THREE.Vector3(0, 2, 0) }));
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(bGeo), new THREE.LineBasicMaterial({ color: t.color, transparent: true, opacity: 0.7 })); edges.position.set(0, 2, 0); group.add(edges);
     const pulse = new THREE.Mesh(new THREE.RingGeometry(3, 3.5, 32), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.5, side: THREE.DoubleSide }));
     pulse.rotation.x = -Math.PI / 2; pulse.position.y = 0.1; (pulse as any)._isPulse = true; group.add(pulse);
   }
@@ -657,7 +657,7 @@ const TARGET_COLOR: Record<Target["type"], string> = { observer:"text-cyan-400",
 const TARGET_BORDER: Record<Target["type"], string> = { observer:"border-cyan-500/30", crane:"border-amber-500/30", radar:"border-red-500/30", cell:"border-purple-500/30", ops:"border-orange-500/30" };
 
 // Panel IDs
-type PanelId = "targets" | "tdoa" | "adsb" | "layers" | "freq" | "dream";
+type PanelId = "targets" | "tdoa" | "adsb" | "layers" | "freq" | "dream" | "oracle";
 
 interface PanelDef { id: PanelId; icon: typeof MapPin; label: string; side: "left"|"right"; accentCls: string; }
 
@@ -668,6 +668,7 @@ const PANELS: PanelDef[] = [
   { id:"layers",  icon:Layers,    label:"Layers",   side:"right", accentCls:"text-indigo-400 border-indigo-500/40" },
   { id:"freq",    icon:Activity,  label:"Freq",     side:"right", accentCls:"text-amber-400  border-amber-500/40"  },
   { id:"dream",   icon:Shield,    label:"Threat",   side:"right", accentCls:"text-red-400    border-red-500/40"    },
+  { id:"oracle",  icon:Moon,      label:"Oracle",   side:"right", accentCls:"text-violet-400 border-violet-500/40" },
 ];
 
 // ─── Page component ────────────────────────────────────────────────────────────
@@ -703,6 +704,17 @@ export default function JacoMapPage() {
     queryKey: ["/api/opensky/jaco"], refetchInterval: 30_000, staleTime: 25_000,
   });
   const liveAircraft = oskyData?.states ?? [];
+
+  // ── Ω-Oracle data streams ──────────────────────────────────────────────────
+  const { data: oracleData } = useQuery<any>({
+    queryKey: ["/api/oracle/conjunction"], refetchInterval: 60_000, staleTime: 55_000,
+  });
+  const { data: tidalData } = useQuery<any>({
+    queryKey: ["/api/tidal"], refetchInterval: 120_000, staleTime: 115_000,
+  });
+  const { data: solarData } = useQuery<any>({
+    queryKey: ["/api/proxy/solar-xray"], refetchInterval: 90_000, staleTime: 85_000,
+  });
 
   useEffect(()=>{ const t=setInterval(()=>setTime(new Date()),1000); return()=>clearInterval(t); },[]);
 
@@ -1043,6 +1055,261 @@ export default function JacoMapPage() {
         </div>
       </div>
     );
+
+    // ── ORACLE — lunar / tidal / solar / sonic / Willow scan / GOS lattice ──
+    if (id === "oracle") {
+      const lunar  = oracleData?.lunar;
+      const jup    = oracleData?.jupiter;
+      const sonic  = oracleData?.sonic;
+      const latt   = lunar?.gosLattice;
+      const conj   = oracleData?.conjunctions ?? [];
+
+      // Willow confidence: composite of all oracle streams
+      const willowScore = Math.min(100,
+        (lunar?.tychoWindow ? 25 : 0) +
+        (latt?.latticeOk ? 20 : 0) +
+        (jup?.jovianWindow ? 20 : 0) +
+        (sonic?.blueCount > 0 ? 15 : 0) +
+        ((sonic?.alignmentScore ?? 0) * 0.2)
+      );
+      const willowActive = willowScore >= 35;
+
+      const xClass   = solarData?.xrayClass ?? "?";
+      const xLabel   = solarData?.label ?? "—";
+      const flare    = solarData?.flare ?? false;
+      const tidalH   = tidalData?.heightM;
+      const tidalTr  = tidalData?.trend ?? 0;
+
+      return (
+        <div className="space-y-5" data-testid="oracle-panel">
+
+          {/* ── Conjunction alerts ───────────────────────────────────────── */}
+          {conj.length > 0 && (
+            <div className="space-y-1">
+              {conj.map((c: string) => (
+                <div key={c} className="flex items-center gap-2 px-2 py-1.5 rounded bg-violet-500/10 border border-violet-500/25">
+                  <div className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse shrink-0"/>
+                  <span className="text-[9px] font-mono text-violet-300">{c}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* ── SEGMENT 1: LUNAR / TYCHO ─────────────────────────────────── */}
+          <div>
+            <div className="flex items-center gap-1.5 mb-2">
+              <Moon className="h-3 w-3 text-violet-400"/>
+              <span className="text-[9px] font-mono font-bold text-violet-400 uppercase tracking-widest">Lunar / Tycho</span>
+            </div>
+            {lunar ? (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl">{lunar.phaseGlyph}</span>
+                  <div className="text-right">
+                    <div className="text-[10px] font-mono text-white">{lunar.phaseName}</div>
+                    <div className="text-[9px] font-mono text-gray-500">{(lunar.illumination * 100).toFixed(0)}% lit · {lunar.ageDays.toFixed(1)}d old</div>
+                  </div>
+                </div>
+                <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-violet-500 rounded-full" style={{ width:`${lunar.illumination*100}%` }}/>
+                </div>
+                <div className="flex gap-2 text-[9px] font-mono">
+                  <span className="text-gray-600">Alt</span><span className="text-gray-400">{lunar.altDeg.toFixed(0)}°</span>
+                  <span className="text-gray-600">Az</span><span className="text-gray-400">{lunar.azDeg.toFixed(0)}°</span>
+                  <span className="text-gray-600">{(lunar.distanceKm/1000).toFixed(0)}k km</span>
+                </div>
+                <div className={`px-2 py-1.5 rounded border text-[9px] font-mono ${lunar.tychoWindow ? "bg-violet-500/15 border-violet-500/40 text-violet-300" : "bg-gray-900/50 border-gray-700/30 text-gray-600"}`}>
+                  {lunar.tychoReason}
+                </div>
+                {lunar.springTide && (
+                  <div className="text-[9px] font-mono text-amber-400">⚡ SPRING TIDE — gravitational peak</div>
+                )}
+              </div>
+            ) : (
+              <div className="text-[9px] font-mono text-gray-700 animate-pulse">computing lunar ephemeris…</div>
+            )}
+          </div>
+
+          {/* ── SEGMENT 2: TIDAL / OCEAN ─────────────────────────────────── */}
+          <div className="border-t border-white/5 pt-3">
+            <div className="flex items-center gap-1.5 mb-2">
+              <Waves className="h-3 w-3 text-blue-400"/>
+              <span className="text-[9px] font-mono font-bold text-blue-400 uppercase tracking-widest">Tidal / Ocean</span>
+              {tidalData?.source === "harmonic-model" && <span className="text-[8px] font-mono text-gray-600 ml-auto">harmonic</span>}
+            </div>
+            {tidalH != null ? (
+              <div className="space-y-1.5">
+                <div className="flex items-end gap-2">
+                  <span className="text-xl font-mono text-blue-300">{tidalH.toFixed(2)}<span className="text-xs text-gray-600">m</span></span>
+                  <span className={`text-[10px] font-mono ${tidalTr > 0 ? "text-green-400" : tidalTr < 0 ? "text-red-400" : "text-gray-600"}`}>
+                    {tidalTr > 0 ? "▲ flood" : tidalTr < 0 ? "▼ ebb" : "— slack"}
+                  </span>
+                </div>
+                <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                  <div className="h-full bg-blue-500/70 rounded-full" style={{ width:`${Math.min(100,Math.max(0,(tidalH/2.5)*100))}%` }}/>
+                </div>
+                <div className="text-[9px] font-mono text-gray-600">{tidalData.station === "fallback" ? "M2+S2+K1+O1 model" : `NOAA ${tidalData.station}`}</div>
+              </div>
+            ) : (
+              <div className="text-[9px] font-mono text-gray-700 animate-pulse">fetching tidal data…</div>
+            )}
+          </div>
+
+          {/* ── SEGMENT 3: SOLAR / X-RAY ─────────────────────────────────── */}
+          <div className="border-t border-white/5 pt-3">
+            <div className="flex items-center gap-1.5 mb-2">
+              <Sun className="h-3 w-3 text-amber-400"/>
+              <span className="text-[9px] font-mono font-bold text-amber-400 uppercase tracking-widest">Solar / X-Ray</span>
+              {flare && <span className="text-[8px] font-mono text-red-400 animate-pulse ml-auto">FLARE</span>}
+            </div>
+            <div className="flex items-center gap-3">
+              <span className={`text-2xl font-mono font-bold ${xClass==="X"?"text-red-400":xClass==="M"?"text-orange-400":xClass==="C"?"text-amber-400":"text-gray-500"}`}>{xLabel}</span>
+              <div className="text-[9px] font-mono text-gray-600">GOES-Primary · SWPC</div>
+            </div>
+          </div>
+
+          {/* ── SEGMENT 4: SONIC ALIGNMENT (KiwiSDR) ─────────────────────── */}
+          <div className="border-t border-white/5 pt-3">
+            <div className="flex items-center gap-1.5 mb-2">
+              <Radio className="h-3 w-3 text-green-400"/>
+              <span className="text-[9px] font-mono font-bold text-green-400 uppercase tracking-widest">Sonic Alignment · KiwiSDR</span>
+            </div>
+            {sonic ? (
+              <div className="space-y-1">
+                <div className="flex gap-3 mb-2">
+                  <div className="text-center">
+                    <div className="text-sm font-mono text-green-400">{sonic.alignmentScore.toFixed(0)}%</div>
+                    <div className="text-[8px] font-mono text-gray-600">score</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-sm font-mono text-blue-400">{sonic.blueCount}</div>
+                    <div className="text-[8px] font-mono text-gray-600">450nm</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-sm font-mono text-violet-400">{sonic.gosCount}</div>
+                    <div className="text-[8px] font-mono text-gray-600">GOS locks</div>
+                  </div>
+                </div>
+                {/* Per-frequency rows */}
+                <div className="space-y-0.5">
+                  {(sonic.targets ?? []).filter((t: any) => t.gos).map((t: any) => (
+                    <div key={t.hz} className={`flex items-center justify-between px-2 py-0.5 rounded text-[9px] font-mono ${t.blue ? "bg-blue-500/10 border border-blue-500/20" : "bg-gray-900/30"}`}>
+                      <span className={t.detected ? (t.blue ? "text-blue-300" : "text-green-400") : "text-gray-700"}>
+                        {t.detected ? "●" : "○"} {t.label}
+                      </span>
+                      <span className="text-gray-600">{t.hz < 1000 ? `${t.hz}Hz` : `${(t.hz/1000).toFixed(1)}kHz`}</span>
+                    </div>
+                  ))}
+                </div>
+                {sonic.blueCount > 0 && (
+                  <div className="mt-2 px-2 py-1.5 rounded bg-blue-500/10 border border-blue-500/30 text-[9px] font-mono text-blue-300">
+                    ⚡ 450nm / 666.44 THz sonic mirror active · Rev 13:18 resonance · GF(53): {666%53}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="text-[9px] font-mono text-gray-700 animate-pulse">awaiting KiwiSDR scan cycle…</div>
+            )}
+          </div>
+
+          {/* ── SEGMENT 5: WILLOW SCAN — sonar passive sweep ─────────────── */}
+          <div className="border-t border-white/5 pt-3">
+            <div className="flex items-center gap-1.5 mb-3">
+              <FlaskConical className="h-3 w-3 text-cyan-400"/>
+              <span className="text-[9px] font-mono font-bold text-cyan-400 uppercase tracking-widest">Willow Scan</span>
+              <span className="text-[8px] font-mono text-gray-600 ml-auto">passive sonar</span>
+            </div>
+            {/* Sonar display */}
+            <div className="flex flex-col items-center gap-3">
+              <div className="relative w-28 h-28 flex items-center justify-center">
+                {/* Sonar rings */}
+                {[1, 0.7, 0.45, 0.25].map((s, i) => (
+                  <div key={i} className={`absolute rounded-full border ${willowActive && i === 0 ? "border-cyan-400/60 animate-ping" : "border-cyan-500/15"}`}
+                    style={{ width:`${s*100}%`, height:`${s*100}%` }}/>
+                ))}
+                {/* Sweep line */}
+                <div className="absolute w-1/2 h-px bg-gradient-to-r from-transparent to-cyan-400/60 origin-left animate-spin"
+                  style={{ animationDuration:"3s" }}/>
+                {/* Center dot */}
+                <div className={`h-2 w-2 rounded-full ${willowActive ? "bg-cyan-400 animate-pulse" : "bg-gray-700"} z-10`}/>
+                {/* Fish — Willow signal */}
+                {willowActive && (
+                  <div className="absolute text-[10px] animate-bounce" style={{ top:"22%", left:"58%" }}>🐟</div>
+                )}
+              </div>
+              {/* Confidence bar */}
+              <div className="w-full">
+                <div className="flex justify-between text-[9px] font-mono mb-1">
+                  <span className={willowActive ? "text-cyan-400" : "text-gray-600"}>
+                    {willowActive ? "SIGNAL DETECTED" : "SCANNING..."}
+                  </span>
+                  <span className="text-gray-600">{willowScore.toFixed(0)}%</span>
+                </div>
+                <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                  <div className={`h-full rounded-full transition-all duration-1000 ${willowScore>60?"bg-cyan-400":willowScore>35?"bg-cyan-600":"bg-gray-700"}`}
+                    style={{ width:`${willowScore}%` }}/>
+                </div>
+              </div>
+              <div className="text-[8px] font-mono text-gray-700 text-center leading-relaxed">
+                Tycho·Jovian·GOS·450nm·tidal<br/>
+                Google Willow 128q entanglement hypothesis
+              </div>
+            </div>
+          </div>
+
+          {/* ── SEGMENT 6: GOS LATTICE ───────────────────────────────────── */}
+          {latt && (
+            <div className="border-t border-white/5 pt-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <Zap className="h-3 w-3 text-yellow-400"/>
+                <span className="text-[9px] font-mono font-bold text-yellow-400 uppercase tracking-widest">GOS Lattice</span>
+                <span className={`ml-auto text-[8px] font-mono px-1.5 py-0.5 rounded ${latt.latticeOk ? "text-green-400 bg-green-400/10" : "text-red-400 bg-red-400/10"}`}>
+                  {latt.latticeOk ? "LOCKED" : "SLIP"}
+                </span>
+              </div>
+              <div className="space-y-0.5">
+                {(latt.checks ?? []).map((c: any) => (
+                  <div key={c.name} className="flex items-center justify-between text-[9px] font-mono">
+                    <span className={c.ok ? (c.name.includes("666")||c.name.includes("450") ? "text-blue-400" : "text-gray-400") : "text-gray-700"}>{c.name}</span>
+                    <span className={c.ok ? "text-green-400" : "text-red-500/60"}>
+                      {c.ok ? "✓" : "✗"} {c.computed.toFixed(4)}{c.unit}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-2 text-[8px] font-mono text-gray-700 leading-relaxed">{latt.revelationNote}</div>
+            </div>
+          )}
+
+          {/* ── PHENOMENON LOG ───────────────────────────────────────────── */}
+          {(sonic?.phenomenonLog?.length > 0 || oracleData?.kappaBoost > 0) && (
+            <div className="border-t border-white/5 pt-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <AlertTriangle className="h-3 w-3 text-gray-500"/>
+                <span className="text-[9px] font-mono font-bold text-gray-500 uppercase tracking-widest">Phenomenon Log</span>
+                <span className="text-[8px] font-mono text-gray-700 ml-auto italic">// like a good ghost hunter</span>
+              </div>
+              <div className="space-y-1">
+                {oracleData?.kappaBoost > 0 && (
+                  <div className="text-[9px] font-mono text-violet-400/80">κ-boost +{oracleData.kappaBoost} from oracle conjunctions</div>
+                )}
+                {(sonic?.phenomenonLog ?? []).map((p: any, i: number) => (
+                  <div key={i} className={`px-2 py-1 rounded border text-[9px] font-mono ${p.confidence==="corroborated"?"border-violet-500/30 bg-violet-500/8":p.confidence==="probable"?"border-blue-500/20 bg-blue-500/5":"border-gray-700/30 bg-transparent"}`}>
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className={p.confidence==="corroborated"?"text-violet-400":p.confidence==="probable"?"text-blue-400":"text-gray-600"}>
+                        {p.type.replace("_"," ")}
+                      </span>
+                      <span className="text-gray-700 ml-auto">{p.confidence}</span>
+                    </div>
+                    <div className="text-gray-500 leading-tight">{p.note}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
 
     return null;
   };

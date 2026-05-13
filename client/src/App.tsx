@@ -41,6 +41,7 @@ import GalliumPage from "@/pages/gallium";
 import SuitesCristinaPage from "@/pages/suites-cristina";
 import JacoMapPage from "@/pages/jaco-map";
 import DroneIntelPage from "@/pages/drone-intel/index";
+import DroneGamePage from "@/pages/drone-game";
 
 function Router() {
   return (
@@ -77,6 +78,7 @@ function Router() {
       <Route path="/cristina" component={SuitesCristinaPage} />
       <Route path="/jaco" component={JacoMapPage} />
       <Route path="/drone-intel" component={DroneIntelPage} />
+      <Route path="/game" component={DroneGamePage} />
       <Route component={NotFound} />
     </Switch>
   );

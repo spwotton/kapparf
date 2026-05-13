@@ -1510,6 +1510,85 @@ export async function registerRoutes(
     }
   });
 
+  // ─── Ω-Oracle: Lunar / Planetary / GOS Lattice ───────────────────────────
+  app.get("/api/lunar", async (_req, res) => {
+    try {
+      const { computeLunar, computeJupiter } = await import("./lib/lunar");
+      res.json({ lunar: computeLunar(), jupiter: computeJupiter(), ts: new Date().toISOString() });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // ─── Tidal: NOAA CO-OPS Balboa (Pacific Pacific analog) + harmonic fallback ─
+  app.get("/api/tidal", async (_req, res) => {
+    try {
+      const station = "9440422"; // Balboa, Panama — closest Pacific CO-OPS
+      const now = new Date();
+      const dateStr = now.toISOString().slice(0, 10).replace(/-/g, "");
+      const url = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?station=${station}&product=water_level&datum=MLLW&units=metric&time_zone=gmt&format=json&begin_date=${dateStr}&end_date=${dateStr}`;
+      const resp = await fetch(url, { signal: AbortSignal.timeout(5000) });
+      if (resp.ok) {
+        const d = await resp.json();
+        const readings: Array<{ t: string; v: string }> = d?.data ?? [];
+        const latest = readings[readings.length - 1];
+        const heightM = latest ? parseFloat(latest.v) : null;
+        const trend = readings.length >= 2
+          ? parseFloat(readings[readings.length - 1].v) - parseFloat(readings[readings.length - 2].v)
+          : 0;
+        res.json({ source: "NOAA CO-OPS Balboa", heightM, trend, station, ts: latest?.t ?? now.toISOString(), readings: readings.slice(-6) });
+      } else { throw new Error("NOAA status " + resp.status); }
+    } catch {
+      // Harmonic fallback — M2+S2+K1+O1 for Pacific CR coast
+      const t = Date.now() / 1000;
+      const M2 = 0.85 * Math.cos(2 * Math.PI * t / (12.4206 * 3600) + 1.2);
+      const S2 = 0.12 * Math.cos(2 * Math.PI * t / (12.0 * 3600) + 0.8);
+      const K1 = 0.25 * Math.cos(2 * Math.PI * t / (23.934 * 3600) + 2.1);
+      const O1 = 0.20 * Math.cos(2 * Math.PI * t / (25.819 * 3600) + 0.5);
+      const heightM = 0.9 + M2 + S2 + K1 + O1;
+      const trend = -0.85 * Math.sin(2 * Math.PI * t / (12.4206 * 3600) + 1.2) * (2 * Math.PI / (12.4206 * 3600));
+      res.json({ source: "harmonic-model", heightM: +heightM.toFixed(3), trend: +trend.toFixed(4), station: "fallback", ts: new Date().toISOString(), readings: [] });
+    }
+  });
+
+  // ─── Solar X-ray proxy (GOES SWPC) ───────────────────────────────────────
+  app.get("/api/proxy/solar-xray", async (_req, res) => {
+    try {
+      const resp = await fetch("https://services.swpc.noaa.gov/json/goes/primary/xrays-1-minute.json", { signal: AbortSignal.timeout(6000) });
+      const data = await resp.json();
+      const latest = Array.isArray(data) ? data[data.length - 1] : null;
+      const flux = latest?.flux ?? latest?.["flux"] ?? 0;
+      // X-ray class: A<1e-7, B<1e-6, C<1e-5, M<1e-4, X>=1e-4
+      const xrayClass = flux >= 1e-4 ? "X" : flux >= 1e-5 ? "M" : flux >= 1e-6 ? "C" : flux >= 1e-7 ? "B" : "A";
+      const classNum = flux >= 1e-4 ? (flux / 1e-4).toFixed(1) : flux >= 1e-5 ? (flux / 1e-5).toFixed(1) : flux >= 1e-6 ? (flux / 1e-6).toFixed(1) : (flux / 1e-7).toFixed(1);
+      res.json({ flux, xrayClass, classNum, label: `${xrayClass}${classNum}`, ts: latest?.time_tag ?? new Date().toISOString(), flare: xrayClass === "M" || xrayClass === "X" });
+    } catch (e: any) {
+      res.json({ error: e.message, xrayClass: "?", label: "?", flux: 0, flare: false });
+    }
+  });
+
+  // ─── Oracle conjunction: full snapshot with KiwiSDR sonic alignment ────────
+  app.get("/api/oracle/conjunction", async (_req, res) => {
+    try {
+      const { computeOracleSnapshot, GOS_SONIC_TARGETS } = await import("./lib/lunar");
+      const status = getScannerStatus();
+      // Map KiwiSDR scan results to { freqHz, snrDb } for sonic alignment
+      // Scanner results are in kHz for HF/VLF — map targets that exist in audio range from Riemann/meta
+      const kiwiResults: Array<{ freqHz: number; snrDb: number }> = [];
+      if (status?.lastResults) {
+        for (const r of (status.lastResults as any[])) {
+          if (r?.freqHz && typeof r.snrDb === "number") {
+            kiwiResults.push({ freqHz: r.freqHz, snrDb: r.snrDb });
+          }
+        }
+      }
+      const snapshot = computeOracleSnapshot(kiwiResults.length > 0 ? kiwiResults : undefined, status?.kappaScore);
+      res.json(snapshot);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   app.get("/api/social/data", async (_req, res) => {
     const [domainCounts, correlationCount, events, correlations, satellites] = await Promise.all([
       storage.getEventCountsByDomain(),
