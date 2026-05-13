@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>QUANTUM QUAKE BSP — GOS Resurrection + BSP Map Loader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            color: #0ff
+        }
+
+        canvas#gl {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            cursor: none
+        }
+
+        /* ─── HUD ─── */
+        #hud {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            font-size: 13px
+        }
+
+        #hud-top {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 20, 40, .7);
+            padding: 8px 12px;
+            border: 1px solid rgba(0, 255, 64, .3);
+            border-radius: 4px
+        }
+
+        #hud-top h2 {
+            margin: 0 0 4px;
+            font-size: 14px;
+            color: #0f0
+        }
+
+        .row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        .val {
+            color: #ff0
+        }
+
+        #hud-bottom {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 24px;
+            background: rgba(0, 0, 0, .6);
+            padding: 6px 16px;
+            border: 1px solid #444;
+            border-radius: 4px
+        }
+
+        .stat {
+            text-align: center
+        }
+
+        .stat .label {
+            font-size: 10px;
+            color: #888
+        }
+
+        .stat .value {
+            font-size: 18px;
+            color: #0f0
+        }
+
+        /* ─── Crosshair ─── */
+        #cross {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            pointer-events: none
+        }
+
+        #cross::before,
+        #cross::after {
+            content: '';
+            position: absolute;
+            background: rgba(0, 255, 255, .5)
+        }
+
+        #cross::before {
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px
+        }
+
+        #cross::after {
+            left: 50%;
+            top: 0;
+            height: 100%;
+            width: 1px
+        }
+
+        /* ─── Gene Panel ─── */
+        #genes {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: rgba(0, 20, 40, .7);
+            padding: 8px;
+            border: 1px solid rgba(0, 255, 64, .3);
+            border-radius: 4px;
+            max-height: 45vh;
+            overflow-y: auto;
+            font-size: 11px;
+            width: 200px
+        }
+
+        #genes h3 {
+            color: #f0f;
+            margin-bottom: 4px;
+            font-size: 12px
+        }
+
+        .ge {
+            padding: 1px 0;
+            display: flex;
+            justify-content: space-between
+        }
+
+        .ge .f {
+            color: #ff0
+        }
+
+        .ge.collected {
+            opacity: .3
+        }
+
+        /* ─── Minimap ─── */
+        #minimap {
+            position: absolute;
+            bottom: 60px;
+            right: 8px;
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(0, 255, 64, .3);
+            background: rgba(0, 20, 40, .5);
+            border-radius: 4px
+        }
+
+        /* ─── Start overlay ─── */
+        #start {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, .92);
+            color: #0ff;
+            padding: 30px 40px;
+            border: 2px solid #0ff;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 100;
+            max-width: 520px
+        }
+
+        #start h1 {
+            color: #0f0;
+            margin-bottom: 10px;
+            font-size: 28px
+        }
+
+        .key {
+            color: #ff0;
+            font-weight: bold
+        }
+
+        #start.hidden {
+            display: none
+        }
+
+        /* ─── BSP Drop Zone ─── */
+        #bsp-zone {
+            margin: 16px 0;
+            padding: 16px;
+            border: 2px dashed rgba(0, 255, 255, .4);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color .2s, background .2s
+        }
+
+        #bsp-zone:hover,
+        #bsp-zone.dragover {
+            border-color: #0f0;
+            background: rgba(0, 255, 100, .08)
+        }
+
+        #bsp-zone p {
+            margin: 4px 0
+        }
+
+        #bsp-file {
+            display: none
+        }
+
+        #bsp-status {
+            color: #ff0;
+            font-size: 12px;
+            margin-top: 6px;
+            min-height: 16px
+        }
+
+        #bsp-info {
+            color: #888;
+            font-size: 10px
+        }
+
+        /* ─── Notification ─── */
+        #notify {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 20, 0, .9);
+            color: #0f0;
+            padding: 20px 30px;
+            border: 1px solid #0f0;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 200;
+            display: none;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ═══ Start Overlay ═══ -->
+    <div id="start">
+        <h1>QUANTUM QUAKE BSP</h1>
+        <p style="color:#888">GOS Resurrection Engine v0.3 — Raw WebGL2 + BSP Loader</p><br>
+
+        <!-- BSP File Picker -->
+        <div id="bsp-zone" onclick="document.getElementById('bsp-file').click()">
+            <p style="color:#0ff;font-size:14px">DROP .BSP FILE HERE</p>
+            <p id="bsp-info">or click to browse — Q3 Arena, Q2, Half-Life/CS 1.6, Q1 (.bsp or .zip)</p>
+            <input type="file" id="bsp-file" accept=".bsp,.zip">
+            <div id="bsp-status"></div>
+        </div>
+
+        <p><span class="key">WASD</span> Move · <span class="key">Mouse</span> Look</p>
+        <p><span class="key">Space</span> Jump · <span class="key">Shift</span> Sprint</p>
+        <p><span class="key">E</span> Interact · <span class="key">Q</span> Klein Twist (128.23°)</p>
+        <p><span class="key">V</span> Noclip · <span class="key">P</span> Post-FX Toggle</p><br>
+        <p style="color:#0f0;font-size:16px;cursor:pointer" id="btn-play">[ CLICK TO ENTER ]</p>
+        <p style="font-size:10px;color:#555;margin-top:8px">κ=1.435 | φ=1.618 | θ=128.23° | Δκ=0.161393 | Ψ(t)=1</p>
+    </div>
+
+    <!-- ═══ Notification ═══ -->
+    <div id="notify"></div>
+
+    <!-- ═══ HUD ═══ -->
+    <div id="hud">
+        <div id="hud-top">
+            <h2>QUANTUM QUAKE BSP</h2>
+            <div class="row">
+                <span>κ: <span class="val" id="d-kappa">1.435</span></span>
+                <span>Ψ: <span class="val" id="d-psi">1.000</span></span>
+                <span>θ: <span class="val" id="d-theta">128.23°</span></span>
+                <span>t: <span class="val" id="d-time">0.00</span>s</span>
+                <span>FPS: <span class="val" id="d-fps">0</span></span>
+            </div>
+            <div class="row" id="bsp-hud" style="display:none;margin-top:4px">
+                <span>MAP: <span class="val" id="d-map">—</span></span>
+                <span>FACES: <span class="val" id="d-faces">0</span></span>
+                <span>FORMAT: <span class="val" id="d-format">—</span></span>
+            </div>
+        </div>
+        <div id="hud-bottom">
+            <div class="stat">
+                <div class="label">HEALTH</div>
+                <div class="value" id="d-hp">100</div>
+            </div>
+            <div class="stat">
+                <div class="label">RESONANCE</div>
+                <div class="value" id="d-res">0%</div>
+            </div>
+            <div class="stat">
+                <div class="label">GENE</div>
+                <div class="value" id="d-gene">—</div>
+            </div>
+            <div class="stat">
+                <div class="label">CARRIER</div>
+                <div class="value" id="d-car">8.392</div>
+            </div>
+            <div class="stat">
+                <div class="label">GENES</div>
+                <div class="value" id="d-gc">0/62</div>
+            </div>
+        </div>
+        <div id="cross"></div>
+    </div>
+
+    <div id="genes">
+        <h3>RESONOME</h3>
+        <div id="gene-list"></div>
+    </div>
+    <canvas id="minimap" width="150" height="150"></canvas>
+    <canvas id="gl"></canvas>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     VERTEX SHADER — GOS Twist
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="vs-gos" type="x-shader/x-vertex">#version 300 es
+precision highp float;
+
+layout(location=0) in vec3 aPos;
+layout(location=1) in vec3 aNorm;
+layout(location=2) in vec3 aColor;
+
+uniform mat4 uProj;
+uniform mat4 uView;
+uniform mat4 uModel;
+uniform float uTime;
+uniform float uTwist;   // 128.23° rad
+uniform float uDK;      // Δκ = 0.161393
+uniform float uCarrier;
+
+out vec3 vWorldPos;
+out vec3 vNorm;
+out vec3 vColor;
+out float vHeight;
+
+void main(){
+    // GOS twist: rotate around Y by θ * sin(2πΔκt) scaled by height
+    float twist = uTwist * sin(6.283185 * uDK * uTime) * aPos.y * 0.02;
+    float ct = cos(twist), st = sin(twist);
+    vec3 twisted = vec3(aPos.x*ct - aPos.z*st, aPos.y, aPos.x*st + aPos.z*ct);
+
+    vec4 worldPos = uModel * vec4(twisted, 1.0);
+    vWorldPos = worldPos.xyz;
+    vNorm = mat3(uModel) * aNorm;
+    vColor = aColor;
+    vHeight = aPos.y;
+    gl_Position = uProj * uView * worldPos;
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     FRAGMENT SHADER — GOS Resonance Field (Enhanced Quantum Rendering)
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="fs-gos" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec3 vWorldPos;
+in vec3 vNorm;
+in vec3 vColor;
+in float vHeight;
+
+uniform float uTime;
+uniform float uPsi;       // Ψ coherence
+uniform float uKappa;     // κ = 1.435
+uniform float uPhi;       // φ = 1.618
+uniform float uDK;
+uniform float uCarrier;
+uniform float uBreath;
+uniform vec3 uGeneCol;
+uniform vec3 uCamPos;
+
+out vec4 fragColor;
+
+void main(){
+    vec3 N = normalize(vNorm);
+    vec3 V = normalize(uCamPos - vWorldPos);
+    float NdotV = max(dot(N, V), 0.0);
+
+    // ── GOS κ-field interference (toroidal standing wave) ──
+    float d = length(vWorldPos.xz);
+    float kField = sin(d * uKappa - uTime * uCarrier * 0.5) * 0.12;
+    float kField2 = sin(d * uKappa * uPhi - uTime * uDK * 6.283) * 0.06; // φ-harmonic
+
+    // ── Golden ratio height gradient ──
+    float golden = fract(vHeight * 0.1 * uPhi);
+
+    // ── Three-point lighting (cinematic) ──
+    vec3 keyLight = normalize(vec3(0.4, 0.8, 0.3));
+    vec3 fillLight = normalize(vec3(-0.5, 0.3, -0.4));
+    vec3 rimLight = normalize(vec3(0.0, 0.2, -0.8));
+
+    float NdotKey = max(dot(N, keyLight), 0.0);
+    float NdotFill = max(dot(N, fillLight), 0.0);
+
+    // ── Specular (Blinn-Phong with κ-shimmer) ──
+    vec3 H = normalize(keyLight + V);
+    float spec = pow(max(dot(N, H), 0.0), 48.0) * 0.4;
+    float specShimmer = spec * (1.0 + 0.3 * sin(d * uKappa * 3.0 - uTime * 2.0));
+
+    // ── Hemisphere ambient (sky/ground with quantum color shift) ──
+    float hemiFactor = dot(N, vec3(0,1,0)) * 0.5 + 0.5;
+    vec3 skyAmb = vec3(0.10, 0.14, 0.22) + uGeneCol * 0.03 * uPsi;
+    vec3 gndAmb = vec3(0.04, 0.03, 0.02);
+    vec3 ambient = mix(gndAmb, skyAmb, hemiFactor);
+
+    // ── Base color with κ-field + φ-harmonic modulation ──
+    vec3 baseCol = vColor * (1.0 + kField + kField2);
+    baseCol += vec3(golden * 0.04, golden * 0.025, 0.0);
+
+    // ── Combine lighting ──
+    vec3 col = baseCol * (ambient
+        + vec3(0.95, 0.90, 0.82) * NdotKey * 0.55
+        + vec3(0.20, 0.25, 0.38) * NdotFill * 0.3);
+    col += vec3(0.95, 0.90, 0.82) * specShimmer;
+
+    // ── Subsurface scattering (warm backlit glow) ──
+    float scatter = max(dot(-N, keyLight), 0.0);
+    col += vec3(0.12, 0.04, 0.02) * scatter * scatter * 0.4;
+
+    // ── Gene glow influence ──
+    col += uGeneCol * uPsi * 0.10;
+
+    // ── Ψ coherence brightness ──
+    col *= 0.65 + 0.35 * uPsi;
+
+    // ── Enhanced rim lighting (quantum-colored) ──
+    float rim = pow(1.0 - NdotV, 3.0);
+    vec3 rimCol = mix(vec3(0.0, 0.25, 0.45), uGeneCol, uPsi * 0.4);
+    col += rimCol * rim * 0.35;
+
+    // ── Fresnel reflective shimmer (GOS periodicity) ──
+    float fresnel = pow(1.0 - NdotV, 5.0);
+    col += vec3(0.12, 0.18, 0.22) * fresnel * (0.5 + 0.5 * sin(uTime * uDK * 6.283));
+
+    // ── Volumetric-style depth fog with quantum gradient ──
+    float fogDist = length(uCamPos - vWorldPos);
+    float fog = 1.0 - exp(-fogDist * 0.005);
+    float fogPhase = sin(fogDist * 0.02 + uTime * uDK) * 0.5 + 0.5;
+    vec3 fogNear = vec3(0.02, 0.01, 0.05);
+    vec3 fogFar = vec3(0.04, 0.02, 0.10);
+    vec3 fogCol = mix(fogNear, fogFar, fogPhase);
+    col = mix(col, fogCol, fog * 0.8);
+
+    fragColor = vec4(col, 1.0);
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     SKY VERTEX SHADER
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="vs-sky" type="x-shader/x-vertex">#version 300 es
+precision highp float;
+layout(location=0) in vec3 aPos;
+
+uniform mat4 uProj;
+uniform mat4 uView;
+out vec3 vDir;
+void main(){
+    vDir = aPos;
+    vec4 p = uProj * mat4(mat3(uView)) * vec4(aPos,1.0);
+    gl_Position = p.xyww;
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     SKY FRAGMENT SHADER — Void + Stars + Nebula
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="fs-sky" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec3 vDir;
+uniform float uTime;
+uniform float uDK;
+out vec4 fragColor;
+
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+
+void main(){
+    vec3 d = normalize(vDir);
+    vec2 uv = vec2(atan(d.z,d.x)/6.283+.5, asin(d.y)/3.14159+.5);
+
+    // Stars
+    vec2 g = floor(uv*300.0);
+    float star = step(.997, hash(g));
+    float tw = .5 + .5*sin(uTime*2.0 + hash(g)*6.283);
+
+    // Nebula
+    float neb = 0.0;
+    vec2 p = uv*3.0;
+    for(int i=0;i<3;i++){
+        p = p*1.5 + uTime*uDK*.1;
+        neb += sin(p.x)*sin(p.y)*.5;
+        p = vec2(p.y,-p.x);
+    }
+    neb = abs(neb)*.15;
+
+    vec3 col = vec3(.02,0,.05);
+    col += vec3(.1,0,.2)*neb;
+    col += vec3(.8,.9,1)*star*tw;
+
+    // Horizon glow
+    float horizon = exp(-abs(d.y)*5.0);
+    col += vec3(0,.1,.15)*horizon;
+
+    fragColor = vec4(col,1);
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     GENE GLOW VERTEX SHADER
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="vs-gene" type="x-shader/x-vertex">#version 300 es
+precision highp float;
+layout(location=0) in vec3 aPos;
+layout(location=1) in vec3 aNorm;
+
+uniform mat4 uProj;
+uniform mat4 uView;
+uniform mat4 uModel;
+uniform float uTime;
+uniform float uFreq;
+uniform float uPhase;
+
+out vec3 vNorm;
+out vec3 vWorldPos;
+
+void main(){
+    float pulse = 1.0 + .15*sin(6.283*uFreq*.01*uTime + uPhase);
+    vec3 p = aPos * pulse;
+    float a = uTime*.7, c=cos(a), s=sin(a);
+    p = vec3(p.x*c-p.z*s, p.y, p.x*s+p.z*c);
+    vec4 w = uModel*vec4(p,1);
+    vWorldPos = w.xyz;
+    vNorm = mat3(uModel)*aNorm;
+    gl_Position = uProj*uView*w;
+}
+</script>
+
+    <script id="fs-gene" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec3 vNorm;
+in vec3 vWorldPos;
+uniform float uTime;
+uniform vec3 uColor;
+uniform float uFreq;
+uniform vec3 uCamPos;
+out vec4 fragColor;
+
+void main(){
+    float pulse = .5+.5*sin(6.283*uFreq*.01*uTime);
+    vec3 glow = uColor*(.5+.5*pulse);
+    vec3 V = normalize(uCamPos-vWorldPos);
+    vec3 N = normalize(vNorm);
+    float rim = pow(1.0-max(dot(V,N),0.0),2.0);
+    glow += vec3(1)*rim*.5;
+    fragColor = vec4(glow, .8+.2*pulse);
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     TEXTURED BSP VERTEX SHADER — GOS-enhanced with UV + texture layer
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="vs-gos-tex" type="x-shader/x-vertex">#version 300 es
+precision highp float;
+layout(location=0) in vec3 aPos;
+layout(location=1) in vec3 aNorm;
+layout(location=2) in vec3 aColor;
+layout(location=3) in vec2 aUV;
+layout(location=4) in float aTexLayer;
+uniform mat4 uProj, uView, uModel;
+uniform float uTime, uTwist, uDK;
+out vec3 vWorldPos, vNorm, vColor;
+out vec2 vUV;
+out float vTexLayer;
+void main(){
+    float twist = uTwist * sin(6.283185 * uDK * uTime) * aPos.y * 0.003;
+    float ct = cos(twist), st = sin(twist);
+    vec3 p = vec3(aPos.x*ct - aPos.z*st, aPos.y, aPos.x*st + aPos.z*ct);
+    vec4 wp = uModel * vec4(p, 1.0);
+    vWorldPos = wp.xyz;
+    vNorm = mat3(uModel) * aNorm;
+    vColor = aColor;
+    vUV = aUV;
+    vTexLayer = aTexLayer;
+    gl_Position = uProj * uView * wp;
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     TEXTURED BSP FRAGMENT SHADER — Texture sampling + GOS lighting
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="fs-gos-tex" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec3 vWorldPos, vNorm, vColor;
+in vec2 vUV;
+in float vTexLayer;
+uniform float uTime, uPsi, uKappa, uPhi, uDK, uCarrier;
+uniform vec3 uGeneCol, uCamPos;
+uniform sampler2DArray uTexArray;
+uniform float uHasTextures;
+out vec4 fragColor;
+void main(){
+    vec3 N = normalize(vNorm);
+    vec3 V = normalize(uCamPos - vWorldPos);
+    float NdV = max(dot(N, V), 0.0);
+    vec3 baseCol = vColor;
+    if (uHasTextures > 0.5) {
+        vec4 ts = texture(uTexArray, vec3(vUV, vTexLayer));
+        if (ts.a < 0.1) discard;
+        baseCol = ts.rgb;
+    }
+    float d = length(vWorldPos.xz);
+    float kField = sin(d * uKappa * 0.3 - uTime * uCarrier * 0.3) * 0.03;
+    vec3 keyDir = normalize(vec3(0.4, 0.8, 0.3));
+    vec3 fillDir = normalize(vec3(-0.5, 0.3, -0.4));
+    float NdK = max(dot(N, keyDir), 0.0);
+    float NdF = max(dot(N, fillDir), 0.0);
+    vec3 H = normalize(keyDir + V);
+    float spec = pow(max(dot(N, H), 0.0), 24.0) * 0.15;
+    float hemi = dot(N, vec3(0,1,0)) * 0.5 + 0.5;
+    vec3 ambient = mix(vec3(0.08, 0.06, 0.05), vec3(0.18, 0.20, 0.28), hemi);
+    float lmBright = (vColor.r + vColor.g + vColor.b) / 3.0;
+    vec3 lit = baseCol * (1.0 + kField);
+    if (uHasTextures > 0.5) { lit *= (0.25 + lmBright * 1.6); }
+    lit *= (ambient + vec3(0.85, 0.8, 0.75) * NdK * 0.6 + vec3(0.2, 0.25, 0.35) * NdF * 0.3);
+    lit += vec3(0.9, 0.85, 0.8) * spec;
+    float rim = pow(1.0 - NdV, 3.0);
+    lit += vec3(0.0, 0.12, 0.2) * rim * 0.15;
+    lit += uGeneCol * uPsi * 0.03;
+    float fogD = length(uCamPos - vWorldPos);
+    float fog = 1.0 - exp(-fogD * 0.003);
+    lit = mix(lit, vec3(0.03, 0.01, 0.06), fog * 0.6);
+    fragColor = vec4(lit, 1.0);
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     POST-PROCESS VERTEX SHADER — Fullscreen Quad
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="vs-post" type="x-shader/x-vertex">#version 300 es
+precision highp float;
+layout(location=0) in vec2 aPos;
+out vec2 vUV;
+void main(){
+    vUV = aPos * 0.5 + 0.5;
+    gl_Position = vec4(aPos, 0.0, 1.0);
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     POST-PROCESS FRAGMENT SHADER — Quantum Bloom + ACES + GOS Field
+     ═══════════════════════════════════════════════════════════ -->
+    <script id="fs-post" type="x-shader/x-fragment">#version 300 es
+precision highp float;
+in vec2 vUV;
+uniform sampler2D uScene;
+uniform sampler2D uDepth;
+uniform float uTime;
+uniform vec2 uResolution;
+uniform float uKappa;
+uniform float uDK;
+uniform float uPhi;
+out vec4 fragColor;
+
+// ACES Filmic Tone Mapping — the industry standard for HDR→SDR
+vec3 ACESFilm(vec3 x) {
+    float a = 2.51, b = 0.03, c = 2.43, d = 0.59, e = 0.14;
+    return clamp((x*(a*x+b))/(x*(c*x+d)+e), 0.0, 1.0);
+}
+
+float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1,311.7)))*43758.5453); }
+
+void main() {
+    vec2 uv = vUV;
+    vec2 px = 1.0 / uResolution;
+    float distCenter = length(uv - 0.5);
+
+    // ── Chromatic Aberration (GOS-modulated, stronger at edges) ──
+    float caBase = distCenter * 0.003;
+    float caTime = caBase * (1.0 + 0.2 * sin(uTime * uDK * 6.283));
+    float r = texture(uScene, uv + vec2(caTime, caTime*0.3)).r;
+    float g = texture(uScene, uv).g;
+    float b = texture(uScene, uv - vec2(caTime, caTime*0.3)).b;
+    vec3 col = vec3(r, g, b);
+
+    // ── Bloom (13-tap weighted cross + diagonal, bright-pass threshold) ──
+    vec3 bloom = vec3(0.0);
+    float bw[5]; bw[0]=0.3; bw[1]=0.25; bw[2]=0.2; bw[3]=0.15; bw[4]=0.1;
+    for (int i = 1; i <= 5; i++) {
+        float fi = float(i);
+        float w = bw[i-1];
+        vec2 ox = vec2(px.x * fi * 2.0, 0);
+        vec2 oy = vec2(0, px.y * fi * 2.0);
+        vec2 od = vec2(px.x * fi * 1.4, px.y * fi * 1.4);
+        bloom += max(texture(uScene, uv+ox).rgb - 0.45, 0.0) * w;
+        bloom += max(texture(uScene, uv-ox).rgb - 0.45, 0.0) * w;
+        bloom += max(texture(uScene, uv+oy).rgb - 0.45, 0.0) * w;
+        bloom += max(texture(uScene, uv-oy).rgb - 0.45, 0.0) * w;
+        bloom += max(texture(uScene, uv+od).rgb - 0.50, 0.0) * w * 0.5;
+        bloom += max(texture(uScene, uv-od).rgb - 0.50, 0.0) * w * 0.5;
+    }
+    col += bloom * 0.12;
+
+    // ── Screen-Space Ambient Occlusion (8-tap from depth differences) ──
+    float depth = texture(uDepth, uv).r;
+    float ao = 0.0;
+    for (int i = 0; i < 8; i++) {
+        float angle = float(i) * 0.7854; // PI/4
+        vec2 off = vec2(cos(angle), sin(angle)) * 0.004;
+        float d = texture(uDepth, uv + off).r;
+        ao += step(depth - 0.0005, d);
+    }
+    ao = ao / 8.0;
+    ao = 0.55 + 0.45 * ao; // soften
+    col *= ao;
+
+    // ── GOS Quantum Field Overlay (κ-ripples in screen space) ──
+    float qField = sin(distCenter * 60.0 * uKappa - uTime * uDK * 6.283) * 0.012;
+    float qField2 = sin((uv.x + uv.y) * 40.0 * uPhi - uTime * 1.5) * 0.006;
+    col += vec3(qField * 0.3, qField * 0.7 + qField2, qField * 0.9 + qField2 * 0.5);
+
+    // ── ACES Filmic Tone Mapping ──
+    col = ACESFilm(col * 1.15);
+
+    // ── Vignette (smooth radial darkening) ──
+    float vig = 1.0 - distCenter * distCenter * 0.9;
+    col *= vig;
+
+    // ── Fine Film Grain (temporal noise) ──
+    float grain = hash(uv * (uTime * 60.0 + 1.0));
+    col += (grain - 0.5) * 0.018;
+
+    // ── Subtle Color Grading (push shadows blue, highlights warm) ──
+    float lum = dot(col, vec3(0.2126, 0.7152, 0.0722));
+    col = mix(col + vec3(-0.01, -0.005, 0.02) * (1.0 - lum), col + vec3(0.01, 0.005, -0.01) * lum, lum);
+
+    // ── Gamma (linear → sRGB) ──
+    col = pow(max(col, 0.0), vec3(1.0/2.2));
+
+    fragColor = vec4(col, 1.0);
+}
+</script>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     MAIN ENGINE
+     ═══════════════════════════════════════════════════════════ -->
+    <script>
+        'use strict';
+
+        // ═══════════════════════════════════════════════════════════════
+        //  GOS CONSTANTS
+        // ═══════════════════════════════════════════════════════════════
+        const PI = Math.PI;
+        const TAU = PI * 2;
+        const PHI = (1 + Math.sqrt(5)) / 2;
+        const GOS = {
+            KAPPA: 1.435,
+            PHI: PHI,
+            THETA_DEG: 128.23,
+            THETA: 128.23 * PI / 180,
+            DK: 0.161393,
+            F0: 111,
+            CARRIER: 8.392,
+            OMEGA: 0.567143,
+        };
+
+        // 62 genes (inline)
+        const GENES = [
+            { n: "GENESIS", e: "🌌", f: 111, p: 0, c: "core" }, { n: "TOWER", e: "🗼", f: 128.23, p: 45, c: "core" }, { n: "BRIDGE", e: "🌉", f: 174.07, p: 90, c: "core" },
+            { n: "MOBIUS", e: "♾️", f: 222, p: 135, c: "topo" }, { n: "KLEIN", e: "🍶", f: 256.46, p: 180, c: "topo" }, { n: "TORUS", e: "🍩", f: 333, p: 225, c: "topo" },
+            { n: "QUBIT", e: "⚛️", f: 444, p: 270, c: "quantum" }, { n: "BELL", e: "🔔", f: 512.92, p: 315, c: "quantum" }, { n: "HADAMARD", e: "🎲", f: 555, p: 0, c: "quantum" },
+            { n: "PETAL", e: "🌸", f: 639.69, p: 36, c: "bio" }, { n: "HELIX", e: "🧬", f: 666, p: 72, c: "bio" }, { n: "ENZYME", e: "⚗️", f: 741, p: 108, c: "bio" },
+            { n: "PRISM", e: "🔺", f: 777, p: 144, c: "geo" }, { n: "MERKABA", e: "✡️", f: 852, p: 180, c: "geo" }, { n: "TESSERACT", e: "📦", f: 888, p: 216, c: "geo" },
+            { n: "PULSE", e: "💓", f: 963, p: 252, c: "signal" }, { n: "ECHO", e: "🔊", f: 999, p: 288, c: "signal" }, { n: "WAVE", e: "🌊", f: 1024.84, p: 324, c: "signal" },
+            { n: "FLAME", e: "🔥", f: 1111, p: 0, c: "element" }, { n: "FROST", e: "❄️", f: 1200, p: 60, c: "element" }, { n: "STORM", e: "⚡", f: 1279.38, p: 120, c: "element" },
+            { n: "VOID", e: "🕳️", f: 1333, p: 180, c: "void" }, { n: "SHADOW", e: "👤", f: 1435, p: 240, c: "void" }, { n: "NULL", e: "⬛", f: 1500, p: 300, c: "void" },
+            { n: "CROWN", e: "👑", f: 1555, p: 0, c: "meta" }, { n: "MIRROR", e: "🪞", f: 1618.03, p: 45, c: "meta" }, { n: "SEED", e: "🌱", f: 1666, p: 90, c: "meta" },
+            { n: "ANCHOR", e: "⚓", f: 1741, p: 135, c: "phys" }, { n: "GRAVITY", e: "🌍", f: 1777, p: 180, c: "phys" }, { n: "SPIN", e: "🌀", f: 1852, p: 225, c: "phys" },
+            { n: "CIPHER", e: "🔐", f: 1888, p: 270, c: "info" }, { n: "GLYPH", e: "🔣", f: 1963, p: 315, c: "info" }, { n: "RUNE", e: "ᚱ", f: 1999, p: 0, c: "info" },
+            { n: "DAWN", e: "🌅", f: 2048.69, p: 30, c: "time" }, { n: "DUSK", e: "🌇", f: 2111, p: 60, c: "time" }, { n: "EPOCH", e: "⏳", f: 2222, p: 90, c: "time" },
+            { n: "HALO", e: "😇", f: 2333, p: 120, c: "light" }, { n: "PHOTON", e: "💡", f: 2435, p: 150, c: "light" }, { n: "SPECTRUM", e: "🌈", f: 2558.76, p: 180, c: "light" },
+            { n: "ROOT", e: "🌳", f: 2666, p: 210, c: "bio" }, { n: "SPORE", e: "🍄", f: 2741, p: 240, c: "bio" }, { n: "BLOOM", e: "🌺", f: 2852, p: 270, c: "bio" },
+            { n: "NEXUS", e: "🔗", f: 2963, p: 300, c: "core" }, { n: "MATRIX", e: "🟩", f: 3000, p: 330, c: "core" }, { n: "AXIOM", e: "📐", f: 3141.59, p: 0, c: "core" },
+            { n: "FRACTAL", e: "🔀", f: 3333, p: 36, c: "geo" }, { n: "SPIRAL", e: "🌀", f: 3435, p: 72, c: "geo" }, { n: "LATTICE", e: "🔵", f: 3558.84, p: 108, c: "geo" },
+            { n: "CHARM", e: "✨", f: 3666, p: 144, c: "quantum" }, { n: "STRANGE", e: "👽", f: 3741, p: 180, c: "quantum" }, { n: "ENTANGLE", e: "🪢", f: 3852, p: 216, c: "quantum" },
+            { n: "TREMOR", e: "📳", f: 3963, p: 252, c: "signal" }, { n: "BEACON", e: "🚨", f: 4000, p: 288, c: "signal" }, { n: "CHORUS", e: "🎵", f: 4118.92, p: 324, c: "signal" },
+            { n: "OMEGA", e: "Ω", f: 4222, p: 0, c: "meta" }, { n: "ALPHA", e: "α", f: 4333, p: 60, c: "meta" }, { n: "INFINITY", e: "∞", f: 4435, p: 120, c: "meta" },
+            { n: "ZENITH", e: "⬆️", f: 4558.99, p: 180, c: "phys" }, { n: "NADIR", e: "⬇️", f: 4666, p: 240, c: "phys" }, { n: "HORIZON", e: "🌐", f: 4741, p: 300, c: "phys" },
+            { n: "PHOENIX", e: "🦅", f: 4852, p: 0, c: "void" }, { n: "REBIRTH", e: "♻️", f: 4999.07, p: 180, c: "void" },
+        ];
+        const CAT_COL = { core: [0, 1, 1], topo: [1, 0, 1], quantum: [0, 1, 0], bio: [1, .5, 0], geo: [1, 1, 0], signal: [1, 0, 0], element: [0, .5, 1], void: [.5, 0, .5], meta: [1, 1, 1], phys: [0, .8, .4], info: [.8, .8, 0], time: [0, .6, .8], light: [1, .9, .3] };
+
+        // ═══════════════════════════════════════════════════════════════
+        //  MINI 3D MATH LIBRARY
+        // ═══════════════════════════════════════════════════════════════
+        const v3 = {
+            create: (x = 0, y = 0, z = 0) => new Float32Array([x, y, z]),
+            add: (a, b) => new Float32Array([a[0] + b[0], a[1] + b[1], a[2] + b[2]]),
+            sub: (a, b) => new Float32Array([a[0] - b[0], a[1] - b[1], a[2] - b[2]]),
+            scale: (a, s) => new Float32Array([a[0] * s, a[1] * s, a[2] * s]),
+            dot: (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2],
+            cross: (a, b) => new Float32Array([a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]),
+            len: (a) => Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]),
+            norm: (a) => { const l = Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]) || 1; return new Float32Array([a[0] / l, a[1] / l, a[2] / l]); },
+            lerp: (a, b, t) => new Float32Array([a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1]), a[2] + t * (b[2] - a[2])]),
+        };
+
+        function m4Identity() { return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]); }
+
+        function m4Perspective(fovRad, aspect, near, far) {
+            const f = 1 / Math.tan(fovRad / 2), nf = 1 / (near - far);
+            return new Float32Array([f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (far + near) * nf, -1, 0, 0, 2 * far * near * nf, 0]);
+        }
+
+        function m4LookAt(eye, center, up) {
+            const z = v3.norm(v3.sub(eye, center));
+            const x = v3.norm(v3.cross(up, z));
+            const y = v3.cross(z, x);
+            return new Float32Array([
+                x[0], y[0], z[0], 0, x[1], y[1], z[1], 0, x[2], y[2], z[2], 0,
+                -v3.dot(x, eye), -v3.dot(y, eye), -v3.dot(z, eye), 1
+            ]);
+        }
+
+        function m4Translate(tx, ty, tz) {
+            return new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, tx, ty, tz, 1]);
+        }
+
+        function m4Scale(sx, sy, sz) {
+            return new Float32Array([sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, sz, 0, 0, 0, 0, 1]);
+        }
+
+        function m4RotY(a) {
+            const c = Math.cos(a), s = Math.sin(a);
+            return new Float32Array([c, 0, s, 0, 0, 1, 0, 0, -s, 0, c, 0, 0, 0, 0, 1]);
+        }
+        function m4RotX(a) {
+            const c = Math.cos(a), s = Math.sin(a);
+            return new Float32Array([1, 0, 0, 0, 0, c, -s, 0, 0, s, c, 0, 0, 0, 0, 1]);
+        }
+
+        function m4Mul(a, b) {
+            const r = new Float32Array(16);
+            for (let i = 0; i < 4; i++)for (let j = 0; j < 4; j++) {
+                r[j * 4 + i] = a[i] * b[j * 4] + a[4 + i] * b[j * 4 + 1] + a[8 + i] * b[j * 4 + 2] + a[12 + i] * b[j * 4 + 3];
+            }
+            return r;
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  GEOMETRY GENERATORS
+        // ═══════════════════════════════════════════════════════════════
+        function genPlane(w, d, segW, segD, color) {
+            const verts = [], norms = [], cols = [], idx = [];
+            for (let j = 0; j <= segD; j++)for (let i = 0; i <= segW; i++) {
+                verts.push((i / segW - .5) * w, 0, (j / segD - .5) * d);
+                norms.push(0, 1, 0);
+                cols.push(...color);
+            }
+            for (let j = 0; j < segD; j++)for (let i = 0; i < segW; i++) {
+                const a = j * (segW + 1) + i, b = a + 1, c = a + segW + 1, dd = c + 1;
+                idx.push(a, c, b, b, c, dd);
+            }
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        function genBox(sx, sy, sz, color) {
+            const hx = sx / 2, hy = sy / 2, hz = sz / 2;
+            const faces = [
+                { n: [0, 0, 1], v: [[-hx, -hy, hz], [hx, -hy, hz], [hx, hy, hz], [-hx, hy, hz]] },
+                { n: [0, 0, -1], v: [[hx, -hy, -hz], [-hx, -hy, -hz], [-hx, hy, -hz], [hx, hy, -hz]] },
+                { n: [0, 1, 0], v: [[-hx, hy, hz], [hx, hy, hz], [hx, hy, -hz], [-hx, hy, -hz]] },
+                { n: [0, -1, 0], v: [[-hx, -hy, -hz], [hx, -hy, -hz], [hx, -hy, hz], [-hx, -hy, hz]] },
+                { n: [1, 0, 0], v: [[hx, -hy, hz], [hx, -hy, -hz], [hx, hy, -hz], [hx, hy, hz]] },
+                { n: [-1, 0, 0], v: [[-hx, -hy, -hz], [-hx, -hy, hz], [-hx, hy, hz], [-hx, hy, -hz]] },
+            ];
+            const verts = [], norms = [], cols = [], idx = [];
+            let off = 0;
+            for (const f of faces) {
+                for (const v of f.v) { verts.push(...v); norms.push(...f.n); cols.push(...color); }
+                idx.push(off, off + 1, off + 2, off, off + 2, off + 3);
+                off += 4;
+            }
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        function genSphere(r, seg, color) {
+            const verts = [], norms = [], cols = [], idx = [];
+            for (let j = 0; j <= seg; j++)for (let i = 0; i <= seg; i++) {
+                const u = i / seg, v_ = j / seg;
+                const th = u * TAU, ph = v_ * PI;
+                const x = r * Math.sin(ph) * Math.cos(th);
+                const y = r * Math.cos(ph);
+                const z = r * Math.sin(ph) * Math.sin(th);
+                verts.push(x, y, z);
+                const n = v3.norm(v3.create(x, y, z));
+                norms.push(n[0], n[1], n[2]);
+                cols.push(...color);
+            }
+            for (let j = 0; j < seg; j++)for (let i = 0; i < seg; i++) {
+                const a = j * (seg + 1) + i, b = a + 1, c = a + seg + 1, d = c + 1;
+                idx.push(a, c, b, b, c, d);
+            }
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        function genDodecahedron(r, color) {
+            const t = (1 + Math.sqrt(5)) / 2;
+            const raw = [
+                [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+                [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+                [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
+            ];
+            const faces = [
+                [0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11],
+                [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
+                [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9],
+                [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]
+            ];
+            const verts = [], norms = [], cols = [], idx = [];
+            let off = 0;
+            for (const f of faces) {
+                const a = raw[f[0]].map(x => x * r / v3.len(v3.create(...raw[f[0]])));
+                const b = raw[f[1]].map(x => x * r / v3.len(v3.create(...raw[f[1]])));
+                const c_ = raw[f[2]].map(x => x * r / v3.len(v3.create(...raw[f[2]])));
+                const n = v3.norm(v3.cross(v3.sub(v3.create(...b), v3.create(...a)), v3.sub(v3.create(...c_), v3.create(...a))));
+                verts.push(...a, ...b, ...c_);
+                norms.push(n[0], n[1], n[2], n[0], n[1], n[2], n[0], n[1], n[2]);
+                cols.push(...color, ...color, ...color);
+                idx.push(off, off + 1, off + 2);
+                off += 3;
+            }
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        function genOctahedron(r, color) {
+            const raw = [[0, r, 0], [0, -r, 0], [r, 0, 0], [-r, 0, 0], [0, 0, r], [0, 0, -r]];
+            const faces = [[0, 4, 2], [0, 2, 5], [0, 5, 3], [0, 3, 4], [1, 2, 4], [1, 5, 2], [1, 3, 5], [1, 4, 3]];
+            const verts = [], norms = [], cols = [], idx = [];
+            let off = 0;
+            for (const f of faces) {
+                const a = raw[f[0]], b = raw[f[1]], c_ = raw[f[2]];
+                const n = v3.norm(v3.cross(v3.sub(v3.create(...b), v3.create(...a)), v3.sub(v3.create(...c_), v3.create(...a))));
+                verts.push(...a, ...b, ...c_);
+                norms.push(n[0], n[1], n[2], n[0], n[1], n[2], n[0], n[1], n[2]);
+                cols.push(...color, ...color, ...color);
+                idx.push(off, off + 1, off + 2);
+                off += 3;
+            }
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        function genCylinder(rTop, rBot, h, seg, color) {
+            const verts = [], norms = [], cols = [], idx = [];
+            for (let i = 0; i <= seg; i++) {
+                const a = i / seg * TAU;
+                const c = Math.cos(a), s = Math.sin(a);
+                verts.push(rTop * c, h / 2, rTop * s);
+                const n = v3.norm(v3.create(c, 0, s));
+                norms.push(n[0], n[1], n[2]); cols.push(...color);
+                verts.push(rBot * c, -h / 2, rBot * s);
+                norms.push(n[0], n[1], n[2]); cols.push(...color);
+            }
+            for (let i = 0; i < seg; i++) {
+                const a = i * 2, b = a + 1, c = a + 2, d = a + 3;
+                idx.push(a, b, c, c, b, d);
+            }
+            const topC = verts.length / 3;
+            verts.push(0, h / 2, 0); norms.push(0, 1, 0); cols.push(...color);
+            for (let i = 0; i <= seg; i++) {
+                const a = i / seg * TAU;
+                verts.push(rTop * Math.cos(a), h / 2, rTop * Math.sin(a));
+                norms.push(0, 1, 0); cols.push(...color);
+            }
+            for (let i = 0; i < seg; i++) idx.push(topC, topC + 1 + i, topC + 2 + i);
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        function genKleinBottle(scale, segsU, segsV, color) {
+            const verts = [], norms = [], cols = [], idx = [];
+            for (let j = 0; j <= segsV; j++)for (let i = 0; i <= segsU; i++) {
+                const u = i / segsU * TAU, v_ = j / segsV * TAU;
+                const R = 4;
+                let x, y, z;
+                if (u < PI) {
+                    x = 3 * Math.cos(u) * (1 + Math.sin(u)) + R * (1 - Math.cos(u) / 2) * Math.cos(u) * Math.cos(v_);
+                    z = -8 * Math.sin(u) - R * Math.sin(u) * Math.cos(v_) * (1 - Math.cos(u) / 2);
+                } else {
+                    x = 3 * Math.cos(u) * (1 + Math.sin(u)) + R * (1 - Math.cos(u) / 2) * Math.cos(v_ + PI);
+                    z = -8 * Math.sin(u);
+                }
+                y = -R * Math.sin(v_) * (1 - Math.cos(u) / 2);
+                verts.push(x * scale, y * scale, z * scale);
+                const n = v3.norm(v3.create(x, y, z));
+                norms.push(n[0], n[1], n[2]);
+                cols.push(...color);
+            }
+            for (let j = 0; j < segsV; j++)for (let i = 0; i < segsU; i++) {
+                const a = j * (segsU + 1) + i, b = a + 1, c = a + segsU + 1, d = c + 1;
+                idx.push(a, c, b, b, c, d);
+            }
+            return { verts: new Float32Array(verts), norms: new Float32Array(norms), cols: new Float32Array(cols), idx: new Uint16Array(idx) };
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  WebGL2 CORE
+        // ═══════════════════════════════════════════════════════════════
+        const canvas = document.getElementById('gl');
+        const gl = canvas.getContext('webgl2', { antialias: true, alpha: false });
+        if (!gl) { alert('WebGL2 is required.'); }
+
+        function compileShader(type, src) {
+            const sh = gl.createShader(type);
+            gl.shaderSource(sh, src);
+            gl.compileShader(sh);
+            if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+                console.error('Shader error:', gl.getShaderInfoLog(sh));
+                return null;
+            }
+            return sh;
+        }
+
+        function createProgram(vsId, fsId) {
+            const vs = compileShader(gl.VERTEX_SHADER, document.getElementById(vsId).textContent);
+            const fs = compileShader(gl.FRAGMENT_SHADER, document.getElementById(fsId).textContent);
+            const pg = gl.createProgram();
+            gl.attachShader(pg, vs);
+            gl.attachShader(pg, fs);
+            gl.linkProgram(pg);
+            if (!gl.getProgramParameter(pg, gl.LINK_STATUS)) {
+                console.error('Link error:', gl.getProgramInfoLog(pg));
+                return null;
+            }
+            pg.u = {};
+            const n = gl.getProgramParameter(pg, gl.ACTIVE_UNIFORMS);
+            for (let i = 0; i < n; i++) {
+                const info = gl.getActiveUniform(pg, i);
+                pg.u[info.name] = gl.getUniformLocation(pg, info.name);
+            }
+            return pg;
+        }
+
+        // Enhanced createMesh: supports Uint32Array for large BSP maps
+        function createMesh(geom) {
+            const vao = gl.createVertexArray();
+            gl.bindVertexArray(vao);
+
+            const posBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, geom.verts, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(0);
+
+            const normBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, normBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, geom.norms, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(1);
+
+            const colBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, colBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, geom.cols, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(2, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(2);
+
+            const idxBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, geom.idx, gl.STATIC_DRAW);
+
+            gl.bindVertexArray(null);
+
+            // Detect index type
+            const use32 = geom.idx instanceof Uint32Array;
+            return { vao, count: geom.idx.length, use32 };
+        }
+
+        // createMeshTextured: supports UV (loc 3) + texture layer (loc 4) attributes
+        function createMeshTextured(geom) {
+            const vao = gl.createVertexArray();
+            gl.bindVertexArray(vao);
+
+            const posBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, geom.verts, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(0);
+
+            const normBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, normBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, geom.norms, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(1);
+
+            const colBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, colBuf);
+            gl.bufferData(gl.ARRAY_BUFFER, geom.cols, gl.STATIC_DRAW);
+            gl.vertexAttribPointer(2, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(2);
+
+            if (geom.uvs) {
+                const uvBuf = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf);
+                gl.bufferData(gl.ARRAY_BUFFER, geom.uvs, gl.STATIC_DRAW);
+                gl.vertexAttribPointer(3, 2, gl.FLOAT, false, 0, 0);
+                gl.enableVertexAttribArray(3);
+            }
+
+            if (geom.texLayers) {
+                const tlBuf = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, tlBuf);
+                gl.bufferData(gl.ARRAY_BUFFER, geom.texLayers, gl.STATIC_DRAW);
+                gl.vertexAttribPointer(4, 1, gl.FLOAT, false, 0, 0);
+                gl.enableVertexAttribArray(4);
+            }
+
+            const idxBuf = gl.createBuffer();
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, idxBuf);
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, geom.idx, gl.STATIC_DRAW);
+
+            gl.bindVertexArray(null);
+            const use32 = geom.idx instanceof Uint32Array;
+            return { vao, count: geom.idx.length, use32 };
+        }
+
+        // Generate procedural RGBA texture from name
+        function generateProceduralTex(name, size) {
+            const rgba = new Uint8Array(size * size * 4);
+            const nl = (name || '').toLowerCase();
+            let h = 0;
+            for (let i = 0; i < nl.length; i++) h = ((h << 5) - h + nl.charCodeAt(i)) | 0;
+            let r0, g0, b0;
+            if (nl.includes('sky')) { r0 = 100; g0 = 140; b0 = 200; }
+            else if (nl.includes('sand') || nl.includes('dust') || nl.includes('desert')) { r0 = 170; g0 = 145; b0 = 100; }
+            else if (nl.includes('brick') || nl.includes('wall')) { r0 = 140; g0 = 90; b0 = 65; }
+            else if (nl.includes('metal') || nl.includes('steel') || nl.includes('pipe')) { r0 = 110; g0 = 115; b0 = 120; }
+            else if (nl.includes('wood') || nl.includes('crate') || nl.includes('plank')) { r0 = 130; g0 = 90; b0 = 50; }
+            else if (nl.includes('water') || nl.includes('liquid')) { r0 = 30; g0 = 70; b0 = 130; }
+            else if (nl.includes('grass') || nl.includes('ground') || nl.includes('dirt')) { r0 = 70; g0 = 100; b0 = 50; }
+            else if (nl.includes('tile') || nl.includes('floor')) { r0 = 140; g0 = 135; b0 = 125; }
+            else if (nl.includes('concrete') || nl.includes('cement')) { r0 = 130; g0 = 130; b0 = 125; }
+            else if (nl.includes('glass') || nl.includes('window')) { r0 = 120; g0 = 150; b0 = 180; }
+            else { r0 = 80 + (Math.abs(h) % 80); g0 = 80 + (Math.abs(h >> 8) % 80); b0 = 80 + (Math.abs(h >> 16) % 80); }
+            for (let y = 0; y < size; y++) {
+                for (let x = 0; x < size; x++) {
+                    const i = (y * size + x) * 4;
+                    const n1 = Math.sin(x * 0.4 + y * 0.3) * 8 + Math.sin(x * 0.15 - y * 0.2) * 12;
+                    const n2 = ((x ^ y) & 3) * 2;
+                    rgba[i] = Math.max(0, Math.min(255, r0 + n1 + n2));
+                    rgba[i + 1] = Math.max(0, Math.min(255, g0 + n1 + n2));
+                    rgba[i + 2] = Math.max(0, Math.min(255, b0 + n1 + n2));
+                    rgba[i + 3] = 255;
+                }
+            }
+            return rgba;
+        }
+
+        // Create TEXTURE_2D_ARRAY from extracted BSP textures
+        function createBSPTexArray(textures) {
+            const LAYER_SIZE = 128;
+            const numLayers = Math.max(textures.length, 1);
+            const levels = Math.floor(Math.log2(LAYER_SIZE)) + 1;
+            const tex = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D_ARRAY, tex);
+            gl.texStorage3D(gl.TEXTURE_2D_ARRAY, levels, gl.RGBA8, LAYER_SIZE, LAYER_SIZE, numLayers);
+
+            const tmpCanvas = document.createElement('canvas');
+            tmpCanvas.width = LAYER_SIZE; tmpCanvas.height = LAYER_SIZE;
+            const tmpCtx = tmpCanvas.getContext('2d');
+            const srcCanvas = document.createElement('canvas');
+            const srcCtx = srcCanvas.getContext('2d');
+
+            let embedded = 0;
+            for (let i = 0; i < textures.length; i++) {
+                const t = textures[i];
+                let layerData;
+                if (t && t.rgba) {
+                    embedded++;
+                    srcCanvas.width = t.w; srcCanvas.height = t.h;
+                    const src = new ImageData(new Uint8ClampedArray(t.rgba.buffer, t.rgba.byteOffset, t.rgba.byteLength), t.w, t.h);
+                    srcCtx.putImageData(src, 0, 0);
+                    tmpCtx.clearRect(0, 0, LAYER_SIZE, LAYER_SIZE);
+                    tmpCtx.drawImage(srcCanvas, 0, 0, LAYER_SIZE, LAYER_SIZE);
+                    layerData = new Uint8Array(tmpCtx.getImageData(0, 0, LAYER_SIZE, LAYER_SIZE).data.buffer);
+                } else {
+                    layerData = generateProceduralTex(t ? t.name : '', LAYER_SIZE);
+                }
+                gl.texSubImage3D(gl.TEXTURE_2D_ARRAY, 0, 0, 0, i, LAYER_SIZE, LAYER_SIZE, 1, gl.RGBA, gl.UNSIGNED_BYTE, layerData);
+            }
+
+            gl.generateMipmap(gl.TEXTURE_2D_ARRAY);
+            gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_WRAP_S, gl.REPEAT);
+            gl.texParameteri(gl.TEXTURE_2D_ARRAY, gl.TEXTURE_WRAP_T, gl.REPEAT);
+            console.log(`[BSP Textures] Created ${numLayers}-layer array (${embedded} embedded, ${numLayers - embedded} procedural)`);
+            return tex;
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  BSP PARSER — Supports Quake 2 (v38), Half-Life/GoldSrc (v30), Quake 1 (v29)
+        // ═══════════════════════════════════════════════════════════════
+
+        const BSP = {
+            loaded: false,
+            mesh: null,
+            data: null,
+            mapName: '',
+            format: '',
+            spawnPos: null,
+            spawnYaw: 0,
+            floorY: 0,
+            bounds: null,
+            texArray: null,
+            hasTextures: false,
+        };
+
+        // Surface flags (shared across formats)
+        const SURF_SKY = 0x4;
+        const SURF_WARP = 0x8;
+        const SURF_NODRAW = 0x80;
+
+        function parseBSP(buffer) {
+            const dv = new DataView(buffer);
+            const magic = dv.getUint32(0, true);
+
+            let format, version, numLumps, lumpStart;
+
+            if (magic === 0x50534249) { // "IBSP" — Quake 2 or Quake 3
+                version = dv.getInt32(4, true);
+                if (version === 38) { format = 'Quake 2'; numLumps = 19; }
+                else if (version === 46) { format = 'Quake 3'; numLumps = 17; }
+                else throw new Error('Unknown IBSP version: ' + version);
+                lumpStart = 8;
+            } else if (magic === 0x56425350) { // "VBSP" — Source
+                throw new Error('Source BSP (VBSP) not yet supported. Use Quake 2, Half-Life, or Quake 1 maps.');
+            } else if (magic === 30) { // Half-Life / GoldSrc
+                format = 'Half-Life';
+                version = 30;
+                numLumps = 15;
+                lumpStart = 4;
+            } else if (magic === 29) { // Quake 1
+                format = 'Quake 1';
+                version = 29;
+                numLumps = 15;
+                lumpStart = 4;
+            } else {
+                throw new Error('Unknown BSP format (magic: 0x' + magic.toString(16) + ')');
+            }
+
+            // Read directory of lumps
+            const lumps = [];
+            for (let i = 0; i < numLumps; i++) {
+                lumps.push({
+                    offset: dv.getInt32(lumpStart + i * 8, true),
+                    length: dv.getInt32(lumpStart + i * 8 + 4, true)
+                });
+            }
+
+            // Format-specific lump indices
+            let L;
+            if (format === 'Quake 2') {
+                L = {
+                    ENTITIES: 0, PLANES: 1, VERTEXES: 2, VISIBILITY: 3, NODES: 4, TEXINFO: 5,
+                    FACES: 6, LIGHTING: 7, LEAFS: 8, LEAFFACES: 9, LEAFBRUSHES: 10,
+                    EDGES: 11, SURFEDGES: 12, MODELS: 13
+                };
+            } else if (format === 'Quake 3') {
+                L = {
+                    ENTITIES: 0, TEXTURES: 1, PLANES: 2, NODES: 3, LEAFS: 4,
+                    LEAFFACES: 5, LEAFBRUSHES: 6, MODELS: 7, BRUSHES: 8, BRUSHSIDES: 9,
+                    VERTEXES: 10, MESHVERTS: 11, EFFECTS: 12, FACES: 13, LIGHTMAPS: 14,
+                    LIGHTVOLS: 15, VISDATA: 16
+                };
+            } else { // Half-Life, Quake 1
+                L = {
+                    ENTITIES: 0, PLANES: 1, TEXTURES: 2, VERTEXES: 3, VISIBILITY: 4, NODES: 5,
+                    TEXINFO: 6, FACES: 7, LIGHTING: 8, CLIPNODES: 9, LEAFS: 10,
+                    MARKSURFACES: 11, EDGES: 12, SURFEDGES: 13, MODELS: 14
+                };
+            }
+
+            // ──── QUAKE 3 ARENA (direct vertex+meshvert — no edges/surfedges) ────
+            if (format === 'Quake 3') {
+                const txl = lumps[L.TEXTURES];
+                const q3textures = [];
+                for (let i = 0; i < txl.length / 72; i++) {
+                    const o = txl.offset + i * 72;
+                    let tn = '';
+                    for (let j = 0; j < 64; j++) { const ch = dv.getUint8(o + j); if (ch === 0) break; tn += String.fromCharCode(ch); }
+                    q3textures.push({ name: tn, flags: dv.getInt32(o + 64, true), contents: dv.getInt32(o + 68, true) });
+                }
+                const q3vl = lumps[L.VERTEXES];
+                const numQ3V = q3vl.length / 44;
+                const q3pos = new Float32Array(numQ3V * 3), q3norm = new Float32Array(numQ3V * 3), q3col = new Uint8Array(numQ3V * 4);
+                for (let i = 0; i < numQ3V; i++) {
+                    const o = q3vl.offset + i * 44;
+                    q3pos[i * 3] = dv.getFloat32(o, true); q3pos[i * 3 + 1] = dv.getFloat32(o + 4, true); q3pos[i * 3 + 2] = dv.getFloat32(o + 8, true);
+                    q3norm[i * 3] = dv.getFloat32(o + 28, true); q3norm[i * 3 + 1] = dv.getFloat32(o + 32, true); q3norm[i * 3 + 2] = dv.getFloat32(o + 36, true);
+                    q3col[i * 4] = dv.getUint8(o + 40); q3col[i * 4 + 1] = dv.getUint8(o + 41); q3col[i * 4 + 2] = dv.getUint8(o + 42); q3col[i * 4 + 3] = dv.getUint8(o + 43);
+                }
+                const mvl = lumps[L.MESHVERTS];
+                const meshverts = new Int32Array(mvl.length / 4);
+                for (let i = 0; i < meshverts.length; i++) meshverts[i] = dv.getInt32(mvl.offset + i * 4, true);
+                const q3fl = lumps[L.FACES];
+                const q3faces = [];
+                for (let i = 0; i < q3fl.length / 104; i++) {
+                    const o = q3fl.offset + i * 104;
+                    q3faces.push({
+                        texture: dv.getInt32(o, true), type: dv.getInt32(o + 8, true),
+                        firstvert: dv.getInt32(o + 12, true), numverts: dv.getInt32(o + 16, true),
+                        firstmeshvert: dv.getInt32(o + 20, true), nummeshverts: dv.getInt32(o + 24, true),
+                        normal: [dv.getFloat32(o + 84, true), dv.getFloat32(o + 88, true), dv.getFloat32(o + 92, true)]
+                    });
+                }
+                const q3ml = lumps[L.MODELS];
+                const q3models = [];
+                for (let i = 0; i < q3ml.length / 40; i++) {
+                    const o = q3ml.offset + i * 40;
+                    q3models.push({
+                        mins: [dv.getFloat32(o, true), dv.getFloat32(o + 4, true), dv.getFloat32(o + 8, true)],
+                        maxs: [dv.getFloat32(o + 12, true), dv.getFloat32(o + 16, true), dv.getFloat32(o + 20, true)],
+                        firstface: dv.getInt32(o + 24, true), numfaces: dv.getInt32(o + 28, true)
+                    });
+                }
+                const q3el = lumps[L.ENTITIES];
+                const q3eb = new Uint8Array(buffer, q3el.offset, q3el.length);
+                const q3ent = new TextDecoder().decode(q3eb).replace(/\0/g, '');
+                console.log(`[parseBSP] Q3: ${numQ3V} verts, ${q3faces.length} faces, ${meshverts.length} meshverts, ${q3textures.length} textures`);
+                if (q3models.length > 0) console.log(`[parseBSP] Q3 model 0: firstface=${q3models[0].firstface} numfaces=${q3models[0].numfaces}`);
+                return {
+                    format, version, models: q3models, entityString: q3ent, q3: true,
+                    q3pos, q3norm, q3col, meshverts, q3faces, q3textures,
+                    lightData: null, lightBPP: 3,
+                    vertices: null, edges: null, surfedges: null, texinfos: null, faces: null, planes: null
+                };
+            }
+
+            // ─── Parse Vertices ───
+            const vl = lumps[L.VERTEXES];
+            const numVerts = vl.length / 12;
+            const vertices = new Float32Array(numVerts * 3);
+            for (let i = 0; i < numVerts; i++) {
+                const o = vl.offset + i * 12;
+                vertices[i * 3] = dv.getFloat32(o, true);
+                vertices[i * 3 + 1] = dv.getFloat32(o + 4, true);
+                vertices[i * 3 + 2] = dv.getFloat32(o + 8, true);
+            }
+
+            // ─── Parse Edges ───
+            const el = lumps[L.EDGES];
+            const numEdges = el.length / 4;
+            const edges = new Int32Array(numEdges * 2);
+            for (let i = 0; i < numEdges; i++) {
+                const o = el.offset + i * 4;
+                edges[i * 2] = dv.getUint16(o, true);
+                edges[i * 2 + 1] = dv.getUint16(o + 2, true);
+            }
+
+            // ─── Parse Surfedges ───
+            const sl = lumps[L.SURFEDGES];
+            const numSE = sl.length / 4;
+            const surfedges = new Int32Array(numSE);
+            for (let i = 0; i < numSE; i++) {
+                surfedges[i] = dv.getInt32(sl.offset + i * 4, true);
+            }
+
+            // ─── Parse Planes ───
+            const pl = lumps[L.PLANES];
+            const planeSize = 20;
+            const numPlanes = pl.length / planeSize;
+            const planes = [];
+            for (let i = 0; i < numPlanes; i++) {
+                const o = pl.offset + i * planeSize;
+                planes.push({
+                    normal: [dv.getFloat32(o, true), dv.getFloat32(o + 4, true), dv.getFloat32(o + 8, true)],
+                    dist: dv.getFloat32(o + 12, true)
+                });
+            }
+
+            // ─── Parse Texinfo ───
+            const tl = lumps[L.TEXINFO];
+            const texinfos = [];
+            let tiSize;
+            if (format === 'Quake 2') {
+                tiSize = 76;
+                for (let i = 0; i < tl.length / tiSize; i++) {
+                    const o = tl.offset + i * tiSize;
+                    const vecs = [[], []];
+                    for (let j = 0; j < 4; j++) vecs[0].push(dv.getFloat32(o + j * 4, true));
+                    for (let j = 0; j < 4; j++) vecs[1].push(dv.getFloat32(o + 16 + j * 4, true));
+                    const flags = dv.getInt32(o + 32, true);
+                    // Read texture name (32 chars at offset 40)
+                    let texName = '';
+                    for (let j = 0; j < 32; j++) {
+                        const ch = dv.getUint8(o + 40 + j);
+                        if (ch === 0) break;
+                        texName += String.fromCharCode(ch);
+                    }
+                    texinfos.push({ vecs, flags, texName });
+                }
+            } else { // HL / Q1
+                tiSize = 40;
+                for (let i = 0; i < tl.length / tiSize; i++) {
+                    const o = tl.offset + i * tiSize;
+                    const vecs = [[], []];
+                    for (let j = 0; j < 4; j++) vecs[0].push(dv.getFloat32(o + j * 4, true));
+                    for (let j = 0; j < 4; j++) vecs[1].push(dv.getFloat32(o + 16 + j * 4, true));
+                    const miptex = dv.getInt32(o + 32, true);
+                    const flags = dv.getInt32(o + 36, true);
+                    texinfos.push({ vecs, flags, miptex });
+                }
+            }
+
+            // ─── Parse Faces ───
+            const fl = lumps[L.FACES];
+            const faceSize = 20;
+            const numFaces = fl.length / faceSize;
+            const faces = [];
+            for (let i = 0; i < numFaces; i++) {
+                const o = fl.offset + i * faceSize;
+                faces.push({
+                    planenum: dv.getUint16(o, true),
+                    side: dv.getInt16(o + 2, true),
+                    firstedge: dv.getInt32(o + 4, true),
+                    numedges: dv.getInt16(o + 8, true),
+                    texinfo: dv.getInt16(o + 10, true),
+                    lightofs: dv.getInt32(o + 16, true)
+                });
+            }
+
+            // ─── Parse Models ───
+            const ml = lumps[L.MODELS];
+            const models = [];
+            if (format === 'Quake 2') {
+                const ms = 48;
+                for (let i = 0; i < ml.length / ms; i++) {
+                    const o = ml.offset + i * ms;
+                    models.push({
+                        mins: [dv.getFloat32(o, true), dv.getFloat32(o + 4, true), dv.getFloat32(o + 8, true)],
+                        maxs: [dv.getFloat32(o + 12, true), dv.getFloat32(o + 16, true), dv.getFloat32(o + 20, true)],
+                        origin: [dv.getFloat32(o + 24, true), dv.getFloat32(o + 28, true), dv.getFloat32(o + 32, true)],
+                        firstface: dv.getInt32(o + 40, true),
+                        numfaces: dv.getInt32(o + 44, true)
+                    });
+                }
+            } else { // HL
+                const ms = 64;
+                for (let i = 0; i < ml.length / ms; i++) {
+                    const o = ml.offset + i * ms;
+                    models.push({
+                        mins: [dv.getFloat32(o, true), dv.getFloat32(o + 4, true), dv.getFloat32(o + 8, true)],
+                        maxs: [dv.getFloat32(o + 12, true), dv.getFloat32(o + 16, true), dv.getFloat32(o + 20, true)],
+                        origin: [dv.getFloat32(o + 24, true), dv.getFloat32(o + 28, true), dv.getFloat32(o + 32, true)],
+                        firstface: dv.getInt32(o + 56, true),  // offset 56: after headnode[4](36-52) + visleafs(52-56)
+                        numfaces: dv.getInt32(o + 60, true)    // offset 60
+                    });
+                }
+            }
+
+            // ─── Parse Lighting ───
+            const ll = lumps[L.LIGHTING];
+            const lightData = ll.length > 0 ? new Uint8Array(buffer, ll.offset, ll.length) : null;
+            // Q2 and HL use RGB lightmaps (3 bytes per sample), Q1 uses 1 byte per sample
+            const lightBPP = (format === 'Quake 1') ? 1 : 3;
+
+            // ─── Parse Entities ───
+            const entLump = lumps[L.ENTITIES];
+            const entBytes = new Uint8Array(buffer, entLump.offset, entLump.length);
+            const entityString = new TextDecoder().decode(entBytes).replace(/\0/g, '');
+
+            // Extract HL/Q1 texture names AND pixel data from TEXTURES lump
+            let bspTextures = [];
+            if (L.TEXTURES !== undefined && lumps[L.TEXTURES] && lumps[L.TEXTURES].length > 4) {
+                const txl = lumps[L.TEXTURES];
+                const numTex = dv.getInt32(txl.offset, true);
+                for (let i = 0; i < numTex; i++) {
+                    const off = dv.getInt32(txl.offset + 4 + i * 4, true);
+                    if (off < 0 || off >= txl.length) { bspTextures.push({ name: '', w: 64, h: 64, rgba: null }); continue; }
+                    const base = txl.offset + off;
+                    let name = '';
+                    for (let j = 0; j < 16; j++) { const ch = dv.getUint8(base + j); if (ch === 0) break; name += String.fromCharCode(ch); }
+                    const w = dv.getUint32(base + 16, true);
+                    const h = dv.getUint32(base + 20, true);
+                    const mipOff0 = dv.getUint32(base + 24, true);
+                    const mipOff3 = dv.getUint32(base + 36, true);
+                    if (!mipOff0 || !w || !h) {
+                        bspTextures.push({ name, w: w || 64, h: h || 64, rgba: null });
+                    } else {
+                        try {
+                            const numPix = w * h;
+                            const indexed = new Uint8Array(buffer, base + mipOff0, numPix);
+                            const mip3Size = Math.max(1, (w >> 3)) * Math.max(1, (h >> 3));
+                            const palOff = base + mipOff3 + mip3Size + 2;
+                            const rgba = new Uint8Array(numPix * 4);
+                            for (let p = 0; p < numPix; p++) {
+                                const ci = indexed[p];
+                                rgba[p * 4] = dv.getUint8(palOff + ci * 3);
+                                rgba[p * 4 + 1] = dv.getUint8(palOff + ci * 3 + 1);
+                                rgba[p * 4 + 2] = dv.getUint8(palOff + ci * 3 + 2);
+                                rgba[p * 4 + 3] = (name.startsWith('{') && ci === 255) ? 0 : 255;
+                            }
+                            bspTextures.push({ name, w, h, rgba });
+                        } catch (e) {
+                            bspTextures.push({ name, w: w || 64, h: h || 64, rgba: null });
+                        }
+                    }
+                }
+                for (const ti of texinfos) {
+                    if (ti.miptex !== undefined && ti.miptex >= 0 && ti.miptex < bspTextures.length) {
+                        ti.texName = bspTextures[ti.miptex].name;
+                    }
+                }
+                const embCount = bspTextures.filter(t => t.rgba).length;
+                console.log(`[parseBSP] HL/Q1 textures: ${bspTextures.length} total, ${embCount} embedded`);
+                console.log(`[parseBSP] Names: ${bspTextures.map(t => t.name).filter(n => n).join(', ').substring(0, 300)}`);
+            }
+
+            // For Q2: build texture array from unique texinfo names
+            if (format === 'Quake 2' && bspTextures.length === 0) {
+                const seen = {};
+                for (const ti of texinfos) {
+                    const n = ti.texName || '';
+                    if (!(n in seen)) { seen[n] = bspTextures.length; bspTextures.push({ name: n, w: 64, h: 64, rgba: null }); }
+                    ti.miptex = seen[n];
+                }
+            }
+
+            console.log(`[parseBSP] ${format} v${version}: ${numVerts} verts, ${numEdges} edges, ${numSE} surfedges, ${faces.length} faces, ${models.length} models`);
+            if (models.length > 0) console.log(`[parseBSP] Model 0: firstface=${models[0].firstface} numfaces=${models[0].numfaces}`);
+
+            return {
+                format, version, vertices, edges, surfedges, planes, texinfos, faces,
+                models, lightData, lightBPP, entityString, textures: bspTextures
+            };
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  ENTITY STRING PARSER
+        // ═══════════════════════════════════════════════════════════════
+        function parseEntities(entString) {
+            const entities = [];
+            const re = /\{([^}]*)\}/gs;
+            let m;
+            while ((m = re.exec(entString)) !== null) {
+                const ent = {};
+                const kvRe = /"([^"]*)"\s*"([^"]*)"/g;
+                let kv;
+                while ((kv = kvRe.exec(m[1])) !== null) {
+                    ent[kv[1]] = kv[2];
+                }
+                if (Object.keys(ent).length > 0) entities.push(ent);
+            }
+            return entities;
+        }
+
+        function findSpawnPoint(entities) {
+            // Look for player start entities (in priority order)
+            const spawnClasses = ['info_player_start', 'info_player_deathmatch', 'info_player_coop',
+                'info_player_terrorist', 'info_player_counterterrorist'];
+            for (const cls of spawnClasses) {
+                const ent = entities.find(e => e.classname === cls);
+                if (ent && ent.origin) {
+                    const parts = ent.origin.split(/\s+/).map(Number);
+                    const yaw = ent.angle ? parseFloat(ent.angle) * PI / 180 : 0;
+                    return { origin: parts, yaw };
+                }
+            }
+            return null;
+        }
+
+        function findMapName(entities) {
+            const ws = entities.find(e => e.classname === 'worldspawn');
+            if (ws) return ws.message || ws.mapname || '';
+            return '';
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  QUAKE 3 MESH BUILDER (direct vertex + meshvert format)
+        // ═══════════════════════════════════════════════════════════════
+
+        function texColorFromName(texName, nx, ny, nz) {
+            if (texName) {
+                const tl = texName.toLowerCase();
+                if (tl.includes('sky')) return [0.05, 0.05, 0.12];
+                if (tl.includes('water') || tl.includes('!')) return [0.05, 0.15, 0.3];
+                if (tl.includes('lava')) return [0.5, 0.1, 0.0];
+                if (tl.includes('slime')) return [0.1, 0.4, 0.05];
+                if (tl.includes('light') || tl.includes('~')) return [0.6, 0.55, 0.3];
+                if (tl.includes('metal') || tl.includes('steel')) return [0.25, 0.25, 0.28];
+                if (tl.includes('wood')) return [0.3, 0.2, 0.1];
+                if (tl.includes('brick') || tl.includes('wall')) return [0.3, 0.18, 0.12];
+                if (tl.includes('sand') || tl.includes('dust') || tl.includes('dirt')) return [0.45, 0.38, 0.25];
+                if (tl.includes('floor') || tl.includes('tile')) return [0.25, 0.22, 0.2];
+                if (tl.includes('concrete') || tl.includes('plaster')) return [0.32, 0.3, 0.28];
+                if (tl.includes('glass') || tl.includes('window')) return [0.15, 0.2, 0.35];
+                if (tl.includes('grass') || tl.includes('ground')) return [0.15, 0.28, 0.12];
+                if (tl.includes('rock') || tl.includes('stone')) return [0.3, 0.28, 0.25];
+                if (tl.includes('crate') || tl.includes('box')) return [0.35, 0.25, 0.12];
+                if (tl.includes('door') || tl.includes('gate')) return [0.28, 0.18, 0.08];
+                if (tl.includes('gothic')) return [0.2, 0.12, 0.18];
+                if (tl.includes('tech') || tl.includes('base')) return [0.2, 0.22, 0.25];
+            }
+            const absZ = Math.abs(nz);
+            if (absZ > 0.7) return nz > 0 ? [0.18, 0.28, 0.18] : [0.28, 0.15, 0.12];
+            const hue = Math.atan2(ny, nx) / TAU + 0.5;
+            return [0.22 + 0.08 * Math.sin(hue * TAU), 0.18 + 0.06 * Math.cos(hue * TAU + 1), 0.25 + 0.08 * Math.sin(hue * TAU + 2)];
+        }
+
+        function buildQ3BSPMesh(bsp) {
+            const { q3pos, q3norm, q3col, meshverts, q3faces, q3textures, models } = bsp;
+            const wm = models[0];
+            const mins = [...wm.mins], maxs = [...wm.maxs];
+            const maxExtent = Math.max(maxs[0] - mins[0], maxs[1] - mins[1], maxs[2] - mins[2]);
+            const SCALE = maxExtent > 0 ? 200.0 / maxExtent : 0.03;
+            const cx = (mins[0] + maxs[0]) / 2, cy = (mins[1] + maxs[1]) / 2, cz = (mins[2] + maxs[2]) / 2;
+            function cvt(bx, by, bz) { return [(bx - cx) * SCALE, (bz - cz) * SCALE, -(by - cy) * SCALE]; }
+
+            const verts = [], norms = [], cols = [], indices = [];
+            let vertIdx = 0, skippedFaces = 0;
+            let typeStats = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+            for (let fi = wm.firstface; fi < wm.firstface + wm.numfaces; fi++) {
+                const face = q3faces[fi];
+                if (!face) { skippedFaces++; continue; }
+                typeStats[face.type] = (typeStats[face.type] || 0) + 1;
+                if (face.type !== 1 && face.type !== 3) { skippedFaces++; continue; }
+                if (face.nummeshverts < 3) { skippedFaces++; continue; }
+
+                const tex = q3textures[face.texture];
+                const texName = tex ? tex.name : '';
+                if (texName.includes('sky') || texName.includes('nodraw') ||
+                    texName.includes('clip') || texName.includes('trigger') ||
+                    texName.includes('caulk') || texName.includes('hint')) { skippedFaces++; continue; }
+
+                const nx = face.normal[0], ny = face.normal[1], nz = face.normal[2];
+                const color = texColorFromName(texName, nx, ny, nz);
+                const baseIdx = vertIdx;
+
+                for (let v = 0; v < face.numverts; v++) {
+                    const vi = face.firstvert + v;
+                    const pos = cvt(q3pos[vi * 3], q3pos[vi * 3 + 1], q3pos[vi * 3 + 2]);
+                    verts.push(pos[0], pos[1], pos[2]);
+                    // Convert Q3 normal (X-right Y-forward Z-up) to engine (X-right Y-up Z-back)
+                    const vnx = q3norm[vi * 3], vny = q3norm[vi * 3 + 2], vnz = -q3norm[vi * 3 + 1];
+                    const vnL = Math.sqrt(vnx * vnx + vny * vny + vnz * vnz) || 1;
+                    norms.push(vnx / vnL, vny / vnL, vnz / vnL);
+                    const r = q3col[vi * 4] / 255, g = q3col[vi * 4 + 1] / 255, b = q3col[vi * 4 + 2] / 255;
+                    const bright = (r + g + b) / 3;
+                    if (bright > 0.01) {
+                        cols.push(color[0] * r * 2.5, color[1] * g * 2.5, color[2] * b * 2.5);
+                    } else {
+                        cols.push(color[0], color[1], color[2]);
+                    }
+                    vertIdx++;
+                }
+                for (let m = 0; m < face.nummeshverts; m++) {
+                    indices.push(baseIdx + meshverts[face.firstmeshvert + m]);
+                }
+            }
+
+            console.log(`[buildQ3BSPMesh] ${vertIdx} verts, ${indices.length / 3} tris, ${skippedFaces} skipped`);
+            console.log(`[buildQ3BSPMesh] Face types: polygon=${typeStats[1] || 0} patch=${typeStats[2] || 0} mesh=${typeStats[3] || 0} billboard=${typeStats[4] || 0}`);
+
+            const use32 = vertIdx > 65535;
+            return {
+                geom: {
+                    verts: new Float32Array(verts), norms: new Float32Array(norms),
+                    cols: new Float32Array(cols), idx: use32 ? new Uint32Array(indices) : new Uint16Array(indices)
+                },
+                scale: SCALE, center: [cx, cy, cz],
+                bounds: { min: cvt(mins[0], mins[1], mins[2]), max: cvt(maxs[0], maxs[1], maxs[2]) },
+                stats: { vertices: vertIdx, triangles: indices.length / 3, faces: wm.numfaces - skippedFaces, skipped: skippedFaces }
+            };
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  BSP → WebGL2 MESH CONVERTER
+        //  Follows Quake 2's GL_BuildPolygonFromSurface algorithm
+        // ═══════════════════════════════════════════════════════════════
+
+        function buildBSPMesh(bsp) {
+            if (bsp.q3) return buildQ3BSPMesh(bsp);
+            const { vertices, edges, surfedges, planes, texinfos, faces, models, lightData, lightBPP } = bsp;
+            const worldModel = models[0];
+            console.log(`[buildBSPMesh] ${bsp.format}: Model 0 firstface=${worldModel.firstface} numfaces=${worldModel.numfaces} | ${vertices.length / 3} verts, ${edges.length / 2} edges, ${surfedges.length} surfedges, ${faces.length} faces`);
+
+            // Calculate bounds for auto-scaling
+            const mins = [...worldModel.mins];
+            const maxs = [...worldModel.maxs];
+            const extentX = maxs[0] - mins[0];
+            const extentY = maxs[1] - mins[1];
+            const extentZ = maxs[2] - mins[2];
+            const maxExtent = Math.max(extentX, extentY, extentZ);
+
+            // Auto-scale: fit map into ~200 engine units
+            const SCALE = maxExtent > 0 ? 200.0 / maxExtent : 0.03;
+
+            // Center offset (center map at origin)
+            const cx = (mins[0] + maxs[0]) / 2;
+            const cy = (mins[1] + maxs[1]) / 2;
+            const cz = (mins[2] + maxs[2]) / 2;
+
+            // Coordinate conversion: BSP (X-right, Y-forward, Z-up) → Engine (X-right, Y-up, Z-back)
+            function cvt(bx, by, bz) {
+                return [(bx - cx) * SCALE, (bz - cz) * SCALE, -(by - cy) * SCALE];
+            }
+
+            // Color from face normal direction (procedural "texturing" without actual textures)
+            function normalColor(nx, ny, nz, flags, texName) {
+                const absZ = Math.abs(nz);
+
+                // Special surface colors
+                if (texName) {
+                    const tl = texName.toLowerCase();
+                    if (tl.includes('sky')) return [0.05, 0.05, 0.12]; // dark sky
+                    if (tl.includes('water') || tl.includes('!')) return [0.05, 0.15, 0.3]; // water
+                    if (tl.includes('lava')) return [0.5, 0.1, 0.0];   // lava
+                    if (tl.includes('slime')) return [0.1, 0.4, 0.05];  // slime
+                    if (tl.includes('light') || tl.includes('~')) return [0.6, 0.55, 0.3];  // light fixture
+                    if (tl.includes('metal') || tl.includes('steel')) return [0.25, 0.25, 0.28];
+                    if (tl.includes('wood')) return [0.3, 0.2, 0.1];
+                    if (tl.includes('brick') || tl.includes('wall')) return [0.3, 0.18, 0.12];
+                    if (tl.includes('sand') || tl.includes('dust')) return [0.45, 0.38, 0.25];
+                    if (tl.includes('tile') || tl.includes('floor')) return [0.25, 0.22, 0.2];
+                    if (tl.includes('concrete') || tl.includes('plaster')) return [0.32, 0.3, 0.28];
+                    if (tl.includes('glass') || tl.includes('window')) return [0.15, 0.2, 0.35];
+                    if (tl.includes('door') || tl.includes('gate')) return [0.28, 0.18, 0.08];
+                    if (tl.includes('crate') || tl.includes('box')) return [0.35, 0.25, 0.12];
+                }
+
+                // Floor (Z-up normal > 0.7)
+                if (absZ > 0.7) {
+                    return nz > 0 ? [0.18, 0.28, 0.18] : [0.28, 0.15, 0.12]; // floor / ceiling
+                }
+
+                // Walls — color based on facing direction
+                const hue = Math.atan2(ny, nx) / TAU + 0.5;
+                return [
+                    0.22 + 0.08 * Math.sin(hue * TAU),
+                    0.18 + 0.06 * Math.cos(hue * TAU + 1),
+                    0.25 + 0.08 * Math.sin(hue * TAU + 2)
+                ];
+            }
+
+            // Pre-allocate arrays (estimate: avg 6 verts per face, 4 triangles)
+            const estVerts = worldModel.numfaces * 6;
+            const verts = [];
+            const norms = [];
+            const cols = [];
+            const uvs = [];
+            const texLayers = [];
+            const indices = [];
+            let vertIdx = 0;
+            let skippedFaces = 0;
+
+            for (let fi = worldModel.firstface; fi < worldModel.firstface + worldModel.numfaces; fi++) {
+                const face = faces[fi];
+                if (!face || face.numedges < 3) { skippedFaces++; continue; }
+
+                // Get texinfo
+                const ti = texinfos[face.texinfo];
+                if (!ti) { skippedFaces++; continue; }
+
+                // Skip sky and nodraw
+                if (ti.flags & SURF_SKY) { skippedFaces++; continue; }
+                if (ti.flags & SURF_NODRAW) { skippedFaces++; continue; }
+
+                // Get plane normal
+                const plane = planes[face.planenum];
+                if (!plane) { skippedFaces++; continue; }
+                let nx = plane.normal[0], ny = plane.normal[1], nz = plane.normal[2];
+                if (face.side) { nx = -nx; ny = -ny; nz = -nz; }
+
+                // Gather face vertices (Quake's surfedge → edge → vertex algorithm)
+                const faceVerts = [];
+                const faceVertsRaw = []; // Original BSP coords for UV computation
+                for (let e = 0; e < face.numedges; e++) {
+                    const se = surfedges[face.firstedge + e];
+                    let vi;
+                    if (se >= 0) {
+                        vi = edges[se * 2];     // edge.v[0]
+                    } else {
+                        vi = edges[(-se) * 2 + 1]; // edge.v[1]
+                    }
+                    // Get vertex position (raw BSP + converted)
+                    const bx = vertices[vi * 3], by = vertices[vi * 3 + 1], bz = vertices[vi * 3 + 2];
+                    faceVertsRaw.push([bx, by, bz]);
+                    faceVerts.push(cvt(bx, by, bz));
+                }
+
+                if (faceVerts.length < 3) { skippedFaces++; continue; }
+
+                // Convert normal to engine coords: (nx, ny, nz) BSP → engine
+                // BSP normal: (nx=X-right, ny=Y-forward, nz=Z-up)
+                // Engine normal: (X=right, Y=up, Z=-forward)
+                const enx = nx, eny = nz, enz = -ny;
+                const nLen = Math.sqrt(enx * enx + eny * eny + enz * enz) || 1;
+
+                // Determine color
+                const texName = ti.texName || '';
+                const color = normalColor(nx, ny, nz, ti.flags, texName);
+
+                // Apply lightmap brightness if available
+                if (lightData && face.lightofs >= 0 && face.lightofs < lightData.length) {
+                    if (lightBPP === 3) {
+                        const r = lightData[face.lightofs] / 255;
+                        const g = lightData[face.lightofs + 1] / 255;
+                        const b = lightData[face.lightofs + 2] / 255;
+                        const brightness = (r + g + b) / 3;
+                        color[0] *= (0.4 + brightness * 1.2);
+                        color[1] *= (0.4 + brightness * 1.2);
+                        color[2] *= (0.4 + brightness * 1.2);
+                    } else {
+                        const brightness = lightData[face.lightofs] / 255;
+                        color[0] *= (0.4 + brightness * 1.2);
+                        color[1] *= (0.4 + brightness * 1.2);
+                        color[2] *= (0.4 + brightness * 1.2);
+                    }
+                }
+
+                // Get texture dimensions for UV computation
+                const texIdx = (ti.miptex !== undefined && ti.miptex >= 0) ? ti.miptex : 0;
+                const texW = (bsp.textures && bsp.textures[texIdx]) ? bsp.textures[texIdx].w : 64;
+                const texH = (bsp.textures && bsp.textures[texIdx]) ? bsp.textures[texIdx].h : 64;
+
+                // Emit vertices for this face
+                const baseIdx = vertIdx;
+                for (let i = 0; i < faceVerts.length; i++) {
+                    verts.push(faceVerts[i][0], faceVerts[i][1], faceVerts[i][2]);
+                    norms.push(enx / nLen, eny / nLen, enz / nLen);
+                    cols.push(color[0], color[1], color[2]);
+                    // Compute UV from texinfo vecs and original BSP coords
+                    const bv = faceVertsRaw[i];
+                    const s = bv[0] * ti.vecs[0][0] + bv[1] * ti.vecs[0][1] + bv[2] * ti.vecs[0][2] + ti.vecs[0][3];
+                    const t = bv[0] * ti.vecs[1][0] + bv[1] * ti.vecs[1][1] + bv[2] * ti.vecs[1][2] + ti.vecs[1][3];
+                    uvs.push(s / texW, t / texH);
+                    texLayers.push(texIdx);
+                    vertIdx++;
+                }
+
+                // Fan triangulation (convex polygon: v0, v1, v2; v0, v2, v3; ...)
+                for (let i = 1; i < faceVerts.length - 1; i++) {
+                    indices.push(baseIdx, baseIdx + i, baseIdx + i + 1);
+                }
+            }
+
+            console.log(`BSP mesh built: ${vertIdx} vertices, ${indices.length / 3} triangles, ${skippedFaces} faces skipped`);
+
+            // Choose index type based on vertex count
+            const use32 = vertIdx > 65535;
+            const idxArray = use32 ? new Uint32Array(indices) : new Uint16Array(indices);
+
+            return {
+                geom: {
+                    verts: new Float32Array(verts),
+                    norms: new Float32Array(norms),
+                    cols: new Float32Array(cols),
+                    uvs: new Float32Array(uvs),
+                    texLayers: new Float32Array(texLayers),
+                    idx: idxArray
+                },
+                scale: SCALE,
+                center: [cx, cy, cz],
+                bounds: {
+                    min: cvt(mins[0], mins[1], mins[2]),
+                    max: cvt(maxs[0], maxs[1], maxs[2])
+                },
+                stats: {
+                    vertices: vertIdx,
+                    triangles: indices.length / 3,
+                    faces: worldModel.numfaces - skippedFaces,
+                    skipped: skippedFaces
+                }
+            };
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  BSP LOADER (File input / drag-drop)
+        // ═══════════════════════════════════════════════════════════════
+
+        function loadBSPFile(file) {
+            const status = document.getElementById('bsp-status');
+            status.textContent = 'Loading ' + file.name + '...';
+            status.style.color = '#0ff';
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const t0 = performance.now();
+                    const bspData = parseBSP(e.target.result);
+                    const t1 = performance.now();
+
+                    const entities = parseEntities(bspData.entityString);
+                    const spawn = findSpawnPoint(entities);
+                    const mapName = findMapName(entities) || file.name.replace('.bsp', '');
+
+                    const meshResult = buildBSPMesh(bspData);
+                    const t2 = performance.now();
+
+                    // Create texture array from BSP embedded textures
+                    let hasTextures = false;
+                    let texArray = null;
+                    if (bspData.textures && bspData.textures.length > 0) {
+                        try {
+                            texArray = createBSPTexArray(bspData.textures);
+                            hasTextures = true;
+                            console.log(`[BSP] Texture array created with ${bspData.textures.length} layers`);
+                        } catch (e) {
+                            console.warn('[BSP] Texture array creation failed:', e);
+                        }
+                    }
+
+                    // Store BSP state
+                    BSP.data = bspData;
+                    BSP.mesh = hasTextures ? createMeshTextured(meshResult.geom) : createMesh(meshResult.geom);
+                    BSP.mapName = mapName;
+                    BSP.format = bspData.format;
+                    BSP.bounds = meshResult.bounds;
+                    BSP.hasTextures = hasTextures;
+                    BSP.texArray = texArray;
+                    BSP.loaded = true;
+
+                    // Set spawn point
+                    if (spawn) {
+                        const sv = [(spawn.origin[0] - meshResult.center[0]) * meshResult.scale,
+                        (spawn.origin[2] - meshResult.center[2]) * meshResult.scale,
+                        -(spawn.origin[1] - meshResult.center[1]) * meshResult.scale];
+                        BSP.spawnPos = v3.create(sv[0], sv[1] + 1.7, sv[2]);
+                        BSP.spawnYaw = -spawn.yaw + PI;
+                    } else {
+                        // Default: center of map, elevated
+                        const my = (meshResult.bounds.min[1] + meshResult.bounds.max[1]) / 2;
+                        BSP.spawnPos = v3.create(0, my + 5, 0);
+                        BSP.spawnYaw = 0;
+                    }
+
+                    // Calculate floor Y from bounds
+                    BSP.floorY = meshResult.bounds.min[1];
+
+                    // Clear default level
+                    levelObjects = [];
+                    kleinMesh = null;
+
+                    // Reset player to BSP spawn
+                    player.pos = v3.create(BSP.spawnPos[0], BSP.spawnPos[1], BSP.spawnPos[2]);
+                    player.vel = v3.create(0, 0, 0);
+                    player.yaw = BSP.spawnYaw;
+                    player.pitch = 0;
+                    player.onGround = false;
+
+                    const texInfo = hasTextures ? `, ${bspData.textures.length} textures` : '';
+                    status.textContent = `${bspData.format} v${bspData.version} — ${mapName} — ` +
+                        `${meshResult.stats.faces} faces, ${meshResult.stats.triangles} tris${texInfo} ` +
+                        `(parse: ${(t1 - t0).toFixed(0)}ms, build: ${(t2 - t1).toFixed(0)}ms)`;
+                    status.style.color = '#0f0';
+
+                    // Show BSP HUD
+                    document.getElementById('bsp-hud').style.display = '';
+                    document.getElementById('d-map').textContent = mapName;
+                    document.getElementById('d-faces').textContent = meshResult.stats.faces;
+                    document.getElementById('d-format').textContent = bspData.format + (hasTextures ? ' [TEX]' : '');
+
+                    showNotify(`MAP LOADED: ${mapName}\n${meshResult.stats.triangles} triangles${texInfo}`);
+
+                    console.log(`BSP loaded: ${bspData.format} v${bspData.version}`);
+                    console.log(`  Map: ${mapName}`);
+                    console.log(`  Verts: ${meshResult.stats.vertices}, Tris: ${meshResult.stats.triangles}`);
+                    console.log(`  Entities: ${entities.length}`);
+                    if (spawn) console.log(`  Spawn: ${spawn.origin.join(', ')} yaw=${spawn.yaw}`);
+
+                } catch (err) {
+                    status.textContent = 'ERROR: ' + err.message;
+                    status.style.color = '#f00';
+                    console.error('BSP load error:', err);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function showNotify(msg) {
+            const el = document.getElementById('notify');
+            el.textContent = msg;
+            el.style.display = 'block';
+            setTimeout(() => { el.style.display = 'none'; }, 2500);
+        }
+
+        function setupBSPFileHandling() {
+            const zone = document.getElementById('bsp-zone');
+            const input = document.getElementById('bsp-file');
+
+            // File input
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) handleDroppedFile(e.target.files[0]);
+            });
+
+            // Drag and drop
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                zone.classList.add('dragover');
+            });
+            zone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                zone.classList.remove('dragover');
+            });
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                zone.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) handleDroppedFile(e.dataTransfer.files[0]);
+            });
+
+            // Also allow drop on body (for full-window drop)
+            document.body.addEventListener('dragover', (e) => { e.preventDefault(); });
+            document.body.addEventListener('drop', (e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files.length > 0) handleDroppedFile(e.dataTransfer.files[0]);
+            });
+        }
+
+        // Handle .bsp or .zip files
+        function handleDroppedFile(file) {
+            const name = file.name.toLowerCase();
+            if (name.endsWith('.bsp')) {
+                loadBSPFile(file);
+            } else if (name.endsWith('.zip')) {
+                loadZipFile(file);
+            } else {
+                document.getElementById('bsp-status').textContent = 'Drop a .bsp or .zip file!';
+                document.getElementById('bsp-status').style.color = '#f00';
+            }
+        }
+
+        // Minimal ZIP extraction — find .bsp inside ZIP archive
+        function loadZipFile(file) {
+            const status = document.getElementById('bsp-status');
+            status.textContent = 'Scanning ZIP for .bsp files...';
+            status.style.color = '#0ff';
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const buf = e.target.result;
+                    const dv = new DataView(buf);
+                    const u8 = new Uint8Array(buf);
+                    // Find all local file headers (PK\x03\x04)
+                    const bspFiles = [];
+                    for (let i = 0; i < buf.byteLength - 30; i++) {
+                        if (dv.getUint32(i, true) === 0x04034b50) {
+                            const compMethod = dv.getUint16(i + 8, true);
+                            const compSize = dv.getUint32(i + 18, true);
+                            const uncompSize = dv.getUint32(i + 22, true);
+                            const nameLen = dv.getUint16(i + 26, true);
+                            const extraLen = dv.getUint16(i + 28, true);
+                            const name = new TextDecoder().decode(u8.slice(i + 30, i + 30 + nameLen));
+                            const dataStart = i + 30 + nameLen + extraLen;
+                            if (name.toLowerCase().endsWith('.bsp')) {
+                                bspFiles.push({ name, compMethod, compSize, uncompSize, dataStart });
+                            }
+                        }
+                    }
+                    if (bspFiles.length === 0) {
+                        status.textContent = 'No .bsp files found in ZIP!';
+                        status.style.color = '#f00';
+                        return;
+                    }
+                    // Use first BSP found (prefer stored/uncompressed)
+                    let bspEntry = bspFiles.find(f => f.compMethod === 0) || bspFiles[0];
+                    if (bspEntry.compMethod !== 0) {
+                        // Try to use DecompressionStream (modern browsers)
+                        if (typeof DecompressionStream !== 'undefined') {
+                            const compressed = buf.slice(bspEntry.dataStart, bspEntry.dataStart + bspEntry.compSize);
+                            const ds = new DecompressionStream('deflate-raw');
+                            const writer = ds.writable.getWriter();
+                            writer.write(compressed);
+                            writer.close();
+                            new Response(ds.readable).arrayBuffer().then(decompressed => {
+                                const bspBlob = new Blob([decompressed]);
+                                const bspFile = new File([bspBlob], bspEntry.name);
+                                loadBSPFile(bspFile);
+                            }).catch(err => {
+                                status.textContent = 'ZIP decompression failed: ' + err.message;
+                                status.style.color = '#f00';
+                            });
+                            return;
+                        }
+                        status.textContent = 'BSP in ZIP is compressed (method ' + bspEntry.compMethod + '). Use stored/uncompressed ZIP.';
+                        status.style.color = '#f00';
+                        return;
+                    }
+                    // Stored (uncompressed) — extract directly
+                    const bspBuf = buf.slice(bspEntry.dataStart, bspEntry.dataStart + bspEntry.uncompSize);
+                    const bspBlob = new Blob([bspBuf]);
+                    const bspFile = new File([bspBlob], bspEntry.name);
+                    status.textContent = `Found ${bspEntry.name} in ZIP (${(bspEntry.uncompSize / 1024).toFixed(0)}KB)`;
+                    loadBSPFile(bspFile);
+                } catch (err) {
+                    status.textContent = 'ZIP error: ' + err.message;
+                    status.style.color = '#f00';
+                    console.error('ZIP error:', err);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  PLAYER STATE (Quake-style)
+        // ═══════════════════════════════════════════════════════════════
+        const player = {
+            pos: v3.create(0, 1.7, 8),
+            vel: v3.create(0, 0, 0),
+            yaw: 0,
+            pitch: 0,
+            health: 100,
+            resonance: 0,
+            maxRes: 100,
+            activeGene: null,
+            activeGeneIdx: -1,
+            collected: new Set(),
+            speed: 12,
+            sprintMul: 1.8,
+            jumpForce: 8,
+            gravity: 22,
+            onGround: true,
+            height: 1.7,
+            noclip: false,
+        };
+
+        const keys = {};
+        let pointerLocked = false;
+
+        function playerForward() { return v3.create(-Math.sin(player.yaw), 0, -Math.cos(player.yaw)); }
+        function playerRight() { return v3.create(Math.cos(player.yaw), 0, -Math.sin(player.yaw)); }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  POST-PROCESSING PIPELINE (FBO + Fullscreen Quad)
+        // ═══════════════════════════════════════════════════════════════
+        let sceneFBO = null, sceneColorTex = null, sceneDepthTex = null;
+        let progPost = null, quadVAO = null;
+        let postEnabled = true;
+
+        function setupPostProcessing() {
+            try {
+                sceneFBO = gl.createFramebuffer();
+                sceneColorTex = gl.createTexture();
+                sceneDepthTex = gl.createTexture();
+                resizeFBO();
+
+                // Fullscreen quad (triangle strip: 4 verts)
+                quadVAO = gl.createVertexArray();
+                gl.bindVertexArray(quadVAO);
+                const qb = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, qb);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+                gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+                gl.enableVertexAttribArray(0);
+                gl.bindVertexArray(null);
+
+                progPost = createProgram('vs-post', 'fs-post');
+                if (!progPost) {
+                    console.warn('Post-process shader failed, disabling');
+                    postEnabled = false;
+                    return;
+                }
+                console.log('%c POST-PROCESSING: ENABLED ', 'background:#060;color:#0f0;');
+            } catch (e) {
+                console.warn('Post-processing setup failed:', e);
+                postEnabled = false;
+            }
+        }
+
+        function resizeFBO() {
+            if (!sceneFBO) return;
+            const w = canvas.width, h = canvas.height;
+            gl.bindTexture(gl.TEXTURE_2D, sceneColorTex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+            gl.bindTexture(gl.TEXTURE_2D, sceneDepthTex);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.DEPTH_COMPONENT24, w, h, 0, gl.DEPTH_COMPONENT, gl.UNSIGNED_INT, null);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+            gl.bindFramebuffer(gl.FRAMEBUFFER, sceneFBO);
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, sceneColorTex, 0);
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, sceneDepthTex, 0);
+            const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+            if (status !== gl.FRAMEBUFFER_COMPLETE) {
+                console.warn('FBO incomplete:', status);
+                postEnabled = false;
+            }
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  SCENE OBJECTS
+        // ═══════════════════════════════════════════════════════════════
+        let progGOS, progSky, progGene, progBSPTex;
+        let meshFloor, meshSky;
+        let levelObjects = [];
+        let geneObjects = [];
+        let kleinMesh, kleinModel;
+
+        let gameTime = 0;
+        let twistMultiplier = 1.0;
+
+        let mmCtx;
+
+        // ═══════════════════════════════════════════════════════════════
+        //  INIT
+        // ═══════════════════════════════════════════════════════════════
+        function init() {
+            resize();
+            window.addEventListener('resize', resize);
+
+            progGOS = createProgram('vs-gos', 'fs-gos');
+            progSky = createProgram('vs-sky', 'fs-sky');
+            progGene = createProgram('vs-gene', 'fs-gene');
+            progBSPTex = createProgram('vs-gos-tex', 'fs-gos-tex');
+
+            if (!progGOS || !progSky || !progGene) {
+                console.error('Shader compilation failed!');
+                return;
+            }
+
+            // Set texture array sampler unit once
+            if (progBSPTex) {
+                gl.useProgram(progBSPTex);
+                if (progBSPTex.u.uTexArray) gl.uniform1i(progBSPTex.u.uTexArray, 2);
+            }
+
+            gl.enable(gl.DEPTH_TEST);
+            gl.enable(gl.CULL_FACE);
+            gl.cullFace(gl.BACK);
+            gl.clearColor(0.02, 0.0, 0.04, 1.0);
+
+            buildSkybox();
+            buildLevel();
+            buildKleinBottle();
+            spawnGenes();
+            populateGenePanel();
+            setupInput();
+            setupBSPFileHandling();
+            setupPostProcessing();
+
+            mmCtx = document.getElementById('minimap').getContext('2d');
+
+            requestAnimationFrame(frame);
+            console.log('%c QUANTUM QUAKE BSP: GOS Resurrection ', 'background:#0a0a2e;color:#0ff;font-size:16px;padding:8px;');
+            console.log(`κ=${GOS.KAPPA.toFixed(4)} φ=${GOS.PHI.toFixed(4)} θ=${GOS.THETA_DEG}° Δκ=${GOS.DK}`);
+            console.log('Drop a .bsp file to load any Quake 2, Half-Life, or Quake 1 map!');
+        }
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            resizeFBO();
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  SKYBOX
+        // ═══════════════════════════════════════════════════════════════
+        function buildSkybox() {
+            meshSky = createMesh(genSphere(500, 24, [1, 1, 1]));
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  DEFAULT LEVEL (used when no BSP loaded)
+        // ═══════════════════════════════════════════════════════════════
+        function buildLevel() {
+            meshFloor = createMesh(genPlane(100, 100, 40, 40, [.15, .25, .15]));
+            levelObjects.push({ mesh: meshFloor, model: m4Identity(), type: 'floor' });
+
+            for (let i = 0; i < 12; i++) {
+                const a = i / 12 * TAU;
+                const x = Math.cos(a) * 25, z = Math.sin(a) * 25;
+                const hue = i / 12;
+                const col = [.5 + .5 * Math.cos(hue * TAU), .5 + .5 * Math.cos(hue * TAU + 2), .5 + .5 * Math.cos(hue * TAU + 4)];
+                const mesh = createMesh(genDodecahedron(1.5, col));
+                const model = m4Mul(m4Translate(x, 4, z), m4Scale(1, 3, 1));
+                levelObjects.push({ mesh, model, type: 'pillar', cx: x, cz: z, r: 2 });
+
+                const glowCol = [.3 + .7 * Math.cos(hue * TAU), .3 + .7 * Math.cos(hue * TAU + 2), .3 + .7 * Math.cos(hue * TAU + 4)];
+                const smesh = createMesh(genSphere(.6, 8, glowCol));
+                levelObjects.push({ mesh: smesh, model: m4Translate(x, 8, z), type: 'glow' });
+            }
+
+            for (let i = 0; i < 5; i++) {
+                const a = i / 5 * TAU + PI / 10;
+                const x = Math.cos(a) * 10, z = Math.sin(a) * 10;
+                const mesh = createMesh(genDodecahedron(2, [.4, .2, .9]));
+                levelObjects.push({ mesh, model: m4Translate(x, 2, z), type: 'totem', cx: x, cz: z, r: 2.5 });
+            }
+
+            for (let i = 0; i < 20; i++) {
+                const a = i / 20 * TAU;
+                const x = Math.cos(a) * 40, z = Math.sin(a) * 40;
+                const mesh = createMesh(genBox(4, 8, .5, [.15, .05, .25]));
+                const model = m4Mul(m4Translate(x, 4, z), m4RotY(-a + PI / 2));
+                levelObjects.push({ mesh, model, type: 'wall', cx: x, cz: z, r: 2.5 });
+            }
+
+            const pHeights = [3, 3 * PHI, 3 * PHI * PHI];
+            for (let h = 0; h < pHeights.length; h++) {
+                const y = pHeights[h], count = 3 + h * 2, radius = 15 - h * 3;
+                for (let i = 0; i < count; i++) {
+                    const a = i / count * TAU;
+                    const x = Math.cos(a) * radius, z = Math.sin(a) * radius;
+                    const mesh = createMesh(genCylinder(2, 2, .3, 6, [.2, .5 + h * .1, .4 + h * .1]));
+                    levelObjects.push({ mesh, model: m4Translate(x, y, z), type: 'platform', px: x, py: y, pz: z, pr: 2.2 });
+                }
+            }
+
+            const altarMesh = createMesh(genOctahedron(3, [.8, 0, 1]));
+            levelObjects.push({ mesh: altarMesh, model: m4Translate(0, 2, 0), type: 'altar', cx: 0, cz: 0, r: 3.5 });
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  KLEIN BOTTLE
+        // ═══════════════════════════════════════════════════════════════
+        function buildKleinBottle() {
+            kleinMesh = createMesh(genKleinBottle(.25, 48, 24, [.1, .2, .6]));
+            kleinModel = m4Translate(0, 12, 0);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  GENE COLLECTIBLES
+        // ═══════════════════════════════════════════════════════════════
+        function spawnGenes() {
+            for (let i = 0; i < GENES.length; i++) {
+                const g = GENES[i];
+                const col = CAT_COL[g.c] || [1, 1, 1];
+                const a = i / GENES.length * TAU * 3;
+                const r = 5 + (i / GENES.length) * 30;
+                const x = Math.cos(a) * r, z = Math.sin(a) * r;
+                const y = 1.5 + Math.sin(i * .5) * 1.5;
+                const mesh = createMesh(genOctahedron(.5, col));
+                geneObjects.push({ mesh, pos: v3.create(x, y, z), gene: g, index: i, alive: true, baseY: y });
+            }
+        }
+
+        function populateGenePanel() {
+            const list = document.getElementById('gene-list');
+            list.innerHTML = '';
+            for (let i = 0; i < GENES.length; i++) {
+                const g = GENES[i];
+                const d = document.createElement('div');
+                d.className = 'ge';
+                d.id = 'ge-' + i;
+                d.innerHTML = `<span>${g.e} ${g.n}</span><span class="f">${g.f.toFixed(1)}</span>`;
+                list.appendChild(d);
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  INPUT (Quake-style: kbutton tracking)
+        // ═══════════════════════════════════════════════════════════════
+        function setupInput() {
+            document.addEventListener('keydown', e => {
+                keys[e.code] = true;
+                if (e.code === 'KeyQ') triggerKleinTwist();
+                if (e.code === 'KeyF') player.resonance = Math.min(player.resonance + 15, player.maxRes);
+                if (e.code >= 'Digit1' && e.code <= 'Digit4') selectGenePower(+e.code[5] - 1);
+                if (e.code === 'KeyV') { player.noclip = !player.noclip; showNotify(player.noclip ? 'NOCLIP ON' : 'NOCLIP OFF'); }
+                if (e.code === 'KeyP') { postEnabled = !postEnabled; if (!postEnabled) gl.bindFramebuffer(gl.FRAMEBUFFER, null); showNotify(postEnabled ? 'POST-FX: ON (ACES+Bloom+SSAO+GOS)' : 'POST-FX: OFF (Raw)'); }
+            });
+            document.addEventListener('keyup', e => { keys[e.code] = false; });
+
+            document.getElementById('btn-play').addEventListener('click', () => {
+                canvas.requestPointerLock();
+            });
+            canvas.addEventListener('click', () => {
+                if (!pointerLocked) canvas.requestPointerLock();
+            });
+            document.addEventListener('pointerlockchange', () => {
+                pointerLocked = !!document.pointerLockElement;
+                document.getElementById('start').classList.toggle('hidden', pointerLocked);
+            });
+            document.addEventListener('mousemove', e => {
+                if (!pointerLocked) return;
+                player.yaw -= e.movementX * 0.002;
+                player.pitch -= e.movementY * 0.002;
+                player.pitch = Math.max(-PI / 2 + .01, Math.min(PI / 2 - .01, player.pitch));
+            });
+        }
+
+        function selectGenePower(slot) {
+            const c = Array.from(player.collected);
+            if (slot < c.length) {
+                player.activeGeneIdx = c[slot];
+                player.activeGene = GENES[player.activeGeneIdx];
+            }
+        }
+
+        function triggerKleinTwist() {
+            twistMultiplier = 3.0;
+            setTimeout(() => { twistMultiplier = 1.0; }, 500);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  PHYSICS UPDATE (Quake-style: SV_Physics_Step)
+        // ═══════════════════════════════════════════════════════════════
+        function updatePlayer(dt) {
+            if (!pointerLocked) return;
+
+            // Movement intent
+            let mx = 0, mz = 0, my = 0;
+            if (keys['KeyW'] || keys['ArrowUp']) mz -= 1;
+            if (keys['KeyS'] || keys['ArrowDown']) mz += 1;
+            if (keys['KeyA'] || keys['ArrowLeft']) mx -= 1;
+            if (keys['KeyD'] || keys['ArrowRight']) mx += 1;
+            const len = Math.sqrt(mx * mx + mz * mz) || 1;
+            mx /= len; mz /= len;
+
+            const spd = player.speed * (keys['ShiftLeft'] ? player.sprintMul : 1);
+            const fwd = playerForward(), rgt = playerRight();
+
+            // Noclip mode (fly through walls — useful for BSP exploration)
+            if (player.noclip) {
+                const flyFwd = v3.create(
+                    -Math.sin(player.yaw) * Math.cos(player.pitch),
+                    Math.sin(player.pitch),
+                    -Math.cos(player.yaw) * Math.cos(player.pitch)
+                );
+                const flySpd = spd * 2;
+                if (keys['KeyW'] || keys['ArrowUp']) { player.pos[0] += flyFwd[0] * flySpd * dt; player.pos[1] += flyFwd[1] * flySpd * dt; player.pos[2] += flyFwd[2] * flySpd * dt; }
+                if (keys['KeyS'] || keys['ArrowDown']) { player.pos[0] -= flyFwd[0] * flySpd * dt; player.pos[1] -= flyFwd[1] * flySpd * dt; player.pos[2] -= flyFwd[2] * flySpd * dt; }
+                if (keys['KeyA'] || keys['ArrowLeft']) { player.pos[0] -= rgt[0] * flySpd * dt; player.pos[2] -= rgt[2] * flySpd * dt; }
+                if (keys['KeyD'] || keys['ArrowRight']) { player.pos[0] += rgt[0] * flySpd * dt; player.pos[2] += rgt[2] * flySpd * dt; }
+                if (keys['Space']) player.pos[1] += flySpd * dt;
+                if (keys['ControlLeft'] || keys['KeyC']) player.pos[1] -= flySpd * dt;
+                return;
+            }
+
+            if (keys['KeyW'] || keys['KeyS'] || keys['KeyA'] || keys['KeyD'] ||
+                keys['ArrowUp'] || keys['ArrowDown'] || keys['ArrowLeft'] || keys['ArrowRight']) {
+                player.vel[0] = (fwd[0] * (-mz) + rgt[0] * mx) * spd;
+                player.vel[2] = (fwd[2] * (-mz) + rgt[2] * mx) * spd;
+            } else {
+                player.vel[0] *= .85;
+                player.vel[2] *= .85;
+            }
+
+            // Jump
+            if (keys['Space'] && player.onGround) {
+                player.vel[1] = player.jumpForce;
+                player.onGround = false;
+            }
+
+            // Gravity
+            if (!player.onGround) player.vel[1] -= player.gravity * dt;
+
+            // Integrate
+            player.pos[0] += player.vel[0] * dt;
+            player.pos[1] += player.vel[1] * dt;
+            player.pos[2] += player.vel[2] * dt;
+
+            if (BSP.loaded) {
+                // BSP mode: simple ground collision at floor level
+                const groundY = BSP.floorY + player.height;
+                if (player.pos[1] <= groundY) {
+                    player.pos[1] = groundY;
+                    player.vel[1] = 0;
+                    player.onGround = true;
+                }
+                // Soft boundary around map bounds
+                const b = BSP.bounds;
+                if (b) {
+                    const margin = 5;
+                    if (player.pos[0] < b.min[0] - margin) player.pos[0] = b.min[0] - margin;
+                    if (player.pos[0] > b.max[0] + margin) player.pos[0] = b.max[0] + margin;
+                    if (player.pos[2] < b.min[2] - margin) player.pos[2] = b.min[2] - margin;
+                    if (player.pos[2] > b.max[2] + margin) player.pos[2] = b.max[2] + margin;
+                }
+            } else {
+                // Default arena mode
+                if (player.pos[1] <= player.height) {
+                    player.pos[1] = player.height;
+                    player.vel[1] = 0;
+                    player.onGround = true;
+                }
+
+                for (const o of levelObjects) {
+                    if (o.type === 'platform') {
+                        const dx = player.pos[0] - o.px, dz = player.pos[2] - o.pz;
+                        if (Math.sqrt(dx * dx + dz * dz) < o.pr &&
+                            player.pos[1] >= o.py && player.pos[1] <= o.py + 1.5 && player.vel[1] <= 0) {
+                            player.pos[1] = o.py + player.height * .5;
+                            player.vel[1] = 0;
+                            player.onGround = true;
+                        }
+                    }
+                    if (o.type === 'pillar' || o.type === 'totem' || o.type === 'altar' || o.type === 'wall') {
+                        if (!o.cx) continue;
+                        const dx = player.pos[0] - o.cx, dz = player.pos[2] - o.cz;
+                        const d = Math.sqrt(dx * dx + dz * dz);
+                        if (d < o.r) {
+                            const push = o.r / d;
+                            player.pos[0] = o.cx + dx * push;
+                            player.pos[2] = o.cz + dz * push;
+                        }
+                    }
+                }
+
+                const dist = Math.sqrt(player.pos[0] ** 2 + player.pos[2] ** 2);
+                if (dist > 42) {
+                    player.pos[0] *= 42 / dist;
+                    player.pos[2] *= 42 / dist;
+                }
+            }
+
+            // Gene collection (works in both modes)
+            if (!BSP.loaded) {
+                for (const g of geneObjects) {
+                    if (!g.alive) continue;
+                    const dx = player.pos[0] - g.pos[0], dy = player.pos[1] - g.pos[1], dz = player.pos[2] - g.pos[2];
+                    if (Math.sqrt(dx * dx + dy * dy + dz * dz) < 1.8) {
+                        g.alive = false;
+                        player.collected.add(g.index);
+                        player.resonance = Math.min(player.resonance + 5, player.maxRes);
+                        const el = document.getElementById('ge-' + g.index);
+                        if (el) el.classList.add('collected');
+                    }
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  VIEW MATRIX (Quake: R_SetupGL)
+        // ═══════════════════════════════════════════════════════════════
+        function getViewMatrix() {
+            const eye = player.pos;
+            const dir = v3.create(
+                -Math.sin(player.yaw) * Math.cos(player.pitch),
+                Math.sin(player.pitch),
+                -Math.cos(player.yaw) * Math.cos(player.pitch)
+            );
+            const center = v3.add(eye, dir);
+            return m4LookAt(eye, center, v3.create(0, 1, 0));
+        }
+
+        function getProjMatrix() {
+            return m4Perspective(90 * PI / 180, canvas.width / canvas.height, 0.1, 1000);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  DRAW HELPERS — supports both 16-bit and 32-bit indices
+        // ═══════════════════════════════════════════════════════════════
+        function drawMesh(prog, mesh, model, proj, view, extraUniforms) {
+            gl.useProgram(prog);
+            if (prog.u.uProj) gl.uniformMatrix4fv(prog.u.uProj, false, proj);
+            if (prog.u.uView) gl.uniformMatrix4fv(prog.u.uView, false, view);
+            if (prog.u.uModel) gl.uniformMatrix4fv(prog.u.uModel, false, model);
+            if (prog.u.uTime) gl.uniform1f(prog.u.uTime, gameTime);
+            if (prog.u.uCamPos) gl.uniform3fv(prog.u.uCamPos, player.pos);
+            if (extraUniforms) {
+                for (const [k, v] of Object.entries(extraUniforms)) {
+                    const loc = prog.u[k];
+                    if (!loc) continue;
+                    if (Array.isArray(v) || v instanceof Float32Array) {
+                        if (v.length === 3) gl.uniform3fv(loc, v);
+                        else if (v.length === 16) gl.uniformMatrix4fv(loc, false, v);
+                    } else gl.uniform1f(loc, v);
+                }
+            }
+            gl.bindVertexArray(mesh.vao);
+            const idxType = mesh.use32 ? gl.UNSIGNED_INT : gl.UNSIGNED_SHORT;
+            gl.drawElements(gl.TRIANGLES, mesh.count, idxType, 0);
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  HUD
+        // ═══════════════════════════════════════════════════════════════
+        let fpsCount = 0, fpsTimer = 0, fps = 0;
+
+        function psiCoherence(res, max) {
+            const r = Math.min(res / max, 1);
+            return .5 + .5 * Math.tanh(3 * (r - .5));
+        }
+
+        function updateHUD(dt) {
+            fpsCount++; fpsTimer += dt;
+            if (fpsTimer >= .5) { fps = Math.round(fpsCount / fpsTimer); fpsCount = 0; fpsTimer = 0; }
+            const psi = psiCoherence(player.resonance, player.maxRes);
+
+            const el = id => document.getElementById(id);
+            el('d-kappa').textContent = GOS.KAPPA.toFixed(3);
+            el('d-psi').textContent = psi.toFixed(3);
+            el('d-theta').textContent = GOS.THETA_DEG + '°';
+            el('d-time').textContent = gameTime.toFixed(1);
+            el('d-fps').textContent = fps;
+            el('d-hp').textContent = player.health;
+            el('d-res').textContent = Math.round(player.resonance) + '%';
+            el('d-gene').textContent = player.activeGene ? player.activeGene.e + ' ' + player.activeGene.n : '—';
+            el('d-car').textContent = GOS.CARRIER.toFixed(3);
+            el('d-gc').textContent = player.collected.size + '/' + GENES.length;
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  MINIMAP
+        // ═══════════════════════════════════════════════════════════════
+        function updateMinimap() {
+            const c = mmCtx, w = 150, h = 150;
+            c.clearRect(0, 0, w, h);
+            c.fillStyle = 'rgba(0,10,20,.8)';
+            c.fillRect(0, 0, w, h);
+
+            if (BSP.loaded) {
+                // BSP minimap: show bounding box and player
+                const b = BSP.bounds;
+                if (!b) return;
+                const rangeX = b.max[0] - b.min[0] || 1;
+                const rangeZ = b.max[2] - b.min[2] || 1;
+                const sc = Math.max(rangeX, rangeZ) / 140;
+
+                // Map outline
+                c.strokeStyle = 'rgba(0,255,100,.3)';
+                c.lineWidth = 1;
+                const mx1 = w / 2 + (b.min[0]) / sc, mz1 = h / 2 + (b.min[2]) / sc;
+                const mx2 = w / 2 + (b.max[0]) / sc, mz2 = h / 2 + (b.max[2]) / sc;
+                c.strokeRect(mx1, mz1, mx2 - mx1, mz2 - mz1);
+
+                // Player
+                const px = w / 2 + player.pos[0] / sc;
+                const py = h / 2 + player.pos[2] / sc;
+                const fwd = playerForward();
+                c.strokeStyle = '#0f0'; c.lineWidth = 2;
+                c.beginPath(); c.moveTo(px, py); c.lineTo(px - fwd[0] * 8, py - fwd[2] * 8); c.stroke();
+                c.fillStyle = '#0f0';
+                c.beginPath(); c.arc(px, py, 3, 0, TAU); c.fill();
+            } else {
+                const sc = 1.8;
+                c.strokeStyle = 'rgba(0,255,100,.3)';
+                c.lineWidth = 1;
+                c.beginPath(); c.arc(w / 2, h / 2, 42 / sc, 0, TAU); c.stroke();
+
+                c.fillStyle = 'rgba(0,200,255,.5)';
+                for (let i = 0; i < 12; i++) {
+                    const a = i / 12 * TAU;
+                    c.beginPath(); c.arc(w / 2 + Math.cos(a) * 25 / sc, h / 2 + Math.sin(a) * 25 / sc, 2, 0, TAU); c.fill();
+                }
+
+                c.fillStyle = 'rgba(255,255,0,.4)';
+                for (const g of geneObjects) {
+                    if (!g.alive) continue;
+                    c.fillRect(w / 2 + g.pos[0] / sc - 1, h / 2 + g.pos[2] / sc - 1, 2, 2);
+                }
+
+                const px = w / 2 + player.pos[0] / sc, py = h / 2 + player.pos[2] / sc;
+                const fwd = playerForward();
+                c.strokeStyle = '#0f0'; c.lineWidth = 2;
+                c.beginPath(); c.moveTo(px, py); c.lineTo(px - fwd[0] * 8, py - fwd[2] * 8); c.stroke();
+                c.fillStyle = '#0f0';
+                c.beginPath(); c.arc(px, py, 3, 0, TAU); c.fill();
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  FRAME LOOP (Quake: SCR_UpdateScreen → R_RenderView)
+        // ═══════════════════════════════════════════════════════════════
+        let lastTime = 0;
+
+        function frame(now) {
+            requestAnimationFrame(frame);
+            const dt = Math.min((now - lastTime) / 1000, .1);
+            lastTime = now;
+            gameTime += dt;
+
+            updatePlayer(dt);
+
+            const proj = getProjMatrix();
+            const view = getViewMatrix();
+            const psi = psiCoherence(player.resonance, player.maxRes);
+            const geneCol = player.activeGene ? (CAT_COL[player.activeGene.c] || [0, 1, 1]) : [0, 1, 1];
+
+            const gosUniforms = {
+                uTwist: BSP.loaded ? GOS.THETA * twistMultiplier * 0.3 : GOS.THETA * twistMultiplier,
+                uDK: GOS.DK,
+                uCarrier: GOS.CARRIER,
+                uBreath: 0.05,
+                uPsi: psi,
+                uKappa: GOS.KAPPA,
+                uPhi: GOS.PHI,
+                uGeneCol: geneCol,
+            };
+
+            gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+            // Bind FBO for scene rendering (if post-processing enabled)
+            if (postEnabled && sceneFBO && progPost) {
+                gl.bindFramebuffer(gl.FRAMEBUFFER, sceneFBO);
+                gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+            }
+
+            // ─── Sky ───
+            gl.depthFunc(gl.LEQUAL);
+            gl.disable(gl.CULL_FACE);
+            drawMesh(progSky, meshSky, m4Identity(), proj, view, { uDK: GOS.DK });
+            gl.depthFunc(gl.LESS);
+            gl.enable(gl.CULL_FACE);
+
+            // ─── BSP Map ───
+            if (BSP.loaded && BSP.mesh) {
+                gl.disable(gl.CULL_FACE); // BSP faces can be either direction
+                if (BSP.hasTextures && progBSPTex && BSP.texArray) {
+                    gl.activeTexture(gl.TEXTURE2);
+                    gl.bindTexture(gl.TEXTURE_2D_ARRAY, BSP.texArray);
+                    drawMesh(progBSPTex, BSP.mesh, m4Identity(), proj, view, {
+                        ...gosUniforms, uHasTextures: 1.0
+                    });
+                } else {
+                    drawMesh(progGOS, BSP.mesh, m4Identity(), proj, view, gosUniforms);
+                }
+                gl.enable(gl.CULL_FACE);
+            }
+
+            // ─── Default Level objects ───
+            if (!BSP.loaded) {
+                for (const o of levelObjects) {
+                    drawMesh(progGOS, o.mesh, o.model, proj, view, gosUniforms);
+                }
+            }
+
+            // ─── Klein bottle (double-sided, transparent) ───
+            if (kleinMesh && !BSP.loaded) {
+                gl.disable(gl.CULL_FACE);
+                gl.enable(gl.BLEND);
+                gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+                const kRot = m4Mul(kleinModel, m4RotY(gameTime * GOS.DK * TAU));
+                drawMesh(progGOS, kleinMesh, kRot, proj, view, gosUniforms);
+                gl.disable(gl.BLEND);
+                gl.enable(gl.CULL_FACE);
+            }
+
+            // ─── Gene collectibles ───
+            if (!BSP.loaded) {
+                gl.enable(gl.BLEND);
+                gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+                gl.depthMask(false);
+                for (const g of geneObjects) {
+                    if (!g.alive) continue;
+                    g.pos[1] = g.baseY + Math.sin(gameTime * 2 + g.index) * .3;
+                    const model = m4Translate(g.pos[0], g.pos[1], g.pos[2]);
+                    const col = CAT_COL[g.gene.c] || [1, 1, 1];
+                    drawMesh(progGene, g.mesh, model, proj, view, {
+                        uFreq: g.gene.f, uPhase: g.gene.p * PI / 180, uColor: col
+                    });
+                }
+                gl.depthMask(true);
+                gl.disable(gl.BLEND);
+            }
+
+            // ─── Post-Processing Pass ───
+            if (postEnabled && sceneFBO && progPost) {
+                gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.disable(gl.DEPTH_TEST);
+                gl.disable(gl.BLEND);
+
+                gl.useProgram(progPost);
+                gl.activeTexture(gl.TEXTURE0);
+                gl.bindTexture(gl.TEXTURE_2D, sceneColorTex);
+                if (progPost.u.uScene) gl.uniform1i(progPost.u.uScene, 0);
+                gl.activeTexture(gl.TEXTURE1);
+                gl.bindTexture(gl.TEXTURE_2D, sceneDepthTex);
+                if (progPost.u.uDepth) gl.uniform1i(progPost.u.uDepth, 1);
+                if (progPost.u.uTime) gl.uniform1f(progPost.u.uTime, gameTime);
+                if (progPost.u.uResolution) gl.uniform2f(progPost.u.uResolution, canvas.width, canvas.height);
+                if (progPost.u.uKappa) gl.uniform1f(progPost.u.uKappa, GOS.KAPPA);
+                if (progPost.u.uDK) gl.uniform1f(progPost.u.uDK, GOS.DK);
+                if (progPost.u.uPhi) gl.uniform1f(progPost.u.uPhi, GOS.PHI);
+
+                gl.bindVertexArray(quadVAO);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+                gl.enable(gl.DEPTH_TEST);
+            }
+
+            // ─── HUD ───
+            updateHUD(dt);
+            if (fpsCount % 3 === 0) updateMinimap();
+        }
+
+        // ═══════════════════════════════════════════════════════════════
+        //  START
+        // ═══════════════════════════════════════════════════════════════
+        init();
+    </script>
+</body>
+
+</html>
