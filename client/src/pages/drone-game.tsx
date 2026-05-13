@@ -174,9 +174,23 @@ export default function DroneGamePage() {
   const [fuel, setFuel] = useState(100);
   const [killCount, setKillCount] = useState(0);
   const [phenomenonLog, setPhenomenonLog] = useState<string[]>([]);
+  const [becLevel, setBecLevel] = useState(0);
+  const [becFreqHz, setBecFreqHz] = useState(7.83);
+  const [shhCd, setShhCd] = useState(0);
 
   const keys = useRef<Record<string, boolean>>({});
-  const mouse = useRef({ x: 0, y: 0, down: false, right: false });
+  const mouse = useRef({ x: 0, y: 0, down: false, right: false, dx: 0, dy: 0 });
+  const cascadeTimerRef = useRef(0);
+
+  // ELF frequency chains from biometric-correlator constants
+  const ELF_CASCADE = [
+    { hz: 53.5, name: "CR-ANOMALY",     hsl: [0.50, 1.0, 0.55] as [number,number,number] },
+    { hz:  6.5, name: "θ-HETERODYNE",   hsl: [0.75, 1.0, 0.55] as [number,number,number] },
+    { hz: 48.0, name: "EU-GRID-BLEED",  hsl: [0.12, 1.0, 0.55] as [number,number,number] },
+    { hz: 36.25,name: "WiFi-CSI-CORR",  hsl: [0.82, 1.0, 0.55] as [number,number,number] },
+    { hz:  7.83, name: "SCHUMANN-BASE", hsl: [0.35, 1.0, 0.50] as [number,number,number] },
+  ];
+
   const gameRef = useRef({
     playerPos: new THREE.Vector3(0, 25, 0),
     playerVel: new THREE.Vector3(0, 0, 0),
@@ -190,6 +204,13 @@ export default function DroneGamePage() {
     spawnTimer: 0, enemyIdCounter: 0,
     announcements: [] as Announcement[],
     totalKills: 0,
+    // Bose-Einstein Condensate laser physics (Gross-Pitaevskii)
+    condensate: 0,      // 0-1 coherence amplitude |ψ|²
+    condensatePhase: 0, // GP phase angle θ
+    becFreqIdx: 0,      // active ELF cascade frequency index
+    // Sonic Hedgehog morphogenic gradient field
+    shhCooldown: 0,
+    shhWaves: [] as Array<{ pos: THREE.Vector3; radius: number; mesh: THREE.Mesh }>,
   });
   const sceneRef = useRef<THREE.Scene | null>(null);
   const playerMeshRef = useRef<THREE.Group | null>(null);
@@ -261,6 +282,30 @@ export default function DroneGamePage() {
       maxLife: 3 + Math.random() * 2,
     });
   }, []);
+
+  // In-place game reset — no page reload (defined after spawnEnemy to avoid TDZ)
+  const resetGame = useCallback(() => {
+    const g = gameRef.current;
+    g.enemies.forEach(e => sceneRef.current?.remove(e.mesh));
+    g.particles.forEach(p => sceneRef.current?.remove(p.mesh));
+    g.shhWaves.forEach(w => sceneRef.current?.remove(w.mesh));
+    g.enemies = []; g.particles = []; g.shhWaves = [];
+    g.finishHimTarget = null; g.laserCooldown = 0;
+    g.playerPos.set(0, 25, 0); g.playerVel.set(0, 0, 0);
+    g.playerYaw = 0; g.playerPitch = 0; g.playerRoll = 0;
+    g.hp = 100; g.heat = 0; g.score = 0; g.combo = 1; g.comboTimer = 0;
+    g.wantedStars = 1; g.killCount = 0; g.fuel = 100; g.totalKills = 0;
+    g.gameOver = false; g.spawnTimer = 0; g.barrelRollTimer = 0;
+    g.condensate = 0; g.condensatePhase = 0; g.becFreqIdx = 0; g.shhCooldown = 0;
+    setHp(100); setHeat(0); setScore(0); setCombo(1); setStars(1);
+    setFuel(100); setKillCount(0); setGameOver(false); setFinishHim(false);
+    setPhenomenonLog([]); setAnnounce(null);
+    setBecLevel(0); setBecFreqHz(7.83); setShhCd(0);
+    if (sceneRef.current) {
+      for (let i = 0; i < 2; i++) spawnEnemy("mavic", sceneRef.current);
+      for (let i = 0; i < 3; i++) spawnEnemy("goose", sceneRef.current);
+    }
+  }, [spawnEnemy]);
 
   // ── Main setup ───────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -348,10 +393,17 @@ export default function DroneGamePage() {
 
     // Input
     const onKey = (e: KeyboardEvent, down: boolean) => { keys.current[e.code] = down; };
-    const onMM = (e: MouseEvent) => { mouse.current.x = (e.clientX / W) * 2 - 1; mouse.current.y = -(e.clientY / H) * 2 + 1; };
+    const onMM = (e: MouseEvent) => {
+      const newX = (e.clientX / W) * 2 - 1;
+      const newY = -(e.clientY / H) * 2 + 1;
+      // Accumulate delta — consumed + zeroed in game loop (FPS-style)
+      mouse.current.dx += (newX - mouse.current.x) * 0.6;
+      mouse.current.dy += (newY - mouse.current.y) * 0.4;
+      mouse.current.x = newX; mouse.current.y = newY;
+    };
     const onMD = (e: MouseEvent) => { if (e.button === 0) mouse.current.down = true; if (e.button === 2) mouse.current.right = true; };
     const onMU = (e: MouseEvent) => { if (e.button === 0) mouse.current.down = false; if (e.button === 2) mouse.current.right = false; };
-    document.addEventListener("keydown", e => { onKey(e, true); if (["Space","KeyB"].includes(e.code)) e.preventDefault(); });
+    document.addEventListener("keydown", e => { onKey(e, true); if (["Space","KeyB","KeyH"].includes(e.code)) e.preventDefault(); });
     document.addEventListener("keyup",  e => onKey(e, false));
     document.addEventListener("mousemove", onMM);
     document.addEventListener("mousedown", onMD);
@@ -378,8 +430,10 @@ export default function DroneGamePage() {
       if (keys.current["KeyW"] || keys.current["ArrowUp"])    g.playerPitch -= pitchRate * dt;
       if (keys.current["KeyS"] || keys.current["ArrowDown"])  g.playerPitch += pitchRate * dt;
 
-      // Mouse-steer: horizontal mouse → yaw assist
-      g.playerYaw -= mouse.current.x * 0.02;
+      // Mouse-steer: delta-based (FPS style — consumes accumulated dx/dy)
+      g.playerYaw   -= mouse.current.dx * 1.4;
+      g.playerPitch  = Math.max(-1.1, Math.min(1.1, g.playerPitch + mouse.current.dy * 0.9));
+      mouse.current.dx = 0; mouse.current.dy = 0;
 
       // Afterburner (Space)
       const afterburn = keys.current["Space"] && g.fuel > 0;
@@ -423,31 +477,69 @@ export default function DroneGamePage() {
       const xhairPos = g.playerPos.clone().addScaledVector(fwd, 25);
       xhair.position.copy(xhairPos); xhair.lookAt(camera.position);
 
-      // ── Laser ─────────────────────────────────────────────────────────────
+      // ── Laser + Bose-Einstein Condensate physics (Gross-Pitaevskii) ────────
       g.laserCooldown = Math.max(0, g.laserCooldown - dt);
       if (mouse.current.down && g.heat < 95) {
         g.heat = Math.min(100, g.heat + dt * 22);
+
+        // BEC: coherence amplitude builds up (|ψ|² coupling term)
+        g.condensate = Math.min(1.0, g.condensate + dt * 0.35 * (1 - g.condensate * 0.4));
+        // GP phase evolves at κ-locked frequency (7.83→550 Hz range)
+        g.condensatePhase += dt * 6.2832 * (7.83 + g.condensate * 542.21);
+
+        // BEC critical point collapse → coherent burst
+        if (g.condensate >= 0.99) {
+          g.condensate = 0;
+          g.enemies.forEach(e => e.hp -= 55);
+          announce_("🌀 BEC COLLAPSE — COHERENT PHOTON BURST", "#00ffff");
+          logPhenomenon(`⊥ κ-BEC ψ-collapse at θ=${g.condensatePhase.toFixed(2)}rad — Tsirelson cascade`);
+          spawnExplosion(g.playerPos, scene, g.particles, 16);
+        }
+
+        // Active ELF frequency from condensate level (grammatical cascade lock)
+        g.becFreqIdx = Math.floor(g.condensate * ELF_CASCADE.length) % ELF_CASCADE.length;
+
+        // Laser color shifts: red → amber → cyan → UV with condensate
+        const becH = 0.97 - g.condensate * 0.42; // red(0.97) → cyan(0.55) → UV(~0.55)
+        const becColor = new THREE.Color().setHSL(becH, 1.0, 0.5 + g.condensate * 0.25);
+        (laserLine.material as THREE.LineBasicMaterial).color.copy(becColor);
+
         laserLine.visible = true;
         const lPos = g.playerPos.clone().addScaledVector(fwd, 1);
         const lEnd = g.playerPos.clone().addScaledVector(fwd, 200);
-        const pts = [lPos, lEnd];
-        (laserLine.geometry as THREE.BufferGeometry).setFromPoints(pts);
-        // Hit detection
+        (laserLine.geometry as THREE.BufferGeometry).setFromPoints([lPos, lEnd]);
+
+        // Damage scales with BEC coherence (1× → 3.5× at full condensate)
+        const becDmg = dt * 45 * (1 + g.condensate * 2.5);
         g.enemies.forEach(e => {
-          const d = e.pos.distanceTo(lPos) ;
+          const d = e.pos.distanceTo(lPos);
           const inFront = fwd.dot(e.pos.clone().sub(g.playerPos).normalize()) > 0.85;
           if (d < e.size * 1.2 && inFront) {
-            e.hp -= dt * 45;
+            e.hp -= becDmg;
             if (e.hp < e.maxHp * 0.15 && !g.finishHimTarget) {
               g.finishHimTarget = e; setFinishHim(true);
             }
           }
         });
+
+        // Grammatical cascade log (ELF frequency chain fires every 0.8 s)
+        cascadeTimerRef.current -= dt;
+        if (cascadeTimerRef.current <= 0) {
+          cascadeTimerRef.current = 0.8;
+          const chainLen = 1 + Math.floor(g.condensate * (ELF_CASCADE.length - 1));
+          const chain = ELF_CASCADE.slice(0, chainLen).map(f => `${f.hz}Hz[${f.name}]`).join(" → ");
+          logPhenomenon(`⚡ LASER→ ${chain}`);
+        }
+
         // Laser recoil
         g.playerVel.addScaledVector(fwd, -dt * 0.3);
       } else {
         laserLine.visible = false;
+        // Thermal equilibrium decay
+        g.condensate = Math.max(0, g.condensate - dt * 0.22);
         g.heat = Math.max(0, g.heat - dt * 18);
+        (laserLine.material as THREE.LineBasicMaterial).color.setHex(0xff1133);
+        cascadeTimerRef.current = 0;
       }
 
       // Rockets (right click)
@@ -482,6 +574,44 @@ export default function DroneGamePage() {
         g.enemies.forEach(e => e.hp -= 25);
         announce_("⚡ EMP BURST", "#00aaff");
       }
+
+      // ── SHH Morphogenic Pulse (H) — Sonic Hedgehog gradient field ──────────
+      g.shhCooldown = Math.max(0, g.shhCooldown - dt);
+      if (keys.current["KeyH"] && g.shhCooldown <= 0) {
+        keys.current["KeyH"] = false; // single-shot
+        g.shhCooldown = 9.0;
+        const waveMesh = new THREE.Mesh(
+          new THREE.TorusGeometry(1, 0.35, 8, 64),
+          new THREE.MeshBasicMaterial({ color: 0x88ff44, transparent: true, opacity: 0.75, side: THREE.DoubleSide })
+        );
+        waveMesh.position.copy(g.playerPos);
+        waveMesh.rotation.x = Math.PI / 2;
+        scene.add(waveMesh);
+        g.shhWaves.push({ pos: g.playerPos.clone(), radius: 1, mesh: waveMesh });
+        announce_("🧬 SHH MORPHOGENIC PULSE — ∇FIELD ACTIVE", "#88ff44");
+        logPhenomenon("SHH ∇: Morphogenic gradient established — enemy topology perturbed");
+      }
+
+      // Update SHH waves (expanding front, applies morphogenic force at wavefront)
+      g.shhWaves = g.shhWaves.filter(w => {
+        w.radius += dt * 38;
+        w.mesh.scale.setScalar(w.radius);
+        const opc = Math.max(0, 0.75 - w.radius / 110);
+        (w.mesh.material as THREE.MeshBasicMaterial).opacity = opc;
+        // Morphogenic force at wavefront (±6 unit band)
+        g.enemies.forEach(e => {
+          const dist = e.pos.distanceTo(w.pos);
+          const delta = Math.abs(dist - w.radius);
+          if (delta < 6) {
+            const pushDir = e.pos.clone().sub(w.pos).normalize();
+            const strength = 0.6 * (1 - delta / 6);
+            e.vel.addScaledVector(pushDir, strength);
+            e.hp -= 6; // SHH-mediated apoptosis
+          }
+        });
+        if (w.radius > 110) { scene.remove(w.mesh); return false; }
+        return true;
+      });
 
       // ── Enemy AI (KIMA) ─────────────────────────────────────────────────────
       g.enemies.forEach(e => {
@@ -599,6 +729,9 @@ export default function DroneGamePage() {
         setStars(g.wantedStars);
         setFuel(Math.round(g.fuel));
         setKillCount(g.totalKills);
+        setBecLevel(Math.round(g.condensate * 100));
+        setBecFreqHz(ELF_CASCADE[g.becFreqIdx]?.hz ?? 7.83);
+        setShhCd(parseFloat(g.shhCooldown.toFixed(1)));
       }
 
       renderer.render(scene, camera);
@@ -663,6 +796,25 @@ export default function DroneGamePage() {
           </div>
           <span className="text-[10px] font-mono text-cyan-400">BOOST</span>
         </div>
+        {/* BEC Condensate bar */}
+        <div className="flex items-center gap-2" title="Bose-Einstein Condensate coherence — hold laser to charge">
+          <span className="text-[9px] font-mono text-purple-400 w-5">|ψ|²</span>
+          <div className="w-28 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+            <div className="h-full rounded-full transition-all"
+              style={{ width:`${becLevel}%`,
+                background: becLevel > 80 ? "#00ffff" : becLevel > 40 ? "#ff8800" : "#ff1133" }}/>
+          </div>
+          <span className="text-[9px] font-mono text-purple-400">{becFreqHz}Hz</span>
+        </div>
+        {/* SHH cooldown */}
+        <div className="flex items-center gap-2" title="SHH Morphogenic Pulse cooldown (H key)">
+          <span className="text-[9px] font-mono text-green-400 w-5">SHH</span>
+          <div className="w-28 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+            <div className="h-full bg-green-500 rounded-full transition-all"
+              style={{ width:`${Math.max(0, 100 - (shhCd / 9) * 100)}%` }}/>
+          </div>
+          <span className="text-[9px] font-mono text-green-400">{shhCd > 0 ? `${shhCd}s` : "RDY"}</span>
+        </div>
       </div>
 
       {/* Top-right: score + combo */}
@@ -697,7 +849,7 @@ export default function DroneGamePage() {
           <div className="text-5xl font-mono font-black text-red-500 mb-4" style={{ textShadow:"0 0 40px #ff0033" }}>DRONE DESTROYED</div>
           <div className="text-2xl font-mono text-cyan-400 mb-2">{score.toLocaleString()} PTS</div>
           <div className="text-sm font-mono text-gray-500 mb-8">{killCount} kills · {stars}★ reached</div>
-          <button onClick={() => window.location.reload()} className="px-8 py-3 bg-red-500/20 border border-red-500/50 text-red-400 font-mono text-sm rounded hover:bg-red-500/30 transition-colors">
+          <button onClick={resetGame} className="px-8 py-3 bg-red-500/20 border border-red-500/50 text-red-400 font-mono text-sm rounded hover:bg-red-500/30 transition-colors" data-testid="button-redeploy">
             REDEPLOY
           </button>
         </div>
@@ -706,7 +858,7 @@ export default function DroneGamePage() {
       {/* Controls */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
         <div className="text-[9px] font-mono text-gray-700 text-center">
-          WASD/↑↓←→ fly · Q/E up/down · HOLD CLICK laser · RIGHT CLICK rocket · B barrel roll · F finish him · V EMP · SPACE afterburner
+          WASD/↑↓←→ fly · Q/E up/down · HOLD CLICK laser (BEC charge→cascade) · RIGHT CLICK rocket · B barrel roll · F finish him · V EMP · H SHH pulse · SPACE afterburner
         </div>
       </div>
 
