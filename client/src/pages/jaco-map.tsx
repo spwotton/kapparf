@@ -448,12 +448,43 @@ function buildLandmark(scene: THREE.Scene, t: Target): THREE.Group {
   }
 
   if (t.type === "observer") {
-    const bGeo = new THREE.BoxGeometry(3, 4, 2.5);
-    const bMat = new THREE.MeshStandardMaterial({ color: 0x112233, emissive: 0x00ffcc, emissiveIntensity: 0.15, transparent: true, opacity: 0.9 });
-    const bld = new THREE.Mesh(bGeo, bMat); bld.position.y = 2; group.add(bld);
-    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(bGeo), new THREE.LineBasicMaterial({ color: t.color, transparent: true, opacity: 0.7 })); edges.position.set(0, 2, 0); group.add(edges);
-    const pulse = new THREE.Mesh(new THREE.RingGeometry(3, 3.5, 32), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.5, side: THREE.DoubleSide }));
-    pulse.rotation.x = -Math.PI / 2; pulse.position.y = 0.1; (pulse as any)._isPulse = true; group.add(pulse);
+    // Multi-story hotel — concrete structure with glowing windows
+    const concreteMat = new THREE.MeshStandardMaterial({ color: 0x1a2535, metalness: 0.15, roughness: 0.85 });
+    const glassMat = new THREE.MeshStandardMaterial({ color: 0x0a1a2e, emissive: 0x00ffcc, emissiveIntensity: 0.35, metalness: 0.7, roughness: 0.1, transparent: true, opacity: 0.8 });
+    // Ground floor lobby (wider)
+    const lobby = new THREE.Mesh(new THREE.BoxGeometry(5, 1.2, 4), concreteMat); lobby.position.y = 0.6; group.add(lobby);
+    // 4 floors stacked
+    for (let fl = 0; fl < 4; fl++) {
+      const floor = new THREE.Mesh(new THREE.BoxGeometry(4.2, 1.4, 3.2), concreteMat);
+      floor.position.y = 1.8 + fl * 1.45; group.add(floor);
+      // Balcony slab
+      const balc = new THREE.Mesh(new THREE.BoxGeometry(4.6, 0.1, 0.5), new THREE.MeshStandardMaterial({ color: 0x1e2e3e, metalness: 0.4 }));
+      balc.position.set(0, 1.8 + fl * 1.45 + 0.65, 1.9); group.add(balc);
+      // Window strip per floor (both sides)
+      for (let w = 0; w < 5; w++) {
+        const win = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.65, 0.05), glassMat);
+        win.position.set(-1.8 + w * 0.9, 1.8 + fl * 1.45, 1.62); group.add(win);
+        const winB = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.65, 0.05), glassMat);
+        winB.position.set(-1.8 + w * 0.9, 1.8 + fl * 1.45, -1.62); group.add(winB);
+      }
+    }
+    // Roof equipment — AC units, comms dish, water tank
+    const roofY = 1.8 + 4 * 1.45 + 0.7;
+    const ac = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.7, 0.9), new THREE.MeshStandardMaterial({ color: 0x2a3a4a, metalness: 0.6 }));
+    ac.position.set(-1.2, roofY, 0.5); group.add(ac);
+    const comsDish = new THREE.Mesh(new THREE.SphereGeometry(0.4, 8, 6, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0x8899aa, metalness: 0.9 }));
+    comsDish.position.set(1.2, roofY, 0); comsDish.rotation.x = -Math.PI * 0.7; group.add(comsDish);
+    const comsMast = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2.5, 6), new THREE.MeshStandardMaterial({ color: 0x667788, metalness: 0.85 }));
+    comsMast.position.set(1.2, roofY + 1.7, 0); group.add(comsMast);
+    // Roof beacon
+    const rBeacon = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), new THREE.MeshBasicMaterial({ color: t.color }));
+    rBeacon.position.set(0, roofY + 0.6, 0); (rBeacon as any)._isBeacon = true; group.add(rBeacon);
+    // Outer edge wire frame glow
+    const frameGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(4.3, roofY + 0.4, 3.3));
+    const frame = new THREE.LineSegments(frameGeo, new THREE.LineBasicMaterial({ color: t.color, transparent: true, opacity: 0.25 }));
+    frame.position.y = (roofY + 0.4) / 2; group.add(frame);
+    const pulse = new THREE.Mesh(new THREE.RingGeometry(3.5, 4.2, 48), new THREE.MeshBasicMaterial({ color: t.color, transparent: true, opacity: 0.4, side: THREE.DoubleSide }));
+    pulse.rotation.x = -Math.PI / 2; pulse.position.y = 0.05; (pulse as any)._isPulse = true; group.add(pulse);
   }
   if (t.type === "crane") {
     const yM = new THREE.MeshStandardMaterial({ color: 0xffaa00, metalness: 0.7, roughness: 0.3 });
@@ -470,18 +501,50 @@ function buildLandmark(scene: THREE.Scene, t: Target): THREE.Group {
     }
   }
   if (t.type === "radar") {
-    const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.25, 8, 8), new THREE.MeshStandardMaterial({ color: 0x333344, metalness: 0.8 }));
-    mast.position.y = 4; group.add(mast);
-    const dome = new THREE.Mesh(new THREE.SphereGeometry(1.6, 16, 12, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0xeeeef5, transparent: true, opacity: 0.85 }));
-    dome.position.y = 8.2; group.add(dome);
-    const dish = new THREE.Mesh(new THREE.ConeGeometry(1.0, 0.5, 16, 1, true), new THREE.MeshStandardMaterial({ color: 0x4488ff, emissive: 0x2244ff, emissiveIntensity: 0.4, side: THREE.DoubleSide }));
-    dish.position.y = 8.4; dish.rotation.x = Math.PI / 2; (dish as any)._isRotating = true; group.add(dish);
-    for (let i = 0; i < 3; i++) {
-      const sw = new THREE.Mesh(new THREE.RingGeometry(3 + i * 6, 3.4 + i * 6, 48), new THREE.MeshBasicMaterial({ color: 0xff3333, transparent: true, opacity: 0.08, side: THREE.DoubleSide }));
-      sw.rotation.x = -Math.PI / 2; sw.position.y = 8; (sw as any)._isRF = i; group.add(sw);
+    // Bunker base building
+    const bldMat = new THREE.MeshStandardMaterial({ color: 0x2a1e12, metalness: 0.3, roughness: 0.9 });
+    const bld = new THREE.Mesh(new THREE.BoxGeometry(6, 3, 5), bldMat);
+    bld.position.y = 1.5; group.add(bld);
+    // Concrete reinforcing ribs on building
+    for (let r = 0; r < 3; r++) {
+      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.3, 3.2, 5.2), new THREE.MeshStandardMaterial({ color: 0x221a0e, metalness: 0.2 }));
+      rib.position.set(-2.8 + r * 2.8, 1.6, 0); group.add(rib);
     }
-    const bld = new THREE.Mesh(new THREE.BoxGeometry(4, 2.5, 3), new THREE.MeshStandardMaterial({ color: 0x332211 }));
-    bld.position.y = 1.25; group.add(bld);
+    // Blast door slit
+    const door = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.8, 0.1), new THREE.MeshStandardMaterial({ color: 0x444455, metalness: 0.9, emissive: 0x110022, emissiveIntensity: 0.5 }));
+    door.position.set(0, 1.3, 2.55); group.add(door);
+    // Pedestal tower
+    const pedestal = new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.4, 6, 10), new THREE.MeshStandardMaterial({ color: 0x252015, metalness: 0.5, roughness: 0.7 }));
+    pedestal.position.y = 6; group.add(pedestal);
+    // Radome — white composite sphere, hexagonal panel seams via wireframe sphere
+    const domeMat = new THREE.MeshStandardMaterial({ color: 0xe8ecf0, metalness: 0.1, roughness: 0.3, transparent: true, opacity: 0.88 });
+    const dome = new THREE.Mesh(new THREE.SphereGeometry(2.8, 12, 9), domeMat);
+    dome.position.y = 10.8; group.add(dome);
+    // Hex panel seam wireframe overlay
+    const domeWire = new THREE.Mesh(new THREE.SphereGeometry(2.85, 12, 9), new THREE.MeshBasicMaterial({ color: 0xaabbc8, wireframe: true, transparent: true, opacity: 0.18 }));
+    domeWire.position.y = 10.8; group.add(domeWire);
+    // Inner emissive radar glow through dome
+    const domeGlow = new THREE.Mesh(new THREE.SphereGeometry(1.8, 10, 8), new THREE.MeshBasicMaterial({ color: 0x4488ff, transparent: true, opacity: 0.25 }));
+    domeGlow.position.y = 10.8; (domeGlow as any)._isRadarGlow = true; group.add(domeGlow);
+    // Rotating radar arm (visible through dome)
+    const radarArm = new THREE.Group(); radarArm.position.y = 10.8;
+    const armBar = new THREE.Mesh(new THREE.BoxGeometry(4.0, 0.15, 0.3), new THREE.MeshStandardMaterial({ color: 0x334466, metalness: 0.85 }));
+    radarArm.add(armBar);
+    const headL = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.6, 8), new THREE.MeshStandardMaterial({ color: 0x6699ff, emissive: 0x2244ff, emissiveIntensity: 0.8 }));
+    headL.position.x = 2.1; headL.rotation.z = -Math.PI / 2; radarArm.add(headL);
+    const headR = new THREE.Mesh(new THREE.ConeGeometry(0.25, 0.6, 8), new THREE.MeshStandardMaterial({ color: 0x6699ff, emissive: 0x2244ff, emissiveIntensity: 0.8 }));
+    headR.position.x = -2.1; headR.rotation.z = Math.PI / 2; radarArm.add(headR);
+    (radarArm as any)._isRotating = true; group.add(radarArm);
+    // Pulsing scan sweeps
+    for (let i = 0; i < 4; i++) {
+      const sw = new THREE.Mesh(new THREE.RingGeometry(4 + i * 7, 4.6 + i * 7, 64), new THREE.MeshBasicMaterial({ color: 0xff2222, transparent: true, opacity: 0.07 - i * 0.01, side: THREE.DoubleSide }));
+      sw.rotation.x = -Math.PI / 2; sw.position.y = 10; (sw as any)._isRF = i; group.add(sw);
+    }
+    // Warning beacon on dome top
+    const warn = new THREE.Mesh(new THREE.SphereGeometry(0.28, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff2222 }));
+    warn.position.y = 13.7; (warn as any)._isBeacon = true; group.add(warn);
+    // Red PointLight at dome to color local terrain
+    const radarPt = new THREE.PointLight(0xff1111, 2.5, 20); radarPt.position.y = 11; group.add(radarPt);
   }
   if (t.type === "cell") {
     const mastMat = new THREE.MeshStandardMaterial({ color: 0x888899, metalness: 0.85 });
@@ -512,16 +575,100 @@ function buildLandmark(scene: THREE.Scene, t: Target): THREE.Group {
 
 function buildDrone(scene: THREE.Scene): THREE.Group {
   const drone = new THREE.Group();
-  drone.add(new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.2, 0.6), new THREE.MeshStandardMaterial({ color: 0x111111, emissive: 0x00ffcc, emissiveIntensity: 0.3 })));
-  for (let i = 0; i < 4; i++) {
-    const ang = (i / 4) * Math.PI * 2 + Math.PI / 4;
-    const arm = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.06, 0.06), new THREE.MeshStandardMaterial({ color: 0x222222 }));
-    arm.position.set(Math.cos(ang) * 0.6, 0, Math.sin(ang) * 0.6); arm.rotation.y = ang; drone.add(arm);
-    const prop = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.04, 8), new THREE.MeshStandardMaterial({ color: 0x444444, transparent: true, opacity: 0.6 }));
-    prop.position.set(Math.cos(ang) * 1.1, 0.12, Math.sin(ang) * 1.1); (prop as any)._isProp = true; drone.add(prop);
+
+  // ── Central body — carbon-fibre hexagonal platform ───────────────────────
+  const bodyMat = new THREE.MeshStandardMaterial({ color: 0x0a0a0f, metalness: 0.85, roughness: 0.25, emissive: 0x001a14, emissiveIntensity: 0.4 });
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(1.05, 1.15, 0.28, 8), bodyMat);
+  drone.add(body);
+  // top plate edge ring
+  const rim = new THREE.Mesh(new THREE.TorusGeometry(1.1, 0.06, 6, 16), new THREE.MeshStandardMaterial({ color: 0x1a2a2a, metalness: 0.9, roughness: 0.2 }));
+  rim.rotation.x = Math.PI / 2; rim.position.y = 0.14; drone.add(rim);
+  // status LED strip along rim
+  const ledMat = new THREE.MeshBasicMaterial({ color: 0x00ffcc });
+  const led = new THREE.Mesh(new THREE.TorusGeometry(1.08, 0.045, 4, 32), ledMat);
+  led.rotation.x = Math.PI / 2; led.position.y = -0.02; (led as any)._isDroneLED = true; drone.add(led);
+
+  // ── 4 Arms + motor nacelles ───────────────────────────────────────────────
+  const ARM_DIRS = [45, 135, 225, 315];
+  const armMat = new THREE.MeshStandardMaterial({ color: 0x0d1117, metalness: 0.75, roughness: 0.35 });
+  const nacelleMat = new THREE.MeshStandardMaterial({ color: 0x141820, metalness: 0.9, roughness: 0.15 });
+
+  ARM_DIRS.forEach((deg, i) => {
+    const ang = deg * Math.PI / 180;
+    const ax = Math.sin(ang), az = Math.cos(ang);
+
+    // Tapered arm (wide at body, narrow at tip)
+    const armGroup = new THREE.Group();
+    armGroup.rotation.y = -ang;
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.09, 2.4), armMat);
+    arm.position.z = 1.3; armGroup.add(arm);
+    // Carbon-fibre ribs on arm
+    for (let r = 0; r < 3; r++) {
+      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.04, 0.04), new THREE.MeshStandardMaterial({ color: 0x1a2030, metalness: 0.7 }));
+      rib.position.set(0, 0.06, 0.7 + r * 0.7); armGroup.add(rib);
+    }
+    drone.add(armGroup);
+
+    // Motor nacelle cylinder
+    const nacelle = new THREE.Mesh(new THREE.CylinderGeometry(0.38, 0.34, 0.3, 12), nacelleMat);
+    nacelle.position.set(ax * 2.55, 0.0, az * 2.55); drone.add(nacelle);
+    const nacTop = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.38, 0.06, 12), new THREE.MeshStandardMaterial({ color: 0x222a32, metalness: 0.95 }));
+    nacTop.position.set(ax * 2.55, 0.18, az * 2.55); drone.add(nacTop);
+
+    // ── Rotor blades — 2 crossed thin blades ─────────────────────────────
+    const rotorHub = new THREE.Group();
+    rotorHub.position.set(ax * 2.55, 0.25, az * 2.55);
+    const bladeMat = new THREE.MeshStandardMaterial({ color: 0x1a1a22, metalness: 0.5, roughness: 0.5, side: THREE.DoubleSide });
+    for (let b = 0; b < 2; b++) {
+      const blade = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.04, 0.18), bladeMat);
+      blade.rotation.y = b * Math.PI / 2; rotorHub.add(blade);
+    }
+    // Blur disc (shows spinning motion)
+    const blurDisc = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.35, 1.35, 0.02, 32),
+      new THREE.MeshBasicMaterial({ color: i % 2 === 0 ? 0x334455 : 0x223344, transparent: true, opacity: 0.28, depthWrite: false })
+    );
+    rotorHub.add(blurDisc);
+    (rotorHub as any)._rotorIdx = i;
+    drone.add(rotorHub);
+
+    // ── Nav lights ────────────────────────────────────────────────────────
+    if (i === 0) { // Front-right: green
+      const nl = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6), new THREE.MeshBasicMaterial({ color: 0x00ff44 }));
+      nl.position.set(ax * 2.55, 0.1, az * 2.55); (nl as any)._isNavLight = "green"; drone.add(nl);
+      const pt = new THREE.PointLight(0x00ff44, 0.8, 4); pt.position.copy(nl.position); drone.add(pt);
+    }
+    if (i === 1) { // Front-left: red
+      const nl = new THREE.Mesh(new THREE.SphereGeometry(0.12, 6, 6), new THREE.MeshBasicMaterial({ color: 0xff2200 }));
+      nl.position.set(ax * 2.55, 0.1, az * 2.55); (nl as any)._isNavLight = "red"; drone.add(nl);
+      const pt = new THREE.PointLight(0xff2200, 0.8, 4); pt.position.copy(nl.position); drone.add(pt);
+    }
+    if (i === 2) { // Rear: white strobe
+      const nl = new THREE.Mesh(new THREE.SphereGeometry(0.10, 6, 6), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      nl.position.set(ax * 2.55, 0.1, az * 2.55); (nl as any)._isNavLight = "strobe"; drone.add(nl);
+    }
+  });
+
+  // ── Camera gimbal ─────────────────────────────────────────────────────────
+  const gMat = new THREE.MeshStandardMaterial({ color: 0x1a1a20, metalness: 0.9, roughness: 0.1 });
+  const gimbal = new THREE.Mesh(new THREE.SphereGeometry(0.42, 10, 8), gMat);
+  gimbal.position.y = -0.38; drone.add(gimbal);
+  const lens = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.22, 0.18, 12), new THREE.MeshStandardMaterial({ color: 0x06080c, emissive: 0x1133aa, emissiveIntensity: 0.6, metalness: 0.99 }));
+  lens.position.y = -0.62; (lens as any)._isLens = true; drone.add(lens);
+
+  // ── Downwash illumination + scan volumes ──────────────────────────────────
+  const belly = new THREE.PointLight(0x44ffee, 1.4, 12); belly.position.y = -1.0; (belly as any)._isBellyLight = true; drone.add(belly);
+  const cone = new THREE.Mesh(new THREE.ConeGeometry(3.5, 9, 20, 1, true), new THREE.MeshBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.05, side: THREE.DoubleSide, depthWrite: false }));
+  cone.rotation.x = Math.PI; cone.position.y = -4.5; (cone as any)._isScanCone = true; drone.add(cone);
+  // inner hot cone
+  const coneInner = new THREE.Mesh(new THREE.ConeGeometry(1.0, 9, 12, 1, true), new THREE.MeshBasicMaterial({ color: 0xaaffee, transparent: true, opacity: 0.06, side: THREE.DoubleSide, depthWrite: false }));
+  coneInner.rotation.x = Math.PI; coneInner.position.y = -4.5; drone.add(coneInner);
+  // Scan rings at different depths
+  for (let r = 0; r < 3; r++) {
+    const scanRing = new THREE.Mesh(new THREE.RingGeometry(1.8 + r * 1.1, 2.0 + r * 1.1, 32), new THREE.MeshBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.06 - r * 0.015, side: THREE.DoubleSide, depthWrite: false }));
+    scanRing.rotation.x = -Math.PI / 2; scanRing.position.y = -3 - r * 2.2; (scanRing as any)._isScanRing = r; drone.add(scanRing);
   }
-  const cone = new THREE.Mesh(new THREE.ConeGeometry(2.5, 6, 16, 1, true), new THREE.MeshBasicMaterial({ color: 0x00ffcc, transparent: true, opacity: 0.07, side: THREE.DoubleSide, depthWrite: false }));
-  cone.rotation.x = Math.PI; cone.position.y = -3; (cone as any)._isScanCone = true; drone.add(cone);
+
   scene.add(drone); return drone;
 }
 
@@ -565,16 +712,74 @@ function createScene(
   renderer.toneMappingExposure = 1.1;
   container.appendChild(renderer.domElement);
 
-  scene.add(new THREE.AmbientLight(0x0a1520, 0.5));
-  const sun = new THREE.DirectionalLight(0x5588aa, 0.7);
-  sun.position.set(-40, 80, -20); sun.castShadow = true; scene.add(sun);
-  scene.add(new THREE.HemisphereLight(0x224466, 0x112211, 0.4));
+  // ── Lighting: Quake-engine night — deep moonlit valley ────────────────────
+  scene.add(new THREE.AmbientLight(0x04080f, 0.3));
+  // Cold moonlight from high left
+  const moon = new THREE.DirectionalLight(0x8ab4d4, 0.55);
+  moon.position.set(-60, 110, -30); moon.castShadow = true;
+  moon.shadow.mapSize.set(1024, 1024); moon.shadow.camera.near = 1; moon.shadow.camera.far = 400;
+  moon.shadow.camera.left = -80; moon.shadow.camera.right = 80;
+  moon.shadow.camera.top = 80; moon.shadow.camera.bottom = -80;
+  scene.add(moon);
+  // Subtle warm fill from east (dawn glow on ridge)
+  const fillLight = new THREE.DirectionalLight(0x3a1a05, 0.18);
+  fillLight.position.set(80, 20, -60); scene.add(fillLight);
+  // Sky hemisphere — deep night blue sky / dark green jungle floor
+  scene.add(new THREE.HemisphereLight(0x0d1f3a, 0x0a120a, 0.5));
 
-  const starGeo = new THREE.BufferGeometry();
-  const starPos = new Float32Array(1200 * 3);
-  for (let i = 0; i < 1200; i++) { starPos[i*3]=(Math.random()-.5)*600; starPos[i*3+1]=80+Math.random()*120; starPos[i*3+2]=(Math.random()-.5)*600; }
-  starGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
-  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xaabbcc, size: 0.3, transparent: true, opacity: 0.6 })));
+  // ── Colored point lights at each target for dramatic set-dressing ─────────
+  const TARGET_LIGHTS: [number, number, number, number, number][] = [
+    // [lat, lon, elevM, color, intensity]
+    [TARGETS[0].lat, TARGETS[0].lon, TARGETS[0].elevM + 8, 0x00ffcc, 2.0],  // ECHO: teal
+    [TARGETS[1].lat, TARGETS[1].lon, TARGETS[1].elevM + 20, 0xff8800, 1.8], // crane: amber
+    [TARGETS[2].lat, TARGETS[2].lon, TARGETS[2].elevM + 6, 0xff2222, 3.0],  // El Miro: red
+    [TARGETS[3].lat, TARGETS[3].lon, TARGETS[3].elevM + 10, 0xaa44ff, 1.6], // breakwater: purple
+    [TARGETS[4].lat, TARGETS[4].lon, TARGETS[4].elevM + 6, 0xff5533, 1.4],  // hermosa: orange
+  ];
+  TARGET_LIGHTS.forEach(([lat, lon, elev, col, intensity]) => {
+    const [lx, ly, lz] = latLonToScene(lat, lon, elev);
+    const pl = new THREE.PointLight(col, intensity, 28); pl.position.set(lx, ly, lz); scene.add(pl);
+  });
+
+  // ── Moon sphere in sky ────────────────────────────────────────────────────
+  const moonSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(8, 16, 12),
+    new THREE.MeshBasicMaterial({ color: 0xd8e8f5 })
+  );
+  moonSphere.position.set(-180, 220, -280); scene.add(moonSphere);
+  // Moon glow halo
+  const moonHalo = new THREE.Mesh(
+    new THREE.SphereGeometry(14, 12, 8),
+    new THREE.MeshBasicMaterial({ color: 0x6090c0, transparent: true, opacity: 0.07, side: THREE.BackSide })
+  );
+  moonHalo.position.copy(moonSphere.position); scene.add(moonHalo);
+
+  // ── Stars — 3 layers of depth ─────────────────────────────────────────────
+  const starLayers = [
+    { count: 800, spread: 600, y0: 80, yH: 140, size: 0.25, col: 0xd0e0f0, op: 0.7 },
+    { count: 400, spread: 400, y0: 90, yH: 100, size: 0.45, col: 0xffeedd, op: 0.5 },
+    { count: 200, spread: 500, y0: 100, yH: 120, size: 0.18, col: 0xaabbff, op: 0.4 },
+  ];
+  starLayers.forEach(({ count, spread, y0, yH, size, col, op }) => {
+    const geo = new THREE.BufferGeometry();
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) { pos[i*3]=(Math.random()-.5)*spread; pos[i*3+1]=y0+Math.random()*yH; pos[i*3+2]=(Math.random()-.5)*spread; }
+    geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: col, size, transparent: true, opacity: op, sizeAttenuation: true })));
+  });
+
+  // ── Ground mist — dense low-altitude particles ─────────────────────────────
+  const mistGeo = new THREE.BufferGeometry();
+  const mPos = new Float32Array(1200 * 3);
+  for (let i = 0; i < 1200; i++) { mPos[i*3]=(Math.random()-.5)*160; mPos[i*3+1]=Math.random()*2.5; mPos[i*3+2]=(Math.random()-.5)*160; }
+  mistGeo.setAttribute("position", new THREE.BufferAttribute(mPos, 3));
+  scene.add(new THREE.Points(mistGeo, new THREE.PointsMaterial({ color: 0x8ab8c8, size: 2.8, transparent: true, opacity: 0.055, blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true })));
+
+  // ── El Miro scan beam — slow sweep SpotLight ───────────────────────────────
+  const scanBeam = new THREE.SpotLight(0xff2222, 4.0, 80, Math.PI / 14, 0.5, 1.5);
+  const [emX, emY, emZ] = latLonToScene(TARGETS[2].lat, TARGETS[2].lon, TARGETS[2].elevM + 12);
+  scanBeam.position.set(emX, emY, emZ); scene.add(scanBeam); scene.add(scanBeam.target);
+  (scanBeam as any)._isScanBeam = true;
 
   buildTerrain(scene, elevData);
   buildDetLayers(scene);
@@ -644,6 +849,7 @@ function createScene(
       camTarget.z+Math.sin(camAngle)*camDist*Math.cos(camElev),
     ); camera.lookAt(camTarget);
 
+    // ── Drone patrol with banking/pitch physics ──────────────────────────────
     const segDur=120.0,fullCycle=TARGETS.length*segDur,cycleT=(t*0.5)%fullCycle;
     const seg=Math.floor(cycleT/segDur),frac=(cycleT%segDur)/segDur;
     const from=TARGETS[seg%TARGETS.length],to=TARGETS[(seg+1)%TARGETS.length];
@@ -651,8 +857,35 @@ function createScene(
     const [fx,fy,fz]=latLonToScene(from.lat,from.lon,from.elevM);
     const [tx,ty,tz]=latLonToScene(to.lat,to.lon,to.elevM);
     const ease=frac<.5?2*frac*frac:-1+(4-2*frac)*frac;
-    drone.position.set(fx+(tx-fx)*ease,Math.max(fy,ty)+12+Math.sin(frac*Math.PI)*8,fz+(tz-fz)*ease);
-    drone.rotation.y=Math.atan2(tx-fx,tz-fz);
+    const dEase=frac<.5?4*frac:4*(1-frac); // derivative of ease — speed proxy
+    const flightH = Math.max(fy,ty)+14+Math.sin(frac*Math.PI)*10;
+    drone.position.set(fx+(tx-fx)*ease, flightH, fz+(tz-fz)*ease);
+    // Heading
+    const targetYaw=Math.atan2(tx-fx,tz-fz);
+    drone.rotation.y=targetYaw;
+    // Banking (roll): bank into turn — based on yaw rate × speed
+    const dist=Math.sqrt((tx-fx)**2+(tz-fz)**2);
+    const bank=Math.sin(t*0.5)*0.04 + (dist>0.1?Math.sin(frac*Math.PI)*0.18:0);
+    drone.rotation.z = -bank;
+    // Pitch: nose slightly down at cruise, nose up at deceleration
+    const pitch = dEase>2.5 ? -0.12 : (dEase<0.4 ? 0.08 : -0.05);
+    drone.rotation.x = pitch;
+    // Hover bob
+    drone.position.y += Math.sin(t*2.3)*0.35;
+
+    // ── Scan beam rotation ────────────────────────────────────────────────────
+    const sb = scanBeam as any;
+    if (sb._isScanBeam) {
+      const sweepAngle = t * 0.35;
+      const sweepR = 35;
+      scanBeam.target.position.set(
+        emX + Math.sin(sweepAngle) * sweepR,
+        emY - 15,
+        emZ + Math.cos(sweepAngle) * sweepR
+      );
+      scanBeam.target.updateMatrixWorld();
+      (scanBeam as THREE.SpotLight).intensity = 3.5 + Math.sin(t * 2.1) * 0.8;
+    }
 
     scene.traverse(obj=>{
       if((obj as any)._isPulse){const s=1+Math.sin(t*2)*.5;obj.scale.set(s,1,s);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.25+Math.sin(t*3)*.25;}
@@ -660,11 +893,25 @@ function createScene(
       if((obj as any)._isRF!==undefined){const p=(t*.6+(obj as any)._isRF*.4)%1;obj.scale.set(1+p*1.8,1,1+p*1.8);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.12*(1-p);}
       if((obj as any)._detRing!==undefined)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.15+Math.sin(t*1.5+(obj as any)._detRing)*.08;
       if((obj as any)._engRing!==undefined)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.12+Math.sin(t*2.2+(obj as any)._engRing*.7)*.06;
-      if((obj as any)._isRotating)obj.rotation.z=t*1.2;
+      // Radar arm spins on Y axis (not Z — it's horizontal)
+      if((obj as any)._isRotating)obj.rotation.y=t*0.9;
       if((obj as any)._isProp)obj.rotation.y=t*20;
       if((obj as any)._isScanCone)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.04+Math.sin(t*3)*.04;
+      if((obj as any)._isScanRing!==undefined){const p=(t*.4+(obj as any)._isScanRing*.3)%1;obj.scale.set(1+p*1.2,1,1+p*1.2);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.07*(1-p);}
       if((obj as any)._isPing){const s=1+(Math.sin(t*2.5)*.5+.5)*1.5;obj.scale.set(s,1,s);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.6*(1-(s-1)/1.5);}
       if((obj as any)._tdoaNode){obj.rotation.x=t*.8;obj.rotation.z=t*.5;}
+      // Radar dome inner glow pulse
+      if((obj as any)._isRadarGlow)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.18+Math.sin(t*1.8)*0.12;
+      // Drone LED ring breathes teal
+      if((obj as any)._isDroneLED)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).color.setHSL(0.47, 1.0, 0.45+Math.sin(t*3)*0.15);
+      // Nav lights blink pattern
+      if((obj as any)._isNavLight==="green")((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=t%1.5<0.06?1.0:0.55;
+      if((obj as any)._isNavLight==="red")((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=t%1.8<0.07?1.0:0.5;
+      if((obj as any)._isNavLight==="strobe"){const s=(t%1.2<0.06||((t+0.07)%1.2<0.06));((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=s?1.0:0.0;}
+      // Belly PointLight pulses with rotor effort
+      if((obj as any)._isBellyLight)(obj as THREE.PointLight).intensity=1.2+Math.abs(pitch)*4+Math.sin(t*8)*0.15;
+      // Rotor hubs spin fast — alternate CW/CCW like real quad
+      if((obj as any)._rotorIdx!==undefined){const dir=(obj as any)._rotorIdx%2===0?1:-1;obj.rotation.y=t*28*dir;}
       // Update quantum shader uTime uniforms
       if(obj instanceof THREE.Mesh){
         const m=obj.material as any;
@@ -673,8 +920,9 @@ function createScene(
       }
     });
 
+    // Ambient particle drift — slow upward float
     const pa=partGeo.attributes.position.array as Float32Array;
-    for(let i=0;i<partCount;i++){pa[i*3+1]+=pSpd[i];if(pa[i*3+1]>55){pa[i*3+1]=0;pa[i*3]=(Math.random()-.5)*180;pa[i*3+2]=(Math.random()-.5)*180;}}
+    for(let i=0;i<partCount;i++){pa[i*3+1]+=pSpd[i]*0.6;if(pa[i*3+1]>55){pa[i*3+1]=0;pa[i*3]=(Math.random()-.5)*180;pa[i*3+2]=(Math.random()-.5)*180;}}
     partGeo.attributes.position.needsUpdate=true;
     renderer.render(scene,camera);
   };
