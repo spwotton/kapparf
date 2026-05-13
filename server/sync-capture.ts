@@ -365,8 +365,8 @@ export async function runSyncCapture(): Promise<SyncCaptureResult> {
     eventType: "synchronized-capture",
     frequency: 0,
     confidence: 1.0,
-    latitude: 9.9352,
-    longitude: -84.1094,
+    latitude: 9.6196,
+    longitude: -84.6282,
     metadata: {
       correlationId,
       epochMs,

@@ -39,6 +39,7 @@ import WhistleblowerPage from "@/pages/whistleblower";
 import MemoryCortexPage from "@/pages/memory-cortex";
 import GalliumPage from "@/pages/gallium";
 import SuitesCristinaPage from "@/pages/suites-cristina";
+import JacoMapPage from "@/pages/jaco-map";
 
 function Router() {
   return (
@@ -73,6 +74,7 @@ function Router() {
       <Route path="/memory" component={MemoryCortexPage} />
       <Route path="/gallium" component={GalliumPage} />
       <Route path="/cristina" component={SuitesCristinaPage} />
+      <Route path="/jaco" component={JacoMapPage} />
       <Route component={NotFound} />
     </Switch>
   );

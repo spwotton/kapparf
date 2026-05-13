@@ -76,6 +76,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.networkForensics", fallback: "Network Forensics", url: "/forensics", icon: Network },
       { titleKey: "sidebar.board", fallback: "Board", url: "/board", icon: Globe },
       { titleKey: "sidebar.cristina", fallback: "Suites Cristina", url: "/cristina", icon: Building2 },
+      { titleKey: "sidebar.jaco", fallback: "Jacó Valley 3D", url: "/jaco", icon: Globe },
     ],
   },
   {

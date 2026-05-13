@@ -3879,3 +3879,34 @@ function escapeHtml(str: string): string {
   if (!str) return "";
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
+
+// ── Terrain proxy routes ──────────────────────────────────────────────────────
+
+app.get("/api/terrain/elevation", async (req, res) => {
+  try {
+    const locations = req.query.locations as string;
+    if (!locations) return res.status(400).json({ error: "locations required" });
+    const url = `https://api.opentopodata.org/v1/srtm90m?locations=${encodeURIComponent(locations)}`;
+    const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+    if (!r.ok) return res.status(r.status).json({ error: "upstream error" });
+    const data = await r.json();
+    res.json(data);
+  } catch (e) {
+    res.status(500).json({ error: String(e) });
+  }
+});
+
+app.get("/api/terrain/tile/:z/:y/:x", async (req, res) => {
+  try {
+    const { z, y, x } = req.params;
+    const url = `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
+    const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+    if (!r.ok) return res.status(r.status).send("tile error");
+    const buf = Buffer.from(await r.arrayBuffer());
+    res.set("Content-Type", r.headers.get("content-type") || "image/jpeg");
+    res.set("Cache-Control", "public, max-age=86400");
+    res.send(buf);
+  } catch (e) {
+    res.status(500).send(String(e));
+  }
+});

@@ -55,7 +55,7 @@ const translations = {
     "correlations.domains": "Domains",
     "correlations.condition": "Condition",
     "satellites.title": "Satellites",
-    "satellites.description": "TLE-based satellite tracking with pass predictions for San José (9.9352°N, 84.1094°W).",
+    "satellites.description": "TLE-based satellite tracking with pass predictions for Jacó (9.6196°N, 84.6282°W).",
     "satellites.name": "Name",
     "satellites.norad": "NORAD ID",
     "satellites.elevation": "Elevation",
