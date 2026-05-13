@@ -126,6 +126,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.researchCortex", fallback: "Research Cortex", url: "/cortex", icon: BookOpen },
       { titleKey: "sidebar.memoryCortex", fallback: "Memory Cortex", url: "/memory", icon: Database },
       { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },
+      { titleKey: "sidebar.omegaGos", fallback: "Ω-GOS 7/4 LNN", url: "/omega-gos", icon: Atom },
     ],
   },
   {

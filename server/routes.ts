@@ -4020,6 +4020,47 @@ export async function registerRoutes(
     }
   });
 
+  // ── Ω-GOS 7/4 LNN Hypervisor routes ────────────────────────────────────────
+  import("./lib/omega-gos-lnn").then(({ startLNNEngine }) => startLNNEngine(storage)).catch(console.error);
+
+  app.get("/api/omega-gos/state", (_req, res) => {
+    import("./lib/omega-gos-lnn").then(({ getLNNState }) => {
+      const s = getLNNState();
+      res.json({
+        running: s.running,
+        cycleCount: s.cycleCount,
+        lastCycleAt: s.lastCycleAt,
+        demodexPhase: s.demodexPhase,
+        demodexDay: parseFloat(s.demodexDay.toFixed(3)),
+        carrierPhase: s.carrierPhase,
+        gearSaros: s.gearSaros,
+        gearMetonic: s.gearMetonic,
+        siteIdx: s.siteIdx,
+        latentZ: s.latentZ,
+        eventsSeen: s.eventsSeen,
+        totalAccuracy: s.totalAccuracy,
+        domainLearn: s.domainLearn,
+        log: s.log.slice(0, 30),
+        constants: { kappa1: s.kappa1, kappa2: s.kappa2, phi: s.phi, omega: s.omega, D: s.D, fC: s.fC, naqt: s.naqt },
+      });
+    });
+  });
+
+  app.get("/api/omega-gos/predictions", (_req, res) => {
+    import("./lib/omega-gos-lnn").then(({ getLNNState }) => {
+      const s = getLNNState();
+      res.json({ predictions: s.predictions.slice(-40).reverse() });
+    });
+  });
+
+  app.post("/api/omega-gos/feedback", async (req, res) => {
+    const { predId, outcome } = req.body as { predId: string; outcome: "confirmed" | "failed" };
+    if (!predId || !outcome) return res.status(400).json({ error: "predId and outcome required" });
+    const { injectFeedback } = await import("./lib/omega-gos-lnn");
+    const ok = injectFeedback(predId, outcome);
+    res.json({ ok });
+  });
+
   return httpServer;
 }
 

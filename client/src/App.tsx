@@ -43,6 +43,7 @@ import JacoMapPage from "@/pages/jaco-map";
 import DroneIntelPage from "@/pages/drone-intel/index";
 import DroneGamePage from "@/pages/drone-game";
 import SpokeWheelPage from "@/pages/spoke-wheel";
+import OmegaGOSLNNPage from "@/pages/omega-gos-lnn";
 
 function Router() {
   return (
@@ -81,6 +82,7 @@ function Router() {
       <Route path="/drone-intel" component={DroneIntelPage} />
       <Route path="/game" component={DroneGamePage} />
       <Route path="/spoke-wheel" component={SpokeWheelPage} />
+      <Route path="/omega-gos" component={OmegaGOSLNNPage} />
       <Route component={NotFound} />
     </Switch>
   );
