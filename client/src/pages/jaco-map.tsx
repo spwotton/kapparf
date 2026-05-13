@@ -7,7 +7,7 @@ import {
   Radio, RotateCcw, ZoomIn, ZoomOut, Crosshair,
   AlertTriangle, Wifi, MapPin, Layers,
   Satellite, Activity, Shield, Zap, Signal,
-  X, ChevronUp,
+  X, Flag, Download, Clock,
 } from "lucide-react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -72,6 +72,57 @@ interface LiveAircraft {
 
 interface OpenSkyResponse { states: LiveAircraft[]; time: number; count: number; error?: string; }
 
+// ─── Aircraft event types ─────────────────────────────────────────────────────
+
+type AcEventType = "ENTRY" | "PROXIMITY" | "ALT_DROP" | "ALT_GAIN" | "HOVER" | "LOITER" | "EXIT" | "FLAGGED";
+
+interface AircraftEvent {
+  id: string;
+  ts: number;
+  icao24: string;
+  callsign: string | null;
+  type: AcEventType;
+  lat: number;
+  lon: number;
+  altM: number | null;
+  velocityMs: number | null;
+  distKm: number;
+  note: string;
+  manual?: boolean;
+}
+
+interface AcHistEntry {
+  firstSeen: number;
+  lastSeen: number;
+  pollCount: number;
+  lastAlt: number | null;
+  lastLat: number;
+  lastLon: number;
+  loiterLogged: number; // last ts a loiter event was logged
+  flagged: boolean;
+}
+
+// ─── Haversine ────────────────────────────────────────────────────────────────
+
+function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+const AC_EVENT_STYLE: Record<AcEventType, { cls: string; label: string }> = {
+  ENTRY:     { cls: "text-cyan-400 border-cyan-500/30",    label: "ENTRY"    },
+  PROXIMITY: { cls: "text-red-400 border-red-500/40",      label: "PROXIMITY"},
+  ALT_DROP:  { cls: "text-orange-400 border-orange-500/30",label: "ALT DROP" },
+  ALT_GAIN:  { cls: "text-amber-400 border-amber-500/20",  label: "ALT GAIN" },
+  HOVER:     { cls: "text-red-400 border-red-500/40",      label: "HOVER"    },
+  LOITER:    { cls: "text-orange-400 border-orange-500/30",label: "LOITER"   },
+  EXIT:      { cls: "text-gray-500 border-gray-700",       label: "EXIT"     },
+  FLAGGED:   { cls: "text-purple-400 border-purple-500/40",label: "FLAGGED"  },
+};
+
 // ─── Fixed targets ────────────────────────────────────────────────────────────
 
 const TARGETS: Target[] = [
@@ -124,12 +175,178 @@ function buildTerrain(scene: THREE.Scene, elevData: number[][] | null) {
     }
   }
   geo.computeVertexNormals();
-  const mat = new THREE.MeshStandardMaterial({ color: 0x2d5a1b, roughness: 0.9, metalness: 0.05 });
-  new THREE.TextureLoader().load("/api/terrain/tile/13/3876/2170", (tex) => { mat.map = tex; mat.color.set(0xffffff); mat.needsUpdate = true; }, undefined, () => {});
+
+  // ── QUANTUM TERRAIN SHADER ──────────────────────────────────────────────────
+  // Wave-function interference scan lines + PBR-approximated lighting + κ-phase
+  // Derived from renderer_1774207206398.txt — SuperpositionShader / WaveFunctionShader
+  const terrainVS = /* glsl */`
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    varying vec3 vWorldPos;
+    varying float vElevation;
+    uniform float uTime;
+
+    float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+    float noise(vec2 p){
+      vec2 i=floor(p); vec2 f=fract(p); f=f*f*(3.0-2.0*f);
+      return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
+    }
+
+    void main(){
+      vUv=uv; vNormal=normalMatrix*normal;
+      vec3 pos=position;
+      // Micro-detail via multi-octave noise (κ=1.273 amplitude scale)
+      float detail=(noise(pos.xz*6.0)*1.0+noise(pos.xz*13.0)*0.5+noise(pos.xz*27.0)*0.25)*0.35;
+      pos.y+=detail*smoothstep(0.0,1.8,pos.y)*1.273;
+      vElevation=pos.y;
+      vec4 wp=modelMatrix*vec4(pos,1.0);
+      vWorldPos=wp.xyz;
+      gl_Position=projectionMatrix*viewMatrix*wp;
+    }
+  `;
+  const terrainFS = /* glsl */`
+    precision highp float;
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    varying vec3 vWorldPos;
+    varying float vElevation;
+    uniform float uTime;
+    uniform sampler2D uSatTex;
+    uniform float uHasTex;
+
+    // κ wave-function interference — born rule probability density
+    float kappaPhase(vec2 p, float t){
+      const float KAPPA=1.273;
+      float w1=sin(p.x*KAPPA*4.0-t*0.28)*cos(p.y*KAPPA*3.0+t*0.19);
+      float w2=cos(p.x*2.31+p.y*3.14*KAPPA-t*0.11);
+      // Born rule |ψ|² probability density
+      float psi=w1*0.6+w2*0.4;
+      return psi*psi; // always positive, like probability
+    }
+
+    // Wigner quasi-probability (from WaveFunctionShader)
+    float wigner(vec2 ps){ float q=ps.x,p=ps.y; return exp(-q*q-p*p)/3.14159; }
+
+    void main(){
+      // Elevation-based terrain palette (jungle valley + ridge)
+      float e=clamp(vElevation/2.0,0.0,1.0);
+      vec3 beach=vec3(0.76,0.70,0.55);
+      vec3 lowland=vec3(0.10,0.26,0.09);
+      vec3 midland=vec3(0.13,0.20,0.07);
+      vec3 ridge=vec3(0.18,0.16,0.10);
+      vec3 rock=vec3(0.28,0.24,0.18);
+      vec3 terrainCol=mix(beach,mix(lowland,mix(midland,mix(ridge,rock,
+        smoothstep(0.75,1.0,e)),smoothstep(0.45,0.75,e)),
+        smoothstep(0.12,0.45,e)),smoothstep(0.0,0.12,e));
+
+      // Satellite texture blend
+      vec3 base=terrainCol;
+      if(uHasTex>0.5){
+        vec4 sat=texture2D(uSatTex,vUv);
+        float blend=smoothstep(0.0,0.1,e)*0.78; // fade to pure terrain at beach
+        base=mix(terrainCol,sat.rgb*1.08,blend);
+      }
+
+      // κ-phase quantum scan line — very subtle teal shimmer at low elevation
+      float kp=kappaPhase(vWorldPos.xz*0.08,uTime);
+      vec3 kappaGlow=vec3(0.0,0.85,0.7)*kp*0.04*(1.0-e*0.9);
+
+      // Wigner probability glow along ridges (interference fringe)
+      float wig=wigner(vWorldPos.xz*0.04)*0.06*e;
+      vec3 wigGlow=vec3(0.1,0.4,0.8)*wig;
+
+      // PBR-approximated lighting
+      vec3 sunDir=normalize(vec3(-0.35,0.85,-0.25));
+      vec3 n=normalize(vNormal);
+      float diffuse=max(dot(n,sunDir),0.0);
+      // Ambient occlusion approximation via elevation gradient
+      float ao=0.65+0.35*smoothstep(0.0,0.6,vElevation);
+      // Specular highlight (Blinn-Phong)
+      vec3 viewDir=normalize(vec3(0.4,0.75,0.5));
+      vec3 half_=normalize(sunDir+viewDir);
+      float spec=pow(max(dot(n,half_),0.0),18.0)*0.12*(1.0-e*0.5);
+
+      vec3 lit=base*(0.32+diffuse*0.68)*ao+vec3(spec)+kappaGlow+wigGlow;
+
+      // Subtle CRT scan line at horizon — KAPPA HF monitoring aesthetic
+      float scan=sin(vWorldPos.x*3.5+uTime*0.4)*sin(vWorldPos.z*3.5-uTime*0.28);
+      float scanMask=smoothstep(0.9,1.0,abs(scan))*0.018*(1.0-e);
+      lit+=vec3(0.0,1.0,0.78)*scanMask;
+
+      gl_FragColor=vec4(clamp(lit,0.0,1.0),1.0);
+    }
+  `;
+
+  const terrainUniforms = { uTime:{value:0.0}, uSatTex:{value:null as THREE.Texture|null}, uHasTex:{value:0.0} };
+  const mat = new THREE.ShaderMaterial({ vertexShader:terrainVS, fragmentShader:terrainFS, uniforms:terrainUniforms });
+  (mat as any)._isTerrainShader = true;
+  new THREE.TextureLoader().load("/api/terrain/tile/13/3876/2170", (tex) => {
+    tex.wrapS=tex.wrapT=THREE.RepeatWrapping;
+    terrainUniforms.uSatTex.value=tex; terrainUniforms.uHasTex.value=1.0;
+  }, undefined, () => {});
   scene.add(new THREE.Mesh(geo, mat));
-  const ocean = new THREE.Mesh(new THREE.PlaneGeometry(60, SIZE), new THREE.MeshStandardMaterial({ color: 0x003366, emissive: 0x001133, emissiveIntensity: 0.3, roughness: 0.05, metalness: 0.4, transparent: true, opacity: 0.82 }));
-  ocean.rotation.x = -Math.PI / 2; ocean.position.set(-70, 0.05, 0); scene.add(ocean);
-  scene.add(new THREE.GridHelper(SIZE, 48, 0x112233, 0x0a1522));
+
+  // ── QUANTUM OCEAN ────────────────────────────────────────────────────────────
+  // Animated wave-interference caustics from TunnelingShader approach
+  const oceanVS = /* glsl */`
+    uniform float uTime;
+    varying vec2 vUv;
+    varying vec3 vWorldPos;
+
+    void main(){
+      vUv=uv;
+      vec3 pos=position;
+      // Wave superposition: 3 travelling waves at κ-harmonic angles
+      float w1=sin(pos.x*0.18+uTime*1.1)*0.4;
+      float w2=sin(pos.z*0.22-uTime*0.9)*0.35;
+      float w3=sin((pos.x+pos.z)*0.14+uTime*0.7)*0.25;
+      pos.y+=w1+w2+w3;
+      vec4 wp=modelMatrix*vec4(pos,1.0);
+      vWorldPos=wp.xyz;
+      gl_Position=projectionMatrix*viewMatrix*wp;
+    }
+  `;
+  const oceanFS = /* glsl */`
+    precision highp float;
+    uniform float uTime;
+    varying vec2 vUv;
+    varying vec3 vWorldPos;
+
+    void main(){
+      // Deep Pacific Pacific coast water
+      vec3 deep=vec3(0.01,0.07,0.18);
+      vec3 shallow=vec3(0.02,0.14,0.28);
+      vec3 foam=vec3(0.3,0.55,0.65);
+
+      // Caustic interference pattern (TunnelingShader transmission coefficient idea)
+      float c1=sin(vWorldPos.x*0.6+uTime*1.4)*sin(vWorldPos.z*0.7-uTime*1.1);
+      float c2=sin((vWorldPos.x-vWorldPos.z)*0.5+uTime*0.9);
+      float caustic=pow(max(c1*c2,0.0),2.5)*0.35;
+
+      // Born-rule foam crests — probability density on wave peaks
+      float peak=smoothstep(0.6,1.0,sin(vWorldPos.x*0.18+uTime*1.1)*0.5+0.5)*0.2;
+
+      vec3 col=mix(deep,shallow,caustic+peak*0.5);
+      col+=foam*(caustic*0.5+peak);
+
+      // Specular sun glint
+      vec3 n=normalize(vec3(sin(uTime*0.8)*0.1,1.0,cos(uTime*0.6)*0.1));
+      vec3 sunDir=normalize(vec3(-0.35,0.85,-0.25));
+      vec3 vd=normalize(vec3(0.4,0.75,0.5));
+      float spec=pow(max(dot(normalize(n),normalize(sunDir+vd)),0.0),32.0)*0.5;
+      col+=vec3(0.5,0.7,0.85)*spec;
+
+      gl_FragColor=vec4(col,0.88);
+    }
+  `;
+  const oceanUniforms = { uTime:{value:0.0} };
+  const oceanMat = new THREE.ShaderMaterial({ vertexShader:oceanVS, fragmentShader:oceanFS, uniforms:oceanUniforms, transparent:true, side:THREE.DoubleSide });
+  (oceanMat as any)._isOceanShader = true;
+  const ocean = new THREE.Mesh(new THREE.PlaneGeometry(70, SIZE, 32, 32), oceanMat);
+  ocean.rotation.x = -Math.PI / 2; ocean.position.set(-73, 0.0, 0); scene.add(ocean);
+
+  // Subtle grid — very faint tactical overlay
+  scene.add(new THREE.GridHelper(SIZE, 48, 0x0d1f2d, 0x081520));
 }
 
 function buildRing(scene: THREE.Scene, group: THREE.Group, cx: number, cy: number, cz: number, range: number, color: number, opacity: number, yOff = 0) {
@@ -386,6 +603,12 @@ function createScene(
       if((obj as any)._isScanCone)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.04+Math.sin(t*3)*.04;
       if((obj as any)._isPing){const s=1+(Math.sin(t*2.5)*.5+.5)*1.5;obj.scale.set(s,1,s);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.6*(1-(s-1)/1.5);}
       if((obj as any)._tdoaNode){obj.rotation.x=t*.8;obj.rotation.z=t*.5;}
+      // Update quantum shader uTime uniforms
+      if(obj instanceof THREE.Mesh){
+        const m=obj.material as any;
+        if(m?._isTerrainShader&&m.uniforms?.uTime) m.uniforms.uTime.value=t;
+        if(m?._isOceanShader&&m.uniforms?.uTime) m.uniforms.uTime.value=t;
+      }
     });
 
     const pa=partGeo.attributes.position.array as Float32Array;
@@ -467,6 +690,15 @@ export default function JacoMapPage() {
   // Layer toggles (inside Layers panel)
   const [detLayers, setDetLayers] = useState([true,true,true,true]);
 
+  // Aircraft event tracking
+  const acHistory = useRef<Map<string, AcHistEntry>>(new Map());
+  const [acEvents, setAcEvents] = useState<AircraftEvent[]>([]);
+  const [acEventTab, setAcEventTab] = useState<"live"|"log">("live");
+
+  // Blade rail hover state — rails slide in on hover, hidden by default
+  const [leftRailHovered, setLeftRailHovered] = useState(false);
+  const [rightRailHovered, setRightRailHovered] = useState(false);
+
   const { data: oskyData, dataUpdatedAt } = useQuery<OpenSkyResponse>({
     queryKey: ["/api/opensky/jaco"], refetchInterval: 30_000, staleTime: 25_000,
   });
@@ -493,7 +725,103 @@ export default function JacoMapPage() {
     sceneRef.current=s; return()=>s.destroy();
   },[elevStatus,elevData]);
 
-  useEffect(()=>{ if(liveAircraft.length>0)sceneRef.current?.updateAircraft(liveAircraft); },[liveAircraft]);
+  useEffect(()=>{
+    if(liveAircraft.length===0) return;
+    sceneRef.current?.updateAircraft(liveAircraft);
+
+    const now = Date.now();
+    const hist = acHistory.current;
+    const newEvts: AircraftEvent[] = [];
+    const seen = new Set<string>();
+
+    liveAircraft.forEach(ac => {
+      const lat = ac.latitude; const lon = ac.longitude;
+      if(!lat||!lon) return;
+      const distKm = haversineKm(CENTER.lat, CENTER.lon, lat, lon);
+      const alt = ac.baroAltitude ?? ac.geoAltitude ?? null;
+      const vel = ac.velocity ?? null;
+      seen.add(ac.icao24);
+
+      const prev = hist.get(ac.icao24);
+      if(!prev) {
+        // New entry
+        const e: AircraftEvent = { id:`${ac.icao24}-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+          type:"ENTRY", lat, lon, altM:alt, velocityMs:vel, distKm, note:`Entered AOR · ${distKm.toFixed(1)}km from ECHO` };
+        newEvts.push(e);
+        hist.set(ac.icao24, { firstSeen:now, lastSeen:now, pollCount:1, lastAlt:alt, lastLat:lat, lastLon:lon, loiterLogged:0, flagged:false });
+        return;
+      }
+
+      const updated: AcHistEntry = { ...prev, lastSeen:now, pollCount:prev.pollCount+1, lastLat:lat, lastLon:lon };
+
+      // PROXIMITY — <1km
+      if(distKm < 1.0 && prev.pollCount >= 1) {
+        newEvts.push({ id:`${ac.icao24}-prox-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+          type:"PROXIMITY", lat, lon, altM:alt, velocityMs:vel, distKm,
+          note:`PROXIMITY ALERT · ${(distKm*1000).toFixed(0)}m from ECHO${alt!=null?` · ${Math.round(alt)}m AGL`:""}` });
+      }
+
+      // ALT_DROP / ALT_GAIN — >100m change
+      if(alt!=null && prev.lastAlt!=null) {
+        const delta = alt - prev.lastAlt;
+        if(delta < -100) newEvts.push({ id:`${ac.icao24}-adrop-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+          type:"ALT_DROP", lat, lon, altM:alt, velocityMs:vel, distKm, note:`Rapid descent ${Math.abs(Math.round(delta))}m · now ${Math.round(alt)}m` });
+        else if(delta > 100) newEvts.push({ id:`${ac.icao24}-again-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+          type:"ALT_GAIN", lat, lon, altM:alt, velocityMs:vel, distKm, note:`Rapid climb +${Math.round(delta)}m · now ${Math.round(alt)}m` });
+      }
+
+      // HOVER — alt <400m, vel <5 m/s, 2+ polls
+      if(alt!=null && alt<400 && vel!=null && vel<5 && prev.pollCount>=2) {
+        newEvts.push({ id:`${ac.icao24}-hover-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+          type:"HOVER", lat, lon, altM:alt, velocityMs:vel, distKm,
+          note:`HOVER · ${Math.round(alt)}m · ${vel.toFixed(1)}m/s · ${distKm.toFixed(2)}km from ECHO` });
+      }
+
+      // LOITER — 3+ polls, dist <3km, max one event per 2min
+      if(prev.pollCount>=3 && distKm<3 && (now - prev.loiterLogged) > 120_000) {
+        newEvts.push({ id:`${ac.icao24}-loiter-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+          type:"LOITER", lat, lon, altM:alt, velocityMs:vel, distKm,
+          note:`Loitering ${prev.pollCount} polls · ${distKm.toFixed(2)}km from ECHO` });
+        updated.loiterLogged = now;
+      }
+
+      updated.lastAlt = alt;
+      hist.set(ac.icao24, updated);
+    });
+
+    // EXIT — was in hist but not seen this poll
+    hist.forEach((h, icao) => {
+      if(!seen.has(icao) && now - h.lastSeen < 120_000) {
+        newEvts.push({ id:`${icao}-exit-${now}`, ts:now, icao24:icao, callsign:null,
+          type:"EXIT", lat:h.lastLat, lon:h.lastLon, altM:h.lastAlt, velocityMs:null,
+          distKm:haversineKm(CENTER.lat,CENTER.lon,h.lastLat,h.lastLon),
+          note:`Left AOR after ${h.pollCount} polls · ${Math.round((now-h.firstSeen)/60000)}min dwell` });
+        hist.delete(icao);
+      }
+    });
+
+    if(newEvts.length>0) setAcEvents(prev=>[...newEvts,...prev].slice(0,500));
+  },[liveAircraft]);
+
+  const flagAircraft = useCallback((ac: LiveAircraft) => {
+    const now = Date.now();
+    const distKm = haversineKm(CENTER.lat, CENTER.lon, ac.latitude, ac.longitude);
+    const evt: AircraftEvent = { id:`${ac.icao24}-flag-${now}`, ts:now, icao24:ac.icao24, callsign:ac.callsign,
+      type:"FLAGGED", lat:ac.latitude, lon:ac.longitude, altM:ac.baroAltitude??ac.geoAltitude??null,
+      velocityMs:ac.velocity??null, distKm, note:`MANUALLY FLAGGED · operator annotation`, manual:true };
+    const h = acHistory.current.get(ac.icao24);
+    if(h) acHistory.current.set(ac.icao24, {...h, flagged:true});
+    setAcEvents(prev=>[evt,...prev].slice(0,500));
+    setAcEventTab("log");
+  },[]);
+
+  const exportEvents = useCallback(() => {
+    const payload = { observer:{ lat:CENTER.lat, lon:CENTER.lon }, exportedAt:new Date().toISOString(), events:acEvents };
+    const blob = new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a"); a.href=url; a.download=`kappa-adsb-events-${Date.now()}.json`; a.click();
+    URL.revokeObjectURL(url);
+  },[acEvents]);
 
   const toggleLeft = useCallback((id:PanelId)=>setActiveLeft(p=>p===id?null:id),[]);
   const toggleRight = useCallback((id:PanelId)=>setActiveRight(p=>p===id?null:id),[]);
@@ -547,35 +875,95 @@ export default function JacoMapPage() {
 
     if (id === "adsb") return (
       <div className="space-y-2">
+        {/* Header */}
         <div className="flex items-center justify-between mb-1">
-          <span className="text-[10px] text-gray-500 font-mono">OpenSky · Jacó AOR ±25km · {lastUpdate}</span>
+          <span className="text-[10px] text-gray-500 font-mono">OpenSky · Jacó AOR · {lastUpdate}</span>
           <Badge className={`text-[9px] px-1.5 py-0 ${aircraftCount>0?"bg-red-500/15 text-red-400 border-red-500/30":"bg-gray-700 text-gray-500 border-gray-700"}`}>
             {aircraftCount} AC
           </Badge>
         </div>
-        {liveAircraft.length===0&&(
-          <div className="text-center py-6 text-[11px] text-gray-600 font-mono">No airborne traffic in AOR</div>
-        )}
-        <div className="space-y-1.5 overflow-y-auto max-h-64">
-          {liveAircraft.slice(0,15).map(ac=>{
-            const th=acThreat(ac);
-            return(
-              <div key={ac.icao24} className={`flex items-start justify-between text-[10px] font-mono border rounded px-2 py-1.5 ${th.bgCls}`} data-testid={`row-aircraft-${ac.icao24}`}>
-                <div>
-                  <div className={`font-bold text-xs ${th.cls}`}>{ac.callsign||ac.icao24.toUpperCase()}</div>
-                  <div className="text-gray-500">{ac.originCountry}</div>
-                  <div className="text-gray-600">{ac.squawk?`SQK ${ac.squawk}`:""}</div>
-                </div>
-                <div className="text-right space-y-0.5">
-                  <div className="text-gray-300">{ac.baroAltitude?`${Math.round(ac.baroAltitude)}m`:"—"}</div>
-                  <div className="text-gray-400">{ac.velocity?`${Math.round(ac.velocity)}m/s`:"—"}</div>
-                  <Badge className={`text-[8px] px-1 py-0 ${th.bgCls}`}>{th.level}</Badge>
-                </div>
-              </div>
-            );
-          })}
+        {/* Sub-tabs */}
+        <div className="flex gap-0 border border-white/10 rounded overflow-hidden mb-2">
+          {(["live","log"] as const).map(tab=>(
+            <button key={tab} onClick={()=>setAcEventTab(tab)}
+              className={`flex-1 flex items-center justify-center gap-1 py-1.5 text-[10px] font-mono uppercase tracking-widest transition-colors ${acEventTab===tab?"bg-blue-500/20 text-blue-300":"text-gray-600 hover:text-gray-400"}`}
+              data-testid={`tab-adsb-${tab}`}>
+              {tab==="live"?<Satellite className="h-3 w-3"/>:<Clock className="h-3 w-3"/>}
+              {tab==="live"?"Live":"Events"}
+              {tab==="log"&&acEvents.length>0&&<span className="ml-0.5 text-[8px] text-red-400">{acEvents.length}</span>}
+            </button>
+          ))}
         </div>
-        {liveAircraft.length>15&&<div className="text-[10px] text-gray-600 font-mono text-center">+{liveAircraft.length-15} more</div>}
+        {/* Live aircraft tab */}
+        {acEventTab==="live"&&(
+          <>
+            {liveAircraft.length===0&&(
+              <div className="text-center py-6 text-[11px] text-gray-600 font-mono">No airborne traffic in AOR</div>
+            )}
+            <div className="space-y-1.5 overflow-y-auto max-h-72">
+              {liveAircraft.slice(0,15).map(ac=>{
+                const th=acThreat(ac);
+                const hist=acHistory.current.get(ac.icao24);
+                return(
+                  <div key={ac.icao24} className={`text-[10px] font-mono border rounded px-2 py-1.5 ${th.bgCls}${hist?.flagged?" ring-1 ring-purple-500/50":""}`} data-testid={`row-aircraft-${ac.icao24}`}>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className={`font-bold text-xs ${th.cls}`}>{ac.callsign||ac.icao24.toUpperCase()}</div>
+                        <div className="text-gray-500">{ac.originCountry}</div>
+                        <div className="text-gray-600">{ac.squawk?`SQK ${ac.squawk}`:""}</div>
+                      </div>
+                      <div className="text-right space-y-0.5">
+                        <div className="text-gray-300">{ac.baroAltitude?`${Math.round(ac.baroAltitude)}m`:"—"}</div>
+                        <div className="text-gray-400">{ac.velocity?`${Math.round(ac.velocity)}m/s`:"—"}</div>
+                        <Badge className={`text-[8px] px-1 py-0 ${th.bgCls}`}>{th.level}</Badge>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between mt-1 pt-1 border-t border-white/5">
+                      <span className="text-gray-600">{haversineKm(CENTER.lat,CENTER.lon,ac.latitude,ac.longitude).toFixed(1)}km</span>
+                      <button onClick={()=>flagAircraft(ac)}
+                        className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono transition-colors ${hist?.flagged?"text-purple-400 bg-purple-500/15":"text-gray-600 hover:text-purple-400 hover:bg-purple-500/10"}`}
+                        data-testid={`btn-flag-${ac.icao24}`}>
+                        <Flag className="h-2.5 w-2.5"/>{hist?.flagged?"FLAGGED":"FLAG"}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            {liveAircraft.length>15&&<div className="text-[10px] text-gray-600 font-mono text-center">+{liveAircraft.length-15} more</div>}
+          </>
+        )}
+        {/* Event log tab */}
+        {acEventTab==="log"&&(
+          <>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] text-gray-500 font-mono">{acEvents.length} events logged</span>
+              <button onClick={exportEvents} disabled={acEvents.length===0}
+                className="flex items-center gap-1 px-2 py-1 rounded text-[9px] font-mono bg-blue-500/15 text-blue-400 hover:bg-blue-500/25 disabled:opacity-30 transition-colors"
+                data-testid="btn-export-events">
+                <Download className="h-2.5 w-2.5"/>EXPORT JSON
+              </button>
+            </div>
+            {acEvents.length===0&&(
+              <div className="text-center py-6 text-[11px] text-gray-600 font-mono">No events detected yet.<br/>Events auto-log as aircraft are polled.</div>
+            )}
+            <div className="space-y-1 overflow-y-auto max-h-72">
+              {acEvents.slice(0,60).map(evt=>{
+                const s=AC_EVENT_STYLE[evt.type];
+                return(
+                  <div key={evt.id} className={`border rounded px-2 py-1.5 text-[10px] font-mono ${s.cls}`} data-testid={`evt-${evt.id}`}>
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className={`text-[9px] px-1 rounded border font-bold ${s.cls}`}>{s.label}</span>
+                      <span className="text-gray-600 text-[9px]">{new Date(evt.ts).toLocaleTimeString("en-US",{hour12:false})}</span>
+                    </div>
+                    <div className="font-bold">{evt.callsign||evt.icao24.toUpperCase()}</div>
+                    <div className="text-gray-500 leading-relaxed">{evt.note}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     );
 
@@ -717,27 +1105,39 @@ export default function JacoMapPage() {
 
       {/* ════════════════════════════════════════════════════════════
            DESKTOP BLADE UI  (md and up)
+           Rails are hidden by default — only a 2px accent line shows.
+           Hovering the 20px edge zone slides the full rail in.
+           Panels open offset from the rail when active.
          ════════════════════════════════════════════════════════════ */}
 
-      {/* Left blade rail */}
-      <div className="hidden md:flex absolute left-0 top-10 bottom-0 z-30 flex-col items-center py-3 gap-1 w-10 bg-black/80 backdrop-blur-sm border-r border-white/8">
-        {leftPanels.map(p=>{
-          const Icon=p.icon; const isActive=activeLeft===p.id;
-          return(
-            <button key={p.id} onClick={()=>toggleLeft(p.id)}
-              className={`flex flex-col items-center justify-center gap-1 w-9 h-14 rounded-lg transition-all duration-200 ${isActive?"bg-white/10 border border-white/15":"hover:bg-white/5 border border-transparent"}`}
-              data-testid={`blade-left-${p.id}`} title={p.label}>
-              <Icon className={`h-4 w-4 transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-500"}`}/>
-              <span className={`text-[8px] font-mono uppercase tracking-wide transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-600"}`}>{p.label}</span>
-              {isActive&&<div className={`absolute left-0 h-8 w-0.5 rounded-r ${p.accentCls.split(" ")[0].replace("text-","bg-")}`}/>}
-            </button>
-          );
-        })}
+      {/* LEFT edge system */}
+      <div className="hidden md:block absolute left-0 top-10 bottom-0 z-30 w-5"
+        onMouseEnter={()=>setLeftRailHovered(true)}
+        onMouseLeave={()=>setLeftRailHovered(false)}>
+        {/* Permanent 2px accent line */}
+        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/50 via-green-500/20 to-transparent pointer-events-none"/>
+        {/* Sliding rail */}
+        <div className="absolute left-0 top-0 bottom-0 w-10 bg-black/92 backdrop-blur-xl border-r border-white/10 flex flex-col items-center py-3 gap-0.5"
+          style={{ transform:(leftRailHovered||activeLeft!==null)?"translateX(0)":"translateX(-100%)", transition:"transform 180ms cubic-bezier(0.4,0,0.2,1)", pointerEvents:(leftRailHovered||activeLeft!==null)?"auto":"none" }}>
+          {leftPanels.map(p=>{
+            const Icon=p.icon; const isActive=activeLeft===p.id;
+            return(
+              <button key={p.id} onClick={()=>toggleLeft(p.id)}
+                className={`relative flex flex-col items-center justify-center gap-1 w-9 h-14 rounded-lg transition-all duration-150 ${isActive?"bg-white/10 border border-white/15":"hover:bg-white/5 border border-transparent"}`}
+                data-testid={`blade-left-${p.id}`} title={p.label}>
+                {isActive&&<div className={`absolute left-0 top-3 h-8 w-0.5 rounded-r ${p.accentCls.split(" ")[0].replace("text-","bg-")}`}/>}
+                <Icon className={`h-4 w-4 transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-500"}`}/>
+                <span className={`text-[8px] font-mono uppercase tracking-wide transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-600"}`}>{p.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Left blade panel */}
+      {/* Left blade panel — slides from rail edge */}
       {leftPanels.map(p=>(
-        <div key={p.id} className={`hidden md:block absolute top-10 bottom-0 z-20 w-72 bg-black/90 backdrop-blur-xl border-r border-white/10 overflow-hidden transition-transform duration-300 ease-in-out ${activeLeft===p.id?"translate-x-10":"-translate-x-full"}`}>
+        <div key={p.id} className="hidden md:block absolute top-10 bottom-0 z-20 w-72 bg-black/92 backdrop-blur-xl border-r border-white/10 overflow-hidden"
+          style={{ left:"40px", transform:activeLeft===p.id?"translateX(0)":"translateX(calc(-100% - 40px))", transition:"transform 250ms cubic-bezier(0.4,0,0.2,1)" }}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/8 shrink-0">
             <div className="flex items-center gap-2">
               <p.icon className={`h-4 w-4 ${p.accentCls.split(" ")[0]}`}/>
@@ -749,25 +1149,34 @@ export default function JacoMapPage() {
         </div>
       ))}
 
-      {/* Right blade rail */}
-      <div className="hidden md:flex absolute right-0 top-10 bottom-0 z-30 flex-col items-center py-3 gap-1 w-10 bg-black/80 backdrop-blur-sm border-l border-white/8">
-        {rightPanels.map(p=>{
-          const Icon=p.icon; const isActive=activeRight===p.id;
-          return(
-            <button key={p.id} onClick={()=>toggleRight(p.id)}
-              className={`flex flex-col items-center justify-center gap-1 w-9 h-14 rounded-lg transition-all duration-200 ${isActive?"bg-white/10 border border-white/15":"hover:bg-white/5 border border-transparent"}`}
-              data-testid={`blade-right-${p.id}`} title={p.label}>
-              <Icon className={`h-4 w-4 transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-500"}`}/>
-              <span className={`text-[8px] font-mono uppercase tracking-wide transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-600"}`}>{p.label}</span>
-              {isActive&&<div className={`absolute right-0 h-8 w-0.5 rounded-l ${p.accentCls.split(" ")[0].replace("text-","bg-")}`}/>}
-            </button>
-          );
-        })}
+      {/* RIGHT edge system */}
+      <div className="hidden md:block absolute right-0 top-10 bottom-0 z-30 w-5"
+        onMouseEnter={()=>setRightRailHovered(true)}
+        onMouseLeave={()=>setRightRailHovered(false)}>
+        {/* Permanent 2px accent line */}
+        <div className="absolute right-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/50 via-indigo-500/20 to-transparent pointer-events-none"/>
+        {/* Sliding rail */}
+        <div className="absolute right-0 top-0 bottom-0 w-10 bg-black/92 backdrop-blur-xl border-l border-white/10 flex flex-col items-center py-3 gap-0.5"
+          style={{ transform:(rightRailHovered||activeRight!==null)?"translateX(0)":"translateX(100%)", transition:"transform 180ms cubic-bezier(0.4,0,0.2,1)", pointerEvents:(rightRailHovered||activeRight!==null)?"auto":"none" }}>
+          {rightPanels.map(p=>{
+            const Icon=p.icon; const isActive=activeRight===p.id;
+            return(
+              <button key={p.id} onClick={()=>toggleRight(p.id)}
+                className={`relative flex flex-col items-center justify-center gap-1 w-9 h-14 rounded-lg transition-all duration-150 ${isActive?"bg-white/10 border border-white/15":"hover:bg-white/5 border border-transparent"}`}
+                data-testid={`blade-right-${p.id}`} title={p.label}>
+                {isActive&&<div className={`absolute right-0 top-3 h-8 w-0.5 rounded-l ${p.accentCls.split(" ")[0].replace("text-","bg-")}`}/>}
+                <Icon className={`h-4 w-4 transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-500"}`}/>
+                <span className={`text-[8px] font-mono uppercase tracking-wide transition-colors ${isActive?p.accentCls.split(" ")[0]:"text-gray-600"}`}>{p.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Right blade panel */}
+      {/* Right blade panel — slides from rail edge */}
       {rightPanels.map(p=>(
-        <div key={p.id} className={`hidden md:block absolute top-10 bottom-0 z-20 right-10 w-72 bg-black/90 backdrop-blur-xl border-l border-white/10 overflow-hidden transition-transform duration-300 ease-in-out ${activeRight===p.id?"translate-x-0":"translate-x-full"}`}>
+        <div key={p.id} className="hidden md:block absolute top-10 bottom-0 z-20 w-72 bg-black/92 backdrop-blur-xl border-l border-white/10 overflow-hidden"
+          style={{ right:"40px", transform:activeRight===p.id?"translateX(0)":"translateX(calc(100% + 40px))", transition:"transform 250ms cubic-bezier(0.4,0,0.2,1)" }}>
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/8 shrink-0">
             <div className="flex items-center gap-2">
               <p.icon className={`h-4 w-4 ${p.accentCls.split(" ")[0]}`}/>
