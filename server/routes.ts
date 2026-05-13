@@ -3852,13 +3852,93 @@ export async function registerRoutes(
 
   startKymaCollector(60000);
 
+  // ── 3-Layer GOS Oracle (Jacó scene analysis) ─────────────────────────────
+
+  app.post("/api/gos/oracle/analyze", async (req, res) => {
+    try {
+      const { droneTarget, aircraftCount, acSnapshot, kappaScore, lunar, solarClass, targets } = req.body;
+
+      const sceneCtx = [
+        `Surveillance scene — Jacó Valley, Costa Rica`,
+        `Drone currently patrolling toward: ${droneTarget || 'unknown'}`,
+        `Live aircraft in AOR: ${aircraftCount ?? 0}${acSnapshot ? ` — ${acSnapshot}` : ''}`,
+        `Targets: ${targets || 'ECHO,CRANE-ALPHA,EL-MIRO,BREAKWATER,HERMOSA-PALMS'}`,
+        `κ-Oracle boost: ${kappaScore ?? 0} | Lunar: ${lunar || '?'} | Solar class: ${solarClass || '?'}`,
+      ].join('\n');
+
+      const gosCtx = `GOS constants: κ=4/π≈1.2732, φ≈1.618, Ω≈0.5671, θ_K=128.23°, B_Tsirelson=2√2≈2.828`;
+
+      const orKey = process.env.OPENROUTER_API_KEY;
+      if (!orKey) { res.status(500).json({ error: 'OPENROUTER_API_KEY not set' }); return; }
+
+      const callOR = async (model: string, systemPrompt: string, userMsg: string): Promise<string> => {
+        const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${orKey}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model,
+            messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userMsg }],
+            max_tokens: 300,
+          }),
+        });
+        const d = await r.json();
+        return d.choices?.[0]?.message?.content?.trim() || '[no response]';
+      };
+
+      // Layer 1 — 3 parallel tactical analysis groups
+      const [tactical, signals, behavioral] = await Promise.all([
+        callOR(
+          'mistralai/mistral-large-2512',
+          `You are a C-UAS tactical analyst. ${gosCtx}. Analyze drone patrol patterns and physical surveillance coverage. Be concise (3-4 sentences).`,
+          `Scene:\n${sceneCtx}\n\nAnalyze: patrol route tactical logic, coverage gaps, physical threat posture.`
+        ),
+        callOR(
+          'mistralai/mistral-large-2512',
+          `You are an RF/SIGINT analyst. ${gosCtx}. Focus on electromagnetic signatures, frequency coordination, and signal intelligence. Be concise (3-4 sentences).`,
+          `Scene:\n${sceneCtx}\n\nAnalyze: RF threat indicators, frequency coordination between targets, EW posture.`
+        ),
+        callOR(
+          'nousresearch/hermes-3-llama-3.1-70b',
+          `You are a behavioral pattern analyst specializing in covert surveillance operations. ${gosCtx}. Be concise (3-4 sentences).`,
+          `Scene:\n${sceneCtx}\n\nAnalyze: behavioral indicators of coordinated surveillance, timing patterns, operator intent.`
+        ),
+      ]);
+
+      // Layer 2 — Cross-critique synthesis
+      const critique = await callOR(
+        'moonshotai/kimi-k2',
+        `You are a senior intelligence analyst performing cross-critique. ${gosCtx}. Review 3 analysis threads and identify convergences and contradictions. 4-5 sentences.`,
+        `Scene:\n${sceneCtx}\n\nL1-Tactical: ${tactical}\n\nL1-Signals: ${signals}\n\nL1-Behavioral: ${behavioral}\n\nCross-critique: what do these agree on? What is contradictory? What is the most operationally significant finding?`
+      );
+
+      // Layer 3 — Master threat synthesis
+      const master = await callOR(
+        'nousresearch/hermes-3-llama-3.1-70b',
+        `You are the KAPPA master hypervisor — final intelligence synthesis. ${gosCtx}. Deliver a direct, actionable threat assessment. No caveats. 4-5 sentences.`,
+        `Scene:\n${sceneCtx}\n\nAll analysis:\nTactical: ${tactical}\nSignals: ${signals}\nBehavioral: ${behavioral}\nCritique: ${critique}\n\nFinal assessment: current threat level, most significant indicator, recommended immediate action.`
+      );
+
+      res.json({
+        layers: [
+          { layer: 1, label: 'Tactical', content: tactical },
+          { layer: 1, label: 'RF / SIGINT', content: signals },
+          { layer: 1, label: 'Behavioral', content: behavioral },
+          { layer: 2, label: 'Cross-Critique', content: critique },
+          { layer: 3, label: 'Master Assessment', content: master },
+        ],
+      });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // ── Terrain proxy routes ────────────────────────────────────────────────────
 
   app.get("/api/terrain/elevation", async (req, res) => {
     try {
       const locations = req.query.locations as string;
       if (!locations) return res.status(400).json({ error: "locations required" });
-      const googleKey = process.env.GOOGLE_MAPS_API_KEY;
+      const googleKey = process.env.GOOGLE_MAPS_API_KEY || process.env.GEMINI_API_KEY;
       let data: any;
       if (googleKey) {
         const url = `https://maps.googleapis.com/maps/api/elevation/json?locations=${encodeURIComponent(locations.replace(/\|/g, "|"))}&key=${googleKey}`;
@@ -3885,7 +3965,7 @@ export async function registerRoutes(
   app.get("/api/terrain/tile/:z/:y/:x", async (req, res) => {
     try {
       const { z, y, x } = req.params;
-      const googleKey = process.env.GOOGLE_MAPS_API_KEY;
+      const googleKey = process.env.GOOGLE_MAPS_API_KEY || process.env.GEMINI_API_KEY;
       const url = googleKey
         ? `https://mt0.google.com/vt/lyrs=y&x=${x}&y=${y}&z=${z}&key=${googleKey}`
         : `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
@@ -3901,7 +3981,7 @@ export async function registerRoutes(
   });
 
   app.get("/api/terrain/maps-key-status", (_req, res) => {
-    res.json({ hasKey: !!process.env.GOOGLE_MAPS_API_KEY });
+    res.json({ hasKey: !!(process.env.GOOGLE_MAPS_API_KEY || process.env.GEMINI_API_KEY) });
   });
 
   // OpenSky Jacó AOR — live aircraft within bounding box (~25km radius around Jacó)

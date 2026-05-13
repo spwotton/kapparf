@@ -7,7 +7,7 @@ import {
   Radio, RotateCcw, ZoomIn, ZoomOut, Crosshair,
   AlertTriangle, Wifi, MapPin, Layers,
   Satellite, Activity, Shield, Zap, Signal,
-  X, Flag, Download, Clock, Moon, Sun, Waves, FlaskConical,
+  X, Flag, Download, Clock, Moon, Sun, Waves, FlaskConical, Cpu,
 } from "lucide-react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -644,7 +644,7 @@ function createScene(
       camTarget.z+Math.sin(camAngle)*camDist*Math.cos(camElev),
     ); camera.lookAt(camTarget);
 
-    const segDur=4.0,fullCycle=TARGETS.length*segDur,cycleT=(t*2.5)%fullCycle;
+    const segDur=120.0,fullCycle=TARGETS.length*segDur,cycleT=(t*0.5)%fullCycle;
     const seg=Math.floor(cycleT/segDur),frac=(cycleT%segDur)/segDur;
     const from=TARGETS[seg%TARGETS.length],to=TARGETS[(seg+1)%TARGETS.length];
     setDroneTarget(to.label.split("—")[0].trim());
@@ -762,6 +762,11 @@ export default function JacoMapPage() {
   const [leftRailHovered, setLeftRailHovered] = useState(false);
   const [rightRailHovered, setRightRailHovered] = useState(false);
 
+  // 3-Layer AI Oracle state
+  const [oracleAnalysis, setOracleAnalysis] = useState<{layer: number; label: string; content: string}[]>([]);
+  const [oracleRunning, setOracleRunning] = useState(false);
+  const [oracleTs, setOracleTs] = useState<string | null>(null);
+
   const { data: oskyData, dataUpdatedAt } = useQuery<OpenSkyResponse>({
     queryKey: ["/api/opensky/jaco"], refetchInterval: 30_000, staleTime: 25_000,
   });
@@ -771,6 +776,39 @@ export default function JacoMapPage() {
   const { data: oracleData } = useQuery<any>({
     queryKey: ["/api/oracle/conjunction"], refetchInterval: 60_000, staleTime: 55_000,
   });
+
+  const runOracleAnalysis = useCallback(async () => {
+    if (oracleRunning) return;
+    setOracleRunning(true);
+    setOracleAnalysis([]);
+    const acSnapshot = liveAircraft.slice(0, 8).map(a =>
+      `${a.callsign?.trim()||a.icao24} alt=${a.baroAltitude??a.geoAltitude??'?'}m spd=${a.velocity??'?'}m/s`
+    ).join('; ');
+    try {
+      const res = await fetch('/api/gos/oracle/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          droneTarget,
+          aircraftCount,
+          acSnapshot,
+          kappaScore: oracleData?.kappaBoost ?? 0,
+          lunar: oracleData?.lunar?.phaseName ?? 'unknown',
+          solarClass: oracleData?.solarClass ?? 'B',
+          targets: TARGETS.map(t => `${t.id}:${t.type}`).join(','),
+        }),
+      });
+      const data = await res.json();
+      if (data.layers) {
+        setOracleAnalysis(data.layers);
+        setOracleTs(new Date().toLocaleTimeString());
+      }
+    } catch {
+      setOracleAnalysis([{ layer: 0, label: 'Error', content: 'Oracle unavailable — check API key' }]);
+    } finally {
+      setOracleRunning(false);
+    }
+  }, [oracleRunning, droneTarget, aircraftCount, liveAircraft, oracleData]);
   const { data: tidalData } = useQuery<any>({
     queryKey: ["/api/tidal"], refetchInterval: 120_000, staleTime: 115_000,
   });
@@ -1376,6 +1414,44 @@ export default function JacoMapPage() {
               </div>
             </div>
           )}
+          {/* ── 3-LAYER AI ORACLE ────────────────────────────────────────── */}
+          <div className="border-t border-white/5 pt-3">
+            <div className="flex items-center gap-1.5 mb-2">
+              <Cpu className="h-3 w-3 text-violet-400"/>
+              <span className="text-[9px] font-mono font-bold text-violet-400 uppercase tracking-widest">3-Layer AI Oracle</span>
+              {oracleTs && <span className="text-[8px] font-mono text-gray-600 ml-auto">{oracleTs}</span>}
+            </div>
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={oracleRunning}
+              onClick={runOracleAnalysis}
+              data-testid="button-oracle-analyze"
+              className="w-full h-6 text-[9px] font-mono border-violet-500/30 text-violet-300 hover:bg-violet-500/10 mb-2"
+            >
+              {oracleRunning ? (
+                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse"/>Analyzing…</span>
+              ) : '⟁ Run Scene Analysis'}
+            </Button>
+            {oracleAnalysis.length > 0 && (
+              <div className="space-y-2">
+                {oracleAnalysis.map((item, i) => (
+                  <div key={i} className={`px-2 py-2 rounded border text-[9px] font-mono ${
+                    item.layer === 3 ? 'border-violet-500/40 bg-violet-500/8' :
+                    item.layer === 2 ? 'border-amber-500/30 bg-amber-500/5' :
+                    'border-gray-700/30 bg-transparent'
+                  }`}>
+                    <div className={`text-[8px] font-bold uppercase tracking-widest mb-1 ${
+                      item.layer === 3 ? 'text-violet-400' :
+                      item.layer === 2 ? 'text-amber-400' : 'text-gray-500'
+                    }`}>L{item.layer} · {item.label}</div>
+                    <div className="text-gray-300 leading-snug whitespace-pre-wrap">{item.content}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
         </div>
       );
     }
