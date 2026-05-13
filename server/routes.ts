@@ -65,6 +65,8 @@ import {
   getBulkStatus, getDeviceHealthScore, getCommandLog,
   getUptimeHistory, getSensorThresholds, setSensorThreshold,
   updateDeviceLocation,
+  nativeRegisterDevice, nativeReceiveHeartbeat,
+  nativeIngestSensors, nativeDeleteDevice,
 } from "./heartbeat-client";
 import {
   insertResearchSessionSchema,
@@ -3589,12 +3591,170 @@ export async function registerRoutes(
 
   startHeartbeatClient();
 
-  app.get("/api/tracker/status", (_req, res) => {
-    res.json(getTrackerStatus());
+  // ── Fleet Tracker — inbound device endpoints ─────────────────────────────
+  // Devices register and send heartbeats directly to KAPPA (no external proxy).
+
+  app.get("/api/healthz", (_req, res) => res.json({ status: "ok" }));
+
+  app.post("/api/devices/register", async (req, res) => {
+    try {
+      const { deviceId, name, type, os, capabilities, metadata } = req.body;
+      if (!deviceId || !name || !type || !os) return res.status(400).json({ error: "deviceId, name, type, os required" });
+      const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || null;
+      const device = await nativeRegisterDevice({ deviceId, name, type, os, capabilities, metadata, ip: ip ?? undefined });
+      res.json(device);
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
   });
 
-  app.get("/api/tracker/stats", (_req, res) => {
-    res.json(getTrackerStats());
+  app.post("/api/heartbeat", async (req, res) => {
+    try {
+      const { deviceId, metadata } = req.body;
+      if (!deviceId) return res.status(400).json({ error: "deviceId required" });
+      const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || req.socket.remoteAddress || undefined;
+      const ack = await nativeReceiveHeartbeat(deviceId, metadata ?? {}, ip);
+      res.json(ack);
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
+  });
+
+  app.post("/api/sensors", async (req, res) => {
+    try {
+      const { deviceId, readings } = req.body;
+      if (!deviceId || !Array.isArray(readings)) return res.status(400).json({ error: "deviceId and readings[] required" });
+      const count = await nativeIngestSensors(deviceId, readings);
+      res.json({ ingested: count });
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
+  });
+
+  app.delete("/api/devices/:deviceId", async (req, res) => {
+    try {
+      const deleted = await nativeDeleteDevice(req.params.deviceId);
+      if (!deleted) return res.status(404).json({ error: "Device not found" });
+      res.json({ deleted: true });
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
+  });
+
+  // ── Agent script downloads ──────────────────────────────────────────────
+  const agentPc = () => `#!/usr/bin/env python3
+"""KAPPA Fleet Agent — Windows/Linux/Mac"""
+import time, json, platform, socket, os
+try: import psutil; HAS_PSUTIL = True
+except: HAS_PSUTIL = False
+try: import urllib.request as r
+except: import urllib.request as r
+
+KAPPA_URL = "${process.env.REPL_SLUG ? `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.replit.app` : "https://your-kappa-app.replit.app"}"
+DEVICE_ID = socket.gethostname().lower().replace(" ", "-")
+INTERVAL = 15
+
+def api(path, data=None):
+    url = KAPPA_URL + "/api" + path
+    body = json.dumps(data).encode() if data else None
+    req = r.Request(url, data=body, headers={"Content-Type":"application/json"})
+    try:
+        with r.urlopen(req, timeout=10) as res: return json.loads(res.read())
+    except Exception as e: print(f"[KAPPA] {e}"); return None
+
+def get_metadata():
+    m = {"clientTimestamp": int(time.time()*1000), "platform": platform.system(), "python": platform.python_version()}
+    if HAS_PSUTIL:
+        m["cpu"] = psutil.cpu_percent(interval=0.1)
+        m["memory"] = psutil.virtual_memory().percent
+        try: m["disk"] = psutil.disk_usage("/").percent
+        except: pass
+        m["uptime"] = int(time.time() - psutil.boot_time())
+    return m
+
+# Register
+api("/devices/register", {"deviceId": DEVICE_ID, "name": platform.node(), "type": "pc", "os": platform.system().lower(), "capabilities": ["cpu","memory","disk"] if HAS_PSUTIL else []})
+print(f"[KAPPA] Registered as {DEVICE_ID}, sending heartbeats every {INTERVAL}s to {KAPPA_URL}")
+while True:
+    api("/heartbeat", {"deviceId": DEVICE_ID, "metadata": get_metadata()})
+    time.sleep(INTERVAL)
+`;
+
+  const agentPhone = () => `#!/usr/bin/env python3
+"""KAPPA Fleet Agent — Termux/Android"""
+import time, json, socket, subprocess
+try: import urllib.request as r
+except: import urllib.request as r
+
+KAPPA_URL = "${process.env.REPL_SLUG ? `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.replit.app` : "https://your-kappa-app.replit.app"}"
+DEVICE_ID = "phone-" + socket.gethostname().lower()
+INTERVAL = 15
+
+def api(path, data=None):
+    url = KAPPA_URL + "/api" + path
+    body = json.dumps(data).encode() if data else None
+    req = r.Request(url, data=body, headers={"Content-Type":"application/json"})
+    try:
+        with r.urlopen(req, timeout=10) as res: return json.loads(res.read())
+    except Exception as e: print(f"[KAPPA] {e}"); return None
+
+def battery():
+    try:
+        out = subprocess.check_output(["termux-battery-status"], timeout=3).decode()
+        return json.loads(out)
+    except: return {}
+
+api("/devices/register", {"deviceId": DEVICE_ID, "name": DEVICE_ID, "type": "phone", "os": "android", "capabilities": ["battery"]})
+print(f"[KAPPA] Phone agent started — {DEVICE_ID} → {KAPPA_URL}")
+while True:
+    m = {"clientTimestamp": int(time.time()*1000), "battery": battery()}
+    api("/heartbeat", {"deviceId": DEVICE_ID, "metadata": m})
+    time.sleep(INTERVAL)
+`;
+
+  const agentBash = () => `#!/bin/bash
+# KAPPA Fleet Agent — minimal bash
+KAPPA_URL="${process.env.REPL_SLUG ? `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.replit.app` : "https://your-kappa-app.replit.app"}"
+DEVICE_ID="$(hostname | tr '[:upper:]' '[:lower:]' | tr ' ' '-')"
+INTERVAL=15
+curl -sf -X POST "$KAPPA_URL/api/devices/register" -H "Content-Type: application/json" -d '{"deviceId":"'"$DEVICE_ID"'","name":"'"$(hostname)"'","type":"pc","os":"linux"}' >/dev/null
+echo "[KAPPA] Agent started: $DEVICE_ID → $KAPPA_URL"
+while true; do
+  TS=$(date +%s000)
+  curl -sf -X POST "$KAPPA_URL/api/heartbeat" -H "Content-Type: application/json" -d '{"deviceId":"'"$DEVICE_ID"'","metadata":{"clientTimestamp":'"$TS"'}}' >/dev/null
+  sleep $INTERVAL
+done
+`;
+
+  app.get("/api/agents/pc",    (_req, res) => { res.setHeader("Content-Type","text/plain"); res.send(agentPc()); });
+  app.get("/api/agents/phone", (_req, res) => { res.setHeader("Content-Type","text/plain"); res.send(agentPhone()); });
+  app.get("/api/agents/bash",  (_req, res) => { res.setHeader("Content-Type","text/plain"); res.send(agentBash()); });
+
+  // ── Fleet Tracker — KAPPA UI read routes ─────────────────────────────────
+
+  app.get("/api/tracker/status", async (_req, res) => {
+    try {
+      const [devices, alerts] = await Promise.all([
+        getTrackerDevices(),
+        getActiveAlerts(),
+      ]);
+      const onlineCount = devices.filter(d => d.online).length;
+      const recentHeartbeats: Record<string, any> = {};
+      devices.forEach(d => {
+        if (d.lastHeartbeat) {
+          recentHeartbeats[d.deviceId] = { lastSeen: d.lastHeartbeat, latencyMs: null, metadata: {} };
+        }
+      });
+      res.json({
+        devices, onlineCount, alerts, recentHeartbeats,
+        serverUptime: Math.floor((Date.now() - (global as any).__kappaStart ?? Date.now()) / 1000),
+        connected: true, polling: true, trackerUrl: "native",
+      });
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
+  });
+
+  app.get("/api/tracker/stats", async (_req, res) => {
+    try {
+      const devices = await getTrackerDevices();
+      const total = devices.length;
+      const online = devices.filter(d => d.online).length;
+      const byType = { pc: 0, phone: 0, sensor: 0, iot: 0 } as Record<string, number>;
+      devices.forEach(d => { if (d.type in byType) byType[d.type]++; });
+      const uptimePercent24h = total > 0 ? Math.round((online / total) * 100 * 10) / 10 : 0;
+      res.json({ total, online, offline: total - online, byType, uptimePercent24h, lastFetch: Date.now() });
+    } catch (err: any) { res.status(500).json({ error: err.message }); }
   });
 
   app.get("/api/tracker/devices", async (req, res) => {
@@ -3696,11 +3856,14 @@ export async function registerRoutes(
 
   app.get("/api/tracker/agent-urls", (_req, res) => {
     res.json({
-      pc: getAgentScriptUrl("pc"),
-      phone: getAgentScriptUrl("phone"),
-      bash: getAgentScriptUrl("bash"),
-      dashboard: getTrackerDashboardUrl(),
-      websocket: "wss://heartbeat-tracker-monitor.replit.app/ws?deviceId=YOUR_DEVICE_ID",
+      pc: "/api/agents/pc",
+      phone: "/api/agents/phone",
+      bash: "/api/agents/bash",
+      dashboard: "/fleet",
+      register: "/api/devices/register",
+      heartbeat: "/api/heartbeat",
+      sensors: "/api/sensors",
+      note: "All endpoints are native KAPPA — no external dependency",
     });
   });
 

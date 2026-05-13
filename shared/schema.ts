@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, integer, real, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, real, timestamp, jsonb, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -2558,5 +2558,61 @@ export interface SuperpositionStatus {
   lastProcessingAt: number | null;
   processingCycleCount: number;
 }
+
+// ─── Fleet Tracker (native, replaces external heartbeat-tracker-monitor app) ──
+
+export const fleetDevices = pgTable("fleet_devices", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  deviceId: text("device_id").notNull().unique(),
+  name: text("name").notNull(),
+  type: text("type").notNull().default("pc"),
+  os: text("os").notNull().default("unknown"),
+  ip: text("ip"),
+  capabilities: text("capabilities").array().notNull().default(sql`'{}'::text[]`),
+  metadata: jsonb("metadata").notNull().default(sql`'{}'::jsonb`),
+  online: boolean("online").notNull().default(false),
+  registeredAt: timestamp("registered_at").notNull().defaultNow(),
+  lastHeartbeat: timestamp("last_heartbeat"),
+  lastDisconnect: timestamp("last_disconnect"),
+  latitude: real("latitude"),
+  longitude: real("longitude"),
+});
+
+export const fleetHeartbeats = pgTable("fleet_heartbeats", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  deviceId: text("device_id").notNull(),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+  latencyMs: real("latency_ms"),
+  metadata: jsonb("metadata").notNull().default(sql`'{}'::jsonb`),
+});
+
+export const fleetAlerts = pgTable("fleet_alerts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  deviceId: text("device_id").notNull(),
+  type: text("type").notNull(),
+  message: text("message").notNull(),
+  severity: integer("severity").notNull().default(2),
+  metadata: jsonb("metadata").notNull().default(sql`'{}'::jsonb`),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  acknowledged: boolean("acknowledged").notNull().default(false),
+});
+
+export const fleetSensorReadings = pgTable("fleet_sensor_readings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  deviceId: text("device_id").notNull(),
+  sensorType: text("sensor_type").notNull(),
+  timestamp: timestamp("timestamp").notNull().defaultNow(),
+  values: jsonb("values").notNull().default(sql`'{}'::jsonb`),
+});
+
+export const fleetCommandLog = pgTable("fleet_command_log", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  deviceId: text("device_id").notNull(),
+  command: text("command").notNull(),
+  args: jsonb("args").notNull().default(sql`'{}'::jsonb`),
+  sentAt: timestamp("sent_at").notNull().defaultNow(),
+  result: text("result"),
+  respondedAt: timestamp("responded_at"),
+});
 
 export * from "./models/chat";

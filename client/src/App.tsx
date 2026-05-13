@@ -44,6 +44,7 @@ import DroneIntelPage from "@/pages/drone-intel/index";
 import DroneGamePage from "@/pages/drone-game";
 import SpokeWheelPage from "@/pages/spoke-wheel";
 import OmegaGOSLNNPage from "@/pages/omega-gos-lnn";
+import FleetTrackerPage from "@/pages/fleet-tracker";
 
 function Router() {
   return (
@@ -83,6 +84,7 @@ function Router() {
       <Route path="/game" component={DroneGamePage} />
       <Route path="/spoke-wheel" component={SpokeWheelPage} />
       <Route path="/omega-gos" component={OmegaGOSLNNPage} />
+      <Route path="/fleet" component={FleetTrackerPage} />
       <Route component={NotFound} />
     </Switch>
   );

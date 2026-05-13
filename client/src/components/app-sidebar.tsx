@@ -132,6 +132,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.operations", fallbackLabel: "OPERATIONS",
     items: [
+      { titleKey: "sidebar.fleetTracker", fallback: "Fleet Tracker", url: "/fleet", icon: Radio },
       { titleKey: "sidebar.karachi", fallback: "Karachi", url: "/karachi", icon: Crosshair },
       { titleKey: "sidebar.congusto", fallback: "Congusto", url: "/congusto", icon: FlaskConical },
       { titleKey: "sidebar.iceBriefing", fallback: "ICE Briefing", url: "/gallium", icon: Globe },
