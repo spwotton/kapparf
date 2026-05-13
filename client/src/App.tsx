@@ -42,6 +42,7 @@ import SuitesCristinaPage from "@/pages/suites-cristina";
 import JacoMapPage from "@/pages/jaco-map";
 import DroneIntelPage from "@/pages/drone-intel/index";
 import DroneGamePage from "@/pages/drone-game";
+import SpokeWheelPage from "@/pages/spoke-wheel";
 
 function Router() {
   return (
@@ -79,6 +80,7 @@ function Router() {
       <Route path="/jaco" component={JacoMapPage} />
       <Route path="/drone-intel" component={DroneIntelPage} />
       <Route path="/game" component={DroneGamePage} />
+      <Route path="/spoke-wheel" component={SpokeWheelPage} />
       <Route component={NotFound} />
     </Switch>
   );

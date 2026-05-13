@@ -30,6 +30,7 @@ import {
   Globe,
   ChevronRight,
   Building2,
+  RotateCw,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -79,6 +80,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.jaco", fallback: "Jacó Valley 3D", url: "/jaco", icon: Globe },
       { titleKey: "sidebar.droneIntel", fallback: "C-UAS Intel Library", url: "/drone-intel", icon: Shield },
       { titleKey: "sidebar.game", fallback: "Drone Dogfight", url: "/game", icon: Crosshair },
+      { titleKey: "sidebar.spokeWheel", fallback: "24-Gon Spoke Wheel", url: "/spoke-wheel", icon: RotateCw },
     ],
   },
   {

@@ -115,6 +115,7 @@ import {
   RIEMANN_SONNET,
   type LatticeAllResponse,
 } from "@shared/lattice-data";
+import { runSpokeWheel } from "./lib/spoke-wheel";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -1615,6 +1616,25 @@ export async function registerRoutes(
       overheadSatellites: overheadSats.length,
       generatedAt: new Date().toISOString(),
     });
+  });
+
+  // ── 24-GON SPOKE WHEEL ORACLE ────────────────────────────────────────────
+  console.log("[SPOKE-WHEEL] Registering route /api/oracle/spoke-wheel");
+  let _spokeCache2: ReturnType<typeof runSpokeWheel> | null = null;
+  let _spokeCacheTs2 = 0;
+  app.get("/api/oracle/spoke-wheel", (_req, res) => {
+    console.log("[SPOKE-WHEEL] Handler invoked");
+    try {
+      const now = Date.now();
+      if (!_spokeCache2 || now - _spokeCacheTs2 > 60_000) {
+        _spokeCache2 = runSpokeWheel();
+        _spokeCacheTs2 = now;
+      }
+      return res.json(_spokeCache2);
+    } catch (err) {
+      console.error("[SPOKE-WHEEL] Error:", err);
+      return res.status(500).json({ error: String(err) });
+    }
   });
 
   app.post("/api/social/caption", async (req, res) => {
@@ -4025,4 +4045,5 @@ function escapeHtml(str: string): string {
   if (!str) return "";
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
+
 
