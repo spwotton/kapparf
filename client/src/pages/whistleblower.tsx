@@ -2072,7 +2072,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• CDMX trip: wedding for Carolina Soto</li>
-                <li>• Partner: Deal Frog (Leo Orozco) — controller/dealer</li>
+                <li>• Partner: Deal Frog (<RedactedName name="Leo Orozco" />) — controller/dealer</li>
                 <li>• Friends with Ghost Rat (danish2210/danich2210) fake IG profile</li>
                 <li>• Soto family network spans CR ↔ CDMX</li>
               </ul>
