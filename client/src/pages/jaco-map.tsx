@@ -1044,6 +1044,10 @@ export default function JacoMapPage() {
           lunar: oracleData?.lunar?.phaseName ?? 'unknown',
           solarClass: oracleData?.solarClass ?? 'B',
           targets: TARGETS.map(t => `${t.id}:${t.type}`).join(','),
+          echoLat: CENTER.lat,
+          echoLon: CENTER.lon,
+          elMiroDist: '1.91km',
+          elMiroAngle: '3.1°',
         }),
       });
       const data = await res.json();

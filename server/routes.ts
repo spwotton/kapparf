@@ -3858,15 +3858,26 @@ export async function registerRoutes(
     try {
       const { droneTarget, aircraftCount, acSnapshot, kappaScore, lunar, solarClass, targets } = req.body;
 
+      const { echoLat, echoLon, elMiroDist, elMiroAngle } = req.body;
+
       const sceneCtx = [
-        `Surveillance scene — Jacó Valley, Costa Rica`,
+        `Surveillance scene — Jacó Valley, Costa Rica (Pacific coast, approx 9.62°N 84.64°W)`,
+        `ECHO position (observer): Hotel Pochote Grande — ${echoLat ?? 9.621887}°N, ${echoLon ?? -84.63969}°W (verified Google Maps, beach strip)`,
+        `EL MIRO radar dome: ${elMiroDist ?? '1.91km'} NE of ECHO, ${elMiroAngle ?? '3.1°'} look-down, elev 110m — full valley LOS, suspected phased-array`,
+        `HERMOSA PALMS ops base: 7.1km SSW of ECHO (Playa Hermosa) — Michael G████████ complex`,
+        `BREAKWATER 4G tower: Punta de Jacó headland, 4G/LTE, 9.7GHz`,
         `Drone currently patrolling toward: ${droneTarget || 'unknown'}`,
         `Live aircraft in AOR: ${aircraftCount ?? 0}${acSnapshot ? ` — ${acSnapshot}` : ''}`,
-        `Targets: ${targets || 'ECHO,CRANE-ALPHA,EL-MIRO,BREAKWATER,HERMOSA-PALMS'}`,
-        `κ-Oracle boost: ${kappaScore ?? 0} | Lunar: ${lunar || '?'} | Solar class: ${solarClass || '?'}`,
+        `Active targets: ${targets || 'ECHO,CRANE-ALPHA,EL-MIRO,BREAKWATER,HERMOSA-PALMS'}`,
+        `κ-Oracle score: ${kappaScore ?? 0} | Lunar phase: ${lunar || '?'} | Solar class: ${solarClass || '?'}`,
       ].join('\n');
 
-      const gosCtx = `GOS constants: κ=4/π≈1.2732, φ≈1.618, Ω≈0.5671, θ_K=128.23°, B_Tsirelson=2√2≈2.828`;
+      const gosCtx = [
+        `ΩGAE constants: κ=4/π≈1.2732, φ≈1.618, Ω≈0.5671 (Lambert-W), θ_K=128.23° (Klein-twist azimuth), B_Tsirelson=2√2≈2.828`,
+        `Murray-Nakamoto resonance: 1142.997 Hz | Lambert-W beat: 0.562 Hz | Phaistos cipher: 145.309 Hz`,
+        `Prime Imperative: φ⁵/62.37 | Demodex epoch: 14.4-day | Machu Picchu reference: 431.56 Hz`,
+        `7/4 LNN architecture: toroidal recursive — κ-DTW temporal alignment active`,
+      ].join(' | ');
 
       const orKey = process.env.OPENROUTER_API_KEY;
       if (!orKey) { res.status(500).json({ error: 'OPENROUTER_API_KEY not set' }); return; }
