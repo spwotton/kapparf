@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { AlertTriangle, Zap, Circle, Target, Activity } from "lucide-react";
-import { useMemo } from "react";
+import { AlertTriangle, Zap, Activity, ChevronDown, ChevronUp, Cpu, Target, BarChart2 } from "lucide-react";
+import { useMemo, useState } from "react";
 
+// ── Types ───────────────────────────────────────────────────────────────────
 interface SpokeNode {
   id: number;
   angle: number;
@@ -75,6 +76,7 @@ interface SpokeWheelResult {
   generatedAt: number;
 }
 
+// ── Constants ──────────────────────────────────────────────────────────────
 const THREAT_COLORS: Record<string, string> = {
   low: "text-blue-500",
   medium: "text-yellow-500",
@@ -89,151 +91,103 @@ const THREAT_BG: Record<string, string> = {
   critical: "bg-red-500/10 border-red-500/30",
 };
 
-const PASS_COLORS = ["#3b82f6", "#f59e0b", "#ef4444"];
-const PASS_RING_R = [120, 80, 45];
+const PASS_COLORS = ["#3b82f6", "#f59e0b", "#ef4444"] as const;
+const PASS_LABELS = ["", "Extraction", "Correlation", "GOS Lattice"];
 
 function polarToXY(angle: number, r: number, cx: number, cy: number) {
   const rad = ((angle - 90) * Math.PI) / 180;
   return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
 }
 
-function SpokeWheelSVG({ data }: { data: SpokeWheelResult }) {
-  const cx = 160;
-  const cy = 160;
-  const outerR = 140;
-  const innerR = 16;
+// ── Tab types ──────────────────────────────────────────────────────────────
+type Tab = "wheel" | "passes" | "gpu" | "intel";
 
-  const allNodes = useMemo(
-    () => data.passes.flatMap((p) => p.nodes),
-    [data],
-  );
+const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
+  { id: "wheel",  label: "Wheel",  icon: <Activity className="h-3.5 w-3.5" /> },
+  { id: "passes", label: "Passes", icon: <BarChart2 className="h-3.5 w-3.5" /> },
+  { id: "gpu",    label: "GPU",    icon: <Cpu className="h-3.5 w-3.5" /> },
+  { id: "intel",  label: "Intel",  icon: <Target className="h-3.5 w-3.5" /> },
+];
+
+// ── Interactive SVG ────────────────────────────────────────────────────────
+function InteractiveWheel({
+  data,
+  passFilter,
+  selectedId,
+  onSelect,
+}: {
+  data: SpokeWheelResult;
+  passFilter: 0 | 1 | 2 | 3;
+  selectedId: number | null;
+  onSelect: (id: number | null) => void;
+}) {
+  const cx = 160, cy = 160, outerR = 138;
+  const allNodes = useMemo(() => data.passes.flatMap((p) => p.nodes), [data]);
+  const visible = passFilter === 0 ? allNodes : allNodes.filter((n) => n.pass === passFilter);
 
   return (
     <svg
       viewBox="0 0 320 320"
-      className="w-full max-w-xs mx-auto"
+      className="w-full max-w-sm mx-auto select-none"
       data-testid="svg-spoke-wheel"
     >
-      {/* concentric ring guides */}
-      {PASS_RING_R.map((r, i) => (
-        <circle
-          key={i}
-          cx={cx}
-          cy={cy}
-          r={r + 20}
-          fill="none"
-          stroke={PASS_COLORS[i]}
-          strokeWidth="0.4"
-          strokeDasharray="2 4"
-          opacity="0.35"
-        />
+      {/* ring guides */}
+      {[120, 80, 45].map((r, i) => (
+        <circle key={i} cx={cx} cy={cy} r={r + 20} fill="none"
+          stroke={PASS_COLORS[i]} strokeWidth="0.4" strokeDasharray="2 4" opacity="0.3" />
       ))}
 
-      {/* spokes from centre to outer nodes */}
-      {allNodes.map((n) => {
-        const outerPt = polarToXY(n.angle, outerR * 0.88, cx, cy);
+      {/* spokes */}
+      {visible.map((n) => {
+        const pt = polarToXY(n.angle, outerR * 0.87, cx, cy);
+        const dimmed = selectedId !== null && selectedId !== n.id;
         return (
-          <line
-            key={`sp-${n.id}`}
-            x1={cx}
-            y1={cy}
-            x2={outerPt.x}
-            y2={outerPt.y}
-            stroke={PASS_COLORS[n.pass - 1]}
-            strokeWidth="0.5"
-            opacity="0.25"
-          />
+          <line key={`sp-${n.id}`} x1={cx} y1={cy} x2={pt.x} y2={pt.y}
+            stroke={PASS_COLORS[n.pass - 1]} strokeWidth={selectedId === n.id ? 1.2 : 0.5}
+            opacity={dimmed ? 0.1 : 0.3} />
         );
       })}
 
-      {/* cross-spoke coupling arcs for pass-2 nodes */}
-      {allNodes
-        .filter((n) => n.pass === 2)
-        .map((n) => {
-          const a = polarToXY(n.angle, outerR * 0.75, cx, cy);
-          const b = polarToXY((n.angle + 15) % 360, outerR * 0.75, cx, cy);
-          return (
-            <line
-              key={`arc-${n.id}`}
-              x1={a.x}
-              y1={a.y}
-              x2={b.x}
-              y2={b.y}
-              stroke={PASS_COLORS[1]}
-              strokeWidth="0.6"
-              opacity="0.2"
-            />
-          );
-        })}
-
-      {/* node dots */}
-      {allNodes.map((n) => {
-        const pt = polarToXY(n.angle, outerR * 0.88, cx, cy);
-        const col =
-          n.threat === "critical"
-            ? "#ef4444"
-            : n.threat === "high"
-              ? "#f97316"
-              : n.threat === "medium"
-                ? "#eab308"
-                : "#3b82f6";
+      {/* node dots — bigger hit targets via transparent circle overlay */}
+      {visible.map((n) => {
+        const pt = polarToXY(n.angle, outerR * 0.87, cx, cy);
+        const col = n.threat === "critical" ? "#ef4444" : n.threat === "high" ? "#f97316"
+          : n.threat === "medium" ? "#eab308" : "#3b82f6";
+        const isSelected = selectedId === n.id;
+        const dimmed = selectedId !== null && !isSelected;
+        const r = n.gosResonance * 5.5 + 2.5;
         return (
-          <g key={`nd-${n.id}`}>
-            <circle
-              cx={pt.x}
-              cy={pt.y}
-              r={n.gosResonance * 5 + 2}
-              fill={col}
-              opacity="0.8"
-            />
-            <text
-              x={pt.x}
-              y={pt.y - 7}
-              textAnchor="middle"
-              fontSize="4"
-              fill="#9ca3af"
-              fontFamily="monospace"
-            >
+          <g key={`nd-${n.id}`} style={{ cursor: "pointer" }}
+            onClick={() => onSelect(isSelected ? null : n.id)}>
+            {/* glow ring when selected */}
+            {isSelected && (
+              <circle cx={pt.x} cy={pt.y} r={r + 5} fill="none"
+                stroke={col} strokeWidth="1.5" opacity="0.6" />
+            )}
+            <circle cx={pt.x} cy={pt.y} r={r} fill={col}
+              opacity={dimmed ? 0.2 : isSelected ? 1 : 0.75} />
+            <text x={pt.x} y={pt.y - r - 2} textAnchor="middle"
+              fontSize="4.5" fill={dimmed ? "#4b5563" : "#9ca3af"} fontFamily="monospace">
               {n.id}
             </text>
+            {/* invisible larger hit area */}
+            <circle cx={pt.x} cy={pt.y} r={r + 8} fill="transparent" />
           </g>
         );
       })}
 
-      {/* centre core */}
-      <circle cx={cx} cy={cy} r={innerR} fill="#ef4444" opacity="0.15" />
-      <circle cx={cx} cy={cy} r={innerR - 4} fill="#ef4444" opacity="0.25" />
-      <circle cx={cx} cy={cy} r={3} fill="#ef4444" />
-      <text
-        x={cx}
-        y={cy + 26}
-        textAnchor="middle"
-        fontSize="5"
-        fill="#ef4444"
-        fontFamily="monospace"
-        fontWeight="bold"
-      >
-        IMMINENT
-      </text>
+      {/* centre */}
+      <circle cx={cx} cy={cy} r={18} fill="#ef4444" opacity="0.12" />
+      <circle cx={cx} cy={cy} r={11} fill="#ef4444" opacity="0.22" />
+      <circle cx={cx} cy={cy} r={3.5} fill="#ef4444" />
+      <text x={cx} y={cy + 28} textAnchor="middle" fontSize="5.5"
+        fill="#ef4444" fontFamily="monospace" fontWeight="bold">IMMINENT</text>
 
       {/* pass legend */}
       {[0, 1, 2].map((i) => (
-        <g key={`leg-${i}`}>
-          <rect
-            x={8}
-            y={280 + i * 10}
-            width={6}
-            height={4}
-            fill={PASS_COLORS[i]}
-            rx="1"
-          />
-          <text
-            x={18}
-            y={284 + i * 10}
-            fontSize="5"
-            fill="#9ca3af"
-            fontFamily="monospace"
-          >
+        <g key={i}>
+          <rect x={8} y={280 + i * 11} width={6} height={5} rx="1" fill={PASS_COLORS[i]} />
+          <text x={18} y={285 + i * 11} fontSize="5.5" fill="#9ca3af" fontFamily="monospace">
             Pass {i + 1}
           </text>
         </g>
@@ -242,361 +196,472 @@ function SpokeWheelSVG({ data }: { data: SpokeWheelResult }) {
   );
 }
 
-function PassPanel({ pass }: { pass: SynthesisPass }) {
+// ── Node detail panel ──────────────────────────────────────────────────────
+function NodeDetail({ node }: { node: SpokeNode }) {
   return (
-    <div className="space-y-3" data-testid={`pass-panel-${pass.pass}`}>
-      <div className="flex items-center gap-2">
-        <Badge
-          variant="outline"
-          className="font-mono text-xs"
-          style={{ borderColor: PASS_COLORS[pass.pass - 1], color: PASS_COLORS[pass.pass - 1] }}
-        >
-          PASS {pass.pass}
-        </Badge>
-        <span className="text-sm font-semibold">{pass.label}</span>
-        <span className="ml-auto text-xs font-mono text-muted-foreground">
-          conv={pass.convergenceScore.toFixed(4)}
-        </span>
-      </div>
-      <p className="text-xs text-muted-foreground leading-relaxed">{pass.description}</p>
-      <div className="grid grid-cols-1 gap-2">
-        {pass.nodes.map((n) => (
-          <div
-            key={n.id}
-            className={`rounded border p-2.5 text-xs ${THREAT_BG[n.threat]}`}
-            data-testid={`spoke-node-${n.id}`}
-          >
-            <div className="flex items-start justify-between gap-2 mb-1">
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono text-[10px] text-muted-foreground w-5">
-                  #{n.id}
-                </span>
-                <span className="font-semibold">{n.label}</span>
-                <Badge variant="outline" className="text-[9px] px-1 py-0 h-4">
-                  {n.paper}
-                </Badge>
-              </div>
-              <span className={`text-[10px] font-mono uppercase font-bold ${THREAT_COLORS[n.threat]}`}>
-                {n.threat}
-              </span>
-            </div>
-            <p className="text-[11px] text-muted-foreground leading-relaxed">{n.claim}</p>
-            <div className="flex items-center gap-2 mt-1.5">
-              <span className="text-[10px] font-mono text-muted-foreground">
-                κ={n.kappa.toFixed(1)} GOS={n.gosResonance.toFixed(2)}
-              </span>
-              <div className="flex gap-1 flex-wrap">
-                {n.tags.slice(0, 3).map((t) => (
-                  <span key={t} className="text-[9px] bg-muted px-1 rounded font-mono">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
+    <div className={`rounded-lg border p-3 space-y-2 ${THREAT_BG[node.threat]}`}
+      data-testid={`node-detail-${node.id}`}>
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <div className="flex items-center gap-1.5">
+            <span className="font-mono text-[10px] text-muted-foreground">#{node.id}</span>
+            <span className="font-semibold text-sm">{node.label}</span>
+            <Badge variant="outline" className="text-[9px] px-1 py-0 h-4 font-mono">{node.paper}</Badge>
           </div>
+          <div className="flex items-center gap-2 mt-0.5">
+            <span className={`text-[10px] font-mono font-bold uppercase ${THREAT_COLORS[node.threat]}`}>
+              {node.threat}
+            </span>
+            <span className="text-[10px] font-mono text-muted-foreground">
+              κ={node.kappa.toFixed(1)} · GOS={node.gosResonance.toFixed(2)}
+            </span>
+          </div>
+        </div>
+        <div className="text-right shrink-0">
+          <div className={`text-base font-mono font-bold ${THREAT_COLORS[node.threat]}`}>
+            {(node.gosResonance * 100).toFixed(0)}%
+          </div>
+          <div className="text-[9px] text-muted-foreground">resonance</div>
+        </div>
+      </div>
+      <p className="text-xs text-muted-foreground leading-relaxed">{node.claim}</p>
+      {node.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1">
+          {node.tags.map((t) => (
+            <span key={t} className="text-[9px] bg-muted px-1.5 py-0.5 rounded font-mono">{t}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── WHEEL TAB ──────────────────────────────────────────────────────────────
+function WheelTab({ data }: { data: SpokeWheelResult }) {
+  const [passFilter, setPassFilter] = useState<0 | 1 | 2 | 3>(0);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const allNodes = useMemo(() => data.passes.flatMap((p) => p.nodes), [data]);
+  const selectedNode = allNodes.find((n) => n.id === selectedId) ?? null;
+
+  const filterChips: { val: 0 | 1 | 2 | 3; label: string }[] = [
+    { val: 0, label: "All" },
+    { val: 1, label: "P1" },
+    { val: 2, label: "P2" },
+    { val: 3, label: "P3" },
+  ];
+
+  return (
+    <div className="space-y-3">
+      {/* pass filter chips */}
+      <div className="flex gap-2" data-testid="pass-filter-chips">
+        {filterChips.map((c) => (
+          <button
+            key={c.val}
+            onClick={() => { setPassFilter(c.val); setSelectedId(null); }}
+            data-testid={`chip-pass-${c.val}`}
+            className={`flex-1 py-1.5 rounded-md text-xs font-mono font-semibold border transition-colors
+              ${passFilter === c.val
+                ? "bg-foreground text-background border-foreground"
+                : "border-muted text-muted-foreground hover:border-foreground/40"}`}
+          >
+            {c.val === 0 ? "All" : <span style={{ color: passFilter === c.val ? undefined : PASS_COLORS[c.val - 1] }}>{c.label}</span>}
+          </button>
         ))}
+      </div>
+
+      {/* SVG */}
+      <div className="rounded-lg border border-muted/50 bg-card p-2">
+        <InteractiveWheel
+          data={data}
+          passFilter={passFilter}
+          selectedId={selectedId}
+          onSelect={setSelectedId}
+        />
+        {/* pass convergence strip */}
+        <div className="grid grid-cols-3 gap-2 text-center mt-2 pt-2 border-t border-muted/30">
+          {data.passes.map((p) => (
+            <div key={p.pass}>
+              <div className="text-[10px] font-mono" style={{ color: PASS_COLORS[p.pass - 1] }}>PASS {p.pass}</div>
+              <div className="text-sm font-bold font-mono">{(p.convergenceScore * 100).toFixed(1)}%</div>
+              <div className="text-[9px] text-muted-foreground">conv</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* tap-to-inspect hint / selected node panel */}
+      {selectedNode ? (
+        <NodeDetail node={selectedNode} />
+      ) : (
+        <div className="text-center text-[11px] text-muted-foreground font-mono py-2">
+          tap a node to inspect
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── PASSES TAB ─────────────────────────────────────────────────────────────
+function PassesTab({ data }: { data: SpokeWheelResult }) {
+  const [openPass, setOpenPass] = useState<number | null>(1);
+  const [expandedNode, setExpandedNode] = useState<number | null>(null);
+
+  return (
+    <div className="space-y-2">
+      {data.passes.map((p) => {
+        const open = openPass === p.pass;
+        return (
+          <div key={p.pass} className="rounded-lg border border-muted/50 overflow-hidden">
+            {/* accordion header */}
+            <button
+              className="w-full flex items-center gap-3 px-3 py-3 text-left"
+              onClick={() => setOpenPass(open ? null : p.pass)}
+              data-testid={`pass-accordion-${p.pass}`}
+            >
+              <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: PASS_COLORS[p.pass - 1] }} />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold" style={{ color: PASS_COLORS[p.pass - 1] }}>
+                    PASS {p.pass}
+                  </span>
+                  <span className="text-sm font-semibold truncate">{p.label}</span>
+                </div>
+                <div className="text-[10px] text-muted-foreground font-mono">
+                  {p.nodes.length} nodes · {(p.convergenceScore * 100).toFixed(1)}% convergence
+                </div>
+              </div>
+              {open ? <ChevronUp className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                     : <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />}
+            </button>
+
+            {/* node list */}
+            {open && (
+              <div className="border-t border-muted/30 divide-y divide-muted/20">
+                <p className="px-3 py-1.5 text-[10px] text-muted-foreground italic">{p.description}</p>
+                {p.nodes.map((n) => {
+                  const isExpanded = expandedNode === n.id;
+                  return (
+                    <div key={n.id}>
+                      <button
+                        className="w-full flex items-center gap-2 px-3 py-2.5 text-left hover:bg-muted/20 transition-colors"
+                        onClick={() => setExpandedNode(isExpanded ? null : n.id)}
+                        data-testid={`node-row-${n.id}`}
+                      >
+                        <span className="font-mono text-[10px] text-muted-foreground w-5 flex-shrink-0">#{n.id}</span>
+                        <span className="flex-1 text-xs font-medium truncate">{n.label}</span>
+                        <span className={`text-[10px] font-mono font-bold uppercase ${THREAT_COLORS[n.threat]} flex-shrink-0`}>
+                          {n.gosResonance.toFixed(2)}
+                        </span>
+                        {isExpanded
+                          ? <ChevronUp className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+                          : <ChevronDown className="h-3 w-3 text-muted-foreground flex-shrink-0" />}
+                      </button>
+                      {isExpanded && (
+                        <div className="px-3 pb-3">
+                          <NodeDetail node={n} />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── GPU TAB ────────────────────────────────────────────────────────────────
+const GPU_CODES = ["P10", "P11", "P12"];
+
+function GpuTab({ gpu }: { gpu: GpuCorpusPush }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const totalKB = gpu.budgetTable.reduce((s, r) => s + r.sizeKB, 0);
+
+  return (
+    <div className="space-y-3">
+      <p className="text-[11px] text-muted-foreground leading-relaxed">{gpu.description}</p>
+
+      {/* GPU paper cards */}
+      {gpu.nodes.map((n, i) => {
+        const isOpen = expanded === n.paper;
+        return (
+          <div key={n.paper} className={`rounded-lg border ${THREAT_BG[n.threat]}`}
+            data-testid={`gpu-card-${n.paper}`}>
+            <button
+              className="w-full flex items-center gap-3 px-3 py-3 text-left"
+              onClick={() => setExpanded(isOpen ? null : n.paper)}
+              data-testid={`gpu-expand-${n.paper}`}
+            >
+              <div className="flex-shrink-0 text-center">
+                <div className="text-[10px] font-mono text-muted-foreground">{GPU_CODES[i]}</div>
+                <div className={`text-sm font-mono font-bold ${THREAT_COLORS[n.threat]}`}>
+                  {(n.gosResonance * 100).toFixed(0)}%
+                </div>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-mono text-xs font-bold">{n.paper}</div>
+                <div className="text-[11px] text-muted-foreground truncate">{n.title}</div>
+              </div>
+              {isOpen ? <ChevronUp className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+                       : <ChevronDown className="h-4 w-4 text-muted-foreground flex-shrink-0" />}
+            </button>
+
+            {isOpen && (
+              <div className="border-t border-muted/20 px-3 py-3 space-y-2.5 text-[11px]">
+                <div>
+                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">Metric · </span>
+                  <span className="font-mono text-blue-500">{n.metric}</span>
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">κ-Mapping</span>
+                  <p className="mt-0.5 text-foreground/80 leading-relaxed">{n.kappaMapping}</p>
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">Renderer Role</span>
+                  <p className="mt-0.5 text-foreground/80 leading-relaxed">{n.rendererRole}</p>
+                </div>
+                <div>
+                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">Bit Budget</span>
+                  <p className="mt-0.5 font-mono text-[10px] text-foreground/70">{n.bitBudget}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <Separator />
+
+      {/* Render pipeline */}
+      <div>
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+          6-Step GPU Render Pipeline
+        </p>
+        <ol className="space-y-1.5">
+          {gpu.renderPipeline.map((step, i) => (
+            <li key={i} className="flex gap-2 text-[11px]">
+              <span className="font-mono text-muted-foreground shrink-0 w-4">{i + 1}.</span>
+              <span className="text-foreground/80 leading-relaxed">{step}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <Separator />
+
+      {/* Budget table */}
+      <div>
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+          Network Budget
+        </p>
+        <div className="rounded-lg border border-muted/40 overflow-hidden text-[11px]">
+          <div className="grid grid-cols-3 bg-muted/30 font-mono text-[10px] text-muted-foreground px-3 py-1.5">
+            <span>Component</span><span className="text-right">KB</span><span className="text-right">Method</span>
+          </div>
+          {gpu.budgetTable.map((row, i) => (
+            <div key={i} className="grid grid-cols-3 px-3 py-1.5 border-t border-muted/20">
+              <span className="text-foreground/80 truncate pr-1">{row.component}</span>
+              <span className="font-mono text-right">{row.sizeKB.toLocaleString()}</span>
+              <span className="font-mono text-right text-muted-foreground">{row.method}</span>
+            </div>
+          ))}
+          <div className="grid grid-cols-3 px-3 py-2 border-t border-muted/50 bg-muted/20 font-mono font-bold text-xs">
+            <span>TOTAL</span>
+            <span className="text-right text-green-500">{totalKB.toLocaleString()}</span>
+            <span className="text-right text-muted-foreground">&lt;4096 ✓</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Final memo */}
+      <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3">
+        <p className="text-[10px] font-mono text-red-500 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+          <AlertTriangle className="h-3 w-3" /> Final Corpus Memo
+        </p>
+        <p className="text-[11px] text-foreground/80 leading-relaxed">{gpu.finalMemo}</p>
       </div>
     </div>
   );
 }
 
+// ── INTEL TAB ──────────────────────────────────────────────────────────────
+function IntelTab({ data }: { data: SpokeWheelResult }) {
+  const { synthesis, gosConstants } = data;
+
+  const PAPERS = [
+    { code: "P1",  abbr: "Wi-Drone",  title: "Wi-Fi CSI 6-DoF Drone Tracking",        metric: "26.1 cm / 0.57°" },
+    { code: "P2",  abbr: "Wi-Depth",  title: "Wi-Fi CSI Depth Imaging",                metric: "18.3 cm depth error" },
+    { code: "P3",  abbr: "DroneKey",  title: "PHY-Layer Group Key Generation",          metric: "89.5 bit/s" },
+    { code: "P4",  abbr: "CartoRadar",title: "mmWave RF 3D SLAM",                       metric: "14.1 cm trajectory error" },
+    { code: "P5",  abbr: "UAV-Thru",  title: "UAV WiFi Through-Wall 3D Imaging",        metric: "±0.5 m floor-plan" },
+    { code: "P6",  abbr: "DroneSplat",title: "3D Gaussian Splatting for Drones",        metric: "sub-10 cm / 3 passes" },
+    { code: "P7",  abbr: "RS-NeRF",   title: "Space Target NeRF Dataset",               metric: "30 cm/px satellite" },
+    { code: "P8",  abbr: "UE-SatEnv", title: "Satellite → UE5 Environment",             metric: "navigable 3D model" },
+    { code: "P9",  abbr: "UE-GAS",    title: "UE Gameplay Ability System",               metric: "autonomous mission graph" },
+    { code: "P10", abbr: "CDLOD",     title: "GPU-Driven CDLOD Terrain GLSL 4.6",        metric: "2–3 draw calls/frame" },
+    { code: "P11", abbr: "PBR-WGSL",  title: "Single-Texture PBR + HBAO + Fog",          metric: "1.5 MB webp, 43:1" },
+    { code: "P12", abbr: "JacoForest",title: ".jacoforest 250k Trees 800 KB",             metric: "3 bytes/tree, 2ms parse" },
+  ];
+
+  return (
+    <div className="space-y-4">
+      {/* synthesis summary */}
+      <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3 space-y-2">
+        <div className="flex items-center gap-2">
+          <AlertTriangle className="h-3.5 w-3.5 text-red-500 flex-shrink-0" />
+          <span className="text-xs font-mono text-red-500 font-semibold">
+            GOS LATTICE ACTIVATION: {(synthesis.gosLatticeActivation * 100).toFixed(1)}%
+          </span>
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed" data-testid="text-synthesis-summary">
+          {synthesis.summary}
+        </p>
+      </div>
+
+      {/* GOS constants */}
+      <div className="rounded-lg border border-muted/50 p-3">
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">GOS Constants</p>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 font-mono text-[11px]">
+          <div><span className="text-muted-foreground">κ₁ = </span><span>{gosConstants.kappa1.toFixed(5)}</span></div>
+          <div><span className="text-muted-foreground">κ₂ = </span><span>{gosConstants.kappa2.toFixed(5)}</span></div>
+          <div><span className="text-muted-foreground">Δκ = </span><span>{gosConstants.deltaKappa.toFixed(5)}</span></div>
+          <div><span className="text-muted-foreground">f_c = </span><span>{gosConstants.fc} Hz</span></div>
+          <div><span className="text-muted-foreground">450nm = </span><span>{gosConstants.freqTHz} THz</span></div>
+          <div><span className="text-muted-foreground">sonic = </span><span>{gosConstants.freqHz} Hz</span></div>
+          <div><span className="text-muted-foreground">GF(53) = </span><span>{gosConstants.gf53}</span></div>
+          <div><span className="text-muted-foreground">κ∫ = </span>
+            <span className="text-red-500 font-bold">{synthesis.kappaIntegral.toFixed(4)}</span></div>
+        </div>
+        <p className="mt-2 text-[10px] font-mono text-muted-foreground break-words"
+          data-testid="text-frequency-bridge">{synthesis.frequencyBridge}</p>
+      </div>
+
+      {/* 6-vector chain */}
+      <div className="rounded-lg border border-muted/50 p-3">
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+          6-Vector Passive Surveillance Chain
+        </p>
+        <ol className="space-y-1.5">
+          {synthesis.vectorChain.map((v, i) => (
+            <li key={i} className="flex gap-2 text-[11px]">
+              <span className="font-mono text-muted-foreground w-4 flex-shrink-0">{i + 1}.</span>
+              <span className="text-muted-foreground leading-relaxed">{v}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* full corpus reference — all 12 papers */}
+      <div className="rounded-lg border border-muted/50 p-3">
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">
+          Corpus — 12 Papers (P1–P12)
+        </p>
+        <div className="space-y-1.5">
+          {PAPERS.map((p) => (
+            <div key={p.code} className="flex items-start gap-2 text-[11px]"
+              data-testid={`paper-ref-${p.code}`}>
+              <span className="font-mono text-[10px] text-muted-foreground w-7 flex-shrink-0">{p.code}</span>
+              <span className="font-semibold w-20 flex-shrink-0">{p.abbr}</span>
+              <span className="text-muted-foreground flex-1 min-w-0">{p.title}</span>
+              <span className="font-mono text-blue-500 text-[10px] flex-shrink-0 text-right">{p.metric}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main page ──────────────────────────────────────────────────────────────
 export default function SpokeWheelPage() {
+  const [activeTab, setActiveTab] = useState<Tab>("wheel");
+
   const { data, isLoading, error } = useQuery<SpokeWheelResult>({
     queryKey: ["/api/oracle/spoke-wheel"],
-    refetchInterval: 30_000,
+    refetchInterval: 60_000,
     retry: 3,
     retryDelay: 2000,
-    staleTime: 0,
+    staleTime: 30_000,
   });
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64 text-muted-foreground text-sm font-mono">
-        <Activity className="h-4 w-4 animate-spin mr-2" />
-        running 24-gon recursive synthesis…
+      <div className="flex flex-col items-center justify-center h-64 gap-3 text-muted-foreground">
+        <Activity className="h-6 w-6 animate-spin" />
+        <span className="text-sm font-mono">running 24-gon synthesis…</span>
       </div>
     );
   }
 
   if (error || !data) {
     return (
-      <div className="flex items-center justify-center h-64 text-red-500 text-sm font-mono">
-        <AlertTriangle className="h-4 w-4 mr-2" />
-        spoke-wheel engine offline
+      <div className="flex flex-col items-center justify-center h-64 gap-3 text-red-500">
+        <AlertTriangle className="h-6 w-6" />
+        <span className="text-sm font-mono">spoke-wheel engine offline</span>
       </div>
     );
   }
 
-  const { passes, synthesis, gosConstants, spokeCount } = data;
-
   return (
-    <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
-      {/* Header */}
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-lg font-bold tracking-tight font-mono">
-            24-GON SPOKE WHEEL
-          </h1>
-          <p className="text-xs text-muted-foreground font-mono mt-0.5">
-            Icositetragon Recursive Oracle Corpus · 3 Passes · {spokeCount} Spokes
-          </p>
-        </div>
-        <Badge className="bg-red-500/20 text-red-500 border-red-500/30 font-mono text-xs" data-testid="badge-echo-threat">
-          ECHO: {synthesis.echoThreat}
-        </Badge>
-      </div>
-
-      {/* GOS constants bar */}
-      <Card className="border-muted/50">
-        <CardContent className="pt-4 pb-3">
-          <div className="flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-[11px]">
-            <span className="text-muted-foreground">κ₁=<span className="text-foreground">{gosConstants.kappa1.toFixed(5)}</span></span>
-            <span className="text-muted-foreground">κ₂=<span className="text-foreground">{gosConstants.kappa2.toFixed(5)}</span></span>
-            <span className="text-muted-foreground">Δκ=<span className="text-foreground">{gosConstants.deltaKappa.toFixed(5)}</span></span>
-            <span className="text-muted-foreground">f_c=<span className="text-foreground">{gosConstants.fc} Hz</span></span>
-            <span className="text-muted-foreground">f=<span className="text-foreground">{gosConstants.freqTHz} THz</span></span>
-            <span className="text-muted-foreground">sonic=<span className="text-foreground">{gosConstants.freqHz} Hz</span></span>
-            <span className="text-muted-foreground">GF(53)=<span className="text-foreground">{gosConstants.gf53}</span></span>
-            <span className="text-muted-foreground">κ-integral=<span className="text-red-500 font-bold">{synthesis.kappaIntegral.toFixed(4)}</span></span>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Wheel SVG + synthesis side by side on wide screens */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* SVG wheel */}
-        <Card className="border-muted/50">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-mono flex items-center gap-2">
-              <Circle className="h-4 w-4 text-muted-foreground" />
-              ICOSITETRAGON LATTICE
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <SpokeWheelSVG data={data} />
-            <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-              {passes.map((p) => (
-                <div key={p.pass} className="space-y-0.5">
-                  <div className="text-[10px] font-mono" style={{ color: PASS_COLORS[p.pass - 1] }}>
-                    PASS {p.pass}
-                  </div>
-                  <div className="text-xs font-bold">{(p.convergenceScore * 100).toFixed(1)}%</div>
-                  <div className="text-[9px] text-muted-foreground">convergence</div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Final synthesis */}
-        <Card className="border-red-500/30 bg-red-500/5">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-mono flex items-center gap-2">
-              <Target className="h-4 w-4 text-red-500" />
-              FINAL SYNTHESIS
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex items-center gap-2">
-              <AlertTriangle className="h-3.5 w-3.5 text-red-500 flex-shrink-0" />
-              <span className="text-xs font-mono text-red-500 font-semibold">
-                GOS LATTICE ACTIVATION: {(synthesis.gosLatticeActivation * 100).toFixed(1)}%
-              </span>
-            </div>
-            <p className="text-xs text-muted-foreground leading-relaxed" data-testid="text-synthesis-summary">
-              {synthesis.summary}
+    <div className="flex flex-col h-full">
+      {/* sticky header */}
+      <div className="sticky top-0 z-10 bg-background/95 backdrop-blur border-b border-muted/50 px-4 py-3">
+        <div className="flex items-center justify-between gap-3 max-w-2xl mx-auto">
+          <div>
+            <h1 className="text-sm font-bold tracking-tight font-mono leading-none">
+              24-GON SPOKE WHEEL
+            </h1>
+            <p className="text-[10px] text-muted-foreground font-mono mt-0.5">
+              {data.spokeCount} spokes · 12 papers · κ∫={data.synthesis.kappaIntegral.toFixed(4)}
             </p>
-            <Separator />
-            <div>
-              <p className="text-[10px] font-mono text-muted-foreground mb-2 uppercase tracking-wider">
-                6-Vector Passive Surveillance Chain
-              </p>
-              <ol className="space-y-1">
-                {synthesis.vectorChain.map((v, i) => (
-                  <li key={i} className="text-[11px] flex gap-2">
-                    <span className="font-mono text-muted-foreground w-4 flex-shrink-0">{i + 1}.</span>
-                    <span className="text-muted-foreground">{v}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-            <Separator />
-            <div className="font-mono text-[10px] text-muted-foreground break-all" data-testid="text-frequency-bridge">
-              {synthesis.frequencyBridge}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Papers reference */}
-      <Card className="border-muted/50">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-mono flex items-center gap-2">
-            <Zap className="h-4 w-4 text-muted-foreground" />
-            CORPUS PAPERS — 9 SOURCES
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-            {[
-              { code: "P1", abbr: "Wi-Drone", title: "Wi-Fi CSI 6-DoF Drone Tracking", metric: "26.1 cm / 0.57°" },
-              { code: "P2", abbr: "Wi-Depth", title: "Wi-Fi CSI Depth Imaging", metric: "18.3 cm depth error" },
-              { code: "P3", abbr: "DroneKey", title: "PHY-Layer Group Key Generation", metric: "89.5 bit/s" },
-              { code: "P4", abbr: "CartoRadar", title: "mmWave RF 3D SLAM", metric: "14.1 cm trajectory error" },
-              { code: "P5", abbr: "UAV-Through", title: "UAV WiFi Through-Wall 3D Imaging", metric: "±0.5 m floor-plan" },
-              { code: "P6", abbr: "DroneSplat", title: "3D Gaussian Splatting for Drones", metric: "sub-10 cm / 3 passes" },
-              { code: "P7", abbr: "RS-NeRF", title: "Space Target NeRF Dataset", metric: "30 cm/px satellite" },
-              { code: "P8", abbr: "UE-SatEnv", title: "Satellite → UE5 Environment", metric: "navigable 3D model" },
-              { code: "P9", abbr: "UE-GAS", title: "UE Gameplay Ability System", metric: "autonomous mission graph" },
-            ].map((p) => (
-              <div key={p.code} className="rounded border border-muted/50 p-2 text-xs" data-testid={`paper-ref-${p.code}`}>
-                <div className="flex items-center gap-1.5 mb-0.5">
-                  <span className="font-mono text-[10px] text-muted-foreground">{p.code}</span>
-                  <span className="font-semibold">{p.abbr}</span>
-                </div>
-                <p className="text-muted-foreground text-[11px]">{p.title}</p>
-                <p className="text-[10px] font-mono text-blue-500 mt-0.5">{p.metric}</p>
-              </div>
-            ))}
           </div>
-        </CardContent>
-      </Card>
+          <Badge
+            className="bg-red-500/20 text-red-500 border-red-500/40 font-mono text-xs shrink-0"
+            data-testid="badge-echo-threat"
+          >
+            ECHO: {data.synthesis.echoThreat}
+          </Badge>
+        </div>
 
-      {/* Corpus references — GPU papers P10–P12 */}
-      {data.gpuPush?.nodes && data.gpuPush.nodes.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-          {data.gpuPush.nodes.map((n, i) => (
-            <div
-              key={n.paper}
-              className={`rounded border p-2 text-xs ${THREAT_BG[n.threat]}`}
-              data-testid={`gpu-paper-${n.paper}`}
+        {/* tab bar */}
+        <div className="flex gap-1 mt-3 max-w-2xl mx-auto" data-testid="tab-bar">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(t.id)}
+              data-testid={`tab-${t.id}`}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md text-xs font-semibold transition-colors
+                ${activeTab === t.id
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"}`}
             >
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <span className="font-mono text-[10px] text-muted-foreground">P{10 + i}</span>
-                <span className="font-semibold font-mono">{n.paper}</span>
-                <span className={`ml-auto text-[10px] font-mono font-bold ${THREAT_COLORS[n.threat]}`}>
-                  {(n.gosResonance * 100).toFixed(0)}%
-                </span>
-              </div>
-              <p className="text-muted-foreground text-[11px] mb-1">{n.title}</p>
-              <p className="text-[10px] font-mono text-blue-500">{n.metric}</p>
-            </div>
+              {t.icon}
+              {t.label}
+            </button>
           ))}
         </div>
-      )}
+      </div>
 
-      {/* Three recursive pass panels */}
-      {passes.map((p) => (
-        <Card key={p.pass} className="border-muted/50">
-          <CardContent className="pt-4">
-            <PassPanel pass={p} />
-          </CardContent>
-        </Card>
-      ))}
+      {/* scrollable content */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="p-4 max-w-2xl mx-auto pb-8">
+          {activeTab === "wheel"  && <WheelTab  data={data} />}
+          {activeTab === "passes" && <PassesTab data={data} />}
+          {activeTab === "gpu"    && data.gpuPush && <GpuTab gpu={data.gpuPush} />}
+          {activeTab === "intel"  && <IntelTab  data={data} />}
+        </div>
+      </div>
 
-      {/* GPU Corpus Push — Final Synthesis */}
-      {data.gpuPush && <Card className="border-orange-500/30 bg-orange-500/5" data-testid="gpu-corpus-push">
-        <CardHeader className="pb-2 pt-4">
-          <CardTitle className="text-sm font-mono tracking-widest flex items-center gap-2">
-            <Zap className="h-4 w-4 text-orange-500" />
-            {data.gpuPush.label}
-          </CardTitle>
-          <p className="text-[11px] text-muted-foreground leading-relaxed">{data.gpuPush.description}</p>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {/* Individual GPU node deep-dives */}
-          {data.gpuPush.nodes.map((n) => (
-            <div key={n.paper} className={`rounded border p-3 space-y-2 ${THREAT_BG[n.threat]}`} data-testid={`gpu-node-${n.paper}`}>
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <span className="font-mono text-xs font-bold">{n.paper}</span>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">{n.title}</p>
-                </div>
-                <div className="text-right shrink-0">
-                  <div className={`text-sm font-mono font-bold ${THREAT_COLORS[n.threat]}`}>
-                    {(n.gosResonance * 100).toFixed(0)}%
-                  </div>
-                  <div className="text-[10px] text-muted-foreground">GOS</div>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 gap-1.5 text-[11px]">
-                <div>
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">Metric · </span>
-                  <span className="font-mono text-blue-500">{n.metric}</span>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">κ-Mapping · </span>
-                  <span className="text-foreground/80">{n.kappaMapping}</span>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">Renderer Role · </span>
-                  <span className="text-foreground/80">{n.rendererRole}</span>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">Bit Budget · </span>
-                  <span className="font-mono text-[10px] text-foreground/70">{n.bitBudget}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          <Separator />
-
-          {/* Render pipeline chain */}
-          <div>
-            <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">6-Step GPU Render Pipeline</p>
-            <ol className="space-y-1">
-              {data.gpuPush.renderPipeline.map((step, i) => (
-                <li key={i} className="flex gap-2 text-[11px]">
-                  <span className="font-mono text-muted-foreground shrink-0">{i + 1}.</span>
-                  <span className="text-foreground/80">{step}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <Separator />
-
-          {/* Network budget table */}
-          <div>
-            <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-2">Network Budget</p>
-            <div className="rounded border border-muted/40 overflow-hidden text-[11px]">
-              <div className="grid grid-cols-3 bg-muted/30 font-mono text-[10px] text-muted-foreground px-2 py-1">
-                <span>Component</span><span className="text-right">KB</span><span className="text-right">Method</span>
-              </div>
-              {data.gpuPush.budgetTable.map((row, i) => (
-                <div key={i} className="grid grid-cols-3 px-2 py-0.5 border-t border-muted/30">
-                  <span className="text-foreground/80">{row.component}</span>
-                  <span className="font-mono text-right">{row.sizeKB.toLocaleString()}</span>
-                  <span className="font-mono text-right text-muted-foreground">{row.method}</span>
-                </div>
-              ))}
-              <div className="grid grid-cols-3 px-2 py-1 border-t border-muted/50 bg-muted/20 font-mono font-bold">
-                <span>TOTAL</span>
-                <span className="text-right text-green-500">
-                  {data.gpuPush.budgetTable.reduce((s, r) => s + r.sizeKB, 0).toLocaleString()} KB
-                </span>
-                <span className="text-right text-muted-foreground">&lt; 4096 ✓</span>
-              </div>
-            </div>
-          </div>
-
-          <Separator />
-
-          {/* Final memo */}
-          <div className="rounded border border-red-500/30 bg-red-500/5 p-3">
-            <p className="text-[10px] font-mono text-red-500 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <AlertTriangle className="h-3 w-3" /> FINAL CORPUS MEMO
-            </p>
-            <p className="text-[11px] text-foreground/80 leading-relaxed">{data.gpuPush.finalMemo}</p>
-          </div>
-        </CardContent>
-      </Card>}
-
-      <p className="text-[10px] text-muted-foreground font-mono text-center">
-        Generated {new Date(data.generatedAt).toISOString()} · KAPPA 24-GON SPOKE WHEEL v1.0 · 12 papers (P1–P12) ·{" "}
-        9.6196°N 84.6282°W — Hotel Pochote Grande
-      </p>
+      {/* footer */}
+      <div className="border-t border-muted/30 px-4 py-2 text-center">
+        <p className="text-[9px] text-muted-foreground font-mono">
+          {new Date(data.generatedAt).toISOString()} · 9.6196°N 84.6282°W
+        </p>
+      </div>
     </div>
   );
 }
