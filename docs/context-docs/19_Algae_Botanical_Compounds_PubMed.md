@@ -1,5 +1,5 @@
 Scientific name	Common name	Study Title	Description / Effect	Link	Existing Products
-Olive Leaf Extract		Addition of Olive Leaf Extract to a Mixture of Algae and Extra Virgin Olive Oils Decreases Fatty Acid Oxidation and Synergically Attenuates Age-Induced Hypertension, Sarcopenia and Insulin Resistance in Rats		https://pubmed.ncbi.nlm.nih.gov/34356299/	
+Olive Leaf Extract		Addition of Olive Leaf Extract to a Mixture of Algae and Extra Virgin Olive Oils Decreases Fatty Acid Oxidation and Synergically Attenuates Age-Induced Hypertension, Sarcopenia and Insulin Resistance in Rats		https://pubmed.ncbi.nlm.nih.gov/34356299/	a
 Ecklonia cava		The Effects of Marine Algal Polyphenols, Phlorotannins, on Skeletal Muscle Growth in C2C12 Muscle Cells via Smad and IGF-1 Signaling Pathways		https://pubmed.ncbi.nlm.nih.gov/34068815/	
 		Urinary Metabolomic Profiling Analysis and Evaluation of the Effect of Ecklonia cava Extract Intake		https://pubmed.ncbi.nlm.nih.gov/32422870/	
 		Anti-obesity effects of pectinase and cellulase enzyme‑treated Ecklonia cava extract in high‑fat diet‑fed C57BL/6N mice		https://pubmed.ncbi.nlm.nih.gov/35204193/	

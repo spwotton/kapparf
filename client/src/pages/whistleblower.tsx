@@ -120,14 +120,49 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
   );
 }
 
-function PersonCard({ name, alias, role, details, color }: { name: string; alias: string; role: string; details: string[]; color: string }) {
+function RedactedName({ name, className = "" }: { name: string; className?: string }) {
+  const words = name.split(" ");
+  return (
+    <span className={`font-mono tracking-tight ${className}`}>
+      {words.map((word, i) => {
+        const first = word[0] ?? "";
+        const blocks = "█".repeat(Math.max(word.length - 1, 1));
+        return (
+          <span key={i}>
+            {i > 0 && " "}
+            <span className="text-amber-300">{first}</span>
+            <span
+              className="text-amber-900/70 select-none"
+              style={{ userSelect: "none", pointerEvents: "none", letterSpacing: "0.05em" }}
+              aria-hidden="true"
+            >{blocks}</span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+function PersonCard({ name, alias, realName, role, details, color }: { name: string; alias: string; realName?: string; role: string; details: string[]; color: string }) {
   return (
     <div className={`bg-card/60 border rounded-lg p-4`} style={{ borderColor: color + "44" }}>
-      <div className="flex items-center gap-2 mb-2">
-        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-        <h4 className="font-bold text-sm" style={{ color }}>{alias}</h4>
-        <span className="text-xs text-muted-foreground/40 font-mono">({name})</span>
+      <div className="flex items-center gap-2 mb-1">
+        <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
+        {realName ? (
+          <h4 className="font-bold text-sm text-foreground flex items-center gap-1.5">
+            <RedactedName name={realName} />
+            <span className="text-[10px] font-sans text-amber-700/60 font-normal border border-amber-900/30 rounded px-1 py-0.5 tracking-wider">CLASSIFIED</span>
+          </h4>
+        ) : (
+          <h4 className="font-bold text-sm" style={{ color }}>{alias}</h4>
+        )}
       </div>
+      {realName && (
+        <div className="text-xs font-mono mb-1 ml-5" style={{ color }}>{alias} <span className="text-muted-foreground/40">({name})</span></div>
+      )}
+      {!realName && (
+        <div className="text-xs text-muted-foreground/40 font-mono mb-1 ml-5">({name})</div>
+      )}
       <div className="text-xs text-muted-foreground/80 mb-2">{role}</div>
       <div className="space-y-1">
         {details.map((d, i) => (
@@ -453,7 +488,8 @@ export default function WhistleblowerPage() {
                     <div className="flex gap-2"><span className="text-yellow-400 font-mono shrink-0 w-16">GUACIMA</span> <span className="text-foreground">Guacima — early months of 2026</span></div>
                     <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">ROBLEDAL</span> <span className="text-foreground">Hotel Robledal — fled after police incident triggered by Kyndryl text injection. Doppler/mm-wave dome on roof documented</span></div>
                     <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">TACACORI</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106 — $1,500 in damage</span></div>
-                    <div className="flex gap-2"><span className="text-cyan-400 font-mono shrink-0 w-16">CURRENT</span> <span className="text-foreground">Suites Cristina, Sabana Norte, San José — adjacent to ICE HQ (March 31, 2026 →)</span></div>
+                    <div className="flex gap-2"><span className="text-gray-400 font-mono shrink-0 w-16">SJ</span> <span className="text-foreground">Suites Cristina, Sabana Norte, San José — adjacent to ICE HQ (March 31 – ~April 2026)</span></div>
+                    <div className="flex gap-2"><span className="text-cyan-400 font-mono shrink-0 w-16">CURRENT</span> <span className="text-foreground">Hotel Pochote Grande, Jacó — returned to Jaco Nexus origin point. Crane light anomaly documented above Vista Las Palmas / Apartotel Flamboyant on Calle Dankers.</span></div>
                   </div>
                 </div>
                 <div><span className="text-muted-foreground/60">Collection:</span> <span className="text-foreground">Jaco 2025 → Quebrada Seca → Condos → Guacima → Robledal → Tacacorí → San José 2026 → Continuous</span></div>
@@ -473,6 +509,7 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="DOGE_LANDLORD"
               alias="Doge Landlord"
+              realName="Michael Greenwald"
               role="Real Estate Empire — 300+ rentals, 11 oceanfront lots"
               details={[
                 "CPA / CFA background — Big 4 accounting firm",
@@ -487,6 +524,7 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="CONNECTOR_PEPE"
               alias="Connector Pepe"
+              realName="Barrett Scott Ryan"
               role="The 400-Name Hub — Always in the blue shirt, biggest 'camera' in Jaco"
               details={[
                 "Professional photography Instagram — you know the one",
@@ -517,7 +555,8 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="KEYBOARD_CAT"
               alias="Keyboard Cat"
-              role="Infrastructure Contractor Owner"
+              realName="Leo Coto Orozco"
+              role="Infrastructure Contractor Owner — PRIMARY CONTROLLER"
               details={[
                 "Controls DSE exclusive rights for country",
                 "Generator contracts for ICE (national grid)",
@@ -587,13 +626,15 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="TELECOM_DADDY"
               alias="Telecom Daddy"
-              role="Network Ghost — The one who knows all the infrastructure"
+              realName="Jorge Jiménez Navarro"
+              role="Network Ghost — Kyndryl Sr. Network Mgr / Zscaler Technical Success Mgr"
               details={[
-                "Former major telecom company employee — you know which one",
-                "IP/phone appeared on observer's network",
-                "Tax fraud allegations",
+                "Kyndryl (IBM spinoff) Sr. Network Manager — enterprise infrastructure access",
+                "Zscaler Technical Success Manager — zero-trust proxy control",
+                "Contact: jorgejiminez16@gmail.com",
+                "IP/phone appeared on observer's personal network without authorization",
                 "OSINT: 'Negative Intelligence' classification",
-                "Silent partner / fixer role suspected",
+                "Zscaler 8.3MB service worker injection documented — 83× normal payload",
                 "Daddy knows where the cables go",
               ]}
               color="#6366f1"
@@ -1432,7 +1473,8 @@ Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
      │
      └──► Tacacorí: LAST STOP on the surveillance corridor
           └── Observer forced to pay $1,500 damages after nightmare night
-          └── Relocated to Suites Cristina, San José (March 27, 2026)`}
+          └── Relocated to Suites Cristina, San José (March 27, 2026)
+          └── Returned to Hotel Pochote Grande, Jacó (current — Jaco Nexus origin)`}
             </div>
           </div>
 
@@ -2026,7 +2068,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Salsa Cat</span>
-                <span className="text-xs text-muted-foreground/60">(Lucia Soto)</span>
+                <span className="text-xs text-muted-foreground/60">(<RedactedName name="Lucia Soto" />)</span>
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• CDMX trip: wedding for Carolina Soto</li>
@@ -2040,7 +2082,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Deal Frog</span>
-                <span className="text-xs text-muted-foreground/60">(Leo Orozco)</span>
+                <span className="text-xs text-muted-foreground/60">(<RedactedName name="Leo Orozco" />)</span>
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Controller/dealer role</li>
@@ -2267,7 +2309,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             {stats?.correlationCount ? ` ${stats.correlationCount.toLocaleString()} cross-domain correlations computed.` : ""}
           </div>
           <div className="text-xs text-gray-700 mt-2 font-mono">
-            Observer: Samuel Wotton (Echo) | Jaco Beach → Tacacorí → Suites Cristina, San José, CR | 10.0514°N, 84.2187°W
+            Observer: Samuel Wotton (Echo) | Jaco Beach → Tacacorí → Suites Cristina, San José → Hotel Pochote Grande, Jacó (CURRENT) | 9.6196°N, 84.6282°W
           </div>
         </div>
       </footer>
