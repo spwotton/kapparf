@@ -3753,6 +3753,73 @@ export async function registerRoutes(
 
   startKymaCollector(60000);
 
+  // ── Terrain proxy routes ────────────────────────────────────────────────────
+
+  app.get("/api/terrain/elevation", async (req, res) => {
+    try {
+      const locations = req.query.locations as string;
+      if (!locations) return res.status(400).json({ error: "locations required" });
+      const url = `https://api.opentopodata.org/v1/srtm90m?locations=${encodeURIComponent(locations)}`;
+      const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+      if (!r.ok) return res.status(r.status).json({ error: "upstream error" });
+      const data = await r.json();
+      res.json(data);
+    } catch (e) {
+      res.status(500).json({ error: String(e) });
+    }
+  });
+
+  app.get("/api/terrain/tile/:z/:y/:x", async (req, res) => {
+    try {
+      const { z, y, x } = req.params;
+      const url = `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
+      const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+      if (!r.ok) return res.status(r.status).send("tile error");
+      const buf = Buffer.from(await r.arrayBuffer());
+      res.set("Content-Type", r.headers.get("content-type") || "image/jpeg");
+      res.set("Cache-Control", "public, max-age=86400");
+      res.send(buf);
+    } catch (e) {
+      res.status(500).send(String(e));
+    }
+  });
+
+  // OpenSky Jacó AOR — live aircraft within bounding box (~25km radius around Jacó)
+  app.get("/api/opensky/jaco", async (req, res) => {
+    try {
+      const LAT_MIN = 9.40, LAT_MAX = 9.85;
+      const LON_MIN = -84.90, LON_MAX = -84.35;
+      const url = `https://opensky-network.org/api/states/all?lamin=${LAT_MIN}&lomin=${LON_MIN}&lamax=${LAT_MAX}&lomax=${LON_MAX}`;
+      const r = await fetch(url, {
+        headers: { "User-Agent": "KAPPA-SIGINT/1.0" },
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!r.ok) {
+        return res.json({ states: [], time: Date.now(), error: `OpenSky HTTP ${r.status}` });
+      }
+      const data = await r.json();
+      const states = (data.states || []).map((s: any[]) => ({
+        icao24: s[0],
+        callsign: (s[1] || "").trim() || null,
+        originCountry: s[2],
+        timePosition: s[3],
+        lastContact: s[4],
+        longitude: s[5],
+        latitude: s[6],
+        baroAltitude: s[7],
+        onGround: s[8],
+        velocity: s[9],
+        trueTrack: s[10],
+        verticalRate: s[11],
+        geoAltitude: s[13],
+        squawk: s[14],
+      })).filter((s: any) => s.latitude && s.longitude && !s.onGround);
+      res.json({ states, time: data.time || Math.floor(Date.now() / 1000), count: states.length });
+    } catch (e) {
+      res.json({ states: [], time: Date.now(), error: String(e) });
+    }
+  });
+
   return httpServer;
 }
 
@@ -3880,70 +3947,3 @@ function escapeHtml(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-// ── Terrain proxy routes ──────────────────────────────────────────────────────
-
-app.get("/api/terrain/elevation", async (req, res) => {
-  try {
-    const locations = req.query.locations as string;
-    if (!locations) return res.status(400).json({ error: "locations required" });
-    const url = `https://api.opentopodata.org/v1/srtm90m?locations=${encodeURIComponent(locations)}`;
-    const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
-    if (!r.ok) return res.status(r.status).json({ error: "upstream error" });
-    const data = await r.json();
-    res.json(data);
-  } catch (e) {
-    res.status(500).json({ error: String(e) });
-  }
-});
-
-app.get("/api/terrain/tile/:z/:y/:x", async (req, res) => {
-  try {
-    const { z, y, x } = req.params;
-    const url = `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
-    const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
-    if (!r.ok) return res.status(r.status).send("tile error");
-    const buf = Buffer.from(await r.arrayBuffer());
-    res.set("Content-Type", r.headers.get("content-type") || "image/jpeg");
-    res.set("Cache-Control", "public, max-age=86400");
-    res.send(buf);
-  } catch (e) {
-    res.status(500).send(String(e));
-  }
-});
-
-// OpenSky Jacó AOR — live aircraft within bounding box (~25km radius around Jacó)
-app.get("/api/opensky/jaco", async (req, res) => {
-  try {
-    const LAT_MIN = 9.40, LAT_MAX = 9.85;
-    const LON_MIN = -84.90, LON_MAX = -84.35;
-    const url = `https://opensky-network.org/api/states/all?lamin=${LAT_MIN}&lomin=${LON_MIN}&lamax=${LAT_MAX}&lomax=${LON_MAX}`;
-    const r = await fetch(url, {
-      headers: { "User-Agent": "KAPPA-SIGINT/1.0" },
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!r.ok) {
-      return res.json({ states: [], time: Date.now(), error: `OpenSky HTTP ${r.status}` });
-    }
-    const data = await r.json();
-    // Map raw state vectors to structured objects
-    const states = (data.states || []).map((s: any[]) => ({
-      icao24: s[0],
-      callsign: (s[1] || "").trim() || null,
-      originCountry: s[2],
-      timePosition: s[3],
-      lastContact: s[4],
-      longitude: s[5],
-      latitude: s[6],
-      baroAltitude: s[7],
-      onGround: s[8],
-      velocity: s[9],
-      trueTrack: s[10],
-      verticalRate: s[11],
-      geoAltitude: s[13],
-      squawk: s[14],
-    })).filter((s: any) => s.latitude && s.longitude && !s.onGround);
-    res.json({ states, time: data.time || Math.floor(Date.now() / 1000), count: states.length });
-  } catch (e) {
-    res.json({ states: [], time: Date.now(), error: String(e) });
-  }
-});
