@@ -12,7 +12,7 @@ import {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const CENTER = { lat: 9.6196, lon: -84.6282 };
+const CENTER = { lat: 9.621887, lon: -84.63969 };
 const METERS_PER_DEG_LAT = 111320;
 const METERS_PER_DEG_LON = 111320 * Math.cos(CENTER.lat * Math.PI / 180);
 const SCENE_SCALE = 80;
@@ -126,11 +126,11 @@ const AC_EVENT_STYLE: Record<AcEventType, { cls: string; label: string }> = {
 // ─── Fixed targets ────────────────────────────────────────────────────────────
 
 const TARGETS: Target[] = [
-  { id: "pochote",    label: "HOTEL POCHOTE GRANDE — ECHO",   lat: 9.6196, lon: -84.6282, elevM: 5,   type: "observer", color: 0x00ffcc, desc: "Observer current position • Jaco Beach strip" },
-  { id: "crane",      label: "CRANE-ALPHA — CALLE DANKERS",   lat: 9.621,  lon: -84.6295, elevM: 8,   type: "crane",    color: 0xffaa00, desc: "Construction crane • Suspected surveillance relay" },
-  { id: "elmiro",     label: "EL MIRO RADAR DOME",            lat: 9.617,  lon: -84.623,  elevM: 110, type: "radar",    color: 0xff3333, desc: "Hillside • Full valley LOS • Suspected phased-array" },
-  { id: "breakwater", label: "BREAKWATER 4G TOWER",           lat: 9.626,  lon: -84.641,  elevM: 6,   type: "cell",     color: 0xaa44ff, desc: "Punta de Jacó headland • 4G/LTE • 9.7GHz" },
-  { id: "hermosa",    label: "HERMOSA PALMS — OPS BASE",      lat: 9.5588, lon: -84.6519, elevM: 4,   type: "ops",      color: 0xff6644, desc: "Michael G████████ complex • Playa Hermosa • 7.3km SSW of ECHO position" },
+  { id: "pochote",    label: "HOTEL POCHOTE GRANDE — ECHO",   lat: 9.621887, lon: -84.63969, elevM: 5,   type: "observer", color: 0x00ffcc, desc: "Observer position • Hotel Pochote Grande • Jacó Beach (verified Google Maps)" },
+  { id: "crane",      label: "CRANE-ALPHA — CALLE DANKERS",   lat: 9.621,    lon: -84.6295,  elevM: 8,   type: "crane",    color: 0xffaa00, desc: "Construction crane • Suspected surveillance relay" },
+  { id: "elmiro",     label: "EL MIRO RADAR DOME",            lat: 9.617,    lon: -84.623,   elevM: 110, type: "radar",    color: 0xff3333, desc: "Hillside • 1.91km NE of ECHO • 3.1° look-down • Suspected phased-array" },
+  { id: "breakwater", label: "BREAKWATER 4G TOWER",           lat: 9.626,    lon: -84.641,   elevM: 6,   type: "cell",     color: 0xaa44ff, desc: "Punta de Jacó headland • 4G/LTE • 9.7GHz" },
+  { id: "hermosa",    label: "HERMOSA PALMS — OPS BASE",      lat: 9.5588,   lon: -84.6519,  elevM: 4,   type: "ops",      color: 0xff6644, desc: "Michael G████████ complex • Playa Hermosa • 7.1km SSW of ECHO position" },
 ];
 
 // ─── Threat helpers ───────────────────────────────────────────────────────────

@@ -30,3 +30,9 @@ id = "OeuhqGMIxIJQ-6yJS9174"
 uri = "file://KAPPA_Full_Intelligence_Report.pdf"
 type = "pdf"
 title = "KAPPA Full Intelligence Report (Fixed - 10 pages, no blanks)"
+
+[[outputs]]
+id = "x6Eik807aSzr3xwuhfnkF"
+uri = "file://docs/ALGAE_ENGINE_TREATISE.md"
+type = "text"
+title = "Ω-ALGAE ENGINE TREATISE — Grand Unified Architecture"
