@@ -1,0 +1,9 @@
+{
+    "pcap": "network_evidence_live.pcap",
+    "timestamp": "2026-02-14T22:49:24.324419",
+    "summary": {
+        "total_ips": 0,
+        "threats_found": 0
+    },
+    "ip_analysis": []
+}

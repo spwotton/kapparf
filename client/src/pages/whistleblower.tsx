@@ -672,6 +672,84 @@ export default function WhistleblowerPage() {
             />
           </div>
 
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <PersonCard
+              name="SHELL_MIKE"
+              alias="Shell Mike"
+              realName="Michael Lipman"
+              role="Breakwater Landlord — Shell Company Operator / Maine Connection"
+              details={[
+                "Landlord/host at Breakwater Point condo (January 14, 2025 — origin point)",
+                "Moved into Michael Greenwald's personally built Hermosa Palms mansion",
+                "Shell companies: ostensibly 'sports ticket sales' — suspected laundering",
+                "Provided physical staging for 3I/ATLAS RF injection at Breakwater",
+                "From Scarborough, Maine — connection to Portland ME network",
+                "Daughter-in-law also present with him in CR",
+              ]}
+              color="#a855f7"
+            />
+            <PersonCard
+              name="SUPPLEMENT_JESSE"
+              alias="Supplement Jesse"
+              realName="Jesse Talty"
+              role="Lipman Son-in-Law — Portland ME / Intelligence-Adjacent"
+              details={[
+                "Son-in-law of Michael Lipman",
+                "Known to observer from Portland, Maine (pre-2016)",
+                "Came to observer's gym and supplement store in Portland",
+                "Business partner: Bill Kimball (recently deceased)",
+                "Kimball warned observer before death: 'stay away — he has killed people'",
+                "Shady mortgage company operated jointly with Kimball",
+                "Appears intelligence-connected or operative-adjacent",
+              ]}
+              color="#dc2626"
+            />
+            <PersonCard
+              name="GENESIS_P"
+              alias="Genesis P"
+              realName="Genesis Peralta"
+              role="In-Situ Operator — r-PPG Bio-Feedback Loop / Breakwater"
+              details={[
+                "Former roommate/partner of observer at Breakwater Point",
+                "Employed by Lipman/Greenwald network",
+                "Role: maintained r-PPG (emotional state analysis) bio-feedback loop",
+                "Conflict at #42 Calle Naciones Unidas (Oct–Dec 28, 2024) preceded injection",
+                "Drama used to create dopamine spike — energy threshold for 3I/ATLAS latch",
+                "Operative placement confirmed by pre-staged Breakwater funnel pattern",
+              ]}
+              color="#ec4899"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
+            <PersonCard
+              name="BMX_CAT"
+              alias="BMX Cat"
+              realName="Pablo 'Pasti' Mora"
+              role="Handler — BMX Rider / Peralta Controller"
+              details={[
+                "Professional BMX rider — sponsorship ties to Kenneth Tencio / BAC Credomatic",
+                "Suspected handler coordinating Genesis Peralta's operative role",
+                "BAC network connection provides financial infrastructure cover",
+                "Breakwater Point presence during January 2025 escalation",
+              ]}
+              color="#10b981"
+            />
+            <PersonCard
+              name="SPARKY_CAT"
+              alias="Sparky Cat"
+              realName="Hector Mora"
+              role="Electrical / RF Infrastructure — Breakwater Maintenance"
+              details={[
+                "Maintenance and electrical operator at Breakwater Point",
+                "Observed modifying 'generators' during January 14 escalation",
+                "Generators suspected to be high-power RF transducers",
+                "Provides technical cover for RF injection hardware at Breakwater",
+              ]}
+              color="#f59e0b"
+            />
+          </div>
+
           <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 mt-6">
             <h4 className="font-bold text-red-400 mb-3">The UPNP Incident — Proof of Active Monitoring</h4>
             <div className="grid md:grid-cols-2 gap-6">

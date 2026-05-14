@@ -1,0 +1,427 @@
+{
+    "pcap": "nice_sample_115min.pcap",
+    "timestamp": "2026-02-14T22:49:29.576610",
+    "summary": {
+        "total_ips": 17,
+        "threats_found": 2
+    },
+    "ip_analysis": [
+        {
+            "ip": "104.21.47.49",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Cloudflare, Inc."
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 61,
+                    "as_owner": "Cloudflare, Inc.",
+                    "country": "Unknown"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Cloudflare, Inc.",
+                    "os": null,
+                    "ports": [
+                        8080,
+                        2082,
+                        2083,
+                        2052,
+                        2053,
+                        2086,
+                        2087,
+                        2095,
+                        80,
+                        8880,
+                        8443,
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "239.255.255.250",
+            "threat_score": 0,
+            "summary": [],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 60,
+                    "as_owner": "Unknown",
+                    "country": "Unknown"
+                }
+            }
+        },
+        {
+            "ip": "224.0.0.22",
+            "threat_score": 0,
+            "summary": [],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 58,
+                    "as_owner": "Unknown",
+                    "country": "Unknown"
+                }
+            }
+        },
+        {
+            "ip": "172.217.162.138",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Google LLC"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 60,
+                    "as_owner": "Google LLC",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Google LLC",
+                    "os": null,
+                    "ports": [
+                        80,
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "224.0.0.1",
+            "threat_score": 0,
+            "summary": [],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 60,
+                    "as_owner": "Unknown",
+                    "country": "Unknown"
+                }
+            }
+        },
+        {
+            "ip": "57.144.197.32",
+            "threat_score": 5,
+            "summary": [
+                "VT Flagged Suspicious (1 engines)",
+                "Shodan Org: Meta Platforms Ireland Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 1,
+                    "harmless": 59,
+                    "as_owner": "Facebook, Inc.",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Meta Platforms Ireland Limited",
+                    "os": null,
+                    "ports": [
+                        80,
+                        443,
+                        5222
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "57.144.162.34",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Meta Platforms Ireland Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 59,
+                    "as_owner": "Facebook, Inc.",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Meta Platforms Ireland Limited",
+                    "os": null,
+                    "ports": [
+                        80,
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "18.97.36.63",
+            "threat_score": 0,
+            "summary": [],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 61,
+                    "as_owner": "Amazon.com, Inc.",
+                    "country": "US"
+                }
+            }
+        },
+        {
+            "ip": "224.0.0.251",
+            "threat_score": 0,
+            "summary": [],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 59,
+                    "as_owner": "Unknown",
+                    "country": "Unknown"
+                }
+            }
+        },
+        {
+            "ip": "224.0.0.252",
+            "threat_score": 0,
+            "summary": [],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 60,
+                    "as_owner": "Unknown",
+                    "country": "Unknown"
+                }
+            }
+        },
+        {
+            "ip": "1.1.1.1",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: APNIC and Cloudflare DNS Resolver project"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 63,
+                    "as_owner": "Cloudflare, Inc.",
+                    "country": "Unknown"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "APNIC and Cloudflare DNS Resolver project",
+                    "os": null,
+                    "ports": [
+                        161,
+                        2082,
+                        2083,
+                        2053,
+                        2086,
+                        2087,
+                        80,
+                        8880,
+                        8080,
+                        53,
+                        8443,
+                        443,
+                        2096
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "172.172.255.217",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Microsoft Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 61,
+                    "as_owner": "Microsoft Corporation",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Microsoft Limited",
+                    "os": null,
+                    "ports": [
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "57.144.196.141",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Meta Platforms Ireland Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 59,
+                    "as_owner": "Facebook, Inc.",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Meta Platforms Ireland Limited",
+                    "os": null,
+                    "ports": [
+                        80,
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "69.48.218.2",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Uber Technologies, Inc"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 60,
+                    "as_owner": "Cloudflare London, LLC",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Uber Technologies, Inc",
+                    "os": null,
+                    "ports": [
+                        2096,
+                        2082,
+                        2083,
+                        2052,
+                        2086,
+                        2087,
+                        2095,
+                        80,
+                        8880,
+                        8080,
+                        8443,
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "57.144.162.145",
+            "threat_score": 10,
+            "summary": [
+                "VT Flagged Malicious (1 engines)",
+                "Shodan Org: Meta Platforms Ireland Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 1,
+                    "suspicious": 0,
+                    "harmless": 60,
+                    "as_owner": "Facebook, Inc.",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Meta Platforms Ireland Limited",
+                    "os": null,
+                    "ports": [
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "135.234.174.40",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Microsoft Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 61,
+                    "as_owner": "Microsoft Corporation",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Microsoft Limited",
+                    "os": null,
+                    "ports": [
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        },
+        {
+            "ip": "57.144.196.145",
+            "threat_score": 0,
+            "summary": [
+                "Shodan Org: Meta Platforms Ireland Limited"
+            ],
+            "details": {
+                "virustotal": {
+                    "source": "VirusTotal",
+                    "malicious": 0,
+                    "suspicious": 0,
+                    "harmless": 0,
+                    "as_owner": "Facebook, Inc.",
+                    "country": "US"
+                },
+                "shodan": {
+                    "source": "Shodan",
+                    "org": "Meta Platforms Ireland Limited",
+                    "os": null,
+                    "ports": [
+                        443
+                    ],
+                    "vulns": []
+                }
+            }
+        }
+    ]
+}
