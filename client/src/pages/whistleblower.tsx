@@ -538,7 +538,6 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="KEYBOARD_CAT"
               alias="Keyboard Cat"
-              realName="Leo Coto Orozco"
               role="Infrastructure Contractor Owner — PRIMARY CONTROLLER"
               details={[
                 "Controls DSE exclusive rights for country",
@@ -566,6 +565,7 @@ export default function WhistleblowerPage() {
             <PersonCard
               name="DISTRACTED_BF"
               alias="Distracted Boyfriend"
+              realName="Barrett Scott Ryan"
               role="Registered Offender — Confirmed FDLE"
               details={[
                 "FDLE records: convicted — victim under 16",

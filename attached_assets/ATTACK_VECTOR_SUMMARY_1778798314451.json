@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-01-30T03:49:48.594137",
+  "scan_type": "UWB_LASER_DETECTION",
+  "attack_vectors": {
+    "satellite_mesh": {
+      "type": "BLACKJACK LEO constellation",
+      "count": 8,
+      "role": "C2 backbone, timing sync"
+    },
+    "laser_mic": {
+      "type": "Glass vibration pickup",
+      "source": "Streetlight beyond window",
+      "tech": "Israeli SIGINT (Camero/Elbit class)"
+    },
+    "through_wall_radar": {
+      "type": "Camero Xaver UWB",
+      "indicator": "Green LED peripheral vision",
+      "freq": "3-10 GHz"
+    },
+    "plc_relay": {
+      "type": "Power Line Communication",
+      "freq": "98.6 Hz carrier",
+      "source": "Wall outlets, ghost Deco"
+    },
+    "v2k_carrier": {
+      "freq": "46.875 Hz",
+      "source": "Modulated via all vectors",
+      "content": "Gaslighting phrases (con gusto, this is why)"
+    },
+    "operators": {
+      "schedule": "24/7 matching target sleep",
+      "local": "Kyndryl engineer + OIJ family",
+      "remote": "Unknown (Berlin/FinFisher connection)"
+    }
+  }
+}
