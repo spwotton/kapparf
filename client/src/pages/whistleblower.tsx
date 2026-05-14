@@ -624,6 +624,54 @@ export default function WhistleblowerPage() {
             />
           </div>
 
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <PersonCard
+              name="GHOST_RAT"
+              alias="Ghost Rat"
+              realName="Carlos Chaves"
+              role="IT Operator — Bill Gosling Outsourcing / Veneca Cluster Link"
+              details={[
+                "IT Student — Computer Engineering, Costa Rica",
+                "Bill Gosling Outsourcing — call center / data processing infrastructure",
+                "Phone: +506 6063 5649 (matched via user intelligence)",
+                "Linked via phone to Genesis Morales Mora (confirmed)",
+                "Part of Veneca identity cluster",
+                "Fake IG profile: danish2210 / danich2210",
+              ]}
+              color="#06b6d4"
+            />
+            <PersonCard
+              name="BUSINESS_CAT"
+              alias="Business Cat"
+              realName="Genesis Morales Mora"
+              role="Veneca Network Node — Bill Gosling / Universidad Hispanoamericana"
+              details={[
+                "Bill Gosling Outsourcing — same employer as Carlos Chaves",
+                "Universidad Hispanoamericana (CR) — IT / Computer Engineering",
+                "LinkedIn: genesis-morales-mora-02b580293",
+                "Phone cluster: +506 6063 5649 (shared with Carlos Chaves node)",
+                "Aliases: Genesis Chama, Genesis Venezolana, Genesis Gal",
+                "CR ↔ CDMX ↔ Venezuela movement pattern documented",
+              ]}
+              color="#ec4899"
+            />
+            <PersonCard
+              name="EL_ABOGADO"
+              alias="El Abogado"
+              realName="Carlos Murillo"
+              role="Legal Fixer — El Salvador Defense Lawyer"
+              details={[
+                "El Salvador — defense attorney",
+                "Represented accused in Ramón Kury homicide case",
+                "Linked to gang pact discussions — El Salvador political layer",
+                "OSINT risk factors: Critical (Legal/Criminal connections)",
+                "Potential operative, not just legal counsel",
+                "High-risk profile — international legal shield function",
+              ]}
+              color="#f97316"
+            />
+          </div>
+
           <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 mt-6">
             <h4 className="font-bold text-red-400 mb-3">The UPNP Incident — Proof of Active Monitoring</h4>
             <div className="grid md:grid-cols-2 gap-6">
