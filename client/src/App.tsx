@@ -45,6 +45,7 @@ import DroneGamePage from "@/pages/drone-game";
 import SpokeWheelPage from "@/pages/spoke-wheel";
 import OmegaGOSLNNPage from "@/pages/omega-gos-lnn";
 import FleetTrackerPage from "@/pages/fleet-tracker";
+import SeismicKappaPage from "@/pages/seismic-kappa";
 
 function Router() {
   return (
@@ -85,6 +86,7 @@ function Router() {
       <Route path="/spoke-wheel" component={SpokeWheelPage} />
       <Route path="/omega-gos" component={OmegaGOSLNNPage} />
       <Route path="/fleet" component={FleetTrackerPage} />
+      <Route path="/seismic" component={SeismicKappaPage} />
       <Route component={NotFound} />
     </Switch>
   );

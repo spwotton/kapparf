@@ -31,6 +31,7 @@ import {
   ChevronRight,
   Building2,
   RotateCw,
+  Waves,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -97,6 +98,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.correlations", fallback: "Correlations", url: "/correlations", icon: Link2 },
       { titleKey: "sidebar.hypervisor", fallback: "Hypervisor", url: "/hypervisor", icon: Brain },
       { titleKey: "sidebar.map", fallback: "Map", url: "/map", icon: MapIcon },
+      { titleKey: "sidebar.seismicKappa", fallback: "Seismic KAPPA", url: "/seismic", icon: Waves },
     ],
   },
   {

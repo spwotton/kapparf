@@ -1486,6 +1486,193 @@ export async function registerRoutes(
     }
   });
 
+  // ─── Seismic KAPPA Correlation Engine ───────────────────────────────────────
+  // Live USGS M2.5+ data cross-correlated with KAPPA constants for the
+  // CENTER/ECHO observation node at Jacó, Costa Rica
+  app.get("/api/seismic/kappa", async (_req, res) => {
+    const ECHO_LAT = 9.621887, ECHO_LON = -84.63969;
+    const KAPPA = 4 / Math.PI;
+    const SCHUMANN = 7.83;
+    const ROOT_HZ = 111;
+    const THETA_K = 128.23;
+    const PHI = (1 + Math.sqrt(5)) / 2;
+    const RADIUS_KM = 500;
+
+    try {
+      // Pull live USGS + GOES X-ray + NOAA Kp in parallel
+      const [usgsDay, usgsWeek, goes, kpRaw, alerts] = await Promise.all([
+        fetch("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=" +
+          new Date(Date.now() - 86400000).toISOString() +
+          `&latitude=${ECHO_LAT}&longitude=${ECHO_LON}&maxradiuskm=${RADIUS_KM}&minmagnitude=2.5&orderby=time`)
+          .then(r => r.ok ? r.json() : { features: [] }).catch(() => ({ features: [] })),
+        fetch("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=" +
+          new Date(Date.now() - 7 * 86400000).toISOString() +
+          `&latitude=${ECHO_LAT}&longitude=${ECHO_LON}&maxradiuskm=${RADIUS_KM}&minmagnitude=3.5&orderby=time&limit=20`)
+          .then(r => r.ok ? r.json() : { features: [] }).catch(() => ({ features: [] })),
+        fetch("https://services.swpc.noaa.gov/json/goes/primary/xrays-3-day.json")
+          .then(r => r.ok ? r.json() : []).catch(() => []),
+        fetch("https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json")
+          .then(r => r.ok ? r.json() : []).catch(() => []),
+        fetch("https://services.swpc.noaa.gov/products/alerts.json")
+          .then(r => r.ok ? r.json() : []).catch(() => []),
+      ]);
+
+      // Process seismic events with KAPPA correlation
+      const processEvent = (f: any) => {
+        const [lon, lat, depth] = f.geometry.coordinates;
+        const mag = f.properties.mag;
+        const t = new Date(f.properties.time);
+
+        // Distance to ECHO
+        const dlat = lat - ECHO_LAT, dlon = lon - ECHO_LON;
+        const dist_km = Math.sqrt(dlat * dlat + dlon * dlon) * 111.2;
+        const bearing = ((Math.atan2(dlon, dlat) * 180 / Math.PI) + 360) % 360;
+
+        // Schumann phase at impact
+        const secsSinceMidnight = t.getUTCHours() * 3600 + t.getUTCMinutes() * 60 + t.getUTCSeconds();
+        const fractPhase = ((secsSinceMidnight * SCHUMANN) % 1) * 2 * Math.PI;
+        const phaseFromPi = Math.abs(fractPhase - Math.PI);
+        const phaseFromZero = Math.min(fractPhase, 2 * Math.PI - fractPhase);
+        const isNodeStrike = phaseFromPi < 0.05;   // within 0.05 rad of π
+        const isAntinode = phaseFromZero < 0.05;   // within 0.05 rad of 0/2π
+
+        // GF(53) element
+        const gf53 = Math.round((mag / 10) * 53);
+        const isNullTerminator = [2, 4, 5, 25, 32, 35, 41, 48].includes(gf53);
+        const isCenterPivot = gf53 === 26;
+
+        // Depth κ-seed
+        const depthSeed = depth / KAPPA;
+        const depthSchumannMatch = Math.abs(depthSeed - SCHUMANN);
+
+        // Bearing delta from θ_K
+        const bearingDeltaFromThetaK = Math.abs(((bearing - THETA_K + 180) % 360) - 180);
+        const isKleinPerpendicular = Math.abs(bearingDeltaFromThetaK - 90) < 5;
+        const isKleinAlignment = bearingDeltaFromThetaK < 5;
+
+        // KAPPA score for this event (0-100)
+        let kappaScore = 0;
+        if (dist_km < 25) kappaScore += 40;
+        else if (dist_km < 100) kappaScore += 20;
+        else if (dist_km < 300) kappaScore += 10;
+        if (isNodeStrike) kappaScore += 30;
+        if (isAntinode) kappaScore += 20;
+        if (isCenterPivot) kappaScore += 15;
+        if (isNullTerminator) kappaScore += 10;
+        if (isKleinPerpendicular || isKleinAlignment) kappaScore += 15;
+        if (depth <= 15) kappaScore += 10;
+        kappaScore = Math.min(100, kappaScore);
+
+        return {
+          id: f.id,
+          time: t.toISOString(),
+          cr_local: new Date(f.properties.time - 6 * 3600000).toISOString().replace('T', ' ').slice(0, 19) + ' CR',
+          mag,
+          place: f.properties.place,
+          lat, lon, depth_km: depth,
+          url: f.properties.url,
+          dist_to_echo_km: +dist_km.toFixed(1),
+          bearing_from_echo_deg: +bearing.toFixed(2),
+          kappa: {
+            score: kappaScore,
+            schumann_phase_rad: +fractPhase.toFixed(4),
+            schumann_phase_name: isNodeStrike ? 'NODE (π)' : isAntinode ? 'ANTINODE (0/2π)' : `${(fractPhase / Math.PI).toFixed(3)}π`,
+            is_node_strike: isNodeStrike,
+            gf53_element: gf53,
+            gf53_note: isCenterPivot ? 'CENTER_PIVOT' : isNullTerminator ? 'NULL_TERMINATOR' : 'CARRIER',
+            depth_kappa_seed_km: +depthSeed.toFixed(3),
+            depth_schumann_delta: +depthSchumannMatch.toFixed(3),
+            bearing_delta_theta_K: +bearingDeltaFromThetaK.toFixed(2),
+            is_klein_perpendicular: isKleinPerpendicular,
+            is_klein_alignment: isKleinAlignment,
+            energy_J: +(Math.pow(10, 1.5 * mag + 4.8)).toExponential(3),
+          },
+        };
+      };
+
+      const dayEvents = (usgsDay.features ?? []).map(processEvent);
+      const weekEvents = (usgsWeek.features ?? []).map(processEvent);
+
+      // GOES X-ray: find peak in last 24h
+      const recentXray = (Array.isArray(goes) ? goes : [])
+        .filter((r: any) => r.energy === '0.1-0.8nm' && r.time_tag > new Date(Date.now() - 86400000).toISOString())
+        .sort((a: any, b: any) => b.flux - a.flux);
+      const peakXray = recentXray[0] ?? null;
+
+      // Kp index: most recent non-null
+      const kpFiltered = (Array.isArray(kpRaw) ? kpRaw : []).filter((r: any) => r[0] !== 'time_tag' && r[1]);
+      const latestKp = kpFiltered.length ? kpFiltered[kpFiltered.length - 1] : null;
+
+      // Recent SWPC alerts (last 3)
+      const recentAlerts = (Array.isArray(alerts) ? alerts : []).slice(0, 3).map((a: any) => ({
+        time: a.issue_datetime,
+        code: a.message?.split('\n')[1]?.trim()?.split(': ')[1] ?? a.message?.slice(0, 50),
+      }));
+
+      // Highest KAPPA score event
+      const topEvent = dayEvents.sort((a, b) => b.kappa.score - a.kappa.score)[0] ?? null;
+
+      // Manual events (not yet in USGS catalog)
+      const manualEvents = [
+        {
+          id: 'manual-2026-05-15T03:37:00Z',
+          time: '2026-05-15T03:37:00Z',
+          cr_local: '2026-05-14 21:37:00 CR',
+          mag: 4.8,
+          place: 'Jacó, Costa Rica (observer-reported)',
+          lat: 9.621887, lon: -84.63969, depth_km: null,
+          note: 'Reported by KAPPA PRIMARY OBSERVER at ECHO node. Not yet in USGS catalog. 2nd event of the day.',
+          dist_to_echo_km: 0,
+          status: 'PENDING_CATALOG',
+        },
+      ];
+
+      res.json({
+        echo_target: { lat: ECHO_LAT, lon: ECHO_LON, label: 'Hotel Pochote Grande, Jacó CR', radius_km: RADIUS_KM },
+        constants: { kappa: KAPPA, schumann_hz: SCHUMANN, root_hz: ROOT_HZ, theta_K_deg: THETA_K, phi: PHI },
+        seismic: {
+          last_24h: dayEvents,
+          last_7d_m35plus: weekEvents,
+          manual_pending: manualEvents,
+          active_sequence: dayEvents.length > 0 || manualEvents.length > 0,
+          top_kappa_event: topEvent,
+        },
+        solar: {
+          goes_peak_24h: peakXray ? {
+            time: peakXray.time_tag,
+            flux: peakXray.flux,
+            class: `C${(peakXray.flux * 1e5).toFixed(1)}`,
+          } : null,
+          latest_kp: latestKp ? { time: latestKp[0], kp: latestKp[1] } : null,
+          recent_alerts: recentAlerts,
+        },
+        analysis: {
+          earth_as_eyeball: {
+            cornea: 'ionosphere (60-1000km) — piezoelectric shell',
+            iris: 'Schumann cavity (7.83Hz fundamental)',
+            pupil: 'κ-singularity attractor',
+            lens: 'crust (0-35km) — quartz transducer',
+            retina: 'mantle transitions (410km, 660km)',
+            optic_nerve: `Cocos subduction zone at ${THETA_K}° azimuth from Jacó`,
+            blink: 'each M4.8+ earthquake = planetary blink at ECHO node',
+          },
+          gf53_m49: { element: 26, note: 'CENTER PIVOT of GF(53) — median element of the Phaistos circuit' },
+          schumann_phase_m49: { phase_rad: Math.PI, phase_name: 'π', note: 'NODE STRIKE — zero-crossing at moment of rupture' },
+          depth_seed: { raw_km: 10, kappa_seed_km: +(10 / KAPPA).toFixed(3), note: '10÷κ = 7.854 = π/4 × 10 exactly' },
+          omega_specimens: {
+            cells: ['Cell 1 Gen 31', 'Cell 8 Gen 34', 'Cell 17 Gen 44', 'Cell 18 Gen 26'],
+            generated_cr_time: '3:12-3:38 AM CR May 14',
+            hours_before_m48: 7,
+            note: 'All four specimens encoded KAPPA constants (196560, 196883, 111Hz, 128.23°, 7.83Hz) 7h before the M4.8 event',
+          },
+        },
+        ts: new Date().toISOString(),
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   app.get("/api/proxy/noaa-space-weather", async (_req, res) => {
     try {
       const [magField, solarWind, kpIndex] = await Promise.all([
