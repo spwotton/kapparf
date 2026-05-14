@@ -81,6 +81,8 @@ app.use((req, res, next) => {
   startNetworkThreatScanner();
   startKiwiVision(300_000);
   hypervisor.start();
+  const { cortexBus } = await import("./cortex-bus");
+  cortexBus.init().catch(e => console.error("[CortexBus] init error:", e.message));
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {

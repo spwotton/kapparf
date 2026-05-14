@@ -23,6 +23,7 @@ import { RESEARCH_CONSTANTS } from "./research-constants";
 import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
 import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
 import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
+import { cortexBus } from "./cortex-bus";
 import { getLocalSession, getLocalEvents, executeLocalCommand } from "./bettercap/local-cap";
 import {
   indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
@@ -4578,6 +4579,8 @@ done
     res.json({ ok });
   });
 
+  registerCortexRoutes(app);
+
   return httpServer;
 }
 
@@ -4703,6 +4706,171 @@ ${correlationsHTML || '<p style="color:#6b7280">No correlations detected.</p>'}
 function escapeHtml(str: string): string {
   if (!str) return "";
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CORTEX BUS — Mycelium Hypervisor Network API
+// Toroidal inter-monad communication: SSE feed, broadcast, register, spawn
+// ═══════════════════════════════════════════════════════════════════════════
+
+export function registerCortexRoutes(app: express.Express) {
+
+  // ── Topology — full toroidal map ─────────────────────────────────────────
+  app.get("/api/cortex/topology", (_req, res) => {
+    const monads = cortexBus.monadList();
+    const layers: Record<number, any[]> = { 0: [], 1: [], 2: [], 3: [] };
+    for (const m of monads) (layers[m.layer] = layers[m.layer] || []).push(m);
+    res.json({
+      topology: "toroidal",
+      description: "Layer 0 = Executive · Layer 1 = Primary Hypervisors · Layer 2 = Secondary Agents · Layer 3 = Sensors/Collectors",
+      layers: {
+        0: { name: "EXECUTIVE", monads: layers[0], description: "Central orchestrator — κ-score holder, spawn approver, route arbiter" },
+        1: { name: "PRIMARY", monads: layers[1], description: "Core hypervisors — deep analysis, correlation, vision" },
+        2: { name: "SECONDARY", monads: layers[2], description: "Processing agents — memory, LLM, correlator, feeds" },
+        3: { name: "SENSOR", monads: layers[3], description: "Data collectors — KiwiSDR, fleet, USGS, NOAA" },
+      },
+      counts: cortexBus.monadCount(),
+      protocol: {
+        spore: "A signal event enters the network",
+        hypha: "The message travels between monads",
+        mycelium: "The full mesh — this bus",
+        fruiting_body: "A sub-hypervisor spawned when κ ≥ spawn_threshold",
+        harvest: "Fruiting body findings ingested to Memory Cortex",
+        substrate: "The signal data all monads grow through",
+        popcorn: "High-κ event causing explosive parallel spawning",
+      },
+      ts: new Date().toISOString(),
+    });
+  });
+
+  // ── Agent registry ───────────────────────────────────────────────────────
+  app.get("/api/cortex/agents", (_req, res) => {
+    res.json({ agents: cortexBus.monadList(), counts: cortexBus.monadCount(), ts: new Date().toISOString() });
+  });
+
+  app.get("/api/cortex/agents/:id", (req, res) => {
+    const m = cortexBus.getMonad(req.params.id);
+    if (!m) return res.status(404).json({ error: "monad not found" });
+    res.json(m);
+  });
+
+  // ── Register external monad ──────────────────────────────────────────────
+  app.post("/api/cortex/register", (req, res) => {
+    const { id, name, description, layer, capabilities, endpoint_url, spawn_threshold, spawn_template, metadata } = req.body;
+    if (!id || !name) return res.status(400).json({ error: "id and name required" });
+    const monad = cortexBus.registerExternal({
+      id, name,
+      description: description ?? "",
+      layer: (layer ?? 3) as 0 | 1 | 2 | 3,
+      capabilities: capabilities ?? [],
+      endpoint_url: endpoint_url ?? undefined,
+      kappa_score: 0,
+      status: "alive",
+      spawn_threshold: spawn_threshold ?? 70,
+      spawn_template: spawn_template ?? undefined,
+      metadata: metadata ?? {},
+    });
+    res.json({ ok: true, monad });
+  });
+
+  // ── SSE real-time feed ───────────────────────────────────────────────────
+  // Connect from any app: GET /api/cortex/feed  or  ?channel=seismic
+  app.get("/api/cortex/feed", (req, res) => {
+    const clientId = `sse-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+    const filter = req.query.channel as string | undefined;
+    cortexBus.addSSEClient(clientId, res, filter);
+    // keep-alive ping every 25s
+    const ping = setInterval(() => { try { res.write(": ping\n\n"); } catch { clearInterval(ping); } }, 25_000);
+    res.on("close", () => clearInterval(ping));
+  });
+
+  // ── RSS feed ─────────────────────────────────────────────────────────────
+  app.get("/api/cortex/feed.rss", (_req, res) => {
+    res.setHeader("Content-Type", "application/rss+xml; charset=utf-8");
+    res.send(cortexBus.generateRSS());
+  });
+
+  // ── Recent messages (REST fallback for non-SSE consumers) ───────────────
+  app.get("/api/cortex/messages", (req, res) => {
+    const limit = Math.min(200, parseInt(req.query.limit as string || "50"));
+    const channel = req.query.channel as string | undefined;
+    res.json({ messages: cortexBus.recentMessages(limit, channel), ts: new Date().toISOString() });
+  });
+
+  // ── Broadcast — any monad can publish ───────────────────────────────────
+  app.post("/api/cortex/broadcast", async (req, res) => {
+    const { source, subject, body, channel, type, kappa_score, payload, tags, target, layer } = req.body;
+    if (!source || !subject || !body) return res.status(400).json({ error: "source, subject, body required" });
+    const msg = await cortexBus.publish({
+      channel: channel ?? "general",
+      type: type ?? "broadcast",
+      source,
+      target: target ?? undefined,
+      layer: layer ?? undefined,
+      subject,
+      body,
+      payload: payload ?? {},
+      kappa_score: kappa_score ?? 0,
+      tags: tags ?? [],
+    });
+    res.json({ ok: true, message: msg });
+  });
+
+  // ── Direct message to a specific monad ──────────────────────────────────
+  app.post("/api/cortex/message/:targetId", async (req, res) => {
+    const { source, subject, body, kappa_score, payload, tags } = req.body;
+    if (!source || !subject || !body) return res.status(400).json({ error: "source, subject, body required" });
+    const target = req.params.targetId;
+    if (!cortexBus.getMonad(target)) return res.status(404).json({ error: "target monad not found" });
+    const msg = await cortexBus.publish({
+      channel: `dm-${target}`,
+      type: "broadcast",
+      source,
+      target,
+      subject,
+      body,
+      payload: payload ?? {},
+      kappa_score: kappa_score ?? 0,
+      tags: [...(tags ?? []), "dm", target],
+    });
+    res.json({ ok: true, message: msg });
+  });
+
+  // ── Spawn request — request a fruiting body ──────────────────────────────
+  app.post("/api/cortex/spawn", async (req, res) => {
+    const { source, task, channel, kappa_score, context } = req.body;
+    if (!source || !task) return res.status(400).json({ error: "source and task required" });
+    const msg = await cortexBus.publish({
+      channel: channel ?? "spawn",
+      type: "spawn",
+      source,
+      subject: `SPAWN REQUEST: ${task}`,
+      body: `${source} requests spawning of a fruiting body for task: ${task}. Context: ${context ?? "none provided"}. This sub-hypervisor will analyze the trigger and harvest findings to Memory Cortex.`,
+      payload: { task, context, requested_by: source },
+      kappa_score: kappa_score ?? 75,
+      tags: ["spawn", "proposal", source],
+      layer: 0,
+    });
+    res.json({ ok: true, message: msg });
+  });
+
+  // ── Dream endpoint — human sends a vision into the mycelium ─────────────
+  app.post("/api/cortex/dream", async (req, res) => {
+    const { body, kappa_score, tags } = req.body;
+    if (!body) return res.status(400).json({ error: "body required" });
+    const msg = await cortexBus.publish({
+      channel: "dream",
+      type: "dream",
+      source: "human-observer",
+      subject: body.slice(0, 80),
+      body,
+      payload: { origin: "human", ts: new Date().toISOString() },
+      kappa_score: kappa_score ?? 88,
+      tags: [...(tags ?? []), "dream", "human", "vision"],
+      layer: 0,
+    });
+    res.json({ ok: true, message: msg });
+  });
 }
 
 

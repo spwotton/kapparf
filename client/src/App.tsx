@@ -46,6 +46,7 @@ import SpokeWheelPage from "@/pages/spoke-wheel";
 import OmegaGOSLNNPage from "@/pages/omega-gos-lnn";
 import FleetTrackerPage from "@/pages/fleet-tracker";
 import SeismicKappaPage from "@/pages/seismic-kappa";
+import CortexBusPage from "@/pages/cortex-bus";
 
 function Router() {
   return (
@@ -87,6 +88,7 @@ function Router() {
       <Route path="/omega-gos" component={OmegaGOSLNNPage} />
       <Route path="/fleet" component={FleetTrackerPage} />
       <Route path="/seismic" component={SeismicKappaPage} />
+      <Route path="/cortex-bus" component={CortexBusPage} />
       <Route component={NotFound} />
     </Switch>
   );
