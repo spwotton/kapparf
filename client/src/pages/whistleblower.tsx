@@ -2051,11 +2051,11 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Salsa Cat</span>
-                <span className="text-xs text-muted-foreground/60">(<RedactedName name="Lucia Soto" />)</span>
+                <span className="text-xs text-muted-foreground/60 font-mono select-none">(<span className="text-amber-300">L</span><span className="text-amber-900/70">█████</span> <span className="text-amber-300">S</span><span className="text-amber-900/70">███</span>)</span>
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• CDMX trip: wedding for Carolina Soto</li>
-                <li>• Partner: Deal Frog (<RedactedName name="Leo Orozco" full />) — controller/dealer</li>
+                <li>• Partner: Deal Frog (<span className="font-mono select-none text-amber-300">L</span><span className="font-mono select-none text-amber-900/70">██</span> <span className="font-mono select-none text-amber-300">O</span><span className="font-mono select-none text-amber-900/70">█████</span>) — controller/dealer</li>
                 <li>• Friends with Ghost Rat (danish2210/danich2210) fake IG profile</li>
                 <li>• Soto family network spans CR ↔ CDMX</li>
               </ul>
@@ -2065,7 +2065,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Deal Frog</span>
-                <span className="text-xs text-muted-foreground/60">(<RedactedName name="Leo Orozco" full />)</span>
+                <span className="text-xs text-muted-foreground/60 font-mono select-none">(<span className="text-amber-300">L</span><span className="text-amber-900/70">██</span> <span className="text-amber-300">O</span><span className="text-amber-900/70">█████</span>)</span>
               </div>
               <ul className="text-xs text-muted-foreground/80 space-y-1 ml-5">
                 <li>• Controller/dealer role</li>
