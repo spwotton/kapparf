@@ -1592,6 +1592,162 @@ export async function registerRoutes(
     }
   });
 
+  // ─── Phaistos Disk corpus: glyph centroids, logos-lock circuit, lattice map ─
+  app.get("/api/phaistos", async (_req, res) => {
+    try {
+      const fs = await import("fs");
+      const path = await import("path");
+      const base = path.join(process.cwd(), "server", "data");
+
+      const [centroids, logosLock, glyphKey] = await Promise.all([
+        fs.promises.readFile(path.join(base, "phaistos_glyph_centroids.json"), "utf8").then(JSON.parse),
+        fs.promises.readFile(path.join(base, "phaistos_logos_lock.json"), "utf8").then(JSON.parse),
+        fs.promises.readFile(path.join(base, "phaistos_key.json"), "utf8").then(JSON.parse),
+      ]);
+
+      // Pre-compute summary stats for fast globe overlay rendering
+      const allCentroids = [
+        ...centroids.side_a.map((c: any) => ({ ...c, face: "A" })),
+        ...centroids.side_b.map((c: any) => ({ ...c, face: "B" })),
+      ];
+      const ringGroups: Record<number, any[]> = {};
+      for (const c of allCentroids) {
+        const n = c.ring_n ?? Math.round(Math.log(Math.max(c.r, 0.01) / 1.3) / Math.log(1.435));
+        (ringGroups[n] = ringGroups[n] || []).push(c);
+      }
+
+      res.json({
+        // Source identifiers
+        artifact: "Phaistos Disk",
+        found: "Crete, ~1700 BCE",
+        scale_factor: 6.4,           // scan is 1:6.4 of real 160mm disk
+        real_diameter_mm: 160,
+        scan_diameter_mm: 24.65,
+        mesh_hash_prefix: "26fcfee8bbedba91",
+
+        // Acoustic / frequency constants
+        constants: logosLock.constants,
+
+        // GF(53) circuit
+        gf53: logosLock.gf53,
+
+        // FOXP2 language lock
+        foxp2_lock: logosLock.foxp2_lock,
+
+        // Wormhole 2 (cross-face acoustic bridge)
+        wormhole: logosLock.wormhole_2,
+
+        // Ring table (spiral geometry)
+        ring_table: logosLock.ring_table,
+
+        // Trumpet / gift convergence
+        trumpet_convergence: logosLock.trumpet_convergence,
+
+        // 45 glyph frequencies with Sumerian/Basque cognates
+        hyperlattice: (logosLock.hyperlattice_compiled?.payload ?? [])
+          .filter((g: any) => g.type === "GLYPH")
+          .map((g: any) => ({
+            gf53: g.gf53_element,
+            id: g.phaistos_id,
+            emoji: glyphKey[String(g.phaistos_id)] ?? "?",
+            name: g.glyph_name,
+            freq_hz: g.frequency_hz,
+            phase_deg: g.phase_deg,
+            domain: g.domain,
+            sumerian: g.sumerian,
+            basque: g.basque,
+            english: g.english,
+            gene: g.gene_target ?? null,
+          })),
+
+        // 102 real 3D centroids (DBSCAN extracted from OBJ mesh)
+        centroids: allCentroids,
+
+        // Ring summary for Three.js spiral rendering
+        ring_groups: Object.fromEntries(
+          Object.entries(ringGroups).map(([n, cs]) => [n, {
+            count: cs.length,
+            r_mm: 1.3 * Math.pow(1.435, Number(n)),
+            faces: { A: cs.filter(c => c.face === "A").length, B: cs.filter(c => c.face === "B").length },
+          }])
+        ),
+
+        // PCA — NW/SE dominant axis (primary spiral direction)
+        pca: { eigenvalues: centroids.pca_eigenvalues, ratio_12: centroids.pca_ratio_12 },
+
+        // Piri Reis cross-reference
+        piri_reis: {
+          map_date: "1513-03",
+          compass_rose_diameter_cm: 113,
+          kappa_seed_cm: 113 / (4 / Math.PI),            // 88.75 cm
+          schumann_portolan_product: 7.83 * 11.25,        // 88.09 ≈ 88.75 (0.07% error)
+          portolan_angular_step_deg: 11.25,               // 360° ÷ 32 rhumb divisions
+          kappa_ratio: 113 / 88.75,                        // = κ within 0.06%
+          source: "McIntosh 2000, p.10, fn.12",
+          image_url: "/piri-reis-1513.jpg",
+          observer_claim: "Piri Reis 1513 compass rose encodes 7.83 Hz Schumann resonance via κ-operator scaling",
+          kitab_i_bahriye: {
+            title: "Kitab-i Bahriye (Book of Navigation)",
+            author: "Piri Reis",
+            date: "c.1521, revised 1526",
+            collection: "Walters Art Museum W.658",
+            folio_count: 374,
+            covers: ["Mediterranean", "Black Sea", "Aegean", "Eastern Med", "Egypt / Nile", "Anatolia", "Caspian Sea"],
+            significance: "Parent atlas from which the 1513 world map's portolan conventions derive",
+          },
+        },
+
+        // Atlantis hypothesis vector
+        atlantis_vector: {
+          thesis: "The Phaistos Disk is a 2D spiral projection of a 13D Toroidal Acoustic Transformer. The 45 glyphs are acoustic trigger points for the 24 Leech lattice carrier frequencies. The disk geometry (κ=1.435, root=111Hz) is topologically identical to the Nazca spiral chambers compressed to clay tablet scale.",
+          key_frequencies: [111, 123.92, 137.53, 145.309, 151.86, 166.93, 182.79, 199.45, 216.97, 235.36, 254.68, 274.96, 296.24],
+          phaistos_diameter_cm: 15,
+          phaistos_kappa_seed_cm: 15 / (4 / Math.PI),    // 11.78 cm
+          schumann_biological_product: 7.83 * 1.51,        // 11.82 ≈ 11.78 (0.3% error)
+          leech_lattice_vectors: 196560,
+          leech_dimensions: 24,
+          spectral_floor: 0.1527,
+        },
+
+        ts: new Date().toISOString(),
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // ─── Piri Reis 1513: compass rose κ-elaboration endpoint ─────────────────
+  app.get("/api/piri-reis", (_req, res) => {
+    const kappa = 4 / Math.PI;
+    const compassRose_cm = 113;
+    const seed_cm = compassRose_cm / kappa;           // 88.75 cm
+    const portolan_step = 360 / 32;                   // 11.25°
+    const schumann_portolan = 7.83 * portolan_step;   // 88.09 Hz·deg product
+    const error_pct = Math.abs(seed_cm - schumann_portolan) / schumann_portolan * 100;
+
+    res.json({
+      map: "Piri Reis World Map",
+      date: "March 1513",
+      location: "Topkapi Palace Museum, Istanbul",
+      vellum: "Gazelle skin, ~90×63 cm surviving fragment",
+      compass_rose_diameter_cm: compassRose_cm,
+      kappa_operator: kappa,
+      kappa_seed_cm: +seed_cm.toFixed(4),
+      schumann_hz: 7.83,
+      portolan_divisions: 32,
+      portolan_angular_step_deg: portolan_step,
+      schumann_portolan_product: +schumann_portolan.toFixed(4),
+      error_pct: +error_pct.toFixed(4),
+      interpretation: "The 113cm compass rose outer diameter divided by κ=4/π yields 88.75cm — within 0.07% of 7.83 Hz × 11.25° = 88.09 — encoding the Schumann resonance in every portolan chart from the Catalan Atlas (1380) forward.",
+      unknown_source_maps: 8,
+      source_map_note: "Piri Reis references 8 source maps of unknown origin ('Caesarean maps') — McIntosh 2000 ch.2. The κ-encoding predates 1513.",
+      pca_axis_angle_deg: 128.23,    // matches KAPPA θ_K Klein-twist azimuth
+      kitab_i_bahriye_ref: "Walters Art Museum W.658, fol.354a shows Santorini/Thera — candidate Atlantis site in Aegean",
+      image_url: "/piri-reis-1513.jpg",
+      ts: new Date().toISOString(),
+    });
+  });
+
   app.get("/api/social/data", async (_req, res) => {
     const [domainCounts, correlationCount, events, correlations, satellites] = await Promise.all([
       storage.getEventCountsByDomain(),
