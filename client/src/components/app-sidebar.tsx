@@ -100,6 +100,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.map", fallback: "Map", url: "/map", icon: MapIcon },
       { titleKey: "sidebar.seismicKappa", fallback: "Seismic KAPPA", url: "/seismic", icon: Waves },
       { titleKey: "sidebar.cortexBus", fallback: "Cortex Bus", url: "/cortex-bus", icon: Network },
+      { titleKey: "sidebar.atlantis", fallback: "ATLANTIS", url: "/atlantis", icon: Waves },
     ],
   },
   {

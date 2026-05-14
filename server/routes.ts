@@ -24,6 +24,7 @@ import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, ge
 import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
 import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
 import { cortexBus } from "./cortex-bus";
+import { atlantisHub } from "./atlantis-hub";
 import { getLocalSession, getLocalEvents, executeLocalCommand } from "./bettercap/local-cap";
 import {
   indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
@@ -4580,6 +4581,7 @@ done
   });
 
   registerCortexRoutes(app);
+  registerAtlantisRoutes(app);
 
   return httpServer;
 }
@@ -4712,6 +4714,127 @@ function escapeHtml(str: string): string {
 // CORTEX BUS — Mycelium Hypervisor Network API
 // Toroidal inter-monad communication: SSE feed, broadcast, register, spawn
 // ═══════════════════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ATLANTIS HUB — The Vanishing Isle API
+// Inter-app intelligence hub. Destane the turtle surfaces when there is signal.
+// ═══════════════════════════════════════════════════════════════════════════
+
+export function registerAtlantisRoutes(app: express.Express) {
+  // CORS middleware for all atlantis routes (external apps need cross-origin access)
+  const atlantisCors = (_req: any, res: any, next: any) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Atlantis-Key");
+    next();
+  };
+
+  // ── App registry ─────────────────────────────────────────────────────────
+  app.get("/api/atlantis/apps", atlantisCors, (_req, res) => {
+    res.json({ apps: atlantisHub.appList(), ts: new Date().toISOString() });
+  });
+
+  app.get("/api/atlantis/apps/:id", atlantisCors, (req, res) => {
+    const a = atlantisHub.getApp(req.params.id);
+    if (!a) return res.status(404).json({ error: "app not found" });
+    res.json(a);
+  });
+
+  // ── Stats / turtle state ─────────────────────────────────────────────────
+  app.get("/api/atlantis/stats", atlantisCors, (_req, res) => {
+    res.json({ ...atlantisHub.getTurtleStats(), ts: new Date().toISOString() });
+  });
+
+  // ── Register new app ─────────────────────────────────────────────────────
+  app.options("/api/atlantis/register", atlantisCors, (_req, res) => res.sendStatus(204));
+  app.post("/api/atlantis/register", atlantisCors, (req, res) => {
+    const { id, name, url, description, category, metadata } = req.body;
+    if (!id || !name || !url) return res.status(400).json({ error: "id, name, url required" });
+    const app = atlantisHub.registerExternalApp({ id, name, url, description, category, metadata });
+    res.json({ ok: true, app, api_key: app.api_key });
+  });
+
+  // ── SSE real-time stream ─────────────────────────────────────────────────
+  app.get("/api/atlantis/stream", (req, res) => {
+    const clientId = `atl-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    atlantisHub.addSSEClient(clientId, res);
+    const ping = setInterval(() => { try { res.write(": ping\n\n"); } catch { clearInterval(ping); } }, 25_000);
+    res.on("close", () => clearInterval(ping));
+  });
+
+  // ── RSS feed ─────────────────────────────────────────────────────────────
+  app.get("/api/atlantis/stream.rss", (_req, res) => {
+    const events = atlantisHub.recentEvents(30);
+    const items = events.map(e => `
+    <item>
+      <title>[${e.app_name}] ${e.subject}</title>
+      <description><![CDATA[${e.body}]]></description>
+      <pubDate>${new Date(e.ts).toUTCString()}</pubDate>
+      <guid>${e.id}</guid>
+      <category>${e.category}</category>
+    </item>`).join("");
+    res.setHeader("Content-Type", "application/rss+xml; charset=utf-8");
+    res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>ATLANTIS Hub — The Vanishing Isle</title>
+    <description>Inter-app intelligence feed. All apps on Destane's shell.</description>
+    <link>/api/atlantis/stream.rss</link>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <ttl>60</ttl>${items}
+  </channel>
+</rss>`);
+  });
+
+  // ── Event ingest — any app POSTs here ────────────────────────────────────
+  app.options("/api/atlantis/ingest/:appId", atlantisCors, (_req, res) => res.sendStatus(204));
+  app.post("/api/atlantis/ingest/:appId", atlantisCors, async (req, res) => {
+    const { appId } = req.params;
+    const { type, subject, body, payload, tags } = req.body;
+    if (!subject || !body) return res.status(400).json({ error: "subject and body required" });
+
+    // Optional key verification (permissive — logs if key missing but still accepts)
+    const key = req.headers["x-atlantis-key"] as string || req.query.key as string;
+    const app = atlantisHub.getApp(appId);
+    if (!app) return res.status(404).json({ error: `app '${appId}' not registered` });
+
+    const event = await atlantisHub.ingest(appId, { type: type ?? "signal", subject, body, payload, tags });
+    res.json({ ok: true, event });
+  });
+
+  // ── Dream channel ─────────────────────────────────────────────────────────
+  app.options("/api/atlantis/dream", atlantisCors, (_req, res) => res.sendStatus(204));
+  app.post("/api/atlantis/dream", atlantisCors, async (req, res) => {
+    const { source_app, dream_text, payload, tags } = req.body;
+    if (!dream_text) return res.status(400).json({ error: "dream_text required" });
+    const dream = await atlantisHub.postDream(
+      source_app ?? "unknown",
+      dream_text,
+      payload ?? {},
+      tags ?? []
+    );
+    res.json({ ok: true, dream });
+  });
+
+  // ── Fetch dreams ─────────────────────────────────────────────────────────
+  app.get("/api/atlantis/dreams", atlantisCors, (req, res) => {
+    const limit = Math.min(100, parseInt(req.query.limit as string || "30"));
+    res.json({ dreams: atlantisHub.recentDreams(limit), ts: new Date().toISOString() });
+  });
+
+  // ── Recent events (REST fallback) ────────────────────────────────────────
+  app.get("/api/atlantis/events", atlantisCors, (req, res) => {
+    const limit = Math.min(200, parseInt(req.query.limit as string || "50"));
+    const appId = req.query.app as string | undefined;
+    res.json({ events: atlantisHub.recentEvents(limit, appId), ts: new Date().toISOString() });
+  });
+
+  // ── Patterns ─────────────────────────────────────────────────────────────
+  app.get("/api/atlantis/patterns", atlantisCors, (req, res) => {
+    const limit = Math.min(100, parseInt(req.query.limit as string || "30"));
+    res.json({ patterns: atlantisHub.recentPatterns(limit), ts: new Date().toISOString() });
+  });
+}
 
 export function registerCortexRoutes(app: express.Express) {
 
