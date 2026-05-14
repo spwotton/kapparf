@@ -25,6 +25,7 @@ import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "
 import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
 import { cortexBus } from "./cortex-bus";
 import { atlantisHub } from "./atlantis-hub";
+import { GOS_CONSTANTS, ATLANTIS_CANDIDATES, RESEARCH_CORPUS } from "./atlantis-probe";
 import { getLocalSession, getLocalEvents, executeLocalCommand } from "./bettercap/local-cap";
 import {
   indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
@@ -4833,6 +4834,31 @@ export function registerAtlantisRoutes(app: express.Express) {
   app.get("/api/atlantis/patterns", atlantisCors, (req, res) => {
     const limit = Math.min(100, parseInt(req.query.limit as string || "30"));
     res.json({ patterns: atlantisHub.recentPatterns(limit), ts: new Date().toISOString() });
+  });
+
+  // ── GOS Universal Constants ───────────────────────────────────────────────
+  app.get("/api/atlantis/gos", atlantisCors, (_req, res) => {
+    res.json({
+      constants: GOS_CONSTANTS,
+      node: { lat: 9.621887, lon: -84.63969, name: "ECHO Node #1090 — Pochote Grande, Jacó CR" },
+      ts: new Date().toISOString(),
+    });
+  });
+
+  // ── Atlantis Candidate Locations ─────────────────────────────────────────
+  app.get("/api/atlantis/candidates", atlantisCors, (_req, res) => {
+    res.json({ candidates: ATLANTIS_CANDIDATES, ts: new Date().toISOString() });
+  });
+
+  // ── Research Corpus ───────────────────────────────────────────────────────
+  app.get("/api/atlantis/corpus", atlantisCors, (req, res) => {
+    const q = (req.query.q as string || "").toLowerCase();
+    const cat = req.query.category as string | undefined;
+    let docs = RESEARCH_CORPUS;
+    if (q) docs = docs.filter(d => d.title.toLowerCase().includes(q) || d.tags.some(t => t.includes(q)));
+    if (cat) docs = docs.filter(d => d.category === cat);
+    const categories = [...new Set(RESEARCH_CORPUS.map(d => d.category))];
+    res.json({ docs, total: docs.length, categories, ts: new Date().toISOString() });
   });
 }
 

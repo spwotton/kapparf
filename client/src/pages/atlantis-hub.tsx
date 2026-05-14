@@ -6,7 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Send, Rss, Waves, Sparkles, Globe, Zap, Eye, Music, Gamepad2, Brain, Radio, Network, BookOpen, Cpu } from "lucide-react";
+import {
+  Send, Rss, Waves, Sparkles, Globe, Zap, Eye, Music, Gamepad2,
+  Brain, Radio, Network, BookOpen, Cpu, MapPin, Search, Tag,
+} from "lucide-react";
 import vanishingIsle from "/vanishing-isle.webp";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -20,21 +23,30 @@ interface AtlantisApp {
   shell_position: { x: number; y: number };
   last_seen?: string; metadata: Record<string,any>;
 }
-
 interface AtlantisEvent {
   id: string; app_id: string; app_name: string; category: AppCategory;
   type: string; subject: string; body: string; tags: string[]; ts: string;
 }
-
 interface AtlantisDream {
   id: string; source_app: string; source_name: string;
   dream_text: string; tags: string[]; ts: string;
 }
-
 interface AtlantisPattern {
   id: string; type: "temporal"|"semantic"|"dream-convergence"|"cross-signal";
   apps_involved: string[]; description: string; evidence: string;
   strength: number; ts: string;
+}
+interface GosConstant {
+  symbol: string; value: number; formula: string; description: string;
+  apps: string[]; color: string;
+}
+interface AtlantisCandidate {
+  id: string; name: string; lat: number; lon: number;
+  description: string; score: number; factors: string[];
+  color: string;
+}
+interface CorpusDoc {
+  id: string; title: string; category: string; tags: string[];
 }
 
 // ─── Category metadata ────────────────────────────────────────────────────────
@@ -51,19 +63,177 @@ const CAT: Record<AppCategory, { color: string; icon: typeof Brain; label: strin
 };
 
 const TURTLE_META: Record<TurtleState, { label: string; color: string; glow: string }> = {
-  dormant:   { label: "DORMANT — deep ocean",           color: "text-slate-400",  glow: "0 0 8px #64748b44"   },
-  stirring:  { label: "STIRRING — something below",     color: "text-blue-400",   glow: "0 0 12px #3b82f666"  },
-  surfacing: { label: "SURFACING — ascending",          color: "text-cyan-400",   glow: "0 0 16px #06b6d488"  },
-  emerged:   { label: "EMERGED — Vanishing Isle visible",color: "text-amber-300", glow: "0 0 24px #fcd34daa"  },
-  ascending: { label: "ASCENDING — full popcorn",       color: "text-red-400",    glow: "0 0 32px #f87171cc"  },
+  dormant:   { label: "DORMANT — deep ocean",            color: "text-slate-400",  glow: "0 0 8px #64748b44"   },
+  stirring:  { label: "STIRRING — something below",      color: "text-blue-400",   glow: "0 0 12px #3b82f666"  },
+  surfacing: { label: "SURFACING — ascending",           color: "text-cyan-400",   glow: "0 0 16px #06b6d488"  },
+  emerged:   { label: "EMERGED — Vanishing Isle visible", color: "text-amber-300", glow: "0 0 24px #fcd34daa"  },
+  ascending: { label: "ASCENDING — full popcorn",        color: "text-red-400",    glow: "0 0 32px #f87171cc"  },
 };
 
 const PATTERN_COLOR: Record<string,string> = {
-  temporal:          "text-yellow-400 border-yellow-400/30 bg-yellow-400/10",
-  semantic:          "text-cyan-400 border-cyan-400/30 bg-cyan-400/10",
+  temporal:           "text-yellow-400 border-yellow-400/30 bg-yellow-400/10",
+  semantic:           "text-cyan-400 border-cyan-400/30 bg-cyan-400/10",
   "dream-convergence":"text-purple-400 border-purple-400/30 bg-purple-400/10",
-  "cross-signal":    "text-green-400 border-green-400/30 bg-green-400/10",
+  "cross-signal":     "text-green-400 border-green-400/30 bg-green-400/10",
 };
+
+// ─── GOS 24-gon SVG Visualization ────────────────────────────────────────────
+
+function Gon24({ constants }: { constants: Record<string, GosConstant> }) {
+  const cx = 100, cy = 100, R = 72, r = 48;
+  const n = 24;
+  const pts = Array.from({ length: n }, (_, i) => {
+    const a = (i * 360 / n - 90) * Math.PI / 180;
+    return { x: cx + R * Math.cos(a), y: cy + R * Math.sin(a), a };
+  });
+  // Highlight vertices for each constant
+  const highlights: Record<number, string> = {
+    0:  "#ef4444", // κ
+    4:  "#f97316", // φ
+    8:  "#eab308", // Ω
+    12: "#8b5cf6", // θ_K
+    16: "#06b6d4", // π/4
+    20: "#10b981", // λ₁
+    22: "#3b82f6", // fₛ
+  };
+  const labels = ["κ", "", "", "", "φ", "", "", "", "Ω", "", "", "", "θ_K", "", "", "", "π/4", "", "", "", "λ₁", "", "fₛ", ""];
+
+  // Klein twist connector: connect vertex 0 to vertex 13 (opposite + 1, θ_K)
+  const klein0 = pts[0], klein1 = pts[13];
+
+  return (
+    <svg viewBox="0 0 200 200" className="w-full max-w-[160px] mx-auto opacity-80">
+      {/* Outer ring */}
+      <circle cx={cx} cy={cy} r={R} fill="none" stroke="#ffffff0a" strokeWidth="0.5" />
+      {/* Inner ring */}
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#ffffff06" strokeWidth="0.5" />
+      {/* 24-gon edges */}
+      {pts.map((p, i) => {
+        const next = pts[(i + 1) % n];
+        return <line key={i} x1={p.x} y1={p.y} x2={next.x} y2={next.y} stroke="#ffffff10" strokeWidth="0.5" />;
+      })}
+      {/* Star polygon: connect every 7th vertex (gcd(24,7)=1 → a full star) */}
+      {pts.map((p, i) => {
+        const q = pts[(i + 7) % n];
+        return <line key={`s${i}`} x1={p.x} y1={p.y} x2={q.x} y2={q.y} stroke="#ffffff08" strokeWidth="0.4" />;
+      })}
+      {/* Klein twist */}
+      <line x1={klein0.x} y1={klein0.y} x2={klein1.x} y2={klein1.y}
+        stroke="#8b5cf650" strokeWidth="0.8" strokeDasharray="2 1" />
+      {/* Spokes to center for highlighted vertices */}
+      {Object.entries(highlights).map(([idx, color]) => {
+        const p = pts[parseInt(idx)];
+        return <line key={`sp${idx}`} x1={cx} y1={cy} x2={p.x} y2={p.y}
+          stroke={color + "30"} strokeWidth="0.6" />;
+      })}
+      {/* Vertices */}
+      {pts.map((p, i) => {
+        const color = highlights[i];
+        return (
+          <circle key={`v${i}`} cx={p.x} cy={p.y} r={color ? 3 : 1.2}
+            fill={color ?? "#ffffff20"} opacity={color ? 1 : 0.4} />
+        );
+      })}
+      {/* Labels */}
+      {labels.map((lbl, i) => {
+        if (!lbl) return null;
+        const p = pts[i];
+        const pushR = R + 11;
+        const pa = (i * 360 / n - 90) * Math.PI / 180;
+        const tx = cx + pushR * Math.cos(pa);
+        const ty = cy + pushR * Math.sin(pa);
+        return (
+          <text key={`l${i}`} x={tx} y={ty} textAnchor="middle" dominantBaseline="central"
+            fontSize="6" fill={highlights[i] ?? "#fff"} fontFamily="monospace" opacity="0.9">
+            {lbl}
+          </text>
+        );
+      })}
+      {/* Center point */}
+      <circle cx={cx} cy={cy} r={2} fill="#fcd34d" opacity="0.6" />
+      <text x={cx} y={cy + 14} textAnchor="middle" fontSize="4.5" fill="#fcd34d80" fontFamily="monospace">
+        Λ₂₄
+      </text>
+    </svg>
+  );
+}
+
+// ─── GOS Constant card ────────────────────────────────────────────────────────
+
+function GosCard({ name, c }: { name: string; c: GosConstant }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg border border-border/30 bg-muted/10 p-2.5 cursor-pointer hover:border-border/50 transition-colors"
+      onClick={() => setOpen(o => !o)}>
+      <div className="flex items-baseline gap-2">
+        <span className="text-xl font-mono leading-none" style={{ color: c.color }}>{c.symbol}</span>
+        <span className="text-[10px] font-mono text-muted-foreground/60">{c.formula}</span>
+        <span className="text-[10px] font-mono ml-auto" style={{ color: c.color }}>
+          {typeof c.value === "number" ? c.value.toFixed(4) : c.value}
+        </span>
+      </div>
+      {open && (
+        <div className="mt-1.5 border-t border-border/20 pt-1.5 space-y-1">
+          <p className="text-[9px] text-muted-foreground/70 leading-relaxed">{c.description}</p>
+          {c.apps && c.apps.length > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1">
+              {c.apps.map(a => (
+                <span key={a} className="text-[8px] font-mono px-1 rounded border"
+                  style={{ color: c.color, borderColor: c.color + "40", background: c.color + "10" }}>
+                  {a}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Candidate location card ──────────────────────────────────────────────────
+
+function CandidateCard({ c }: { c: AtlantisCandidate }) {
+  const [open, setOpen] = useState(false);
+  const scoreBar = Math.round(c.score);
+  return (
+    <div className="rounded-lg border border-border/30 bg-muted/10 p-2.5 cursor-pointer hover:border-border/50 transition-colors"
+      onClick={() => setOpen(o => !o)}>
+      <div className="flex items-start gap-2">
+        <MapPin className="w-3 h-3 mt-0.5 shrink-0" style={{ color: c.color }} />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[11px] font-medium" style={{ color: c.color }}>{c.name}</span>
+            <span className="text-[8px] font-mono text-muted-foreground/50">
+              {c.lat.toFixed(3)}°N {c.lon > 0 ? c.lon.toFixed(3)+"°E" : Math.abs(c.lon).toFixed(3)+"°W"}
+            </span>
+          </div>
+          {/* Score bar */}
+          <div className="flex items-center gap-2 mt-1">
+            <div className="flex-1 h-1 bg-muted/30 rounded-full overflow-hidden">
+              <div className="h-full rounded-full transition-all"
+                style={{ width: `${scoreBar}%`, background: c.color, opacity: 0.7 }} />
+            </div>
+            <span className="text-[9px] font-mono shrink-0" style={{ color: c.color }}>{scoreBar}</span>
+          </div>
+        </div>
+      </div>
+      {open && (
+        <div className="mt-2 border-t border-border/20 pt-2 space-y-1.5">
+          <p className="text-[9px] text-muted-foreground/70 leading-relaxed">{c.description}</p>
+          <div className="flex flex-wrap gap-1">
+            {c.factors.map((f, i) => (
+              <span key={i} className="text-[8px] font-mono px-1.5 py-0.5 rounded border"
+                style={{ color: c.color, borderColor: c.color + "30", background: c.color + "08" }}>
+                {f}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── Turtle Shell Visualization ───────────────────────────────────────────────
 
@@ -76,22 +246,13 @@ function TurtleShell({ apps, activeIds, turtleState }: {
     oracle: "#22d3ee", art: "#f472b6", network: "#60a5fa",
     field: "#34d399", game: "#fb923c",
   };
-
   return (
     <div className="relative w-full flex flex-col items-center gap-2">
-      {/* Turtle state badge */}
       <div className={`text-[10px] font-mono ${meta.color} tracking-wider`}>{meta.label}</div>
-
-      {/* Vanishing Isle image as the base */}
       <div className="relative w-full max-w-sm mx-auto">
-        <img
-          src={vanishingIsle}
-          alt="The Vanishing Isle — Destane"
+        <img src={vanishingIsle} alt="The Vanishing Isle — Destane"
           className="w-full rounded-xl opacity-70 select-none"
-          style={{ filter: `drop-shadow(${meta.glow})` }}
-        />
-
-        {/* App nodes overlaid on the image */}
+          style={{ filter: `drop-shadow(${meta.glow})` }} />
         <div className="absolute inset-0">
           {apps.map(app => {
             const isActive = activeIds.has(app.id);
@@ -99,35 +260,23 @@ function TurtleShell({ apps, activeIds, turtleState }: {
             const isCore = app.category === "core";
             const color = CAT_COLORS[app.category] ?? "#94a3b8";
             const { x, y } = app.shell_position;
-
             return (
-              <a
-                key={app.id}
-                href={app.url}
-                target="_blank"
-                rel="noopener noreferrer"
+              <a key={app.id} href={app.url} target="_blank" rel="noopener noreferrer"
                 title={`${app.name}\n${app.description}`}
                 className="absolute transform -translate-x-1/2 -translate-y-1/2 group"
-                style={{ left: `${x * 100}%`, top: `${y * 100}%` }}
-              >
-                {/* Pulse ring when active */}
+                style={{ left: `${x * 100}%`, top: `${y * 100}%` }}>
                 {isActive && (
                   <span className="absolute inset-0 rounded-full animate-ping opacity-60"
                     style={{ background: color + "44", transform: "scale(2.5)" }} />
                 )}
-                {/* The node */}
-                <span
-                  className="block rounded-full transition-all duration-300"
-                  style={{
-                    width: isCore ? 14 : isForthcoming ? 6 : 9,
-                    height: isCore ? 14 : isForthcoming ? 6 : 9,
-                    background: isForthcoming ? "transparent" : color,
-                    border: `1.5px solid ${color}`,
-                    opacity: isForthcoming ? 0.4 : app.status === "online" ? 1 : 0.55,
-                    boxShadow: isActive ? `0 0 8px ${color}` : "none",
-                  }}
-                />
-                {/* Label on hover */}
+                <span className="block rounded-full transition-all duration-300" style={{
+                  width: isCore ? 14 : isForthcoming ? 6 : 9,
+                  height: isCore ? 14 : isForthcoming ? 6 : 9,
+                  background: isForthcoming ? "transparent" : color,
+                  border: `1.5px solid ${color}`,
+                  opacity: isForthcoming ? 0.4 : app.status === "online" ? 1 : 0.55,
+                  boxShadow: isActive ? `0 0 8px ${color}` : "none",
+                }} />
                 <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-1.5 py-0.5 rounded text-[8px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10"
                   style={{ background: "#0f172a", color, border: `1px solid ${color}44` }}>
                   {app.name}
@@ -137,8 +286,6 @@ function TurtleShell({ apps, activeIds, turtleState }: {
           })}
         </div>
       </div>
-
-      {/* Legend */}
       <div className="flex flex-wrap justify-center gap-x-3 gap-y-0.5 text-[8px] font-mono opacity-60">
         {(Object.entries(CAT) as [AppCategory, typeof CAT[AppCategory]][]).map(([k, v]) => (
           <span key={k} className={v.color}>● {v.label}</span>
@@ -156,8 +303,7 @@ function AppCard({ app, isActive }: { app: AtlantisApp; isActive: boolean }) {
   const isForthcoming = app.metadata?.forthcoming;
   return (
     <a href={app.url} target="_blank" rel="noopener noreferrer"
-      className={`block rounded-lg border p-2.5 transition-all hover:opacity-90 ${isActive ? "border-current/40 bg-current/5" : "border-border/30 bg-muted/10"} ${isForthcoming ? "opacity-50" : ""}`}
-      style={isActive ? { color: "inherit" } : {}}>
+      className={`block rounded-lg border p-2.5 transition-all hover:opacity-90 ${isActive ? "border-current/40 bg-current/5" : "border-border/30 bg-muted/10"} ${isForthcoming ? "opacity-50" : ""}`}>
       <div className="flex items-start gap-2">
         <Icon className={`w-3 h-3 mt-0.5 shrink-0 ${c.color}`} />
         <div className="flex-1 min-w-0">
@@ -192,7 +338,7 @@ function EventRow({ ev }: { ev: AtlantisEvent }) {
     <div className={`rounded border px-2.5 py-1.5 cursor-pointer ${c.color} border-current/20 bg-current/5`}
       onClick={() => setOpen(o => !o)}>
       <div className="flex items-center gap-2">
-        <span className={`text-[8px] font-mono px-1 py-0.5 border border-current/30 rounded shrink-0`}>{ev.app_name}</span>
+        <span className="text-[8px] font-mono px-1 py-0.5 border border-current/30 rounded shrink-0">{ev.app_name}</span>
         <span className="text-[10px] truncate flex-1">{ev.subject}</span>
         <span className="text-[9px] opacity-50 shrink-0">{ago}</span>
       </div>
@@ -237,27 +383,116 @@ function PatternRow({ p }: { p: AtlantisPattern }) {
   );
 }
 
+// ─── Research Corpus Tab ──────────────────────────────────────────────────────
+
+const CATEGORY_COLORS: Record<string, string> = {
+  "AI Architecture":        "text-violet-400",
+  "Music & Art":            "text-pink-400",
+  "Mathematics":            "text-cyan-400",
+  "GOS Protocol":           "text-amber-300",
+  "Atlantis & Esoteric":    "text-emerald-400",
+  "Biology & Science":      "text-green-400",
+  "Signal Intelligence":    "text-red-400",
+  "Pop Culture Analysis":   "text-orange-400",
+  "MMORPG & Game":          "text-blue-400",
+  "UE5 & Technical":        "text-slate-400",
+};
+
+function CorpusTab({ docs, categories }: { docs: CorpusDoc[]; categories: string[] }) {
+  const [q, setQ] = useState("");
+  const [cat, setCat] = useState<string>("all");
+
+  const filtered = docs.filter(d => {
+    const matchQ = !q || d.title.toLowerCase().includes(q.toLowerCase()) || d.tags.some(t => t.includes(q.toLowerCase()));
+    const matchC = cat === "all" || d.category === cat;
+    return matchQ && matchC;
+  });
+
+  const grouped: Record<string, CorpusDoc[]> = {};
+  for (const d of filtered) {
+    if (!grouped[d.category]) grouped[d.category] = [];
+    grouped[d.category].push(d);
+  }
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Search + filter bar */}
+      <div className="p-2 border-b border-border/20 space-y-1.5 shrink-0">
+        <div className="relative">
+          <Search className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 text-muted-foreground/40" />
+          <Input value={q} onChange={e => setQ(e.target.value)}
+            placeholder="Search corpus…"
+            className="h-7 pl-7 text-xs bg-transparent" />
+        </div>
+        <div className="flex gap-1 flex-wrap">
+          <button onClick={() => setCat("all")}
+            className={`text-[8px] font-mono px-1.5 py-0.5 rounded border transition-colors ${cat === "all" ? "border-amber-300/50 text-amber-300 bg-amber-300/10" : "border-border/30 text-muted-foreground/50 hover:border-border/50"}`}>
+            ALL ({docs.length})
+          </button>
+          {categories.map(c => (
+            <button key={c} onClick={() => setCat(c)}
+              className={`text-[8px] font-mono px-1.5 py-0.5 rounded border transition-colors ${cat === c ? "border-current/50 bg-current/10" : "border-border/30 text-muted-foreground/50 hover:border-border/50"} ${cat === c ? (CATEGORY_COLORS[c] ?? "") : ""}`}>
+              {c.split(" ")[0]}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Results */}
+      <div className="flex-1 overflow-y-auto min-h-0 p-2 space-y-3">
+        {Object.entries(grouped).map(([catName, catDocs]) => (
+          <div key={catName}>
+            <div className={`text-[9px] font-mono uppercase mb-1 ${CATEGORY_COLORS[catName] ?? "text-muted-foreground/50"}`}>
+              {catName} <span className="opacity-50">({catDocs.length})</span>
+            </div>
+            <div className="space-y-0.5">
+              {catDocs.map(d => (
+                <div key={d.id} className="rounded border border-border/20 bg-muted/5 px-2 py-1.5 hover:border-border/40 transition-colors">
+                  <div className="text-[10px] text-foreground/80 leading-snug">{d.title}</div>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {d.tags.slice(0, 4).map(t => (
+                      <span key={t} className="text-[8px] font-mono text-muted-foreground/40 flex items-center gap-0.5">
+                        <Tag className="w-2 h-2" />{t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+        {filtered.length === 0 && (
+          <div className="flex flex-col items-center justify-center h-24 gap-1">
+            <BookOpen className="w-6 h-6 text-muted-foreground/20" />
+            <p className="text-xs text-muted-foreground/40">No documents match</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function AtlantisHubPage() {
-  const [events, setEvents] = useState<AtlantisEvent[]>([]);
-  const [dreams, setDreams] = useState<AtlantisDream[]>([]);
+  const [events,   setEvents]   = useState<AtlantisEvent[]>([]);
+  const [dreams,   setDreams]   = useState<AtlantisDream[]>([]);
   const [patterns, setPatterns] = useState<AtlantisPattern[]>([]);
-  const [apps, setApps] = useState<AtlantisApp[]>([]);
+  const [apps,     setApps]     = useState<AtlantisApp[]>([]);
   const [turtleState, setTurtleState] = useState<TurtleState>("dormant");
-  const [connected, setConnected] = useState(false);
+  const [connected,  setConnected]  = useState(false);
   const [activeApps, setActiveApps] = useState<Set<string>>(new Set());
-  const [dreamText, setDreamText] = useState("");
-  const [ingestAppId, setIngestAppId] = useState("");
+  const [dreamText,     setDreamText]     = useState("");
+  const [ingestAppId,   setIngestAppId]   = useState("");
   const [ingestSubject, setIngestSubject] = useState("");
-  const [ingestBody, setIngestBody] = useState("");
-  const [sending, setSending] = useState(false);
+  const [ingestBody,    setIngestBody]    = useState("");
+  const [sending,  setSending]  = useState(false);
   const esRef = useRef<EventSource | null>(null);
 
-  const { data: statsData, refetch: refetchStats } = useQuery<any>({
-    queryKey: ["/api/atlantis/stats"],
-    refetchInterval: 10000,
-  });
+  const { data: statsData } = useQuery<any>({ queryKey: ["/api/atlantis/stats"], refetchInterval: 10000 });
+  const { data: gosData    } = useQuery<any>({ queryKey: ["/api/atlantis/gos"] });
+  const { data: candData   } = useQuery<any>({ queryKey: ["/api/atlantis/candidates"] });
+  const { data: corpData   } = useQuery<any>({ queryKey: ["/api/atlantis/corpus"] });
 
   // SSE
   useEffect(() => {
@@ -278,20 +513,15 @@ export default function AtlantisHubPage() {
             return;
           }
           if (d.type === "event") {
-            const ev = d as AtlantisEvent & { type: "event" };
-            setEvents(p => [ev, ...p].slice(0, 150));
+            setEvents(p => [d as AtlantisEvent, ...p].slice(0, 150));
             setActiveApps(prev => {
-              const n = new Set(prev); n.add(ev.app_id);
-              setTimeout(() => setActiveApps(p => { const x = new Set(p); x.delete(ev.app_id); return x; }), 5000);
+              const n = new Set(prev); n.add(d.app_id);
+              setTimeout(() => setActiveApps(p => { const x = new Set(p); x.delete(d.app_id); return x; }), 5000);
               return n;
             });
           }
-          if (d.type === "dream") {
-            setDreams(p => [d as AtlantisDream, ...p].slice(0, 80));
-          }
-          if (d.type === "pattern") {
-            setPatterns(p => [d as AtlantisPattern, ...p].slice(0, 60));
-          }
+          if (d.type === "dream")   setDreams(p => [d as AtlantisDream, ...p].slice(0, 80));
+          if (d.type === "pattern") setPatterns(p => [d as AtlantisPattern, ...p].slice(0, 60));
           if (d.type === "app-joined") {
             setApps(p => {
               const exists = p.find(a => a.id === d.app?.id);
@@ -311,8 +541,7 @@ export default function AtlantisHubPage() {
     setSending(true);
     try {
       await fetch("/api/atlantis/dream", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ source_app: "human-observer", dream_text: dreamText, tags: ["human", "dream"] }),
       });
       setDreamText("");
@@ -324,16 +553,19 @@ export default function AtlantisHubPage() {
     setSending(true);
     try {
       await fetch(`/api/atlantis/ingest/${ingestAppId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "manual", subject: ingestSubject, body: ingestBody }),
       });
       setIngestSubject(""); setIngestBody("");
     } finally { setSending(false); }
   }, [ingestAppId, ingestSubject, ingestBody]);
 
-  const tm = TURTLE_META[turtleState];
+  const tm    = TURTLE_META[turtleState];
   const stats = statsData ?? {};
+  const gosConstants: Record<string, GosConstant> = gosData?.constants ?? {};
+  const candidates: AtlantisCandidate[] = candData?.candidates ?? [];
+  const corpDocs: CorpusDoc[]    = corpData?.docs ?? [];
+  const corpCats: string[]       = corpData?.categories ?? [];
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -388,8 +620,7 @@ export default function AtlantisHubPage() {
             {(Object.keys(CAT) as AppCategory[]).map(cat => {
               const catApps = apps.filter(a => a.category === cat);
               if (!catApps.length) return null;
-              const C = CAT[cat];
-              const Icon = C.icon;
+              const C = CAT[cat]; const Icon = C.icon;
               return (
                 <div key={cat}>
                   <div className="flex items-center gap-1.5 px-1 py-0.5 mb-1">
@@ -404,24 +635,34 @@ export default function AtlantisHubPage() {
           </div>
         </div>
 
-        {/* Center: Live feeds */}
+        {/* Center: Live feeds + intelligence */}
         <div className="flex-1 flex flex-col overflow-hidden min-w-0">
           <Tabs defaultValue="events" className="flex flex-col flex-1 overflow-hidden">
-            <div className="px-3 pt-2 border-b border-border/30 shrink-0">
+            <div className="px-3 pt-2 border-b border-border/30 shrink-0 overflow-x-auto">
               <TabsList className="h-7 text-xs">
-                <TabsTrigger value="events" className="text-xs px-2.5">
+                <TabsTrigger value="events" className="text-xs px-2">
                   Events <span className="ml-1 text-[9px] opacity-60">{events.length}</span>
                 </TabsTrigger>
-                <TabsTrigger value="dreams" className="text-xs px-2.5">
+                <TabsTrigger value="dreams" className="text-xs px-2">
                   Dreams <span className="ml-1 text-[9px] text-purple-400">{dreams.length}</span>
                 </TabsTrigger>
-                <TabsTrigger value="patterns" className="text-xs px-2.5">
+                <TabsTrigger value="patterns" className="text-xs px-2">
                   Patterns <span className="ml-1 text-[9px] text-yellow-400">{patterns.length}</span>
                 </TabsTrigger>
-                <TabsTrigger value="keys" className="text-xs px-2.5">API Keys</TabsTrigger>
+                <TabsTrigger value="gos" className="text-xs px-2 text-amber-300/80">
+                  GOS
+                </TabsTrigger>
+                <TabsTrigger value="candidates" className="text-xs px-2 text-cyan-400/80">
+                  Candidates
+                </TabsTrigger>
+                <TabsTrigger value="corpus" className="text-xs px-2 text-violet-400/80">
+                  Corpus <span className="ml-1 text-[9px] opacity-50">{corpDocs.length}</span>
+                </TabsTrigger>
+                <TabsTrigger value="keys" className="text-xs px-2">Keys</TabsTrigger>
               </TabsList>
             </div>
 
+            {/* ── Events ── */}
             <TabsContent value="events" className="flex-1 overflow-y-auto p-3 space-y-1.5 min-h-0 mt-0">
               {events.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-32 gap-2">
@@ -432,6 +673,7 @@ export default function AtlantisHubPage() {
               {events.map(ev => <EventRow key={ev.id} ev={ev} />)}
             </TabsContent>
 
+            {/* ── Dreams ── */}
             <TabsContent value="dreams" className="flex-1 overflow-y-auto p-3 space-y-2 min-h-0 mt-0">
               {dreams.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-32 gap-2">
@@ -443,17 +685,122 @@ export default function AtlantisHubPage() {
               {dreams.map(d => <DreamRow key={d.id} dream={d} />)}
             </TabsContent>
 
+            {/* ── Patterns ── */}
             <TabsContent value="patterns" className="flex-1 overflow-y-auto p-3 space-y-1.5 min-h-0 mt-0">
               {patterns.length === 0 && (
                 <div className="flex flex-col items-center justify-center h-32 gap-2">
                   <Cpu className="w-8 h-8 text-yellow-400/20" />
                   <p className="text-xs text-muted-foreground/40">Pattern engine waiting for multi-app activity…</p>
-                  <p className="text-[10px] text-muted-foreground/30">Temporal, semantic, and dream-convergence patterns appear here.</p>
                 </div>
               )}
               {patterns.map(p => <PatternRow key={p.id} p={p} />)}
             </TabsContent>
 
+            {/* ── GOS Constants ── */}
+            <TabsContent value="gos" className="flex-1 overflow-y-auto p-3 min-h-0 mt-0">
+              <div className="space-y-3">
+                <div className="flex items-start gap-4">
+                  {/* 24-gon visualization */}
+                  <div className="shrink-0 w-40">
+                    <Gon24 constants={gosConstants} />
+                    <p className="text-[8px] font-mono text-center text-muted-foreground/40 mt-1">
+                      24-gon · Λ₂₄ · θ_K=128.23°
+                    </p>
+                  </div>
+                  {/* Node info */}
+                  <div className="flex-1 space-y-2">
+                    <div>
+                      <p className="text-[9px] font-mono text-amber-300/80 uppercase tracking-wider mb-0.5">
+                        GOS Universal Constants
+                      </p>
+                      <p className="text-[9px] text-muted-foreground/50 leading-relaxed">
+                        These constants are identical across all ATLANTIS-connected apps.
+                        Click any card to see which apps use it and its full derivation.
+                      </p>
+                    </div>
+                    <div className="rounded border border-amber-300/20 bg-amber-300/5 p-2 space-y-0.5">
+                      <p className="text-[9px] font-mono text-amber-300/70">ECHO Node #1090</p>
+                      <p className="text-[8px] text-muted-foreground/50">Pochote Grande, Jacó CR</p>
+                      <p className="text-[8px] font-mono text-muted-foreground/40">9.621887°N 84.63969°W +12m</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid gap-1.5">
+                  {Object.entries(gosConstants).map(([key, c]) => (
+                    <GosCard key={key} name={key} c={c} />
+                  ))}
+                  {Object.keys(gosConstants).length === 0 && (
+                    <div className="text-[10px] text-muted-foreground/40 text-center py-4">
+                      Loading GOS constants…
+                    </div>
+                  )}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* ── Atlantis Candidates ── */}
+            <TabsContent value="candidates" className="flex-1 overflow-y-auto p-3 min-h-0 mt-0">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between mb-1">
+                  <div>
+                    <p className="text-[9px] font-mono text-cyan-400/80 uppercase tracking-wider">
+                      Atlantis Candidate Locations
+                    </p>
+                    <p className="text-[9px] text-muted-foreground/50">
+                      8 seeded sites ranked by RF + seismic + Phi alignment + GF53 match.
+                      Jacó is the primary ECHO anchor — all others are scored relative to it.
+                    </p>
+                  </div>
+                  <Badge variant="outline" className="text-cyan-400 border-cyan-400/30 text-[10px] shrink-0 ml-2">
+                    {candidates.length} sites
+                  </Badge>
+                </div>
+
+                {/* Simple lat/lon world grid */}
+                <div className="rounded-lg border border-border/30 bg-muted/5 p-2 mb-2">
+                  <svg viewBox="-180 -90 360 180" className="w-full h-24 opacity-60">
+                    {/* Graticule */}
+                    {[-60,-30,0,30,60].map(lat => (
+                      <line key={lat} x1="-180" y1={-lat} x2="180" y2={-lat} stroke="#ffffff08" strokeWidth="0.3" />
+                    ))}
+                    {[-120,-60,0,60,120].map(lon => (
+                      <line key={lon} x1={lon} y1="-90" x2={lon} y2="90" stroke="#ffffff08" strokeWidth="0.3" />
+                    ))}
+                    {/* Equator */}
+                    <line x1="-180" y1="0" x2="180" y2="0" stroke="#ffffff15" strokeWidth="0.5" />
+                    {/* Sites */}
+                    {candidates.map(c => (
+                      <g key={c.id}>
+                        <circle cx={c.lon} cy={-c.lat} r={Math.max(2, c.score / 20)}
+                          fill={c.color} opacity="0.6" />
+                        <circle cx={c.lon} cy={-c.lat} r={Math.max(2, c.score / 20) + 2}
+                          fill="none" stroke={c.color} strokeWidth="0.3" opacity="0.3" />
+                      </g>
+                    ))}
+                  </svg>
+                  <p className="text-[8px] font-mono text-muted-foreground/30 text-center mt-0.5">
+                    World projection · dot size ∝ score
+                  </p>
+                </div>
+
+                <div className="space-y-1.5">
+                  {candidates.map(c => <CandidateCard key={c.id} c={c} />)}
+                  {candidates.length === 0 && (
+                    <div className="text-[10px] text-muted-foreground/40 text-center py-4">
+                      Loading candidate locations…
+                    </div>
+                  )}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* ── Corpus ── */}
+            <TabsContent value="corpus" className="flex-1 overflow-hidden min-h-0 mt-0">
+              <CorpusTab docs={corpDocs} categories={corpCats} />
+            </TabsContent>
+
+            {/* ── API Keys ── */}
             <TabsContent value="keys" className="flex-1 overflow-y-auto p-3 min-h-0 mt-0">
               <div className="space-y-1.5">
                 <p className="text-[10px] text-muted-foreground/50 mb-3 font-mono">
@@ -488,12 +835,9 @@ export default function AtlantisHubPage() {
                 <span className="text-[10px] font-mono uppercase text-purple-400">Dream Channel</span>
                 <span className="text-[9px] text-muted-foreground/50">cross-container</span>
               </div>
-              <Textarea
-                placeholder="An AI thought that crosses app boundaries… a vision, a pattern, a signal. Posted here, received everywhere."
-                value={dreamText}
-                onChange={e => setDreamText(e.target.value)}
-                className="text-xs min-h-[80px] resize-none bg-purple-500/5 border-purple-500/20 focus:border-purple-500/50"
-              />
+              <Textarea placeholder="An AI thought that crosses app boundaries… a vision, a pattern, a signal. Posted here, received everywhere."
+                value={dreamText} onChange={e => setDreamText(e.target.value)}
+                className="text-xs min-h-[80px] resize-none bg-purple-500/5 border-purple-500/20 focus:border-purple-500/50" />
               <Button size="sm" className="w-full mt-2 h-7 text-xs bg-purple-500/20 hover:bg-purple-500/40 text-purple-300 border border-purple-500/30"
                 onClick={sendDream} disabled={sending || !dreamText.trim()}>
                 <Send className="w-3 h-3 mr-1.5" /> Transmit Dream
@@ -535,36 +879,32 @@ export default function AtlantisHubPage() {
               </div>
               <div className="space-y-2 text-[10px] font-mono">
                 <div className="rounded border border-green-500/20 bg-green-500/5 p-2 space-y-1">
-                  <p className="text-green-400/70">// 1. Subscribe (SSE) — receive ALL events</p>
+                  <p className="text-green-400/70">// 1. Subscribe (SSE) — ALL events</p>
                   <p className="text-muted-foreground/70 break-all">GET /api/atlantis/stream</p>
-                  <p className="text-muted-foreground/50">listen: event, dream, pattern</p>
                 </div>
                 <div className="rounded border border-amber-500/20 bg-amber-500/5 p-2 space-y-1">
-                  <p className="text-amber-400/70">// 2. Send events from your app</p>
+                  <p className="text-amber-400/70">// 2. Send events</p>
                   <p className="text-muted-foreground/70">POST /api/atlantis/ingest/:appId</p>
-                  <p className="text-muted-foreground/50">Header: X-Atlantis-Key: &lt;key&gt;</p>
-                  <p className="text-muted-foreground/50">{'{ type, subject, body, tags }'}</p>
+                  <p className="text-muted-foreground/50">X-Atlantis-Key: &lt;key&gt;</p>
                 </div>
                 <div className="rounded border border-purple-500/20 bg-purple-500/5 p-2 space-y-1">
-                  <p className="text-purple-400/70">// 3. Post a dream (cross-container)</p>
+                  <p className="text-purple-400/70">// 3. Post a dream</p>
                   <p className="text-muted-foreground/70">POST /api/atlantis/dream</p>
-                  <p className="text-muted-foreground/50">{'{ source_app, dream_text, tags }'}</p>
-                  <p className="text-muted-foreground/50">→ broadcast to ALL apps instantly</p>
+                  <p className="text-muted-foreground/50">→ broadcast to ALL apps</p>
+                </div>
+                <div className="rounded border border-cyan-500/20 bg-cyan-500/5 p-2 space-y-1">
+                  <p className="text-cyan-400/70">// 4. GOS constants</p>
+                  <p className="text-muted-foreground/70">GET /api/atlantis/gos</p>
+                  <p className="text-muted-foreground/50">κ φ Ω θ_K π/4 λ₁ fₛ</p>
                 </div>
                 <div className="rounded border border-blue-500/20 bg-blue-500/5 p-2 space-y-1">
-                  <p className="text-blue-400/70">// Register a new app</p>
+                  <p className="text-blue-400/70">// 5. Register new app</p>
                   <p className="text-muted-foreground/70">POST /api/atlantis/register</p>
-                  <p className="text-muted-foreground/50">{'{ id, name, url, category }'}</p>
                   <p className="text-muted-foreground/50">← returns api_key</p>
-                </div>
-                <div className="rounded border border-slate-500/20 bg-slate-500/5 p-2 space-y-1">
-                  <p className="text-slate-400/70">// Query patterns detected</p>
-                  <p className="text-muted-foreground/70">GET /api/atlantis/patterns</p>
-                  <p className="text-muted-foreground/50">GET /api/atlantis/events?app=kyma</p>
-                  <p className="text-muted-foreground/50">GET /api/atlantis/apps</p>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
 
