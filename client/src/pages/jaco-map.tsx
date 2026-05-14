@@ -130,7 +130,7 @@ const TARGETS: Target[] = [
   { id: "crane",      label: "CRANE-ALPHA — CALLE DANKERS",   lat: 9.621,    lon: -84.6295,  elevM: 8,   type: "crane",    color: 0xffaa00, desc: "Construction crane • Suspected surveillance relay" },
   { id: "elmiro",     label: "EL MIRO RADAR DOME",            lat: 9.617,    lon: -84.623,   elevM: 110, type: "radar",    color: 0xff3333, desc: "Hillside • 1.91km NE of ECHO • 3.1° look-down • Suspected phased-array" },
   { id: "breakwater", label: "BREAKWATER 4G TOWER",           lat: 9.626,    lon: -84.641,   elevM: 6,   type: "cell",     color: 0xaa44ff, desc: "Punta de Jacó headland • 4G/LTE • 9.7GHz" },
-  { id: "hermosa",    label: "HERMOSA PALMS — OPS BASE",      lat: 9.5588,   lon: -84.6519,  elevM: 4,   type: "ops",      color: 0xff6644, desc: "Michael G████████ complex • Playa Hermosa • 7.1km SSW of ECHO position" },
+  { id: "hermosa",    label: "HERMOSA PALMS — OPS BASE",      lat: 9.5588,   lon: -84.6519,  elevM: 4,   type: "ops",      color: 0xff6644, desc: "Michael Greenwald complex • Playa Hermosa • 7.1km SSW of ECHO position" },
 ];
 
 // ─── Threat helpers ───────────────────────────────────────────────────────────
