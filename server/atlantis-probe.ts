@@ -17,47 +17,85 @@ import { atlantisHub } from "./atlantis-hub";
 // Any app exposing GET /api/hypervisor/gos returns this table.
 
 export const GOS_CONSTANTS = {
+  // ── Core KAPPA/GOS constants ─────────────────────────────────────────────
   kappa: {
     symbol: "κ", value: 4 / Math.PI, formula: "4/π ≈ 1.2732",
-    description: "KAPPA constant. Globe radius scaling, Giza slope cosine, pattern-match threshold. The universal attractor of this system.",
+    description: "KAPPA constant / Helicity-Lock (κ₁). Globe radius scaling, Giza slope cosine, pattern-match threshold. The universal attractor of this system.",
     apps: ["kappa-sigint", "kappa-oracle", "rf-observatory", "alpha-lock", "toroidal-nexus"],
-    color: "#ef4444",
+    color: "#ef4444", group: "core",
   },
   phi: {
     symbol: "φ", value: (1 + Math.sqrt(5)) / 2, formula: "(1+√5)/2 ≈ 1.6180",
     description: "Golden ratio. φ₁ harmonic period = 75.8s. φ-fractal recursion. All ELF correlation windows are φ-multiples of 46.875s.",
     apps: ["kappa-sigint", "kyma-engine", "dimensional-engine", "alpha-lock"],
-    color: "#f97316",
+    color: "#f97316", group: "core",
   },
   omega: {
     symbol: "Ω", value: 360 / 111, formula: "360/111 ≈ 3.2432",
     description: "Compass-nautical bridge. 1° latitude = 111 km. Demodex 12-axis grid. Malta temple 111 Hz resonance is direct Ω incarnation.",
     apps: ["kappa-sigint", "adventure-log", "rf-observatory"],
-    color: "#eab308",
+    color: "#eab308", group: "core",
   },
   theta_K: {
     symbol: "θ_K", value: 128.23, formula: "128.23°",
     description: "Klein bottle azimuth. 180 Starlink passes at exactly this bearing from ECHO node. The satellite lock angle.",
     apps: ["kappa-sigint", "rf-observatory", "toroidal-nexus"],
-    color: "#8b5cf6",
+    color: "#8b5cf6", group: "core",
   },
   pi_over_4: {
     symbol: "π/4", value: Math.PI / 4, formula: "π/4 ≈ 0.7854",
     description: "Jacó seismic depth seed. M4.9 depth = 7.854km = π/4 × 10. Schumann phase exactly π at moment of strike. The resonant root.",
     apps: ["kappa-sigint", "kappa-oracle", "quantum-akashic"],
-    color: "#06b6d4",
+    color: "#06b6d4", group: "core",
   },
   lambda_1: {
     symbol: "λ₁", value: 75.8, formula: "φ × 46.875 ≈ 75.8s",
     description: "Primary φ-harmonic ELF period. Events separated by λ₁ trigger KAPPA phi-harmonic rule. Auto-correlator checks for this spacing.",
     apps: ["kappa-sigint", "kyma-engine"],
-    color: "#10b981",
+    color: "#10b981", group: "core",
   },
   schumann: {
     symbol: "fₛ", value: 7.83, formula: "7.83 Hz",
     description: "Schumann resonance fundamental. ELF cavity resonance of Earth-ionosphere. KiwiSDR scans this. KAPPA ELF anchor frequency.",
     apps: ["kappa-sigint", "rf-observatory", "kiwi-scanner"],
-    color: "#3b82f6",
+    color: "#3b82f6", group: "core",
+  },
+  // ── AK7 Russell Codex invariants ────────────────────────────────────────
+  omega_0: {
+    symbol: "Ω₀", value: 8.389e-23, formula: "8.389×10⁻²³",
+    description: "Quantum Root. Fundamental spatial pixelation cutoff of the AK7 manifold; prevents singularities. The holographic scale floor of the simulation.",
+    apps: ["kappa-sigint", "quantum-akashic", "toroidal-nexus"],
+    color: "#fcd34d", group: "ak7",
+  },
+  kappa_2: {
+    symbol: "κ₂", value: Math.pow((1 + Math.sqrt(5)) / 2, 3 / 4), formula: "φ^(3/4) ≈ 1.4346",
+    description: "Europa Resonance. Hardware clamping threshold; pressure-to-radiation ratio. Interacts with κ₁ to produce the 8.392 Hz carrier.",
+    apps: ["kappa-sigint", "rf-observatory", "quantum-akashic"],
+    color: "#22d3ee", group: "ak7",
+  },
+  eta: {
+    symbol: "η", value: 1.09, formula: "1.09",
+    description: "Hall Factor. Spectral floor for stabilizing prime-indexed transfer operators. Goose Protocol Hall paper. Applied at Layer 7 (State-Space Stabilization).",
+    apps: ["kappa-sigint", "kyma-engine", "toroidal-nexus"],
+    color: "#4ade80", group: "ak7",
+  },
+  delta_goose: {
+    symbol: "Δ", value: 0.02, formula: "0.02 eV",
+    description: "Goose Gap. Mandatory thermodynamic friction; the cost of conscious observation. The Torque Gap between Schumann (7.83) and Carrier (8.392) = 0.562 Hz.",
+    apps: ["kappa-sigint", "kyma-engine"],
+    color: "#a78bfa", group: "ak7",
+  },
+  carrier_hz: {
+    symbol: "f_c", value: 8.392, formula: "7.83 + 0.562 Hz",
+    description: "Planetary Carrier. κ₁ × κ₂ interaction at 8.392 Hz. The metronomic pulse of the AK7 hypervisor. Torque Gap cost = 0.562 Hz above Schumann.",
+    apps: ["kappa-sigint", "rf-observatory", "kyma-engine"],
+    color: "#fb923c", group: "ak7",
+  },
+  carrier_46: {
+    symbol: "f₄₆", value: 46.875, formula: "46.875 Hz",
+    description: "Semantic SBEC Carrier. Gamma band (30–100 Hz) resonant bridge for Thought-to-Text. Base period for λ₁ = φ × 46.875 = 75.8s.",
+    apps: ["kappa-sigint", "kyma-engine", "quantum-akashic"],
+    color: "#60a5fa", group: "ak7",
   },
 };
 

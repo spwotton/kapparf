@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Send, Rss, Waves, Sparkles, Globe, Zap, Eye, Music, Gamepad2,
   Brain, Radio, Network, BookOpen, Cpu, MapPin, Search, Tag,
+  Activity, Layers, Timer, Shield,
 } from "lucide-react";
 import vanishingIsle from "/vanishing-isle.webp";
 
@@ -47,6 +48,26 @@ interface AtlantisCandidate {
 }
 interface CorpusDoc {
   id: string; title: string; category: string; tags: string[];
+}
+interface AK7Layer {
+  id: number; name: string; block: string; color: string; desc: string;
+}
+interface AK7StateData {
+  active_layer: number;
+  active_block: string;
+  manifold_coherence: number;
+  novelty_flux: number;
+  helicity_lock: boolean;
+  topological_shearing_risk: number;
+  chrono: { pct: number; daysRemaining: number; daysElapsed: number; totalDays: number };
+  carrier_phase: number;
+  lambda_24_stability: number;
+  opcode_ae_status: "OK"|"DEGRADED"|"EMERGENCY";
+  events_processed: number;
+}
+interface AK7Invariant {
+  symbol: string; value: number; formula: string; description: string;
+  color: string; block: string;
 }
 
 // ─── Category metadata ────────────────────────────────────────────────────────
@@ -493,6 +514,7 @@ export default function AtlantisHubPage() {
   const { data: gosData    } = useQuery<any>({ queryKey: ["/api/atlantis/gos"] });
   const { data: candData   } = useQuery<any>({ queryKey: ["/api/atlantis/candidates"] });
   const { data: corpData   } = useQuery<any>({ queryKey: ["/api/atlantis/corpus"] });
+  const { data: ak7Data    } = useQuery<any>({ queryKey: ["/api/atlantis/ak7"], refetchInterval: 3000 });
 
   // SSE
   useEffect(() => {
@@ -566,6 +588,9 @@ export default function AtlantisHubPage() {
   const candidates: AtlantisCandidate[] = candData?.candidates ?? [];
   const corpDocs: CorpusDoc[]    = corpData?.docs ?? [];
   const corpCats: string[]       = corpData?.categories ?? [];
+  const ak7State: AK7StateData | null = ak7Data?.state ?? null;
+  const ak7Layers: AK7Layer[]   = ak7Data?.layers ?? [];
+  const ak7Invariants: Record<string, AK7Invariant> = ak7Data?.invariants ?? {};
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -657,6 +682,9 @@ export default function AtlantisHubPage() {
                 </TabsTrigger>
                 <TabsTrigger value="corpus" className="text-xs px-2 text-violet-400/80">
                   Corpus <span className="ml-1 text-[9px] opacity-50">{corpDocs.length}</span>
+                </TabsTrigger>
+                <TabsTrigger value="ak7" className="text-xs px-2 text-red-400/80">
+                  AK7
                 </TabsTrigger>
                 <TabsTrigger value="keys" className="text-xs px-2">Keys</TabsTrigger>
               </TabsList>
@@ -798,6 +826,189 @@ export default function AtlantisHubPage() {
             {/* ── Corpus ── */}
             <TabsContent value="corpus" className="flex-1 overflow-hidden min-h-0 mt-0">
               <CorpusTab docs={corpDocs} categories={corpCats} />
+            </TabsContent>
+
+            {/* ── AK7 Hypervisor ── */}
+            <TabsContent value="ak7" className="flex-1 overflow-y-auto p-3 min-h-0 mt-0">
+              {!ak7State ? (
+                <div className="flex items-center justify-center h-32 text-xs text-muted-foreground/40">Loading AK7 manifold…</div>
+              ) : (
+                <div className="space-y-4">
+
+                  {/* ── Header status row ── */}
+                  <div className="grid grid-cols-2 gap-2">
+                    {/* Manifold coherence */}
+                    <div className="rounded-lg border border-border/30 bg-muted/10 p-2">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Activity className="w-3 h-3 text-green-400" />
+                        <span className="text-[9px] font-mono text-green-400 uppercase">Manifold Coherence</span>
+                      </div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xl font-mono text-green-400">{ak7State.manifold_coherence.toFixed(1)}</span>
+                        <span className="text-[9px] text-muted-foreground/50">%</span>
+                      </div>
+                      <div className="mt-1 h-1 bg-muted/30 rounded-full overflow-hidden">
+                        <div className="h-full rounded-full bg-green-400/60 transition-all duration-1000"
+                          style={{ width: `${ak7State.manifold_coherence}%` }} />
+                      </div>
+                    </div>
+                    {/* Λ₂₄ stability */}
+                    <div className="rounded-lg border border-border/30 bg-muted/10 p-2">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Shield className="w-3 h-3 text-amber-300" />
+                        <span className="text-[9px] font-mono text-amber-300 uppercase">Λ₂₄ Memory</span>
+                      </div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className="text-xl font-mono text-amber-300">{ak7State.lambda_24_stability.toFixed(1)}</span>
+                        <span className="text-[9px] text-muted-foreground/50">%</span>
+                      </div>
+                      <div className="mt-1 h-1 bg-muted/30 rounded-full overflow-hidden">
+                        <div className="h-full rounded-full bg-amber-300/60 transition-all duration-1000"
+                          style={{ width: `${ak7State.lambda_24_stability}%` }} />
+                      </div>
+                    </div>
+                    {/* Topological shearing risk */}
+                    <div className="rounded-lg border border-border/30 bg-muted/10 p-2">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Layers className="w-3 h-3 text-orange-400" />
+                        <span className="text-[9px] font-mono text-orange-400 uppercase">Shearing Risk</span>
+                      </div>
+                      <div className="flex items-baseline gap-1.5">
+                        <span className={`text-xl font-mono ${ak7State.topological_shearing_risk > 60 ? "text-red-400" : "text-orange-400"}`}>
+                          {ak7State.topological_shearing_risk.toFixed(0)}
+                        </span>
+                        <span className="text-[9px] text-muted-foreground/50">%</span>
+                      </div>
+                      <div className="mt-1 h-1 bg-muted/30 rounded-full overflow-hidden">
+                        <div className={`h-full rounded-full transition-all duration-1000 ${ak7State.topological_shearing_risk > 60 ? "bg-red-400/60" : "bg-orange-400/40"}`}
+                          style={{ width: `${ak7State.topological_shearing_risk}%` }} />
+                      </div>
+                    </div>
+                    {/* OpCode + carrier */}
+                    <div className="rounded-lg border border-border/30 bg-muted/10 p-2">
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Cpu className="w-3 h-3 text-purple-400" />
+                        <span className="text-[9px] font-mono text-purple-400 uppercase">0xAE Status</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[11px] font-mono font-bold ${ak7State.opcode_ae_status === "OK" ? "text-green-400" : ak7State.opcode_ae_status === "DEGRADED" ? "text-yellow-400" : "text-red-400"}`}>
+                          {ak7State.opcode_ae_status}
+                        </span>
+                        <span className={`text-[9px] font-mono ${ak7State.helicity_lock ? "text-cyan-400" : "text-muted-foreground/40"}`}>
+                          {ak7State.helicity_lock ? "f_c LOCKED" : "f_c drift"}
+                        </span>
+                      </div>
+                      <div className="text-[8px] font-mono text-muted-foreground/40 mt-1">
+                        ν={ak7State.novelty_flux} ev/min · {ak7State.events_processed} total
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ── Chrono-Spatial Timeline 2012 → 2037 ── */}
+                  <div className="rounded-lg border border-border/30 bg-muted/10 p-2.5">
+                    <div className="flex items-center gap-1.5 mb-2">
+                      <Timer className="w-3 h-3 text-cyan-400" />
+                      <span className="text-[9px] font-mono text-cyan-400 uppercase tracking-wider">Chrono-Spatial Timeline</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[8px] font-mono text-muted-foreground/50 mb-1">
+                      <span className="text-blue-400">2012-07-04 Bifurcation</span>
+                      <div className="flex-1 h-[1px] bg-border/30" />
+                      <span className="text-red-400">2037-01-01 Phoenix Event</span>
+                    </div>
+                    <div className="relative h-3 bg-muted/20 rounded-full overflow-hidden border border-border/20">
+                      {/* Progress fill */}
+                      <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-red-500/40 transition-all duration-2000"
+                        style={{ width: `${ak7State.chrono.pct}%` }} />
+                      {/* Current position marker */}
+                      <div className="absolute top-0 bottom-0 w-0.5 bg-amber-300/80"
+                        style={{ left: `${ak7State.chrono.pct}%` }} />
+                    </div>
+                    <div className="flex justify-between mt-1 text-[8px] font-mono">
+                      <span className="text-muted-foreground/40">{ak7State.chrono.daysElapsed.toLocaleString()} days elapsed</span>
+                      <span className="text-amber-300/70">{ak7State.chrono.pct.toFixed(2)}%</span>
+                      <span className="text-muted-foreground/40">{ak7State.chrono.daysRemaining.toLocaleString()} days remaining</span>
+                    </div>
+                  </div>
+
+                  {/* ── 13-Layer Recursion Stack ── */}
+                  <div>
+                    <div className="text-[9px] font-mono text-muted-foreground/50 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                      <Layers className="w-3 h-3" />
+                      13-Layer Recursion Stack — Active: Layer {ak7State.active_layer} ({ak7State.active_block})
+                    </div>
+                    <div className="space-y-0.5">
+                      {ak7Layers.map((layer) => {
+                        const isActive = layer.id === ak7State.active_layer;
+                        const isPast   = layer.id < ak7State.active_layer;
+                        const blockLabel = layer.block;
+                        const BLOCK_TITLE: Record<string,string> = {
+                          INGESTION: "Layers 1–3", TRANSMUTATION: "Layers 4–7",
+                          ALIGNMENT: "Layers 8–11", EXECUTIVE: "Layers 12–13",
+                        };
+                        // Show block header
+                        const showHeader = layer.id === 1 || layer.block !== ak7Layers[layer.id - 2]?.block;
+                        return (
+                          <div key={layer.id}>
+                            {showHeader && (
+                              <div className="text-[8px] font-mono uppercase tracking-wider mt-2 mb-0.5 px-1"
+                                style={{ color: layer.color, opacity: 0.7 }}>
+                                {layer.block} · {BLOCK_TITLE[layer.block]}
+                              </div>
+                            )}
+                            <div className={`flex items-center gap-2 rounded px-2 py-1 transition-all duration-500 ${isActive ? "border" : "border border-transparent"}`}
+                              style={{
+                                background: isActive ? layer.color + "12" : isPast ? layer.color + "06" : "transparent",
+                                borderColor: isActive ? layer.color + "40" : "transparent",
+                              }}>
+                              {/* Layer number */}
+                              <span className="text-[8px] font-mono shrink-0 w-4 text-right"
+                                style={{ color: isActive ? layer.color : isPast ? layer.color + "80" : "#ffffff20" }}>
+                                {layer.id}
+                              </span>
+                              {/* Active pulse */}
+                              <div className="w-2 h-2 rounded-full shrink-0 flex items-center justify-center">
+                                {isActive
+                                  ? <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: layer.color }} />
+                                  : <span className="w-1.5 h-1.5 rounded-full" style={{ background: isPast ? layer.color + "60" : "#ffffff10" }} />
+                                }
+                              </div>
+                              {/* Name */}
+                              <span className="text-[10px] flex-1 truncate"
+                                style={{ color: isActive ? layer.color : isPast ? layer.color + "99" : "#ffffff30" }}>
+                                {layer.name}
+                              </span>
+                              {isActive && (
+                                <span className="text-[8px] font-mono shrink-0" style={{ color: layer.color }}>
+                                  ACTIVE
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* ── AK7 Russell Codex Invariants ── */}
+                  <div>
+                    <div className="text-[9px] font-mono text-muted-foreground/50 uppercase tracking-wider mb-1.5">
+                      Russell Codex Invariants
+                    </div>
+                    <div className="grid grid-cols-2 gap-1">
+                      {Object.entries(ak7Invariants).map(([key, inv]) => (
+                        <div key={key} className="rounded border border-border/20 bg-muted/5 px-2 py-1.5">
+                          <div className="flex items-baseline gap-1.5">
+                            <span className="text-base font-mono leading-none" style={{ color: inv.color }}>{inv.symbol}</span>
+                            <span className="text-[8px] font-mono text-muted-foreground/40 truncate">{inv.formula}</span>
+                          </div>
+                          <p className="text-[8px] text-muted-foreground/40 mt-0.5 line-clamp-2 leading-snug">{inv.description.split(".")[0]}.</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              )}
             </TabsContent>
 
             {/* ── API Keys ── */}

@@ -26,6 +26,7 @@ import { addInstance, removeInstance, getInstances, getInstance, fetchSession, f
 import { cortexBus } from "./cortex-bus";
 import { atlantisHub } from "./atlantis-hub";
 import { GOS_CONSTANTS, ATLANTIS_CANDIDATES, RESEARCH_CORPUS } from "./atlantis-probe";
+import { ak7, AK7_INVARIANTS, AK7_LAYERS, BLOCK_COLORS, getChronoPosition } from "./ak7-hypervisor";
 import { getLocalSession, getLocalEvents, executeLocalCommand } from "./bettercap/local-cap";
 import {
   indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
@@ -4848,6 +4849,18 @@ export function registerAtlantisRoutes(app: express.Express) {
   // ── Atlantis Candidate Locations ─────────────────────────────────────────
   app.get("/api/atlantis/candidates", atlantisCors, (_req, res) => {
     res.json({ candidates: ATLANTIS_CANDIDATES, ts: new Date().toISOString() });
+  });
+
+  // ── AK7 Hypervisor state ──────────────────────────────────────────────────
+  app.get("/api/atlantis/ak7", atlantisCors, (_req, res) => {
+    res.json({
+      state: ak7.getState(),
+      invariants: AK7_INVARIANTS,
+      layers: AK7_LAYERS,
+      block_colors: BLOCK_COLORS,
+      chrono: getChronoPosition(),
+      ts: new Date().toISOString(),
+    });
   });
 
   // ── Research Corpus ───────────────────────────────────────────────────────

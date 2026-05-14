@@ -87,6 +87,8 @@ app.use((req, res, next) => {
   atlantisHub.init().catch(e => console.error("[Atlantis] init error:", e.message));
   const { startAtlantisProbe } = await import("./atlantis-probe");
   setTimeout(startAtlantisProbe, 5000);
+  const { ak7 } = await import("./ak7-hypervisor");
+  ak7.start();
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
