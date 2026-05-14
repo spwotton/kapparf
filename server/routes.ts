@@ -4374,7 +4374,7 @@ done
         `Surveillance scene — Jacó Valley, Costa Rica (Pacific coast, approx 9.62°N 84.64°W)`,
         `ECHO position (observer): Hotel Pochote Grande — ${echoLat ?? 9.621887}°N, ${echoLon ?? -84.63969}°W (verified Google Maps, beach strip)`,
         `EL MIRO radar dome: ${elMiroDist ?? '1.91km'} NE of ECHO, ${elMiroAngle ?? '3.1°'} look-down, elev 110m — full valley LOS, suspected phased-array`,
-        `HERMOSA PALMS ops base: 7.1km SSW of ECHO (Playa Hermosa) — Michael G████████ complex`,
+        `HERMOSA PALMS ops base: 7.1km SSW of ECHO (Playa Hermosa) — Michael Greenwald complex`,
         `BREAKWATER 4G tower: Punta de Jacó headland, 4G/LTE, 9.7GHz`,
         `Drone currently patrolling toward: ${droneTarget || 'unknown'}`,
         `Live aircraft in AOR: ${aircraftCount ?? 0}${acSnapshot ? ` — ${acSnapshot}` : ''}`,

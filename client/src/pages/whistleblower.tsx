@@ -120,37 +120,9 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
   );
 }
 
-function RedactedName({ name, className = "", full = false }: { name: string; className?: string; full?: boolean }) {
-  const words = name.split(" ");
+function RedactedName({ name, className = "" }: { name: string; className?: string; full?: boolean }) {
   return (
-    <span className={`font-mono tracking-tight ${className}`}>
-      {words.map((word, i) => {
-        const first = word[0] ?? "";
-        const restBlocks = "█".repeat(Math.max(word.length - 1, 1));
-        const fullBlocks = "█".repeat(Math.max(word.length, 1));
-        return (
-          <span key={i}>
-            {i > 0 && " "}
-            {full ? (
-              <span
-                className="text-amber-900/70 select-none"
-                style={{ userSelect: "none", pointerEvents: "none", letterSpacing: "0.05em" }}
-                aria-hidden="true"
-              >{fullBlocks}</span>
-            ) : (
-              <>
-                <span className="text-amber-300">{first}</span>
-                <span
-                  className="text-amber-900/70 select-none"
-                  style={{ userSelect: "none", pointerEvents: "none", letterSpacing: "0.05em" }}
-                  aria-hidden="true"
-                >{restBlocks}</span>
-              </>
-            )}
-          </span>
-        );
-      })}
-    </span>
+    <span className={`font-mono tracking-tight text-amber-300 ${className}`}>{name}</span>
   );
 }
 
