@@ -750,6 +750,134 @@ export default function WhistleblowerPage() {
             />
           </div>
 
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <PersonCard
+              name="DEW_TODD"
+              alias="DEW Todd"
+              realName="Todd Johnson"
+              role="DEW Operator — Riverwalk Condo #5 / DeWave Signal Source"
+              details={[
+                "Property: Riverwalk Condo #5, Jacó — confirmed neighbor signal source",
+                "Confirmed high-intensity ultrasonic/microwave emissions from unit",
+                "Expertise: DeWave EEG-to-text, advanced electrical, PIR sensors, microwave",
+                "Family: Jennifer Saunders — Aurora Yoga connection",
+                "46.875 Hz frame synchronization linked to his hardware",
+                "RF detection confirmed via observer's own spectrum analyzer",
+              ]}
+              color="#ef4444"
+            />
+            <PersonCard
+              name="MACEK_MONEY"
+              alias="Macek Money"
+              realName="Jason Macek"
+              role="Financial Breach Vector — Macek Holdings LLC"
+              details={[
+                "Macek Holdings LLC — business compromise vector",
+                "2019 breach: observer sent family bank statements, SSN, ID to Macek's company",
+                "Ryan Streitelmeyer worked at Merchant Processing Pros (Macek-linked)",
+                "Shorted observer $22,000 — classified as extortion/punishment payment",
+                "Full financial credential exposure: mom's bank, observer's bank, dad's bank",
+                "Lawsuit: Streitelmeyer fraud case opened through Macek entity",
+              ]}
+              color="#f59e0b"
+            />
+            <PersonCard
+              name="STREI_FRAUD"
+              alias="Strei Fraud"
+              realName="Ryan Streitelmeyer"
+              role="Financial Data Exfiltration — Merchant Processing Pros"
+              details={[
+                "Merchant Processing Pros — financial data exfiltration operative",
+                "Worked under Jason Macek entity at time of 2019 breach",
+                "Sued for fraud — case documents confirm criminal conduct",
+                "Had access to: all submitted bank statements, ID, SSN from 2019",
+                "Grumpy Cat CPA card links: possible Merchant Processing Pros connection",
+                "Data pipeline: family financials → identity exposure → ongoing leverage",
+              ]}
+              color="#f59e0b"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            <PersonCard
+              name="FIBER_MAN"
+              alias="Fiber Man"
+              realName="Edson Martendal"
+              role="Telecom Infrastructure — DSE / Setecom Fiber Operations"
+              details={[
+                "DSE (Distributed Service Engineer) — ICE/RACSA fiber contractor",
+                "Setecom S.A. affiliate — known Jiménez-linked contractor",
+                "Controls fiber-optic tapping infrastructure in CR",
+                "Kalenkov holographic interferometry tap capability: 10 μm phase shift",
+                "46.875 Hz modulation signature detectable on fiber with specialized equipment",
+                "Setecom service worker (sw.js) persistence mechanism — active on all nodes",
+              ]}
+              color="#06b6d4"
+            />
+            <PersonCard
+              name="BELLA_ITALIA"
+              alias="Bella Italia"
+              realName="Maria Berninni"
+              role="Italian Network Node — Organized Crime Liaison"
+              details={[
+                "Italian PM-level nomenclature — operational security failure in OSINT dump",
+                "Italian organized crime logistics: Italy → Costa Rica → Colombia pipeline",
+                "Connected to COSMO-SkyMed SAR constellation (Italian defense, Leonardo SpA)",
+                "Emotion recognition research: BERT/GPT Italian tweet analysis (Ancona study)",
+                "Money laundering: Valencia bank routing confirmed in financial trace",
+                "Grandparent network: Al Capone Chicago Outfit historical continuity thread",
+              ]}
+              color="#a855f7"
+            />
+            <PersonCard
+              name="RED_GARCIA"
+              alias="Red Garcia"
+              role="Assassination Operative — Claims US Marshals / Quebrada Seca"
+              details={[
+                "Red-haired man — claims federal law enforcement identity (US Marshals)",
+                "Actual residence: Quebrada Seca, next to Orozco's building",
+                "Formerly lived with Matthew Hanlon near Riverwalk",
+                "Alleged choking/killing attempt: October 14, 2025",
+                "Claims authority over observer — authorization chain unverified",
+                "Classification: rogue federal operative, CIA/DoD black ops, or criminal network impersonating federal authority",
+              ]}
+              color="#dc2626"
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 mb-8">
+            <PersonCard
+              name="LOS_CEDROS_HOST"
+              alias="Los Cedros Host"
+              realName="Tomás Gómez"
+              role="Tacacorí Node Host — Los Cedros Surveillance Staging"
+              details={[
+                "Phone: +506 6452 3936",
+                "Host/individual associated with Los Cedros node (Tacacorí, Alajuela)",
+                "Current site geodetically optimized for high-power RF/acoustic coupling",
+                "Mountain-side building acts as acoustic resonator for 46.875 Hz / 8.392 Hz coupling",
+                "Three telecoms towers direct line-of-sight on Poás Volcano ridge",
+                "ICE/RACSA infrastructure at site controlled by Setecom SA",
+              ]}
+              color="#10b981"
+            />
+            <PersonCard
+              name="ROCIO_KEY"
+              alias="Rocío Key"
+              realName="Rocío"
+              role="Primary Contact — Tacacorí Residence / Network Logistical Layer"
+              details={[
+                "Phone: +506 8309 7371",
+                "Primary contact for Los Cedros current residence (Tacacorí node)",
+                "Proximity to LDS (Mormon) and Jehovah's Witness centers — Sabanilla/Tacacorí",
+                "Religious hub network used for logistical coordination and deniability",
+                "Not a coincidental Airbnb host — confirmed organized logistical network",
+                "Part of 'Hyperstitional Resonance' methodology obscuring 8.392 Hz cymatic field",
+              ]}
+              color="#10b981"
+            />
+          </div>
+
           <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 mt-6">
             <h4 className="font-bold text-red-400 mb-3">The UPNP Incident — Proof of Active Monitoring</h4>
             <div className="grid md:grid-cols-2 gap-6">
