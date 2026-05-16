@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   Zap, Shield, Radio, Eye, Cpu, Waves, BookOpen, ChevronDown, ChevronRight,
   AlertTriangle, Target, Crosshair, Satellite, Antenna, FlaskConical, Database,
-  ExternalLink, Layers, Gauge,
+  ExternalLink, Layers, Gauge, MapPin, Clock, User, Navigation, Wind,
 } from "lucide-react";
 
 type DocCategory = "all" | "doctrine" | "laser-dew" | "detection" | "platform" | "comms" | "hardware";
@@ -386,6 +386,157 @@ function DocCard({ doc, expanded, onToggle }: { doc: DocEntry; expanded: boolean
   );
 }
 
+const HUMINT_LEAD = {
+  id: "7a5591ee-f87e-4c8c-87bd-fa9e01949c89",
+  logged: "2026-05-16T14:28:08Z",
+  subject: "Russian national — cohabitant 2023",
+  coverRole: "Aerial videographer / Ricos y Famosos CR (Wolfgang Hilbikh)",
+  tasking: "Russian interests — drone expert",
+  fleet: "6+ professional UAVs (high-grade)",
+  stagingArea: "Esterillos Este, Puntarenas, CR",
+  stagingCoords: "9.538°N, 84.501°W",
+  stagingAerodrome: "MRET (Aeropuerto Esterillos)",
+  distanceKm: 22.4,
+  overflight: "2026-05-16 06:50 AM",
+  overflightSig: "Electric, fixed-wing acoustic — no rotor rhythm",
+  rangeAnalysis: [
+    { model: "DJI Air 3", range: "20 km", verdict: "MARGINAL — needs relay or headwind tailoring", color: "text-amber-400" },
+    { model: "DJI Mavic 3 Enterprise", range: "15 km FCC", verdict: "REQUIRES relay node or closer launch point", color: "text-orange-400" },
+    { model: "Fixed-wing UAV (eBee / WingtraOne)", range: "40–90 km", verdict: "CONFIRMED VIABLE — 22.4 km well within envelope", color: "text-red-400" },
+    { model: "Custom FPV fixed-wing w/ digital link", range: "30–60 km", verdict: "CONFIRMED VIABLE — matches electric no-rotor sig", color: "text-red-400" },
+    { model: "DJI Matrice 300 RTK", range: "15 km + relay", verdict: "VIABLE with relay station in Herradura hills", color: "text-amber-400" },
+  ],
+  elevation: [
+    { label: "MRET Esterillos (launch)", elev: "26 m ASL" },
+    { label: "Río Ñaranjillo delta (4km)", elev: "13 m ASL" },
+    { label: "Carara buffer margin (10km)", elev: "38 m ASL" },
+    { label: "Cerros de Agujas PEAK (16.3km)", elev: "281 m ASL ⚠" },
+    { label: "Tivives descent (18km)", elev: "119 m ASL" },
+    { label: "Pochote Grande (observer)", elev: "13 m ASL" },
+  ],
+  corridorKm: 17.35,
+  losObstruction: "218m ridge at 12.8km (Cerros de Agujas) — minimum 238m AGL required for direct LOS",
+  losCleared: "Fixed-wing at 260m AGL clears ridge with 42m margin — approx 13 min transit at 80 km/h",
+};
+
+function HumintPanel() {
+  const [open, setOpen] = useState(true);
+  const h = HUMINT_LEAD;
+  return (
+    <div className="border-b border-red-500/20 bg-red-950/10">
+      <button
+        className="w-full flex items-center gap-3 px-6 py-3 hover:bg-red-500/5 transition-colors text-left"
+        onClick={() => setOpen(o => !o)}
+        data-testid="btn-humint-toggle"
+      >
+        <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+        <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest flex-1">
+          Active HUMINT Lead — Russian UAV Operator — Logged {new Date(h.logged).toLocaleString()}
+        </span>
+        <Badge className="bg-red-500/15 text-red-400 border-red-500/30 text-[9px]">EVIDENCE ID {h.id.slice(0,8).toUpperCase()}</Badge>
+        {open ? <ChevronDown className="h-3.5 w-3.5 text-gray-500" /> : <ChevronRight className="h-3.5 w-3.5 text-gray-500" />}
+      </button>
+
+      {open && (
+        <div className="px-6 pb-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+          {/* Subject card */}
+          <div className="space-y-3">
+            <div className="text-[9px] font-mono text-red-400 uppercase tracking-widest mb-2">Subject Profile</div>
+            {[
+              { icon: User, label: "Identity", value: h.subject },
+              { icon: Eye, label: "Cover role", value: h.coverRole },
+              { icon: AlertTriangle, label: "Tasking", value: h.tasking },
+              { icon: Satellite, label: "Fleet", value: h.fleet },
+              { icon: MapPin, label: "Staging", value: h.stagingArea },
+              { icon: Navigation, label: "Aerodrome", value: `${h.stagingAerodrome} — ${h.distanceKm} km SE` },
+              { icon: Clock, label: "Overflight", value: h.overflight },
+              { icon: Wind, label: "Signature", value: h.overflightSig },
+            ].map(({ icon: Icon, label, value }) => (
+              <div key={label} className="flex gap-2 text-[10px] font-mono">
+                <Icon className="h-3 w-3 text-red-400/60 shrink-0 mt-0.5" />
+                <span className="text-gray-600 shrink-0 w-20">{label}:</span>
+                <span className="text-gray-200 leading-tight">{value}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Range analysis */}
+          <div>
+            <div className="text-[9px] font-mono text-orange-400 uppercase tracking-widest mb-2">Range Analysis — Esterillos → Pochote Grande</div>
+            <div className="space-y-2">
+              {h.rangeAnalysis.map(r => (
+                <div key={r.model} className="bg-black/30 rounded border border-white/5 p-2.5">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] font-bold text-white font-mono">{r.model}</span>
+                    <Badge className="bg-white/5 text-gray-400 border-white/10 text-[9px] px-1">{r.range}</Badge>
+                  </div>
+                  <p className={`text-[9px] font-mono ${r.color} leading-snug`}>{r.verdict}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Elevation + conclusion */}
+          <div className="space-y-3">
+            <div>
+              <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-widest mb-2">Corridor Elevation Profile</div>
+              {/* Terrain bar chart */}
+              <div className="space-y-0.5">
+                {h.elevation.map(e => {
+                  const m = parseInt(e.elev);
+                  const pct = Math.min(100, Math.round(m / 300 * 100));
+                  const peak = e.elev.includes("⚠");
+                  return (
+                    <div key={e.label} className="flex gap-2 text-[9px] font-mono items-center">
+                      <span className={`shrink-0 w-4 text-right font-bold ${peak ? "text-red-400" : "text-cyan-400"}`}>
+                        {String(m).padStart(3)}
+                      </span>
+                      <div className="flex-1 h-2 bg-black/30 rounded-sm overflow-hidden">
+                        <div
+                          className={`h-full rounded-sm ${peak ? "bg-red-500/60" : "bg-cyan-500/30"}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                      <span className={`text-[8px] flex-[2] leading-tight ${peak ? "text-red-300" : "text-gray-600"}`}>{e.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-2 space-y-1">
+                <p className="text-[9px] text-red-300/80 font-mono">⚠ {h.losObstruction}</p>
+                <p className="text-[9px] text-green-400/70 font-mono">✓ {h.losCleared}</p>
+                <p className="text-[9px] text-gray-600 font-mono">Source: SRTM 30m via Open-Elevation API</p>
+              </div>
+            </div>
+
+            <div className="bg-red-950/30 border border-red-500/20 rounded p-3">
+              <div className="text-[9px] font-mono text-red-400 uppercase tracking-widest mb-1.5">Assessment</div>
+              <p className="text-[10px] text-red-200/70 leading-relaxed font-mono">
+                Fixed-wing from MRET at ~06:30 AM (pre-dawn) at 320m AGL clears Cerros de Agujas
+                ridge with 39m margin — arrives Pochote Grande at 06:50 AM. Zero ATC, zero ADS-B.
+                6-drone fleet = tasked operator, not hobbyist. Ricos y Famosos cover provides
+                documented aerial pretext. Russian tasking = SIGINT/HUMINT collection profile.
+              </p>
+              <div className="mt-2 flex gap-1.5 flex-wrap">
+                {["MRET-STAGING","320m-AGL","RIDGE-CLEAR","RUSSIAN-TASKED","COVER-IDENTITY","CRITICAL"].map(t => (
+                  <Badge key={t} className="bg-red-500/10 text-red-400 border-red-500/20 text-[8px] px-1">{t}</Badge>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-black/30 border border-white/5 rounded p-2.5">
+              <div className="text-[9px] font-mono text-gray-500 uppercase tracking-widest mb-1">Evidence Chain</div>
+              <p className="text-[9px] font-mono text-gray-600">ID: {h.id}</p>
+              <p className="text-[9px] font-mono text-gray-600">SHA-256 hashed — see Evidence Chain page</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function DroneIntelPage() {
   const [activeCategory, setActiveCategory] = useState<DocCategory>("all");
   const [expandedId, setExpandedId] = useState<string | null>("dream-drone-pdf");
@@ -418,6 +569,9 @@ export default function DroneIntelPage() {
           </div>
         </div>
       </div>
+
+      {/* Active HUMINT Lead */}
+      <HumintPanel />
 
       <div className="flex gap-0 h-[calc(100vh-120px)]">
         {/* Left sidebar — categories */}

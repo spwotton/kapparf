@@ -1495,15 +1495,56 @@ export async function registerRoutes(
 
   app.get("/api/proxy/google/places", async (req, res) => {
     if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
-    const { lat, lon, radius = "15000", type = "airport", keyword } = req.query as Record<string, string>;
+    const { lat, lon, radius = "15000", type, keyword } = req.query as Record<string, string>;
     if (!lat || !lon) return res.status(400).json({ error: "lat and lon required" });
     try {
-      let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lon}&radius=${radius}&key=${GMAPS_KEY}`;
-      if (type) url += `&type=${encodeURIComponent(type)}`;
-      if (keyword) url += `&keyword=${encodeURIComponent(keyword)}`;
-      const r = await fetch(url);
+      // Use Places API (New) — nearby search v1
+      const body: any = {
+        locationRestriction: {
+          circle: {
+            center: { latitude: parseFloat(lat), longitude: parseFloat(lon) },
+            radius: parseFloat(radius),
+          },
+        },
+        maxResultCount: 20,
+      };
+      if (type) body.includedTypes = [type];
+
+      // If keyword provided, use searchText instead (nearby doesn't support text)
+      const endpoint = keyword
+        ? "https://places.googleapis.com/v1/places:searchText"
+        : "https://places.googleapis.com/v1/places:searchNearby";
+      if (keyword) {
+        (body as any).textQuery = keyword;
+        delete body.locationRestriction;
+        body.locationBias = {
+          circle: {
+            center: { latitude: parseFloat(lat), longitude: parseFloat(lon) },
+            radius: parseFloat(radius),
+          },
+        };
+      }
+
+      const r = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Goog-Api-Key": GMAPS_KEY,
+          "X-Goog-FieldMask": "places.id,places.displayName,places.formattedAddress,places.location,places.types,places.rating,places.internationalPhoneNumber",
+        },
+        body: JSON.stringify(body),
+      });
       const d = await r.json();
-      res.json(d);
+      // Normalize to legacy-compatible shape for frontend
+      const results = (d.places || []).map((p: any) => ({
+        place_id: p.id,
+        name: p.displayName?.text || p.displayName || "",
+        vicinity: p.formattedAddress || "",
+        geometry: { location: { lat: p.location?.latitude, lng: p.location?.longitude } },
+        types: p.types || [],
+        rating: p.rating,
+      }));
+      res.json({ status: d.error ? "ERROR" : "OK", results, _raw_error: d.error });
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
@@ -1562,6 +1603,104 @@ export async function registerRoutes(
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
+  });
+
+  // ─── Google Earth Engine Proxy ───────────────────────────────────────────────
+  const EE_PROJECT = "gen-lang-client-0752046783";
+
+  app.post("/api/proxy/earth-engine/compute", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    try {
+      const r = await fetch(
+        `https://earthengine.googleapis.com/v1/projects/${EE_PROJECT}/value:compute?key=${GMAPS_KEY}`,
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(req.body) }
+      );
+      res.json(await r.json());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.get("/api/proxy/earth-engine/assets", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    const { parent = `projects/${EE_PROJECT}/assets` } = req.query as Record<string, string>;
+    try {
+      const r = await fetch(
+        `https://earthengine.googleapis.com/v1/${parent}?key=${GMAPS_KEY}`
+      );
+      res.json(await r.json());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Open-Elevation SRTM proxy — free, no key needed, 30m resolution
+  app.post("/api/proxy/terrain/elevation", async (req, res) => {
+    const { locations } = req.body;
+    if (!locations || !Array.isArray(locations)) return res.status(400).json({ error: "locations array required" });
+    try {
+      const r = await fetch("https://api.open-elevation.com/api/v1/lookup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locations }),
+      });
+      if (!r.ok) throw new Error(`Open-Elevation ${r.status}`);
+      res.json(await r.json());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Terrain LOS profile — computes full corridor between two points
+  app.get("/api/proxy/terrain/los-profile", async (req, res) => {
+    const { lat1, lon1, lat2, lon2, steps = "20" } = req.query as Record<string, string>;
+    if (!lat1 || !lon1 || !lat2 || !lon2) return res.status(400).json({ error: "lat1,lon1,lat2,lon2 required" });
+    const n = Math.min(50, parseInt(steps));
+    const locations = Array.from({ length: n }, (_, i) => ({
+      latitude: parseFloat(lat1) + (i / (n - 1)) * (parseFloat(lat2) - parseFloat(lat1)),
+      longitude: parseFloat(lon1) + (i / (n - 1)) * (parseFloat(lon2) - parseFloat(lon1)),
+    }));
+    try {
+      const r = await fetch("https://api.open-elevation.com/api/v1/lookup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ locations }),
+      });
+      if (!r.ok) throw new Error(`Open-Elevation ${r.status}`);
+      const data = await r.json();
+      const results = (data.results || []) as { latitude: number; longitude: number; elevation: number }[];
+
+      // Compute LOS analysis
+      const elevations = results.map(r => r.elevation);
+      const maxElev = Math.max(...elevations);
+      const maxIdx = elevations.indexOf(maxElev);
+      const startElev = elevations[0], endElev = elevations[n - 1];
+
+      const R = 6371;
+      const dLat = (parseFloat(lat2) - parseFloat(lat1)) * Math.PI / 180;
+      const dLon = (parseFloat(lon2) - parseFloat(lon1)) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(parseFloat(lat1) * Math.PI / 180) * Math.cos(parseFloat(lat2) * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+      const totalKm = R * 2 * Math.asin(Math.sqrt(a));
+
+      const peakDistKm = (maxIdx / (n - 1)) * totalKm;
+      const minAGL = maxElev + 20; // 20m clearance
+      const losObstructed = maxElev > Math.max(startElev, endElev) + 10;
+
+      res.json({
+        profile: results.map((r, i) => ({
+          distKm: parseFloat(((i / (n - 1)) * totalKm).toFixed(2)),
+          lat: r.latitude,
+          lon: r.longitude,
+          elevM: r.elevation,
+        })),
+        analysis: {
+          totalKm: parseFloat(totalKm.toFixed(2)),
+          maxElevM: maxElev,
+          peakDistKm: parseFloat(peakDistKm.toFixed(2)),
+          startElevM: startElev,
+          endElevM: endElev,
+          minAGLRequired: minAGL,
+          losObstructed,
+          losNotes: losObstructed
+            ? `Ridge at ${peakDistKm.toFixed(1)}km — minimum ${minAGL}m AGL required for direct LOS`
+            : `Clear terrain — no significant obstruction`,
+        },
+      });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
   app.get("/api/proxy/atlantis-satellite/status", async (_req, res) => {
