@@ -1,0 +1,136 @@
+======================================================================
+OMEGA SPECTROGRAM SYNTHESIS REPORT
+Generated: 2026-01-30T13:24:39.216702
+======================================================================
+
+Total captures analyzed: 383
+[SUSPECT] Suspect frequencies: 21
+[WARNING] Military bands: 0
+[RADIO] Standard captures: 362
+
+----------------------------------------------------------------------
+[SUSPECT] SUSPECT FREQUENCIES - REQUIRES INVESTIGATION
+----------------------------------------------------------------------
+  File: SUSPECT_1234kHz_am_20260130_111605.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_1234kHz_am_20260130_111926.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_1234kHz_am_20260130_113104.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_1234kHz_am_20260130_113521.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_1234kHz_am_20260130_120417.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_1234kHz_am_20260130_123325.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_1234kHz_am_20260130_130719.png
+  Frequency: 1234 kHz
+  Reason: TR-069 Backdoor Correlation
+  Notes: Port 1234 on router
+
+  File: SUSPECT_4687kHz_am_20260130_111610.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_4687kHz_am_20260130_111931.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_4687kHz_am_20260130_113109.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_4687kHz_am_20260130_113525.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_4687kHz_am_20260130_120423.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_4687kHz_am_20260130_123331.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_4687kHz_am_20260130_130724.png
+  Frequency: 4687 kHz
+  Reason: 46.875 Hz × 100
+  Notes: V2K harmonic scaled
+
+  File: SUSPECT_7410kHz_am_20260130_111621.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+  File: SUSPECT_7410kHz_am_20260130_111940.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+  File: SUSPECT_7410kHz_am_20260130_113117.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+  File: SUSPECT_7410kHz_am_20260130_113533.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+  File: SUSPECT_7410kHz_am_20260130_120432.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+  File: SUSPECT_7410kHz_am_20260130_123340.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+  File: SUSPECT_7410kHz_am_20260130_130733.png
+  Frequency: 7410 kHz
+  Reason: Hector Mora HF
+  Notes: Setecom 180W radio possibility
+
+----------------------------------------------------------------------
+FREQUENCY DISTRIBUTION
+----------------------------------------------------------------------
+  10m: 36 captures
+  12m: 9 captures
+  15m: 21 captures
+  160m: 26 captures
+  17m: 9 captures
+  20m: 32 captures
+  30m: 12 captures
+  40m: 28 captures
+  60m: 20 captures
+  80m: 26 captures
+  Unknown: 164 captures
+
+======================================================================
+END REPORT
+======================================================================

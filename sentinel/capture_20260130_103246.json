@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-01-30T10:32:46.648241",
+  "unix_time": 1769790766.64825,
+  "duration_s": 5,
+  "baseline_db": -15.04687786102295,
+  "frequencies": {
+    "infrasound_14": {
+      "freq_hz": 14.3,
+      "power_db": 36.88490295410156,
+      "delta_db": 51.93178176879883
+    },
+    "sub_bass_42": {
+      "freq_hz": 42.2,
+      "power_db": 41.56388854980469,
+      "delta_db": 56.61076736450195
+    },
+    "v2k_carrier": {
+      "freq_hz": 46.875,
+      "power_db": 15.85505485534668,
+      "delta_db": 30.901931762695312
+    },
+    "motor_97": {
+      "freq_hz": 97.0,
+      "power_db": 22.761449813842773,
+      "delta_db": 37.808326721191406
+    },
+    "glass_200": {
+      "freq_hz": 200.0,
+      "power_db": 33.70234298706055,
+      "delta_db": 48.74922180175781
+    },
+    "blade_400": {
+      "freq_hz": 400.0,
+      "power_db": 11.734535217285156,
+      "delta_db": 26.781414031982422
+    },
+    "band_infrasound": {
+      "range": "1-20",
+      "delta_db": 35.55604934692383
+    },
+    "band_v2k_band": {
+      "range": "40-55",
+      "delta_db": 29.373069763183594
+    },
+    "band_ultrasound": {
+      "range": "18000-22000",
+      "delta_db": -1.8797426223754883
+    },
+    "top_peaks": [
+      {
+        "freq_hz": 88.4,
+        "delta_db": 58.55200958251953
+      },
+      {
+        "freq_hz": 88.60000000000001,
+        "delta_db": 57.473602294921875
+      },
+      {
+        "freq_hz": 42.2,
+        "delta_db": 56.61076736450195
+      },
+      {
+        "freq_hz": 91.2,
+        "delta_db": 55.96725082397461
+      },
+      {
+        "freq_hz": 185.0,
+        "delta_db": 55.43735122680664
+      }
+    ]
+  },
+  "alerts": [
+    "infrasound_14: +51.9dB",
+    "sub_bass_42: +56.6dB",
+    "v2k_carrier: +30.9dB",
+    "motor_97: +37.8dB",
+    "glass_200: +48.7dB",
+    "blade_400: +26.8dB",
+    "infrasound_band: +35.6dB",
+    "v2k_band_band: +29.4dB"
+  ],
+  "alert_count": 8
+}

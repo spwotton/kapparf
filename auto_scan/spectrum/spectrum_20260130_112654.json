@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-01-30T11:26:54.296951",
+  "epoch": 1769794014.296951,
+  "category": "spectrum",
+  "priority": "normal",
+  "data": {
+    "sdr_status": {
+      "online": true,
+      "users": 4,
+      "users_max": 8,
+      "name": "RADIOCLUB COSTA RICA | San Jose"
+    },
+    "frequencies_scanned": 8,
+    "scans": [
+      {
+        "frequency_khz": 1234,
+        "mode": "am",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=1234&mod=am&zoom=11"
+      },
+      {
+        "frequency_khz": 4687,
+        "mode": "lsb",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=4687&mod=lsb&zoom=11"
+      },
+      {
+        "frequency_khz": 6925,
+        "mode": "lsb",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=6925&mod=lsb&zoom=11"
+      },
+      {
+        "frequency_khz": 7410,
+        "mode": "lsb",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=7410&mod=lsb&zoom=11"
+      },
+      {
+        "frequency_khz": 7200,
+        "mode": "lsb",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=7200&mod=lsb&zoom=11"
+      },
+      {
+        "frequency_khz": 14200,
+        "mode": "lsb",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=14200&mod=lsb&zoom=11"
+      },
+      {
+        "frequency_khz": 27025,
+        "mode": "am",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=27025&mod=am&zoom=11"
+      },
+      {
+        "frequency_khz": 27185,
+        "mode": "am",
+        "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=27185&mod=am&zoom=11"
+      }
+    ]
+  }
+}

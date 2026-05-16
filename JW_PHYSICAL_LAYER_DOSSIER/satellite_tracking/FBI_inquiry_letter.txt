@@ -1,0 +1,227 @@
+Federal Bureau of Investigation
+935 Pennsylvania Avenue, NW
+Washington, D.C. 20535-0001
+Phone: (202) 324-3000
+
+I am a U.S. citizen and independent researcher residing in Guácima,
+Alajuela Province, Costa Rica (9.9535°N, 84.2908°W). I am writing to
+formally request information and assistance regarding potential
+electromagnetic interference (EMI) and unintended RF emissions that
+may constitute a national security threat, associated with the
+DARPA BLACKJACK (ACES) demonstration satellites and the SDA
+Proliferated Warfighter Space Architecture (PWSA) assets operating in
+Low Earth Orbit (LEO) over Central America.
+
+Over the past several months, I have conducted a longitudinal RF
+spectrum survey at my location. My data indicates a statistically
+significant correlation between specific LEO satellite overpasses and
+high-magnitude ELF (Extremely Low Frequency) transients detected in
+local residential power infrastructure, which may indicate unauthorized
+surveillance or interference activities.
+
+
+1. OBSERVATIONAL DATA & ORBITAL CORRELATION
+============================================
+
+Using Celestrak TLE data and the Skyfield astrodynamics library, I
+have tracked overhead passes of the BLACKJACK ACES constellation
+(launched June 12, 2023, Transporter-8) and SDA Tranche 0/1 assets.
+
+Visual Confirmation: I have documented satellite formations in
+"star/diamond" mesh topologies distinct from linear Starlink trains.
+During these windows, I have observed periodic optical flashes. While
+I recognize OISL (Optical Inter-Satellite Links) typically operate in
+the IR spectrum (1550 nm) and are invisible to the naked eye, these
+flashes are consistent with specular glints from large-bus satellite
+chassis maneuvering for cross-link acquisition.
+
+Concurrent Assets: Observation windows frequently overlap with passes
+of:
+  - USA-285  (NORAD 49263, LEO ~1,200 km, el. 12.5°, NRO classified)
+  - MUOS-3   (NORAD 40374, GEO, el. 11.6°, USN UHF SATCOM)
+  - AEHF-4   (NORAD 43651, GEO, el. 67.0°, USAF EHF SATCOM)
+
+This suggests multi-layer orbital density during anomaly events.
+
+Live Snapshot (2026-02-07 01:19 UTC): 626 total satellites visible
+from my position, including 33 US military, 20 Chinese, and 19
+Russian assets (tracked via omega_tracker/live_satellites.json).
+
+
+2. SPECTRAL ANALYSIS & SIGNAL ARTIFACTS
+=========================================
+
+My monitoring station uses calibrated audio spectrum analysis (48 kHz
+sample rate, 24-bit resolution, 1024-point FFT). I have isolated two
+persistent signal artifacts that correlate with orbital windows:
+
+A. The 46.875 Hz Signature (System Clock Feedthrough)
+------------------------------------------------------
+I have detected a persistent narrowband signal at exactly 46.875 Hz.
+
+  Technical Context: 48,000 Hz / 1024 bins = 46.875 Hz
+
+While this is the fundamental frequency resolution of standard FFT
+processing, the signal power varies between 2.30 dB and 16.29 dB
+above the noise floor depending on satellite proximity. Harmonics are
+present at:
+  - 93.750 Hz  (2nd harmonic, +3.4 dB)
+  - 140.625 Hz (3rd harmonic, +5.3 dB)
+
+Hypothesis: Hardware clock feedthrough or beat frequency from a Pulse
+Repetition Frequency (PRF) synchronized to standard DSP timing rates,
+potentially originating from ground-based telemetry equipment or PLC
+(Power Line Communication) repeaters.
+
+B. The 24.2 Hz ELF Transient
+------------------------------
+A high-power signal at 24.2 Hz, peaking at ~2,369 amplitude units
+(+33.7 dB above noise floor), appears during overhead passes.
+
+Isolation Test (January 26, 2026): Disconnecting the main building
+breaker resulted in a 98.4% signal drop (2,369 → 38 units). This
+confirms the building's wiring is acting as a receiving antenna
+(inductive coupling), picking up Ground Potential Rise (GPR) or
+magnetic induction from a nearby high-power emitter.
+
+  BREAKER ISOLATION RESULTS:
+  ┌──────────────┬────────────┬─────────────┬───────────┐
+  │ Frequency    │ Breaker ON │ Breaker OFF │ Reduction │
+  ├──────────────┼────────────┼─────────────┼───────────┤
+  │ 24.2 Hz ELF  │ 2369.83    │ 38.36       │ 98.4%     │
+  │ 46.875 Hz    │ Present    │ Absent      │ 100%      │
+  │ 48.0 Hz      │ 18.33      │ 5.69        │ 68.9%     │
+  │ 53.0 Hz      │ 16.77      │ 7.08        │ 57.8%     │
+  │ 60.0 Hz Grid │ 18.81      │ 3.93        │ 79.1%     │
+  └──────────────┴────────────┴─────────────┴───────────┘
+
+Post-test observation: After breaker restoration, the dominant
+frequency SHIFTED from 24.2 Hz to 36.2 Hz (power 271.42), suggesting
+adaptive/responsive behavior inconsistent with passive EMI.
+
+C. 50 Hz Equipment in 60 Hz Country
+-------------------------------------
+A persistent 48.0 Hz signal (+12.6 dB) indicates 50 Hz equipment
+harmonics in Costa Rica, which uses a 60 Hz grid (ICE standard). This
+is consistent with hardware of European, Asian, or other 50 Hz-origin
+deployed at or near the property.
+
+D. Correlated Aerial Signatures
+---------------------------------
+A 97 Hz acoustic signature (up to 67.23x normal) consistent with
+multi-rotor UAS propulsion peaks during the same observation windows.
+Drone detection log entries span 01:38–02:02 on 2026-01-30, with
+power levels tracking an approach-loiter-depart pattern.
+
+
+3. ADDITIONAL CONTEXT: THE ITALIAN GROUND SEGMENT
+===================================================
+
+Concurrent with US LEO constellation activity, I note the following
+regarding Italian state-affiliated aerospace presence in Costa Rica:
+
+  - Telespazio (67% Leonardo / 33% Thales) holds a $20M cadastral
+    survey contract mapping 50% of Costa Rica (>1M land parcels),
+    executed via Telespazio Argentina.
+
+  - The COSMO-SkyMed Second Generation (CSG) constellation provides
+    sub-meter X-band SAR imaging (0.3m Spotlight mode) over the
+    region, with demonstrated tasking over Costa Rican territory
+    (2010 EEAS activation for Isla Calero border dispute).
+
+  - e-GEOS (80% Telespazio / 20% ASI) processes CSG data on the
+    CLEOS cloud platform (Accenture partnership), creating potential
+    third-party cloud access to Costa Rican survey data.
+
+  - Telecom Italia Sparkle (AS6762) routes Central American internet
+    traffic through Miami PoP before transatlantic transit to
+    Palermo, Sicily.
+
+  - Leonardo S.p.A. is 30.2% owned by the Italian Ministry of
+    Economy and Finance, making all subsidiaries de facto state
+    actors.
+
+I raise this to illustrate that the EMI environment at my location
+is not attributable to a single source. Multiple state-affiliated
+orbital and terrestrial systems operate concurrently over this area.
+
+
+4. INQUIRY & REQUEST FOR ASSISTANCE
+====================================
+
+Given the correlation between these terrestrial EMI events and the
+orbital mechanics of the BLACKJACK/SDA constellations, and the
+potential for unauthorized surveillance or interference, I request
+the following information and assistance under applicable U.S. laws
+and national security protocols:
+
+  (a) THREAT ASSESSMENT: Does the FBI have any intelligence or
+      investigations related to EMI from BLACKJACK/SDA satellites
+      that could be used for unauthorized monitoring or data
+      exfiltration in Central America?
+
+  (b) GROUND INFRASTRUCTURE: Are there known ground terminals or
+      relay stations in the region associated with these programs
+      that might be causing the observed signals?
+
+  (c) COORDINATION WITH ALLIES: Has the FBI coordinated with Italian
+      or other allied intelligence services regarding potential
+      dual-use satellite operations over Costa Rica?
+
+  (d) CYBER/PHYSICAL SECURITY: Could these signals indicate attempts
+      to compromise residential infrastructure for surveillance
+      purposes, and what guidance can the FBI provide for personal
+      security?
+
+I am NOT requesting classified information. I am seeking unclassified
+guidance on potential threats and how to report or mitigate such
+activities.
+
+
+5. PRIOR REPORTING
+====================
+
+Related concerns have been reported to:
+
+  - FBI          legatsanjose@fbi.gov, cyber@fbi.gov,
+                 miamicyber@fbi.gov
+  - US Embassy   ACSSanJose@state.gov
+  - OIJ (CR)     denuncias@oij.go.cr
+  - SUTEL (CR)   info@sutel.go.cr
+  - FCC          international@fcc.gov
+  - SpaceX       abuse@starlink.com
+  - SPACECOM     spoc.public.affairs@spacecom.mil
+  - NASA OIG     oig@nasa.gov
+  - FGR (Mexico) atencionfgr@fgr.org.mx
+
+Reference: IRS Case #16221-445-09691-5 (related identity fraud
+investigation involving telecommunications infrastructure abuse).
+
+
+6. EVIDENCE PACKAGE
+=====================
+
+Available upon request or via secure channel:
+
+  - Timestamped FFT spectral analysis logs (48 kHz / 1024-pt)
+  - Breaker isolation test: before/after measurements (Jan 26, 2026)
+  - Satellite tracking data (TLE-derived, correlated with signal
+    events via Skyfield/SGP4)
+  - Network traffic captures (.pcap, .pcapng)
+  - Live satellite position snapshots (626 assets, Feb 7, 2026)
+  - Photographic evidence of anomalous hardware installations
+  - Italian ground segment contract documentation (SICOP/public)
+  - Traceroute data showing AS6762 transit routing
+
+This research is part of a broader study on the interactions between
+LEO constellations and civilian infrastructure, including dual-use
+satellite systems operated by NATO-aligned state actors.
+
+I look forward to your response.
+
+Respectfully,
+
+Sam Wotton
+Independent Researcher / Data Analyst
+Guácima, Alajuela Province, Costa Rica
+spwotton@gmail.com

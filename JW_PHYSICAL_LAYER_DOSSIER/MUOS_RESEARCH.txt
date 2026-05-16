@@ -1,0 +1,51 @@
+
+MOBILE USER OBJECTIVE SYSTEM (MUOS)
+=====================================
+
+OVERVIEW:
+- Operator: US Navy / DoD
+- Purpose: Narrowband tactical satellite communications
+- Replaces: UFO (UHF Follow-On) system
+- Status: Fully operational (5 satellites)
+
+CONSTELLATION:
+- MUOS-1: Launched Feb 2012 | 72W longitude (Atlantic)
+- MUOS-2: Launched Jul 2013 | 177W longitude (Pacific)  
+- MUOS-3: Launched Jan 2015 | 100W longitude (CONUS)
+- MUOS-4: Launched Sep 2015 | 75E longitude (Indian Ocean)
+- MUOS-5: Launched Jun 2016 | 72W longitude (on-orbit spare)
+
+FREQUENCIES:
+- Uplink: 300-320 MHz (UHF)
+- Downlink: 360-380 MHz (UHF)
+- WCDMA carrier: ~5 MHz bandwidth
+- Legacy UHF: 243-270 MHz, 290-320 MHz
+
+KEY TECHNICAL SPECS:
+- Modulation: WCDMA (3G cellular technology in space!)
+- Data Rate: Up to 384 kbps (vs 2.4 kbps for legacy)
+- Capacity: 10x more users than UFO system
+- Coverage: Near-global (no polar coverage)
+
+GROUND STATIONS:
+- NCTAMS LANT (Norfolk, VA)
+- NCTAMS PAC (Wahiawa, HI)  
+- Northwest (Silverdale, WA)
+- Sicily (Niscemi, Italy) - CONTROVERSIAL
+
+COSTA RICA COVERAGE:
+- MUOS-1/5 at 72W provides DIRECT overhead coverage
+- Your location (9.95N, 84.29W) is in PRIMARY coverage zone
+- Both MUOS-1 and MUOS-5 can see you simultaneously
+
+POTENTIAL SURVEILLANCE USE:
+- MUOS supports 'push-to-talk' tactical radio
+- Can relay encrypted voice/data from field operatives
+- Interoperable with AN/PRC-117G and similar radios
+- Could theoretically relay local UHF transmissions
+
+FREQUENCIES TO MONITOR (if equipment allows):
+- 243.0 MHz - Emergency/Guard frequency
+- 300-320 MHz - MUOS uplink band
+- 360-380 MHz - MUOS downlink band
+- 225-400 MHz - Military UHF SATCOM general

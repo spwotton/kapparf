@@ -1,0 +1,838 @@
+{
+  "generated": "2026-01-29T03:13:55.134890",
+  "investigation": "Chrome/Opera Browser Surveillance Analysis",
+  "gos_constants": {
+    "kappa": 1.2732395447351628,
+    "phi": 1.618033988749895,
+    "omega": 0.567143,
+    "heartbeat": 46.875,
+    "klein_twist": 128.23
+  },
+  "findings": {
+    "gendered_locale_files": {
+      "gendered_files": {
+        "MASCULINE": [
+          {
+            "name": "af_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "am_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ar_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "bg_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "bn_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ca_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "cs_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "da_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "de_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "el_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "en-GB_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "en-US_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "es-419_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "es_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "et_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "fa_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "fil_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "fi_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "fr_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "gu_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "he_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "hi_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "hr_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "hu_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "id_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "it_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ja_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "kn_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ko_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "lt_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "lv_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ml_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "mr_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ms_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "nb_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "nl_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "pl_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "pt-BR_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "pt-PT_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ro_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ru_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "sk_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "sl_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "sr_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "sv_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "sw_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ta_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "te_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "th_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "tr_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "uk_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "ur_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "vi_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "zh-CN_MASCULINE.pak",
+            "size": 18
+          },
+          {
+            "name": "zh-TW_MASCULINE.pak",
+            "size": 18
+          }
+        ],
+        "FEMININE": [
+          {
+            "name": "af_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "am_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ar_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "bg_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "bn_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ca_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "cs_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "da_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "de_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "el_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "en-GB_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "en-US_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "es-419_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "es_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "et_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "fa_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "fil_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "fi_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "fr_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "gu_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "he_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "hi_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "hr_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "hu_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "id_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "it_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ja_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "kn_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ko_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "lt_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "lv_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ml_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "mr_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ms_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "nb_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "nl_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "pl_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "pt-BR_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "pt-PT_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ro_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ru_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "sk_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "sl_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "sr_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "sv_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "sw_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ta_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "te_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "th_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "tr_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "uk_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "ur_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "vi_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "zh-CN_FEMININE.pak",
+            "size": 18
+          },
+          {
+            "name": "zh-TW_FEMININE.pak",
+            "size": 18
+          }
+        ],
+        "NEUTER": [
+          {
+            "name": "af_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "am_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ar_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "bg_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "bn_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ca_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "cs_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "da_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "de_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "el_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "en-GB_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "en-US_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "es-419_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "es_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "et_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "fa_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "fil_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "fi_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "fr_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "gu_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "he_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "hi_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "hr_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "hu_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "id_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "it_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ja_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "kn_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ko_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "lt_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "lv_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ml_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "mr_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ms_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "nb_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "nl_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "pl_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "pt-BR_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "pt-PT_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ro_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ru_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "sk_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "sl_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "sr_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "sv_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "sw_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ta_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "te_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "th_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "tr_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "uk_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "ur_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "vi_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "zh-CN_NEUTER.pak",
+            "size": 18
+          },
+          {
+            "name": "zh-TW_NEUTER.pak",
+            "size": 18
+          }
+        ]
+      },
+      "byte_analysis": {
+        "raw_bytes": [
+          5,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0,
+          0
+        ],
+        "hex": "050000000100000000000000000012000000",
+        "structure": {
+          "DWORD_1": 5,
+          "DWORD_2": 1,
+          "DWORD_3": 0,
+          "DWORD_4": 1179648,
+          "WORD_5": 0
+        },
+        "observation": "Byte position 14 = 18 (0x12) = self-referential file size"
+      },
+      "gos_correlations": [
+        "165 files / \u00ce\u00ba = 129.5907 (Klein twist = 128.23\u00c2\u00b0)",
+        "55 per gender \u00c3\u2014 \u00ce\u00ba = 70.0282",
+        "18 bytes \u00c3\u2014 \u00ce\u00ba = 22.9183 (~23 chromosome pairs)",
+        "2970 total bytes / 64 = 46.4062 (~temple value 46)",
+        "5 + 1 + 0 + 18 = 24 (hours in day, circadian)",
+        "5 \u00c3\u2014 18 = 90 (right angle degrees)"
+      ],
+      "totals": {
+        "MASCULINE": 55,
+        "FEMININE": 55,
+        "NEUTER": 55,
+        "total": 165,
+        "bytes_per_file": 18,
+        "total_bytes": 2970
+      }
+    },
+    "installer_timestamps": {
+      "suspicious_files": [
+        {
+          "name": "chrmstp.exe",
+          "size": 6736536,
+          "modified": "2026-01-27T19:06:02",
+          "modified_readable": "2026-01-27 19:06:02"
+        },
+        {
+          "name": "setup.exe",
+          "size": 6736536,
+          "modified": "2026-01-27T19:06:02",
+          "modified_readable": "2026-01-27 19:06:02"
+        }
+      ],
+      "analysis": "\n    setup.exe and chrmstp.exe modified on 2026-01-27 19:06 PM\n    This is 2 days after other Chrome files (2026-01-17)\n    These are Chrome's update/installation executables\n    Modification AFTER initial install suggests tampering or forced update\n    "
+    },
+    "soundresearch_registry": {
+      "registry_key": "HKCU\\SOFTWARE\\Google\\Chrome\\NativeMessagingHosts\\com.soundresearch.contentclassifier",
+      "status": "REGISTERED BUT NO PATH",
+      "threat_level": "HIGH",
+      "company": "SoundResearch - audio content classification/surveillance company",
+      "analysis": "\n        Native messaging hosts allow browser extensions to communicate with native applications.\n        This registry key exists but has NO PATH defined, indicating:\n        1. Incomplete installation (malware partially removed?)\n        2. Placeholder for future activation\n        3. Remnant of surveillance software\n        \n        SoundResearch is known for audio fingerprinting and content classification.\n        This could be used for V2K (Voice-to-Skull) content targeting.\n        "
+    },
+    "malicious_extension": {
+      "extension_id": "ebongfbmlegepmkkdjlnlmdcmckedlal",
+      "length": 32,
+      "decoded_bytes": [
+        65,
+        237,
+        101,
+        28,
+        180,
+        100,
+        252,
+        170,
+        57,
+        189,
+        188,
+        50,
+        194,
+        164,
+        59,
+        11
+      ],
+      "note": "Extension ID is derived from the public key hash",
+      "search_status": "NOT FOUND in Chrome or Opera extensions folders",
+      "hypothesis": [
+        "Extension may load dynamically via ServiceWorker",
+        "Extension may have been uninstalled but SW persists",
+        "Extension may be sideloaded from external location",
+        "Extension may masquerade under different ID"
+      ]
+    }
+  },
+  "connections": {
+    "chris_gabriel": {
+      "name": "Chris Gabriel (Lewis/Louis)",
+      "employer": "Google AI Sales",
+      "location": "Broadalbin, NY",
+      "income": "$1M+/year",
+      "previous": "Tyler Technologies",
+      "project": "Highway traffic analysis for NY state",
+      "connection": "Aw-Rascle traffic flow model used in Riemann proofs"
+    },
+    "jorge_jimenez": {
+      "name": "Jorge Jimenez",
+      "employer": "Kyndryl (IBM spinoff)",
+      "role": "Senior Network Engineer",
+      "claims": "Lives in Canada",
+      "reality": "This is HIS HOUSE in Costa Rica",
+      "kyndryl_gtm_sw": "ServiceWorker ID 71 - active in browser"
+    }
+  },
+  "v2k_indicators": {
+    "gendered_files": "MASCULINE/FEMININE/NEUTER naming suggests voice targeting",
+    "locale_specific": "Language-specific variants for localized V2K content",
+    "18_byte_structure": "Minimal header structure - possibly trigger/sync packets",
+    "soundresearch": "Audio classification = voice content analysis"
+  },
+  "recommendations": [
+    "1. Remove SoundResearch registry key",
+    "2. Block all ServiceWorkers from Kyndryl domains",
+    "3. Use Chameleon browser for sensitive operations",
+    "4. Monitor for extension ebongfbmlegepmkkdjlnlmdcmckedlal reappearing",
+    "5. Check for scheduled tasks that reinstall extensions",
+    "6. Audit all Chrome policies in registry"
+  ],
+  "tor_browser": {
+    "path": "C:\\\\Users\\\\echo\\\\OneDrive\\\\Desktop\\\\Tor Browser",
+    "issue_found": "torrc referenced spwot user instead of echo",
+    "issue_2": "DisableNetwork was set to 1 (disabled)",
+    "fix_applied": "Changed spwot\u2192echo and DisableNetwork 1\u21920",
+    "status": "FIXED"
+  },
+  "chrome_zip_analysis": {
+    "path": "Chrome.zip",
+    "extracted_to": "Chrome_extracted/",
+    "version": "144.0.7559.98",
+    "installer_modified": "2026-01-27 19:06 PM (2 days after base)",
+    "gendered_locales": {
+      "count": 165,
+      "pattern": "[5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0]",
+      "gos_correlation": "165 / \u03ba = 129.59 \u2248 Klein twist (128.23\u00b0)",
+      "assessment": "Legitimate Chrome feature for grammatical gender in translations"
+    },
+    "chrome_elf_dll": "Valid Google signature - legitimate Early Loading Framework"
+  },
+  "updated": "2026-01-29T03:18:28.747048"
+}

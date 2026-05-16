@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "total_aliases_scanned": 883,
+    "target_ip": "190.106.77.194",
+    "hypothesis": "Digital Twin Swarm / Identity Scattering",
+    "status": "CONFIRMED_CONVERGENCE"
+  },
+  "root_metrics": {
+    "top_tokens": [
+      [
+        "genesis",
+        177
+      ],
+      [
+        "alfaro",
+        117
+      ],
+      [
+        "marquez",
+        78
+      ],
+      [
+        "alvaro",
+        61
+      ],
+      [
+        "peralta",
+        30
+      ],
+      [
+        "daniela",
+        25
+      ],
+      [
+        "génesis",
+        22
+      ],
+      [
+        "álvaro",
+        17
+      ],
+      [
+        "márquez",
+        13
+      ],
+      [
+        "vasquez",
+        10
+      ],
+      [
+        "de",
+        9
+      ],
+      [
+        "alex",
+        6
+      ],
+      [
+        "marques",
+        6
+      ],
+      [
+        "g",
+        6
+      ],
+      [
+        "m",
+        5
+      ],
+      [
+        "jairo",
+        5
+      ],
+      [
+        "jose",
+        4
+      ],
+      [
+        "al",
+        4
+      ],
+      [
+        "s",
+        4
+      ],
+      [
+        "gene",
+        4
+      ]
+    ]
+  },
+  "convergence_clusters": {
+    "genesis": {
+      "count": 338,
+      "samples": [
+        "genesis vasquez alvaro",
+        "genesis c vasquez",
+        "genesis vega",
+        "genesis erin vasquez",
+        "genesis marina vasquez",
+        "genesis melou baez",
+        "genesis m vasquez",
+        "genesis angelique vasquez",
+        "genesis acencio alvaro",
+        "genesis alvaro"
+      ]
+    },
+    "uncategorized": {
+      "count": 232,
+      "samples": [
+        "génesis vasquez",
+        "génesis vázquez",
+        "octavio vasquez",
+        "génesis ventiladores",
+        "jairo acuna",
+        "jairus dapyro",
+        "jairo l massard",
+        "daniel génesis onyenwosa",
+        "michilena ramírez génesis daniela",
+        "génesis daniela moreno rodríguez"
+      ]
+    },
+    "alvaro": {
+      "count": 68,
+      "samples": [
+        "génesis alvaro",
+        "alvaro cabana",
+        "alvaro vela",
+        "alvaro hylander",
+        "alvaro",
+        "alvaro none",
+        "génesis alvaro",
+        "alvarocabana",
+        "alvaro vela",
+        "alvaromcdrums"
+      ]
+    },
+    "alfaro": {
+      "count": 93,
+      "samples": [
+        "jairo alfaro",
+        "dr jairo alfaro",
+        "jairo alfaro rodriguez",
+        "jayro alfaro herrera",
+        "génesis daniela alfaro",
+        "génesis daniela alfaro enríquez",
+        "génesis daniela pineda alfaro",
+        "ruddy daniela alfaro cordoba",
+        "michel daniela alfaro",
+        "reinielis daniela alfaro"
+      ]
+    },
+    "marquez": {
+      "count": 98,
+      "samples": [
+        "carolyne marquez",
+        "monica gonzalez marquez",
+        "cristina marquez",
+        "ericka marquez",
+        "pepe marquez",
+        "lucas romano marquez rizzi",
+        "sarah marissa marquez",
+        "jose gomez marquez",
+        "phillip marquez",
+        "mat marquez"
+      ]
+    },
+    "peralta": {
+      "count": 54,
+      "samples": [
+        "carialvarezperalta",
+        "milvaperaltaalvarez",
+        "gloriaperezperalta",
+        "santiperalta",
+        "lilyperalta",
+        "peraltaalex70",
+        "len peralta",
+        "abi peralta econ",
+        "joan peralta",
+        "yaddyra peralta"
+      ]
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "timestamp": "2026-04-04T19:10:49.739069",
+  "kiwisdr": "http://ti0rc.proxy.kiwisdr.com:8073",
+  "status": {
+    "online": false,
+    "error": "timed out"
+  },
+  "frequencies": {
+    "SHARES-A": {
+      "frequency_mhz": 5211.0,
+      "frequency_khz": 5211000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=5211000&mode=usb&zoom=10"
+    },
+    "SHARES-B": {
+      "frequency_mhz": 7527.0,
+      "frequency_khz": 7527000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=7527000&mode=usb&zoom=10"
+    },
+    "SHARES-C": {
+      "frequency_mhz": 10493.0,
+      "frequency_khz": 10493000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=10493000&mode=usb&zoom=10"
+    },
+    "SHARES-D": {
+      "frequency_mhz": 14396.5,
+      "frequency_khz": 14396500,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=14396500&mode=usb&zoom=10"
+    },
+    "MARS-ARMY-1": {
+      "frequency_mhz": 4020.0,
+      "frequency_khz": 4020000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=4020000&mode=usb&zoom=10"
+    },
+    "MARS-ARMY-2": {
+      "frequency_mhz": 6997.5,
+      "frequency_khz": 6997500,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=6997500&mode=usb&zoom=10"
+    },
+    "MARS-NAVY-1": {
+      "frequency_mhz": 4018.0,
+      "frequency_khz": 4018000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=4018000&mode=usb&zoom=10"
+    },
+    "MARS-USAF-1": {
+      "frequency_mhz": 13927.0,
+      "frequency_khz": 13927000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=13927000&mode=usb&zoom=10"
+    },
+    "USCG-DISTRESS": {
+      "frequency_mhz": 2182.0,
+      "frequency_khz": 2182000,
+      "mode": "am",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=2182000&mode=am&zoom=10"
+    },
+    "USCG-SAFETY": {
+      "frequency_mhz": 4125.0,
+      "frequency_khz": 4125000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=4125000&mode=usb&zoom=10"
+    },
+    "USCG-WORKING": {
+      "frequency_mhz": 8291.0,
+      "frequency_khz": 8291000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=8291000&mode=usb&zoom=10"
+    },
+    "HF-DISTRESS": {
+      "frequency_mhz": 8364.0,
+      "frequency_khz": 8364000,
+      "mode": "am",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=8364000&mode=am&zoom=10"
+    },
+    "AVIATION-HF": {
+      "frequency_mhz": 5616.0,
+      "frequency_khz": 5616000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=5616000&mode=usb&zoom=10"
+    },
+    "NUMBERS-1": {
+      "frequency_mhz": 6840.0,
+      "frequency_khz": 6840000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=6840000&mode=usb&zoom=10"
+    },
+    "NUMBERS-2": {
+      "frequency_mhz": 7887.0,
+      "frequency_khz": 7887000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=7887000&mode=usb&zoom=10"
+    },
+    "NUMBERS-3": {
+      "frequency_mhz": 9450.0,
+      "frequency_khz": 9450000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=9450000&mode=usb&zoom=10"
+    },
+    "HAM-40M-EMERG": {
+      "frequency_mhz": 7290.0,
+      "frequency_khz": 7290000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=7290000&mode=usb&zoom=10"
+    },
+    "HAM-20M-EMERG": {
+      "frequency_mhz": 14300.0,
+      "frequency_khz": 14300000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=14300000&mode=usb&zoom=10"
+    },
+    "WWV-5": {
+      "frequency_mhz": 5000.0,
+      "frequency_khz": 5000000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=5000000&mode=usb&zoom=10"
+    },
+    "WWV-10": {
+      "frequency_mhz": 10000.0,
+      "frequency_khz": 10000000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=10000000&mode=usb&zoom=10"
+    },
+    "WWV-15": {
+      "frequency_mhz": 15000.0,
+      "frequency_khz": 15000000,
+      "mode": "usb",
+      "url": "http://ti0rc.proxy.kiwisdr.com:8073/?f=15000000&mode=usb&zoom=10"
+    }
+  }
+}

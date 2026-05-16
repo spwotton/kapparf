@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KiwiSDR Spectrum Scan - 20260404_191040</title>
+    <style>
+        body { font-family: monospace; background: #1a1a2e; color: #0f0; padding: 20px; }
+        h1 { color: #ff6b6b; }
+        h2 { color: #feca57; margin-top: 30px; }
+        a { color: #54a0ff; text-decoration: none; }
+        a:hover { color: #fff; background: #54a0ff; }
+        .band { margin: 10px 0; padding: 10px; background: #16213e; border-radius: 5px; }
+        .suspect { background: #8b0000 !important; }
+        .freq { display: inline-block; width: 100px; }
+        .mode { display: inline-block; width: 50px; color: #feca57; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #333; }
+        th { background: #0d3b66; }
+        .priority-HIGH { background: #ff4757; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>🎯 KiwiSDR Spectrum Scanner</h1>
+    <p>Target: <strong>Hector Mora Setecom 180W HF Radio</strong></p>
+    <p>KiwiSDR: <a href="http://ti0rc.proxy.kiwisdr.com:8073" target="_blank">http://ti0rc.proxy.kiwisdr.com:8073</a></p>
+    <p>Status: ❌ OFFLINE 
+       (?/? users)</p>
+    <p>Generated: 2026-04-04T19:10:40.823603</p>
+    <p>Total Frequencies: <strong>210</strong></p>
+    
+    <h2>🚨 SUSPECT FREQUENCIES (Check First)</h2>
+    <table>
+        <tr><th>Freq (kHz)</th><th>Mode</th><th>Notes</th><th>Link</th></tr>
+
+        <tr class="priority-HIGH">
+            <td>1234</td>
+            <td>AM</td>
+            <td>TR-069 port correlation</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1234&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>4687</td>
+            <td>AM</td>
+            <td>46.875 Hz harmonic</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4687&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>9375</td>
+            <td>AM</td>
+            <td>46.875 Hz harmonic</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=9375&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>14062</td>
+            <td>AM</td>
+            <td>46.875 Hz harmonic</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14062&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>7410</td>
+            <td>AM</td>
+            <td>Pirate radio hotspot</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7410&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>6925</td>
+            <td>AM</td>
+            <td>Pirate radio hotspot</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=6925&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>11175</td>
+            <td>AM</td>
+            <td>USAF HFGCS</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=11175&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>8992</td>
+            <td>AM</td>
+            <td>USAF HFGCS</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=8992&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>4724</td>
+            <td>AM</td>
+            <td>USAF HFGCS</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4724&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+        <tr class="priority-HIGH">
+            <td>6739</td>
+            <td>AM</td>
+            <td>USAF HFGCS</td>
+            <td><a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=6739&mod=am&zoom=11&wf=2" target="_blank">📻 OPEN</a></td>
+        </tr>
+    </table>
+
+    <h2>📡 LW (150-520 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=150&mod=am&zoom=10&wf=2" target="_blank" title="150 kHz">
+            <span class="freq">150 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=200&mod=am&zoom=10&wf=2" target="_blank" title="200 kHz">
+            <span class="freq">200 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=250&mod=am&zoom=10&wf=2" target="_blank" title="250 kHz">
+            <span class="freq">250 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=300&mod=am&zoom=10&wf=2" target="_blank" title="300 kHz">
+            <span class="freq">300 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=350&mod=am&zoom=10&wf=2" target="_blank" title="350 kHz">
+            <span class="freq">350 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=400&mod=am&zoom=10&wf=2" target="_blank" title="400 kHz">
+            <span class="freq">400 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=450&mod=am&zoom=10&wf=2" target="_blank" title="450 kHz">
+            <span class="freq">450 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=500&mod=am&zoom=10&wf=2" target="_blank" title="500 kHz">
+            <span class="freq">500 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 MW_AM (530-1700 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=530&mod=am&zoom=10&wf=2" target="_blank" title="530 kHz">
+            <span class="freq">530 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=630&mod=am&zoom=10&wf=2" target="_blank" title="630 kHz">
+            <span class="freq">630 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=730&mod=am&zoom=10&wf=2" target="_blank" title="730 kHz">
+            <span class="freq">730 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=830&mod=am&zoom=10&wf=2" target="_blank" title="830 kHz">
+            <span class="freq">830 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=930&mod=am&zoom=10&wf=2" target="_blank" title="930 kHz">
+            <span class="freq">930 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1030&mod=am&zoom=10&wf=2" target="_blank" title="1030 kHz">
+            <span class="freq">1030 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1130&mod=am&zoom=10&wf=2" target="_blank" title="1130 kHz">
+            <span class="freq">1130 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1230&mod=am&zoom=10&wf=2" target="_blank" title="1230 kHz">
+            <span class="freq">1230 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1330&mod=am&zoom=10&wf=2" target="_blank" title="1330 kHz">
+            <span class="freq">1330 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1430&mod=am&zoom=10&wf=2" target="_blank" title="1430 kHz">
+            <span class="freq">1430 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1530&mod=am&zoom=10&wf=2" target="_blank" title="1530 kHz">
+            <span class="freq">1530 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1630&mod=am&zoom=10&wf=2" target="_blank" title="1630 kHz">
+            <span class="freq">1630 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 160M (1800-2000 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1800&mod=lsb&zoom=11&wf=2" target="_blank" title="1800 kHz">
+            <span class="freq">1800 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1820&mod=lsb&zoom=11&wf=2" target="_blank" title="1820 kHz">
+            <span class="freq">1820 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1840&mod=lsb&zoom=11&wf=2" target="_blank" title="1840 kHz">
+            <span class="freq">1840 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1860&mod=lsb&zoom=11&wf=2" target="_blank" title="1860 kHz">
+            <span class="freq">1860 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1880&mod=lsb&zoom=11&wf=2" target="_blank" title="1880 kHz">
+            <span class="freq">1880 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1900&mod=lsb&zoom=11&wf=2" target="_blank" title="1900 kHz">
+            <span class="freq">1900 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1920&mod=lsb&zoom=11&wf=2" target="_blank" title="1920 kHz">
+            <span class="freq">1920 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1940&mod=lsb&zoom=11&wf=2" target="_blank" title="1940 kHz">
+            <span class="freq">1940 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1960&mod=lsb&zoom=11&wf=2" target="_blank" title="1960 kHz">
+            <span class="freq">1960 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=1980&mod=lsb&zoom=11&wf=2" target="_blank" title="1980 kHz">
+            <span class="freq">1980 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2000&mod=lsb&zoom=11&wf=2" target="_blank" title="2000 kHz">
+            <span class="freq">2000 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 80M (3500-4000 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3500&mod=lsb&zoom=10&wf=2" target="_blank" title="3500 kHz">
+            <span class="freq">3500 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3550&mod=lsb&zoom=10&wf=2" target="_blank" title="3550 kHz">
+            <span class="freq">3550 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3600&mod=lsb&zoom=10&wf=2" target="_blank" title="3600 kHz">
+            <span class="freq">3600 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3650&mod=lsb&zoom=10&wf=2" target="_blank" title="3650 kHz">
+            <span class="freq">3650 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3700&mod=lsb&zoom=10&wf=2" target="_blank" title="3700 kHz">
+            <span class="freq">3700 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3750&mod=lsb&zoom=10&wf=2" target="_blank" title="3750 kHz">
+            <span class="freq">3750 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3800&mod=lsb&zoom=10&wf=2" target="_blank" title="3800 kHz">
+            <span class="freq">3800 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3850&mod=lsb&zoom=10&wf=2" target="_blank" title="3850 kHz">
+            <span class="freq">3850 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3900&mod=lsb&zoom=10&wf=2" target="_blank" title="3900 kHz">
+            <span class="freq">3900 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=3950&mod=lsb&zoom=10&wf=2" target="_blank" title="3950 kHz">
+            <span class="freq">3950 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4000&mod=lsb&zoom=10&wf=2" target="_blank" title="4000 kHz">
+            <span class="freq">4000 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 60M (5300-5500 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5300&mod=usb&zoom=11&wf=2" target="_blank" title="5300 kHz">
+            <span class="freq">5300 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5320&mod=usb&zoom=11&wf=2" target="_blank" title="5320 kHz">
+            <span class="freq">5320 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5340&mod=usb&zoom=11&wf=2" target="_blank" title="5340 kHz">
+            <span class="freq">5340 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5360&mod=usb&zoom=11&wf=2" target="_blank" title="5360 kHz">
+            <span class="freq">5360 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5380&mod=usb&zoom=11&wf=2" target="_blank" title="5380 kHz">
+            <span class="freq">5380 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5400&mod=usb&zoom=11&wf=2" target="_blank" title="5400 kHz">
+            <span class="freq">5400 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5420&mod=usb&zoom=11&wf=2" target="_blank" title="5420 kHz">
+            <span class="freq">5420 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5440&mod=usb&zoom=11&wf=2" target="_blank" title="5440 kHz">
+            <span class="freq">5440 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5460&mod=usb&zoom=11&wf=2" target="_blank" title="5460 kHz">
+            <span class="freq">5460 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5480&mod=usb&zoom=11&wf=2" target="_blank" title="5480 kHz">
+            <span class="freq">5480 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5500&mod=usb&zoom=11&wf=2" target="_blank" title="5500 kHz">
+            <span class="freq">5500 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 40M (7000-7300 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7000&mod=lsb&zoom=10&wf=2" target="_blank" title="7000 kHz">
+            <span class="freq">7000 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7030&mod=lsb&zoom=10&wf=2" target="_blank" title="7030 kHz">
+            <span class="freq">7030 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7060&mod=lsb&zoom=10&wf=2" target="_blank" title="7060 kHz">
+            <span class="freq">7060 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7090&mod=lsb&zoom=10&wf=2" target="_blank" title="7090 kHz">
+            <span class="freq">7090 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7120&mod=lsb&zoom=10&wf=2" target="_blank" title="7120 kHz">
+            <span class="freq">7120 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7150&mod=lsb&zoom=10&wf=2" target="_blank" title="7150 kHz">
+            <span class="freq">7150 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7180&mod=lsb&zoom=10&wf=2" target="_blank" title="7180 kHz">
+            <span class="freq">7180 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7210&mod=lsb&zoom=10&wf=2" target="_blank" title="7210 kHz">
+            <span class="freq">7210 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7240&mod=lsb&zoom=10&wf=2" target="_blank" title="7240 kHz">
+            <span class="freq">7240 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7270&mod=lsb&zoom=10&wf=2" target="_blank" title="7270 kHz">
+            <span class="freq">7270 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=7300&mod=lsb&zoom=10&wf=2" target="_blank" title="7300 kHz">
+            <span class="freq">7300 kHz</span>
+            <span class="mode">LSB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 30M (10100-10150 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=10100&mod=cw&zoom=12&wf=2" target="_blank" title="10100 kHz">
+            <span class="freq">10100 kHz</span>
+            <span class="mode">CW</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=10110&mod=cw&zoom=12&wf=2" target="_blank" title="10110 kHz">
+            <span class="freq">10110 kHz</span>
+            <span class="mode">CW</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=10120&mod=cw&zoom=12&wf=2" target="_blank" title="10120 kHz">
+            <span class="freq">10120 kHz</span>
+            <span class="mode">CW</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=10130&mod=cw&zoom=12&wf=2" target="_blank" title="10130 kHz">
+            <span class="freq">10130 kHz</span>
+            <span class="mode">CW</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=10140&mod=cw&zoom=12&wf=2" target="_blank" title="10140 kHz">
+            <span class="freq">10140 kHz</span>
+            <span class="mode">CW</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=10150&mod=cw&zoom=12&wf=2" target="_blank" title="10150 kHz">
+            <span class="freq">10150 kHz</span>
+            <span class="mode">CW</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 20M (14000-14350 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14000&mod=usb&zoom=10&wf=2" target="_blank" title="14000 kHz">
+            <span class="freq">14000 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14035&mod=usb&zoom=10&wf=2" target="_blank" title="14035 kHz">
+            <span class="freq">14035 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14070&mod=usb&zoom=10&wf=2" target="_blank" title="14070 kHz">
+            <span class="freq">14070 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14105&mod=usb&zoom=10&wf=2" target="_blank" title="14105 kHz">
+            <span class="freq">14105 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14140&mod=usb&zoom=10&wf=2" target="_blank" title="14140 kHz">
+            <span class="freq">14140 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14175&mod=usb&zoom=10&wf=2" target="_blank" title="14175 kHz">
+            <span class="freq">14175 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14210&mod=usb&zoom=10&wf=2" target="_blank" title="14210 kHz">
+            <span class="freq">14210 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14245&mod=usb&zoom=10&wf=2" target="_blank" title="14245 kHz">
+            <span class="freq">14245 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14280&mod=usb&zoom=10&wf=2" target="_blank" title="14280 kHz">
+            <span class="freq">14280 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14315&mod=usb&zoom=10&wf=2" target="_blank" title="14315 kHz">
+            <span class="freq">14315 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=14350&mod=usb&zoom=10&wf=2" target="_blank" title="14350 kHz">
+            <span class="freq">14350 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 17M (18068-18168 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=18068&mod=usb&zoom=11&wf=2" target="_blank" title="18068 kHz">
+            <span class="freq">18068 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=18088&mod=usb&zoom=11&wf=2" target="_blank" title="18088 kHz">
+            <span class="freq">18088 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=18108&mod=usb&zoom=11&wf=2" target="_blank" title="18108 kHz">
+            <span class="freq">18108 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=18128&mod=usb&zoom=11&wf=2" target="_blank" title="18128 kHz">
+            <span class="freq">18128 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=18148&mod=usb&zoom=11&wf=2" target="_blank" title="18148 kHz">
+            <span class="freq">18148 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=18168&mod=usb&zoom=11&wf=2" target="_blank" title="18168 kHz">
+            <span class="freq">18168 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 15M (21000-21450 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21000&mod=usb&zoom=10&wf=2" target="_blank" title="21000 kHz">
+            <span class="freq">21000 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21045&mod=usb&zoom=10&wf=2" target="_blank" title="21045 kHz">
+            <span class="freq">21045 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21090&mod=usb&zoom=10&wf=2" target="_blank" title="21090 kHz">
+            <span class="freq">21090 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21135&mod=usb&zoom=10&wf=2" target="_blank" title="21135 kHz">
+            <span class="freq">21135 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21180&mod=usb&zoom=10&wf=2" target="_blank" title="21180 kHz">
+            <span class="freq">21180 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21225&mod=usb&zoom=10&wf=2" target="_blank" title="21225 kHz">
+            <span class="freq">21225 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21270&mod=usb&zoom=10&wf=2" target="_blank" title="21270 kHz">
+            <span class="freq">21270 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21315&mod=usb&zoom=10&wf=2" target="_blank" title="21315 kHz">
+            <span class="freq">21315 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21360&mod=usb&zoom=10&wf=2" target="_blank" title="21360 kHz">
+            <span class="freq">21360 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21405&mod=usb&zoom=10&wf=2" target="_blank" title="21405 kHz">
+            <span class="freq">21405 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=21450&mod=usb&zoom=10&wf=2" target="_blank" title="21450 kHz">
+            <span class="freq">21450 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 12M (24890-24990 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=24890&mod=usb&zoom=11&wf=2" target="_blank" title="24890 kHz">
+            <span class="freq">24890 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=24910&mod=usb&zoom=11&wf=2" target="_blank" title="24910 kHz">
+            <span class="freq">24910 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=24930&mod=usb&zoom=11&wf=2" target="_blank" title="24930 kHz">
+            <span class="freq">24930 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=24950&mod=usb&zoom=11&wf=2" target="_blank" title="24950 kHz">
+            <span class="freq">24950 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=24970&mod=usb&zoom=11&wf=2" target="_blank" title="24970 kHz">
+            <span class="freq">24970 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=24990&mod=usb&zoom=11&wf=2" target="_blank" title="24990 kHz">
+            <span class="freq">24990 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 10M (28000-29700 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28000&mod=usb&zoom=9&wf=2" target="_blank" title="28000 kHz">
+            <span class="freq">28000 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28100&mod=usb&zoom=9&wf=2" target="_blank" title="28100 kHz">
+            <span class="freq">28100 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28200&mod=usb&zoom=9&wf=2" target="_blank" title="28200 kHz">
+            <span class="freq">28200 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28300&mod=usb&zoom=9&wf=2" target="_blank" title="28300 kHz">
+            <span class="freq">28300 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28400&mod=usb&zoom=9&wf=2" target="_blank" title="28400 kHz">
+            <span class="freq">28400 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28500&mod=usb&zoom=9&wf=2" target="_blank" title="28500 kHz">
+            <span class="freq">28500 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28600&mod=usb&zoom=9&wf=2" target="_blank" title="28600 kHz">
+            <span class="freq">28600 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28700&mod=usb&zoom=9&wf=2" target="_blank" title="28700 kHz">
+            <span class="freq">28700 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28800&mod=usb&zoom=9&wf=2" target="_blank" title="28800 kHz">
+            <span class="freq">28800 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=28900&mod=usb&zoom=9&wf=2" target="_blank" title="28900 kHz">
+            <span class="freq">28900 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29000&mod=usb&zoom=9&wf=2" target="_blank" title="29000 kHz">
+            <span class="freq">29000 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29100&mod=usb&zoom=9&wf=2" target="_blank" title="29100 kHz">
+            <span class="freq">29100 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29200&mod=usb&zoom=9&wf=2" target="_blank" title="29200 kHz">
+            <span class="freq">29200 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29300&mod=usb&zoom=9&wf=2" target="_blank" title="29300 kHz">
+            <span class="freq">29300 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29400&mod=usb&zoom=9&wf=2" target="_blank" title="29400 kHz">
+            <span class="freq">29400 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29500&mod=usb&zoom=9&wf=2" target="_blank" title="29500 kHz">
+            <span class="freq">29500 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29600&mod=usb&zoom=9&wf=2" target="_blank" title="29600 kHz">
+            <span class="freq">29600 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=29700&mod=usb&zoom=9&wf=2" target="_blank" title="29700 kHz">
+            <span class="freq">29700 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 CB (26960-27410 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=26960&mod=am&zoom=11&wf=2" target="_blank" title="26960 kHz">
+            <span class="freq">26960 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=26970&mod=am&zoom=11&wf=2" target="_blank" title="26970 kHz">
+            <span class="freq">26970 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=26980&mod=am&zoom=11&wf=2" target="_blank" title="26980 kHz">
+            <span class="freq">26980 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=26990&mod=am&zoom=11&wf=2" target="_blank" title="26990 kHz">
+            <span class="freq">26990 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27000&mod=am&zoom=11&wf=2" target="_blank" title="27000 kHz">
+            <span class="freq">27000 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27010&mod=am&zoom=11&wf=2" target="_blank" title="27010 kHz">
+            <span class="freq">27010 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27020&mod=am&zoom=11&wf=2" target="_blank" title="27020 kHz">
+            <span class="freq">27020 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27030&mod=am&zoom=11&wf=2" target="_blank" title="27030 kHz">
+            <span class="freq">27030 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27040&mod=am&zoom=11&wf=2" target="_blank" title="27040 kHz">
+            <span class="freq">27040 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27050&mod=am&zoom=11&wf=2" target="_blank" title="27050 kHz">
+            <span class="freq">27050 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27060&mod=am&zoom=11&wf=2" target="_blank" title="27060 kHz">
+            <span class="freq">27060 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27070&mod=am&zoom=11&wf=2" target="_blank" title="27070 kHz">
+            <span class="freq">27070 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27080&mod=am&zoom=11&wf=2" target="_blank" title="27080 kHz">
+            <span class="freq">27080 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27090&mod=am&zoom=11&wf=2" target="_blank" title="27090 kHz">
+            <span class="freq">27090 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27100&mod=am&zoom=11&wf=2" target="_blank" title="27100 kHz">
+            <span class="freq">27100 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27110&mod=am&zoom=11&wf=2" target="_blank" title="27110 kHz">
+            <span class="freq">27110 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27120&mod=am&zoom=11&wf=2" target="_blank" title="27120 kHz">
+            <span class="freq">27120 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27130&mod=am&zoom=11&wf=2" target="_blank" title="27130 kHz">
+            <span class="freq">27130 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27140&mod=am&zoom=11&wf=2" target="_blank" title="27140 kHz">
+            <span class="freq">27140 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27150&mod=am&zoom=11&wf=2" target="_blank" title="27150 kHz">
+            <span class="freq">27150 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27160&mod=am&zoom=11&wf=2" target="_blank" title="27160 kHz">
+            <span class="freq">27160 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27170&mod=am&zoom=11&wf=2" target="_blank" title="27170 kHz">
+            <span class="freq">27170 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27180&mod=am&zoom=11&wf=2" target="_blank" title="27180 kHz">
+            <span class="freq">27180 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27190&mod=am&zoom=11&wf=2" target="_blank" title="27190 kHz">
+            <span class="freq">27190 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27200&mod=am&zoom=11&wf=2" target="_blank" title="27200 kHz">
+            <span class="freq">27200 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27210&mod=am&zoom=11&wf=2" target="_blank" title="27210 kHz">
+            <span class="freq">27210 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27220&mod=am&zoom=11&wf=2" target="_blank" title="27220 kHz">
+            <span class="freq">27220 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27230&mod=am&zoom=11&wf=2" target="_blank" title="27230 kHz">
+            <span class="freq">27230 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27240&mod=am&zoom=11&wf=2" target="_blank" title="27240 kHz">
+            <span class="freq">27240 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27250&mod=am&zoom=11&wf=2" target="_blank" title="27250 kHz">
+            <span class="freq">27250 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27260&mod=am&zoom=11&wf=2" target="_blank" title="27260 kHz">
+            <span class="freq">27260 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27270&mod=am&zoom=11&wf=2" target="_blank" title="27270 kHz">
+            <span class="freq">27270 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27280&mod=am&zoom=11&wf=2" target="_blank" title="27280 kHz">
+            <span class="freq">27280 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27290&mod=am&zoom=11&wf=2" target="_blank" title="27290 kHz">
+            <span class="freq">27290 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27300&mod=am&zoom=11&wf=2" target="_blank" title="27300 kHz">
+            <span class="freq">27300 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27310&mod=am&zoom=11&wf=2" target="_blank" title="27310 kHz">
+            <span class="freq">27310 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27320&mod=am&zoom=11&wf=2" target="_blank" title="27320 kHz">
+            <span class="freq">27320 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27330&mod=am&zoom=11&wf=2" target="_blank" title="27330 kHz">
+            <span class="freq">27330 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27340&mod=am&zoom=11&wf=2" target="_blank" title="27340 kHz">
+            <span class="freq">27340 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27350&mod=am&zoom=11&wf=2" target="_blank" title="27350 kHz">
+            <span class="freq">27350 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27360&mod=am&zoom=11&wf=2" target="_blank" title="27360 kHz">
+            <span class="freq">27360 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27370&mod=am&zoom=11&wf=2" target="_blank" title="27370 kHz">
+            <span class="freq">27370 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27380&mod=am&zoom=11&wf=2" target="_blank" title="27380 kHz">
+            <span class="freq">27380 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27390&mod=am&zoom=11&wf=2" target="_blank" title="27390 kHz">
+            <span class="freq">27390 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27400&mod=am&zoom=11&wf=2" target="_blank" title="27400 kHz">
+            <span class="freq">27400 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=27410&mod=am&zoom=11&wf=2" target="_blank" title="27410 kHz">
+            <span class="freq">27410 kHz</span>
+            <span class="mode">AM</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 MARS (2000-2100 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2000&mod=usb&zoom=11&wf=2" target="_blank" title="2000 kHz">
+            <span class="freq">2000 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2010&mod=usb&zoom=11&wf=2" target="_blank" title="2010 kHz">
+            <span class="freq">2010 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2020&mod=usb&zoom=11&wf=2" target="_blank" title="2020 kHz">
+            <span class="freq">2020 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2030&mod=usb&zoom=11&wf=2" target="_blank" title="2030 kHz">
+            <span class="freq">2030 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2040&mod=usb&zoom=11&wf=2" target="_blank" title="2040 kHz">
+            <span class="freq">2040 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2050&mod=usb&zoom=11&wf=2" target="_blank" title="2050 kHz">
+            <span class="freq">2050 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2060&mod=usb&zoom=11&wf=2" target="_blank" title="2060 kHz">
+            <span class="freq">2060 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2070&mod=usb&zoom=11&wf=2" target="_blank" title="2070 kHz">
+            <span class="freq">2070 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2080&mod=usb&zoom=11&wf=2" target="_blank" title="2080 kHz">
+            <span class="freq">2080 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2090&mod=usb&zoom=11&wf=2" target="_blank" title="2090 kHz">
+            <span class="freq">2090 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=2100&mod=usb&zoom=11&wf=2" target="_blank" title="2100 kHz">
+            <span class="freq">2100 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 HF_AERO (5450-5730 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5450&mod=usb&zoom=10&wf=2" target="_blank" title="5450 kHz">
+            <span class="freq">5450 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5480&mod=usb&zoom=10&wf=2" target="_blank" title="5480 kHz">
+            <span class="freq">5480 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5510&mod=usb&zoom=10&wf=2" target="_blank" title="5510 kHz">
+            <span class="freq">5510 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5540&mod=usb&zoom=10&wf=2" target="_blank" title="5540 kHz">
+            <span class="freq">5540 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5570&mod=usb&zoom=10&wf=2" target="_blank" title="5570 kHz">
+            <span class="freq">5570 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5600&mod=usb&zoom=10&wf=2" target="_blank" title="5600 kHz">
+            <span class="freq">5600 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5630&mod=usb&zoom=10&wf=2" target="_blank" title="5630 kHz">
+            <span class="freq">5630 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5660&mod=usb&zoom=10&wf=2" target="_blank" title="5660 kHz">
+            <span class="freq">5660 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5690&mod=usb&zoom=10&wf=2" target="_blank" title="5690 kHz">
+            <span class="freq">5690 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=5720&mod=usb&zoom=10&wf=2" target="_blank" title="5720 kHz">
+            <span class="freq">5720 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📡 HF_MARINE (4000-4500 kHz)</h2>
+    <div class="band">
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4000&mod=usb&zoom=10&wf=2" target="_blank" title="4000 kHz">
+            <span class="freq">4000 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4050&mod=usb&zoom=10&wf=2" target="_blank" title="4050 kHz">
+            <span class="freq">4050 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4100&mod=usb&zoom=10&wf=2" target="_blank" title="4100 kHz">
+            <span class="freq">4100 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4150&mod=usb&zoom=10&wf=2" target="_blank" title="4150 kHz">
+            <span class="freq">4150 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4200&mod=usb&zoom=10&wf=2" target="_blank" title="4200 kHz">
+            <span class="freq">4200 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4250&mod=usb&zoom=10&wf=2" target="_blank" title="4250 kHz">
+            <span class="freq">4250 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4300&mod=usb&zoom=10&wf=2" target="_blank" title="4300 kHz">
+            <span class="freq">4300 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4350&mod=usb&zoom=10&wf=2" target="_blank" title="4350 kHz">
+            <span class="freq">4350 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4400&mod=usb&zoom=10&wf=2" target="_blank" title="4400 kHz">
+            <span class="freq">4400 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4450&mod=usb&zoom=10&wf=2" target="_blank" title="4450 kHz">
+            <span class="freq">4450 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+        <a href="http://ti0rc.proxy.kiwisdr.com:8073/?f=4500&mod=usb&zoom=10&wf=2" target="_blank" title="4500 kHz">
+            <span class="freq">4500 kHz</span>
+            <span class="mode">USB</span>
+        </a> | 
+
+    </div>
+
+    <h2>📋 Quick Scan Instructions</h2>
+    <ol>
+        <li>Click any frequency link to open KiwiSDR at that frequency</li>
+        <li>Watch the <strong>waterfall</strong> for unusual strong signals</li>
+        <li>180W transmitter will show as BRIGHT vertical line</li>
+        <li>Look for spurious emissions / harmonics</li>
+        <li>Note any signals with excessive bandwidth (overmodulation)</li>
+        <li>Screenshot anomalies for evidence</li>
+    </ol>
+    
+    <h2>🔍 What to Look For</h2>
+    <ul>
+        <li><strong>Unusually strong signals</strong> - 180W is HIGH POWER</li>
+        <li><strong>Splatter</strong> - Signal bleeding outside normal bandwidth</li>
+        <li><strong>Harmonics</strong> - Same signal at 2x, 3x frequency</li>
+        <li><strong>Distortion</strong> - Overmodulated audio</li>
+        <li><strong>Illegal frequencies</strong> - Outside amateur bands</li>
+    </ul>
+    
+    <script>
+        // Auto-refresh status
+        console.log('Scan plan loaded - {len(urls)} frequencies to check');
+    </script>
+</body>
+</html>

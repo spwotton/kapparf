@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-01-30T10:01:06.468277",
+  "location": {
+    "lat": 9.9535043,
+    "lon": -84.2908709
+  },
+  "satellites": {
+    "Starlink": {
+      "count": 0,
+      "sats": []
+    },
+    "Military": {
+      "count": 0,
+      "sats": []
+    },
+    "Amateur": {
+      "count": 0,
+      "sats": []
+    }
+  }
+}

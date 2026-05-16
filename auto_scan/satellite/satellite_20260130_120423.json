@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-01-30T12:04:23.291271",
+  "epoch": 1769796263.291271,
+  "category": "satellite",
+  "priority": "normal",
+  "data": {
+    "location": {
+      "lat": 9.9535043,
+      "lon": -84.2908709
+    },
+    "satellites_overhead": [
+      {
+        "name": "MUOS-3",
+        "norad_id": 40374,
+        "altitude_deg": 11.8,
+        "azimuth_deg": 95.1,
+        "distance_km": 40611.0
+      },
+      {
+        "name": "AEHF-4",
+        "norad_id": 43651,
+        "altitude_deg": 67.1,
+        "azimuth_deg": 121.3,
+        "distance_km": 35961.0
+      }
+    ],
+    "count": 2
+  }
+}

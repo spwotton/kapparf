@@ -1,0 +1,1205 @@
+{
+  "dorje_station": {
+    "lat": 10.0167,
+    "lon": -84.2167,
+    "location": "La Guacima, Costa Rica"
+  },
+  "session_id": "20260125_041627",
+  "timestamp": "2026-01-25T04:19:26.414098",
+  "scan_results": {
+    "receivers": [
+      {
+        "name": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+        "url": "22555.proxy.kiwisdr.com",
+        "location": "Tellico Plains, TN USA",
+        "lat": 35.298568,
+        "lon": -84.275581,
+        "distance_km": 2811.2217888322475,
+        "status": "online"
+      },
+      {
+        "name": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+        "url": "ssi.proxy.kiwisdr.com",
+        "location": "Bakersville, NC, USA",
+        "lat": 36.02734,
+        "lon": -82.12578,
+        "distance_km": 2899.94518310738,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+        "url": "n0bqv.proxy.kiwisdr.com",
+        "location": "[N0BQV] [Republic, Missouri. USA",
+        "lat": 37.16,
+        "lon": -93.57,
+        "distance_km": 3160.805190423459,
+        "status": "online"
+      },
+      {
+        "name": "National Radio Quiet Zone SDR | Monterey, Virginia",
+        "url": "phonic.proxy.kiwisdr.com",
+        "location": "Monterey, Virginia",
+        "lat": 38.391508,
+        "lon": -79.624402,
+        "distance_km": 3188.1942103047472,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | Cortland, New York USA",
+        "url": "kb2faf.org",
+        "location": "Cortland, New York USA",
+        "lat": 42.574636,
+        "lon": -76.011545,
+        "distance_km": 3707.2325280043237,
+        "status": "online"
+      },
+      {
+        "name": "KFS Omni KiwiSDR | Half Moon Bay, California",
+        "url": "kiwisdr.kfsdr.com",
+        "location": "Half Moon Bay, California",
+        "lat": 37.39,
+        "lon": -122.41,
+        "distance_km": 4881.571776067338,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | Stevensville, MT",
+        "url": "mtkiwi.proxy.kiwisdr.com",
+        "location": "Stevensville, MT",
+        "lat": 46.62,
+        "lon": -114.028,
+        "distance_km": 4947.92312014331,
+        "status": "online"
+      },
+      {
+        "name": "KPH 0-30 MHz SDR fed by TCI-530 3-30 MHz Omni | Point Reyes, California",
+        "url": "kphsdr.com",
+        "location": "Point Reyes, California",
+        "lat": 38.095647,
+        "lon": -122.947616,
+        "distance_km": 4960.664391369161,
+        "status": "online"
+      },
+      {
+        "name": "LU1HCW | ALPA CORRAL ARGENTINA",
+        "url": "190.123.83.42",
+        "location": "ALPA CORRAL ARGENTINA",
+        "lat": -32.66,
+        "lon": -64.76,
+        "distance_km": 5175.030488111924,
+        "status": "online"
+      },
+      {
+        "name": "ve6ars kiwi #1",
+        "url": "208.38.9.135",
+        "location": "Southern Alberta 1",
+        "lat": 50.08,
+        "lon": -113.68,
+        "distance_km": 5212.141157209793,
+        "status": "online"
+      },
+      {
+        "name": "Ireland North West 2 \ud83d\udcfb",
+        "url": "irelandnorthwest2.proxy.kiwisdr.com",
+        "location": "Ireland west",
+        "lat": 54.229144,
+        "lon": -9.312494,
+        "distance_km": 8126.106527730787,
+        "status": "online"
+      },
+      {
+        "name": "Ireland North West 3",
+        "url": "irelandnorthwest3.proxy.kiwisdr.com",
+        "location": "Ireland",
+        "lat": 54.229144,
+        "lon": -9.312494,
+        "distance_km": 8126.106527730787,
+        "status": "online"
+      },
+      {
+        "name": "Ireland North West 4",
+        "url": "22424.proxy.kiwisdr.com",
+        "location": "Ireland",
+        "lat": 54.229144,
+        "lon": -9.312494,
+        "distance_km": 8126.106527730787,
+        "status": "online"
+      },
+      {
+        "name": "Ireland North West 5",
+        "url": "22370.proxy.kiwisdr.com",
+        "location": "Ireland",
+        "lat": 54.229144,
+        "lon": -9.312494,
+        "distance_km": 8126.106527730787,
+        "status": "online"
+      },
+      {
+        "name": "G3SDR, 0-32 MHz Kiwi 8073. Weston-super-Mare. Parallel dipoles for 160m, 80m, 60m & 40m. 5/8th Vertical for 28MHz. Wellbrook Loop for VLF & MW \ud83d\udd7e",
+        "url": "g3sdr.com",
+        "location": "Weston-super-Mare, United Kingdom",
+        "lat": 51.317266,
+        "lon": -2.950479,
+        "distance_km": 8533.991615908813,
+        "status": "online"
+      },
+      {
+        "name": "G4WIM | Freckleton, Lancashire, UK",
+        "url": "21490.proxy.kiwisdr.com",
+        "location": "Freckleton, Lancashire, UK",
+        "lat": 53.75666,
+        "lon": -2.853857,
+        "distance_km": 8543.934688358038,
+        "status": "online"
+      },
+      {
+        "name": "Wessex KiWi V1 - G8JNJ - 0-30MHz - South West UK",
+        "url": "wessex.zapto.org",
+        "location": "South West England, UK",
+        "lat": 50.74,
+        "lon": -2.63,
+        "distance_km": 8556.090768197932,
+        "status": "online"
+      },
+      {
+        "name": "G2YT 10 element Log Periodic @ 27m usually parked beaming SOUTH WEST | Hitchin, UK",
+        "url": "g2yt.proxy.kiwisdr.com",
+        "location": "Hitchin, UK",
+        "lat": 51.91,
+        "lon": -0.245,
+        "distance_km": 8720.18310098496,
+        "status": "online"
+      },
+      {
+        "name": "F5LFE - North Burgundy KiwiSDR 0-30 MHZ | Marsangy (89), France",
+        "url": "www.f5lfe.fr",
+        "location": "Marsangy (89), France",
+        "lat": 48.119606,
+        "lon": 3.24148,
+        "distance_km": 8992.452983389583,
+        "status": "online"
+      },
+      {
+        "name": "ENJOY BY F4JOY | PRADIERS DEP 15 JN15LG, FRANCE",
+        "url": "f4joy.ddns.net",
+        "location": "PRADIERS DEP 15 JN15LG, FRANCE",
+        "lat": 45.269722,
+        "lon": 2.924131,
+        "distance_km": 8995.797800282002,
+        "status": "online"
+      },
+      {
+        "name": "\ud83c\uddf3\ud83c\uddf1 \u25ba PB8W \u25c0 \ud83c\uddf3\ud83c\uddf1 \u25ba Willem \u25c0 \ud83c\uddf3\ud83c\uddf1 \u25ba PAHGOR active loop sn:001 \u25c0 \ud83c\uddf3\ud83c\uddf1 | Assen | Netherlands",
+        "url": "pb8w.proxy.kiwisdr.com",
+        "location": "Assen | Netherlands",
+        "lat": 52.98,
+        "lon": 6.49,
+        "distance_km": 9166.929386452504,
+        "status": "online"
+      },
+      {
+        "name": "110-142MHz AirBand KiwiSDR | SWITZERLAND Hasenberg04 AG 700m / Antenna: VHF Omni",
+        "url": "hasenberg04.proxy.kiwisdr.com",
+        "location": "SWITZERLAND Hasenberg04 AG 700m JN47EJ",
+        "lat": 47.378459,
+        "lon": 8.364135,
+        "distance_km": 9382.422942115716,
+        "status": "online"
+      },
+      {
+        "name": "DJ8KL 0-30 MHz SDR | Hannover, Germany",
+        "url": "77.21.181.19",
+        "location": "Hannover, Germany",
+        "lat": 52.46,
+        "lon": 9.74,
+        "distance_km": 9391.68962364626,
+        "status": "online"
+      },
+      {
+        "name": "DF3LZ, KiwiSDR1 | Hamburg, Germany, 33m T2FD",
+        "url": "85.183.11.108",
+        "location": "Hamburg, Germany, 33m T2FD",
+        "lat": 53.452118,
+        "lon": 10.221034,
+        "distance_km": 9405.492408459424,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | Arvika,Sweden",
+        "url": "sa4bna.hopto.org",
+        "location": "Arvika,Sweden",
+        "lat": 59.61059,
+        "lon": 12.525302,
+        "distance_km": 9423.434913323841,
+        "status": "online"
+      },
+      {
+        "name": "HB9TMC SDR | Malvaglia TI, Switzerland",
+        "url": "hb9tmc.ddns.net",
+        "location": "Malvaglia TI, Switzerland",
+        "lat": 46.41,
+        "lon": 8.99,
+        "distance_km": 9446.17707344409,
+        "status": "online"
+      },
+      {
+        "name": "Hofmann's SDR | Illeben, Germany",
+        "url": "91.137.17.115",
+        "location": "Illeben, Germany",
+        "lat": 51.081386,
+        "lon": 10.675438,
+        "distance_km": 9480.88619657978,
+        "status": "online"
+      },
+      {
+        "name": "OE9XRV | Bregenz, Austria",
+        "url": "shack.oe9.at",
+        "location": "Bregenz, Austria",
+        "lat": 47.50492,
+        "lon": 9.720673,
+        "distance_km": 9480.891151211074,
+        "status": "online"
+      },
+      {
+        "name": "Radiohill, Alberschwende, Austria, 995m asl, 80m long vertical loop",
+        "url": "kiwi.oe9.oevsv.at",
+        "location": "Alberschwende, Austria",
+        "lat": 47.442516,
+        "lon": 9.843918,
+        "distance_km": 9491.192304797825,
+        "status": "online"
+      },
+      {
+        "name": "0.01-30 MHz SDR | active E-field vert. antenna | Germany, Bavaria, Landshut",
+        "url": "kiwisdr.dl1rf.ipv64.de",
+        "location": "Germany, Bavaria, Landshut",
+        "lat": 48.414761,
+        "lon": 12.278801,
+        "distance_km": 9649.574414344848,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR, SK2HG, Siknas Fortress, Sweden",
+        "url": "kiwisdr.sk2hg.se",
+        "location": "Siknas Sweden",
+        "lat": 65.868181,
+        "lon": 22.643595,
+        "distance_km": 9740.117171064605,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR, OK1DEK, Sedlcany, Czech Republic",
+        "url": "178.17.3.34",
+        "location": "Sedlcany, Czech Republic",
+        "lat": 49.659991,
+        "lon": 14.41974,
+        "distance_km": 9772.697358099445,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | Trecastelli, Italy",
+        "url": "iw2nke.ddns.net",
+        "location": "Trecastelli, Italy",
+        "lat": 43.662,
+        "lon": 13.137,
+        "distance_km": 9823.379737842679,
+        "status": "online"
+      },
+      {
+        "name": "\ud83d\udfe2\u26aa\ud83d\udd34 IZ6198SWL Radio Station \ud83d\udfe2\u26aa\ud83d\udd34 Alvito Central Italy | G5RV Full Size Antenna \ud83d\udef0\ufe0f | Solar-Powered \u2600\ufe0f\ud83d\udce1\ud83c\uddee\ud83c\uddf9",
+        "url": "iz6198swl.proxy.kiwisdr.com",
+        "location": "Alvito, Italy 0-30 MHz Frequencies",
+        "lat": 41.694738,
+        "lon": 13.759247,
+        "distance_km": 9920.485143078562,
+        "status": "online"
+      },
+      {
+        "name": "OH1CT - 160m dipole - Loppi, Finland",
+        "url": "oh1ct.sytes.net",
+        "location": "Loppi, Finland",
+        "lat": 60.673316,
+        "lon": 24.474856,
+        "distance_km": 10026.19586864064,
+        "status": "online"
+      },
+      {
+        "name": "\ud83d\uddf2 30 KHz-30 MHz \ud83d\uddf2 | Sobikow, Poland",
+        "url": "jm55.proxy.kiwisdr.com",
+        "location": "Sobikow, Poland",
+        "lat": 51.94,
+        "lon": 21.18,
+        "distance_km": 10161.94035048081,
+        "status": "online"
+      },
+      {
+        "name": "ZL2BKW | Palmerston North, New Zealand",
+        "url": "zl2bkw.proxy.kiwisdr.com",
+        "location": "Palmerston North, New Zealand",
+        "lat": -40.288936,
+        "lon": 175.6062,
+        "distance_km": 11585.795453525498,
+        "status": "online"
+      },
+      {
+        "name": "ZL2P H6 Masterton New Zealand",
+        "url": "h6.proxy.kiwisdr.com",
+        "location": "Masterton, New Zealand",
+        "lat": -40.919803,
+        "lon": 175.595149,
+        "distance_km": 11588.085049364814,
+        "status": "online"
+      },
+      {
+        "name": "ZL2P H4 Masterton New Zealand",
+        "url": "h4.proxy.kiwisdr.com",
+        "location": "Masterton, New Zealand",
+        "lat": -40.920341,
+        "lon": 175.592879,
+        "distance_km": 11588.276817007103,
+        "status": "online"
+      },
+      {
+        "name": "ZL2P H9 Masterton New Zealand",
+        "url": "h9.proxy.kiwisdr.com",
+        "location": "Masterton, New Zealand",
+        "lat": -40.920942,
+        "lon": 175.590697,
+        "distance_km": 11588.46131378423,
+        "status": "online"
+      },
+      {
+        "name": "######ZL2J 0-30 MHz SDR antenna 400m Doublet \\\\\\",
+        "url": "zl2j.proxy.kiwisdr.com",
+        "location": "Carterton, New Zealand",
+        "lat": -40.945498,
+        "lon": 175.57251,
+        "distance_km": 11590.037127031508,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR, ZL2VH Branch 63 New Zealand | Mount Climie, Upper Hutt NZ",
+        "url": "123.255.47.67",
+        "location": "Mount Climie, Upper Hutt NZ",
+        "lat": -41.150409,
+        "lon": 175.143457,
+        "distance_km": 11626.34602763183,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | New Zealand, Auckland",
+        "url": "22337.proxy.kiwisdr.com",
+        "location": "New Zealand, Auckland",
+        "lat": -36.776771,
+        "lon": 174.604368,
+        "distance_km": 11663.838630875072,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR Operated by the Marlborough Amateur Radio Club",
+        "url": "zl2ks.proxy.kiwisdr.com",
+        "location": "Marlborough, New Zealand",
+        "lat": -41.296085,
+        "lon": 174.002149,
+        "distance_km": 11721.875479637509,
+        "status": "online"
+      },
+      {
+        "name": "KiwiSDR2 | ZL3RCK QTH: White Rock, North Canterbury, New Zealand",
+        "url": "zl3rck.proxy.kiwisdr.com",
+        "location": "ZL3RCK QTH: White Rock, North Canterbury, New Zealand",
+        "lat": -43.18,
+        "lon": 172.46,
+        "distance_km": 11845.504860203742,
+        "status": "online"
+      },
+      {
+        "name": "Scroggs Hill KiwiSDR | Mosgiel, New Zealand",
+        "url": "zl4md.proxy.kiwisdr.com",
+        "location": "Mosgiel, New Zealand",
+        "lat": -45.91,
+        "lon": 170.34,
+        "distance_km": 11998.101947886391,
+        "status": "online"
+      },
+      {
+        "name": "Latham Road KiwiSDR | Gore, New Zealand",
+        "url": "latham.proxy.kiwisdr.com",
+        "location": "Gore, New Zealand",
+        "lat": -46.109176,
+        "lon": 169.011279,
+        "distance_km": 12098.620905182855,
+        "status": "online"
+      },
+      {
+        "name": "JP7FSO,0-30 MHz SDR, Fukushima JAPAN",
+        "url": "jp7fso-kiwisdr.sytes.net",
+        "location": "Matsukawa, Fukushima JAPAN",
+        "lat": 37.669714,
+        "lon": 140.492137,
+        "distance_km": 12964.743084655225,
+        "status": "online"
+      },
+      {
+        "name": "JA5FP 40m | Chiba, Japan",
+        "url": "ja5fp2.proxy.kiwisdr.com",
+        "location": "Chiba, Japan",
+        "lat": 35.667916,
+        "lon": 140.171996,
+        "distance_km": 13126.896583605823,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | Chiba, Japan",
+        "url": "22299.proxy.kiwisdr.com",
+        "location": "Chiba, Japan",
+        "lat": 35.45,
+        "lon": 140.06,
+        "distance_km": 13149.951293547783,
+        "status": "online"
+      },
+      {
+        "name": "0.5-30 MHz SDR | JK1EIO YOKOHAMA,JAPAN",
+        "url": "118.87.9.113",
+        "location": "JK1EIO YOKOHAMA,JAPAN",
+        "lat": 35.399774,
+        "lon": 139.596579,
+        "distance_km": 13186.144982980788,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR | Kyoto, Japan",
+        "url": "60.236.98.22",
+        "location": "Kyoto, Japan",
+        "lat": 34.945505,
+        "lon": 135.778699,
+        "distance_km": 13482.324708690527,
+        "status": "online"
+      },
+      {
+        "name": "VK2GGC SDR1: 10m 6 ELEMENT LFA YAGI BEAMING USA - HUNTER VALLEY NSW AUSTRALIA",
+        "url": "101.168.59.219",
+        "location": "Hunter Valley NSW Australia",
+        "lat": -32.524557,
+        "lon": 151.757692,
+        "distance_km": 13779.995613022966,
+        "status": "online"
+      },
+      {
+        "name": "VK2GGC SDR1: 10m 6 ELEMENT LFA YAGI BEAMING USA - HUNTER VALLEY NSW AUSTRALIA",
+        "url": "101.168.59.219",
+        "location": "Hunter Valley NSW Australia",
+        "lat": -32.524557,
+        "lon": 151.757692,
+        "distance_km": 13779.995613022966,
+        "status": "online"
+      },
+      {
+        "name": "\u2705 Snowline SDR \u2705 | Dry Plains, New South Wales, Australia",
+        "url": "snowlinesdr.vk1hf.com",
+        "location": "Dry Plains, New South Wales, Australia",
+        "lat": -36.025634,
+        "lon": 148.907778,
+        "distance_km": 13951.167038868245,
+        "status": "online"
+      },
+      {
+        "name": "\ud83d\udfe0VK3SOL-Strathbogie Rx2. Victoria, Australia [Hor. Loop 0.2-30MHz]\ud83d\udfe0",
+        "url": "22568.proxy.kiwisdr.com",
+        "location": "Strathbogie, Victoria, Australia",
+        "lat": -36.852596,
+        "lon": 145.738417,
+        "distance_km": 14197.749687211643,
+        "status": "online"
+      },
+      {
+        "name": "\ud83d\udfe0VK3SOL-Strathbogie Rx1. Victoria, Australia [Vert. Loop. 0.2-30MHz]\ud83d\udfe0",
+        "url": "22545.proxy.kiwisdr.com",
+        "location": "Strathbogie, Victoria, Australia",
+        "lat": -36.852596,
+        "lon": 145.738417,
+        "distance_km": 14197.749687211643,
+        "status": "online"
+      },
+      {
+        "name": "VK4GFR | 0-30MHz SDR | Townsville, Queensland",
+        "url": "21982.proxy.kiwisdr.com",
+        "location": "Townsville, Queensland",
+        "lat": -19.398133,
+        "lon": 146.708223,
+        "distance_km": 14459.290898712314,
+        "status": "online"
+      },
+      {
+        "name": "2-30MHZ SDR #1, VK5ARG Remote Receiver Site | Near Tarlee, South Australia",
+        "url": "kiwisdr.areg.org.au",
+        "location": "Near Tarlee, South Australia",
+        "lat": -34.2737,
+        "lon": 138.771,
+        "distance_km": 14887.368059183009,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR, BM2KVV Taiwan #3",
+        "url": "jplin53z.proxy.kiwisdr.com",
+        "location": "Taiwan",
+        "lat": 25.106,
+        "lon": 121.82,
+        "distance_km": 15197.105276217293,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR, BM2KVV Taiwan #1",
+        "url": "jplin53a.proxy.kiwisdr.com",
+        "location": "Taiwan",
+        "lat": 25.106238,
+        "lon": 121.816775,
+        "distance_km": 15197.289269402583,
+        "status": "online"
+      },
+      {
+        "name": "0-30 MHz SDR,BV7AU Pingtung taiwan",
+        "url": "bv7au.ddns.net",
+        "location": "Pingtung, Taiwan \u9ad8\u6a39 \u81fa\u7063 \u5c4f\u6771",
+        "lat": 22.79,
+        "lon": 120.58,
+        "distance_km": 15476.416659185768,
+        "status": "online"
+      },
+      {
+        "name": "FR4RX HF KiwiSDR | Nighttime only! | Reunion Island (Saint-Pierre)",
+        "url": "fr4rx.ddns.net",
+        "location": "Saint-Pierre, La R\u00e9union",
+        "lat": -21.317596,
+        "lon": 55.494403,
+        "distance_km": 15537.23196401524,
+        "status": "online"
+      },
+      {
+        "name": "GRMS KTM | Kathmandu, Nepal",
+        "url": "ktm.twrmon.net",
+        "location": "Kathmandu, Nepal",
+        "lat": 27.73,
+        "lon": 85.30111,
+        "distance_km": 15668.696460376972,
+        "status": "online"
+      },
+      {
+        "name": "LA6LU KiwiSDR - Cha-Am, Thailand (0-30 MHz SDR)",
+        "url": "la6lukiwisdrth.ddns.net",
+        "location": "Cha-Am, Thailand",
+        "lat": 12.79,
+        "lon": 99.97,
+        "distance_km": 17437.30298868329,
+        "status": "online"
+      }
+    ],
+    "vlf_check": {
+      "NAA_Cutler": {
+        "freq_khz": 24.0,
+        "timestamp": "2026-01-25T04:17:48.586071",
+        "status": "queried",
+        "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184943\ngps_date=0,0\ndate=Sun Jan 25 10:17:48 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+      },
+      "NML_LaMoure": {
+        "freq_khz": 25.2,
+        "timestamp": "2026-01-25T04:17:48.979766",
+        "status": "queried",
+        "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184943\ngps_date=0,0\ndate=Sun Jan 25 10:17:49 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+      },
+      "NAU_Aguada": {
+        "freq_khz": 40.75,
+        "timestamp": "2026-01-25T04:17:49.383067",
+        "status": "queried",
+        "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184944\ngps_date=0,0\ndate=Sun Jan 25 10:17:49 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+      },
+      "NPM_Hawaii": {
+        "freq_khz": 21.4,
+        "timestamp": "2026-01-25T04:17:49.794228",
+        "status": "queried",
+        "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184944\ngps_date=0,0\ndate=Sun Jan 25 10:17:50 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+      },
+      "WWVB": {
+        "freq_khz": 60.0,
+        "timestamp": "2026-01-25T04:17:50.194211",
+        "status": "queried",
+        "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184945\ngps_date=0,0\ndate=Sun Jan 25 10:17:50 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+      }
+    },
+    "huawei_hunt": {
+      "scan_type": "huawei_hunt",
+      "timestamp": "2026-01-25T04:17:50.195078",
+      "frequencies_checked": [
+        {
+          "name": "chinese_time",
+          "freq_khz": 5000.0,
+          "triangulation": {
+            "frequency_khz": 5000.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 5000.0,
+                  "timestamp": "2026-01-25T04:19:11.333072",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185026\ngps_date=0,0\ndate=Sun Jan 25 10:19:11 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 5000.0,
+                  "timestamp": "2026-01-25T04:19:11.840094",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174399\ngps_date=0,0\ndate=Sun Jan 25 10:19:12 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 5000.0,
+                  "timestamp": "2026-01-25T04:19:12.345603",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90401\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184668\ngps_date=1,1\ndate=Sun Jan 25 10:19:12 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 5000.0,
+                  "timestamp": "2026-01-25T04:19:12.826773",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78812\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176202\ngps_date=1,1\ndate=Sun Jan 25 10:19:13 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 5000.0,
+                  "timestamp": "2026-01-25T04:19:13.230876",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85567\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176626\ngps_date=1,1\ndate=Sun Jan 25 10:19:13 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:13.231072"
+          }
+        },
+        {
+          "name": "chinese_time_10",
+          "freq_khz": 10000.0,
+          "triangulation": {
+            "frequency_khz": 10000.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 10000.0,
+                  "timestamp": "2026-01-25T04:19:13.645155",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185028\ngps_date=0,0\ndate=Sun Jan 25 10:19:13 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 10000.0,
+                  "timestamp": "2026-01-25T04:19:14.043252",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174402\ngps_date=0,0\ndate=Sun Jan 25 10:19:14 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 10000.0,
+                  "timestamp": "2026-01-25T04:19:14.461029",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90402\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184670\ngps_date=1,1\ndate=Sun Jan 25 10:19:14 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 10000.0,
+                  "timestamp": "2026-01-25T04:19:14.880318",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78813\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176204\ngps_date=1,1\ndate=Sun Jan 25 10:19:15 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 10000.0,
+                  "timestamp": "2026-01-25T04:19:15.151112",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85568\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176628\ngps_date=1,1\ndate=Sun Jan 25 10:19:15 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:15.151330"
+          }
+        },
+        {
+          "name": "chinese_time_15",
+          "freq_khz": 15000.0,
+          "triangulation": {
+            "frequency_khz": 15000.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 15000.0,
+                  "timestamp": "2026-01-25T04:19:15.584041",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185030\ngps_date=0,0\ndate=Sun Jan 25 10:19:15 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 15000.0,
+                  "timestamp": "2026-01-25T04:19:15.978936",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174404\ngps_date=0,0\ndate=Sun Jan 25 10:19:16 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 15000.0,
+                  "timestamp": "2026-01-25T04:19:16.402943",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90403\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184672\ngps_date=1,1\ndate=Sun Jan 25 10:19:16 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 15000.0,
+                  "timestamp": "2026-01-25T04:19:16.793532",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78814\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176206\ngps_date=1,1\ndate=Sun Jan 25 10:19:17 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 15000.0,
+                  "timestamp": "2026-01-25T04:19:17.048031",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=8\nfixes=85569\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176630\ngps_date=1,1\ndate=Sun Jan 25 10:19:17 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:17.048267"
+          }
+        },
+        {
+          "name": "chinese_mil_1",
+          "freq_khz": 8461.0,
+          "triangulation": {
+            "frequency_khz": 8461.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 8461.0,
+                  "timestamp": "2026-01-25T04:19:17.447467",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185032\ngps_date=0,0\ndate=Sun Jan 25 10:19:17 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 8461.0,
+                  "timestamp": "2026-01-25T04:19:17.829667",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174405\ngps_date=0,0\ndate=Sun Jan 25 10:19:18 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 8461.0,
+                  "timestamp": "2026-01-25T04:19:18.220305",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90404\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184674\ngps_date=1,1\ndate=Sun Jan 25 10:19:18 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 8461.0,
+                  "timestamp": "2026-01-25T04:19:18.634186",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=10\nfixes=78815\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176208\ngps_date=1,1\ndate=Sun Jan 25 10:19:18 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 8461.0,
+                  "timestamp": "2026-01-25T04:19:18.901367",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85570\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176632\ngps_date=1,1\ndate=Sun Jan 25 10:19:19 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:18.901583"
+          }
+        },
+        {
+          "name": "chinese_mil_2",
+          "freq_khz": 11545.0,
+          "triangulation": {
+            "frequency_khz": 11545.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 11545.0,
+                  "timestamp": "2026-01-25T04:19:19.290463",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185034\ngps_date=0,0\ndate=Sun Jan 25 10:19:19 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 11545.0,
+                  "timestamp": "2026-01-25T04:19:19.680920",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174407\ngps_date=0,0\ndate=Sun Jan 25 10:19:19 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 11545.0,
+                  "timestamp": "2026-01-25T04:19:20.079981",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90405\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184675\ngps_date=1,1\ndate=Sun Jan 25 10:19:20 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 11545.0,
+                  "timestamp": "2026-01-25T04:19:20.482001",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78816\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176210\ngps_date=1,1\ndate=Sun Jan 25 10:19:20 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 11545.0,
+                  "timestamp": "2026-01-25T04:19:20.753844",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85571\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176634\ngps_date=1,1\ndate=Sun Jan 25 10:19:21 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:20.754052"
+          }
+        },
+        {
+          "name": "chinese_numbers",
+          "freq_khz": 4880.0,
+          "triangulation": {
+            "frequency_khz": 4880.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 4880.0,
+                  "timestamp": "2026-01-25T04:19:21.151691",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185035\ngps_date=0,0\ndate=Sun Jan 25 10:19:21 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 4880.0,
+                  "timestamp": "2026-01-25T04:19:21.541749",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174409\ngps_date=0,0\ndate=Sun Jan 25 10:19:21 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 4880.0,
+                  "timestamp": "2026-01-25T04:19:21.963331",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90406\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184677\ngps_date=1,1\ndate=Sun Jan 25 10:19:22 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 4880.0,
+                  "timestamp": "2026-01-25T04:19:22.371086",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78817\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176212\ngps_date=1,1\ndate=Sun Jan 25 10:19:22 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 4880.0,
+                  "timestamp": "2026-01-25T04:19:22.644037",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85572\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176635\ngps_date=1,1\ndate=Sun Jan 25 10:19:23 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:22.644365"
+          }
+        },
+        {
+          "name": "chinese_diplo",
+          "freq_khz": 6880.0,
+          "triangulation": {
+            "frequency_khz": 6880.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 6880.0,
+                  "timestamp": "2026-01-25T04:19:23.028033",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185037\ngps_date=0,0\ndate=Sun Jan 25 10:19:23 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 6880.0,
+                  "timestamp": "2026-01-25T04:19:23.429986",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174411\ngps_date=0,0\ndate=Sun Jan 25 10:19:23 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 6880.0,
+                  "timestamp": "2026-01-25T04:19:23.843478",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90407\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184679\ngps_date=1,1\ndate=Sun Jan 25 10:19:24 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 6880.0,
+                  "timestamp": "2026-01-25T04:19:24.252978",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78818\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176214\ngps_date=1,1\ndate=Sun Jan 25 10:19:24 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 6880.0,
+                  "timestamp": "2026-01-25T04:19:24.537612",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85573\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176637\ngps_date=1,1\ndate=Sun Jan 25 10:19:24 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:24.537950"
+          }
+        },
+        {
+          "name": "firedrake",
+          "freq_khz": 7280.0,
+          "triangulation": {
+            "frequency_khz": 7280.0,
+            "receivers_used": 5,
+            "measurements": [
+              {
+                "receiver": "WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA",
+                "lat": 35.298568,
+                "lon": -84.275581,
+                "distance_km": 2811.2217888322475,
+                "data": {
+                  "freq_khz": 7280.0,
+                  "timestamp": "2026-01-25T04:19:24.933847",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=WB8UFC's KiwiSDR 2 172' end fed @ 50' | Tellico Plains, TN USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udcfb DRM \u2063\nop_email=WB8UFC@gmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=7\nusers_max=8\npreempt=0\navatar_ctime=1769065174\ngps=(35.298568, -84.275581)\ngrid=EM75ul\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Tellico Plains, TN USA\nsw_version=KiwiSDR_v1.828\nantenna=end-fed 173' wire @ 50'\nsnr=3,3\nant_connected=1\nadc_ov=3304\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=185039\ngps_date=0,0\ndate=Sun Jan 25 10:19:25 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "W4GUZ .5-30 MHz SDR Bakersville, North Carolina",
+                "lat": 36.02734,
+                "lon": -82.12578,
+                "distance_km": 2899.94518310738,
+                "data": {
+                  "freq_khz": 7280.0,
+                  "timestamp": "2026-01-25T04:19:25.324365",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=W4GUZ .5-30 MHz SDR Bakersville, North Carolina\nsdr_hw=KiwiSDR 1 v1.701 \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=ncsardog114@gmail.com\nbands=500000-30000000\nfreq_offset=0.000\nusers=0\nusers_max=1\npreempt=0\navatar_ctime=1726909780\ngps=(36.027340, -82.125780)\ngps_good=0\nfixes=0\nfixes_min=0\nfixes_hour=0\ntdoa_id=SSI\ntdoa_ch=3\nasl=5\nloc=Bakersville, NC, USA\nsw_version=KiwiSDR_v1.701\nantenna=80-40-20m    Fan dipole \nsnr=42,27\nant_connected=1\nadc_ov=72445\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=174413\ngps_date=0,0\ndate=Sun Jan 25 10:19:25 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA",
+                "lat": 37.16,
+                "lon": -93.57,
+                "distance_km": 3160.805190423459,
+                "data": {
+                  "freq_khz": 7280.0,
+                  "timestamp": "2026-01-25T04:19:25.719523",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | [N0BQV] [Republic, Missouri. USA\nsdr_hw=KiwiSDR 2 v1.827 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063\nop_email=n0bqv@yahoo.com\nbands=10000-30000000\nfreq_offset=0.000\nusers=3\nusers_max=6\npreempt=0\navatar_ctime=1768954031\ngps=(37.16, -93.57)\ngrid=EM37fd\ngps_good=5\nfixes=90408\nfixes_min=29\nfixes_hour=1785\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=[N0BQV] [Republic, Missouri. USA\nsw_version=KiwiSDR_v1.827\nantenna=40-75 meter Inverted Vee, feed point @ 75 Feet, 23 Meters...........Please check in with call or name.\nsnr=39,26\nant_connected=1\nadc_ov=4\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=184681\ngps_date=1,1\ndate=Sun Jan 25 10:19:26 2026\nip_blacklist=9f462a4f\ndx_file=855,f911da61,51086\n"
+                }
+              },
+              {
+                "receiver": "National Radio Quiet Zone SDR | Monterey, Virginia",
+                "lat": 38.391508,
+                "lon": -79.624402,
+                "distance_km": 3188.1942103047472,
+                "data": {
+                  "freq_khz": 7280.0,
+                  "timestamp": "2026-01-25T04:19:26.140787",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=National Radio Quiet Zone SDR | Monterey, Virginia\nsdr_hw=KiwiSDR 1 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \u23f3 Limits \u2063 \ud83d\udcfb DRM \u2063\nop_email=dit74@protonmail.com\nbands=0-30000000\nfreq_offset=0.000\nusers=3\nusers_max=4\npreempt=1\navatar_ctime=1769071229\ngps=(38.391508, -79.624402)\ngrid=FM08eh\ngps_good=11\nfixes=78819\nfixes_min=26\nfixes_hour=1621\ntdoa_id=\ntdoa_ch=3\nasl=30\nloc=Monterey, Virginia\nsw_version=KiwiSDR_v1.828\nantenna=EFHW\nsnr=32,23\nant_connected=1\nadc_ov=3\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176216\ngps_date=1,1\ndate=Sun Jan 25 10:19:26 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              },
+              {
+                "receiver": "0-30 MHz SDR | Cortland, New York USA",
+                "lat": 42.574636,
+                "lon": -76.011545,
+                "distance_km": 3707.2325280043237,
+                "data": {
+                  "freq_khz": 7280.0,
+                  "timestamp": "2026-01-25T04:19:26.413622",
+                  "status": "queried",
+                  "raw": "status=active\noffline=no\nname=0-30 MHz SDR | Cortland, New York USA\nsdr_hw=KiwiSDR 2 v1.828 \u2063 \ud83d\udce1 GPS \u2063 \ud83d\udcfb DRM \u2063\nop_email=kb2faf@arrl.net\nbands=0-30000000\nfreq_offset=0.000\nusers=4\nusers_max=4\npreempt=2\navatar_ctime=1769074105\ngps=(42.574636, -76.011545)\ngrid=FN12xn\ngps_good=9\nfixes=85574\nfixes_min=29\nfixes_hour=1747\ntdoa_id=\ntdoa_ch=4\nasl=30\nloc=Cortland, New York USA\nsw_version=KiwiSDR_v1.828\nantenna=Dipole @ 50 Feet\nsnr=27,27\nant_connected=1\nadc_ov=0\nclk_ext_freq=66665900\nclk_ext_gps=0,1\nuptime=176639\ngps_date=1,1\ndate=Sun Jan 25 10:19:26 2026\nip_blacklist=9f462a4f\ndx_file=872,db6868b3,52120\n"
+                }
+              }
+            ],
+            "timestamp": "2026-01-25T04:19:26.414036"
+          }
+        }
+      ],
+      "detections": []
+    }
+  }
+}
