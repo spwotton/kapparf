@@ -7,7 +7,7 @@ import {
   Radio, RotateCcw, ZoomIn, ZoomOut, Crosshair,
   AlertTriangle, Wifi, MapPin, Layers,
   Satellite, Activity, Shield, Zap, Signal,
-  X, Flag, Download, Clock, Moon, Sun, Waves, FlaskConical, Cpu,
+  X, Flag, Download, Clock, Moon, Sun, Waves, FlaskConical, Cpu, Printer,
 } from "lucide-react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -943,6 +943,7 @@ function createScene(
     resetView:()=>{camAngle=Math.PI/4;camElev=.65;camDist=110;camTarget.set(0,8,0);},
     zoomIn:()=>{camDist=Math.max(25,camDist-18);},
     zoomOut:()=>{camDist=Math.min(250,camDist+18);},
+    getCanvas:()=>renderer.domElement,
     focusTarget:(idx:number)=>{const t=TARGETS[idx];if(!t)return;const[x,,z]=latLonToScene(t.lat,t.lon,0);camTarget.set(x,8,z);camDist=45;camElev=.45;},
     updateAircraft:(aircraft:LiveAircraft[])=>{
       const seen=new Set<string>();
@@ -992,6 +993,47 @@ export default function JacoMapPage() {
   const [elevStatus, setElevStatus] = useState<"loading"|"ok"|"fallback">("loading");
   const [elevData, setElevData] = useState<number[][]|null>(null);
   const [time, setTime] = useState(new Date());
+
+  // ── Auto-loop detector state ────────────────────────────────────────────────
+  const [loopAlert, setLoopAlert] = useState<string|null>(null);
+  const visitLog = useRef<{target:string; ts:number}[]>([]);
+  const lastLoopCapture = useRef<number>(0);
+  const acLoiterLog = useRef<Map<string,{positions:{lat:number;lon:number;ts:number}[];alerted:boolean}>>(new Map());
+
+  const exportPng = useCallback(() => {
+    const canvas = sceneRef.current?.getCanvas();
+    if (!canvas) return;
+    const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/png");
+    a.download = `kappa-tactical-${ts}.png`;
+    a.click();
+  }, []);
+
+  const printPdf = useCallback(() => {
+    const canvas = sceneRef.current?.getCanvas();
+    if (!canvas) return;
+    const dataUrl = canvas.toDataURL("image/png");
+    const ts = new Date().toLocaleString("en-US", { hour12: false });
+    const w = window.open("", "_blank");
+    if (!w) return;
+    w.document.write(`<!DOCTYPE html><html><head><title>KAPPA Tactical 3D — ${ts}</title>
+      <style>
+        body{margin:0;background:#06090f;color:#4ade80;font-family:monospace;padding:16px}
+        img{width:100%;max-width:100%;display:block;border:1px solid #1a2a3a}
+        .meta{font-size:10px;color:#4ade80;margin-bottom:8px;opacity:.8}
+        .title{font-size:14px;font-weight:bold;color:#fff;margin-bottom:4px}
+        .tags{font-size:9px;color:#666;margin-top:6px}
+        @media print{body{padding:0} .noprint{display:none}}
+      </style></head><body>
+      <div class="title">JACÓ VALLEY — TACTICAL 3D — KAPPA SIGINT</div>
+      <div class="meta">Exported: ${ts} CST | Observer: 9.6286°N 84.6298°W | CRANE-ALPHA: 9.6210°N 84.6295°W</div>
+      <img src="${dataUrl}" />
+      <div class="tags">CRANE-ALPHA LRP CONFIRMED • DAN WAGNER SUSPECT • RELAY TRIANGLE ACTIVE • CLOSED LOOP 14:45–14:54 CST</div>
+      <script>window.onload=()=>{window.print()}</script>
+    </body></html>`);
+    w.document.close();
+  }, []);
 
   // Active panels — one per side on desktop, one total on mobile
   const [activeLeft, setActiveLeft] = useState<PanelId|null>(null);
@@ -1069,6 +1111,103 @@ export default function JacoMapPage() {
   });
 
   useEffect(()=>{ const t=setInterval(()=>setTime(new Date()),1000); return()=>clearInterval(t); },[]);
+
+  // ── Auto-loop detector: fires when drone moves to a new waypoint ─────────────
+  useEffect(()=>{
+    if(!droneTarget) return;
+    const now = Date.now();
+    const COOLDOWN = 90_000; // min 90s between captures to avoid spam
+    if (now - lastLoopCapture.current < COOLDOWN) {
+      visitLog.current.push({target: droneTarget, ts: now});
+      if (visitLog.current.length > 30) visitLog.current.shift();
+      return;
+    }
+    // Check if this target was visited in the last 20 min (= closed loop)
+    const prior = visitLog.current.filter(v => v.target === droneTarget && now - v.ts < 20 * 60_000);
+    if (prior.length > 0) {
+      const loopDurSec = Math.round((now - prior[prior.length-1].ts) / 1000);
+      const label = `LOOP DETECTED — ${droneTarget} — ${Math.round(loopDurSec/60)}m circuit`;
+      setLoopAlert(label);
+      lastLoopCapture.current = now;
+      // Auto-screenshot
+      const canvas = sceneRef.current?.getCanvas();
+      const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
+      if (canvas) {
+        const dataUrl = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.href = dataUrl;
+        a.download = `loop-auto-${droneTarget.replace(/\s+/g,"-").toLowerCase()}-${ts}.png`;
+        a.click();
+      }
+      // Auto-log incident
+      fetch("/api/incidents", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({
+          title: `AUTO-DETECT: UAV Loop — ${droneTarget} — ${loopDurSec}s circuit`,
+          description: `Autonomous loop detection triggered. Drone returned to "${droneTarget}" after ${loopDurSec}s (${Math.round(loopDurSec/60)} min). Prior visit: ${new Date(prior[prior.length-1].ts).toLocaleTimeString()}. Current visit: ${new Date(now).toLocaleTimeString()}. Full circuit path: ${[...new Set(visitLog.current.slice(-8).map(v=>v.target))].join(" → ")}. Auto-screenshot captured. Pattern consistent with closed surveillance loop over Jacó AOR.`,
+          severity: 4, category: "drone",
+          lat: 9.621, lng: -84.6295,
+          tags: ["auto-detect","loop","uav",droneTarget.toLowerCase().replace(/\s+/g,"-"),"circuit","kappa-3d"],
+        }),
+      }).catch(()=>{});
+      // Auto-dismiss alert after 30s
+      setTimeout(()=>setLoopAlert(null), 30_000);
+    }
+    visitLog.current.push({target: droneTarget, ts: now});
+    if (visitLog.current.length > 30) visitLog.current.shift();
+  }, [droneTarget]);
+
+  // ── OpenSky loiter detector: real aircraft circling Jacó ─────────────────────
+  useEffect(()=>{
+    if (!liveAircraft.length) return;
+    const now = Date.now();
+    const LOITER_RADIUS_KM = 5;
+    const LOITER_MIN_PASSES = 3;
+    const haversineKm = (la1:number,lo1:number,la2:number,lo2:number)=>{
+      const R=6371,dLa=(la2-la1)*Math.PI/180,dLo=(lo2-lo1)*Math.PI/180;
+      const a=Math.sin(dLa/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLo/2)**2;
+      return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+    };
+    for (const ac of liveAircraft) {
+      if (!ac.latitude || !ac.longitude) continue;
+      const log = acLoiterLog.current.get(ac.icao24) ?? {positions:[], alerted:false};
+      log.positions.push({lat:ac.latitude, lon:ac.longitude, ts:now});
+      // Keep 20 min window
+      log.positions = log.positions.filter(p=>now-p.ts<20*60_000);
+      acLoiterLog.current.set(ac.icao24, log);
+      if (log.alerted || log.positions.length < LOITER_MIN_PASSES) continue;
+      // Check if all positions are within LOITER_RADIUS_KM of Jacó center
+      const allNear = log.positions.every(p=>haversineKm(p.lat,p.lon,CENTER.lat,CENTER.lon)<LOITER_RADIUS_KM);
+      if (allNear && !log.alerted) {
+        log.alerted = true;
+        const call = (ac as any).callsign?.trim() || ac.icao24;
+        const alt = ac.baroAltitude ?? ac.geoAltitude ?? 0;
+        setLoopAlert(`LOITER: ${call} — ${log.positions.length} passes <${LOITER_RADIUS_KM}km / ${Math.round(alt)}m`);
+        const canvas = sceneRef.current?.getCanvas();
+        const snapTs = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
+        if (canvas) {
+          const dataUrl = canvas.toDataURL("image/png");
+          const a = document.createElement("a");
+          a.href = dataUrl;
+          a.download = `loiter-auto-${call}-${snapTs}.png`;
+          a.click();
+        }
+        fetch("/api/incidents", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({
+            title: `AUTO-DETECT: ADS-B Loiter — ${call} — ${log.positions.length} passes`,
+            description: `Real aircraft ${call} (ICAO: ${ac.icao24}) detected loitering over Jacó AOR. ${log.positions.length} position reports within ${LOITER_RADIUS_KM}km of CENTER over 20min window. Alt: ${Math.round(alt)}m, Spd: ${Math.round((ac as any).velocity??0)}m/s. Loitering pattern consistent with ISR or surveillance orbit. Auto-screenshot captured.`,
+            severity: 4, category: "drone",
+            lat: ac.latitude, lng: ac.longitude,
+            tags: ["auto-detect","loiter","ads-b",ac.icao24,call.toLowerCase(),"real-aircraft"],
+          }),
+        }).catch(()=>{});
+        setTimeout(()=>setLoopAlert(null), 30_000);
+      }
+    }
+  }, [liveAircraft]);
 
   useEffect(()=>{
     const GRID=16,latMin=CENTER.lat-.04,latMax=CENTER.lat+.04,lonMin=CENTER.lon-.055,lonMax=CENTER.lon+.055;
@@ -1759,7 +1898,15 @@ export default function JacoMapPage() {
             </div>
             <div className="text-[9px] font-mono text-gray-600">CST</div>
           </div>
-          <div className="flex gap-1">
+          <div className="flex gap-1 items-center">
+            {loopAlert && (
+              <div className="flex items-center gap-1 bg-orange-500/20 border border-orange-500/40 rounded px-2 py-0.5 animate-pulse mr-1">
+                <div className="h-1.5 w-1.5 rounded-full bg-orange-400 shrink-0"/>
+                <span className="text-[9px] font-mono text-orange-300 max-w-48 truncate">{loopAlert}</span>
+              </div>
+            )}
+            <Button size="icon" variant="ghost" className="h-7 w-7 text-gray-400 hover:text-green-400 hover:bg-green-500/10" onClick={exportPng} title="Export PNG" data-testid="button-export-png"><Download className="h-3.5 w-3.5"/></Button>
+            <Button size="icon" variant="ghost" className="h-7 w-7 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10" onClick={printPdf} title="Print / Save PDF" data-testid="button-print-pdf"><Printer className="h-3.5 w-3.5"/></Button>
             <Button size="icon" variant="ghost" className="h-7 w-7 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10" onClick={()=>sceneRef.current?.zoomIn()} data-testid="button-zoom-in"><ZoomIn className="h-3.5 w-3.5"/></Button>
             <Button size="icon" variant="ghost" className="h-7 w-7 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10" onClick={()=>sceneRef.current?.zoomOut()} data-testid="button-zoom-out"><ZoomOut className="h-3.5 w-3.5"/></Button>
             <Button size="icon" variant="ghost" className="h-7 w-7 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10" onClick={()=>sceneRef.current?.resetView()} data-testid="button-reset-view"><RotateCcw className="h-3.5 w-3.5"/></Button>

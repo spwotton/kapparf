@@ -386,6 +386,25 @@ function DocCard({ doc, expanded, onToggle }: { doc: DocEntry; expanded: boolean
   );
 }
 
+const HUMINT_LEAD_2 = {
+  id: "86ded060-53e1-4263-8b81-0ec58fe4e9f4",
+  logged: "2026-05-16T14:50:15Z",
+  subject: "Dan Wagner — personal HUMINT contact (AA network)",
+  coverRole: "Unknown — local resident / contractor",
+  tasking: "Local overwatch — suspected tasked short-range operator",
+  fleet: "Unknown — at least 1 UAV (craft type TBD)",
+  lrp: "Las Palmas construction crane — Vista Las Palmas tower, Jacó Walk sector",
+  lrpCoords: "9.6120°N, 84.6260°W",
+  lrpDistKm: 1.9,
+  overflightTime: "2026-05-16 ~14:45 CST",
+  overflightPattern: "Overfly Hotel Pochote Grande → RTB to crane LRP — confirmed via 3D tactical track",
+  craneHeight: "~65–81 m AGL (consistent with 16-story adjacent tower sightline — observer-corroborated)",
+  assessment: "Short-range tasked flight (~1.9 km). Crane serves as disguised launch/recovery point. " +
+    "Personal familiarity with target (AA network) = social-engineering / proximity asset profile. " +
+    "RTB track to crane confirms LRP. Crane beacon L-864 flash rate anomaly warrants optical FFT analysis.",
+  tags: ["dan-wagner","las-palmas","crane","lrp","rtb","local","aa-network","short-range"],
+};
+
 const HUMINT_LEAD = {
   id: "7a5591ee-f87e-4c8c-87bd-fa9e01949c89",
   logged: "2026-05-16T14:28:08Z",
@@ -419,8 +438,111 @@ const HUMINT_LEAD = {
   losCleared: "Fixed-wing at 260m AGL clears ridge with 42m margin — approx 13 min transit at 80 km/h",
 };
 
-function HumintPanel() {
+function WagnerPanel() {
   const [open, setOpen] = useState(true);
+  const w = HUMINT_LEAD_2;
+  return (
+    <div className="border-b border-orange-500/30 bg-orange-950/10">
+      <button
+        className="w-full flex items-center gap-3 px-6 py-3 hover:bg-orange-500/5 transition-colors text-left"
+        onClick={() => setOpen(o => !o)}
+        data-testid="btn-wagner-toggle"
+      >
+        <div className="h-2 w-2 rounded-full bg-orange-400 animate-pulse shrink-0" />
+        <span className="text-[10px] font-mono text-orange-400 uppercase tracking-widest flex-1">
+          LIVE TRACK — CRANE-ALPHA LRP — Dan Wagner — {new Date(w.logged).toLocaleTimeString()}
+        </span>
+        <Badge className="bg-orange-500/15 text-orange-400 border-orange-500/30 text-[9px]">EVIDENCE {w.id.slice(0,8).toUpperCase()}</Badge>
+        <Badge className="bg-red-500/20 text-red-400 border-red-500/30 text-[9px]">RELAY TRIANGLE ACTIVE</Badge>
+        {open ? <ChevronDown className="h-3.5 w-3.5 text-gray-500" /> : <ChevronRight className="h-3.5 w-3.5 text-gray-500" />}
+      </button>
+
+      {open && (
+        <div className="px-6 pb-5 grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* Subject */}
+          <div className="space-y-2.5">
+            <div className="text-[9px] font-mono text-orange-400 uppercase tracking-widest mb-2">Subject — Local Operator</div>
+            {[
+              { icon: User, label: "Identity", value: w.subject },
+              { icon: Eye, label: "Cover role", value: w.coverRole },
+              { icon: AlertTriangle, label: "Tasking", value: w.tasking },
+              { icon: Satellite, label: "Fleet", value: w.fleet },
+              { icon: MapPin, label: "LRP", value: w.lrp },
+              { icon: Navigation, label: "LRP coords", value: `${w.lrpCoords} — ${w.lrpDistKm} km to observer` },
+              { icon: Clock, label: "Overfly time", value: w.overflightTime },
+              { icon: Wind, label: "Pattern", value: w.overflightPattern },
+            ].map(({ icon: Icon, label, value }) => (
+              <div key={label} className="flex gap-2 text-[10px] font-mono">
+                <Icon className="h-3 w-3 text-orange-400/60 shrink-0 mt-0.5" />
+                <span className="text-gray-600 shrink-0 w-20">{label}:</span>
+                <span className="text-gray-200 leading-tight">{value}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Relay triangle */}
+          <div className="space-y-3">
+            <div className="text-[9px] font-mono text-red-400 uppercase tracking-widest mb-2">Relay Triangle — Live Track</div>
+            {[
+              { node: "El Miro Hilltop", role: "Elevated relay / comms anchor", coords: "9.598°N 84.658°W", status: "VECTOR CONFIRMED 14:52", color: "border-red-500/40 bg-red-950/20", dot: "bg-red-500" },
+              { node: "CRANE-ALPHA", role: "Launch/Recovery Point (LRP)", coords: "9.6210°N 84.6295°W", status: "RTB CONFIRMED 14:51", color: "border-orange-500/40 bg-orange-950/20", dot: "bg-orange-400" },
+              { node: "Hotel Pochote Grande", role: "Observer / overfly target", coords: "9.6286°N 84.6298°W", status: "OVERFLIGHT 14:45", color: "border-cyan-500/30 bg-cyan-950/10", dot: "bg-cyan-400" },
+            ].map(n => (
+              <div key={n.node} className={`rounded border ${n.color} p-2.5`}>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className={`h-1.5 w-1.5 rounded-full ${n.dot} animate-pulse`} />
+                  <span className="text-[10px] font-bold text-white font-mono">{n.node}</span>
+                </div>
+                <p className="text-[9px] text-gray-400 font-mono">{n.role}</p>
+                <p className="text-[9px] text-gray-600 font-mono">{n.coords}</p>
+                <p className="text-[9px] text-green-400/70 font-mono mt-1">✓ {n.status}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Assessment */}
+          <div className="space-y-3">
+            <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-widest mb-2">Crane Profile</div>
+            <div className="space-y-1.5">
+              {[
+                { label: "Structure", value: "Construction crane — Vista Las Palmas tower site" },
+                { label: "Height", value: w.craneHeight },
+                { label: "Beacon", value: "L-864 red flash — optical FFT analysis pending" },
+                { label: "Distance", value: `${w.lrpDistKm} km from observer — local short-range` },
+                { label: "Relay to", value: "El Miro hilltop (~6.2 km SW) — dominant LOS" },
+              ].map(({ label, value }) => (
+                <div key={label} className="flex gap-2 text-[10px] font-mono">
+                  <span className="text-gray-600 shrink-0 w-20">{label}:</span>
+                  <span className="text-gray-300 leading-tight">{value}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-orange-950/30 border border-orange-500/20 rounded p-3">
+              <div className="text-[9px] font-mono text-orange-400 uppercase tracking-widest mb-1.5">Assessment</div>
+              <p className="text-[10px] text-orange-200/70 leading-relaxed font-mono">{w.assessment}</p>
+              <div className="mt-2 flex gap-1.5 flex-wrap">
+                {w.tags.map(t => (
+                  <Badge key={t} className="bg-orange-500/10 text-orange-400 border-orange-500/20 text-[8px] px-1">{t.toUpperCase()}</Badge>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-black/30 border border-white/5 rounded p-2.5">
+              <div className="text-[9px] font-mono text-gray-500 uppercase tracking-widest mb-1">Evidence Chain</div>
+              <p className="text-[9px] font-mono text-gray-600">ID: {w.id}</p>
+              <p className="text-[9px] font-mono text-gray-600">CRANE LRP: 19a1b02f-0e28-4e70-a7d8-1c042e829b2f</p>
+              <p className="text-[9px] font-mono text-gray-600">RELAY TRI: 5f85cdc0-e879-4c35-90c6-ca3f5e822b1d</p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HumintPanel() {
+  const [open, setOpen] = useState(false);
   const h = HUMINT_LEAD;
   return (
     <div className="border-b border-red-500/20 bg-red-950/10">
@@ -481,7 +603,6 @@ function HumintPanel() {
           <div className="space-y-3">
             <div>
               <div className="text-[9px] font-mono text-cyan-400 uppercase tracking-widest mb-2">Corridor Elevation Profile</div>
-              {/* Terrain bar chart */}
               <div className="space-y-0.5">
                 {h.elevation.map(e => {
                   const m = parseInt(e.elev);
@@ -570,7 +691,9 @@ export default function DroneIntelPage() {
         </div>
       </div>
 
-      {/* Active HUMINT Lead */}
+      {/* LIVE TRACK — Wagner / CRANE-ALPHA relay triangle */}
+      <WagnerPanel />
+      {/* Active HUMINT Lead — Russian operator */}
       <HumintPanel />
 
       <div className="flex gap-0 h-[calc(100vh-120px)]">
