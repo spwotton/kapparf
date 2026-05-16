@@ -795,6 +795,7 @@ function createScene(
   });
 
   const drone = buildDrone(scene);
+  drone.visible = false; // hidden until real OpenSky contact positions it
   const partCount = 600;
   const partGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(partCount*3), pSpd = new Float32Array(partCount);
@@ -849,29 +850,13 @@ function createScene(
       camTarget.z+Math.sin(camAngle)*camDist*Math.cos(camElev),
     ); camera.lookAt(camTarget);
 
-    // ── Drone patrol with banking/pitch physics ──────────────────────────────
-    const segDur=120.0,fullCycle=TARGETS.length*segDur,cycleT=(t*0.5)%fullCycle;
-    const seg=Math.floor(cycleT/segDur),frac=(cycleT%segDur)/segDur;
-    const from=TARGETS[seg%TARGETS.length],to=TARGETS[(seg+1)%TARGETS.length];
-    setDroneTarget(to.label.split("—")[0].trim());
-    const [fx,fy,fz]=latLonToScene(from.lat,from.lon,from.elevM);
-    const [tx,ty,tz]=latLonToScene(to.lat,to.lon,to.elevM);
-    const ease=frac<.5?2*frac*frac:-1+(4-2*frac)*frac;
-    const dEase=frac<.5?4*frac:4*(1-frac); // derivative of ease — speed proxy
-    const flightH = Math.max(fy,ty)+14+Math.sin(frac*Math.PI)*10;
-    drone.position.set(fx+(tx-fx)*ease, flightH, fz+(tz-fz)*ease);
-    // Heading
-    const targetYaw=Math.atan2(tx-fx,tz-fz);
-    drone.rotation.y=targetYaw;
-    // Banking (roll): bank into turn — based on yaw rate × speed
-    const dist=Math.sqrt((tx-fx)**2+(tz-fz)**2);
-    const bank=Math.sin(t*0.5)*0.04 + (dist>0.1?Math.sin(frac*Math.PI)*0.18:0);
-    drone.rotation.z = -bank;
-    // Pitch: nose slightly down at cruise, nose up at deceleration
-    const pitch = dEase>2.5 ? -0.12 : (dEase<0.4 ? 0.08 : -0.05);
-    drone.rotation.x = pitch;
-    // Hover bob
-    drone.position.y += Math.sin(t*2.3)*0.35;
+    // ── Drone model hidden until real OpenSky contact detected ───────────────
+    // droneTarget is set exclusively by the real OpenSky loiter detector below.
+    // No simulated patrol. drone.visible is toggled by updateAircraft() only.
+    if (drone.visible) {
+      // Hover bob only when a real contact is active
+      drone.position.y += Math.sin(t*2.3)*0.35;
+    }
 
     // ── Scan beam rotation ────────────────────────────────────────────────────
     const sb = scanBeam as any;
@@ -947,14 +932,41 @@ function createScene(
     focusTarget:(idx:number)=>{const t=TARGETS[idx];if(!t)return;const[x,,z]=latLonToScene(t.lat,t.lon,0);camTarget.set(x,8,z);camDist=45;camElev=.45;},
     updateAircraft:(aircraft:LiveAircraft[])=>{
       const seen=new Set<string>();
+      const haversineKm=(la1:number,lo1:number,la2:number,lo2:number)=>{
+        const R=6371,dLa=(la2-la1)*Math.PI/180,dLo=(lo2-lo1)*Math.PI/180;
+        const a=Math.sin(dLa/2)**2+Math.cos(la1*Math.PI/180)*Math.cos(la2*Math.PI/180)*Math.sin(dLo/2)**2;
+        return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+      };
+      // Find closest real contact to Jacó center (within 8km) for drone model
+      let closestAc: LiveAircraft|null = null;
+      let closestDist = Infinity;
       for(const ac of aircraft){
         if(!ac.latitude||!ac.longitude)continue;
         seen.add(ac.icao24);
+        const dist = haversineKm(ac.latitude,ac.longitude,CENTER.lat,CENTER.lon);
+        if(dist < 8 && dist < closestDist){ closestDist=dist; closestAc=ac; }
         const[ax,,az]=latLonToScene(ac.latitude,ac.longitude,0);
         let mesh=acMeshes.get(ac.icao24);
         if(!mesh){mesh=buildAircraftMesh(ac);acMeshes.set(ac.icao24,mesh);scene.add(mesh);}
         mesh.position.set(ax,acY(ac.baroAltitude??ac.geoAltitude),az);
         if(ac.trueTrack!==null)mesh.rotation.y=(ac.trueTrack*Math.PI)/180;
+      }
+      // Position drone model on closest real contact; hide when none in AOR
+      if(closestAc){
+        const[dx,,dz]=latLonToScene(closestAc.latitude!,closestAc.longitude!,0);
+        const dAlt = acY(closestAc.baroAltitude??closestAc.geoAltitude);
+        drone.position.set(dx, dAlt, dz);
+        if(closestAc.trueTrack!==null) drone.rotation.y=(closestAc.trueTrack*Math.PI)/180;
+        drone.visible=true;
+        // Set droneTarget to nearest landmark
+        let nearestLabel="";let nearestDist=Infinity;
+        for(const tgt of TARGETS){
+          const d=haversineKm(closestAc.latitude!,closestAc.longitude!,tgt.lat,tgt.lon);
+          if(d<nearestDist){nearestDist=d;nearestLabel=tgt.label.split("—")[0].trim();}
+        }
+        if(nearestLabel) setDroneTarget(nearestLabel);
+      } else {
+        drone.visible=false;
       }
       for(const[id,mesh]of acMeshes.entries())if(!seen.has(id)){scene.remove(mesh);acMeshes.delete(id);}
       setAircraftCount(seen.size);
