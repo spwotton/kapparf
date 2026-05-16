@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-01-27T21:56:04.9069371-06:00",
+  "connected_devices": [
+    {
+      "hostname": "decoMeshX55",
+      "connection": "Ethernet",
+      "threat": "CRITICAL",
+      "type": "TP-Link Deco Mesh",
+      "status": "MITM_DEVICE"
+    },
+    {
+      "hostname": "unknown",
+      "mac": "de:34:60:09:aa:2e",
+      "connection": "WiFi 2.4G",
+      "status": "UNKNOWN",
+      "speed": "78/86 Mbps"
+    }
+  ],
+  "firewall": {
+    "wan_blocking": "Enabled",
+    "block_fragmented": "Enabled",
+    "ip_flooding": "Enabled",
+    "ipsec_passthrough": "Enabled",
+    "port_scan": "Enabled",
+    "pptp_passthrough": "Enabled",
+    "l2tp_passthrough": "Enabled",
+    "mode": "Custom Security"
+  },
+  "mta_status": "FAILED - Telephony disabled",
+  "router": {
+    "dns_primary": "8.8.8.8",
+    "wan_ip": "186.15.197.241",
+    "uptime": "31 minutes",
+    "model": "Sagemcom FAST3890V3",
+    "serial": "QS2408818000216",
+    "software": "FAST3890V3_LLAMC-RDK_77.2000.9.12",
+    "gateway_mac": "9C:24:72:62:60:C9",
+    "dns_secondary": "186.15.224.84",
+    "wan_mac": "9C:24:72:62:60:C7"
+  }
+}

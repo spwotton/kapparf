@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-02-07T11:50:14.026849+00:00",
+  "capture_file": "ok.pcapng",
+  "capture_start": "2025-12-17T02:39:43.688229+00:00",
+  "capture_end": "2025-12-17T02:40:53.635499+00:00",
+  "total_packets": 7744,
+  "external_ips": [
+    "199.33.68.48",
+    "3.33.235.18",
+    "172.217.165.206",
+    "104.17.107.108",
+    "20.85.77.48"
+  ],
+  "mac_addresses": [
+    "01:00:5e:00:00:16",
+    "01:00:5e:00:00:fb",
+    "01:00:5e:00:00:fc",
+    "33:33:00:00:00:fb",
+    "9c:24:72:62:60:c9",
+    "9c:b1:dc:85:6e:ca",
+    "d0:c6:37:4c:c3:72",
+    "ff:ff:ff:ff:ff:ff"
+  ],
+  "dns_queries": [
+    "019d8b72-1455-2eb8-5589-06a936510190.local.",
+    "96.0.168.192.in-addr.arpa.",
+    "_googlecast._tcp.local.",
+    "_services._dns-sd._udp.local.",
+    "dns.msftncsi.com.",
+    "fuse-4k-019d8b7214552eb8558906a936510190._googlecast._tcp.local."
+  ],
+  "tls_sni": [],
+  "local_devices": {
+    "192.168.0.96": "Primary host (your machine)",
+    "192.168.0.110": "Local device (port 8009 - Google Cast)",
+    "192.168.0.1": "Gateway/Router"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-01-30T10:03:00.181985",
+  "location": {
+    "lat": 9.9535043,
+    "lon": -84.2908709,
+    "name": "Guacima, Costa Rica"
+  },
+  "starlink": {
+    "constellation_size": 9442,
+    "overhead_count": 7,
+    "closest": {
+      "name": "STARLINK-1687",
+      "elevation": 25.6,
+      "distance_km": 709
+    }
+  },
+  "military": {
+    "overhead_count": 15,
+    "critical": [
+      {
+        "name": "USA 285",
+        "elevation": 73.4,
+        "type": "CLASSIFIED"
+      },
+      {
+        "name": "AEHF-4",
+        "elevation": 67.0,
+        "type": "EHF COMMS"
+      },
+      {
+        "name": "MUOS-1",
+        "elevation": 65.4,
+        "type": "UHF TACTICAL"
+      },
+      {
+        "name": "MUOS-5",
+        "elevation": 64.5,
+        "type": "UHF TACTICAL"
+      }
+    ]
+  },
+  "blackjack": {
+    "status": "OPERATIONAL",
+    "assets": 6,
+    "note": "LEO constellation, passes quickly"
+  },
+  "threat_level": "ELEVATED",
+  "notes": "Multiple classified USA-series directly overhead"
+}

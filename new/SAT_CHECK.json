@@ -1,0 +1,11 @@
+{
+  "ts": "2026-01-30T10:03:09.459848",
+  "starlink_overhead": 7,
+  "military_critical": [
+    "USA 285",
+    "AEHF-4",
+    "MUOS-1",
+    "MUOS-5"
+  ],
+  "threat": "ELEVATED"
+}

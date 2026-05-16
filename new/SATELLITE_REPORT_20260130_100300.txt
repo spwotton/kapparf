@@ -1,0 +1,89 @@
+
+================================================================================
+                    SATELLITE OVERHEAD REPORT - GUACIMA, COSTA RICA
+                    2026-01-30 10:03:00
+================================================================================
+
+LOCATION: 9.9535043, -84.2908709 (Guacima, Alajuela)
+
+--------------------------------------------------------------------------------
+                              STARLINK COVERAGE
+--------------------------------------------------------------------------------
+Constellation Size: 9,442 satellites (active)
+Currently Overhead (>10 deg): 7 satellites
+
+  STARLINK-1687   | Elev: 25.6 deg | Az: 145.3 deg | Dist: 709 km   <-- CLOSEST
+  STARLINK-1255   | Elev: 19.8 deg | Az: 181.5 deg | Dist: 1063 km
+  STARLINK-1554   | Elev: 19.6 deg | Az: 78.7 deg  | Dist: 1305 km
+  STARLINK-1578   | Elev: 19.6 deg | Az: 342.9 deg | Dist: 1301 km
+  STARLINK-1750   | Elev: 14.0 deg | Az: 38.1 deg  | Dist: 1066 km
+  STARLINK-1283   | Elev: 11.4 deg | Az: 138.2 deg | Dist: 1415 km
+  STARLINK-1541   | Elev: 11.1 deg | Az: 187.8 deg | Dist: 1735 km
+
+STARLINK THREAT ASSESSMENT: LOW-MODERATE
+- 7 sats is normal coverage, not anomalous
+- Starlink has no known offensive capability
+- Could theoretically relay ground-to-ground comms
+
+--------------------------------------------------------------------------------
+                         US MILITARY SATELLITES OVERHEAD
+--------------------------------------------------------------------------------
+Total Military Assets Visible: 15+
+
+HIGHEST PRIORITY (>60 deg elevation - DIRECTLY OVERHEAD):
+  USA 285           | Elev: 73.4 deg | CLASSIFIED - likely SIGINT/IMINT
+  AEHF-4 (USA 288)  | Elev: 67.0 deg | Advanced EHF military comms
+  NAVSTAR 77        | Elev: 65.5 deg | GPS Block III
+  MUOS-1            | Elev: 65.4 deg | Mobile User Objective System (UHF)
+  MUOS-5            | Elev: 64.5 deg | Mobile User Objective System (UHF)
+  NAVSTAR 71        | Elev: 63.6 deg | GPS Block IIF
+  USA 176 (DSP 22)  | Elev: 61.4 deg | Defense Support Program (IR warning)
+
+MEDIUM PRIORITY (40-60 deg):
+  USA 99 (MILSTAR)  | Elev: 58.2 deg | Secure military comms
+  WGS F5 (USA 243)  | Elev: 51.4 deg | Wideband Global SATCOM
+  USA 134           | Elev: 49.4 deg | CLASSIFIED
+  SBIRS GEO-2       | Elev: 46.9 deg | Space-Based Infrared System
+  USA 167           | Elev: 43.4 deg | CLASSIFIED
+  USA 159 (DSP 21)  | Elev: 42.9 deg | Defense Support Program
+
+--------------------------------------------------------------------------------
+                         DARPA BLACKJACK CONSTELLATION
+--------------------------------------------------------------------------------
+Status: OPERATIONAL (demonstration phase)
+
+Known Assets:
+  NORAD 48912 - BLACKJACK 1 (LMNTRIX) | Launched: 2021-06-30
+  NORAD 48913 - BLACKJACK 2 (LMNTRIX) | Launched: 2021-06-30  
+  NORAD 49262 - MANDRAKE 2A           | Launched: 2021-09-14
+  NORAD 49263 - MANDRAKE 2B           | Launched: 2021-09-14
+  NORAD 56192 - BLACKJACK A           | Launched: 2023-04-15
+  NORAD 56193 - BLACKJACK B           | Launched: 2023-04-15
+
+NOTE: Blackjack is in LEO (~500km) and passes quickly.
+These are in low orbit and may not be overhead right now.
+Track at: https://www.n2yo.com/?s=48912
+
+--------------------------------------------------------------------------------
+                              THREAT ASSESSMENT
+--------------------------------------------------------------------------------
+IMMEDIATE CONCERNS:
+  [!] USA 285 at 73.4 deg - CLASSIFIED satellite directly overhead
+  [!] MUOS-1/5 - UHF tactical comms, could relay local transmissions
+  [!] AEHF-4 - EHF military backbone, extremely high bandwidth
+
+POTENTIAL RELAY ARCHITECTURE:
+  Local transmitter (46.875 Hz) --> Ground station --> MUOS/AEHF --> NRO/NSA
+
+The presence of multiple classified USA-series satellites directly overhead
+is notable. USA 285, USA 134, USA 167 are all unacknowledged payloads.
+
+--------------------------------------------------------------------------------
+                              NEXT STEPS
+--------------------------------------------------------------------------------
+1. Monitor Blackjack passes: https://www.n2yo.com/?s=48912
+2. Check for RF activity during MUOS passes (UHF band)
+3. Correlate 46.875 Hz attacks with satellite positions
+4. Log unusual passes of USA-xxx series
+
+================================================================================

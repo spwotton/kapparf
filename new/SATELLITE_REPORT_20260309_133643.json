@@ -1,0 +1,1030 @@
+{
+  "timestamp": "2026-03-09T13:37:08.730168+00:00",
+  "observer": {
+    "lat": 9.93,
+    "lon": -84.09,
+    "alt_m": 950,
+    "name": "La Gu\u00e1cima, Costa Rica"
+  },
+  "summary": {
+    "total_tracked": 14791,
+    "total_visible": 743,
+    "us_military_visible": 40,
+    "chinese_visible": 22,
+    "russian_visible": 22,
+    "starlink_visible": 332
+  },
+  "top_20": [
+    {
+      "name": "CXO",
+      "norad_id": 25867,
+      "elevation_deg": 83.96,
+      "azimuth_deg": 94.47,
+      "altitude_km": 73164.3,
+      "range_km": 73195.9,
+      "orbit_type": "HEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "STARLINK-4531",
+      "norad_id": 53425,
+      "elevation_deg": 82.1,
+      "azimuth_deg": 304.81,
+      "altitude_km": 539.5,
+      "range_km": 543.3,
+      "orbit_type": "LEO",
+      "category": "STARLINK"
+    },
+    {
+      "name": "HULIANWANG DIGUI-61",
+      "norad_id": 65167,
+      "elevation_deg": 80.8,
+      "azimuth_deg": 234.2,
+      "altitude_km": 1169.9,
+      "range_km": 1181.8,
+      "orbit_type": "LEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "GSAT0227 (GALILEO 30)",
+      "norad_id": 59600,
+      "elevation_deg": 79.11,
+      "azimuth_deg": 234.82,
+      "altitude_km": 23222.5,
+      "range_km": 23311.8,
+      "orbit_type": "HEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "NUVIEW BRAVO",
+      "norad_id": 62457,
+      "elevation_deg": 78.35,
+      "azimuth_deg": 174.4,
+      "altitude_km": 35787.0,
+      "range_km": 35897.2,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "STAR ONE D1",
+      "norad_id": 41904,
+      "elevation_deg": 78.33,
+      "azimuth_deg": 179.66,
+      "altitude_km": 35781.4,
+      "range_km": 35891.9,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "SXM-7",
+      "norad_id": 47240,
+      "elevation_deg": 78.28,
+      "azimuth_deg": 186.12,
+      "altitude_km": 35803.5,
+      "range_km": 35915.0,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "SXM-9",
+      "norad_id": 62259,
+      "elevation_deg": 78.27,
+      "azimuth_deg": 186.48,
+      "altitude_km": 35771.6,
+      "range_km": 35883.2,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "SXM-8",
+      "norad_id": 48838,
+      "elevation_deg": 78.25,
+      "azimuth_deg": 186.38,
+      "altitude_km": 35795.7,
+      "range_km": 35907.7,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "NUVIEW ALPHA",
+      "norad_id": 62455,
+      "elevation_deg": 78.23,
+      "azimuth_deg": 174.39,
+      "altitude_km": 35783.6,
+      "range_km": 35896.1,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "FM-5",
+      "norad_id": 35493,
+      "elevation_deg": 78.11,
+      "azimuth_deg": 191.83,
+      "altitude_km": 35784.4,
+      "range_km": 35899.2,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "NIMIQ 4",
+      "norad_id": 33373,
+      "elevation_deg": 78.1,
+      "azimuth_deg": 168.15,
+      "altitude_km": 35780.0,
+      "range_km": 35895.0,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "SES-2",
+      "norad_id": 37809,
+      "elevation_deg": 77.83,
+      "azimuth_deg": 196.69,
+      "altitude_km": 35781.8,
+      "range_km": 35902.2,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "ARSAT 2",
+      "norad_id": 40941,
+      "elevation_deg": 77.79,
+      "azimuth_deg": 162.71,
+      "altitude_km": 35781.0,
+      "range_km": 35902.2,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "TKSAT-1 (TUPAC KATARI)",
+      "norad_id": 39481,
+      "elevation_deg": 77.76,
+      "azimuth_deg": 197.59,
+      "altitude_km": 35780.2,
+      "range_km": 35901.8,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "VIASAT-3 F2",
+      "norad_id": 66454,
+      "elevation_deg": 77.76,
+      "azimuth_deg": 160.97,
+      "altitude_km": 36250.3,
+      "range_km": 36372.4,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "VIASAT-3 F1",
+      "norad_id": 56370,
+      "elevation_deg": 77.08,
+      "azimuth_deg": 205.98,
+      "altitude_km": 35789.2,
+      "range_km": 35925.1,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "GALAXY 36 (G-36)",
+      "norad_id": 54742,
+      "elevation_deg": 77.0,
+      "azimuth_deg": 206.68,
+      "altitude_km": 35790.7,
+      "range_km": 35928.2,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "GALAXY 17 (G-17)",
+      "norad_id": 31307,
+      "elevation_deg": 76.93,
+      "azimuth_deg": 185.04,
+      "altitude_km": 35781.3,
+      "range_km": 35920.1,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    },
+    {
+      "name": "SKY MEXICO-1",
+      "norad_id": 40664,
+      "elevation_deg": 76.81,
+      "azimuth_deg": 151.86,
+      "altitude_km": 35784.1,
+      "range_km": 35925.6,
+      "orbit_type": "GEO",
+      "category": "OTHER"
+    }
+  ],
+  "us_military": [
+    {
+      "name": "AEHF-4 (USA 288)",
+      "norad_id": 43651,
+      "elevation_deg": 67.24,
+      "azimuth_deg": 123.76,
+      "altitude_km": 35613.7,
+      "range_km": 36036.2,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY",
+      "priority_name": "AEHF-4",
+      "visible": true
+    },
+    {
+      "name": "NAVSTAR 46 (USA 145)",
+      "norad_id": 25933,
+      "elevation_deg": 65.69,
+      "azimuth_deg": 160.38,
+      "altitude_km": 20465.9,
+      "range_km": 20899.7,
+      "orbit_type": "HEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "MUOS-1",
+      "norad_id": 38093,
+      "elevation_deg": 65.05,
+      "azimuth_deg": 231.28,
+      "altitude_km": 35952.9,
+      "range_km": 36460.4,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "MUOS-5",
+      "norad_id": 41622,
+      "elevation_deg": 64.34,
+      "azimuth_deg": 240.36,
+      "altitude_km": 35440.7,
+      "range_km": 35977.0,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY",
+      "priority_name": "MUOS-5",
+      "visible": true
+    },
+    {
+      "name": "NAVSTAR 71 (USA 256)",
+      "norad_id": 40105,
+      "elevation_deg": 62.98,
+      "azimuth_deg": 267.96,
+      "altitude_km": 20128.0,
+      "range_km": 20664.6,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 176 (DSP 22)",
+      "norad_id": 28158,
+      "elevation_deg": 61.3,
+      "azimuth_deg": 211.54,
+      "altitude_km": 35779.8,
+      "range_km": 36448.1,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 77 (USA 289)",
+      "norad_id": 43873,
+      "elevation_deg": 61.12,
+      "azimuth_deg": 187.45,
+      "altitude_km": 20084.9,
+      "range_km": 20694.5,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 99 (MILSTAR-1 1)",
+      "norad_id": 22988,
+      "elevation_deg": 58.02,
+      "azimuth_deg": 194.09,
+      "altitude_km": 35781.1,
+      "range_km": 36608.4,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 159 (DSP 21)",
+      "norad_id": 26880,
+      "elevation_deg": 56.79,
+      "azimuth_deg": 140.0,
+      "altitude_km": 36089.4,
+      "range_km": 36983.3,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 65 (DSP 15)",
+      "norad_id": 20929,
+      "elevation_deg": 54.57,
+      "azimuth_deg": 219.51,
+      "altitude_km": 36335.3,
+      "range_km": 37351.5,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "WGS F5 (USA 243)",
+      "norad_id": 39168,
+      "elevation_deg": 51.65,
+      "azimuth_deg": 105.63,
+      "altitude_km": 35786.0,
+      "range_km": 36974.6,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 74 (USA 262)",
+      "norad_id": 40730,
+      "elevation_deg": 50.62,
+      "azimuth_deg": 26.45,
+      "altitude_km": 19896.1,
+      "range_km": 21025.9,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 134",
+      "norad_id": 25019,
+      "elevation_deg": 49.12,
+      "azimuth_deg": 235.19,
+      "altitude_km": 35780.7,
+      "range_km": 37126.0,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "SBIRS GEO-2 (USA 241)",
+      "norad_id": 39120,
+      "elevation_deg": 47.12,
+      "azimuth_deg": 110.96,
+      "altitude_km": 35778.3,
+      "range_km": 37257.0,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 286",
+      "norad_id": 43446,
+      "elevation_deg": 44.62,
+      "azimuth_deg": 257.35,
+      "altitude_km": 35232.9,
+      "range_km": 36881.5,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 167",
+      "norad_id": 27691,
+      "elevation_deg": 42.98,
+      "azimuth_deg": 250.85,
+      "altitude_km": 35786.2,
+      "range_km": 37554.9,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "AEHF-3 (USA 246)",
+      "norad_id": 39256,
+      "elevation_deg": 42.24,
+      "azimuth_deg": 258.67,
+      "altitude_km": 35405.4,
+      "range_km": 37227.4,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "WGS F1 (USA 195)",
+      "norad_id": 32258,
+      "elevation_deg": 40.9,
+      "azimuth_deg": 101.08,
+      "altitude_km": 35787.2,
+      "range_km": 37711.7,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 115 (MILSTAR-1 2)",
+      "norad_id": 23712,
+      "elevation_deg": 40.5,
+      "azimuth_deg": 238.6,
+      "altitude_km": 35790.4,
+      "range_km": 37742.4,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 56 (USA 180)",
+      "norad_id": 28474,
+      "elevation_deg": 39.24,
+      "azimuth_deg": 116.24,
+      "altitude_km": 19816.7,
+      "range_km": 21687.1,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "WGS F6 (USA 244)",
+      "norad_id": 39222,
+      "elevation_deg": 30.73,
+      "azimuth_deg": 262.14,
+      "altitude_km": 35787.1,
+      "range_km": 38547.1,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 62 (USA 201)",
+      "norad_id": 32711,
+      "elevation_deg": 29.54,
+      "azimuth_deg": 338.74,
+      "altitude_km": 20645.1,
+      "range_km": 23293.6,
+      "orbit_type": "HEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 83 (USA 440)",
+      "norad_id": 62339,
+      "elevation_deg": 28.71,
+      "azimuth_deg": 156.29,
+      "altitude_km": 20161.1,
+      "range_km": 22866.2,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 66 (USA 232)",
+      "norad_id": 37753,
+      "elevation_deg": 21.18,
+      "azimuth_deg": 175.11,
+      "altitude_km": 20380.2,
+      "range_km": 23767.3,
+      "orbit_type": "HEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 68 (USA 242)",
+      "norad_id": 39166,
+      "elevation_deg": 19.01,
+      "azimuth_deg": 33.89,
+      "altitude_km": 19844.1,
+      "range_km": 23433.8,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "UFO 10 (USA 146)",
+      "norad_id": 25967,
+      "elevation_deg": 18.2,
+      "azimuth_deg": 102.07,
+      "altitude_km": 35766.6,
+      "range_km": 39713.3,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "WGS F3 (USA 211)",
+      "norad_id": 36108,
+      "elevation_deg": 15.82,
+      "azimuth_deg": 265.8,
+      "altitude_km": 35603.2,
+      "range_km": 39790.7,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "USA 157 (MILSTAR-2 2)",
+      "norad_id": 26715,
+      "elevation_deg": 14.16,
+      "azimuth_deg": 261.27,
+      "altitude_km": 35637.2,
+      "range_km": 39996.6,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "AEHF-2 (USA 235)",
+      "norad_id": 38254,
+      "elevation_deg": 12.22,
+      "azimuth_deg": 100.04,
+      "altitude_km": 35774.1,
+      "range_km": 40337.7,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 57 (USA 183)",
+      "norad_id": 28874,
+      "elevation_deg": 11.47,
+      "azimuth_deg": 217.46,
+      "altitude_km": 19862.7,
+      "range_km": 24202.4,
+      "orbit_type": "MEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 72 (USA 258)",
+      "norad_id": 40294,
+      "elevation_deg": 11.47,
+      "azimuth_deg": 182.69,
+      "altitude_km": 20366.5,
+      "range_km": 24714.3,
+      "orbit_type": "HEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "MUOS-3",
+      "norad_id": 40374,
+      "elevation_deg": 11.4,
+      "azimuth_deg": 97.03,
+      "altitude_km": 35928.6,
+      "range_km": 40580.3,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY"
+    },
+    {
+      "name": "NAVSTAR 80 (USA 309)",
+      "norad_id": 46826,
+      "elevation_deg": 11.23,
+      "azimuth_deg": 275.13,
+      "altitude_km": 20357.9,
+      "range_km": 24751.4,
+      "orbit_type": "HEO",
+      "category": "US_MILITARY"
+    }
+  ],
+  "chinese": [
+    {
+      "name": "YAOGAN-39 02C",
+      "norad_id": 57890,
+      "elevation_deg": 63.11,
+      "azimuth_deg": 8.93,
+      "altitude_km": 513.5,
+      "range_km": 569.3,
+      "orbit_type": "LEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M25",
+      "norad_id": 61186,
+      "elevation_deg": 61.06,
+      "azimuth_deg": 149.67,
+      "altitude_km": 21519.8,
+      "range_km": 22141.6,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M10",
+      "norad_id": 43246,
+      "elevation_deg": 59.13,
+      "azimuth_deg": 83.82,
+      "altitude_km": 21513.6,
+      "range_km": 22223.7,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M9",
+      "norad_id": 43245,
+      "elevation_deg": 47.68,
+      "azimuth_deg": 183.63,
+      "altitude_km": 21533.1,
+      "range_km": 22855.0,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "YAOGAN-46",
+      "norad_id": 66313,
+      "elevation_deg": 39.91,
+      "azimuth_deg": 204.97,
+      "altitude_km": 7501.6,
+      "range_km": 8890.9,
+      "orbit_type": "MEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M1",
+      "norad_id": 43001,
+      "elevation_deg": 39.25,
+      "azimuth_deg": 218.48,
+      "altitude_km": 21541.8,
+      "range_km": 23436.9,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M17",
+      "norad_id": 43706,
+      "elevation_deg": 33.04,
+      "azimuth_deg": 347.4,
+      "altitude_km": 21553.6,
+      "range_km": 23928.0,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M24",
+      "norad_id": 44542,
+      "elevation_deg": 28.47,
+      "azimuth_deg": 50.41,
+      "altitude_km": 21540.7,
+      "range_km": 24305.7,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M26",
+      "norad_id": 58655,
+      "elevation_deg": 28.05,
+      "azimuth_deg": 186.79,
+      "altitude_km": 21533.4,
+      "range_km": 24323.5,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M4",
+      "norad_id": 43207,
+      "elevation_deg": 27.54,
+      "azimuth_deg": 282.5,
+      "altitude_km": 21546.8,
+      "range_km": 24397.1,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "YAOGAN-45",
+      "norad_id": 65563,
+      "elevation_deg": 18.27,
+      "azimuth_deg": 76.51,
+      "altitude_km": 7489.4,
+      "range_km": 10475.0,
+      "orbit_type": "MEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M2",
+      "norad_id": 43002,
+      "elevation_deg": 15.92,
+      "azimuth_deg": 171.19,
+      "altitude_km": 21542.4,
+      "range_km": 25469.6,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "BEIDOU-3 M7",
+      "norad_id": 43107,
+      "elevation_deg": 11.9,
+      "azimuth_deg": 44.47,
+      "altitude_km": 21520.1,
+      "range_km": 25870.0,
+      "orbit_type": "HEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "YAOGAN-21",
+      "norad_id": 40143,
+      "elevation_deg": 10.76,
+      "azimuth_deg": 156.34,
+      "altitude_km": 495.2,
+      "range_km": 1629.8,
+      "orbit_type": "LEO",
+      "category": "CHINESE"
+    },
+    {
+      "name": "YAOGAN-30 07B",
+      "norad_id": 45461,
+      "elevation_deg": 10.65,
+      "azimuth_deg": 236.3,
+      "altitude_km": 559.6,
+      "range_km": 1791.4,
+      "orbit_type": "LEO",
+      "category": "CHINESE"
+    }
+  ],
+  "russian": [
+    {
+      "name": "COSMOS 2386",
+      "norad_id": 27057,
+      "elevation_deg": 50.29,
+      "azimuth_deg": 265.51,
+      "altitude_km": 1418.1,
+      "range_km": 1738.7,
+      "orbit_type": "LEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2024 (ETALON 2)",
+      "norad_id": 20026,
+      "elevation_deg": 47.95,
+      "azimuth_deg": 145.7,
+      "altitude_km": 19158.2,
+      "range_km": 20434.8,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2500 [GLONASS-M]",
+      "norad_id": 40001,
+      "elevation_deg": 47.56,
+      "azimuth_deg": 92.08,
+      "altitude_km": 19142.2,
+      "range_km": 20446.8,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2475 [GLONASS-M]",
+      "norad_id": 37869,
+      "elevation_deg": 45.93,
+      "azimuth_deg": 226.18,
+      "altitude_km": 19096.7,
+      "range_km": 20498.3,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 1989 (ETALON 1)",
+      "norad_id": 19751,
+      "elevation_deg": 43.11,
+      "azimuth_deg": 218.05,
+      "altitude_km": 19073.5,
+      "range_km": 20657.5,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2518",
+      "norad_id": 42719,
+      "elevation_deg": 42.38,
+      "azimuth_deg": 254.77,
+      "altitude_km": 6870.6,
+      "range_km": 8082.1,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2569 [GLONASS-K2]",
+      "norad_id": 57517,
+      "elevation_deg": 41.74,
+      "azimuth_deg": 213.33,
+      "altitude_km": 19134.6,
+      "range_km": 20811.8,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2456 [GLONASS-M]",
+      "norad_id": 36111,
+      "elevation_deg": 31.03,
+      "azimuth_deg": 296.67,
+      "altitude_km": 19145.7,
+      "range_km": 21641.9,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2563",
+      "norad_id": 54223,
+      "elevation_deg": 29.26,
+      "azimuth_deg": 33.48,
+      "altitude_km": 26354.3,
+      "range_km": 29130.7,
+      "orbit_type": "HEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2557 [GLONASS-K]",
+      "norad_id": 52984,
+      "elevation_deg": 27.27,
+      "azimuth_deg": 172.66,
+      "altitude_km": 19118.7,
+      "range_km": 21921.6,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2547 [GLONASS-K]",
+      "norad_id": 46805,
+      "elevation_deg": 21.11,
+      "azimuth_deg": 349.07,
+      "altitude_km": 19155.3,
+      "range_km": 22521.8,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2432 [GLONASS-M]",
+      "norad_id": 32276,
+      "elevation_deg": 17.73,
+      "azimuth_deg": 46.26,
+      "altitude_km": 19127.9,
+      "range_km": 22824.2,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2596 [GLONASS-K1]",
+      "norad_id": 65590,
+      "elevation_deg": 17.28,
+      "azimuth_deg": 46.05,
+      "altitude_km": 19136.0,
+      "range_km": 22876.4,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2436 [GLONASS-M]",
+      "norad_id": 32395,
+      "elevation_deg": 15.38,
+      "azimuth_deg": 41.66,
+      "altitude_km": 19158.0,
+      "range_km": 23086.2,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2530 (RODNIK-S *)",
+      "norad_id": 43751,
+      "elevation_deg": 14.18,
+      "azimuth_deg": 3.62,
+      "altitude_km": 1510.3,
+      "range_km": 3329.1,
+      "orbit_type": "LEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "COSMOS 2477 [GLONASS-M]",
+      "norad_id": 37868,
+      "elevation_deg": 14.06,
+      "azimuth_deg": 176.6,
+      "altitude_km": 19092.3,
+      "range_km": 23137.7,
+      "orbit_type": "MEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "LUCH-5B",
+      "norad_id": 38977,
+      "elevation_deg": 11.08,
+      "azimuth_deg": 102.75,
+      "altitude_km": 35783.8,
+      "range_km": 40466.8,
+      "orbit_type": "GEO",
+      "category": "RUSSIAN"
+    },
+    {
+      "name": "GONETS-M 4",
+      "norad_id": 38736,
+      "elevation_deg": 10.05,
+      "azimuth_deg": 45.83,
+      "altitude_km": 1502.1,
+      "range_km": 3642.3,
+      "orbit_type": "LEO",
+      "category": "RUSSIAN"
+    }
+  ],
+  "priority_targets": [
+    {
+      "name": "AEHF-4 (USA 288)",
+      "norad_id": 43651,
+      "elevation_deg": 67.24,
+      "azimuth_deg": 123.76,
+      "altitude_km": 35613.7,
+      "range_km": 36036.2,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY",
+      "priority_name": "AEHF-4",
+      "visible": true
+    },
+    {
+      "name": "MUOS-5",
+      "norad_id": 41622,
+      "elevation_deg": 64.34,
+      "azimuth_deg": 240.36,
+      "altitude_km": 35440.7,
+      "range_km": 35977.0,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY",
+      "priority_name": "MUOS-5",
+      "visible": true
+    },
+    {
+      "name": "CS2",
+      "norad_id": 49262,
+      "elevation_deg": -8.58,
+      "azimuth_deg": 61.46,
+      "altitude_km": 466.9,
+      "range_km": 3608.3,
+      "orbit_type": "LEO",
+      "category": "OTHER",
+      "priority_name": "MANDRAKE-2A",
+      "visible": false
+    },
+    {
+      "name": "HAWK-7B",
+      "norad_id": 56193,
+      "elevation_deg": -17.31,
+      "azimuth_deg": 17.5,
+      "altitude_km": 493.0,
+      "range_km": 5063.3,
+      "orbit_type": "LEO",
+      "category": "OTHER",
+      "priority_name": "BLACKJACK-B",
+      "visible": false
+    },
+    {
+      "name": "AEHF-1 (USA 214)",
+      "norad_id": 36868,
+      "elevation_deg": -31.98,
+      "azimuth_deg": 89.55,
+      "altitude_km": 35776.2,
+      "range_km": 45184.1,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY",
+      "priority_name": "AEHF-1",
+      "visible": false
+    },
+    {
+      "name": "COSMOS 2506",
+      "norad_id": 40699,
+      "elevation_deg": -33.03,
+      "azimuth_deg": 9.01,
+      "altitude_km": 718.8,
+      "range_km": 8121.5,
+      "orbit_type": "LEO",
+      "category": "RUSSIAN",
+      "priority_name": "USA-267",
+      "visible": false
+    },
+    {
+      "name": "CUTE",
+      "norad_id": 49263,
+      "elevation_deg": -41.71,
+      "azimuth_deg": 3.39,
+      "altitude_km": 383.2,
+      "range_km": 9024.2,
+      "orbit_type": "LEO",
+      "category": "OTHER",
+      "priority_name": "MANDRAKE-2B",
+      "visible": false
+    },
+    {
+      "name": "ION SCV-010",
+      "norad_id": 56192,
+      "elevation_deg": -68.5,
+      "azimuth_deg": 305.46,
+      "altitude_km": 484.6,
+      "range_km": 12388.5,
+      "orbit_type": "LEO",
+      "category": "OTHER",
+      "priority_name": "BLACKJACK-A",
+      "visible": false
+    },
+    {
+      "name": "TJS-3",
+      "norad_id": 43874,
+      "elevation_deg": -78.71,
+      "azimuth_deg": 35.47,
+      "altitude_km": 35703.7,
+      "range_km": 48319.5,
+      "orbit_type": "GEO",
+      "category": "OTHER",
+      "priority_name": "USA-285",
+      "visible": false
+    },
+    {
+      "name": "WGS F4 (USA 233)",
+      "norad_id": 38070,
+      "elevation_deg": -79.2,
+      "azimuth_deg": 37.47,
+      "altitude_km": 35787.1,
+      "range_km": 48415.2,
+      "orbit_type": "GEO",
+      "category": "US_MILITARY",
+      "priority_name": "MUOS-1",
+      "visible": false
+    }
+  ],
+  "starlink_count": 332,
+  "starlink_highest": {
+    "name": "STARLINK-4531",
+    "norad_id": 53425,
+    "elevation_deg": 82.1,
+    "azimuth_deg": 304.81,
+    "altitude_km": 539.5,
+    "range_km": 543.3,
+    "orbit_type": "LEO",
+    "category": "STARLINK"
+  },
+  "threat_assessment": {
+    "classified_overhead": 19,
+    "blackjack_visible": 0,
+    "mandrake_visible": 0,
+    "muos_visible": 1,
+    "aehf_visible": 1
+  },
+  "threat_level": "CRITICAL"
+}

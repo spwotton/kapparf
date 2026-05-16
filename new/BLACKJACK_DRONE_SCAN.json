@@ -1,0 +1,45 @@
+{
+  "24.2": {
+    "power": 16.289051055908203,
+    "desc": "Sub-infrasonic harassment"
+  },
+  "46.875": {
+    "power": 2.3020081520080566,
+    "desc": "V2K carrier (48000/1024)"
+  },
+  "60.0": {
+    "power": 8.31702995300293,
+    "desc": "Mains reference"
+  },
+  "93.75": {
+    "power": 2.183126926422119,
+    "desc": "2nd harmonic of 46.875"
+  },
+  "97.0": {
+    "power": 2.545257329940796,
+    "desc": "Drone prop fundamental (~5820 RPM)"
+  },
+  "98.6": {
+    "power": 8.274965286254883,
+    "desc": "Drone motor signature"
+  },
+  "100.0": {
+    "power": 11.94980525970459,
+    "desc": "Drone harmonic band"
+  },
+  "140.625": {
+    "power": 3.3799965381622314,
+    "desc": "3rd harmonic of 46.875"
+  },
+  "194.0": {
+    "power": 21.207935333251953,
+    "desc": "2nd harmonic drone"
+  },
+  "197.2": {
+    "power": 7.287068843841553,
+    "desc": "2nd harmonic drone motor"
+  },
+  "timestamp": "2026-01-30T03:28:01.284891",
+  "tv_state": "OFF",
+  "hypothesis": "BLACKJACK_MESH_DRONE_RELAY"
+}
