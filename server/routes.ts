@@ -1490,6 +1490,89 @@ export async function registerRoutes(
     }
   });
 
+  // ─── Google Maps Proxy Routes ────────────────────────────────────────────────
+  const GMAPS_KEY = process.env.GOOGLE_API_KEY;
+
+  app.get("/api/proxy/google/places", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    const { lat, lon, radius = "15000", type = "airport", keyword } = req.query as Record<string, string>;
+    if (!lat || !lon) return res.status(400).json({ error: "lat and lon required" });
+    try {
+      let url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lon}&radius=${radius}&key=${GMAPS_KEY}`;
+      if (type) url += `&type=${encodeURIComponent(type)}`;
+      if (keyword) url += `&keyword=${encodeURIComponent(keyword)}`;
+      const r = await fetch(url);
+      const d = await r.json();
+      res.json(d);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/proxy/google/elevation", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    const { path: pathParam, locations } = req.query as Record<string, string>;
+    try {
+      const loc = locations || pathParam;
+      if (!loc) return res.status(400).json({ error: "locations required" });
+      const url = `https://maps.googleapis.com/maps/api/elevation/json?locations=${encodeURIComponent(loc)}&key=${GMAPS_KEY}`;
+      const r = await fetch(url);
+      res.json(await r.json());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/proxy/google/geocode", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    const { address, latlng } = req.query as Record<string, string>;
+    try {
+      let url = `https://maps.googleapis.com/maps/api/geocode/json?key=${GMAPS_KEY}`;
+      if (address) url += `&address=${encodeURIComponent(address)}`;
+      else if (latlng) url += `&latlng=${encodeURIComponent(latlng)}`;
+      else return res.status(400).json({ error: "address or latlng required" });
+      const r = await fetch(url);
+      res.json(await r.json());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/proxy/google/directions", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    const { origin, destination, mode = "driving" } = req.query as Record<string, string>;
+    if (!origin || !destination) return res.status(400).json({ error: "origin and destination required" });
+    try {
+      const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&mode=${mode}&key=${GMAPS_KEY}`;
+      const r = await fetch(url);
+      res.json(await r.json());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/proxy/google/place-details", async (req, res) => {
+    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
+    const { place_id } = req.query as Record<string, string>;
+    if (!place_id) return res.status(400).json({ error: "place_id required" });
+    try {
+      const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(place_id)}&key=${GMAPS_KEY}`;
+      const r = await fetch(url);
+      res.json(await r.json());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/proxy/atlantis-satellite/status", async (_req, res) => {
+    try {
+      const { getAtlantisSatelliteStatus } = await import("./atlantis-satellite");
+      res.json(getAtlantisSatelliteStatus());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // ─── Seismic KAPPA Correlation Engine ───────────────────────────────────────
   // Live USGS M2.5+ data cross-correlated with KAPPA constants for the
   // CENTER/ECHO observation node at Jacó, Costa Rica

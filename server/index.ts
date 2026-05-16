@@ -89,6 +89,8 @@ app.use((req, res, next) => {
   setTimeout(startAtlantisProbe, 5000);
   const { ak7 } = await import("./ak7-hypervisor");
   ak7.start();
+  const { startAtlantisSatellite } = await import("./atlantis-satellite");
+  setTimeout(() => startAtlantisSatellite().catch(e => console.warn("[AtlantisSatellite]", e.message)), 8000);
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {

@@ -10,6 +10,21 @@ export function serveStatic(app: Express) {
     );
   }
 
+  // Serve raw capture files before SPA catch-all
+  const capturesPath = path.resolve(process.cwd(), "captures");
+  if (fs.existsSync(capturesPath)) {
+    app.use("/captures", express.static(capturesPath, {
+      setHeaders: (res) => { res.setHeader("Access-Control-Allow-Origin", "*"); },
+    }));
+  }
+
+  const kiwiScreenshotsPath = path.resolve(process.cwd(), "kiwisdr_screenshots");
+  if (fs.existsSync(kiwiScreenshotsPath)) {
+    app.use("/kiwisdr_screenshots", express.static(kiwiScreenshotsPath, {
+      setHeaders: (res) => { res.setHeader("Access-Control-Allow-Origin", "*"); },
+    }));
+  }
+
   app.use(express.static(distPath, {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".html")) {
