@@ -129,6 +129,16 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
 
+  app.get("/dl/kappa_capture.sh", (_req, res) => {
+    const scriptPath = nodePath.resolve(process.cwd(), "kappa_tshark_capture.sh");
+    if (!fs.existsSync(scriptPath)) {
+      return res.status(404).send("Script not found");
+    }
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Content-Disposition", "attachment; filename=\"kappa_capture.sh\"");
+    res.sendFile(scriptPath);
+  });
+
   app.use("/evidence", express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".mp4")) {
