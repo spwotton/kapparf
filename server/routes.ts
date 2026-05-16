@@ -27,6 +27,7 @@ import { cortexBus } from "./cortex-bus";
 import { atlantisHub } from "./atlantis-hub";
 import { GOS_CONSTANTS, ATLANTIS_CANDIDATES, RESEARCH_CORPUS } from "./atlantis-probe";
 import { ak7, AK7_INVARIANTS, AK7_LAYERS, BLOCK_COLORS, getChronoPosition } from "./ak7-hypervisor";
+import { buildAuthUrl, exchangeCode, getAuthStatus, getAccessToken as eeGetAccessToken } from "./google-oauth";
 import { getLocalSession, getLocalEvents, executeLocalCommand } from "./bettercap/local-cap";
 import {
   indexAllDocuments, getCortexStatus, getClaims, getDocumentContent, writeDocumentContent,
@@ -1605,29 +1606,98 @@ export async function registerRoutes(
     }
   });
 
+  // ─── Google OAuth 2.0 Auth Flow ──────────────────────────────────────────────
+  app.get("/api/auth/google", (_req, res) => {
+    const url = buildAuthUrl();
+    res.redirect(url);
+  });
+
+  app.get("/api/auth/google/callback", async (req, res) => {
+    const { code, error } = req.query as Record<string, string>;
+    if (error) return res.status(400).send(`OAuth error: ${error}`);
+    if (!code) return res.status(400).send("No code received");
+    try {
+      await exchangeCode(code);
+      res.send(`<html><body style="font-family:monospace;background:#06090f;color:#4ade80;padding:2rem">
+        <h2>✓ Google Earth Engine authenticated</h2>
+        <p>Token stored. You can close this tab.</p>
+        <script>setTimeout(()=>window.close(),2000)</script>
+      </body></html>`);
+    } catch (e: any) {
+      res.status(500).send(`Token exchange failed: ${e.message}`);
+    }
+  });
+
+  app.get("/api/auth/google/status", (_req, res) => {
+    res.json(getAuthStatus());
+  });
+
   // ─── Google Earth Engine Proxy ───────────────────────────────────────────────
   const EE_PROJECT = "gen-lang-client-0752046783";
 
+  const eeAuthHeaders = async (): Promise<HeadersInit> => {
+    const token = await eeGetAccessToken();
+    return { "Content-Type": "application/json", "Authorization": `Bearer ${token}` };
+  };
+
   app.post("/api/proxy/earth-engine/compute", async (req, res) => {
-    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
     try {
+      const headers = await eeAuthHeaders();
       const r = await fetch(
-        `https://earthengine.googleapis.com/v1/projects/${EE_PROJECT}/value:compute?key=${GMAPS_KEY}`,
-        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(req.body) }
+        `https://earthengine.googleapis.com/v1/projects/${EE_PROJECT}/value:compute`,
+        { method: "POST", headers, body: JSON.stringify(req.body) }
       );
       res.json(await r.json());
-    } catch (e: any) { res.status(500).json({ error: e.message }); }
+    } catch (e: any) { res.status(401).json({ error: e.message, auth_url: "/api/auth/google" }); }
   });
 
   app.get("/api/proxy/earth-engine/assets", async (req, res) => {
-    if (!GMAPS_KEY) return res.status(503).json({ error: "GOOGLE_API_KEY not configured" });
     const { parent = `projects/${EE_PROJECT}/assets` } = req.query as Record<string, string>;
     try {
-      const r = await fetch(
-        `https://earthengine.googleapis.com/v1/${parent}?key=${GMAPS_KEY}`
-      );
+      const headers = await eeAuthHeaders();
+      const r = await fetch(`https://earthengine.googleapis.com/v1/${parent}`, { headers });
       res.json(await r.json());
-    } catch (e: any) { res.status(500).json({ error: e.message }); }
+    } catch (e: any) { res.status(401).json({ error: e.message, auth_url: "/api/auth/google" }); }
+  });
+
+  // SRTM elevation from EE — authenticates with OAuth, pulls SRTM30m for point/polygon
+  app.get("/api/proxy/earth-engine/srtm", async (req, res) => {
+    const { lat, lon } = req.query as Record<string, string>;
+    if (!lat || !lon) return res.status(400).json({ error: "lat and lon required" });
+    try {
+      const headers = await eeAuthHeaders();
+      const expression = {
+        expression: {
+          functionInvocationValue: {
+            functionName: "Image.reduceRegion",
+            arguments: {
+              image: {
+                functionInvocationValue: {
+                  functionName: "Image.load",
+                  arguments: { id: { constantValue: "USGS/SRTMGL1_003" } }
+                }
+              },
+              reducer: { functionInvocationValue: { functionName: "Reducer.mean", arguments: {} } },
+              geometry: {
+                functionInvocationValue: {
+                  functionName: "GeometryConstructors.Point",
+                  arguments: {
+                    coordinates: { constantValue: [parseFloat(lon), parseFloat(lat)] }
+                  }
+                }
+              },
+              scale: { constantValue: 30 }
+            }
+          }
+        }
+      };
+      const r = await fetch(
+        `https://earthengine.googleapis.com/v1/projects/${EE_PROJECT}/value:compute`,
+        { method: "POST", headers, body: JSON.stringify(expression) }
+      );
+      const d = await r.json();
+      res.json({ lat: parseFloat(lat), lon: parseFloat(lon), elevM: d?.result?.elevation ?? d, raw: d });
+    } catch (e: any) { res.status(401).json({ error: e.message, auth_url: "/api/auth/google" }); }
   });
 
   // Open-Elevation SRTM proxy — free, no key needed, 30m resolution
