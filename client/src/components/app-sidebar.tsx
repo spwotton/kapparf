@@ -31,6 +31,7 @@ import {
   Building2,
   RotateCw,
   Waves,
+  Cpu,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -119,6 +120,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.intelReports", fallback: "Intel Reports", url: "/intelligence", icon: Sparkles },
       { titleKey: "sidebar.research", fallback: "Research", url: "/research", icon: Microscope },
       { titleKey: "sidebar.deepResearch", fallback: "Deep Research", url: "/deep-research", icon: Orbit },
+      { titleKey: "sidebar.localLLM", fallback: "Local LLM", url: "/local-llm", icon: Cpu },
       { titleKey: "sidebar.researchCortex", fallback: "Research Cortex", url: "/cortex", icon: BookOpen },
       { titleKey: "sidebar.memoryCortex", fallback: "Memory Cortex", url: "/memory", icon: Database },
       { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },

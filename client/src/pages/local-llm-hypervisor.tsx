@@ -1,0 +1,883 @@
+import { useState, useEffect, useRef, useCallback } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import {
+  Cpu, Send, Download, Eye, EyeOff, ChevronDown, ChevronRight,
+  Layers, Zap, AlertTriangle, ExternalLink, RefreshCw, X,
+  Play, Square, Settings, Activity, Brain,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import {
+  LLM_MODELS, DEFAULT_MODEL_ID, AGENT_ROLES, makeDefaultLayers,
+  type HypervisorLayer, type HypervisorAgent, type BlendMode,
+} from "@/lib/llm-models";
+import { Link } from "wouter";
+
+const BLEND_MODES: BlendMode[] = ["normal", "add", "multiply", "screen", "difference"];
+
+interface ChatMessage {
+  role: "user" | "assistant" | "system";
+  content: string;
+  timestamp: number;
+}
+
+interface BackgroundEntry {
+  ts: number;
+  summary: string;
+  eventCount: number;
+}
+
+type WorkerMsg =
+  | { type: "progress"; file: string; progress: number; loaded: number; total: number }
+  | { type: "loaded"; modelId: string }
+  | { type: "token"; layerId: string; agentId: string; text: string }
+  | { type: "done"; layerId: string; agentId: string; totalTokens: number }
+  | { type: "error"; message: string }
+  | { type: "webgpu_unavailable" };
+
+function formatBytes(b: number) {
+  if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
+  return `${(b / 1024 / 1024).toFixed(1)} MB`;
+}
+
+function getRoleInfo(roleId: string) {
+  return AGENT_ROLES.find((r) => r.id === roleId) ?? AGENT_ROLES[0];
+}
+
+function BlendModeChip({ mode }: { mode: BlendMode }) {
+  const colors: Record<BlendMode, string> = {
+    normal: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
+    add: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+    multiply: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+    screen: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+    difference: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  };
+  return (
+    <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${colors[mode]}`}>
+      {mode}
+    </span>
+  );
+}
+
+function AgentChip({ agent, layerId, onTokenReceived }: {
+  agent: HypervisorAgent;
+  layerId: string;
+  onTokenReceived?: (layerId: string, agentId: string, text: string) => void;
+}) {
+  const role = getRoleInfo(agent.roleId);
+  const statusColor = {
+    idle: "bg-zinc-300 dark:bg-zinc-600",
+    running: "bg-blue-500 animate-pulse",
+    done: "bg-emerald-500",
+    error: "bg-red-500",
+  }[agent.status];
+
+  return (
+    <div className="flex items-start gap-2 p-2 rounded border border-border/50 bg-muted/20" data-testid={`agent-chip-${agent.id}`}>
+      <div className="flex items-center gap-1.5 mt-0.5 shrink-0">
+        <div className={`h-2 w-2 rounded-full ${statusColor}`} />
+        <span className="text-[10px] font-mono font-semibold" style={{ color: role.color }}>
+          {role.label}
+        </span>
+      </div>
+      {agent.output && (
+        <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-3 flex-1">
+          {agent.output}
+        </p>
+      )}
+      {agent.status === "running" && !agent.output && (
+        <span className="text-[10px] text-muted-foreground animate-pulse">generating…</span>
+      )}
+      {agent.tokenCount > 0 && (
+        <span className="text-[10px] text-muted-foreground shrink-0">{agent.tokenCount}t</span>
+      )}
+    </div>
+  );
+}
+
+function LayerRow({
+  layer, depth, onToggleHidden, onOpacityChange, onBlendChange, onToggleExpand,
+}: {
+  layer: HypervisorLayer;
+  depth: number;
+  onToggleHidden: (id: string) => void;
+  onOpacityChange: (id: string, v: number) => void;
+  onBlendChange: (id: string, v: BlendMode) => void;
+  onToggleExpand: (id: string) => void;
+}) {
+  const indent = depth * 12;
+  return (
+    <div style={{ marginLeft: indent }} data-testid={`layer-row-${layer.id}`}>
+      <div
+        className={`flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted/30 transition-colors ${layer.isHidden ? "opacity-50" : ""}`}
+      >
+        <button onClick={() => onToggleExpand(layer.id)} className="shrink-0 text-muted-foreground hover:text-foreground">
+          {layer.isExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+        </button>
+        <span className="text-xs font-medium flex-1 truncate">{layer.name}</span>
+        <BlendModeChip mode={layer.blendMode} />
+        <span className="text-[10px] font-mono text-muted-foreground w-8 text-right">
+          {Math.round(layer.opacity * 100)}%
+        </span>
+        <button
+          onClick={() => onToggleHidden(layer.id)}
+          className="shrink-0 text-muted-foreground hover:text-foreground"
+          data-testid={`toggle-hidden-${layer.id}`}
+        >
+          {layer.isHidden ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+        </button>
+      </div>
+
+      {layer.isExpanded && (
+        <div className="ml-6 mb-1 space-y-1">
+          <div className="flex items-center gap-2 px-2">
+            <span className="text-[10px] text-muted-foreground w-12">Opacity</span>
+            <div className="flex-1">
+              <Slider
+                value={[layer.opacity * 100]}
+                onValueChange={([v]) => onOpacityChange(layer.id, v / 100)}
+                min={0} max={100} step={1}
+                className="h-1"
+                data-testid={`slider-opacity-${layer.id}`}
+              />
+            </div>
+          </div>
+          <div className="flex items-center gap-2 px-2">
+            <span className="text-[10px] text-muted-foreground w-12">Blend</span>
+            <Select value={layer.blendMode} onValueChange={(v) => onBlendChange(layer.id, v as BlendMode)}>
+              <SelectTrigger className="h-6 text-[11px] flex-1" data-testid={`select-blend-${layer.id}`}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {BLEND_MODES.map((m) => (
+                  <SelectItem key={m} value={m} className="text-[11px]">{m}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          {layer.mask && (
+            <div className="px-2 text-[10px] text-muted-foreground italic">
+              mask: {layer.mask}
+            </div>
+          )}
+          <div className="px-2 space-y-1">
+            {layer.agents.map((a) => (
+              <AgentChip key={a.id} agent={a} layerId={layer.id} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default function LocalLLMHypervisorPage() {
+  const { toast } = useToast();
+
+  const [webGPUAvail, setWebGPUAvail] = useState<boolean | null>(null);
+  const [modelId, setModelId] = useState(DEFAULT_MODEL_ID);
+  const [hfToken, setHfToken] = useState(() =>
+    localStorage.getItem("hf_token") ?? (import.meta.env.VITE_HF_TOKEN as string | undefined) ?? ""
+  );
+  const [modelStatus, setModelStatus] = useState<"unloaded" | "loading" | "loaded" | "error">("unloaded");
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [loadFile, setLoadFile] = useState("");
+  const [loadLoaded, setLoadLoaded] = useState(0);
+  const [loadTotal, setLoadTotal] = useState(0);
+  const [totalTokens, setTotalTokens] = useState(0);
+
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatStreaming, setChatStreaming] = useState(false);
+  const [streamBuffer, setStreamBuffer] = useState("");
+
+  const [layers, setLayers] = useState<HypervisorLayer[]>(makeDefaultLayers);
+  const [activeLayerMode, setActiveLayerMode] = useState<"chat" | "roundtable">("chat");
+
+  const [bgEnabled, setBgEnabled] = useState(false);
+  const [bgLog, setBgLog] = useState<BackgroundEntry[]>([]);
+  const [lastSeenEventIds, setLastSeenEventIds] = useState<Set<number>>(new Set());
+
+  const workerRef = useRef<Worker | null>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  const bgIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (!("gpu" in navigator)) { setWebGPUAvail(false); return; }
+        const adapter = await (navigator as any).gpu.requestAdapter();
+        setWebGPUAvail(!!adapter);
+      } catch {
+        setWebGPUAvail(false);
+      }
+    })();
+  }, []);
+
+  const initWorker = useCallback(() => {
+    if (workerRef.current) workerRef.current.terminate();
+    const w = new Worker(new URL("../workers/llm-worker.ts", import.meta.url), { type: "module" });
+    w.onmessage = (e: MessageEvent<WorkerMsg>) => {
+      const msg = e.data;
+      if (msg.type === "progress") {
+        setLoadProgress(msg.progress);
+        setLoadFile(msg.file);
+        setLoadLoaded(msg.loaded);
+        setLoadTotal(msg.total);
+      } else if (msg.type === "loaded") {
+        setModelStatus("loaded");
+        setLoadProgress(100);
+        toast({ title: `Model loaded: ${msg.modelId}` });
+      } else if (msg.type === "token") {
+        if (msg.layerId === "chat") {
+          setStreamBuffer((b) => b + msg.text);
+        } else {
+          setLayers((prev) => prev.map((l) => {
+            if (l.id !== msg.layerId) return l;
+            return {
+              ...l,
+              agents: l.agents.map((a) =>
+                a.id === msg.agentId ? { ...a, output: a.output + msg.text, status: "running" } : a
+              ),
+            };
+          }));
+        }
+        setTotalTokens((t) => t + 1);
+      } else if (msg.type === "done") {
+        if (msg.layerId === "chat") {
+          setChatStreaming(false);
+          setStreamBuffer((buf) => {
+            setChatMessages((prev) => [
+              ...prev,
+              { role: "assistant", content: buf, timestamp: Date.now() },
+            ]);
+            return "";
+          });
+        } else {
+          setLayers((prev) => prev.map((l) => {
+            if (l.id !== msg.layerId) return l;
+            return {
+              ...l,
+              agents: l.agents.map((a) =>
+                a.id === msg.agentId ? { ...a, status: "done", tokenCount: a.tokenCount + msg.totalTokens } : a
+              ),
+            };
+          }));
+        }
+      } else if (msg.type === "error") {
+        setModelStatus("error");
+        setChatStreaming(false);
+        toast({ title: "Worker error", description: msg.message, variant: "destructive" });
+      }
+    };
+    workerRef.current = w;
+    return w;
+  }, [toast]);
+
+  const autoLoadedRef = useRef(false);
+
+  useEffect(() => {
+    const w = initWorker();
+    if (!autoLoadedRef.current) {
+      autoLoadedRef.current = true;
+      const model = LLM_MODELS.find((m) => m.id === DEFAULT_MODEL_ID)!;
+      const savedToken =
+        localStorage.getItem("hf_token") ??
+        (import.meta.env.VITE_HF_TOKEN as string | undefined) ??
+        "";
+      setModelStatus("loading");
+      setLoadProgress(0);
+      w.postMessage({ type: "load", modelId: model.hfRepo, hfToken: savedToken || undefined, dtype: model.dtype });
+    }
+    return () => workerRef.current?.terminate();
+  }, []);
+
+  const loadModel = () => {
+    const w = workerRef.current ?? initWorker();
+    const model = LLM_MODELS.find((m) => m.id === modelId)!;
+    setModelStatus("loading");
+    setLoadProgress(0);
+    w.postMessage({ type: "load", modelId: model.hfRepo, hfToken: hfToken || undefined, dtype: model.dtype });
+    if (hfToken) localStorage.setItem("hf_token", hfToken);
+  };
+
+  const sendChat = () => {
+    if (!chatInput.trim() || chatStreaming || modelStatus !== "loaded") return;
+    const userMsg: ChatMessage = { role: "user", content: chatInput, timestamp: Date.now() };
+    const history = [...chatMessages, userMsg];
+    setChatMessages(history);
+    setChatInput("");
+    setChatStreaming(true);
+    setStreamBuffer("");
+
+    const messages = history.map((m) => ({ role: m.role, content: m.content }));
+    workerRef.current?.postMessage({ type: "generate", layerId: "chat", agentId: "chat", messages, maxTokens: 512 });
+  };
+
+  const injectKappaContext = async () => {
+    try {
+      const res = await fetch("/api/events?limit=20");
+      const events = await res.json();
+      const summary = JSON.stringify(events.slice(0, 20), null, 0);
+      const sysMsg: ChatMessage = {
+        role: "system",
+        content: `[KAPPA CONTEXT — ${new Date().toISOString()}]\n${summary}`,
+        timestamp: Date.now(),
+      };
+      setChatMessages((prev) => [...prev, sysMsg]);
+      toast({ title: "KAPPA context injected", description: `${Math.min(events.length, 20)} events prepended` });
+    } catch {
+      toast({ title: "Failed to fetch KAPPA events", variant: "destructive" });
+    }
+  };
+
+  const runRoundtable = async () => {
+    if (modelStatus !== "loaded" || !chatInput.trim()) return;
+    const prompt = chatInput.trim();
+    setChatInput("");
+
+    setLayers((prev) =>
+      prev.map((l) => ({
+        ...l,
+        agents: l.agents.map((a) => ({ ...a, output: "", status: "idle" as const, tokenCount: 0 })),
+      }))
+    );
+
+    const agentLayers = layers.filter((l) => !l.isHidden && l.id !== "layer-hypervisor");
+
+    for (const layer of agentLayers) {
+      for (const agent of layer.agents) {
+        const role = getRoleInfo(agent.roleId);
+        setLayers((prev) =>
+          prev.map((l) => l.id !== layer.id ? l : {
+            ...l,
+            agents: l.agents.map((a) => a.id !== agent.id ? a : { ...a, status: "running" as const }),
+          })
+        );
+        workerRef.current?.postMessage({
+          type: "generate",
+          layerId: layer.id,
+          agentId: agent.id,
+          messages: [
+            { role: "system", content: role.systemPrompt },
+            { role: "user", content: prompt },
+          ],
+          maxTokens: 256,
+        });
+        await new Promise((r) => setTimeout(r, 200));
+      }
+    }
+  };
+
+  const runHypervisor = () => {
+    if (modelStatus !== "loaded") return;
+    const hyperLayer = layers.find((l) => l.id === "layer-hypervisor");
+    if (!hyperLayer) return;
+
+    const agentOutputs = layers
+      .filter((l) => l.id !== "layer-hypervisor")
+      .flatMap((l) =>
+        l.agents
+          .filter((a) => a.output)
+          .map((a) => `[${getRoleInfo(a.roleId).label} — Layer "${l.name}" opacity:${l.opacity} blend:${l.blendMode}]\n${a.output}`)
+      )
+      .join("\n\n---\n\n");
+
+    if (!agentOutputs.trim()) {
+      toast({ title: "No layer outputs to synthesise", description: "Run the roundtable first" });
+      return;
+    }
+
+    const hypAgent = hyperLayer.agents[0];
+    const role = getRoleInfo(hypAgent.roleId);
+
+    setLayers((prev) =>
+      prev.map((l) => l.id !== "layer-hypervisor" ? l : {
+        ...l,
+        agents: l.agents.map((a) => ({ ...a, output: "", status: "running" as const, tokenCount: 0 })),
+      })
+    );
+
+    workerRef.current?.postMessage({
+      type: "generate",
+      layerId: hyperLayer.id,
+      agentId: hypAgent.id,
+      messages: [
+        { role: "system", content: role.systemPrompt },
+        { role: "user", content: `Layer outputs for synthesis:\n\n${agentOutputs}` },
+      ],
+      maxTokens: 512,
+    });
+  };
+
+  useEffect(() => {
+    if (bgIntervalRef.current) clearInterval(bgIntervalRef.current);
+    if (!bgEnabled) return;
+
+    const run = async () => {
+      if (modelStatus !== "loaded") return;
+      try {
+        const res = await fetch("/api/events?limit=50");
+        const events: any[] = await res.json();
+        const newEvents = events.filter((ev) => !lastSeenEventIds.has(ev.id));
+        if (newEvents.length === 0) return;
+
+        setLastSeenEventIds((prev) => {
+          const next = new Set(prev);
+          newEvents.forEach((ev) => next.add(ev.id));
+          return next;
+        });
+
+        const analystLayer = layers.find((l) => l.id === "layer-kappa");
+        const agent = analystLayer?.agents[0];
+        if (!agent) return;
+
+        const role = getRoleInfo("analyst");
+        const summary = JSON.stringify(newEvents.slice(0, 20));
+
+        let collected = "";
+        const cleanup = () => workerRef.current?.removeEventListener("message", handler);
+        const handler = (e: MessageEvent<WorkerMsg>) => {
+          if (e.data.type === "token" && e.data.agentId === agent.id) collected += e.data.text;
+          if (e.data.type === "done" && e.data.agentId === agent.id) {
+            setBgLog((prev) => [
+              { ts: Date.now(), summary: collected, eventCount: newEvents.length },
+              ...prev.slice(0, 19),
+            ]);
+            cleanup();
+          }
+          if (e.data.type === "error") {
+            cleanup();
+          }
+        };
+        workerRef.current?.addEventListener("message", handler);
+
+        workerRef.current?.postMessage({
+          type: "generate",
+          layerId: analystLayer!.id,
+          agentId: agent.id,
+          messages: [
+            { role: "system", content: role.systemPrompt },
+            { role: "user", content: `New KAPPA events:\n${summary}` },
+          ],
+          maxTokens: 256,
+        });
+      } catch (err) {
+        setBgLog((prev) => [
+          { ts: Date.now(), summary: `Analysis error: ${err instanceof Error ? err.message : String(err)}`, eventCount: 0 },
+          ...prev.slice(0, 19),
+        ]);
+      }
+    };
+
+    run();
+    bgIntervalRef.current = setInterval(run, 30000);
+    return () => { if (bgIntervalRef.current) clearInterval(bgIntervalRef.current); };
+  }, [bgEnabled, modelStatus, layers, lastSeenEventIds]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages, streamBuffer]);
+
+  const updateLayer = (id: string, fn: (l: HypervisorLayer) => HypervisorLayer) => {
+    setLayers((prev) => prev.map((l) => l.id === id ? fn(l) : l));
+  };
+
+  const selectedModel = LLM_MODELS.find((m) => m.id === modelId)!;
+
+  return (
+    <div className="h-full flex flex-col min-h-0 p-4 gap-4 max-w-[1600px] mx-auto">
+      {/* Header */}
+      <div className="flex items-center justify-between gap-4 shrink-0">
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight flex items-center gap-2" data-testid="text-local-llm-title">
+            <Layers className="h-5 w-5 text-primary" />
+            Monadic Hypervisor
+          </h1>
+          <p className="text-xs text-muted-foreground mt-0.5">
+            Photoshop-style agent layers · WebGPU local inference · no cloud calls
+          </p>
+        </div>
+
+        {/* Status bar */}
+        <div className="flex items-center gap-3 text-xs font-mono">
+          <div className="flex items-center gap-1.5" data-testid="status-webgpu">
+            <div className={`h-2 w-2 rounded-full ${webGPUAvail === null ? "bg-zinc-400" : webGPUAvail ? "bg-emerald-500" : "bg-amber-500"}`} />
+            <span className="text-muted-foreground">{webGPUAvail === null ? "checking…" : webGPUAvail ? "WebGPU" : "WASM fallback"}</span>
+          </div>
+          <Separator orientation="vertical" className="h-4" />
+          <div className="flex items-center gap-1.5" data-testid="status-model">
+            <div className={`h-2 w-2 rounded-full ${
+              modelStatus === "loaded" ? "bg-emerald-500" :
+              modelStatus === "loading" ? "bg-blue-500 animate-pulse" :
+              modelStatus === "error" ? "bg-red-500" : "bg-zinc-400"
+            }`} />
+            <span className="text-muted-foreground">
+              {modelStatus === "loaded" ? selectedModel.label : modelStatus === "loading" ? "loading…" : "unloaded"}
+            </span>
+          </div>
+          <Separator orientation="vertical" className="h-4" />
+          <span className="text-muted-foreground" data-testid="status-tokens">{totalTokens.toLocaleString()} tokens</span>
+        </div>
+      </div>
+
+      {/* WebGPU unavailable banner */}
+      {webGPUAvail === false && (
+        <div className="flex items-center gap-3 px-4 py-3 rounded-lg border border-amber-500/30 bg-amber-500/5 text-sm shrink-0" data-testid="banner-webgpu-unavailable">
+          <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
+          <span className="text-amber-700 dark:text-amber-400">
+            WebGPU not available in this browser. Inference will fall back to WASM (slower). For best performance use Chrome 113+ or Edge 113+.
+          </span>
+          <Link href="/deep-research">
+            <Button variant="outline" size="sm" className="shrink-0 ml-auto text-xs" data-testid="link-deep-research-fallback">
+              <ExternalLink className="h-3 w-3 mr-1" />
+              Cloud Research
+            </Button>
+          </Link>
+        </div>
+      )}
+
+      <div className="flex-1 grid grid-cols-[240px_1fr_280px] gap-4 min-h-0">
+
+        {/* LEFT — Layer Stack */}
+        <div className="flex flex-col gap-3 min-h-0">
+          <Card className="flex-1 min-h-0 flex flex-col">
+            <CardHeader className="pb-2 shrink-0">
+              <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="h-3.5 w-3.5" /> Layer Stack
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex-1 overflow-y-auto p-2 space-y-0.5">
+              {[...layers].reverse().map((layer) => (
+                <LayerRow
+                  key={layer.id}
+                  layer={layer}
+                  depth={0}
+                  onToggleHidden={(id) => updateLayer(id, (l) => ({ ...l, isHidden: !l.isHidden }))}
+                  onOpacityChange={(id, v) => updateLayer(id, (l) => ({ ...l, opacity: v }))}
+                  onBlendChange={(id, v) => updateLayer(id, (l) => ({ ...l, blendMode: v }))}
+                  onToggleExpand={(id) => updateLayer(id, (l) => ({ ...l, isExpanded: !l.isExpanded }))}
+                />
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Roundtable controls */}
+          <Card className="shrink-0">
+            <CardContent className="p-3 space-y-2">
+              <div className="flex gap-1">
+                <Button
+                  variant={activeLayerMode === "chat" ? "default" : "outline"}
+                  size="sm"
+                  className="flex-1 text-xs h-7"
+                  onClick={() => setActiveLayerMode("chat")}
+                  data-testid="button-mode-chat"
+                >Chat</Button>
+                <Button
+                  variant={activeLayerMode === "roundtable" ? "default" : "outline"}
+                  size="sm"
+                  className="flex-1 text-xs h-7"
+                  onClick={() => setActiveLayerMode("roundtable")}
+                  data-testid="button-mode-roundtable"
+                >Roundtable</Button>
+              </div>
+              {activeLayerMode === "roundtable" && (
+                <Button
+                  size="sm"
+                  className="w-full text-xs h-7"
+                  onClick={runHypervisor}
+                  disabled={modelStatus !== "loaded"}
+                  data-testid="button-run-hypervisor"
+                >
+                  <Brain className="h-3 w-3 mr-1" />
+                  Synthesise ∑
+                </Button>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* CENTER — Chat / Roundtable */}
+        <div className="flex flex-col gap-3 min-h-0">
+          {/* Model panel */}
+          <Card className="shrink-0">
+            <CardContent className="p-3">
+              <div className="grid grid-cols-[1fr_auto_200px] gap-2 items-end">
+                <div className="space-y-1">
+                  <label className="text-[10px] text-muted-foreground uppercase tracking-wider">Model</label>
+                  <Select value={modelId} onValueChange={setModelId}>
+                    <SelectTrigger className="h-8 text-xs" data-testid="select-model">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {LLM_MODELS.map((m) => (
+                        <SelectItem key={m.id} value={m.id} className="text-xs">
+                          {m.label} — {m.sizeLabel}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[10px] text-muted-foreground uppercase tracking-wider">HF Token</label>
+                  <Input
+                    type="password"
+                    placeholder="hf_…"
+                    value={hfToken}
+                    onChange={(e) => setHfToken(e.target.value)}
+                    className="h-8 text-xs w-40 font-mono"
+                    data-testid="input-hf-token"
+                  />
+                </div>
+                <Button
+                  onClick={loadModel}
+                  disabled={modelStatus === "loading"}
+                  className="h-8 text-xs"
+                  data-testid="button-load-model"
+                >
+                  {modelStatus === "loading" ? (
+                    <><RefreshCw className="h-3 w-3 mr-1 animate-spin" />Loading…</>
+                  ) : modelStatus === "loaded" ? (
+                    <><RefreshCw className="h-3 w-3 mr-1" />Reload</>
+                  ) : (
+                    <><Download className="h-3 w-3 mr-1" />Load Model</>
+                  )}
+                </Button>
+              </div>
+
+              {modelStatus === "loading" && (
+                <div className="mt-2 space-y-1" data-testid="download-progress">
+                  <div className="flex justify-between text-[10px] text-muted-foreground font-mono">
+                    <span className="truncate">{loadFile || "Initialising…"}</span>
+                    <span>{loadLoaded > 0 ? `${formatBytes(loadLoaded)} / ${formatBytes(loadTotal)}` : `${loadProgress.toFixed(0)}%`}</span>
+                  </div>
+                  <Progress value={loadProgress} className="h-1.5" />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Chat panel */}
+          <Card className="flex-1 min-h-0 flex flex-col">
+            <CardHeader className="pb-2 shrink-0">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                  {activeLayerMode === "chat" ? (
+                    <><Activity className="h-3.5 w-3.5" /> Chat — Access Layer</>
+                  ) : (
+                    <><Zap className="h-3.5 w-3.5 text-amber-500" /> Roundtable</>
+                  )}
+                </CardTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-6 text-[10px]"
+                  onClick={injectKappaContext}
+                  data-testid="button-inject-kappa"
+                >
+                  <Cpu className="h-3 w-3 mr-1" />
+                  Inject KAPPA
+                </Button>
+              </div>
+            </CardHeader>
+            <ScrollArea className="flex-1 min-h-0 px-3">
+              <div className="space-y-3 pb-2">
+                {chatMessages.length === 0 && (
+                  <div className="text-center text-sm text-muted-foreground py-8" data-testid="text-chat-empty">
+                    {modelStatus === "loaded"
+                      ? "Model ready. Send a message or switch to Roundtable mode."
+                      : "Load a model to begin."}
+                  </div>
+                )}
+                {chatMessages.map((msg, i) => (
+                  <div
+                    key={i}
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                    data-testid={`chat-msg-${i}`}
+                  >
+                    <div
+                      className={`max-w-[80%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
+                        msg.role === "user"
+                          ? "bg-primary text-primary-foreground"
+                          : msg.role === "system"
+                          ? "bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 font-mono text-[11px]"
+                          : "bg-muted"
+                      }`}
+                    >
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+                {chatStreaming && streamBuffer && (
+                  <div className="flex justify-start" data-testid="chat-streaming">
+                    <div className="max-w-[80%] rounded-lg px-3 py-2 text-sm bg-muted leading-relaxed">
+                      {streamBuffer}
+                      <span className="inline-block w-1.5 h-3.5 bg-foreground/60 ml-0.5 animate-pulse align-text-bottom" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Roundtable layer outputs */}
+                {activeLayerMode === "roundtable" && layers.map((layer) =>
+                  !layer.isHidden && layer.id !== "layer-hypervisor" ? (
+                    <div key={layer.id} className="space-y-1" data-testid={`roundtable-layer-${layer.id}`}>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          {layer.name}
+                        </span>
+                        <BlendModeChip mode={layer.blendMode} />
+                        <span className="text-[10px] text-muted-foreground">{Math.round(layer.opacity * 100)}%</span>
+                      </div>
+                      {layer.agents.map((a) => (
+                        <AgentChip key={a.id} agent={a} layerId={layer.id} />
+                      ))}
+                    </div>
+                  ) : null
+                )}
+
+                {/* Hypervisor output */}
+                {activeLayerMode === "roundtable" && (() => {
+                  const hyp = layers.find((l) => l.id === "layer-hypervisor");
+                  const agent = hyp?.agents[0];
+                  if (!agent?.output && agent?.status !== "running") return null;
+                  return (
+                    <div className="border border-primary/30 rounded-lg p-3 bg-primary/5" data-testid="hypervisor-output">
+                      <div className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">
+                        Hypervisor ∑ Synthesis
+                      </div>
+                      <p className="text-sm leading-relaxed">
+                        {agent.output}
+                        {agent.status === "running" && (
+                          <span className="inline-block w-1.5 h-3.5 bg-primary ml-0.5 animate-pulse align-text-bottom" />
+                        )}
+                      </p>
+                    </div>
+                  );
+                })()}
+
+                <div ref={chatEndRef} />
+              </div>
+            </ScrollArea>
+
+            <div className="p-3 border-t border-border shrink-0">
+              <div className="flex gap-2">
+                <Textarea
+                  placeholder={
+                    modelStatus !== "loaded"
+                      ? "Load a model first…"
+                      : activeLayerMode === "chat"
+                      ? "Send a message…"
+                      : "Enter prompt for all agents…"
+                  }
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  rows={2}
+                  className="resize-none text-sm"
+                  disabled={modelStatus !== "loaded"}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      activeLayerMode === "chat" ? sendChat() : runRoundtable();
+                    }
+                  }}
+                  data-testid="textarea-chat-input"
+                />
+                <Button
+                  onClick={activeLayerMode === "chat" ? sendChat : runRoundtable}
+                  disabled={modelStatus !== "loaded" || !chatInput.trim() || chatStreaming}
+                  size="icon"
+                  className="shrink-0 self-end"
+                  data-testid="button-send"
+                >
+                  {chatStreaming ? <Square className="h-4 w-4" /> : <Send className="h-4 w-4" />}
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* RIGHT — Background Analysis */}
+        <div className="flex flex-col gap-3 min-h-0">
+          <Card className="shrink-0">
+            <CardContent className="p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-xs font-semibold">Background Analysis</div>
+                  <div className="text-[10px] text-muted-foreground mt-0.5">
+                    SIGINT analyst layer · polls every 30s
+                  </div>
+                </div>
+                <Switch
+                  checked={bgEnabled}
+                  onCheckedChange={setBgEnabled}
+                  disabled={modelStatus !== "loaded"}
+                  data-testid="toggle-background-analysis"
+                />
+              </div>
+              {bgEnabled && (
+                <div className="mt-2 flex items-center gap-1.5 text-[10px] text-emerald-600 dark:text-emerald-400">
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Active — watching KAPPA feed
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="flex-1 min-h-0 flex flex-col">
+            <CardHeader className="pb-2 shrink-0">
+              <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                <Activity className="h-3.5 w-3.5" /> Analysis Log
+              </CardTitle>
+            </CardHeader>
+            <ScrollArea className="flex-1 min-h-0">
+              <div className="px-3 pb-3 space-y-2">
+                {bgLog.length === 0 ? (
+                  <p className="text-[11px] text-muted-foreground text-center py-6" data-testid="text-bg-empty">
+                    {bgEnabled ? "Waiting for new KAPPA events…" : "Enable background analysis to start"}
+                  </p>
+                ) : bgLog.map((entry, i) => (
+                  <div key={i} className="border border-border/50 rounded p-2 space-y-1" data-testid={`bg-entry-${i}`}>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono text-muted-foreground">
+                        {new Date(entry.ts).toLocaleTimeString()}
+                      </span>
+                      <Badge variant="outline" className="text-[9px] h-4">
+                        {entry.eventCount} events
+                      </Badge>
+                    </div>
+                    <p className="text-[11px] leading-relaxed text-foreground/80">{entry.summary}</p>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+          </Card>
+
+          {/* Model info card */}
+          <Card className="shrink-0">
+            <CardContent className="p-3 space-y-1.5">
+              <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Selected Model</div>
+              <div className="text-xs font-medium">{selectedModel.label}</div>
+              <div className="text-[10px] text-muted-foreground">{selectedModel.description}</div>
+              <div className="flex items-center gap-2 text-[10px]">
+                <Badge variant="outline" className="text-[9px]">{selectedModel.sizeLabel}</Badge>
+                <Badge variant="outline" className="text-[9px]">{selectedModel.dtype}</Badge>
+                {selectedModel.requiresToken && (
+                  <Badge variant="outline" className="text-[9px] border-amber-500 text-amber-600">token required</Badge>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+}
