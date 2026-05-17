@@ -11,9 +11,12 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import {
+  Sheet, SheetContent, SheetHeader, SheetTitle, SheetClose,
+} from "@/components/ui/sheet";
+import {
   Cpu, Send, Download, Eye, EyeOff, ChevronDown, ChevronRight,
   Layers, Zap, AlertTriangle, ExternalLink, RefreshCw, X,
-  Play, Square, Settings, Activity, Brain,
+  Play, Square, Settings, Activity, Brain, History, Search, FileText, Database,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -34,6 +37,75 @@ interface BackgroundEntry {
   ts: number;
   summary: string;
   eventCount: number;
+}
+
+interface SessionLayerOutput {
+  layerName: string;
+  layerId: string;
+  blendMode: BlendMode;
+  opacity: number;
+  agents: Array<{ roleLabel: string; output: string; tokenCount: number }>;
+}
+
+interface RoundtableSession {
+  id: string;
+  ts: number;
+  prompt: string;
+  layerOutputs: SessionLayerOutput[];
+  hypervisorSynthesis: string;
+}
+
+const SESSIONS_KEY = "kappa_roundtable_sessions";
+const MAX_SESSIONS = 50;
+
+function loadSessions(): RoundtableSession[] {
+  try {
+    const raw = localStorage.getItem(SESSIONS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveSessions(sessions: RoundtableSession[]) {
+  try {
+    localStorage.setItem(SESSIONS_KEY, JSON.stringify(sessions.slice(0, MAX_SESSIONS)));
+  } catch {}
+}
+
+function buildMarkdown(session: RoundtableSession): string {
+  const date = new Date(session.ts).toISOString();
+  const lines: string[] = [
+    `# Roundtable Session — ${date}`,
+    ``,
+    `## Prompt`,
+    ``,
+    session.prompt,
+    ``,
+    `## Layer Outputs`,
+    ``,
+  ];
+
+  for (const layer of session.layerOutputs) {
+    lines.push(`### ${layer.layerName} (blend: ${layer.blendMode}, opacity: ${Math.round(layer.opacity * 100)}%)`);
+    lines.push(``);
+    for (const agent of layer.agents) {
+      if (!agent.output) continue;
+      lines.push(`#### ${agent.roleLabel}`);
+      lines.push(``);
+      lines.push(agent.output);
+      lines.push(``);
+    }
+  }
+
+  lines.push(`## Hypervisor ∑ Synthesis`);
+  lines.push(``);
+  lines.push(session.hypervisorSynthesis);
+  lines.push(``);
+  lines.push(`---`);
+  lines.push(`*Exported from KAPPA Monadic Hypervisor*`);
+
+  return lines.join("\n");
 }
 
 type WorkerMsg =
@@ -207,9 +279,16 @@ export default function LocalLLMHypervisorPage() {
   const [bgLog, setBgLog] = useState<BackgroundEntry[]>([]);
   const [lastSeenEventIds, setLastSeenEventIds] = useState<Set<number>>(new Set());
 
+  const [sessions, setSessions] = useState<RoundtableSession[]>(loadSessions);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const [historySearch, setHistorySearch] = useState("");
+  const [selectedSession, setSelectedSession] = useState<RoundtableSession | null>(null);
+
   const workerRef = useRef<Worker | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const bgIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pendingPromptRef = useRef<string>("");
+  const pendingRunIdRef = useRef<string>("");
 
   useEffect(() => {
     (async () => {
@@ -263,15 +342,62 @@ export default function LocalLLMHypervisorPage() {
             return "";
           });
         } else {
-          setLayers((prev) => prev.map((l) => {
-            if (l.id !== msg.layerId) return l;
-            return {
-              ...l,
-              agents: l.agents.map((a) =>
-                a.id === msg.agentId ? { ...a, status: "done", tokenCount: a.tokenCount + msg.totalTokens } : a
-              ),
-            };
-          }));
+          setLayers((prev) => {
+            const next = prev.map((l) => {
+              if (l.id !== msg.layerId) return l;
+              return {
+                ...l,
+                agents: l.agents.map((a) =>
+                  a.id === msg.agentId ? { ...a, status: "done" as const, tokenCount: a.tokenCount + msg.totalTokens } : a
+                ),
+              };
+            });
+
+            if (msg.layerId === "layer-hypervisor") {
+              const runId = pendingRunIdRef.current;
+              const prompt = pendingPromptRef.current;
+
+              if (runId && prompt) {
+                pendingRunIdRef.current = "";
+
+                const hypLayer = next.find((l) => l.id === "layer-hypervisor");
+                const hypAgent = hypLayer?.agents[0];
+                const synthesis = hypAgent?.output ?? "";
+
+                const layerOutputs: SessionLayerOutput[] = next
+                  .filter((l) => l.id !== "layer-hypervisor" && !l.isHidden)
+                  .map((l) => ({
+                    layerName: l.name,
+                    layerId: l.id,
+                    blendMode: l.blendMode,
+                    opacity: l.opacity,
+                    agents: l.agents.map((a) => ({
+                      roleLabel: getRoleInfo(a.roleId).label,
+                      output: a.output,
+                      tokenCount: a.tokenCount,
+                    })),
+                  }));
+
+                const session: RoundtableSession = {
+                  id: runId,
+                  ts: Date.now(),
+                  prompt,
+                  layerOutputs,
+                  hypervisorSynthesis: synthesis,
+                };
+
+                setSessions((prev) => {
+                  const updated = [session, ...prev];
+                  saveSessions(updated);
+                  return updated;
+                });
+
+                toast({ title: "Session saved", description: "Roundtable session stored in history" });
+              }
+            }
+
+            return next;
+          });
         }
       } else if (msg.type === "error") {
         setModelStatus("error");
@@ -343,6 +469,8 @@ export default function LocalLLMHypervisorPage() {
   const runRoundtable = async () => {
     if (modelStatus !== "loaded" || !chatInput.trim()) return;
     const prompt = chatInput.trim();
+    pendingPromptRef.current = prompt;
+    pendingRunIdRef.current = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     setChatInput("");
 
     setLayers((prev) =>
@@ -492,6 +620,49 @@ export default function LocalLLMHypervisorPage() {
     setLayers((prev) => prev.map((l) => l.id === id ? fn(l) : l));
   };
 
+  const exportSession = (session: RoundtableSession) => {
+    const md = buildMarkdown(session);
+    const blob = new Blob([md], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `roundtable-${new Date(session.ts).toISOString().replace(/[:.]/g, "-")}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast({ title: "Session exported", description: "Markdown file downloaded" });
+  };
+
+  const saveToMemory = async (session: RoundtableSession) => {
+    try {
+      const content = buildMarkdown(session);
+      const res = await fetch("/api/memory/store", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: "local-llm",
+          title: `Roundtable: ${session.prompt.slice(0, 80)}`,
+          content,
+          metadata: { sessionId: session.id, ts: session.ts, prompt: session.prompt },
+          source: "monadic-hypervisor",
+          importance: 0.7,
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      toast({ title: "Saved to Memory Cortex", description: "Session persisted as local-llm memory" });
+    } catch (err) {
+      toast({ title: "Memory save failed", description: String(err), variant: "destructive" });
+    }
+  };
+
+  const deleteSession = (id: string) => {
+    setSessions((prev) => {
+      const next = prev.filter((s) => s.id !== id);
+      saveSessions(next);
+      return next;
+    });
+    if (selectedSession?.id === id) setSelectedSession(null);
+  };
+
   const selectedModel = LLM_MODELS.find((m) => m.id === modelId)!;
 
   return (
@@ -527,6 +698,20 @@ export default function LocalLLMHypervisorPage() {
           </div>
           <Separator orientation="vertical" className="h-4" />
           <span className="text-muted-foreground" data-testid="status-tokens">{totalTokens.toLocaleString()} tokens</span>
+          <Separator orientation="vertical" className="h-4" />
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-7 text-xs gap-1.5 font-sans"
+            onClick={() => setHistoryOpen(true)}
+            data-testid="button-open-history"
+          >
+            <History className="h-3.5 w-3.5" />
+            History
+            {sessions.length > 0 && (
+              <Badge variant="secondary" className="text-[9px] h-4 px-1 ml-0.5">{sessions.length}</Badge>
+            )}
+          </Button>
         </div>
       </div>
 
@@ -878,6 +1063,166 @@ export default function LocalLLMHypervisorPage() {
           </Card>
         </div>
       </div>
+
+      {/* Session History Sheet */}
+      <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
+        <SheetContent side="right" className="w-full max-w-[900px] flex flex-col p-0">
+          <SheetHeader className="px-6 py-4 border-b border-border shrink-0">
+            <div className="flex items-center justify-between">
+              <SheetTitle className="flex items-center gap-2 text-base">
+                <History className="h-4 w-4" />
+                Session History
+                <Badge variant="secondary" className="text-xs">{sessions.length}</Badge>
+              </SheetTitle>
+              <SheetClose asChild>
+                <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-close-history">
+                  <X className="h-4 w-4" />
+                </Button>
+              </SheetClose>
+            </div>
+            <div className="relative mt-2">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
+              <Input
+                placeholder="Search sessions by prompt…"
+                value={historySearch}
+                onChange={(e) => setHistorySearch(e.target.value)}
+                className="pl-8 h-8 text-sm"
+                data-testid="input-history-search"
+              />
+            </div>
+          </SheetHeader>
+
+          <div className="flex flex-1 min-h-0">
+            {/* Session list */}
+            <div className="w-72 border-r border-border flex flex-col min-h-0 shrink-0">
+              <ScrollArea className="flex-1">
+                <div className="p-2 space-y-1">
+                  {sessions.length === 0 ? (
+                    <p className="text-xs text-muted-foreground text-center py-8" data-testid="text-history-empty">
+                      No sessions yet. Run a roundtable and synthesise to save one.
+                    </p>
+                  ) : sessions
+                    .filter((s) =>
+                      !historySearch.trim() ||
+                      s.prompt.toLowerCase().includes(historySearch.toLowerCase())
+                    )
+                    .map((s) => (
+                      <button
+                        key={s.id}
+                        onClick={() => setSelectedSession(s)}
+                        className={`w-full text-left rounded px-3 py-2.5 transition-colors space-y-1 ${
+                          selectedSession?.id === s.id
+                            ? "bg-primary/10 border border-primary/20"
+                            : "hover:bg-muted/50 border border-transparent"
+                        }`}
+                        data-testid={`session-item-${s.id}`}
+                      >
+                        <div className="text-[10px] font-mono text-muted-foreground">
+                          {new Date(s.ts).toLocaleString()}
+                        </div>
+                        <div className="text-xs font-medium line-clamp-2 leading-snug">
+                          {s.prompt}
+                        </div>
+                        <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
+                          <span>{s.layerOutputs.length} layers</span>
+                          <span>·</span>
+                          <span>{s.hypervisorSynthesis ? "synthesised" : "no synthesis"}</span>
+                        </div>
+                      </button>
+                    ))
+                  }
+                </div>
+              </ScrollArea>
+            </div>
+
+            {/* Session detail */}
+            <div className="flex-1 flex flex-col min-h-0">
+              {selectedSession ? (
+                <>
+                  <div className="px-5 py-3 border-b border-border shrink-0 flex items-center gap-2">
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[10px] text-muted-foreground font-mono">
+                        {new Date(selectedSession.ts).toISOString()}
+                      </div>
+                      <div className="text-sm font-medium truncate">{selectedSession.prompt}</div>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-7 shrink-0"
+                      onClick={() => exportSession(selectedSession)}
+                      data-testid="button-export-session"
+                    >
+                      <FileText className="h-3 w-3 mr-1" />
+                      Export .md
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-7 shrink-0"
+                      onClick={() => saveToMemory(selectedSession)}
+                      data-testid="button-save-memory"
+                    >
+                      <Database className="h-3 w-3 mr-1" />
+                      Memory Cortex
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-xs h-7 shrink-0 text-destructive hover:text-destructive"
+                      onClick={() => deleteSession(selectedSession.id)}
+                      data-testid="button-delete-session"
+                    >
+                      <X className="h-3 w-3" />
+                    </Button>
+                  </div>
+
+                  <ScrollArea className="flex-1 min-h-0">
+                    <div className="px-5 py-4 space-y-5">
+                      {/* Layer outputs */}
+                      {selectedSession.layerOutputs.map((layer) => (
+                        <div key={layer.layerId} className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                              {layer.layerName}
+                            </span>
+                            <span className="text-[10px] font-mono text-muted-foreground">
+                              blend:{layer.blendMode} · {Math.round(layer.opacity * 100)}%
+                            </span>
+                          </div>
+                          {layer.agents.map((agent, ai) => agent.output ? (
+                            <div key={ai} className="border border-border/60 rounded p-3 bg-muted/10 space-y-1">
+                              <div className="text-[10px] font-semibold text-primary">{agent.roleLabel}</div>
+                              <p className="text-xs leading-relaxed whitespace-pre-wrap">{agent.output}</p>
+                              <div className="text-[9px] text-muted-foreground font-mono">{agent.tokenCount}t</div>
+                            </div>
+                          ) : null)}
+                        </div>
+                      ))}
+
+                      {/* Hypervisor synthesis */}
+                      {selectedSession.hypervisorSynthesis && (
+                        <div className="border border-primary/30 rounded-lg p-4 bg-primary/5">
+                          <div className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-2">
+                            Hypervisor ∑ Synthesis
+                          </div>
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                            {selectedSession.hypervisorSynthesis}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </ScrollArea>
+                </>
+              ) : (
+                <div className="flex-1 flex items-center justify-center text-sm text-muted-foreground" data-testid="text-no-session-selected">
+                  Select a session from the list to view details
+                </div>
+              )}
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
