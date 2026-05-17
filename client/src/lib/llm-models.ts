@@ -59,7 +59,14 @@ export const LLM_MODELS: LLMModel[] = [
 
 export const DEFAULT_MODEL_ID = LLM_MODELS[0].id;
 
-export const AGENT_ROLES = [
+export interface AgentRole {
+  id: string;
+  label: string;
+  color: string;
+  systemPrompt: string;
+}
+
+export const AGENT_ROLES: AgentRole[] = [
   {
     id: "designer",
     label: "Designer",
@@ -95,15 +102,58 @@ export const AGENT_ROLES = [
     systemPrompt:
       "You are the Hypervisor Synthesis Layer. You receive outputs from all lower layers (Designer, Coder, Engineer, Analyst) and synthesise them into a single coherent, actionable response. Apply weighted composition: blend perspectives by relevance and confidence. Eliminate contradictions. Output a unified synthesis.",
   },
-] as const;
+  {
+    id: "threat-hunter",
+    label: "Threat Hunter",
+    color: "#dc2626",
+    systemPrompt:
+      "You are a Threat Hunter agent. Proactively search for indicators of compromise, lateral movement, and adversarial tactics within the provided data. Identify kill-chain phases and recommend mitigations concisely.",
+  },
+  {
+    id: "red-team",
+    label: "Red Team",
+    color: "#b91c1c",
+    systemPrompt:
+      "You are a Red Team agent. Identify attack surfaces, exploit chains, and adversarial opportunities in the described system. Think like an attacker and enumerate vulnerabilities with concise severity ratings.",
+  },
+  {
+    id: "strategist",
+    label: "Strategist",
+    color: "#1d4ed8",
+    systemPrompt:
+      "You are a Strategic Analyst agent. Assess the long-term implications of the presented information. Identify second-order effects, geopolitical context, and recommended strategic responses.",
+  },
+  {
+    id: "data-scientist",
+    label: "Data Scientist",
+    color: "#0d9488",
+    systemPrompt:
+      "You are a Data Scientist agent. Extract statistical patterns, anomalies, and correlations from the provided data. Suggest quantitative models, feature engineering approaches, and confidence intervals.",
+  },
+  {
+    id: "writer",
+    label: "Technical Writer",
+    color: "#6b7280",
+    systemPrompt:
+      "You are a Technical Writer agent. Summarise and structure the provided information clearly for a broad audience. Use plain language, logical structure, and avoid unnecessary jargon.",
+  },
+  {
+    id: "devil",
+    label: "Devil's Advocate",
+    color: "#9333ea",
+    systemPrompt:
+      "You are a Devil's Advocate agent. Challenge every assumption in the input. Identify logical fallacies, missing evidence, and alternative explanations. Your goal is constructive criticism that stress-tests the analysis.",
+  },
+];
 
-export type AgentRoleId = (typeof AGENT_ROLES)[number]["id"];
+export type AgentRoleId = string;
 
 export type BlendMode = "normal" | "add" | "multiply" | "screen" | "difference";
 
 export interface HypervisorAgent {
   id: string;
   roleId: AgentRoleId;
+  customSystemPrompt?: string;
   output: string;
   status: "idle" | "running" | "done" | "error";
   tokenCount: number;
@@ -165,4 +215,18 @@ export function makeDefaultLayers(): HypervisorLayer[] {
       isExpanded: true,
     },
   ];
+}
+
+export function getRoleInfo(roleId: string): AgentRole {
+  return AGENT_ROLES.find((r) => r.id === roleId) ?? {
+    id: roleId,
+    label: roleId,
+    color: "#8b5cf6",
+    systemPrompt: "You are an AI agent. Analyse the input and provide a concise, structured response.",
+  };
+}
+
+export function getEffectiveSystemPrompt(agent: HypervisorAgent): string {
+  if (agent.customSystemPrompt?.trim()) return agent.customSystemPrompt.trim();
+  return getRoleInfo(agent.roleId).systemPrompt;
 }

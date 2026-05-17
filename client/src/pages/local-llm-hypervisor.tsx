@@ -17,15 +17,35 @@ import {
   Cpu, Send, Download, Eye, EyeOff, ChevronDown, ChevronRight,
   Layers, Zap, AlertTriangle, ExternalLink, RefreshCw, X,
   Play, Square, Settings, Activity, Brain, History, Search, FileText, Database,
+  Plus, GripVertical, Pencil, Check, Trash2, RotateCcw,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
-  LLM_MODELS, DEFAULT_MODEL_ID, AGENT_ROLES, makeDefaultLayers,
+  LLM_MODELS, DEFAULT_MODEL_ID, AGENT_ROLES, makeDefaultLayers, getRoleInfo, getEffectiveSystemPrompt,
   type HypervisorLayer, type HypervisorAgent, type BlendMode,
 } from "@/lib/llm-models";
 import { Link } from "wouter";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+  type DraggableAttributes,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const BLEND_MODES: BlendMode[] = ["normal", "add", "multiply", "screen", "difference"];
+const LS_KEY = "kappa-hypervisor-layers-v2";
 
 interface ChatMessage {
   role: "user" | "assistant" | "system";
@@ -121,8 +141,11 @@ function formatBytes(b: number) {
   return `${(b / 1024 / 1024).toFixed(1)} MB`;
 }
 
-function getRoleInfo(roleId: string) {
-  return AGENT_ROLES.find((r) => r.id === roleId) ?? AGENT_ROLES[0];
+function newLayerId() {
+  return `layer-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+}
+function newAgentId() {
+  return `agent-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
 function BlendModeChip({ mode }: { mode: BlendMode }) {
@@ -140,12 +163,22 @@ function BlendModeChip({ mode }: { mode: BlendMode }) {
   );
 }
 
-function AgentChip({ agent, layerId, onTokenReceived }: {
+function AgentChip({
+  agent,
+  layerId,
+  onDelete,
+  onPromptChange,
+}: {
   agent: HypervisorAgent;
   layerId: string;
-  onTokenReceived?: (layerId: string, agentId: string, text: string) => void;
+  onDelete: (layerId: string, agentId: string) => void;
+  onPromptChange: (layerId: string, agentId: string, prompt: string) => void;
 }) {
   const role = getRoleInfo(agent.roleId);
+  const [showPrompt, setShowPrompt] = useState(false);
+  const [promptDraft, setPromptDraft] = useState(agent.customSystemPrompt ?? "");
+
+  const effectivePrompt = agent.customSystemPrompt?.trim() ? agent.customSystemPrompt : role.systemPrompt;
   const statusColor = {
     idle: "bg-zinc-300 dark:bg-zinc-600",
     running: "bg-blue-500 animate-pulse",
@@ -153,70 +186,223 @@ function AgentChip({ agent, layerId, onTokenReceived }: {
     error: "bg-red-500",
   }[agent.status];
 
+  const savePrompt = () => {
+    onPromptChange(layerId, agent.id, promptDraft);
+    setShowPrompt(false);
+  };
+
   return (
-    <div className="flex items-start gap-2 p-2 rounded border border-border/50 bg-muted/20" data-testid={`agent-chip-${agent.id}`}>
-      <div className="flex items-center gap-1.5 mt-0.5 shrink-0">
-        <div className={`h-2 w-2 rounded-full ${statusColor}`} />
-        <span className="text-[10px] font-mono font-semibold" style={{ color: role.color }}>
-          {role.label}
-        </span>
+    <div className="rounded border border-border/50 bg-muted/20" data-testid={`agent-chip-${agent.id}`}>
+      <div className="flex items-start gap-2 p-2">
+        <div className="flex items-center gap-1.5 mt-0.5 shrink-0">
+          <div className={`h-2 w-2 rounded-full ${statusColor}`} />
+          <span className="text-[10px] font-mono font-semibold" style={{ color: role.color }}>
+            {role.label}
+          </span>
+          {agent.customSystemPrompt?.trim() && (
+            <span className="text-[9px] text-amber-500 font-mono">custom</span>
+          )}
+        </div>
+        {agent.output && (
+          <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-3 flex-1">
+            {agent.output}
+          </p>
+        )}
+        {agent.status === "running" && !agent.output && (
+          <span className="text-[10px] text-muted-foreground animate-pulse flex-1">generating…</span>
+        )}
+        {agent.tokenCount > 0 && (
+          <span className="text-[10px] text-muted-foreground shrink-0">{agent.tokenCount}t</span>
+        )}
+        <button
+          onClick={() => { setShowPrompt((v) => !v); setPromptDraft(agent.customSystemPrompt ?? ""); }}
+          className="shrink-0 text-muted-foreground hover:text-foreground ml-auto"
+          title="Edit system prompt"
+          data-testid={`button-edit-prompt-${agent.id}`}
+        >
+          <Pencil className="h-2.5 w-2.5" />
+        </button>
+        <button
+          onClick={() => onDelete(layerId, agent.id)}
+          className="shrink-0 text-muted-foreground hover:text-red-500"
+          title="Remove agent"
+          data-testid={`button-delete-agent-${agent.id}`}
+        >
+          <X className="h-2.5 w-2.5" />
+        </button>
       </div>
-      {agent.output && (
-        <p className="text-[11px] text-muted-foreground leading-relaxed line-clamp-3 flex-1">
-          {agent.output}
-        </p>
-      )}
-      {agent.status === "running" && !agent.output && (
-        <span className="text-[10px] text-muted-foreground animate-pulse">generating…</span>
-      )}
-      {agent.tokenCount > 0 && (
-        <span className="text-[10px] text-muted-foreground shrink-0">{agent.tokenCount}t</span>
+
+      {showPrompt && (
+        <div className="px-2 pb-2 space-y-1 border-t border-border/30 pt-1.5">
+          <div className="text-[9px] text-muted-foreground font-mono mb-1">
+            System prompt {agent.customSystemPrompt?.trim() ? "(custom)" : "(default — editing overrides)"}
+          </div>
+          <Textarea
+            value={promptDraft || effectivePrompt}
+            onChange={(e) => setPromptDraft(e.target.value)}
+            rows={4}
+            className="text-[10px] resize-none font-mono leading-relaxed"
+            data-testid={`textarea-agent-prompt-${agent.id}`}
+          />
+          <div className="flex gap-1 justify-end">
+            {agent.customSystemPrompt?.trim() && (
+              <Button
+                size="sm"
+                variant="ghost"
+                className="h-5 text-[9px] text-muted-foreground"
+                onClick={() => { onPromptChange(layerId, agent.id, ""); setShowPrompt(false); }}
+                data-testid={`button-reset-prompt-${agent.id}`}
+              >
+                Reset to default
+              </Button>
+            )}
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-5 text-[9px]"
+              onClick={() => setShowPrompt(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              size="sm"
+              className="h-5 text-[9px]"
+              onClick={savePrompt}
+              data-testid={`button-save-prompt-${agent.id}`}
+            >
+              <Check className="h-2.5 w-2.5 mr-0.5" />Save
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
-function LayerRow({
-  layer, depth, onToggleHidden, onOpacityChange, onBlendChange, onToggleExpand,
-}: {
-  layer: HypervisorLayer;
-  depth: number;
+interface LayerRowCallbacks {
   onToggleHidden: (id: string) => void;
   onOpacityChange: (id: string, v: number) => void;
   onBlendChange: (id: string, v: BlendMode) => void;
   onToggleExpand: (id: string) => void;
+  onRename: (id: string, name: string) => void;
+  onDelete: (id: string) => void;
+  onAddAgent: (layerId: string, roleId: string) => void;
+  onDeleteAgent: (layerId: string, agentId: string) => void;
+  onAgentPromptChange: (layerId: string, agentId: string, prompt: string) => void;
+}
+
+function LayerRow({
+  layer,
+  dragHandleAttributes,
+  dragHandleListeners,
+  autoRename,
+  callbacks,
+}: {
+  layer: HypervisorLayer;
+  dragHandleAttributes?: DraggableAttributes;
+  dragHandleListeners?: Record<string, React.EventHandler<React.SyntheticEvent>>;
+  autoRename?: boolean;
+  callbacks: LayerRowCallbacks;
 }) {
-  const indent = depth * 12;
+  const [renaming, setRenaming] = useState(() => autoRename ?? false);
+  const [nameDraft, setNameDraft] = useState(layer.name);
+  const [addingAgent, setAddingAgent] = useState(false);
+  const [newAgentRole, setNewAgentRole] = useState(AGENT_ROLES[0].id);
+
+  const commitRename = () => {
+    if (nameDraft.trim()) callbacks.onRename(layer.id, nameDraft.trim());
+    setRenaming(false);
+  };
+
+  const commitAddAgent = () => {
+    callbacks.onAddAgent(layer.id, newAgentRole);
+    setAddingAgent(false);
+    setNewAgentRole(AGENT_ROLES[0].id);
+  };
+
   return (
-    <div style={{ marginLeft: indent }} data-testid={`layer-row-${layer.id}`}>
+    <div data-testid={`layer-row-${layer.id}`}>
       <div
-        className={`flex items-center gap-2 px-2 py-1.5 rounded hover:bg-muted/30 transition-colors ${layer.isHidden ? "opacity-50" : ""}`}
+        className={`flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-muted/30 transition-colors ${layer.isHidden ? "opacity-50" : ""}`}
       >
-        <button onClick={() => onToggleExpand(layer.id)} className="shrink-0 text-muted-foreground hover:text-foreground">
+        <button
+          {...(dragHandleAttributes ?? {})}
+          {...(dragHandleListeners ?? {})}
+          className="shrink-0 text-muted-foreground hover:text-foreground cursor-grab active:cursor-grabbing touch-none"
+          title="Drag to reorder"
+          data-testid={`drag-handle-${layer.id}`}
+        >
+          <GripVertical className="h-3 w-3" />
+        </button>
+
+        <button
+          onClick={() => callbacks.onToggleExpand(layer.id)}
+          className="shrink-0 text-muted-foreground hover:text-foreground"
+        >
           {layer.isExpanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
         </button>
-        <span className="text-xs font-medium flex-1 truncate">{layer.name}</span>
+
+        {renaming ? (
+          <form
+            className="flex-1 flex gap-1"
+            onSubmit={(e) => { e.preventDefault(); commitRename(); }}
+          >
+            <Input
+              value={nameDraft}
+              onChange={(e) => setNameDraft(e.target.value)}
+              className="h-5 text-[11px] flex-1 px-1"
+              autoFocus
+              onBlur={commitRename}
+              data-testid={`input-rename-layer-${layer.id}`}
+            />
+          </form>
+        ) : (
+          <span
+            className="text-xs font-medium flex-1 truncate cursor-pointer"
+            onDoubleClick={() => { setNameDraft(layer.name); setRenaming(true); }}
+            title="Double-click to rename"
+          >
+            {layer.name}
+          </span>
+        )}
+
         <BlendModeChip mode={layer.blendMode} />
         <span className="text-[10px] font-mono text-muted-foreground w-8 text-right">
           {Math.round(layer.opacity * 100)}%
         </span>
         <button
-          onClick={() => onToggleHidden(layer.id)}
+          onClick={() => { setNameDraft(layer.name); setRenaming(true); }}
+          className="shrink-0 text-muted-foreground hover:text-foreground"
+          title="Rename layer"
+          data-testid={`button-rename-layer-${layer.id}`}
+        >
+          <Pencil className="h-2.5 w-2.5" />
+        </button>
+        <button
+          onClick={() => callbacks.onToggleHidden(layer.id)}
           className="shrink-0 text-muted-foreground hover:text-foreground"
           data-testid={`toggle-hidden-${layer.id}`}
         >
           {layer.isHidden ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
         </button>
+        <button
+          onClick={() => callbacks.onDelete(layer.id)}
+          className="shrink-0 text-muted-foreground hover:text-red-500"
+          title="Delete layer"
+          data-testid={`button-delete-layer-${layer.id}`}
+        >
+          <Trash2 className="h-3 w-3" />
+        </button>
       </div>
 
       {layer.isExpanded && (
-        <div className="ml-6 mb-1 space-y-1">
+        <div className="ml-6 mb-2 space-y-1.5">
           <div className="flex items-center gap-2 px-2">
             <span className="text-[10px] text-muted-foreground w-12">Opacity</span>
             <div className="flex-1">
               <Slider
                 value={[layer.opacity * 100]}
-                onValueChange={([v]) => onOpacityChange(layer.id, v / 100)}
+                onValueChange={([v]) => callbacks.onOpacityChange(layer.id, v / 100)}
                 min={0} max={100} step={1}
                 className="h-1"
                 data-testid={`slider-opacity-${layer.id}`}
@@ -225,7 +411,7 @@ function LayerRow({
           </div>
           <div className="flex items-center gap-2 px-2">
             <span className="text-[10px] text-muted-foreground w-12">Blend</span>
-            <Select value={layer.blendMode} onValueChange={(v) => onBlendChange(layer.id, v as BlendMode)}>
+            <Select value={layer.blendMode} onValueChange={(v) => callbacks.onBlendChange(layer.id, v as BlendMode)}>
               <SelectTrigger className="h-6 text-[11px] flex-1" data-testid={`select-blend-${layer.id}`}>
                 <SelectValue />
               </SelectTrigger>
@@ -241,15 +427,112 @@ function LayerRow({
               mask: {layer.mask}
             </div>
           )}
+
           <div className="px-2 space-y-1">
             {layer.agents.map((a) => (
-              <AgentChip key={a.id} agent={a} layerId={layer.id} />
+              <AgentChip
+                key={a.id}
+                agent={a}
+                layerId={layer.id}
+                onDelete={callbacks.onDeleteAgent}
+                onPromptChange={callbacks.onAgentPromptChange}
+              />
             ))}
           </div>
+
+          {addingAgent ? (
+            <div className="px-2 flex gap-1 items-center" data-testid={`add-agent-form-${layer.id}`}>
+              <Select value={newAgentRole} onValueChange={setNewAgentRole}>
+                <SelectTrigger className="h-6 text-[10px] flex-1" data-testid={`select-new-agent-role-${layer.id}`}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {AGENT_ROLES.map((r) => (
+                    <SelectItem key={r.id} value={r.id} className="text-[11px]">
+                      <span style={{ color: r.color }}>{r.label}</span>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button size="sm" className="h-6 text-[10px] px-2" onClick={commitAddAgent} data-testid={`button-confirm-add-agent-${layer.id}`}>
+                <Check className="h-2.5 w-2.5 mr-0.5" />Add
+              </Button>
+              <Button size="sm" variant="ghost" className="h-6 text-[10px] px-2" onClick={() => setAddingAgent(false)}>
+                <X className="h-2.5 w-2.5" />
+              </Button>
+            </div>
+          ) : (
+            <div className="px-2">
+              <Button
+                size="sm"
+                variant="outline"
+                className="h-6 text-[10px] w-full"
+                onClick={() => setAddingAgent(true)}
+                data-testid={`button-add-agent-${layer.id}`}
+              >
+                <Plus className="h-2.5 w-2.5 mr-1" />Add Agent
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>
   );
+}
+
+function SortableLayerRow({
+  layer,
+  autoRename,
+  callbacks,
+}: {
+  layer: HypervisorLayer;
+  autoRename?: boolean;
+  callbacks: LayerRowCallbacks;
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: layer.id,
+  });
+
+  const style: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    zIndex: isDragging ? 50 : undefined,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      <LayerRow
+        layer={layer}
+        dragHandleAttributes={attributes}
+        dragHandleListeners={listeners as Record<string, React.EventHandler<React.SyntheticEvent>>}
+        autoRename={autoRename}
+        callbacks={callbacks}
+      />
+    </div>
+  );
+}
+
+function loadLayersFromStorage(): HypervisorLayer[] | null {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) return null;
+    return parsed as HypervisorLayer[];
+  } catch {
+    return null;
+  }
+}
+
+function saveLayersToStorage(layers: HypervisorLayer[]) {
+  try {
+    const clean = layers.map((l) => ({
+      ...l,
+      agents: l.agents.map((a) => ({ ...a, output: "", status: "idle", tokenCount: 0 })),
+    }));
+    localStorage.setItem(LS_KEY, JSON.stringify(clean));
+  } catch {}
 }
 
 export default function LocalLLMHypervisorPage() {
@@ -272,7 +555,8 @@ export default function LocalLLMHypervisorPage() {
   const [chatStreaming, setChatStreaming] = useState(false);
   const [streamBuffer, setStreamBuffer] = useState("");
 
-  const [layers, setLayers] = useState<HypervisorLayer[]>(makeDefaultLayers);
+  const [layers, setLayers] = useState<HypervisorLayer[]>(() => loadLayersFromStorage() ?? makeDefaultLayers());
+  const [justAddedLayerId, setJustAddedLayerId] = useState<string | null>(null);
   const [activeLayerMode, setActiveLayerMode] = useState<"chat" | "roundtable">("chat");
 
   const [bgEnabled, setBgEnabled] = useState(false);
@@ -289,6 +573,7 @@ export default function LocalLLMHypervisorPage() {
   const bgIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pendingPromptRef = useRef<string>("");
   const pendingRunIdRef = useRef<string>("");
+  const justAddedLayerIdRef = useRef<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -301,6 +586,26 @@ export default function LocalLLMHypervisorPage() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    saveLayersToStorage(layers);
+  }, [layers]);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+  );
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    setLayers((prev) => {
+      const oldIndex = prev.findIndex((l) => l.id === active.id);
+      const newIndex = prev.findIndex((l) => l.id === over.id);
+      if (oldIndex === -1 || newIndex === -1) return prev;
+      return arrayMove(prev, oldIndex, newIndex);
+    });
+  }
 
   const initWorker = useCallback(() => {
     if (workerRef.current) workerRef.current.terminate();
@@ -480,11 +785,12 @@ export default function LocalLLMHypervisorPage() {
       }))
     );
 
-    const agentLayers = layers.filter((l) => !l.isHidden && l.id !== "layer-hypervisor");
+    const synthLayerId = findSynthLayerId();
+    const agentLayers = layers.filter((l) => !l.isHidden && l.id !== synthLayerId);
 
     for (const layer of agentLayers) {
       for (const agent of layer.agents) {
-        const role = getRoleInfo(agent.roleId);
+        const systemPrompt = getEffectiveSystemPrompt(agent);
         setLayers((prev) =>
           prev.map((l) => l.id !== layer.id ? l : {
             ...l,
@@ -496,7 +802,7 @@ export default function LocalLLMHypervisorPage() {
           layerId: layer.id,
           agentId: agent.id,
           messages: [
-            { role: "system", content: role.systemPrompt },
+            { role: "system", content: systemPrompt },
             { role: "user", content: prompt },
           ],
           maxTokens: 256,
@@ -506,13 +812,20 @@ export default function LocalLLMHypervisorPage() {
     }
   };
 
+  const findSynthLayerId = () => {
+    const explicit = layers.find((l) => l.id === "layer-hypervisor");
+    if (explicit) return explicit.id;
+    return layers[layers.length - 1]?.id ?? "";
+  };
+
   const runHypervisor = () => {
     if (modelStatus !== "loaded") return;
-    const hyperLayer = layers.find((l) => l.id === "layer-hypervisor");
+    const synthId = findSynthLayerId();
+    const hyperLayer = layers.find((l) => l.id === synthId);
     if (!hyperLayer) return;
 
     const agentOutputs = layers
-      .filter((l) => l.id !== "layer-hypervisor")
+      .filter((l) => l.id !== synthId)
       .flatMap((l) =>
         l.agents
           .filter((a) => a.output)
@@ -526,10 +839,15 @@ export default function LocalLLMHypervisorPage() {
     }
 
     const hypAgent = hyperLayer.agents[0];
-    const role = getRoleInfo(hypAgent.roleId);
+    if (!hypAgent) {
+      toast({ title: "Synthesis layer has no agents", description: "Add an agent to the top layer" });
+      return;
+    }
+
+    const systemPrompt = getEffectiveSystemPrompt(hypAgent);
 
     setLayers((prev) =>
-      prev.map((l) => l.id !== "layer-hypervisor" ? l : {
+      prev.map((l) => l.id !== synthId ? l : {
         ...l,
         agents: l.agents.map((a) => ({ ...a, output: "", status: "running" as const, tokenCount: 0 })),
       })
@@ -540,7 +858,7 @@ export default function LocalLLMHypervisorPage() {
       layerId: hyperLayer.id,
       agentId: hypAgent.id,
       messages: [
-        { role: "system", content: role.systemPrompt },
+        { role: "system", content: systemPrompt },
         { role: "user", content: `Layer outputs for synthesis:\n\n${agentOutputs}` },
       ],
       maxTokens: 512,
@@ -569,7 +887,7 @@ export default function LocalLLMHypervisorPage() {
         const agent = analystLayer?.agents[0];
         if (!agent) return;
 
-        const role = getRoleInfo("analyst");
+        const systemPrompt = getEffectiveSystemPrompt(agent);
         const summary = JSON.stringify(newEvents.slice(0, 20));
 
         let collected = "";
@@ -594,7 +912,7 @@ export default function LocalLLMHypervisorPage() {
           layerId: analystLayer!.id,
           agentId: agent.id,
           messages: [
-            { role: "system", content: role.systemPrompt },
+            { role: "system", content: systemPrompt },
             { role: "user", content: `New KAPPA events:\n${summary}` },
           ],
           maxTokens: 256,
@@ -663,7 +981,75 @@ export default function LocalLLMHypervisorPage() {
     if (selectedSession?.id === id) setSelectedSession(null);
   };
 
+  const callbacks: LayerRowCallbacks = {
+    onToggleHidden: (id) => updateLayer(id, (l) => ({ ...l, isHidden: !l.isHidden })),
+    onOpacityChange: (id, v) => updateLayer(id, (l) => ({ ...l, opacity: v })),
+    onBlendChange: (id, v) => updateLayer(id, (l) => ({ ...l, blendMode: v })),
+    onToggleExpand: (id) => updateLayer(id, (l) => ({ ...l, isExpanded: !l.isExpanded })),
+    onRename: (id, name) => {
+      if (id === justAddedLayerIdRef.current) justAddedLayerIdRef.current = null;
+      updateLayer(id, (l) => ({ ...l, name }));
+    },
+    onDelete: (id) => {
+      setLayers((prev) => {
+        if (prev.length <= 1) {
+          toast({ title: "Cannot delete the last layer", variant: "destructive" });
+          return prev;
+        }
+        return prev.filter((l) => l.id !== id);
+      });
+    },
+    onAddAgent: (layerId, roleId) => {
+      updateLayer(layerId, (l) => ({
+        ...l,
+        agents: [
+          ...l.agents,
+          { id: newAgentId(), roleId, output: "", status: "idle" as const, tokenCount: 0 },
+        ],
+      }));
+    },
+    onDeleteAgent: (layerId, agentId) => {
+      updateLayer(layerId, (l) => ({
+        ...l,
+        agents: l.agents.filter((a) => a.id !== agentId),
+      }));
+    },
+    onAgentPromptChange: (layerId, agentId, prompt) => {
+      updateLayer(layerId, (l) => ({
+        ...l,
+        agents: l.agents.map((a) =>
+          a.id === agentId ? { ...a, customSystemPrompt: prompt || undefined } : a
+        ),
+      }));
+    },
+  };
+
+  const addNewLayer = () => {
+    const id = newLayerId();
+    const newLayer: HypervisorLayer = {
+      id,
+      name: `Layer ${layers.length + 1}`,
+      opacity: 1.0,
+      blendMode: "normal",
+      isHidden: false,
+      mask: "",
+      agents: [],
+      subLayers: [],
+      isExpanded: true,
+    };
+    setLayers((prev) => [...prev, newLayer]);
+    justAddedLayerIdRef.current = id;
+  };
+
+  const resetToDefaults = () => {
+    setLayers(makeDefaultLayers());
+    localStorage.removeItem(LS_KEY);
+    toast({ title: "Layer stack reset to defaults" });
+  };
+
   const selectedModel = LLM_MODELS.find((m) => m.id === modelId)!;
+  const synthId = findSynthLayerId();
+  const reversedLayers = [...layers].reverse();
 
   return (
     <div className="h-full flex flex-col min-h-0 p-4 gap-4 max-w-[1600px] mx-auto">
@@ -679,7 +1065,6 @@ export default function LocalLLMHypervisorPage() {
           </p>
         </div>
 
-        {/* Status bar */}
         <div className="flex items-center gap-3 text-xs font-mono">
           <div className="flex items-center gap-1.5" data-testid="status-webgpu">
             <div className={`h-2 w-2 rounded-full ${webGPUAvail === null ? "bg-zinc-400" : webGPUAvail ? "bg-emerald-500" : "bg-amber-500"}`} />
@@ -715,7 +1100,6 @@ export default function LocalLLMHypervisorPage() {
         </div>
       </div>
 
-      {/* WebGPU unavailable banner */}
       {webGPUAvail === false && (
         <div className="flex items-center gap-3 px-4 py-3 rounded-lg border border-amber-500/30 bg-amber-500/5 text-sm shrink-0" data-testid="banner-webgpu-unavailable">
           <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" />
@@ -737,22 +1121,51 @@ export default function LocalLLMHypervisorPage() {
         <div className="flex flex-col gap-3 min-h-0">
           <Card className="flex-1 min-h-0 flex flex-col">
             <CardHeader className="pb-2 shrink-0">
-              <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
-                <Layers className="h-3.5 w-3.5" /> Layer Stack
-              </CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                  <Layers className="h-3.5 w-3.5" /> Layer Stack
+                </CardTitle>
+                <div className="flex gap-1">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="h-6 w-6 p-0"
+                    onClick={resetToDefaults}
+                    title="Reset to defaults"
+                    data-testid="button-reset-defaults"
+                  >
+                    <RotateCcw className="h-3 w-3" />
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="h-6 w-6 p-0"
+                    onClick={addNewLayer}
+                    title="Add new layer"
+                    data-testid="button-add-layer"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="flex-1 overflow-y-auto p-2 space-y-0.5">
-              {[...layers].reverse().map((layer) => (
-                <LayerRow
-                  key={layer.id}
-                  layer={layer}
-                  depth={0}
-                  onToggleHidden={(id) => updateLayer(id, (l) => ({ ...l, isHidden: !l.isHidden }))}
-                  onOpacityChange={(id, v) => updateLayer(id, (l) => ({ ...l, opacity: v }))}
-                  onBlendChange={(id, v) => updateLayer(id, (l) => ({ ...l, blendMode: v }))}
-                  onToggleExpand={(id) => updateLayer(id, (l) => ({ ...l, isExpanded: !l.isExpanded }))}
-                />
-              ))}
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+              >
+                <SortableContext items={reversedLayers.map((l) => l.id)} strategy={verticalListSortingStrategy}>
+                  {reversedLayers.map((layer) => (
+                    <SortableLayerRow
+                      key={layer.id}
+                      layer={layer}
+                      autoRename={layer.id === justAddedLayerIdRef.current}
+                      callbacks={callbacks}
+                    />
+                  ))}
+                </SortableContext>
+              </DndContext>
             </CardContent>
           </Card>
 
@@ -787,13 +1200,15 @@ export default function LocalLLMHypervisorPage() {
                   Synthesise ∑
                 </Button>
               )}
+              <div className="text-[10px] text-muted-foreground text-center">
+                {layers.length} layer{layers.length !== 1 ? "s" : ""} · {layers.reduce((n, l) => n + l.agents.length, 0)} agents
+              </div>
             </CardContent>
           </Card>
         </div>
 
         {/* CENTER — Chat / Roundtable */}
         <div className="flex flex-col gap-3 min-h-0">
-          {/* Model panel */}
           <Card className="shrink-0">
             <CardContent className="p-3">
               <div className="grid grid-cols-[1fr_auto_200px] gap-2 items-end">
@@ -851,7 +1266,6 @@ export default function LocalLLMHypervisorPage() {
             </CardContent>
           </Card>
 
-          {/* Chat panel */}
           <Card className="flex-1 min-h-0 flex flex-col">
             <CardHeader className="pb-2 shrink-0">
               <div className="flex items-center justify-between">
@@ -876,7 +1290,7 @@ export default function LocalLLMHypervisorPage() {
             </CardHeader>
             <ScrollArea className="flex-1 min-h-0 px-3">
               <div className="space-y-3 pb-2">
-                {chatMessages.length === 0 && (
+                {chatMessages.length === 0 && activeLayerMode === "chat" && (
                   <div className="text-center text-sm text-muted-foreground py-8" data-testid="text-chat-empty">
                     {modelStatus === "loaded"
                       ? "Model ready. Send a message or switch to Roundtable mode."
@@ -911,9 +1325,8 @@ export default function LocalLLMHypervisorPage() {
                   </div>
                 )}
 
-                {/* Roundtable layer outputs */}
                 {activeLayerMode === "roundtable" && layers.map((layer) =>
-                  !layer.isHidden && layer.id !== "layer-hypervisor" ? (
+                  !layer.isHidden && layer.id !== synthId ? (
                     <div key={layer.id} className="space-y-1" data-testid={`roundtable-layer-${layer.id}`}>
                       <div className="flex items-center gap-2">
                         <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
@@ -923,21 +1336,26 @@ export default function LocalLLMHypervisorPage() {
                         <span className="text-[10px] text-muted-foreground">{Math.round(layer.opacity * 100)}%</span>
                       </div>
                       {layer.agents.map((a) => (
-                        <AgentChip key={a.id} agent={a} layerId={layer.id} />
+                        <AgentChip
+                          key={a.id}
+                          agent={a}
+                          layerId={layer.id}
+                          onDelete={callbacks.onDeleteAgent}
+                          onPromptChange={callbacks.onAgentPromptChange}
+                        />
                       ))}
                     </div>
                   ) : null
                 )}
 
-                {/* Hypervisor output */}
                 {activeLayerMode === "roundtable" && (() => {
-                  const hyp = layers.find((l) => l.id === "layer-hypervisor");
+                  const hyp = layers.find((l) => l.id === synthId);
                   const agent = hyp?.agents[0];
                   if (!agent?.output && agent?.status !== "running") return null;
                   return (
                     <div className="border border-primary/30 rounded-lg p-3 bg-primary/5" data-testid="hypervisor-output">
                       <div className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">
-                        Hypervisor ∑ Synthesis
+                        {hyp?.name ?? "Synthesis"} ∑
                       </div>
                       <p className="text-sm leading-relaxed">
                         {agent.output}
@@ -1046,7 +1464,6 @@ export default function LocalLLMHypervisorPage() {
             </ScrollArea>
           </Card>
 
-          {/* Model info card */}
           <Card className="shrink-0">
             <CardContent className="p-3 space-y-1.5">
               <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Selected Model</div>
