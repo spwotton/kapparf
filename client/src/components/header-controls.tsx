@@ -9,27 +9,29 @@ export function HeaderControls() {
   const { locale, setLocale } = useI18n();
 
   return (
-    <header className="flex items-center justify-between gap-1 p-2 border-b">
-      <SidebarTrigger data-testid="button-sidebar-toggle" />
-      <div className="flex items-center gap-1">
-        <Button
-          size="sm"
-          variant="ghost"
+    <header className="flex items-center justify-between px-4 h-10 border-b border-border bg-background">
+      <div className="flex items-center gap-2">
+        <SidebarTrigger data-testid="button-sidebar-toggle" className="text-muted-foreground hover:text-foreground" />
+      </div>
+      
+      <div className="flex items-center gap-4">
+        <button
           onClick={() => setLocale(locale === "en" ? "es" : "en")}
           data-testid="button-lang-toggle"
-          className="font-mono text-xs"
+          className="flex items-center gap-1.5 font-sans text-[11px] font-semibold tracking-widest text-muted-foreground hover:text-primary uppercase transition-colors"
         >
-          <Languages className="h-4 w-4 mr-1" />
+          <Languages className="h-3 w-3" />
           {locale === "en" ? "ES" : "EN"}
-        </Button>
-        <Button
-          size="icon"
-          variant="ghost"
+        </button>
+        <div className="h-3 w-px bg-border"></div>
+        <button
           onClick={toggle}
           data-testid="button-theme-toggle"
+          className="flex items-center gap-1.5 font-sans text-[11px] font-semibold tracking-widest text-muted-foreground hover:text-primary uppercase transition-colors"
         >
-          {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-        </Button>
+          {theme === "light" ? <Moon className="h-3 w-3" /> : <Sun className="h-3 w-3" />}
+          {theme === "light" ? "DARK" : "LIGHT"}
+        </button>
       </div>
     </header>
   );

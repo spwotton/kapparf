@@ -28,7 +28,6 @@ import {
   FileWarning,
   Database,
   Globe,
-  ChevronRight,
   Building2,
   RotateCw,
   Waves,
@@ -37,13 +36,6 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarHeader,
-  SidebarFooter,
 } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
 import { useI18n } from "@/lib/i18n";
@@ -148,50 +140,39 @@ const navGroups: NavGroup[] = [
 
 function CollapsibleGroup({ group, location }: { group: NavGroup; location: string }) {
   const { t } = useI18n();
-  const hasActive = group.items.some((item) => location === item.url);
-  const [open, setOpen] = useState(hasActive || group.fallbackLabel === "EVIDENCE");
 
   const groupLabel = t(group.labelKey as any) !== group.labelKey ? t(group.labelKey as any) : group.fallbackLabel;
 
   return (
-    <SidebarGroup>
-      <button
-        onClick={() => setOpen((p) => !p)}
-        className="flex items-center justify-between w-full px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold text-muted-foreground hover:text-foreground transition-colors"
-        data-testid={`nav-group-${group.fallbackLabel.toLowerCase()}`}
-      >
-        <span>{groupLabel}</span>
-        <ChevronRight className={`h-3 w-3 transition-transform duration-200 ${open ? "rotate-90" : ""}`} />
-      </button>
-      {open && (
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {group.items.map((item) => {
-              const itemTitle = t(item.titleKey as any) !== item.titleKey ? t(item.titleKey as any) : item.fallback;
-              return (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton
-                    asChild
-                    data-active={location === item.url}
-                    data-testid={`nav-${item.url.replace("/", "") || "command-center"}`}
-                  >
-                    <Link href={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      <span className="text-sm">{itemTitle}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            })}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      )}
-    </SidebarGroup>
+    <div className="mb-6">
+      <div className="px-4 mb-2">
+        <h4 className="section-label">{groupLabel}</h4>
+      </div>
+      <ul className="space-y-0.5">
+        {group.items.map((item) => {
+          const itemTitle = t(item.titleKey as any) !== item.titleKey ? t(item.titleKey as any) : item.fallback;
+          const isActive = location === item.url;
+          return (
+            <li key={item.url}>
+              <Link 
+                href={item.url}
+                className={`flex items-center gap-3 px-4 py-1.5 text-sm font-serif transition-colors border-l-2 ${
+                  isActive 
+                    ? "border-primary text-primary font-bold bg-sidebar-accent/50" 
+                    : "border-transparent text-foreground hover:text-primary hover:bg-sidebar-accent/30"
+                }`}
+              >
+                {itemTitle}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
 export function AppSidebar() {
-  const { t } = useI18n();
   const [location] = useLocation();
 
   const { data: kappaStatus } = useQuery<KappaStatus>({
@@ -210,52 +191,46 @@ export function AppSidebar() {
   const ewWindow = kappaStatus?.eveningWindow?.window ?? null;
 
   return (
-    <Sidebar>
-      <SidebarHeader className="p-3 pb-2">
-        <div className="flex items-center gap-2">
-          <div
-            className="h-2.5 w-2.5 rounded-full flex-shrink-0 animate-pulse"
-            style={{ backgroundColor: threatColor }}
-          />
-          <span className="text-base font-bold tracking-tight" data-testid="text-app-title">
-            CIAJW
-          </span>
-          <span className="text-[10px] text-muted-foreground font-mono" data-testid="text-app-subtitle">
-            KAPPA SIGINT
-          </span>
+    <Sidebar className="border-r border-border bg-sidebar h-full flex flex-col w-[260px]">
+      <div className="p-6 border-b border-border mb-4">
+        <h1 className="text-3xl font-serif tracking-tight font-bold text-foreground">KAPPA</h1>
+        
+        <div className="mt-4 flex flex-col gap-2">
+          <div className="flex items-center gap-2">
+            <div
+              className="h-2 w-2 rounded-full animate-pulse flex-shrink-0"
+              style={{ backgroundColor: threatColor }}
+            />
+            <span className="text-sm font-sans font-semibold tracking-tight text-foreground">
+              SCORE: {score.toFixed(1)} κ
+            </span>
+          </div>
+          {ewActive && ewWindow && (
+            <Badge variant="outline" className="w-fit text-[10px] font-sans rounded-none border-primary text-primary">
+              EVENING WINDOW: {ewWindow}
+            </Badge>
+          )}
         </div>
-      </SidebarHeader>
-      <SidebarContent className="px-0">
+      </div>
+      
+      <SidebarContent className="flex-1 overflow-y-auto overflow-x-hidden pb-8">
         {navGroups.map((group) => (
           <CollapsibleGroup key={group.fallbackLabel} group={group} location={location} />
         ))}
       </SidebarContent>
-      <SidebarFooter className="p-3 space-y-1.5">
-        <div className="flex items-center gap-2" data-testid="sidebar-kappa-status">
-          <span
-            className="inline-block h-2.5 w-2.5 rounded-full flex-shrink-0"
-            style={{ backgroundColor: threatColor }}
-          />
-          <span className="text-sm font-mono font-semibold" data-testid="text-sidebar-score">
-            {score.toFixed(0)}
-          </span>
-          <span className="text-xs text-muted-foreground font-mono">κ</span>
-          {ewActive && ewWindow && (
-            <Badge variant="secondary" className="text-[10px] ml-auto" data-testid="badge-sidebar-ew">
-              EW {ewWindow}
-            </Badge>
+
+      <div className="p-4 border-t border-border mt-auto">
+        <div className="text-[10px] font-sans text-muted-foreground flex flex-col gap-1">
+          <span>KAPPA SECURE INTEL</span>
+          <span>SYSTEM 4.2.1 ACTIVE</span>
+          {phoenixCountdown && (
+            <div className="flex items-center justify-between mt-1 pt-1 border-t border-border/50">
+              <span>PHOENIX PROTOCOL</span>
+              <span className="font-mono text-primary">{phoenixCountdown.percentComplete.toFixed(1)}%</span>
+            </div>
           )}
         </div>
-        <p className="text-[10px] text-muted-foreground font-mono">10.0514°N 84.2187°W</p>
-        {phoenixCountdown && (
-          <div className="flex items-center justify-between gap-1" data-testid="sidebar-phoenix-countdown">
-            <span className="text-[10px] text-muted-foreground">Phoenix</span>
-            <span className="text-[10px] font-mono font-semibold" data-testid="text-sidebar-phoenix-pct">
-              {phoenixCountdown.percentComplete.toFixed(1)}%
-            </span>
-          </div>
-        )}
-      </SidebarFooter>
+      </div>
     </Sidebar>
   );
 }
