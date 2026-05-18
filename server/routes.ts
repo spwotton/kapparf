@@ -1217,6 +1217,135 @@ export async function registerRoutes(
     res.json(biometricCorrelator.getKymaTimeline(limit));
   });
 
+  // ── Serve captures/ directory (KiwiSDR PNG spectrograms) ─────────────────────
+  app.get("/captures/:filename", (req, res) => {
+    const filename = req.params.filename;
+    if (!/^[\w\-\.]+$/.test(filename)) return res.status(400).end();
+    const filepath = nodePath.join(process.cwd(), "captures", filename);
+    if (!fs.existsSync(filepath)) return res.status(404).end();
+    res.sendFile(filepath);
+  });
+
+  // ── Bio-Acoustic Signal Correlator API ───────────────────────────────────────
+  const KIWI_BAND_META: Record<string, { label: string; freqKhzLow: number; freqKhzHigh: number; domain: string }> = {
+    kiwi_vlf_military_20_30:   { label: "VLF Military 20-30 kHz", freqKhzLow: 20, freqKhzHigh: 30, domain: "vlf" },
+    kiwi_vlf_wide_10_30:       { label: "VLF Wide 10-30 kHz", freqKhzLow: 10, freqKhzHigh: 30, domain: "vlf" },
+    kiwi_vlf_nav_37_42:        { label: "VLF Nav 37-42 kHz", freqKhzLow: 37, freqKhzHigh: 42, domain: "vlf" },
+    kiwi_vlf_utility_45_50:    { label: "VLF Utility 45-50 kHz", freqKhzLow: 45, freqKhzHigh: 50, domain: "vlf" },
+    "kiwi_lf_time_58-63":      { label: "LF Time Signals 58-63 kHz", freqKhzLow: 58, freqKhzHigh: 63, domain: "lf" },
+    kiwi_lf_75_band:           { label: "LF 75 kHz", freqKhzLow: 73, freqKhzHigh: 77, domain: "lf" },
+    kiwi_hf_blackjack_2200m:   { label: "BLACKJACK 136 kHz (λ=2200m)", freqKhzLow: 135, freqKhzHigh: 138, domain: "mf" },
+    kiwi_hf_475_630m:          { label: "MF 475 kHz (λ=630m)", freqKhzLow: 472, freqKhzHigh: 478, domain: "mf" },
+    kiwi_hf_1800_160m:         { label: "HF 1.8 MHz (160m)", freqKhzLow: 1800, freqKhzHigh: 2000, domain: "hf" },
+    kiwi_hf_3500_80m:          { label: "HF 3.5 MHz (80m)", freqKhzLow: 3500, freqKhzHigh: 4000, domain: "hf" },
+    kiwi_hf_5_60m:             { label: "HF 5 MHz (60m)", freqKhzLow: 4900, freqKhzHigh: 5100, domain: "hf" },
+    kiwi_hf_7_40m:             { label: "HF 7 MHz (40m)", freqKhzLow: 6900, freqKhzHigh: 7300, domain: "hf" },
+    kiwi_hf_10_30m:            { label: "HF 10 MHz (30m)", freqKhzLow: 9900, freqKhzHigh: 10200, domain: "hf" },
+    kiwi_hf_14_20m:            { label: "HF 14 MHz (20m)", freqKhzLow: 13900, freqKhzHigh: 14400, domain: "hf" },
+    kiwi_hf_21_15m:            { label: "HF 21 MHz (15m)", freqKhzLow: 20900, freqKhzHigh: 21500, domain: "hf" },
+    kiwi_hf_28_10m:            { label: "HF 28 MHz (10m)", freqKhzLow: 27900, freqKhzHigh: 28800, domain: "hf" },
+    kiwi_hf_cb_27:             { label: "CB 27 MHz", freqKhzLow: 26900, freqKhzHigh: 27500, domain: "hf" },
+    kiwi_hf_numbers_station_survey: { label: "Numbers Station Survey", freqKhzLow: 4000, freqKhzHigh: 18000, domain: "hf" },
+    kiwi_hf_radio_impacto_915: { label: "Radio Impacto 9.15 MHz", freqKhzLow: 9100, freqKhzHigh: 9200, domain: "hf" },
+    kiwi_hf_starlink_gateway:  { label: "Starlink Gateway ~10 GHz IF", freqKhzLow: 10000, freqKhzHigh: 12000, domain: "hf" },
+    kiwi_wideband_overview:    { label: "Wideband Overview", freqKhzLow: 0, freqKhzHigh: 30000, domain: "all" },
+  };
+
+  app.get("/api/bio-acoustic/captures", (_req, res) => {
+    const capturesDir = nodePath.join(process.cwd(), "captures");
+    let files: string[] = [];
+    try {
+      files = fs.readdirSync(capturesDir).filter(f => f.endsWith(".png") && f.startsWith("kiwi_"));
+    } catch { return res.status(500).json({ error: "captures directory unreadable" }); }
+
+    const captures = files.map(f => {
+      const tsMatch = f.match(/_(\d{13})\.png$/);
+      const ts = tsMatch ? parseInt(tsMatch[1]) : 0;
+      const band = f.replace(/_\d{13}\.png$/, "");
+      const meta = KIWI_BAND_META[band] || { label: band, freqKhzLow: 0, freqKhzHigh: 0, domain: "unknown" };
+      return { filename: f, band, timestamp: ts, isoTime: ts ? new Date(ts).toISOString() : null, url: `/captures/${f}`, ...meta };
+    }).sort((a, b) => b.timestamp - a.timestamp);
+
+    res.json({ captures, count: captures.length });
+  });
+
+  app.get("/api/bio-acoustic/elevation", async (req, res) => {
+    const { lat1, lon1, lat2, lon2, samples } = req.query;
+    const apiKey = process.env.GOOGLE_API_KEY;
+    if (!apiKey) return res.status(500).json({ error: "GOOGLE_API_KEY not configured" });
+    if (!lat1 || !lon1 || !lat2 || !lon2) return res.status(400).json({ error: "lat1/lon1/lat2/lon2 required" });
+
+    const n = Math.min(parseInt(samples as string) || 32, 64);
+    const path = `${lat1},${lon1}|${lat2},${lon2}`;
+    const url = `https://maps.googleapis.com/maps/api/elevation/json?path=${encodeURIComponent(path)}&samples=${n}&key=${apiKey}`;
+
+    try {
+      const r = await fetch(url);
+      const data = await r.json() as any;
+      if (data.status !== "OK") return res.status(400).json({ error: data.status, message: data.error_message });
+
+      const profile: Array<{ index: number; lat: number; lon: number; elevationM: number }> = data.results.map((p: any, i: number) => ({
+        index: i, lat: p.location.lat, lon: p.location.lng, elevationM: Math.round(p.elevation * 10) / 10,
+      }));
+
+      const srcElev = profile[0].elevationM;
+      const tgtElev = profile[profile.length - 1].elevationM;
+      const toRad = (d: number) => d * Math.PI / 180;
+      const dLat = toRad(parseFloat(lat2 as string) - parseFloat(lat1 as string));
+      const dLon = toRad(parseFloat(lon2 as string) - parseFloat(lon1 as string));
+      const a = Math.sin(dLat/2)**2 + Math.cos(toRad(parseFloat(lat1 as string))) * Math.cos(toRad(parseFloat(lat2 as string))) * Math.sin(dLon/2)**2;
+      const totalDistM = 6371000 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      const obstructions = profile.filter((p, i) => {
+        if (i === 0 || i === profile.length - 1) return false;
+        const frac = i / (profile.length - 1);
+        const losElev = srcElev + (tgtElev - srcElev) * frac;
+        return p.elevationM > losElev + 3;
+      });
+
+      res.json({ profile, totalDistM: Math.round(totalDistM), losBlocked: obstructions.length > 0, obstructions: obstructions.length, srcElevM: srcElev, tgtElevM: tgtElev });
+    } catch (err) {
+      res.status(500).json({ error: "Elevation API request failed", details: String(err) });
+    }
+  });
+
+  app.post("/api/bio-acoustic/path-loss", (req, res) => {
+    const { sources, frequencies } = req.body as {
+      sources: Array<{ name: string; distM: number }>;
+      frequencies: Array<{ label: string; freqHz: number; type: "rf" | "acoustic" }>;
+    };
+    if (!sources || !frequencies) return res.status(400).json({ error: "sources and frequencies required" });
+
+    const results = sources.flatMap(src => frequencies.map(freq => {
+      const d = src.distM;
+      const f = freq.freqHz;
+      const c = 3e8;
+      // RF Free-Space Path Loss (dB): FSPL = 20log(d) + 20log(f) + 20log(4π/c)
+      const fsplRf = 20 * Math.log10(d) + 20 * Math.log10(f) + 20 * Math.log10(4 * Math.PI / c);
+      // Acoustic geometric spreading loss: 20log(d/1m), plus atmospheric absorption ~0.001 dB/m @ 100 Hz
+      const acousticLoss = 20 * Math.log10(d) + 0.001 * d;
+      // Fresnel zone 1 radius at midpoint: r = sqrt(λ * d/4) for end-to-end path
+      const lambda = c / f;
+      const fresnelR = Math.sqrt(lambda * d / 4);
+      // Acoustic propagation delay
+      const acousticDelayMs = (d / 343) * 1000;
+      // Expected acoustic SPL at ECHO if source is 100 dBSPL @ 1m
+      const expectedSplAtEcho = 100 - acousticLoss;
+
+      return {
+        source: src.name, distM: d, freqHz: f, freqLabel: freq.label,
+        fsplRfDb: parseFloat(fsplRf.toFixed(1)),
+        acousticLossDb: parseFloat(acousticLoss.toFixed(1)),
+        fresnelRadiusM: parseFloat(fresnelR.toFixed(1)),
+        acousticDelayMs: parseFloat(acousticDelayMs.toFixed(0)),
+        expectedSplAtEchoDb: parseFloat(expectedSplAtEcho.toFixed(1)),
+        wavelengthM: parseFloat(lambda.toFixed(4)),
+      };
+    }));
+
+    res.json({ results, computed: results.length });
+  });
+
   app.get("/api/vision/status", (_req, res) => {
     res.json(getVisionStatus());
   });
