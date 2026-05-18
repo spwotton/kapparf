@@ -4,7 +4,7 @@
 KAPPA is a software-defined Signal Intelligence (SIGINT) platform designed to correlate electromagnetic emissions across multiple domains using passive collection tools. Its primary purpose is to provide real-time threat intelligence and analysis by identifying patterns and anomalies in collected signal data, generating correlations, and summarizing intelligence for enhanced situational awareness and proactive threat response.
 
 ## User Preferences
-- No mock data — all events must come from real sources or manual entry
+- **ABSOLUTE RULE: ZERO simulation data, zero mock data, zero synthetic detections, zero placeholder events — ever, under any circumstances, in any component, at any time. Every event, detection, alert, or data point displayed to the user must come from a real external source or be manually entered by the user. This rule has no exceptions.**
 - No simulated detection pipelines
 - Notion-style minimal professional UI (not sci-fi)
 
