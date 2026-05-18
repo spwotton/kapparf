@@ -580,6 +580,12 @@ export default function LocalLLMHypervisorPage() {
   const [selectedSession, setSelectedSession] = useState<RoundtableSession | null>(null);
   const [checkedSessionIds, setCheckedSessionIds] = useState<Set<string>>(new Set());
 
+  useEffect(() => {
+    if (!historyOpen) {
+      setCheckedSessionIds(new Set());
+    }
+  }, [historyOpen]);
+
   const poolRef = useRef<WorkerPool | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const bgIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
