@@ -6,86 +6,93 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 161 94% 30%; /* Emerald #059669 */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%; /* #64748b */
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222 47% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%; /* #e2e8f0 */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 161 94% 30%;
-    
-    --sidebar: 30 15% 98%; /* light cream */
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-primary: 161 94% 30%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 210 40% 96.1%;
-    --sidebar-accent-foreground: 222 47% 11.2%;
-    --sidebar-ring: 161 94% 30%;
+    /* Light mode — parchment/warm dark (rarely used; app defaults to dark) */
+    --background: 222 45% 8%;
+    --foreground: 45 20% 88%;
+    --card: 222 42% 11%;
+    --card-foreground: 45 20% 88%;
+    --popover: 222 42% 11%;
+    --popover-foreground: 45 20% 88%;
+    --primary: 43 82% 52%;        /* amber gold — golden logarithmic spirals */
+    --primary-foreground: 222 45% 8%;
+    --secondary: 195 70% 36%;     /* deep cyan — aurora borealis */
+    --secondary-foreground: 45 20% 88%;
+    --muted: 222 38% 14%;
+    --muted-foreground: 220 18% 54%;
+    --accent: 275 52% 48%;        /* amethyst — phonon insulation geodes */
+    --accent-foreground: 45 20% 88%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 45 20% 88%;
+    --border: 222 35% 19%;
+    --input: 222 35% 19%;
+    --ring: 43 82% 52%;
+
+    --sidebar: 222 48% 5%;
+    --sidebar-foreground: 45 20% 88%;
+    --sidebar-border: 222 35% 14%;
+    --sidebar-primary: 43 82% 52%;
+    --sidebar-primary-foreground: 222 45% 8%;
+    --sidebar-accent: 222 38% 12%;
+    --sidebar-accent-foreground: 45 20% 88%;
+    --sidebar-ring: 43 82% 52%;
 
     --font-serif: 'EB Garamond', Georgia, serif;
     --font-sans: 'Montserrat', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     --radius: 0.5rem;
-    
-    --shadow-2xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    
-    --chart-1: 161 94% 30%;
-    --chart-2: 222 47% 11%;
-    --chart-3: 215 16% 47%;
-    --chart-4: 0 84% 60%;
-    --chart-5: 45 60% 50%;
+
+    --shadow-2xs: 0 1px 2px 0 rgba(0,0,0,0.4);
+    --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.4);
+    --shadow-sm:  0 1px 3px 0 rgba(0,0,0,0.5), 0 1px 2px -1px rgba(0,0,0,0.4);
+    --shadow:     0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -2px rgba(0,0,0,0.4);
+    --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -2px rgba(0,0,0,0.4);
+    --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.6), 0 4px 6px -4px rgba(0,0,0,0.4);
+    --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.6), 0 8px 10px -6px rgba(0,0,0,0.4);
+    --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.7);
+
+    --chart-1: 43 82% 52%;   /* amber */
+    --chart-2: 195 70% 42%;  /* cyan */
+    --chart-3: 275 52% 55%;  /* amethyst */
+    --chart-4: 0 72% 56%;    /* red */
+    --chart-5: 160 60% 42%;  /* teal */
   }
 
   .dark {
-    --background: 225 50% 8%; /* Deep navy #0a0f1e */
-    --foreground: 210 40% 98%; /* #f1f5f9 */
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 161 94% 30%; /* Emerald */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 27.9% 16.9%; /* #1e293b */
-    --input: 215 27.9% 16.9%;
-    --ring: 161 94% 30%;
-    
-    --sidebar: 225 50% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-border: 215 27.9% 16.9%;
-    --sidebar-primary: 161 94% 30%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-ring: 161 94% 30%;
+    --background: 222 45% 6%;     /* deep navy-black — Monadic Surface */
+    --foreground: 45 20% 88%;     /* warm off-white — Ω-GOS text */
+    --card: 222 42% 9%;
+    --card-foreground: 45 20% 88%;
+    --popover: 222 42% 9%;
+    --popover-foreground: 45 20% 88%;
+    --primary: 43 82% 52%;        /* amber gold */
+    --primary-foreground: 222 45% 6%;
+    --secondary: 195 70% 36%;     /* aurora cyan */
+    --secondary-foreground: 45 20% 88%;
+    --muted: 222 38% 13%;
+    --muted-foreground: 220 18% 52%;
+    --accent: 275 52% 48%;        /* amethyst */
+    --accent-foreground: 45 20% 88%;
+    --destructive: 0 62% 42%;
+    --destructive-foreground: 45 20% 88%;
+    --border: 222 35% 17%;
+    --input: 222 35% 17%;
+    --ring: 43 82% 52%;
+
+    --sidebar: 222 48% 4%;
+    --sidebar-foreground: 45 20% 88%;
+    --sidebar-border: 222 35% 13%;
+    --sidebar-primary: 43 82% 52%;
+    --sidebar-primary-foreground: 222 45% 6%;
+    --sidebar-accent: 222 38% 11%;
+    --sidebar-accent-foreground: 45 20% 88%;
+    --sidebar-ring: 43 82% 52%;
+
+    --chart-1: 43 82% 52%;
+    --chart-2: 195 70% 42%;
+    --chart-3: 275 52% 55%;
+    --chart-4: 0 72% 56%;
+    --chart-5: 160 60% 42%;
   }
 }
 
@@ -112,7 +119,7 @@
     font-family: var(--font-serif);
     @apply text-4xl md:text-5xl lg:text-6xl font-normal leading-tight;
   }
-  
+
   .section-label {
     font-family: var(--font-sans);
     @apply text-[10px] tracking-[0.2em] uppercase font-bold text-muted-foreground;
