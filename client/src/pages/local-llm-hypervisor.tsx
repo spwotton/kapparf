@@ -1039,6 +1039,22 @@ export default function LocalLLMHypervisorPage() {
     toast({ title: "All sessions exported", description: `${sessions.length} session${sessions.length !== 1 ? "s" : ""} packaged as ZIP` });
   };
 
+  const exportAllSessionsJson = () => {
+    if (sessions.length === 0) {
+      toast({ title: "No sessions to export", description: "Run a roundtable first", variant: "destructive" });
+      return;
+    }
+    const json = JSON.stringify(sessions, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `kappa-sessions-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast({ title: "Sessions exported as JSON", description: `${sessions.length} session${sessions.length !== 1 ? "s" : ""} downloaded as JSON` });
+  };
+
   const saveToMemory = async (session: RoundtableSession) => {
     try {
       const content = buildMarkdown(session);
@@ -1622,7 +1638,18 @@ export default function LocalLLMHypervisorPage() {
                   data-testid="button-export-all-sessions"
                 >
                   <Archive className="h-3 w-3 mr-1" />
-                  Export All
+                  Export ZIP
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={exportAllSessionsJson}
+                  disabled={sessions.length === 0}
+                  data-testid="button-export-all-sessions-json"
+                >
+                  <FileText className="h-3 w-3 mr-1" />
+                  Export JSON
                 </Button>
                 <SheetClose asChild>
                   <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-close-history">
