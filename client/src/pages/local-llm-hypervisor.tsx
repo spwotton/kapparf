@@ -1774,7 +1774,14 @@ export default function LocalLLMHypervisorPage() {
                       {allChecked ? "Deselect all" : "Select all"}{filtered.length !== sessions.length ? ` (${filtered.length} visible)` : ""}
                     </span>
                     {checkedCount > 0 && (
-                      <span className="ml-auto text-[10px] text-primary font-medium select-none" data-testid="text-sessions-checked-count">
+                      <span
+                        className={`ml-auto text-[10px] select-none transition-colors ${
+                          checkedCount === filtered.length
+                            ? "bg-primary text-primary-foreground font-semibold px-1.5 py-0.5 rounded-full"
+                            : "text-primary font-medium"
+                        }`}
+                        data-testid="text-sessions-checked-count"
+                      >
                         {checkedCount} of {filtered.length} selected
                       </span>
                     )}
