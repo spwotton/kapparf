@@ -109,6 +109,7 @@ const navGroups: NavGroup[] = [
     items: [
       { titleKey: "sidebar.kiwiNodes", fallback: "KiwiSDR Nodes", url: "/nodes", icon: Server },
       { titleKey: "sidebar.satellites", fallback: "Satellites", url: "/satellites", icon: Satellite },
+      { titleKey: "sidebar.bioAcoustic", fallback: "Bio-Acoustic Correlator", url: "/bio-acoustic", icon: Activity },
       { titleKey: "sidebar.lattice", fallback: "Lattice", url: "/lattice", icon: Hexagon },
       { titleKey: "sidebar.superposition", fallback: "Superposition", url: "/superposition", icon: Atom },
     ],

@@ -49,6 +49,7 @@ import SeismicKappaPage from "@/pages/seismic-kappa";
 import CortexBusPage from "@/pages/cortex-bus";
 import AtlantisHubPage from "@/pages/atlantis-hub";
 import LocalLLMHypervisorPage from "@/pages/local-llm-hypervisor";
+import BioAcousticPage from "@/pages/bio-acoustic";
 
 function Router() {
   return (
@@ -93,6 +94,7 @@ function Router() {
       <Route path="/cortex-bus" component={CortexBusPage} />
       <Route path="/atlantis" component={AtlantisHubPage} />
       <Route path="/local-llm" component={LocalLLMHypervisorPage} />
+      <Route path="/bio-acoustic" component={BioAcousticPage} />
       <Route component={NotFound} />
     </Switch>
   );

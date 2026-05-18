@@ -4917,11 +4917,10 @@ done
   app.get("/api/terrain/tile/:z/:y/:x", async (req, res) => {
     try {
       const { z, y, x } = req.params;
-      const googleKey = process.env.GOOGLE_MAPS_API_KEY || process.env.GEMINI_API_KEY;
-      const url = googleKey
-        ? `https://mt0.google.com/vt/lyrs=y&x=${x}&y=${y}&z=${z}&key=${googleKey}`
-        : `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
-      const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" } });
+      const googleKey = process.env.GOOGLE_API_KEY || process.env.GOOGLE_MAPS_API_KEY || process.env.GEMINI_API_KEY;
+      // Use ArcGIS as primary (no API key required, reliable satellite imagery)
+      const url = `https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/${z}/${y}/${x}`;
+      const r = await fetch(url, { headers: { "User-Agent": "KAPPA-SIGINT/1.0" }, signal: AbortSignal.timeout(8000) });
       if (!r.ok) return res.status(r.status).send("tile error");
       const buf = Buffer.from(await r.arrayBuffer());
       res.set("Content-Type", r.headers.get("content-type") || "image/jpeg");

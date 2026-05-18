@@ -695,15 +695,32 @@ function createScene(
   const camera = new THREE.PerspectiveCamera(55, container.clientWidth / container.clientHeight, 0.1, 600);
   camera.position.set(50, 55, 70); camera.lookAt(0, 5, 0);
 
-  let renderer: THREE.WebGLRenderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
-  } catch {
+  function webglFallback(msg?: string) {
     const fb = document.createElement("div");
     fb.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#00ffcc;font-family:monospace;font-size:13px;background:#020a12;";
-    fb.innerHTML = `<div style="text-align:center;opacity:.7"><div style="font-size:22px;margin-bottom:10px">◌</div>JACÓ VALLEY 3D MAP<br><span style="font-size:10px;color:#445;line-height:2">WebGL unavailable in this preview<br>Open ciajw.com/jaco in Chrome/Firefox</span></div>`;
+    fb.innerHTML = `<div style="text-align:center;opacity:.7"><div style="font-size:22px;margin-bottom:10px">◌</div>JACÓ VALLEY 3D MAP<br><span style="font-size:10px;color:#445;line-height:2">${msg ?? "WebGL unavailable in this environment"}<br>Open this page in Chrome or Firefox</span></div>`;
     container.appendChild(fb);
     return { destroy: () => fb.remove(), resetView: () => {}, zoomIn: () => {}, zoomOut: () => {}, focusTarget: () => {}, updateAircraft: () => {} };
+  }
+
+  // Quick canvas probe — catches both missing WebGL and context-creation failure
+  const probe = document.createElement("canvas");
+  const probeCtx = probe.getContext("webgl2") || probe.getContext("webgl") || probe.getContext("experimental-webgl");
+  if (!probeCtx) return webglFallback("WebGL unavailable in this preview");
+
+  let renderer: THREE.WebGLRenderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance", canvas: probe as HTMLCanvasElement });
+    // Verify the GL context actually exists after construction
+    if (!renderer.getContext()) {
+      renderer.dispose();
+      return webglFallback("WebGL context creation failed");
+    }
+    // Detach probe canvas — we'll let Three.js create its own
+    renderer.dispose();
+    renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+  } catch {
+    return webglFallback("WebGL unavailable — open in Chrome/Firefox");
   }
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
