@@ -1785,7 +1785,7 @@ export default function LocalLLMHypervisorPage() {
                         >
                           {checkedCount} of {filtered.length} selected
                         </span>
-                        {checkedCount === filtered.length && (
+                        {checkedCount > 0 && (
                           <button
                             type="button"
                             onClick={() => setCheckedSessionIds(new Set())}
