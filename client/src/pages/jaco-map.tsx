@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
+import { buildWebGPUScene, type WGPUSceneTarget } from "@/lib/jaco-webgpu";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -1022,6 +1023,7 @@ export default function JacoMapPage() {
   const [elevStatus, setElevStatus] = useState<"loading"|"ok"|"fallback">("loading");
   const [elevData, setElevData] = useState<number[][]|null>(null);
   const [time, setTime] = useState(new Date());
+  const [renderMode, setRenderMode] = useState<"webgpu"|"webgl"|null>(null);
 
   // ── Auto-loop detector state ────────────────────────────────────────────────
   const [loopAlert, setLoopAlert] = useState<string|null>(null);
@@ -1246,8 +1248,44 @@ export default function JacoMapPage() {
 
   useEffect(()=>{
     if(elevStatus==="loading"||!containerRef.current)return;
-    const s=createScene(containerRef.current,elevData,setHoveredTarget,setDroneTarget,setAircraftCount);
-    sceneRef.current=s; return()=>s.destroy();
+    const el = containerRef.current;
+    let cancelled = false;
+    let cleanup: (()=>void) | null = null;
+
+    // Try WebGPU first; fall back to Three.js (WebGL) if unavailable
+    const wgpuTargets: WGPUSceneTarget[] = TARGETS.map(t => ({
+      id: t.id, label: t.label, lat: t.lat, lon: t.lon, elevM: t.elevM,
+      type: t.type, color: t.color,
+    }));
+
+    buildWebGPUScene(el, wgpuTargets, elevData, setDroneTarget, setAircraftCount)
+      .then(handle => {
+        if (cancelled) { handle?.destroy(); return; }
+        if (handle) {
+          sceneRef.current = handle as unknown as ReturnType<typeof createScene>;
+          setRenderMode("webgpu");
+          cleanup = () => handle.destroy();
+        } else {
+          // WebGPU unavailable — use Three.js
+          const s = createScene(el, elevData, setHoveredTarget, setDroneTarget, setAircraftCount);
+          sceneRef.current = s;
+          setRenderMode("webgl");
+          cleanup = () => s.destroy();
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
+        const s = createScene(el, elevData, setHoveredTarget, setDroneTarget, setAircraftCount);
+        sceneRef.current = s;
+        setRenderMode("webgl");
+        cleanup = () => s.destroy();
+      });
+
+    return () => {
+      cancelled = true;
+      cleanup?.();
+      sceneRef.current = null;
+    };
   },[elevStatus,elevData]);
 
   useEffect(()=>{
@@ -1903,6 +1941,11 @@ export default function JacoMapPage() {
               <span className={`text-[9px] font-mono px-1 rounded ${elevStatus==="ok"?"text-green-400":"text-amber-400"}`}>
                 {elevStatus==="ok"?"● SRTM":"△ PROC"}
               </span>
+              {renderMode && (
+                <span className={`text-[9px] font-mono px-1 rounded border ${renderMode==="webgpu"?"text-violet-300 border-violet-500/40 bg-violet-500/10":"text-gray-500 border-gray-700/40"}`}>
+                  {renderMode==="webgpu"?"⬡ WebGPU":"◻ WebGL"}
+                </span>
+              )}
               <span className={`text-[9px] font-mono px-1 rounded ${aircraftCount>0?"text-red-400":"text-gray-600"}`}>
                 ✈ {aircraftCount} AC
               </span>
