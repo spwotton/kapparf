@@ -1124,11 +1124,22 @@ export default function JacoMapPage() {
 
   useEffect(()=>{ const t=setInterval(()=>setTime(new Date()),1000); return()=>clearInterval(t); },[]);
 
-  // ── Auto-loop detector: fires when drone moves to a new waypoint ─────────────
+  // ── ADS-B loop detector: only fires when a confirmed live OpenSky contact is active ──
+  // RULE: if liveAircraft is empty, droneTarget is stale state — do NOT log, do NOT
+  // screenshot, show an explicit NO-DATA error instead. Zero synthetic detections.
   useEffect(()=>{
     if(!droneTarget) return;
     const now = Date.now();
-    const COOLDOWN = 90_000; // min 90s between captures to avoid spam
+
+    // Hard guard: no real contact = no detection. Stale droneTarget must not produce incidents.
+    if (!liveAircraft.length) {
+      setLoopAlert("NO LIVE ADS-B CONTACT — loop detector suspended");
+      setTimeout(()=>setLoopAlert(null), 8_000);
+      visitLog.current = []; // clear stale log
+      return;
+    }
+
+    const COOLDOWN = 90_000;
     if (now - lastLoopCapture.current < COOLDOWN) {
       visitLog.current.push({target: droneTarget, ts: now});
       if (visitLog.current.length > 30) visitLog.current.shift();
@@ -1138,37 +1149,27 @@ export default function JacoMapPage() {
     const prior = visitLog.current.filter(v => v.target === droneTarget && now - v.ts < 20 * 60_000);
     if (prior.length > 0) {
       const loopDurSec = Math.round((now - prior[prior.length-1].ts) / 1000);
-      const label = `LOOP DETECTED — ${droneTarget} — ${Math.round(loopDurSec/60)}m circuit`;
+      const label = `ADS-B LOOP — ${droneTarget} — ${Math.round(loopDurSec/60)}m circuit — ICAO: ${liveAircraft[0]?.icao24 ?? "?"}`;
       setLoopAlert(label);
       lastLoopCapture.current = now;
-      // Auto-screenshot
-      const canvas = sceneRef.current?.getCanvas();
-      const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
-      if (canvas) {
-        const dataUrl = canvas.toDataURL("image/png");
-        const a = document.createElement("a");
-        a.href = dataUrl;
-        a.download = `loop-auto-${droneTarget.replace(/\s+/g,"-").toLowerCase()}-${ts}.png`;
-        a.click();
-      }
-      // Auto-log incident
+      // Log incident — real contact only, no auto-screenshot
+      const ac = liveAircraft[0];
       fetch("/api/incidents", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({
-          title: `AUTO-DETECT: UAV Loop — ${droneTarget} — ${loopDurSec}s circuit`,
-          description: `Autonomous loop detection triggered. Drone returned to "${droneTarget}" after ${loopDurSec}s (${Math.round(loopDurSec/60)} min). Prior visit: ${new Date(prior[prior.length-1].ts).toLocaleTimeString()}. Current visit: ${new Date(now).toLocaleTimeString()}. Full circuit path: ${[...new Set(visitLog.current.slice(-8).map(v=>v.target))].join(" → ")}. Auto-screenshot captured. Pattern consistent with closed surveillance loop over Jacó AOR.`,
+          title: `ADS-B Loop — ${droneTarget} — ${loopDurSec}s — ICAO ${ac?.icao24 ?? "unknown"}`,
+          description: `Real ADS-B contact (ICAO: ${ac?.icao24 ?? "unknown"}, callsign: ${ac?.callsign ?? "none"}, origin: ${ac?.originCountry ?? "?"}) detected returning to "${droneTarget}" after ${loopDurSec}s. Alt: ${Math.round(ac?.baroAltitude ?? ac?.geoAltitude ?? 0)}m, speed: ${Math.round(ac?.velocity ?? 0)}m/s. Circuit path: ${[...new Set(visitLog.current.slice(-8).map(v=>v.target))].join(" → ")}. OpenSky confirmed ${liveAircraft.length} contact(s) in AOR at time of detection. No ADS-B = no incident.`,
           severity: 4, category: "drone",
-          lat: 9.621, lng: -84.6295,
-          tags: ["auto-detect","loop","uav",droneTarget.toLowerCase().replace(/\s+/g,"-"),"circuit","kappa-3d"],
+          lat: ac?.latitude ?? 9.621, lng: ac?.longitude ?? -84.6295,
+          tags: ["ads-b-confirmed","loop","real-aircraft",ac?.icao24 ?? "unknown",(ac?.callsign ?? "").toLowerCase().trim(),"no-simulation"],
         }),
       }).catch(()=>{});
-      // Auto-dismiss alert after 30s
       setTimeout(()=>setLoopAlert(null), 30_000);
     }
     visitLog.current.push({target: droneTarget, ts: now});
     if (visitLog.current.length > 30) visitLog.current.shift();
-  }, [droneTarget]);
+  }, [droneTarget, liveAircraft]);
 
   // ── OpenSky loiter detector: real aircraft circling Jacó ─────────────────────
   useEffect(()=>{
@@ -1195,25 +1196,17 @@ export default function JacoMapPage() {
         log.alerted = true;
         const call = (ac as any).callsign?.trim() || ac.icao24;
         const alt = ac.baroAltitude ?? ac.geoAltitude ?? 0;
-        setLoopAlert(`LOITER: ${call} — ${log.positions.length} passes <${LOITER_RADIUS_KM}km / ${Math.round(alt)}m`);
-        const canvas = sceneRef.current?.getCanvas();
-        const snapTs = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
-        if (canvas) {
-          const dataUrl = canvas.toDataURL("image/png");
-          const a = document.createElement("a");
-          a.href = dataUrl;
-          a.download = `loiter-auto-${call}-${snapTs}.png`;
-          a.click();
-        }
+        setLoopAlert(`ADS-B LOITER: ${call} (${ac.icao24}) — ${log.positions.length} passes <${LOITER_RADIUS_KM}km / ${Math.round(alt)}m`);
+        // No auto-screenshot — manual export only
         fetch("/api/incidents", {
           method: "POST",
           headers: {"Content-Type":"application/json"},
           body: JSON.stringify({
-            title: `AUTO-DETECT: ADS-B Loiter — ${call} — ${log.positions.length} passes`,
-            description: `Real aircraft ${call} (ICAO: ${ac.icao24}) detected loitering over Jacó AOR. ${log.positions.length} position reports within ${LOITER_RADIUS_KM}km of CENTER over 20min window. Alt: ${Math.round(alt)}m, Spd: ${Math.round((ac as any).velocity??0)}m/s. Loitering pattern consistent with ISR or surveillance orbit. Auto-screenshot captured.`,
+            title: `ADS-B Loiter — ${call} (ICAO: ${ac.icao24}) — ${log.positions.length} passes`,
+            description: `Real ADS-B aircraft ${call} (ICAO: ${ac.icao24}, origin: ${ac.originCountry}) detected loitering over Jacó AOR. ${log.positions.length} confirmed position reports within ${LOITER_RADIUS_KM}km of CENTER over 20min window. Alt: ${Math.round(alt)}m, speed: ${Math.round((ac as any).velocity??0)}m/s. OpenSky-verified contact — not simulated. Use manual export button for screenshot.`,
             severity: 4, category: "drone",
             lat: ac.latitude, lng: ac.longitude,
-            tags: ["auto-detect","loiter","ads-b",ac.icao24,call.toLowerCase(),"real-aircraft"],
+            tags: ["ads-b-confirmed","loiter","real-aircraft",ac.icao24,call.toLowerCase(),"no-simulation"],
           }),
         }).catch(()=>{});
         setTimeout(()=>setLoopAlert(null), 30_000);
