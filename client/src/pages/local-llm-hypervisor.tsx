@@ -1743,6 +1743,7 @@ export default function LocalLLMHypervisorPage() {
                 );
                 const allChecked = filtered.length > 0 && filtered.every((s) => checkedSessionIds.has(s.id));
                 const someChecked = !allChecked && filtered.some((s) => checkedSessionIds.has(s.id));
+                const checkedCount = filtered.filter((s) => checkedSessionIds.has(s.id)).length;
                 return (
                   <div className="flex items-center gap-2 px-3 py-2 border-b border-border shrink-0">
                     <button
@@ -1772,6 +1773,11 @@ export default function LocalLLMHypervisorPage() {
                     <span className="text-[10px] text-muted-foreground select-none">
                       {allChecked ? "Deselect all" : "Select all"}{filtered.length !== sessions.length ? ` (${filtered.length} visible)` : ""}
                     </span>
+                    {checkedCount > 0 && (
+                      <span className="ml-auto text-[10px] text-primary font-medium select-none" data-testid="text-sessions-checked-count">
+                        {checkedCount} of {filtered.length} selected
+                      </span>
+                    )}
                   </div>
                 );
               })()}
