@@ -1736,6 +1736,45 @@ export default function LocalLLMHypervisorPage() {
           <div className="flex flex-1 min-h-0">
             {/* Session list */}
             <div className="w-72 border-r border-border flex flex-col min-h-0 shrink-0">
+              {sessions.length > 0 && (() => {
+                const filtered = sessions.filter((s) =>
+                  !historySearch.trim() ||
+                  s.prompt.toLowerCase().includes(historySearch.toLowerCase())
+                );
+                const allChecked = filtered.length > 0 && filtered.every((s) => checkedSessionIds.has(s.id));
+                const someChecked = !allChecked && filtered.some((s) => checkedSessionIds.has(s.id));
+                return (
+                  <div className="flex items-center gap-2 px-3 py-2 border-b border-border shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (allChecked) {
+                          setCheckedSessionIds((prev) => {
+                            const next = new Set(prev);
+                            filtered.forEach((s) => next.delete(s.id));
+                            return next;
+                          });
+                        } else {
+                          setCheckedSessionIds((prev) => {
+                            const next = new Set(prev);
+                            filtered.forEach((s) => next.add(s.id));
+                            return next;
+                          });
+                        }
+                      }}
+                      className="shrink-0 flex items-center justify-center w-4 h-4 rounded border border-muted-foreground/40 bg-background transition-colors hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                      aria-label={allChecked ? "Deselect all sessions" : "Select all sessions"}
+                      data-testid="checkbox-select-all-sessions"
+                    >
+                      {allChecked && <Check className="h-2.5 w-2.5 text-primary" />}
+                      {someChecked && <div className="w-2 h-0.5 bg-primary rounded-full" />}
+                    </button>
+                    <span className="text-[10px] text-muted-foreground select-none">
+                      {allChecked ? "Deselect all" : "Select all"}{filtered.length !== sessions.length ? ` (${filtered.length} visible)` : ""}
+                    </span>
+                  </div>
+                );
+              })()}
               <ScrollArea className="flex-1">
                 <div className="p-2 space-y-1">
                   {sessions.length === 0 ? (
