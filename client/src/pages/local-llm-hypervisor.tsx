@@ -16,10 +16,11 @@ import {
 import {
   Cpu, Send, Download, Eye, EyeOff, ChevronDown, ChevronRight,
   Layers, Zap, AlertTriangle, ExternalLink, RefreshCw, X,
-  Play, Square, Settings, Activity, Brain, History, Search, FileText, Database,
+  Play, Square, Settings, Activity, Brain, History, Search, FileText, Database, Archive,
   Plus, GripVertical, Pencil, Check, Trash2, RotateCcw,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import JSZip from "jszip";
 import {
   LLM_MODELS, DEFAULT_MODEL_ID, AGENT_ROLES, makeDefaultLayers, getRoleInfo, getEffectiveSystemPrompt,
   type HypervisorLayer, type HypervisorAgent, type BlendMode,
@@ -950,6 +951,27 @@ export default function LocalLLMHypervisorPage() {
     toast({ title: "Session exported", description: "Markdown file downloaded" });
   };
 
+  const exportAllSessions = async () => {
+    if (sessions.length === 0) {
+      toast({ title: "No sessions to export", description: "Run a roundtable first", variant: "destructive" });
+      return;
+    }
+    const zip = new JSZip();
+    for (const session of sessions) {
+      const md = buildMarkdown(session);
+      const filename = `roundtable-${new Date(session.ts).toISOString().replace(/[:.]/g, "-")}.md`;
+      zip.file(filename, md);
+    }
+    const blob = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `kappa-roundtable-sessions-${new Date().toISOString().replace(/[:.]/g, "-")}.zip`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast({ title: "All sessions exported", description: `${sessions.length} session${sessions.length !== 1 ? "s" : ""} packaged as ZIP` });
+  };
+
   const saveToMemory = async (session: RoundtableSession) => {
     try {
       const content = buildMarkdown(session);
@@ -1491,11 +1513,24 @@ export default function LocalLLMHypervisorPage() {
                 Session History
                 <Badge variant="secondary" className="text-xs">{sessions.length}</Badge>
               </SheetTitle>
-              <SheetClose asChild>
-                <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-close-history">
-                  <X className="h-4 w-4" />
+              <div className="flex items-center gap-1">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={exportAllSessions}
+                  disabled={sessions.length === 0}
+                  data-testid="button-export-all-sessions"
+                >
+                  <Archive className="h-3 w-3 mr-1" />
+                  Export All
                 </Button>
-              </SheetClose>
+                <SheetClose asChild>
+                  <Button variant="ghost" size="icon" className="h-7 w-7" data-testid="button-close-history">
+                    <X className="h-4 w-4" />
+                  </Button>
+                </SheetClose>
+              </div>
             </div>
             <div className="relative mt-2">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
