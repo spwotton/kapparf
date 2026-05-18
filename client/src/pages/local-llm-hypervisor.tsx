@@ -25,6 +25,7 @@ import {
   LLM_MODELS, DEFAULT_MODEL_ID, AGENT_ROLES, makeDefaultLayers, getRoleInfo, getEffectiveSystemPrompt,
   type HypervisorLayer, type HypervisorAgent, type BlendMode,
 } from "@/lib/llm-models";
+import { WorkerPool, type WorkerOutMsg, type AgentSubscription } from "@/lib/worker-pool";
 import { Link } from "wouter";
 import {
   DndContext,
@@ -129,14 +130,6 @@ function buildMarkdown(session: RoundtableSession): string {
   return lines.join("\n");
 }
 
-type WorkerMsg =
-  | { type: "progress"; file: string; progress: number; loaded: number; total: number }
-  | { type: "loaded"; modelId: string }
-  | { type: "token"; layerId: string; agentId: string; text: string }
-  | { type: "done"; layerId: string; agentId: string; totalTokens: number }
-  | { type: "error"; message: string }
-  | { type: "webgpu_unavailable" };
-
 function formatBytes(b: number) {
   if (b < 1024 * 1024) return `${(b / 1024).toFixed(1)} KB`;
   return `${(b / 1024 / 1024).toFixed(1)} MB`;
@@ -182,6 +175,7 @@ function AgentChip({
   const effectivePrompt = agent.customSystemPrompt?.trim() ? agent.customSystemPrompt : role.systemPrompt;
   const statusColor = {
     idle: "bg-zinc-300 dark:bg-zinc-600",
+    queued: "bg-amber-400 animate-pulse",
     running: "bg-blue-500 animate-pulse",
     done: "bg-emerald-500",
     error: "bg-red-500",
@@ -191,6 +185,14 @@ function AgentChip({
     onPromptChange(layerId, agent.id, promptDraft);
     setShowPrompt(false);
   };
+
+  const statusLabel = {
+    idle: null,
+    queued: <span className="text-[10px] text-amber-600 dark:text-amber-400 animate-pulse">queued…</span>,
+    running: !agent.output ? <span className="text-[10px] text-muted-foreground animate-pulse">generating…</span> : null,
+    done: null,
+    error: <span className="text-[10px] text-red-500">error</span>,
+  }[agent.status];
 
   return (
     <div className="rounded border border-border/50 bg-muted/20" data-testid={`agent-chip-${agent.id}`}>
@@ -274,6 +276,11 @@ function AgentChip({
               <Check className="h-2.5 w-2.5 mr-0.5" />Save
             </Button>
           </div>
+        </div>
+      )}
+      {!agent.output && statusLabel && (
+        <div className="px-2 pb-1">
+          <span className="flex-1">{statusLabel}</span>
         </div>
       )}
     </div>
@@ -536,6 +543,8 @@ function saveLayersToStorage(layers: HypervisorLayer[]) {
   } catch {}
 }
 
+const DEFAULT_MAX_CONCURRENT = 3;
+
 export default function LocalLLMHypervisorPage() {
   const { toast } = useToast();
 
@@ -559,6 +568,7 @@ export default function LocalLLMHypervisorPage() {
   const [layers, setLayers] = useState<HypervisorLayer[]>(() => loadLayersFromStorage() ?? makeDefaultLayers());
   const [justAddedLayerId, setJustAddedLayerId] = useState<string | null>(null);
   const [activeLayerMode, setActiveLayerMode] = useState<"chat" | "roundtable">("chat");
+  const [maxConcurrent, setMaxConcurrent] = useState(DEFAULT_MAX_CONCURRENT);
 
   const [bgEnabled, setBgEnabled] = useState(false);
   const [bgLog, setBgLog] = useState<BackgroundEntry[]>([]);
@@ -569,12 +579,19 @@ export default function LocalLLMHypervisorPage() {
   const [historySearch, setHistorySearch] = useState("");
   const [selectedSession, setSelectedSession] = useState<RoundtableSession | null>(null);
 
-  const workerRef = useRef<Worker | null>(null);
+  const poolRef = useRef<WorkerPool | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const bgIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pendingPromptRef = useRef<string>("");
   const pendingRunIdRef = useRef<string>("");
   const justAddedLayerIdRef = useRef<string | null>(null);
+
+  const roundtableTrackerRef = useRef<{ total: number; done: number } | null>(null);
+  const layersRef = useRef<HypervisorLayer[]>(layers);
+
+  useEffect(() => {
+    layersRef.current = layers;
+  }, [layers]);
 
   useEffect(() => {
     (async () => {
@@ -608,117 +625,208 @@ export default function LocalLLMHypervisorPage() {
     });
   }
 
-  const initWorker = useCallback(() => {
-    if (workerRef.current) workerRef.current.terminate();
-    const w = new Worker(new URL("../workers/llm-worker.ts", import.meta.url), { type: "module" });
-    w.onmessage = (e: MessageEvent<WorkerMsg>) => {
-      const msg = e.data;
-      if (msg.type === "progress") {
-        setLoadProgress(msg.progress);
-        setLoadFile(msg.file);
-        setLoadLoaded(msg.loaded);
-        setLoadTotal(msg.total);
-      } else if (msg.type === "loaded") {
-        setModelStatus("loaded");
-        setLoadProgress(100);
-        toast({ title: `Model loaded: ${msg.modelId}` });
-      } else if (msg.type === "token") {
-        if (msg.layerId === "chat") {
-          setStreamBuffer((b) => b + msg.text);
-        } else {
-          setLayers((prev) => prev.map((l) => {
+  const handlePoolMessage = useCallback((msg: WorkerOutMsg) => {
+    if (msg.type === "progress") {
+      setLoadProgress(msg.progress);
+      setLoadFile(msg.file);
+      setLoadLoaded(msg.loaded);
+      setLoadTotal(msg.total);
+    } else if (msg.type === "loaded") {
+      setModelStatus("loaded");
+      setLoadProgress(100);
+      toast({ title: `Model loaded: ${msg.modelId}` });
+    } else if (msg.type === "token") {
+      if (msg.text === "\u0000queued") {
+        setLayers((prev) => prev.map((l) => {
+          if (l.id !== msg.layerId) return l;
+          return {
+            ...l,
+            agents: l.agents.map((a) =>
+              a.id === msg.agentId ? { ...a, status: "queued" as const } : a
+            ),
+          };
+        }));
+        return;
+      }
+      if (msg.layerId === "chat") {
+        setStreamBuffer((b) => b + msg.text);
+      } else {
+        setLayers((prev) => prev.map((l) => {
+          if (l.id !== msg.layerId) return l;
+          return {
+            ...l,
+            agents: l.agents.map((a) =>
+              a.id === msg.agentId ? { ...a, output: a.output + msg.text, status: "running" as const } : a
+            ),
+          };
+        }));
+      }
+      setTotalTokens((t) => t + 1);
+    } else if (msg.type === "done") {
+      if (msg.layerId === "chat") {
+        setChatStreaming(false);
+        setStreamBuffer((buf) => {
+          setChatMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: buf, timestamp: Date.now() },
+          ]);
+          return "";
+        });
+      } else {
+        setLayers((prev) => {
+          const next = prev.map((l) => {
             if (l.id !== msg.layerId) return l;
             return {
               ...l,
               agents: l.agents.map((a) =>
-                a.id === msg.agentId ? { ...a, output: a.output + msg.text, status: "running" } : a
+                a.id === msg.agentId ? { ...a, status: "done" as const, tokenCount: a.tokenCount + msg.totalTokens } : a
               ),
             };
-          }));
-        }
-        setTotalTokens((t) => t + 1);
-      } else if (msg.type === "done") {
-        if (msg.layerId === "chat") {
-          setChatStreaming(false);
-          setStreamBuffer((buf) => {
-            setChatMessages((prev) => [
-              ...prev,
-              { role: "assistant", content: buf, timestamp: Date.now() },
-            ]);
-            return "";
           });
-        } else {
-          setLayers((prev) => {
-            const next = prev.map((l) => {
-              if (l.id !== msg.layerId) return l;
-              return {
-                ...l,
-                agents: l.agents.map((a) =>
-                  a.id === msg.agentId ? { ...a, status: "done" as const, tokenCount: a.tokenCount + msg.totalTokens } : a
-                ),
+
+          // Save session when Hypervisor synthesis completes.
+          if (msg.layerId === "layer-hypervisor") {
+            const runId = pendingRunIdRef.current;
+            const prompt = pendingPromptRef.current;
+
+            if (runId && prompt) {
+              pendingRunIdRef.current = "";
+
+              const hypLayer = next.find((l) => l.id === "layer-hypervisor");
+              const hypAgent = hypLayer?.agents[0];
+              const synthesis = hypAgent?.output ?? "";
+
+              const layerOutputs: SessionLayerOutput[] = next
+                .filter((l) => l.id !== "layer-hypervisor" && !l.isHidden)
+                .map((l) => ({
+                  layerName: l.name,
+                  layerId: l.id,
+                  blendMode: l.blendMode,
+                  opacity: l.opacity,
+                  agents: l.agents.map((a) => ({
+                    roleLabel: getRoleInfo(a.roleId).label,
+                    output: a.output,
+                    tokenCount: a.tokenCount,
+                  })),
+                }));
+
+              const session: RoundtableSession = {
+                id: runId,
+                ts: Date.now(),
+                prompt,
+                layerOutputs,
+                hypervisorSynthesis: synthesis,
               };
-            });
 
-            if (msg.layerId === "layer-hypervisor") {
-              const runId = pendingRunIdRef.current;
-              const prompt = pendingPromptRef.current;
+              setSessions((prev) => {
+                const updated = [session, ...prev];
+                saveSessions(updated);
+                return updated;
+              });
 
-              if (runId && prompt) {
-                pendingRunIdRef.current = "";
-
-                const hypLayer = next.find((l) => l.id === "layer-hypervisor");
-                const hypAgent = hypLayer?.agents[0];
-                const synthesis = hypAgent?.output ?? "";
-
-                const layerOutputs: SessionLayerOutput[] = next
-                  .filter((l) => l.id !== "layer-hypervisor" && !l.isHidden)
-                  .map((l) => ({
-                    layerName: l.name,
-                    layerId: l.id,
-                    blendMode: l.blendMode,
-                    opacity: l.opacity,
-                    agents: l.agents.map((a) => ({
-                      roleLabel: getRoleInfo(a.roleId).label,
-                      output: a.output,
-                      tokenCount: a.tokenCount,
-                    })),
-                  }));
-
-                const session: RoundtableSession = {
-                  id: runId,
-                  ts: Date.now(),
-                  prompt,
-                  layerOutputs,
-                  hypervisorSynthesis: synthesis,
-                };
-
-                setSessions((prev) => {
-                  const updated = [session, ...prev];
-                  saveSessions(updated);
-                  return updated;
-                });
-
-                toast({ title: "Session saved", description: "Roundtable session stored in history" });
-              }
+              toast({ title: "Session saved", description: "Roundtable session stored in history" });
             }
+          }
 
-            return next;
-          });
+          return next;
+        });
+
+        // Advance roundtable tracker for non-hypervisor layers (triggers auto-Hypervisor).
+        if (msg.layerId !== "layer-hypervisor" && roundtableTrackerRef.current) {
+          roundtableTrackerRef.current.done += 1;
+          if (roundtableTrackerRef.current.done >= roundtableTrackerRef.current.total) {
+            roundtableTrackerRef.current = null;
+            setTimeout(() => { triggerHypervisorFromRef(); }, 100);
+          }
         }
-      } else if (msg.type === "error") {
+      }
+    } else if (msg.type === "error") {
+      const isAgentError = msg.agentId && msg.agentId !== "chat";
+
+      if (!isAgentError) {
         setModelStatus("error");
         setChatStreaming(false);
-        toast({ title: "Worker error", description: msg.message, variant: "destructive" });
       }
-    };
-    workerRef.current = w;
-    return w;
+
+      toast({ title: "Worker error", description: msg.message, variant: "destructive" });
+
+      if (isAgentError && msg.agentId && msg.layerId) {
+        // Mark the specific agent as errored in the UI.
+        const aidSnap = msg.agentId;
+        const lidSnap = msg.layerId;
+        setLayers((prev) =>
+          prev.map((l) => {
+            if (l.id !== lidSnap) return l;
+            return {
+              ...l,
+              agents: l.agents.map((a) =>
+                a.id === aidSnap ? { ...a, status: "error" as const } : a
+              ),
+            };
+          })
+        );
+
+        // Advance the roundtable completion tracker so the Hypervisor can
+        // still be triggered even if some agents fail.
+        if (roundtableTrackerRef.current && lidSnap !== "layer-hypervisor") {
+          roundtableTrackerRef.current.done += 1;
+          if (roundtableTrackerRef.current.done >= roundtableTrackerRef.current.total) {
+            roundtableTrackerRef.current = null;
+            setTimeout(() => { triggerHypervisorFromRef(); }, 100);
+          }
+        }
+      }
+    }
   }, [toast]);
+
+  function triggerHypervisorFromRef() {
+    const currentLayers = layersRef.current;
+    const hyperLayer = currentLayers.find((l) => l.id === "layer-hypervisor");
+    if (!hyperLayer) return;
+
+    const agentOutputs = currentLayers
+      .filter((l) => l.id !== "layer-hypervisor")
+      .flatMap((l) =>
+        l.agents
+          .filter((a) => a.output)
+          .map((a) => `[${getRoleInfo(a.roleId).label} — Layer "${l.name}" opacity:${l.opacity} blend:${l.blendMode}]\n${a.output}`)
+      )
+      .join("\n\n---\n\n");
+
+    if (!agentOutputs.trim()) return;
+
+    const hypAgent = hyperLayer.agents[0];
+    const role = getRoleInfo(hypAgent.roleId);
+
+    setLayers((prev) =>
+      prev.map((l) => l.id !== "layer-hypervisor" ? l : {
+        ...l,
+        agents: l.agents.map((a) => ({ ...a, output: "", status: "running" as const, tokenCount: 0 })),
+      })
+    );
+
+    poolRef.current?.dispatch(
+      hypAgent.id,
+      hyperLayer.id,
+      [
+        { role: "system", content: role.systemPrompt },
+        { role: "user", content: `Layer outputs for synthesis:\n\n${agentOutputs}` },
+      ],
+      512
+    );
+  }
+
+  const initPool = useCallback(() => {
+    if (poolRef.current) poolRef.current.terminate();
+    const pool = new WorkerPool(maxConcurrent, handlePoolMessage);
+    poolRef.current = pool;
+    return pool;
+  }, [maxConcurrent, handlePoolMessage]);
 
   const autoLoadedRef = useRef(false);
 
   useEffect(() => {
-    const w = initWorker();
+    const pool = initPool();
     if (!autoLoadedRef.current) {
       autoLoadedRef.current = true;
       const model = LLM_MODELS.find((m) => m.id === DEFAULT_MODEL_ID)!;
@@ -728,17 +836,21 @@ export default function LocalLLMHypervisorPage() {
         "";
       setModelStatus("loading");
       setLoadProgress(0);
-      w.postMessage({ type: "load", modelId: model.hfRepo, hfToken: savedToken || undefined, dtype: model.dtype });
+      pool.loadModel({ modelId: model.hfRepo, hfToken: savedToken || undefined, dtype: model.dtype });
     }
-    return () => workerRef.current?.terminate();
+    return () => poolRef.current?.terminate();
   }, []);
 
+  useEffect(() => {
+    poolRef.current?.setMaxConcurrent(maxConcurrent);
+  }, [maxConcurrent]);
+
   const loadModel = () => {
-    const w = workerRef.current ?? initWorker();
+    const pool = poolRef.current ?? initPool();
     const model = LLM_MODELS.find((m) => m.id === modelId)!;
     setModelStatus("loading");
     setLoadProgress(0);
-    w.postMessage({ type: "load", modelId: model.hfRepo, hfToken: hfToken || undefined, dtype: model.dtype });
+    pool.loadModel({ modelId: model.hfRepo, hfToken: hfToken || undefined, dtype: model.dtype });
     if (hfToken) localStorage.setItem("hf_token", hfToken);
   };
 
@@ -752,7 +864,7 @@ export default function LocalLLMHypervisorPage() {
     setStreamBuffer("");
 
     const messages = history.map((m) => ({ role: m.role, content: m.content }));
-    workerRef.current?.postMessage({ type: "generate", layerId: "chat", agentId: "chat", messages, maxTokens: 512 });
+    poolRef.current?.dispatch("chat", "chat", messages, 512);
   };
 
   const injectKappaContext = async () => {
@@ -772,7 +884,7 @@ export default function LocalLLMHypervisorPage() {
     }
   };
 
-  const runRoundtable = async () => {
+  const runRoundtable = () => {
     if (modelStatus !== "loaded" || !chatInput.trim()) return;
     const prompt = chatInput.trim();
     pendingPromptRef.current = prompt;
@@ -788,28 +900,26 @@ export default function LocalLLMHypervisorPage() {
 
     const synthLayerId = findSynthLayerId();
     const agentLayers = layers.filter((l) => !l.isHidden && l.id !== synthLayerId);
+    const allAgents = agentLayers.flatMap((l) => l.agents.map((a) => ({ layer: l, agent: a })));
 
-    for (const layer of agentLayers) {
-      for (const agent of layer.agents) {
-        const systemPrompt = getEffectiveSystemPrompt(agent);
-        setLayers((prev) =>
-          prev.map((l) => l.id !== layer.id ? l : {
-            ...l,
-            agents: l.agents.map((a) => a.id !== agent.id ? a : { ...a, status: "running" as const }),
-          })
-        );
-        workerRef.current?.postMessage({
-          type: "generate",
-          layerId: layer.id,
-          agentId: agent.id,
-          messages: [
-            { role: "system", content: systemPrompt },
-            { role: "user", content: prompt },
-          ],
-          maxTokens: 256,
-        });
-        await new Promise((r) => setTimeout(r, 200));
-      }
+    if (allAgents.length === 0) {
+      toast({ title: "No visible agent layers", description: "Unhide a layer to run the roundtable" });
+      return;
+    }
+
+    roundtableTrackerRef.current = { total: allAgents.length, done: 0 };
+
+    for (const { layer, agent } of allAgents) {
+      const systemPrompt = getEffectiveSystemPrompt(agent);
+      poolRef.current?.dispatch(
+        agent.id,
+        layer.id,
+        [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: prompt },
+        ],
+        256
+      );
     }
   };
 
@@ -821,49 +931,7 @@ export default function LocalLLMHypervisorPage() {
 
   const runHypervisor = () => {
     if (modelStatus !== "loaded") return;
-    const synthId = findSynthLayerId();
-    const hyperLayer = layers.find((l) => l.id === synthId);
-    if (!hyperLayer) return;
-
-    const agentOutputs = layers
-      .filter((l) => l.id !== synthId)
-      .flatMap((l) =>
-        l.agents
-          .filter((a) => a.output)
-          .map((a) => `[${getRoleInfo(a.roleId).label} — Layer "${l.name}" opacity:${l.opacity} blend:${l.blendMode}]\n${a.output}`)
-      )
-      .join("\n\n---\n\n");
-
-    if (!agentOutputs.trim()) {
-      toast({ title: "No layer outputs to synthesise", description: "Run the roundtable first" });
-      return;
-    }
-
-    const hypAgent = hyperLayer.agents[0];
-    if (!hypAgent) {
-      toast({ title: "Synthesis layer has no agents", description: "Add an agent to the top layer" });
-      return;
-    }
-
-    const systemPrompt = getEffectiveSystemPrompt(hypAgent);
-
-    setLayers((prev) =>
-      prev.map((l) => l.id !== synthId ? l : {
-        ...l,
-        agents: l.agents.map((a) => ({ ...a, output: "", status: "running" as const, tokenCount: 0 })),
-      })
-    );
-
-    workerRef.current?.postMessage({
-      type: "generate",
-      layerId: hyperLayer.id,
-      agentId: hypAgent.id,
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: `Layer outputs for synthesis:\n\n${agentOutputs}` },
-      ],
-      maxTokens: 512,
-    });
+    triggerHypervisorFromRef();
   };
 
   useEffect(() => {
@@ -886,38 +954,37 @@ export default function LocalLLMHypervisorPage() {
 
         const analystLayer = layers.find((l) => l.id === "layer-kappa");
         const agent = analystLayer?.agents[0];
-        if (!agent) return;
+        if (!agent || !poolRef.current) return;
 
         const systemPrompt = getEffectiveSystemPrompt(agent);
         const summary = JSON.stringify(newEvents.slice(0, 20));
 
         let collected = "";
-        const cleanup = () => workerRef.current?.removeEventListener("message", handler);
-        const handler = (e: MessageEvent<WorkerMsg>) => {
-          if (e.data.type === "token" && e.data.agentId === agent.id) collected += e.data.text;
-          if (e.data.type === "done" && e.data.agentId === agent.id) {
+        let unsubscribe: (() => void) | null = null;
+
+        const callbacks: AgentSubscription = {
+          onToken: (text) => { collected += text; },
+          onDone: () => {
             setBgLog((prev) => [
               { ts: Date.now(), summary: collected, eventCount: newEvents.length },
               ...prev.slice(0, 19),
             ]);
-            cleanup();
-          }
-          if (e.data.type === "error") {
-            cleanup();
-          }
+            unsubscribe?.();
+          },
+          onError: () => { unsubscribe?.(); },
         };
-        workerRef.current?.addEventListener("message", handler);
 
-        workerRef.current?.postMessage({
-          type: "generate",
-          layerId: analystLayer!.id,
-          agentId: agent.id,
-          messages: [
+        unsubscribe = poolRef.current.subscribeAgent(agent.id, callbacks);
+
+        poolRef.current.dispatch(
+          agent.id,
+          analystLayer!.id,
+          [
             { role: "system", content: systemPrompt },
             { role: "user", content: `New KAPPA events:\n${summary}` },
           ],
-          maxTokens: 256,
-        });
+          256
+        );
       } catch (err) {
         setBgLog((prev) => [
           { ts: Date.now(), summary: `Analysis error: ${err instanceof Error ? err.message : String(err)}`, eventCount: 0 },
@@ -1073,6 +1140,10 @@ export default function LocalLLMHypervisorPage() {
   const synthId = findSynthLayerId();
   const reversedLayers = [...layers].reverse();
 
+  const roundtableRunning = layers.some((l) =>
+    l.id !== "layer-hypervisor" && l.agents.some((a) => a.status === "running" || a.status === "queued")
+  );
+
   return (
     <div className="h-full flex flex-col min-h-0 p-4 gap-4 max-w-[1600px] mx-auto">
       {/* Header */}
@@ -1083,7 +1154,7 @@ export default function LocalLLMHypervisorPage() {
             Monadic Hypervisor
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Photoshop-style agent layers · WebGPU local inference · no cloud calls
+            Photoshop-style agent layers · WebGPU local inference · parallel workers
           </p>
         </div>
 
@@ -1211,16 +1282,38 @@ export default function LocalLLMHypervisorPage() {
                 >Roundtable</Button>
               </div>
               {activeLayerMode === "roundtable" && (
-                <Button
-                  size="sm"
-                  className="w-full text-xs h-7"
-                  onClick={runHypervisor}
-                  disabled={modelStatus !== "loaded"}
-                  data-testid="button-run-hypervisor"
-                >
-                  <Brain className="h-3 w-3 mr-1" />
-                  Synthesise ∑
-                </Button>
+                <>
+                  <Button
+                    size="sm"
+                    className="w-full text-xs h-7"
+                    onClick={runHypervisor}
+                    disabled={modelStatus !== "loaded" || roundtableRunning}
+                    data-testid="button-run-hypervisor"
+                  >
+                    <Brain className="h-3 w-3 mr-1" />
+                    Synthesise ∑
+                  </Button>
+
+                  {/* Concurrency control */}
+                  <div className="space-y-1 pt-1 border-t border-border/40">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-muted-foreground">Parallel workers</span>
+                      <span className="text-[10px] font-mono text-foreground" data-testid="text-max-concurrent">{maxConcurrent}</span>
+                    </div>
+                    <Slider
+                      value={[maxConcurrent]}
+                      onValueChange={([v]) => setMaxConcurrent(v)}
+                      min={1}
+                      max={6}
+                      step={1}
+                      className="h-1"
+                      data-testid="slider-max-concurrent"
+                    />
+                    <div className="text-[9px] text-muted-foreground">
+                      Lower = less GPU contention
+                    </div>
+                  </div>
+                </>
               )}
               <div className="text-[10px] text-muted-foreground text-center">
                 {layers.length} layer{layers.length !== 1 ? "s" : ""} · {layers.reduce((n, l) => n + l.agents.length, 0)} agents
@@ -1295,7 +1388,13 @@ export default function LocalLLMHypervisorPage() {
                   {activeLayerMode === "chat" ? (
                     <><Activity className="h-3.5 w-3.5" /> Chat — Access Layer</>
                   ) : (
-                    <><Zap className="h-3.5 w-3.5 text-amber-500" /> Roundtable</>
+                    <><Zap className="h-3.5 w-3.5 text-amber-500" /> Roundtable
+                      {roundtableRunning && (
+                        <Badge variant="outline" className="text-[9px] h-4 border-blue-500 text-blue-600 ml-1 animate-pulse">
+                          running
+                        </Badge>
+                      )}
+                    </>
                   )}
                 </CardTitle>
                 <Button

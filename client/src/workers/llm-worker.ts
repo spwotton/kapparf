@@ -19,7 +19,7 @@ type WorkerOutMsg =
   | { type: "loaded"; modelId: string }
   | { type: "token"; layerId: string; agentId: string; text: string }
   | { type: "done"; layerId: string; agentId: string; totalTokens: number }
-  | { type: "error"; message: string };
+  | { type: "error"; message: string; agentId?: string; layerId?: string };
 
 let generator: TextGenerationPipeline | null = null;
 let currentModelId: string | null = null;
@@ -116,12 +116,13 @@ self.onmessage = async (e: MessageEvent<WorkerInMsg>) => {
   }
 
   if (msg.type === "generate") {
+    const { layerId, agentId, messages, maxTokens } = msg;
+
     if (!generator) {
-      self.postMessage({ type: "error", message: "No model loaded" } satisfies WorkerOutMsg);
+      self.postMessage({ type: "error", message: "No model loaded", agentId, layerId } satisfies WorkerOutMsg);
       return;
     }
     aborted = false;
-    const { layerId, agentId, messages, maxTokens } = msg;
     let tokenCount = 0;
 
     const tokenizer = (generator as unknown as { tokenizer: ConstructorParameters<typeof TextStreamer>[0] }).tokenizer;
@@ -146,7 +147,7 @@ self.onmessage = async (e: MessageEvent<WorkerInMsg>) => {
       self.postMessage({ type: "done", layerId, agentId, totalTokens: tokenCount } satisfies WorkerOutMsg);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
-      self.postMessage({ type: "error", message } satisfies WorkerOutMsg);
+      self.postMessage({ type: "error", message, agentId, layerId } satisfies WorkerOutMsg);
     }
   }
 };
