@@ -1774,16 +1774,29 @@ export default function LocalLLMHypervisorPage() {
                       {allChecked ? "Deselect all" : "Select all"}{filtered.length !== sessions.length ? ` (${filtered.length} visible)` : ""}
                     </span>
                     {checkedCount > 0 && (
-                      <span
-                        className={`ml-auto text-[10px] select-none transition-colors ${
-                          checkedCount === filtered.length
-                            ? "bg-primary text-primary-foreground font-semibold px-1.5 py-0.5 rounded-full"
-                            : "text-primary font-medium"
-                        }`}
-                        data-testid="text-sessions-checked-count"
-                      >
-                        {checkedCount} of {filtered.length} selected
-                      </span>
+                      <div className="ml-auto flex items-center gap-1">
+                        <span
+                          className={`text-[10px] select-none transition-colors ${
+                            checkedCount === filtered.length
+                              ? "bg-primary text-primary-foreground font-semibold px-1.5 py-0.5 rounded-full"
+                              : "text-primary font-medium"
+                          }`}
+                          data-testid="text-sessions-checked-count"
+                        >
+                          {checkedCount} of {filtered.length} selected
+                        </span>
+                        {checkedCount === filtered.length && (
+                          <button
+                            type="button"
+                            onClick={() => setCheckedSessionIds(new Set())}
+                            className="text-[10px] text-muted-foreground hover:text-foreground transition-colors px-1 py-0.5 rounded hover:bg-muted focus:outline-none focus:ring-1 focus:ring-primary"
+                            aria-label="Clear selection"
+                            data-testid="button-clear-selection"
+                          >
+                            ×&nbsp;Clear
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 );
