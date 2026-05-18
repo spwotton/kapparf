@@ -578,6 +578,7 @@ export default function LocalLLMHypervisorPage() {
   const [historyOpen, setHistoryOpen] = useState(false);
   const [historySearch, setHistorySearch] = useState("");
   const [selectedSession, setSelectedSession] = useState<RoundtableSession | null>(null);
+  const [checkedSessionIds, setCheckedSessionIds] = useState<Set<string>>(new Set());
 
   const poolRef = useRef<WorkerPool | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -1055,6 +1056,39 @@ export default function LocalLLMHypervisorPage() {
     toast({ title: "Sessions exported as JSON", description: `${sessions.length} session${sessions.length !== 1 ? "s" : ""} downloaded as JSON` });
   };
 
+  const exportSelectedSessions = async () => {
+    const toExport = sessions.filter((s) => checkedSessionIds.has(s.id));
+    if (toExport.length === 0) {
+      toast({ title: "No sessions selected", description: "Check at least one session before exporting", variant: "destructive" });
+      return;
+    }
+    const zip = new JSZip();
+    for (const session of toExport) {
+      const md = buildMarkdown(session);
+      const filename = `roundtable-${new Date(session.ts).toISOString().replace(/[:.]/g, "-")}.md`;
+      zip.file(filename, md);
+    }
+    const blob = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `kappa-roundtable-selected-${new Date().toISOString().replace(/[:.]/g, "-")}.zip`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast({ title: "Selected sessions exported", description: `${toExport.length} session${toExport.length !== 1 ? "s" : ""} packaged as ZIP` });
+    setCheckedSessionIds(new Set());
+  };
+
+  const toggleSessionCheck = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCheckedSessionIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
   const saveToMemory = async (session: RoundtableSession) => {
     try {
       const content = buildMarkdown(session);
@@ -1083,7 +1117,19 @@ export default function LocalLLMHypervisorPage() {
       saveSessions(next);
       return next;
     });
+    setCheckedSessionIds((prev) => {
+      if (!prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
     if (selectedSession?.id === id) setSelectedSession(null);
+    setCheckedSessionIds((prev) => {
+      if (!prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
   };
 
   const callbacks: LayerRowCallbacks = {
@@ -1633,6 +1679,17 @@ export default function LocalLLMHypervisorPage() {
                   variant="outline"
                   size="sm"
                   className="text-xs h-7"
+                  onClick={exportSelectedSessions}
+                  disabled={checkedSessionIds.size === 0}
+                  data-testid="button-export-selected-sessions"
+                >
+                  <Archive className="h-3 w-3 mr-1" />
+                  Export Selected{checkedSessionIds.size > 0 ? ` (${checkedSessionIds.size})` : ""}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
                   onClick={exportAllSessions}
                   disabled={sessions.length === 0}
                   data-testid="button-export-all-sessions"
@@ -1685,28 +1742,44 @@ export default function LocalLLMHypervisorPage() {
                       s.prompt.toLowerCase().includes(historySearch.toLowerCase())
                     )
                     .map((s) => (
-                      <button
+                      <div
                         key={s.id}
-                        onClick={() => setSelectedSession(s)}
-                        className={`w-full text-left rounded px-3 py-2.5 transition-colors space-y-1 ${
+                        className={`flex items-start gap-2 rounded border transition-colors ${
                           selectedSession?.id === s.id
-                            ? "bg-primary/10 border border-primary/20"
-                            : "hover:bg-muted/50 border border-transparent"
+                            ? "bg-primary/10 border-primary/20"
+                            : "hover:bg-muted/50 border-transparent"
                         }`}
                         data-testid={`session-item-${s.id}`}
                       >
-                        <div className="text-[10px] font-mono text-muted-foreground">
-                          {new Date(s.ts).toLocaleString()}
-                        </div>
-                        <div className="text-xs font-medium line-clamp-2 leading-snug">
-                          {s.prompt}
-                        </div>
-                        <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                          <span>{s.layerOutputs.length} layers</span>
-                          <span>·</span>
-                          <span>{s.hypervisorSynthesis ? "synthesised" : "no synthesis"}</span>
-                        </div>
-                      </button>
+                        <button
+                          type="button"
+                          onClick={(e) => toggleSessionCheck(s.id, e)}
+                          className="shrink-0 mt-2.5 ml-2 flex items-center justify-center w-4 h-4 rounded border border-muted-foreground/40 bg-background transition-colors hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                          aria-label={checkedSessionIds.has(s.id) ? "Deselect session" : "Select session"}
+                          data-testid={`checkbox-session-${s.id}`}
+                        >
+                          {checkedSessionIds.has(s.id) && (
+                            <Check className="h-2.5 w-2.5 text-primary" />
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedSession(s)}
+                          className="flex-1 text-left px-2 py-2.5 space-y-1 min-w-0"
+                        >
+                          <div className="text-[10px] font-mono text-muted-foreground">
+                            {new Date(s.ts).toLocaleString()}
+                          </div>
+                          <div className="text-xs font-medium line-clamp-2 leading-snug">
+                            {s.prompt}
+                          </div>
+                          <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
+                            <span>{s.layerOutputs.length} layers</span>
+                            <span>·</span>
+                            <span>{s.hypervisorSynthesis ? "synthesised" : "no synthesis"}</span>
+                          </div>
+                        </button>
+                      </div>
                     ))
                   }
                 </div>
