@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { cast } from "@/lib/goose-personas";
 import { BarneyTRex } from "@/components/barney-trex";
+import { PinkRabbit } from "@/components/pink-rabbit";
 
 // ─── WEB AUDIO HONK ──────────────────────────────────────────────────────────
 function playHonk() {
@@ -649,6 +650,10 @@ export default function GooseGazettePage() {
 
           <div className="border-t border-gray-200 pt-5 mt-2">
             <BarneyTRex />
+          </div>
+
+          <div className="border-t border-gray-200 pt-5 mt-5">
+            <PinkRabbit />
           </div>
 
           <div className="border-t border-gray-200 pt-4 mt-5">
