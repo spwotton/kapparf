@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ZoomableImage } from "@/components/zoomable-image";
 import nexusImg from "@assets/complete_nexus_all_threads_1774025171694.png";
 import confirmedImg from "@assets/jaco_nexus_confirmed_evidence_1774025171697.png";
@@ -269,6 +269,56 @@ function CopyBlock({ text, multiline }: { text: string; multiline?: boolean }) {
 
 export default function WhistleblowerPage() {
   const [activeSection, setActiveSection] = useState("overview");
+  const scrollSpyPaused = useRef(false);
+  const scrollSpyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const navItems = [
+    { id: "overview", label: "Overview" },
+    { id: "jaco", label: "The Jaco Nexus" },
+    { id: "sonar", label: "Sonar Evidence" },
+    { id: "setecom", label: "Setecom/DSE" },
+    { id: "actors", label: "The Actors" },
+    { id: "network", label: "Network Evidence" },
+    { id: "motive", label: "Motive" },
+    { id: "signals", label: "Signal Intelligence" },
+    { id: "correlations", label: "Correlations" },
+    { id: "pcap", label: "Packet Captures" },
+    { id: "timeline", label: "Timeline" },
+    { id: "evidence", label: "Visual Evidence" },
+    { id: "zersetzung", label: "Digital Zersetzung" },
+    { id: "phased-array", label: "Phased Array" },
+    { id: "radio-towers", label: "Radio Towers" },
+    { id: "panopticon", label: "Panopticon" },
+    { id: "3i-atlas", label: "3I/ATLAS" },
+    { id: "archive", label: "Evidence Archive" },
+    { id: "github", label: "GitHub Forensics" },
+    { id: "cdmx-nexus", label: "CDMX Nexus" },
+    { id: "legal", label: "Legal Framework" },
+  ];
+
+  useEffect(() => {
+    const sectionIds = navItems.map(item => item.id);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (scrollSpyPaused.current) return;
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-10% 0px -80% 0px",
+        threshold: 0,
+      }
+    );
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const { data: stats } = useQuery<{ totalEvents: number; correlationCount: number; domainCounts: Record<string, number> }>({ queryKey: ["/api/stats"] });
   const { data: reports } = useQuery<any[]>({ queryKey: ["/api/hypervisor/reports"] });
@@ -300,29 +350,16 @@ export default function WhistleblowerPage() {
   ];
 
 
-  const navItems = [
-    { id: "overview", label: "Overview" },
-    { id: "jaco", label: "The Jaco Nexus" },
-    { id: "sonar", label: "Sonar Evidence" },
-    { id: "setecom", label: "Setecom/DSE" },
-    { id: "actors", label: "The Actors" },
-    { id: "network", label: "Network Evidence" },
-    { id: "motive", label: "Motive" },
-    { id: "signals", label: "Signal Intelligence" },
-    { id: "correlations", label: "Correlations" },
-    { id: "pcap", label: "Packet Captures" },
-    { id: "timeline", label: "Timeline" },
-    { id: "evidence", label: "Visual Evidence" },
-    { id: "zersetzung", label: "Digital Zersetzung" },
-    { id: "phased-array", label: "Phased Array" },
-    { id: "radio-towers", label: "Radio Towers" },
-    { id: "panopticon", label: "Panopticon" },
-    { id: "3i-atlas", label: "3I/ATLAS" },
-    { id: "archive", label: "Evidence Archive" },
-    { id: "github", label: "GitHub Forensics" },
-    { id: "cdmx-nexus", label: "CDMX Nexus" },
-    { id: "legal", label: "Legal Framework" },
-  ];
+  function handleNavClick(id: string) {
+    setActiveSection(id);
+    scrollSpyPaused.current = true;
+    if (scrollSpyTimer.current) clearTimeout(scrollSpyTimer.current);
+    scrollSpyTimer.current = setTimeout(() => {
+      scrollSpyPaused.current = false;
+    }, 1200);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
@@ -334,11 +371,7 @@ export default function WhistleblowerPage() {
           <div className="sm:hidden">
             <select
               value={activeSection}
-              onChange={e => {
-                setActiveSection(e.target.value);
-                const el = document.getElementById(e.target.value);
-                if (el) el.scrollIntoView({ behavior: "smooth" });
-              }}
+              onChange={e => handleNavClick(e.target.value)}
               data-testid="nav-mobile-select"
               className="w-full bg-background border border-amber-900/40 rounded px-2 py-1.5 text-xs font-sans text-foreground focus:outline-none focus:border-amber-600"
             >
@@ -354,7 +387,7 @@ export default function WhistleblowerPage() {
                 key={item.id}
                 href={`#${item.id}`}
                 className={`px-2 py-1 text-[11px] font-sans rounded transition-colors ${activeSection === item.id ? "bg-amber-900/50 text-amber-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
-                onClick={() => setActiveSection(item.id)}
+                onClick={e => { e.preventDefault(); handleNavClick(item.id); }}
                 data-testid={`nav-${item.id}`}
               >
                 {item.label}
