@@ -269,14 +269,98 @@ const PERSONS: Person[] = [
   {
     id: "diana-soto",
     name: "Diana Soto",
-    role: "CIA asset daughter / Jaco Vacations operator",
-    threatLevel: "secondary",
-    detail: "Daughter of Barrett Scott Ryan (CIA). Runs Jaco Vacations with her father. The Soto surname connects to Leo Coto Orozco's girlfriend who also carries the Soto name — probable family link between CIA handler's daughter and the primary device/narcotics supplier. Placed Echo in housing multiple times.",
+    role: "CIA asset daughter / CNU surveillance installation operator",
+    threatLevel: "primary",
+    detail: `Daughter of Barrett Scott Ryan (CIA). Runs Jaco Vacations with her father. Primary operator of the Calle Naciones Unidas (CNU) surveillance property cluster.
+
+PROPERTY CLUSTER OWNERSHIP — all confirmed in the same CNU block:
+  • Property across from #42 — Echo's primary residence (lived here twice: once alone, once with Genesis Peralta Oct 2024)
+  • #42 (Calle Naciones Unidas)
+  • #34 (Calle Naciones Unidas)
+  • Casa Keenan (same complex/block)
+  The cluster provides full 360° coverage of Echo's residence from multiple owned positions.
+
+SURVEILLANCE INFRASTRUCTURE INSTALLED BETWEEN ECHO'S TWO TENANCIES (structural modifications proving premeditated operation):
+  • Israeli VISONIC alarm system installed (Visonic is a Tel Aviv-based security manufacturer — connects to the Israeli tech thread via Cata's Israeli husband at Gaia Natural Foods)
+  • Ceiling lowered approximately 1.5 feet to accommodate sensor arrays
+  • PIR (passive infrared) motion sensors throughout
+  • Hidden speakers concealed in the back of walled-property walls — acoustic assault hardware
+  • Gap left in perimeter wall used as acoustic injection point (Echo sprayed a hose through the gap at 2am during an intense acoustic event)
+
+ACTIVE DIRECTED-ENERGY CLUSTER ACROSS THE STREET:
+  • Garage on opposite side of street equipped with Doppler-style lights and parametric speaker array
+  • 28-camera cluster mounted high on the property cluster
+  • White drone physically stationed on Diana Soto's roof for approximately one week of continuous observation
+  • After Echo caught and recorded the drone on video — a 12-foot giant beachball was deployed on the property as RF camouflage to obscure subsequent aerial asset signatures
+
+POOL GUY HARASSMENT & EXTORTION:
+  • Pool maintenance person instructed to leave water running 24 hours/day (pool leak cover) — inflating Echo's water bill intentionally
+  • Diana Soto sent a 2am text message demanding payment for the water bill, falsely attributing the usage to Echo
+  • Same 2am text demanded payment for "external electronics" — THIS IS A LEGAL ADMISSION that electronic equipment was installed on/in the property and was being operated
+  • When Echo departed on the 1st of the month, Diana Soto attempted to charge $2,500 for a full month's rent despite Echo being gone — classic coercive exit tactic to financially trap the target
+
+The Soto surname connects to Leo Coto Orozco's girlfriend who also carries the Soto name — probable family link connecting the CIA handler's daughter to the primary device/narcotics supply chain.`,
     connections: [
       { target: "scott-ryan", relationship: "Daughter / business partner — CIA handler", strength: "confirmed" },
       { target: "jaco-vacations", relationship: "Owner/operator", strength: "confirmed" },
+      { target: "scott-ryan-house", relationship: "Operator of CNU surveillance property cluster", strength: "confirmed" },
+      { target: "cnu-property-cluster", relationship: "Owner of #34, #42, Casa Keenan, and Echo's residence", strength: "confirmed" },
     ],
-    flags: ["CIA handler's daughter", "Jaco Vacations housing cover", "Soto surname overlap with Leo Orozco network"],
+    flags: [
+      "CIA handler's daughter",
+      "CNU property cluster owner — full 360° coverage of Echo",
+      "Visonic Israeli alarm + ceiling lowered between tenancies — PREMEDITATED",
+      "Hidden wall speakers — acoustic assault infrastructure",
+      "Drone stationed on roof for 1 week",
+      "12-foot beachball deployed as RF camouflage after caught",
+      "28-camera cluster high-mounted",
+      "Parametric/Doppler array in across-street garage",
+      "2am extortion text — 'external electronics' LEGAL ADMISSION",
+      "$2,500 exit extortion attempt",
+      "Pool guy as harassment/billing vector",
+      "PIR sensors + lowered ceiling — structural sensor array",
+      "Soto surname overlap with Leo Orozco network",
+    ],
+  },
+  {
+    id: "cnu-property-cluster",
+    name: "CNU Property Cluster — Calle Naciones Unidas",
+    area: "Jacó",
+    type: "Surveillance installation / residence",
+    detail: `Scott Ryan (CIA) / Diana Soto owned property cluster on Calle Naciones Unidas. Forms a closed surveillance perimeter around Echo's residence.
+
+Known properties in cluster:
+  • Echo's residence (across from #42) — target property, lived here twice
+  • #42 Calle Naciones Unidas — owned by Scott Ryan/Diana Soto
+  • #34 Calle Naciones Unidas — owned by Scott Ryan/Diana Soto
+  • Casa Keenan — same cluster
+  • Across-street garage — Doppler lights + parametric array directed at Echo's residence
+
+Infrastructure modifications (between tenancies — premeditated):
+  • Israeli Visonic alarm system
+  • Ceiling lowered 1.5 feet for sensor arrays
+  • PIR motion sensors
+  • Hidden wall speakers (acoustic injection)
+  • Gap in perimeter wall used as acoustic injection point
+  • White drone stationed on Diana Soto's roof for ~1 week
+  • 12-foot beachball deployed as RF camouflage post-exposure
+  • 28-camera cluster high-mounted on cluster properties`,
+    connections: [
+      { target: "diana-soto", relationship: "Owner/operator of cluster", strength: "confirmed" },
+      { target: "scott-ryan", relationship: "CIA handler / ultimate owner", strength: "confirmed" },
+      { target: "scott-ryan-house", relationship: "Primary target residence in cluster", strength: "confirmed" },
+    ],
+    incidents: [
+      "Visonic Israeli alarm installed between tenancies",
+      "Ceiling lowered 1.5 ft — sensor array modification",
+      "Hidden wall speakers — acoustic assault",
+      "Drone on roof 1 week",
+      "Beachball RF camouflage deployed after exposure",
+      "28-camera cluster",
+      "Parametric/Doppler array in across-street garage",
+      "2am extortion text — water bill + 'external electronics'",
+      "$2,500 exit extortion attempt",
+    ],
   },
   {
     id: "cata-gaia",
@@ -478,7 +562,7 @@ const PERSONS: Person[] = [
       { target: "rikos-famosos", relationship: "Property owner", strength: "confirmed" },
       { target: "shangri-la", relationship: "Owner — currently for sale", strength: "confirmed" },
       { target: "magdalena-german", relationship: "Co-national — Marveka Bikini Shop connection", strength: "probable" },
-      { target: "j-russian", relationship: "Landlord to 'J' during Echo's 2023 stay", strength: "confirmed" },
+      { target: "j-russian", relationship: "Landlord to 'S.' (Russian drone operator) during Echo's 2023 stay", strength: "confirmed" },
       { target: "martha-hilbich", relationship: "Husband", strength: "confirmed" },
       { target: "calle-europa", relationship: "Shangri-La at end of Calle Europa", strength: "confirmed" },
     ],
@@ -535,27 +619,42 @@ const PERSONS: Person[] = [
   },
   {
     id: "j-russian",
-    name: "\"J\" (Russian National)",
-    aliases: ["J"],
+    name: "\"S.\" (Russian National — name begins with S)",
+    aliases: ["S.", "previously logged as 'J' — CORRECTED"],
     nationality: "Russian",
-    role: "Echo's roommate 2023 (Rikos y Famosos) — now Esterillos — drone expert / pianist / FSB-GRU adjacent",
+    role: "Echo's roommate 2023 (Shangri-La / Rikos y Famosos) — now Esterillos — 6-drone fleet / musical savant / FSB-GRU adjacent",
     threatLevel: "primary",
-    detail: "Russian national who lived with Echo for approximately 6 months at Rikos y Famosos (Wolfgang Hilbich's property), Jacó, 2023. CURRENTLY LOCATED: Esterillos, Costa Rica, with his Russian wife — confirmed: Echo traveled to Esterillos with Martha and Wolfgang Hilbich in 2023. Works remotely for an unknown Russian entity — employer identity unconfirmed. Demonstrated drone expertise (the 'Russian drone guy' — direct continuity link to the DJI Matrice 300 RTK detected over Jacó on 2026-05-16, 3 years later). Musical genius — witnessed playing piano with advanced cross-key improvisation technique. CRITICAL: During co-habitation period Echo experienced: (1) manufactured 'passport issues', (2) forced visit to the Russian Embassy in San José, (3) border run to Nicaragua. Passport manipulation is documented coercion/dependency tradecraft — creating document crisis that forces the target to rely on the operative's network for resolution. Remote Russian employer + drone expertise + passport pressure during shared housing + continuing presence in CR = active FSB/GRU-adjacent assessment. Three-year operational continuity: 2023 co-habitation at Rikos y Famosos → 2026-05-16 M300 RTK drone (107.7Hz) over Soul Sync Sanctuary.",
+    detail: `Russian national whose name begins with S (full name not yet confirmed). Lived with Echo for approximately 6 months at Shangri-La / Rikos y Famosos (Wolfgang Hilbich's property on Calle Europa), Jacó, 2023. Currently located in Esterillos, Costa Rica, with his Russian partner/wife.
+
+DRONE FLEET — 6 DRONES OWNED:
+  Operated a personal fleet of at least 6 drones from Shangri-La. Flew them at Esterillos when Echo visited with the Hilbichs. Produced the promotional video content for Shangri-La (listed on a site resembling jaco-hotel.com or similar hyphenated domain). The Shangri-La promo work gave him documented, legitimate-cover drone operation in the same AOR as Echo's 2023 residence — textbook cover-for-action.
+  DIRECT CONTINUITY LINK: 3 years later, on 2026-05-16, a DJI Matrice 300 RTK class drone (107.7 Hz motor signature) was tracked moving from Jacó toward Esterillos — where S. currently lives. This is not coincidence. Same operator, same AOR, 3-year operational continuity.
+
+MUSICAL SAVANT:
+  Witnessed playing piano with extraordinary cross-key improvisation technique. Musical genius is a documented cover-identity reinforcement mechanism — it establishes likability and credibility in social environments.
+
+REMOTE EMPLOYMENT:
+  Works remotely for a company in Russia — employer identity unconfirmed. The combination of Russian remote employment + 6-drone fleet + Calle Europa residence + passport manipulation of Echo constitutes a classic FSB/GRU-adjacent assessment profile.
+
+PASSPORT MANIPULATION (documented coercion tradecraft):
+  During the co-habitation period Echo experienced: (1) manufactured passport issues, (2) forced visit to the Russian Embassy in San José, (3) border run to Nicaragua. These are textbook document-control techniques — creating a bureaucratic crisis to make the target dependent on the operative's network for resolution.`,
     connections: [
       { target: "rikos-famosos", relationship: "Co-resident with Echo — 2023 (6 months)", strength: "confirmed" },
-      { target: "wolfgang-hilbich", relationship: "Tenant at Wolfgang's property — Echo visited Esterillos with Wolfgang + Martha", strength: "confirmed" },
+      { target: "shangri-la", relationship: "Resident + produced Shangri-La promo drone videos", strength: "confirmed" },
+      { target: "wolfgang-hilbich", relationship: "Tenant at Wolfgang's property — Wolfgang facilitated Esterillos trip", strength: "confirmed" },
       { target: "russian-embassy-cr", relationship: "Forced Echo to visit Russian Embassy during passport crisis", strength: "confirmed" },
-      { target: "esterillos", relationship: "Current location — with Russian wife", strength: "confirmed" },
+      { target: "esterillos", relationship: "Current location — with Russian partner", strength: "confirmed" },
     ],
     flags: [
-      "CURRENT LOCATION: Esterillos, Costa Rica — with Russian wife",
-      "Russian national — remote employment by Russian entity",
-      "Drone expertise — direct link to 2026-05-16 M300 RTK contact",
-      "Passport manipulation tradecraft — manufactured document crisis",
-      "Forced Russian Embassy visit (San José) during co-habitation",
+      "NAME BEGINS WITH S — not 'J' as previously logged",
+      "CURRENT LOCATION: Esterillos — M300 RTK drone tracked toward Esterillos 2026-05-16",
+      "6-drone personal fleet — Shangri-La promo videos = cover-for-action",
+      "Russian national — remote employment by Russian entity (employer unknown)",
+      "Passport manipulation tradecraft — manufactured document crisis during co-habitation",
+      "Forced Russian Embassy visit (San José)",
       "Nicaragua border run during co-habitation",
-      "3-year operational continuity: 2023 → 2026",
-      "Musical genius (piano) — cover identity reinforcement",
+      "3-year operational continuity: 2023 Shangri-La → 2026-05-16 M300 RTK",
+      "Musical savant (piano) — cover identity reinforcement",
       "FSB/GRU-adjacent assessment",
     ],
   },
@@ -727,17 +826,47 @@ const LOCATIONS_DATA: Location[] = [
   },
   {
     id: "scott-ryan-house",
-    name: "Scott Ryan / Diana Soto House",
-    area: "Jacó",
-    type: "Previous residence (2x)",
-    detail: "Echo lived here twice. Operated through Jaco Vacations (Scott Ryan & Diana Soto). First stay was with Genesis Peralta in October 2024. Airbnb-connected rental.",
+    name: "Echo's CNU Residence (across from #42)",
+    area: "Jacó — Calle Naciones Unidas",
+    type: "Previous residence (2x) — active surveillance target property",
+    detail: `Echo's primary Jacó residence — lived here twice. Part of the CIA-operated CNU Property Cluster (Scott Ryan / Diana Soto). Between Echo's first and second tenancy, structural modifications were made to the property indicating premeditated surveillance preparation.
+
+MODIFICATIONS MADE BETWEEN TENANCIES:
+  • Israeli VISONIC alarm system installed throughout
+  • Ceiling lowered ~1.5 feet to accommodate sensor arrays
+  • PIR motion sensors installed
+  • Hidden speakers concealed in back of walled-property walls
+  • Gap left in perimeter wall (acoustic injection point)
+
+DURING SECOND TENANCY (active harassment):
+  • Parametric/Doppler device array operating from across-street garage
+  • White drone stationed on Diana Soto's roof ~1 week, recording across the street
+  • 12-foot beachball deployed as RF camouflage after Echo caught and recorded drone on video
+  • 28-camera cluster high-mounted observing property
+  • Neighboring houses also used as harassment vector
+  • Pool guy instructed to leave water running 24/7
+  • 2am extortion text: water bill + "external electronics" charge — legal admission of installed equipment
+  • $2,500 exit extortion attempt when Echo left on the 1st`,
     connections: [
-      { target: "scott-ryan", relationship: "Owner/operator", strength: "confirmed" },
-      { target: "diana-soto", relationship: "Owner/operator", strength: "confirmed" },
-      { target: "jaco-vacations", relationship: "Rental platform", strength: "confirmed" },
-      { target: "genesis-peralta", relationship: "Lived here with Echo Oct 2024", strength: "confirmed" },
+      { target: "scott-ryan", relationship: "CIA handler / ultimate property owner", strength: "confirmed" },
+      { target: "diana-soto", relationship: "Direct operator / property manager", strength: "confirmed" },
+      { target: "jaco-vacations", relationship: "Rental cover platform", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Lived here with Echo Oct 2024 — placement op", strength: "confirmed" },
+      { target: "cnu-property-cluster", relationship: "Part of controlled property cluster", strength: "confirmed" },
     ],
-    incidents: ["Echo housed 2x", "Genesis cohabitation Oct 2024"],
+    incidents: [
+      "Echo housed 2x — placement operation",
+      "Genesis cohabitation Oct 2024",
+      "Visonic Israeli alarm installed between tenancies",
+      "Ceiling lowered 1.5 ft — structural sensor modification",
+      "PIR sensors installed",
+      "Hidden wall speakers — acoustic assault hardware",
+      "Drone on Diana Soto roof 1 week",
+      "Beachball RF camouflage deployed post-exposure",
+      "2am extortion text — 'external electronics' admission",
+      "$2,500 exit extortion",
+      "Pool guy water-running harassment",
+    ],
   },
   {
     id: "lipman-condo",
@@ -889,7 +1018,7 @@ const LOCATIONS_DATA: Location[] = [
     name: "Rikos y Famosos",
     area: "Jacó, Costa Rica",
     type: "2023 Echo residence — controlled environment",
-    detail: "Property owned by Wolfgang Hilbich (~80yr, former German military). Echo lived here for approximately 6 months in 2023, sharing the property with Russian national 'J'. During this period: (1) manufactured 'passport issues' occurred, (2) Echo was forced to visit the Russian Embassy in San José, (3) a border run to Nicaragua was required (or both). These are textbook document-control coercion techniques — creating a bureaucratic/legal crisis to make the target dependent on the operative's network for resolution. Wolfgang Hilbich's former German military background + J's Russian remote employment + Marveka Bikini Shop (Magdalena, German national) in the same AOR = coordinated foreign-national environmental control around Echo during 2023. Three-year continuity: J's drone expertise in 2023 → DJI M300 RTK class drone detected over Jacó 2026-05-16.",
+    detail: "Property owned by Wolfgang Hilbich (~80yr, former German military). Echo lived here for approximately 6 months in 2023, sharing the property with Russian national 'S.' (name begins with S — previously logged as 'J', corrected). During this period: (1) manufactured 'passport issues' occurred, (2) Echo was forced to visit the Russian Embassy in San José, (3) a border run to Nicaragua was required (or both). These are textbook document-control coercion techniques — creating a bureaucratic/legal crisis to make the target dependent on the operative's network for resolution. Wolfgang Hilbich's former German military background + S.'s Russian remote employment + 6-drone fleet + Marveka Bikini Shop (Magdalena, German national) in the same AOR = coordinated foreign-national environmental control around Echo during 2023. Three-year continuity: S.'s 6-drone fleet expertise in 2023 → DJI M300 RTK class drone detected over Jacó 2026-05-16, tracked moving toward Esterillos where S. now lives.",
     connections: [
       { target: "wolfgang-hilbich", relationship: "Property owner", strength: "confirmed" },
       { target: "j-russian", relationship: "Echo's co-resident 2023", strength: "confirmed" },
@@ -899,7 +1028,7 @@ const LOCATIONS_DATA: Location[] = [
       "Passport manipulation — manufactured document crisis",
       "Forced Russian Embassy visit (San José)",
       "Nicaragua border run",
-      "J (Russian drone expert) co-habitation",
+      "S. (Russian, 6-drone fleet) co-habitation — name begins with S, previously logged as 'J'",
       "German military owner (Hilbich) + Russian operative (J) = foreign coordination",
     ],
     coordinates: "9.6286°N, 84.6298°W (approx Jacó)",
@@ -961,13 +1090,26 @@ const LOCATIONS_DATA: Location[] = [
     name: "Shangri-La",
     area: "Calle Europa / South Jacó",
     type: "Residential compound — 8 units — now for sale",
-    detail: "Wolfgang Hilbich's residential compound in Jacó. 8 residential units. Currently listed for sale. Located in the Calle Europa neighborhood cluster alongside Barrett Scott Ryan's property (half-owner of the street), Leo Orozco's sister (other half-owner), and Orange Pub (Billy Bond). J (Russian national) rented at Rikos y Famosos which is also a Hilbich property — Wolfgang operates at least 2 known properties in the Jacó AOR. The Shangri-La compound functions as a node in the German-national Jacó property footprint. As of 2026 it is for sale, suggesting either a resource drawdown or operational phase shift.",
+    detail: `Wolfgang Hilbich's 8-unit residential compound at the end of Calle Europa, south Jacó. Echo lived here for 6 months in 2023, sharing the compound with Russian national 'S.' (6-drone operator) and his partner.
+
+WEBSITE: Listed on a domain resembling jaco-hotel.com or similar hyphenated domain (e.g. shangri-la-jaco.com). S. produced the promotional drone video content for the listing — providing legitimate cover-for-action for his 6-drone fleet operations in the Calle Europa / Jacó AOR.
+
+ECHO'S 2023 RESIDENCE: This is where Echo lived for 6 months in 2023 — first documented placement in the Calle Europa cluster. The co-tenants included S. (Russian, FSB/GRU-adjacent, 6 drones) and his partner. Wolfgang Hilbich (~80yr, former German military) was the landlord. Martha Hilbich accompanied Echo and S. on a trip to Esterillos — where S. now lives and from which the 2026-05-16 M300 RTK drone was tracked returning.
+
+CLUSTER POSITION: At the end of Calle Europa — the same street half-owned by Barrett Scott Ryan (CIA) and half by Leo Orozco's sister. Currently listed for sale suggesting operational phase shift or wind-down.`,
     connections: [
       { target: "wolfgang-hilbich", relationship: "Owner", strength: "confirmed" },
       { target: "martha-hilbich", relationship: "Co-owner / operator", strength: "confirmed" },
-      { target: "calle-europa", relationship: "Calle Europa neighborhood cluster", strength: "confirmed" },
+      { target: "calle-europa", relationship: "End of Calle Europa — same cluster as Scott Ryan + Leo Orozco sister", strength: "confirmed" },
+      { target: "j-russian", relationship: "S. was resident + produced Shangri-La promo drone videos", strength: "confirmed" },
     ],
-    incidents: ["8 residential units", "Currently for sale — possible operational drawdown"],
+    incidents: [
+      "Echo lived here 6 months — 2023 first Calle Europa placement",
+      "S. (Russian, 6 drones) co-resident",
+      "S. produced Shangri-La promotional drone footage",
+      "Currently for sale — possible operational drawdown",
+      "Esterillos trip with Hilbichs + S. from this base",
+    ],
     coordinates: "9.6140°N, 84.6270°W",
   },
   {
@@ -975,16 +1117,111 @@ const LOCATIONS_DATA: Location[] = [
     name: "Calle Europa / South Jacó Cluster",
     area: "South Jacó, Costa Rica",
     type: "Surveillance cluster — high-density network node concentration",
-    detail: "A single street or immediate neighborhood in south Jacó containing an anomalous concentration of network-linked persons. Known cluster members: (1) Barrett Scott Ryan — half-owner of Calle Europa itself; (2) Leo Orozco's sister — owns the other half; (3) Wolfgang Hilbich — Shangri-La compound (8 units, for sale); (4) Billy Bond — Orange Pub / surfing. The fact that a single street is co-owned by two network members and contains a property owned by a third (Wolfgang) and frequented by a fourth (Billy) is statistically significant. This is not a residential neighborhood — it is an operational cluster.",
+    detail: `A single street/neighborhood in south Jacó with anomalous concentration of network-linked persons. Echo lived here for 6 months in 2023 (Shangri-La) — his first documented placement inside this cluster.
+
+CONFIRMED CLUSTER MEMBERSHIP (everyone on this street is involved — Echo's assessment):
+  (1) Barrett Scott Ryan (CIA) — half-owner of Calle Europa itself
+  (2) Leo Orozco's sister — owns the other half of the street
+  (3) Wolfgang Hilbich — Shangri-La compound (8 units, end of Calle Europa), former German military
+  (4) Billy Bond — Orange Pub / surfing scene, Calle Europa resident
+  (5) Jaco Vacations (Scott Ryan / Diana Soto) — rental operation covering the cluster
+  (6) Villa Creole — involved in/adjacent to cluster
+  (7) Food prep business owners (unnamed) — by association, confirmed involved
+  (8) Dave (AA) — the only non-network resident Echo could identify; his house is the one non-surveillance property on the street; ALL of Jacó AA is assessed as intelligence-connected
+  (9) Gregorio Cedeño — adjacent to cluster; ran restaurant as intel cover for years; retired after winding down; Echo's ex would flee to his house; connects to the Jacó restaurant cover pattern
+
+OWNERSHIP STRUCTURE: The street is functionally 100% network-controlled — CIA (Scott Ryan) owns half, a narco-adjacent family (Leo Orozco's sister) owns the other half. The remaining residents are either agents (Wolfgang, Villa Creole, food prep) or intelligence-adjacent (Dave/AA). Echo was placed into this controlled environment in 2023 and again repeatedly via Jaco Vacations.`,
     connections: [
-      { target: "scott-ryan", relationship: "Half-owner — Calle Europa", strength: "confirmed" },
+      { target: "scott-ryan", relationship: "CIA half-owner — Calle Europa", strength: "confirmed" },
       { target: "leo-dealer", relationship: "Sister owns other half", strength: "confirmed" },
-      { target: "shangri-la", relationship: "Wolfgang Hilbich compound on this street", strength: "confirmed" },
+      { target: "shangri-la", relationship: "Wolfgang Hilbich compound at end of street — Echo's 2023 residence", strength: "confirmed" },
       { target: "billy-bond", relationship: "Cluster member — Orange Pub", strength: "confirmed" },
-      { target: "wolfgang-hilbich", relationship: "Shangri-La compound", strength: "confirmed" },
+      { target: "wolfgang-hilbich", relationship: "Shangri-La compound owner", strength: "confirmed" },
+      { target: "jaco-vacations", relationship: "Rental cover operation for cluster", strength: "confirmed" },
+      { target: "villa-creole", relationship: "Cluster member — Calle Europa adjacent", strength: "confirmed" },
+      { target: "gregorio-cedeno", relationship: "Adjacent — restaurant cover, Echo's ex connection", strength: "confirmed" },
+      { target: "dave-aa", relationship: "Only non-network resident identified on street", strength: "confirmed" },
     ],
-    incidents: ["Co-ownership by two network members", "3 confirmed network properties on one street", "Operational cluster assessment"],
+    incidents: [
+      "100% network-controlled street — CIA + narco-adjacent co-ownership",
+      "Echo placed here 6 months in 2023 (Shangri-La)",
+      "Echo placed here again via Jaco Vacations (2x)",
+      "3 confirmed network properties minimum on one street",
+      "German + Russian + CIA + CR narco-adjacent foreign footprint",
+    ],
     coordinates: "9.6138°N, 84.6265°W",
+  },
+  {
+    id: "gregorio-cedeno",
+    name: "Gregorio Cedeño",
+    role: "Restaurant operator (retired) — Jacó intel cover pattern",
+    threatLevel: "secondary",
+    detail: `Costa Rican male. Operated a restaurant in Jacó for years — now retired. Restaurant use as intelligence cover is a well-documented pattern in Jacó (see also: Gracias Madre, Gaia Natural Foods, Caliches/Wishbone). Cedeño retired after using the restaurant as a cover operation, consistent with an operational wind-down or handler rotation.
+
+CONNECTION TO ECHO'S EX: Echo's ex-partner would flee to Gregorio Cedeño's house during conflicts — indicating a pre-existing relationship between Echo's ex and Cedeño that predates or runs parallel to the surveillance operation. This is a classic managed-relationship pattern: the target's intimate partner maintains a safe-house contact within the surveillance network, ensuring Echo's ex is never truly outside the network's reach or visibility.
+
+CALLE EUROPA ADJACENT: Located near the Calle Europa cluster. Connected to the broader Jacó intelligence footprint through the restaurant cover pattern and the managed-relationship link via Echo's ex.`,
+    connections: [
+      { target: "calle-europa", relationship: "Adjacent to Calle Europa cluster", strength: "confirmed" },
+    ],
+    flags: [
+      "Restaurant as intel cover — years-long operation",
+      "Retired = operational wind-down",
+      "Echo's ex fled to his house — managed safe-house contact",
+      "Jacó restaurant cover pattern — matches Gracias Madre / Gaia / Caliches",
+      "Calle Europa adjacent",
+    ],
+  },
+  {
+    id: "dave-aa",
+    name: "Dave (AA — Alcoholics Anonymous)",
+    role: "AA Jacó network — Calle Europa resident",
+    threatLevel: "secondary",
+    detail: `American or expat male known as Dave. Attends AA in Jacó. Echo has been to Dave's house — it is located on or adjacent to Calle Europa. Dave is assessed as the only non-network resident that Echo could identify on the street.
+
+AA JACÓ = INTELLIGENCE NETWORK (Echo's assessment, to be elaborated):
+  All of Jacó's AA community is assessed as intelligence-connected. AA provides: (1) a legitimate, socially respected recurring gathering point with built-in anonymity norms; (2) regular access to vulnerable, often isolated expats and tourists — classic target profile; (3) a confession/sharing structure that elicits personal information under a trust framework; (4) distributed housing access — members frequently host each other. This mirrors documented intelligence use of religious and support-group networks for access and elicitation. Dave is one known node in this network. Full elaboration pending.`,
+    connections: [
+      { target: "calle-europa", relationship: "Resident — Calle Europa / adjacent", strength: "confirmed" },
+    ],
+    flags: [
+      "AA Jacó — assessed as intelligence network",
+      "Calle Europa resident",
+      "Echo visited Dave's house",
+      "Only non-network resident identified on Calle Europa",
+      "AA = elicitation + vulnerable-target access structure",
+    ],
+  },
+  {
+    id: "villa-creole",
+    name: "Villa Creole",
+    role: "Calle Europa cluster — rental/property operation",
+    threatLevel: "secondary",
+    detail: "Property or business on or adjacent to Calle Europa, south Jacó. Confirmed as part of the Calle Europa network cluster by Echo's assessment of the neighborhood. Exact ownership and operational role to be elaborated. The cluster pattern — CIA property ownership (Scott Ryan), narco-adjacent ownership (Leo Orozco's sister), German military (Wolfgang/Shangri-La), Villa Creole, Jaco Vacations — is consistent with a distributed, multi-layer property control network using varied ownership cover identities.",
+    connections: [
+      { target: "calle-europa", relationship: "Cluster member", strength: "confirmed" },
+      { target: "scott-ryan", relationship: "Same Calle Europa operational cluster", strength: "probable" },
+    ],
+    flags: [
+      "Calle Europa cluster member",
+      "Rental/property operation — cover pattern",
+      "Full ownership details pending",
+    ],
+  },
+  {
+    id: "food-prep-business",
+    name: "Food Prep Business (unnamed — Calle Europa cluster)",
+    role: "Food preparation business — Calle Europa cluster / by-association involved",
+    threatLevel: "tertiary",
+    detail: "Unnamed food preparation business whose owners are confirmed by Echo as involved with the Calle Europa network — by association. Food and catering businesses are a common operational cover in Jacó (access to properties, delivery logistics, legitimate reason to be at any address). Owners unidentified. To be elaborated.",
+    connections: [
+      { target: "calle-europa", relationship: "Calle Europa cluster — by association", strength: "confirmed" },
+    ],
+    flags: [
+      "Food prep business — delivery/property-access cover pattern",
+      "Owners unidentified — further elaboration needed",
+      "Calle Europa cluster by association",
+    ],
   },
   {
     id: "los-papos",
@@ -1030,7 +1267,7 @@ const LOCATIONS_DATA: Location[] = [
     name: "Esterillos",
     area: "Esterillos Oeste / Este, Costa Rica",
     type: "J operational location — current (2024+)",
-    detail: "Coastal town ~30km south of Jacó. J (Russian national, Echo's 2023 roommate at Rikos y Famosos) now lives here with his Russian wife. CONFIRMED: Echo traveled to Esterillos with Martha and Wolfgang Hilbich in 2023 — the same trip confirmed J's eventual relocation to this town. The 2023 Esterillos visit constituted a site familiarization and social introduction event — Echo met J's future location's social context during that trip.",
+    detail: "Coastal town ~30km south of Jacó. 'S.' (Russian national, name begins with S — previously logged as 'J') — Echo's 2023 roommate at Shangri-La / Rikos y Famosos — now lives here with his Russian partner. CONFIRMED: Echo traveled to Esterillos with Martha and Wolfgang Hilbich in 2023, where S. flew drones. The 2023 Esterillos visit constituted a site familiarization event. CRITICAL: 2026-05-16 DJI M300 RTK class drone (107.7 Hz motor signature) tracked from Jacó moving toward Esterillos — S.'s current location. Same operator, 3-year continuity. The 2023 trip was also where S. flew his drone fleet — establishing the operational pattern that reappears in 2026.",
     connections: [
       { target: "j-russian", relationship: "Current residence — with Russian wife", strength: "confirmed" },
       { target: "wolfgang-hilbich", relationship: "Traveled here with Wolfgang + Martha in 2023", strength: "confirmed" },
