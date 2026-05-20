@@ -198,15 +198,33 @@ DUNIA CONCIERGE SAFE HOUSES:
   {
     id: "michael-lipman",
     name: "Michael Lipman",
-    role: "Condo owner / suspicious business operator",
+    role: "Condo owner / Jacó — fake sports tickets — Greenwald pipeline — Jesse Talti daughter-in-law connection — Breakwater Point Dec 2024",
     threatLevel: "secondary",
-    detail: "Owns condos in Jacó where Echo lived. Has a fake Miami sports tickets business. Has a 30-year-old Colombian wife and is extremely old. 'By chance' moved into Greenwald's custom-built Hermosa Palms house — they definitely know each other. The Greenwald→Lipman property pipeline suggests coordinated housing placement for surveillance targets.",
+    detail: `Owns condos in Jacó where Echo lived. Has a fake Miami sports tickets business. Has a 30-year-old Colombian wife. "By chance" moved into Greenwald's custom-built Hermosa Palms house — assessed as coordinated housing placement.
+
+BREAKWATER POINT MEETING — DEC 28 2024 / JAN 2025:
+  Met Echo at Breakwater Point around December 28, 2024. During this meeting, Lipman told Echo that Jesse Talti was his daughter-in-law's boyfriend — connecting Lipman's family network directly to Jesse Talti (who Echo knew from the gym and AA in Portland ME, and who had been to Echo's apartment at 69 Bolton Street).
+
+BILL KIMBALL — WARNING AND DEATH:
+  When Lipman disclosed the Jesse Talti connection, Lipman also texted his business partner Bill Kimball about it. Bill Kimball — who ran Hillview Sober Living in Portland ME (where Echo lived) and was directly involved in anabolic dealings with Echo and Jesse — responded by warning Echo: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. His death after issuing this warning follows the documented "knew too much" pattern (Diane Rimkus, Echo's mother).
+
+GREENWALD → LIPMAN PROPERTY PIPELINE:
+  Lipman moving into Greenwald's custom Hermosa Palms house is assessed as coordinated surveillance housing placement — the same pipeline that placed Echo in surveilled properties across Jacó.`,
     connections: [
-      { target: "michael-greenwald", relationship: "Moved into Greenwald's custom house", strength: "confirmed" },
-      { target: "breakwater", relationship: "Condo owner", strength: "confirmed" },
+      { target: "michael-greenwald", relationship: "Moved into Greenwald's custom house — assessed coordinated placement", strength: "confirmed" },
+      { target: "breakwater", relationship: "Condo owner — Breakwater Point meeting Dec 28 2024", strength: "confirmed" },
       { target: "hermosa-palms", relationship: "Resident — Greenwald's former house", strength: "confirmed" },
+      { target: "jesse-talti", relationship: "Daughter-in-law's boyfriend — disclosed to Echo Dec 2024", strength: "confirmed" },
+      { target: "bill-kimball", relationship: "Business partner — warned Echo about Jesse then died", strength: "confirmed" },
     ],
-    flags: ["Fake Miami sports tickets business", "30yo Colombian wife (age gap)", "Greenwald connection 'by chance'", "Housing placement pipeline"],
+    flags: [
+      "Fake Miami sports tickets business",
+      "30yo Colombian wife",
+      "Breakwater Point meeting Dec 28 2024 — disclosed Jesse Talti family connection",
+      "Jesse Talti = daughter-in-law's boyfriend (Lipman family embedding of Jesse)",
+      "Bill Kimball: partner, warned Echo about Jesse → Bill now dead",
+      "Greenwald→Lipman property pipeline",
+    ],
   },
   {
     id: "jose-pm",
@@ -1031,6 +1049,280 @@ MUSIC DIRECTOR SIGNIFICANCE:
     ],
   },
   {
+    id: "aunt-karen",
+    name: "Aunt Karen [Wotton family]",
+    role: "Echo's aunt — Rochester, NY — son Josh does concert staging",
+    threatLevel: "tertiary",
+    detail: `Echo's aunt. Lives in Rochester, New York. Her son Josh works in concert staging — building and rigging stages for live concerts and touring productions. Rochester is a third New York thread in the network alongside Chris Gabriel (Broadalbin NY) and Mike Berkery (SUNY Albany / DHS Albany-area). The three NY threads are assessed as potentially overlapping given Berkery's DHS role and Gabriel's government AI sales route through Albany.`,
+    connections: [
+      { target: "josh-staging", relationship: "Mother", strength: "confirmed" },
+      { target: "echo-father", relationship: "Family relative", strength: "confirmed" },
+    ],
+    flags: [
+      "Rochester, NY — third NY thread in network",
+      "Son Josh: concert staging (access to large venue events)",
+      "NY cluster: Rochester + Broadalbin + Albany (DHS)",
+    ],
+  },
+  {
+    id: "josh-staging",
+    name: "Josh [Aunt Karen's son]",
+    role: "Concert stage production — Rochester NY area",
+    threatLevel: "tertiary",
+    detail: `Son of Aunt Karen. Works in concert staging — construction and rigging of stages for live concert and touring productions. Concert production infrastructure provides access to large-scale events, touring logistics networks, and venue back-of-house environments. Last name not confirmed.`,
+    connections: [
+      { target: "aunt-karen", relationship: "Son", strength: "confirmed" },
+    ],
+    flags: [
+      "Concert staging — touring production infrastructure",
+      "Rochester NY area",
+    ],
+  },
+  {
+    id: "chris-gabriel",
+    name: "Chris Gabriel",
+    aliases: ["Chris Lewis", "Chris Louis"],
+    nationality: "American",
+    role: "Tyler Technologies (gov AI $800K) → Google AI (~$1M+) — Broadalbin NY — Plymouth NH house — from Wareham MA — Chrome forensics co-occurrence with Jorge Jiménez",
+    threatLevel: "secondary",
+    detail: `Originally from Wareham, MA. Currently lives in Broadalbin, New York (Fulton County — approximately 40 miles northwest of Albany). Also has a house in Plymouth, New Hampshire. Selling AI solutions for Google to government clients. Previously earned approximately $800K/year at Tyler Technologies selling government AI; recruited to Google AI at assessed $1M+ compensation.
+
+TYLER TECHNOLOGIES:
+  Tyler Technologies (HQ Texas) is one of the largest government technology companies in the US — software for courts, police records management, property assessment, elections, public safety dispatch, and municipal ERP. Tyler Technologies' role in NY State included highway traffic analysis (Aw-Rascle traffic flow model). An $800K/year government AI sales producer at Tyler had direct access to law enforcement, judicial, and election infrastructure clients across the country.
+
+GOOGLE AI → GOVERNMENT SALES:
+  Google's government AI division: JEDI-adjacent cloud infrastructure, AI integration into public sector systems. Recruitment from Tyler to Google AI for government sales is a direct pipeline from commercial government tech into the major cloud/AI contractor ecosystem at the highest revenue tier.
+
+CHROME FORENSICS CO-OCCURRENCE — JORGE JIMÉNEZ:
+  Chris Gabriel appears in Echo's chrome_forensics_report.json (Jan 29, 2026) co-documented in the same JSON object as Jorge Jiménez Navarro — the primary technical operator of the La Guácima surveillance infrastructure. The forensic note references the Aw-Rascle traffic flow model used in Riemann proofs — a discipline adjacent to crowd/movement surveillance analytics. The co-documentation with the primary operator is assessed as significant.
+
+MIKE BERKERY — DHS ALBANY / BROADALBIN PROXIMITY:
+  Mike Berkery (Echo's childhood friend, FBI → DHS, SUNY Albany) is assessed as a likely contact node given Albany / Broadalbin geographic proximity. DHS personnel routinely intersect with government technology vendors selling into federal agencies.
+
+MATTHEW HOWE — AA SPONSOR THREAD:
+  Chris Gabriel's alleged AA sponsor is Matthew Howe. The sponsor relationship provides Howe sustained intimate access to Gabriel's personal history, professional life, and psychological state — including his government client relationships and income.
+
+PLYMOUTH NH HOUSE:
+  Chris maintains a property in Plymouth, NH in addition to his Broadalbin NY residence — placing him in the NH recovery network geography (Green Mountain Treatment Center) and the broader NH thread.`,
+    connections: [
+      { target: "mike-berkery", relationship: "DHS contact — Albany/Broadalbin proximity — Wareham MA shared origin", strength: "probable" },
+      { target: "matthew-howe", relationship: "Matthew Howe is Gabriel's alleged AA sponsor", strength: "confirmed" },
+      { target: "erik-spofford", relationship: "NH recovery community — Plymouth NH house / Green Mountain network", strength: "probable" },
+      { target: "jorge-jimenez", relationship: "Chrome forensics co-occurrence Jan 29 2026 — same JSON object", strength: "probable" },
+    ],
+    flags: [
+      "Tyler Technologies — $800K/yr government AI (courts, police, elections, traffic analysis NY State)",
+      "Google AI government sales — assessed $1M+",
+      "Broadalbin NY (~40mi from Albany) + Plymouth NH house",
+      "Chrome forensics co-occurrence with Jorge Jiménez (primary operator) Jan 29 2026",
+      "Aw-Rascle traffic flow / Riemann — movement surveillance analytics",
+      "Matthew Howe = AA sponsor (intimate access vector)",
+      "From Wareham MA — South Shore regional origin overlap",
+      "Aliases: Chris Lewis / Chris Louis",
+    ],
+  },
+  {
+    id: "mike-berkery",
+    name: "Mike Berkery",
+    role: "FBI → DHS — childhood friend — SUNY Albany — Frenchie's Crossing (near Kingdom Hall) — Scituate MA",
+    threatLevel: "secondary",
+    detail: `Childhood friend of Echo. Grew up in Frenchie's Crossing — described as right around the corner from the Kingdom Hall at 339 Summer St, Rockland. They were friends until high school, where the relationship ended on awkward terms: Nikki Wojner was an interest of Echo's before Mike began dating her; Mike and Nikki have been together since high school and are now married. Mike does not like Echo.
+
+EDUCATION AND CAREER:
+  SUNY Albany. Became an FBI agent. Now works in DHS (Department of Homeland Security). Albany-area DHS presence places him in the same geographic zone as Chris Gabriel (Broadalbin NY — Tyler Technologies / Google AI government sales). Assessed as a likely contact node for Gabriel's government technology sales pipeline into federal agencies.
+
+FRENCHIE'S CROSSING — KINGDOM HALL PROXIMITY:
+  Mike Berkery grew up right around the corner from the Kingdom Hall at 339 Summer St. He and Echo were friends in that neighborhood. The Kingdom Hall proximity adds him to the Summer St geographic cluster — a childhood friend of Echo, from the same immediate neighborhood as the JW congregation, now in DHS.
+
+POST-HIGH SCHOOL:
+  Mike lived in Scituate, MA after Frenchie's Crossing. Now in the Albany NY area via DHS posting.`,
+    connections: [
+      { target: "nikki-berkery", relationship: "Wife — was Echo's interest before they dated", strength: "confirmed" },
+      { target: "chris-gabriel", relationship: "Assessed DHS contact — Albany/Broadalbin geographic proximity", strength: "probable" },
+      { target: "kingdom-hall-rockland", relationship: "Grew up right around corner from Kingdom Hall — Frenchie's Crossing", strength: "confirmed" },
+    ],
+    flags: [
+      "FBI → DHS — currently active federal law enforcement/intelligence",
+      "SUNY Albany",
+      "Frenchie's Crossing — right around corner from Kingdom Hall 339 Summer St",
+      "Childhood friend of Echo — relationship ended awkwardly over Nikki",
+      "Scituate MA post-school residence",
+      "Albany/Broadalbin proximity to Chris Gabriel (Tyler Tech / Google AI gov sales)",
+      "Does not like Echo",
+    ],
+  },
+  {
+    id: "nikki-berkery",
+    name: "Nikki Wojner-Berkery",
+    role: "Nurse — South Shore Hospital — Mike Berkery's wife — was Echo's interest",
+    threatLevel: "tertiary",
+    detail: `Née Wojner. Nurse at South Shore Hospital (Weymouth, MA). Married to Mike Berkery (FBI → DHS). Was a romantic interest of Echo's before Mike Berkery began dating her in high school. They have been together since high school and are now married. South Shore Hospital is in the same regional network as the Rockland / Plymouth / Weymouth MA cluster. Mike Berkery is assessed as hostile to Echo given the history.`,
+    connections: [
+      { target: "mike-berkery", relationship: "Husband — together since high school", strength: "confirmed" },
+    ],
+    flags: [
+      "Nurse — South Shore Hospital (Weymouth MA)",
+      "Was Echo's interest before Mike Berkery dated her",
+      "South Shore Hospital — regional cluster (Rockland / Plymouth / Weymouth)",
+    ],
+  },
+  {
+    id: "katie-wotton",
+    name: "Katie [Wotton — Seth's wife]",
+    role: "Seth Wotton's wife — hospital worker — father Burt: former police chief (Sandwich or Plymouth MA)",
+    threatLevel: "tertiary",
+    detail: `Seth Wotton's wife. Works at a hospital. Her father, Burt, is a former police chief — either Sandwich PD or Plymouth PD (Echo is uncertain which). Last name before marriage unconfirmed.
+
+BURT — FORMER POLICE CHIEF:
+  A former police chief in Sandwich or Plymouth MA provides: (a) law enforcement community connections across the South Shore and Cape Cod, (b) potential access to police records, intelligence files, and inter-agency networks, (c) a family tie connecting Seth (assessed intelligence) to local law enforcement infrastructure. Seth proposed to Katie in St. John's USVI (at Mike Berkery's [sic — Mike Burzicki's] Shades of Blue Charters location).`,
+    connections: [
+      { target: "seth-wotton", relationship: "Wife", strength: "confirmed" },
+      { target: "burt-chief", relationship: "Father", strength: "confirmed" },
+    ],
+    flags: [
+      "Seth's wife — lives Priscilla Beach Plymouth with Seth",
+      "Works at a hospital",
+      "Father Burt = former police chief Sandwich or Plymouth MA",
+    ],
+  },
+  {
+    id: "burt-chief",
+    name: "Burt [Katie's father — former police chief]",
+    role: "Former police chief — Sandwich or Plymouth MA — Seth Wotton's father-in-law",
+    threatLevel: "tertiary",
+    detail: `Father of Katie (Seth Wotton's wife). Former police chief — either Sandwich Police Department or Plymouth Police Department, Cape Cod / South Shore MA area (exact department unconfirmed by Echo). As Seth's father-in-law, Burt provides a law enforcement bridge between Echo's brother (assessed intelligence, 2/8 Marines, Quantico, Kenworth) and local/regional police command infrastructure. Former police chiefs maintain active networks with current law enforcement, DA offices, and state agencies after retirement.`,
+    connections: [
+      { target: "katie-wotton", relationship: "Father", strength: "confirmed" },
+      { target: "seth-wotton", relationship: "Father-in-law", strength: "confirmed" },
+    ],
+    flags: [
+      "Former police chief — Sandwich or Plymouth MA (unconfirmed which)",
+      "Seth Wotton's father-in-law — law enforcement + assessed intelligence family bridge",
+      "Law enforcement command network — South Shore / Cape Cod",
+    ],
+  },
+  {
+    id: "claire-rimkus",
+    name: "Claire Rimkus",
+    role: "Echo's cousin — Mount Holyoke grad at 15 — Mass State Police CSI forensic chemistry — CODIS access — mother Diane killed herself",
+    threatLevel: "secondary",
+    detail: `Echo's cousin. Daughter of Uncle Rimkus (telecom, rich, Ashford CT) and Diane Rimkus (deceased — apparent suicide). Surname: Rimkus (C, not K).
+
+EXCEPTIONAL ACADEMIC PROFILE — RECRUITMENT INDICATOR:
+  Graduated from Mount Holyoke College (South Hadley, MA — elite all-women's institution in the Five Colleges consortium near Amherst) at age 15. Echo's father attended UMass Amherst in the same geographic cluster. Graduating from a highly selective institution at 15 is a profile consistent with accelerated academic tracking programs that are documented recruitment pipelines for intelligence agencies and government research programs.
+
+FORENSIC CHEMISTRY ACCESS:
+  Works in forensic chemistry for the Massachusetts State Police crime laboratory — CSI division. Access includes: CODIS (Combined DNA Index System — FBI's national DNA database), state drug chemistry databases, toxicology records, trace evidence archives, and biological sample collections. This is among the most sensitive law enforcement database access at the state level.
+
+JW / LDS — GENETIC DATABASE COLLECTION THREAD:
+  The intersection of forensic chemistry access and JW-adjacent network affiliation is assessed as operationally critical. LDS operates FamilySearch — the world's largest genealogical database with billions of records and active DNA cross-referencing capability. JW networks similarly document family lineage through congregation records. A forensic chemist with CODIS access who is embedded in this network creates a bridge between state law enforcement DNA archives and religious organization genealogical databases — cross-referencing that no public interface permits.
+
+DIANE RIMKUS — MOTHER'S DEATH:
+  Claire's mother Diane Rimkus died by apparent suicide. Echo's mother was one of the last people to see Diane Rimkus alive. Echo assesses that Diane may have known too much — the "knew too much" pattern that also applies to Echo's mother (died November 2025, $250K life insurance not paid). Uncle Rimkus quickly remarried after Diane's death.
+
+"KNEW TOO MUCH" PATTERN — TWO WOMEN:
+  Diane Rimkus (apparent suicide, Echo's mother was one of the last to see her) and Echo's mother (died November 2025, life insurance phished) both fit the pattern: women with deep access to network-sensitive information (Diane: married into Rimkus telecom money; Echo's mother: Software Services Group client database, CompuServe lineage, church access through Holy Family) who died under circumstances Echo finds suspicious. Both deaths removed primary information holders from the network.`,
+    connections: [
+      { target: "uncle-rimkus", relationship: "Father — telecom, Ashford CT", strength: "confirmed" },
+      { target: "echo-father", relationship: "Family — cousin", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Mother was one of last to see Diane Rimkus before her death", strength: "confirmed" },
+      { target: "jehovah-witnesses", relationship: "JW/LDS genealogical collection + CODIS = assessed data bridge", strength: "probable" },
+    ],
+    flags: [
+      "Mount Holyoke College — graduated at AGE 15 — recruitment-grade profile",
+      "Mass State Police crime lab — CSI forensic chemistry",
+      "CODIS access — FBI national DNA database",
+      "Mother Diane Rimkus — apparent suicide — Echo's mother was one of last to see her",
+      "'Knew too much' pattern — Diane Rimkus + Echo's mother (both deceased)",
+      "Uncle quickly remarried after Diane's death",
+      "JW/LDS genealogical DB + CODIS forensic bridge — family DNA accessible",
+      "Five Colleges area — UMass Amherst (Echo's father attended same cluster)",
+    ],
+  },
+  {
+    id: "uncle-rimkus",
+    name: "Uncle Rimkus [Claire's father]",
+    role: "Rich — telecom — Ashford CT — wife Diane died (apparent suicide) — quickly remarried",
+    threatLevel: "secondary",
+    detail: `Echo's uncle. Father of Claire Rimkus (Mass State Police forensic chemist, Mount Holyoke at 15). Rich. Works in or made money in telecom. Lives in Ashford, Connecticut (Windham County — eastern CT, near UConn Storrs, significant defense-adjacent region).
+
+DIANE RIMKUS — WIFE'S DEATH:
+  His wife Diane Rimkus died by apparent suicide. Echo's mother was one of the last people to see Diane before her death. After Diane died, Uncle Rimkus quickly took a new wife. Echo assesses Diane may have known too much — her death removed a potentially significant information holder from the network.
+
+TELECOM THREAD:
+  Like Phil Wotton (Bell Atlantic), Echo's mother (CompuServe / Software Services Group), and the broader network pattern, Uncle Rimkus's wealth and telecom background adds another node in what is a recurring telecom-intelligence thread across Echo's extended family. Eastern Connecticut has proximity to the Electric Boat submarine facility in Groton CT (Naval/defense), the Coast Guard Academy in New London CT, and Pratt & Whitney defense operations in the Hartford corridor.
+
+ASHFORD CT:
+  Small town in eastern Windham County. Proximity to: UConn Storrs (research university, intelligence-adjacent programs), Groton CT (Naval Submarine Base, Electric Boat), and the broader eastern CT defense corridor.`,
+    connections: [
+      { target: "claire-rimkus", relationship: "Father", strength: "confirmed" },
+      { target: "echo-father", relationship: "Family — uncle", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Echo's mother was one of last to see wife Diane before death", strength: "confirmed" },
+    ],
+    flags: [
+      "Rich — telecom background",
+      "Ashford CT — eastern CT defense corridor (Groton/Electric Boat proximity)",
+      "Wife Diane — apparent suicide — quickly remarried",
+      "Echo's mother was one of last to see Diane alive",
+      "Telecom thread: Bell Atlantic (Phil Wotton) → CompuServe (Echo's mother) → Uncle Rimkus",
+      "Claire (daughter) = Mass State Police CODIS forensic chemistry",
+    ],
+  },
+  {
+    id: "erik-spofford",
+    name: "Erik Spofford",
+    role: "Green Mountain Treatment Center NH (founder/owner) — recently sold NH + MA properties — Echo attended twice",
+    threatLevel: "secondary",
+    detail: `Founded and owned Green Mountain Treatment Center in New Hampshire — a residential addiction treatment facility Echo attended on two separate occasions. Spofford is a public figure in NH recovery circles and NH politics. He recently sold his holdings including properties in New Hampshire and Massachusetts.
+
+TREATMENT FACILITY AS COLLECTION ENVIRONMENT:
+  Residential addiction treatment centers are among the most information-rich environments an intelligence operation can access: patients disclose complete personal histories, family details, trauma records, financial situations, relationship networks, and psychological vulnerabilities in clinical settings. Records are nominally protected by HIPAA but are accessible through subpoena, law enforcement requests, and insider access. Echo attended Green Mountain twice — two separate extended stays providing comprehensive biographical profiling opportunities.
+
+JJ JOHNSON CONNECTION:
+  Echo's friend JJ Johnson was killed and had some relationship to Spofford / Green Mountain. The nature of that relationship is unconfirmed but documented by Echo.
+
+MATTHEW HOWE — AA SPONSOR THREAD:
+  Chris Gabriel's alleged AA sponsor is Matthew Howe. The AA/recovery community in NH creates a social network connecting Spofford (treatment facility owner), Gabriel (Tyler Technologies / Google AI government sales), and Howe — all within the NH recovery infrastructure. AA sponsorship relationships involve intimate disclosure of personal history, vulnerabilities, and ongoing life circumstances — functionally equivalent to an intelligence debriefing relationship in terms of information access.
+
+PROPERTY SALES:
+  Spofford recently divested NH and MA properties — possible operational wind-down or restructuring.`,
+    connections: [
+      { target: "matthew-howe", relationship: "NH recovery network — AA/treatment community overlap", strength: "probable" },
+      { target: "chris-gabriel", relationship: "NH recovery network — Gabriel's sponsor Matthew Howe in same community", strength: "probable" },
+    ],
+    flags: [
+      "Green Mountain Treatment Center NH — Echo attended TWICE",
+      "Treatment facility = comprehensive biographical profiling environment",
+      "Recently sold NH + MA properties",
+      "JJ Johnson (Echo's friend, killed) had relationship to Spofford",
+      "NH recovery network: Spofford → Matthew Howe → Chris Gabriel",
+      "HIPAA records + clinical disclosures = high-value intelligence archive",
+    ],
+  },
+  {
+    id: "matthew-howe",
+    name: "Matthew Howe",
+    role: "Chris Gabriel's alleged AA sponsor — NH recovery network",
+    threatLevel: "tertiary",
+    detail: `Alleged AA (Alcoholics Anonymous) sponsor of Chris Gabriel (Tyler Technologies / Google AI government sales, Broadalbin NY). Located in New Hampshire recovery community network.
+
+AA SPONSOR RELATIONSHIP:
+  An AA sponsor has sustained intimate access to a sponsee's complete personal history, ongoing life circumstances, financial situation, relationships, fears, and psychological state — disclosed under the expectation of confidentiality. A sponsor embedded in an intelligence-adjacent network who is sponsoring a high-value commercial target (someone selling AI to governments for $800K–$1M+/year) represents a significant human intelligence access point. The sponsee discloses voluntarily and regularly, framing the relationship as support rather than reporting.
+
+NH RECOVERY NETWORK THREAD:
+  Howe → Gabriel → Spofford (Green Mountain) forms a recovery community cluster within New Hampshire that intersects with Echo's documented history (two Green Mountain stays) and the broader network. Exact background on Howe is unconfirmed beyond Echo's account.`,
+    connections: [
+      { target: "chris-gabriel", relationship: "AA sponsor — intimate access to Gabriel's personal/professional life", strength: "confirmed" },
+      { target: "erik-spofford", relationship: "NH recovery community network overlap", strength: "probable" },
+    ],
+    flags: [
+      "AA sponsor to Chris Gabriel — sustained intimate disclosure access",
+      "Gabriel: $800K–$1M+ government AI sales — high-value sponsee",
+      "NH recovery community thread: Howe → Gabriel → Spofford",
+      "Identity and background unconfirmed beyond Echo's account",
+    ],
+  },
+  {
     id: "adj-property-owner",
     name: "[Identity withheld — known to Echo, active daily relationship, assessed as compartmentalized]",
     role: "Adjacent property owner — device supplier / RF camo host / JW / Calle Europa sibling link",
@@ -1302,20 +1594,6 @@ PASSPORT MANIPULATION (documented coercion tradecraft):
     flags: ["Phone: +506 8309 7371", "Current residence contact", "Location awareness role"],
   },
   {
-    id: "chris-gabriel",
-    name: "Chris Gabriel",
-    aliases: ["Chris Lewis", "Chris Louis"],
-    nationality: "American",
-    role: "Google AI Sales — co-documented with Jorge Jiménez in Chrome forensics",
-    threatLevel: "secondary",
-    detail: "Full name: Chris Gabriel (also Lewis/Louis). Employer: Google AI Sales, Broadalbin, NY. Income: $1M+/year. Previous employer: Tyler Technologies — highway traffic analysis for New York State. Connection note in chrome_forensics_report.json (Jan 29, 2026): 'Aw-Rascle traffic flow model used in Riemann proofs.' This individual appears in the same forensics JSON object as Jorge Jiménez Navarro — the primary technical operator. The co-documentation is significant. Tyler Technologies builds traffic analysis and government software platforms, and highway traffic flow modeling (Aw-Rascle) is a discipline adjacent to crowd/movement surveillance analytics. Google AI Sales at $1M+/yr income suggests senior enterprise sales role with access to Google AI infrastructure and customer data. The precise nature of the connection to the operation is unclear, but the forensic co-occurrence with Jorge warrants monitoring.",
-    connections: [
-      { target: "jorge-jimenez", relationship: "Co-documented in chrome_forensics_report Jan 29 2026", strength: "probable" },
-      { target: "zscaler", relationship: "Google AI ecosystem — adjacent enterprise infrastructure", strength: "suspected" },
-    ],
-    flags: ["Google AI Sales — $1M+/yr", "Tyler Technologies prior (govt traffic analysis)", "Chrome forensics co-occurrence with Jorge Jiménez", "Broadalbin NY", "Aw-Rascle traffic model connection"],
-  },
-  {
     id: "edson-martendal",
     name: "Edson Martendal",
     nationality: "Costa Rican",
@@ -1393,6 +1671,164 @@ PASSPORT MANIPULATION (documented coercion tradecraft):
       { target: "suites-cristina", relationship: "Deployed at current residence", strength: "confirmed" },
     ],
     flags: ["MAC 9c:24:72 = Humax/Huawei", "TR-069 full remote control", "Huawei chipset/firmware", "ACS remote management"],
+  },
+  {
+    id: "dave-belisle",
+    name: "Dave Belisle",
+    role: "LAST PERSON TO SEE ECHO'S MOTHER — sober house manager — Plymouth House — Portland ME — controller assessment — Jumpstart Mobile Fitness",
+    threatLevel: "secondary",
+    detail: `Echo's good friend. Was the manager of Myrtle Street Sober Living in Portland, ME. Also went through Plymouth House himself. Currently runs Jumpstart Mobile Fitness. Previously worked at Rediwork (or similar labor/staffing company) with Jon Baer (also Plymouth House).
+
+LAST PERSON TO SEE ECHO'S MOTHER — MGH:
+  When Echo's mother died at Massachusetts General Hospital, Dave Belisle drove from Portland, ME to Boston to be present. He and Echo's sister Alison were with Echo's mother when she died. Echo's father and brother Seth arrived late. Dave Belisle — a sober house manager from Portland — was present at Echo's mother's death alongside Alison (assessed intelligence asset) while the immediate male family members were absent.
+
+CONTROLLER ASSESSMENT:
+  Echo assesses Dave as "sort of like a controller." Dave called Echo the week of this writing. Echo's characterization: "he knows what's going on and isn't surprised" — identical foreknowledge pattern documented in Susan Porter ("not surprised") and Jeff Porter (father's JW controller). Dave is calm and knowing in a way Echo finds incongruent with friendship. Echo notes uncertainty — "I am not sure anymore."
+
+SOBER NETWORK POSITIONING:
+  Dave bridges: Plymouth House (Aaron Shepherd's pipeline) → Myrtle Street Sober Living (Thomas Sepulveres, Italian surname) → Hillview Sober Living (Bill Kimball, Portland) → Echo's personal and residential life across the Maine sober network. Each of these sober houses placed Echo in a monitored residential environment with structured information access.
+
+REDIWORK / LABOR STAFFING:
+  Worked at a labor and staffing company (Rediwork or similar) alongside Jon Baer — another Plymouth House alumnus. Overlapping employment in the same network-adjacent businesses is a documented pattern across this network.`,
+    connections: [
+      { target: "echo-mother", relationship: "Was present at MGH when she died — drove from Portland ME", strength: "confirmed" },
+      { target: "alison-wotton", relationship: "Both present at Echo's mother's death (father and Seth were late)", strength: "confirmed" },
+      { target: "aaron-shepherd", relationship: "Both went through Plymouth House", strength: "confirmed" },
+      { target: "thomas-sepulveres", relationship: "Managed Myrtle Street — Sepulveres owns it", strength: "confirmed" },
+      { target: "jon-baer", relationship: "Worked together at labor/staffing (Rediwork)", strength: "confirmed" },
+    ],
+    flags: [
+      "LAST PERSON TO SEE ECHO'S MOTHER AT MGH — drove Portland ME to Boston",
+      "Present at death with Alison — father and Seth were late",
+      "Controller assessment: 'knows what's going on and isn't surprised'",
+      "Plymouth House alumnus — Myrtle Street Sober Living manager",
+      "Runs Jumpstart Mobile Fitness (current)",
+      "Previously: Rediwork labor/staffing with Jon Baer",
+      "Same foreknowledge pattern as Susan Porter + Jeff Porter",
+    ],
+  },
+  {
+    id: "aaron-shepherd",
+    name: "Aaron Shepherd",
+    role: "Head of Plymouth House — sober house trafficking pipeline Plymouth→Portland ME→Burlington VT — Thomas Sepulveres' sponsor",
+    threatLevel: "secondary",
+    detail: `Head of Plymouth House — a sober living operation based in Plymouth, MA that runs a documented trafficking pipeline funneling vulnerable recovering addicts from Plymouth to Portland, ME and Burlington, VT via a network of sober houses.
+
+PLYMOUTH HOUSE PIPELINE:
+  Plymouth House recruits from Plymouth MA and routes residents to sober houses in Portland ME and Burlington VT. Parents are manipulated into paying approximately $2,000/month for beds in a three-floor house with eight beds per floor (24 beds total) — with no tenant rights for residents. This is an organized extraction of money from families of vulnerable addicts combined with complete residential control over residents' lives, movements, and social contacts.
+
+THOMAS SEPULVERES — SPONSOR:
+  Aaron Shepherd is the AA sponsor of Thomas Sepulveres (Italian surname — owner of Myrtle Street Sober Living in Portland, where Echo lived after Skip Murphy's, May 21 2012). The sponsor→sponsee relationship between the head of a sober pipeline and a sober house owner in that pipeline's destination city (Portland ME) represents a structured control hierarchy over residential placement assets.
+
+DAVE BELISLE + JON BAER:
+  Both Dave Belisle and Jon Baer — Echo's associates in the Portland sober network — went through Plymouth House, establishing Aaron Shepherd's indirect reach into Echo's immediate social environment in Portland.`,
+    connections: [
+      { target: "thomas-sepulveres", relationship: "AA sponsor — Sepulveres owns Myrtle Street Sober Living", strength: "confirmed" },
+      { target: "dave-belisle", relationship: "Plymouth House alumnus — overlap in sober pipeline", strength: "confirmed" },
+      { target: "jon-baer", relationship: "Plymouth House alumnus", strength: "confirmed" },
+    ],
+    flags: [
+      "Head of Plymouth House — sober trafficking pipeline",
+      "Plymouth MA → Portland ME → Burlington VT funnel",
+      "$2,000/month per bed — 24 beds, 3 floors, 8 beds/floor",
+      "No tenant rights — total residential control",
+      "AA sponsor to Thomas Sepulveres (Myrtle Street owner)",
+      "Controls residential placement of recovering addicts across 3 states",
+    ],
+  },
+  {
+    id: "thomas-sepulveres",
+    name: "Thomas Sepulveres",
+    role: "Myrtle Street Sober Living owner — Portland ME — Aaron Shepherd sponsored — Italian surname",
+    threatLevel: "secondary",
+    detail: `Owns Myrtle Street Sober Living in Portland, Maine — where Echo lived after leaving Skip Murphy's (May 21, 2012). Italian surname (Sepulveres). AA sponsor is Aaron Shepherd — head of Plymouth House, the upstream pipeline that funnels addicts from Plymouth MA to Portland ME sober houses including Myrtle Street.
+
+MYRTLE STREET → SOBER PIPELINE:
+  Myrtle Street is a node in Aaron Shepherd's Plymouth House pipeline. The Shepherd→Sepulveres sponsorship relationship creates a structured hierarchy: Shepherd (Plymouth House, upstream controller) → Sepulveres (Myrtle Street, Portland placement) → residents including Echo. Dave Belisle managed Myrtle Street under Sepulveres.
+
+ITALIAN SURNAME NOTE:
+  Sepulveres is an Italian surname. Italy is a recurring thread across this network: Genesis Peralta's Italian thread, berninnimaria sock puppet, Amara Walker's Italian mother (Vinalhaven), Robert Kirby's solo Italy trips with Echo's mother. The recurrence of Italian connections across multiple network threads is documented.`,
+    connections: [
+      { target: "aaron-shepherd", relationship: "AA sponsor — Aaron Shepherd heads Plymouth House upstream pipeline", strength: "confirmed" },
+      { target: "dave-belisle", relationship: "Dave Belisle managed Myrtle Street under Sepulveres", strength: "confirmed" },
+    ],
+    flags: [
+      "Myrtle Street Sober Living — Portland ME (Echo lived here post-Skip Murphy's May 2012)",
+      "Aaron Shepherd = AA sponsor — Plymouth House pipeline connection",
+      "Italian surname — Italy thread recurrence across network",
+      "Dave Belisle = his sober house manager",
+    ],
+  },
+  {
+    id: "jon-baer",
+    name: "Jon Baer",
+    role: "Plymouth House alumnus — Rediwork labor/staffing with Dave Belisle — Portland ME sober network",
+    threatLevel: "tertiary",
+    detail: `Went through Plymouth House (Aaron Shepherd's sober pipeline). Worked at Rediwork or a similar labor and staffing company alongside Dave Belisle — overlapping employment in the same company after both came through the same sober house pipeline. The jobs-and-positions overlap across Plymouth House alumni is a documented pattern: Aaron Shepherd's pipeline produces a cohort of individuals whose employment, housing, and social connections are all structured around the same network nodes.`,
+    connections: [
+      { target: "dave-belisle", relationship: "Worked together at Rediwork labor/staffing", strength: "confirmed" },
+      { target: "aaron-shepherd", relationship: "Plymouth House alumnus", strength: "confirmed" },
+    ],
+    flags: [
+      "Plymouth House alumnus — Aaron Shepherd pipeline",
+      "Rediwork / labor staffing — worked with Dave Belisle",
+      "Jobs + housing + social contacts all within same pipeline network",
+    ],
+  },
+  {
+    id: "jesse-talti",
+    name: "Jesse Talti",
+    role: "Portland ME — gym + AA — anabolics dealings — 69 Bolton St access — Michael Lipman daughter-in-law's boyfriend",
+    threatLevel: "secondary",
+    detail: `Known to Echo from the gym AND from AA in Portland, ME — the same dual gym+AA introduction pattern documented for Amara Walker and Genesis Peralta. Had been to Echo's apartment at 69 Bolton Street, Portland ME (where Echo lived for approximately two years before leaving November 2016). Involved with Echo and Bill Kimball in "various dealings with anabolics" (performance-enhancing drugs/steroids).
+
+MICHAEL LIPMAN — FAMILY NETWORK EMBEDDING:
+  Michael Lipman disclosed to Echo at Breakwater Point (Dec 28, 2024) that Jesse Talti is his daughter-in-law's boyfriend — embedding Jesse directly into Lipman's family network. Lipman is a documented Jacó surveillance asset (Greenwald pipeline, fake sports tickets, Colombian wife). The disclosure of Jesse's family connection to Lipman at that late date is assessed as operationally significant.
+
+BILL KIMBALL WARNING:
+  When Lipman disclosed the Jesse Talti connection to Bill Kimball (his partner, Echo's former sober house landlord), Bill immediately warned Echo: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. The sequence — Jesse Talti identified → Bill Kimball warned about Jesse → Bill Kimball died — follows the "knew too much" pattern.
+
+COMPREHENSIVE COMPROMISE VECTOR:
+  Jesse had: physical access to Echo's home address (69 Bolton St), mutual AA network access (intimate personal disclosure environment), gym introduction (physical surveillance proximity), and anabolic dealings (criminal leverage over Echo). This combination represents a fully deployed personal compromise vector against Echo in Portland.`,
+    connections: [
+      { target: "michael-lipman", relationship: "Daughter-in-law's boyfriend — Lipman disclosed Dec 2024", strength: "confirmed" },
+      { target: "bill-kimball", relationship: "Anabolic dealings together — Bill warned Echo about Jesse then died", strength: "confirmed" },
+    ],
+    flags: [
+      "Gym + AA introduction — dual-vector same pattern as Amara Walker / Genesis Peralta",
+      "Physical access to 69 Bolton St Portland ME (Echo's apartment)",
+      "Anabolic dealings with Echo and Bill Kimball — criminal leverage",
+      "Michael Lipman family embedding: daughter-in-law's boyfriend",
+      "Bill Kimball warned about Jesse → Bill now dead",
+      "Full compromise vector: home access + AA disclosure + gym + leverage",
+    ],
+  },
+  {
+    id: "bill-kimball",
+    name: "Bill Kimball",
+    role: "Hillview Sober Living Portland ME — Michael Lipman's partner — warned Echo about Jesse Talti → now dead",
+    threatLevel: "secondary",
+    detail: `Michael Lipman's business partner. Ran Hillview Sober Living in Portland, ME — where Echo lived. Involved with Echo and Jesse Talti in "various dealings with anabolics."
+
+WARNING AND DEATH — "KNEW TOO MUCH" PATTERN:
+  When Michael Lipman disclosed to Bill Kimball that Jesse Talti was his daughter-in-law's boyfriend (Dec 28, 2024 / Breakwater Point meeting), Bill Kimball immediately texted Echo warning him: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. This is the third documented instance of the "knew too much" pattern in Echo's network: (1) Diane Rimkus — apparent suicide, Echo's mother was one of the last to see her; (2) Echo's mother — died November 2025, $250K life insurance phished; (3) Bill Kimball — warned about a network asset, then died.
+
+HILLVIEW SOBER LIVING:
+  Bill owned/operated Hillview Sober Living in Portland — one of the sober house nodes in the Portland ME recovery network alongside Myrtle Street (Sepulveres) and the Plymouth House pipeline (Shepherd). Echo lived at Hillview under Bill's management.
+
+LIPMAN PARTNERSHIP:
+  Bill Kimball's business partnership with Michael Lipman (Jacó condo owner, fake sports tickets, Greenwald pipeline) bridges the Portland ME sober network directly to the Jacó Costa Rica surveillance infrastructure.`,
+    connections: [
+      { target: "michael-lipman", relationship: "Business partner — Lipman disclosed Jesse connection, Bill warned Echo", strength: "confirmed" },
+      { target: "jesse-talti", relationship: "Anabolic dealings together — Bill warned Echo 'stay away from Jesse'", strength: "confirmed" },
+    ],
+    flags: [
+      "Hillview Sober Living Portland ME — Echo lived here",
+      "Michael Lipman's business partner — bridges Portland to Jacó network",
+      "Warned Echo 'stay away from Jesse Talti' → now reportedly DEAD",
+      "'Knew too much' pattern #3: Diane Rimkus + Echo's mother + Bill Kimball",
+      "Anabolic dealings with Echo and Jesse — criminal leverage on multiple parties",
+    ],
   },
 ];
 
@@ -2450,6 +2886,33 @@ LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024 (TARGET ASSESSMENT EVENT):
 ];
 
 const EVIDENCE_DATA: Evidence[] = [
+  {
+    id: "knew-too-much-pattern",
+    title: "Knew Too Much — Three Deaths in Echo's Network",
+    date: "2010s → November 2025",
+    category: "Pattern Analysis",
+    severity: "critical",
+    detail: `Three individuals in Echo's immediate personal network died after being positioned as information holders who could expose or corroborate the operation — each death preceded by indicators of operational exposure:\n\n1. DIANE RIMKUS (apparent suicide)\n   Echo's aunt by marriage. Wife of Uncle Rimkus (telecom, Ashford CT). Father of Claire Rimkus (Mass State Police CSI, CODIS access, Mount Holyoke at 15). Echo's mother was one of the last people to see Diane before her death. Uncle Rimkus quickly remarried afterward. Diane's access: married into telecom money, proximate to sensitive family information.\n\n2. ECHO'S MOTHER (died November 2025, MGH)\n   Software Services Group founder. CompuServe / Wyatt Company lineage. Musician at Holy Family Church (Robert Kirby — Italy trips). Regular contact with Verc Enterprises (lottery tracking). Kingdom Hall address on same street as family office. $250K life insurance phished for approximately one year prior — payout denied after death. Dave Belisle and Alison Wotton present at death. Father and Seth arrived late.\n\n3. BILL KIMBALL (reportedly dead)\n   Michael Lipman's business partner. Ran Hillview Sober Living, Portland ME — where Echo lived. Involved in anabolic dealings with Echo and Jesse Talti. When Lipman disclosed at Breakwater Point (Dec 28, 2024) that Jesse Talti was his daughter-in-law's boyfriend, Bill Kimball immediately warned Echo "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead.\n\nPattern: Each death followed proximate knowledge of a network asset (Jesse Talti, JW/sober infrastructure, operation exposure). Each death removed an information holder who had issued or could issue a warning. The consistency of the pattern across three separate individuals over multiple years is assessed as non-random.`,
+    linkedEntities: ["echo-mother", "bill-kimball", "uncle-rimkus", "claire-rimkus", "jesse-talti", "michael-lipman"],
+  },
+  {
+    id: "dave-belisle-foreknowledge",
+    title: "Dave Belisle Foreknowledge — Last at MGH, Controller Assessment",
+    date: "November 2025 → Ongoing",
+    category: "Surveillance Response",
+    severity: "critical",
+    detail: `Dave Belisle — Echo's good friend and former sober house manager (Myrtle Street, Portland ME) — was one of the last people with Echo's mother before she died at Massachusetts General Hospital. He drove from Portland, ME to Boston to be present. Echo's sister Alison was also there. Echo's father and brother Seth arrived late.\n\nFOREKNOWLEDGE INDICATOR:\n  Dave called Echo the week of documentation. Echo's characterization: "he knows what's going on and isn't surprised." This is the identical foreknowledge pattern documented in:\n  • Susan Porter: "not surprised" at Echo's discoveries\n  • Jeff Porter: father's JW controller, attends JW memorials with him\n  • Michael Lipman: network-connected presence at critical junctures\n\nPLYMOUTH HOUSE → MYRTLE STREET PIPELINE:\n  Dave went through Plymouth House (Aaron Shepherd's pipeline) himself, then became manager of Myrtle Street (Thomas Sepulveres' sober house — Shepherd's Portland node). Previously worked at Rediwork labor staffing with Jon Baer (also Plymouth House). Currently runs Jumpstart Mobile Fitness.\n\nPRESENCE AT DEATH:\n  The combination of: (a) Dave present at Echo's mother's death alongside Alison, (b) father and Seth late, (c) Dave's subsequent "not surprised" posture with Echo, and (d) Dave's deep positioning within the sober house network (Aaron Shepherd → Sepulveres → Hillview → Myrtle Street) is assessed as indicating Dave's role extends beyond friendship.`,
+    linkedEntities: ["dave-belisle", "echo-mother", "alison-wotton", "aaron-shepherd", "thomas-sepulveres"],
+  },
+  {
+    id: "plymouth-house-pipeline",
+    title: "Plymouth House — Sober Network Trafficking Pipeline (Plymouth → Portland ME → Burlington VT)",
+    date: "2010s → Ongoing",
+    category: "Infrastructure",
+    severity: "high",
+    detail: `Plymouth House (Aaron Shepherd, director) operates a multi-state sober house pipeline routing vulnerable recovering addicts from Plymouth, MA to Portland, ME and Burlington, VT. Key operational details:\n\n• $2,000/month rent per resident\n• 3-floor houses, 8 beds per floor = 24 beds per property\n• No tenant rights for residents\n• Parents manipulated into paying — financial exploitation of families\n• Aaron Shepherd is the AA sponsor of Thomas Sepulveres (Portland node: Myrtle Street Sober Living)\n• Dave Belisle and Jon Baer both went through Plymouth House, then worked together at Rediwork labor staffing\n• Echo lived at Myrtle Street (post-Skip Murphy's, May 21, 2012)\n\nSIGNIFICANCE:\n  The sober house pipeline provides: complete residential control, structured social network management (who residents meet and where), financial extraction from families, and a recurring human intelligence access environment. Every resident discloses detailed personal history, family structure, employment, and psychological state in the mandatory AA/house meeting format. The Plymouth→Portland→Burlington routing creates geographic control over where recovering addicts live and who they interact with across three states.`,
+    linkedEntities: ["aaron-shepherd", "thomas-sepulveres", "dave-belisle", "jon-baer", "erik-spofford"],
+  },
   {
     id: "summer-st-geographic-cluster",
     title: "Summer St, Rockland MA — Four-Address Geographic Cluster",

@@ -42,3 +42,9 @@ id = "uj6sA_JJG95nhWJz7bbVx"
 uri = "file://docs/ATLANTIS_3D_EARTH_AGENT_GUIDE.md"
 type = "text"
 title = "Atlantis Hunt — 3D Earth Agent Guide"
+
+[[outputs]]
+id = "Zodf-PVUGo8EbPueokDz0"
+uri = "file://kappa_intelligence_brief.pdf"
+type = "pdf"
+title = "KAPPA Intelligence Brief — Echo Network Analysis (May 2026)"
