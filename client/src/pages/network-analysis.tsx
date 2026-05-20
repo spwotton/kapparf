@@ -195,7 +195,10 @@ const PERSONS: Person[] = [
     name: "Jairo Alfaro",
     role: "Genesis handler / Los Papos owner / weed dealer / placement operative",
     threatLevel: "primary",
-    detail: "Genesis's best guy friend — described as a 'little leprechaun who ran errands.' Worked with Genesis at Caliches Wishbone for 8 years before it closed. Then recruited Genesis to Gracias Madre in 2025 when it opened despite Echo explicitly telling her he didn't want to be with a bartender on the beach in Jacó — she lied and did it anyway. Jairo is Papo's roommate. Owner of Los Papos Mahi Mahi Shack directly next to Gracias Madre. Also sells weed. Los Papos struggles financially — consistent with a permаcover operation (a business kept alive by external funding regardless of revenue, providing permanent legitimate cover). Alfaro surname links to Marjorie Alfaro Jimenez who bridges the Kyndryl/tech cluster.",
+    detail: `Genesis's supposed "best guy friend" — described as a 'little leprechaun who ran errands.' Worked with Genesis at Caliches Wishbone (Italian-adjacent, now closed) for 8 years. Cover story: claimed Peralta was "like a sister/brother" — standard handler-cover normalization. Then recruited Genesis to Gracias Madre in 2025 when it opened, despite Echo explicitly telling her he didn't want to be with a bartender on the beach in Jacó — she lied and went anyway. Jairo is Papo's roommate. Owner of Los Papos Mahi Mahi Shack directly next to Gracias Madre. Also sells weed. Los Papos struggles financially — consistent with a permacover operation (externally funded regardless of revenue to maintain legitimate presence). Alfaro surname links to Marjorie Alfaro Jimenez who bridges the Kyndryl/tech cluster.
+
+LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024:
+  Echo was brought to Caliches' house in Los Sueños for his birthday in June 2024, when first starting to date Peralta — framed as a generous social treat. Now assessed as a target assessment and social-mapping event: handler takes target to a controlled private environment (gated Los Sueños marina community) in the first weeks of the relationship to assess behavior, relationships, and vulnerabilities before the operation deepens.`,
     connections: [
       { target: "genesis-peralta", relationship: "Best friend / handler — 8 years co-worker", strength: "confirmed" },
       { target: "marjorie-alfaro", relationship: "Surname connection — possible family", strength: "probable" },
@@ -251,20 +254,43 @@ const PERSONS: Person[] = [
   {
     id: "scott-ryan",
     name: "Barrett Scott Ryan",
-    aliases: ["Scott Ryan", "Barrett"],
-    role: "CIA — Jaco Vacations operator / Calle Europa property owner",
+    aliases: ["Scott Ryan", "Barrett", "Scott Aronson (NOC document alias — does not exist in CR records)"],
+    role: "CIA — Jaco Vacations / Calle Europa / Los Ríos document signatory / new bar with Leo's sister",
     threatLevel: "primary",
-    detail: "IDENTIFIED AS CIA. Runs Jaco Vacations with Diana Soto (his daughter). Echo lived in their house twice — once with Genesis Peralta (Oct 2024). Owns roughly half the Calle Europa neighborhood in south Jacó — the other half is owned by Leo Orozco's sister. His daughter Diana Soto shares the Soto surname with Leo Coto Orozco's girlfriend — potential family linkage connecting CIA asset to the dealer/device supply chain. CRITICAL CONNECTION: Scott Ryan's daughter Elizabeth (via second relationship or family branch) is Jesse Talty's longtime girlfriend and Michael Lipman's daughter-in-law — linking the CIA placement network directly to the Portland Maine / Breakwater condo chain. DJI Mavic or equivalent drone was previously observed at the Calle Naciones Unidas address associated with this network. The Calle Europa ownership map places Barrett Scott Ryan, Leo Orozco's family, Wolfgang Hilbich, and Billy Bond in the same concentrated geographic cell — consistent with an operational cluster managed by a CIA handler.",
+    detail: `IDENTIFIED AS CIA. Runs Jaco Vacations with Diana Soto (his daughter). Echo lived in their house twice — once with Genesis Peralta (Oct 2024). Owns roughly half the Calle Europa neighborhood in south Jacó — the other half is owned by the sibling of the [withheld adjacent property owner].
+
+NOC DOCUMENT ALIAS — "SCOTT ARONSON":
+  Scott Ryan signs official documents using the name "Scott Aronson" — an identity that does not appear in Costa Rica's Registro Nacional or any public record. This is a classic CIA Non-Official Cover (NOC) alias used for legal and property document signing to create plausible deniability and obscure the true beneficial owner. He signed documents on behalf of the Los Ríos development owners (Madrigal family — former Jacó mayor and son) using this alias. The "Aronson" surname is notably Ashkenazi Jewish — combined with the Visonic (Tel Aviv-manufactured) alarm system installed at CNU and the Israeli national business partner at Gaia Natural Foods, this suggests a CIA-Israel joint operational thread.
+
+NEW BAR — SCOTT RYAN + SIBLING OF [WITHHELD]:
+  Scott Ryan (CIA) and the sibling of the [withheld adjacent property owner] (narco-adjacent, other half-owner of Calle Europa) have now opened a bar together — making their previously inferred partnership an overt, public business relationship. CIA handler + narco-adjacent network in a shared hospitality business in Jacó is the operational model made visible.
+
+LOS RÍOS DOCUMENT CONNECTION:
+  "Scott Aronson" signed documents for the Los Ríos development — connecting the CIA handler directly to the Madrigal family's LiFi-wired residential development where Echo was subsequently placed. This is the paper trail linking CIA asset management to the surveillance infrastructure that Echo moved into.
+
+ADDITIONAL: His daughter Diana Soto shares the Soto surname with a contact in the adjacent vendor network — potential family linkage connecting CIA to the dealer/device supply chain. Daughter Elizabeth → Jesse Talty → Michael Lipman chain links to Portland Maine/Breakwater condo network.`,
     connections: [
       { target: "diana-soto", relationship: "Father / business partner — Jaco Vacations", strength: "confirmed" },
       { target: "jaco-vacations", relationship: "Owner/operator", strength: "confirmed" },
       { target: "calle-europa", relationship: "Half-owner of neighborhood", strength: "confirmed" },
-      { target: "leo-dealer", relationship: "Sister owns other half of Calle Europa", strength: "confirmed" },
+      { target: "leo-sister-bar", relationship: "Co-owner — new bar with sibling of [withheld] — overt CIA-narco-adjacent partnership", strength: "confirmed" },
+      { target: "los-rios-dev", relationship: "Signed documents as 'Scott Aronson' for Los Ríos owners", strength: "confirmed" },
       { target: "wolfgang-hilbich", relationship: "Same Calle Europa cluster", strength: "confirmed" },
       { target: "michael-lipman", relationship: "Daughter-in-law Elizabeth → Jesse Talty → Lipman chain", strength: "probable" },
       { target: "genesis-peralta", relationship: "Housed Echo + Genesis together — placement op", strength: "confirmed" },
     ],
-    flags: ["CIA CONFIRMED", "Echo housed 2x — placement operation", "Airbnb network cover", "Calle Europa half-owner", "Leo Orozco sister = other half-owner", "Concentrated geographic cell with Wolfgang + Billy Bond", "Daughter Diana Soto in op network", "DJI Mavic observed at CNU address", "Portland ME → Elizabeth → Jesse Talty → CIA chain"],
+    flags: [
+      "CIA CONFIRMED",
+      "NOC ALIAS: 'Scott Aronson' — does not exist in CR records",
+      "Aronson (Jewish surname) + Visonic (Israeli) + Israeli national at Gaia = CIA-Israel thread",
+      "Signed Los Ríos documents as Aronson — links CIA to Madrigal development where Echo placed",
+      "New bar with Leo's sister — CIA + narco overt partnership",
+      "Echo housed 2x — placement operation",
+      "CNU property cluster — Visonic alarm + hidden speakers + drone on roof",
+      "Calle Europa half-owner",
+      "Daughter Diana Soto in op network",
+      "Portland ME → Elizabeth → Jesse Talty → CIA chain",
+    ],
   },
   {
     id: "diana-soto",
@@ -299,7 +325,7 @@ POOL GUY HARASSMENT & EXTORTION:
   • Same 2am text demanded payment for "external electronics" — THIS IS A LEGAL ADMISSION that electronic equipment was installed on/in the property and was being operated
   • When Echo departed on the 1st of the month, Diana Soto attempted to charge $2,500 for a full month's rent despite Echo being gone — classic coercive exit tactic to financially trap the target
 
-The Soto surname connects to Leo Coto Orozco's girlfriend who also carries the Soto name — probable family link connecting the CIA handler's daughter to the primary device/narcotics supply chain.`,
+The Soto surname overlaps with a contact in the adjacent vendor network — probable family link connecting the CIA handler's daughter to the device/narcotics supply chain.`,
     connections: [
       { target: "scott-ryan", relationship: "Daughter / business partner — CIA handler", strength: "confirmed" },
       { target: "jaco-vacations", relationship: "Owner/operator", strength: "confirmed" },
@@ -319,7 +345,7 @@ The Soto surname connects to Leo Coto Orozco's girlfriend who also carries the S
       "$2,500 exit extortion attempt",
       "Pool guy as harassment/billing vector",
       "PIR sensors + lowered ceiling — structural sensor array",
-      "Soto surname overlap with Leo Orozco network",
+      "Soto surname overlap with adjacent vendor network",
     ],
   },
   {
@@ -441,35 +467,54 @@ Infrastructure modifications (between tenancies — premeditated):
     flags: ["'Not surprised' foreknowledge", "JW network via husband"],
   },
   {
-    id: "leo-dealer",
-    name: "Leo Coto Orozco",
-    aliases: ["Leo"],
-    nationality: "Costa Rican",
-    role: "Primary controller — device supplier, multi-product vendor, RF infrastructure host",
-    threatLevel: "primary",
-    detail: "Echo's primary 'controller'. Supplied Echo's CURRENT computer and multiple past phones — providing pre-compromise hardware access at the supply chain level. Multi-product vendor (cannabis + other substances) operating from adjacent property in La Guácima and Quebrada Seca property where the 'ivy RF camo' setup was documented. Girlfriend is Lucia Soto (cousin of Renato 'Peto' Herrera). The dealer relationship creates the foundational deniability layer: Echo as a documented cannabis user will be automatically discredited if reporting surveillance. Only non-Airbnb property nearby. Showed up with 'tons of tech equipment' and draped a leaf camouflage cover over the setup.",
-    connections: [
-      { target: "la-guacima", relationship: "Adjacent property", strength: "confirmed" },
-      { target: "lucia-soto", relationship: "Girlfriend", strength: "confirmed" },
-      { target: "renato-herrera", relationship: "Via Lucia (her cousin)", strength: "confirmed" },
-      { target: "daniel-arce", relationship: "Vendor network", strength: "confirmed" },
-      { target: "quebrada-seca", relationship: "Property — RF camo site", strength: "confirmed" },
-    ],
-    flags: ["DEVICE SUPPLIER — current computer + past phones", "Multi-product vendor", "Tons of tech equipment", "Ivy/leaf RF camouflage cover", "Only non-Airbnb neighbor", "PRIMARY CONTROLLER", "Quebrada Seca RF site"],
-  },
-  {
-    id: "lucia-soto",
-    name: "Lucia Soto",
-    nationality: "Costa Rican",
-    role: "Leo Coto Orozco's girlfriend — Soto family link",
+    id: "adj-property-owner",
+    name: "[Identity withheld — known to Echo, active daily relationship, assessed as compartmentalized]",
+    role: "Adjacent property owner — device supplier / RF camo host / JW / Calle Europa sibling link",
     threatLevel: "secondary",
-    detail: "Girlfriend of Leo Coto Orozco (Echo's primary controller/device supplier). Cousin of Renato 'Peto' Herrera (PayPal/SINPE intermediary). Diana Soto (Scott Ryan's daughter, Jaco Vacations employee) shares the Soto surname — potential family connection linking the dealer network to the Jacó property/tourism network.",
+    detail: `Identity withheld. Echo maintains an active daily relationship with this individual and assesses them as a good-faith actor who is compartmentalized from the full scope of the operation running on and around their property.
+
+DEVICE SUPPLY — SUPPLY CHAIN COMPROMISE:
+  Supplied Echo's current computer and multiple past phones — providing pre-compromise hardware access at the supply chain level. Multi-product vendor (cannabis + other substances). The vendor relationship creates the foundational deniability layer: Echo as a documented cannabis user will be automatically discredited if reporting surveillance.
+
+ADJACENT 3-UNIT PROPERTY — JW ROTATING TENANTS:
+  Property is a 3-unit building. The other two units cycled through tenants rapidly with stories that did not add up — assessed as intelligence rotation, placing fresh collection assets in adjacent units while maintaining plausible cover as normal rental turnover. Consistent with the JW-as-intel-substrate pattern identified across this network.
+
+PARAMETRIC SPEAKER EQUIPMENT — VIDEO EVIDENCE:
+  Parametric speaker equipment is visible at this property. Echo has video documentation. Parametric directional audio requires deliberate acquisition — this is not incidental consumer hardware.
+
+IVY/RF CAMOUFLAGE — REACTIVE DEPLOYMENT (3 DAYS POST-MOVE-IN):
+  An ivy/leaf RF camouflage setup appeared at this property within 3 days of Echo moving into the adjacent La Guácima address. This is a reactive deployment — the timeline confirms the operation had pre-knowledge of Echo's exact move date and mobilized physical RF infrastructure immediately upon Echo's arrival.
+
+DRONE VIDEO PROCESSING SHED — UNKNOWN THIRD-PARTY OPERATOR:
+  A shed on this property was discovered to be actively processing drone video footage. The property owner had no knowledge of this (compartmentalized). The shed was operated by an unknown third party using the property without the owner's awareness. Echo severed the feed wire with a butcher knife and faced zero consequences — confirming the operators could not escalate without exposing the covert installation. PCAPs were captured from the shed's network at the time of the incident.
+
+JW CONFIRMED:
+  Confirmed Jehovah's Witness. Consistent with the broader JW intelligence substrate identified across this network.
+
+SIBLING LINK — CALLE EUROPA + SCOTT RYAN:
+  Sibling of this individual co-owns the other half of Calle Europa alongside Barrett Scott Ryan (CIA). That sibling has subsequently opened a new bar with Scott Ryan — making the CIA-narco-adjacent partnership an overt public business relationship.`,
     connections: [
-      { target: "leo-dealer", relationship: "Girlfriend", strength: "confirmed" },
-      { target: "renato-herrera", relationship: "Cousin", strength: "confirmed" },
-      { target: "scott-ryan", relationship: "Diana Soto connection (Soto family)", strength: "suspected" },
+      { target: "la-guacima", relationship: "Adjacent property — La Guácima", strength: "confirmed" },
+      { target: "renato-herrera", relationship: "Connected via mutual contact (financial intermediary)", strength: "confirmed" },
+      { target: "daniel-arce", relationship: "Vendor network", strength: "confirmed" },
+      { target: "quebrada-seca", relationship: "Property — RF camo + parametric + drone shed site", strength: "confirmed" },
+      { target: "calle-europa", relationship: "Sibling co-owns other half of Calle Europa with Scott Ryan", strength: "confirmed" },
+      { target: "leo-sister-bar", relationship: "Sibling opened bar with Scott Ryan (CIA)", strength: "confirmed" },
+      { target: "jehovah-witnesses", relationship: "Confirmed JW", strength: "confirmed" },
     ],
-    flags: ["Soto family — links dealer network to Jaco Vacations"],
+    flags: [
+      "IDENTITY WITHHELD — compartmentalized, good-faith actor",
+      "Device supplier — current computer + past phones (supply chain compromise)",
+      "3-unit property — other units cycled with JW-pattern tenants (intel rotation)",
+      "Parametric speakers on property — VIDEO EVIDENCE",
+      "Ivy/leaf RF camo appeared 3 DAYS after Echo moved in — REACTIVE DEPLOYMENT",
+      "Drone video processing shed — unknown 3rd-party operator, owner unaware",
+      "Wire severed with butcher knife — zero blowback (covert op confirmed)",
+      "PCAPs captured from shed network",
+      "Confirmed JW",
+      "Sibling co-owns Calle Europa with CIA (Scott Ryan)",
+      "Sibling opened bar with Scott Ryan — CIA-narco overt partnership",
+    ],
   },
   {
     id: "renato-herrera",
@@ -478,13 +523,12 @@ Infrastructure modifications (between tenancies — premeditated):
     nationality: "Costa Rican",
     role: "Intermediary dealer — PayPal/SINPE financial bridge, passed Daniel Arce contact",
     threatLevel: "secondary",
-    detail: "Lucia Soto's cousin. Echo sends money via PayPal, Renato converts to SINPE (Costa Rican instant payment system) — creating a documented cross-platform financial trail. Passed Echo the contact for Daniel Arce. The PayPal→SINPE conversion creates traceable records on both platforms tying Echo to the vendor network financially.",
+    detail: "Connected to Echo via a mutual contact (identity withheld). Echo sends money via PayPal, Renato converts to SINPE (Costa Rican instant payment system) — creating a documented cross-platform financial trail. Passed Echo the contact for Daniel Arce. The PayPal→SINPE conversion creates traceable records on both platforms tying Echo to the vendor network financially.",
     connections: [
-      { target: "lucia-soto", relationship: "Cousin", strength: "confirmed" },
-      { target: "leo-dealer", relationship: "Via Lucia", strength: "confirmed" },
+      { target: "adj-property-owner", relationship: "Connected via mutual contact", strength: "confirmed" },
       { target: "daniel-arce", relationship: "Passed contact to Echo", strength: "confirmed" },
     ],
-    flags: ["PayPal→SINPE financial bridge", "Lucia's cousin"],
+    flags: ["PayPal→SINPE financial bridge", "Connected via withheld mutual contact"],
   },
   {
     id: "daniel-arce",
@@ -496,7 +540,7 @@ Infrastructure modifications (between tenancies — premeditated):
     connections: [
       { target: "renato-herrera", relationship: "Contact source", strength: "confirmed" },
       { target: "daniel-ibanez", relationship: "OSINT overlap — same name pattern, geographic proximity", strength: "suspected" },
-      { target: "leo-dealer", relationship: "Vendor network", strength: "confirmed" },
+      { target: "adj-property-owner", relationship: "Vendor network", strength: "confirmed" },
     ],
     flags: ["OSINT overlap with Daniel Ibanez", "Multi-product vendor"],
   },
@@ -557,7 +601,7 @@ Infrastructure modifications (between tenancies — premeditated):
     nationality: "German",
     role: "Rikos y Famosos / Shangri-La / former German military — financially stressed",
     threatLevel: "secondary",
-    detail: "~80-year-old German national. Former German military. Wife: Martha (spends his money aggressively). Own/owned Rikos y Famosos (Echo's 2023 residence). Recently bought a hotel in San José. Now liquidating assets — Jeep Wrangler listed on Facebook dropping $65k → $61k → $55k. Trying to sell Shangri-La, an 8-unit complex at the end of Calle Europa (same neighborhood as Barrett Scott Ryan and Leo Orozco's sister). Accompanied Echo and others on a trip to Esterillos. Connected to Magdalena (Marveka Bikini Shop) — two German nationals in the same Jacó AOR. Financial stress is operationally relevant: asset liquidation under pressure can indicate either operation wind-down, a change in handler, or external financial control being applied.",
+    detail: "~80-year-old German national. Former German military. Wife: Martha (spends his money aggressively). Own/owned Rikos y Famosos (Echo's 2023 residence). Recently bought a hotel in San José. Now liquidating assets — Jeep Wrangler listed on Facebook dropping $65k → $61k → $55k. Trying to sell Shangri-La, an 8-unit complex at the end of Calle Europa (same neighborhood as Barrett Scott Ryan and the sibling of the [withheld adjacent property owner]). Accompanied Echo and others on a trip to Esterillos. Connected to Magdalena (Marveka Bikini Shop) — two German nationals in the same Jacó AOR. Financial stress is operationally relevant: asset liquidation under pressure can indicate either operation wind-down, a change in handler, or external financial control being applied.",
     connections: [
       { target: "rikos-famosos", relationship: "Property owner", strength: "confirmed" },
       { target: "shangri-la", relationship: "Owner — currently for sale", strength: "confirmed" },
@@ -585,7 +629,7 @@ Infrastructure modifications (between tenancies — premeditated):
     name: "Billy Bond",
     role: "Surfing / Orange Pub — Calle Europa cluster",
     threatLevel: "tertiary",
-    detail: "Connected to surfing scene and Orange Pub in Jacó. Located in or connected to the Calle Europa neighborhood — same cluster as Barrett Scott Ryan (half-owner), Leo Orozco's sister (other half-owner), and Wolfgang Hilbich (Shangri-La). The concentration of surveillance-adjacent network members in one small neighborhood is not random.",
+    detail: "Connected to surfing scene and Orange Pub in Jacó. Located in or connected to the Calle Europa neighborhood — same cluster as Barrett Scott Ryan (half-owner), sibling of [withheld adjacent property owner] (other half-owner), and Wolfgang Hilbich (Shangri-La). The concentration of surveillance-adjacent network members in one small neighborhood is not random.",
     connections: [
       { target: "calle-europa", relationship: "Calle Europa cluster", strength: "confirmed" },
       { target: "scott-ryan", relationship: "Same Calle Europa neighborhood", strength: "probable" },
@@ -920,15 +964,22 @@ DURING SECOND TENANCY (active harassment):
   },
   {
     id: "quebrada-seca",
-    name: "Leo Coto Orozco Property — Quebrada Seca",
+    name: "Adjacent Property — Quebrada Seca / La Guácima",
     area: "Quebrada Seca, Jacó area",
-    type: "RF infrastructure site",
-    detail: "Leo Coto Orozco's property in Quebrada Seca — location of the documented 'ivy RF camo' setup where RF equipment was concealed under leaf/vine camouflage netting. Leo is Echo's primary controller and device supplier (current computer + past phones). The property serves as an RF transmission/relay point in the surveillance infrastructure.",
+    type: "RF infrastructure site — parametric / drone shed / RF camo",
+    detail: "Property belonging to an individual with an active daily relationship with Echo (identity withheld). Location of the documented ivy/leaf RF camouflage setup — appeared within 3 days of Echo moving into the adjacent La Guácima address (reactive deployment confirming pre-knowledge of move date). Parametric speaker equipment present at this site — Echo has video documentation. A shed on this property was discovered processing drone video footage; operated by an unknown third party without the owner's knowledge. Echo severed the shed's feed wire with a butcher knife and faced zero consequences. PCAPs captured from shed network at incident time.",
     connections: [
-      { target: "leo-dealer", relationship: "Property owner", strength: "confirmed" },
-      { target: "la-guacima", relationship: "Leo operates from both locations", strength: "confirmed" },
+      { target: "adj-property-owner", relationship: "Property owner (identity withheld)", strength: "confirmed" },
+      { target: "la-guacima", relationship: "Adjacent property — La Guácima / Quebrada Seca overlap", strength: "confirmed" },
+      { target: "dunia-concierge", relationship: "Same geographic band — Quebrada Seca / Los Ríos", strength: "confirmed" },
     ],
-    incidents: ["Ivy/leaf RF camouflage concealment", "RF equipment installation"],
+    incidents: [
+      "Ivy/leaf RF camouflage — appeared 3 days post-move-in (REACTIVE DEPLOYMENT)",
+      "Parametric speaker equipment — VIDEO EVIDENCE",
+      "Drone video processing shed — 3rd-party operated, owner unaware",
+      "Wire severed — zero blowback (covert op confirmed)",
+      "PCAPs captured from shed network",
+    ],
   },
   {
     id: "gracias-madre-location",
@@ -950,15 +1001,15 @@ DURING SECOND TENANCY (active harassment):
     name: "La Guácima Property (Calle Cabello Real)",
     area: "La Guácima, Alajuela",
     type: "Attack position / Jorge Jimenez property",
-    detail: "Property owned by Oscar Jimenez (ex-drug cop OIJ), managed by son Jorge Jimenez (Kyndryl). Location of active attack with drones, street light manipulation (8 color temperatures / PWM pulsing), PLC (Power Line Communication) via electrical wiring, hidden WiFi network (f6:09:0d:20:e6:46 spoofed MAC), V-SEK cameras ~20m away, 5G tower in neighbor's yard. Fridge motor interference indicates PLC signals on power circuit. Leo (dealer) on adjacent property with camouflaged tech equipment. Near ICE satellite earth station (9.2m C/Ku-band antennas).",
+    detail: "Property owned by Oscar Jimenez (ex-drug cop OIJ), managed by son Jorge Jimenez (Kyndryl). Location of active attack with drones, street light manipulation (8 color temperatures / PWM pulsing), PLC (Power Line Communication) via electrical wiring, hidden WiFi network (f6:09:0d:20:e6:46 spoofed MAC), V-SEK cameras ~20m away, 5G tower in neighbor's yard. Fridge motor interference indicates PLC signals on power circuit. Adjacent property (owner identity withheld) hosts camouflaged tech equipment, parametric speakers, and a drone video processing shed operated by an unknown third party. Near ICE satellite earth station (9.2m C/Ku-band antennas).",
     connections: [
       { target: "oscar-jimenez", relationship: "Property owner", strength: "confirmed" },
       { target: "jorge-jimenez", relationship: "Owner's son (Kyndryl)", strength: "confirmed" },
-      { target: "leo-dealer", relationship: "Adjacent property — surveillance position", strength: "confirmed" },
+      { target: "adj-property-owner", relationship: "Adjacent property — RF camo + parametric + shed", strength: "confirmed" },
       { target: "v-sek", relationship: "Cameras ~20m away", strength: "confirmed" },
       { target: "setecom", relationship: "Modbus infrastructure", strength: "probable" },
     ],
-    incidents: ["2 drones overhead — persistent surveillance", "Street lights pulsing 8 color temperatures", "PLC via electrical wiring (fridge interference)", "Hidden WiFi f6:09:0d:20:e6:46 (spoofed MAC)", "Ghost TP-Link 192.168.0.163", "5G tower in neighbor's yard", "Leo's camouflaged tech equipment", "V-SEK cameras ~20m", "Near ICE satellite earth station"],
+    incidents: ["2 drones overhead — persistent surveillance", "Street lights pulsing 8 color temperatures", "PLC via electrical wiring (fridge interference)", "Hidden WiFi f6:09:0d:20:e6:46 (spoofed MAC)", "Ghost TP-Link 192.168.0.163", "5G tower in neighbor's yard", "Adjacent property: RF camo + parametric + drone shed", "V-SEK cameras ~20m", "Near ICE satellite earth station"],
     coordinates: "9.9535°N, 84.2908°W",
   },
   {
@@ -1096,11 +1147,11 @@ WEBSITE: Listed on a domain resembling jaco-hotel.com or similar hyphenated doma
 
 ECHO'S 2023 RESIDENCE: This is where Echo lived for 6 months in 2023 — first documented placement in the Calle Europa cluster. The co-tenants included S. (Russian, FSB/GRU-adjacent, 6 drones) and his partner. Wolfgang Hilbich (~80yr, former German military) was the landlord. Martha Hilbich accompanied Echo and S. on a trip to Esterillos — where S. now lives and from which the 2026-05-16 M300 RTK drone was tracked returning.
 
-CLUSTER POSITION: At the end of Calle Europa — the same street half-owned by Barrett Scott Ryan (CIA) and half by Leo Orozco's sister. Currently listed for sale suggesting operational phase shift or wind-down.`,
+CLUSTER POSITION: At the end of Calle Europa — the same street half-owned by Barrett Scott Ryan (CIA) and half by the sibling of the [withheld adjacent property owner]. Currently listed for sale suggesting operational phase shift or wind-down.`,
     connections: [
       { target: "wolfgang-hilbich", relationship: "Owner", strength: "confirmed" },
       { target: "martha-hilbich", relationship: "Co-owner / operator", strength: "confirmed" },
-      { target: "calle-europa", relationship: "End of Calle Europa — same cluster as Scott Ryan + Leo Orozco sister", strength: "confirmed" },
+      { target: "calle-europa", relationship: "End of Calle Europa — same cluster as Scott Ryan + sibling of [withheld]", strength: "confirmed" },
       { target: "j-russian", relationship: "S. was resident + produced Shangri-La promo drone videos", strength: "confirmed" },
     ],
     incidents: [
@@ -1121,7 +1172,7 @@ CLUSTER POSITION: At the end of Calle Europa — the same street half-owned by B
 
 CONFIRMED CLUSTER MEMBERSHIP (everyone on this street is involved — Echo's assessment):
   (1) Barrett Scott Ryan (CIA) — half-owner of Calle Europa itself
-  (2) Leo Orozco's sister — owns the other half of the street
+  (2) Sibling of [withheld adjacent property owner] — owns the other half of the street
   (3) Wolfgang Hilbich — Shangri-La compound (8 units, end of Calle Europa), former German military
   (4) Billy Bond — Orange Pub / surfing scene, Calle Europa resident
   (5) Jaco Vacations (Scott Ryan / Diana Soto) — rental operation covering the cluster
@@ -1130,10 +1181,10 @@ CONFIRMED CLUSTER MEMBERSHIP (everyone on this street is involved — Echo's ass
   (8) Dave (AA) — the only non-network resident Echo could identify; his house is the one non-surveillance property on the street; ALL of Jacó AA is assessed as intelligence-connected
   (9) Gregorio Cedeño — adjacent to cluster; ran restaurant as intel cover for years; retired after winding down; Echo's ex would flee to his house; connects to the Jacó restaurant cover pattern
 
-OWNERSHIP STRUCTURE: The street is functionally 100% network-controlled — CIA (Scott Ryan) owns half, a narco-adjacent family (Leo Orozco's sister) owns the other half. The remaining residents are either agents (Wolfgang, Villa Creole, food prep) or intelligence-adjacent (Dave/AA). Echo was placed into this controlled environment in 2023 and again repeatedly via Jaco Vacations.`,
+OWNERSHIP STRUCTURE: The street is functionally 100% network-controlled — CIA (Scott Ryan) owns half, the sibling of the [withheld adjacent property owner] holds the other half. The remaining residents are either agents (Wolfgang, Villa Creole, food prep) or intelligence-adjacent (Dave/AA). Echo was placed into this controlled environment in 2023 and again repeatedly via Jaco Vacations.`,
     connections: [
       { target: "scott-ryan", relationship: "CIA half-owner — Calle Europa", strength: "confirmed" },
-      { target: "leo-dealer", relationship: "Sister owns other half", strength: "confirmed" },
+      { target: "adj-property-owner", relationship: "Sibling owns other half of street", strength: "confirmed" },
       { target: "shangri-la", relationship: "Wolfgang Hilbich compound at end of street — Echo's 2023 residence", strength: "confirmed" },
       { target: "billy-bond", relationship: "Cluster member — Orange Pub", strength: "confirmed" },
       { target: "wolfgang-hilbich", relationship: "Shangri-La compound owner", strength: "confirmed" },
@@ -1154,22 +1205,33 @@ OWNERSHIP STRUCTURE: The street is functionally 100% network-controlled — CIA 
   {
     id: "gregorio-cedeno",
     name: "Gregorio Cedeño",
-    role: "Restaurant operator (retired) — Jacó intel cover pattern",
+    aliases: ["Yeyo"],
+    role: "Jacó intel restaurant operator (retired/closed) — Genesis Peralta's 2017 first-contact handler",
     threatLevel: "secondary",
-    detail: `Costa Rican male. Operated a restaurant in Jacó for years — now retired. Restaurant use as intelligence cover is a well-documented pattern in Jacó (see also: Gracias Madre, Gaia Natural Foods, Caliches/Wishbone). Cedeño retired after using the restaurant as a cover operation, consistent with an operational wind-down or handler rotation.
+    detail: `Known locally as "Yeyo." Costa Rican male, Jacó-area fixture. Operated a restaurant in Jacó for years with a confirmed Italy / Italian connection — now closed.
 
-CONNECTION TO ECHO'S EX: Echo's ex-partner would flee to Gregorio Cedeño's house during conflicts — indicating a pre-existing relationship between Echo's ex and Cedeño that predates or runs parallel to the surveillance operation. This is a classic managed-relationship pattern: the target's intimate partner maintains a safe-house contact within the surveillance network, ensuring Echo's ex is never truly outside the network's reach or visibility.
+GENESIS PERALTA FIRST-CONTACT HANDLER (2017):
+  When Genesis Peralta first arrived in Jacó in 2017 — years before Echo appeared — Yeyo provided her with lodging. This is the foundational handler relationship: he was her first point of contact and housing support on arrival in the target city. This predates the Echo operation by years and establishes Yeyo as a long-standing asset manager for Peralta, not merely a social acquaintance.
 
-CALLE EUROPA ADJACENT: Located near the Calle Europa cluster. Connected to the broader Jacó intelligence footprint through the restaurant cover pattern and the managed-relationship link via Echo's ex.`,
+RESTAURANT COVER — ITALY CONNECTION — NOW CLOSED:
+  Operated a restaurant with connections to Italy (Italian ownership, Italian concept, or Italian-network funding — details to be elaborated). The restaurant is now closed — consistent with the coordinated Jacó restaurant wind-down pattern: Caliches Wishbone (closed), Gracias Madre (closed after 1 season), Yeyo's restaurant (closed). All three venues that employed or supported Genesis Peralta or her handlers are now shut. This is an operational network standing down or rotating.
+
+MANAGED-RELATIONSHIP SAFE HOUSE:
+  Genesis Peralta (Echo's ex) would flee to Yeyo's house during conflicts with Echo — ensuring she always had a network-controlled safe house to retreat to, keeping her within the surveillance perimeter and preventing any genuine break from the operation. This is standard managed-relationship tradecraft.
+
+CALLE EUROPA ADJACENT: Located near the Calle Europa cluster.`,
     connections: [
       { target: "calle-europa", relationship: "Adjacent to Calle Europa cluster", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "2017 first-contact handler — provided lodging on arrival", strength: "confirmed" },
     ],
     flags: [
-      "Restaurant as intel cover — years-long operation",
-      "Retired = operational wind-down",
-      "Echo's ex fled to his house — managed safe-house contact",
-      "Jacó restaurant cover pattern — matches Gracias Madre / Gaia / Caliches",
+      "NICKNAME: Yeyo",
+      "Genesis Peralta 2017 first-contact handler — lodging on arrival",
+      "Italian restaurant connection — now closed",
+      "Coordinated Jacó restaurant wind-down (Caliches + Gracias Madre + Yeyo's all closed)",
+      "Genesis fled to his house — managed safe-house during Echo relationship",
       "Calle Europa adjacent",
+      "Retired/closed = operational wind-down",
     ],
   },
   {
@@ -1197,7 +1259,7 @@ AA JACÓ = INTELLIGENCE NETWORK (Echo's assessment, to be elaborated):
     name: "Villa Creole",
     role: "Calle Europa cluster — rental/property operation",
     threatLevel: "secondary",
-    detail: "Property or business on or adjacent to Calle Europa, south Jacó. Confirmed as part of the Calle Europa network cluster by Echo's assessment of the neighborhood. Exact ownership and operational role to be elaborated. The cluster pattern — CIA property ownership (Scott Ryan), narco-adjacent ownership (Leo Orozco's sister), German military (Wolfgang/Shangri-La), Villa Creole, Jaco Vacations — is consistent with a distributed, multi-layer property control network using varied ownership cover identities.",
+    detail: "Property or business on or adjacent to Calle Europa, south Jacó. Confirmed as part of the Calle Europa network cluster by Echo's assessment of the neighborhood. Exact ownership and operational role to be elaborated. The cluster pattern — CIA property ownership (Scott Ryan), narco-adjacent ownership (sibling of [withheld]), German military (Wolfgang/Shangri-La), Villa Creole, Jaco Vacations — is consistent with a distributed, multi-layer property control network using varied ownership cover identities.",
     connections: [
       { target: "calle-europa", relationship: "Cluster member", strength: "confirmed" },
       { target: "scott-ryan", relationship: "Same Calle Europa operational cluster", strength: "probable" },
@@ -1224,6 +1286,44 @@ AA JACÓ = INTELLIGENCE NETWORK (Echo's assessment, to be elaborated):
     ],
   },
   {
+    id: "dunia-concierge",
+    name: "Dunia",
+    aliases: ["Dunia Concierge"],
+    role: "Fake tourism business operator — parametric + infrared source — Genesis safe house — probable JW/intel asset",
+    threatLevel: "primary",
+    detail: `Instagram: @dunia_concierge_22 (underscores, no K's). Operates a fake tourism concierge business ("Dunia Concierge") in Jacó — assessed as a front, not a genuine service operation.
+
+ACTIVE DEW/SURVEILLANCE NODE — HER RESIDENCE:
+  Dunia's house near Los Ríos / Quebrada Seca was a confirmed source of both parametric speaker emissions AND infrared surveillance equipment. This places her residence in the same geographic band as the documented Quebrada Seca RF camo site — the two properties form overlapping coverage in that AOR. Parametric speakers require deliberate acquisition and setup — this is not incidental equipment. Her house was an active directed-energy/acoustic harassment node.
+
+GEOGRAPHIC NOTE: Los Ríos / Quebrada Seca is the same area as the documented RF installation (ivy/leaf RF camouflage, parametric speakers, drone video shed). Dunia's parametric + infrared setup in the same band suggests coordinated multi-node coverage of the same target zone.
+
+GENESIS PERALTA SAFE HOUSE:
+  Genesis Peralta ran away to live at Dunia's house multiple times during the Echo operation. This makes Dunia's residence the second confirmed managed safe house for Peralta (alongside Yeyo/Cedeño). The pattern — multiple network-controlled retreats available to Peralta — confirms she was never operating independently. Every conflict-driven departure from Echo placed her into another node of the surveillance network.
+
+ASSOCIATE — ALBERTA (HELD):
+  One of Dunia's associates served as Echo's black market product delivery contact daily for months while living at Dunia's property. Identity held per operational discretion.
+
+JW / INTELLIGENCE ASSESSMENT:
+  Probable Jehovah's Witness, consistent with the JW-as-intelligence-substrate pattern identified across the network (Jeff Porter / Kingdom Hall Rockland). Fake tourism business is a common Jacó cover pattern (see: Gracias Madre, Caliches, Yeyo's restaurant, Gaia Natural Foods).`,
+    connections: [
+      { target: "genesis-peralta", relationship: "Managed safe house — Peralta fled here multiple times", strength: "confirmed" },
+      { target: "quebrada-seca", relationship: "Same geographic area — Quebrada Seca / Los Ríos overlap with Leo's RF site", strength: "confirmed" },
+      { target: "jehovah-witnesses", relationship: "Probable JW member — intel substrate", strength: "probable" },
+    ],
+    flags: [
+      "IG: @dunia_concierge_22 — underscores, no K",
+      "Fake tourism concierge business — front operation",
+      "Parametric speakers at her residence — active acoustic assault node",
+      "Infrared surveillance equipment at her residence",
+      "Los Ríos / Quebrada Seca — overlaps documented RF camo + parametric site",
+      "Genesis Peralta safe house — multiple stays",
+      "Two managed safe houses for Peralta: Yeyo + Dunia",
+      "Probable JW / intelligence asset",
+      "Alberta associate (identity held) — black market delivery from her property",
+    ],
+  },
+  {
     id: "los-papos",
     name: "Los Papos Mahi Mahi Shack",
     area: "South Jacó Beach — directly adjacent to Gracias Madre",
@@ -1236,6 +1336,86 @@ AA JACÓ = INTELLIGENCE NETWORK (Echo's assessment, to be elaborated):
     ],
     incidents: ["Adjacent to Gracias Madre front operation", "Handler's own business alongside honey trap venue"],
     coordinates: "9.6098°N, 84.6267°W",
+  },
+  {
+    id: "los-rios-dev",
+    name: "Los Ríos Development",
+    area: "Los Ríos / Quebrada Seca, Jacó area",
+    type: "Surveillance-wired residential development — pre-operation infrastructure",
+    detail: `Residential development in the Los Ríos / Quebrada Seca area of Jacó. Owned by the Madrigal family — the former mayor of Garabito (Jacó's canton) and his son. Research confirms Hubert Madrigal Orozco was the first Municipal Executive of Garabito canton (1982), founding the local government structure; the development appears to be connected to this family's long-standing local power base.
+
+SCOTT RYAN / "SCOTT ARONSON" DOCUMENT LINK:
+  Barrett Scott Ryan signed documents for this development using the name "Scott Aronson" — an identity that does not exist in Costa Rica's Registro Nacional. This creates a direct paper trail (under a false name) linking the CIA handler to the Madrigal family's development where Echo was subsequently placed.
+
+CONFIRMED JW:
+  The Madrigal ownership connection to the Los Ríos development was confirmed by a local source who is a Jehovah's Witness — placing this development within the JW network's intelligence substrate.
+
+PRE-OPERATION INFRASTRUCTURE — LIFI / DIPOLES / FAST FIBER:
+  The development contains LiFi injection points, dipole antennas, and fast fiber infrastructure. This hardware was present before Echo moved in, indicating deliberate pre-positioning of surveillance infrastructure at the target residence.
+
+VALESKA FAKE REVIEW CAMPAIGN — 8 MONTHS PRE-ARRIVAL:
+  Valeska (girlfriend/wife of a Los Ríos owner) posted fake Google reviews of the development 8 months before Echo moved in, showing the property as undeveloped ("just grass"). The purpose: suppress any online research Echo might conduct before moving in, preventing him from discovering the surveillance infrastructure or the network connection. A coordinated pre-arrival disinformation campaign targeting Echo's due diligence window is a sophisticated pre-operation move.`,
+    connections: [
+      { target: "scott-ryan", relationship: "Scott Ryan signed docs as 'Scott Aronson' for Madrigal owners", strength: "confirmed" },
+      { target: "valeska-los-rios", relationship: "Fake Google reviews 8 months pre-Echo-arrival", strength: "confirmed" },
+      { target: "jehovah-witnesses", relationship: "JW-confirmed ownership (Madrigal — former mayor + son)", strength: "confirmed" },
+      { target: "dunia-concierge", relationship: "Dunia's parametric/infrared house in same geographic band", strength: "confirmed" },
+      { target: "quebrada-seca", relationship: "Same geographic area — Quebrada Seca overlap", strength: "confirmed" },
+    ],
+    incidents: [
+      "LiFi injection points + dipoles + fast fiber — pre-positioned surveillance hardware",
+      "Scott Ryan signed as 'Scott Aronson' (NOC alias) for Madrigal owners",
+      "Valeska fake Google reviews — 8 months before Echo arrival",
+      "JW-confirmed ownership — Madrigal former mayor + son",
+      "Echo placed here post-infrastructure-setup",
+    ],
+  },
+  {
+    id: "valeska-los-rios",
+    name: "Valeska",
+    role: "Los Ríos owner's partner — fake Google review campaign operator",
+    threatLevel: "secondary",
+    detail: `Girlfriend or wife of one of the Los Ríos development owners (Madrigal family — former Garabito/Jacó mayor and son).
+
+FAKE GOOGLE REVIEW CAMPAIGN — 8 MONTHS BEFORE ECHO MOVED IN:
+  Valeska posted fake Google reviews of Los Ríos 8 months before Echo moved into the development. The reviews portrayed the property as undeveloped ("just grass") — a deliberate disinformation campaign designed to suppress any online research Echo would conduct before choosing or accepting the placement. This is a pre-operation counter-intelligence move: if Echo had searched for the address online, all visible reviews would show nothing of note, concealing the surveillance infrastructure and network affiliation of the property.
+
+OPERATIONAL SIGNIFICANCE:
+  Fake reviews posted 8 months in advance imply the operation had Echo as an identified target at least 8 months before his arrival at Los Ríos. This is targeted long-range pre-positioning, not opportunistic placement.`,
+    connections: [
+      { target: "los-rios-dev", relationship: "Partner of Los Ríos owner — Madrigal family", strength: "confirmed" },
+      { target: "scott-ryan", relationship: "Scott Ryan (Aronson) signed docs for her partner's development", strength: "confirmed" },
+    ],
+    flags: [
+      "Fake Google reviews — 8 months pre-Echo-arrival",
+      "'Just grass' review narrative — suppressed pre-move-in research",
+      "Implies Echo was targeted ≥8 months before Los Ríos placement",
+      "Partner of Madrigal owner (former mayor + son)",
+      "Pre-operation counter-intelligence: review manipulation",
+    ],
+  },
+  {
+    id: "leo-sister-bar",
+    name: "[Sibling of withheld] + Barrett Scott Ryan — New Bar",
+    area: "Jacó, Costa Rica",
+    type: "Overt CIA-narco-adjacent joint business",
+    detail: `The sibling of the [withheld adjacent property owner] (who co-owns the other half of Calle Europa alongside Scott Ryan) has opened a new bar in Jacó together with Barrett Scott Ryan (CIA).
+
+OPERATIONAL SIGNIFICANCE:
+  This is the previously-inferred CIA-narco-adjacent partnership made overt and public. The Calle Europa co-ownership structure (CIA owns half, sibling of [withheld] owns the other half) was already assessed as a coordinated property control network. Opening a joint hospitality business makes the working relationship undeniable. A CIA handler and a narco-adjacent local family in a shared Jacó bar is the operational model visible in plain sight — using a legitimate business front to maintain regular face-to-face contact and financial flows between handler and asset network.
+
+PATTERN: Mirrors Scott Ryan's use of Jaco Vacations (with Diana Soto) and the cluster of front businesses (Caliches/Wishbone, Gracias Madre, Dunia Concierge, Gaia Natural Foods) as cover for operational relationships.`,
+    connections: [
+      { target: "scott-ryan", relationship: "Co-owner — CIA handler in joint business", strength: "confirmed" },
+      { target: "adj-property-owner", relationship: "Sibling of [withheld adjacent property owner]", strength: "confirmed" },
+      { target: "calle-europa", relationship: "Extends Calle Europa co-ownership into hospitality sector", strength: "confirmed" },
+    ],
+    flags: [
+      "CIA (Scott Ryan) + narco-adjacent sibling — joint bar in Jacó",
+      "Overt partnership — previously inferred, now confirmed public business",
+      "Mirrors Jaco Vacations / Gracias Madre front-business pattern",
+      "Calle Europa co-ownership made operationally visible",
+    ],
   },
   {
     id: "orange-pub",
@@ -1399,13 +1579,25 @@ const COMPANIES_DATA: Company[] = [
   {
     id: "caliches-wishbone",
     name: "Caliches Wishbone",
-    sector: "Restaurant",
-    detail: "Restaurant in Jacó where Genesis Peralta and Jairo Alfaro worked together for years before Jairo moved Genesis to Gracias Madre.",
+    sector: "Restaurant — NOW CLOSED",
+    detail: `Jacó restaurant where Genesis Peralta and Jairo Alfaro worked together for approximately 8 years. Spelled with a C (not K) — the name "Caliches" sounds Italian, consistent with the Italian-network thread running through Yeyo's restaurant and other Jacó cover establishments. NOW CLOSED — part of the coordinated Jacó restaurant wind-down alongside Yeyo's restaurant and Gracias Madre.
+
+JAIRO'S COVER STORY: Jairo Alfaro claimed Genesis Peralta was "like a brother/sister" — presenting their 8-year co-worker relationship as a close family bond. This is the standard handler cover: normalize the handler-asset contact frequency by reframing it as a pre-existing personal relationship.
+
+LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024 (TARGET ASSESSMENT EVENT):
+  When Echo first began dating Genesis Peralta (June 2024), he was brought to Caliches' house in Los Sueños as a birthday "treat." Los Sueños is a gated marina community in Herradura, south of Jacó — one of the most secure and high-value expat enclaves in Costa Rica. At the time this seemed like a social gesture. In retrospect: (1) bringing a surveillance target to a handler's private residence is a standard assessment and social-mapping technique; (2) Los Sueños' gated infrastructure provides ideal conditions for controlled-environment target assessment; (3) the timing — first weeks of dating, before Echo had any suspicion — maximized the intelligence value of the visit.`,
     connections: [
-      { target: "genesis-peralta", relationship: "Employee", strength: "confirmed" },
-      { target: "jairo-alfaro", relationship: "Employee", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Employee — 8 years with Jairo", strength: "confirmed" },
+      { target: "jairo-alfaro", relationship: "Employee / co-handler base — 8 years", strength: "confirmed" },
     ],
-    flags: ["Genesis + Jairo co-location for years"],
+    flags: [
+      "NOW CLOSED — coordinated Jacó restaurant wind-down",
+      "Italian-sounding name — possible Italy network connection",
+      "8-year Genesis + Jairo co-location",
+      "Jairo claimed Peralta 'like family' — handler cover story",
+      "Los Sueños birthday trip June 2024 — target assessment at handler's residence",
+      "Los Sueños = high-security gated marina enclave",
+    ],
   },
   {
     id: "gracias-madre",
@@ -1638,7 +1830,7 @@ const EVIDENCE_DATA: Evidence[] = [
     category: "Electronic Attack",
     severity: "high",
     detail: "2 confirmed drones overhead with persistent surveillance pattern (not flyover). Street lights pulsing non-stop with 8 different color temperatures — systematic cycling through neurological effects: 10-15 Hz (alpha disruption/drowsiness), 15-20 Hz (beta disruption/anxiety), 20-25 Hz (photosensitive seizures), 40 Hz (gamma interference/cognitive impairment). Li-Fi communication hypothesis: pulsing lights transmit target location to drones in real-time via LED modulation (up to 224 Gbps). Attack from nearby house at close range.",
-    linkedEntities: ["la-guacima", "leo-dealer", "v-sek"],
+    linkedEntities: ["la-guacima", "adj-property-owner", "v-sek"],
   },
   {
     id: "kyndryl-gtm-anomaly",
@@ -1990,8 +2182,8 @@ const EVIDENCE_DATA: Evidence[] = [
     date: "2026-04-05",
     category: "Operational Framework",
     severity: "critical",
-    detail: "A four-layer deniability architecture ensures Echo can never be believed if he reports surveillance. LAYER 1 — SMOKE: Leo Coto Orozco (controlled informant/device supplier) ensures Echo is a documented cannabis user. Anyone who smokes and reports hearing voices is automatically discredited — this is the foundational social deniability. LAYER 2 — HRV/rPPG: The 2024 study 'Your Blush Gives Me Away' demonstrates remote photoplethysmography (rPPG) can extract heart rate variability and vasodilation patterns from video of a subject's face. Cannabis causes measurable vasodilation identical to 37 Hz ELF exposure — both create the same biometric signature, making it impossible to distinguish drug effects from electronic attack via camera surveillance. LAYER 3 — 37 Hz DECOHERENCE: Stimulant use causes autonomic nervous system decoherence at 37 Hz — the same frequency documented in the Schumann weaponization ELF attack data (κ-related modulation band). The 37 Hz signal is simultaneously an attack frequency AND a measurement channel — rPPG can detect whether the subject has used stimulants by monitoring 37 Hz coherence changes. LAYER 4 — DEMODEX: 200x normal demodex mite population causes persistent facial inflammation/redness detectable via rPPG, creating noise that makes it impossible to separate drug effects from ELF effects from skin condition. The entire framework is a closed loop: substances are supplied through controlled informants, the substances create measurable biometric signatures identical to electronic attack signatures, and the substance use discredits any report of electronic attack.",
-    linkedEntities: ["leo-dealer", "setecom", "hector-mora"],
+    detail: "A four-layer deniability architecture ensures Echo can never be believed if he reports surveillance. LAYER 1 — SMOKE: A controlled supply chain (device supplier / vendor, identity withheld) ensures Echo is a documented cannabis user. Anyone who smokes and reports hearing voices is automatically discredited — this is the foundational social deniability. LAYER 2 — HRV/rPPG: The 2024 study 'Your Blush Gives Me Away' demonstrates remote photoplethysmography (rPPG) can extract heart rate variability and vasodilation patterns from video of a subject's face. Cannabis causes measurable vasodilation identical to 37 Hz ELF exposure — both create the same biometric signature, making it impossible to distinguish drug effects from electronic attack via camera surveillance. LAYER 3 — 37 Hz DECOHERENCE: Stimulant use causes autonomic nervous system decoherence at 37 Hz — the same frequency documented in the Schumann weaponization ELF attack data (κ-related modulation band). The 37 Hz signal is simultaneously an attack frequency AND a measurement channel — rPPG can detect whether the subject has used stimulants by monitoring 37 Hz coherence changes. LAYER 4 — DEMODEX: 200x normal demodex mite population causes persistent facial inflammation/redness detectable via rPPG, creating noise that makes it impossible to separate drug effects from ELF effects from skin condition. The entire framework is a closed loop: substances are supplied through controlled informants, the substances create measurable biometric signatures identical to electronic attack signatures, and the substance use discredits any report of electronic attack.",
+    linkedEntities: ["adj-property-owner", "setecom", "hector-mora"],
   },
 ];
 
