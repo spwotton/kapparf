@@ -5584,7 +5584,7 @@ export function registerCortexRoutes(app: express.Express) {
     try {
       const buffer = fs.readFileSync(found);
       const ext = nodePath.extname(filename).slice(1).toLowerCase() || "m4a";
-      const fileObj = await audioToFile(buffer, filename, ext === "m4a" ? "audio/mp4" : `audio/${ext}`);
+      const fileObj = await audioToFile(buffer, filename, { type: ext === "m4a" ? "audio/mp4" : `audio/${ext}` });
       const result = await audioOpenAI.audio.transcriptions.create({
         file: fileObj,
         model: "whisper-1",
@@ -5628,6 +5628,104 @@ export function registerCortexRoutes(app: express.Express) {
   app.post("/api/audio-forensics/upload", audioUpload.array("files", 100), (req, res) => {
     const files = (req.files as Express.Multer.File[]) || [];
     res.json({ uploaded: files.length, filenames: files.map(f => f.originalname) });
+  });
+
+  app.get("/api/audio-forensics/spectral", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/bwp_spectral_analysis.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "Spectral analysis not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  // ─── Video Forensics Vault ───────────────────────────────────────────────
+  app.get("/api/video-forensics/fft", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/fft_results.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "FFT analysis not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  app.get("/api/video-forensics/flash", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/flash_analysis.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "Flash analysis not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  app.get("/api/video-forensics/vision", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/vision_analysis.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "Vision analysis not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  app.get("/api/video-forensics/frames", (_req, res) => {
+    const dir = nodePath.join(process.cwd(), "client/public/video_forensics/frames");
+    if (!fs.existsSync(dir)) return res.json({ frames: [] });
+    const files = fs.readdirSync(dir).filter(f => f.endsWith(".jpg")).sort();
+    res.json({ frames: files.map(f => `/video_forensics/frames/${f}`), count: files.length });
+  });
+
+  app.post("/api/video-forensics/rerun-fft", async (_req, res) => {
+    const { execFile } = await import("child_process");
+    execFile("python3", ["server/scripts/video_fft_analysis.py"], { cwd: process.cwd() }, (err, stdout) => {
+      if (err) return res.status(500).json({ error: err.message });
+      try { res.json(JSON.parse(stdout)); } catch { res.json({ status: "ok" }); }
+    });
+  });
+
+  app.post("/api/video-forensics/rerun-vision", async (_req, res) => {
+    const { execFile } = await import("child_process");
+    execFile("python3", ["server/scripts/vision_analysis.py"], {
+      cwd: process.cwd(),
+      env: { ...process.env },
+      timeout: 120000,
+    }, (err, stdout) => {
+      if (err) return res.status(500).json({ error: err.message });
+      try { res.json(JSON.parse(stdout)); } catch { res.json({ status: "ok" }); }
+    });
+  });
+
+  // ─── Video 2 (4K 60fps) routes ────────────────────────────────────────────
+  app.get("/api/video-forensics/vid2-fft", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/vid2/fft_results.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "VID2 FFT not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  app.get("/api/video-forensics/vid2-flash", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/vid2/flash_analysis.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "VID2 flash not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  app.get("/api/video-forensics/vid2-vision", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/vid2/vision_analysis.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "VID2 vision not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
+  app.get("/api/video-forensics/frames2", (_req, res) => {
+    const dir = nodePath.join(process.cwd(), "client/public/video_forensics/frames2");
+    if (!fs.existsSync(dir)) return res.json({ frames: [], count: 0 });
+    const files = fs.readdirSync(dir).filter(f => f.endsWith(".jpg")).sort();
+    res.json({ frames: files.map(f => `/video_forensics/frames2/${f}`), count: files.length });
+  });
+
+  app.post("/api/video-forensics/rerun-fft2", async (_req, res) => {
+    const { execFile } = await import("child_process");
+    execFile("python3", ["server/scripts/video2_fft.py"], { cwd: process.cwd() }, (err, stdout) => {
+      if (err) return res.status(500).json({ error: err.message });
+      try { res.json(JSON.parse(stdout)); } catch { res.json({ status: "ok" }); }
+    });
+  });
+
+  app.post("/api/video-forensics/rerun-vision2", async (_req, res) => {
+    const { execFile } = await import("child_process");
+    execFile("python3", ["/tmp/vision2.py"], {
+      cwd: process.cwd(),
+      env: { ...process.env },
+      timeout: 120000,
+    }, (err, stdout) => {
+      if (err) return res.status(500).json({ error: err.message });
+      try { res.json(JSON.parse(stdout)); } catch { res.json({ status: "ok" }); }
+    });
   });
 
   app.post("/api/audio-forensics/analyze", async (_req, res) => {

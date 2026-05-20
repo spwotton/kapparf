@@ -1,0 +1,519 @@
+{
+  "file": "IMG_0085_1779253681665.mov",
+  "fps_analyzed": 4.0,
+  "frame_count": 66,
+  "duration_s": 16.5,
+  "luminance_stats": {
+    "mean": 48.34,
+    "std": 19.51,
+    "min": 19.02,
+    "max": 84.05,
+    "dynamic_range": 65.03
+  },
+  "flash_pulses": [
+    {
+      "t_start": 0.0,
+      "t_peak": 0.25,
+      "t_end": 1.75,
+      "duration_s": 1.75,
+      "peak_lum": 84.05,
+      "mean_excess": 35.71
+    },
+    {
+      "t_start": 5.75,
+      "t_peak": 6.0,
+      "t_end": 6.5,
+      "duration_s": 0.75,
+      "peak_lum": 80.76,
+      "mean_excess": 32.42
+    },
+    {
+      "t_start": 7.0,
+      "t_peak": 7.0,
+      "t_end": 7.0,
+      "duration_s": 0.0,
+      "peak_lum": 59.21,
+      "mean_excess": 10.87
+    },
+    {
+      "t_start": 7.5,
+      "t_peak": 7.5,
+      "t_end": 7.5,
+      "duration_s": 0.0,
+      "peak_lum": 59.72,
+      "mean_excess": 11.37
+    },
+    {
+      "t_start": 8.0,
+      "t_peak": 8.0,
+      "t_end": 8.25,
+      "duration_s": 0.25,
+      "peak_lum": 79.22,
+      "mean_excess": 30.88
+    },
+    {
+      "t_start": 8.75,
+      "t_peak": 8.75,
+      "t_end": 9.0,
+      "duration_s": 0.25,
+      "peak_lum": 62.93,
+      "mean_excess": 14.59
+    },
+    {
+      "t_start": 13.0,
+      "t_peak": 13.0,
+      "t_end": 13.25,
+      "duration_s": 0.25,
+      "peak_lum": 61.92,
+      "mean_excess": 13.58
+    },
+    {
+      "t_start": 14.0,
+      "t_peak": 14.25,
+      "t_end": 14.25,
+      "duration_s": 0.25,
+      "peak_lum": 60.99,
+      "mean_excess": 12.65
+    },
+    {
+      "t_start": 14.75,
+      "t_peak": 14.75,
+      "t_end": 15.0,
+      "duration_s": 0.25,
+      "peak_lum": 66.74,
+      "mean_excess": 18.39
+    },
+    {
+      "t_start": 16.0,
+      "t_peak": 16.0,
+      "t_end": 16.0,
+      "duration_s": 0.0,
+      "peak_lum": 66.23,
+      "mean_excess": 17.89
+    }
+  ],
+  "flash_frequency": {
+    "flash_count": 10,
+    "mean_interval_s": 1.75,
+    "estimated_freq_hz": 0.5714,
+    "interval_std": 1.7951,
+    "regularity_pct": -2.6
+  },
+  "strobe_signature_matches": [
+    {
+      "name": "FAA Part 107",
+      "freq_hz": 0.5,
+      "tol": 0.15,
+      "detected_hz": 0.5714,
+      "delta_hz": 0.0714
+    }
+  ],
+  "sharp_transitions": [
+    {
+      "t": 5.5,
+      "delta": 55.07
+    },
+    {
+      "t": 12.75,
+      "delta": 40.67
+    }
+  ],
+  "timeline": [
+    {
+      "frame": 1,
+      "t": 0.0,
+      "lum": 68.93,
+      "file": "frame_0001.jpg"
+    },
+    {
+      "frame": 2,
+      "t": 0.25,
+      "lum": 84.05,
+      "file": "frame_0002.jpg"
+    },
+    {
+      "frame": 3,
+      "t": 0.5,
+      "lum": 81.77,
+      "file": "frame_0003.jpg"
+    },
+    {
+      "frame": 4,
+      "t": 0.75,
+      "lum": 80.16,
+      "file": "frame_0004.jpg"
+    },
+    {
+      "frame": 5,
+      "t": 1.0,
+      "lum": 78.42,
+      "file": "frame_0005.jpg"
+    },
+    {
+      "frame": 6,
+      "t": 1.25,
+      "lum": 79.56,
+      "file": "frame_0006.jpg"
+    },
+    {
+      "frame": 7,
+      "t": 1.5,
+      "lum": 77.79,
+      "file": "frame_0007.jpg"
+    },
+    {
+      "frame": 8,
+      "t": 1.75,
+      "lum": 60.96,
+      "file": "frame_0008.jpg"
+    },
+    {
+      "frame": 9,
+      "t": 2.0,
+      "lum": 57.24,
+      "file": "frame_0009.jpg"
+    },
+    {
+      "frame": 10,
+      "t": 2.25,
+      "lum": 45.64,
+      "file": "frame_0010.jpg"
+    },
+    {
+      "frame": 11,
+      "t": 2.5,
+      "lum": 41.59,
+      "file": "frame_0011.jpg"
+    },
+    {
+      "frame": 12,
+      "t": 2.75,
+      "lum": 40.8,
+      "file": "frame_0012.jpg"
+    },
+    {
+      "frame": 13,
+      "t": 3.0,
+      "lum": 40.61,
+      "file": "frame_0013.jpg"
+    },
+    {
+      "frame": 14,
+      "t": 3.25,
+      "lum": 33.81,
+      "file": "frame_0014.jpg"
+    },
+    {
+      "frame": 15,
+      "t": 3.5,
+      "lum": 35.36,
+      "file": "frame_0015.jpg"
+    },
+    {
+      "frame": 16,
+      "t": 3.75,
+      "lum": 35.26,
+      "file": "frame_0016.jpg"
+    },
+    {
+      "frame": 17,
+      "t": 4.0,
+      "lum": 33.41,
+      "file": "frame_0017.jpg"
+    },
+    {
+      "frame": 18,
+      "t": 4.25,
+      "lum": 29.61,
+      "file": "frame_0018.jpg"
+    },
+    {
+      "frame": 19,
+      "t": 4.5,
+      "lum": 24.49,
+      "file": "frame_0019.jpg"
+    },
+    {
+      "frame": 20,
+      "t": 4.75,
+      "lum": 23.25,
+      "file": "frame_0020.jpg"
+    },
+    {
+      "frame": 21,
+      "t": 5.0,
+      "lum": 50.39,
+      "file": "frame_0021.jpg"
+    },
+    {
+      "frame": 22,
+      "t": 5.25,
+      "lum": 27.37,
+      "file": "frame_0022.jpg"
+    },
+    {
+      "frame": 23,
+      "t": 5.5,
+      "lum": 23.43,
+      "file": "frame_0023.jpg"
+    },
+    {
+      "frame": 24,
+      "t": 5.75,
+      "lum": 78.5,
+      "file": "frame_0024.jpg"
+    },
+    {
+      "frame": 25,
+      "t": 6.0,
+      "lum": 80.76,
+      "file": "frame_0025.jpg"
+    },
+    {
+      "frame": 26,
+      "t": 6.25,
+      "lum": 60.21,
+      "file": "frame_0026.jpg"
+    },
+    {
+      "frame": 27,
+      "t": 6.5,
+      "lum": 60.3,
+      "file": "frame_0027.jpg"
+    },
+    {
+      "frame": 28,
+      "t": 6.75,
+      "lum": 45.9,
+      "file": "frame_0028.jpg"
+    },
+    {
+      "frame": 29,
+      "t": 7.0,
+      "lum": 59.21,
+      "file": "frame_0029.jpg"
+    },
+    {
+      "frame": 30,
+      "t": 7.25,
+      "lum": 44.57,
+      "file": "frame_0030.jpg"
+    },
+    {
+      "frame": 31,
+      "t": 7.5,
+      "lum": 59.72,
+      "file": "frame_0031.jpg"
+    },
+    {
+      "frame": 32,
+      "t": 7.75,
+      "lum": 50.83,
+      "file": "frame_0032.jpg"
+    },
+    {
+      "frame": 33,
+      "t": 8.0,
+      "lum": 79.22,
+      "file": "frame_0033.jpg"
+    },
+    {
+      "frame": 34,
+      "t": 8.25,
+      "lum": 76.88,
+      "file": "frame_0034.jpg"
+    },
+    {
+      "frame": 35,
+      "t": 8.5,
+      "lum": 48.82,
+      "file": "frame_0035.jpg"
+    },
+    {
+      "frame": 36,
+      "t": 8.75,
+      "lum": 62.93,
+      "file": "frame_0036.jpg"
+    },
+    {
+      "frame": 37,
+      "t": 9.0,
+      "lum": 61.55,
+      "file": "frame_0037.jpg"
+    },
+    {
+      "frame": 38,
+      "t": 9.25,
+      "lum": 40.7,
+      "file": "frame_0038.jpg"
+    },
+    {
+      "frame": 39,
+      "t": 9.5,
+      "lum": 22.45,
+      "file": "frame_0039.jpg"
+    },
+    {
+      "frame": 40,
+      "t": 9.75,
+      "lum": 19.02,
+      "file": "frame_0040.jpg"
+    },
+    {
+      "frame": 41,
+      "t": 10.0,
+      "lum": 25.81,
+      "file": "frame_0041.jpg"
+    },
+    {
+      "frame": 42,
+      "t": 10.25,
+      "lum": 31.98,
+      "file": "frame_0042.jpg"
+    },
+    {
+      "frame": 43,
+      "t": 10.5,
+      "lum": 25.03,
+      "file": "frame_0043.jpg"
+    },
+    {
+      "frame": 44,
+      "t": 10.75,
+      "lum": 24.29,
+      "file": "frame_0044.jpg"
+    },
+    {
+      "frame": 45,
+      "t": 11.0,
+      "lum": 19.13,
+      "file": "frame_0045.jpg"
+    },
+    {
+      "frame": 46,
+      "t": 11.25,
+      "lum": 23.79,
+      "file": "frame_0046.jpg"
+    },
+    {
+      "frame": 47,
+      "t": 11.5,
+      "lum": 21.6,
+      "file": "frame_0047.jpg"
+    },
+    {
+      "frame": 48,
+      "t": 11.75,
+      "lum": 30.63,
+      "file": "frame_0048.jpg"
+    },
+    {
+      "frame": 49,
+      "t": 12.0,
+      "lum": 21.94,
+      "file": "frame_0049.jpg"
+    },
+    {
+      "frame": 50,
+      "t": 12.25,
+      "lum": 24.88,
+      "file": "frame_0050.jpg"
+    },
+    {
+      "frame": 51,
+      "t": 12.5,
+      "lum": 30.36,
+      "file": "frame_0051.jpg"
+    },
+    {
+      "frame": 52,
+      "t": 12.75,
+      "lum": 21.25,
+      "file": "frame_0052.jpg"
+    },
+    {
+      "frame": 53,
+      "t": 13.0,
+      "lum": 61.92,
+      "file": "frame_0053.jpg"
+    },
+    {
+      "frame": 54,
+      "t": 13.25,
+      "lum": 61.54,
+      "file": "frame_0054.jpg"
+    },
+    {
+      "frame": 55,
+      "t": 13.5,
+      "lum": 45.09,
+      "file": "frame_0055.jpg"
+    },
+    {
+      "frame": 56,
+      "t": 13.75,
+      "lum": 55.31,
+      "file": "frame_0056.jpg"
+    },
+    {
+      "frame": 57,
+      "t": 14.0,
+      "lum": 60.27,
+      "file": "frame_0057.jpg"
+    },
+    {
+      "frame": 58,
+      "t": 14.25,
+      "lum": 60.99,
+      "file": "frame_0058.jpg"
+    },
+    {
+      "frame": 59,
+      "t": 14.5,
+      "lum": 52.23,
+      "file": "frame_0059.jpg"
+    },
+    {
+      "frame": 60,
+      "t": 14.75,
+      "lum": 66.74,
+      "file": "frame_0060.jpg"
+    },
+    {
+      "frame": 61,
+      "t": 15.0,
+      "lum": 61.29,
+      "file": "frame_0061.jpg"
+    },
+    {
+      "frame": 62,
+      "t": 15.25,
+      "lum": 54.64,
+      "file": "frame_0062.jpg"
+    },
+    {
+      "frame": 63,
+      "t": 15.5,
+      "lum": 36.18,
+      "file": "frame_0063.jpg"
+    },
+    {
+      "frame": 64,
+      "t": 15.75,
+      "lum": 47.42,
+      "file": "frame_0064.jpg"
+    },
+    {
+      "frame": 65,
+      "t": 16.0,
+      "lum": 66.23,
+      "file": "frame_0065.jpg"
+    },
+    {
+      "frame": 66,
+      "t": 16.25,
+      "lum": 54.62,
+      "file": "frame_0066.jpg"
+    }
+  ]
+}

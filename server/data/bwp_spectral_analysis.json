@@ -1,0 +1,1682 @@
+{
+  "files": {
+    "BWP-1": {
+      "dur": 91.9,
+      "rms_db": -41.8,
+      "silence_pct": 30.0,
+      "hits": [
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 84.2,
+          "peak_db": -68.0
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 83.7,
+          "peak_db": -68.5
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 83.4,
+          "peak_db": -68.8
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 82.1,
+          "peak_db": -70.1
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 81.9,
+          "peak_db": -70.3
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 81.8,
+          "peak_db": -70.3
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 80.9,
+          "peak_db": -71.3
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 80.0,
+          "peak_db": -72.2
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 79.5,
+          "peak_db": -72.6
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 79.5,
+          "peak_db": -72.7
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 79.3,
+          "peak_db": -72.8
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 79.3,
+          "peak_db": -72.8
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 72.2,
+          "peak_db": -80.0
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 70.0,
+          "peak_db": -82.1
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 68.2,
+          "peak_db": -84.0
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 60.7,
+          "peak_db": -91.5
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 57.9,
+          "peak_db": -94.3
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 52.4,
+          "peak_db": -99.8
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 52.2,
+          "peak_db": -99.9
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 51.1,
+          "peak_db": -101.0
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 50.7,
+          "peak_db": -101.5
+        }
+      ]
+    },
+    "BWP-3": {
+      "dur": 196.6,
+      "rms_db": -29.9,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 96.0,
+          "peak_db": -52.7
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 95.4,
+          "peak_db": -53.3
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 95.2,
+          "peak_db": -53.5
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 91.9,
+          "peak_db": -56.8
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 90.2,
+          "peak_db": -58.5
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 89.7,
+          "peak_db": -59.0
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 89.0,
+          "peak_db": -59.7
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 88.6,
+          "peak_db": -60.1
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 88.6,
+          "peak_db": -60.1
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 87.3,
+          "peak_db": -61.4
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 86.9,
+          "peak_db": -61.8
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 85.8,
+          "peak_db": -62.9
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 84.4,
+          "peak_db": -64.3
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 81.5,
+          "peak_db": -67.2
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 81.5,
+          "peak_db": -67.2
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 64.9,
+          "peak_db": -83.8
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 61.8,
+          "peak_db": -86.9
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 60.3,
+          "peak_db": -88.4
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 59.6,
+          "peak_db": -89.1
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 54.6,
+          "peak_db": -94.1
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 54.2,
+          "peak_db": -94.5
+        }
+      ]
+    },
+    "BWP-4": {
+      "dur": 254.8,
+      "rms_db": -35.9,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 85.5,
+          "peak_db": -61.6
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 83.4,
+          "peak_db": -63.6
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 83.3,
+          "peak_db": -63.7
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 82.9,
+          "peak_db": -64.2
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 82.8,
+          "peak_db": -64.2
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 82.4,
+          "peak_db": -64.7
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 82.4,
+          "peak_db": -64.7
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 81.4,
+          "peak_db": -65.6
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 80.5,
+          "peak_db": -66.5
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 79.6,
+          "peak_db": -67.5
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 79.4,
+          "peak_db": -67.7
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 79.3,
+          "peak_db": -67.8
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 73.2,
+          "peak_db": -73.9
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 72.4,
+          "peak_db": -74.7
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 69.5,
+          "peak_db": -77.5
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 57.3,
+          "peak_db": -89.8
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 55.8,
+          "peak_db": -91.2
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 53.9,
+          "peak_db": -93.1
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 52.3,
+          "peak_db": -94.7
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 50.7,
+          "peak_db": -96.4
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 50.6,
+          "peak_db": -96.4
+        }
+      ]
+    },
+    "BWP-6": {
+      "dur": 1.6,
+      "rms_db": -38.6,
+      "silence_pct": 50.0,
+      "hits": [
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 92.9,
+          "peak_db": -50.4
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 84.4,
+          "peak_db": -59.0
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 81.9,
+          "peak_db": -61.4
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 78.0,
+          "peak_db": -65.3
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 72.2,
+          "peak_db": -71.1
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 71.7,
+          "peak_db": -71.6
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 71.7,
+          "peak_db": -71.6
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 71.1,
+          "peak_db": -72.2
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 71.1,
+          "peak_db": -72.2
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 70.1,
+          "peak_db": -73.2
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 69.5,
+          "peak_db": -73.8
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 68.5,
+          "peak_db": -74.8
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 67.7,
+          "peak_db": -75.7
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 67.2,
+          "peak_db": -76.1
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 60.9,
+          "peak_db": -82.4
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 57.6,
+          "peak_db": -85.7
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 53.9,
+          "peak_db": -89.4
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 52.8,
+          "peak_db": -90.5
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 52.2,
+          "peak_db": -91.1
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 44.2,
+          "peak_db": -99.1
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 41.0,
+          "peak_db": -102.3
+        }
+      ]
+    },
+    "BWP-7": {
+      "dur": 69.7,
+      "rms_db": -31.5,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 104.7,
+          "peak_db": -48.5
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 94.8,
+          "peak_db": -58.3
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 92.4,
+          "peak_db": -60.7
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 90.7,
+          "peak_db": -62.4
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 88.4,
+          "peak_db": -64.7
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 88.2,
+          "peak_db": -64.9
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 86.3,
+          "peak_db": -66.8
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 85.1,
+          "peak_db": -68.0
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 81.4,
+          "peak_db": -71.8
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 80.4,
+          "peak_db": -72.8
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 78.2,
+          "peak_db": -75.0
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 76.3,
+          "peak_db": -76.8
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 75.7,
+          "peak_db": -77.5
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 71.8,
+          "peak_db": -81.3
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 71.6,
+          "peak_db": -81.5
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 69.8,
+          "peak_db": -83.4
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 69.3,
+          "peak_db": -83.8
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 63.0,
+          "peak_db": -90.1
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 61.9,
+          "peak_db": -91.2
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 59.7,
+          "peak_db": -93.4
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 58.8,
+          "peak_db": -94.3
+        }
+      ]
+    },
+    "BWP-9": {
+      "dur": 92.8,
+      "rms_db": -34.5,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 85.0,
+          "peak_db": -56.8
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 84.7,
+          "peak_db": -57.1
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 82.8,
+          "peak_db": -59.0
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 82.3,
+          "peak_db": -59.5
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 82.3,
+          "peak_db": -59.5
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 81.9,
+          "peak_db": -59.9
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 79.4,
+          "peak_db": -62.4
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 78.7,
+          "peak_db": -63.1
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 77.8,
+          "peak_db": -64.0
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 77.7,
+          "peak_db": -64.1
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 76.5,
+          "peak_db": -65.3
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 75.0,
+          "peak_db": -66.8
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 74.0,
+          "peak_db": -67.8
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 74.0,
+          "peak_db": -67.8
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 71.7,
+          "peak_db": -70.1
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 54.1,
+          "peak_db": -87.8
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 52.6,
+          "peak_db": -89.3
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 51.5,
+          "peak_db": -90.3
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 51.5,
+          "peak_db": -90.3
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 49.9,
+          "peak_db": -91.9
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 47.0,
+          "peak_db": -94.9
+        }
+      ]
+    },
+    "CNU-1": {
+      "label": "CNU-1",
+      "dur": 7.7,
+      "rms_db": -17.4,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 86.4,
+          "peak_db": -50.4
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 86.4,
+          "peak_db": -50.4
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 86.4,
+          "peak_db": -50.4
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 75.6,
+          "peak_db": -61.2
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 73.2,
+          "peak_db": -63.6
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 71.5,
+          "peak_db": -65.3
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 70.6,
+          "peak_db": -66.2
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 70.5,
+          "peak_db": -66.3
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 68.4,
+          "peak_db": -68.4
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 67.8,
+          "peak_db": -69.0
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 66.1,
+          "peak_db": -70.7
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 65.9,
+          "peak_db": -70.9
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 65.4,
+          "peak_db": -71.4
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 64.7,
+          "peak_db": -72.1
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 62.9,
+          "peak_db": -73.9
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 62.1,
+          "peak_db": -74.7
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 62.1,
+          "peak_db": -74.7
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 55.1,
+          "peak_db": -81.7
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 53.9,
+          "peak_db": -82.9
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 52.8,
+          "peak_db": -84.0
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 49.5,
+          "peak_db": -87.3
+        }
+      ]
+    },
+    "CNU-5": {
+      "label": "CNU-5",
+      "dur": 2310.1,
+      "rms_db": -48.0,
+      "silence_pct": 100.0,
+      "hits": [
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 75.0,
+          "peak_db": -79.2
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 73.9,
+          "peak_db": -80.4
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 70.1,
+          "peak_db": -84.2
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 67.2,
+          "peak_db": -87.1
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 66.3,
+          "peak_db": -88.0
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 65.1,
+          "peak_db": -89.2
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 64.0,
+          "peak_db": -90.3
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 62.6,
+          "peak_db": -91.7
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 62.6,
+          "peak_db": -91.7
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 62.1,
+          "peak_db": -92.2
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 61.2,
+          "peak_db": -93.1
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 60.7,
+          "peak_db": -93.6
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 58.2,
+          "peak_db": -96.1
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 57.1,
+          "peak_db": -97.2
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 55.8,
+          "peak_db": -98.5
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 51.2,
+          "peak_db": -103.1
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 50.9,
+          "peak_db": -103.4
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 50.8,
+          "peak_db": -103.5
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 49.2,
+          "peak_db": -105.1
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 45.4,
+          "peak_db": -108.9
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 43.5,
+          "peak_db": -110.7
+        }
+      ]
+    },
+    "CNU-7": {
+      "label": "CNU-7",
+      "dur": 113.6,
+      "rms_db": -32.9,
+      "silence_pct": 50.0,
+      "hits": [
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 93.4,
+          "peak_db": -59.5
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 87.1,
+          "peak_db": -65.8
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 86.0,
+          "peak_db": -66.9
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 84.8,
+          "peak_db": -68.1
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 82.1,
+          "peak_db": -70.9
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 81.8,
+          "peak_db": -71.1
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 80.0,
+          "peak_db": -73.0
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 80.0,
+          "peak_db": -73.0
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 80.0,
+          "peak_db": -72.9
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 79.9,
+          "peak_db": -73.1
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 79.9,
+          "peak_db": -73.1
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 79.0,
+          "peak_db": -73.9
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 77.1,
+          "peak_db": -75.8
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 76.6,
+          "peak_db": -76.4
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 74.4,
+          "peak_db": -78.6
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 73.4,
+          "peak_db": -79.5
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 70.9,
+          "peak_db": -82.0
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 58.7,
+          "peak_db": -94.3
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 57.7,
+          "peak_db": -95.3
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 55.0,
+          "peak_db": -98.0
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 54.7,
+          "peak_db": -98.2
+        }
+      ]
+    },
+    "CNU-18": {
+      "label": "CNU-18",
+      "dur": 682.9,
+      "rms_db": -36.7,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 83.1,
+          "peak_db": -63.0
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 82.8,
+          "peak_db": -63.2
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 80.1,
+          "peak_db": -66.0
+        },
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 78.7,
+          "peak_db": -67.3
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 77.6,
+          "peak_db": -68.5
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 73.7,
+          "peak_db": -72.4
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 72.5,
+          "peak_db": -73.6
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 71.4,
+          "peak_db": -74.7
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 68.7,
+          "peak_db": -77.4
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 67.8,
+          "peak_db": -78.3
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 64.6,
+          "peak_db": -81.5
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 64.6,
+          "peak_db": -81.5
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 64.3,
+          "peak_db": -81.8
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 60.9,
+          "peak_db": -85.2
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 59.6,
+          "peak_db": -86.5
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 57.0,
+          "peak_db": -89.1
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 50.9,
+          "peak_db": -95.2
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 49.9,
+          "peak_db": -96.2
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 49.3,
+          "peak_db": -96.8
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 48.4,
+          "peak_db": -97.7
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 46.6,
+          "peak_db": -99.5
+        }
+      ]
+    },
+    "CLM-4": {
+      "label": "CLM-4",
+      "dur": 0.0,
+      "rms_db": 0,
+      "silence_pct": 0,
+      "hits": [],
+      "error": "decode failed"
+    },
+    "CPH-1": {
+      "label": "CPH-1",
+      "dur": 22.2,
+      "rms_db": -23.8,
+      "silence_pct": 0.0,
+      "hits": [
+        {
+          "id": "HTR2A_gene",
+          "hz": 176.591,
+          "snr_db": 83.2,
+          "peak_db": -58.4
+        },
+        {
+          "id": "FOXP2_gene",
+          "hz": 139.978,
+          "snr_db": 74.1,
+          "peak_db": -67.6
+        },
+        {
+          "id": "gamma_hi",
+          "hz": 150.0,
+          "snr_db": 72.0,
+          "peak_db": -69.6
+        },
+        {
+          "id": "CLOCK_gene",
+          "hz": 119.73,
+          "snr_db": 70.4,
+          "peak_db": -71.2
+        },
+        {
+          "id": "twist_128Hz",
+          "hz": 128.23,
+          "snr_db": 70.2,
+          "peak_db": -71.4
+        },
+        {
+          "id": "APOE_gene",
+          "hz": 111.57,
+          "snr_db": 66.6,
+          "peak_db": -75.0
+        },
+        {
+          "id": "F2_subliminal",
+          "hz": 2004.0,
+          "snr_db": 63.5,
+          "peak_db": -78.1
+        },
+        {
+          "id": "F3_formant",
+          "hz": 2511.0,
+          "snr_db": 51.8,
+          "peak_db": -89.8
+        },
+        {
+          "id": "gamma_lo",
+          "hz": 70.0,
+          "snr_db": 48.9,
+          "peak_db": -92.7
+        },
+        {
+          "id": "delta_2Hz",
+          "hz": 2.0,
+          "snr_db": 41.3,
+          "peak_db": -100.3
+        },
+        {
+          "id": "PIEZO1_gene",
+          "hz": 55.44,
+          "snr_db": 40.3,
+          "peak_db": -101.3
+        },
+        {
+          "id": "beat_theta",
+          "hz": 7.0,
+          "snr_db": 39.4,
+          "peak_db": -102.2
+        },
+        {
+          "id": "beta_14Hz",
+          "hz": 14.0,
+          "snr_db": 39.4,
+          "peak_db": -102.2
+        },
+        {
+          "id": "AC_grid_CR",
+          "hz": 60.0,
+          "snr_db": 39.3,
+          "peak_db": -102.3
+        },
+        {
+          "id": "theta_carrier",
+          "hz": 53.0,
+          "snr_db": 39.1,
+          "peak_db": -102.6
+        },
+        {
+          "id": "MSTN_gene",
+          "hz": 40.364,
+          "snr_db": 37.9,
+          "peak_db": -103.7
+        },
+        {
+          "id": "3i_ATLAS_clock",
+          "hz": 46.875,
+          "snr_db": 37.8,
+          "peak_db": -103.8
+        },
+        {
+          "id": "BVTSONAR_PRF",
+          "hz": 47.0,
+          "snr_db": 37.8,
+          "peak_db": -103.8
+        },
+        {
+          "id": "infrasonic_38",
+          "hz": 38.0,
+          "snr_db": 37.3,
+          "peak_db": -104.3
+        },
+        {
+          "id": "infrasonic_37",
+          "hz": 37.0,
+          "snr_db": 35.5,
+          "peak_db": -106.1
+        },
+        {
+          "id": "KYMA_clock",
+          "hz": 8.392,
+          "snr_db": 34.4,
+          "peak_db": -107.2
+        }
+      ]
+    }
+  },
+  "signatures": [
+    {
+      "id": "3i_ATLAS_clock",
+      "hz": 46.875,
+      "bw": 1.5,
+      "cat": "DSP",
+      "desc": "3i ATLAS System Clock \u2014 48000\u00f71024 FFT bin resolution"
+    },
+    {
+      "id": "BVTSONAR_PRF",
+      "hz": 47.0,
+      "bw": 1.5,
+      "cat": "DSP",
+      "desc": "BVTSONAR Pulse Repetition Frequency"
+    },
+    {
+      "id": "AC_grid_CR",
+      "hz": 60.0,
+      "bw": 1.0,
+      "cat": "ENV",
+      "desc": "Costa Rica AC mains 60 Hz"
+    },
+    {
+      "id": "theta_carrier",
+      "hz": 53.0,
+      "bw": 1.0,
+      "cat": "PSY",
+      "desc": "Theta carrier injected into AC wiring (60\u22127=53)"
+    },
+    {
+      "id": "beat_theta",
+      "hz": 7.0,
+      "bw": 0.8,
+      "cat": "PSY",
+      "desc": "60\u221253 Hz beat \u2192 theta brainwave entrainment"
+    },
+    {
+      "id": "infrasonic_37",
+      "hz": 37.0,
+      "bw": 1.0,
+      "cat": "PSY",
+      "desc": "Infrasonic assault \u2014 vestibular disruption / nausea"
+    },
+    {
+      "id": "infrasonic_38",
+      "hz": 38.0,
+      "bw": 1.0,
+      "cat": "PSY",
+      "desc": "Infrasonic assault \u2014 vestibular disruption"
+    },
+    {
+      "id": "delta_2Hz",
+      "hz": 2.0,
+      "bw": 0.5,
+      "cat": "PSY",
+      "desc": "Delta psychological trigger"
+    },
+    {
+      "id": "beta_14Hz",
+      "hz": 14.0,
+      "bw": 0.8,
+      "cat": "PSY",
+      "desc": "Beta psychological trigger"
+    },
+    {
+      "id": "KYMA_clock",
+      "hz": 8.392,
+      "bw": 0.3,
+      "cat": "RF",
+      "desc": "KYMA global clock \u2014 GPS L5 sub-harmonic"
+    },
+    {
+      "id": "F2_subliminal",
+      "hz": 2004.0,
+      "bw": 20.0,
+      "cat": "V2K",
+      "desc": "F2 formant / subliminal burst rate \u2014 601 pulses pre-conscious"
+    },
+    {
+      "id": "F3_formant",
+      "hz": 2511.0,
+      "bw": 20.0,
+      "cat": "V2K",
+      "desc": "F3 formant \u2014 consonant transition encoding"
+    },
+    {
+      "id": "FOXP2_gene",
+      "hz": 139.978,
+      "bw": 2.0,
+      "cat": "GEN",
+      "desc": "FOXP2 language/speech intent gene resonance"
+    },
+    {
+      "id": "CLOCK_gene",
+      "hz": 119.73,
+      "bw": 2.0,
+      "cat": "GEN",
+      "desc": "CLOCK circadian timing gene resonance"
+    },
+    {
+      "id": "HTR2A_gene",
+      "hz": 176.591,
+      "bw": 2.0,
+      "cat": "GEN",
+      "desc": "HTR2A consciousness/serotonin receptor resonance"
+    },
+    {
+      "id": "MSTN_gene",
+      "hz": 40.364,
+      "bw": 1.0,
+      "cat": "GEN",
+      "desc": "MSTN structural density gene resonance"
+    },
+    {
+      "id": "PIEZO1_gene",
+      "hz": 55.44,
+      "bw": 1.0,
+      "cat": "GEN",
+      "desc": "PIEZO1 mechanosensitive ion channel resonance"
+    },
+    {
+      "id": "APOE_gene",
+      "hz": 111.57,
+      "bw": 2.0,
+      "cat": "GEN",
+      "desc": "APOE memory/information gene resonance"
+    },
+    {
+      "id": "twist_128Hz",
+      "hz": 128.23,
+      "bw": 1.5,
+      "cat": "GEN",
+      "desc": "Klein twist base frequency"
+    },
+    {
+      "id": "gamma_lo",
+      "hz": 70.0,
+      "bw": 2.0,
+      "cat": "NEU",
+      "desc": "High-gamma neural lo \u2014 memory matching"
+    },
+    {
+      "id": "gamma_hi",
+      "hz": 150.0,
+      "bw": 3.0,
+      "cat": "NEU",
+      "desc": "High-gamma neural hi \u2014 stimulus utilization"
+    }
+  ],
+  "locations": {
+    "BWP": {
+      "name": "Breakwater Point Hermosa",
+      "address": "Playa Hermosa, Jac\u00f3, Costa Rica",
+      "intel": "Primary observation zone. Original surveillance-initiated field recordings.",
+      "files": [
+        "BWP-1",
+        "BWP-3",
+        "BWP-4",
+        "BWP-6",
+        "BWP-7",
+        "BWP-9"
+      ],
+      "actors": []
+    },
+    "CNU": {
+      "name": "Calle Naciones Unidas",
+      "address": "La Gu\u00e1cima / Jac\u00f3 area, Costa Rica",
+      "intel": "Jaco Vacations S.A. property. Diana Soto & Scott Ryan (Barrett Scott Ryan \u2014 FL registered sex offender). Recorded ~July 6 2025 when Genesis Peralta vacated. Primary adversarial node.",
+      "files": [
+        "CNU-1",
+        "CNU-5",
+        "CNU-7",
+        "CNU-18"
+      ],
+      "actors": [
+        "Diana Soto",
+        "Scott Ryan (Barrett Scott Ryan)",
+        "Genesis Peralta (departed Jul 6 2025)",
+        "Jaco Vacations S.A."
+      ]
+    },
+    "CLM": {
+      "name": "Calle La Monta\u00f1a",
+      "address": "La Gu\u00e1cima / Jac\u00f3 area, Costa Rica",
+      "intel": "Leo's residence. Adjacent to JW outpost. Rented concurrently by Echo to escape Peralta violence.",
+      "files": [
+        "CLM-4"
+      ],
+      "actors": [
+        "Leo (resident)"
+      ]
+    },
+    "CPH": {
+      "name": "Calle Playa Hermosa",
+      "address": "Playa Hermosa, Jac\u00f3, Costa Rica",
+      "intel": "Additional field recording location near Hermosa beach.",
+      "files": [
+        "CPH-1"
+      ],
+      "actors": []
+    }
+  }
+}

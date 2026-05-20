@@ -1,0 +1,38 @@
+{
+  "frames_analyzed": [
+    "frame_0001.jpg",
+    "frame_0006.jpg",
+    "frame_0012.jpg",
+    "frame_0015.jpg",
+    "frame_0031.jpg",
+    "frame_0047.jpg",
+    "frame_0048.jpg",
+    "frame_0061.jpg"
+  ],
+  "model_used": "google/gemini-2.0-flash-001",
+  "analysis": "## KAPPA Intelligence Assessment - Jac\u00f3, Costa Rica - Aerial Platform Observation\n\n**Date/Time:** 2024-01-26 09:53:00 UTC (Analysis Time)\n**Location:** Jac\u00f3, Costa Rica (Residential Balcony)\n**Subject:** Suspected Aerial Surveillance Platform\n\n**1. Aerial Object Identification:**\n\n*   A point light source is visible in the majority of frames, consistent with an aerial platform. The light source appears intermittently, suggesting either a strobe pattern or periods of complete illumination cutoff.\n*   Frames 0015 and 0048 show complete obscuration of the light source, indicating either a deliberate shutdown or temporary obstruction (e.g., cloud cover, platform maneuvering).\n\n**2. Lighting Characteristics:**\n\n*   **Color:** White/yellowish. Insufficient data to determine if color is fixed or variable.\n*   **Intensity:** Varies significantly across frames. Peak luminance at t=2.5s (frame 0006).\n*   **Pulse Shape:** Cannot be determined with only 2fps extraction. Sharp luminance transitions at t=5.5s, t=6.5s, t=7.0s, and t=23.0-23.5s suggest a rapid on/off cycle.\n*   **Strobe Pattern:** Insufficient data to establish a definitive strobe frequency. The observed transitions could indicate a frequency between 0.5 Hz and 1 Hz, but this is speculative.\n\n**3. Altitude and Distance Estimation:**\n\n*   Difficult to estimate precisely without additional data (e.g., known landmarks, platform size).\n*   The relatively small angular size of the light source suggests a moderate distance.\n*   The presence of palm trees in the foreground provides a relative scale. Assuming typical palm tree height, the platform is likely several hundred meters away and at an altitude above the tree line.\n\n**4. Antenna/Sensor Array Identification:**\n\n*   No antenna or sensor arrays are visually identifiable in the provided frames. The resolution and lighting conditions are insufficient for such analysis.\n\n**5. Light Pattern Matching:**\n\n*   The limited data prevents definitive pattern matching.\n*   The potential frequency range (0.5-1 Hz) overlaps with FAA Part 107 (0.5 Hz) and military TCAS (1 Hz), but further analysis is required.\n*   The intermittent obscuration of the light source is atypical for standard navigation lighting and warrants further investigation.\n\n**6. Cross-Reference (LIDAR, Optical Downlink, Modulated Illumination):**\n\n*   No visual evidence of LIDAR or optical downlink.\n*   The sharp luminance transitions could potentially indicate modulated illumination, but this is speculative without higher-resolution temporal data.\n\n**7. Other Relevant Details:**\n\n*   **Environment:** Residential area with palm trees. Suggests potential for civilian surveillance.\n*   **AC Grid Frequency:** Confirmed at 59.971 Hz, consistent with Costa Rican electrical grid. This confirms the location and can be used to filter out potential electrical interference in future signal analysis.\n*   **FFT Peak Cluster:** 87-120 Hz harmonics suggest a motorized platform, supporting the drone/UAV hypothesis.\n\n**Intelligence Assessment Summary:**\n\nThe observed light source is consistent with an aerial platform, potentially a drone or UAV, operating over a residential area in Jac\u00f3, Costa Rica. The platform exhibits intermittent illumination with rapid on/off transitions. The limited frame rate prevents definitive strobe pattern identification. No antenna or sensor arrays are visually identifiable. The platform's behavior warrants further investigation to determine its purpose and potential surveillance capabilities.\n\n**Recommendations:**\n\n*   Acquire higher-resolution video or still images to improve platform identification and sensor array detection.\n*   Conduct spectral analysis of the light source to determine its precise color and potential modulation characteristics.\n*   Increase the frame rate of video extraction to accurately measure the strobe frequency.\n*   Correlate platform activity with known events or individuals in the area.\n*   Deploy counter-surveillance measures to deter further activity.\n",
+  "error": "HTTP Error 404: Not Found",
+  "usage": {
+    "prompt_tokens": 2624,
+    "completion_tokens": 870,
+    "total_tokens": 3494,
+    "cost": 0.0006104,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.0006104,
+      "upstream_inference_prompt_cost": 0.0002624,
+      "upstream_inference_completions_cost": 0.000348
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  }
+}
