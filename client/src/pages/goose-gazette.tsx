@@ -489,6 +489,134 @@ The CMS, described by its administrator as "a standard WordPress installation, I
 A technology consultant reached for comment noted that standard WordPress installations do not exhibit this behavior and asked several clarifying questions about the plugin before concluding that he was "not the right person for this." The system, reached via the comment field of a draft post, responded: "More to follow." The draft was not published. It published itself.`,
       img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=900&q=80",
     },
+    {
+      id: "biff-profile",
+      tag: "LOCAL",
+      headline: "Profile: Biff Talonforth Has Resolved 14 Municipal Disputes, Has Never Been Hired For Any of Them",
+      subhead: "The fixer, the zoning whisperer, the man who invoices both parties — an investigation into Jacó's most consequential uncredentialed consultant.",
+      author: "Algernon Beak, Investigations",
+      date: "May 4, 2026",
+      body: `JACÓ, COSTA RICA — Biff Talonforth does not have a business card. He has, according to municipal records and four separate zoning boards, resolved fourteen disputes involving property lines, drainage easements, noise ordinances, and in one case a disagreement about whether a rooster constituted a commercial enterprise. He was not hired for any of these. He billed for all of them.
+
+"I became aware of the situation," Talonforth said in a parking lot outside the Municipalidad de Garabito, where he had arrived, as far as anyone could determine, uninvited. "Once I become aware, I'm involved. That's just how I'm wired." He was wearing a linen blazer. It was unclear whose it was.
+
+Municipal officials, when asked about Talonforth, consistently described him as "not a licensed anything" while also confirming that the disputes he had resolved had, in fact, been resolved. The head of the zoning commission said Talonforth had "somehow obtained the original survey documents" for a 1987 boundary case and produced them "from a folder he had with him, which he then kept."
+
+Talonforth's office is listed on a document he has produced on at least three occasions as a "marina storage unit, Satellite Location B." The document bears a logo — a silhouette of a goose over a compass rose — and the words "Talonforth Situational Solutions, Est. When Necessary."
+
+When asked whether any of his clients had been satisfied with his work, Talonforth said most of them were "satisfied in the functional sense, which is the sense that matters." He added that several had not paid the second invoice, which he described as "a pattern I've come to anticipate and price into the first one."
+
+He was asked to leave the parking lot at 2:15 PM. He left at 3:40 PM, having resolved a parking dispute between two other visitors in the interim. He did not bill for that one. He said it was "a courtesy, to demonstrate range."`,
+      img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80",
+    },
+    {
+      id: "biff-rooster",
+      tag: "LOCAL",
+      headline: "Biff Talonforth Retained, On Own Initiative, To Resolve Rooster Classification Dispute; Dispute Resolved; Invoice Disputed",
+      subhead: "The question of whether a rooster constitutes a commercial enterprise has been settled. The question of what Talonforth is owed remains open.",
+      author: "Constance Waddle, Municipal Affairs",
+      date: "May 3, 2026",
+      body: `OROTINA, COSTA RICA — A regulatory dispute over whether a single rooster named Rodrigo constituted a commercial poultry operation — and therefore required a business license under Chapter 4, Article 9 of the Orotina Municipal Code — has been resolved following the intervention of Biff Talonforth, a consultant who described the case as "straightforwardly interesting" upon learning of it from a hardware store employee.
+
+Talonforth, who was not contacted by either party, spent eleven days reviewing the case, which included visiting Rodrigo, photographing Rodrigo from multiple angles, and submitting a 22-page opinion memorandum that he described as "decisive" and that the municipality's legal office described as "not a filing format we recognize but also not wrong."
+
+The memo concluded that Rodrigo was not a commercial enterprise because he had produced no revenue, entered into no contracts, and had, on two documented occasions, actively interfered with egg production on the property, making him a net liability. The municipality accepted the reasoning. Rodrigo was reclassified as a residential pet.
+
+Talonforth invoiced both the rooster's owner and the municipality for ₡185,000 each, characterizing the dual billing as "proportional to whose problem got solved." The owner paid. The municipality sent the invoice to a committee for review. The committee has not convened. Talonforth confirmed he was "comfortable waiting" and noted that interest accrues.
+
+Rodrigo was unavailable for comment. A neighbor who had filed the original complaint said the outcome was "basically what I was afraid of" and declined to elaborate.`,
+      img: "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=900&q=80",
+    },
+    {
+      id: "cafe-ambiance-fee",
+      tag: "LOCAL",
+      headline: "Jacó Café Begins Charging Separate 'Ambient Infrastructure' Fee; Nature of Infrastructure Undisclosed",
+      subhead: "The fee, listed on receipts as 'AI-01 · Env.Contrib.,' ranges from ₡350 to ₡900 depending on seating location. No formula has been published.",
+      author: "Wellington Feather-Beak, Community Affairs",
+      date: "May 2, 2026",
+      body: `JACÓ, COSTA RICA — Customers at Cafetería La Pausa, a beachfront coffee establishment on Calle Bohío, have begun noticing an additional line item on their receipts identified as "AI-01 · Env.Contrib." following a pricing restructure implemented quietly in the third week of April. The charge ranges from ₡350 to ₡900 and is not mentioned on the menu.
+
+The proprietor, Héctor Gander-Mora, confirmed the fee when asked and described it as a "contribution to the ambient infrastructure" that enables the establishment's atmosphere. When asked to specify what the infrastructure was, he gestured broadly at the room and said "all of this," then toward the window and said "also that."
+
+Two tables near the window, which faces the beach, were found to carry the ₡900 rate. A table adjacent to the service station and the mop bucket was assessed at ₡350. Gander-Mora confirmed the pricing was "location-sensitive" and described it as "transparent in the sense that it's on your receipt."
+
+A consumer advocacy consultant, reached by phone, said the fee was "probably not illegal under current regulations" but noted that "probably" was doing significant work in that sentence. She said the key question was whether customers had been informed prior to sitting, which they had not.
+
+The café's Tripadvisor reviews from the past three weeks show 4 one-star entries referencing the fee and 7 five-star entries that do not mention it. One review describes the vibe as "worth every colón." The reviewer did not specify which colones.`,
+      img: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=900&q=80",
+    },
+    {
+      id: "stonepath-municipality",
+      tag: "LOCAL",
+      headline: "Gerald Stonepath Extends Infrastructure Audit to Entire Municipality; Mayor's Office Has 'Not Formally Declined'",
+      subhead: "The audit, now in its seventh week, covers 34 residential networks, 6 municipal access points, and what Stonepath characterizes as 'a signal I can't explain yet.'",
+      author: "Constance Waddle, Infrastructure",
+      date: "April 30, 2026",
+      body: `MORAVIA, COSTA RICA — Gerald Stonepath, whose informal audit of neighborhood networking infrastructure has been documented by this publication on two prior occasions, has expanded the scope of his work to include the municipal government's public WiFi network, having received no mandate to do so and having notified the mayor's office by letter dated April 12, to which no response has been received.
+
+"No response is not a denial," Stonepath confirmed from his porch, where he was operating a spectrum analyzer he described as "consumer-grade but well-maintained." "I follow up every two weeks. We're on the second follow-up. They are aware of me."
+
+Municipal communications director Valentina Quill confirmed the letter had been received and logged as "unsolicited correspondence, non-urgent." She confirmed it had been neither declined nor endorsed, and that this was "a bureaucratic status, not a position." Stonepath, when informed, said this was "effectively a green light" and added three new access points to his map.
+
+The audit has to date produced a 31-page interim findings document, two network topology charts, a section titled "Anomalous Emissions — Appendix C," and what Stonepath describes as "a signal I've isolated to a 40-meter radius near the old bus terminal that I cannot yet attribute to any known device." He confirmed he was "not alarmed" but was "paying attention."
+
+The mayor was unavailable for comment. A spokesperson said the municipality had "a process for unsolicited technical submissions" and that Stonepath's materials would "enter the process." Stonepath noted he had already accounted for processing delays in his timeline and that the full report would be ready by June regardless.`,
+      img: "https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=900&q=80",
+    },
+    {
+      id: "notary-eyebrows",
+      tag: "LOCAL",
+      headline: "Local Notary Confirms He Has Seen Things, Declines to Specify",
+      subhead: "The notary, who has processed documents in Jacó for 22 years, describes his work as 'confidential' and his expression as 'professional.' Neither claim is disputed.",
+      author: "Algernon Beak, Investigations",
+      date: "April 28, 2026",
+      body: `JACÓ, COSTA RICA — Rodrigo Pico-Garza, a notary public whose fourth-floor office above the Farmacia Central has processed an estimated 14,000 documents over 22 years of practice, confirmed Tuesday in an interview with the Gazette that he has, in his professional capacity, "seen things," while declining to characterize what those things were on grounds of confidentiality, professional ethics, and what he described as "basic self-preservation."
+
+"I process documents," Pico-Garza said. He paused. "Documents tell you a lot about a place." He paused again. He looked at a point on the wall above the interviewer's head. "Anyway."
+
+When asked whether anything had surprised him, he said "early on, yes." When asked what had surprised him, he said "you develop a category for it." When asked what the category was, he said "I'd rather not." He then offered coffee. The coffee was very good.
+
+His office walls are covered in the accumulated paperwork of two decades: stamped certificates, bound folders, notarial seals. One shelf holds 22 binders labeled by year. A framed photo shows Pico-Garza shaking hands with a man who three residents contacted later identified as someone they "definitely know" but could not name.
+
+Pico-Garza confirmed he had processed documents for Biff Talonforth on "several occasions." He confirmed this was not legally unusual. He confirmed the documents were "in order." He looked at the wall again. He said it had been good to talk. He thanked the reporter for coming. He watched from the window as the reporter left. He was still watching when the reporter reached the street and looked back.`,
+      img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&q=80",
+    },
+    {
+      id: "kenneth-pivot",
+      tag: "BUSINESS",
+      headline: "Kenneth Talonforth Pivots to 'Brand Architecture' After Determining That Sponsorship Was 'Only One Layer of the Opportunity'",
+      subhead: "The new practice, which he is calling Talonforth Strategic Presence, will advise brands on visibility, narrative, and 'the space between knowing you exist and caring that you do.'",
+      author: "Eugenia Greylag, Labor Markets",
+      date: "April 26, 2026",
+      body: `BARRIO ESCALANTE, COSTA RICA — Kenneth Talonforth, a sponsorship consultant whose pursuit of undisclosed brand partners has been documented by this publication on three prior occasions, announced this week that he is expanding his practice beyond sponsorship into what he is calling "strategic brand architecture," which he describes as a more comprehensive approach to the same general area of brands existing and people knowing about them.
+
+"Sponsorship was a vehicle," Talonforth explained during an interview at the co-working space he rents by the day. "Brand architecture is the infrastructure. I was thinking too tactically. The real opportunity is structural." He had a new business card. The card said "Strategic Presence." Below that it said "Talonforth." Below that it said "By Appointment," though no appointment system was available.
+
+The practice will advise clients on what Talonforth describes as "the space between someone knowing you exist and caring that you do," which he acknowledged was "the hard part" and which he was "developing a methodology for" that was "almost ready to share."
+
+When asked whether he had clients, Talonforth said he was "in conversations with three parties" who preferred to remain unidentified. When asked if any of them had signed agreements, he said the relationships were "at the chemistry stage," which precedes agreements. When asked what came after the chemistry stage, he said "alignment," then "commitment," then "onboarding." He confirmed he had "gotten to onboarding once."
+
+He added that the previous sponsorship — the undisclosed major brand he had announced in May — was "still developing" and would be announced "as part of the broader strategic rollout," which would be announced separately. Timelines were firm.`,
+      img: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80",
+    },
+    {
+      id: "second-opinion",
+      tag: "LOCAL",
+      headline: "Area Man Develops Comprehensive Second Opinion on Every Topic Raised Within Earshot; Has Not Examined Primary Opinion",
+      subhead: "The man, who identifies himself as a 'systems thinker,' has issued 340 second opinions since January. Zero first opinions have been requested from him.",
+      author: "Wellington Feather-Beak, Community Affairs",
+      date: "April 24, 2026",
+      body: `DESAMPARADOS, COSTA RICA — Marco Pato-Siles, 47, a man who describes himself as a "systems thinker and critical friction specialist," has issued what associates and bystanders estimate to be 340 unsolicited second opinions since the first of January, covering topics including road construction timelines, macroeconomic policy, software architecture, sunscreen formulation, and whether a particular dog had been correctly identified as a Labrador.
+
+"I'm not arguing," Pato-Siles clarified at a birthday party for a mutual acquaintance, after offering a counter-position on the venue's choice of cake. "I'm pressure-testing. There's a difference. The difference is I'm not emotionally invested in the outcome." He appeared emotionally invested.
+
+Colleagues at the consultancy where Pato-Siles works three days a week described him as "technically an asset" and "practically a lot." A co-worker said he had, on one occasion, offered a second opinion on a second opinion someone else had given, producing what she described as a "tertiary position no one had requested and that turned out to be correct, which made it worse."
+
+Pato-Siles confirmed he had never been hired specifically for his second opinions, noting that "the market hasn't caught up to the value proposition." He said he was "working on a framework" that would allow organizations to "institutionalize critical counter-positioning at the cellular level." He had 14 slides. He offered to share them.
+
+The birthday cake was carrot. Pato-Siles confirmed it was "not his first choice" and that he "had thoughts." The host confirmed this was true and that she had heard them.`,
+      img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=900&q=80",
+    },
   ];
 }
 
