@@ -16,7 +16,7 @@ import {
 import {
   Cpu, Send, Download, Eye, EyeOff, ChevronDown, ChevronRight,
   Layers, Zap, AlertTriangle, ExternalLink, RefreshCw, X,
-  Play, Square, Settings, Activity, Brain, History, Search, FileText, Database, Archive,
+  Play, Square, Settings, Activity, Brain, History, Search, FileText, FileJson, Database, Archive,
   Plus, GripVertical, Pencil, Check, Trash2, RotateCcw,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -1069,6 +1069,18 @@ export default function LocalLLMHypervisorPage() {
     toast({ title: "Session exported", description: "Markdown file downloaded" });
   };
 
+  const exportSessionAsJson = (session: RoundtableSession) => {
+    const json = JSON.stringify(session, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `roundtable-${new Date(session.ts).toISOString().replace(/[:.]/g, "-")}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast({ title: "Session exported", description: "JSON file downloaded" });
+  };
+
   const exportAllSessions = async () => {
     if (sessions.length === 0) {
       toast({ title: "No sessions to export", description: "Run a roundtable first", variant: "destructive" });
@@ -2044,6 +2056,16 @@ export default function LocalLLMHypervisorPage() {
                     >
                       <FileText className="h-3 w-3 mr-1" />
                       Export .md
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-xs h-7 shrink-0"
+                      onClick={() => exportSessionAsJson(selectedSession)}
+                      data-testid="button-export-session-json"
+                    >
+                      <FileJson className="h-3 w-3 mr-1" />
+                      Export .json
                     </Button>
                     <Button
                       variant="outline"
