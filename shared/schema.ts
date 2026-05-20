@@ -2654,6 +2654,7 @@ export const gooseHumorScores = pgTable("goose_humor_scores", {
   resolutionUnresolved: integer("resolution_unresolved").notNull(),
   overall: integer("overall").notNull(),
   judgeNotes: text("judge_notes"),
+  rubricVersion: integer("rubric_version").notNull().default(1),
   scoredAt: timestamp("scored_at").notNull().defaultNow(),
 });
 

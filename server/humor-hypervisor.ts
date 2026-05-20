@@ -13,8 +13,15 @@
 
 import { db } from "./db";
 import { gooseArticles, gooseHumorScores } from "@shared/schema";
-import { desc, sql, notInArray, eq } from "drizzle-orm";
+import { desc, sql, eq } from "drizzle-orm";
 import { openai as aiClient } from "./replit_integrations/audio/client";
+
+/**
+ * RUBRIC_VERSION — bump this constant after any meaningful change to JUDGE_SYSTEM
+ * or the dimension definitions. The hypervisor will then re-judge every article
+ * whose latest score was produced under an older rubric on the next cycle.
+ */
+export const RUBRIC_VERSION = 1;
 
 const CYCLE_MS = 10 * 60 * 1000;
 const STARTUP_DELAY_MS = 5 * 60 * 1000;
@@ -141,22 +148,33 @@ ${article.body}`;
   }
 }
 
-export async function scoreRecentArticles(): Promise<{ scored: number; skipped: number }> {
-  const scoredRows = await db.select({ articleId: gooseHumorScores.articleId }).from(gooseHumorScores);
-  const scoredIds = scoredRows.map(r => r.articleId);
+export async function scoreRecentArticles(): Promise<{ scored: number; skipped: number; rejudged: number }> {
+  // Pick articles that either have no score yet, or whose latest score is from
+  // an older rubric version. The LEFT JOIN + version filter handles both cases.
+  const candidates = await db.execute<{
+    id: string;
+    headline: string;
+    subhead: string | null;
+    body: string;
+    prev_version: number | null;
+  }>(sql`
+    SELECT a.id, a.headline, a.subhead, a.body,
+           (SELECT MAX(s.rubric_version) FROM goose_humor_scores s WHERE s.article_id = a.id) AS prev_version
+    FROM goose_articles a
+    WHERE NOT EXISTS (
+      SELECT 1 FROM goose_humor_scores s
+      WHERE s.article_id = a.id AND s.rubric_version >= ${RUBRIC_VERSION}
+    )
+    ORDER BY a.published_at DESC
+    LIMIT ${SCORE_BATCH}
+  `);
 
-  const recent = await db.select({
-    id: gooseArticles.id,
-    headline: gooseArticles.headline,
-    subhead: gooseArticles.subhead,
-    body: gooseArticles.body,
-  }).from(gooseArticles)
-    .where(scoredIds.length > 0 ? notInArray(gooseArticles.id, scoredIds) : sql`true`)
-    .orderBy(desc(gooseArticles.publishedAt))
-    .limit(SCORE_BATCH);
+  const rows: Array<{ id: string; headline: string; subhead: string | null; body: string; prev_version: number | null }> =
+    (candidates as any).rows ?? (candidates as any);
 
   let scored = 0;
-  for (const art of recent) {
+  let rejudged = 0;
+  for (const art of rows) {
     const result = await judgeArticle(art);
     if (!result) continue;
     const overall = Math.round(
@@ -164,7 +182,16 @@ export async function scoreRecentArticles(): Promise<{ scored: number; skipped: 
        result.specificityCarrier + result.resolutionUnresolved) / 5
     );
     const judgeNotes = JSON.stringify({ notes: result.notes, summary: result.summary });
+    const isRejudge = art.prev_version !== null && art.prev_version < RUBRIC_VERSION;
     try {
+      // Replace any stale-rubric rows for this article so the rolling avg stops
+      // mixing rubric versions, then insert the fresh score.
+      if (isRejudge) {
+        await db.delete(gooseHumorScores).where(
+          sql`${gooseHumorScores.articleId} = ${art.id} AND ${gooseHumorScores.rubricVersion} < ${RUBRIC_VERSION}`
+        );
+        rejudged++;
+      }
       await db.insert(gooseHumorScores).values({
         articleId: art.id,
         apRigidity: result.apRigidity,
@@ -174,13 +201,14 @@ export async function scoreRecentArticles(): Promise<{ scored: number; skipped: 
         resolutionUnresolved: result.resolutionUnresolved,
         overall,
         judgeNotes,
+        rubricVersion: RUBRIC_VERSION,
       });
       scored++;
     } catch (e) {
       console.warn("[HUMOR:PERSIST] failed for", art.id, (e as Error).message);
     }
   }
-  return { scored, skipped: recent.length - scored };
+  return { scored, skipped: rows.length - scored, rejudged };
 }
 
 export interface HumorFeedback {
@@ -307,13 +335,13 @@ async function cycle() {
   cycleCount++;
   const t0 = Date.now();
   try {
-    const { scored } = await scoreRecentArticles();
+    const { scored, rejudged } = await scoreRecentArticles();
     cachedFeedback = await buildHumorFeedback();
     cachedAt = Date.now();
     lastCycleAt = Date.now();
     const avg = cachedFeedback.rollingAvg;
     console.log(
-      `[HUMOR-HYPER] cycle #${cycleCount} scored=${scored} | ` +
+      `[HUMOR-HYPER] cycle #${cycleCount} scored=${scored} rejudged=${rejudged} rubric=v${RUBRIC_VERSION} | ` +
       `avg overall=${avg.overall} AP=${avg.apRigidity} ` +
       `premise=${avg.premiseAbsurdity} discipline=${avg.jokeDiscipline} ` +
       `carrier=${avg.specificityCarrier} resolution=${avg.resolutionUnresolved} ` +
