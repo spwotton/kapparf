@@ -1,4 +1,5 @@
 import {
+  gooseArticles, type GooseArticle, type InsertGooseArticle,
   type User, type InsertUser,
   type SignalEvent, type InsertSignalEvent,
   type Correlation, type InsertCorrelation,
@@ -94,6 +95,9 @@ export interface IStorage {
   getIncidentsByCategory(category: string): Promise<Incident[]>;
   getIncidentsByTimeRange(from: Date, to: Date): Promise<Incident[]>;
   getIncidentCount(): Promise<number>;
+  getGooseArticles(limit?: number): Promise<GooseArticle[]>;
+  createGooseArticle(article: InsertGooseArticle): Promise<GooseArticle>;
+  approveGooseArticle(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -496,6 +500,22 @@ export class DatabaseStorage implements IStorage {
   async getIncidentCount(): Promise<number> {
     const [result] = await db.select({ count: sql<number>`count(*)` }).from(incidents);
     return Number(result?.count ?? 0);
+  }
+
+  async getGooseArticles(limit = 50): Promise<GooseArticle[]> {
+    return db.select().from(gooseArticles)
+      .where(eq(gooseArticles.approved, true))
+      .orderBy(desc(gooseArticles.publishedAt))
+      .limit(limit);
+  }
+
+  async createGooseArticle(article: InsertGooseArticle): Promise<GooseArticle> {
+    const [created] = await db.insert(gooseArticles).values(article).returning();
+    return created;
+  }
+
+  async approveGooseArticle(id: string): Promise<void> {
+    await db.update(gooseArticles).set({ approved: true }).where(eq(gooseArticles.id, id));
   }
 }
 

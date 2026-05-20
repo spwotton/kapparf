@@ -98,6 +98,10 @@ app.use((req, res, next) => {
   startNetworkThreatScanner();
   startKiwiVision(300_000);
   hypervisor.start();
+
+  // Goose Gazette — automated satirical content engine
+  const { startGooseScheduler } = await import("./goose-generator");
+  startGooseScheduler();
   const { cortexBus } = await import("./cortex-bus");
   cortexBus.init().catch(e => console.error("[CortexBus] init error:", e.message));
   const { atlantisHub } = await import("./atlantis-hub");

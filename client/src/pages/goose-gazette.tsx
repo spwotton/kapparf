@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // ─── ARTICLES ────────────────────────────────────────────────────────────────
 const ARTICLES = [
@@ -389,8 +390,32 @@ export default function GooseGazettePage() {
     setTimeout(() => setHonking(false), 400);
   }, []);
 
-  const coverArticle = ARTICLES[0];
-  const restArticles = ARTICLES.slice(1);
+  // Fetch AI-generated articles from the database — prepend to hardcoded founding edition
+  const { data: apiArticles } = useQuery<any[]>({
+    queryKey: ["/api/goose/articles"],
+    refetchInterval: 5 * 60 * 1000, // refresh every 5 min
+  });
+
+  // Merge: generated articles first (newest), then hardcoded founding edition as filler
+  const allArticles = [
+    ...(apiArticles ?? []).map((a: any) => ({
+      id: a.id,
+      tag: a.tag ?? "NEWS",
+      headline: a.headline,
+      subhead: a.subhead ?? "",
+      author: a.authorByline ?? "Staff Reporter",
+      date: new Date(a.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+      body: a.body,
+      img: a.imgQuery
+        ? `https://source.unsplash.com/900x600/?${encodeURIComponent(a.imgQuery)}`
+        : `https://picsum.photos/seed/${a.id}/900/600`,
+      isCover: false,
+    })),
+    ...ARTICLES,
+  ];
+
+  const coverArticle = allArticles[0];
+  const restArticles = allArticles.slice(1);
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
@@ -726,8 +751,23 @@ export default function GooseGazettePage() {
             </p>
           </div>
         </div>
-        <div className="border-t border-gray-700 text-center py-3 text-[10px] font-sans text-gray-600">
-          © 2026 The Goose Gazette · All The News That's Fit To HONK · Klein Topology Division · Est. The Moment Things Got Weird
+        <div className="border-t border-gray-700 text-center py-3 text-[10px] font-sans text-gray-600 flex items-center justify-center gap-4">
+          <span>© 2026 The Goose Gazette · All The News That's Fit To HONK · Klein Topology Division · Est. The Moment Things Got Weird</span>
+          <button
+            data-testid="button-generate-article"
+            onClick={async () => {
+              try {
+                const r = await fetch("/api/goose/generate", { method: "POST" });
+                if (r.ok) {
+                  setTimeout(() => window.location.reload(), 800);
+                }
+              } catch {}
+            }}
+            className="text-gray-700 hover:text-white transition-colors shrink-0"
+            title="Generate article"
+          >
+            ↻
+          </button>
         </div>
       </div>
 

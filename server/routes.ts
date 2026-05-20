@@ -5017,6 +5017,7 @@ done
 
   registerCortexRoutes(app);
   registerAtlantisRoutes(app);
+  registerGooseRoutes(app);
 
   return httpServer;
 }
@@ -5138,6 +5139,71 @@ ${correlationsHTML || '<p style="color:#6b7280">No correlations detected.</p>'}
 <div class="footer">KAPPA Evidence Chain v1.0 — Generated ${observer.generated} — This document is self-contained and requires no external dependencies to view.</div>
 </body>
 </html>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// GOOSE GAZETTE API
+// ═══════════════════════════════════════════════════════════════════════════
+
+export function registerGooseRoutes(app: express.Express) {
+  // GET /api/goose/articles — fetch approved articles, newest first
+  app.get("/api/goose/articles", async (req, res) => {
+    try {
+      const limit = Math.min(Number(req.query.limit ?? 50), 100);
+      const articles = await storage.getGooseArticles(limit);
+      res.json(articles);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // POST /api/goose/generate — manually trigger article generation
+  app.post("/api/goose/generate", async (_req, res) => {
+    try {
+      const { generateGooseArticle, getGooseSchedulerStatus } = await import("./goose-generator");
+      const { kappaEngine } = await import("./kappa-engine");
+      const status = kappaEngine.getStatus();
+      const recentEvents = await storage.getRecentSignalEvents(20);
+      const correlations = await storage.getCorrelations(10);
+
+      const kappaData = {
+        recentEvents: recentEvents.map(e => ({
+          domain: e.domain,
+          description: e.description,
+          timestamp: e.timestamp.toISOString(),
+          location: (e.metadata as any)?.location,
+        })),
+        correlations: correlations.map(c => ({
+          title: c.title,
+          description: c.description,
+          score: c.score,
+        })),
+        kappaScore: status.score,
+        stats: status.domainWindows ?? {},
+      };
+
+      const article = await generateGooseArticle(kappaData);
+      if (!article) return res.status(500).json({ error: "Generation failed — check OpenAI key and try again" });
+      res.json({ success: true, article });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // GET /api/goose/status — scheduler status
+  app.get("/api/goose/status", async (_req, res) => {
+    try {
+      const { getGooseSchedulerStatus } = await import("./goose-generator");
+      const articles = await storage.getGooseArticles(3);
+      res.json({
+        ...getGooseSchedulerStatus(),
+        articleCount: articles.length,
+        latest: articles[0] ?? null,
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
 }
 
 function escapeHtml(str: string): string {

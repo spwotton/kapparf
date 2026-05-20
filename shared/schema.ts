@@ -2616,3 +2616,29 @@ export const fleetCommandLog = pgTable("fleet_command_log", {
 });
 
 export * from "./models/chat";
+
+// ── GOOSE GAZETTE ─────────────────────────────────────────────────────────────
+export const gooseArticles = pgTable("goose_articles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  headline: text("headline").notNull(),
+  subhead: text("subhead"),
+  body: text("body").notNull(),
+  tag: text("tag").notNull().default("NEWS"),
+  category: text("category").notNull().default("news"),
+  authorByline: text("author_byline"),
+  publishedAt: timestamp("published_at").notNull().defaultNow(),
+  generatedAt: timestamp("generated_at").notNull().defaultNow(),
+  sourceEventIds: text("source_event_ids").array(),
+  sourceDescription: text("source_description"),
+  approved: boolean("approved").notNull().default(true),
+  imgQuery: text("img_query"),
+  templateUsed: text("template_used"),
+  wordCount: integer("word_count"),
+});
+
+export const insertGooseArticleSchema = createInsertSchema(gooseArticles).omit({
+  id: true,
+  generatedAt: true,
+});
+export type GooseArticle = typeof gooseArticles.$inferSelect;
+export type InsertGooseArticle = z.infer<typeof insertGooseArticleSchema>;
