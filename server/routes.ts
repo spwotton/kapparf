@@ -5296,6 +5296,46 @@ export function registerGooseRoutes(app: express.Express) {
     }
   });
 
+  // GET /api/humor/rejudge-all/stream — SSE feed emitting one event per judged
+  // article (and a final `done` event with totals) while a sweep runs.
+  app.get("/api/humor/rejudge-all/stream", async (req, res) => {
+    try {
+      const { rejudgeEvents, getRejudgeProgress, RUBRIC_VERSION } = await import("./humor-hypervisor");
+      res.setHeader("Content-Type", "text/event-stream");
+      res.setHeader("Cache-Control", "no-cache, no-transform");
+      res.setHeader("Connection", "keep-alive");
+      res.setHeader("X-Accel-Buffering", "no");
+      res.flushHeaders?.();
+
+      const send = (event: string, data: unknown) => {
+        res.write(`event: ${event}\n`);
+        res.write(`data: ${JSON.stringify(data)}\n\n`);
+      };
+
+      send("hello", { rubricVersion: RUBRIC_VERSION, progress: getRejudgeProgress() });
+
+      const onJudged = (ev: unknown) => send("judged", ev);
+      const onDone = (ev: unknown) => send("done", ev);
+      rejudgeEvents.on("judged", onJudged);
+      rejudgeEvents.on("done", onDone);
+
+      const keepalive = setInterval(() => {
+        try { res.write(`: ping\n\n`); } catch {}
+      }, 15000);
+
+      const cleanup = () => {
+        clearInterval(keepalive);
+        rejudgeEvents.off("judged", onJudged);
+        rejudgeEvents.off("done", onDone);
+        try { res.end(); } catch {}
+      };
+      req.on("close", cleanup);
+      req.on("aborted", cleanup);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // GET /api/goose/status — scheduler status
   app.get("/api/goose/status", async (_req, res) => {
     try {

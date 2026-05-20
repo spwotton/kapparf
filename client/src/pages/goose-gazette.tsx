@@ -61,6 +61,19 @@ interface RejudgeStatus {
   rejudged: number;
   lastError: string | null;
 }
+interface JudgedTick {
+  articleId: string;
+  headline: string;
+  apRigidity: number;
+  premiseAbsurdity: number;
+  jokeDiscipline: number;
+  specificityCarrier: number;
+  resolutionUnresolved: number;
+  overall: number;
+  rubricVersion: number;
+  rejudged: boolean;
+  at: number;
+}
 function HumorBadge() {
   const { data } = useQuery<HumorStats>({
     queryKey: ["/api/goose/humor-stats"],
@@ -72,6 +85,21 @@ function HumorBadge() {
     refetchInterval: pollWhileRunning ? 2000 : false,
   });
   const [flash, setFlash] = useState<string | null>(null);
+  const [ticker, setTicker] = useState<JudgedTick[]>([]);
+
+  useEffect(() => {
+    if (!pollWhileRunning) return;
+    const es = new EventSource("/api/humor/rejudge-all/stream");
+    es.addEventListener("judged", (e: MessageEvent) => {
+      try {
+        const ev = JSON.parse(e.data) as JudgedTick;
+        setTicker((prev) => [ev, ...prev].slice(0, 5));
+      } catch {}
+    });
+    es.addEventListener("done", () => { es.close(); });
+    es.onerror = () => { es.close(); };
+    return () => { es.close(); };
+  }, [pollWhileRunning]);
   const rejudge = useMutation({
     mutationFn: async () => {
       const res = await apiRequest("POST", "/api/humor/rejudge-all");
@@ -80,7 +108,7 @@ function HumorBadge() {
         durationMs: number; alreadyRunning?: boolean; rubricVersion: number;
       }>;
     },
-    onMutate: () => { setPollWhileRunning(true); setFlash(null); },
+    onMutate: () => { setPollWhileRunning(true); setFlash(null); setTicker([]); },
     onSuccess: (r) => {
       const secs = (r.durationMs / 1000).toFixed(1);
       setFlash(
@@ -126,21 +154,50 @@ Resolution Unresolved: ${avg.resolutionUnresolved}`;
   })();
 
   return (
-    <span className="flex items-center gap-2 text-[10px] font-mono">
-      {badge}
-      <button
-        type="button"
-        onClick={() => rejudge.mutate()}
-        disabled={!!running}
-        data-testid="button-rejudge-all"
-        title="Re-judge every article whose latest score is older than the current rubric"
-        className="px-2 py-0.5 border border-gray-700 rounded text-gray-400 hover:text-white hover:border-white transition-colors disabled:opacity-50 disabled:cursor-wait"
-      >
-        {running ? "judging…" : "↻ re-judge all"}
-      </button>
-      {liveLabel && (
-        <span data-testid="text-rejudge-status" className="text-gray-400 truncate max-w-[260px]">
-          {liveLabel}
+    <span className="inline-flex flex-col gap-1 text-[10px] font-mono align-top">
+      <span className="flex items-center gap-2">
+        {badge}
+        <button
+          type="button"
+          onClick={() => rejudge.mutate()}
+          disabled={!!running}
+          data-testid="button-rejudge-all"
+          title="Re-judge every article whose latest score is older than the current rubric"
+          className="px-2 py-0.5 border border-gray-700 rounded text-gray-400 hover:text-white hover:border-white transition-colors disabled:opacity-50 disabled:cursor-wait"
+        >
+          {running ? "judging…" : "↻ re-judge all"}
+        </button>
+        {liveLabel && (
+          <span data-testid="text-rejudge-status" className="text-gray-400 truncate max-w-[260px]">
+            {liveLabel}
+          </span>
+        )}
+      </span>
+      {ticker.length > 0 && (
+        <span
+          data-testid="list-rejudge-ticker"
+          className="flex flex-col gap-0.5 border-l-2 border-gray-800 pl-2 max-w-[420px]"
+        >
+          {ticker.map((t) => {
+            const tone = t.overall >= 75 ? "text-green-500"
+                       : t.overall >= 55 ? "text-amber-500"
+                       : "text-red-500";
+            return (
+              <span
+                key={`${t.articleId}-${t.at}`}
+                data-testid={`row-rejudge-tick-${t.articleId}`}
+                className="flex items-center gap-2 text-gray-400"
+                title={`AP ${t.apRigidity} · Premise ${t.premiseAbsurdity} · Joke ${t.jokeDiscipline} · Spec ${t.specificityCarrier} · Resolution ${t.resolutionUnresolved} · rubric v${t.rubricVersion}${t.rejudged ? " · re-judged" : ""}`}
+              >
+                <span className={`${tone} w-8 tabular-nums`}>{t.overall}</span>
+                <span className="text-gray-600 w-12 tabular-nums">
+                  {t.apRigidity}/{t.premiseAbsurdity}/{t.jokeDiscipline}/{t.specificityCarrier}/{t.resolutionUnresolved}
+                </span>
+                <span className="truncate">{t.headline}</span>
+                <span className="text-gray-700">v{t.rubricVersion}</span>
+              </span>
+            );
+          })}
         </span>
       )}
     </span>

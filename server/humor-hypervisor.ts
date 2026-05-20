@@ -11,10 +11,35 @@
  * Cycle: every 10 minutes. Startup delay: 5 minutes (after generator warmup).
  */
 
+import { EventEmitter } from "events";
 import { db } from "./db";
 import { gooseArticles, gooseHumorScores, type GooseHumorScore } from "@shared/schema";
 import { desc, sql, eq } from "drizzle-orm";
 import { openai as aiClient } from "./replit_integrations/audio/client";
+
+export interface RejudgeJudgedEvent {
+  articleId: string;
+  headline: string;
+  apRigidity: number;
+  premiseAbsurdity: number;
+  jokeDiscipline: number;
+  specificityCarrier: number;
+  resolutionUnresolved: number;
+  overall: number;
+  rubricVersion: number;
+  rejudged: boolean;
+  at: number;
+}
+export interface RejudgeDoneEvent {
+  batches: number;
+  scored: number;
+  rejudged: number;
+  durationMs: number;
+  rubricVersion: number;
+  lastError: string | null;
+}
+export const rejudgeEvents = new EventEmitter();
+rejudgeEvents.setMaxListeners(50);
 
 /**
  * RUBRIC_VERSION — bump this constant after any meaningful change to JUDGE_SYSTEM
@@ -204,6 +229,21 @@ export async function scoreRecentArticles(): Promise<{ scored: number; skipped: 
         rubricVersion: RUBRIC_VERSION,
       });
       scored++;
+      try {
+        rejudgeEvents.emit("judged", {
+          articleId: art.id,
+          headline: art.headline,
+          apRigidity: result.apRigidity,
+          premiseAbsurdity: result.premiseAbsurdity,
+          jokeDiscipline: result.jokeDiscipline,
+          specificityCarrier: result.specificityCarrier,
+          resolutionUnresolved: result.resolutionUnresolved,
+          overall,
+          rubricVersion: RUBRIC_VERSION,
+          rejudged: isRejudge,
+          at: Date.now(),
+        } as RejudgeJudgedEvent);
+      } catch {}
     } catch (e) {
       console.warn("[HUMOR:PERSIST] failed for", art.id, (e as Error).message);
     }
@@ -280,6 +320,16 @@ export async function rejudgeAllStale(opts: { batchDelayMs?: number; maxBatches?
   } finally {
     rejudgeProgress.running = false;
     rejudgeProgress.finishedAt = Date.now();
+    try {
+      rejudgeEvents.emit("done", {
+        batches: rejudgeProgress.batches,
+        scored: rejudgeProgress.scored,
+        rejudged: rejudgeProgress.rejudged,
+        durationMs: Date.now() - t0,
+        rubricVersion: RUBRIC_VERSION,
+        lastError: rejudgeProgress.lastError,
+      } as RejudgeDoneEvent);
+    } catch {}
   }
   return {
     batches: rejudgeProgress.batches,
