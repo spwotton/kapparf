@@ -216,7 +216,7 @@ function GooseSvg({ honking, size = 40 }: { honking: boolean; size?: number }) {
 // ─── TAG BADGE ────────────────────────────────────────────────────────────────
 function TagBadge({ tag }: { tag: string }) {
   const colors: Record<string, string> = {
-    BREAKING: "bg-red-700 text-white",
+    BREAKING: "bg-gray-900 text-white",
     SCIENCE: "bg-blue-800 text-white",
     BUSINESS: "bg-gray-800 text-white",
     SOCIETY: "bg-purple-800 text-white",
@@ -250,7 +250,7 @@ function StoryCard({ article, onClick, variant = "default" }: {
         </div>
         <div className="flex-1 min-w-0">
           <TagBadge tag={article.tag}/>
-          <h4 className="font-serif text-[13px] font-bold leading-snug mt-1 text-gray-900 group-hover:text-red-700 transition-colors line-clamp-2">
+          <h4 className="font-serif text-[13px] font-bold leading-snug mt-1 text-gray-900 group-hover:text-gray-500 transition-colors line-clamp-2">
             {article.headline}
           </h4>
         </div>
@@ -266,7 +266,7 @@ function StoryCard({ article, onClick, variant = "default" }: {
           onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${article.id}/700/440`; }}/>
       </div>
       <TagBadge tag={article.tag}/>
-      <h3 className={`font-serif font-bold leading-snug mt-1.5 text-gray-900 group-hover:text-red-700 transition-colors ${variant === "featured" ? "text-xl" : "text-[15px]"}`}>
+      <h3 className={`font-serif font-bold leading-snug mt-1.5 text-gray-900 group-hover:text-gray-500 transition-colors ${variant === "featured" ? "text-xl" : "text-[15px]"}`}>
         {article.headline}
       </h3>
       {article.subhead && variant !== "default" && (
