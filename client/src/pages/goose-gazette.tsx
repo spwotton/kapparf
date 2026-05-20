@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 
 // ─── ARTICLES ────────────────────────────────────────────────────────────────
 const ARTICLES = [
@@ -366,11 +366,21 @@ function ArticleModal({ article, onClose }: { article: typeof ARTICLES[0]; onClo
 }
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
+const NAV_SECTIONS = ["News", "Society", "Business", "Science", "Obituaries", "Maritime", "Opinion"];
+
 export default function GooseGazettePage() {
   const [honking, setHonking] = useState(false);
   const [honkCount, setHonkCount] = useState(0);
   const [selected, setSelected] = useState<typeof ARTICLES[0] | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const tickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleHonk = useCallback(() => {
     playHonk();
@@ -383,14 +393,101 @@ export default function GooseGazettePage() {
   const restArticles = ARTICLES.slice(1);
 
   return (
-    <div className="min-h-screen bg-white font-serif" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+    <div className="min-h-screen bg-white" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
 
-      {/* ── SATIRICAL ANNOUNCEMENT BAR ── */}
-      <div className="bg-gray-900 text-gray-200 text-[11px] font-sans text-center py-1.5 tracking-wide">
-        <span className="text-yellow-400 font-bold">OFFICIAL NOTICE:</span>{" "}
-        Experts Recommend "Protecting Your System" By Not Plugging It In, Not Turning It On, And Not Telling Anyone You Own One.{" "}
-        <span className="text-gray-500">| This message brought to you by your ISP, who definitely cannot access your router remotely.</span>
-      </div>
+      {/* ── STICKY TRANSPARENT NAVBAR ── */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+          scrolled
+            ? "bg-white/96 backdrop-blur-md shadow-sm border-b border-gray-300"
+            : "bg-white/80 backdrop-blur-sm border-b border-gray-200"
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 h-13 flex items-center justify-between gap-3" style={{ height: 52 }}>
+
+          {/* Logo */}
+          <a href="/goose" className="flex items-center gap-1.5 shrink-0 select-none">
+            <span className="text-lg leading-none" style={{ lineHeight: 1 }}>🪿</span>
+            <span
+              className="font-black text-black tracking-tight leading-none"
+              style={{ fontFamily: "Georgia, serif", fontSize: 15 }}
+            >
+              <span className="hidden sm:inline">THE GOOSE GAZETTE</span>
+              <span className="sm:hidden">GOOSE GAZETTE</span>
+            </span>
+          </a>
+
+          {/* Desktop nav links */}
+          <nav className="hidden md:flex items-center">
+            {NAV_SECTIONS.map((s) => (
+              <button
+                key={s}
+                className="px-2.5 py-1 text-[10px] font-black font-sans text-gray-600 hover:text-black tracking-widest uppercase transition-colors hover:bg-gray-100 rounded-sm"
+              >
+                {s}
+              </button>
+            ))}
+          </nav>
+
+          {/* Right: Honk button + hamburger */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={handleHonk}
+              data-testid="button-nav-honk"
+              className={`hidden sm:block text-[10px] font-black font-sans px-3 py-1.5 border-2 border-black transition-all ${
+                honking ? "bg-yellow-400 text-black scale-105" : "bg-white text-black hover:bg-yellow-50"
+              }`}
+            >
+              {honking ? "HONK!!!" : "HONK"}
+            </button>
+            <button
+              onClick={() => setMobileOpen((o) => !o)}
+              data-testid="button-mobile-menu"
+              className="md:hidden p-2 text-black hover:bg-gray-100 rounded-sm transition-colors"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? (
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M3 7h18M3 12h18M3 17h18" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile drawer */}
+        {mobileOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 border-b-2 border-b-black shadow-lg">
+            <div className="max-w-6xl mx-auto px-4 py-3 grid grid-cols-3 gap-1">
+              {NAV_SECTIONS.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-left px-3 py-3 text-[11px] font-black font-sans text-gray-800 hover:bg-gray-100 tracking-widest uppercase transition-colors rounded-sm"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+            <div className="px-4 pb-3">
+              <button
+                onClick={() => { handleHonk(); setMobileOpen(false); }}
+                data-testid="button-drawer-honk"
+                className="w-full py-3 bg-yellow-400 text-black text-[12px] font-black font-sans tracking-widest border-2 border-black hover:bg-yellow-300 transition-colors"
+              >
+                🪿 HONK {honkCount > 0 ? `(${honkCount})` : ""}
+              </button>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* Spacer for fixed header */}
+      <div style={{ height: 52 }} />
 
       {/* ── BREAKING NEWS TICKER ── */}
       <div className="bg-red-700 text-white flex items-center overflow-hidden" style={{ height: 28 }}>

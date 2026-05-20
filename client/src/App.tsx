@@ -114,17 +114,24 @@ function App() {
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <SidebarProvider>
-              <div className="flex h-screen w-full">
-                <AppSidebar />
-                <div className="flex flex-col flex-1 min-w-0">
-                  <HeaderControls />
-                  <main className="flex-1 overflow-auto min-h-0">
-                    <Router />
-                  </main>
-                </div>
-              </div>
-            </SidebarProvider>
+            <Switch>
+              {/* Standalone sites — no KAPPA sidebar */}
+              <Route path="/goose" component={GooseGazettePage} />
+              {/* Main KAPPA platform */}
+              <Route>
+                <SidebarProvider>
+                  <div className="flex h-screen w-full">
+                    <AppSidebar />
+                    <div className="flex flex-col flex-1 min-w-0">
+                      <HeaderControls />
+                      <main className="flex-1 overflow-auto min-h-0">
+                        <Router />
+                      </main>
+                    </div>
+                  </div>
+                </SidebarProvider>
+              </Route>
+            </Switch>
             <Toaster />
           </TooltipProvider>
         </QueryClientProvider>
