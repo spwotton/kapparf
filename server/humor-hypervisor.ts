@@ -12,7 +12,7 @@
  */
 
 import { db } from "./db";
-import { gooseArticles, gooseHumorScores } from "@shared/schema";
+import { gooseArticles, gooseHumorScores, type GooseHumorScore } from "@shared/schema";
 import { desc, sql, eq } from "drizzle-orm";
 import { openai as aiClient } from "./replit_integrations/audio/client";
 
@@ -394,4 +394,68 @@ export function stopHumorHypervisor() {
 
 export function getHumorHypervisorStatus() {
   return { running: started, cycleCount, lastCycleAt, cycleMs: CYCLE_MS };
+}
+
+// ── Single-article helpers (used by goose-generator L5 + HTTP routes) ────────
+
+/**
+ * Judge one article now and persist the result. Replaces any older-rubric score
+ * rows for the same article so the rolling average stays consistent. Returns
+ * the persisted score, or null if the judge call failed.
+ */
+export async function ingestArticle(article: {
+  id: string;
+  headline: string;
+  subhead: string | null;
+  body: string;
+}): Promise<GooseHumorScore | null> {
+  const result = await judgeArticle(article);
+  if (!result) return null;
+  const overall = Math.round(
+    (result.apRigidity + result.premiseAbsurdity + result.jokeDiscipline +
+     result.specificityCarrier + result.resolutionUnresolved) / 5
+  );
+  const judgeNotes = JSON.stringify({ notes: result.notes, summary: result.summary });
+  try {
+    await db.delete(gooseHumorScores).where(
+      sql`${gooseHumorScores.articleId} = ${article.id} AND ${gooseHumorScores.rubricVersion} < ${RUBRIC_VERSION}`
+    );
+    const [row] = await db.insert(gooseHumorScores).values({
+      articleId: article.id,
+      apRigidity: result.apRigidity,
+      premiseAbsurdity: result.premiseAbsurdity,
+      jokeDiscipline: result.jokeDiscipline,
+      specificityCarrier: result.specificityCarrier,
+      resolutionUnresolved: result.resolutionUnresolved,
+      overall,
+      judgeNotes,
+      rubricVersion: RUBRIC_VERSION,
+    }).returning();
+    // Bust the rolling-feedback cache so the next read reflects this score.
+    cachedFeedback = null;
+    return row;
+  } catch (e) {
+    console.warn("[HUMOR:INGEST] persist failed for", article.id, (e as Error).message);
+    return null;
+  }
+}
+
+/** Latest score for a single article (newest rubric wins), or null if unscored. */
+export async function getArticleScore(articleId: string): Promise<GooseHumorScore | null> {
+  const rows = await db.select()
+    .from(gooseHumorScores)
+    .where(eq(gooseHumorScores.articleId, articleId))
+    .orderBy(desc(gooseHumorScores.rubricVersion), desc(gooseHumorScores.scoredAt))
+    .limit(1);
+  return rows[0] ?? null;
+}
+
+/** Combined status + rolling feedback bundle — what the dashboard reads. */
+export async function getHypervisorState() {
+  const feedback = await getCachedFeedback();
+  return {
+    ...getHumorHypervisorStatus(),
+    rubricVersion: RUBRIC_VERSION,
+    feedback,
+  };
 }
