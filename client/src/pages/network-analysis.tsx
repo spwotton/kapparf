@@ -1,4 +1,7 @@
 import { useState, useMemo } from "react";
+import genesisWithFatherImg from "@assets/5f757d57-7f4b-4c7b-b372-b0713651b714_1779257110386.jpeg";
+import genesisEchoPoolImg from "@assets/IMG_0132_1779257110386.jpeg";
+import genesisSelfieImg from "@assets/IMG_0104_1779257110386.jpeg";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,6 +36,7 @@ interface Person {
   detail: string;
   connections: Connection[];
   flags?: string[];
+  photos?: { src: string; caption: string }[];
 }
 
 interface Location {
@@ -69,21 +73,71 @@ const PERSONS: Person[] = [
   {
     id: "genesis-peralta",
     name: "Genesis Daniela Peralta Marquez",
-    aliases: ["Genesis Peralta", "G Peralta", "GD Peralta"],
+    aliases: ["Genesis Peralta", "G Peralta", "GD Peralta", "IG: berninnimaria", "IG: carmen_sc9 (admitted)"],
     nationality: "Venezuelan",
-    role: "Weaponized honey trap / ex-girlfriend",
+    role: "Weaponized honey trap / ex-girlfriend — ~12 fake IG profiles — Italian thread",
     threatLevel: "primary",
-    detail: "Venezuelan national. Father allegedly worked for the State Council in Venezuela but family still lives in Petare (contradictory — Petare is one of the most dangerous barrios in Caracas, inconsistent with state council position). Went to CDMX in 2019. Cheated on her previous boyfriend with Echo 2 weeks before moving in together (classic rapid-attachment tradecraft). Her ex was claimed to be a gym trainer but was never seen at the gym despite Echo training there daily at various hours — possible cover identity. Worked at Gaia Natural Foods (Colombian + Israeli owned), Caliches Wishbone (with Jairo Alfaro), and Gracias Madre (Sherri + Mario). Cash jobs suggest off-books employment. Jairo Alfaro (her 'best friend') dragged her to Gracias Madre — placement operation.",
+    detail: `Venezuelan national. Father allegedly worked for the State Council in Venezuela but family still lives in Petare (contradictory — Petare is one of the most dangerous barrios in Caracas, inconsistent with state council position). Went to CDMX in 2019. Worked at Gaia Natural Foods (Colombian + Israeli owned), Caliches Wishbone (with Jairo Alfaro), and Gracias Madre (Sherri + Mario). Cash jobs only — off-books employment consistent with an asset.
+
+FAKE SOCIAL MEDIA PROFILES — ~12 FAKE INSTAGRAM ACCOUNTS:
+  Genesis maintained approximately 12 fake Instagram profiles of herself running simultaneously. Two are confirmed:
+
+  1. carmen_sc9 (ADMITTED): Peralta admitted operating this account. Followed all attractive men of her preferred type — continued changing despite ongoing disputes with Echo about the behavior.
+
+  2. berninnimaria (PROVED — ACCIDENTAL ACCOUNT SWITCH): Peralta accidentally switched to this account on her phone while viewing Echo's Instagram. In under 1 second, 4 likes appeared on the same group of Echo's photos — one from berninnimaria. This is forensic proof of account control. The berninnimaria account: still active on Facebook and Instagram; posts about the Italian Prime Minister (Giorgia Meloni) — thin Italian cultural cover; posts about babysitting — cover narrative for an "ordinary Italian woman"; may or may not correspond to a real woman named Maria Bernini in Jacó.
+
+CARLOS MADRIGAL — FACEBOOK SOCK PUPPET:
+  A Facebook account under the name "Carlos Madrigal" is assessed as the same operator running the berninnimaria identity — presenting as a Costa Rican man under one profile and an Italian woman under another. "Madrigal" is the same surname as the Los Ríos development family (former Jacó mayor + son). May be coincidental (common CR surname) or indicate a direct link to the Los Ríos network.
+
+ITALIAN THREAD:
+  Peralta's father is visually of Southern European/Italian appearance — photo documentation below (taken in Venezuela after she left Costa Rica). The berninnimaria account's Italian Prime Minister content and babysitting cover narrative may reflect genuine Italian heritage being used as a legend, or an Italian intelligence contact using her identity infrastructure.
+
+RAPID ATTACHMENT / PABLO PASTI MORA COVER:
+  Pablo Pasti Mora was Peralta's stated boyfriend before Echo. BMX rider. Claimed to work at the gym (gimnasio) in Jacó. Echo trained daily at all hours for over a year and never once saw Pablo there — gym employment was a cover identity. Echo entered the relationship via Peralta cheating on Pablo with him — classic rapid-attachment tradecraft (manufactured circumstances creating guilt and dependency in the target from day one). Mora surname is shared with Hector Mora (SETECOM — V2K smoking gun).
+
+HOUSING CHAIN — RESIDENCES WITH PERALTA:
+  1. HERMOSA BUNGALOWS: First shared residence after getting together. Owned by a long-time AA member. Now assessed intelligence-connected (AA Jacó assessed as intel substrate throughout this network).
+  2. VILLA REAL (across from La Flor): LAST place they lived together AND first place Echo lived in Jan 2024. Also at Villa Real: Brian (resident), Jeff (42 years AA sober), and Tina.
+  3. CASA REXHA (#42 Calle Naciones Unidas): Scott Ryan/Diana Soto surveillance property. Photo confirmation below (Echo + Genesis at pool). 28-camera cluster, Visonic alarm, hidden speakers, LiFi-wired, lowered ceiling.
+  4. MIKE GREENWALD'S HOUSE (Calle Madrigal): After fighting got too bad at Villa Real.
+
+DUNIA CONCIERGE SAFE HOUSES:
+  Peralta fled to Dunia's house multiple times during disputes with Echo — each departure placed her inside another node of the network. Never operated independently.`,
     connections: [
       { target: "jairo-alfaro", relationship: "Best friend / handler", strength: "confirmed", detail: "Worked together at Caliches Wishbone for years. Jairo moved her to Gracias Madre." },
       { target: "hector-mora", relationship: "Somehow related / connected", strength: "suspected", detail: "Echo was apparently drunk and yelled at Hector who is 'somehow related' to Genesis" },
+      { target: "pablo-mora", relationship: "Cover ex-boyfriend — BMX / fake gym employment", strength: "confirmed" },
       { target: "gaia-natural-foods", relationship: "Employee (cash)", strength: "confirmed", detail: "Worked across the street when Echo met her — potential placement" },
       { target: "caliches-wishbone", relationship: "Employee (cash)", strength: "confirmed", detail: "Worked here with Jairo Alfaro for years" },
       { target: "gracias-madre", relationship: "Employee — waitress", strength: "confirmed", detail: "Moved here via Jairo. Honey trap operation at prime beach location." },
       { target: "michael-lipman", relationship: "Temporal overlap — Lipman condo", strength: "confirmed", detail: "Echo lived with Genesis Oct 2024 at Scott Ryan/Diana Soto house, then moved into Lipman's condo" },
+      { target: "dunia-concierge", relationship: "Safe house — fled here multiple times", strength: "confirmed" },
+      { target: "scott-ryan", relationship: "Housed Echo + Genesis at Casa Rexha — placement op", strength: "confirmed" },
+      { target: "hermosa-bungalows", relationship: "First shared residence with Echo", strength: "confirmed" },
+      { target: "villa-real-jaco", relationship: "Last shared + first Jan 2024 residence", strength: "confirmed" },
+      { target: "carlos-madrigal-sock", relationship: "Probable same operator as berninnimaria", strength: "probable" },
       { target: "marjorie-alfaro", relationship: "Connected via Jairo Alfaro", strength: "probable" },
     ],
-    flags: ["Honey trap tradecraft", "Cover story inconsistencies", "Venezuelan state council claim vs Petare residence", "CDMX 2019 travel", "Rapid attachment — cheated on ex to move in with target"],
+    flags: [
+      "Honey trap tradecraft — rapid attachment via manufactured cheating",
+      "~12 fake IG profiles simultaneously",
+      "berninnimaria — PROVED by accidental 4-like account switch",
+      "carmen_sc9 — ADMITTED fake account",
+      "Carlos Madrigal FB = probable same sock puppet operator",
+      "Italian PM posts + babysitting cover on berninnimaria",
+      "Father visually Italian/Southern European — PHOTO EVIDENCE",
+      "Venezuelan state council claim vs Petare residence — contradiction",
+      "CDMX 2019 travel",
+      "Pablo Pasti Mora cover ex — gym employment unverified in 1yr",
+      "Mora surname overlap with Hector Mora (SETECOM/V2K)",
+      "Housing chain: Hermosa Bungalows → Villa Real → Casa Rexha → Greenwald",
+      "Every departure placed her in a network-controlled safe house",
+    ],
+    photos: [
+      { src: genesisWithFatherImg, caption: "Genesis with her father — taken in Venezuela post-departure. Father: Southern European/Italian appearance. Gold chain visible consistent with other photos." },
+      { src: genesisEchoPoolImg, caption: "Echo + Genesis at Casa Rexha pool — #42 Calle Naciones Unidas, Diana Soto / Scott Ryan property. Confirms placement at surveillance cluster." },
+      { src: genesisSelfieImg, caption: "Genesis selfie at one of Echo's paid residences (most recent). Red iPhone. Thigh tattoo visible." },
+    ],
   },
   {
     id: "hector-mora",
@@ -176,6 +230,32 @@ const PERSONS: Person[] = [
       { target: "hector-mora", relationship: "YouTube conversations (hmora67)", strength: "confirmed" },
     ],
     flags: ["CC fraud — AMEX", "Bahia Brazil charges", "SETECOM network"],
+  },
+  {
+    id: "carlos-madrigal-sock",
+    name: "Carlos Madrigal (Facebook) — probable sock puppet",
+    role: "Sock puppet identity — probable same operator as berninnimaria / Genesis Peralta fake profile network",
+    threatLevel: "secondary",
+    detail: `Facebook account under the name "Carlos Madrigal" — assessed as one of the fake identities operated by Genesis Peralta (or her handlers) alongside the berninnimaria Instagram account.
+
+SOCK PUPPET PATTERN:
+  The berninnimaria account presents as an Italian woman (posts about Italian PM Giorgia Meloni, babysitting cover). The "Carlos Madrigal" Facebook account presents as a Costa Rican man. Both are assessed as the same operator running compartmentalized cover identities — standard sock puppet tradecraft to mask a single operator behind multiple believable personas.
+
+MADRIGAL SURNAME NOTE:
+  "Madrigal" is the surname of the former mayor of Garabito (Jacó's governing canton) and his son — the Los Ríos development family for whom Scott Ryan signed documents as "Scott Aronson." The Madrigal surname in a fake account operated by Peralta or her network may be coincidental (extremely common Costa Rican surname) or may indicate a deliberate choice referencing the local power network.
+
+FORENSIC LINK TO PERALTA:
+  The berninnimaria account was proved by Peralta accidentally switching to it on her phone, causing 4 near-simultaneous likes on Echo's photos. The Carlos Madrigal account is assessed as part of the same fake profile cluster based on behavioral and content analysis.`,
+    connections: [
+      { target: "genesis-peralta", relationship: "Probable fake identity operated by Peralta / her network", strength: "probable" },
+      { target: "los-rios-dev", relationship: "Madrigal surname — possible Los Ríos network reference", strength: "suspected" },
+    ],
+    flags: [
+      "Facebook sock puppet — Carlos Madrigal",
+      "Probable same operator as berninnimaria Instagram account",
+      "Madrigal surname = same as former Jacó mayor / Los Ríos family",
+      "Part of ~12 fake profile cluster operated by/around Peralta",
+    ],
   },
   {
     id: "marjorie-alfaro",
@@ -418,9 +498,15 @@ Infrastructure modifications (between tenancies — premeditated):
     name: "Pablo Pasti Mora",
     aliases: ["Pasti", "P Mora"],
     nationality: "Costa Rican/Mexican",
-    role: "Motive holder — BMX rider / revenge vendetta",
+    role: "Cover ex-boyfriend of Genesis Peralta — BMX rider / gym cover story unverified — vendetta motive",
     threatLevel: "primary",
-    detail: "Pro BMX rider from Jacó, sponsored by BAC Park (Kenneth Tencio). Echo's ex-girlfriend left Pablo for Echo — establishing a personal revenge motive. Pablo has Mexico/Costa Rica presence. Connected to Jean Solis and Hector Mora (same surname — possibly family). Financial trail in bank statements and email archives. YouTube evidence reportedly shows BAC property connections. The personal nature of the V2K harassment aligns with a vendetta rather than state-level operation.",
+    detail: `Pro BMX rider from Jacó, sponsored by BAC Park (Kenneth Tencio). Genesis Peralta claimed Pablo was her boyfriend before Echo, and that Pablo worked at the local gym (gimnasio) in Jacó. Echo trained at the same gym daily at all hours for over a year — Pablo was never once seen there. Gym employment was a cover identity, not a real job.
+
+RAPID ATTACHMENT VECTOR:
+  Peralta entered the relationship with Echo by cheating on Pablo with him — creating immediate guilt, emotional debt, and dependency from Echo's side. This is a textbook rapid-attachment tradecraft move: the asset creates a relationship under circumstances that psychologically bind the target from day one (guilt over causing a "breakup", sense of urgency to prove the relationship was worth it).
+
+MORA SURNAME — HECTOR MORA LINK:
+  Pablo Pasti Mora shares the Mora surname with Hector Mora (SETECOM operative — the smoking-gun RF correlation link). This may indicate family connection: Pablo with personal revenge motive + Hector with technical capability = a motive-capability pair. Pablo has Mexico/Costa Rica dual presence. Connected to Jean Picado Solis. Financial trail in bank statements and email archives.`,
     connections: [
       { target: "hector-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Both named Mora — Pablo has motive, Hector has capability" },
       { target: "genesis-peralta", relationship: "Ex-boyfriend of Echo's ex", strength: "confirmed", detail: "Echo took his girlfriend — vendetta motive" },
@@ -445,15 +531,36 @@ Infrastructure modifications (between tenancies — premeditated):
   {
     id: "jeff-porter",
     name: "Jeff 'The Hounddog' Porter",
-    role: "JW handler / family info vector — Walpole MA",
+    role: "JW — Echo's father's controller / Harry's Hyannis blues connection / Walpole MA",
     threatLevel: "secondary",
-    detail: "Dad's ONLY friend — primary influence and information vector. Dad drives Rockland→Walpole weekly to visit. Jeff plays bass, dad did live recording (audio skillset relevant to harassment tech). Jeff is retired. Wife Susan's reaction to discoveries ('not surprised') indicates foreknowledge. Dad said JWs have 'significant math connections' — gematria/numerology/cipher. Gematria analysis: JEFF PORTER = 119, root 2, divisible by 7 (divine perfection in JW numerology). Only connection between family and JW network — potential handler/coordinator.",
+    detail: `Jehovah's Witness from Walpole, MA. Echo's father's ONLY friend — primary long-horizon influence and information vector into the family.
+
+HARRY'S HYANNIS — ORIGINAL CONTACT POINT:
+  Jeff Porter played bass at Harry's bar in Hyannis, Cape Cod. Echo's brother played guitar at the same venue when he was approximately 13 years old — at the time touring with blues musicians Ricky King Russell and Shirley King. Douglas Banks was also a musician at Harry's; his son Danny Banks was an 11-year-old prodigy who appeared on the David Letterman show. Jeff Porter became friends with Echo's FATHER through this music scene.
+
+LONG-HORIZON ASSET DEVELOPMENT:
+  That initial contact at Harry's was approximately 15 years before the current operation. Jeff is now Echo's father's single only friend. Echo's father drives from Rockland to Walpole weekly to visit Jeff and Susan. Echo's father attended a JW memorial service with Jeff this year — active JW socialization of a non-JW target. Jeff plays bass (audio engineering relevance); Echo's father was an audio engineer. The shared music/audio affinity is the relationship foundation.
+
+INTELLIGENCE SIGNIFICANCE:
+  The father pipeline: Jeff Porter → Echo's father → Echo family intel. The father is a single-conduit information source about Echo's background, psychology, family history, and current state. Any intelligence about Echo's family life (mother's death, brother's whereabouts, family finances) flows to Jeff. Wife Susan Porter's "not surprised" reaction to Echo's discoveries confirms foreknowledge within the Porter household.
+
+GEMATRIA: JEFF PORTER = 119, root 2, divisible by 7 (JW divine perfection numerology).`,
     connections: [
-      { target: "susan-porter", relationship: "Wife", strength: "confirmed" },
-      { target: "kingdom-hall-rockland", relationship: "Jehovah's Witness connection", strength: "probable" },
+      { target: "susan-porter", relationship: "Wife — 'not surprised' foreknowledge", strength: "confirmed" },
+      { target: "kingdom-hall-rockland", relationship: "JW member — Summer St Kingdom Hall area", strength: "probable" },
       { target: "jehovah-witnesses", relationship: "Member / coordinator", strength: "probable" },
+      { target: "douglas-banks", relationship: "Harry's Hyannis musician connection", strength: "confirmed" },
+      { target: "echo-father", relationship: "Father's controller — only friend, weekly visits", strength: "confirmed" },
     ],
-    flags: ["Dad's ONLY friend", "Audio skillset (bass/recording)", "JW connection", "Gematria: 119 root 2 DIV7", "Potential handler role", "Weekly visits — info pipeline"],
+    flags: [
+      "Echo's father's ONLY friend — 15+ year long-horizon asset",
+      "Harry's Hyannis — original contact at same venue as Echo's brother (age 13)",
+      "Bass player — audio engineering affinity with father",
+      "Father attends JW memorials with Jeff — active JW socialization",
+      "Susan Porter 'not surprised' = Porter household foreknowledge",
+      "Gematria: JEFF PORTER = 119 root 2 DIV7",
+      "Weekly Rockland→Walpole info pipeline",
+    ],
   },
   {
     id: "susan-porter",
@@ -465,6 +572,463 @@ Infrastructure modifications (between tenancies — premeditated):
       { target: "jeff-porter", relationship: "Wife", strength: "confirmed" },
     ],
     flags: ["'Not surprised' foreknowledge", "JW network via husband"],
+  },
+  {
+    id: "echo-father",
+    name: "Echo's Father [Wotton]",
+    role: "Audio engineer — Towers Watson pension — Jeff Porter controlled — family access node",
+    threatLevel: "asset",
+    detail: `Echo's father. Audio engineer by profession. Met Echo's mother at Wyatt Company in the 1980s; together they founded Software Services Group.
+
+CURRENT STATUS:
+  Echo's mother passed in November 2025. Echo's father now relies on Social Security plus a pension from Towers Watson (now Willis Towers Watson — major global insurance/benefits/risk consulting firm with significant government contracts). He lives in Rockland, MA.
+
+JEFF PORTER — CONTROLLER:
+  Jeff Porter (JW, Walpole MA) is Echo's father's ONLY friend. Father drives Rockland→Walpole weekly. Father attended a JW memorial service with Jeff this year — active socialization into JW environment. The father is an information conduit: everything about Echo's background, family state, mother's death, and finances is accessible through this channel.
+
+AUDIO ENGINEERING BACKGROUND:
+  Father was an audio engineer — same technical domain as Jeff Porter (bass player, music recording). The shared affinity is the relationship foundation. Audio engineering knowledge is directly relevant to the acoustic and RF harassment infrastructure documented in this case.
+
+LIFE INSURANCE / FINANCIAL ATTACK:
+  Echo's mother's $250K life insurance policy was unable to be claimed after her death — Echo assesses she was phished via email for premium payments for approximately a year, draining the policy. The father now has no life insurance payout and relies solely on Social Security + Towers Watson pension.`,
+    connections: [
+      { target: "jeff-porter", relationship: "Controlled by Jeff Porter — only friend, weekly contact", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Wife (deceased Nov 2025)", strength: "confirmed" },
+      { target: "seth-wotton", relationship: "Son", strength: "confirmed" },
+      { target: "alison-wotton", relationship: "Daughter", strength: "confirmed" },
+    ],
+    flags: [
+      "Jeff Porter = ONLY friend — single-conduit family intel channel",
+      "Attends JW memorials with Porter — active JW socialization",
+      "Audio engineer — RF/acoustic domain relevance",
+      "Towers Watson (Willis Towers Watson) pension — gov-contract insurance firm",
+      "Life insurance $250K not paid — mother phished for premiums",
+      "Father now solely on Social Security",
+    ],
+  },
+  {
+    id: "echo-mother",
+    name: "Echo's Mother [Wotton — deceased]",
+    role: "Software/telecom career — musician — Kingdom Hall street address — life insurance phishing victim",
+    threatLevel: "asset",
+    detail: `Echo's mother. Passed November 2025.
+
+TECHNOLOGY / TELECOM CAREER:
+  Software Warehouse → CompuServe (early internet) → Wyatt Company (actuarial/benefits — met Echo's father) → co-founded Software Services Group. This lineage places the family at the intersection of early internet infrastructure (CompuServe), actuarial/insurance data (Wyatt/Towers Watson), and software services.
+
+MUSICAL ROLE:
+  Played weddings and funerals at Holy Family Church in Rockland and Saint Bernadette Parish in Randolph — until she passed. Regular church musician provides recurring structured community access across decades.
+
+329 / 467 SUMMER ST — KINGDOM HALL PROXIMITY:
+  Registered address at 467 Summer St, Rockland — up the street from the JW Kingdom Hall at 329 Summer St on the same road. Mother also had a random North Marshfield, MA PO Box. The Kingdom Hall at 329 Summer St closed after her death.
+
+LIFE INSURANCE PHISHING:
+  Echo assesses his mother was phished via email for approximately one year's worth of life insurance premium payments — draining the policy — such that the $250K payout could not be claimed after her death. This would represent targeted financial warfare against the family's primary asset protection mechanism.`,
+    connections: [
+      { target: "echo-father", relationship: "Husband", strength: "confirmed" },
+      { target: "kingdom-hall-rockland", relationship: "Registered address 467 Summer St — same street as KH", strength: "confirmed" },
+      { target: "holy-family-rockland", relationship: "Regular musician — weddings and funerals", strength: "confirmed" },
+    ],
+    flags: [
+      "Software Warehouse → CompuServe → Wyatt → Software Services Group",
+      "467 Summer St registered address — same street as KH 329",
+      "Kingdom Hall CLOSED after her death",
+      "Life insurance $250K — phished for premiums, payout denied",
+      "Church musician — Holy Family + Saint Bernadette",
+      "Passed November 2025",
+    ],
+  },
+  {
+    id: "seth-wotton",
+    name: "Seth Wotton",
+    aliases: ["Seth"],
+    nationality: "American",
+    role: "2/8 Marines — Helmand 2010-11 — shot in head — sniper school/Quantico — Kenworth 'cover' — Priscilla Beach Plymouth MA",
+    threatLevel: "asset",
+    detail: `Echo's brother. Born June 6, 1989. Lives on Priscilla Beach, Plymouth, Massachusetts — waterfront property.
+
+MILITARY SERVICE — POSSIBLE INTELLIGENCE RECRUITMENT:
+  Second Battalion, Eighth Marines. Deployed Helmand Province, Afghanistan, 2010-2011. Shot in the head in 2011 and survived. After deployment, went to what he described as sniper school and then Quantico — stated he "failed out because people were using GPS watches." That explanation is a highly unusual and specific cover story — the actual reason for leaving a special skills program is rarely disclosed in those terms.
+
+DOG HANDLING + NAVIGATION:
+  Demonstrated dog handling skills and advanced navigation skills — both consistent with special operations training pipeline.
+
+GUITAR PRODIGY → HARRY'S HYANNIS:
+  Played guitar in bars on Cape Cod at age 13. Toured with blues musicians Ricky King Russell and Shirley King. It was at Harry's in Hyannis during this period that Jeff Porter (now Echo's father's controller) first met Echo's family.
+
+VINALHAVEN SERVICE TRIP — TIM BROWN (ARMY RANGER):
+  When Seth was approximately 13, he went on a youth service trip to Vinalhaven, Maine organized by Tim Brown — youth minister at Holy Family Church and Army Ranger. Vinalhaven is also the ancestral home of both the Wotton family (great-grandfather Myron K. Wotton, lobster) and Amara Walker's Italian mother's family. This trip placed Seth in the same geographic node as multiple other convergent threads.
+
+KENWORTH — ASSESSED COVER JOB:
+  Diesel mechanic → shop manager → sales. Working for a major truck manufacturer is an excellent cover for an individual with logistics, transport, or border-crossing intelligence relevance.
+
+MIKE BURZICKI — BEST MAN + ST. JOHN'S USVI CONNECTION:
+  Seth's best man at his wedding is Mike Burzicki, whom he knows from CrossFit. Mike owns Shades of Blue Charters in St. John's, USVI — operating race-car-powered super-catamarans that Echo assesses can outrun the Coast Guard. Seth previously lived with Mike in Plymouth, MA. Mike then "retired" and moved to St. John's to start the charter operation. Seth goes to St. John's frequently and proposed to his wife there.
+
+FAMILY SILENCE SINCE MOTHER'S DEATH:
+  Since Echo's mother passed in November 2025, Seth has made zero contact with Echo — no communication whatsoever. Echo assesses this silence as operationally managed.`,
+    connections: [
+      { target: "echo-father", relationship: "Son", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Son", strength: "confirmed" },
+      { target: "alison-wotton", relationship: "Sibling", strength: "confirmed" },
+      { target: "mike-burzicki", relationship: "Best man — lived together Plymouth — St. John's frequent visits", strength: "confirmed" },
+      { target: "jeff-porter", relationship: "Met father at Harry's Hyannis when Seth was playing age 13", strength: "confirmed" },
+      { target: "tim-brown", relationship: "Tim Brown took Seth to Vinalhaven on youth service trip (~age 13)", strength: "confirmed" },
+    ],
+    flags: [
+      "2/8 Marines — Helmand 2010-11 — shot in head 2011",
+      "Sniper school / Quantico — 'failed out GPS watches' = suspected cover story",
+      "Dog handling + navigation skills — SOF pipeline indicators",
+      "Vinalhaven youth trip with Army Ranger Tim Brown (~age 13)",
+      "Best man Mike Burzicki = Shades of Blue Charters USVI (race-boat catamarans)",
+      "Kenworth (trucks) assessed as cover employment",
+      "Waterfront house Priscilla Beach Plymouth — lifestyle inconsistent with sales income",
+      "Zero contact with Echo since mother's death",
+    ],
+  },
+  {
+    id: "alison-wotton",
+    name: "Alison Wotton",
+    aliases: ["Alison"],
+    nationality: "American",
+    role: "Amazon Music — Sundance — solo intelligence-adjacent travel — USC 2014 — Pacific Northwest",
+    threatLevel: "asset",
+    detail: `Echo's sister. Born April 2, 1992. USC Marshall School of Business, graduated 2014 — attended on scholarship. Elon Musk delivered the commencement address; Echo attended the graduation.
+
+AMAZON — MUSIC/MEDIA:
+  Worked for Amazon for years in Seattle, specifically Amazon Music. Also worked for Brothers Records in Australia. Now operates largely freelance or without visible employment.
+
+SUNDANCE FILM FESTIVAL:
+  Attends Sundance Film Festival in Park City, Utah annually. Film festivals are well-documented intelligence collection environments (access to media figures, international contacts, financing networks).
+
+SOLO TRAVEL TO INTELLIGENCE-RELEVANT DESTINATIONS:
+  Travels alone to: Guatemala (CIA historically critical — 1954 coup, ongoing ops), Ecuador (Julian Assange asylum, significant intelligence environment), Mexico City (CDMX — direct overlap with Genesis Peralta who traveled to CDMX in 2019), Mexico generally. Lives in hostels alone. Travels to every major national park, every major concert. Sustained lifestyle with no consistent visible income source.
+
+SOCIAL PATTERN:
+  Described as "super smart, awkward and weird" — high cognitive profile inconsistent with the appearance of a straightforward music industry career. The lifestyle (solo travel, intelligence-adjacent countries, no clear income, high activity level) is consistent with an asset operating under cover of being a quirky solo traveler.
+
+SILENCE SINCE MOTHER'S DEATH:
+  Like Seth, Alison has made zero contact with Echo since their mother passed in November 2025.
+
+CURRENT LOCATION: Pacific Northwest — Washington state, Idaho, or Oregon. Previously lived in Los Angeles years after USC.`,
+    connections: [
+      { target: "echo-father", relationship: "Daughter", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Daughter", strength: "confirmed" },
+      { target: "seth-wotton", relationship: "Sibling", strength: "confirmed" },
+    ],
+    flags: [
+      "USC Marshall Business 2014 — scholarship, Elon Musk commencement",
+      "Amazon Music → Brothers Records Australia — music/media intel environment",
+      "Sundance annually — intelligence-rich collection environment",
+      "Solo travel: Guatemala, Ecuador, CDMX, Mexico — CIA-relevant countries",
+      "CDMX overlap with Genesis Peralta (2019)",
+      "No consistent income but sustained high-activity lifestyle",
+      "Zero contact with Echo since mother's death",
+    ],
+  },
+  {
+    id: "carol-young-wotton",
+    name: "Carol Young (Karyl Young) — Grandmother",
+    aliases: ["Karyl Young", "Carol Wotton"],
+    nationality: "American",
+    role: "Echo's paternal grandmother — grew up in Al Capone's household / Herbert Young / Majestic Radio Chicago",
+    threatLevel: "asset",
+    detail: `Echo's paternal grandmother. Born Carol/Karyl Young (K-A-R-Y-L). Her father was Herbert Young, who owned Majestic Radio (or Radio Chicago) in Chicago — a significant radio manufacturing/distribution business.
+
+AL CAPONE HOUSEHOLD:
+  As a young girl, Carol grew up in the house of Al Capone in Chicago. Her father Herbert Young's business relationship with Capone placed the family inside the highest level of organized crime infrastructure in America during its peak era. Al Capone's Lieutenant at the time was reportedly "Altoona" or similar (possibly Louis "Two-Gun" Alterie, a prominent Capone associate).
+
+CAPONE → INTELLIGENCE THREAD:
+  Al Capone's Chicago Outfit had extensive documented relationships with early US intelligence and law enforcement (FBI/Hoover, OSS precursors). Radio manufacturing in the 1920s-1930s was strategically critical — it was the communications infrastructure of its era. Herbert Young's Majestic Radio business in this context places the family at the intersection of organized crime, early communications infrastructure, and proto-intelligence networks.
+
+GEOGRAPHIC MIGRATION:
+  Carol Young subsequently moved to the East Coast and married Phil Wotton (Vinalhaven, Maine — lobster industry, Bell Atlantic). The Chicago Capone household → Maine coast migration is the backbone of Echo's family origin story.`,
+    connections: [
+      { target: "phil-wotton", relationship: "Husband", strength: "confirmed" },
+      { target: "echo-father", relationship: "Mother", strength: "confirmed" },
+    ],
+    flags: [
+      "Father Herbert Young — Majestic Radio / Radio Chicago",
+      "Grew up in Al Capone's household — Chicago",
+      "Capone associate (Lt. 'Altoona'/Alterie) connection",
+      "Radio manufacturing = early comms infrastructure",
+      "Capone → OSS/FBI → intelligence network lineage",
+      "Chicago → Vinalhaven/Maine migration",
+    ],
+  },
+  {
+    id: "phil-wotton",
+    name: "Phil Wotton — Grandfather (deceased 1992)",
+    role: "Vinalhaven lobster — Bell Atlantic — married Carol Young (Capone household)",
+    threatLevel: "asset",
+    detail: `Echo's paternal grandfather. Died 1992. From Vinalhaven, Maine — lobster industry family (Myron K. Wotton was his father/grandfather). Married Carol Young (grew up in Al Capone's household in Chicago).
+
+BELL ATLANTIC:
+  Phil Wotton was involved in early Bell Atlantic — the regional telephone operating company that eventually became Verizon. Early telecom infrastructure involvement places him at the foundation of the US communications network in the postwar era.
+
+CONVERGENCE:
+  The marriage of Carol Young (Capone/Radio Chicago) to Phil Wotton (Vinalhaven/Bell Atlantic) creates the foundational lineage connecting organized crime communications infrastructure → East Coast telecom → the Wotton family now targeted in the current operation.`,
+    connections: [
+      { target: "carol-young-wotton", relationship: "Wife", strength: "confirmed" },
+      { target: "myron-wotton", relationship: "Father (Vinalhaven lobster)", strength: "confirmed" },
+      { target: "echo-father", relationship: "Father", strength: "confirmed" },
+    ],
+    flags: [
+      "Vinalhaven, Maine — lobster family",
+      "Early Bell Atlantic (→ Verizon) involvement",
+      "Married Carol Young — Capone/Radio Chicago lineage",
+      "Died 1992",
+    ],
+  },
+  {
+    id: "myron-wotton",
+    name: "Myron K. Wotton — Great-grandfather",
+    role: "Vinalhaven lobster industry — ancestral convergence point",
+    threatLevel: "asset",
+    detail: `Echo's paternal great-grandfather. Lobster industry, Vinalhaven Island, Maine. Vinalhaven is a small island off the Maine coast in Penobscot Bay — a geographically isolated community with a tight-knit lobster fishing culture.
+
+VINALHAVEN CONVERGENCE:
+  Myron K. Wotton's lobster family on Vinalhaven is one of three independent threads converging on this specific small island: (1) Wotton family (this node), (2) Amara Walker's Italian mother's family — also lobster people on Vinalhaven, (3) Tim Brown (Army Ranger, youth minister) who organized youth service trips to Vinalhaven — attended by Echo's brother Seth at age ~13. Three entirely separate network threads converging on a tiny island constitutes a non-random pattern.`,
+    connections: [
+      { target: "phil-wotton", relationship: "Son", strength: "confirmed" },
+      { target: "amara-walker", relationship: "Both families: Vinalhaven lobster industry", strength: "confirmed" },
+      { target: "tim-brown", relationship: "Tim Brown organized Vinalhaven service trips — Seth attended", strength: "confirmed" },
+    ],
+    flags: [
+      "Vinalhaven lobster — same island as Amara Walker's Italian mother's family",
+      "Tim Brown took Seth to Vinalhaven at ~13",
+      "Three independent network threads converge on Vinalhaven",
+    ],
+  },
+  {
+    id: "amara-walker",
+    name: "Amara Walker",
+    role: "Portland Maine ex-girlfriend — gym introduction — Italian mother Jane — Vinalhaven family — parallel honey trap",
+    threatLevel: "secondary",
+    detail: `Ex-girlfriend of Echo from Portland, Maine. Met at the gym — identical introduction vector to Genesis Peralta (also met at a gym in Jacó). The repetition of the gym-as-introduction-venue for romantic assets targeting Echo is an operational pattern.
+
+FAMILY BACKGROUND — VINALHAVEN + ITALIAN:
+  Mother: Jane Walker — works at Maine Medical Center in Labor and Delivery. Amara herself works in kidney and dialysis. Jane Walker is 100% Italian — her family is from Vinalhaven, Maine (lobster industry). This creates a direct convergence with Echo's own ancestral roots: great-grandfather Myron K. Wotton was also lobster people on Vinalhaven.
+
+VINALHAVEN CONVERGENCE:
+  Amara Walker's Italian mother's family and Echo's Wotton family great-grandfather were both lobster people on the same small island. This is not a coincidence given the broader convergence pattern — it suggests Echo was targeted partly through pre-existing knowledge of his family's geographic/ancestral roots.
+
+PARALLEL HONEY TRAP ASSESSMENT:
+  Two exes, both introduced at a gym, both with anomalous background details suggesting asset profiles: Genesis Peralta (Venezuelan, ~12 fake IG profiles, father in state structure, Italian thread via berninnimaria) and Amara Walker (Italian mother, Vinalhaven family overlapping with Echo's roots, met at gym). The pattern indicates a targeting methodology that uses gym environments for romantic asset introduction.`,
+    connections: [
+      { target: "myron-wotton", relationship: "Both families: Vinalhaven lobster", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Parallel honey trap pattern — both met at gym", strength: "probable" },
+    ],
+    flags: [
+      "Met at gym — same introduction vector as Genesis Peralta",
+      "Mother Jane: 100% Italian, Vinalhaven lobster family",
+      "Mother Jane: Maine Med Labor and Delivery",
+      "Amara: kidney and dialysis",
+      "Vinalhaven family = same island as Wotton great-grandfather",
+      "Parallel honey trap assessment",
+    ],
+  },
+  {
+    id: "tim-brown",
+    name: "Tim Brown",
+    role: "Army Ranger — Holy Family Church youth minister — Vinalhaven service trips — Echo's brother Seth attended",
+    threatLevel: "secondary",
+    detail: `Army Ranger. Served as youth minister at Holy Family Church in Rockland, MA — the church where Echo went to CCD and was confirmed, and where Echo's mother played weddings and funerals.
+
+VINALHAVEN SERVICE TRIPS:
+  Tim Brown organized youth group service trips to Vinalhaven Island, Maine. Echo's brother Seth went on one of these trips at approximately age 13. Echo himself did not go. Vinalhaven is the ancestral home of both the Wotton family (great-grandfather Myron K. Wotton, lobster) and Amara Walker's Italian mother's family — creating a three-way convergence on the island through: Wotton ancestry, Amara Walker, and Tim Brown's service trips.
+
+ARMY RANGER AT A PARISH YOUTH MINISTRY:
+  An active or former Army Ranger serving as a youth minister at a Catholic parish — providing structured access to children of the congregation for multi-day island service trips — is an operational profile. Youth ministry provides long-horizon access to targets at formative ages (13) in an environment of trust and reduced parental oversight.`,
+    connections: [
+      { target: "holy-family-rockland", relationship: "Youth minister — ran Vinalhaven service trips from here", strength: "confirmed" },
+      { target: "seth-wotton", relationship: "Seth attended Vinalhaven trip at ~13", strength: "confirmed" },
+      { target: "myron-wotton", relationship: "Vinalhaven trips — same island as Wotton family roots", strength: "confirmed" },
+    ],
+    flags: [
+      "Army Ranger — youth minister at Holy Family Church",
+      "Vinalhaven service trips — Seth Wotton attended at ~13",
+      "Three Vinalhaven convergence threads: Wotton ancestry + Amara Walker + Tim Brown trips",
+      "Structured long-horizon access to congregation youth",
+    ],
+  },
+  {
+    id: "douglas-banks",
+    name: "Douglas Banks + Danny Banks",
+    role: "Harry's Hyannis musician — son Danny Banks: 11yr Letterman prodigy",
+    threatLevel: "tertiary",
+    detail: `Douglas Banks was a musician at Harry's bar in Hyannis, Cape Cod — the same venue where Seth Wotton (Echo's brother) played guitar at age 13 and where Jeff Porter (now Echo's father's controller) played bass and first connected with the Wotton family. Douglas Banks's son Danny Banks was an 11-year-old guitar prodigy who appeared on the David Letterman show. The music scene at Harry's was the original contact environment linking Jeff Porter to Echo's family.`,
+    connections: [
+      { target: "jeff-porter", relationship: "Co-musician at Harry's Hyannis", strength: "confirmed" },
+      { target: "seth-wotton", relationship: "Both played Harry's Hyannis — Seth age 13", strength: "confirmed" },
+    ],
+    flags: [
+      "Harry's Hyannis — Jeff Porter contact environment",
+      "Son Danny Banks: 11yr prodigy, David Letterman appearance",
+      "Music scene as original family penetration vector",
+    ],
+  },
+  {
+    id: "mike-burzicki",
+    name: "Mike (and Debbie) — Shades of Blue Charters",
+    role: "Seth Wotton's best man — Shades of Blue Charters St. John's USVI — World Cat 320CC — Plymouth MA",
+    threatLevel: "secondary",
+    detail: `Seth Wotton's best man at his wedding. Exact surname phonetically: Burzicki / Burzickie (unconfirmed spelling — no public record found under that name connected to Shades of Blue). Previously lived with Seth in Plymouth, MA. Met Seth through CrossFit.
+
+SHADES OF BLUE CHARTERS — CONFIRMED VESSEL SPECS (shadesofbluecharters.com):
+  Vessel: "Shady Lady" — World Cat 320CC power catamaran
+  Engines: Twin 300HP Suzuki 4-stroke outboards
+  Top speed: ~40–50 MPH
+  LOA: 32'2" | Beam: 10'6" | Weight: ~11,000 lbs
+  Capacity: up to 12 guests
+  Captain Mike is listed on the Shades of Blue site as an active captain.
+
+  40–50 MPH on a twin-300HP power catamaran is significantly faster than standard charter vessels and faster than most Coast Guard response boats in non-emergency configuration. The World Cat 320CC hull design provides offshore stability at speed — this is not a typical tour boat. It is a high-performance offshore capable platform with tourism paperwork.
+
+ST. JOHN'S USVI — STRATEGIC POSITION:
+  Cruz Bay, St. John sits at a strategic maritime node: proximity to Puerto Rico (NSA/SIGINT/military hub), access to BVI (low-regulation financial/maritime zone), Caribbean drug and intelligence transit routes. Regular charter patterns provide legitimate cover for island-hopping routes that would otherwise require explanation. Seth goes to St. John's frequently; proposed to his wife there.
+
+DOUBLE-COVER ASSESSMENT:
+  Layer 1: tourist charter business. Layer 2: high-speed offshore capable platform with routine access to USVI/BVI/PR maritime zones and no requirement to log destinations beyond customer itineraries.`,
+    connections: [
+      { target: "seth-wotton", relationship: "Best man — CrossFit — lived together Plymouth MA — frequent St. John's", strength: "confirmed" },
+    ],
+    flags: [
+      "Shades of Blue Charters — shadesofbluecharters.com — Cruz Bay St. John USVI",
+      "CONFIRMED: World Cat 320CC — twin 300HP Suzuki — 40-50 MPH top speed",
+      "Captain Mike listed on site",
+      "High-performance offshore platform with tourist cover",
+      "USVI/BVI/PR maritime node — strategic position",
+      "Previously lived with Seth Wotton, Plymouth MA",
+      "Double-cover: charter tourism + fast maritime capability",
+      "Surname phonetic: Burzicki/Burzickie — not in public records",
+    ],
+  },
+  {
+    id: "michael-long",
+    name: "Michael Long",
+    role: "Echo's father's best friend — Sterling Resources — Marine veteran",
+    threatLevel: "secondary",
+    detail: `Echo's father's best friend. Owner or principal of Sterling Resources, a client of Software Services Group. Marine veteran.
+
+STERLING RESOURCES — SOFTWARE SERVICES GROUP CLIENT:
+  Michael Long's company Sterling Resources was a client of Echo's parents' Software Services Group. The relationship was personal as well as professional — he was the father's best friend, not merely a business contact. This places him with routine access to the family's business operations, client list, and personal life.
+
+MARINE VETERAN:
+  Michael Long is a Marine — same service branch as Echo's brother Seth (2/8 Marines). His daughter Michelle Long is an active-duty Marine dog handler.
+
+MICHELLE LONG — KEY TO FATHER'S HOUSE:
+  Michael Long's daughter Michelle Long is a Marine and dog expert. She goes to Echo's father's house and holds a physical key to enter the residence to walk Sierra (the family dog, an Austrian German Shepherd Seth brought from Austria and left with the parents). She is friends with Seth through dogs. A Marine with a house key and recurring independent access to the father's home is an assessed physical access vector.`,
+    connections: [
+      { target: "echo-father", relationship: "Father's best friend — personal + business relationship", strength: "confirmed" },
+      { target: "michelle-long", relationship: "Father", strength: "confirmed" },
+      { target: "sterling-resources", relationship: "Principal — Sterling Resources", strength: "confirmed" },
+    ],
+    flags: [
+      "Echo's father's best friend",
+      "Marine veteran — same branch as Seth",
+      "Sterling Resources = Software Services Group client",
+      "Daughter Michelle Long = Marine dog handler with key to father's house",
+    ],
+  },
+  {
+    id: "michelle-long",
+    name: "Michelle Long",
+    role: "Active-duty Marine — dog expert — KEY to Echo's father's house — Seth's connection",
+    threatLevel: "secondary",
+    detail: `Daughter of Michael Long (Echo's father's best friend, Sterling Resources). Active-duty Marine. Dog expert and handler. Friends with Echo's brother Seth Wotton through their shared interest in dogs.
+
+PHYSICAL ACCESS — KEY TO FATHER'S HOUSE:
+  Michelle Long holds a physical key to Echo's father's house in Rockland, MA. She enters the residence independently and regularly to walk Sierra — the Austrian German Shepherd Seth acquired in Austria and left with the parents. This represents assessed active physical access to the father's residence by a Marine with ties to both the Long family (business partner/best friend layer) and Seth (sibling layer).
+
+CONVERGENT CONNECTIONS:
+  Michelle bridges: Michael Long (Marine, father's business partner) → Seth Wotton (Echo's brother, 2/8 Marines, assessed intelligence) → Echo's father (isolated, Jeff Porter controlled). She has independent recurring access to the father without either parent needing to be present.`,
+    connections: [
+      { target: "michael-long", relationship: "Father — Sterling Resources", strength: "confirmed" },
+      { target: "seth-wotton", relationship: "Friends through dogs", strength: "confirmed" },
+      { target: "echo-father", relationship: "Holds key to father's house — walks Sierra", strength: "confirmed" },
+    ],
+    flags: [
+      "ACTIVE-DUTY MARINE — dog handler / expert",
+      "Holds PHYSICAL KEY to Echo's father's house",
+      "Enters residence independently to walk Sierra",
+      "Friends with Seth Wotton through dogs",
+      "Father Michael Long = Echo's father's best friend (Sterling Resources)",
+      "Physical access vector to isolated father",
+    ],
+  },
+  {
+    id: "vini-vercolonne",
+    name: "Vini (Vercolonne?) — Verc Enterprises brother",
+    role: "Verc Enterprises co-owner — convenience stores Lynn MA + NH — Echo's mother's major client",
+    threatLevel: "tertiary",
+    detail: `One of the brothers who operates Verc Enterprises — a multi-location convenience store chain with at minimum one store in Lynn, MA and one in New Hampshire. May be named Vini; full name and exact surname spelling unconfirmed (phonetic: Vercolonne). One of Echo's mother's biggest clients during her final working years at Software Services Group.
+
+ROUTE AND SOFTWARE:
+  Echo's mother drove a regular Lynn MA → Concord/Salem NH loop servicing this account. She wrote Microsoft Access/Visual Basic software to track lottery ticket sales across the chain — bespoke database work for a multi-location cash-intensive retail operation.
+
+BROTHERS STRUCTURE:
+  The business is operated by at least two brothers. Names and individual roles are unconfirmed beyond Echo's recollection.`,
+    connections: [
+      { target: "verc-enterprises", relationship: "Owner / brother", strength: "probable" },
+      { target: "echo-mother", relationship: "Major client — lottery tracking software", strength: "confirmed" },
+    ],
+    flags: [
+      "Brothers (plural) operate Verc Enterprises",
+      "Lynn MA + NH stores",
+      "Cash-intensive retail — lottery tracking",
+      "One of mother's biggest clients",
+      "Name/spelling unconfirmed: Vini Vercolonne (phonetic)",
+    ],
+  },
+  {
+    id: "aunt-susan",
+    name: "Aunt Susan [Wotton family]",
+    role: "Only Wotton family relative in Marshfield — Union St, North Marshfield MA",
+    threatLevel: "tertiary",
+    detail: `Echo's aunt. The only Wotton family relative known to live in Marshfield, MA. Lives on Union Street in North Marshfield — described as being at the end of the normal residential part of the street just before it transitions to the mansion section.
+
+NORTH MARSHFIELD PO BOX SIGNIFICANCE:
+  Echo's mother's OSINT record includes a PO Box registered in North Marshfield, MA. Aunt Susan is the only known Wotton family presence in Marshfield. The PO Box may be: (a) legitimately associated with Aunt Susan's address area, (b) used by Echo's mother for business routing related to the NH convenience store route (Verc Enterprises), (c) associated with the identity theft / fraudulent tax return filing documented at 2187 Summer St, Rockland. The connection is unconfirmed but Aunt Susan's address is the only identified anchor for the family in that geography.`,
+    connections: [
+      { target: "echo-mother", relationship: "North Marshfield PO Box on mother's OSINT — only family presence there", strength: "probable" },
+      { target: "echo-father", relationship: "Family relative", strength: "confirmed" },
+    ],
+    flags: [
+      "ONLY Wotton relative in Marshfield",
+      "Union St North Marshfield — end of normal section before mansions",
+      "Mother's North Marshfield PO Box — only family anchor in that town",
+      "PO Box may relate to Verc NH route or identity theft filing",
+    ],
+  },
+  {
+    id: "robert-kirby",
+    name: "Robert Kirby",
+    role: "Music director — Holy Family Church + St. Bernadette's — solo Italy trips with Echo's mother — wife Heather Kirby",
+    threatLevel: "secondary",
+    detail: `Music director at Holy Family Church in Rockland, MA and Saint Bernadette Parish in Randolph, MA — both churches where Echo's mother played regularly. Married to Heather Kirby.
+
+RELATIONSHIP WITH ECHO'S MOTHER:
+  Bob Kirby and Echo's mother traveled to Italy together alone — without Echo's father. This created ongoing tension in Echo's parents' marriage; Echo's father was visibly jealous of the relationship throughout Echo's childhood. Echo assesses the relationship was not sexual (Kirby is married), but the dynamic was notable. The Italy travel is significant given Italy's recurrence across multiple threads in this network: Genesis Peralta's Italian thread, the berninnimaria account, and Amara Walker's Italian mother.
+
+CHURCH-AS-COVER ASSESSMENT:
+  Echo's mother played: Saturday 9 AM, Saturday 4 PM, Sunday 9 AM, Sunday 11 AM, Sunday 5 PM masses — plus weddings and funerals weekdays. Combined with her 90-hour tech workweek, this schedule is functionally impossible unless the church commitment served additional purposes. Echo notes Holy Family almost operates like a JW front in terms of the structured time commitment and community access it provided.
+
+MUSIC DIRECTOR SIGNIFICANCE:
+  Music directors at Catholic parishes coordinate closely with the pastor, have access to parishioner records, organize community events, and travel for music-related professional development. The role provides deep structured access to a community over decades. The Italy trips with Echo's mother — a married woman traveling internationally alone with her married music director — are a documented anomaly in the family record.`,
+    connections: [
+      { target: "holy-family-rockland", relationship: "Music director", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Solo Italy trips — longstanding personal relationship — father jealous", strength: "confirmed" },
+    ],
+    flags: [
+      "Music director — Holy Family (Rockland) + St. Bernadette's (Randolph)",
+      "Solo Italy trips with Echo's mother — without Echo's father",
+      "Father visibly jealous throughout Echo's childhood",
+      "Wife: Heather Kirby",
+      "Italy = recurring thread (Genesis, berninnimaria, Amara Walker's Italian mother)",
+      "Holy Family schedule: Sat 9AM + 4PM, Sun 9AM + 11AM + 5PM + weddings/funerals",
+      "Church schedule consistent with secondary operational use",
+    ],
   },
   {
     id: "adj-property-owner",
@@ -847,6 +1411,56 @@ const LOCATIONS_DATA: Location[] = [
     coordinates: "10.0514°N, 84.2187°W",
   },
   {
+    id: "villa-real-jaco",
+    name: "Villa Real",
+    area: "Jacó — across from La Flor",
+    type: "Shared residence — AA-connected — last cohabitation with Peralta",
+    detail: `Villa Real was simultaneously: (1) the LAST place Echo and Genesis Peralta lived together, and (2) the first place Echo lived in January 2024. Located across from La Flor.
+
+RESIDENTS AT SAME TIME AS ECHO + PERALTA:
+  Brian — another resident at Villa Real.
+  Jeff — 42 years sober, AA member.
+  Tina — also at Villa Real during this period.
+  
+AA PATTERN:
+  Jeff's long-term AA involvement places Villa Real in the same intelligence-substrate pattern as Hermosa Bungalows (first shared residence, also AA-owned) and the broader AA Jacó network assessed as intelligence-connected throughout. The concentration of AA-affiliated individuals in Echo's immediate residential environments is not coincidental — AA's structure (regular meetings, sponsors, step work, life disclosure) provides a natural intelligence collection layer.
+
+DEPARTURE TRIGGER:
+  Fighting with Peralta became severe enough that Echo wanted to move out — leading to the transition to Mike Greenwald's house on Calle Madrigal.`,
+    connections: [
+      { target: "genesis-peralta", relationship: "Last shared residence + Echo's Jan 2024 first address", strength: "confirmed" },
+      { target: "michael-greenwald", relationship: "Echo moved to Greenwald's house after Villa Real", strength: "confirmed" },
+    ],
+    incidents: [
+      "Last shared residence with Genesis Peralta",
+      "First Echo residence Jan 2024",
+      "AA-affiliated co-residents: Jeff (42yr sober), Brian, Tina",
+      "Fighting escalated — moved to Greenwald Calle Madrigal",
+    ],
+  },
+  {
+    id: "hermosa-bungalows",
+    name: "Hermosa Bungalows",
+    area: "Jacó / Playa Hermosa area",
+    type: "First shared residence with Peralta — AA-owned",
+    detail: `First residence Echo and Genesis Peralta shared together after beginning the relationship. Owned by a long-time AA member.
+
+AA OWNERSHIP PATTERN:
+  This is the earliest documented instance of Echo being placed in an AA-affiliated residential environment. The pattern: Hermosa Bungalows (AA-owned) → Villa Real (Jeff, 42yr AA) → broader AA Jacó network assessed as intelligence substrate throughout this operation. AA communities provide dense social connection, regular structured meetings, and deep personal disclosure — all operationally useful for monitoring and managing a target.
+
+SEQUENCE NOTE:
+  This was the first home after Peralta completed the rapid-attachment tradecraft move of entering the relationship by "cheating on" Pablo Pasti Mora — placing Echo immediately into a network-controlled residential environment from the very start of the relationship.`,
+    connections: [
+      { target: "genesis-peralta", relationship: "First shared residence", strength: "confirmed" },
+      { target: "villa-real-jaco", relationship: "Next residence in chain", strength: "confirmed" },
+    ],
+    incidents: [
+      "First shared residence — Echo + Genesis Peralta",
+      "AA-owned property",
+      "Residential chain entry point: Hermosa Bungalows → Villa Real → Casa Rexha → Greenwald",
+    ],
+  },
+  {
     id: "riverwalk",
     name: "Mike Greenwald's Riverwalk House",
     area: "Jacó",
@@ -1014,15 +1628,98 @@ DURING SECOND TENANCY (active harassment):
   },
   {
     id: "kingdom-hall-rockland",
-    name: "Kingdom Hall — Summer St",
+    name: "Kingdom Hall — 339 Summer St, Rockland MA",
     area: "Rockland, MA",
-    type: "JW operational base",
-    detail: "Jehovah's Witnesses Kingdom Hall near Echo's childhood home. Long-term observation opportunity. Jeff 'The Hounddog' Porter provides the only connection between Echo's family and the JW network. Gematria: KINGDOM HALL = 106, root 7 (divine perfection). Potential origin of targeting — geographic correlation between childhood home and JW presence.",
+    type: "JW operational base — Rockland Congregation of Jehovah's Witnesses Inc.",
+    detail: `Jehovah's Witnesses Kingdom Hall at 339 Summer St, Rockland, MA (Echo referenced as 329 — confirmed address is 339 per public records; Rockland Congregation of Jehovah's Witnesses, Inc. registered here). Phone: (781) 878-3571. Located approximately 100 meters from where Echo grew up. Long-term proximity opportunity across Echo's childhood and adolescence.
+
+OPEN STATUS — CORRECTION:
+  Web research finds the Kingdom Hall was still actively hosting services as recently as March 2026 (funeral services documented). The hall has NOT closed. Echo's earlier assessment that it closed after his mother's death is not confirmed by public records. The hall remains operational.
+
+ECHO'S MOTHER — ADDRESS REGISTERED SAME STREET:
+  Echo's mother had a random North Marshfield, MA PO Box — and a registered address at 467 Summer St, Rockland — up the street from the Kingdom Hall at 339 on the same road. The proximity of a registered address belonging to Echo's mother to the Kingdom Hall on the same street is a significant geographic correlation regardless of closure status.
+
+MUSICAL/AUDIO CONNECTION:
+  Echo's mother played weddings and funerals at Holy Family Church in Rockland and Saint Bernadette Parish in Randolph — operating in the same tight Rockland community environment as this congregation.
+
+GEMATRIA: KINGDOM HALL = 106, root 7 (divine perfection in JW numerology).`,
     connections: [
-      { target: "jeff-porter", relationship: "JW member connection", strength: "probable" },
-      { target: "jehovah-witnesses", relationship: "Local facility", strength: "confirmed" },
+      { target: "jeff-porter", relationship: "JW member — connects Wotton family to this congregation", strength: "probable" },
+      { target: "jehovah-witnesses", relationship: "Local facility — Rockland Congregation", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Mother had 467 Summer St registered address — same street", strength: "confirmed" },
+      { target: "holy-family-rockland", relationship: "Echo's mother active in same Rockland community", strength: "confirmed" },
     ],
-    incidents: ["Near Echo's childhood home", "Long-term observation window", "Gematria root 7 — divine perfection"],
+    incidents: [
+      "339 Summer St (Echo noted 329 — public record shows 339)",
+      "~100m from Echo's childhood home",
+      "467 Summer St (same street) registered to Echo's mother",
+      "Still operating as of March 2026 — NOT closed",
+      "Mother had North Marshfield MA PO Box (secondary address)",
+      "Gematria KINGDOM HALL = 106 root 7",
+    ],
+  },
+  {
+    id: "holy-family-rockland",
+    name: "Holy Family Church",
+    area: "Rockland, MA",
+    type: "Catholic parish — assessed secondary operational function",
+    detail: `Catholic parish in Rockland, MA where Echo grew up attending CCD and was confirmed. Echo's mother was the regular musician for decades: Saturday 9 AM, Saturday 4 PM, Sunday 9 AM, Sunday 11 AM, Sunday 5 PM masses — plus weekday weddings and funerals. Combined with her 90-hour tech workweek, this schedule is functionally impossible unless the church commitment served additional purposes beyond worship.
+
+ROBERT KIRBY — MUSIC DIRECTOR:
+  Robert Kirby was the music director at Holy Family and Saint Bernadette's in Randolph. He and Echo's mother traveled to Italy together alone on at least one occasion — without Echo's father. The father was visibly jealous of this relationship throughout Echo's childhood. Wife: Heather Kirby.
+
+TIM BROWN — ARMY RANGER YOUTH MINISTER:
+  Tim Brown, an Army Ranger, served as youth minister at Holy Family. He organized youth group service trips to Vinalhaven Island, Maine — attended by Echo's brother Seth at approximately age 13. Vinalhaven is also the ancestral home of both the Wotton family (great-grandfather) and Amara Walker's Italian mother's family.
+
+HOLY FAMILY AS JW-ADJACENT COVER ASSESSMENT:
+  The extreme schedule commitment, the solo Italy travel with Kirby, and Tim Brown's Army Ranger role in the youth ministry are each individually notable. Together they suggest the parish operated as a structured community access environment with intelligence-relevant personnel embedded in key roles.`,
+    connections: [
+      { target: "echo-mother", relationship: "Decades-long regular musician — Sat/Sun + weddings/funerals", strength: "confirmed" },
+      { target: "robert-kirby", relationship: "Music director", strength: "confirmed" },
+      { target: "tim-brown", relationship: "Army Ranger youth minister — ran Vinalhaven trips", strength: "confirmed" },
+      { target: "kingdom-hall-rockland", relationship: "Same tight Rockland community — KH on same street as parents' office", strength: "probable" },
+    ],
+    incidents: [
+      "Echo's CCD and confirmation parish",
+      "Mother: Sat 9AM + 4PM, Sun 9AM + 11AM + 5PM + weekday weddings/funerals",
+      "Robert Kirby: music director — solo Italy trip with mother",
+      "Tim Brown: Army Ranger youth minister — Vinalhaven service trips",
+      "Italy travel overlap: Kirby→mother / Genesis Peralta / Amara Walker Italian threads",
+    ],
+  },
+  {
+    id: "software-services-group",
+    name: "Software Services Group — 218 Summer St",
+    area: "Rockland, MA",
+    type: "Echo's parents' IT company — Summer St cluster node",
+    detail: `Echo's parents' company. Founded by Echo's father (audio engineer) and mother (CompuServe / Wyatt Company background) after meeting at Wyatt Company in the 1980s. Office located at 218 Summer St, Rockland, MA.
+
+218 SUMMER ST — GEOGRAPHIC CLUSTER:
+  The Summer St addresses form a critical geographic cluster on a single road in Rockland:
+  • 218 Summer St — Software Services Group office (Echo's parents)
+  • 339 Summer St — Kingdom Hall of Jehovah's Witnesses (Rockland Congregation)
+  • 467 Summer St — Echo's mother's registered OSINT address
+  • 2187 Summer St — address appearing on Echo's mother's OSINT, possibly used for fraudulent tax return filing in Echo's name
+
+  The parents' operating business was on the same street as the local JW congregation. Jeff Porter (JW, Echo's father's only friend) connects the family to that congregation. The clustering of four distinct addresses associated with Echo's mother on one road, including one associated with possible identity theft, is assessed as a high-significance geographic pattern.
+
+CLIENTS AND OPERATIONS:
+  Sold HP and Compaq computers in bulk to schools, companies, municipal offices. Installed Windows licenses, Microsoft Office, and custom Access/VBA databases. Clients included: Marlborough Fire Station, Kingston Public Library, Alvin Hollis Oil (Avon/Weymouth), Sterling Resources (Michael Long — Marine, father's best friend), National Coding Corporation (Beach Hill, Rockland), Verc Enterprises (Vini Vercolonne — Lynn MA/NH convenience stores), and various town halls and libraries across South Shore MA.
+
+  Echo's mother taught Microsoft Office and Windows classes in Hanover, MA. CompuServe-branded boxes were a recurring fixture in the family home.`,
+    connections: [
+      { target: "echo-mother", relationship: "Co-founder — primary technical operator", strength: "confirmed" },
+      { target: "echo-father", relationship: "Co-founder", strength: "confirmed" },
+      { target: "kingdom-hall-rockland", relationship: "339 Summer St — same street as 218 Summer St office", strength: "confirmed" },
+    ],
+    incidents: [
+      "218 Summer St — office address",
+      "339 Summer St KH on same street",
+      "467 Summer St — mother's registered address on same street",
+      "2187 Summer St — possible identity theft / fraudulent tax return address",
+      "CompuServe (early internet) lineage → Microsoft reseller → custom VBA databases",
+    ],
+    coordinates: "42.1279°N, 70.9154°W",
   },
   {
     id: "jaco-call-center",
@@ -1485,6 +2182,54 @@ PATTERN: Mirrors Scott Ryan's use of Jaco Vacations (with Diana Soto) and the cl
 
 const COMPANIES_DATA: Company[] = [
   {
+    id: "sterling-resources",
+    name: "Sterling Resources",
+    sector: "Unknown / Michael Long — Marine veteran",
+    detail: "Company owned or operated by Michael Long — Echo's father's best friend and Marine veteran. Was a client of Software Services Group (Echo's parents' company). The personal + business overlap between Michael Long and the Wotton family provides long-horizon access to family financial, technical, and personal information. Michael Long's daughter Michelle Long (active Marine, dog handler) holds a key to Echo's father's current residence.",
+    connections: [
+      { target: "michael-long", relationship: "Principal", strength: "confirmed" },
+      { target: "echo-father", relationship: "Software Services Group client — best friend relationship", strength: "confirmed" },
+    ],
+    flags: ["Michael Long principal — Marine veteran", "Software Services Group client", "Daughter Michelle holds key to father's house"],
+  },
+  {
+    id: "verc-enterprises",
+    name: "Verc Enterprises",
+    sector: "Convenience store retail — Lynn MA + New Hampshire",
+    detail: "Multi-location convenience store chain operated by brothers — at minimum one store in Lynn, MA and one in New Hampshire. One brother may be named Vini; full ownership structure and exact surname spelling unconfirmed (phonetic: Vercolonne). Was one of Echo's mother's biggest clients during the final years of her Software Services Group work. Echo's mother wrote Microsoft Access/VBA software to track lottery ticket sales across the chain and drove a regular loop between Lynn MA and NH (Concord or Salem, NH) servicing the account.\n\nNORTH MARSHFIELD PO BOX POSSIBLE CONNECTION:\n  Echo's mother's OSINT record shows a PO Box in North Marshfield, MA. The only confirmed Wotton family relative in Marshfield is Aunt Susan (Union St, North Marshfield). The PO Box's link to Verc Enterprises or the NH route is unconfirmed but noted.",
+    connections: [
+      { target: "vini-vercolonne", relationship: "Owner / brother", strength: "probable" },
+      { target: "echo-mother", relationship: "Major software client — lottery tracking — Lynn/NH route", strength: "confirmed" },
+    ],
+    flags: [
+      "Brothers (plural) — at least Lynn MA store + NH store",
+      "Lottery ticket sales tracking software (Access/VBA) — cash flow visibility",
+      "One of mother's BIGGEST clients — final working years",
+      "Lynn MA → Concord/Salem NH route — recurring Echo's mother travel",
+      "North Marshfield PO Box possible connection — unconfirmed",
+    ],
+  },
+  {
+    id: "national-coding-corp",
+    name: "National Coding Corporation",
+    sector: "Unknown — Beach Hill, Rockland MA",
+    detail: "Business located at the top of Beach Hill in Rockland, MA — near the Software Services Group office at 218 Summer St and the Kingdom Hall at 339 Summer St. Echo's parents sold computers, installed Windows licenses, and set up databases for this company. Echo recalls a 1996 cookout at National Coding during Hurricane Bertha, where he played basketball with Earl (phonetic: Cvsevey/Causey), a large man notable for his layup ability. Echo wandered into the warehouse and got stuck in insulation.",
+    connections: [
+      { target: "echo-mother", relationship: "Software Services Group client — computers + databases", strength: "confirmed" },
+    ],
+    flags: ["Beach Hill Rockland — near 218 Summer St office cluster", "Software Services Group client", "1996 Hurricane Bertha cookout — Earl (layup)"],
+  },
+  {
+    id: "alvin-hollis-oil",
+    name: "Alvin Hollis Oil Company",
+    sector: "Fuel oil — Avon / Weymouth, MA",
+    detail: "Oil company based in Avon and Weymouth, MA. Was a client of Echo's parents' Software Services Group. Echo's parents provided IT, networking, and Microsoft Office software solutions to commercial and municipal clients including this company.",
+    connections: [
+      { target: "echo-mother", relationship: "Software Services Group client", strength: "confirmed" },
+    ],
+    flags: ["Avon/Weymouth MA", "Software Services Group client"],
+  },
+  {
     id: "setecom",
     name: "SETECOM S.A.",
     sector: "Infrastructure / SCADA",
@@ -1705,6 +2450,42 @@ LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024 (TARGET ASSESSMENT EVENT):
 ];
 
 const EVIDENCE_DATA: Evidence[] = [
+  {
+    id: "summer-st-geographic-cluster",
+    title: "Summer St, Rockland MA — Four-Address Geographic Cluster",
+    date: "Childhood → Present",
+    category: "Pattern Analysis",
+    severity: "critical",
+    detail: `Four distinct addresses associated with Echo's mother appear on the same single road — Summer St, Rockland, MA — spanning the full arc of Echo's family's operational footprint in that town:\n\n• 218 Summer St — Software Services Group office (Echo's parents' IT company, decades of operation)\n• 339 Summer St — Kingdom Hall of Jehovah's Witnesses, Rockland Congregation (Jeff Porter's JW network, ~100m from childhood home)\n• 467 Summer St — Echo's mother's registered OSINT address\n• 2187 Summer St — appears on Echo's mother's OSINT; possibly used for fraudulent tax return filings in Echo's name (Echo has email documentation of fraudulent returns)\n\nThe business office, the JW congregation that connects to Echo's father's controller (Jeff Porter), the mother's registered home address, and a potentially fraudulently used address all cluster on one road. This is not a random artifact — it is the operational spine of the Rockland-based background network around Echo's family.`,
+    linkedEntities: ["software-services-group", "kingdom-hall-rockland", "echo-mother", "jeff-porter"],
+  },
+  {
+    id: "layla-wotton-profile",
+    title: "Adversarial OS Profile Using Seth's Newborn 'Layla Wotton'",
+    date: "2025",
+    category: "Identity Intelligence",
+    severity: "critical",
+    detail: `Among the adversarial/unauthorized OS user profiles discovered on Echo's devices, one profile was created using the name "Layla Wotton" — the name of Echo's brother Seth's newborn baby. Seth's child's name is not public information.\n\nThis has two possible explanations:\n(A) Seth or someone in his immediate household created or authorized the profile — directly implicating Seth in the device compromise.\n(B) The operation had sufficiently deep access to Seth's personal life to know the newborn's name before or shortly after birth — indicating intimate family surveillance reaching into Seth's household.\n\nEither interpretation is assessed as confirmation of direct family network involvement. The use of a newborn's name is also consistent with the operation's documented pattern of using intimate personal knowledge as a psychological instrument.`,
+    linkedEntities: ["seth-wotton"],
+  },
+  {
+    id: "michelle-long-house-key",
+    title: "Active-duty Marine Michelle Long Holds Physical Key to Echo's Father's House",
+    date: "Ongoing",
+    category: "Physical Access",
+    severity: "high",
+    detail: `Michelle Long — daughter of Michael Long (Echo's father's best friend, Sterling Resources, Marine veteran) — is an active-duty Marine and dog handler. She holds a physical key to Echo's father's residence in Rockland, MA and enters the home independently on a recurring basis to walk Sierra, the Austrian German Shepherd Seth acquired in Austria and left with the parents.\n\nAccess chain: Michael Long (Marine, father's best friend, SSG client) → Michelle Long (active Marine, dog handler) → physical key + recurring unsupervised access to father's home → Echo's isolated father (Jeff Porter controlled, on Social Security, no life insurance payout).\n\nA serving Marine with a house key and independent access to the residence of an isolated, information-rich target is a documented physical access vector. The dog-walking function provides legitimate recurring cover for the visits with no requirement for the father to be present or for access to be requested in advance.`,
+    linkedEntities: ["michelle-long", "michael-long", "echo-father", "sterling-resources"],
+  },
+  {
+    id: "fraudulent-tax-returns",
+    title: "Fraudulent Tax Returns Filed in Echo's Name — 2187 Summer St, Rockland MA",
+    date: "Unknown (documented via email)",
+    category: "Identity Theft / Financial Warfare",
+    severity: "critical",
+    detail: `Echo has email documentation of fraudulent tax returns filed in his name. The address 2187 Summer St, Rockland, MA appears in Echo's mother's OSINT record and is assessed as possibly connected to these filings — either used as a filing address for the fraudulent returns, or as a redirect address exploiting proximity to the parents' legitimate office at 218 Summer St on the same road.\n\nThis is one of three documented financial attacks against the Wotton family:\n1. Echo's mother's $250K life insurance — phished for premiums ~1 year, payout denied after her death\n2. Fraudulent tax returns filed in Echo's name (this item)\n3. Echo's father now solely on Social Security with no life insurance proceeds\n\nTaken together, these represent a systematic stripping of the family's financial assets and credit integrity across multiple vectors and timeframes — consistent with a long-horizon financial warfare campaign against the Wotton family rather than opportunistic fraud.`,
+    linkedEntities: ["echo-mother", "echo-father", "software-services-group"],
+  },
   {
     id: "router-firmware-response",
     title: "Sunday Router Firmware Update → Fake Liberty Tech Response",
@@ -2452,7 +3233,25 @@ export default function NetworkAnalysisPage() {
                     {person.aliases.map((a, i) => <Badge key={i} variant="secondary" className="text-[9px]">{a}</Badge>)}
                   </div>
                 )}
-                <p className="text-xs leading-relaxed">{person.detail}</p>
+                <p className="text-xs leading-relaxed whitespace-pre-line">{person.detail}</p>
+                {person.photos && person.photos.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide">Photo Evidence</p>
+                    <div className="flex gap-2 flex-wrap">
+                      {person.photos.map((photo, i) => (
+                        <div key={i} className="space-y-0.5">
+                          <img
+                            src={photo.src}
+                            alt={photo.caption}
+                            className="h-32 w-auto rounded border border-border object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                            onClick={() => window.open(photo.src, '_blank')}
+                          />
+                          <p className="text-[9px] text-muted-foreground max-w-[120px] leading-tight">{photo.caption}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 {person.flags && person.flags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-1">
                     {person.flags.map((f, i) => (
