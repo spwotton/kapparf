@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, type MutableRefObject } from "react";
 import * as THREE from "three";
 import { buildWebGPUScene, type WGPUSceneTarget } from "@/lib/jaco-webgpu";
 import { useQuery } from "@tanstack/react-query";
-import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Badge } from "@/components/ui/badge";
@@ -1015,11 +1015,20 @@ const PANELS: PanelDef[] = [
   { id:"oracle",  icon:Moon,      label:"Oracle",   side:"right", accentCls:"text-violet-400 border-violet-500/40" },
 ];
 
+// ─── Leaflet map-ref grabber (must live inside MapContainer) ──────────────────
+
+function MapRefGrabber({ mapRef }: { mapRef: MutableRefObject<L.Map | null> }) {
+  const map = useMap();
+  useEffect(() => { mapRef.current = map; return () => { mapRef.current = null; }; }, [map, mapRef]);
+  return null;
+}
+
 // ─── Page component ────────────────────────────────────────────────────────────
 
 export default function JacoMapPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<ReturnType<typeof createScene>|null>(null);
+  const leafletMapRef = useRef<L.Map | null>(null);
   const [hoveredTarget, setHoveredTarget] = useState<Target|null>(null);
   const [droneTarget, setDroneTarget] = useState("");
   const [aircraftCount, setAircraftCount] = useState(0);
@@ -1410,7 +1419,7 @@ export default function JacoMapPage() {
       <div className="space-y-2">
         {TARGETS.map((t,i)=>(
           <button key={t.id} className={`w-full text-left border rounded-lg px-3 py-2.5 transition-colors hover:bg-white/5 active:bg-white/10 ${TARGET_BORDER[t.type]}`}
-            onClick={()=>sceneRef.current?.focusTarget(i)} data-testid={`button-target-${t.id}`}>
+            onClick={()=>{ if (renderMode === "leaflet") { leafletMapRef.current?.flyTo([t.lat, t.lon], 16, { animate: true }); } else { sceneRef.current?.focusTarget(i); } }} data-testid={`button-target-${t.id}`}>
             <div className="flex items-center gap-2">
               <MapPin className={`h-3.5 w-3.5 shrink-0 ${TARGET_COLOR[t.type]}`}/>
               <span className={`text-xs font-mono font-bold leading-tight ${TARGET_COLOR[t.type]}`}>{t.label.split("—")[0].trim()}</span>
@@ -1940,6 +1949,7 @@ export default function JacoMapPage() {
             style={{ height: "100%", width: "100%" }}
             zoomControl={true}
           >
+            <MapRefGrabber mapRef={leafletMapRef} />
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
