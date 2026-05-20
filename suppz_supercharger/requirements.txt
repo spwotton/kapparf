@@ -1,0 +1,4 @@
+shopifyapi
+geopy
+python-dotenv
+schedule

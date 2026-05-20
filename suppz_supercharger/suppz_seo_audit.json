@@ -1,0 +1,155 @@
+{
+  "audit_date": "2026-01-24T20:19:50.564396",
+  "total_products": 3,
+  "products": [
+    {
+      "product_id": "1",
+      "handle": "helios-fat-burner",
+      "title": "Helios Fat Burner",
+      "current_meta_title": "Helios Fat Burner",
+      "current_meta_description": "",
+      "optimized_meta_title": "Helios Fat Burner | Premium Fat Burner | Suppz",
+      "optimized_meta_description": "Discover Helios Fat Burner with Deep ocean Ecklonia cava extract. Supports cognitive function. Premium Korean brown algae extract. Shop now at Suppz - Fast shipping!",
+      "target_keywords": [
+        "fat burner",
+        "thermogenic",
+        "metabolism booster",
+        "weight loss supplement"
+      ],
+      "schema_markup": {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "Helios Fat Burner",
+        "description": "Premium thermogenic with Ecklonia cava extract for enhanced metabolism and cognitive support.",
+        "image": [
+          "https://example.com/helios.jpg"
+        ],
+        "brand": {
+          "@type": "Brand",
+          "name": "Suppz"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://suppz.com/products/helios-fat-burner",
+          "priceCurrency": "USD",
+          "price": "49.99",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Suppz"
+          }
+        }
+      },
+      "seo_score": 65,
+      "issues": [
+        "Meta title too short (<30 chars)",
+        "Missing meta description",
+        "1 images missing alt text"
+      ],
+      "recommendations": [
+        "Add product type keyword to title"
+      ]
+    },
+    {
+      "product_id": "2",
+      "handle": "charged-amino",
+      "title": "Charged Amino",
+      "current_meta_title": "Charged Amino",
+      "current_meta_description": "",
+      "optimized_meta_title": "Charged Amino - Amino Acids for Muscle Recovery | Suppz",
+      "optimized_meta_description": "Fuel your muscles with Charged Amino. Premium Amino Acids for faster recovery and lean muscle growth. Clinically-studied formula.",
+      "target_keywords": [
+        "amino acids",
+        "BCAAs",
+        "muscle recovery",
+        "workout supplement"
+      ],
+      "schema_markup": {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "Charged Amino",
+        "description": "Essential amino acids for muscle recovery and growth. Perfect intra-workout formula.",
+        "image": [
+          "https://example.com/charged.jpg"
+        ],
+        "brand": {
+          "@type": "Brand",
+          "name": "Suppz"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://suppz.com/products/charged-amino",
+          "priceCurrency": "USD",
+          "price": "34.99",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Suppz"
+          }
+        }
+      },
+      "seo_score": 70,
+      "issues": [
+        "Meta title too short (<30 chars)",
+        "Missing meta description"
+      ],
+      "recommendations": [
+        "Add product type keyword to title"
+      ]
+    },
+    {
+      "product_id": "3",
+      "handle": "marine-phytoplankton",
+      "title": "Marine Phytoplankton Complex",
+      "current_meta_title": "Marine Phytoplankton Complex",
+      "current_meta_description": "",
+      "optimized_meta_title": "Marine Phytoplankton Complex | Brain-Boosting Nootropic |...",
+      "optimized_meta_description": "Enhance mental clarity with Marine Phytoplankton Complex. premium ingredients for improved focus and cognitive performance. Clinically-studied formula.",
+      "target_keywords": [
+        "nootropic",
+        "brain supplement",
+        "cognitive enhancer",
+        "focus supplement"
+      ],
+      "schema_markup": {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "Marine Phytoplankton Complex",
+        "description": "Ocean-sourced superfood with Ecklonia cava and marine phytoplankton. Ultimate cellular nutrition.",
+        "image": [
+          "https://example.com/marine.jpg"
+        ],
+        "brand": {
+          "@type": "Brand",
+          "name": "Gaia's Legacy"
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://suppz.com/products/marine-phytoplankton",
+          "priceCurrency": "USD",
+          "price": "59.99",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "Suppz"
+          }
+        }
+      },
+      "seo_score": 65,
+      "issues": [
+        "Meta title too short (<30 chars)",
+        "Missing meta description",
+        "1 images missing alt text"
+      ],
+      "recommendations": [
+        "Add product type keyword to title"
+      ]
+    }
+  ],
+  "summary": {
+    "avg_score": 66,
+    "critical_issues": 0,
+    "products_need_work": 3,
+    "products_optimized": 0
+  }
+}

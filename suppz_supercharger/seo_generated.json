@@ -1,0 +1,795 @@
+[
+  {
+    "handle": "rule-1-bar1-protein-bar",
+    "title": "Rule 1 Bar1 Protein Bar",
+    "vendor": "Rule 1",
+    "price": "31.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Rule 1 Bar1 Protein Bar | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Rule 1 Bar1 Protein Bar at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "barebells-plant-based-protein-bar",
+    "title": "Barebells Plant Based Protein Bar",
+    "vendor": "Barebells",
+    "price": "26.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Barebells Plant Based Protein Bar | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Barebells Plant Based Protein Bar at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "nutrex-volu-gro-superior-creatine-and-glycogen-loader",
+    "title": "Nutrex Volu Gro Superior Creatine and Glycogen Loader",
+    "vendor": "Nutrex",
+    "price": "39.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Nutrex Volu Gro Superior Creatine and Glycoge... | Suppz.com",
+    "new_seo_desc": "Buy Nutrex Volu Gro Superior Creatine and Glycogen Loader at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. S...",
+    "keywords": [
+      "nutrex research",
+      "lipo 6"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ryse-loaded-pre",
+    "title": "Ryse Loaded Pre",
+    "vendor": "RYSE",
+    "price": "42.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Ryse Loaded Pre | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Ryse Loaded Pre at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "hi-tech-pharma-liver-rx-90-caps",
+    "title": "Hi Tech Pharma Liver-RX 90 Caps",
+    "vendor": "Hi Tech Pharmaceuticals",
+    "price": "24.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Hi Tech Pharma Liver-RX 90 Caps | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Hi Tech Pharma Liver-RX 90 Caps at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hi-tech pharmaceuticals",
+      "legal prohormone"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "hi-tech-winstrol-90tabs",
+    "title": "Hi Tech Winstrol (90 Tabs)",
+    "vendor": "Hi Tech Pharmaceuticals",
+    "price": "59.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Hi Tech Winstrol (90 Tabs) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Hi Tech Winstrol (90 Tabs) at Suppz.com. Legal winstrol alternative for hardening and definition. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hi tech winstrol",
+      "hi-tech pharmaceuticals",
+      "winstrol supplement",
+      "cutting prohormone",
+      "legal prohormone",
+      "lean gains"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "gorilla-mine-gorilla-mode-pre-workout-formula",
+    "title": "Gorilla Mine Gorilla Mode Pre-Workout Formula",
+    "vendor": "Gorilla Mind",
+    "price": "49.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Gorilla Mine Gorilla Mode Pre-Workout Formula... | Suppz.com",
+    "new_seo_desc": "Buy Gorilla Mine Gorilla Mode Pre-Workout Formula at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "purus-labs-noxygen-preworkout",
+    "title": "Purus Labs Noxygen Preworkout",
+    "vendor": "Purus Labs",
+    "price": "34.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Purus Labs Noxygen Preworkout | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Purus Labs Noxygen Preworkout at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "blackstone-labs-paraburn-60caps",
+    "title": "Blackstone labs Paraburn 60Caps",
+    "vendor": "Blackstone Labs",
+    "price": "49.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Blackstone labs Paraburn 60Caps | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Blackstone labs Paraburn 60Caps at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hardcore supplement",
+      "blackstone labs"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "glaxon-goon-mode",
+    "title": "Glaxon Goon Mode",
+    "vendor": "Glaxon",
+    "price": "49.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Glaxon Goon Mode | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Glaxon Goon Mode at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "repp-sports-recov-7",
+    "title": "Repp Sports Recov-7",
+    "vendor": "Repp Sports",
+    "price": "37.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Repp Sports Recov-7 | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Repp Sports Recov-7 at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "repp-sports-raze-focus-60-caps",
+    "title": "Repp Sports Raze Focus (60 Caps)",
+    "vendor": "Repp Sports",
+    "price": "46.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Repp Sports Raze Focus (60 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Repp Sports Raze Focus (60 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-oxyglow-natural-marine-collagen",
+    "title": "EHP Labs OxyGlow Natural Marine Collagen",
+    "vendor": "EHP Labs",
+    "price": "39.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs OxyGlow Natural Marine Collagen... | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs OxyGlow Natural Marine Collagen at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-enhanced-performance-vitamins",
+    "title": "EHP Labs Enhanced Performance Vitamins",
+    "vendor": "EHP Labs",
+    "price": "49.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs Enhanced Performance Vitamins... | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs Enhanced Performance Vitamins at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-inner-health-detox-for-women-120-caps",
+    "title": "EHP Labs Inner Health Detox for Women (120 Caps)",
+    "vendor": "EHP Labs",
+    "price": "34.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs Inner Health Detox for Women (120 Ca... | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs Inner Health Detox for Women (120 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-oxyrem-fat-burner",
+    "title": "EHP Labs OxyRem Fat Burner",
+    "vendor": "EHP Labs",
+    "price": "44.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs OxyRem Fat Burner | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs OxyRem Fat Burner at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-pride",
+    "title": "EHP Labs Pride",
+    "vendor": "EHP Labs",
+    "price": "44.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs Pride | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs Pride at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-oxyshred-non-stim",
+    "title": "EHP Labs OxyShred Non-Stim",
+    "vendor": "EHP Labs",
+    "price": "59.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs OxyShred Non-Stim | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs OxyShred Non-Stim at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ehp-labs-oxyshred-hardcore",
+    "title": "EHP Labs OxyShred Hardcore",
+    "vendor": "EHP Labs",
+    "price": "59.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "EHP Labs OxyShred Hardcore | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy EHP Labs OxyShred Hardcore at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "selfe-delta-8-thc-gummies",
+    "title": "SelfE Delta 8 THC Gummies",
+    "vendor": "SelfE",
+    "price": "49.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "SelfE Delta 8 THC Gummies | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy SelfE Delta 8 THC Gummies at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "xcel-sports-nutrition-phenibut-90caps",
+    "title": "XCEL Sports Nutrition Phenibut 90Caps",
+    "vendor": "XCEL Sports Nutrition",
+    "price": "39.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "XCEL Sports Nutrition Phenibut 90Caps... | Suppz.com",
+    "new_seo_desc": "Buy XCEL Sports Nutrition Phenibut 90Caps at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "suppz-com-100-pure-micronized-creatine-300g",
+    "title": "Suppz.com 100% Pure Micronized Creatine 300g",
+    "vendor": "Suppz",
+    "price": "19.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Suppz.com 100% Pure Micronized Creatine 300g... | Suppz.com",
+    "new_seo_desc": "Buy Suppz.com 100% Pure Micronized Creatine 300g at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "cytosport-muscle-milk-creatine-500g",
+    "title": "Cytosport Muscle Milk Creatine (500g)",
+    "vendor": "Cytosport",
+    "price": "29.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Cytosport Muscle Milk Creatine (500g)... | Suppz.com",
+    "new_seo_desc": "Buy Cytosport Muscle Milk Creatine (500g) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "puritans-pride-b-complex-with-b-12-90-tabs",
+    "title": "Puritan's Pride B-Complex with B-12 (90 Tabs)",
+    "vendor": "Puritans's Pride",
+    "price": "8.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Puritan's Pride B-Complex with B-12 (90 Tabs)... | Suppz.com",
+    "new_seo_desc": "Buy Puritan's Pride B-Complex with B-12 (90 Tabs) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "black-magic-supply-magic-eraser-advanced-definition-gel-12oz-bottle",
+    "title": "Black Magic Supply Magic Eraser Advanced Definition Gel (12oz Bottle)",
+    "vendor": "Black Magic Supply",
+    "price": "39.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Black Magic Supply Magic Eraser Advanced Defi... | Suppz.com",
+    "new_seo_desc": "Buy Black Magic Supply Magic Eraser Advanced Definition Gel (12oz Bottle) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping...",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "hi-tech-nac-100-caps",
+    "title": "Hi Tech NAC (100 Caps)",
+    "vendor": "Hi Tech Pharmaceuticals",
+    "price": "19.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Hi Tech NAC (100 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Hi Tech NAC (100 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hi-tech pharmaceuticals",
+      "legal prohormone"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "muscletech-alphatest-120-caps",
+    "title": "Muscletech AlphaTest (120 Caps)",
+    "vendor": "Muscletech",
+    "price": "24.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Muscletech AlphaTest (120 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Muscletech AlphaTest (120 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "arsenal-labs-fmj-preworkout",
+    "title": "Arsenal Labs FMJ Preworkout",
+    "vendor": "Arsenal Labs",
+    "price": "44.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Arsenal Labs FMJ Preworkout | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Arsenal Labs FMJ Preworkout at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "1st-phorm-bcaa",
+    "title": "1st Phorm BCAA",
+    "vendor": "1St Phorm",
+    "price": "42.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "1st Phorm BCAA | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy 1st Phorm BCAA at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "metabolic-nutrition-stimulean-45-caps",
+    "title": "Metabolic Nutrition Stimulean  (45 Caps)",
+    "vendor": "Metabolic Nutrition",
+    "price": "35.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Metabolic Nutrition Stimulean  (45 Caps)... | Suppz.com",
+    "new_seo_desc": "Buy Metabolic Nutrition Stimulean  (45 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "metabolic-nutrition-phenodrex-60-caps",
+    "title": "Metabolic Nutrition Phenodrex (60 Caps)",
+    "vendor": "Metabolic Nutrition",
+    "price": "49.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Metabolic Nutrition Phenodrex (60 Caps)... | Suppz.com",
+    "new_seo_desc": "Buy Metabolic Nutrition Phenodrex (60 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "ultimate-nutrition-creatine-300g",
+    "title": "Ultimate Nutrition Creatine 300g",
+    "vendor": "Ultimate Nutrition",
+    "price": "19.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Ultimate Nutrition Creatine 300g | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Ultimate Nutrition Creatine 300g at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "gillette-proglide-refill-8-cartridges",
+    "title": "Gillette Proglide Refill (8 Cartridges)",
+    "vendor": "Gillette",
+    "price": "24.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Gillette Proglide Refill (8 Cartridges)... | Suppz.com",
+    "new_seo_desc": "Buy Gillette Proglide Refill (8 Cartridges) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "nutrex-creatine-drive",
+    "title": "Nutrex Creatine Drive",
+    "vendor": "Nutrex",
+    "price": "19.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Nutrex Creatine Drive | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Nutrex Creatine Drive at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "nutrex research",
+      "lipo 6"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "nutrex-zma-90-caps",
+    "title": "Nutrex ZMA (90 Caps)",
+    "vendor": "Nutrex",
+    "price": "12.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Nutrex ZMA (90 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Nutrex ZMA (90 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "nutrex research",
+      "lipo 6"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "nutrex-l-arginine-1000-120-caps",
+    "title": "Nutrex L-Arginine 1000 (120 Caps)",
+    "vendor": "Nutrex",
+    "price": "22.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Nutrex L-Arginine 1000 (120 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Nutrex L-Arginine 1000 (120 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "nutrex research",
+      "lipo 6"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "rich-piana-all-day-you-shred",
+    "title": "Rich Piana All Day You Shred",
+    "vendor": "Rich Piana 5%",
+    "price": "46.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Rich Piana All Day You Shred | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Rich Piana All Day You Shred at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "mts-nutrition-machine-greens-multi-180-caps",
+    "title": "MTS Nutrition Machine Greens + Multi (180 Caps)",
+    "vendor": "MTS Nutrition",
+    "price": "23.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "MTS Nutrition Machine Greens + Multi (180 Cap... | Suppz.com",
+    "new_seo_desc": "Buy MTS Nutrition Machine Greens + Multi (180 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "trilliant-labs-male-trt-120-caps",
+    "title": "Trilliant Labs Male TRT (120 Caps)",
+    "vendor": "Trilliant Labs",
+    "price": "29.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Trilliant Labs Male TRT (120 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Trilliant Labs Male TRT (120 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "phase-one-nutrition-pump-phase-extreme-120-caps",
+    "title": "Phase One Nutrition Pump Phase Extreme (120 Caps)",
+    "vendor": "Phase One Nutrition",
+    "price": "34.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Phase One Nutrition Pump Phase Extreme (120 C... | Suppz.com",
+    "new_seo_desc": "Buy Phase One Nutrition Pump Phase Extreme (120 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop ...",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "apollon-nutrition-hard-target-90-caps",
+    "title": "Apollon Nutrition Hard Target (90 Caps)",
+    "vendor": "Apollon Nutrition",
+    "price": "69.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Apollon Nutrition Hard Target (90 Caps)... | Suppz.com",
+    "new_seo_desc": "Buy Apollon Nutrition Hard Target (90 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "apollon-nutrition-assassin-black-tulip",
+    "title": "Apollon Nutrition Assassin Black Tulip",
+    "vendor": "Apollon Nutrition",
+    "price": "64.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Apollon Nutrition Assassin Black Tulip... | Suppz.com",
+    "new_seo_desc": "Buy Apollon Nutrition Assassin Black Tulip at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "goli-nutrition-ashwagandha-gummies",
+    "title": "Goli Nutrition Ashwagandha Gummies",
+    "vendor": "Goli Nutrition",
+    "price": "18.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Goli Nutrition Ashwagandha Gummies | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Goli Nutrition Ashwagandha Gummies at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "goli-nutrition-superfruits-gummies",
+    "title": "Goli Nutrition Superfruits Gummies",
+    "vendor": "Goli Nutrition",
+    "price": "18.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Goli Nutrition Superfruits Gummies | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Goli Nutrition Superfruits Gummies at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "proven-pre-workout",
+    "title": "Proven Pre Workout",
+    "vendor": "Arsenal Labs",
+    "price": "39.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Proven Pre Workout | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Proven Pre Workout at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "hi-tech-pharma-halotestin-60caps",
+    "title": "Hi Tech Halotestin 60 Caps",
+    "vendor": "Hi Tech Pharmaceuticals",
+    "price": "59.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Hi Tech Halotestin 60 Caps | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Hi Tech Halotestin 60 Caps at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hi-tech pharmaceuticals",
+      "legal prohormone"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "man-sports-brain-bridge-1",
+    "title": "Man Sports Brain Bridge",
+    "vendor": "MAN Sports",
+    "price": "44.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Man Sports Brain Bridge | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Man Sports Brain Bridge at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "paradigm-pharma-oxy-elite-2-0-og-60-caps",
+    "title": "Paradigm Pharma Oxy OG Elite 2.0 (60 Caps)",
+    "vendor": "Paradigm Pharma",
+    "price": "44.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Paradigm Pharma Oxy OG Elite 2.0 (60 Caps)... | Suppz.com",
+    "new_seo_desc": "Buy Paradigm Pharma Oxy OG Elite 2.0 (60 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "supplement",
+      "buy online",
+      "free shipping"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "hi-tech-redux-60-caps",
+    "title": "Hi Tech Redux (60 Caps)",
+    "vendor": "Hi Tech Pharmaceuticals",
+    "price": "34.95",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Hi Tech Redux (60 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Hi Tech Redux (60 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hi-tech pharmaceuticals",
+      "legal prohormone"
+    ],
+    "needs_update": true
+  },
+  {
+    "handle": "hi-tech-coq10-120caps",
+    "title": "Hi Tech CoQ10 (120 Caps)",
+    "vendor": "Hi Tech Pharmaceuticals",
+    "price": "59.99",
+    "current_seo_title": "",
+    "current_seo_desc": "",
+    "new_seo_title": "Hi Tech CoQ10 (120 Caps) | Buy Online | Suppz.com",
+    "new_seo_desc": "Buy Hi Tech CoQ10 (120 Caps) at Suppz.com. Premium quality supplement for your fitness goals. Fast shipping, best prices. Shop now!",
+    "keywords": [
+      "hi-tech pharmaceuticals",
+      "legal prohormone"
+    ],
+    "needs_update": true
+  }
+]

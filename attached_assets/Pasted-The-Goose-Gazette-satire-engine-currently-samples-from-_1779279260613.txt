@@ -1,0 +1,35 @@
+The Goose Gazette satire engine currently samples from only 8 KAPPA signal templates (aerial, seismic, space, frequency, pattern, infrastructure, wildlife, economics). The user's attached "20 Goose-Themed Satire Categories" sheet is much richer — diplomatic, cyber, narco, neutrality-doctrine, treaty-absurdity, etc. Expand the template pool so the Council has many more category seeds to sample from, each mapped onto the existing math lattice (κ₁ ratio, Ψ=A×N=1 invariant, CZ Gate, Ω-GOS 26-spoke lattice) so they slot cleanly into the existing pipeline.
+
+Keep the original 8 templates and add new ones inspired by (not copied verbatim from) the attached Goose Gazette categories. Each new template must follow the same Template shape and the AP-rigidity / inverted-pyramid / absurd-premise discipline the Humor Hypervisor scores against.
+Done looks like
+
+    The TEMPLATES array in server/goose-generator.ts contains the original 8 entries plus ~15–20 new entries inspired by the attached categories (e.g. fortified-nest / sovereignty, rusted-tank / defense theater, arms-fair neutrality, cyber-command, treaty/port, lithium-mine, UN-resolution, psyop / counter-goose, border-wall, narco-sub, treasury, surveillance-drone, foreign-troop agreement, trade-bloc, espionage, doctrine, subsea-cable, legislative-amendment, island-claim, parade).
+    Each new template:
+        Has a unique name (kebab-case), a tag matching existing tag conventions (LOCAL, BREAKING, SCIENCE, BUSINESS, WILDLIFE, or a new POLITICS / DIPLOMACY / DEFENSE tag if needed, kept consistent everywhere the tag is consumed), and a matching category.
+        Has a buildPrompt(d) that pulls from KappaData where signals are relevant (KAPPA score, recent events, stats counts, correlations) and falls back to _d cleanly when not.
+        States an ARTICLE CONCEPT line, a dateline hint where appropriate, and an explicit punchline-position instruction — same shape as the originals, so the Geometer/Body Architect/Arbiter chain works without code changes downstream.
+    The Council's sampling logic continues to work — i.e. wherever TEMPLATES is iterated, randomly picked, or filtered, the new entries are picked up automatically with no special-casing required.
+    If tag strings flow into any UI badge map, humor-hypervisor rubric, or category filter, those maps are extended so any newly introduced tags render correctly (no "unknown tag" fallbacks).
+    A quick generation run produces at least one article from a newly added template without throwing, and the Humor Hypervisor scores it on all 5 dimensions as it would any existing template.
+
+Out of scope
+
+    Changing the Council architecture, κ₁ math, Ψ=A×N invariant, CZ Gate, or Humor Hypervisor rubric.
+    Editing the persona list (client/src/lib/goose-personas.ts) or byline pool.
+    New UI for browsing/picking templates — this is a pure content-pool expansion.
+    Verbatim copying of the attached satire text into the codebase; templates are seed concepts, not finished articles.
+
+Steps
+
+    Audit tag/category consumers. Grep for every place tag and category from TEMPLATES are read (UI badges, hypervisor, storage filters) so we know which tag values are safe to introduce and where any new tag must also be registered.
+    Draft the new template seeds. Translate the 20 attached Goose Gazette categories into ~15–20 Template entries (some can be merged where they overlap with existing templates like wildlife or infrastructure). Each entry encodes one absurd-premise concept + AP-style punchline instruction.
+    Wire new tags (if any). If a template needs a tag that doesn't already exist, add it everywhere tags are consumed so badges, filters, and rubric paths handle it.
+    Smoke-test generation. Run the existing Goose generation path once with a forced pick from a new template and confirm the article renders, is scored by the Humor Hypervisor, and respects the CZ Gate headline cap.
+
+Relevant files
+
+    server/goose-generator.ts:300-408
+    server/humor-hypervisor.ts
+    client/src/lib/goose-personas.ts
+    attached_assets/Pasted--THE-GOOSE-GAZETTE-Investigative-Satire-from-the-Guanac_1779276763413.txt
+    attached_assets/Pasted-The-Semiotic-and-Mathematical-Topology-of-Satirical-Res_1779264527726.txt
