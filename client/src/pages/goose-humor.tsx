@@ -99,6 +99,55 @@ export default function GooseHumorPage() {
   // Sparklines: oldest -> newest, so reverse from API (which is newest-first)
   const chrono = [...recent].reverse();
 
+  const handleDownloadCsv = () => {
+    const headers = [
+      "articleId",
+      "headline",
+      "apRigidity",
+      "premiseAbsurdity",
+      "jokeDiscipline",
+      "specificityCarrier",
+      "resolutionUnresolved",
+      "overall",
+      "scoredAt",
+      "summary",
+    ];
+    const escape = (val: unknown): string => {
+      const s = val === null || val === undefined ? "" : String(val);
+      if (/[",\n\r]/.test(s)) {
+        return `"${s.replace(/"/g, '""')}"`;
+      }
+      return s;
+    };
+    const rows = recent.map((r) =>
+      [
+        r.articleId,
+        r.headline,
+        r.apRigidity,
+        r.premiseAbsurdity,
+        r.jokeDiscipline,
+        r.specificityCarrier,
+        r.resolutionUnresolved,
+        r.overall,
+        r.scoredAt,
+        r.summary,
+      ]
+        .map(escape)
+        .join(","),
+    );
+    const csv = [headers.join(","), ...rows].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const today = new Date().toISOString().slice(0, 10);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `goose-humor-${today}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div
       className="min-h-screen bg-white dark:bg-black text-black dark:text-gray-100 p-6"
@@ -115,13 +164,24 @@ export default function GooseHumorPage() {
               Per-article humor scores across 5 dimensions, judged by gpt-4o-mini.
             </p>
           </div>
-          <Link
-            href="/goose"
-            className="text-sm px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
-            data-testid="link-back-gazette"
-          >
-            ← Gazette
-          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleDownloadCsv}
+              disabled={recent.length === 0}
+              className="text-sm px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-50 dark:hover:bg-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+              data-testid="button-download-csv"
+            >
+              Download CSV
+            </button>
+            <Link
+              href="/goose"
+              className="text-sm px-3 py-1.5 border border-gray-300 dark:border-gray-700 rounded hover:bg-gray-50 dark:hover:bg-gray-900"
+              data-testid="link-back-gazette"
+            >
+              ← Gazette
+            </Link>
+          </div>
         </div>
 
         {/* Status row */}
