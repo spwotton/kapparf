@@ -1106,6 +1106,72 @@ export default function LocalLLMHypervisorPage() {
     toast({ title: "Sessions exported as JSON", description: `${sessions.length} session${sessions.length !== 1 ? "s" : ""} downloaded as JSON` });
   };
 
+  const importSessionsFromJson = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = "";
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target?.result as string);
+        if (!Array.isArray(parsed)) throw new Error("Expected an array");
+
+        const isValidAgent = (a: unknown) =>
+          a && typeof a === "object" &&
+          typeof (a as Record<string, unknown>).roleLabel === "string" &&
+          typeof (a as Record<string, unknown>).output === "string" &&
+          typeof (a as Record<string, unknown>).tokenCount === "number";
+
+        const isValidLayerOutput = (l: unknown) =>
+          l && typeof l === "object" &&
+          typeof (l as Record<string, unknown>).layerName === "string" &&
+          typeof (l as Record<string, unknown>).layerId === "string" &&
+          typeof (l as Record<string, unknown>).blendMode === "string" &&
+          typeof (l as Record<string, unknown>).opacity === "number" &&
+          Array.isArray((l as Record<string, unknown>).agents) &&
+          ((l as Record<string, unknown>).agents as unknown[]).every(isValidAgent);
+
+        const isValidSession = (s: unknown): s is RoundtableSession =>
+          s !== null && typeof s === "object" &&
+          typeof (s as Record<string, unknown>).id === "string" &&
+          (s as Record<string, unknown>).id !== "" &&
+          typeof (s as Record<string, unknown>).ts === "number" &&
+          typeof (s as Record<string, unknown>).prompt === "string" &&
+          typeof (s as Record<string, unknown>).hypervisorSynthesis === "string" &&
+          Array.isArray((s as Record<string, unknown>).layerOutputs) &&
+          ((s as Record<string, unknown>).layerOutputs as unknown[]).every(isValidLayerOutput);
+
+        const valid = parsed.filter(isValidSession);
+
+        if (valid.length === 0) {
+          toast({ title: "No valid sessions found", description: "The file did not contain any recognisable sessions", variant: "destructive" });
+          return;
+        }
+
+        setSessions((prev) => {
+          const sessionMap = new Map<string, RoundtableSession>(prev.map((s) => [s.id, s]));
+          let added = 0;
+          let skipped = 0;
+          for (const s of valid) {
+            if (sessionMap.has(s.id)) {
+              skipped++;
+            } else {
+              sessionMap.set(s.id, s);
+              added++;
+            }
+          }
+          const merged = Array.from(sessionMap.values()).sort((a, b) => b.ts - a.ts);
+          saveSessions(merged);
+          toast({ title: "Sessions imported", description: `${added} new session${added !== 1 ? "s" : ""} added (${skipped} duplicate${skipped !== 1 ? "s" : ""} skipped)` });
+          return merged;
+        });
+      } catch {
+        toast({ title: "Import failed", description: "Could not parse the file. Make sure it is a valid kappa-sessions JSON.", variant: "destructive" });
+      }
+    };
+    reader.readAsText(file);
+  };
+
   const exportSelectedSessions = async () => {
     const toExport = sessions.filter((s) => checkedSessionIds.has(s.id));
     if (toExport.length === 0) {
@@ -1764,6 +1830,24 @@ export default function LocalLLMHypervisorPage() {
                 <Badge variant="secondary" className="text-xs">{sessions.length}</Badge>
               </SheetTitle>
               <div className="flex items-center gap-1">
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  className="hidden"
+                  id="import-sessions-json-input"
+                  onChange={importSessionsFromJson}
+                  data-testid="input-import-sessions-json"
+                />
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs h-7"
+                  onClick={() => document.getElementById("import-sessions-json-input")?.click()}
+                  data-testid="button-import-sessions-json"
+                >
+                  <Download className="h-3 w-3 mr-1" />
+                  Import JSON
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"
