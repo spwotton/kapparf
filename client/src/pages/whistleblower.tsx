@@ -20,7 +20,7 @@ function VennDiagram({ sets, title }: { sets: { label: string; color: string; it
   const r = 120;
   return (
     <div className="my-8">
-      <h3 className="text-lg font-bold text-center mb-4 text-red-400">{title}</h3>
+      <h3 className="text-lg font-bold text-center mb-4 text-amber-400">{title}</h3>
       <svg viewBox="0 0 500 400" className="w-full max-w-xl mx-auto">
         <defs>
           {sets.map((s, i) => (
@@ -44,7 +44,7 @@ function VennDiagram({ sets, title }: { sets: { label: string; color: string; it
           </g>
         ))}
         <text x="250" y="210" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="bold">CONVERGENCE</text>
-        <text x="250" y="224" textAnchor="middle" fill="#ef4444" fontSize="9">Target / Observer</text>
+        <text x="250" y="224" textAnchor="middle" fill="#d97706" fontSize="9">Target / Observer</text>
       </svg>
     </div>
   );
@@ -68,7 +68,7 @@ function CorrelationMatrix({ data }: { data: { x: string; y: string; strength: n
               {labels.map(col => {
                 const cell = data.find(d => (d.x === row && d.y === col) || (d.x === col && d.y === row));
                 const s = cell?.strength || 0;
-                const bg = s > 0.8 ? "bg-red-900" : s > 0.5 ? "bg-orange-900" : s > 0.2 ? "bg-yellow-900/50" : row === col ? "bg-muted" : "bg-card/50";
+                const bg = s > 0.8 ? "bg-amber-900" : s > 0.5 ? "bg-orange-900" : s > 0.2 ? "bg-yellow-900/50" : row === col ? "bg-muted" : "bg-card/50";
                 return (
                   <td key={col} className={`p-2 text-center ${bg} border border-border cursor-default`} title={cell?.label || ""}>
                     {row === col ? "-" : s > 0 ? s.toFixed(1) : ""}
@@ -84,8 +84,8 @@ function CorrelationMatrix({ data }: { data: { x: string; y: string; strength: n
 }
 
 function TimelineEvent({ date, title, detail, severity }: { date: string; title: string; detail: string; severity: number }) {
-  const colors = ["", "border-gray-600", "border-yellow-600", "border-orange-500", "border-red-500", "border-red-700"];
-  const dots = ["", "bg-gray-500", "bg-yellow-500", "bg-orange-500", "bg-red-500", "bg-red-700"];
+  const colors = ["", "border-gray-600", "border-yellow-600", "border-orange-500", "border-amber-500", "border-amber-700"];
+  const dots = ["", "bg-gray-500", "bg-yellow-500", "bg-orange-500", "bg-amber-500", "bg-amber-700"];
   return (
     <div className="flex gap-4 mb-6">
       <div className="flex flex-col items-center">
@@ -104,7 +104,7 @@ function TimelineEvent({ date, title, detail, severity }: { date: string; title:
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="py-16 border-t border-border">
-      <h2 className="text-3xl font-black mb-8 text-red-500 tracking-tight">{title}</h2>
+      <h2 className="text-3xl font-black mb-8 text-amber-500 tracking-tight">{title}</h2>
       {children}
     </section>
   );
@@ -115,7 +115,7 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
     <div className="bg-card/80 border border-border rounded-lg p-4 text-center">
       <div className="text-2xl font-black font-mono text-foreground">{typeof value === "number" ? value.toLocaleString() : value}</div>
       <div className="text-xs text-muted-foreground/80 mt-1">{label}</div>
-      {sub && <div className="text-xs text-red-400 mt-1">{sub}</div>}
+      {sub && <div className="text-xs text-emerald-600 dark:text-emerald-400 mt-1">{sub}</div>}
     </div>
   );
 }
@@ -184,10 +184,10 @@ function SonarTable() {
         </thead>
         <tbody>
           {readings.map((r, i) => (
-            <tr key={i} className={`border-b border-border/50 ${r.snr === "54.45" ? "bg-red-950/30" : ""}`}>
+            <tr key={i} className={`border-b border-border/50 ${r.snr === "54.45" ? "bg-emerald-950/20" : ""}`}>
               <td className="p-2 font-mono text-muted-foreground/80">{r.ts}</td>
               <td className="p-2 font-mono text-muted-foreground/80">{r.sr}</td>
-              <td className="p-2 font-mono text-red-400 font-bold">{r.prf}</td>
+              <td className="p-2 font-mono text-emerald-700 dark:text-emerald-400 font-bold">{r.prf}</td>
               <td className="p-2 font-mono text-foreground font-bold">{r.snr}</td>
               <td className="p-2 text-muted-foreground/80">{r.notes}</td>
             </tr>
@@ -218,7 +218,7 @@ function DSEBackdoorTable() {
         <tbody>
           {devices.map((d, i) => (
             <tr key={i} className="border-b border-border/50">
-              <td className="p-2 font-mono text-red-400 font-bold">{d.device}</td>
+              <td className="p-2 font-mono text-emerald-700 dark:text-emerald-400 font-bold">{d.device}</td>
               <td className="p-2 text-muted-foreground">{d.fn}</td>
               <td className="p-2 text-orange-400">{d.vuln}</td>
             </tr>
@@ -258,7 +258,7 @@ function CopyBlock({ text, multiline }: { text: string; multiline?: boolean }) {
           </>
         )}
       </button>
-      <div className="bg-black border border-red-900/50 rounded p-3 pr-20 font-mono text-xs text-green-400 break-all">
+      <div className="bg-black border border-amber-900/50 rounded p-3 pr-20 font-mono text-xs text-green-400 break-all">
         {multiline
           ? text.split("\n").map((line, i) => <div key={i}>{line}</div>)
           : text}
@@ -328,7 +328,7 @@ export default function WhistleblowerPage() {
   return (
     <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
       <div
-        className="relative z-50 bg-red-600 cursor-pointer select-none"
+        className="relative z-50 bg-emerald-800 cursor-pointer select-none"
         onClick={() => setBannerOpen(!bannerOpen)}
         data-testid="security-banner"
       >
@@ -338,47 +338,47 @@ export default function WhistleblowerPage() {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`w-4 h-4 text-white flex-shrink-0 transition-transform duration-300 ${bannerOpen ? "rotate-180" : ""}`}><polyline points="6 9 12 15 18 9"/></svg>
         </div>
         <div className={`overflow-hidden transition-all duration-500 ease-in-out ${bannerOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}>
-          <div className="bg-black/95 border-t border-red-500/30 px-4 py-8">
+          <div className="bg-black/95 border-t border-emerald-700/30 px-4 py-8">
             <div className="max-w-4xl mx-auto space-y-6">
               <div className="text-center mb-6">
                 <h2 className="text-2xl font-black text-white mb-2">Immediate Device Hardening</h2>
-                <p className="text-red-300 text-sm">If you suspect surveillance on your network, these steps encrypt your traffic and close common attack ports.</p>
+                <p className="text-amber-300 text-sm">If you suspect surveillance on your network, these steps encrypt your traffic and close common attack ports.</p>
               </div>
 
               <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
+                <div className="bg-white/5 border border-amber-900/40 rounded-lg p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-2xl">🐧</span>
                     <h3 className="text-white font-bold text-lg">Linux</h3>
                   </div>
-                  <p className="text-red-300 text-xs mb-3">One command. Run in terminal after every boot:</p>
+                  <p className="text-amber-300 text-xs mb-3">One command. Run in terminal after every boot:</p>
                   <CopyBlock text="wget https://ciajw.com/scripts/harden.sh -O ~/harden.sh && sudo bash ~/harden.sh" />
                   <p className="text-muted-foreground/60 text-xs">Enables firewall, blocks 17 surveillance ports (Modbus, TR-069, Meterpreter, SNMP, backdoors), disables mDNS/UPnP discovery, installs Mullvad VPN (primary) or Cloudflare WARP (fallback). You become invisible on any hostile network.</p>
                 </div>
 
-                <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
+                <div className="bg-white/5 border border-amber-900/40 rounded-lg p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-2xl">🪟</span>
                     <h3 className="text-white font-bold text-lg">Windows</h3>
                   </div>
-                  <p className="text-red-300 text-xs mb-3">Run in PowerShell as Administrator:</p>
+                  <p className="text-amber-300 text-xs mb-3">Run in PowerShell as Administrator:</p>
                   <CopyBlock text={`Set-NetFirewallProfile -All -Enabled True -DefaultInboundAction Block\nwinget install MullvadVPN.Mullvad\nwinget install Cloudflare.Warp`} multiline />
                   <p className="text-muted-foreground/60 text-xs mt-3">Enables Windows Firewall on all profiles, blocks all unsolicited inbound. Mullvad VPN (mullvad.net) is recommended — no email, no logs, 5 EUR/month, accepts crypto/cash. Cloudflare WARP is a free fallback.</p>
                 </div>
 
-                <div className="bg-white/5 border border-red-900/40 rounded-lg p-5">
+                <div className="bg-white/5 border border-amber-900/40 rounded-lg p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-2xl">🍎</span>
                     <h3 className="text-white font-bold text-lg">macOS</h3>
                   </div>
-                  <p className="text-red-300 text-xs mb-3">Run in Terminal:</p>
+                  <p className="text-amber-300 text-xs mb-3">Run in Terminal:</p>
                   <CopyBlock text={`sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on\nsudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall on\nbrew install mullvadvpn\nbrew install cloudflare-warp`} multiline />
                   <p className="text-muted-foreground/60 text-xs mt-3">Enables macOS Application Firewall, blocks all incoming connections. Mullvad VPN (mullvad.net) is recommended — no email, no logs, accepts crypto/cash. If no brew, download from mullvad.net or 1.1.1.1 for WARP.</p>
                 </div>
               </div>
 
-              <div className="bg-red-950/40 border border-red-500/30 rounded-lg p-4 text-center">
-                <p className="text-red-300 text-sm font-bold mb-1">Why this matters</p>
+              <div className="bg-emerald-950/25 border border-emerald-700/30 rounded-lg p-4 text-center">
+                <p className="text-amber-300 text-sm font-bold mb-1">Why this matters</p>
                 <p className="text-muted-foreground/70 text-xs leading-relaxed max-w-2xl mx-auto">
                   Hotel/public WiFi access points (like UniFi) give network operators full visibility into your traffic — every domain you visit, every connection you make.
                   Surveillance operators use ports like SNMP (161), Modbus (502), TR-069 (7547), and mDNS (5353) to discover, fingerprint, and attack your device.
@@ -390,14 +390,14 @@ export default function WhistleblowerPage() {
         </div>
       </div>
 
-      <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-red-900/30 dark:border-red-900/50">
+      <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-amber-900/30 dark:border-amber-900/50">
         <div className="max-w-6xl mx-auto px-4 py-2">
           <nav className="flex gap-1 flex-wrap justify-center">
             {navItems.map(item => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`px-2 py-1 text-xs font-sans rounded transition-colors ${activeSection === item.id ? "bg-red-900/50 text-red-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
+                className={`px-2 py-1 text-xs font-sans rounded transition-colors ${activeSection === item.id ? "bg-amber-900/50 text-amber-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
                 onClick={() => setActiveSection(item.id)}
                 data-testid={`nav-${item.id}`}
               >
@@ -409,14 +409,14 @@ export default function WhistleblowerPage() {
       </div>
 
       <div className="relative overflow-hidden py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-red-950/10 dark:from-red-950/20 via-background to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/8 dark:from-emerald-950/15 via-background to-background" />
         <div className="relative max-w-4xl mx-auto text-center">
-          <div className="text-xs font-mono text-red-500 tracking-widest mb-4">DOCUMENTED SURVEILLANCE HARASSMENT — AT LEAST A DOZEN LOCATIONS ACROSS COSTA RICA</div>
+          <div className="text-xs font-mono text-emerald-700 dark:text-emerald-400 tracking-widest mb-4">DOCUMENTED SURVEILLANCE HARASSMENT — AT LEAST A DOZEN LOCATIONS ACROSS COSTA RICA</div>
           <h1 className="text-4xl md:text-6xl font-black text-foreground leading-tight mb-6" data-testid="hero-title">
             Where Intelligence Agencies,<br />
             Religious Organizations &<br />
             Corporate Infrastructure<br />
-            <span className="text-red-500">Converge on One Person</span>
+            <span className="text-emerald-700 dark:text-emerald-400">Converge on One Person</span>
           </h1>
           <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto mb-4">
             A documented case of multi-vector surveillance targeting a single individual across at least a dozen locations in Costa Rica.
@@ -472,12 +472,12 @@ export default function WhistleblowerPage() {
             <div className="bg-card/60 border border-border rounded-lg p-5">
               <h4 className="font-bold text-foreground mb-3">What makes this different</h4>
               <ul className="space-y-2 text-sm text-muted-foreground/80">
-                <li className="flex gap-2"><span className="text-red-500 mt-0.5">1.</span> Sonar at 54.45 dB SNR — 250x above noise floor — confirmed active surveillance transmission</li>
-                <li className="flex gap-2"><span className="text-red-500 mt-0.5">2.</span> DSE/Setecom backdoors documented to national power grid (ICE) and telecom (Liberty)</li>
-                <li className="flex gap-2"><span className="text-red-500 mt-0.5">3.</span> Packet captures with Tor, Meterpreter, and backdoor ports in the same capture</li>
-                <li className="flex gap-2"><span className="text-red-500 mt-0.5">4.</span> Cross-domain correlations computed mathematically showing non-random clustering</li>
-                <li className="flex gap-2"><span className="text-red-500 mt-0.5">5.</span> SHA-256 integrity hashes ensure chain-of-custody for every data point</li>
-                <li className="flex gap-2"><span className="text-red-500 mt-0.5">6.</span> Behavior-modification motive supported by peer-reviewed academic research (Liu et al., 2024)</li>
+                <li className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">1.</span> Sonar at 54.45 dB SNR — 250x above noise floor — confirmed active surveillance transmission</li>
+                <li className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">2.</span> DSE/Setecom backdoors documented to national power grid (ICE) and telecom (Liberty)</li>
+                <li className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">3.</span> Packet captures with Tor, Meterpreter, and backdoor ports in the same capture</li>
+                <li className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">4.</span> Cross-domain correlations computed mathematically showing non-random clustering</li>
+                <li className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">5.</span> SHA-256 integrity hashes ensure chain-of-custody for every data point</li>
+                <li className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 mt-0.5">6.</span> Behavior-modification motive supported by peer-reviewed academic research (Liu et al., 2024)</li>
               </ul>
             </div>
             <div className="bg-card/60 border border-border rounded-lg p-5">
@@ -488,12 +488,12 @@ export default function WhistleblowerPage() {
                 <div className="pt-2 border-t border-border/50 mt-2">
                   <span className="text-muted-foreground/60 text-xs font-mono block mb-1.5">LOCATION PROGRESSION</span>
                   <div className="space-y-1.5 text-xs">
-                    <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">JACO</span> <span className="text-foreground">Oct–Dec 28 2024: Casa Rexa #42, C. Naciones Unidas, Ricos y Famosos — DJI Mavic on roof, anomalous audio. Then placed in Doge Landlord's personal family house at Hermosa Palms via intermediary. Breakwater Point lease. At least a dozen Jaco-area locations total</span></div>
+                    <div className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 font-mono shrink-0 w-16">JACO</span> <span className="text-foreground">Oct–Dec 28 2024: Casa Rexa #42, C. Naciones Unidas, Ricos y Famosos — DJI Mavic on roof, anomalous audio. Then placed in Doge Landlord's personal family house at Hermosa Palms via intermediary. Breakwater Point lease. At least a dozen Jaco-area locations total</span></div>
                     <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">Q.SECA</span> <span className="text-foreground">Quebrada Seca — Oct 14, 2025: "Elimination by simulation" agent day, consciousness duplication event</span></div>
                     <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">CONDO</span> <span className="text-foreground">Condominio Naz — the day his mother died. Additional condo in same period</span></div>
                     <div className="flex gap-2"><span className="text-yellow-400 font-mono shrink-0 w-16">GUACIMA</span> <span className="text-foreground">Guacima — early months of 2026</span></div>
                     <div className="flex gap-2"><span className="text-orange-400 font-mono shrink-0 w-16">ROBLEDAL</span> <span className="text-foreground">Hotel Robledal — fled after police incident triggered by Kyndryl text injection. Doppler/mm-wave dome on roof documented</span></div>
-                    <div className="flex gap-2"><span className="text-red-400 font-mono shrink-0 w-16">TACACORI</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106 — $1,500 in damage</span></div>
+                    <div className="flex gap-2"><span className="text-emerald-600 dark:text-emerald-400 font-mono shrink-0 w-16">TACACORI</span> <span className="text-foreground">Calle Los Cedros, ultima casa a la izquierda, Tacacori, Alajuela 20106 — $1,500 in damage</span></div>
                     <div className="flex gap-2"><span className="text-gray-400 font-mono shrink-0 w-16">SJ</span> <span className="text-foreground">Suites Cristina, Sabana Norte, San José — adjacent to ICE HQ (March 31 – ~April 2026)</span></div>
                     <div className="flex gap-2"><span className="text-cyan-400 font-mono shrink-0 w-16">CURRENT</span> <span className="text-foreground">Hotel Pochote Grande, Jacó — returned to Jaco Nexus origin point. Crane light anomaly documented above Vista Las Palmas / Apartotel Flamboyant on Calle Dankers.</span></div>
                   </div>
@@ -570,7 +570,7 @@ export default function WhistleblowerPage() {
                 "YouTube: generator sales training",
                 "Default credential training normalizes insecurity",
               ]}
-              color="#ef4444"
+              color="#d97706"
             />
             <PersonCard
               name="NYAN_CAT_TECH"
@@ -598,7 +598,7 @@ export default function WhistleblowerPage() {
                 "20+ year operation with local partner",
                 "Kompromat vulnerability for entire network",
               ]}
-              color="#dc2626"
+              color="#b45309"
             />
           </div>
 
@@ -725,7 +725,7 @@ export default function WhistleblowerPage() {
                 "Shady mortgage company operated jointly with Kimball",
                 "Appears intelligence-connected or operative-adjacent",
               ]}
-              color="#dc2626"
+              color="#b45309"
             />
             <PersonCard
               name="GENESIS_P"
@@ -787,7 +787,7 @@ export default function WhistleblowerPage() {
                 "46.875 Hz frame synchronization linked to his hardware",
                 "RF detection confirmed via observer's own spectrum analyzer",
               ]}
-              color="#ef4444"
+              color="#d97706"
             />
             <PersonCard
               name="MACEK_MONEY"
@@ -864,7 +864,7 @@ export default function WhistleblowerPage() {
                 "Claims authority over observer — authorization chain unverified",
                 "Classification: rogue federal operative, CIA/DoD black ops, or criminal network impersonating federal authority",
               ]}
-              color="#dc2626"
+              color="#b45309"
             />
           </div>
 
@@ -901,8 +901,8 @@ export default function WhistleblowerPage() {
             />
           </div>
 
-          <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 mt-6">
-            <h4 className="font-bold text-red-400 mb-3">The UPNP Incident — Proof of Active Monitoring</h4>
+          <div className="bg-card/60 border border-amber-900/50 rounded-lg p-5 mt-6">
+            <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3">The UPNP Incident — Proof of Active Monitoring</h4>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <p className="text-sm text-muted-foreground/80 mb-3">
@@ -922,7 +922,7 @@ export default function WhistleblowerPage() {
                   <div><span className="text-green-400">T+0:00</span> Observer disables UPNP</div>
                   <div><span className="text-yellow-400">T+0:05</span> Manager texts — "checking router"</div>
                   <div><span className="text-orange-400">T+48:00</span> Sunday — technician arrives</div>
-                  <div><span className="text-red-400">CONCLUSION</span> Automated monitoring confirmed</div>
+                  <div><span className="text-amber-400">CONCLUSION</span> Automated monitoring confirmed</div>
                 </div>
               </div>
             </div>
@@ -936,7 +936,7 @@ export default function WhistleblowerPage() {
             This is not a DSP artifact, not 1/f noise, not an FFT bin artifact — it is intentional transmission.
           </p>
 
-          <div className="bg-card/60 border border-red-900/50 rounded-lg p-6 mb-6">
+          <div className="bg-card/60 border border-amber-900/50 rounded-lg p-6 mb-6">
             <h3 className="font-bold text-foreground mb-3">Raw Sonar Readings — 46.875 Hz PRF</h3>
             <SonarTable />
             <div className="mt-3 text-xs text-muted-foreground/60">
@@ -948,7 +948,7 @@ export default function WhistleblowerPage() {
             <div className="bg-card/60 border border-border rounded-lg p-5">
               <h4 className="font-bold text-foreground mb-3">Why 54.45 dB SNR Is Proof</h4>
               <ul className="space-y-2 text-sm text-muted-foreground/80">
-                <li><strong className="text-red-400">54.45 dB</strong> = signal 250x stronger than noise floor</li>
+                <li><strong className="text-amber-400">54.45 dB</strong> = signal 250x stronger than noise floor</li>
                 <li><strong className="text-foreground">NOT</strong> DC offset leakage (wrong frequency)</li>
                 <li><strong className="text-foreground">NOT</strong> 1/f noise (too narrow, too strong)</li>
                 <li><strong className="text-foreground">NOT</strong> FFT artifact (48000/1024 = 46.875 is a coincidence — artifacts don't have 54dB SNR)</li>
@@ -965,8 +965,8 @@ export default function WhistleblowerPage() {
                 This conclusion is either:
               </p>
               <div className="space-y-2">
-                <div className="bg-red-950/30 rounded p-2 text-xs">
-                  <span className="text-red-400 font-bold">1. Disinformation</span>
+                <div className="bg-emerald-950/20 rounded p-2 text-xs">
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">1. Disinformation</span>
                   <span className="text-muted-foreground/80"> — intentional misdirection to discredit documented evidence</span>
                 </div>
                 <div className="bg-orange-950/30 rounded p-2 text-xs">
@@ -986,7 +986,7 @@ export default function WhistleblowerPage() {
           </div>
 
           <div className="bg-card/60 border border-amber-900/30 rounded-lg p-5 mt-6">
-            <h4 className="font-bold text-amber-400 mb-3">Parametric LED Array — Directed Energy</h4>
+            <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3">Parametric LED Array — Directed Energy</h4>
             <p className="text-sm text-muted-foreground/80">
               A parametric LED array on the El Miro building was documented with the capability to <strong className="text-foreground">move foliage with its beam</strong>.
               This is consistent with directed energy technology — the same beam can be used for acoustic projection (voice cloning),
@@ -1003,11 +1003,11 @@ export default function WhistleblowerPage() {
             Training materials from the company normalize critically insecure practices.
           </p>
 
-          <div className="bg-card/60 border border-red-900/50 rounded-lg p-6 mb-6">
+          <div className="bg-card/60 border border-amber-900/50 rounded-lg p-6 mb-6">
             <h3 className="font-bold text-foreground mb-3">DSE Device Backdoor Matrix</h3>
             <DSEBackdoorTable />
-            <div className="mt-3 bg-red-950/30 rounded p-3">
-              <div className="text-xs text-red-400 font-bold mb-1">DSE Webnet — UK Server Kill Switch</div>
+            <div className="mt-3 bg-emerald-950/20 rounded p-3">
+              <div className="text-xs text-emerald-700 dark:text-emerald-400 font-bold mb-1">DSE Webnet — UK Server Kill Switch</div>
               <div className="text-xs text-muted-foreground/80">
                 DSE Webnet connects to a server in England with a master account that has <strong className="text-foreground">kill switch capability</strong> —
                 it can shut down ALL generators connected to the network in the entire country. A single compromised account
@@ -1024,12 +1024,12 @@ export default function WhistleblowerPage() {
                 actively teaches practices that compromise national infrastructure:
               </p>
               <ul className="space-y-1 text-xs text-muted-foreground/80">
-                <li className="flex gap-2"><span className="text-red-500">-</span> Default credentials: <span className="font-mono text-red-400">Admin / Password1234</span></li>
-                <li className="flex gap-2"><span className="text-red-500">-</span> Teaches bypass of connection limits</li>
-                <li className="flex gap-2"><span className="text-red-500">-</span> Unencrypted Modbus TCP/IP (port 502)</li>
-                <li className="flex gap-2"><span className="text-red-500">-</span> SNMP v2 cleartext with default community strings</li>
-                <li className="flex gap-2"><span className="text-red-500">-</span> HTTP SCADA with no VPN requirement</li>
-                <li className="flex gap-2"><span className="text-red-500">-</span> 4G GSM gateway tunneling to UK servers</li>
+                <li className="flex gap-2"><span className="text-amber-500">-</span> Default credentials: <span className="font-mono text-amber-400">Admin / Password1234</span></li>
+                <li className="flex gap-2"><span className="text-amber-500">-</span> Teaches bypass of connection limits</li>
+                <li className="flex gap-2"><span className="text-amber-500">-</span> Unencrypted Modbus TCP/IP (port 502)</li>
+                <li className="flex gap-2"><span className="text-amber-500">-</span> SNMP v2 cleartext with default community strings</li>
+                <li className="flex gap-2"><span className="text-amber-500">-</span> HTTP SCADA with no VPN requirement</li>
+                <li className="flex gap-2"><span className="text-amber-500">-</span> 4G GSM gateway tunneling to UK servers</li>
               </ul>
             </div>
             <div className="bg-card/60 border border-border rounded-lg p-5">
@@ -1039,19 +1039,19 @@ export default function WhistleblowerPage() {
               </p>
               <div className="space-y-2">
                 <div className="bg-muted/50 rounded p-2 text-xs">
-                  <span className="font-mono text-red-400">Port 80</span> — Web SCADA, no encryption, no VPN
+                  <span className="font-mono text-amber-400">Port 80</span> — Web SCADA, no encryption, no VPN
                 </div>
                 <div className="bg-muted/50 rounded p-2 text-xs">
-                  <span className="font-mono text-red-400">Port 502</span> — Modbus TCP/IP, cleartext industrial control
+                  <span className="font-mono text-amber-400">Port 502</span> — Modbus TCP/IP, cleartext industrial control
                 </div>
                 <div className="bg-muted/50 rounded p-2 text-xs">
-                  <span className="font-mono text-red-400">Port 161/162</span> — SNMP v2, default community strings
+                  <span className="font-mono text-amber-400">Port 161/162</span> — SNMP v2, default community strings
                 </div>
                 <div className="bg-muted/50 rounded p-2 text-xs">
-                  <span className="font-mono text-red-400">Port 8291</span> — MikroTik WinBox exploitation
+                  <span className="font-mono text-amber-400">Port 8291</span> — MikroTik WinBox exploitation
                 </div>
                 <div className="bg-muted/50 rounded p-2 text-xs">
-                  <span className="font-mono text-red-400">CVE-2025-10948</span> — MikroTik RouterOS buffer overflow RCE
+                  <span className="font-mono text-amber-400">CVE-2025-10948</span> — MikroTik RouterOS buffer overflow RCE
                 </div>
               </div>
             </div>
@@ -1142,10 +1142,10 @@ export default function WhistleblowerPage() {
               </div>
             </div>
 
-            <div className="bg-card/60 border border-red-900/50 rounded-lg p-5 md:col-span-2">
+            <div className="bg-card/60 border border-amber-900/50 rounded-lg p-5 md:col-span-2">
               <div className="flex items-center gap-2 mb-3">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <h4 className="font-bold text-red-400">ISP-Level Infrastructure Compromise (TR-069)</h4>
+                <div className="w-3 h-3 rounded-full bg-amber-500" />
+                <h4 className="font-bold text-amber-400">ISP-Level Infrastructure Compromise (TR-069)</h4>
               </div>
               <p className="text-sm text-muted-foreground/80 mb-3">
                 CWMP exploitation (port 7547) for forced router resets, ghost mesh node injection, and MITM.
@@ -1216,7 +1216,7 @@ export default function WhistleblowerPage() {
                   <h4 className="font-bold text-foreground">{item.title}</h4>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-muted-foreground/60 font-mono">{item.date}</span>
-                    <span className={`text-xs px-2 py-0.5 rounded font-bold ${item.severity >= 4 ? "bg-red-900 text-red-300" : "bg-orange-900 text-orange-300"}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded font-bold ${item.severity >= 4 ? "bg-amber-900 text-amber-300" : "bg-orange-900 text-orange-300"}`}>
                       SEV {item.severity}
                     </span>
                   </div>
@@ -1235,7 +1235,7 @@ export default function WhistleblowerPage() {
             is <strong className="text-foreground">data collection for behavior-modification research</strong>.
           </p>
 
-          <div className="bg-card/60 border border-red-900/50 rounded-lg p-6 mb-6">
+          <div className="bg-card/60 border border-amber-900/50 rounded-lg p-6 mb-6">
             <h3 className="font-bold text-foreground mb-4">The Hypothesis</h3>
             <p className="text-sm text-muted-foreground/80 mb-4">
               Attackers use the resident as an unwitting subject to collect multimodal data (thermal, camera, Wi-Fi/CSI, sonar/ultrasound)
@@ -1244,7 +1244,7 @@ export default function WhistleblowerPage() {
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-muted/50 rounded p-4">
-                <h5 className="text-xs font-bold text-red-400 mb-2">Data Points Collected</h5>
+                <h5 className="text-xs font-bold text-amber-400 mb-2">Data Points Collected</h5>
                 <ul className="space-y-1 text-xs text-muted-foreground/80">
                   <li>- Thermal & visual ROI: facial temperature shifts (nose, lips, cheeks)</li>
                   <li>- r-PPG equivalents: remote camera → approximate HR/HRV</li>
@@ -1320,7 +1320,7 @@ export default function WhistleblowerPage() {
               {sevFindings.slice(0, 8).map((f: any, i: number) => (
                 <div key={i} className="bg-card/60 border border-border rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <span className={`text-xs px-2 py-0.5 rounded font-bold ${f.severity >= 4 ? "bg-red-900 text-red-300" : "bg-orange-900 text-orange-300"}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded font-bold ${f.severity >= 4 ? "bg-amber-900 text-amber-300" : "bg-orange-900 text-orange-300"}`}>
                       SEV {f.severity}
                     </span>
                     <span className="text-xs text-muted-foreground/60 font-mono">{f.category}</span>
@@ -1332,7 +1332,7 @@ export default function WhistleblowerPage() {
             </div>
           )}
 
-          <div className="bg-card/60 border border-red-900/30 rounded-lg p-6">
+          <div className="bg-card/60 border border-amber-900/30 rounded-lg p-6">
             <h3 className="font-bold text-foreground mb-3">Evening Window Anomaly</h3>
             <p className="text-sm text-muted-foreground/80 mb-4">
               Signal activity during 18:00-22:00 CST / 00:00-04:00 UTC shows statistically significant enrichment.
@@ -1340,7 +1340,7 @@ export default function WhistleblowerPage() {
             </p>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
-                <div className="text-2xl font-black text-red-500">30.1%</div>
+                <div className="text-2xl font-black text-amber-500">30.1%</div>
                 <div className="text-xs text-muted-foreground/60">Actual EW concentration</div>
               </div>
               <div className="text-center">
@@ -1373,7 +1373,7 @@ export default function WhistleblowerPage() {
               <div className="space-y-3">
                 {[...correlationData].sort((a, b) => b.strength - a.strength).slice(0, 6).map((c, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <div className={`h-3 rounded ${c.strength > 0.8 ? "bg-red-600" : c.strength > 0.5 ? "bg-orange-600" : "bg-yellow-600"}`}
+                    <div className={`h-3 rounded ${c.strength > 0.8 ? "bg-amber-600" : c.strength > 0.5 ? "bg-orange-600" : "bg-yellow-600"}`}
                       style={{ width: `${c.strength * 60}px` }} />
                     <div>
                       <span className="text-xs font-bold text-foreground">{c.x} ↔ {c.y}</span>
@@ -1416,14 +1416,14 @@ export default function WhistleblowerPage() {
                       <div><span className="text-muted-foreground/60 text-xs">Packets:</span> <span className="font-mono text-foreground">{pcap.packetCount?.toLocaleString()}</span></div>
                       <div><span className="text-muted-foreground/60 text-xs">Size:</span> <span className="font-mono text-foreground">{(pcap.filesize / 1024 / 1024).toFixed(1)} MB</span></div>
                       <div><span className="text-muted-foreground/60 text-xs">Duration:</span> <span className="font-mono text-foreground">{f.timeRange?.durationSec ? `${Math.round(f.timeRange.durationSec)}s` : "N/A"}</span></div>
-                      <div><span className="text-muted-foreground/60 text-xs">EW Traffic:</span> <span className="font-mono text-red-400">{f.ewRatio ? `${(f.ewRatio * 100).toFixed(1)}%` : "N/A"}</span></div>
+                      <div><span className="text-muted-foreground/60 text-xs">EW Traffic:</span> <span className="font-mono text-amber-400">{f.ewRatio ? `${(f.ewRatio * 100).toFixed(1)}%` : "N/A"}</span></div>
                     </div>
                     {f.suspiciousPorts?.length > 0 && (
                       <div className="mb-3">
                         <div className="text-xs text-muted-foreground/60 mb-1">Suspicious Ports:</div>
                         <div className="flex flex-wrap gap-1">
                           {f.suspiciousPorts.map((p: any, j: number) => (
-                            <span key={j} className="text-xs bg-red-900/50 text-red-300 px-2 py-0.5 rounded font-mono">
+                            <span key={j} className="text-xs bg-amber-900/50 text-amber-300 px-2 py-0.5 rounded font-mono">
                               :{p.port} {p.label} ({p.count})
                             </span>
                           ))}
@@ -1537,7 +1537,7 @@ export default function WhistleblowerPage() {
 
           <div className="mt-12">
             <h3 className="text-lg font-bold text-foreground mb-2 flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+              <span className="inline-block h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
               Video Evidence
             </h3>
             <p className="text-muted-foreground/80 text-sm mb-6">
@@ -1545,7 +1545,7 @@ export default function WhistleblowerPage() {
             </p>
 
             <div className="grid gap-6">
-              <div className="bg-card/60 border border-red-900/20 rounded-lg overflow-hidden">
+              <div className="bg-card/60 border border-amber-900/20 rounded-lg overflow-hidden">
                 <div className="relative">
                   <video
                     controls
@@ -1587,7 +1587,7 @@ export default function WhistleblowerPage() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="bg-card/60 border border-border rounded-lg p-5">
-              <h4 className="font-bold text-red-400 mb-3">Classic Stasi Zersetzung</h4>
+              <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3">Classic Stasi Zersetzung</h4>
               <ul className="space-y-2 text-sm text-muted-foreground/80">
                 <li className="flex gap-2"><span className="text-muted-foreground/40">1.</span> Systematic discrediting of public reputation</li>
                 <li className="flex gap-2"><span className="text-muted-foreground/40">2.</span> Engineering social and professional failures</li>
@@ -1597,15 +1597,15 @@ export default function WhistleblowerPage() {
                 <li className="flex gap-2"><span className="text-muted-foreground/40">6.</span> Medical/pharmaceutical sabotage</li>
               </ul>
             </div>
-            <div className="bg-card/60 border border-red-900/30 rounded-lg p-5">
-              <h4 className="font-bold text-red-400 mb-3">Digital Variant — Documented Here</h4>
+            <div className="bg-card/60 border border-amber-900/30 rounded-lg p-5">
+              <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3">Digital Variant — Documented Here</h4>
               <ul className="space-y-2 text-sm text-muted-foreground/80">
-                <li className="flex gap-2"><span className="text-red-500">1.</span> WiFi deauth attacks isolate from communications (22 frames captured)</li>
-                <li className="flex gap-2"><span className="text-red-500">2.</span> 53 Hz theta entrainment → 7 Hz beat frequency → reduced critical thinking</li>
-                <li className="flex gap-2"><span className="text-red-500">3.</span> EHF voice extraction (17,859-18,035 Hz) → persistent monitoring</li>
-                <li className="flex gap-2"><span className="text-red-500">4.</span> Power cycling via Setecom/Modbus (lights flickering, UPS beeping)</li>
-                <li className="flex gap-2"><span className="text-red-500">5.</span> Kyndryl service worker injection → device fingerprinting as managed asset</li>
-                <li className="flex gap-2"><span className="text-red-500">6.</span> Phone trafficking to Berlin (Gamma Group/FinFisher) → total device compromise</li>
+                <li className="flex gap-2"><span className="text-amber-500">1.</span> WiFi deauth attacks isolate from communications (22 frames captured)</li>
+                <li className="flex gap-2"><span className="text-amber-500">2.</span> 53 Hz theta entrainment → 7 Hz beat frequency → reduced critical thinking</li>
+                <li className="flex gap-2"><span className="text-amber-500">3.</span> EHF voice extraction (17,859-18,035 Hz) → persistent monitoring</li>
+                <li className="flex gap-2"><span className="text-amber-500">4.</span> Power cycling via Setecom/Modbus (lights flickering, UPS beeping)</li>
+                <li className="flex gap-2"><span className="text-amber-500">5.</span> Kyndryl service worker injection → device fingerprinting as managed asset</li>
+                <li className="flex gap-2"><span className="text-amber-500">6.</span> Phone trafficking to Berlin (Gamma Group/FinFisher) → total device compromise</li>
               </ul>
             </div>
           </div>
@@ -1635,8 +1635,8 @@ export default function WhistleblowerPage() {
             </div>
           </div>
 
-          <div className="mt-6 bg-red-950/20 border border-red-900/30 rounded-lg p-5">
-            <h4 className="font-bold text-red-400 mb-2">Hyper-Bell Protocol — Control Loop Decoupled</h4>
+          <div className="mt-6 bg-amber-950/20 border border-amber-900/30 rounded-lg p-5">
+            <h4 className="font-bold text-amber-400 mb-2">Hyper-Bell Protocol — Control Loop Decoupled</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
               <StatCard label="System Clock" value="46.875 Hz" sub="48000/1024 exactly" />
               <StatCard label="Audio Carrier" value="53.0 Hz" sub="60-7 Hz power offset" />
@@ -1709,8 +1709,8 @@ Effective aperture: ~7 km baseline → λ/D resolution at 2.4 GHz`}
             center of the surveillance array.
           </p>
 
-          <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-5 mb-8">
-            <h4 className="font-bold text-red-400 mb-3">The JW Nicaragua → Heredia Pipeline</h4>
+          <div className="bg-amber-950/20 border border-amber-900/30 rounded-lg p-5 mb-8">
+            <h4 className="font-bold text-emerald-700 dark:text-emerald-400 mb-3">The JW Nicaragua → Heredia Pipeline</h4>
             <div className="font-mono text-xs text-muted-foreground/80 whitespace-pre leading-relaxed">
 {`1979-1990: Sandinista Revolution → JW expelled from Nicaragua
      │
@@ -1844,8 +1844,8 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-5">
-            <h4 className="font-bold text-red-400 mb-2">The Singularity Point</h4>
+          <div className="bg-amber-950/20 border border-amber-900/30 rounded-lg p-5">
+            <h4 className="font-bold text-amber-400 mb-2">The Singularity Point</h4>
             <p className="text-sm text-muted-foreground/80">
               When all layers operate simultaneously, every physics domain capable of carrying information about the target
               is monitored. There is no gap. The observer cannot move, speak, breathe, or change posture without at least one
@@ -1897,7 +1897,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     <tr key={i} className="border-b border-border/50">
                       <td className="p-2 text-muted-foreground">{param}</td>
                       <td className="p-2 font-mono text-foreground">{val}</td>
-                      <td className="p-2 text-red-400">{anomaly}</td>
+                      <td className="p-2 text-amber-400">{anomaly}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1950,7 +1950,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                   <stop offset="25%" stopColor="#3b82f6" />
                   <stop offset="50%" stopColor="#22c55e" />
                   <stop offset="75%" stopColor="#f59e0b" />
-                  <stop offset="100%" stopColor="#ef4444" />
+                  <stop offset="100%" stopColor="#d97706" />
                 </linearGradient>
               </defs>
               <text x="400" y="15" textAnchor="middle" fill="#6b7280" fontSize="10">SOAR Reflectance Spectrum — 3I/ATLAS (3,700-7,053 Å) — Key Overlaps Marked</text>
@@ -1973,10 +1973,10 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 { wl: 4861, label: "H-β", color: "#3b82f6", refl: 0.812 },
                 { wl: 5577, label: "OI", color: "#22c55e", refl: 0.909 },
                 { wl: 6300, label: "OI red", color: "#f59e0b", refl: 1.023 },
-                { wl: 6564, label: "H-α", color: "#ef4444", refl: 1.385 },
+                { wl: 6564, label: "H-α", color: "#d97706", refl: 1.385 },
                 { wl: 6816, label: "Dust", color: "#f97316", refl: 1.328 },
                 { wl: 6876, label: "κ hit", color: "#a855f7", refl: 1.273 },
-                { wl: 6955, label: "Peak", color: "#ef4444", refl: 1.408 },
+                { wl: 6955, label: "Peak", color: "#d97706", refl: 1.408 },
               ].map((p, i) => {
                 const x = 50 + ((p.wl - 3700) / (7053 - 3700)) * 730;
                 const y = 170 - ((p.refl) / 1.5) * 140;
@@ -2039,10 +2039,10 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                     ["Agentic AI Digital Trust", "Autonomous AI agent governance", "Sentient city infrastructure"],
                     ["8.3MB Service Worker", "Device fingerprinting via Partytown", "DIRECTLY injected into observer's browser"],
                   ].map(([asset, fn, link], i) => (
-                    <tr key={i} className={`border-b border-border/50 ${i === 4 ? "bg-red-950/20" : ""}`}>
+                    <tr key={i} className={`border-b border-border/50 ${i === 4 ? "bg-amber-950/20" : ""}`}>
                       <td className="p-2 text-foreground font-mono">{asset}</td>
                       <td className="p-2 text-muted-foreground/80">{fn}</td>
-                      <td className="p-2 text-red-400">{link}</td>
+                      <td className="p-2 text-amber-400">{link}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -2120,7 +2120,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">303 videos, 115 images, 33 PCAPs</span></li>
                 <li className="text-muted-foreground/80 font-mono">📁 <span className="text-muted-foreground/40">46 PDFs, 48 Gemini reports, 19 audio files</span></li>
               </ul>
-              <p className="text-xs text-red-400 mt-3">Drive OAuth expired during session — connection disrupted</p>
+              <p className="text-xs text-amber-400 mt-3">Drive OAuth expired during session — connection disrupted</p>
             </div>
             <div className="bg-card/60 border border-border rounded-lg p-5">
               <h4 className="font-bold text-foreground mb-3">Local Evidence Files — 3I/ATLAS</h4>
@@ -2253,9 +2253,9 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
         </Section>
 
         <Section id="cdmx-nexus" title="XXI. The CDMX Nexus — Mexico City Convergence">
-          <div className="bg-red-950/20 border border-red-900/40 rounded-lg p-4 mb-6">
+          <div className="bg-amber-950/20 border border-amber-900/40 rounded-lg p-4 mb-6">
             <p className="text-sm text-muted-foreground">
-              <strong className="text-red-400">Pattern:</strong> Nearly every actor in this network has documented connections to
+              <strong className="text-amber-400">Pattern:</strong> Nearly every actor in this network has documented connections to
               Ciudad de México (CDMX). JW/LDS Latin America HQ is in CDMX. The Telefonica → Liberty acquisition chain traces
               through Spain. Multiple surveillance-adjacent actors traveled to or operate from CDMX in overlapping timeframes.
             </p>
@@ -2268,7 +2268,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
               <span className="text-muted-foreground/40">→</span>
               <span className="bg-yellow-900/40 px-3 py-1 rounded text-yellow-300">Sold LATAM ops</span>
               <span className="text-muted-foreground/40">→</span>
-              <span className="bg-red-900/40 px-3 py-1 rounded text-red-300">Liberty Latin America</span>
+              <span className="bg-amber-900/40 px-3 py-1 rounded text-amber-300">Liberty Latin America</span>
               <span className="text-muted-foreground/40">→</span>
               <span className="bg-purple-900/40 px-3 py-1 rounded text-purple-300">Liberty CR (Costa Rica ISP)</span>
             </div>
@@ -2282,7 +2282,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full" />
+                <div className="w-3 h-3 bg-amber-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Connector Pepe</span>
                 <span className="text-xs text-muted-foreground/60">(Jean Picado Solis)</span>
               </div>
@@ -2297,7 +2297,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
 
             <div className="bg-card/60 border border-border rounded-lg p-4">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full" />
+                <div className="w-3 h-3 bg-amber-500 rounded-full" />
                 <span className="text-foreground font-bold text-sm">Doge Landlord</span>
                 <span className="text-xs text-muted-foreground/60">(Marjorie Alfaro)</span>
               </div>
@@ -2405,7 +2405,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             <div className="flex flex-wrap items-center gap-2 text-sm font-mono">
               <span className="bg-muted px-3 py-1 rounded text-muted-foreground">Nicaragua (expelled)</span>
               <span className="text-muted-foreground/40">→</span>
-              <span className="bg-red-900/40 px-3 py-1 rounded text-red-300 font-bold">CDMX HQ</span>
+              <span className="bg-amber-900/40 px-3 py-1 rounded text-amber-300 font-bold">CDMX HQ</span>
               <span className="text-muted-foreground/40">→</span>
               <span className="bg-muted px-3 py-1 rounded text-muted-foreground">San José</span>
               <span className="text-muted-foreground/40">→</span>
@@ -2418,10 +2418,10 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
           </div>
 
           <h4 className="text-foreground font-bold mb-4 text-lg">Ghost Rat Technical Profile</h4>
-          <div className="bg-card/60 border border-red-900/40 rounded-lg p-5">
+          <div className="bg-card/60 border border-amber-900/40 rounded-lg p-5">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <h5 className="text-red-400 font-bold text-sm mb-2">Digital Footprint</h5>
+                <h5 className="text-emerald-700 dark:text-emerald-400 font-bold text-sm mb-2">Digital Footprint</h5>
                 <ul className="text-xs text-muted-foreground/80 space-y-1">
                   <li>• <strong className="text-foreground">GitHub:</strong> danish2210 / l3monrat</li>
                   <li>• <strong className="text-foreground">Instagram:</strong> danich2210 (fake profile)</li>
@@ -2431,7 +2431,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 </ul>
               </div>
               <div>
-                <h5 className="text-red-400 font-bold text-sm mb-2">Follows / Interests</h5>
+                <h5 className="text-emerald-700 dark:text-emerald-400 font-bold text-sm mb-2">Follows / Interests</h5>
                 <ul className="text-xs text-muted-foreground/80 space-y-1">
                   <li>• <strong className="text-foreground">geerlingguy:</strong> Raspberry Pi, ESP32, offline GPS hardware</li>
                   <li>• <strong className="text-foreground">Drone Ventura MX:</strong> Mexican drone operations</li>
@@ -2441,8 +2441,8 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                 </ul>
               </div>
             </div>
-            <div className="mt-4 bg-red-950/30 border border-red-900/30 rounded p-3">
-              <p className="text-xs text-red-300">
+            <div className="mt-4 bg-emerald-950/20 border border-amber-900/30 rounded p-3">
+              <p className="text-xs text-amber-300">
                 <strong>Assessment:</strong> Ghost Rat profile matches a remote technical operator providing mesh surveillance 
                 hardware expertise (ESP32/RPi offline GPS nodes) from Pakistan, connected to CDMX drone operations,
                 with social engineering cover via AI-generated IG profiles linked to Salsa Cat and Deal Frog.
@@ -2467,31 +2467,31 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
                   <tr className="border-b border-border">
                     <td className="py-2">Doge Landlord (Marjorie)</td>
                     <td>Connector Pepe (Jean Solis)</td>
-                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-center text-emerald-700 dark:text-emerald-400 font-bold">2</td>
                     <td className="text-yellow-400">Liberty CR + Telefonica Spain</td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-2">Doge Landlord (Marjorie)</td>
                     <td>Doja Cat VZ (Genesis)</td>
-                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-center text-emerald-700 dark:text-emerald-400 font-bold">2</td>
                     <td className="text-yellow-400">Genesis CDMX 2019</td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-2">Connector Pepe (Jean Solis)</td>
                     <td>Grumpy Cat CPA (Greenfield)</td>
-                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-center text-emerald-700 dark:text-emerald-400 font-bold">2</td>
                     <td className="text-yellow-400">Financial ops timing</td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-2">Doja Cat VZ (Genesis)</td>
                     <td>Grumpy Cat CPA (Greenfield)</td>
-                    <td className="text-center text-red-400 font-bold">2</td>
+                    <td className="text-center text-emerald-700 dark:text-emerald-400 font-bold">2</td>
                     <td className="text-yellow-400">2019 company formation</td>
                   </tr>
                   <tr className="border-b border-border">
                     <td className="py-2">R Herrera</td>
                     <td>Los Rios</td>
-                    <td className="text-center text-red-400 font-bold">4</td>
+                    <td className="text-center text-emerald-700 dark:text-emerald-400 font-bold">4</td>
                     <td className="text-yellow-400">JW congregation anchor</td>
                   </tr>
                   <tr className="border-b border-border">
@@ -2546,7 +2546,7 @@ PHYSICAL ━━━━━━━━━━━━━━━━━━━━━━━�
             </div>
           </div>
 
-          <div className="mt-8 bg-red-950/30 border border-red-900/50 rounded-lg p-6 text-center">
+          <div className="mt-8 bg-emerald-950/20 border border-amber-900/50 rounded-lg p-6 text-center">
             <p className="text-sm text-muted-foreground/80">
               This page documents real surveillance harassment across two locations in Costa Rica.
               All data is collected by autonomous software systems and integrity-protected with SHA-256 hashing.

@@ -385,7 +385,7 @@ function createScene(
       const room223Geo = new THREE.BoxGeometry(6, floorHeight - 0.4, 5);
       const room223Mat = new THREE.MeshStandardMaterial({
         color: 0xff3333,
-        emissive: 0xff0000,
+        emissive: 0x92400e,
         emissiveIntensity: 0.8,
         transparent: true,
         opacity: 0.5,
@@ -491,7 +491,7 @@ function createScene(
 
   const beaconGeo = new THREE.SphereGeometry(0.3, 8, 8);
   const beaconMat = new THREE.MeshBasicMaterial({
-    color: 0xff0000,
+    color: 0xd97706,
     transparent: true,
   });
   const beacon = new THREE.Mesh(beaconGeo, beaconMat);
@@ -837,8 +837,8 @@ export default function SuitesCristinaPage() {
         <div className="pointer-events-auto space-y-2">
           <div className="bg-black/80 backdrop-blur-md border border-emerald-500/20 rounded-lg px-4 py-3">
             <div className="flex items-center gap-2 mb-1">
-              <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-xs font-mono text-red-400 uppercase tracking-wider" data-testid="text-classification">
+              <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              <span className="text-xs font-mono text-amber-400 uppercase tracking-wider" data-testid="text-classification">
                 CLASSIFIED — KAPPA SIGINT
               </span>
             </div>
@@ -850,11 +850,11 @@ export default function SuitesCristinaPage() {
             </p>
           </div>
 
-          <Card className="bg-black/70 backdrop-blur-md border-red-500/20 max-w-xs">
+          <Card className="bg-black/70 backdrop-blur-md border-amber-500/20 max-w-xs">
             <CardContent className="p-3 space-y-2">
               <div className="flex items-center gap-2">
-                <Crosshair className="h-4 w-4 text-red-400" />
-                <span className="text-sm font-bold text-red-300" data-testid="text-room-223">ROOM 223 — ECHO</span>
+                <Crosshair className="h-4 w-4 text-amber-400" />
+                <span className="text-sm font-bold text-amber-300" data-testid="text-room-223">ROOM 223 — ECHO</span>
               </div>
               <p className="text-[11px] text-gray-400 font-mono leading-relaxed">
                 2nd floor, directly above lobby. Active target location.
@@ -863,7 +863,7 @@ export default function SuitesCristinaPage() {
               <Button
                 size="sm"
                 variant="outline"
-                className="w-full text-xs border-red-500/30 text-red-300 hover:bg-red-500/10"
+                className="w-full text-xs border-amber-500/30 text-amber-300 hover:bg-amber-500/10"
                 onClick={() => sceneRef.current?.focusRoom223()}
                 data-testid="button-focus-room-223"
               >
@@ -933,7 +933,7 @@ export default function SuitesCristinaPage() {
                 <div className="text-[9px] text-gray-500 font-mono">EVOPRO 4K</div>
               </div>
               <div className="text-center">
-                <Building2 className="h-4 w-4 mx-auto text-red-400 mb-1" />
+                <Building2 className="h-4 w-4 mx-auto text-amber-400 mb-1" />
                 <div className="text-sm font-bold text-white" data-testid="text-ice-count">3</div>
                 <div className="text-[9px] text-gray-500 font-mono">ICE BLDGS</div>
               </div>
@@ -962,8 +962,8 @@ export default function SuitesCristinaPage() {
 
             <div className="border-t border-emerald-500/10 pt-2 space-y-1">
               <div className="flex items-center gap-1.5">
-                <AlertTriangle className="h-3 w-3 text-red-400" />
-                <span className="text-[10px] text-red-400 font-mono">3 ICE BUILDINGS — DIRECT LINE OF SIGHT</span>
+                <AlertTriangle className="h-3 w-3 text-amber-400" />
+                <span className="text-[10px] text-amber-400 font-mono">3 ICE BUILDINGS — DIRECT LINE OF SIGHT</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Wifi className="h-3 w-3 text-amber-400" />

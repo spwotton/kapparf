@@ -52,7 +52,7 @@ const elementIcons: Record<string, typeof Radio> = {
 const confidenceLevels = [
   { key: "high", color: "bg-green-500/10 text-green-700 dark:text-green-400" },
   { key: "medium", color: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400" },
-  { key: "low", color: "bg-red-500/10 text-red-700 dark:text-red-400" },
+  { key: "low", color: "bg-amber-500/10 text-amber-700 dark:text-amber-400" },
 ];
 
 const mathConstants = [

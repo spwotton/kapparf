@@ -88,7 +88,7 @@ const TURTLE_META: Record<TurtleState, { label: string; color: string; glow: str
   stirring:  { label: "STIRRING — something below",      color: "text-blue-400",   glow: "0 0 12px #3b82f666"  },
   surfacing: { label: "SURFACING — ascending",           color: "text-cyan-400",   glow: "0 0 16px #06b6d488"  },
   emerged:   { label: "EMERGED — Vanishing Isle visible", color: "text-amber-300", glow: "0 0 24px #fcd34daa"  },
-  ascending: { label: "ASCENDING — full popcorn",        color: "text-red-400",    glow: "0 0 32px #f87171cc"  },
+  ascending: { label: "ASCENDING — full popcorn",        color: "text-amber-400",    glow: "0 0 32px #f87171cc"  },
 };
 
 const PATTERN_COLOR: Record<string,string> = {
@@ -109,7 +109,7 @@ function Gon24({ constants }: { constants: Record<string, GosConstant> }) {
   });
   // Highlight vertices for each constant
   const highlights: Record<number, string> = {
-    0:  "#ef4444", // κ
+    0:  "#d97706", // κ
     4:  "#f97316", // φ
     8:  "#eab308", // Ω
     12: "#8b5cf6", // θ_K
@@ -413,7 +413,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   "GOS Protocol":           "text-amber-300",
   "Atlantis & Esoteric":    "text-emerald-400",
   "Biology & Science":      "text-green-400",
-  "Signal Intelligence":    "text-red-400",
+  "Signal Intelligence":    "text-amber-400",
   "Pop Culture Analysis":   "text-orange-400",
   "MMORPG & Game":          "text-blue-400",
   "UE5 & Technical":        "text-slate-400",
@@ -603,7 +603,7 @@ export default function AtlantisHubPage() {
             <span className="text-xs text-muted-foreground font-mono">The Vanishing Isle — Destane</span>
           </div>
           <div className="flex items-center gap-2 ml-auto flex-wrap">
-            <div className={`flex items-center gap-1.5 text-xs font-mono ${connected ? tm.color : "text-red-400"}`}>
+            <div className={`flex items-center gap-1.5 text-xs font-mono ${connected ? tm.color : "text-amber-400"}`}>
               <span className={`w-2 h-2 rounded-full ${connected ? "animate-pulse" : ""}`}
                 style={{ background: connected ? "currentColor" : "#f87171" }} />
               {connected ? tm.label : "reconnecting…"}
@@ -683,7 +683,7 @@ export default function AtlantisHubPage() {
                 <TabsTrigger value="corpus" className="text-xs px-2 text-violet-400/80">
                   Corpus <span className="ml-1 text-[9px] opacity-50">{corpDocs.length}</span>
                 </TabsTrigger>
-                <TabsTrigger value="ak7" className="text-xs px-2 text-red-400/80">
+                <TabsTrigger value="ak7" className="text-xs px-2 text-amber-400/80">
                   AK7
                 </TabsTrigger>
                 <TabsTrigger value="keys" className="text-xs px-2">Keys</TabsTrigger>
@@ -874,13 +874,13 @@ export default function AtlantisHubPage() {
                         <span className="text-[9px] font-mono text-orange-400 uppercase">Shearing Risk</span>
                       </div>
                       <div className="flex items-baseline gap-1.5">
-                        <span className={`text-xl font-mono ${ak7State.topological_shearing_risk > 60 ? "text-red-400" : "text-orange-400"}`}>
+                        <span className={`text-xl font-mono ${ak7State.topological_shearing_risk > 60 ? "text-amber-400" : "text-orange-400"}`}>
                           {ak7State.topological_shearing_risk.toFixed(0)}
                         </span>
                         <span className="text-[9px] text-muted-foreground/50">%</span>
                       </div>
                       <div className="mt-1 h-1 bg-muted/30 rounded-full overflow-hidden">
-                        <div className={`h-full rounded-full transition-all duration-1000 ${ak7State.topological_shearing_risk > 60 ? "bg-red-400/60" : "bg-orange-400/40"}`}
+                        <div className={`h-full rounded-full transition-all duration-1000 ${ak7State.topological_shearing_risk > 60 ? "bg-amber-400/60" : "bg-orange-400/40"}`}
                           style={{ width: `${ak7State.topological_shearing_risk}%` }} />
                       </div>
                     </div>
@@ -891,7 +891,7 @@ export default function AtlantisHubPage() {
                         <span className="text-[9px] font-mono text-purple-400 uppercase">0xAE Status</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className={`text-[11px] font-mono font-bold ${ak7State.opcode_ae_status === "OK" ? "text-green-400" : ak7State.opcode_ae_status === "DEGRADED" ? "text-yellow-400" : "text-red-400"}`}>
+                        <span className={`text-[11px] font-mono font-bold ${ak7State.opcode_ae_status === "OK" ? "text-green-400" : ak7State.opcode_ae_status === "DEGRADED" ? "text-yellow-400" : "text-amber-400"}`}>
                           {ak7State.opcode_ae_status}
                         </span>
                         <span className={`text-[9px] font-mono ${ak7State.helicity_lock ? "text-cyan-400" : "text-muted-foreground/40"}`}>
@@ -913,11 +913,11 @@ export default function AtlantisHubPage() {
                     <div className="flex items-center gap-2 text-[8px] font-mono text-muted-foreground/50 mb-1">
                       <span className="text-blue-400">2012-07-04 Bifurcation</span>
                       <div className="flex-1 h-[1px] bg-border/30" />
-                      <span className="text-red-400">2037-01-01 Phoenix Event</span>
+                      <span className="text-amber-400">2037-01-01 Phoenix Event</span>
                     </div>
                     <div className="relative h-3 bg-muted/20 rounded-full overflow-hidden border border-border/20">
                       {/* Progress fill */}
-                      <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-red-500/40 transition-all duration-2000"
+                      <div className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-amber-500/40 transition-all duration-2000"
                         style={{ width: `${ak7State.chrono.pct}%` }} />
                       {/* Current position marker */}
                       <div className="absolute top-0 bottom-0 w-0.5 bg-amber-300/80"

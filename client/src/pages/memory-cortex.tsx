@@ -39,7 +39,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   quantum_circuit: "bg-violet-500/20 text-violet-300 border-violet-500/30",
   mathematical_proof: "bg-blue-500/20 text-blue-300 border-blue-500/30",
   signal_intelligence: "bg-green-500/20 text-green-300 border-green-500/30",
-  surveillance_evidence: "bg-red-500/20 text-red-300 border-red-500/30",
+  surveillance_evidence: "bg-amber-500/20 text-amber-300 border-amber-500/30",
   kappa_constant: "bg-amber-500/20 text-amber-300 border-amber-500/30",
   frequency_analysis: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
   network_forensics: "bg-orange-500/20 text-orange-300 border-orange-500/30",
@@ -48,7 +48,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   decision: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
   code_change: "bg-gray-500/20 text-gray-300 border-gray-500/30",
   correlation: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
-  whistleblower: "bg-red-600/20 text-red-200 border-red-600/30",
+  whistleblower: "bg-amber-600/20 text-amber-200 border-amber-600/30",
   session_context: "bg-slate-500/20 text-slate-300 border-slate-500/30",
 };
 
@@ -95,7 +95,7 @@ function MemoryCard({ memory, onDelete }: { memory: MemoryRecord; onDelete: (id:
             <Button variant="ghost" size="icon" className="h-7 w-7 text-gray-500 hover:text-gray-300" onClick={() => setExpanded(!expanded)} data-testid={`button-expand-${memory.id}`}>
               {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
             </Button>
-            <Button variant="ghost" size="icon" className="h-7 w-7 text-gray-500 hover:text-red-400" onClick={() => onDelete(memory.id)} data-testid={`button-delete-${memory.id}`}>
+            <Button variant="ghost" size="icon" className="h-7 w-7 text-gray-500 hover:text-amber-400" onClick={() => onDelete(memory.id)} data-testid={`button-delete-${memory.id}`}>
               <Trash2 className="h-4 w-4" />
             </Button>
           </div>
@@ -298,7 +298,7 @@ export default function MemoryCortexPage() {
               <span className="text-xs uppercase tracking-wider">Embedding Model</span>
             </div>
             <p className="text-sm font-bold text-gray-100 mt-1" data-testid="text-embedding-model">{stats?.embedding_model ?? "—"}</p>
-            <Badge variant="outline" className={stats?.status === "online" ? "bg-green-500/20 text-green-300 border-green-500/30" : "bg-red-500/20 text-red-300 border-red-500/30"}>
+            <Badge variant="outline" className={stats?.status === "online" ? "bg-green-500/20 text-green-300 border-green-500/30" : "bg-amber-500/20 text-amber-300 border-amber-500/30"}>
               {stats?.status ?? "unknown"}
             </Badge>
           </CardContent>
@@ -366,7 +366,7 @@ export default function MemoryCortexPage() {
                     <Badge variant="outline" className="bg-blue-500/20 text-blue-300 border-blue-500/30 text-xs">{kymaLatest.behavior}</Badge>
                     <Badge variant="outline" className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 text-xs">{kymaLatest.flowRegime}</Badge>
                     {kymaLatest.apertureLocked && (
-                      <Badge variant="outline" className="bg-red-500/20 text-red-300 border-red-500/30 text-xs">APERTURE LOCKED</Badge>
+                      <Badge variant="outline" className="bg-amber-500/20 text-amber-300 border-amber-500/30 text-xs">APERTURE LOCKED</Badge>
                     )}
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-xs">

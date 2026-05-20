@@ -15,8 +15,8 @@ const severityColors = [
   "bg-green-500/10 text-green-700 dark:text-green-400",
   "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
   "bg-orange-500/10 text-orange-700 dark:text-orange-400",
-  "bg-red-500/10 text-red-700 dark:text-red-400",
-  "bg-red-700/10 text-red-900 dark:text-red-300",
+  "bg-amber-500/10 text-amber-700 dark:text-amber-400",
+  "bg-amber-700/10 text-amber-900 dark:text-amber-300",
 ];
 
 function StarRating({ correlationId }: { correlationId: string }) {

@@ -34,14 +34,14 @@ interface CortexMessage {
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const LAYER_META: Record<number, { name: string; color: string; bg: string; border: string; icon: typeof Network }> = {
-  0: { name: "EXECUTIVE",  color: "text-red-400",    bg: "bg-red-500/10",    border: "border-red-500/30",    icon: Brain },
+  0: { name: "EXECUTIVE",  color: "text-amber-400",    bg: "bg-amber-500/10",    border: "border-amber-500/30",    icon: Brain },
   1: { name: "PRIMARY",    color: "text-orange-400", bg: "bg-orange-500/10", border: "border-orange-500/30", icon: Cpu },
   2: { name: "SECONDARY",  color: "text-blue-400",   bg: "bg-blue-500/10",   border: "border-blue-500/30",   icon: Database },
   3: { name: "SENSOR",     color: "text-green-400",  bg: "bg-green-500/10",  border: "border-green-500/30",  icon: Radio },
 };
 
 const MSG_COLOR: Record<string, string> = {
-  alert:       "text-red-400 border-red-400/30 bg-red-400/10",
+  alert:       "text-amber-400 border-amber-400/30 bg-amber-400/10",
   spawn:       "text-orange-400 border-orange-400/30 bg-orange-400/10",
   harvest:     "text-emerald-400 border-emerald-400/30 bg-emerald-400/10",
   dream:       "text-purple-400 border-purple-400/30 bg-purple-400/10",
@@ -57,7 +57,7 @@ const MSG_COLOR: Record<string, string> = {
 function ToroidalMap({ monads, activeIds }: { monads: Monad[]; activeIds: Set<string> }) {
   const cx = 160, cy = 160;
   const radii = [28, 60, 100, 140];
-  const colors = ["#ef4444", "#f97316", "#3b82f6", "#22c55e"];
+  const colors = ["#d97706", "#f97316", "#3b82f6", "#22c55e"];
 
   const layers = [0, 1, 2, 3].map(l => monads.filter(m => m.layer === l));
 
@@ -69,8 +69,8 @@ function ToroidalMap({ monads, activeIds }: { monads: Monad[]; activeIds: Set<st
           stroke={colors[i]} strokeOpacity="0.2" strokeWidth="1.5" strokeDasharray="4,3" />
       ))}
       {/* Center pulsing dot — executive */}
-      <circle cx={cx} cy={cy} r={10} fill="#ef4444" fillOpacity="0.15" stroke="#ef4444" strokeOpacity="0.6" strokeWidth="1" />
-      <circle cx={cx} cy={cy} r={5} fill="#ef4444" fillOpacity="0.8" />
+      <circle cx={cx} cy={cy} r={10} fill="#d97706" fillOpacity="0.15" stroke="#d97706" strokeOpacity="0.6" strokeWidth="1" />
+      <circle cx={cx} cy={cy} r={5} fill="#d97706" fillOpacity="0.8" />
 
       {/* Layer labels */}
       {[0,1,2,3].map(l => {
@@ -118,7 +118,7 @@ function ToroidalMap({ monads, activeIds }: { monads: Monad[]; activeIds: Set<st
       )}
 
       {/* κ label */}
-      <text x={cx - 5} y={cy + 3} fontSize="9" fill="#ef4444" fillOpacity="0.9" fontFamily="monospace" fontWeight="bold">κ</text>
+      <text x={cx - 5} y={cy + 3} fontSize="9" fill="#d97706" fillOpacity="0.9" fontFamily="monospace" fontWeight="bold">κ</text>
     </svg>
   );
 }
@@ -306,8 +306,8 @@ export default function CortexBusPage() {
             <span className="text-xs text-muted-foreground font-mono">Mycelium Hypervisor Network</span>
           </div>
           <div className="flex items-center gap-2 ml-auto flex-wrap">
-            <div className={`flex items-center gap-1.5 text-xs font-mono ${connected ? "text-green-400" : "text-red-400"}`}>
-              <span className={`w-2 h-2 rounded-full ${connected ? "bg-green-400 animate-pulse" : "bg-red-400"}`} />
+            <div className={`flex items-center gap-1.5 text-xs font-mono ${connected ? "text-green-400" : "text-amber-400"}`}>
+              <span className={`w-2 h-2 rounded-full ${connected ? "bg-green-400 animate-pulse" : "bg-amber-400"}`} />
               {connected ? "LIVE" : "reconnecting…"}
             </div>
             <Badge variant="outline" className="text-purple-400 border-purple-400/30 text-[10px]">
@@ -466,8 +466,8 @@ export default function CortexBusPage() {
                   <p className="text-purple-400/70">// RSS feed</p>
                   <p className="text-muted-foreground/70 break-all">GET /api/cortex/feed.rss</p>
                 </div>
-                <div className="rounded border border-red-500/20 bg-red-500/5 p-2 space-y-1">
-                  <p className="text-red-400/70">// Request spawn</p>
+                <div className="rounded border border-amber-500/20 bg-amber-500/5 p-2 space-y-1">
+                  <p className="text-amber-400/70">// Request spawn</p>
                   <p className="text-muted-foreground/70">POST /api/cortex/spawn</p>
                   <p className="text-muted-foreground/50">{'{ source, task, kappa_score }'}</p>
                 </div>

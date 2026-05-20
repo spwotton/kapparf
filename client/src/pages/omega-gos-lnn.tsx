@@ -47,12 +47,12 @@ const ACOUSTIC_HZ: Record<string, number> = {
 
 function statusColor(s: string) {
   if (s === "confirmed") return "text-green-600 dark:text-green-400";
-  if (s === "expired" || s === "failed") return "text-red-500 dark:text-red-400";
+  if (s === "expired" || s === "failed") return "text-amber-500 dark:text-amber-400";
   return "text-amber-500 dark:text-amber-400";
 }
 function statusIcon(s: string) {
   if (s === "confirmed") return <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />;
-  if (s === "expired" || s === "failed") return <XCircle className="w-3.5 h-3.5 text-red-500" />;
+  if (s === "expired" || s === "failed") return <XCircle className="w-3.5 h-3.5 text-amber-500" />;
   return <Clock className="w-3.5 h-3.5 text-amber-500" />;
 }
 
@@ -264,7 +264,7 @@ export default function OmegaGOSLNNPage() {
                         className="h-full rounded-full transition-all"
                         style={{
                           width: `${Math.round(learn.accuracy * 100)}%`,
-                          background: learn.accuracy > 0.7 ? "#22c55e" : learn.accuracy > 0.4 ? "#f59e0b" : "#ef4444"
+                          background: learn.accuracy > 0.7 ? "#22c55e" : learn.accuracy > 0.4 ? "#f59e0b" : "#d97706"
                         }}
                       />
                     </div>
@@ -300,7 +300,7 @@ export default function OmegaGOSLNNPage() {
                   const proj = slice.reduce((a: number, v: number) => a + v, 0) / 7;
                   return (
                     <div key={d} className="flex items-center gap-1 text-[10px]">
-                      <div className="w-1.5 h-1.5 rounded-full" style={{ background: proj > 0.1 ? "#22c55e" : proj < -0.1 ? "#ef4444" : "#6b7280" }} />
+                      <div className="w-1.5 h-1.5 rounded-full" style={{ background: proj > 0.1 ? "#22c55e" : proj < -0.1 ? "#d97706" : "#6b7280" }} />
                       <span className="text-muted-foreground">{d}</span>
                       <span className="font-mono ml-auto">{proj.toFixed(3)}</span>
                     </div>
@@ -399,7 +399,7 @@ export default function OmegaGOSLNNPage() {
                       </Button>
                       <Button
                         size="sm" variant="outline"
-                        className="h-5 text-[10px] px-2 border-red-500/30 text-red-600 dark:text-red-400 hover:bg-red-500/10"
+                        className="h-5 text-[10px] px-2 border-amber-500/30 text-amber-600 dark:text-amber-400 hover:bg-amber-500/10"
                         onClick={() => feedbackMut.mutate({ predId: pred.id, outcome: "failed" })}
                         data-testid={`btn-fail-${pred.id}`}
                       >
@@ -426,7 +426,7 @@ export default function OmegaGOSLNNPage() {
                   <div key={i} className={
                     line.includes("CONFIRM") ? "text-green-600 dark:text-green-400" :
                     line.includes("PREDICT") ? "text-amber-500" :
-                    line.includes("EXPIRED") || line.includes("ERR") ? "text-red-500" :
+                    line.includes("EXPIRED") || line.includes("ERR") ? "text-amber-500" :
                     line.includes("Acoustic") ? "text-cyan-500" :
                     "text-muted-foreground"
                   }>

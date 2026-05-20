@@ -148,7 +148,7 @@ export default function IntelligencePage() {
                     variant="secondary"
                     className={c.running
                       ? "bg-green-500/10 text-green-700 dark:text-green-400"
-                      : "bg-red-500/10 text-red-700 dark:text-red-400"
+                      : "bg-amber-500/10 text-amber-700 dark:text-amber-400"
                     }
                     data-testid={`badge-collector-status-${c.name}`}
                   >
@@ -172,7 +172,7 @@ export default function IntelligencePage() {
                   </div>
                   <div className="flex justify-between">
                     <span>{t("dashboard.errors")}</span>
-                    <span className={`font-mono ${c.errors > 0 ? "text-red-600 dark:text-red-400" : ""}`}>
+                    <span className={`font-mono ${c.errors > 0 ? "text-amber-600 dark:text-amber-400" : ""}`}>
                       {c.errors}
                     </span>
                   </div>
@@ -484,7 +484,7 @@ export default function IntelligencePage() {
                         variant="secondary"
                         className={log.status === "success"
                           ? "bg-green-500/10 text-green-700 dark:text-green-400 text-[10px]"
-                          : "bg-red-500/10 text-red-700 dark:text-red-400 text-[10px]"
+                          : "bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[10px]"
                         }
                       >
                         {log.status}

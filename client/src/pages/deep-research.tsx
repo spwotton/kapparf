@@ -47,8 +47,8 @@ function statusBadge(status: string) {
     pending: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400",
     running: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
     completed: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-    error: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-    failed: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    error: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+    failed: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
     partial: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
   };
   return (
@@ -531,7 +531,7 @@ export default function DeepResearchPage() {
                           <span className={`h-2 w-2 rounded-full ${
                             r.status === "completed" ? "bg-emerald-500" :
                             r.status === "running" ? "bg-blue-500 animate-pulse" :
-                            r.status === "error" ? "bg-red-500" :
+                            r.status === "error" ? "bg-amber-500" :
                             "bg-zinc-300 dark:bg-zinc-600"
                           }`} />
                         </div>

@@ -252,7 +252,7 @@ function CorrelationCard({ data, format }: { data: SocialCardData; format: CardF
             {data.recentCorrelations.slice(0, format === "square" ? 3 : 5).map((c, i) => (
               <div key={c.id || i} className="bg-[#1c1a17] rounded-[12px] p-[24px] border border-[#2a2622] flex items-center justify-between">
                 <div className="flex items-center gap-[16px]">
-                  <div className="w-[8px] h-[8px] rounded-full" style={{ backgroundColor: c.severity >= 3 ? "#ef4444" : c.severity >= 2 ? "#f59e0b" : "#22c55e" }} />
+                  <div className="w-[8px] h-[8px] rounded-full" style={{ backgroundColor: c.severity >= 3 ? "#d97706" : c.severity >= 2 ? "#f59e0b" : "#22c55e" }} />
                   <span className="text-[#e8e4de] font-mono text-[20px]">{c.ruleName}</span>
                 </div>
                 <span className="text-[#7a746a] font-mono text-[18px]">SEV {c.severity}</span>
@@ -481,7 +481,7 @@ function QuantumSonnetCard({ format }: { format: CardFormat }) {
   const languages = [
     { name: "English", script: "Shall I compare thee", color: "#f0c040" },
     { name: "العربية", script: "هل أقارنك بيوم صيفي", color: "#06b6d4" },
-    { name: "中文", script: "我可否把你比作夏日", color: "#ef4444" },
+    { name: "中文", script: "我可否把你比作夏日", color: "#d97706" },
     { name: "日本語", script: "君を夏の日に喩えようか", color: "#22c55e" },
     { name: "한국어", script: "너를 여름날에 비할까", color: "#a882ff" },
     { name: "עברית", script: "האשווה אותך ליום קיץ", color: "#f59e0b" },
@@ -554,7 +554,7 @@ function QuantumApocalypseCard({ format }: { format: CardFormat }) {
       <div className="relative flex flex-col h-full p-[60px]">
         <div className="flex items-center justify-between mb-[32px]">
           <div className="flex items-center gap-[16px]">
-            <div className="w-[12px] h-[12px] rounded-full bg-[#ef4444] animate-pulse" />
+            <div className="w-[12px] h-[12px] rounded-full bg-[#d97706] animate-pulse" />
             <span className="text-[#e8e4de] font-mono text-[24px] tracking-[0.2em] font-semibold">APOCALYPSE CIRCUIT</span>
           </div>
           <span className="text-[#7a746a] font-mono text-[18px]">7 SEALS</span>
@@ -563,13 +563,13 @@ function QuantumApocalypseCard({ format }: { format: CardFormat }) {
         <div className="flex-1 flex flex-col items-center justify-center">
           <div className="text-center mb-[40px]">
             <div className="text-[28px] font-mono text-[#7a746a] tracking-[0.3em] mb-[16px]">REVELATION 8:1-2</div>
-            <div className="text-[100px] font-mono font-bold text-[#ef4444] leading-none" style={{ textShadow: "0 0 60px rgba(239,68,68,0.3)" }}>7</div>
+            <div className="text-[100px] font-mono font-bold text-[#d97706] leading-none" style={{ textShadow: "0 0 60px rgba(217,119,6,0.3)" }}>7</div>
             <div className="text-[36px] font-mono text-[#e8e4de] mt-[12px] tracking-[0.15em]">TRUMPET GATES</div>
           </div>
 
           <div className="w-full max-w-[800px] grid grid-cols-7 gap-[12px] mb-[36px]">
             {["I", "II", "III", "IV", "V", "VI", "VII"].map((num, i) => {
-              const gateColors = ["#ef4444", "#f97316", "#f0c040", "#22c55e", "#06b6d4", "#a882ff", "#ec4899"];
+              const gateColors = ["#d97706", "#f97316", "#f0c040", "#22c55e", "#06b6d4", "#a882ff", "#ec4899"];
               return (
                 <div key={num} className="flex flex-col items-center gap-[8px]">
                   <div className="w-[80px] h-[80px] rounded-full border-2 flex items-center justify-center" style={{ borderColor: gateColors[i], boxShadow: `0 0 20px ${gateColors[i]}33` }}>
@@ -589,7 +589,7 @@ function QuantumApocalypseCard({ format }: { format: CardFormat }) {
               </div>
               <div>
                 <div className="text-[16px] font-mono text-[#7a746a] tracking-wider mb-[8px]">SEAL PROTOCOL</div>
-                <div className="text-[28px] font-mono font-bold text-[#ef4444]">x = 53⁷</div>
+                <div className="text-[28px] font-mono font-bold text-[#d97706]">x = 53⁷</div>
               </div>
             </div>
           </div>
@@ -684,7 +684,7 @@ function QuantumBellCard({ format }: { format: CardFormat }) {
 function Paper002Card({ format }: { format: CardFormat }) {
   const dim = FORMAT_DIMENSIONS[format];
   const proofChain = [
-    { step: "1", label: "GRAM MATRIX", value: "5.78 x 10\u00B9\u2075", color: "#ef4444" },
+    { step: "1", label: "GRAM MATRIX", value: "5.78 x 10\u00B9\u2075", color: "#d97706" },
     { step: "2", label: "HALL REGULARIZATION", value: "\u03B7 = 0.09", color: "#f0c040" },
     { step: "3", label: "CONDITION NUMBER", value: "65.18", color: "#22c55e" },
     { step: "4", label: "GOLDEN RATIO", value: "\u03C6 = 1.618", color: "#a882ff" },
@@ -873,7 +873,7 @@ function GooseProtocolCard({ format }: { format: CardFormat }) {
 function DemodexCard({ format }: { format: CardFormat }) {
   const dim = FORMAT_DIMENSIONS[format];
   const stats = [
-    { label: "FACE TEMP", value: "37\u00B0C", sub: "\u00B10.5\u00B0C precision", color: "#ef4444" },
+    { label: "FACE TEMP", value: "37\u00B0C", sub: "\u00B10.5\u00B0C precision", color: "#d97706" },
     { label: "SEBUM pH", value: "4.5-6.0", sub: "Lipid-rich bioreactor", color: "#f59e0b" },
     { label: "SKIN CYCLE", value: "28 days", sub: "Dead cell renewal", color: "#22c55e" },
     { label: "POPULATION", value: "~50K", sub: "Per human face", color: "#a882ff" },
@@ -942,7 +942,7 @@ function TrilingualCard({ format }: { format: CardFormat }) {
   const cognates = [
     { sumerian: "uru / iri", basque: "(h)erri / uri", meaning: "City/Town", glyph: "\uD83C\uDFDB\uFE0F", freq: "111.00 Hz", color: "#f0c040" },
     { sumerian: "igi", basque: "begi", meaning: "Eye", glyph: "\uD83D\uDD2E", freq: "235.36 Hz", color: "#a882ff" },
-    { sumerian: "su", basque: "su", meaning: "Fire", glyph: "\uD83D\uDD25", freq: "137.53 Hz", color: "#ef4444" },
+    { sumerian: "su", basque: "su", meaning: "Fire", glyph: "\uD83D\uDD25", freq: "137.53 Hz", color: "#d97706" },
     { sumerian: "nam-lugal", basque: "nahi / lege", meaning: "Kingship", glyph: "\uD83D\uDD31", freq: "111.00 Hz", color: "#06b6d4" },
     { sumerian: "bal", basque: "bil", meaning: "Revolve", glyph: "\uD83C\uDF00", freq: "166.93 Hz", color: "#22c55e" },
   ];
@@ -1015,7 +1015,7 @@ function TrilingualCard({ format }: { format: CardFormat }) {
 function CanineGenomeCard({ format }: { format: CardFormat }) {
   const dim = FORMAT_DIMENSIONS[format];
   const chromosomes = [
-    { id: "CHR 1", name: "PACK PROTOCOL", gene: "OXTR", detail: "Bonding cascade \u00B7 5.4 Hz coupling", color: "#ef4444", glyph: "\uD83D\uDC3A" },
+    { id: "CHR 1", name: "PACK PROTOCOL", gene: "OXTR", detail: "Bonding cascade \u00B7 5.4 Hz coupling", color: "#d97706", glyph: "\uD83D\uDC3A" },
     { id: "CHR 6", name: "SCENT MATRIX", gene: "OR52N2", detail: "1.5 GHz olfactory sampling", color: "#f0c040", glyph: "\uD83D\uDC43" },
     { id: "CHR 10", name: "TIME-SNARL", gene: "SLC2A9", detail: "7.314-min temporal chunks", color: "#06b6d4", glyph: "\u231B" },
     { id: "CHR X", name: "EMPATHY LOOP", gene: "GTF2I", detail: "2.8 Hz heartbeat sync", color: "#a882ff", glyph: "\uD83D\uDD01" },

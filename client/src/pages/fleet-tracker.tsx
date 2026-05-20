@@ -31,14 +31,14 @@ function ago(ts: string | number | null | undefined) {
 
 function StatusDot({ online }: { online: boolean }) {
   return (
-    <span className={`inline-block w-2 h-2 rounded-full ${online ? "bg-emerald-400" : "bg-red-500"}`} />
+    <span className={`inline-block w-2 h-2 rounded-full ${online ? "bg-emerald-400" : "bg-amber-500"}`} />
   );
 }
 
 function LatencyBar({ latency, max = 200 }: { latency: number | null; max?: number }) {
   if (latency == null) return <div className="h-1 w-full bg-muted rounded" />;
   const w = Math.min(100, (latency / max) * 100);
-  const color = latency < 50 ? "bg-emerald-500" : latency < 120 ? "bg-yellow-500" : "bg-red-500";
+  const color = latency < 50 ? "bg-emerald-500" : latency < 120 ? "bg-yellow-500" : "bg-amber-500";
   return (
     <div className="h-1 w-full bg-muted rounded overflow-hidden">
       <div className={`h-full ${color} rounded transition-all`} style={{ width: `${w}%` }} />
@@ -115,7 +115,7 @@ export default function FleetTrackerPage() {
           ) : status?.connected ? (
             <Badge className="text-xs gap-1 bg-emerald-500/15 text-emerald-400 border-emerald-500/30"><Wifi className="h-3 w-3" />Online</Badge>
           ) : (
-            <Badge className="text-xs gap-1 bg-red-500/15 text-red-400 border-red-500/30"><WifiOff className="h-3 w-3" />Offline</Badge>
+            <Badge className="text-xs gap-1 bg-amber-500/15 text-amber-400 border-amber-500/30"><WifiOff className="h-3 w-3" />Offline</Badge>
           )}
           <Button size="sm" variant="outline" className="h-7 text-xs gap-1"
             onClick={() => qc.invalidateQueries({ queryKey: ["/api/tracker/devices"] })}
@@ -130,7 +130,7 @@ export default function FleetTrackerPage() {
         {[
           { label: "Devices", value: stats?.totalDevices ?? devList.length, icon: Server, color: "text-blue-400" },
           { label: "Online", value: stats?.onlineDevices ?? devList.filter(d => bulk[d.id]?.online ?? d.online).length, icon: CheckCircle2, color: "text-emerald-400" },
-          { label: "Alerts", value: alerts.length, icon: AlertTriangle, color: alerts.length > 0 ? "text-red-400" : "text-muted-foreground" },
+          { label: "Alerts", value: alerts.length, icon: AlertTriangle, color: alerts.length > 0 ? "text-amber-400" : "text-muted-foreground" },
           { label: "Avg Latency", value: stats?.avgLatency ? ms(stats.avgLatency) : "—", icon: Zap, color: "text-yellow-400" },
         ].map(s => (
           <div key={s.label} className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">
@@ -211,14 +211,14 @@ export default function FleetTrackerPage() {
               <CardHeader className="pb-2 pt-4 px-4">
                 <CardTitle className="text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                   <AlertTriangle className="h-3.5 w-3.5" />Active Alerts
-                  {alerts.length > 0 && <Badge className="ml-auto text-[10px] h-4 px-1.5 bg-red-500/15 text-red-400 border-red-500/30">{alerts.length}</Badge>}
+                  {alerts.length > 0 && <Badge className="ml-auto text-[10px] h-4 px-1.5 bg-amber-500/15 text-amber-400 border-amber-500/30">{alerts.length}</Badge>}
                 </CardTitle>
               </CardHeader>
               <CardContent className="px-4 pb-4 space-y-2">
                 {alerts.length === 0 && <p className="text-xs text-muted-foreground">No active alerts</p>}
                 {alerts.map((a: any) => (
-                  <div key={a.id} className="rounded border px-3 py-2 bg-red-500/5 border-red-500/20" data-testid={`alert-${a.id}`}>
-                    <div className="text-xs font-medium text-red-400">{a.type || "Alert"}</div>
+                  <div key={a.id} className="rounded border px-3 py-2 bg-amber-500/5 border-amber-500/20" data-testid={`alert-${a.id}`}>
+                    <div className="text-xs font-medium text-amber-400">{a.type || "Alert"}</div>
                     <div className="text-[11px] text-muted-foreground mt-0.5">{a.message || a.description}</div>
                     <div className="text-[10px] text-muted-foreground mt-1">{ago(a.createdAt)}</div>
                   </div>
@@ -326,7 +326,7 @@ function DeviceDetail({ deviceId, dev, lat, jitter, uptime, online }: any) {
   return (
     <div className="px-4 pb-3 border-t pt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
       <div className="text-muted-foreground">Status</div>
-      <div className={online ? "text-emerald-400" : "text-red-400"}>{online ? "Online" : "Offline"}</div>
+      <div className={online ? "text-emerald-400" : "text-amber-400"}>{online ? "Online" : "Offline"}</div>
       {dev.ip && <><div className="text-muted-foreground">IP</div><div className="font-mono">{dev.ip}</div></>}
       {dev.os && <><div className="text-muted-foreground">OS</div><div>{dev.os}</div></>}
       {dev.version && <><div className="text-muted-foreground">Agent</div><div className="font-mono">{dev.version}</div></>}

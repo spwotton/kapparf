@@ -21,7 +21,7 @@
     --muted-foreground: 215 16% 47%;  /* slate gray #64748b */
     --accent: 152 60% 95%;            /* light green tint */
     --accent-foreground: 160 61% 20%; /* dark emerald */
-    --destructive: 0 62% 50%;         /* muted red — destructive actions only */
+    --destructive: 25 95% 35%;        /* dark amber — destructive actions */
     --destructive-foreground: 0 0% 100%;
     --border: 215 32% 91%;            /* soft gray #e2e8f0 */
     --input: 215 32% 91%;
@@ -74,7 +74,7 @@
     --muted-foreground: 215 14% 54%;
     --accent: 160 28% 18%;            /* subtle green tint */
     --accent-foreground: 160 60% 68%;
-    --destructive: 0 55% 42%;         /* muted red — destructive only */
+    --destructive: 25 95% 30%;        /* dark amber — destructive only */
     --destructive-foreground: 0 0% 100%;
     --border: 215 18% 22%;
     --input: 215 18% 22%;

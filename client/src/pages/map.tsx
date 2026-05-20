@@ -33,7 +33,7 @@ const jacoIcon = new L.DivIcon({
 });
 
 const sjoIcon = new L.DivIcon({
-  html: `<div style="background:#ef4444;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:8px;font-weight:bold;">A</span></div>`,
+  html: `<div style="background:#d97706;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 4px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:8px;font-weight:bold;">A</span></div>`,
   iconSize: [14, 14],
   iconAnchor: [7, 7],
   className: "",
@@ -54,7 +54,7 @@ const satIcon = new L.DivIcon({
 });
 
 const overheadIcon = new L.DivIcon({
-  html: `<div style="background:#ef4444;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 0 8px rgba(239,68,68,0.7);animation:pulse 2s infinite;"><style>@keyframes pulse{0%,100%{box-shadow:0 0 8px rgba(239,68,68,0.7)}50%{box-shadow:0 0 16px rgba(239,68,68,1)}}</style></div>`,
+  html: `<div style="background:#d97706;width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 0 8px rgba(217,119,6,0.7);animation:pulse 2s infinite;"><style>@keyframes pulse{0%,100%{box-shadow:0 0 8px rgba(217,119,6,0.7)}50%{box-shadow:0 0 16px rgba(217,119,6,1)}}</style></div>`,
   iconSize: [14, 14],
   iconAnchor: [7, 7],
   className: "",
@@ -93,7 +93,7 @@ function flightIcon(heading: number | null, altitude: number | null) {
   if (altitude != null) {
     if (altitude < 3000) color = "#22c55e";
     else if (altitude < 8000) color = "#eab308";
-    else color = "#ef4444";
+    else color = "#d97706";
   }
   return new L.DivIcon({
     html: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(${rotation}deg);filter:drop-shadow(0 0 2px rgba(0,0,0,0.5));"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>`,
@@ -115,10 +115,10 @@ function FitBoundsOnce() {
   return null;
 }
 
-const severityLineColors = ["#6b7280", "#22c55e", "#eab308", "#f97316", "#ef4444", "#991b1b"];
+const severityLineColors = ["#6b7280", "#22c55e", "#eab308", "#f97316", "#d97706", "#78350f"];
 
 const radioImpactoIcon = new L.DivIcon({
-  html: `<div style="background:#dc2626;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 6px rgba(220,38,38,0.6);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:7px;font-weight:bold;">FM</span></div>`,
+  html: `<div style="background:#b45309;width:14px;height:14px;border-radius:3px;border:2px solid white;box-shadow:0 0 6px rgba(180,83,9,0.6);display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:7px;font-weight:bold;">FM</span></div>`,
   iconSize: [14, 14],
   iconAnchor: [7, 7],
   className: "",
@@ -241,7 +241,7 @@ export default function MapPage() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className="text-2xl font-mono font-semibold text-red-600" data-testid="text-map-overhead">{overheadSats.length}</div>
+            <div className="text-2xl font-mono font-semibold text-amber-600" data-testid="text-map-overhead">{overheadSats.length}</div>
             <div className="text-xs text-muted-foreground">{t("map.overhead")}</div>
           </CardContent>
         </Card>
@@ -306,7 +306,7 @@ export default function MapPage() {
                 <Circle
                   center={[KAPPA_CONSTANTS.SJO_LAT, KAPPA_CONSTANTS.SJO_LON]}
                   radius={10000}
-                  pathOptions={{ color: "#ef4444", fillColor: "#ef4444", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
+                  pathOptions={{ color: "#d97706", fillColor: "#d97706", fillOpacity: 0.05, weight: 1, dashArray: "4 4" }}
                 />
                 <Circle
                   center={[KAPPA_CONSTANTS.JACO_LAT, KAPPA_CONSTANTS.JACO_LON]}
@@ -341,7 +341,7 @@ export default function MapPage() {
                   <Popup>
                     <div className="text-xs">
                       <strong>{sat.satelliteName}</strong>
-                      {isOverhead && <span style={{color:"#ef4444",fontWeight:"bold",marginLeft:4}}>OVERHEAD</span>}
+                      {isOverhead && <span style={{color:"#d97706",fontWeight:"bold",marginLeft:4}}>OVERHEAD</span>}
                       <br />
                       NORAD: {sat.noradId} | {sat.category}
                       <br />

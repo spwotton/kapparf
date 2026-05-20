@@ -15,7 +15,7 @@ import {
 import { useState, useRef, useCallback } from "react";
 
 const SEV_COLORS: Record<number, string> = {
-  1: "bg-gray-600", 2: "bg-yellow-600", 3: "bg-orange-600", 4: "bg-red-600", 5: "bg-red-800",
+  1: "bg-gray-600", 2: "bg-yellow-600", 3: "bg-orange-600", 4: "bg-amber-600", 5: "bg-amber-800",
 };
 const SEV_LABELS: Record<number, string> = {
   1: "LOW", 2: "MEDIUM", 3: "HIGH", 4: "CRITICAL", 5: "EMERGENCY",
@@ -115,7 +115,7 @@ export default function ForensicHypervisorPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2" data-testid="page-title">
-            <Crosshair className="w-6 h-6 text-red-500" />
+            <Crosshair className="w-6 h-6 text-amber-500" />
             Forensic Hypervisor
           </h1>
           <p className="text-sm text-gray-400 mt-1">
@@ -332,7 +332,7 @@ export default function ForensicHypervisorPage() {
                     <div className="grid grid-cols-4 gap-2 text-xs">
                       <div><span className="text-gray-500">Packets:</span> <span className="font-mono">{pcap.packetCount?.toLocaleString()}</span></div>
                       <div><span className="text-gray-500">Size:</span> <span className="font-mono">{(pcap.filesize / 1024).toFixed(1)} KB</span></div>
-                      <div><span className="text-gray-500">Anomalies:</span> <span className="font-mono text-red-400">{pcap.anomalies?.length || 0}</span></div>
+                      <div><span className="text-gray-500">Anomalies:</span> <span className="font-mono text-amber-400">{pcap.anomalies?.length || 0}</span></div>
                       <div><span className="text-gray-500">Time:</span> <span className="font-mono">{new Date(pcap.timestamp).toLocaleString()}</span></div>
                     </div>
                     {pcap.anomalies?.length > 0 && (
@@ -362,7 +362,7 @@ export default function ForensicHypervisorPage() {
                         <div className="text-xs text-gray-500 mb-1">Suspicious Ports:</div>
                         <div className="flex flex-wrap gap-1">
                           {f.suspiciousPorts.map((p: any, i: number) => (
-                            <Badge key={i} className="text-xs bg-red-900 text-red-300 font-mono">
+                            <Badge key={i} className="text-xs bg-amber-900 text-amber-300 font-mono">
                               :{p.port} — {p.label} ({p.count})
                             </Badge>
                           ))}
@@ -375,7 +375,7 @@ export default function ForensicHypervisorPage() {
                         <div className="space-y-1">
                           {f.temporalAlignment.slice(0, 5).map((m: any, i: number) => (
                             <div key={i} className="text-xs flex items-center gap-2">
-                              <Badge className={m.significance === "STRONG" ? "bg-red-800" : m.significance === "MODERATE" ? "bg-orange-800" : "bg-gray-700"}>
+                              <Badge className={m.significance === "STRONG" ? "bg-amber-800" : m.significance === "MODERATE" ? "bg-orange-800" : "bg-gray-700"}>
                                 {m.significance}
                               </Badge>
                               <span className="font-mono">{m.eventType}</span>

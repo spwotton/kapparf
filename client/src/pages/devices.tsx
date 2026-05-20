@@ -29,7 +29,7 @@ function getEntityIcon(id: string) {
   if (id.startsWith("SDR-")) return <Radio className="h-3.5 w-3.5 text-yellow-500" />;
   if (id.startsWith("NET-")) return <Globe className="h-3.5 w-3.5 text-slate-500" />;
   if (id.startsWith("ADS-")) return <Plane className="h-3.5 w-3.5 text-rose-500" />;
-  if (id.startsWith("TGT-")) return <Crosshair className="h-3.5 w-3.5 text-red-500" />;
+  if (id.startsWith("TGT-")) return <Crosshair className="h-3.5 w-3.5 text-amber-500" />;
   if (id.startsWith("SIG-") || id.startsWith("SRC-")) return <Activity className="h-3.5 w-3.5 text-green-500" />;
   if (id.startsWith("PHONE-")) return <Smartphone className="h-3.5 w-3.5 text-blue-500" />;
   return <Fingerprint className="h-3.5 w-3.5 text-muted-foreground" />;
@@ -200,7 +200,7 @@ curl -X POST "${kappaUrl}/api/phone/sensors" \\
           )}
 
           {registerResult?.error && (
-            <div className="p-3 rounded bg-red-50 dark:bg-red-900/20 text-sm text-red-600">
+            <div className="p-3 rounded bg-amber-50 dark:bg-amber-900/20 text-sm text-amber-600">
               {registerResult.error}
             </div>
           )}
@@ -389,7 +389,7 @@ function BiometricPanel() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className="text-lg font-bold font-mono text-red-500" data-testid="stat-correlations">
+            <div className="text-lg font-bold font-mono text-amber-500" data-testid="stat-correlations">
               {biometricStatus?.correlationsFound ?? 0}
             </div>
             <div className="text-[10px] text-muted-foreground">Bio-RF Correlations</div>
@@ -454,7 +454,7 @@ function BiometricPanel() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Heart className="w-4 h-4 text-red-500" />
+              <Heart className="w-4 h-4 text-amber-500" />
               Biometric-RF Correlations
             </CardTitle>
           </CardHeader>
@@ -585,7 +585,7 @@ function HeartbeatPanel() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className="text-lg font-bold font-mono text-red-500" data-testid="stat-tracker-offline">
+            <div className="text-lg font-bold font-mono text-amber-500" data-testid="stat-tracker-offline">
               {trackerStats?.offline ?? 0}
             </div>
             <div className="text-[10px] text-muted-foreground">Offline</div>
@@ -610,7 +610,7 @@ function HeartbeatPanel() {
       </div>
 
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <div className={`w-2 h-2 rounded-full ${trackerStatus?.polling ? "bg-green-500 animate-pulse" : "bg-red-500"}`} />
+        <div className={`w-2 h-2 rounded-full ${trackerStatus?.polling ? "bg-green-500 animate-pulse" : "bg-amber-500"}`} />
         <span>Tracker: {trackerStatus?.trackerUrl || "Not connected"}</span>
         <span className="ml-auto">
           Server uptime: {trackerStatus?.serverUptime ? formatUptime(trackerStatus.serverUptime) : "—"}
@@ -654,7 +654,7 @@ function HeartbeatPanel() {
                 </div>
               ))}
               {offlineDevices.map((device: any) => (
-                <div key={device.id || device.deviceId} className="flex items-center gap-3 p-3 rounded-lg bg-red-500/5 border border-red-500/20 opacity-60" data-testid={`tracker-device-${device.id || device.deviceId}`}>
+                <div key={device.id || device.deviceId} className="flex items-center gap-3 p-3 rounded-lg bg-amber-500/5 border border-amber-500/20 opacity-60" data-testid={`tracker-device-${device.id || device.deviceId}`}>
                   {getDeviceTypeIcon(device.type)}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -695,14 +695,14 @@ function HeartbeatPanel() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Bell className="w-4 h-4 text-red-500" />
+              <Bell className="w-4 h-4 text-amber-500" />
               Active Alerts ({activeAlerts.length})
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-2 max-h-[300px] overflow-y-auto">
               {activeAlerts.map((alert: any, i: number) => (
-                <div key={alert.id || i} className="flex items-start gap-3 p-2 rounded bg-red-500/5 text-xs" data-testid={`tracker-alert-${i}`}>
+                <div key={alert.id || i} className="flex items-start gap-3 p-2 rounded bg-amber-500/5 text-xs" data-testid={`tracker-alert-${i}`}>
                   <Badge
                     variant={alert.severity >= 3 ? "destructive" : "secondary"}
                     className="text-xs min-w-[50px] justify-center"
@@ -843,7 +843,7 @@ export default function DevicesPage() {
                 {isLoading ? (
                   <Skeleton className="h-8 w-20" />
                 ) : (
-                  <div className={`text-3xl font-mono font-semibold tabular-nums ${suspiciousCount > 0 ? "text-red-600" : ""}`} data-testid="text-suspicious-count">
+                  <div className={`text-3xl font-mono font-semibold tabular-nums ${suspiciousCount > 0 ? "text-amber-600" : ""}`} data-testid="text-suspicious-count">
                     {suspiciousCount}
                   </div>
                 )}

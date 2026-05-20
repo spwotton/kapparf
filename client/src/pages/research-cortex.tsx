@@ -102,7 +102,7 @@ const categoryColors: Record<string, string> = {
   entity: "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/30",
   mechanism: "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/30",
   evidence: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30",
-  prediction: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/30",
+  prediction: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30",
   connection: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border-cyan-500/30",
   definition: "bg-gray-500/10 text-gray-700 dark:text-gray-400 border-gray-500/30",
 };
@@ -110,8 +110,8 @@ const categoryColors: Record<string, string> = {
 const severityColors: Record<string, string> = {
   low: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
   medium: "bg-orange-500/10 text-orange-700 dark:text-orange-400",
-  high: "bg-red-500/10 text-red-700 dark:text-red-400",
-  critical: "bg-red-600/20 text-red-600 dark:text-red-300",
+  high: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
+  critical: "bg-amber-600/20 text-amber-600 dark:text-amber-300",
 };
 
 const statusIcons: Record<string, any> = {
@@ -447,7 +447,7 @@ export default function ResearchCortexPage() {
             <Card data-testid="card-contradictions">
               <CardHeader className="pb-3">
                 <CardTitle className="text-base flex items-center gap-2">
-                  <GitBranch className="w-4 h-4 text-red-500" />
+                  <GitBranch className="w-4 h-4 text-amber-500" />
                   Contradictions ({s.contradictions.length})
                 </CardTitle>
                 <CardDescription>Cross-document inconsistencies detected by the indexer</CardDescription>
@@ -460,7 +460,7 @@ export default function ResearchCortexPage() {
                 ) : (
                   <div className="space-y-2">
                     {s.contradictions.map(c => (
-                      <div key={c.id} className="rounded-lg border p-3 bg-red-500/5">
+                      <div key={c.id} className="rounded-lg border p-3 bg-amber-500/5">
                         <div className="flex items-center gap-2 mb-1">
                           <Badge className={severityColors[c.severity]} variant="outline">{c.severity}</Badge>
                           <span className="text-sm font-medium">{c.description}</span>
@@ -600,7 +600,7 @@ export default function ResearchCortexPage() {
                           onClick={() => toggleFacet(facet.id)}
                         >
                           {isExpanded ? <ChevronDown className="w-4 h-4 shrink-0" /> : <ChevronRight className="w-4 h-4 shrink-0" />}
-                          <StatusIcon className={`w-4 h-4 shrink-0 ${facet.status === "running" ? "animate-spin" : ""} ${facet.status === "completed" ? "text-green-500" : facet.status === "error" ? "text-red-500" : "text-muted-foreground"}`} />
+                          <StatusIcon className={`w-4 h-4 shrink-0 ${facet.status === "running" ? "animate-spin" : ""} ${facet.status === "completed" ? "text-green-500" : facet.status === "error" ? "text-amber-500" : "text-muted-foreground"}`} />
                           <span className="text-sm font-medium flex-1">{facet.name}</span>
                           <Badge variant="outline" className="text-[10px]">{facet.angle}</Badge>
                           {facet.assignedModel && (

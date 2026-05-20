@@ -880,8 +880,8 @@ export const THREAT_LEVELS: { level: ThreatLevel; minScore: number; color: strin
   { level: "NOMINAL", minScore: 0, color: "#16a34a", description: "Baseline — no anomalous patterns detected" },
   { level: "ELEVATED", minScore: 30, color: "#d97706", description: "Minor cross-domain coincidence detected" },
   { level: "HIGH", minScore: 60, color: "#c2410c", description: "Active multi-domain correlation — possible surveillance" },
-  { level: "CRITICAL", minScore: 80, color: "#9f1239", description: "Confirmed pattern match — active SIGINT operation probable" },
-  { level: "EMERGENCY", minScore: 95, color: "#7f1d1d", description: "Full spectrum engagement — all domains correlated" },
+  { level: "CRITICAL", minScore: 80, color: "#92400e", description: "Confirmed pattern match — active SIGINT operation probable" },
+  { level: "EMERGENCY", minScore: 95, color: "#451a03", description: "Full spectrum engagement — all domains correlated" },
 ];
 
 export interface CouncilNode {

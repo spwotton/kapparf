@@ -1208,7 +1208,7 @@ export default function ConspiracyBoardPage() {
                       <Badge
                         key={i}
                         variant="outline"
-                        className={`text-[9px] cursor-pointer ${e.live ? "border-green-900/50 text-green-400 hover:bg-green-900/20" : "border-red-900/50 text-red-400 hover:bg-red-900/20"}`}
+                        className={`text-[9px] cursor-pointer ${e.live ? "border-green-900/50 text-green-400 hover:bg-green-900/20" : "border-amber-900/50 text-amber-400 hover:bg-amber-900/20"}`}
                         onClick={() => {
                           const o = nodes.find(n => n.id === otherId);
                           if (o) setSelectedNode(o);

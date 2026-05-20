@@ -25,14 +25,14 @@ function PhaseArc({ phase }: { phase: number }) {
       <line x1={nodeX} y1={nodeY} x2={piX} y2={piY} stroke="currentColor" strokeOpacity="0.1" strokeWidth="1" strokeDasharray="2,2" />
       <text x={piX + 2} y={piY - 4} fontSize="7" fill="currentColor" fillOpacity="0.4">π</text>
       <text x={nodeX + 2} y={nodeY + 12} fontSize="7" fill="currentColor" fillOpacity="0.4">0</text>
-      <circle cx={x} cy={y} r={5} fill={Math.abs(phase - PI) < 0.05 ? "#ef4444" : Math.min(phase, 2*PI-phase) < 0.05 ? "#f97316" : "#3b82f6"} />
-      <line x1={cx} y1={cy} x2={x} y2={y} stroke={Math.abs(phase - PI) < 0.05 ? "#ef4444" : "#3b82f6"} strokeWidth="1.5" />
+      <circle cx={x} cy={y} r={5} fill={Math.abs(phase - PI) < 0.05 ? "#d97706" : Math.min(phase, 2*PI-phase) < 0.05 ? "#f97316" : "#3b82f6"} />
+      <line x1={cx} y1={cy} x2={x} y2={y} stroke={Math.abs(phase - PI) < 0.05 ? "#d97706" : "#3b82f6"} strokeWidth="1.5" />
     </svg>
   );
 }
 
 function KappaScoreBadge({ score }: { score: number }) {
-  const color = score >= 90 ? "bg-red-500/20 text-red-400 border-red-500/30"
+  const color = score >= 90 ? "bg-amber-500/20 text-amber-400 border-amber-500/30"
     : score >= 70 ? "bg-orange-500/20 text-orange-400 border-orange-500/30"
     : score >= 40 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
     : "bg-muted text-muted-foreground border-border";
@@ -82,10 +82,10 @@ export default function SeismicKappaPage() {
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <Activity className="w-5 h-5 text-red-400" />
+            <Activity className="w-5 h-5 text-amber-400" />
             <h1 className="text-lg font-semibold tracking-tight">Seismic KAPPA Correlation</h1>
             {active && (
-              <Badge variant="outline" className="text-red-400 border-red-400/40 bg-red-400/10 animate-pulse text-xs">
+              <Badge variant="outline" className="text-amber-400 border-amber-400/40 bg-amber-400/10 animate-pulse text-xs">
                 ACTIVE SEQUENCE
               </Badge>
             )}
@@ -95,15 +95,15 @@ export default function SeismicKappaPage() {
           </p>
         </div>
         {isLoading && <span className="text-xs text-muted-foreground">polling USGS…</span>}
-        {error && <span className="text-xs text-red-400">fetch error</span>}
+        {error && <span className="text-xs text-amber-400">fetch error</span>}
       </div>
 
       {/* Active sequence alert */}
       {active && (
-        <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-4 flex gap-3">
-          <AlertTriangle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+        <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 flex gap-3">
+          <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <p className="text-sm font-medium text-red-300">Double-Strike Active — Jacó / ECHO Node</p>
+            <p className="text-sm font-medium text-amber-300">Double-Strike Active — Jacó / ECHO Node</p>
             <p className="text-xs text-muted-foreground">
               M4.9 (10:22 AM CR) + M4.8 (9:37 PM CR) · Both events within 25km of the KAPPA PRIMARY OBSERVATION NODE ·
               Cocos Plate active segment · 24h seismic window open
@@ -115,9 +115,9 @@ export default function SeismicKappaPage() {
       {/* Key correlation metrics for M4.9 */}
       {analysis && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <Card className="p-3 border-red-500/20 bg-red-500/5">
+          <Card className="p-3 border-amber-500/20 bg-amber-500/5">
             <p className="text-xs text-muted-foreground font-mono mb-1">SCHUMANN PHASE @ IMPACT</p>
-            <p className="text-2xl font-mono font-bold text-red-400">π</p>
+            <p className="text-2xl font-mono font-bold text-amber-400">π</p>
             <p className="text-xs text-muted-foreground mt-1">NODE STRIKE — zero-crossing</p>
             <p className="text-[10px] text-muted-foreground/60 font-mono">{analysis.schumann_phase_m49?.phase_rad?.toFixed(6)} rad</p>
           </Card>
@@ -176,14 +176,14 @@ export default function SeismicKappaPage() {
           )}
 
           {events7d.map((e: any) => (
-            <Card key={e.id} className={`p-3 ${e.kappa.score >= 80 ? 'border-red-500/30 bg-red-500/5' : e.kappa.score >= 50 ? 'border-orange-500/20 bg-orange-500/5' : ''}`}>
+            <Card key={e.id} className={`p-3 ${e.kappa.score >= 80 ? 'border-amber-500/30 bg-amber-500/5' : e.kappa.score >= 50 ? 'border-orange-500/20 bg-orange-500/5' : ''}`}>
               <div className="flex items-start gap-3">
                 <PhaseArc phase={e.kappa.schumann_phase_rad} />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <span className="font-mono font-bold text-sm">M{e.mag}</span>
                     <KappaScoreBadge score={e.kappa.score} />
-                    {e.kappa.is_node_strike && <Badge variant="outline" className="text-red-400 border-red-400/30 text-[10px]">NODE STRIKE π</Badge>}
+                    {e.kappa.is_node_strike && <Badge variant="outline" className="text-amber-400 border-amber-400/30 text-[10px]">NODE STRIKE π</Badge>}
                     {e.kappa.gf53_note === 'CENTER_PIVOT' && <Badge variant="outline" className="text-orange-400 border-orange-400/30 text-[10px]">GF CENTER</Badge>}
                     {e.kappa.gf53_note === 'NULL_TERMINATOR' && <Badge variant="outline" className="text-purple-400 border-purple-400/30 text-[10px]">NULL TERM</Badge>}
                     {e.kappa.is_klein_perpendicular && <Badge variant="outline" className="text-blue-400 border-blue-400/30 text-[10px]">KLEIN ⊥</Badge>}
@@ -301,7 +301,7 @@ export default function SeismicKappaPage() {
                   <span className="text-[9px] font-mono bg-black/70 text-white/80 px-1.5 py-0.5 rounded">{label}</span>
                 </div>
                 <div className="absolute top-1.5 right-1.5">
-                  <span className="text-[9px] font-mono bg-red-500/80 text-white px-1.5 py-0.5 rounded">{score}/100</span>
+                  <span className="text-[9px] font-mono bg-amber-500/80 text-white px-1.5 py-0.5 rounded">{score}/100</span>
                 </div>
               </div>
               <p className="text-[10px] text-muted-foreground leading-relaxed">{caption}</p>

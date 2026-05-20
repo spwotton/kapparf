@@ -298,14 +298,14 @@ const CATEGORIES = [
 ];
 
 const THREAT_COLORS = {
-  critical: { badge: "bg-red-500/15 text-red-400 border-red-500/30", dot: "bg-red-500", border: "border-l-red-500/60" },
+  critical: { badge: "bg-amber-500/15 text-amber-400 border-amber-500/30", dot: "bg-amber-500", border: "border-l-amber-500/60" },
   high: { badge: "bg-orange-500/15 text-orange-400 border-orange-500/30", dot: "bg-orange-500", border: "border-l-orange-500/60" },
   medium: { badge: "bg-amber-500/15 text-amber-400 border-amber-500/30", dot: "bg-amber-500", border: "border-l-amber-500/60" },
   low: { badge: "bg-green-500/15 text-green-400 border-green-500/30", dot: "bg-green-500", border: "border-l-green-500/60" },
 };
 
 const KEY_EXTRACTED_SPECS = [
-  { label: "30kW DEW hard-kill range", value: "3–4 km", icon: Zap, color: "text-red-400" },
+  { label: "30kW DEW hard-kill range", value: "3–4 km", icon: Zap, color: "text-amber-400" },
   { label: "DragonFire precision", value: "£1 coin @ 1km", icon: Target, color: "text-orange-400" },
   { label: "DragonFire cost/shot", value: "~£10", icon: Gauge, color: "text-amber-400" },
   { label: "Blue laser wavelength (NDB4916)", value: "458 nm / 500 mW", icon: FlaskConical, color: "text-blue-400" },
@@ -313,8 +313,8 @@ const KEY_EXTRACTED_SPECS = [
   { label: "UOWC water-air rate", value: "44 Mbit/s (drone mobile)", icon: Waves, color: "text-cyan-400" },
   { label: "Dream Drone ceiling", value: ">50,000 ft", icon: Satellite, color: "text-indigo-400" },
   { label: "Dream Drone AI compute", value: "275 TOPS (Jetson AGX Orin)", icon: Database, color: "text-violet-400" },
-  { label: "Jacó DEW LOS (El Miro)", value: "~4.2 km to Pochote Grande", icon: Crosshair, color: "text-red-400" },
-  { label: "RF jam ineffective vs", value: "Autonomous/pre-programmed drones", icon: Radio, color: "text-red-500" },
+  { label: "Jacó DEW LOS (El Miro)", value: "~4.2 km to Pochote Grande", icon: Crosshair, color: "text-amber-400" },
+  { label: "RF jam ineffective vs", value: "Autonomous/pre-programmed drones", icon: Radio, color: "text-amber-500" },
   { label: "C-UAS systems catalogued", value: "537 (Bard College, 2019)", icon: Layers, color: "text-gray-400" },
   { label: "Zen Indrajaal coverage", value: "100 km² / 24×7 autonomous", icon: Eye, color: "text-green-400" },
 ];
@@ -421,8 +421,8 @@ const HUMINT_LEAD = {
   rangeAnalysis: [
     { model: "DJI Air 3", range: "20 km", verdict: "MARGINAL — needs relay or headwind tailoring", color: "text-amber-400" },
     { model: "DJI Mavic 3 Enterprise", range: "15 km FCC", verdict: "REQUIRES relay node or closer launch point", color: "text-orange-400" },
-    { model: "Fixed-wing UAV (eBee / WingtraOne)", range: "40–90 km", verdict: "CONFIRMED VIABLE — 22.4 km well within envelope", color: "text-red-400" },
-    { model: "Custom FPV fixed-wing w/ digital link", range: "30–60 km", verdict: "CONFIRMED VIABLE — matches electric no-rotor sig", color: "text-red-400" },
+    { model: "Fixed-wing UAV (eBee / WingtraOne)", range: "40–90 km", verdict: "CONFIRMED VIABLE — 22.4 km well within envelope", color: "text-amber-400" },
+    { model: "Custom FPV fixed-wing w/ digital link", range: "30–60 km", verdict: "CONFIRMED VIABLE — matches electric no-rotor sig", color: "text-amber-400" },
     { model: "DJI Matrice 300 RTK", range: "15 km + relay", verdict: "VIABLE with relay station in Herradura hills", color: "text-amber-400" },
   ],
   elevation: [
@@ -453,7 +453,7 @@ function WagnerPanel() {
           LIVE TRACK — CRANE-ALPHA LRP — Dan Wagner — {new Date(w.logged).toLocaleTimeString()}
         </span>
         <Badge className="bg-orange-500/15 text-orange-400 border-orange-500/30 text-[9px]">EVIDENCE {w.id.slice(0,8).toUpperCase()}</Badge>
-        <Badge className="bg-red-500/20 text-red-400 border-red-500/30 text-[9px]">RELAY TRIANGLE ACTIVE</Badge>
+        <Badge className="bg-amber-500/20 text-amber-400 border-amber-500/30 text-[9px]">RELAY TRIANGLE ACTIVE</Badge>
         {open ? <ChevronDown className="h-3.5 w-3.5 text-gray-500" /> : <ChevronRight className="h-3.5 w-3.5 text-gray-500" />}
       </button>
 
@@ -482,9 +482,9 @@ function WagnerPanel() {
 
           {/* Relay triangle */}
           <div className="space-y-3">
-            <div className="text-[9px] font-mono text-red-400 uppercase tracking-widest mb-2">Relay Triangle — Live Track</div>
+            <div className="text-[9px] font-mono text-amber-400 uppercase tracking-widest mb-2">Relay Triangle — Live Track</div>
             {[
-              { node: "El Miro Hilltop", role: "Elevated relay / comms anchor", coords: "9.598°N 84.658°W", status: "VECTOR CONFIRMED 14:52", color: "border-red-500/40 bg-red-950/20", dot: "bg-red-500" },
+              { node: "El Miro Hilltop", role: "Elevated relay / comms anchor", coords: "9.598°N 84.658°W", status: "VECTOR CONFIRMED 14:52", color: "border-amber-500/40 bg-amber-950/20", dot: "bg-amber-500" },
               { node: "CRANE-ALPHA", role: "Launch/Recovery Point (LRP)", coords: "9.6210°N 84.6295°W", status: "RTB CONFIRMED 14:51", color: "border-orange-500/40 bg-orange-950/20", dot: "bg-orange-400" },
               { node: "Hotel Pochote Grande", role: "Observer / overfly target", coords: "9.6286°N 84.6298°W", status: "OVERFLIGHT 14:45", color: "border-cyan-500/30 bg-cyan-950/10", dot: "bg-cyan-400" },
             ].map(n => (
@@ -545,17 +545,17 @@ function HumintPanel() {
   const [open, setOpen] = useState(false);
   const h = HUMINT_LEAD;
   return (
-    <div className="border-b border-red-500/20 bg-red-950/10">
+    <div className="border-b border-amber-500/20 bg-amber-950/10">
       <button
-        className="w-full flex items-center gap-3 px-6 py-3 hover:bg-red-500/5 transition-colors text-left"
+        className="w-full flex items-center gap-3 px-6 py-3 hover:bg-amber-500/5 transition-colors text-left"
         onClick={() => setOpen(o => !o)}
         data-testid="btn-humint-toggle"
       >
-        <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0" />
-        <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest flex-1">
+        <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse shrink-0" />
+        <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest flex-1">
           Active HUMINT Lead — Russian UAV Operator — Logged {new Date(h.logged).toLocaleString()}
         </span>
-        <Badge className="bg-red-500/15 text-red-400 border-red-500/30 text-[9px]">EVIDENCE ID {h.id.slice(0,8).toUpperCase()}</Badge>
+        <Badge className="bg-amber-500/15 text-amber-400 border-amber-500/30 text-[9px]">EVIDENCE ID {h.id.slice(0,8).toUpperCase()}</Badge>
         {open ? <ChevronDown className="h-3.5 w-3.5 text-gray-500" /> : <ChevronRight className="h-3.5 w-3.5 text-gray-500" />}
       </button>
 
@@ -564,7 +564,7 @@ function HumintPanel() {
 
           {/* Subject card */}
           <div className="space-y-3">
-            <div className="text-[9px] font-mono text-red-400 uppercase tracking-widest mb-2">Subject Profile</div>
+            <div className="text-[9px] font-mono text-amber-400 uppercase tracking-widest mb-2">Subject Profile</div>
             {[
               { icon: User, label: "Identity", value: h.subject },
               { icon: Eye, label: "Cover role", value: h.coverRole },
@@ -576,7 +576,7 @@ function HumintPanel() {
               { icon: Wind, label: "Signature", value: h.overflightSig },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex gap-2 text-[10px] font-mono">
-                <Icon className="h-3 w-3 text-red-400/60 shrink-0 mt-0.5" />
+                <Icon className="h-3 w-3 text-amber-400/60 shrink-0 mt-0.5" />
                 <span className="text-gray-600 shrink-0 w-20">{label}:</span>
                 <span className="text-gray-200 leading-tight">{value}</span>
               </div>
@@ -610,30 +610,30 @@ function HumintPanel() {
                   const peak = e.elev.includes("⚠");
                   return (
                     <div key={e.label} className="flex gap-2 text-[9px] font-mono items-center">
-                      <span className={`shrink-0 w-4 text-right font-bold ${peak ? "text-red-400" : "text-cyan-400"}`}>
+                      <span className={`shrink-0 w-4 text-right font-bold ${peak ? "text-amber-400" : "text-cyan-400"}`}>
                         {String(m).padStart(3)}
                       </span>
                       <div className="flex-1 h-2 bg-black/30 rounded-sm overflow-hidden">
                         <div
-                          className={`h-full rounded-sm ${peak ? "bg-red-500/60" : "bg-cyan-500/30"}`}
+                          className={`h-full rounded-sm ${peak ? "bg-amber-500/60" : "bg-cyan-500/30"}`}
                           style={{ width: `${pct}%` }}
                         />
                       </div>
-                      <span className={`text-[8px] flex-[2] leading-tight ${peak ? "text-red-300" : "text-gray-600"}`}>{e.label}</span>
+                      <span className={`text-[8px] flex-[2] leading-tight ${peak ? "text-amber-300" : "text-gray-600"}`}>{e.label}</span>
                     </div>
                   );
                 })}
               </div>
               <div className="mt-2 space-y-1">
-                <p className="text-[9px] text-red-300/80 font-mono">⚠ {h.losObstruction}</p>
+                <p className="text-[9px] text-amber-300/80 font-mono">⚠ {h.losObstruction}</p>
                 <p className="text-[9px] text-green-400/70 font-mono">✓ {h.losCleared}</p>
                 <p className="text-[9px] text-gray-600 font-mono">Source: SRTM 30m via Open-Elevation API</p>
               </div>
             </div>
 
-            <div className="bg-red-950/30 border border-red-500/20 rounded p-3">
-              <div className="text-[9px] font-mono text-red-400 uppercase tracking-widest mb-1.5">Assessment</div>
-              <p className="text-[10px] text-red-200/70 leading-relaxed font-mono">
+            <div className="bg-amber-950/30 border border-amber-500/20 rounded p-3">
+              <div className="text-[9px] font-mono text-amber-400 uppercase tracking-widest mb-1.5">Assessment</div>
+              <p className="text-[10px] text-amber-200/70 leading-relaxed font-mono">
                 Fixed-wing from MRET at ~06:30 AM (pre-dawn) at 320m AGL clears Cerros de Agujas
                 ridge with 39m margin — arrives Pochote Grande at 06:50 AM. Zero ATC, zero ADS-B.
                 6-drone fleet = tasked operator, not hobbyist. Ricos y Famosos cover provides
@@ -641,7 +641,7 @@ function HumintPanel() {
               </p>
               <div className="mt-2 flex gap-1.5 flex-wrap">
                 {["MRET-STAGING","320m-AGL","RIDGE-CLEAR","RUSSIAN-TASKED","COVER-IDENTITY","CRITICAL"].map(t => (
-                  <Badge key={t} className="bg-red-500/10 text-red-400 border-red-500/20 text-[8px] px-1">{t}</Badge>
+                  <Badge key={t} className="bg-amber-500/10 text-amber-400 border-amber-500/20 text-[8px] px-1">{t}</Badge>
                 ))}
               </div>
             </div>
@@ -672,8 +672,8 @@ export default function DroneIntelPage() {
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-[10px] font-mono text-red-400 uppercase tracking-widest">C-UAS Intelligence Library — KAPPA SIGINT</span>
+              <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+              <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest">C-UAS Intelligence Library — KAPPA SIGINT</span>
             </div>
             <h1 className="text-xl font-bold text-white tracking-tight">Drone Intelligence Research Archive</h1>
             <p className="text-xs text-gray-500 mt-0.5 font-mono">
@@ -681,7 +681,7 @@ export default function DroneIntelPage() {
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
-            <Badge className="bg-red-500/15 text-red-400 border-red-500/30 text-[10px]">
+            <Badge className="bg-amber-500/15 text-amber-400 border-amber-500/30 text-[10px]">
               {criticalCount} CRITICAL
             </Badge>
             <Badge className="bg-cyan-500/10 text-cyan-400 border-cyan-500/20 text-[10px]">
@@ -752,7 +752,7 @@ export default function DroneIntelPage() {
               {activeCategory !== "all" && ` — ${CATEGORIES.find(c => c.id === activeCategory)?.label}`}
             </span>
             <div className="flex items-center gap-1.5">
-              <div className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+              <div className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
               <span className="text-[9px] text-gray-600 font-mono">LIVE KAPPA CORRELATION ACTIVE</span>
             </div>
           </div>

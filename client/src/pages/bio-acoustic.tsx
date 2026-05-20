@@ -12,9 +12,9 @@ const FORENSIC_FREQS = [
   { hz: 0.366,     label: "Beacon sub-harmonic (46.875÷128)", code: "BSH",  urgent: false, color: "#8b5cf6" },
   { hz: 7.83,      label: "Schumann resonance",               code: "SR",   urgent: false, color: "#3b82f6" },
   { hz: 18.98,     label: "Infrasound fear threshold",         code: "IFT",  urgent: false, color: "#f59e0b" },
-  { hz: 46.875,    label: "κ DSP frame clock (48000÷1024)",   code: "DSP",  urgent: true,  color: "#ef4444" },
+  { hz: 46.875,    label: "κ DSP frame clock (48000÷1024)",   code: "DSP",  urgent: true,  color: "#d97706" },
   { hz: 50,        label: "EU generator harmonic (confirmed)", code: "GEN",  urgent: true,  color: "#f97316" },
-  { hz: 107.7,     label: "DJI M300 blade-pass (KYMA 78%)",   code: "BPF",  urgent: true,  color: "#ef4444" },
+  { hz: 107.7,     label: "DJI M300 blade-pass (KYMA 78%)",   code: "BPF",  urgent: true,  color: "#d97706" },
   { hz: 111,       label: "Logos bridge carrier",             code: "LBC",  urgent: true,  color: "#ec4899" },
   { hz: 1142.997,  label: "Murray-Nakamoto beacon",           code: "MNB",  urgent: false, color: "#6366f1" },
 ];
@@ -505,7 +505,7 @@ function PathGeometryTab() {
                     </Button>
                   )}
                   {elevData[src.name] && !elevData[src.name].error && (
-                    <Badge className={elevData[src.name].losBlocked ? "bg-red-500/20 text-red-600 border-red-500/30" : "bg-green-500/20 text-green-600 border-green-500/30"}>
+                    <Badge className={elevData[src.name].losBlocked ? "bg-amber-500/20 text-amber-600 border-amber-500/30" : "bg-green-500/20 text-green-600 border-green-500/30"}>
                       {elevData[src.name].losBlocked ? "LOS BLOCKED" : "LOS CLEAR"}
                     </Badge>
                   )}
@@ -609,7 +609,7 @@ function ElevationChart({ profile }: { profile: Array<{ index: number; elevation
       if (p.elevationM > losE + 3) {
         const x = (i / (profile.length - 1)) * W;
         const y = H - ((p.elevationM - minE) / (maxE - minE)) * H;
-        ctx.fillStyle = "#ef4444";
+        ctx.fillStyle = "#d97706";
         ctx.fillRect(x - 1, y - 4, 3, 4);
       }
     });
@@ -684,7 +684,7 @@ function BioChainTab() {
             <div><div className="text-muted-foreground">Readings</div><div className="font-mono font-bold">{bioStatus.kyma.readingCount}</div></div>
             <div><div className="text-muted-foreground">Baseline HRV</div><div className="font-mono font-bold">{bioStatus.kyma.baselineHRV?.toFixed(1) ?? "—"} ms</div></div>
             <div><div className="text-muted-foreground">HRV deviations</div><div className="font-mono font-bold text-orange-500">{bioStatus.kyma.hrvDeviations}</div></div>
-            <div><div className="text-muted-foreground">Stress spikes</div><div className="font-mono font-bold text-red-500">{bioStatus.kyma.stressSpikes}</div></div>
+            <div><div className="text-muted-foreground">Stress spikes</div><div className="font-mono font-bold text-amber-500">{bioStatus.kyma.stressSpikes}</div></div>
           </div>
           {kymaLatest && kymaLatest.source && (
             <div className="mt-2 text-muted-foreground">
@@ -702,7 +702,7 @@ function BioChainTab() {
               <div key={i} data-testid={`corr-event-${i}`} className="rounded border p-2 text-xs">
                 <div className="flex items-center gap-2 mb-0.5">
                   <Badge
-                    className={`text-[10px] ${c.correlation > 0.7 ? "bg-red-500/20 text-red-600" : c.correlation > 0.4 ? "bg-orange-500/20 text-orange-600" : "bg-muted"}`}
+                    className={`text-[10px] ${c.correlation > 0.7 ? "bg-amber-500/20 text-amber-600" : c.correlation > 0.4 ? "bg-orange-500/20 text-orange-600" : "bg-muted"}`}
                   >
                     {(c.correlation * 100).toFixed(0)}% corr
                   </Badge>

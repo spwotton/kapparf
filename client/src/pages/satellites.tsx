@@ -18,7 +18,7 @@ import { RefreshCw, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-re
 import { useToast } from "@/hooks/use-toast";
 
 const categoryColors: Record<string, string> = {
-  stations: "bg-red-500/10 text-red-700 dark:text-red-400",
+  stations: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
   visual: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
   active: "bg-green-500/10 text-green-700 dark:text-green-400",
   weather: "bg-sky-500/10 text-sky-700 dark:text-sky-400",
@@ -244,7 +244,7 @@ export default function SatellitesPage() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className="text-2xl font-mono font-semibold text-red-600" data-testid="text-sat-overhead">{overheadCount}</div>
+            <div className="text-2xl font-mono font-semibold text-amber-600" data-testid="text-sat-overhead">{overheadCount}</div>
             <div className="text-xs text-muted-foreground">{t("satellites.overhead")}</div>
           </CardContent>
         </Card>

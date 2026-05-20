@@ -115,10 +115,10 @@ function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): nu
 
 const AC_EVENT_STYLE: Record<AcEventType, { cls: string; label: string }> = {
   ENTRY:     { cls: "text-cyan-400 border-cyan-500/30",    label: "ENTRY"    },
-  PROXIMITY: { cls: "text-red-400 border-red-500/40",      label: "PROXIMITY"},
+  PROXIMITY: { cls: "text-amber-400 border-amber-500/40",      label: "PROXIMITY"},
   ALT_DROP:  { cls: "text-orange-400 border-orange-500/30",label: "ALT DROP" },
   ALT_GAIN:  { cls: "text-amber-400 border-amber-500/20",  label: "ALT GAIN" },
-  HOVER:     { cls: "text-red-400 border-red-500/40",      label: "HOVER"    },
+  HOVER:     { cls: "text-amber-400 border-amber-500/40",      label: "HOVER"    },
   LOITER:    { cls: "text-orange-400 border-orange-500/30",label: "LOITER"   },
   EXIT:      { cls: "text-gray-500 border-gray-700",       label: "EXIT"     },
   FLAGGED:   { cls: "text-purple-400 border-purple-500/40",label: "FLAGGED"  },
@@ -139,7 +139,7 @@ const TARGETS: Target[] = [
 function acThreat(ac: LiveAircraft) {
   const alt = ac.baroAltitude ?? ac.geoAltitude ?? 9999;
   const vel = ac.velocity ?? 0;
-  if (alt < 500 && vel < 40) return { level: "CRITICAL", hex: 0xff0033, cls: "text-red-400",    bgCls: "bg-red-500/20 border-red-500/40" };
+  if (alt < 500 && vel < 40) return { level: "CRITICAL", hex: 0xff0033, cls: "text-amber-400",    bgCls: "bg-amber-500/20 border-amber-500/40" };
   if (alt < 1500)             return { level: "HIGH",     hex: 0xff6600, cls: "text-orange-400", bgCls: "bg-orange-500/15 border-orange-500/30" };
   if (alt < 5000)             return { level: "MED",      hex: 0xffcc00, cls: "text-amber-400",  bgCls: "bg-amber-500/10 border-amber-500/20" };
   return                             { level: "LOW",      hex: 0x4488cc, cls: "text-blue-400",   bgCls: "bg-blue-500/10 border-blue-500/20" };
@@ -994,8 +994,8 @@ function createScene(
 
 // ─── Panel definitions ────────────────────────────────────────────────────────
 
-const TARGET_COLOR: Record<Target["type"], string> = { observer:"text-cyan-400", crane:"text-amber-400", radar:"text-red-400", cell:"text-purple-400", ops:"text-orange-400" };
-const TARGET_BORDER: Record<Target["type"], string> = { observer:"border-cyan-500/30", crane:"border-amber-500/30", radar:"border-red-500/30", cell:"border-purple-500/30", ops:"border-orange-500/30" };
+const TARGET_COLOR: Record<Target["type"], string> = { observer:"text-cyan-400", crane:"text-amber-400", radar:"text-amber-400", cell:"text-purple-400", ops:"text-orange-400" };
+const TARGET_BORDER: Record<Target["type"], string> = { observer:"border-cyan-500/30", crane:"border-amber-500/30", radar:"border-amber-500/30", cell:"border-purple-500/30", ops:"border-orange-500/30" };
 
 // Panel IDs
 type PanelId = "targets" | "tdoa" | "adsb" | "layers" | "freq" | "dream" | "oracle";
@@ -1008,7 +1008,7 @@ const PANELS: PanelDef[] = [
   { id:"adsb",    icon:Satellite, label:"ADS-B",    side:"right", accentCls:"text-blue-400   border-blue-500/40"   },
   { id:"layers",  icon:Layers,    label:"Layers",   side:"right", accentCls:"text-indigo-400 border-indigo-500/40" },
   { id:"freq",    icon:Activity,  label:"Freq",     side:"right", accentCls:"text-amber-400  border-amber-500/40"  },
-  { id:"dream",   icon:Shield,    label:"Threat",   side:"right", accentCls:"text-red-400    border-red-500/40"    },
+  { id:"dream",   icon:Shield,    label:"Threat",   side:"right", accentCls:"text-amber-400    border-amber-500/40"    },
   { id:"oracle",  icon:Moon,      label:"Oracle",   side:"right", accentCls:"text-violet-400 border-violet-500/40" },
 ];
 
@@ -1415,7 +1415,7 @@ export default function JacoMapPage() {
         ))}
         <div className="border-t border-white/8 pt-2 space-y-1.5 mt-1">
           <div className="flex items-center gap-2"><AlertTriangle className="h-3 w-3 text-amber-400 shrink-0"/><span className="text-[10px] text-amber-300 font-mono">CRANE — GRIDTIDE C2 SUSPECTED</span></div>
-          <div className="flex items-center gap-2"><Radio className="h-3 w-3 text-red-400 shrink-0"/><span className="text-[10px] text-red-300 font-mono">EL MIRO — FULL VALLEY LOS + DEW</span></div>
+          <div className="flex items-center gap-2"><Radio className="h-3 w-3 text-amber-400 shrink-0"/><span className="text-[10px] text-amber-300 font-mono">EL MIRO — FULL VALLEY LOS + DEW</span></div>
           <div className="flex items-center gap-2"><Wifi className="h-3 w-3 text-purple-400 shrink-0"/><span className="text-[10px] text-purple-300 font-mono">BREAKWATER — 4G/LTE + 9.7GHz</span></div>
         </div>
       </div>
@@ -1448,7 +1448,7 @@ export default function JacoMapPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-1">
           <span className="text-[10px] text-gray-500 font-mono">OpenSky · Jacó AOR · {lastUpdate}</span>
-          <Badge className={`text-[9px] px-1.5 py-0 ${aircraftCount>0?"bg-red-500/15 text-red-400 border-red-500/30":"bg-gray-700 text-gray-500 border-gray-700"}`}>
+          <Badge className={`text-[9px] px-1.5 py-0 ${aircraftCount>0?"bg-amber-500/15 text-amber-400 border-amber-500/30":"bg-gray-700 text-gray-500 border-gray-700"}`}>
             {aircraftCount} AC
           </Badge>
         </div>
@@ -1460,7 +1460,7 @@ export default function JacoMapPage() {
               data-testid={`tab-adsb-${tab}`}>
               {tab==="live"?<Satellite className="h-3 w-3"/>:<Clock className="h-3 w-3"/>}
               {tab==="live"?"Live":"Events"}
-              {tab==="log"&&acEvents.length>0&&<span className="ml-0.5 text-[8px] text-red-400">{acEvents.length}</span>}
+              {tab==="log"&&acEvents.length>0&&<span className="ml-0.5 text-[8px] text-amber-400">{acEvents.length}</span>}
             </button>
           ))}
         </div>
@@ -1588,8 +1588,8 @@ export default function JacoMapPage() {
     if (id === "dream") return (
       <div className="space-y-2">
         <div className="flex items-center gap-2 mb-3">
-          <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse"/>
-          <span className="text-[10px] font-mono text-red-400 uppercase tracking-wider">Active threat — Jacó AOR</span>
+          <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse"/>
+          <span className="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Active threat — Jacó AOR</span>
         </div>
         {[
           ["Platform", "IAI flying wing (LO tailless)"],
@@ -1603,12 +1603,12 @@ export default function JacoMapPage() {
           ["Jam-immune", "Autonomous edge AI — no GCS"],
           ["Counter", "Laser DEW only — RF jam ineffective"],
         ].map(([k,v])=>(
-          <div key={k} className="flex gap-3 py-1 border-b border-red-500/10">
+          <div key={k} className="flex gap-3 py-1 border-b border-amber-500/10">
             <span className="text-[10px] font-mono text-gray-600 w-20 shrink-0">{k}</span>
-            <span className="text-[10px] font-mono text-red-300">{v}</span>
+            <span className="text-[10px] font-mono text-amber-300">{v}</span>
           </div>
         ))}
-        <div className="mt-2 pt-2 border-t border-red-500/20 text-[10px] font-mono text-red-400">
+        <div className="mt-2 pt-2 border-t border-amber-500/20 text-[10px] font-mono text-amber-400">
           KAPPA Rule #23 — correlation +18 Kappa Score
         </div>
       </div>
@@ -1699,7 +1699,7 @@ export default function JacoMapPage() {
               <div className="space-y-1.5">
                 <div className="flex items-end gap-2">
                   <span className="text-xl font-mono text-blue-300">{tidalH.toFixed(2)}<span className="text-xs text-gray-600">m</span></span>
-                  <span className={`text-[10px] font-mono ${tidalTr > 0 ? "text-green-400" : tidalTr < 0 ? "text-red-400" : "text-gray-600"}`}>
+                  <span className={`text-[10px] font-mono ${tidalTr > 0 ? "text-green-400" : tidalTr < 0 ? "text-amber-400" : "text-gray-600"}`}>
                     {tidalTr > 0 ? "▲ flood" : tidalTr < 0 ? "▼ ebb" : "— slack"}
                   </span>
                 </div>
@@ -1718,10 +1718,10 @@ export default function JacoMapPage() {
             <div className="flex items-center gap-1.5 mb-2">
               <Sun className="h-3 w-3 text-amber-400"/>
               <span className="text-[9px] font-mono font-bold text-amber-400 uppercase tracking-widest">Solar / X-Ray</span>
-              {flare && <span className="text-[8px] font-mono text-red-400 animate-pulse ml-auto">FLARE</span>}
+              {flare && <span className="text-[8px] font-mono text-amber-400 animate-pulse ml-auto">FLARE</span>}
             </div>
             <div className="flex items-center gap-3">
-              <span className={`text-2xl font-mono font-bold ${xClass==="X"?"text-red-400":xClass==="M"?"text-orange-400":xClass==="C"?"text-amber-400":"text-gray-500"}`}>{xLabel}</span>
+              <span className={`text-2xl font-mono font-bold ${xClass==="X"?"text-amber-400":xClass==="M"?"text-orange-400":xClass==="C"?"text-amber-400":"text-gray-500"}`}>{xLabel}</span>
               <div className="text-[9px] font-mono text-gray-600">GOES-Primary · SWPC</div>
             </div>
           </div>
@@ -1821,7 +1821,7 @@ export default function JacoMapPage() {
               <div className="flex items-center gap-1.5 mb-2">
                 <Zap className="h-3 w-3 text-yellow-400"/>
                 <span className="text-[9px] font-mono font-bold text-yellow-400 uppercase tracking-widest">GOS Lattice</span>
-                <span className={`ml-auto text-[8px] font-mono px-1.5 py-0.5 rounded ${latt.latticeOk ? "text-green-400 bg-green-400/10" : "text-red-400 bg-red-400/10"}`}>
+                <span className={`ml-auto text-[8px] font-mono px-1.5 py-0.5 rounded ${latt.latticeOk ? "text-green-400 bg-green-400/10" : "text-amber-400 bg-amber-400/10"}`}>
                   {latt.latticeOk ? "LOCKED" : "SLIP"}
                 </span>
               </div>
@@ -1829,7 +1829,7 @@ export default function JacoMapPage() {
                 {(latt.checks ?? []).map((c: any) => (
                   <div key={c.name} className="flex items-center justify-between text-[9px] font-mono">
                     <span className={c.ok ? (c.name.includes("666")||c.name.includes("450") ? "text-blue-400" : "text-gray-400") : "text-gray-700"}>{c.name}</span>
-                    <span className={c.ok ? "text-green-400" : "text-red-500/60"}>
+                    <span className={c.ok ? "text-green-400" : "text-amber-500/60"}>
                       {c.ok ? "✓" : "✗"} {c.computed.toFixed(4)}{c.unit}
                     </span>
                   </div>
@@ -1934,7 +1934,7 @@ export default function JacoMapPage() {
       <div className="absolute top-0 left-0 right-0 z-40 flex items-center justify-between px-3 py-2 bg-black/75 backdrop-blur-md border-b border-white/8" data-testid="hud-strip">
         {/* Left — identity */}
         <div className="flex items-center gap-2 min-w-0">
-          <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse shrink-0"/>
+          <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse shrink-0"/>
           <div className="min-w-0">
             <div className="text-[11px] font-mono font-bold text-white truncate leading-tight">JACÓ VALLEY — TACTICAL 3D</div>
             <div className="flex items-center gap-1.5 flex-wrap">
@@ -1946,7 +1946,7 @@ export default function JacoMapPage() {
                   {renderMode==="webgpu"?"⬡ WebGPU":"◻ WebGL"}
                 </span>
               )}
-              <span className={`text-[9px] font-mono px-1 rounded ${aircraftCount>0?"text-red-400":"text-gray-600"}`}>
+              <span className={`text-[9px] font-mono px-1 rounded ${aircraftCount>0?"text-amber-400":"text-gray-600"}`}>
                 ✈ {aircraftCount} AC
               </span>
               <span className="text-[9px] font-mono text-cyan-500">5PT-TDOA</span>

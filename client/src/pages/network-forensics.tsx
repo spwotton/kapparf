@@ -149,7 +149,7 @@ const FORENSIC_CHECKS: ForensicCheck[] = [
 ];
 
 const severityColors: Record<string, string> = {
-  critical: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
+  critical: "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
   high: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
   medium: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
   info: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
@@ -208,7 +208,7 @@ export default function NetworkForensicsPage() {
             <CheckCircle2 className="h-3 w-3" /> {completedCount}/{FORENSIC_CHECKS.length} checked
           </Badge>
           {suspiciousCount > 0 && (
-            <Badge className="bg-red-600 gap-1" data-testid="badge-suspicious">
+            <Badge className="bg-amber-600 gap-1" data-testid="badge-suspicious">
               <AlertTriangle className="h-3 w-3" /> {suspiciousCount} suspicious
             </Badge>
           )}
@@ -240,7 +240,7 @@ export default function NetworkForensicsPage() {
             return (
               <Card
                 key={check.id}
-                className={`transition-all ${finding === "suspicious" ? "border-red-500 dark:border-red-700" : finding === "clean" ? "border-green-500 dark:border-green-700" : ""}`}
+                className={`transition-all ${finding === "suspicious" ? "border-amber-500 dark:border-amber-700" : finding === "clean" ? "border-green-500 dark:border-green-700" : ""}`}
                 data-testid={`card-check-${check.id}`}
               >
                 <CardHeader className="pb-3">
@@ -280,7 +280,7 @@ export default function NetworkForensicsPage() {
                       <Button
                         size="sm"
                         variant={finding === "suspicious" ? "default" : "outline"}
-                        className={finding === "suspicious" ? "bg-red-600 hover:bg-red-700" : ""}
+                        className={finding === "suspicious" ? "bg-amber-600 hover:bg-amber-700" : ""}
                         onClick={() => markFinding(check.id, "suspicious")}
                         data-testid={`btn-suspicious-${check.id}`}
                       >

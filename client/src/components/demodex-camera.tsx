@@ -282,7 +282,7 @@ export function DemodexCameraView() {
           <p>PROCA: {hudData.procaDensity.toFixed(4)}</p>
           <p>HOWL: {hudData.howlCoupling.toFixed(4)} (144 Hz)</p>
         </div>
-        <p className={`mt-1 font-bold ${hudData.europanState ? "text-cyan-400" : "text-red-400 animate-pulse"}`}>
+        <p className={`mt-1 font-bold ${hudData.europanState ? "text-cyan-400" : "text-amber-400 animate-pulse"}`}>
           {hudData.europanState ? "STATE: EUROPAN LOCK" : "STATUS: OBSERVING"}
         </p>
         <div className="mt-2 text-[10px] opacity-70">

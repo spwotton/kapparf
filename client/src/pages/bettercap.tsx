@@ -58,7 +58,7 @@ function SignalBar({ rssi }: { rssi: number }) {
           key={i}
           className={`w-1 rounded-sm transition-colors ${
             i <= strength
-              ? rssi > -50 ? "bg-green-500" : rssi > -70 ? "bg-yellow-500" : "bg-red-500"
+              ? rssi > -50 ? "bg-green-500" : rssi > -70 ? "bg-yellow-500" : "bg-amber-500"
               : "bg-muted"
           }`}
           style={{ height: `${25 + i * 25}%` }}
@@ -161,7 +161,7 @@ function InstanceSelector({
           onClick={() => onSelect(inst.id)}
           data-testid={`button-instance-${inst.id}`}
         >
-          <CircleDot className={`w-3 h-3 mr-1 ${inst.connected ? "text-green-500" : "text-red-500"}`} />
+          <CircleDot className={`w-3 h-3 mr-1 ${inst.connected ? "text-green-500" : "text-amber-500"}`} />
           {inst.name}
           {inst.connected && inst.lastPing > 0 && (
             <span className="ml-1 text-xs text-muted-foreground">{inst.lastPing}ms</span>
@@ -242,7 +242,7 @@ function WiFiTab({ instanceId }: { instanceId: string }) {
                     <button onClick={() => copyMac(ap.mac)} className="hover:text-primary" data-testid={`button-copy-${ap.mac}`}>
                       {ap.mac?.toUpperCase()}
                     </button>
-                    {ap.handshake && <Shield className="w-3 h-3 text-red-500" />}
+                    {ap.handshake && <Shield className="w-3 h-3 text-amber-500" />}
                   </div>
                 </td>
                 <td className={`px-2 py-1.5 ${ap.hostname === "<hidden>" ? "text-muted-foreground italic" : ""}`}>
@@ -270,7 +270,7 @@ function WiFiTab({ instanceId }: { instanceId: string }) {
                 <td className="px-2 py-1.5 text-center">
                   {ap.clients?.length > 0 ? (
                     <button
-                      className="inline-flex items-center gap-0.5 text-xs bg-red-500/20 text-red-400 px-1.5 py-0.5 rounded"
+                      className="inline-flex items-center gap-0.5 text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded"
                       onClick={() => setExpandedAP(expandedAP === ap.mac ? null : ap.mac)}
                       data-testid={`button-expand-clients-${ap.mac}`}
                     >
@@ -297,7 +297,7 @@ function WiFiTab({ instanceId }: { instanceId: string }) {
         const ap = sorted.find((a: any) => a.mac === expandedAP);
         if (!ap || !ap.clients?.length) return null;
         return (
-          <Card className="border-red-500/30">
+          <Card className="border-amber-500/30">
             <CardHeader className="py-2 px-3">
               <CardTitle className="text-xs">Clients of {ap.hostname || ap.mac?.toUpperCase()}</CardTitle>
             </CardHeader>
@@ -322,7 +322,7 @@ function WiFiTab({ instanceId }: { instanceId: string }) {
                       <td className="px-2 py-1 text-right text-xs">{formatBytes(client.sent)} / {formatBytes(client.received)}</td>
                       <td className="px-2 py-1 text-right text-xs">{client.last_seen ? timeAgo(client.last_seen) : "—"}</td>
                       <td className="px-2 py-1 text-center">
-                        <Button size="sm" variant="ghost" className="h-5 text-xs text-red-400"
+                        <Button size="sm" variant="ghost" className="h-5 text-xs text-amber-400"
                           onClick={() => cmdMutation.mutate(`wifi.deauth ${client.mac}`)}
                           data-testid={`button-deauth-${client.mac}`}>
                           <Zap className="w-3 h-3" />
@@ -369,7 +369,7 @@ function LANTab({ instanceId }: { instanceId: string }) {
           <Button size="sm" variant="ghost" onClick={() => cmdMutation.mutate("net.probe on")} data-testid="button-net-probe">
             <Activity className="w-3 h-3 mr-1" /> Probe
           </Button>
-          <Button size="sm" variant="ghost" className="text-red-400" onClick={() => cmdMutation.mutate("arp.spoof on")} data-testid="button-arp-spoof">
+          <Button size="sm" variant="ghost" className="text-amber-400" onClick={() => cmdMutation.mutate("arp.spoof on")} data-testid="button-arp-spoof">
             <ShieldAlert className="w-3 h-3 mr-1" /> ARP Spoof
           </Button>
         </div>
@@ -622,7 +622,7 @@ function CommandConsole({ instanceId }: { instanceId: string }) {
         {output.map((entry, i) => (
           <div key={i} className="mb-1">
             <div className="text-blue-400">» {entry.cmd}</div>
-            <div className={entry.ok ? "text-gray-300" : "text-red-400"}>{entry.result}</div>
+            <div className={entry.ok ? "text-gray-300" : "text-amber-400"}>{entry.result}</div>
           </div>
         ))}
       </div>
@@ -760,7 +760,7 @@ export default function BettercapPage() {
         </div>
         <div className="flex items-center gap-2">
           {selectedInstance && (
-            <Button variant="ghost" size="sm" className="text-red-400"
+            <Button variant="ghost" size="sm" className="text-amber-400"
               onClick={() => deleteMutation.mutate(selectedInstance)}
               data-testid="button-remove-instance">
               <Trash2 className="w-4 h-4 mr-1" /> Remove

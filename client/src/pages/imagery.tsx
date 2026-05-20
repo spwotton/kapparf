@@ -149,7 +149,7 @@ interface AnomalyFeedItem {
 }
 
 const SHAPE_COLORS: Record<string, string> = {
-  Triangle: "bg-red-500/20 text-red-400 border-red-500/30",
+  Triangle: "bg-amber-500/20 text-amber-400 border-amber-500/30",
   Disk: "bg-amber-500/20 text-amber-400 border-amber-500/30",
   Circle: "bg-blue-500/20 text-blue-400 border-blue-500/30",
   Sphere: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
@@ -312,7 +312,7 @@ function SatelliteHunterTab() {
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-[10px]">
                       <div className="p-2 rounded border bg-muted/30 text-center">
                         <span className="text-muted-foreground block">Anomaly Score</span>
-                        <span className={`text-lg font-bold font-mono ${(satData.analysis.anomalyScore || 0) > 60 ? "text-red-400" : (satData.analysis.anomalyScore || 0) > 40 ? "text-amber-400" : "text-green-400"}`}>
+                        <span className={`text-lg font-bold font-mono ${(satData.analysis.anomalyScore || 0) > 60 ? "text-amber-400" : (satData.analysis.anomalyScore || 0) > 40 ? "text-amber-400" : "text-green-400"}`}>
                           {satData.analysis.anomalyScore || 0}
                         </span>
                       </div>
@@ -322,7 +322,7 @@ function SatelliteHunterTab() {
                       </div>
                       <div className="p-2 rounded border bg-muted/30 text-center">
                         <span className="text-muted-foreground block">Gap Edges</span>
-                        <span className="text-lg font-bold font-mono text-red-400">{satData.analysis.gapEdgeCount || 0}</span>
+                        <span className="text-lg font-bold font-mono text-amber-400">{satData.analysis.gapEdgeCount || 0}</span>
                       </div>
                       <div className="p-2 rounded border bg-muted/30 text-center">
                         <span className="text-muted-foreground block">Base-53 Entropy</span>
@@ -456,7 +456,7 @@ function ArtifactScannerTab() {
   }, []);
 
   const getScoreColor = (score: number) => {
-    if (score >= 70) return "text-red-400";
+    if (score >= 70) return "text-amber-400";
     if (score >= 40) return "text-amber-400";
     return "text-green-400";
   };
@@ -527,7 +527,7 @@ function ArtifactScannerTab() {
                 </div>
                 <div className="p-2.5 rounded border bg-muted/30 text-center">
                   <span className="text-[10px] text-muted-foreground block">Cloaked</span>
-                  <span className={`text-lg font-bold font-mono ${scanResult.cloakedCandidates > 0 ? "text-red-400" : "text-green-400"}`}>
+                  <span className={`text-lg font-bold font-mono ${scanResult.cloakedCandidates > 0 ? "text-amber-400" : "text-green-400"}`}>
                     {scanResult.cloakedCandidates}
                   </span>
                 </div>
@@ -987,7 +987,7 @@ function SeismicCorrelatorTab() {
             </div>
             <div className="p-2.5 rounded border bg-muted/30 text-center">
               <span className="text-[10px] text-muted-foreground block">Max Magnitude</span>
-              <span className="text-lg font-bold font-mono text-red-400">
+              <span className="text-lg font-bold font-mono text-amber-400">
                 {earthquakes.length > 0 ? Math.max(...earthquakes.map((e: any) => e.properties.mag)).toFixed(1) : "—"}
               </span>
             </div>
@@ -1023,7 +1023,7 @@ function SeismicCorrelatorTab() {
                     const xPct = Math.max(0, Math.min(100, ((t - weekAgo) / (now - weekAgo)) * 100));
                     const yPct = Math.max(5, Math.min(90, 90 - ((eq.properties.mag / maxMag) * 80)));
                     const size = Math.max(4, Math.min(16, eq.properties.mag * 2.5));
-                    const color = eq.properties.mag >= 5 ? "#ef4444" : eq.properties.mag >= 4 ? "#f59e0b" : "#22c55e";
+                    const color = eq.properties.mag >= 5 ? "#d97706" : eq.properties.mag >= 4 ? "#f59e0b" : "#22c55e";
                     return (
                       <div
                         key={eq.id}
@@ -1062,7 +1062,7 @@ function SeismicCorrelatorTab() {
                 <div className="absolute top-1 right-2 flex items-center gap-2 text-[8px] text-muted-foreground/60">
                   <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full bg-green-500 inline-block" /> &lt;4</span>
                   <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block" /> 4-5</span>
-                  <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full bg-red-500 inline-block" /> 5+</span>
+                  <span className="flex items-center gap-0.5"><span className="w-2 h-2 rounded-full bg-amber-500 inline-block" /> 5+</span>
                 </div>
               </div>
 
@@ -1074,7 +1074,7 @@ function SeismicCorrelatorTab() {
                     const xPct = ((lon + 180) / 360) * 100;
                     const yPct = ((90 - lat) / 180) * 100;
                     const size = Math.max(4, Math.min(14, eq.properties.mag * 2));
-                    const color = eq.properties.mag >= 5 ? "#ef4444" : eq.properties.mag >= 4 ? "#f59e0b" : "#22c55e";
+                    const color = eq.properties.mag >= 5 ? "#d97706" : eq.properties.mag >= 4 ? "#f59e0b" : "#22c55e";
                     return (
                       <div
                         key={`map-${eq.id}`}
@@ -1131,7 +1131,7 @@ function SeismicCorrelatorTab() {
                 <div className="flex items-center gap-2">
                   <Badge
                     variant="outline"
-                    className={`text-[10px] ${eq.properties.mag >= 5 ? "border-red-500 text-red-400" : eq.properties.mag >= 4 ? "border-amber-500 text-amber-400" : "border-green-500 text-green-400"}`}
+                    className={`text-[10px] ${eq.properties.mag >= 5 ? "border-amber-500 text-amber-400" : eq.properties.mag >= 4 ? "border-amber-500 text-amber-400" : "border-green-500 text-green-400"}`}
                   >
                     M{eq.properties.mag.toFixed(1)}
                   </Badge>
@@ -1350,7 +1350,7 @@ function ResearchCrossAnalysis() {
                 <div key={i} className="p-2 rounded border hover:bg-muted/30 text-[10px] font-mono" data-testid={`crossmatch-${i}`}>
                   <div className="flex items-center justify-between">
                     <span className="text-foreground font-semibold">{m.a}</span>
-                    <Badge variant="outline" className={`text-[9px] ${m.deviationPct < 1 ? "border-green-500 text-green-400" : m.deviationPct < 5 ? "border-amber-500 text-amber-400" : "border-red-500 text-red-400"}`}>
+                    <Badge variant="outline" className={`text-[9px] ${m.deviationPct < 1 ? "border-green-500 text-green-400" : m.deviationPct < 5 ? "border-amber-500 text-amber-400" : "border-amber-500 text-amber-400"}`}>
                       {m.deviationPct.toFixed(2)}% dev
                     </Badge>
                   </div>
@@ -1493,7 +1493,7 @@ function AnomalyFeedPanel() {
                 className={`text-[9px] shrink-0 mt-0.5 ${
                   item.type === "artifact_scan" ? "border-purple-500 text-purple-400" :
                   item.type === "nuforc_sighting" ? "border-amber-500 text-amber-400" :
-                  item.type === "usgs_earthquake" ? "border-red-500 text-red-400" :
+                  item.type === "usgs_earthquake" ? "border-amber-500 text-amber-400" :
                   item.type === "audio_flag" ? "border-cyan-500 text-cyan-400" :
                   "border-gray-500 text-gray-400"
                 }`}
@@ -1512,7 +1512,7 @@ function AnomalyFeedPanel() {
                   </span>
                 )}
               </div>
-              <span className={`text-xs font-mono font-bold shrink-0 ${(item.score || 0) >= 70 ? "text-red-400" : (item.score || 0) >= 40 ? "text-amber-400" : "text-green-400"}`}>
+              <span className={`text-xs font-mono font-bold shrink-0 ${(item.score || 0) >= 70 ? "text-amber-400" : (item.score || 0) >= 40 ? "text-amber-400" : "text-green-400"}`}>
                 {item.score}
               </span>
             </div>

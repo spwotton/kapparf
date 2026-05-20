@@ -26,12 +26,12 @@ const domainColors: Record<string, string> = {
   morse: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
   wifi: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
   ble: "bg-pink-500/10 text-pink-700 dark:text-pink-400",
-  lte: "bg-red-500/10 text-red-700 dark:text-red-400",
+  lte: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
 };
 
 const categoryColors: Record<string, string> = {
   spoofing: "bg-blue-500/10 text-blue-700 dark:text-blue-400",
-  injection: "bg-red-500/10 text-red-700 dark:text-red-400",
+  injection: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
   "flow-analysis": "bg-green-500/10 text-green-700 dark:text-green-400",
   orbital: "bg-purple-500/10 text-purple-700 dark:text-purple-400",
   exploit: "bg-orange-500/10 text-orange-700 dark:text-orange-400",
@@ -53,7 +53,7 @@ const categoryGroupOrder = [
 ];
 
 function ThreatSeverityBar({ severity }: { severity: number }) {
-  const color = severity >= 80 ? "bg-red-500" : severity >= 50 ? "bg-amber-500" : severity >= 30 ? "bg-yellow-500" : "bg-green-500";
+  const color = severity >= 80 ? "bg-amber-500" : severity >= 50 ? "bg-amber-500" : severity >= 30 ? "bg-yellow-500" : "bg-green-500";
   return (
     <div className="flex items-center gap-2">
       <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
@@ -260,7 +260,7 @@ if __name__ == "__main__":
         </Card>
         <Card data-testid="stat-threats">
           <CardContent className="py-3 text-center">
-            <div className="text-lg font-bold font-mono text-red-500">{scannerStatus?.threatsDetected ?? 0}</div>
+            <div className="text-lg font-bold font-mono text-amber-500">{scannerStatus?.threatsDetected ?? 0}</div>
             <div className="text-[10px] text-muted-foreground">Threats Detected</div>
           </CardContent>
         </Card>
@@ -278,7 +278,7 @@ if __name__ == "__main__":
         </Card>
         <Card data-testid="stat-kappa">
           <CardContent className="py-3 text-center">
-            <div className={`text-lg font-bold font-mono ${(kappaStatus?.score ?? 0) > 60 ? "text-red-500" : (kappaStatus?.score ?? 0) > 30 ? "text-amber-500" : "text-green-500"}`}>
+            <div className={`text-lg font-bold font-mono ${(kappaStatus?.score ?? 0) > 60 ? "text-amber-500" : (kappaStatus?.score ?? 0) > 30 ? "text-amber-500" : "text-green-500"}`}>
               {(kappaStatus?.score ?? 0).toFixed(1)}
             </div>
             <div className="text-[10px] text-muted-foreground">κ Score</div>
@@ -287,7 +287,7 @@ if __name__ == "__main__":
         <Card data-testid="stat-network">
           <CardContent className="py-3 text-center">
             <div className="flex items-center justify-center gap-1">
-              <div className={`h-2 w-2 rounded-full ${watchdog?.networkActive ? "bg-green-500" : "bg-red-500"}`} />
+              <div className={`h-2 w-2 rounded-full ${watchdog?.networkActive ? "bg-green-500" : "bg-amber-500"}`} />
               <span className="text-sm font-mono">{watchdog?.avgLatencyMs ?? 0}ms</span>
             </div>
             <div className="text-[10px] text-muted-foreground">Network ({watchdog?.dropCount ?? 0} drops)</div>
@@ -299,7 +299,7 @@ if __name__ == "__main__":
         <Card data-testid="card-recent-threats">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-red-500" />
+              <AlertTriangle className="h-4 w-4 text-amber-500" />
               Live Threat Feed
               {scannerStatus?.lastPacketTime && (
                 <Badge variant="secondary" className="text-[10px] ml-auto">
@@ -320,7 +320,7 @@ if __name__ == "__main__":
                 {recentThreats.map((t, i) => (
                   <div key={i} className="border rounded-lg p-2 space-y-1" data-testid={`threat-${i}`}>
                     <div className="flex items-center justify-between">
-                      <Badge className={t.severity >= 70 ? "bg-red-500/10 text-red-500" : t.severity >= 40 ? "bg-amber-500/10 text-amber-500" : "bg-yellow-500/10 text-yellow-500"}>
+                      <Badge className={t.severity >= 70 ? "bg-amber-500/10 text-amber-500" : t.severity >= 40 ? "bg-amber-500/10 text-amber-500" : "bg-yellow-500/10 text-yellow-500"}>
                         {t.type}
                       </Badge>
                       <span className="text-[10px] text-muted-foreground font-mono">
@@ -385,7 +385,7 @@ if __name__ == "__main__":
         <Card data-testid="card-suspicious-devices">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm flex items-center gap-2">
-              <Fingerprint className="h-4 w-4 text-red-500" />
+              <Fingerprint className="h-4 w-4 text-amber-500" />
               Suspicious Devices (Cross-Domain)
             </CardTitle>
           </CardHeader>
@@ -427,7 +427,7 @@ if __name__ == "__main__":
               <div className="space-y-1 max-h-48 overflow-y-auto">
                 {Object.entries(scannerStatus?.ipHitCounts || {}).sort((a, b) => b[1] - a[1]).slice(0, 15).map(([ip, count]) => (
                   <div key={ip} className="flex justify-between text-[11px] font-mono">
-                    <span className="text-red-400">{ip}</span>
+                    <span className="text-amber-400">{ip}</span>
                     <span className="text-muted-foreground">{count}</span>
                   </div>
                 ))}
@@ -822,7 +822,7 @@ export default function KarachiPage() {
                       </div>
                       <div>
                         <span className="text-muted-foreground">{t("finspy.status")}:</span>
-                        <Badge variant="secondary" className="bg-red-500/10 text-red-700 dark:text-red-400 text-[10px] mt-0.5">
+                        <Badge variant="secondary" className="bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[10px] mt-0.5">
                           {finspy.alexanderplatz.status}
                         </Badge>
                       </div>
@@ -941,7 +941,7 @@ export default function KarachiPage() {
                       <ol className="mt-1 space-y-1">
                         {finspy.airbnbGhost.attackSteps.map((step, i) => (
                           <li key={i} className="text-xs flex items-start gap-1.5" data-testid={`text-attack-step-${i}`}>
-                            <span className="flex items-center justify-center h-4 w-4 rounded-full bg-red-500/10 text-red-700 dark:text-red-400 text-[10px] font-mono flex-shrink-0">
+                            <span className="flex items-center justify-center h-4 w-4 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[10px] font-mono flex-shrink-0">
                               {i + 1}
                             </span>
                             {step}

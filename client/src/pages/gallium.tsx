@@ -126,8 +126,8 @@ const ROOTKIT_ARSENAL = [
 ];
 
 const RECOMMENDATIONS = [
-  { priority: "IMMEDIATE", title: "Audit all DSE855/890/891/892 gateways for default credentials", detail: "Every SETECOM-distributed unit ships with Admin/Password1234. This controls backup generators for ICE's national grid, hospitals, and cell towers. Change credentials and segment OT networks immediately.", color: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20", steps: ["Enumerate all DSE units via SNMP discovery or DSE WebNet inventory", "Change default credentials on every unit (Admin/Password1234)", "Implement network segmentation between OT and IT networks", "Deploy monitoring on port 502 (Modbus) and DSE WebNet HTTP interfaces", "Establish credential rotation policy for all SCADA equipment"] },
-  { priority: "IMMEDIATE", title: "Sweep for GRIDTIDE persistence (xapt systemd service)", detail: "Check all Linux servers for /etc/systemd/system/xapt.service and /usr/sbin/xapt binary. GRIDTIDE uses Google Sheets API as C2 — traditional network IDS will not detect it.", color: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20", steps: ["Run: find / -name 'xapt' -o -name 'xapt.service' on all Linux systems", "Check systemd: systemctl list-units --type=service | grep xapt", "Audit Google Sheets API OAuth tokens in outbound traffic logs", "Search for 16-byte key files in /etc/ and service account home directories", "Check for SoftEther VPN Bridge processes and connections"] },
+  { priority: "IMMEDIATE", title: "Audit all DSE855/890/891/892 gateways for default credentials", detail: "Every SETECOM-distributed unit ships with Admin/Password1234. This controls backup generators for ICE's national grid, hospitals, and cell towers. Change credentials and segment OT networks immediately.", color: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20", steps: ["Enumerate all DSE units via SNMP discovery or DSE WebNet inventory", "Change default credentials on every unit (Admin/Password1234)", "Implement network segmentation between OT and IT networks", "Deploy monitoring on port 502 (Modbus) and DSE WebNet HTTP interfaces", "Establish credential rotation policy for all SCADA equipment"] },
+  { priority: "IMMEDIATE", title: "Sweep for GRIDTIDE persistence (xapt systemd service)", detail: "Check all Linux servers for /etc/systemd/system/xapt.service and /usr/sbin/xapt binary. GRIDTIDE uses Google Sheets API as C2 — traditional network IDS will not detect it.", color: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20", steps: ["Run: find / -name 'xapt' -o -name 'xapt.service' on all Linux systems", "Check systemd: systemctl list-units --type=service | grep xapt", "Audit Google Sheets API OAuth tokens in outbound traffic logs", "Search for 16-byte key files in /etc/ and service account home directories", "Check for SoftEther VPN Bridge processes and connections"] },
   { priority: "HIGH", title: "Deploy Tier-0 hypervisor monitoring", detail: "UNC3886 operates below guest OS at the hypervisor level. Current SOC monitors application layer only. REPTILE and MEDUSA rootkits are invisible to EDR.", color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20", steps: ["Deploy hypervisor-level integrity monitoring on all ESXi hosts", "Implement VMware vCenter audit logging with SIEM integration", "Check for unauthorized kernel modules: lsmod and /etc/modprobe.d/", "Verify LD_PRELOAD is not set in /etc/environment or PAM configs", "Conduct memory forensics on critical servers"] },
   { priority: "HIGH", title: "Patch MikroTik fleet against CVE-2025-10948", detail: "Critical heap overflow (CVSS 8.8–9.8) in REST API. MikroTik routers are ubiquitous in Costa Rican ISP infrastructure.", color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20", steps: ["Inventory all MikroTik devices across ICE infrastructure", "Update RouterOS to latest stable release", "Disable REST API on all devices where not required", "Implement ACLs restricting management access to trusted IPs", "Monitor for exploitation attempts via IDS signatures"] },
   { priority: "HIGH", title: "Investigate TR-069 management plane access", detail: "Unauthorized admin password reset detected 2026-01-30 via TR-069 on ARRIS router.", color: "bg-orange-500/10 text-orange-700 dark:text-orange-400 border-orange-500/20", steps: ["Audit TR-069 ACS (Auto Configuration Server) access logs", "Review all CPE password reset events in the last 6 months", "Verify ACS authentication and authorization controls", "Implement TR-069 connection encryption (TLS)", "Consider restricting TR-069 access to management VLAN only"] },
@@ -172,7 +172,7 @@ const TWO_THEORIES = [
 
 function SeverityBadge({ severity }: { severity: string }) {
   const colors: Record<string, string> = {
-    critical: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30",
+    critical: "bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30",
     high: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border-orange-500/30",
     medium: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30",
     low: "bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30",
@@ -187,7 +187,7 @@ function SeverityBadge({ severity }: { severity: string }) {
 function PhaseBadge({ phase }: { phase: number }) {
   const labels = ["PHASE 0: NOISE", "PHASE 1: TRANSITION", "PHASE 2: SILENT"];
   const colors = [
-    "bg-red-500/10 text-red-600 dark:text-red-300 border-red-500/20",
+    "bg-amber-500/10 text-amber-600 dark:text-amber-300 border-amber-500/20",
     "bg-amber-500/10 text-amber-600 dark:text-amber-300 border-amber-500/20",
     "bg-violet-500/10 text-violet-600 dark:text-violet-300 border-violet-500/20",
   ];
@@ -196,7 +196,7 @@ function PhaseBadge({ phase }: { phase: number }) {
 
 function PriorityBadge({ priority }: { priority: string }) {
   const colors: Record<string, string> = {
-    IMMEDIATE: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30",
+    IMMEDIATE: "bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30",
     HIGH: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border-orange-500/30",
     MEDIUM: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30",
     STRATEGIC: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30",
@@ -525,7 +525,7 @@ export default function GalliumPage() {
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <div className="flex items-center gap-2 mb-1 flex-wrap">
-              <Badge variant="outline" className="bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20 text-[10px] font-mono">
+              <Badge variant="outline" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 text-[10px] font-mono">
                 CLASSIFIED — FOR ICE INTERNAL USE
               </Badge>
               <Badge variant="outline" className="text-[10px] font-mono">
@@ -581,7 +581,7 @@ export default function GalliumPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <Card>
           <CardContent className="p-3 text-center">
-            <div className="text-2xl font-mono font-bold text-red-500 dark:text-red-400" data-testid="text-cve-count">{CVE_TABLE.length}</div>
+            <div className="text-2xl font-mono font-bold text-amber-500 dark:text-amber-400" data-testid="text-cve-count">{CVE_TABLE.length}</div>
             <div className="text-xs text-muted-foreground">CVEs Documented</div>
           </CardContent>
         </Card>
@@ -785,7 +785,7 @@ export default function GalliumPage() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-base flex items-center gap-2">
-                <Cpu className="h-4 w-4 text-red-500" />
+                <Cpu className="h-4 w-4 text-amber-500" />
                 GRIDTIDE C2 Architecture
               </CardTitle>
             </CardHeader>
@@ -822,8 +822,8 @@ export default function GalliumPage() {
                       </div>
                     </div>
                   ))}
-                  <div className="p-2 rounded bg-red-500/5 border border-red-500/20">
-                    <h4 className="text-xs font-semibold text-red-600 dark:text-red-400 mb-1">ICE Impact</h4>
+                  <div className="p-2 rounded bg-amber-500/5 border border-amber-500/20">
+                    <h4 className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-1">ICE Impact</h4>
                     <p className="text-xs text-muted-foreground">{GRIDTIDE_SPEC.iceData}</p>
                     <p className="text-xs text-muted-foreground mt-1">Scope: {GRIDTIDE_SPEC.scope}</p>
                   </div>
@@ -875,12 +875,12 @@ export default function GalliumPage() {
                 {filteredCVEs.map((cve, i) => (
                   <ExpandableRow key={i} detail={cve.detail}>
                     <div className="flex items-center gap-2 flex-wrap" data-testid={`cve-row-${cve.cve}`}>
-                      <span className="font-mono text-xs text-red-600 dark:text-red-400 font-bold w-28 flex-shrink-0">{cve.cve}</span>
+                      <span className="font-mono text-xs text-amber-600 dark:text-amber-400 font-bold w-28 flex-shrink-0">{cve.cve}</span>
                       <span className="text-xs">{cve.target}</span>
                       <span className="text-xs text-muted-foreground hidden sm:inline">— {cve.mechanism}</span>
                       <Badge variant="outline" className="text-[9px] ml-auto">{cve.actor}</Badge>
                       {cve.cvss !== "—" && (
-                        <span className={`text-[10px] font-mono ${cve.cvss.includes("Crit") ? "text-red-600 dark:text-red-400 font-bold" : "text-amber-600 dark:text-amber-400"}`}>
+                        <span className={`text-[10px] font-mono ${cve.cvss.includes("Crit") ? "text-amber-600 dark:text-amber-400 font-bold" : "text-amber-600 dark:text-amber-400"}`}>
                           {cve.cvss}
                         </span>
                       )}
@@ -899,14 +899,14 @@ export default function GalliumPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-1">
-              <div className="p-3 rounded-lg bg-red-500/5 border border-red-500/20 mb-3">
+              <div className="p-3 rounded-lg bg-amber-500/5 border border-amber-500/20 mb-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <AlertTriangle className="h-4 w-4 text-red-500" />
-                  <span className="text-sm font-bold text-red-600 dark:text-red-400">CRITICAL: Default Credentials</span>
+                  <AlertTriangle className="h-4 w-4 text-amber-500" />
+                  <span className="text-sm font-bold text-amber-600 dark:text-amber-400">CRITICAL: Default Credentials</span>
                 </div>
                 <div className="grid grid-cols-2 gap-4 text-sm font-mono">
-                  <div><span className="text-muted-foreground">Username:</span> <span className="text-red-600 dark:text-red-300">Admin</span></div>
-                  <div><span className="text-muted-foreground">Password:</span> <span className="text-red-600 dark:text-red-300">Password1234</span></div>
+                  <div><span className="text-muted-foreground">Username:</span> <span className="text-amber-600 dark:text-amber-300">Admin</span></div>
+                  <div><span className="text-muted-foreground">Password:</span> <span className="text-amber-600 dark:text-amber-300">Password1234</span></div>
                 </div>
               </div>
               {SETECOM_EVIDENCE.map((p, i) => (
@@ -932,12 +932,12 @@ export default function GalliumPage() {
               {HUAWEI_EVIDENCE.map((item, i) => {
                 const typeColors: Record<string, string> = {
                   regulatory: "text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
-                  influence: "text-red-600 dark:text-red-400 bg-red-500/10 border-red-500/20",
+                  influence: "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
                   diplomatic: "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
                   retaliatory: "text-orange-600 dark:text-orange-400 bg-orange-500/10 border-orange-500/20",
                   legal: "text-violet-600 dark:text-violet-400 bg-violet-500/10 border-violet-500/20",
                   countermeasure: "text-green-600 dark:text-green-400 bg-green-500/10 border-green-500/20",
-                  vulnerability: "text-red-600 dark:text-red-400 bg-red-500/10 border-red-500/20",
+                  vulnerability: "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
                 };
                 return (
                   <div key={i} className="p-3 rounded-lg border" data-testid={`huawei-evidence-${i}`}>
@@ -1011,7 +1011,7 @@ export default function GalliumPage() {
                           const isOverhead = (sat.elevation ?? 0) > 30;
                           const isRecon = ["YAOGAN", "YG-", "GAOFEN", "GF-", "JILIN"].some(p => (sat.satelliteName || "").toUpperCase().includes(p));
                           return (
-                            <tr key={sat.id} className={`border-b hover:bg-muted/50 ${isRecon ? "bg-red-500/5" : ""}`} data-testid={`sat-row-${sat.noradId}`}>
+                            <tr key={sat.id} className={`border-b hover:bg-muted/50 ${isRecon ? "bg-amber-500/5" : ""}`} data-testid={`sat-row-${sat.noradId}`}>
                               <td className="p-1.5 font-mono">
                                 {sat.satelliteName}
                                 {isRecon && <Badge variant="outline" className="ml-1 text-[8px]">ISR</Badge>}
@@ -1051,14 +1051,14 @@ export default function GalliumPage() {
             <CardContent className="space-y-0.5">
               {ROOTKIT_ARSENAL.map((r, i) => {
                 const layerColors: Record<string, string> = {
-                  Kernel: "text-red-600 dark:text-red-400",
+                  Kernel: "text-amber-600 dark:text-amber-400",
                   Application: "text-amber-600 dark:text-amber-400",
                   Memory: "text-violet-600 dark:text-violet-400",
                 };
                 return (
                   <ExpandableRow key={i} detail={r.detail}>
                     <div className="flex items-center gap-3 flex-wrap" data-testid={`rootkit-row-${r.family}`}>
-                      <span className="font-mono font-bold text-xs text-red-600 dark:text-red-300 w-28 flex-shrink-0">{r.family}</span>
+                      <span className="font-mono font-bold text-xs text-amber-600 dark:text-amber-300 w-28 flex-shrink-0">{r.family}</span>
                       <span className={`text-xs font-semibold w-20 flex-shrink-0 ${layerColors[r.layer] || "text-muted-foreground"}`}>{r.layer}</span>
                       <span className="text-xs text-muted-foreground hidden sm:inline">{r.mechanism}</span>
                       <Badge variant="outline" className="text-[9px] ml-auto">{r.actor}</Badge>
@@ -1071,7 +1071,7 @@ export default function GalliumPage() {
                 <h4 className="text-xs font-semibold mb-1">Key Insight: Tier-0 Invisibility</h4>
                 <p className="text-xs text-muted-foreground">
                   UNC3886 operates below guest OS at the hypervisor level — invisible to all EDR.
-                  Median dwell time: <span className="text-red-600 dark:text-red-400 font-bold font-mono">122 days</span> (~10x eCrime average).
+                  Median dwell time: <span className="text-amber-600 dark:text-amber-400 font-bold font-mono">122 days</span> (~10x eCrime average).
                   The US-funded SOC monitors application-layer while these actors persist at Tier-0.
                 </p>
               </div>

@@ -142,11 +142,11 @@ const SCANNER_TOOLS = [
 const FREQ_CHAIN = [
   { freq: "7.8 Hz", domain: "ELF", label: "Schumann resonance (weaponized SNR 1966)", color: "text-cyan-500" },
   { freq: "46.875 Hz", domain: "ELF", label: "Sonar/V2K harmonic (54.45 dB SNR)", color: "text-cyan-400" },
-  { freq: "50.0 Hz", domain: "ELF", label: "Anomalous source (NOT CR 60 Hz mains)", color: "text-red-500" },
+  { freq: "50.0 Hz", domain: "ELF", label: "Anomalous source (NOT CR 60 Hz mains)", color: "text-amber-500" },
   { freq: "53 Hz", domain: "ELF", label: "PLC carrier (power line communication)", color: "text-cyan-300" },
   { freq: "60 Hz", domain: "ELF", label: "Costa Rica mains frequency", color: "text-gray-400" },
   { freq: "4687 kHz", domain: "HF", label: "46.875 Hz × 100 — V2K harmonic (KiwiSDR target)", color: "text-yellow-500" },
-  { freq: "7410 kHz", domain: "HF", label: "Hector Mora 40m amateur — SMOKING GUN", color: "text-red-500" },
+  { freq: "7410 kHz", domain: "HF", label: "Hector Mora 40m amateur — SMOKING GUN", color: "text-amber-500" },
   { freq: "107.25 MHz", domain: "VHF", label: "FM broadcast peak (full spectrum scan)", color: "text-green-500" },
 ];
 
@@ -218,7 +218,7 @@ export default function ToolsPage() {
                   </thead>
                   <tbody>
                     {PCAP_CORRELATIONS.map((c) => (
-                      <tr key={c.pcapWindow} className={`border-b last:border-b-0 ${c.pcapPackets > 50000 ? "bg-red-500/5" : ""}`}>
+                      <tr key={c.pcapWindow} className={`border-b last:border-b-0 ${c.pcapPackets > 50000 ? "bg-amber-500/5" : ""}`}>
                         <td className="p-2 font-mono">{c.pcapWindow}</td>
                         <td className="p-2 text-right font-mono">{c.pcapPackets.toLocaleString()}</td>
                         <td className="p-2 text-right font-mono">{c.hipercontracer.toLocaleString()}</td>
@@ -248,7 +248,7 @@ export default function ToolsPage() {
               </div>
               <div className="text-xs text-muted-foreground space-y-1 p-3 rounded bg-muted/30 border">
                 <p className="font-medium text-foreground flex items-center gap-1.5">
-                  <AlertTriangle className="h-3 w-3 text-red-500" />
+                  <AlertTriangle className="h-3 w-3 text-amber-500" />
                   Anti-Correlation Pattern Detected
                 </p>
                 <p>Network SILENT during Schumann weaponization (04:04–04:14, only 4 packets) → ELF attacks during quiet periods, data exfiltration during burst periods. Two attack modalities alternate.</p>
@@ -256,10 +256,10 @@ export default function ToolsPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-red-500/20">
+          <Card className="border-amber-500/20">
             <CardHeader className="pb-3">
               <CardTitle className="text-base flex items-center gap-2">
-                <Radio className="h-4 w-4 text-red-500" />
+                <Radio className="h-4 w-4 text-amber-500" />
                 Frequency Chain — ELF → HF → VHF
               </CardTitle>
             </CardHeader>
@@ -273,7 +273,7 @@ export default function ToolsPage() {
                     <Badge variant="secondary" className="text-[9px] min-w-[32px] justify-center">
                       {f.domain}
                     </Badge>
-                    <span className={f.freq === "50.0 Hz" || f.freq === "7410 kHz" ? "font-medium text-red-500 dark:text-red-400" : "text-muted-foreground"}>
+                    <span className={f.freq === "50.0 Hz" || f.freq === "7410 kHz" ? "font-medium text-amber-500 dark:text-amber-400" : "text-muted-foreground"}>
                       {f.label}
                     </span>
                   </div>
@@ -303,7 +303,7 @@ export default function ToolsPage() {
                         <Clock className="h-3 w-3 text-muted-foreground" />
                         <span className="text-xs font-mono">{scan.timestamp}</span>
                       </div>
-                      <Badge variant="outline" className="text-[9px] bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30">
+                      <Badge variant="outline" className="text-[9px] bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30">
                         {scan.dominantFreq} Hz ≠ 60 Hz
                       </Badge>
                     </div>
@@ -424,7 +424,7 @@ export default function ToolsPage() {
                       { freq: "8,992 kHz", mode: "USB", target: "USAF HFGCS primary" },
                       { freq: "11,175 kHz", mode: "USB", target: "USAF HFGCS Andrews" },
                     ].map((t) => (
-                      <tr key={t.freq} className={`border-b last:border-b-0 ${t.freq.includes("4,687") || t.freq.includes("7,410") ? "bg-red-500/5" : ""}`}>
+                      <tr key={t.freq} className={`border-b last:border-b-0 ${t.freq.includes("4,687") || t.freq.includes("7,410") ? "bg-amber-500/5" : ""}`}>
                         <td className="p-2 font-mono font-medium">{t.freq}</td>
                         <td className="p-2">
                           <Badge variant="secondary" className="text-[9px]">{t.mode}</Badge>

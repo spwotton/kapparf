@@ -66,14 +66,14 @@ function StatusDot({ status }: { status: string }) {
     active: "bg-green-500",
     processing: "bg-yellow-500 animate-pulse",
     idle: "bg-gray-400 dark:bg-gray-600",
-    error: "bg-red-500",
+    error: "bg-amber-500",
   };
   return <span className={`inline-block w-2 h-2 rounded-full ${colors[status] || colors.idle}`} />;
 }
 
 function MetricGauge({ label, value, icon: Icon, suffix }: { label: string; value: number; icon: LucideIcon; suffix?: string }) {
   const pct = Math.min(100, value * 100);
-  const color = pct > 75 ? "text-green-500" : pct > 40 ? "text-yellow-500" : "text-red-500";
+  const color = pct > 75 ? "text-green-500" : pct > 40 ? "text-yellow-500" : "text-amber-500";
   return (
     <div className="space-y-1.5" data-testid={`metric-${label.toLowerCase().replace(/\s+/g, "-")}`}>
       <div className="flex items-center justify-between text-sm">

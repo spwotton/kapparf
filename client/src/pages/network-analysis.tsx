@@ -1758,7 +1758,7 @@ const EVIDENCE_DATA: Evidence[] = [
 
 function ThreatBadge({ level }: { level: ThreatLevel }) {
   const config: Record<ThreatLevel, { color: string; label: string }> = {
-    primary: { color: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30", label: "PRIMARY" },
+    primary: { color: "bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30", label: "PRIMARY" },
     secondary: { color: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border-orange-500/30", label: "SECONDARY" },
     tertiary: { color: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30", label: "TERTIARY" },
     asset: { color: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30", label: "ASSET" },
@@ -1770,7 +1770,7 @@ function ThreatBadge({ level }: { level: ThreatLevel }) {
 
 function SeverityBadge({ severity }: { severity: string }) {
   const colors: Record<string, string> = {
-    critical: "bg-red-500/20 text-red-600 dark:text-red-400 border-red-500/30",
+    critical: "bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30",
     high: "bg-orange-500/20 text-orange-600 dark:text-orange-400 border-orange-500/30",
     medium: "bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border-yellow-500/30",
     low: "bg-green-500/20 text-green-600 dark:text-green-400 border-green-500/30",
@@ -1782,7 +1782,7 @@ function StrengthIndicator({ strength }: { strength: string }) {
   const colors: Record<string, string> = {
     confirmed: "bg-green-500",
     probable: "bg-amber-500",
-    suspected: "bg-red-500",
+    suspected: "bg-amber-500",
   };
   return (
     <span className="inline-flex items-center gap-1 text-[9px] text-muted-foreground">
@@ -1907,7 +1907,7 @@ export default function NetworkAnalysisPage() {
     <div className="p-4 sm:p-6 space-y-4 max-w-5xl mx-auto" data-testid="network-analysis-page">
       <div className="space-y-2">
         <div className="flex items-center gap-2 mb-1 flex-wrap">
-          <Badge variant="outline" className="bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20 text-[10px] font-mono">
+          <Badge variant="outline" className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 text-[10px] font-mono">
             CLASSIFIED — OPERATIONAL INTELLIGENCE
           </Badge>
         </div>
@@ -1922,7 +1922,7 @@ export default function NetworkAnalysisPage() {
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <Card>
           <CardContent className="p-3 text-center">
-            <div className="text-xl font-mono font-bold text-red-500" data-testid="text-person-count">{PERSONS.length}</div>
+            <div className="text-xl font-mono font-bold text-amber-500" data-testid="text-person-count">{PERSONS.length}</div>
             <div className="text-[10px] text-muted-foreground">Persons</div>
           </CardContent>
         </Card>
@@ -2025,7 +2025,7 @@ export default function NetworkAnalysisPage() {
                 {person.flags && person.flags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-1">
                     {person.flags.map((f, i) => (
-                      <Badge key={i} variant="outline" className="text-[8px] bg-red-500/5 text-red-600 dark:text-red-400 border-red-500/20">
+                      <Badge key={i} variant="outline" className="text-[8px] bg-amber-500/5 text-amber-600 dark:text-amber-400 border-amber-500/20">
                         <AlertTriangle className="h-2 w-2 mr-0.5" />{f}
                       </Badge>
                     ))}
@@ -2091,7 +2091,7 @@ export default function NetworkAnalysisPage() {
                 {company.flags && company.flags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-1">
                     {company.flags.map((f, i) => (
-                      <Badge key={i} variant="outline" className="text-[8px] bg-red-500/5 text-red-600 dark:text-red-400 border-red-500/20">
+                      <Badge key={i} variant="outline" className="text-[8px] bg-amber-500/5 text-amber-600 dark:text-amber-400 border-amber-500/20">
                         <AlertTriangle className="h-2 w-2 mr-0.5" />{f}
                       </Badge>
                     ))}
@@ -2125,7 +2125,7 @@ export default function NetworkAnalysisPage() {
                     {ev.linkedEntities.map((entityId, i) => {
                       const info = allEntities.get(entityId);
                       const typeColors: Record<string, string> = {
-                        person: "bg-red-500/10 text-red-600 dark:text-red-400",
+                        person: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
                         location: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
                         company: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
                       };
@@ -2151,13 +2151,13 @@ export default function NetworkAnalysisPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="p-3 rounded-lg border border-red-500/20 bg-red-500/5">
-                <h3 className="text-sm font-bold text-red-600 dark:text-red-400 mb-2">CLUSTER 1: Honey Trap Operation</h3>
+              <div className="p-3 rounded-lg border border-amber-500/20 bg-amber-500/5">
+                <h3 className="text-sm font-bold text-amber-600 dark:text-amber-400 mb-2">CLUSTER 1: Honey Trap Operation</h3>
                 <p className="text-xs text-muted-foreground mb-2">
                   Genesis Peralta was systematically placed through a chain of venues and handlers.
                 </p>
                 <div className="text-xs font-mono space-y-0.5">
-                  <div>Gaia Natural Foods <span className="text-muted-foreground">(Colombian + Israeli owners)</span> → <span className="text-red-500">Genesis meets Echo</span></div>
+                  <div>Gaia Natural Foods <span className="text-muted-foreground">(Colombian + Israeli owners)</span> → <span className="text-amber-500">Genesis meets Echo</span></div>
                   <div>↓ Jairo Alfaro <span className="text-muted-foreground">(handler, years at Caliches)</span></div>
                   <div>Caliches Wishbone → Gracias Madre <span className="text-muted-foreground">(single season front, prime beach RE)</span></div>
                   <div>↓ Marjorie Alfaro Jimenez <span className="text-muted-foreground">(bridges to Kyndryl via Jorge Jimenez)</span></div>
@@ -2222,11 +2222,11 @@ export default function NetworkAnalysisPage() {
                   Personal revenge motive provides operational fuel — Mora surname bridges motive to capability.
                 </p>
                 <div className="text-xs font-mono space-y-0.5">
-                  <div>Echo's ex-girlfriend <span className="text-muted-foreground">left Pablo Mora for Echo</span> → <span className="text-red-500">vendetta motive</span></div>
+                  <div>Echo's ex-girlfriend <span className="text-muted-foreground">left Pablo Mora for Echo</span> → <span className="text-amber-500">vendetta motive</span></div>
                   <div>↓ Pablo "Pasti" Mora <span className="text-muted-foreground">(BMX rider, Mexico-CR dual presence)</span></div>
                   <div>↓ Kenneth Tencio / BAC Park <span className="text-muted-foreground">(Olympic BMX, Red Bull — Pablo sponsor)</span></div>
                   <div>↓ Hector Mora <span className="text-muted-foreground">(SETECOM, 180W HF radio — same surname)</span></div>
-                  <div>↓ 7410 kHz = <span className="text-red-500">SMOKING GUN</span> <span className="text-muted-foreground">(100% temporal correlation with V2K, p&lt;0.01%)</span></div>
+                  <div>↓ 7410 kHz = <span className="text-amber-500">SMOKING GUN</span> <span className="text-muted-foreground">(100% temporal correlation with V2K, p&lt;0.01%)</span></div>
                   <div>↓ Edson Martenal <span className="text-muted-foreground">(YouTube/hmora67 — AMEX fraud, Bahia Brazil)</span></div>
                   <div className="mt-1 text-amber-400">Pablo has MOTIVE → Hector has CAPABILITY → BAC has MONEY</div>
                 </div>

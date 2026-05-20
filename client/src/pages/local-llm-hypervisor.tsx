@@ -148,7 +148,7 @@ function BlendModeChip({ mode }: { mode: BlendMode }) {
     add: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
     multiply: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
     screen: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-    difference: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+    difference: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
   };
   return (
     <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${colors[mode]}`}>
@@ -178,7 +178,7 @@ function AgentChip({
     queued: "bg-amber-400 animate-pulse",
     running: "bg-blue-500 animate-pulse",
     done: "bg-emerald-500",
-    error: "bg-red-500",
+    error: "bg-amber-500",
   }[agent.status];
 
   const savePrompt = () => {
@@ -191,7 +191,7 @@ function AgentChip({
     queued: <span className="text-[10px] text-amber-600 dark:text-amber-400 animate-pulse">queued…</span>,
     running: !agent.output ? <span className="text-[10px] text-muted-foreground animate-pulse">generating…</span> : null,
     done: null,
-    error: <span className="text-[10px] text-red-500">error</span>,
+    error: <span className="text-[10px] text-amber-500">error</span>,
   }[agent.status];
 
   return (
@@ -227,7 +227,7 @@ function AgentChip({
         </button>
         <button
           onClick={() => onDelete(layerId, agent.id)}
-          className="shrink-0 text-muted-foreground hover:text-red-500"
+          className="shrink-0 text-muted-foreground hover:text-amber-500"
           title="Remove agent"
           data-testid={`button-delete-agent-${agent.id}`}
         >
@@ -395,7 +395,7 @@ function LayerRow({
         </button>
         <button
           onClick={() => callbacks.onDelete(layer.id)}
-          className="shrink-0 text-muted-foreground hover:text-red-500"
+          className="shrink-0 text-muted-foreground hover:text-amber-500"
           title="Delete layer"
           data-testid={`button-delete-layer-${layer.id}`}
         >
@@ -1236,7 +1236,7 @@ export default function LocalLLMHypervisorPage() {
             <div className={`h-2 w-2 rounded-full ${
               modelStatus === "loaded" ? "bg-emerald-500" :
               modelStatus === "loading" ? "bg-blue-500 animate-pulse" :
-              modelStatus === "error" ? "bg-red-500" : "bg-zinc-400"
+              modelStatus === "error" ? "bg-amber-500" : "bg-zinc-400"
             }`} />
             <span className="text-muted-foreground">
               {modelStatus === "loaded" ? selectedModel.label : modelStatus === "loading" ? "loading…" : "unloaded"}

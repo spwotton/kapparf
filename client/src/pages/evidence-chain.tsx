@@ -21,8 +21,8 @@ const SEVERITY_CONFIG = [
   { level: 1, label: "LOW", color: "bg-gray-600" },
   { level: 2, label: "MEDIUM", color: "bg-yellow-600" },
   { level: 3, label: "HIGH", color: "bg-orange-600" },
-  { level: 4, label: "CRITICAL", color: "bg-red-600" },
-  { level: 5, label: "EMERGENCY", color: "bg-red-800" },
+  { level: 4, label: "CRITICAL", color: "bg-amber-600" },
+  { level: 5, label: "EMERGENCY", color: "bg-amber-800" },
 ];
 
 const CATEGORY_ICONS: Record<string, any> = {
@@ -165,7 +165,7 @@ function IncidentForm({ onClose }: { onClose: () => void }) {
         data-testid="button-submit-incident"
         onClick={handleSubmit}
         disabled={mutation.isPending}
-        className="w-full bg-red-600 hover:bg-red-700"
+        className="w-full bg-amber-600 hover:bg-amber-700"
       >
         {mutation.isPending ? "Documenting..." : "Document Incident"}
       </Button>
@@ -180,10 +180,10 @@ function TimelineEntry({ entry }: { entry: any }) {
     const sev = getSeverityConfig(data.severity);
     const Icon = CATEGORY_ICONS[data.category] || AlertTriangle;
     return (
-      <div className="flex gap-3 border-l-4 border-red-600 pl-4 py-3" data-testid={`timeline-incident-${data.id}`}>
+      <div className="flex gap-3 border-l-4 border-amber-600 pl-4 py-3" data-testid={`timeline-incident-${data.id}`}>
         <div className="flex-shrink-0 mt-1">
-          <div className="w-8 h-8 rounded-full bg-red-600/20 flex items-center justify-center">
-            <Icon className="w-4 h-4 text-red-400" />
+          <div className="w-8 h-8 rounded-full bg-amber-600/20 flex items-center justify-center">
+            <Icon className="w-4 h-4 text-amber-400" />
           </div>
         </div>
         <div className="flex-1 min-w-0">
@@ -308,7 +308,7 @@ export default function EvidenceChainPage() {
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold tracking-tight flex items-center gap-2" data-testid="text-page-title">
-            <Shield className="w-6 h-6 text-red-500" />
+            <Shield className="w-6 h-6 text-amber-500" />
             Evidence Chain
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
@@ -318,14 +318,14 @@ export default function EvidenceChainPage() {
         <div className="flex gap-2">
           <Dialog open={addOpen} onOpenChange={setAddOpen}>
             <DialogTrigger asChild>
-              <Button data-testid="button-add-incident" className="bg-red-600 hover:bg-red-700">
+              <Button data-testid="button-add-incident" className="bg-amber-600 hover:bg-amber-700">
                 <Plus className="w-4 h-4 mr-2" /> Log Incident
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-500" />
+                  <AlertTriangle className="w-5 h-5 text-amber-500" />
                   Document Incident
                 </DialogTitle>
               </DialogHeader>
@@ -341,7 +341,7 @@ export default function EvidenceChainPage() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         <Card>
           <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-red-500" data-testid="text-incident-count">{countData?.count ?? 0}</div>
+            <div className="text-2xl font-bold text-amber-500" data-testid="text-incident-count">{countData?.count ?? 0}</div>
             <div className="text-[10px] text-muted-foreground uppercase">Incidents</div>
           </CardContent>
         </Card>
@@ -431,7 +431,7 @@ export default function EvidenceChainPage() {
                 <p className="text-sm">No incidents documented yet.</p>
                 <Button
                   data-testid="button-first-incident"
-                  className="mt-4 bg-red-600 hover:bg-red-700"
+                  className="mt-4 bg-amber-600 hover:bg-amber-700"
                   onClick={() => setAddOpen(true)}
                 >
                   <Plus className="w-4 h-4 mr-2" /> Document First Incident
@@ -443,13 +443,13 @@ export default function EvidenceChainPage() {
               const sev = getSeverityConfig(inc.severity);
               const Icon = CATEGORY_ICONS[inc.category] || AlertTriangle;
               return (
-                <Card key={inc.id} className="border-l-4 border-l-red-600" data-testid={`card-incident-${inc.id}`}>
+                <Card key={inc.id} className="border-l-4 border-l-amber-600" data-testid={`card-incident-${inc.id}`}>
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex gap-3 flex-1 min-w-0">
                         <div className="flex-shrink-0 mt-0.5">
-                          <div className="w-10 h-10 rounded-lg bg-red-600/10 flex items-center justify-center">
-                            <Icon className="w-5 h-5 text-red-400" />
+                          <div className="w-10 h-10 rounded-lg bg-amber-600/10 flex items-center justify-center">
+                            <Icon className="w-5 h-5 text-amber-400" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
@@ -487,7 +487,7 @@ export default function EvidenceChainPage() {
                         data-testid={`button-delete-incident-${inc.id}`}
                         variant="ghost"
                         size="sm"
-                        className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
+                        className="text-amber-400 hover:text-amber-300 hover:bg-amber-900/20"
                         onClick={() => deleteMutation.mutate(inc.id)}
                       >
                         <Trash2 className="w-4 h-4" />

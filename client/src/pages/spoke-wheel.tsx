@@ -81,17 +81,17 @@ const THREAT_COLORS: Record<string, string> = {
   low: "text-blue-500",
   medium: "text-yellow-500",
   high: "text-orange-500",
-  critical: "text-red-500",
+  critical: "text-amber-500",
 };
 
 const THREAT_BG: Record<string, string> = {
   low: "bg-blue-500/10 border-blue-500/30",
   medium: "bg-yellow-500/10 border-yellow-500/30",
   high: "bg-orange-500/10 border-orange-500/30",
-  critical: "bg-red-500/10 border-red-500/30",
+  critical: "bg-amber-500/10 border-amber-500/30",
 };
 
-const PASS_COLORS = ["#3b82f6", "#f59e0b", "#ef4444"] as const;
+const PASS_COLORS = ["#3b82f6", "#f59e0b", "#d97706"] as const;
 const PASS_LABELS = ["", "Extraction", "Correlation", "GOS Lattice"];
 
 function polarToXY(angle: number, r: number, cx: number, cy: number) {
@@ -151,7 +151,7 @@ function InteractiveWheel({
       {/* node dots — bigger hit targets via transparent circle overlay */}
       {visible.map((n) => {
         const pt = polarToXY(n.angle, outerR * 0.87, cx, cy);
-        const col = n.threat === "critical" ? "#ef4444" : n.threat === "high" ? "#f97316"
+        const col = n.threat === "critical" ? "#d97706" : n.threat === "high" ? "#f97316"
           : n.threat === "medium" ? "#eab308" : "#3b82f6";
         const isSelected = selectedId === n.id;
         const dimmed = selectedId !== null && !isSelected;
@@ -177,11 +177,11 @@ function InteractiveWheel({
       })}
 
       {/* centre */}
-      <circle cx={cx} cy={cy} r={18} fill="#ef4444" opacity="0.12" />
-      <circle cx={cx} cy={cy} r={11} fill="#ef4444" opacity="0.22" />
-      <circle cx={cx} cy={cy} r={3.5} fill="#ef4444" />
+      <circle cx={cx} cy={cy} r={18} fill="#d97706" opacity="0.12" />
+      <circle cx={cx} cy={cy} r={11} fill="#d97706" opacity="0.22" />
+      <circle cx={cx} cy={cy} r={3.5} fill="#d97706" />
       <text x={cx} y={cy + 28} textAnchor="middle" fontSize="5.5"
-        fill="#ef4444" fontFamily="monospace" fontWeight="bold">IMMINENT</text>
+        fill="#d97706" fontFamily="monospace" fontWeight="bold">IMMINENT</text>
 
       {/* pass legend */}
       {[0, 1, 2].map((i) => (
@@ -478,8 +478,8 @@ function GpuTab({ gpu }: { gpu: GpuCorpusPush }) {
       </div>
 
       {/* Final memo */}
-      <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3">
-        <p className="text-[10px] font-mono text-red-500 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+      <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-3">
+        <p className="text-[10px] font-mono text-amber-500 uppercase tracking-wider mb-1.5 flex items-center gap-1">
           <AlertTriangle className="h-3 w-3" /> Final Corpus Memo
         </p>
         <p className="text-[11px] text-foreground/80 leading-relaxed">{gpu.finalMemo}</p>
@@ -510,10 +510,10 @@ function IntelTab({ data }: { data: SpokeWheelResult }) {
   return (
     <div className="space-y-4">
       {/* synthesis summary */}
-      <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3 space-y-2">
+      <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 space-y-2">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="h-3.5 w-3.5 text-red-500 flex-shrink-0" />
-          <span className="text-xs font-mono text-red-500 font-semibold">
+          <AlertTriangle className="h-3.5 w-3.5 text-amber-500 flex-shrink-0" />
+          <span className="text-xs font-mono text-amber-500 font-semibold">
             GOS LATTICE ACTIVATION: {(synthesis.gosLatticeActivation * 100).toFixed(1)}%
           </span>
         </div>
@@ -534,7 +534,7 @@ function IntelTab({ data }: { data: SpokeWheelResult }) {
           <div><span className="text-muted-foreground">sonic = </span><span>{gosConstants.freqHz} Hz</span></div>
           <div><span className="text-muted-foreground">GF(53) = </span><span>{gosConstants.gf53}</span></div>
           <div><span className="text-muted-foreground">κ∫ = </span>
-            <span className="text-red-500 font-bold">{synthesis.kappaIntegral.toFixed(4)}</span></div>
+            <span className="text-amber-500 font-bold">{synthesis.kappaIntegral.toFixed(4)}</span></div>
         </div>
         <p className="mt-2 text-[10px] font-mono text-muted-foreground break-words"
           data-testid="text-frequency-bridge">{synthesis.frequencyBridge}</p>
@@ -599,7 +599,7 @@ export default function SpokeWheelPage() {
 
   if (error || !data) {
     return (
-      <div className="flex flex-col items-center justify-center h-64 gap-3 text-red-500">
+      <div className="flex flex-col items-center justify-center h-64 gap-3 text-amber-500">
         <AlertTriangle className="h-6 w-6" />
         <span className="text-sm font-mono">spoke-wheel engine offline</span>
       </div>
@@ -620,7 +620,7 @@ export default function SpokeWheelPage() {
             </p>
           </div>
           <Badge
-            className="bg-red-500/20 text-red-500 border-red-500/40 font-mono text-xs shrink-0"
+            className="bg-amber-500/20 text-amber-500 border-amber-500/40 font-mono text-xs shrink-0"
             data-testid="badge-echo-threat"
           >
             ECHO: {data.synthesis.echoThreat}

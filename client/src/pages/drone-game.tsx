@@ -774,7 +774,7 @@ export default function DroneGamePage() {
         </div>
         {/* HP */}
         <div className="flex items-center gap-2">
-          <Heart className="h-3.5 w-3.5 text-red-400"/>
+          <Heart className="h-3.5 w-3.5 text-amber-400"/>
           <div className="w-28 h-2 bg-gray-800 rounded-full overflow-hidden">
             <div className="h-full rounded-full transition-all" style={{ width:`${hp}%`, background: hp > 50 ? "#22cc44" : hp > 25 ? "#ff8800" : "#ff2233" }}/>
           </div>
@@ -782,11 +782,11 @@ export default function DroneGamePage() {
         </div>
         {/* Laser heat */}
         <div className="flex items-center gap-2">
-          <Zap className="h-3.5 w-3.5 text-red-500"/>
+          <Zap className="h-3.5 w-3.5 text-amber-500"/>
           <div className="w-28 h-2 bg-gray-800 rounded-full overflow-hidden">
             <div className="h-full rounded-full transition-all" style={{ width:`${heat}%`, background: heat > 80 ? "#ff0033" : "#ff4422" }}/>
           </div>
-          <span className="text-[10px] font-mono text-red-400">{heat > 90 ? "OVERHEAT!" : "30kW"}</span>
+          <span className="text-[10px] font-mono text-amber-400">{heat > 90 ? "OVERHEAT!" : "30kW"}</span>
         </div>
         {/* Fuel */}
         <div className="flex items-center gap-2">
@@ -836,7 +836,7 @@ export default function DroneGamePage() {
       {/* FINISH HIM */}
       {finishHim && (
         <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-40 pointer-events-none text-center">
-          <div className="text-4xl font-mono font-black text-red-500 animate-pulse tracking-widest" style={{ textShadow:"0 0 30px #ff0033" }}>
+          <div className="text-4xl font-mono font-black text-amber-500 animate-pulse tracking-widest" style={{ textShadow:"0 0 30px #ff0033" }}>
             FINISH HIM
           </div>
           <div className="text-xs font-mono text-gray-400 mt-1">PRESS [F]</div>
@@ -846,10 +846,10 @@ export default function DroneGamePage() {
       {/* Game Over */}
       {gameOver && (
         <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/80">
-          <div className="text-5xl font-mono font-black text-red-500 mb-4" style={{ textShadow:"0 0 40px #ff0033" }}>DRONE DESTROYED</div>
+          <div className="text-5xl font-mono font-black text-amber-500 mb-4" style={{ textShadow:"0 0 40px #ff0033" }}>DRONE DESTROYED</div>
           <div className="text-2xl font-mono text-cyan-400 mb-2">{score.toLocaleString()} PTS</div>
           <div className="text-sm font-mono text-gray-500 mb-8">{killCount} kills · {stars}★ reached</div>
-          <button onClick={resetGame} className="px-8 py-3 bg-red-500/20 border border-red-500/50 text-red-400 font-mono text-sm rounded hover:bg-red-500/30 transition-colors" data-testid="button-redeploy">
+          <button onClick={resetGame} className="px-8 py-3 bg-amber-500/20 border border-amber-500/50 text-amber-400 font-mono text-sm rounded hover:bg-amber-500/30 transition-colors" data-testid="button-redeploy">
             REDEPLOY
           </button>
         </div>

@@ -49,7 +49,7 @@ const agentColors: Record<string, string> = {
 const confidenceColors: Record<string, string> = {
   HIGH: "bg-green-500/10 text-green-700 dark:text-green-400",
   MEDIUM: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
-  LOW: "bg-red-500/10 text-red-700 dark:text-red-400",
+  LOW: "bg-amber-500/10 text-amber-700 dark:text-amber-400",
 };
 
 function StatusDot({ status }: { status: string }) {
@@ -57,7 +57,7 @@ function StatusDot({ status }: { status: string }) {
     active: "bg-green-500",
     scanning: "bg-yellow-500 animate-pulse",
     idle: "bg-gray-400 dark:bg-gray-600",
-    error: "bg-red-500",
+    error: "bg-amber-500",
   };
   return <span className={`inline-block w-2 h-2 rounded-full ${colors[status] || colors.idle}`} />;
 }

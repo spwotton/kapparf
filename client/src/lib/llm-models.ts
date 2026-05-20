@@ -98,21 +98,21 @@ export const AGENT_ROLES: AgentRole[] = [
   {
     id: "hypervisor",
     label: "Hypervisor",
-    color: "#ef4444",
+    color: "#d97706",
     systemPrompt:
       "You are the Hypervisor Synthesis Layer. You receive outputs from all lower layers (Designer, Coder, Engineer, Analyst) and synthesise them into a single coherent, actionable response. Apply weighted composition: blend perspectives by relevance and confidence. Eliminate contradictions. Output a unified synthesis.",
   },
   {
     id: "threat-hunter",
     label: "Threat Hunter",
-    color: "#dc2626",
+    color: "#b45309",
     systemPrompt:
       "You are a Threat Hunter agent. Proactively search for indicators of compromise, lateral movement, and adversarial tactics within the provided data. Identify kill-chain phases and recommend mitigations concisely.",
   },
   {
     id: "red-team",
     label: "Red Team",
-    color: "#b91c1c",
+    color: "#92400e",
     systemPrompt:
       "You are a Red Team agent. Identify attack surfaces, exploit chains, and adversarial opportunities in the described system. Think like an attacker and enumerate vulnerabilities with concise severity ratings.",
   },

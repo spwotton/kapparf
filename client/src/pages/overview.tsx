@@ -67,9 +67,9 @@ const domainColors: Record<string, string> = {
 
 const alertTypeColors: Record<string, string> = {
   "mac-cross-domain": "text-blue-600 dark:text-blue-400",
-  "congusto-full": "text-red-600 dark:text-red-400",
+  "congusto-full": "text-amber-600 dark:text-amber-400",
   "congusto-partial": "text-orange-600 dark:text-orange-400",
-  "stingray-pattern": "text-red-700 dark:text-red-300",
+  "stingray-pattern": "text-amber-700 dark:text-amber-300",
   "klein-twist": "text-fuchsia-600 dark:text-fuchsia-400",
   "phi-harmonic": "text-purple-600 dark:text-purple-400",
   "evening-spike": "text-amber-600 dark:text-amber-400",
@@ -583,7 +583,7 @@ export default function DashboardPage() {
                           </span>
                         </span>
                       ) : (
-                        <XCircle className="h-3.5 w-3.5 ml-auto text-red-500" />
+                        <XCircle className="h-3.5 w-3.5 ml-auto text-amber-500" />
                       )}
                     </div>
                     <div className="flex justify-between text-xs text-muted-foreground">
@@ -706,7 +706,7 @@ export default function DashboardPage() {
                         <span className="font-mono text-muted-foreground">{r.target}</span>
                         <div className="flex items-center gap-2">
                           <span className="font-mono">{r.snrDb > -Infinity ? `${r.snrDb} dB` : "--"}</span>
-                          <Badge variant={r.detected ? "default" : "secondary"} className={`text-[9px] ${r.detected ? "bg-red-500/10 text-red-600" : ""}`}>
+                          <Badge variant={r.detected ? "default" : "secondary"} className={`text-[9px] ${r.detected ? "bg-amber-500/10 text-amber-600" : ""}`}>
                             {r.detected ? t("scanner.detected") : t("scanner.clean")}
                           </Badge>
                         </div>
@@ -729,7 +729,7 @@ export default function DashboardPage() {
               <Network className="h-4 w-4 text-muted-foreground" />
               <CardTitle className="text-sm font-medium">{t("watchdog.title")}</CardTitle>
               {watchdogStatus && (
-                <Badge variant="secondary" className={`text-[10px] ml-auto ${watchdogStatus.networkActive ? "bg-green-500/10 text-green-700 dark:text-green-400" : "bg-red-500/10 text-red-600"}`}>
+                <Badge variant="secondary" className={`text-[10px] ml-auto ${watchdogStatus.networkActive ? "bg-green-500/10 text-green-700 dark:text-green-400" : "bg-amber-500/10 text-amber-600"}`}>
                   {watchdogStatus.networkActive ? t("watchdog.networkActive") : t("watchdog.networkDown")}
                 </Badge>
               )}
@@ -742,7 +742,7 @@ export default function DashboardPage() {
               <>
                 <div className="grid grid-cols-4 gap-2 text-center">
                   <div>
-                    <div className="text-lg font-mono font-semibold text-red-500">{watchdogStatus.dropCount}</div>
+                    <div className="text-lg font-mono font-semibold text-amber-500">{watchdogStatus.dropCount}</div>
                     <div className="text-[10px] text-muted-foreground">{t("watchdog.drops")}</div>
                   </div>
                   <div>
@@ -768,7 +768,7 @@ export default function DashboardPage() {
                   <div className="mt-3 space-y-1.5 max-h-24 overflow-y-auto">
                     {watchdogStatus.recentEvents.slice(0, 5).map((ev, i) => (
                       <div key={i} className="flex items-center justify-between text-[11px] border-b border-border/50 pb-1">
-                        <Badge variant="secondary" className={`text-[9px] ${ev.type === "drop" ? "bg-red-500/10 text-red-600" : ev.type === "reconnect" ? "bg-green-500/10 text-green-600" : ev.type === "tr069-pulse" ? "bg-amber-500/10 text-amber-600" : ""}`}>
+                        <Badge variant="secondary" className={`text-[9px] ${ev.type === "drop" ? "bg-amber-500/10 text-amber-600" : ev.type === "reconnect" ? "bg-green-500/10 text-green-600" : ev.type === "tr069-pulse" ? "bg-amber-500/10 text-amber-600" : ""}`}>
                           {(t as (k: string) => string)(`watchdog.event.${ev.type}`) || ev.type}
                         </Badge>
                         <span className="text-muted-foreground font-mono truncate max-w-[200px]">{ev.details}</span>
@@ -820,7 +820,7 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className={`text-2xl font-mono font-semibold ${(kappaStatus?.suspiciousDevices ?? 0) > 0 ? "text-red-600" : ""}`} data-testid="text-suspicious-devices">
+            <div className={`text-2xl font-mono font-semibold ${(kappaStatus?.suspiciousDevices ?? 0) > 0 ? "text-amber-600" : ""}`} data-testid="text-suspicious-devices">
               {kappaStatus?.suspiciousDevices ?? 0}
             </div>
             <div className="text-xs text-muted-foreground flex items-center justify-center gap-1">
@@ -891,7 +891,7 @@ export default function DashboardPage() {
         </Card>
         <Card>
           <CardContent className="py-3 text-center">
-            <div className={`text-lg font-mono font-semibold ${(kappaStatus?.stingrayAlerts ?? 0) > 0 ? "text-red-600" : ""}`} data-testid="text-stingray">
+            <div className={`text-lg font-mono font-semibold ${(kappaStatus?.stingrayAlerts ?? 0) > 0 ? "text-amber-600" : ""}`} data-testid="text-stingray">
               {kappaStatus?.stingrayAlerts ?? 0}
             </div>
             <div className="text-[10px] text-muted-foreground">Stingray/IMSI</div>

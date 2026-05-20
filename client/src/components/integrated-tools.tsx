@@ -659,7 +659,7 @@ function HttpProbeTool() {
               <div className="space-y-1">
                 {Object.entries(result.securityHeaders).map(([key, val]) => (
                   <div key={key} className="flex items-center gap-2">
-                    {val ? <Lock className="h-3 w-3 text-green-600" /> : <Unlock className="h-3 w-3 text-red-500" />}
+                    {val ? <Lock className="h-3 w-3 text-green-600" /> : <Unlock className="h-3 w-3 text-amber-500" />}
                     <span className="font-mono text-[11px]">{key}</span>
                     {val && <span className="font-mono text-[10px] text-muted-foreground truncate max-w-[200px]">{val}</span>}
                   </div>
