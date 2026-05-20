@@ -36,6 +36,9 @@ import {
 import * as jpeg from "jpeg-js";
 import { PNG } from "pngjs";
 import multer from "multer";
+import { execFile } from "child_process";
+import { openai as audioOpenAI } from "./replit_integrations/audio/client";
+import { toFile as audioToFile } from "openai";
 import {
   runForensicAnalysis, analyzePcap, scanGitHubRepos, getForensicReports,
   getPcapUploads, startHypervisor, stopHypervisor, getHypervisorStatus,
@@ -5462,6 +5465,206 @@ export function registerCortexRoutes(app: express.Express) {
       layer: 0,
     });
     res.json({ ok: true, message: msg });
+  });
+
+  // ── Audio Forensics Vault ─────────────────────────────────────────────────
+  const audioTranscriptionCache = new Map<string, { text: string; timestamp: string; language?: string; duration?: number }>();
+
+  const AUDIO_DIRS = [
+    nodePath.resolve(process.cwd(), "attached_assets"),
+    nodePath.resolve(process.cwd(), "attached_assets/audio-uploads"),
+  ];
+
+  function getAllAudioFiles(): string[] {
+    const seen = new Set<string>();
+    const files: string[] = [];
+    for (const dir of AUDIO_DIRS) {
+      if (!fs.existsSync(dir)) continue;
+      fs.readdirSync(dir).forEach((f) => {
+        if (/\.(m4a|mp3|wav|ogg|webm|aac)$/i.test(f) && !seen.has(f)) {
+          seen.add(f);
+          files.push(nodePath.join(dir, f));
+        }
+      });
+    }
+    return files.sort();
+  }
+
+  function getAudioMeta(filepath: string): Promise<{
+    duration: number; bitrate: number; size: number; codec: string;
+    sampleRate: number; channels: number; createdAt: string | null; tags: Record<string, string>;
+  }> {
+    return new Promise((resolve) => {
+      execFile("ffprobe", [
+        "-v", "quiet", "-print_format", "json", "-show_format", "-show_streams", filepath
+      ], (err: any, stdout: string) => {
+        if (err) return resolve({ duration: 0, bitrate: 0, size: 0, codec: "unknown", sampleRate: 0, channels: 1, createdAt: null, tags: {} });
+        try {
+          const d = JSON.parse(stdout);
+          const fmt = d.format || {};
+          const s = (d.streams || [{}])[0] || {};
+          const tags = fmt.tags || {};
+          resolve({
+            duration: parseFloat(fmt.duration || "0"),
+            bitrate: Math.round(parseInt(fmt.bit_rate || "0") / 1000),
+            size: parseInt(fmt.size || "0"),
+            codec: s.codec_name || "unknown",
+            sampleRate: parseInt(s.sample_rate || "0"),
+            channels: parseInt(s.channels || "1"),
+            createdAt: tags.creation_time || null,
+            tags,
+          });
+        } catch { resolve({ duration: 0, bitrate: 0, size: 0, codec: "unknown", sampleRate: 0, channels: 1, createdAt: null, tags: {} }); }
+      });
+    });
+  }
+
+  app.get("/api/audio-forensics/files", async (_req, res) => {
+    try {
+      const paths = getAllAudioFiles();
+      const files = await Promise.all(paths.map(async (fp) => {
+        const filename = nodePath.basename(fp);
+        const meta = await getAudioMeta(fp);
+        const cached = audioTranscriptionCache.get(filename);
+        return {
+          filename,
+          filepath: fp,
+          ...meta,
+          transcribed: !!cached,
+          transcription: cached?.text ?? null,
+          transcribedAt: cached?.timestamp ?? null,
+          language: cached?.language ?? null,
+          url: `/api/audio-forensics/stream/${encodeURIComponent(filename)}`,
+        };
+      }));
+      res.json({ files, total: files.length, transcribed: files.filter(f => f.transcribed).length });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/audio-forensics/stream/:filename", (req, res) => {
+    const filename = decodeURIComponent(req.params.filename);
+    let found: string | null = null;
+    for (const dir of AUDIO_DIRS) {
+      const fp = nodePath.join(dir, filename);
+      if (fs.existsSync(fp)) { found = fp; break; }
+    }
+    if (!found) return res.status(404).json({ error: "File not found" });
+    const ext = nodePath.extname(filename).toLowerCase();
+    const mime = ext === ".m4a" ? "audio/mp4" : ext === ".mp3" ? "audio/mpeg" : ext === ".wav" ? "audio/wav" : "audio/octet-stream";
+    const stat = fs.statSync(found);
+    const range = req.headers.range;
+    if (range) {
+      const [startStr, endStr] = range.replace(/bytes=/, "").split("-");
+      const start = parseInt(startStr, 10);
+      const end = endStr ? parseInt(endStr, 10) : stat.size - 1;
+      res.writeHead(206, {
+        "Content-Range": `bytes ${start}-${end}/${stat.size}`,
+        "Accept-Ranges": "bytes",
+        "Content-Length": end - start + 1,
+        "Content-Type": mime,
+      });
+      fs.createReadStream(found, { start, end }).pipe(res);
+    } else {
+      res.writeHead(200, { "Content-Length": stat.size, "Content-Type": mime, "Accept-Ranges": "bytes" });
+      fs.createReadStream(found).pipe(res);
+    }
+  });
+
+  app.post("/api/audio-forensics/transcribe", async (req, res) => {
+    const { filename } = req.body;
+    if (!filename) return res.status(400).json({ error: "filename required" });
+    let found: string | null = null;
+    for (const dir of AUDIO_DIRS) {
+      const fp = nodePath.join(dir, filename);
+      if (fs.existsSync(fp)) { found = fp; break; }
+    }
+    if (!found) return res.status(404).json({ error: "File not found" });
+    try {
+      const buffer = fs.readFileSync(found);
+      const ext = nodePath.extname(filename).slice(1).toLowerCase() || "m4a";
+      const fileObj = await audioToFile(buffer, filename, ext === "m4a" ? "audio/mp4" : `audio/${ext}`);
+      const result = await audioOpenAI.audio.transcriptions.create({
+        file: fileObj,
+        model: "whisper-1",
+        response_format: "verbose_json",
+        language: undefined,
+      });
+      const entry = {
+        text: (result as any).text || "",
+        timestamp: new Date().toISOString(),
+        language: (result as any).language || null,
+        duration: (result as any).duration || null,
+      };
+      audioTranscriptionCache.set(filename, entry);
+      res.json({ filename, ...entry });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/audio-forensics/transcriptions", (_req, res) => {
+    const result: Record<string, any> = {};
+    audioTranscriptionCache.forEach((v, k) => { result[k] = v; });
+    res.json(result);
+  });
+
+  const audioUpload = multer({
+    storage: multer.diskStorage({
+      destination: (_req, _file, cb) => {
+        const dir = nodePath.resolve(process.cwd(), "attached_assets/audio-uploads");
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        cb(null, dir);
+      },
+      filename: (_req, file, cb) => cb(null, file.originalname),
+    }),
+    limits: { fileSize: 200 * 1024 * 1024, files: 100 },
+    fileFilter: (_req, file, cb) => {
+      cb(null, /\.(m4a|mp3|wav|ogg|webm|aac)$/i.test(file.originalname));
+    },
+  });
+
+  app.post("/api/audio-forensics/upload", audioUpload.array("files", 100), (req, res) => {
+    const files = (req.files as Express.Multer.File[]) || [];
+    res.json({ uploaded: files.length, filenames: files.map(f => f.originalname) });
+  });
+
+  app.post("/api/audio-forensics/analyze", async (_req, res) => {
+    if (audioTranscriptionCache.size === 0) {
+      return res.status(400).json({ error: "No transcriptions available yet. Transcribe files first." });
+    }
+    const entries: string[] = [];
+    audioTranscriptionCache.forEach((v, k) => {
+      entries.push(`--- FILE: ${k} (lang: ${v.language ?? "?"})\n${v.text}`);
+    });
+    const combined = entries.join("\n\n");
+    try {
+      const completion = await audioOpenAI.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: `You are a forensic audio analyst for a counter-surveillance case in Costa Rica. 
+The subject (Echo) believes they are under multi-vector surveillance by coordinated actors at Breakwater Point, Jacó. 
+Their voice is likely present in some recordings. Analyze ALL provided transcriptions together and produce:
+1. SPEAKER ANALYSIS — how many distinct voices appear, any patterns in who speaks
+2. CONTENT SUMMARY — what topics/activities are discussed or audible in each recording
+3. SURVEILLANCE INDICATORS — anything suggesting the presence of other parties, monitoring activity, unusual sounds
+4. TIMELINE RECONSTRUCTION — chronological order of events based on content
+5. KEY PHRASES — notable quotes or phrases worth flagging
+6. GAPS — note that recordings 2, 5, 8 are absent from the sequence; speculate on significance
+7. FORENSIC NOTES — audio quality, background sounds, location indicators
+Be factual and precise. This is real evidence for a legal case.`,
+          },
+          { role: "user", content: `Here are the transcriptions from ${audioTranscriptionCache.size} recordings:\n\n${combined}` },
+        ],
+        max_tokens: 2000,
+      });
+      res.json({ analysis: completion.choices[0]?.message?.content ?? "", files: audioTranscriptionCache.size });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
   });
 }
 

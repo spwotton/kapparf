@@ -50,6 +50,7 @@ import CortexBusPage from "@/pages/cortex-bus";
 import AtlantisHubPage from "@/pages/atlantis-hub";
 import LocalLLMHypervisorPage from "@/pages/local-llm-hypervisor";
 import BioAcousticPage from "@/pages/bio-acoustic";
+import AudioForensicsPage from "@/pages/audio-forensics";
 
 function Router() {
   return (
@@ -95,6 +96,7 @@ function Router() {
       <Route path="/atlantis" component={AtlantisHubPage} />
       <Route path="/local-llm" component={LocalLLMHypervisorPage} />
       <Route path="/bio-acoustic" component={BioAcousticPage} />
+      <Route path="/audio" component={AudioForensicsPage} />
       <Route component={NotFound} />
     </Switch>
   );
