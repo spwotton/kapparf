@@ -223,10 +223,23 @@ export interface HumorFeedback {
     overall: number;
     sampleSize: number;
   };
+  recent?: Array<{
+    articleId: string;
+    headline: string;
+    apRigidity: number;
+    premiseAbsurdity: number;
+    jokeDiscipline: number;
+    specificityCarrier: number;
+    resolutionUnresolved: number;
+    overall: number;
+    summary: string;
+    scoredAt: string;
+  }>;
 }
 
 export async function buildHumorFeedback(): Promise<HumorFeedback> {
-  const rows = await db.select({
+  const rowsWithId = await db.select({
+    articleId: gooseHumorScores.articleId,
     headline: gooseArticles.headline,
     overall: gooseHumorScores.overall,
     apRigidity: gooseHumorScores.apRigidity,
@@ -241,7 +254,7 @@ export async function buildHumorFeedback(): Promise<HumorFeedback> {
     .orderBy(desc(gooseHumorScores.scoredAt))
     .limit(40);
 
-  if (rows.length === 0) {
+  if (rowsWithId.length === 0) {
     return {
       exemplars: [],
       failures: [],
@@ -252,10 +265,10 @@ export async function buildHumorFeedback(): Promise<HumorFeedback> {
     };
   }
 
-  const avg = (key: keyof typeof rows[0]) =>
-    Math.round(rows.reduce((s, r) => s + (r[key] as number), 0) / rows.length * 10) / 10;
+  const avg = (key: keyof typeof rowsWithId[0]) =>
+    Math.round(rowsWithId.reduce((s, r) => s + (r[key] as number), 0) / rowsWithId.length * 10) / 10;
 
-  const sortedDesc = [...rows].sort((a, b) => b.overall - a.overall);
+  const sortedDesc = [...rowsWithId].sort((a, b) => b.overall - a.overall);
   const top = sortedDesc.slice(0, BUNDLE_TOP);
   const bottom = sortedDesc.slice(-BUNDLE_BOTTOM).reverse();
 
@@ -285,8 +298,20 @@ export async function buildHumorFeedback(): Promise<HumorFeedback> {
       specificityCarrier: avg("specificityCarrier"),
       resolutionUnresolved: avg("resolutionUnresolved"),
       overall: avg("overall"),
-      sampleSize: rows.length,
+      sampleSize: rowsWithId.length,
     },
+    recent: rowsWithId.map(r => ({
+      articleId: r.articleId,
+      headline: r.headline,
+      apRigidity: r.apRigidity,
+      premiseAbsurdity: r.premiseAbsurdity,
+      jokeDiscipline: r.jokeDiscipline,
+      specificityCarrier: r.specificityCarrier,
+      resolutionUnresolved: r.resolutionUnresolved,
+      overall: r.overall,
+      summary: parseSummary(r.judgeNotes),
+      scoredAt: r.scoredAt instanceof Date ? r.scoredAt.toISOString() : String(r.scoredAt),
+    })),
   };
 }
 

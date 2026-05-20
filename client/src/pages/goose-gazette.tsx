@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { cast } from "@/lib/goose-personas";
 import { BarneyTRex } from "@/components/barney-trex";
 import { PinkRabbit } from "@/components/pink-rabbit";
@@ -72,9 +73,12 @@ Joke Discipline: ${avg.jokeDiscipline}
 Specificity Carrier: ${avg.specificityCarrier}
 Resolution Unresolved: ${avg.resolutionUnresolved}`;
   return (
-    <span data-testid="badge-humor-score"
-      className={`px-2 py-0.5 border rounded font-mono ${tone}`}
-      title={title}>κ-humor: {avg.overall.toFixed(1)}</span>
+    <Link
+      href="/goose/humor"
+      data-testid="badge-humor-score"
+      className={`px-2 py-0.5 border rounded font-mono hover:opacity-80 cursor-pointer ${tone}`}
+      title={`${title}\n\nClick for full dashboard →`}
+    >κ-humor: {avg.overall.toFixed(1)}</Link>
   );
 }
 

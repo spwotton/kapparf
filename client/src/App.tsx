@@ -53,6 +53,7 @@ import BioAcousticPage from "@/pages/bio-acoustic";
 import AudioForensicsPage from "@/pages/audio-forensics";
 import VideoForensicsPage from "@/pages/video-forensics";
 import GooseGazettePage from "@/pages/goose-gazette";
+import GooseHumorPage from "@/pages/goose-humor";
 import HyperobjectsPage from "@/pages/hyperobjects";
 
 function Router() {
@@ -117,6 +118,7 @@ function App() {
           <TooltipProvider>
             <Switch>
               {/* Standalone sites — no KAPPA sidebar */}
+              <Route path="/goose/humor" component={GooseHumorPage} />
               <Route path="/goose" component={GooseGazettePage} />
               {/* Main KAPPA platform */}
               <Route>
