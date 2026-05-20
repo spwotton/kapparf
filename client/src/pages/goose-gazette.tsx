@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { cast } from "@/lib/goose-personas";
 import { BarneyTRex } from "@/components/barney-trex";
 import { PinkRabbit } from "@/components/pink-rabbit";
+import { HypervisorPanel } from "@/components/hypervisor-panel";
 
 // ─── WEB AUDIO HONK ──────────────────────────────────────────────────────────
 function playHonk() {
@@ -649,6 +650,10 @@ export default function GooseGazettePage() {
           </div>
 
           <div className="border-t border-gray-200 pt-5 mt-2">
+            <HypervisorPanel />
+          </div>
+
+          <div className="border-t border-gray-200 pt-5 mt-5">
             <BarneyTRex />
           </div>
 

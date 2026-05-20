@@ -735,6 +735,15 @@ export async function generateGooseArticle(data: KappaData): Promise<GooseArticl
 
     console.log(`[GOOSE:L4] ✓ Article published: "${article.headline.substring(0, 70)}..."`);
     console.log(`[GOOSE:L4] κ₁_final=${draft.kappaScore.toFixed(4)} | err=${draft.kappaError.toFixed(4)} | words=${wordCount}`);
+
+    // L5: Humor Hypervisor — weigh the article (Anubis), update vector DB & weights
+    try {
+      const { ingestArticle } = await import("./humor-hypervisor");
+      ingestArticle(article).catch(err => console.error("[GOOSE:L5] HV ingest error:", err));
+    } catch (e: any) {
+      console.error("[GOOSE:L5] HV import failed:", e.message);
+    }
+
     return article;
   } catch (err) {
     console.error("[GOOSE] Generation pipeline error:", err);

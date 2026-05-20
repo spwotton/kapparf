@@ -5146,6 +5146,53 @@ ${correlationsHTML || '<p style="color:#6b7280">No correlations detected.</p>'}
 // ═══════════════════════════════════════════════════════════════════════════
 
 export function registerGooseRoutes(app: express.Express) {
+  // ──────────────────────────────────────────────────────────────────────────
+  // HUMOR HYPERVISOR — self-learning, LN-principled judge for Goose Gazette
+  // ──────────────────────────────────────────────────────────────────────────
+  app.get("/api/humor-hypervisor/state", async (_req, res) => {
+    try {
+      const { getHypervisorState } = await import("./humor-hypervisor");
+      res.json(await getHypervisorState());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/humor-hypervisor/article/:id", async (req, res) => {
+    try {
+      const { getArticleScore } = await import("./humor-hypervisor");
+      const score = await getArticleScore(req.params.id);
+      if (!score) return res.status(404).json({ error: "not scored yet" });
+      res.json(score);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/humor-hypervisor/evaluate/:id", async (req, res) => {
+    try {
+      const article = (await storage.getGooseArticles(200)).find(a => a.id === req.params.id);
+      if (!article) return res.status(404).json({ error: "article not found" });
+      const { ingestArticle } = await import("./humor-hypervisor");
+      const score = await ingestArticle(article);
+      res.json(score);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/humor-hypervisor/memory/search", async (req, res) => {
+    try {
+      const q = String(req.query.q || "").slice(0, 500);
+      if (!q) return res.status(400).json({ error: "missing q" });
+      const { searchMemory } = await import("./memory-cortex");
+      const results = await searchMemory(q, { limit: 10, category: "goose_article" });
+      res.json({ query: q, results });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // GET /api/goose/articles — fetch approved articles, newest first
   app.get("/api/goose/articles", async (req, res) => {
     try {

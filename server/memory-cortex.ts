@@ -60,6 +60,10 @@ const CATEGORIES = [
   "session_context",
 ] as const;
 
+export async function embedText(text: string): Promise<number[] | null> {
+  return embed(text);
+}
+
 async function embed(text: string): Promise<number[] | null> {
   const client = getEmbeddingClient();
   if (!client) {
