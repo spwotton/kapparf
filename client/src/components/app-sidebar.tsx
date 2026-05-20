@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Link, useLocation } from "wouter";
 import {
   Terminal,
@@ -41,7 +41,53 @@ import {
 } from "@/components/ui/sidebar";
 import { Badge } from "@/components/ui/badge";
 import { useI18n } from "@/lib/i18n";
+import { useDossier } from "@/lib/dossier";
 import { type KappaStatus, type PhoenixCountdown, THREAT_LEVELS } from "@shared/schema";
+
+function HiddenBookshelf() {
+  const { toggleDossierMode } = useDossier();
+  const clicksRef = useRef(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleClick = useCallback(() => {
+    clicksRef.current += 1;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => { clicksRef.current = 0; }, 5000);
+    if (clicksRef.current >= 3) {
+      clicksRef.current = 0;
+      if (timerRef.current) clearTimeout(timerRef.current);
+      toggleDossierMode();
+    }
+  }, [toggleDossierMode]);
+
+  return (
+    <div
+      onClick={handleClick}
+      title="📚"
+      data-testid="bookshelf-hidden"
+      style={{ cursor: "default", display: "flex", gap: "2px", alignItems: "flex-end", opacity: 0.35 }}
+    >
+      {[
+        { h: 22, w: 6, color: "#6366f1" },
+        { h: 18, w: 5, color: "#8b5cf6" },
+        { h: 24, w: 7, color: "#0891b2" },
+        { h: 16, w: 5, color: "#059669" },
+        { h: 20, w: 6, color: "#d97706" },
+        { h: 19, w: 5, color: "#9333ea" },
+      ].map((b, i) => (
+        <div
+          key={i}
+          style={{
+            width: b.w,
+            height: b.h,
+            background: b.color,
+            borderRadius: "1px 1px 0 0",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
 function getThreatColor(score: number): string {
   for (let i = THREAT_LEVELS.length - 1; i >= 0; i--) {
@@ -245,6 +291,9 @@ export function AppSidebar() {
               <span className="font-mono text-primary">{phoenixCountdown.percentComplete.toFixed(1)}%</span>
             </div>
           )}
+        </div>
+        <div className="mt-3 flex justify-center">
+          <HiddenBookshelf />
         </div>
       </div>
     </Sidebar>

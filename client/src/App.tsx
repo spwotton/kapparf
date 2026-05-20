@@ -7,6 +7,8 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { HeaderControls } from "@/components/header-controls";
 import { ThemeProvider } from "@/lib/theme";
+import { DossierProvider, useDossier } from "@/lib/dossier";
+import { useArrowSequence } from "@/hooks/useArrowSequence";
 import { I18nProvider } from "@/lib/i18n";
 import NotFound from "@/pages/not-found";
 import CommandCenterPage from "@/pages/command-center";
@@ -111,37 +113,84 @@ function Router() {
   );
 }
 
+function DossierBadge() {
+  const { dossierMode, toggleDossierMode } = useDossier();
+  if (!dossierMode) return null;
+  return (
+    <button
+      onClick={toggleDossierMode}
+      title="Exit Dossier Mode"
+      data-testid="badge-dossier-mode"
+      style={{
+        position: "fixed",
+        bottom: "1rem",
+        right: "1rem",
+        zIndex: 9999,
+        opacity: 0.2,
+        fontFamily: "monospace",
+        fontSize: "11px",
+        color: "#a5b4fc",
+        border: "1px solid rgba(165,180,252,0.3)",
+        borderRadius: "3px",
+        padding: "2px 6px",
+        background: "rgba(10,15,30,0.8)",
+        cursor: "pointer",
+        transition: "opacity 0.2s",
+        letterSpacing: "0.05em",
+      }}
+      onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")}
+      onMouseLeave={e => (e.currentTarget.style.opacity = "0.2")}
+    >
+      [D] ×
+    </button>
+  );
+}
+
+function AppWithDossier() {
+  const { toggleDossierMode } = useDossier();
+  useArrowSequence(toggleDossierMode);
+
+  return (
+    <>
+      <Switch>
+        {/* Standalone sites — no KAPPA sidebar */}
+        <Route path="/" component={GooseGazettePage} />
+        <Route path="/goose/admin" component={GooseAdminPage} />
+        <Route path="/goose/humor" component={GooseHumorPage} />
+        <Route path="/goose" component={GooseGazettePage} />
+        {/* Main KAPPA platform */}
+        <Route>
+          <SidebarProvider>
+            <div className="flex h-screen w-full">
+              <AppSidebar />
+              <div className="flex flex-col flex-1 min-w-0">
+                <HeaderControls />
+                <main className="flex-1 overflow-auto min-h-0">
+                  <Router />
+                </main>
+              </div>
+            </div>
+          </SidebarProvider>
+        </Route>
+      </Switch>
+      <Toaster />
+      <DossierBadge />
+    </>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
+    <DossierProvider>
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <Switch>
-              {/* Standalone sites — no KAPPA sidebar */}
-              <Route path="/" component={GooseGazettePage} />
-              <Route path="/goose/admin" component={GooseAdminPage} />
-              <Route path="/goose/humor" component={GooseHumorPage} />
-              <Route path="/goose" component={GooseGazettePage} />
-              {/* Main KAPPA platform */}
-              <Route>
-                <SidebarProvider>
-                  <div className="flex h-screen w-full">
-                    <AppSidebar />
-                    <div className="flex flex-col flex-1 min-w-0">
-                      <HeaderControls />
-                      <main className="flex-1 overflow-auto min-h-0">
-                        <Router />
-                      </main>
-                    </div>
-                  </div>
-                </SidebarProvider>
-              </Route>
-            </Switch>
-            <Toaster />
+            <AppWithDossier />
           </TooltipProvider>
         </QueryClientProvider>
       </I18nProvider>
+    </DossierProvider>
     </ThemeProvider>
   );
 }

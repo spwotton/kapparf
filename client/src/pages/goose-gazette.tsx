@@ -1,6 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useLocation } from "wouter";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useLocation, Link } from "wouter";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { cast } from "@/lib/goose-personas";
+import { BarneyTRex } from "@/components/barney-trex";
+import { PinkRabbit } from "@/components/pink-rabbit";
+import { HypervisorPanel } from "@/components/hypervisor-panel";
 
 // ─── WEB AUDIO HONK ──────────────────────────────────────────────────────────
 function playHonk() {
@@ -17,6 +22,21 @@ function playHonk() {
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+t+0.13);
       osc.start(ctx.currentTime+t); osc.stop(ctx.currentTime+t+0.15);
     });
+  } catch {}
+}
+
+// ─── LOGO EASTER EGG HONK — 220 Hz sawtooth, 150 ms, gain ramp-down ─────────
+function playLogoHonk() {
+  try {
+    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = "sawtooth";
+    osc.frequency.setValueAtTime(220, ctx.currentTime);
+    gain.gain.setValueAtTime(0, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+    osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.15);
   } catch {}
 }
 
@@ -491,7 +511,6 @@ export default function GooseGazettePage() {
   const [honkCount, setHonkCount] = useState(0);
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [mobileOpen, setMobileOpen] = useState(false);
-
   // ── EASTER EGG: Tier 1 — triple-tap logo → KAPPA backend ──────────────────
   const logoTaps = useRef<number[]>([]);
   const handleLogoTap = useCallback(() => {
@@ -507,6 +526,11 @@ export default function GooseGazettePage() {
   // ── EASTER EGG: Tier 2 — HONK × 7 → classified article flashes ──────────
   const [classifiedVisible, setClassifiedVisible] = useState(false);
   const classifiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [generating, setGenerating] = useState(false);
+  const [logoHonking, setLogoHonking] = useState(false);
+  const logoClicksRef = useRef(0);
+  const logoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleHonk = useCallback(() => {
     playHonk();
@@ -536,7 +560,19 @@ export default function GooseGazettePage() {
     if (deltaPress.current) clearTimeout(deltaPress.current);
   };
 
-  // ── DEEP LINK: ?a=articleId ───────────────────────────────────────────────
+  const handleLogoClick = useCallback(() => {
+    handleLogoTap(); // Tier 1
+    logoClicksRef.current += 1;
+    if (logoTimerRef.current) clearTimeout(logoTimerRef.current);
+    logoTimerRef.current = setTimeout(() => { logoClicksRef.current = 0; }, 4000);
+    if (logoClicksRef.current >= 3) {
+      logoClicksRef.current = 0;
+      if (logoTimerRef.current) clearTimeout(logoTimerRef.current);
+      playLogoHonk();
+      setLogoHonking(true);
+      setTimeout(() => setLogoHonking(false), 650);
+    }
+  }, [handleLogoTap]);
   const { data: apiData, refetch } = useQuery<any[]>({
     queryKey: ["/api/goose/articles"],
     refetchInterval: 5 * 60 * 1000,
@@ -633,10 +669,10 @@ export default function GooseGazettePage() {
             ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
             : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>}
         </button>
-        <button onClick={handleLogoTap}
+        <button onClick={e => { e.preventDefault(); handleLogoClick(); }}
           className="flex items-center gap-2 select-none bg-transparent border-none cursor-pointer"
           data-testid="button-logo-mobile">
-          <div className={honking ? "honk-active" : ""}><GooseSvg honking={honking} size={22}/></div>
+          <div className={logoHonking ? "goose-honk" : honking ? "honk-active" : ""} data-testid="logo-goose-mobile"><GooseSvg honking={honking || logoHonking} size={22}/></div>
           <span className="font-black text-[12px] tracking-tight text-black"
             style={{ fontFamily:"Georgia,serif" }}>THE GOOSE GAZETTE</span>
         </button>
@@ -648,10 +684,10 @@ export default function GooseGazettePage() {
         <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setMobileOpen(false)}>
           <aside className="w-64 h-full bg-white p-6 shadow-xl overflow-y-auto"
             onClick={e => e.stopPropagation()} data-testid="drawer-mobile">
-            <button onClick={handleLogoTap}
+            <button onClick={e => { e.preventDefault(); handleLogoClick(); }}
               className="flex flex-col items-center text-center mb-6 w-full bg-transparent border-none cursor-pointer"
               data-testid="button-logo-drawer">
-              <div className="waddle"><GooseSvg honking={false} size={56}/></div>
+              <div className="waddle"><GooseSvg honking={logoHonking} size={56}/></div>
               <h1 className="font-black text-[18px] mt-2 tracking-tight text-black"
                 style={{ fontFamily:"Georgia,serif" }}>The Goose Gazette</h1>
               <p className="text-[10px] italic text-gray-500 mt-1">Est. The Moment Things Got Weird</p>
@@ -674,14 +710,14 @@ export default function GooseGazettePage() {
       {/* ── DESKTOP 3-COL (180px · 1fr · 220px) — lg:grid ───────────────────── */}
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[180px_1fr_220px] pb-16">
 
-        {/* LEFT SIDEBAR — hidden on desktop unless hovered? No — sticky nav */}
+        {/* LEFT SIDEBAR */}
         <aside className="hidden lg:block sticky top-0 self-start h-screen border-r border-gray-200 px-6 py-8 overflow-y-auto"
           data-testid="sidebar-left">
-          <button onClick={handleLogoTap}
+          <button onClick={e => { e.preventDefault(); handleLogoClick(); }}
             className="flex flex-col items-center text-center mb-8 select-none w-full bg-transparent border-none cursor-pointer group"
             data-testid="button-logo-desktop">
-            <div className={honking ? "honk-active" : "waddle"}>
-              <GooseSvg honking={honking} size={64}/>
+            <div className={logoHonking ? "goose-honk" : honking ? "honk-active" : "waddle"} data-testid="logo-goose-desktop">
+              <GooseSvg honking={honking || logoHonking} size={64}/>
             </div>
             <h1 className="font-black text-[19px] mt-3 tracking-tight leading-tight text-black group-hover:text-gray-700 transition-colors"
               style={{ fontFamily:"Georgia,serif" }}>

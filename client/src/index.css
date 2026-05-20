@@ -126,3 +126,99 @@
     @apply text-[10px] tracking-[0.2em] uppercase font-bold text-muted-foreground;
   }
 }
+
+/* ─── DOSSIER MODE — secret evidence-dossier aesthetic ───────────────────── */
+.dossier {
+  --background: 225 35% 8%;
+  --foreground: 220 15% 88%;
+  --card: 225 28% 11%;
+  --card-foreground: 220 15% 88%;
+  --popover: 225 28% 11%;
+  --popover-foreground: 220 15% 88%;
+  --primary: 243 60% 65%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 225 22% 15%;
+  --secondary-foreground: 220 15% 88%;
+  --muted: 225 20% 14%;
+  --muted-foreground: 220 12% 52%;
+  --accent: 243 38% 20%;
+  --accent-foreground: 243 60% 75%;
+  --destructive: 243 60% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 225 18% 18%;
+  --input: 225 18% 18%;
+  --ring: 243 60% 65%;
+  --sidebar: 225 35% 6%;
+  --sidebar-foreground: 220 15% 80%;
+  --sidebar-border: 225 18% 14%;
+  --sidebar-primary: 243 60% 65%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 225 22% 12%;
+  --sidebar-accent-foreground: 220 15% 80%;
+  --sidebar-ring: 243 60% 65%;
+}
+
+.dossier body {
+  background: linear-gradient(160deg, #0a0f1e 0%, #111827 100%);
+  color: #dde1ea;
+}
+
+.dossier .bg-card,
+.dossier [class*="bg-card"] {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dossier [class*="backdrop"],
+.dossier aside,
+.dossier header {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dossier [class*="border"] {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Goose Gazette hardcoded class overrides (no inline-style reach) ───────── */
+.dossier .bg-white                 { background-color: #0d1220 !important; }
+.dossier .min-h-screen.bg-white    { background: linear-gradient(160deg, #0a0f1e, #111827) !important; }
+.dossier .text-gray-900,
+.dossier .text-black               { color: #dde1ea !important; }
+.dossier .text-gray-800            { color: #c8cdd9 !important; }
+.dossier .text-gray-700            { color: #9aa3b8 !important; }
+.dossier .text-gray-600            { color: #8892a8 !important; }
+.dossier .text-gray-500            { color: #6b7594 !important; }
+.dossier .text-gray-400            { color: #535e7a !important; }
+.dossier .text-gray-300            { color: #c8cdd9 !important; }
+.dossier .text-white               { color: #f0f2f8 !important; }
+.dossier .bg-gray-950              { background: linear-gradient(90deg, #06080f, #0d1120) !important; }
+.dossier .bg-gray-100,
+.dossier .bg-gray-50               { background-color: rgba(255, 255, 255, 0.04) !important; }
+.dossier .border-gray-200          { border-color: rgba(255, 255, 255, 0.08) !important; }
+.dossier .border-gray-800          { border-color: rgba(255, 255, 255, 0.12) !important; }
+.dossier .border-black             { border-color: rgba(255, 255, 255, 0.10) !important; }
+.dossier .divide-gray-200 > * + * { border-color: rgba(255, 255, 255, 0.08) !important; }
+.dossier .hover\:text-black:hover,
+.dossier .group:hover .group-hover\:text-gray-600,
+.dossier .group:hover .group-hover\:text-gray-700  { color: #a5b4fc !important; }
+/* cards & images */
+.dossier .bg-gray-100.shrink-0,
+.dossier .overflow-hidden.bg-gray-100 { background-color: rgba(99, 102, 241, 0.08) !important; }
+/* yellow HONK button in dossier — keep readable */
+.dossier .bg-yellow-400            { background-color: #4f46e5 !important; }
+.dossier .border-white             { border-color: rgba(165, 180, 252, 0.6) !important; }
+/* tag badges */
+.dossier .bg-black                 { background-color: #1e264a !important; }
+
+/* Goose Easter Egg animation */
+@keyframes goose-honk {
+  0%   { transform: scale(1) rotate(0deg); }
+  20%  { transform: scale(1.3) rotate(-8deg); }
+  40%  { transform: scale(1.2) rotate(6deg); }
+  60%  { transform: scale(1.25) rotate(-5deg) translateY(-4px); }
+  80%  { transform: scale(1.1) rotate(3deg) translateY(0px); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.goose-honk {
+  animation: goose-honk 0.6s ease-in-out forwards;
+}
