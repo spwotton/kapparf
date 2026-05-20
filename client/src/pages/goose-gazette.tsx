@@ -38,7 +38,26 @@ interface Article {
 }
 
 // ─── CATEGORIES ──────────────────────────────────────────────────────────────
-const CATEGORIES = ["ALL","LOCAL","WORLD","POLITICS","BUSINESS","SCIENCE","CULTURE","WILDLIFE","MARITIME","OPINION","BREAKING"];
+const CATEGORIES = ["ALL","LOCAL NEWS","SOCIETY","SCIENCE","WILDLIFE","MARITIME","OPINION"];
+
+// Map sidebar category label → article tags that match
+function matchesCategory(tag: string, cat: string): boolean {
+  const t = tag.toUpperCase();
+  if (cat === "ALL") return true;
+  if (cat === "LOCAL NEWS") return t === "LOCAL" || t === "LOCAL NEWS";
+  if (cat === "SOCIETY") return t === "SOCIETY" || t === "CULTURE" || t === "BUSINESS";
+  return t === cat;
+}
+
+// Category → representative emoji for secondary feed items
+const TAG_EMOJI: Record<string, string> = {
+  LOCAL: "🏘️", "LOCAL NEWS": "🏘️",
+  SOCIETY: "🎭", CULTURE: "🎭", BUSINESS: "📊",
+  SCIENCE: "🔬", WILDLIFE: "🦆", MARITIME: "⚓",
+  OPINION: "✒️", POLITICS: "🏛️", WORLD: "🌐",
+  BREAKING: "⚡", CLASSIFIED: "🔒", DIPLOMACY: "🤝",
+  DEFENSE: "🛡️", CYBER: "💻",
+};
 
 // ─── DEEP LORE: TIER-2 EGG ───────────────────────────────────────────────────
 // Appears on HONK × 7. Byline predicted by the piece itself.
@@ -557,9 +576,7 @@ export default function GooseGazettePage() {
     ? [CLASSIFIED_ARTICLE, ...allArticles]
     : allArticles;
 
-  const filtered = activeCategory === "ALL"
-    ? feedArticles
-    : feedArticles.filter(a => a.tag.toUpperCase() === activeCategory);
+  const filtered = feedArticles.filter(a => matchesCategory(a.tag, activeCategory));
 
   const cover      = filtered[0] ?? allArticles[0];
   const sideRecent = allArticles.slice(0, 5);
@@ -708,30 +725,30 @@ export default function GooseGazettePage() {
             </article>
           )}
 
-          {/* Secondary feed */}
-          <div className="divide-y divide-gray-200">
-            {filtered.slice(1).map(a => (
-              <article key={a.id} className="py-5 cursor-pointer group article-hover"
-                onClick={() => setSelected(a)} data-testid={`article-feed-${a.id}`}>
-                <div className="flex gap-4 items-start">
-                  <div className="shrink-0 w-20 h-20 overflow-hidden bg-gray-100">
-                    <img src={a.img} alt=""
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      onError={e => { (e.target as HTMLImageElement).src=`https://picsum.photos/seed/${a.id}/200/200`; }}/>
+          {/* Secondary feed — emoji icon column + text, thin rule separators */}
+          <div>
+            {filtered.slice(1).map((a, idx) => (
+              <div key={a.id}>
+                {idx > 0 && <hr className="border-gray-200"/>}
+                <article className="py-5 cursor-pointer group article-hover"
+                  onClick={() => setSelected(a)} data-testid={`article-feed-${a.id}`}>
+                  <div className="flex gap-5 items-start">
+                    <div className="shrink-0 w-16 h-16 bg-gray-50 border border-gray-100 flex items-center justify-center text-[28px] select-none">
+                      {TAG_EMOJI[a.tag.toUpperCase()] ?? "📰"}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-serif font-bold text-[16px] leading-snug text-gray-900 group-hover:text-gray-600 transition-colors"
+                        style={{ fontFamily:"Georgia,serif" }}>
+                        {a.headline}
+                      </h3>
+                      {a.subhead && (
+                        <p className="text-[12px] text-gray-600 italic mt-1 leading-snug line-clamp-2">{a.subhead}</p>
+                      )}
+                      <p className="text-[10px] font-sans text-gray-400 mt-2 tracking-wide">{a.author} &nbsp;·&nbsp; {a.date}</p>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <TagBadge tag={a.tag}/>
-                    <h3 className="font-serif font-bold text-[16px] leading-snug mt-1 text-gray-900 group-hover:text-gray-600 transition-colors"
-                      style={{ fontFamily:"Georgia,serif" }}>
-                      {a.headline}
-                    </h3>
-                    {a.subhead && (
-                      <p className="text-[12px] text-gray-600 italic mt-1 leading-snug line-clamp-2">{a.subhead}</p>
-                    )}
-                    <p className="text-[10px] font-sans text-gray-400 mt-2 tracking-wide">{a.author} &nbsp;·&nbsp; {a.date}</p>
-                  </div>
-                </div>
-              </article>
+                </article>
+              </div>
             ))}
             {filtered.length === 0 && (
               <p className="py-12 text-center text-[12px] text-gray-400 font-sans">No stories in this section.</p>
@@ -785,8 +802,8 @@ export default function GooseGazettePage() {
       {/* ── STICKY BOTTOM BAR ─────────────────────────────────────────────────── */}
       <div className="fixed bottom-0 left-0 right-0 z-30 bg-gray-950 text-gray-300 border-t-2 border-black h-12 flex items-center justify-between px-4 lg:px-6"
         data-testid="bar-bottom">
-        <p className="font-serif italic text-[11px] truncate flex-1 mr-4 text-gray-500">
-          All The News That's Fit To HONK &nbsp;·&nbsp; <span className="text-gray-600">The Goose Gazette</span>
+        <p className="font-serif italic text-[10px] lg:text-[11px] truncate flex-1 mr-4 text-gray-400">
+          *All conflicts are declared 99.98% meaningless. — "Beauty is not a property of objects — it is the <em>κ</em>-constrained collapse of the observer-critic-synthesizer wavefunction."
         </p>
         <button onClick={handleHonk} data-testid="button-honk-bottom"
           className={`shrink-0 text-[10px] font-black font-sans px-3 py-1.5 border-2 transition-all duration-200 ${
