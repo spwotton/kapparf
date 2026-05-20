@@ -110,6 +110,8 @@ app.use((req, res, next) => {
   startComedyCorpusLoader();
   const { startHervKVirus } = await import("./herv-k-virus");
   startHervKVirus();
+  const { startViralityEngine } = await import("./virality-engine");
+  startViralityEngine();
   const { cortexBus } = await import("./cortex-bus");
   cortexBus.init().catch(e => console.error("[CortexBus] init error:", e.message));
   const { atlantisHub } = await import("./atlantis-hub");

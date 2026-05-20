@@ -239,8 +239,8 @@ METADATA RULES:
     Do NOT summarize. Add one concrete detail. Never wink.
   imgQuery: 3-5 literal words for Unsplash search matching the article subject.
     Examples: "parking lot geese", "seismograph reading", "office building exterior"
-  tag: exactly ONE of: BREAKING | SOCIETY | SCIENCE | MARITIME | OBITUARIES | BUSINESS | LOCAL | OPINION | WILDLIFE
-  category: exactly ONE of: news | society | science | maritime | obituaries | business | local | opinion | wildlife
+  tag: exactly ONE of: BREAKING | SOCIETY | SCIENCE | MARITIME | OBITUARIES | BUSINESS | LOCAL | OPINION | WILDLIFE | POLITICS | WORLD | CULTURE | DIPLOMACY | DEFENSE | CYBER
+  category: exactly ONE of: news | society | science | maritime | obituaries | business | local | opinion | wildlife | politics | world | culture | diplomacy | defense | cyber
 
 Output ONLY valid JSON (no markdown):
 { "authorByline": "string", "subhead": "string", "imgQuery": "string", "tag": "string", "category": "string" }`;
@@ -475,7 +475,153 @@ Total events in system: ${Object.values(d.stats).reduce((a, b) => a + b, 0).toLo
 
 ARTICLE CONCEPT: An economic indicator, study, or quarterly report confirms something that everyone already knew. An economist explains it using a model. The model confirms the thing everyone knew. No action will be taken.`,
   },
+  // ── 15 NEW TEMPLATES ──────────────────────────────────────────────────────
+  {
+    name: "politics_study",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Domestic politics / Governance
+ARTICLE CONCEPT: A government committee has released a 400-page study confirming that the thing everyone wanted confirmed is confirmed. The committee is now dissolved. A new committee will be formed to study the first committee's findings. Dateline: San José, Cartago, or Heredia.
+Punchline: The scope of the second committee. It is narrower than the first.`,
+  },
+  {
+    name: "diplomacy_bilateral",
+    tag: "DIPLOMACY",
+    category: "diplomacy",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Bilateral diplomacy / International relations
+ARTICLE CONCEPT: Two countries have agreed to "strengthen ties." The ties in question are not specified. A joint statement was issued. The statement contains the phrase "mutual benefit" four times. Neither ambassador was available for comment. A third country issued a separate statement describing itself as "supportive."
+Dateline: San José, Washington D.C., or Geneva. Use real diplomatic boilerplate.`,
+  },
+  {
+    name: "defense_procurement",
+    tag: "DEFENSE",
+    category: "defense",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Defense procurement / Military affairs
+ARTICLE CONCEPT: A defense contractor has delivered a procurement item described as "mission-critical" that is either (a) two years late and one-third of its original specifications, or (b) fully functional but for a purpose no longer required. The contract was renewed. The procurement office issued a statement describing the outcome as "within acceptable parameters."
+Use real procurement terminology. No specific countries named — "the ministry," "the contractor," "the program."`,
+  },
+  {
+    name: "world_summit",
+    tag: "WORLD",
+    category: "world",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: International summit / Multilateral conference
+ARTICLE CONCEPT: An international summit has concluded with a communiqué. The communiqué reaffirms existing commitments. Delegates described the summit as "productive." One delegation described it as "historic." No definition of historic was provided. The next summit has been scheduled.
+Dateline: Vienna, Geneva, or Davos. One country's delegate quotes must be diplomatically evasive.`,
+  },
+  {
+    name: "culture_report",
+    tag: "CULTURE",
+    category: "culture",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Cultural trends / Arts
+ARTICLE CONCEPT: A cultural phenomenon — a genre, a dance, a phrase, an aesthetic — has been declared "over" by an expert. A separate expert has declared it "back." Both experts agree it is "interesting." A third expert says "it was never really gone." Dateline: Barrio Escalante, San José, or Quepos.
+The phenomenon should be something mundane: a color, a jacket style, a way of greeting people.`,
+  },
+  {
+    name: "cyber_incident",
+    tag: "CYBER",
+    category: "cyber",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Cybersecurity / Network incident
+KAPPA score: ${d.kappaScore.toFixed(1)}
+WiFi events: ${d.stats.wifi ?? 0}, LTE: ${d.stats.lte ?? 0}
+ARTICLE CONCEPT: An organization has disclosed a "cybersecurity incident" in which the affected systems were "contained." The nature of the incident is described as "consistent with known threat patterns." Nothing specific about the threat, the systems, or the containment is disclosed. The organization is committed to "transparency" and will provide updates "as the situation develops."
+Punchline: The last line of the disclosure document. It contains a warranty disclaimer.`,
+  },
+  {
+    name: "narco_sub",
+    tag: "MARITIME",
+    category: "maritime",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Maritime interdiction / Pacific coast trafficking
+ARTICLE CONCEPT: Authorities have intercepted a semi-submersible vessel in the Pacific Ocean near Costa Rica. The vessel contained a large quantity of something described as "consistent with controlled substances pending laboratory confirmation." The crew was apprehended. A spokesperson confirmed the interdiction was "consistent with ongoing operations." No additional details were available. Dateline: Pacific Ocean off Quepos or the Nicoya Peninsula.`,
+  },
+  {
+    name: "lithium_treaty",
+    tag: "DIPLOMACY",
+    category: "diplomacy",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Natural resource diplomacy / Minerals
+ARTICLE CONCEPT: A country with significant lithium, rare earth, or mineral reserves has entered negotiations with a foreign partner. The partnership is described as "strategic." The terms are "commercially sensitive." An economist describes the deal as "significant." A second economist describes it as "not necessarily significant in isolation." A government spokesperson says both economists are correct.
+Use a real Central or South American dateline. No fictional countries.`,
+  },
+  {
+    name: "un_resolution",
+    tag: "WORLD",
+    category: "world",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: UN / Multilateral resolution
+ARTICLE CONCEPT: The United Nations General Assembly has passed a non-binding resolution reaffirming a principle it previously affirmed. The vote was 147-3, with 12 abstentions. The three dissenting countries issued separate statements. One abstaining country issued a statement explaining its abstention in terms that are technically an endorsement. The principle in question is described as "fundamental."
+Dateline: New York or Geneva. Use real UNGA procedural language.`,
+  },
+  {
+    name: "border_dispute",
+    tag: "WORLD",
+    category: "world",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Territorial / Border dispute
+ARTICLE CONCEPT: Two neighboring countries have described a disputed area using different maps. Both maps are described as "authoritative." A third party has offered to mediate. Neither country has responded to the offer. A spokesperson for the mediating party confirmed they had sent a letter. The letter is "under review." The area in dispute is approximately the size of a shopping mall parking lot.
+Dateline: Central America or Caribbean. Real geography, fictional specific incident.`,
+  },
+  {
+    name: "foreign_troops",
+    tag: "DEFENSE",
+    category: "defense",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Military presence / Foreign troops
+ARTICLE CONCEPT: A country has confirmed the presence of foreign military personnel on its territory for purposes described as "training" and "capacity building." The number of personnel is "not publicly disclosed for operational reasons." A spokesperson confirmed the presence is "temporary" without providing a timeline. A neighboring country issued a statement describing the development as "noted." No further comment.
+Dateline: Central America. Tone: completely neutral wire copy.`,
+  },
+  {
+    name: "espionage_expulsion",
+    tag: "WORLD",
+    category: "world",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Intelligence / Diplomatic expulsion
+ARTICLE CONCEPT: A country has expelled a foreign diplomat for activities described as "incompatible with diplomatic status." The diplomat's country of origin has expelled a diplomat in response. Both countries described their actions as "proportionate." The original diplomat's activities were not specified. The retaliatory expulsion's target's activities were also not specified. Relations between the two countries are described as "normal" by both foreign ministries.`,
+  },
+  {
+    name: "subsea_cable",
+    tag: "SCIENCE",
+    category: "science",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Submarine infrastructure / Telecom
+KAPPA score: ${d.kappaScore.toFixed(1)}
+SDR detections: ${d.stats.sdr?.toLocaleString() ?? "unknown"}
+ARTICLE CONCEPT: A submarine fiber optic cable has experienced an "unplanned service interruption" in the Pacific or Caribbean. The cause is "under investigation." Internet traffic was "rerouted through alternative paths," which experienced "increased latency." The cable's owners confirmed the interruption was "not related to" three specific things they listed. They did not explain why they felt the need to exclude those three things.
+Use real cable names or realistic fictional ones (e.g., "CAC-1," "ARCOS-1," "Pacific Jade").`,
+  },
+  {
+    name: "parade_incident",
+    tag: "LOCAL",
+    category: "local",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Local civic event / Public ceremony
+ARTICLE CONCEPT: A civic parade or public ceremony in a Costa Rican city has experienced a logistical complication described by organizers as "minor" and by participants as "significant." The complication involved either (a) a vehicle blocking a route, (b) a sound system playing the wrong thing at the wrong moment, or (c) an animal entering the parade formation. Officials confirmed it was "handled." Dateline: Jacó, Liberia, Alajuela, or San José. One specific mundane detail must be stated twice.`,
+  },
+  {
+    name: "tech_launch",
+    tag: "BUSINESS",
+    category: "business",
+    buildPrompt: (_d) => `
+SIGNAL DOMAIN: Technology sector / Product launch
+ARTICLE CONCEPT: A technology company has launched a product that solves a problem the company identified in a press release. The problem was not previously known to exist. The product costs $49 per month. The company's CEO described the problem as "pervasive." An analyst described the market size as "significant." A user described the product as "fine, I guess." Dateline: San José technology district or Silicon Valley. Use real startup press release language.`,
+  },
 ];
+
+// ── LORE SEED INTEGRATION: pick a seed 25% of the time ───────────────────────
+export function pickLoreSeed(): string | null {
+  const seeds: Array<{ story: string; used: number }> = (global as any).__gooseLoreSeeds ?? [];
+  if (!seeds.length || Math.random() > 0.25) return null;
+  // prefer seeds used fewer times
+  const seed = seeds.sort((a, b) => a.used - b.used)[0];
+  seed.used++;
+  return seed.story;
+}
 
 // ── COUNCIL HELPER: safe JSON parse from LLM ─────────────────────────────────
 function safeParseJSON<T>(raw: string | null | undefined, fallback: T): T {
@@ -497,7 +643,9 @@ function safeParseJSON<T>(raw: string | null | undefined, fallback: T): T {
 // ── L1A: GEOMETER AGENT ───────────────────────────────────────────────────────
 async function runGeometerAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<GeometerOutput | null> {
   try {
-    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
+    const loreSeed = pickLoreSeed();
+    const loreBlock = loreSeed ? `\nLORE SEED (weave this real story subtly into background detail — do NOT quote it directly):\n${loreSeed.slice(0, 400)}\n` : "";
+    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data) + loreBlock;
     const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
     const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
 

@@ -54,6 +54,7 @@ import AudioForensicsPage from "@/pages/audio-forensics";
 import VideoForensicsPage from "@/pages/video-forensics";
 import GooseGazettePage from "@/pages/goose-gazette";
 import GooseHumorPage from "@/pages/goose-humor";
+import GooseAdminPage from "@/pages/goose-admin";
 import HyperobjectsPage from "@/pages/hyperobjects";
 
 function Router() {
@@ -118,6 +119,8 @@ function App() {
           <TooltipProvider>
             <Switch>
               {/* Standalone sites — no KAPPA sidebar */}
+              <Route path="/" component={GooseGazettePage} />
+              <Route path="/goose/admin" component={GooseAdminPage} />
               <Route path="/goose/humor" component={GooseHumorPage} />
               <Route path="/goose" component={GooseGazettePage} />
               {/* Main KAPPA platform */}
