@@ -157,6 +157,8 @@ export interface HypervisorAgent {
   output: string;
   status: "idle" | "queued" | "running" | "done" | "error" | "aborted";
   tokenCount: number;
+  tokensPerSec: number;
+  tokenTimestamps: number[];
 }
 
 export interface HypervisorLayer {
@@ -181,7 +183,7 @@ export function makeDefaultLayers(): HypervisorLayer[] {
       isHidden: true,
       mask: "signal intelligence only",
       agents: [
-        { id: "kappa-analyst", roleId: "analyst", output: "", status: "idle", tokenCount: 0 },
+        { id: "kappa-analyst", roleId: "analyst", output: "", status: "idle", tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] },
       ],
       subLayers: [],
       isExpanded: false,
@@ -194,9 +196,9 @@ export function makeDefaultLayers(): HypervisorLayer[] {
       isHidden: false,
       mask: "",
       agents: [
-        { id: "agent-designer", roleId: "designer", output: "", status: "idle", tokenCount: 0 },
-        { id: "agent-coder", roleId: "coder", output: "", status: "idle", tokenCount: 0 },
-        { id: "agent-engineer", roleId: "engineer", output: "", status: "idle", tokenCount: 0 },
+        { id: "agent-designer", roleId: "designer", output: "", status: "idle", tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] },
+        { id: "agent-coder", roleId: "coder", output: "", status: "idle", tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] },
+        { id: "agent-engineer", roleId: "engineer", output: "", status: "idle", tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] },
       ],
       subLayers: [],
       isExpanded: true,
@@ -209,7 +211,7 @@ export function makeDefaultLayers(): HypervisorLayer[] {
       isHidden: false,
       mask: "",
       agents: [
-        { id: "hyp-synth", roleId: "hypervisor", output: "", status: "idle", tokenCount: 0 },
+        { id: "hyp-synth", roleId: "hypervisor", output: "", status: "idle", tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] },
       ],
       subLayers: [],
       isExpanded: true,

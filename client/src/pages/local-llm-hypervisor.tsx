@@ -220,6 +220,14 @@ function AgentChip({
         {agent.status === "running" && !agent.output && (
           <span className="text-[10px] text-muted-foreground animate-pulse flex-1">generating…</span>
         )}
+        {agent.status === "running" && agent.tokensPerSec > 0 && (
+          <span
+            className="text-[10px] font-mono text-blue-500 dark:text-blue-400 shrink-0 tabular-nums"
+            data-testid={`badge-tps-${agent.id}`}
+          >
+            {agent.tokensPerSec} t/s
+          </span>
+        )}
         {agent.tokenCount > 0 && (
           <span className="text-[10px] text-muted-foreground shrink-0">{agent.tokenCount}t</span>
         )}
@@ -556,7 +564,7 @@ function saveLayersToStorage(layers: HypervisorLayer[]) {
   try {
     const clean = layers.map((l) => ({
       ...l,
-      agents: l.agents.map((a) => ({ ...a, output: "", status: "idle", tokenCount: 0 })),
+      agents: l.agents.map((a) => ({ ...a, output: "", status: "idle", tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] })),
     }));
     localStorage.setItem(LS_KEY, JSON.stringify(clean));
   } catch {}
@@ -682,13 +690,22 @@ export default function LocalLLMHypervisorPage() {
       if (msg.layerId === "chat") {
         setStreamBuffer((b) => b + msg.text);
       } else {
+        const now = Date.now();
         setLayers((prev) => prev.map((l) => {
           if (l.id !== msg.layerId) return l;
           return {
             ...l,
-            agents: l.agents.map((a) =>
-              a.id === msg.agentId ? { ...a, output: a.output + msg.text, status: "running" as const } : a
-            ),
+            agents: l.agents.map((a) => {
+              if (a.id !== msg.agentId) return a;
+              const window = [...(a.tokenTimestamps ?? []).filter((t) => now - t <= 2000), now];
+              return {
+                ...a,
+                output: a.output + msg.text,
+                status: "running" as const,
+                tokenTimestamps: window,
+                tokensPerSec: Math.round(window.length / 2),
+              };
+            }),
           };
         }));
       }
@@ -714,7 +731,7 @@ export default function LocalLLMHypervisorPage() {
               ...l,
               agents: l.agents.map((a) =>
                 a.id === msg.agentId
-                  ? { ...a, status: (isAborted ? "aborted" : "done") as const, tokenCount: a.tokenCount + msg.totalTokens }
+                  ? { ...a, status: (isAborted ? "aborted" : "done") as const, tokenCount: a.tokenCount + msg.totalTokens, tokensPerSec: 0, tokenTimestamps: [] }
                   : a
               ),
             };
@@ -850,7 +867,7 @@ export default function LocalLLMHypervisorPage() {
     setLayers((prev) =>
       prev.map((l) => l.id !== "layer-hypervisor" ? l : {
         ...l,
-        agents: l.agents.map((a) => ({ ...a, output: "", status: "running" as const, tokenCount: 0 })),
+        agents: l.agents.map((a) => ({ ...a, output: "", status: "running" as const, tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] })),
       })
     );
 
@@ -945,7 +962,7 @@ export default function LocalLLMHypervisorPage() {
     setLayers((prev) =>
       prev.map((l) => ({
         ...l,
-        agents: l.agents.map((a) => ({ ...a, output: "", status: "idle" as const, tokenCount: 0 })),
+        agents: l.agents.map((a) => ({ ...a, output: "", status: "idle" as const, tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] })),
       }))
     );
 
@@ -1283,7 +1300,7 @@ export default function LocalLLMHypervisorPage() {
         ...l,
         agents: [
           ...l.agents,
-          { id: newAgentId(), roleId, output: "", status: "idle" as const, tokenCount: 0 },
+          { id: newAgentId(), roleId, output: "", status: "idle" as const, tokenCount: 0, tokensPerSec: 0, tokenTimestamps: [] },
         ],
       }));
     },
@@ -1704,8 +1721,18 @@ export default function LocalLLMHypervisorPage() {
                   if (!agent?.output && agent?.status !== "running") return null;
                   return (
                     <div className="border border-primary/30 rounded-lg p-3 bg-primary/5" data-testid="hypervisor-output">
-                      <div className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-1">
-                        {hyp?.name ?? "Synthesis"} ∑
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-semibold text-primary uppercase tracking-wider">
+                          {hyp?.name ?? "Synthesis"} ∑
+                        </span>
+                        {agent.status === "running" && agent.tokensPerSec > 0 && (
+                          <span
+                            className="text-[10px] font-mono text-primary/70 tabular-nums"
+                            data-testid="badge-tps-synthesis"
+                          >
+                            {agent.tokensPerSec} t/s
+                          </span>
+                        )}
                       </div>
                       <p className="text-sm leading-relaxed">
                         {agent.output}

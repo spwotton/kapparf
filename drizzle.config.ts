@@ -12,4 +12,5 @@ export default defineConfig({
     url: process.env.DATABASE_URL,
   },
   tablesFilter: ["!memory_vectors", "!atlantis_apps"],
+  strict: false,
 });
