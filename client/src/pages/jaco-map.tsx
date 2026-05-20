@@ -1982,6 +1982,61 @@ export default function JacoMapPage() {
                 pathOptions={{ color: "#" + l.color.toString(16).padStart(6,"0"), fillColor: "#" + l.color.toString(16).padStart(6,"0"), fillOpacity: l.opacity * 0.4, weight: 1 }}
               />
             ))}
+            {liveAircraft.filter(ac => ac.latitude != null && ac.longitude != null).map(ac => {
+              const altM = ac.baroAltitude ?? ac.geoAltitude ?? null;
+              const spdMs = ac.velocity ?? null;
+              const heading = ac.trueTrack ?? 0;
+              const threatLevel =
+                altM === null ? "UNKNOWN" :
+                altM < 500  ? "HIGH" :
+                altM < 2000 ? "MEDIUM" : "LOW";
+              const threatColor =
+                threatLevel === "HIGH"    ? "#ef4444" :
+                threatLevel === "MEDIUM"  ? "#f97316" :
+                threatLevel === "UNKNOWN" ? "#6b7280" : "#22c55e";
+              const aircraftIcon = new L.DivIcon({
+                html: `<div style="
+                  transform: rotate(${heading}deg);
+                  font-size: 18px;
+                  line-height: 1;
+                  filter: drop-shadow(0 0 4px ${threatColor});
+                  color: ${threatColor};
+                ">✈</div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10],
+                className: "",
+              });
+              const callsign = ac.callsign?.trim() || ac.icao24;
+              const altStr = altM !== null ? `${Math.round(altM)} m` : "—";
+              const spdStr = spdMs !== null ? `${Math.round(spdMs * 1.944)} kt` : "—";
+              return (
+                <Marker
+                  key={ac.icao24}
+                  position={[ac.latitude, ac.longitude]}
+                  icon={aircraftIcon}
+                >
+                  <Popup>
+                    <div style={{ fontFamily: "monospace", fontSize: "12px", minWidth: "160px" }}>
+                      <div style={{ fontWeight: "bold", fontSize: "13px", marginBottom: "4px" }}>
+                        ✈ {callsign}
+                      </div>
+                      <div>ICAO: <strong>{ac.icao24.toUpperCase()}</strong></div>
+                      <div>Origin: {ac.originCountry || "—"}</div>
+                      <div>Altitude: <strong>{altStr}</strong></div>
+                      <div>Speed: <strong>{spdStr}</strong></div>
+                      <div>Heading: {heading ? `${Math.round(heading)}°` : "—"}</div>
+                      {ac.squawk && <div>Squawk: {ac.squawk}</div>}
+                      <div style={{ marginTop: "6px" }}>
+                        Threat:{" "}
+                        <span style={{ color: threatColor, fontWeight: "bold" }}>
+                          {threatLevel}
+                        </span>
+                      </div>
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
           </MapContainer>
           {/* Fallback banner */}
           <div className="absolute top-12 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none" data-testid="leaflet-fallback-banner">
