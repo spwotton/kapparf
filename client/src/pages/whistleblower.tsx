@@ -267,37 +267,74 @@ function CopyBlock({ text, multiline }: { text: string; multiline?: boolean }) {
   );
 }
 
+const navGroups = [
+  {
+    id: "overview",
+    label: "Overview",
+    items: [
+      { id: "overview", label: "Overview" },
+    ],
+  },
+  {
+    id: "actors",
+    label: "Actors",
+    items: [
+      { id: "jaco", label: "The Jaco Nexus" },
+      { id: "setecom", label: "Setecom/DSE" },
+      { id: "actors", label: "The Actors" },
+      { id: "cdmx-nexus", label: "CDMX Nexus" },
+    ],
+  },
+  {
+    id: "evidence",
+    label: "Evidence",
+    items: [
+      { id: "sonar", label: "Sonar Evidence" },
+      { id: "network", label: "Network Evidence" },
+      { id: "pcap", label: "Packet Captures" },
+      { id: "evidence", label: "Visual Evidence" },
+      { id: "archive", label: "Evidence Archive" },
+      { id: "github", label: "GitHub Forensics" },
+    ],
+  },
+  {
+    id: "signals",
+    label: "Signals",
+    items: [
+      { id: "signals", label: "Signal Intelligence" },
+      { id: "phased-array", label: "Phased Array" },
+      { id: "radio-towers", label: "Radio Towers" },
+      { id: "panopticon", label: "Panopticon" },
+    ],
+  },
+  {
+    id: "analysis",
+    label: "Analysis",
+    items: [
+      { id: "motive", label: "Motive" },
+      { id: "correlations", label: "Correlations" },
+      { id: "timeline", label: "Timeline" },
+      { id: "zersetzung", label: "Digital Zersetzung" },
+    ],
+  },
+  {
+    id: "legal",
+    label: "Legal",
+    items: [
+      { id: "3i-atlas", label: "3I/ATLAS" },
+      { id: "legal", label: "Legal Framework" },
+    ],
+  },
+];
+
 export default function WhistleblowerPage() {
   const [activeSection, setActiveSection] = useState("overview");
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
   const scrollSpyPaused = useRef(false);
   const scrollSpyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const navItems = [
-    { id: "overview", label: "Overview" },
-    { id: "jaco", label: "The Jaco Nexus" },
-    { id: "sonar", label: "Sonar Evidence" },
-    { id: "setecom", label: "Setecom/DSE" },
-    { id: "actors", label: "The Actors" },
-    { id: "network", label: "Network Evidence" },
-    { id: "motive", label: "Motive" },
-    { id: "signals", label: "Signal Intelligence" },
-    { id: "correlations", label: "Correlations" },
-    { id: "pcap", label: "Packet Captures" },
-    { id: "timeline", label: "Timeline" },
-    { id: "evidence", label: "Visual Evidence" },
-    { id: "zersetzung", label: "Digital Zersetzung" },
-    { id: "phased-array", label: "Phased Array" },
-    { id: "radio-towers", label: "Radio Towers" },
-    { id: "panopticon", label: "Panopticon" },
-    { id: "3i-atlas", label: "3I/ATLAS" },
-    { id: "archive", label: "Evidence Archive" },
-    { id: "github", label: "GitHub Forensics" },
-    { id: "cdmx-nexus", label: "CDMX Nexus" },
-    { id: "legal", label: "Legal Framework" },
-  ];
-
   useEffect(() => {
-    const sectionIds = navItems.map(item => item.id);
+    const sectionIds = navGroups.flatMap(g => g.items).map(item => item.id);
     const observer = new IntersectionObserver(
       (entries) => {
         if (scrollSpyPaused.current) return;
@@ -350,8 +387,11 @@ export default function WhistleblowerPage() {
   ];
 
 
-  function handleNavClick(id: string) {
+  const activeGroup = navGroups.find(g => g.items.some(i => i.id === activeSection))?.id ?? "overview";
+
+  function navigateTo(id: string) {
     setActiveSection(id);
+    setOpenGroup(null);
     scrollSpyPaused.current = true;
     if (scrollSpyTimer.current) clearTimeout(scrollSpyTimer.current);
     scrollSpyTimer.current = setTimeout(() => {
@@ -364,34 +404,78 @@ export default function WhistleblowerPage() {
   return (
     <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
 
-
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-amber-900/30 dark:border-amber-900/50">
         <div className="max-w-6xl mx-auto px-4 py-2">
-          {/* Mobile: compact select dropdown */}
+          {/* Mobile: grouped select dropdown */}
           <div className="sm:hidden">
             <select
               value={activeSection}
-              onChange={e => handleNavClick(e.target.value)}
+              onChange={e => navigateTo(e.target.value)}
               data-testid="nav-mobile-select"
               className="w-full bg-background border border-amber-900/40 rounded px-2 py-1.5 text-xs font-sans text-foreground focus:outline-none focus:border-amber-600"
             >
-              {navItems.map(item => (
-                <option key={item.id} value={item.id}>{item.label}</option>
+              {navGroups.map(group => (
+                <optgroup key={group.id} label={group.label}>
+                  {group.items.map(item => (
+                    <option key={item.id} value={item.id}>{item.label}</option>
+                  ))}
+                </optgroup>
               ))}
             </select>
           </div>
-          {/* Desktop: wrapping pill nav */}
-          <nav className="hidden sm:flex gap-1 flex-wrap justify-center">
-            {navItems.map(item => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`px-2 py-1 text-[11px] font-sans rounded transition-colors ${activeSection === item.id ? "bg-amber-900/50 text-amber-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
-                onClick={e => { e.preventDefault(); handleNavClick(item.id); }}
-                data-testid={`nav-${item.id}`}
-              >
-                {item.label}
-              </a>
+          {/* Desktop: grouped pill nav with dropdowns */}
+          <nav
+            className="hidden sm:flex gap-1 justify-center items-center"
+            onMouseLeave={() => setOpenGroup(null)}
+          >
+            {navGroups.map(group => (
+              <div key={group.id} className="relative">
+                <button
+                  data-testid={`nav-group-${group.id}`}
+                  onMouseEnter={() => setOpenGroup(group.id)}
+                  onClick={() => {
+                    if (group.items.length === 1) {
+                      navigateTo(group.items[0].id);
+                    } else {
+                      setOpenGroup(prev => prev === group.id ? null : group.id);
+                    }
+                  }}
+                  className={`px-3 py-1.5 text-[11px] font-sans rounded transition-colors flex items-center gap-1 ${
+                    activeGroup === group.id
+                      ? "bg-amber-900/50 text-amber-300"
+                      : "text-muted-foreground/60 hover:text-muted-foreground hover:bg-muted/40"
+                  }`}
+                >
+                  {group.label}
+                  {group.items.length > 1 && (
+                    <svg className="w-2.5 h-2.5 opacity-60" viewBox="0 0 10 6" fill="none">
+                      <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </button>
+                {openGroup === group.id && group.items.length > 1 && (
+                  <div
+                    className="absolute top-full left-0 mt-1 z-50 min-w-[160px] bg-background border border-amber-900/40 rounded shadow-lg py-1"
+                    onMouseEnter={() => setOpenGroup(group.id)}
+                  >
+                    {group.items.map(item => (
+                      <a
+                        key={item.id}
+                        href={`#${item.id}`}
+                        data-testid={`nav-${item.id}`}
+                        onClick={e => { e.preventDefault(); navigateTo(item.id); }}
+                        className={`block px-3 py-1.5 text-[11px] font-sans transition-colors whitespace-nowrap ${
+                          activeSection === item.id
+                            ? "text-amber-300 bg-amber-900/30"
+                            : "text-muted-foreground/70 hover:text-foreground hover:bg-muted/40"
+                        }`}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
         </div>
