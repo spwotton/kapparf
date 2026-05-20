@@ -1,5 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 interface RecentRow {
   articleId: string;
@@ -89,11 +92,222 @@ function Sparkline({ values, label }: { values: number[]; label: string }) {
   );
 }
 
+interface ArticleDetail {
+  article: {
+    id: string;
+    headline: string;
+    subhead: string | null;
+    body: string;
+    tag: string;
+    publishedAt: string;
+    authorByline: string | null;
+  };
+  score: {
+    overall: number;
+    apRigidity: number;
+    premiseAbsurdity: number;
+    jokeDiscipline: number;
+    specificityCarrier: number;
+    resolutionUnresolved: number;
+    rubricVersion: number;
+    scoredAt: string;
+  } | null;
+  notes: Record<string, string> | null;
+  summary: string | null;
+}
+
+function ArticleRow({
+  row,
+  expanded,
+  onToggle,
+}: {
+  row: RecentRow;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const { data: detail, isLoading: detailLoading } = useQuery<ArticleDetail>({
+    queryKey: ["/api/goose/articles", row.articleId],
+    enabled: expanded,
+  });
+
+  const rejudge = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", `/api/humor-hypervisor/evaluate/${row.articleId}`);
+      return res.json();
+    },
+    onSuccess: () => {
+      toast({ title: "Re-judged", description: "Fresh scores saved." });
+      queryClient.invalidateQueries({ queryKey: ["/api/goose/humor-stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/goose/articles", row.articleId] });
+    },
+    onError: (e: any) => {
+      toast({
+        title: "Re-judge failed",
+        description: e?.message ?? "Unknown error",
+        variant: "destructive",
+      });
+    },
+  });
+
+  return (
+    <>
+      <tr
+        className="border-b border-gray-100 dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-950 cursor-pointer"
+        data-testid={`row-article-${row.articleId}`}
+        onClick={onToggle}
+      >
+        <td className="px-4 py-2">
+          <div className="flex items-start gap-2">
+            <span
+              className="text-gray-400 dark:text-gray-600 font-mono text-xs mt-0.5 select-none"
+              aria-hidden
+            >
+              {expanded ? "▾" : "▸"}
+            </span>
+            <div className="min-w-0">
+              <div className="font-medium truncate max-w-xs" title={row.headline}>
+                {row.headline}
+              </div>
+              {row.summary && (
+                <div
+                  className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-xs"
+                  title={row.summary}
+                >
+                  {row.summary}
+                </div>
+              )}
+            </div>
+          </div>
+        </td>
+        {DIMS.map((d) => (
+          <td
+            key={d.key as string}
+            className={`px-2 py-2 text-right font-mono ${toneClass(row[d.key] as number)}`}
+          >
+            {row[d.key] as number}
+          </td>
+        ))}
+        <td className={`px-2 py-2 text-right font-mono font-semibold ${toneClass(row.overall)}`}>
+          {row.overall}
+        </td>
+        <td className="px-4 py-2 text-right text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+          {new Date(row.scoredAt).toLocaleString()}
+        </td>
+      </tr>
+      {expanded && (
+        <tr
+          className="bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800"
+          data-testid={`row-detail-${row.articleId}`}
+        >
+          <td colSpan={DIMS.length + 3} className="px-6 py-4">
+            {detailLoading && (
+              <div className="text-sm text-gray-500 dark:text-gray-400">Loading details…</div>
+            )}
+            {!detailLoading && detail && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Judge breakdown */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-300">
+                      Judge Breakdown
+                    </h3>
+                    <button
+                      type="button"
+                      onClick={() => rejudge.mutate()}
+                      disabled={rejudge.isPending}
+                      className="text-xs px-2.5 py-1 border border-gray-300 dark:border-gray-700 rounded hover:bg-white dark:hover:bg-black disabled:opacity-50"
+                      data-testid={`button-rejudge-${row.articleId}`}
+                    >
+                      {rejudge.isPending ? "Re-judging…" : "Re-judge"}
+                    </button>
+                  </div>
+                  {detail.summary && (
+                    <div
+                      className="text-sm text-gray-700 dark:text-gray-300 border-l-2 border-gray-300 dark:border-gray-700 pl-3 italic"
+                      data-testid={`text-overall-summary-${row.articleId}`}
+                    >
+                      {detail.summary}
+                    </div>
+                  )}
+                  <ul className="space-y-2">
+                    {DIMS.map((d) => {
+                      const score = row[d.key] as number;
+                      const note = detail.notes?.[d.key as string] ?? "";
+                      return (
+                        <li
+                          key={d.key as string}
+                          className="text-sm"
+                          data-testid={`note-${d.key as string}-${row.articleId}`}
+                        >
+                          <div className="flex items-baseline justify-between gap-2">
+                            <span className="font-medium text-gray-800 dark:text-gray-200">
+                              {d.label}
+                            </span>
+                            <span className={`font-mono ${toneClass(score)}`}>{score}</span>
+                          </div>
+                          {note ? (
+                            <div className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
+                              {note}
+                            </div>
+                          ) : (
+                            <div className="text-xs text-gray-400 dark:text-gray-600 mt-0.5 italic">
+                              No note recorded.
+                            </div>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                {/* Article body */}
+                <div className="space-y-2">
+                  <h3 className="text-xs font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-300">
+                    Original Article
+                  </h3>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                    {detail.article.tag}
+                    {detail.article.authorByline ? ` · ${detail.article.authorByline}` : ""}
+                  </div>
+                  <h4
+                    className="text-base font-semibold text-gray-900 dark:text-gray-100"
+                    data-testid={`text-article-headline-${row.articleId}`}
+                  >
+                    {detail.article.headline}
+                  </h4>
+                  {detail.article.subhead && (
+                    <div
+                      className="text-sm text-gray-700 dark:text-gray-300"
+                      data-testid={`text-article-subhead-${row.articleId}`}
+                    >
+                      {detail.article.subhead}
+                    </div>
+                  )}
+                  <div
+                    className="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto pr-2"
+                    data-testid={`text-article-body-${row.articleId}`}
+                  >
+                    {detail.article.body}
+                  </div>
+                </div>
+              </div>
+            )}
+          </td>
+        </tr>
+      )}
+    </>
+  );
+}
+
 export default function GooseHumorPage() {
   const { data, isLoading } = useQuery<HumorStats>({
     queryKey: ["/api/goose/humor-stats"],
     refetchInterval: 60 * 1000,
   });
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const recent = data?.recent ?? [];
   // Sparklines: oldest -> newest, so reverse from API (which is newest-first)
@@ -346,39 +560,14 @@ export default function GooseHumorPage() {
               </thead>
               <tbody>
                 {recent.map((r) => (
-                  <tr
+                  <ArticleRow
                     key={r.articleId}
-                    className="border-b border-gray-100 dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-950"
-                    data-testid={`row-article-${r.articleId}`}
-                  >
-                    <td className="px-4 py-2">
-                      <div className="font-medium truncate max-w-xs" title={r.headline}>
-                        {r.headline}
-                      </div>
-                      {r.summary && (
-                        <div
-                          className="text-xs text-gray-500 dark:text-gray-400 truncate max-w-xs"
-                          title={r.summary}
-                        >
-                          {r.summary}
-                        </div>
-                      )}
-                    </td>
-                    {DIMS.map((d) => (
-                      <td
-                        key={d.key as string}
-                        className={`px-2 py-2 text-right font-mono ${toneClass(r[d.key] as number)}`}
-                      >
-                        {r[d.key] as number}
-                      </td>
-                    ))}
-                    <td className={`px-2 py-2 text-right font-mono font-semibold ${toneClass(r.overall)}`}>
-                      {r.overall}
-                    </td>
-                    <td className="px-4 py-2 text-right text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                      {new Date(r.scoredAt).toLocaleString()}
-                    </td>
-                  </tr>
+                    row={r}
+                    expanded={expandedId === r.articleId}
+                    onToggle={() =>
+                      setExpandedId((cur) => (cur === r.articleId ? null : r.articleId))
+                    }
+                  />
                 ))}
                 {recent.length === 0 && (
                   <tr>

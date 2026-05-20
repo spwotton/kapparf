@@ -97,6 +97,7 @@ export interface IStorage {
   getIncidentsByTimeRange(from: Date, to: Date): Promise<Incident[]>;
   getIncidentCount(): Promise<number>;
   getGooseArticles(limit?: number): Promise<GooseArticle[]>;
+  getGooseArticle(id: string): Promise<GooseArticle | null>;
   createGooseArticle(article: InsertGooseArticle): Promise<GooseArticle>;
   approveGooseArticle(id: string): Promise<void>;
 }
@@ -514,6 +515,11 @@ export class DatabaseStorage implements IStorage {
       .where(eq(gooseArticles.approved, true))
       .orderBy(desc(gooseArticles.publishedAt))
       .limit(limit);
+  }
+
+  async getGooseArticle(id: string): Promise<GooseArticle | null> {
+    const [row] = await db.select().from(gooseArticles).where(eq(gooseArticles.id, id)).limit(1);
+    return row ?? null;
   }
 
   async createGooseArticle(article: InsertGooseArticle): Promise<GooseArticle> {

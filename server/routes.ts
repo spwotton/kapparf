@@ -5204,6 +5204,28 @@ export function registerGooseRoutes(app: express.Express) {
     }
   });
 
+  // GET /api/goose/articles/:id — fetch one article + its latest humor score (with judge notes)
+  app.get("/api/goose/articles/:id", async (req, res) => {
+    try {
+      const article = await storage.getGooseArticle(req.params.id);
+      if (!article) return res.status(404).json({ error: "article not found" });
+      const { getArticleScore } = await import("./humor-hypervisor");
+      const score = await getArticleScore(req.params.id);
+      let notes: Record<string, string> | null = null;
+      let summary: string | null = null;
+      if (score?.judgeNotes) {
+        try {
+          const parsed = JSON.parse(score.judgeNotes);
+          notes = parsed?.notes ?? null;
+          summary = parsed?.summary ?? null;
+        } catch { /* malformed JSON — leave nulls */ }
+      }
+      res.json({ article, score, notes, summary });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // POST /api/goose/generate — manually trigger article generation
   app.post("/api/goose/generate", async (_req, res) => {
     try {
