@@ -5682,6 +5682,12 @@ export function registerCortexRoutes(app: express.Express) {
     });
   });
 
+  app.get("/api/video-forensics/cnu-comparison", (_req, res) => {
+    const p = nodePath.join(process.cwd(), "server/data/video_forensics/cnu_comparison_report.json");
+    if (!fs.existsSync(p)) return res.status(404).json({ error: "CNU comparison not yet computed" });
+    res.json(JSON.parse(fs.readFileSync(p, "utf8")));
+  });
+
   // ─── Video 2 (4K 60fps) routes ────────────────────────────────────────────
   app.get("/api/video-forensics/vid2-fft", (_req, res) => {
     const p = nodePath.join(process.cwd(), "server/data/video_forensics/vid2/fft_results.json");
