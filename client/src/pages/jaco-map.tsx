@@ -2,6 +2,9 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { buildWebGPUScene, type WGPUSceneTarget } from "@/lib/jaco-webgpu";
 import { useQuery } from "@tanstack/react-query";
+import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -707,7 +710,7 @@ function createScene(
   // Quick canvas probe — catches both missing WebGL and context-creation failure
   const probe = document.createElement("canvas");
   const probeCtx = probe.getContext("webgl2") || probe.getContext("webgl") || probe.getContext("experimental-webgl");
-  if (!probeCtx) return webglFallback("WebGL unavailable in this preview");
+  if (!probeCtx) return null;
 
   let renderer: THREE.WebGLRenderer;
   try {
@@ -715,13 +718,13 @@ function createScene(
     // Verify the GL context actually exists after construction
     if (!renderer.getContext()) {
       renderer.dispose();
-      return webglFallback("WebGL context creation failed");
+      return null;
     }
     // Detach probe canvas — we'll let Three.js create its own
     renderer.dispose();
     renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
   } catch {
-    return webglFallback("WebGL unavailable — open in Chrome/Firefox");
+    return null;
   }
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -1023,7 +1026,7 @@ export default function JacoMapPage() {
   const [elevStatus, setElevStatus] = useState<"loading"|"ok"|"fallback">("loading");
   const [elevData, setElevData] = useState<number[][]|null>(null);
   const [time, setTime] = useState(new Date());
-  const [renderMode, setRenderMode] = useState<"webgpu"|"webgl"|null>(null);
+  const [renderMode, setRenderMode] = useState<"webgpu"|"webgl"|"leaflet"|null>(null);
 
   // ── Auto-loop detector state ────────────────────────────────────────────────
   const [loopAlert, setLoopAlert] = useState<string|null>(null);
@@ -1266,19 +1269,28 @@ export default function JacoMapPage() {
           setRenderMode("webgpu");
           cleanup = () => handle.destroy();
         } else {
-          // WebGPU unavailable — use Three.js
+          // WebGPU unavailable — try Three.js / WebGL
           const s = createScene(el, elevData, setHoveredTarget, setDroneTarget, setAircraftCount);
-          sceneRef.current = s;
-          setRenderMode("webgl");
-          cleanup = () => s.destroy();
+          if (s) {
+            sceneRef.current = s;
+            setRenderMode("webgl");
+            cleanup = () => s.destroy();
+          } else {
+            // WebGL also unavailable — fall back to Leaflet 2D map
+            setRenderMode("leaflet");
+          }
         }
       })
       .catch(() => {
         if (cancelled) return;
         const s = createScene(el, elevData, setHoveredTarget, setDroneTarget, setAircraftCount);
-        sceneRef.current = s;
-        setRenderMode("webgl");
-        cleanup = () => s.destroy();
+        if (s) {
+          sceneRef.current = s;
+          setRenderMode("webgl");
+          cleanup = () => s.destroy();
+        } else {
+          setRenderMode("leaflet");
+        }
       });
 
     return () => {
@@ -1916,8 +1928,70 @@ export default function JacoMapPage() {
 
   return (
     <div className="relative w-full h-full bg-[#020a12] overflow-hidden select-none" data-testid="page-jaco-map">
-      {/* 3D canvas — always full screen */}
-      <div ref={containerRef} className="absolute inset-0 touch-none" data-testid="canvas-jaco-3d"/>
+      {/* 3D canvas — always full screen (hidden when leaflet mode active) */}
+      <div ref={containerRef} className={`absolute inset-0 touch-none ${renderMode === "leaflet" ? "hidden" : ""}`} data-testid="canvas-jaco-3d"/>
+
+      {/* Leaflet 2D fallback map */}
+      {renderMode === "leaflet" && (
+        <div className="absolute inset-0" data-testid="leaflet-fallback-map">
+          <MapContainer
+            center={[CENTER.lat, CENTER.lon]}
+            zoom={13}
+            style={{ height: "100%", width: "100%" }}
+            zoomControl={true}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {TARGETS.map(t => {
+              const colorHex = "#" + t.color.toString(16).padStart(6, "0");
+              const icon = new L.DivIcon({
+                html: `<div style="background:${colorHex};width:14px;height:14px;border-radius:${t.type==="radar"?"3px":"50%"};border:2px solid white;box-shadow:0 0 6px ${colorHex}80;"></div>`,
+                iconSize: [14, 14],
+                iconAnchor: [7, 7],
+                className: "",
+              });
+              return (
+                <Marker key={t.id} position={[t.lat, t.lon]} icon={icon}>
+                  <Popup>
+                    <div className="text-sm">
+                      <strong>{t.label.split("—")[0].trim()}</strong>
+                      <br />
+                      <span className="text-xs text-gray-600">{t.desc}</span>
+                      <br />
+                      <span className="text-xs font-mono">{t.lat.toFixed(5)}°N, {Math.abs(t.lon).toFixed(5)}°W · +{t.elevM}m</span>
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
+            {DET_LAYERS.map((l) => (
+              <Circle
+                key={l.label}
+                center={[TARGETS[0].lat, TARGETS[0].lon]}
+                radius={l.range}
+                pathOptions={{ color: "#" + l.color.toString(16).padStart(6,"0"), fillColor: "#" + l.color.toString(16).padStart(6,"0"), fillOpacity: l.opacity * 0.5, weight: 1, dashArray: "4 4" }}
+              />
+            ))}
+            {ENGAGE_LAYERS.map((l) => (
+              <Circle
+                key={l.label}
+                center={[TARGETS[2].lat, TARGETS[2].lon]}
+                radius={l.range}
+                pathOptions={{ color: "#" + l.color.toString(16).padStart(6,"0"), fillColor: "#" + l.color.toString(16).padStart(6,"0"), fillOpacity: l.opacity * 0.4, weight: 1 }}
+              />
+            ))}
+          </MapContainer>
+          {/* Fallback banner */}
+          <div className="absolute top-12 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none" data-testid="leaflet-fallback-banner">
+            <div className="bg-amber-900/90 border border-amber-500/60 rounded-lg px-4 py-2 text-xs font-mono text-amber-200 flex items-center gap-2 shadow-lg backdrop-blur-sm">
+              <AlertTriangle className="h-3.5 w-3.5 text-amber-400 shrink-0" />
+              3D rendering unavailable — showing 2D overlay map
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Loading overlay */}
       {elevStatus==="loading"&&(
@@ -1942,8 +2016,12 @@ export default function JacoMapPage() {
                 {elevStatus==="ok"?"● SRTM":"△ PROC"}
               </span>
               {renderMode && (
-                <span className={`text-[9px] font-mono px-1 rounded border ${renderMode==="webgpu"?"text-violet-300 border-violet-500/40 bg-violet-500/10":"text-gray-500 border-gray-700/40"}`}>
-                  {renderMode==="webgpu"?"⬡ WebGPU":"◻ WebGL"}
+                <span className={`text-[9px] font-mono px-1 rounded border ${
+                  renderMode==="webgpu" ? "text-violet-300 border-violet-500/40 bg-violet-500/10" :
+                  renderMode==="leaflet" ? "text-amber-400 border-amber-500/40 bg-amber-500/10" :
+                  "text-gray-500 border-gray-700/40"
+                }`}>
+                  {renderMode==="webgpu" ? "⬡ WebGPU" : renderMode==="leaflet" ? "◻ 2D Map" : "◻ WebGL"}
                 </span>
               )}
               <span className={`text-[9px] font-mono px-1 rounded ${aircraftCount>0?"text-amber-400":"text-gray-600"}`}>
