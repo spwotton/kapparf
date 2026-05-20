@@ -5336,6 +5336,85 @@ export function registerGooseRoutes(app: express.Express) {
     }
   });
 
+  // ── HERV-K SHARING VIRUS ─────────────────────────────────────────────────
+  app.get("/api/goose/herv-k/state", async (_req, res) => {
+    try {
+      const { getVirusState } = await import("./herv-k-virus");
+      res.json(getVirusState());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.get("/api/goose/herv-k/article/:id", async (req, res) => {
+    try {
+      const { getArticleHervState } = await import("./herv-k-virus");
+      const state = getArticleHervState(req.params.id);
+      if (!state) return res.status(404).json({ error: "not found" });
+      res.json(state);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.post("/api/goose/herv-k/share/:id", async (req, res) => {
+    try {
+      const { recordShareEvent } = await import("./herv-k-virus");
+      const medium = (req.body?.medium as string) || "web";
+      const state = recordShareEvent(req.params.id, medium);
+      if (!state) return res.status(404).json({ error: "not found" });
+      res.json(state);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.post("/api/goose/herv-k/fossilize/:id", async (req, res) => {
+    try {
+      const { fossilizeArticle } = await import("./herv-k-virus");
+      const note = (req.body?.note as string) || "manually fossilized";
+      const state = fossilizeArticle(req.params.id, note);
+      if (!state) return res.status(404).json({ error: "not found" });
+      res.json(state);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // ── TICO SATIRE HYPERVISOR ────────────────────────────────────────────────
+  app.get("/api/goose/tico-satire/state", async (_req, res) => {
+    try {
+      const { getTicoSatireState } = await import("./tico-satire-hypervisor");
+      res.json(getTicoSatireState());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.get("/api/goose/tico-satire/briefing", async (_req, res) => {
+    try {
+      const { getTicoSatireBriefing } = await import("./tico-satire-hypervisor");
+      const briefing = await getTicoSatireBriefing();
+      res.json({ briefing, ts: Date.now() });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.post("/api/goose/tico-satire/run", async (_req, res) => {
+    try {
+      const { runTicoSatireNow } = await import("./tico-satire-hypervisor");
+      const result = await runTicoSatireNow();
+      res.json(result);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // ── COMEDY CORPUS ─────────────────────────────────────────────────────────
+  app.get("/api/goose/comedy-corpus/status", async (_req, res) => {
+    try {
+      const { getCorpusStatus } = await import("./comedy-corpus");
+      res.json(getCorpusStatus());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.post("/api/goose/comedy-corpus/load", async (_req, res) => {
+    try {
+      const { loadComedyCorpus } = await import("./comedy-corpus");
+      const results = await loadComedyCorpus();
+      res.json({ loaded: results.reduce((s, r) => s + r.loaded, 0), comedians: results });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+  app.get("/api/goose/comedy-corpus/preamble", async (req, res) => {
+    try {
+      const { getComedyPreamble } = await import("./comedy-corpus");
+      const topic = (req.query.topic as string) || undefined;
+      const preamble = await getComedyPreamble(topic);
+      res.json({ preamble });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
   // GET /api/goose/status — scheduler status
   app.get("/api/goose/status", async (_req, res) => {
     try {

@@ -55,6 +55,68 @@ const openrouter = new OpenAI({
 // Best freely available model for structured JSON output
 const COUNCIL_MODEL = "meta-llama/llama-3.3-70b-instruct:free";
 
+// ── REAL COSTA RICA PLACE NAMES (satirical dateline pool) ────────────────────
+const CR_REAL_PLACES = [
+  "Jacó, Puntarenas",
+  "San José, Costa Rica",
+  "Escazú, San José",
+  "Barrio Escalante, San José",
+  "La Uruca, San José",
+  "Hatillo, San José",
+  "Desamparados, San José",
+  "Alajuela, Costa Rica",
+  "Heredia, Costa Rica",
+  "Cartago, Costa Rica",
+  "Turrialba, Cartago",
+  "Tres Ríos, La Unión",
+  "Liberia, Guanacaste",
+  "Tamarindo, Guanacaste",
+  "Nosara, Guanacaste",
+  "Sámara, Guanacaste",
+  "Nicoya, Guanacaste",
+  "Quepos, Puntarenas",
+  "Dominical, Puntarenas",
+  "Uvita, Puntarenas",
+  "Puerto Limón, Limón",
+  "Cahuita, Limón",
+  "Puerto Viejo, Limón",
+  "San Ramón, Alajuela",
+  "Grecia, Alajuela",
+  "Naranjo, Alajuela",
+  "Santo Domingo, Heredia",
+  "San Pablo, Heredia",
+  "Barva, Heredia",
+  "Moravia, San José",
+  "Curridabat, San José",
+  "Tibás, San José",
+  "Zapote, San José",
+  "Santa Ana, San José",
+  "Ciudad Colón, San José",
+  "La Sabana, San José",
+  "Los Yoses, San José",
+];
+
+// ── TICO COLLOQUIAL VOICE LAWS (injected into body & arbiter prompts) ─────────
+const TICO_VOICE_LAWS = `
+TICO COLLOQUIAL VOICE (Costa Rica specificity rules):
+  DATELINE: Always use a real Costa Rican place from this approved pool —
+    Jacó / Escazú / Barrio Escalante / La Uruca / Turrialba / Liberia / Quepos /
+    Cahuita / San Ramón / Moravia / Tibás / Curridabat / Santo Domingo de Heredia /
+    Tamarindo / Puerto Viejo / Tres Ríos / La Sabana / Los Yoses / Nosara / Uvita.
+  PLACE SPECIFICITY: When naming a location inside the article, use the real neighborhood or canton,
+    never "downtown" or "the capital." Prefer "near the Periférico exit at Hatillo 8" over "in San José."
+  LOCAL OFFICIALS: Tico bureaucrats quote using formal Spanish syntax translated into English.
+    Example: "The Ministry of Infrastructure and Territorial Ordering has confirmed the situation
+    is being addressed with the appropriate inter-institutional coordination framework."
+  LOCAL COLOR: Exactly ONE background witness or bystander may use a mild colloquial expression
+    translated into flat English — "a man who identified himself only as Don Beto stated the
+    situation was, quote, 'a real chunche'" or "a resident described the development as 'tuanis,
+    actually.'" This is the ONE permitted informal note. The reporter does not editorialize.
+  COLONES: Monetary amounts use colones (₡) not dollars unless the entity is foreign.
+    Example: "₡47,000 in damages" not "$80."
+  NEVER: "pura vida" as a sign-off or joke punchline. It appears only in direct quotes from locals.
+`;
+
 // ── RESEARCH PRINCIPLES (AP Invariant — baked into all agent prompts) ─────────
 const AP_INVARIANT = `
 THE AP INVARIANT (Ψ = A × N = 1):
@@ -121,7 +183,11 @@ ${AP_INVARIANT}
 
 BODY STRUCTURE — 4 PARAGRAPHS (Onion canonical form):
   P1 — SITUATION ESTABLISHED (DATELINE):
-    [CITY, COUNTRY] — AP wire lead. One sentence that contains the entire absurd premise stated as boring fact.
+    Use one real Costa Rican dateline: JACÓ, PUNTARENAS — or ESCAZÚ, SAN JOSÉ — or BARRIO ESCALANTE, SAN JOSÉ —
+    or TURRIALBA, CARTAGO — or LIBERIA, GUANACASTE — or QUEPOS, PUNTARENAS — or CAHUITA, LIMÓN —
+    or MORAVIA, SAN JOSÉ — or LA URUCA, SAN JOSÉ — or CURRIDABAT, SAN JOSÉ, etc.
+    Never use a generic city. Use the specific canton or district.
+    AP wire lead sentence: contains the ENTIRE absurd premise stated as boring fact.
     Include exact numbers, exact times, exact coordinates, exact percentages. Nothing is framed as unusual.
     This paragraph answers: Who did what. The premise is completely insane. The sentence is completely routine.
     Write 3-5 sentences. End with a figure so specific it could only have been measured.
@@ -154,6 +220,8 @@ BODY STRUCTURE — 4 PARAGRAPHS (Onion canonical form):
 
 WORD COUNT: P1+P2+P3+P4 MUST total at least 300 words. Write full, complete paragraphs.
 
+${TICO_VOICE_LAWS}
+
 Output ONLY valid JSON (no markdown):
 { "p1": "string", "p2": "string", "p3": "string", "p4": "string" }`;
 
@@ -181,6 +249,8 @@ const ARBITER_SYSTEM = `You are the EDITORIAL ARBITER for The Goose Gazette.
 You receive outputs from three specialized council agents. Your job is final synthesis and quality enforcement.
 
 ${AP_INVARIANT}
+
+${TICO_VOICE_LAWS}
 
 ══ HEADLINE LAW — The Onion Formula ══
 Every headline MUST follow one of these two structures:
@@ -317,7 +387,7 @@ Event counts: ${JSON.stringify(d.stats)}
 Recent satellite/RF events: ${d.recentEvents.filter(e => ["satellite","rf"].includes(e.domain)).slice(0,3).map(e => e.description).join(" | ")}
 
 ARTICLE CONCEPT: An aircraft or satellite following an unusual pattern. Officials cannot explain it.
-Dateline options: Jacó Costa Rica, San José Costa Rica, or regional.
+Dateline: pick ONE specific real CR place — Jacó, Escazú, Barrio Escalante, Turrialba, Liberia, Quepos, Moravia, Tibás, La Uruca, Curridabat, Cahuita, Nosara, etc. Never generic.
 Punchline position: Final attribution — pilots, ATC, or agency "could not be reached for comment."`,
   },
   {
@@ -826,9 +896,10 @@ export function startGooseScheduler() {
   schedulerStarted = true;
   schedulerStartedAt = new Date();
 
-  const SIX_HOURS = 6 * 60 * 60 * 1000;
+  // 30-minute cadence — keeps SERPs fresh and AI crawlers fed
+  const GENERATION_INTERVAL = 30 * 60 * 1000;
 
-  // First article after 2 minutes (let collectors warm up)
+  // First article after 30s (collectors warm up fast)
   setTimeout(async () => {
     try {
       const data = await buildKappaData();
@@ -840,16 +911,16 @@ export function startGooseScheduler() {
       try {
         const data = await buildKappaData();
         await generateGooseArticle(data);
-        const hour = new Date().getUTCHours();
-        if (hour >= 23 || hour < 2) {
+        // κ-burst: high-signal moment → bonus article 9 min later
+        if (data.kappaScore > 60) {
           setTimeout(async () => { generateGooseArticle(await buildKappaData()); }, 9 * 60 * 1000);
         }
         lastGeneratedAt = new Date();
       } catch (e) { console.error("[GOOSE] Scheduler run error:", e); }
-    }, SIX_HOURS);
-  }, 2 * 60 * 1000);
+    }, GENERATION_INTERVAL);
+  }, 30 * 1000);
 
-  console.log("[GOOSE] Ω-Council Scheduler started — first article in 2 min, then every 6 hours");
+  console.log("[GOOSE] Ω-Council Scheduler started — first article in 30s, then every 30 minutes");
 }
 
 export function stopGooseScheduler() {
@@ -879,4 +950,4 @@ export function getGooseSchedulerStatus() {
   };
 }
 
-const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
+const SIX_HOURS_MS = 30 * 60 * 1000; // 30 min cadence
