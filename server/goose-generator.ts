@@ -475,7 +475,8 @@ Total events in system: ${Object.values(d.stats).reduce((a, b) => a + b, 0).toLo
 
 ARTICLE CONCEPT: An economic indicator, study, or quarterly report confirms something that everyone already knew. An economist explains it using a model. The model confirms the thing everyone knew. No action will be taken.`,
   },
-  // ── 15 NEW TEMPLATES ──────────────────────────────────────────────────────
+
+  // ── EXPANDED POOL: 15 templates (Task #48) ───────────────────────────────────
   {
     name: "politics_study",
     tag: "POLITICS",
@@ -610,6 +611,270 @@ ARTICLE CONCEPT: A civic parade or public ceremony in a Costa Rican city has exp
     buildPrompt: (_d) => `
 SIGNAL DOMAIN: Technology sector / Product launch
 ARTICLE CONCEPT: A technology company has launched a product that solves a problem the company identified in a press release. The problem was not previously known to exist. The product costs $49 per month. The company's CEO described the problem as "pervasive." An analyst described the market size as "significant." A user described the product as "fine, I guess." Dateline: San José technology district or Silicon Valley. Use real startup press release language.`,
+  },
+
+  // ── EXPANDED POOL: 19 new category seeds (Task #76) ─────────────────────────
+  {
+    name: "sovereignty-nest",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Territorial sovereignty / infrastructure dispute
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.filter(e => ["satellite","rf","wifi"].includes(e.domain)).slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: An animal or creature has established a nesting site inside a piece of contested critical infrastructure — a telecommunications tower, a relay antenna, or a border marker. Officials from at least two parties cannot agree on jurisdiction. A wildlife officer is called. The wildlife officer does not help.
+Dateline: pick ONE specific real CR location — Manzanillo, Gandoca, Puerto Viejo, Golfito, Barra del Colorado, Tortuguero, Sixaola, or Cahuita.
+Punchline position: Final paragraph — the infrastructure operator's press release notes the animal "has not vacated as of press time."`,
+  },
+  {
+    name: "defense-theater",
+    tag: "DEFENSE",
+    category: "defense",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Defense procurement / military capability announcement
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Radar detections: ${d.stats.radar ?? 0}
+Recent aerial events: ${d.recentEvents.filter(e => e.domain === "satellite").slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A government ministry announces a new national security capability. The capability is a repurposed civilian vehicle or consumer product with a modification that is described in the press release using a technical-sounding term. A defense analyst quotes a figure. The figure is not in dispute. The capability is also not in dispute. What is in dispute is whether it qualifies as a capability.
+Dateline: pick a CR city — San José, Liberia, Limón, Puntarenas, Quepos, or Pérez Zeledón.
+Punchline position: The ministry's spokesperson says it "represents a generational leap in deterrence posture."`,
+  },
+  {
+    name: "arms-fair-neutrality",
+    tag: "DIPLOMACY",
+    category: "diplomacy",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Multi-party diplomatic offer / arms cooperation
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Correlation count: ${d.correlations.length}
+Top correlation: ${d.correlations[0]?.title ?? "undisclosed diplomatic signal"}
+
+ARTICLE CONCEPT: Three foreign governments simultaneously extend different forms of "security cooperation" to a small neutral country. The offers are mutually exclusive. The small country declines all three and instead formalizes an arrangement with a fourth party that was not present. The fourth party's identity is described in the official communiqué using a word that is not a proper noun.
+Punchline position: A spokesperson for the neutral country says the outcome "reflects the doctrine as written."`,
+  },
+  {
+    name: "cyber-command",
+    tag: "DEFENSE",
+    category: "defense",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Cyber / electronic warfare unit
+KAPPA score: ${d.kappaScore.toFixed(1)}
+WiFi events: ${d.stats.wifi ?? 0}
+LTE events: ${d.stats.lte ?? 0}
+Recent RF events: ${d.recentEvents.filter(e => e.domain === "rf").slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A government establishes a new cyber defense unit. Its operational inventory is disclosed in a procurement document. The document is public. Analysts review the document. The analysts' findings are stated as findings. The unit's first confirmed operation involved a platform that is also used for something unrelated to defense, stated flatly.
+Dateline: pick a CR city — San José, Heredia, Cartago, or Alajuela.
+Punchline position: The unit's director says the results "exceeded modeled projections" without specifying the model.`,
+  },
+  {
+    name: "treaty-port",
+    tag: "DIPLOMACY",
+    category: "diplomacy",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Port infrastructure / treaty negotiation
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Total events in system: ${Object.values(d.stats).reduce((a, b) => a + b, 0).toLocaleString()}
+
+ARTICLE CONCEPT: A foreign government proposes construction of a port facility. Negotiations proceed for a specific number of months listed in the article. At the conclusion of negotiations, the status of the port is unchanged from the start of negotiations. A communiqué is issued. The communiqué uses the word "progress." An official says what was agreed to. What was agreed to is described in the final sentence.
+Dateline: Puntarenas, Limón, or Quepos port authority.
+Punchline position: The final sentence of the communiqué is quoted in full.`,
+  },
+  {
+    name: "lithium-mine",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Resource extraction / foreign investment dispute
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.filter(e => e.domain === "seismic").slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: Unverified reports circulate that a foreign entity has attempted to acquire rights to a mineral deposit. The reports are denied. The denial is specific in some respects and non-specific in others. A wildlife or agricultural incident occurs at the site described in the reports. Authorities note the timing is "coincidental." The wildlife or agricultural incident is described in detail. The mineral deposit is not.
+Dateline: Guanacaste, Santa Cruz, or Nicoya.
+Punchline position: The relevant ministry says it has "received the report and is reviewing its parameters."`,
+  },
+  {
+    name: "un-resolution",
+    tag: "DIPLOMACY",
+    category: "diplomacy",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: International body / multilateral vote
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Correlations scored: ${d.correlations.length}
+
+ARTICLE CONCEPT: An international deliberative body convenes to address a situation involving a small nation. The session lasts a specific number of hours stated in the article. A permanent member exercises a procedural mechanism. The stated reason for the procedural mechanism concerns an event that occurred before any living delegate was born. The session ends. The situation is unchanged. An observer calls the outcome "not unexpected."
+Punchline position: The observer's organization is named in the final sentence. Its mandate is also named.`,
+  },
+  {
+    name: "psyop-counter-goose",
+    tag: "DEFENSE",
+    category: "defense",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Psychological operations / information warfare
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Total events: ${Object.values(d.stats).reduce((a, b) => a + b, 0).toLocaleString()}
+Recent correlations: ${d.correlations.slice(0,2).map(c => c.title).join("; ")}
+
+ARTICLE CONCEPT: A leaked or declassified document describes a plan to destabilize a target country using a non-military asset. The non-military asset is named in the document. In response, the target country deploys a counter-asset that is also non-military. The counter-asset is described in the article in the same neutral, declarative language as the original plan. A spokesperson for neither party is reached for comment. The plan and counter-plan are both ongoing.
+Punchline position: The document's classification level is stated at the end.`,
+  },
+  {
+    name: "border-wall",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Border infrastructure / migration policy
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.slice(0,3).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A government constructs or announces a barrier on a shared border. A second government responds with a countermeasure. The countermeasure addresses the barrier. The barrier is then adjusted to address the countermeasure. This exchange continues for a specific number of iterations stated in the article. The final state of the barrier and countermeasure is described neutrally. No migration figure changes.
+Dateline: Panama border, Paso Canoas, or Los Chiles.
+Punchline position: A border official says the current configuration "remains under assessment."`,
+  },
+  {
+    name: "narco-sub",
+    tag: "BREAKING",
+    category: "news",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Maritime interdiction / narcotics traffic
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.filter(e => ["satellite","rf"].includes(e.domain)).slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A semi-submersible vessel is detected and intercepted off the Pacific coast. Authorities name the vessel's detected position using coordinates. The interception report is filed. The report includes a finding that is not related to narcotics. The finding is stated in one sentence. The interception otherwise proceeds as documented. A spokesperson confirms the operation was "consistent with protocol."
+Dateline: Quepos, Jacó, or Osa Peninsula coast.
+Punchline position: The non-narcotics finding from the interception report, stated in the final sentence without editorializing.`,
+  },
+  {
+    name: "cyber-treasury",
+    tag: "BUSINESS",
+    category: "business",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Government cybersecurity breach / financial system
+KAPPA score: ${d.kappaScore.toFixed(1)}
+WiFi events: ${d.stats.wifi ?? 0}
+Recent network events: ${d.recentEvents.filter(e => e.domain === "wifi").slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: Unauthorized access to a government financial system is detected. The scope of the intrusion is determined. What the intruders accessed is disclosed. What the intruders chose to do with the access is stated in one sentence. An IT official describes the response measures taken. The response measures are standard. The statement about what the intruders chose to do is not followed up.
+Dateline: San José, Ministerio de Hacienda or equivalent body.
+Punchline position: What the intruders chose to do, stated flatly in the final paragraph.`,
+  },
+  {
+    name: "surveillance-drone",
+    tag: "DEFENSE",
+    category: "defense",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Unmanned aerial vehicle / surveillance program
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Radar detections: ${d.stats.radar ?? 0}
+Recent aerial events: ${d.recentEvents.filter(e => e.domain === "satellite").slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A government agency deploys an aerial surveillance asset. The asset's specifications are disclosed in a procurement filing. The filing names the asset's primary sensor. The asset is deployed. What it detects on its first operational day is disclosed in a subsequent incident report. The incident report is also public. A spokesperson says the data will be "retained for 90 days in accordance with policy."
+Dateline: pick a CR location — Nosara, Tamarindo, Drake Bay, or La Fortuna.
+Punchline position: The first-day detection, stated in the final paragraph.`,
+  },
+  {
+    name: "troop-agreement",
+    tag: "DIPLOMACY",
+    category: "diplomacy",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Foreign military presence / bilateral agreement
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Correlations: ${d.correlations.slice(0,2).map(c => c.title).join("; ")}
+
+ARTICLE CONCEPT: A bilateral agreement authorizes a foreign military contingent to operate in a neutral country for a stated purpose and a stated duration. Both the purpose and the duration are disclosed. The contingent arrives. An inspection regime is established. The inspection regime's frequency is listed. An inspection occurs. The inspection finding is disclosed. The finding's relevance to the stated purpose is not addressed in the official statement.
+Punchline position: The inspection finding, in the final sentence.`,
+  },
+  {
+    name: "trade-bloc",
+    tag: "BUSINESS",
+    category: "business",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Regional economic bloc / trade agreement
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Total events: ${Object.values(d.stats).reduce((a, b) => a + b, 0).toLocaleString()}
+
+ARTICLE CONCEPT: A multi-nation economic forum convenes. An agenda item is proposed by one member. The agenda item is specific. Deliberations last a specific number of hours. The agenda item is modified. What it was changed to is stated in one sentence. Three nations sign. One nation's representative says the agreement "reflects regional priorities." The one nation that did not sign is named. Its reason is stated.
+Punchline position: The non-signing nation's stated reason, final sentence.`,
+  },
+  {
+    name: "espionage",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Foreign intelligence activity / counterintelligence
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.filter(e => ["satellite","rf"].includes(e.domain)).slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: An individual is detained near a site of national interest while conducting an activity that is not itself illegal. The activity is named. The site is named. Officials describe what makes the site notable. The detained individual gives a statement. The statement is quoted. The individual is released. A follow-up inquiry is opened. The inquiry's scope is described. The scope does not include the site.
+Dateline: Arenal, Poás, Irazú, or a named hydroelectric facility.
+Punchline position: The inquiry's stated scope, final sentence.`,
+  },
+  {
+    name: "honk-doctrine",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Foreign policy doctrine / neutrality framework
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Correlation count: ${d.correlations.length}
+
+ARTICLE CONCEPT: A government releases a formal foreign policy doctrine. The doctrine is named. Its key principle is stated in one sentence by an official. The principle is distinctive. Embassies are notified. One embassy responds publicly. The embassy's response uses the word "noted." The doctrine's implementation schedule is disclosed. The first implementation step is described. The implementation step is small and specific.
+Punchline position: The first implementation step, final paragraph, stated flatly.`,
+  },
+  {
+    name: "subsea-cable",
+    tag: "BUSINESS",
+    category: "business",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Subsea telecommunications cable / internet infrastructure
+KAPPA score: ${d.kappaScore.toFixed(1)}
+LTE events: ${d.stats.lte ?? 0}
+WiFi events: ${d.stats.wifi ?? 0}
+Recent events: ${d.recentEvents.filter(e => ["rf","wifi"].includes(e.domain)).slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A major undersea data cable reaches a landing point. The cable's capacity is stated in the press release. A redundancy incident occurs within a specific time window after landing. The cause is investigated. The investigation names the cause. The named cause is unexpected. The telecom operator's recovery measure is stated. Its estimated resolution date is given. The date is specific.
+Dateline: Limón or Puntarenas coast.
+Punchline position: The named cause of the redundancy incident, stated flatly in the final paragraph.`,
+  },
+  {
+    name: "legislative-amendment",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Legislative process / procedural amendment
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Total events in system: ${Object.values(d.stats).reduce((a, b) => a + b, 0).toLocaleString()}
+
+ARTICLE CONCEPT: A legislative body debates a proposed amendment. The amendment's title and stated purpose are given. During committee proceedings, testimony is offered by an expert witness. The expert witness is identified by name and credential. Their testimony addresses the amendment's stated purpose. It also addresses something the amendment does not mention. The committee notes the second point. The amendment passes with language unchanged.
+Punchline position: The expert witness's second point, stated in the final sentence without editorializing.`,
+  },
+  {
+    name: "island-claim",
+    tag: "POLITICS",
+    category: "politics",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Territorial claim / maritime jurisdiction
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.filter(e => ["satellite","rf"].includes(e.domain)).slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: An international consortium or corporate entity files a claim over a remote island territory citing a specific legal instrument. The island's population at time of filing is stated. A counter-claim is registered by a second party. The second party's legal basis is different from the first. Arbitration is agreed to. The arbitration body's expected timeline is stated. In the interim, an activity begins on the island. The activity is named. It is not related to either claim.
+Dateline: Isla del Coco, Isla Uvita, or Caño Island Biological Reserve.
+Punchline position: The unrelated activity now underway, stated in the final sentence.`,
+  },
+  {
+    name: "military-parade",
+    tag: "LOCAL",
+    category: "local",
+    buildPrompt: (d) => `
+SIGNAL DOMAIN: Public ceremony / civic event
+KAPPA score: ${d.kappaScore.toFixed(1)}
+Recent events: ${d.recentEvents.slice(0,2).map(e => e.description).join(" | ")}
+
+ARTICLE CONCEPT: A national civic ceremony or parade takes place. The event's official theme is named. Each element of the procession is described in order, in one clause each, in AP wire style. The final element of the procession is unexpected relative to the preceding elements. It is described in the same declarative register as the others. No official comments on the final element. An attendee's reaction is quoted. The attendee describes the overall event as "very organized."
+Dateline: San José, Paseo Colón, or Plaza de la Democracia.
+Punchline position: The final procession element and the attendee quote together in the closing paragraph.`,
   },
 ];
 

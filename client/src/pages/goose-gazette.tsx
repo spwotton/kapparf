@@ -38,7 +38,7 @@ interface Article {
 }
 
 // ─── CATEGORIES ──────────────────────────────────────────────────────────────
-const CATEGORIES = ["ALL","LOCAL NEWS","SOCIETY","SCIENCE","WILDLIFE","MARITIME","OPINION"];
+const CATEGORIES = ["ALL","LOCAL NEWS","SOCIETY","SCIENCE","WILDLIFE","MARITIME","OPINION","POLITICS","DIPLOMACY","DEFENSE","WORLD","CULTURE","CYBER"];
 
 // Map sidebar category label → article tags that match
 function matchesCategory(tag: string, cat: string): boolean {
@@ -471,6 +471,17 @@ A technology consultant reached for comment noted that standard WordPress instal
     },
   ];
 }
+
+
+// ─── SECTION RULE LABEL ───────────────────────────────────────────────────────
+function SectionRule({ label }: { label: string }) {
+  return (
+    <div className="border-t-4 border-black pt-3 mb-6">
+      <span className="text-[10px] font-black font-sans tracking-[0.28em] uppercase text-gray-500">{label}</span>
+    </div>
+  );
+}
+
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 export default function GooseGazettePage() {
