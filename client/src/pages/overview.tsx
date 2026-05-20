@@ -85,11 +85,11 @@ function getThreatColor(score: number): string {
 
 function getThreatBgClass(level: string): string {
   switch (level) {
-    case "NOMINAL": return "bg-green-500/10 text-green-700 dark:text-green-400";
-    case "ELEVATED": return "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400";
-    case "HIGH": return "bg-orange-500/10 text-orange-700 dark:text-orange-400";
-    case "CRITICAL": return "bg-red-500/10 text-red-700 dark:text-red-400";
-    case "EMERGENCY": return "bg-red-700/20 text-red-900 dark:text-red-300";
+    case "NOMINAL": return "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400";
+    case "ELEVATED": return "bg-amber-500/10 text-amber-700 dark:text-amber-400";
+    case "HIGH": return "bg-orange-700/10 text-orange-800 dark:text-orange-400";
+    case "CRITICAL": return "bg-rose-900/10 text-rose-900 dark:text-rose-400";
+    case "EMERGENCY": return "bg-rose-950/20 text-rose-950 dark:text-rose-300";
     default: return "bg-muted text-muted-foreground";
   }
 }
@@ -334,10 +334,10 @@ export default function DashboardPage() {
                   {kappaStatus?.eveningWindow.active ? (
                     <>
                       <span className="relative flex h-2.5 w-2.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                       </span>
-                      <Badge className="bg-amber-500/10 text-amber-700 dark:text-amber-400" data-testid="badge-evening-active">
+                      <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400" data-testid="badge-evening-active">
                         WINDOW {kappaStatus.eveningWindow.window} ACTIVE
                       </Badge>
                     </>
@@ -1033,11 +1033,11 @@ export default function DashboardPage() {
             {liveCorrelations.slice(0, 10).map((c) => {
               const sevColors = [
                 "",
-                "bg-green-500/10 text-green-700 dark:text-green-400",
-                "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
-                "bg-orange-500/10 text-orange-700 dark:text-orange-400",
-                "bg-red-500/10 text-red-700 dark:text-red-400",
-                "bg-red-700/10 text-red-900 dark:text-red-300",
+                "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400",
+                "bg-amber-500/10 text-amber-700 dark:text-amber-400",
+                "bg-orange-700/10 text-orange-800 dark:text-orange-400",
+                "bg-rose-900/10 text-rose-900 dark:text-rose-400",
+                "bg-rose-950/20 text-rose-950 dark:text-rose-300",
               ];
               return (
                 <Card key={c.id} data-testid={`card-live-corr-${c.id}`}>

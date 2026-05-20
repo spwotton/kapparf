@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Montserrat:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=EB+Garamond:wght@400;700&family=Open+Sans:wght@400;600;700&family=Montserrat:wght@400;600;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,93 +6,94 @@
 
 @layer base {
   :root {
-    /* Light mode — parchment/warm dark (rarely used; app defaults to dark) */
-    --background: 222 45% 8%;
-    --foreground: 45 20% 88%;
-    --card: 222 42% 11%;
-    --card-foreground: 45 20% 88%;
-    --popover: 222 42% 11%;
-    --popover-foreground: 45 20% 88%;
-    --primary: 43 82% 52%;        /* amber gold — golden logarithmic spirals */
-    --primary-foreground: 222 45% 8%;
-    --secondary: 195 70% 36%;     /* deep cyan — aurora borealis */
-    --secondary-foreground: 45 20% 88%;
-    --muted: 222 38% 14%;
-    --muted-foreground: 220 18% 54%;
-    --accent: 275 52% 48%;        /* amethyst — phonon insulation geodes */
-    --accent-foreground: 45 20% 88%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 45 20% 88%;
-    --border: 222 35% 19%;
-    --input: 222 35% 19%;
-    --ring: 43 82% 52%;
+    /* Light mode — editorial news (default) */
+    --background: 0 0% 100%;
+    --foreground: 215 25% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 18%;
+    --primary: 160 84% 30%;           /* emerald green #059669 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;         /* very light gray #f1f5f9 */
+    --secondary-foreground: 215 25% 18%;
+    --muted: 210 40% 98%;             /* near-white #f8fafc */
+    --muted-foreground: 215 16% 47%;  /* slate gray #64748b */
+    --accent: 152 60% 95%;            /* light green tint */
+    --accent-foreground: 160 61% 20%; /* dark emerald */
+    --destructive: 0 62% 50%;         /* muted red — destructive actions only */
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 32% 91%;            /* soft gray #e2e8f0 */
+    --input: 215 32% 91%;
+    --ring: 160 84% 30%;
 
-    --sidebar: 222 48% 5%;
-    --sidebar-foreground: 45 20% 88%;
-    --sidebar-border: 222 35% 14%;
-    --sidebar-primary: 43 82% 52%;
-    --sidebar-primary-foreground: 222 45% 8%;
-    --sidebar-accent: 222 38% 12%;
-    --sidebar-accent-foreground: 45 20% 88%;
-    --sidebar-ring: 43 82% 52%;
+    --sidebar: 210 40% 98%;
+    --sidebar-foreground: 215 25% 18%;
+    --sidebar-border: 215 32% 91%;
+    --sidebar-primary: 160 84% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 215 25% 18%;
+    --sidebar-ring: 160 84% 30%;
 
-    --font-serif: 'EB Garamond', Georgia, serif;
-    --font-sans: 'Montserrat', sans-serif;
+    --font-serif: 'Playfair Display', 'EB Garamond', Georgia, serif;
+    --font-sans: 'Open Sans', 'Montserrat', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     --radius: 0.5rem;
 
-    --shadow-2xs: 0 1px 2px 0 rgba(0,0,0,0.4);
-    --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.4);
-    --shadow-sm:  0 1px 3px 0 rgba(0,0,0,0.5), 0 1px 2px -1px rgba(0,0,0,0.4);
-    --shadow:     0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -2px rgba(0,0,0,0.4);
-    --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -2px rgba(0,0,0,0.4);
-    --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.6), 0 4px 6px -4px rgba(0,0,0,0.4);
-    --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.6), 0 8px 10px -6px rgba(0,0,0,0.4);
-    --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.7);
+    --shadow-2xs: 0 1px 2px 0 rgba(0,0,0,0.04);
+    --shadow-xs:  0 1px 2px 0 rgba(0,0,0,0.05);
+    --shadow-sm:  0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.04);
+    --shadow:     0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06);
+    --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
+    --shadow-xl:  0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.05);
+    --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.12);
 
-    --chart-1: 43 82% 52%;   /* amber */
-    --chart-2: 195 70% 42%;  /* cyan */
-    --chart-3: 275 52% 55%;  /* amethyst */
-    --chart-4: 0 72% 56%;    /* red */
-    --chart-5: 160 60% 42%;  /* teal */
+    --chart-1: 160 84% 30%;  /* emerald */
+    --chart-2: 38 92% 50%;   /* amber */
+    --chart-3: 258 54% 52%;  /* violet */
+    --chart-4: 199 89% 48%;  /* sky blue */
+    --chart-5: 340 75% 55%;  /* rose */
   }
 
   .dark {
-    --background: 222 45% 6%;     /* deep navy-black — Monadic Surface */
-    --foreground: 45 20% 88%;     /* warm off-white — Ω-GOS text */
-    --card: 222 42% 9%;
-    --card-foreground: 45 20% 88%;
-    --popover: 222 42% 9%;
-    --popover-foreground: 45 20% 88%;
-    --primary: 43 82% 52%;        /* amber gold */
-    --primary-foreground: 222 45% 6%;
-    --secondary: 195 70% 36%;     /* aurora cyan */
-    --secondary-foreground: 45 20% 88%;
-    --muted: 222 38% 13%;
-    --muted-foreground: 220 18% 52%;
-    --accent: 275 52% 48%;        /* amethyst */
-    --accent-foreground: 45 20% 88%;
-    --destructive: 0 62% 42%;
-    --destructive-foreground: 45 20% 88%;
-    --border: 222 35% 17%;
-    --input: 222 35% 17%;
-    --ring: 43 82% 52%;
+    /* Dark mode — warm editorial dark gray (not deep navy) */
+    --background: 220 18% 10%;
+    --foreground: 215 28% 88%;
+    --card: 220 18% 13%;
+    --card-foreground: 215 28% 88%;
+    --popover: 220 18% 13%;
+    --popover-foreground: 215 28% 88%;
+    --primary: 160 72% 38%;           /* emerald — slightly brighter for dark bg */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 215 20% 18%;
+    --secondary-foreground: 215 28% 88%;
+    --muted: 215 18% 17%;
+    --muted-foreground: 215 14% 54%;
+    --accent: 160 28% 18%;            /* subtle green tint */
+    --accent-foreground: 160 60% 68%;
+    --destructive: 0 55% 42%;         /* muted red — destructive only */
+    --destructive-foreground: 0 0% 100%;
+    --border: 215 18% 22%;
+    --input: 215 18% 22%;
+    --ring: 160 72% 38%;
 
-    --sidebar: 222 48% 4%;
-    --sidebar-foreground: 45 20% 88%;
-    --sidebar-border: 222 35% 13%;
-    --sidebar-primary: 43 82% 52%;
-    --sidebar-primary-foreground: 222 45% 6%;
-    --sidebar-accent: 222 38% 11%;
-    --sidebar-accent-foreground: 45 20% 88%;
-    --sidebar-ring: 43 82% 52%;
+    --sidebar: 220 18% 8%;
+    --sidebar-foreground: 215 28% 88%;
+    --sidebar-border: 215 18% 18%;
+    --sidebar-primary: 160 72% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 18% 16%;
+    --sidebar-accent-foreground: 215 28% 88%;
+    --sidebar-ring: 160 72% 38%;
 
-    --chart-1: 43 82% 52%;
-    --chart-2: 195 70% 42%;
-    --chart-3: 275 52% 55%;
-    --chart-4: 0 72% 56%;
-    --chart-5: 160 60% 42%;
+    --chart-1: 160 72% 42%;
+    --chart-2: 38 92% 50%;
+    --chart-3: 258 54% 62%;
+    --chart-4: 199 89% 55%;
+    --chart-5: 340 75% 60%;
   }
 }
 
