@@ -132,6 +132,13 @@ const navGroups: NavGroup[] = [
     ],
   },
   {
+    labelKey: "sidebar.public", fallbackLabel: "PUBLIC",
+    items: [
+      { titleKey: "sidebar.gooseGazette", fallback: "🪿 The Goose Gazette", url: "/goose", icon: Globe },
+      { titleKey: "sidebar.hyperobjects", fallback: "⬡ Hyperobject Intel", url: "/hyperobjects", icon: Atom },
+    ],
+  },
+  {
     labelKey: "sidebar.operations", fallbackLabel: "OPERATIONS",
     items: [
       { titleKey: "sidebar.fleetTracker", fallback: "Fleet Tracker", url: "/fleet", icon: Radio },

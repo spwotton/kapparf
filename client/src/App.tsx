@@ -52,6 +52,8 @@ import LocalLLMHypervisorPage from "@/pages/local-llm-hypervisor";
 import BioAcousticPage from "@/pages/bio-acoustic";
 import AudioForensicsPage from "@/pages/audio-forensics";
 import VideoForensicsPage from "@/pages/video-forensics";
+import GooseGazettePage from "@/pages/goose-gazette";
+import HyperobjectsPage from "@/pages/hyperobjects";
 
 function Router() {
   return (
@@ -99,6 +101,8 @@ function Router() {
       <Route path="/bio-acoustic" component={BioAcousticPage} />
       <Route path="/audio" component={AudioForensicsPage} />
       <Route path="/video-forensics" component={VideoForensicsPage} />
+      <Route path="/goose" component={GooseGazettePage} />
+      <Route path="/hyperobjects" component={HyperobjectsPage} />
       <Route component={NotFound} />
     </Switch>
   );
