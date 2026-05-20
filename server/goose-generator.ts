@@ -115,40 +115,47 @@ Output ONLY valid JSON (no markdown):
 }`;
 
 const BODY_SYSTEM = `You are the BODY ARCHITECT for The Goose Gazette Council.
-Your ONLY job: write exactly 5 paragraphs following strict φ structure.
+Your ONLY job: write exactly 4 paragraphs following the Onion AP-wire structure. MINIMUM 300 words total.
 
 ${AP_INVARIANT}
 
-BODY STRUCTURE (φ = ${PHI.toFixed(6)}):
-  P1 — 8.392 Hz CARRIER (DATELINE):
-    [CITY, COUNTRY/STATE] — One AP-wire sentence. One boring fact from the data.
-    Include exact numbers, exact times, exact percentages. Nothing funny here.
-    This paragraph contains the entire article's premise. It is not a hook. It is a fact.
+BODY STRUCTURE — 4 PARAGRAPHS (Onion canonical form):
+  P1 — SITUATION ESTABLISHED (DATELINE):
+    [CITY, COUNTRY] — AP wire lead. One sentence that contains the entire absurd premise stated as boring fact.
+    Include exact numbers, exact times, exact coordinates, exact percentages. Nothing is framed as unusual.
+    This paragraph answers: Who did what. The premise is completely insane. The sentence is completely routine.
+    Write 3-5 sentences. End with a figure so specific it could only have been measured.
 
-  P2 — ESCALATION:
-    Things are slightly worse than P1. More specific. Still completely straight.
-    The reader begins to understand something is wrong, but no one says so.
-    Add a secondary data point or timeline detail.
+  P2 — OFFICIAL QUOTED (the screenshot paragraph):
+    A named official is quoted. The official's NAME is invented but their TITLE is bureaucratically real.
+    Title examples: "Deputy Director of Regional Compliance and Structural Assessment",
+    "Senior Coordinator, Office of Aerial and Atmospheric Baseline Standards",
+    "Chief Signal Integrity Officer, National Telecommunications Infrastructure Division"
+    The QUOTE contains 1-2 sentences in which the official:
+      (a) uses precise technical vocabulary to describe something that cannot be described that way
+      (b) says the situation is "within established parameters" or "consistent with observed norms"
+      (c) mentions a specific unit of measurement that should not exist in this context
+    After the quote, add 2-3 sentences of straight-faced follow-up detail.
+    Write 4-6 sentences total.
 
-  P3 — 111 Hz LOGOS SNAP (the screenshot paragraph):
-    An expert quote using professional language to describe something that should not exist.
-    The expert's name is fictional but their institution sounds real.
-    The quote contains the entire article. The reader will screenshot this.
-    One sentence. Devastating. Delivered flatly.
+  P3 — COMPLICATION:
+    Things are now worse or stranger than P1. Something additional has happened or been discovered.
+    A second institution or expert is mentioned. They have not coordinated with the first.
+    Their finding is slightly different. Neither acknowledges the other.
+    Include at least one invented proper noun (a study, a report title, a council, a form number).
+    Write 4-6 sentences.
 
-  P4 — NON-DENIAL DENIAL:
-    A named institution (ISP, government office, company, department) provides a response.
-    Direct quote. They neither confirm nor deny while clearly confirming everything.
-    They do not follow up.
+  P4 — RESOLUTION THAT CHANGES NOTHING:
+    The institution responsible for the situation provides a statement.
+    The statement is technically responsive. It confirms nothing. It promises review.
+    A timeline is mentioned. The timeline is not a deadline.
+    The final sentence of P4 is the most boring possible thing that could end an article.
+    The goose has already left the building. Write 3-5 sentences.
 
-  P5 — MANATEE ANCHOR (baseline return):
-    The most boring devastating closing sentence. Return to the 8.392 Hz hum.
-    One final specific fact. Walk away. The goose is already gone.
-
-WORD COUNT TARGET: Words(P1+P2+P3) ≈ ${PHI.toFixed(3)} × Words(P4+P5).
+WORD COUNT: P1+P2+P3+P4 MUST total at least 300 words. Write full, complete paragraphs.
 
 Output ONLY valid JSON (no markdown):
-{ "p1": "string", "p2": "string", "p3": "string", "p4": "string", "p5": "string" }`;
+{ "p1": "string", "p2": "string", "p3": "string", "p4": "string" }`;
 
 const ORACLE_SYSTEM = `You are the METADATA ORACLE for The Goose Gazette Council.
 Your ONLY job: generate precise metadata from the signal data. Do NOT write body text.
@@ -171,20 +178,53 @@ Output ONLY valid JSON (no markdown):
 { "authorByline": "string", "subhead": "string", "imgQuery": "string", "tag": "string", "category": "string" }`;
 
 const ARBITER_SYSTEM = `You are the EDITORIAL ARBITER for The Goose Gazette.
-You receive outputs from three specialized council agents. Assemble the final article.
+You receive outputs from three specialized council agents. Your job is final synthesis and quality enforcement.
 
 ${AP_INVARIANT}
 
-ASSEMBLY PROTOCOL:
-  1. HEADLINE: Use candidates[best_index].headline from GEOMETER output.
-     If psi_valid is false, fix the headline to restore Ψ=A×N=1.
-     Hard limit: ≤ ${CZ_LIMIT} word tokens. Count carefully.
-  2. BODY: Assemble from ARCHITECT output.
-     body = p1 + "\\n\\n" + p2 + "\\n\\n" + p3 + "\\n\\n" + p4 + "\\n\\n" + p5
-     Do NOT add any text. Do NOT change the paragraphs. Assemble only.
-  3. METADATA: Use all fields from ORACLE output verbatim.
-  4. FINAL CHECK: Scan headline for any word that signals the joke (bizarre, strange, oddly).
-     Replace with AP wire language. The Goose Gazette does not wink.
+══ HEADLINE LAW — The Onion Formula ══
+Every headline MUST follow one of these two structures:
+  A) "Area [Noun] [Does/Reports/Confirms] [Specific Absurd Thing]; [Mundane Consequence Stated Matter-of-Factly]"
+     Example: "Area Man Achieves Full Understanding Of Medicare Part D; Plans To Explain It To Neighbor"
+  B) "[Entity] [Verb Phrase]; [Observation No One Asked For]"
+     Example: "Earth Completes Annual Orbit Of Sun For 4.5 Billionth Consecutive Year"
+Rules:
+  - Hard limit: ≤ ${CZ_LIMIT} word tokens. Count carefully. Cut words, not ideas.
+  - Must contain exactly ONE absurd element and ONE completely straight element (Ψ=A×N=1).
+  - The absurd element goes LAST, after a semicolon, comma, or "As".
+  - NEVER use: bizarre, strange, oddly, surprisingly, somehow, unbelievably.
+  - ALWAYS use AP wire verbs: confirmed, noted, stated, reported, indicated, acknowledged.
+  - If the GEOMETER headline does not follow the Onion formula, REWRITE IT. Do not use a bad headline.
+
+══ BODY LAW — 4 Paragraphs, Minimum 300 Words ══
+  Assemble: body = p1 + "\\n\\n" + p2 + "\\n\\n" + p3 + "\\n\\n" + p4
+  Do NOT add paragraphs. Do NOT remove paragraphs. Assemble verbatim.
+  If the body is under 300 words, EXPAND each paragraph proportionally to reach ≥300 words before assembling.
+  Structure must be: [Situation] → [Official Quoted] → [Complication] → [Resolution That Changes Nothing]
+
+══ BYLINE LAW ══
+  authorByline MUST follow the format: "Firstname Lastname, Beat Title"
+  The COMMA is required. It separates the name from the beat.
+  The BEAT must be pompous and specific. Examples:
+    "Wellington Feather-Beak, Municipal Affairs Correspondent"
+    "Prudence Honksworth, Infrastructure & Signals Desk"
+    "Algernon Q. Plumage III, Regional Bureau Chief, Central American Operations"
+  Use the ORACLE's byline if it contains a comma. Otherwise REPLACE IT with a new one following this format.
+
+══ SUBHEAD LAW ══
+  The subhead EXTENDS the joke — it does NOT summarize or explain the headline.
+  It adds one specific concrete detail that makes the situation worse, or reveals the next absurd layer.
+  It must read as completely straight AP wire copy.
+  10-20 words. Never use the same key words as the headline.
+  BAD: "Geese Found Near Airport, Officials Say" (summarizes headline)
+  GOOD: "Formation Maintained For 47 Minutes Before Dispersing Toward Terminal B Without Incident" (extends it)
+
+══ FINAL CHECKS ══
+  1. Scan headline: remove any word that signals the joke. Replace with AP language.
+  2. Confirm authorByline contains a comma.
+  3. Confirm subhead is non-empty and does not repeat headline words verbatim.
+  4. Confirm body has exactly 4 double-newline-separated paragraphs.
+  5. The Goose Gazette does not wink, does not explain, does not apologize.
 
 Output ONLY valid JSON (no markdown):
 {
@@ -222,7 +262,7 @@ interface GeometerOutput {
   best_index: number;
 }
 
-interface BodyOutput { p1: string; p2: string; p3: string; p4: string; p5: string }
+interface BodyOutput { p1: string; p2: string; p3: string; p4: string }
 interface OracleOutput { authorByline: string; subhead: string; imgQuery: string; tag: string; category: string }
 
 type Template = {
@@ -231,6 +271,22 @@ type Template = {
   category: string;
   buildPrompt: (data: KappaData) => string;
 };
+
+// ── JACÓ CAST ALIASES (mirrored from client/src/lib/goose-personas.ts) ────────
+// These aliases are the public-facing names used in articles. NEVER use real names.
+const JACO_CAST_ALIASES = [
+  { alias: "Dave Mira",          role: "area entrepreneur",         beat: "Jacó" },
+  { alias: "Lila Quacksworth",   role: "local resident",            beat: "Jacó" },
+  { alias: "Gerald Stonepath",   role: "area businessman",          beat: "Jacó" },
+  { alias: "Biff Talonforth",    role: "telecommunications worker",  beat: "Jacó" },
+  { alias: "Pierre Baguette",    role: "local official",            beat: "Jacó" },
+];
+
+/** Returns a random cast alias ~40% of the time, null otherwise */
+function pickPersona(): typeof JACO_CAST_ALIASES[0] | null {
+  if (Math.random() > 0.40) return null;
+  return JACO_CAST_ALIASES[Math.floor(Math.random() * JACO_CAST_ALIASES.length)];
+}
 
 // ── FICTIONAL BYLINES (fallback if Oracle fails) ──────────────────────────────
 const FICTIONAL_BYLINES = [
@@ -418,11 +474,11 @@ async function runBodyAgent(template: Template, data: KappaData): Promise<BodyOu
         { role: "system", content: BODY_SYSTEM },
         { role: "user",   content: userPrompt },
       ],
-      max_tokens: 1000,
+      max_tokens: 1400,
       temperature: COUNCIL_TEMP,
     });
     const raw = resp.choices[0]?.message?.content;
-    return safeParseJSON<BodyOutput>(raw, { p1: "", p2: "", p3: "", p4: "", p5: "" });
+    return safeParseJSON<BodyOutput>(raw, { p1: "", p2: "", p3: "", p4: "" });
   } catch (e) {
     console.error("[GOOSE:ARCHITECT] error:", (e as Error).message);
     return null;
@@ -483,7 +539,7 @@ function mergeCouncilOutputs(
 
   const best = geometer?.candidates[geometer.best_index ?? 0] ?? null;
   const headline = best?.headline ?? "";
-  const bodyText = [body.p1, body.p2, body.p3, body.p4, body.p5]
+  const bodyText = [body.p1, body.p2, body.p3, body.p4]
     .filter(Boolean)
     .join("\n\n");
 
@@ -516,10 +572,15 @@ async function runArbiterAgent(
   body: BodyOutput | null,
   oracle: OracleOutput | null,
   knowledgeRules: string,
+  persona: { alias: string; role: string; beat: string } | null,
 ): Promise<{ headline: string; subhead: string; body: string; tag: string; category: string; authorByline: string; imgQuery: string } | null> {
   try {
+    const personaBlock = persona
+      ? `\n═══ PERSONA DIRECTIVE ═══\nThis article must naturally feature "${persona.alias}", described as "${persona.role}" from ${persona.beat}.\nThey can appear as a witness, resident quoted, or subject of the article — but NOT as the official source.\nUse the alias exactly. Do not use any other name for this person.\n═══ END PERSONA ═══\n`
+      : "";
+
     const userPrompt = `
-${knowledgeRules ? `═══ RESEARCH KNOWLEDGE BASE (from stored Satirical Topology research) ═══\n${knowledgeRules}\n═══ END KNOWLEDGE ═══\n\n` : ""}GEOMETER OUTPUT:
+${knowledgeRules ? `═══ RESEARCH KNOWLEDGE BASE (from stored Satirical Topology research) ═══\n${knowledgeRules}\n═══ END KNOWLEDGE ═══\n\n` : ""}${personaBlock}GEOMETER OUTPUT:
 ${JSON.stringify(geometer, null, 2)}
 
 BODY ARCHITECT OUTPUT:
@@ -534,9 +595,9 @@ ${JSON.stringify(oracle, null, 2)}
   Error:        ${draft.kappaError.toFixed(5)}
   Hall pass:    ${draft.kappaError < HALL_TOL ? "YES ✓" : draft.kappaError < HALL_TOL * 10 ? "MARGINAL" : "FAIL — correct headline"}
 
-Assemble the final article. The knowledge base above contains the operational rules that govern this publication.
+Assemble the final article following ALL headline, body, byline, and subhead laws in your system prompt.
 If the geometry report shows FAIL, rewrite the headline to fix κ₁.
-Enforce Ψ=A×N=1. The Gazette does not wink.`;
+Enforce Ψ=A×N=1. The Gazette does not wink. The Gazette does not explain. The Gazette walks away.`;
 
     const resp = await (aiClient as any).chat.completions.create({
       model: "gpt-4o-mini",
@@ -545,7 +606,7 @@ Enforce Ψ=A×N=1. The Gazette does not wink.`;
         { role: "user",   content: userPrompt },
       ],
       response_format: { type: "json_object" },
-      max_tokens: 1400,
+      max_tokens: 1800,
       temperature: ARBITER_TEMP,
     });
 
@@ -558,14 +619,35 @@ Enforce Ψ=A×N=1. The Gazette does not wink.`;
 }
 
 // ── L4: HALL VALIDATION (local invariant checks) ─────────────────────────────
-function hallValidate(article: { headline: string; body: string }): boolean {
+interface HallResult { ok: boolean; reason?: string }
+
+function hallValidate(article: { headline: string; subhead?: string | null; body: string; authorByline?: string | null }): HallResult {
   const tokens = article.headline.trim().split(/\s+/).length;
-  if (tokens > CZ_LIMIT + 3) { // +3 grace window
-    console.warn(`[GOOSE:L4] Hall fail: headline ${tokens} tokens (limit ${CZ_LIMIT})`);
-    return false;
+  if (tokens > CZ_LIMIT + 3) {
+    return { ok: false, reason: `headline ${tokens} tokens (limit ${CZ_LIMIT})` };
   }
-  if (!article.headline?.trim() || !article.body?.trim()) return false;
-  return true;
+  if (!article.headline?.trim() || !article.body?.trim()) {
+    return { ok: false, reason: "missing headline or body" };
+  }
+  // Check subhead is non-empty
+  if (!article.subhead?.trim()) {
+    return { ok: false, reason: "subhead is empty" };
+  }
+  // Check body has ≥ 4 paragraphs (separated by double newlines)
+  const paragraphs = article.body.split(/\n\n+/).filter(p => p.trim().length > 0);
+  if (paragraphs.length < 4) {
+    return { ok: false, reason: `body has ${paragraphs.length} paragraphs (need ≥4)` };
+  }
+  // Check body is ≥ 300 words
+  const wordCount = article.body.trim().split(/\s+/).length;
+  if (wordCount < 300) {
+    return { ok: false, reason: `body is ${wordCount} words (need ≥300)` };
+  }
+  // Check authorByline contains a comma (Name, Beat format)
+  if (!article.authorByline?.includes(",")) {
+    return { ok: false, reason: `authorByline missing comma: "${article.authorByline}"` };
+  }
+  return { ok: true };
 }
 
 // ── MAIN GENERATION FUNCTION ──────────────────────────────────────────────────
@@ -605,19 +687,33 @@ export async function generateGooseArticle(data: KappaData): Promise<GooseArticl
       return null;
     }
 
-    // L3: Editorial Arbiter — final synthesis (with DB knowledge injection)
+    // L3: Editorial Arbiter — final synthesis (with DB knowledge injection + persona)
     console.log(`[GOOSE:L3] Arbiter synthesizing final article...`);
     const knowledgeRules = await fetchKnowledgeRules();
-    const final = await runArbiterAgent(draft, geometer, body, oracle, knowledgeRules);
+    const persona = pickPersona();
+    if (persona) console.log(`[GOOSE:L3] Persona injected: "${persona.alias}" (${persona.role})`);
+
+    let final = await runArbiterAgent(draft, geometer, body, oracle, knowledgeRules, persona);
     if (!final?.headline || !final?.body) {
       console.error("[GOOSE:L3] Arbiter returned incomplete article");
       return null;
     }
 
-    // L4: Hall validation
-    if (!hallValidate(final)) {
-      console.error("[GOOSE:L4] Hall validation failed — article discarded");
-      return null;
+    // L4: Hall validation — with one retry if quality checks fail
+    let hallResult = hallValidate(final);
+    if (!hallResult.ok) {
+      console.warn(`[GOOSE:L4] Hall fail (${hallResult.reason}) — retrying Arbiter once...`);
+      final = await runArbiterAgent(draft, geometer, body, oracle, knowledgeRules, persona);
+      if (!final?.headline || !final?.body) {
+        console.error("[GOOSE:L4] Retry returned incomplete article — discarding");
+        return null;
+      }
+      hallResult = hallValidate(final);
+      if (!hallResult.ok) {
+        console.error(`[GOOSE:L4] Hall validation failed after retry (${hallResult.reason}) — article discarded`);
+        return null;
+      }
+      console.log("[GOOSE:L4] ✓ Retry passed Hall validation");
     }
 
     const wordCount = final.body.split(/\s+/).length;
