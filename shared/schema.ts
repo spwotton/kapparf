@@ -2642,3 +2642,24 @@ export const insertGooseArticleSchema = createInsertSchema(gooseArticles).omit({
 });
 export type GooseArticle = typeof gooseArticles.$inferSelect;
 export type InsertGooseArticle = z.infer<typeof insertGooseArticleSchema>;
+
+// ── HUMOR HYPERVISOR ──────────────────────────────────────────────────────────
+export const gooseHumorScores = pgTable("goose_humor_scores", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  articleId: varchar("article_id").notNull().references(() => gooseArticles.id, { onDelete: "cascade" }),
+  apRigidity: integer("ap_rigidity").notNull(),
+  premiseAbsurdity: integer("premise_absurdity").notNull(),
+  jokeDiscipline: integer("joke_discipline").notNull(),
+  specificityCarrier: integer("specificity_carrier").notNull(),
+  resolutionUnresolved: integer("resolution_unresolved").notNull(),
+  overall: integer("overall").notNull(),
+  judgeNotes: text("judge_notes"),
+  scoredAt: timestamp("scored_at").notNull().defaultNow(),
+});
+
+export const insertGooseHumorScoreSchema = createInsertSchema(gooseHumorScores).omit({
+  id: true,
+  scoredAt: true,
+});
+export type GooseHumorScore = typeof gooseHumorScores.$inferSelect;
+export type InsertGooseHumorScore = z.infer<typeof insertGooseHumorScoreSchema>;

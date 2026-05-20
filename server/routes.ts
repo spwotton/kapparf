@@ -5237,6 +5237,17 @@ export function registerGooseRoutes(app: express.Express) {
     }
   });
 
+  // GET /api/goose/humor-stats — Humor Hypervisor rolling averages + bundle
+  app.get("/api/goose/humor-stats", async (_req, res) => {
+    try {
+      const { buildHumorFeedback, getHumorHypervisorStatus } = await import("./humor-hypervisor");
+      const feedback = await buildHumorFeedback();
+      res.json({ ...feedback, hypervisor: getHumorHypervisorStatus() });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // GET /api/goose/status — scheduler status
   app.get("/api/goose/status", async (_req, res) => {
     try {

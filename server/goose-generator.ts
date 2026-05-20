@@ -425,9 +425,9 @@ function safeParseJSON<T>(raw: string | null | undefined, fallback: T): T {
 }
 
 // ── L1A: GEOMETER AGENT ───────────────────────────────────────────────────────
-async function runGeometerAgent(template: Template, data: KappaData): Promise<GeometerOutput | null> {
+async function runGeometerAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<GeometerOutput | null> {
   try {
-    const userPrompt = template.buildPrompt(data);
+    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
     const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
     const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
 
@@ -462,9 +462,9 @@ async function runGeometerAgent(template: Template, data: KappaData): Promise<Ge
 }
 
 // ── L1B: BODY ARCHITECT AGENT ─────────────────────────────────────────────────
-async function runBodyAgent(template: Template, data: KappaData): Promise<BodyOutput | null> {
+async function runBodyAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<BodyOutput | null> {
   try {
-    const userPrompt = template.buildPrompt(data);
+    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
     const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
     const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
 
@@ -486,9 +486,9 @@ async function runBodyAgent(template: Template, data: KappaData): Promise<BodyOu
 }
 
 // ── L1C: METADATA ORACLE AGENT ────────────────────────────────────────────────
-async function runOracleAgent(template: Template, data: KappaData): Promise<OracleOutput | null> {
+async function runOracleAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<OracleOutput | null> {
   try {
-    const userPrompt = template.buildPrompt(data);
+    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
     const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
     const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
 
@@ -671,12 +671,24 @@ export async function generateGooseArticle(data: KappaData): Promise<GooseArticl
     console.log(`[GOOSE:L0] Template selected: ${template.name} | κ-score: ${data.kappaScore.toFixed(1)}`);
 
     // L1: Fire all three council agents in parallel (37 Hz sync — simultaneous)
+    // Inject Humor Hypervisor feedback bundle (top-3 exemplars / bottom-3 failures)
+    let humorPreamble = "";
+    try {
+      const { getCachedFeedback, formatFeedbackPreamble } = await import("./humor-hypervisor");
+      const fb = await getCachedFeedback();
+      humorPreamble = formatFeedbackPreamble(fb);
+      if (humorPreamble) {
+        console.log(`[GOOSE:L1] Humor feedback injected: ${fb.exemplars.length} exemplars, ${fb.failures.length} failures, avg=${fb.rollingAvg.overall} (n=${fb.rollingAvg.sampleSize})`);
+      }
+    } catch (e) {
+      console.warn("[GOOSE:L1] humor preamble unavailable:", (e as Error).message);
+    }
     console.log(`[GOOSE:L1] Council convening — 3 agents firing simultaneously...`);
     const councilStart = Date.now();
     const [geometer, body, oracle] = await Promise.all([
-      runGeometerAgent(template, data),
-      runBodyAgent(template, data),
-      runOracleAgent(template, data),
+      runGeometerAgent(template, data, humorPreamble),
+      runBodyAgent(template, data, humorPreamble),
+      runOracleAgent(template, data, humorPreamble),
     ]);
     console.log(`[GOOSE:L1] Council returned in ${Date.now() - councilStart}ms`);
 

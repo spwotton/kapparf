@@ -39,6 +39,45 @@ interface Article {
 // ─── CATEGORY CONSTANTS ───────────────────────────────────────────────────────
 const CATEGORIES = ["ALL", "NEWS", "SOCIETY", "SCIENCE", "WILDLIFE", "MARITIME", "OPINION"];
 
+// ─── HUMOR HYPERVISOR BADGE ──────────────────────────────────────────────────
+interface HumorStats {
+  rollingAvg: {
+    apRigidity: number; premiseAbsurdity: number; jokeDiscipline: number;
+    specificityCarrier: number; resolutionUnresolved: number;
+    overall: number; sampleSize: number;
+  };
+  exemplars: Array<{ headline: string; overall: number }>;
+  failures: Array<{ headline: string; overall: number }>;
+}
+function HumorBadge() {
+  const { data } = useQuery<HumorStats>({
+    queryKey: ["/api/goose/humor-stats"],
+    refetchInterval: 5 * 60 * 1000,
+  });
+  const avg = data?.rollingAvg;
+  if (!avg || avg.sampleSize === 0) {
+    return (
+      <span data-testid="badge-humor-score"
+        className="px-2 py-0.5 border border-gray-800 rounded text-gray-600 font-mono"
+        title="Humor Hypervisor warming up">κ-humor: —</span>
+    );
+  }
+  const tone = avg.overall >= 75 ? "text-green-500 border-green-900"
+             : avg.overall >= 55 ? "text-amber-500 border-amber-900"
+             : "text-red-500 border-red-900";
+  const title = `Humor Hypervisor — rolling avg over ${avg.sampleSize} articles
+AP Rigidity: ${avg.apRigidity}
+Premise Absurdity: ${avg.premiseAbsurdity}
+Joke Discipline: ${avg.jokeDiscipline}
+Specificity Carrier: ${avg.specificityCarrier}
+Resolution Unresolved: ${avg.resolutionUnresolved}`;
+  return (
+    <span data-testid="badge-humor-score"
+      className={`px-2 py-0.5 border rounded font-mono ${tone}`}
+      title={title}>κ-humor: {avg.overall.toFixed(1)}</span>
+  );
+}
+
 // ─── PLACEHOLDER ARTICLES — Onion-style, using cast() for all characters ─────
 function buildPlaceholders(): Article[] {
   return [
@@ -694,12 +733,15 @@ export default function GooseGazettePage() {
           <span className="hidden lg:inline">*All conflicts declared 99.98% meaningless. — </span>
           "Beauty is not a property of objects — it is the κ-constrained collapse of the observer-critic-synthesizer wavefunction."
         </p>
-        <button onClick={handleHonk} data-testid="button-honk-bottom"
-          className={`shrink-0 text-[10px] font-black font-sans px-3 py-1.5 border-2 transition-all duration-200 ${
-            honking ? "bg-yellow-400 text-black border-yellow-400 scale-105" : "bg-transparent text-white border-white hover:bg-white hover:text-black"
-          }`}>
-          {honking ? "HONK!!!" : `HONK${honkCount > 0 ? ` (${honkCount})` : ""}`}
-        </button>
+        <div className="flex items-center gap-3 shrink-0">
+          <HumorBadge />
+          <button onClick={handleHonk} data-testid="button-honk-bottom"
+            className={`shrink-0 text-[10px] font-black font-sans px-3 py-1.5 border-2 transition-all duration-200 ${
+              honking ? "bg-yellow-400 text-black border-yellow-400 scale-105" : "bg-transparent text-white border-white hover:bg-white hover:text-black"
+            }`}>
+            {honking ? "HONK!!!" : `HONK${honkCount > 0 ? ` (${honkCount})` : ""}`}
+          </button>
+        </div>
       </div>
 
       {selected && <ArticleModal article={selected} onClose={() => setSelected(null)}/>}
