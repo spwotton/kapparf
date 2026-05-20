@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { cast } from "@/lib/goose-personas";
+import { BarneyTRex } from "@/components/barney-trex";
 
 // ─── WEB AUDIO HONK ──────────────────────────────────────────────────────────
 function playHonk() {
@@ -646,7 +647,11 @@ export default function GooseGazettePage() {
             <span className="italic text-gray-500 text-[11px]">(Δ = 0.02)</span>
           </div>
 
-          <div className="border-t border-gray-200 pt-4">
+          <div className="border-t border-gray-200 pt-5 mt-2">
+            <BarneyTRex />
+          </div>
+
+          <div className="border-t border-gray-200 pt-4 mt-5">
             <div className="text-[9px] font-black tracking-[0.28em] uppercase text-gray-400 mb-3">Recent</div>
             <ol className="space-y-4" data-testid="list-recent">
               {mostHonked.slice(0, 5).map((a, i) => (
