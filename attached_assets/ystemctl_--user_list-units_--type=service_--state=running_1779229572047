@@ -1,0 +1,43 @@
+[0;1;32m●[0m session-c1.scope - Session c1 of User mint
+     Loaded: loaded (]8;;file://mint/run/systemd/transient/session-c1.scope/run/systemd/transient/session-c1.scope]8;;; transient[0;1;32m[0m)
+  Transient: yes
+     Active: [0;1;32mactive (running)[0m since Tue 2026-05-19 00:32:59 UTC; 21h ago
+      Tasks: 2154
+     Memory: 12.4G (peak: 14.7G)
+        CPU: 14h 29min 32.309s
+     CGroup: /user.slice/user-1000.slice/session-c1.scope
+             ├─[0;38;5;245m 1701 lightdm --session-child 13 16[0m
+             ├─[0;38;5;245m 1726 /usr/lib/x86_64-linux-gnu/cinnamon-session-binary --session cinnamon[0m
+             ├─[0;38;5;245m 1994 /usr/bin/csd-housekeeping[0m
+             ├─[0;38;5;245m 1995 /usr/bin/csd-screensaver-proxy[0m
+             ├─[0;38;5;245m 1996 /usr/bin/csd-a11y-settings[0m
+             ├─[0;38;5;245m 1997 /usr/bin/csd-keyboard[0m
+             ├─[0;38;5;245m 1998 /usr/bin/csd-settings-remap[0m
+             ├─[0;38;5;245m 1999 /usr/bin/csd-automount[0m
+             ├─[0;38;5;245m 2000 /usr/bin/csd-media-keys[0m
+             ├─[0;38;5;245m 2002 /usr/bin/csd-background[0m
+             ├─[0;38;5;245m 2003 /usr/bin/csd-power[0m
+             ├─[0;38;5;245m 2006 /usr/bin/csd-wacom[0m
+             ├─[0;38;5;245m 2009 /usr/bin/csd-clipboard[0m
+             ├─[0;38;5;245m 2010 /usr/bin/csd-print-notifications[0m
+             ├─[0;38;5;245m 2011 /usr/bin/csd-xsettings[0m
+             ├─[0;38;5;245m 2013 /usr/bin/csd-color[0m
+             ├─[0;38;5;245m 2016 /usr/libexec/at-spi-bus-launcher --launch-immediately[0m
+             ├─[0;38;5;245m 2035 /usr/bin/dbus-daemon --config-file=/usr/share/defaults/at-spi2/accessibility.conf --nofork --print-address 11 --address=unix:path=/run/user/1000/at-spi/bus_0[0m
+             ├─[0;38;5;245m 2041 /usr/libexec/csd-printer[0m
+             ├─[0;38;5;245m 2114 /usr/libexec/at-spi2-registryd --use-gnome-session[0m
+             ├─[0;38;5;245m 2193 cinnamon-launcher[0m
+             ├─[0;38;5;245m 2198 cinnamon --replace[0m
+             ├─[0;38;5;245m 2226 /usr/lib/x86_64-linux-gnu/xapps/xapp-sn-watcher[0m
+             ├─[0;38;5;245m 2250 /usr/libexec/geoclue-2.0/demos/agent[0m
+             ├─[0;38;5;245m 2251 /usr/bin/python3 /usr/bin/blueman-applet[0m
+             ├─[0;38;5;245m 2252 /usr/libexec/evolution-data-server/evolution-alarm-notify[0m
+             ├─[0;38;5;245m 2262 /usr/bin/nemo-desktop[0m
+             ├─[0;38;5;245m 2267 cinnamon-killer-daemon[0m
+             ├─[0;38;5;245m 2475 /usr/bin/python3 /usr/share/system-config-printer/applet.py[0m
+             ├─[0;38;5;245m 2515 /usr/lib/firefox/firefox[0m
+             ├─[0;38;5;245m 2522 /usr/lib/firefox/crashhelper 2515 9 /tmp/ 10 12[0m
+             ├─[0;38;5;245m 2615 /usr/lib/firefox/firefox-bin -contentproc -parentBuildID 20250811145442 -prefsHandle 0:26982 -prefMapHandle 1:269040 -sandboxReporter 2 -chrootClient 3 -ipcHandle 4 -initialChannelId {f31813c5-fe20-4071-84c3-371d51f5f895} -parentPid 2515 -crashReporter 5 -crashHelper 6 -appDir /usr/lib/firefox/browser 1 socket[0m
+             ├─[0;38;5;245m 2672 /usr/lib/firefox/firefox-bin -contentproc -ipcHandle 0 -signalPipe 1 -initialChannelId {d249012b-cf23-4ba1-b107-b9cd9d2ed682} -parentPid 2515 -greomni /usr/lib/firefox/omni.ja -appomni /usr/lib/firefox/browser/omni.ja -appDir /usr/lib/firefox/browser 2 forkserver[0m
+             ├─[0;38;5;245m 2677 "/usr/lib/firefox/firefox-bin -contentproc -isForBrowser -prefsHandle 0:30490 -prefMapHandle 1:269040 -jsInitHandle 2:227036 -parentBuildID 20250811145442 -sandboxReporter 3 -chrootClient 4 -ipcHandle 5 -initialChannelId {a2d815de-460f-4cb8-954b-5e8c11b95de0} -parentPid 2515 -crashReporter 6 -crashHelper 7 -greomni /usr/lib/firefox/omni.ja -appomni /usr/lib/firefox/browser/omni.ja -appDir /usr/lib/firefox/browser 3 tab"[0m
+             ├─[0;38;5;245m 2695 "/usr/lib/firefox/firefox-bin -contentproc -parentBu
