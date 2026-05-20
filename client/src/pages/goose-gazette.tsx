@@ -493,327 +493,202 @@ export default function GooseGazettePage() {
         .article-hover:hover h2, .article-hover:hover h3, .article-hover:hover h4 { color: #374151; }
       `}</style>
 
-      {/* ──────────── HEADER ──────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-40 bg-white border-b border-gray-300 shadow-sm" data-testid="header-main">
-        <div className="max-w-7xl mx-auto px-5 h-12 flex items-center justify-between gap-4">
-          <a href="/goose" className="flex items-center gap-2 shrink-0 select-none">
-            <div className={honking ? "honk-active" : ""}>
-              <GooseSvg honking={honking} size={24}/>
+      {/* ──────────── MOBILE TOP BAR (lg:hidden) ─────────────────────────────── */}
+      <header className="lg:hidden sticky top-0 z-40 bg-white border-b border-gray-200 h-12 flex items-center justify-between px-4" data-testid="header-mobile">
+        <button onClick={() => setMobileOpen(o => !o)} aria-label="Menu" data-testid="button-mobile-menu" className="p-2 text-black">
+          {mobileOpen
+            ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+          }
+        </button>
+        <a href="/goose" className="flex items-center gap-2 select-none">
+          <div className={honking ? "honk-active" : ""}><GooseSvg honking={honking} size={22}/></div>
+          <span className="font-black text-[12px] tracking-tight text-black" style={{ fontFamily: "Georgia, serif" }}>THE GOOSE GAZETTE</span>
+        </a>
+        <div className="w-9"/>
+      </header>
+
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 bg-black/40" onClick={() => setMobileOpen(false)}>
+          <aside className="w-64 h-full bg-white p-6 shadow-xl overflow-y-auto" onClick={e => e.stopPropagation()} data-testid="drawer-mobile">
+            <div className="flex flex-col items-center text-center mb-6">
+              <div className="waddle"><GooseSvg honking={false} size={56}/></div>
+              <h1 className="font-black text-[18px] mt-2 tracking-tight leading-tight text-black" style={{ fontFamily: "Georgia, serif" }}>The Goose Gazette</h1>
+              <p className="text-[10px] italic text-gray-500 mt-1">Est. The Moment Things Got Weird</p>
             </div>
-            <span className="font-black text-[12px] tracking-tight text-black hidden sm:block"
-              style={{ fontFamily: "Georgia, serif" }}>THE GOOSE GAZETTE</span>
+            <nav className="space-y-1">
+              {CATEGORIES.map(cat => (
+                <button key={cat} onClick={() => { setActiveCategory(cat); setMobileOpen(false); }}
+                  data-testid={`button-drawer-${cat.toLowerCase()}`}
+                  className={`block w-full text-left text-[12px] font-sans tracking-wide py-2 transition-colors ${
+                    activeCategory === cat ? "text-black font-bold" : "text-gray-500 hover:text-black"
+                  }`}>
+                  {cat === "ALL" ? "◉  ALL NEWS" : `•  ${cat}`}
+                </button>
+              ))}
+            </nav>
+          </aside>
+        </div>
+      )}
+
+      {/* ──────────── DESKTOP 3-COL LAYOUT (180px · 1fr · 200px) ────────────── */}
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[180px_1fr_220px] pb-16">
+
+        {/* LEFT SIDEBAR */}
+        <aside className="hidden lg:block sticky top-0 self-start h-screen border-r border-gray-200 px-6 py-8 overflow-y-auto" data-testid="sidebar-left">
+          <a href="/goose" className="flex flex-col items-center text-center mb-8 select-none group">
+            <div className={honking ? "honk-active" : "waddle"}>
+              <GooseSvg honking={honking} size={64}/>
+            </div>
+            <h1 className="font-black text-[19px] mt-3 tracking-tight leading-tight text-black group-hover:text-gray-700 transition-colors" style={{ fontFamily: "Georgia, serif" }}>
+              The Goose Gazette
+            </h1>
+            <p className="text-[9px] italic text-gray-500 mt-1 tracking-wide">Est. The Moment Things Got Weird</p>
           </a>
 
-          <nav className="hidden lg:flex items-center gap-0">
-            {CATEGORIES.slice(1).map(cat => (
-              <button key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1 text-[10px] font-black font-sans tracking-widest uppercase transition-colors ${
-                  activeCategory === cat ? "text-black underline" : "text-gray-500 hover:text-black"
+          <nav className="space-y-1.5" data-testid="nav-sections">
+            {CATEGORIES.map(cat => (
+              <button key={cat} onClick={() => setActiveCategory(cat)}
+                data-testid={`button-category-${cat.toLowerCase()}`}
+                className={`block w-full text-left text-[11px] font-sans tracking-[0.15em] py-1.5 transition-colors ${
+                  activeCategory === cat ? "text-black font-bold" : "text-gray-500 hover:text-black"
                 }`}>
-                {cat}
+                {cat === "ALL" ? "◉  ALL NEWS" : `•  ${cat}`}
               </button>
             ))}
           </nav>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <button onClick={handleHonk} data-testid="button-nav-honk"
-              className={`text-[10px] font-black font-sans px-3 py-1.5 border-2 transition-all duration-200 border-black ${
-                honking ? "bg-yellow-400 text-black scale-105" : "bg-white text-black hover:bg-gray-50"
-              }`}>
-              {honking ? "HONK!!!" : `HONK${honkCount > 0 ? ` (${honkCount})` : ""}`}
-            </button>
-            <button onClick={() => setMobileOpen(o => !o)} data-testid="button-mobile-menu"
-              className="lg:hidden p-2 text-black" aria-label="Menu">
-              {mobileOpen
-                ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
-              }
-            </button>
-          </div>
-        </div>
-
-        {mobileOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-200 border-b-2 border-b-black">
-            <div className="max-w-7xl mx-auto px-5 py-3 flex flex-wrap gap-1">
-              {CATEGORIES.map(cat => (
-                <button key={cat}
-                  onClick={() => { setActiveCategory(cat); setMobileOpen(false); }}
-                  data-testid={`button-category-${cat.toLowerCase()}`}
-                  className={`px-3 py-2 text-[10px] font-black font-sans tracking-widest uppercase border transition-colors ${
-                    activeCategory === cat ? "bg-black text-white border-black" : "bg-white text-gray-700 border-gray-300 hover:border-black"
-                  }`}>
-                  {cat}
-                </button>
-              ))}
+          <div className="mt-10 pt-6 border-t border-gray-200">
+            <div className="text-[8px] font-black tracking-[0.3em] uppercase text-gray-400 mb-2">Engine</div>
+            <div className="text-[9px] text-gray-500 font-sans leading-relaxed space-y-0.5">
+              <div>Ψ = A × N = 1</div>
+              <div>κ = 4/π</div>
+              <div>θ_K = 128.23°</div>
+              <div>Δ = 0.02</div>
             </div>
           </div>
-        )}
-      </header>
+        </aside>
 
-      {/* ──────────── MASTHEAD ────────────────────────────────────────────────── */}
-      <div className="border-b-4 border-black bg-white">
-        <div className="max-w-7xl mx-auto px-5 pt-8 pb-5">
-          {/* Top rule + title */}
-          <div className="border-t-8 border-black pt-4 text-center">
-            <div className="text-[9px] font-sans font-bold tracking-[0.4em] uppercase text-gray-500 mb-2 select-none">
-              Est. The Moment Things Got Weird &nbsp;·&nbsp; goosegazette.org
-            </div>
-            <h1 className="font-black leading-none text-black select-none"
-              style={{ fontFamily: "Georgia, serif", fontSize: "clamp(2.8rem, 9vw, 7rem)", letterSpacing: "-0.02em" }}>
-              THE GOOSE GAZETTE
-            </h1>
-            <p className="font-serif italic text-gray-600 text-sm mt-1 tracking-wide select-none">
-              "All The News That's Fit To HONK"
-            </p>
+        {/* CENTER FEED */}
+        <main className="min-w-0 px-5 lg:px-12 py-8" data-testid="main-feed">
+          <div className="flex items-center justify-between border-b border-gray-200 pb-3 mb-8">
+            <span className="text-[11px] text-gray-600 font-sans tracking-wide" data-testid="text-date">{today}</span>
+            <span className="text-[10px] text-gray-400 font-sans">Edition No. {edition}</span>
           </div>
 
-          {/* Thin rule + metadata */}
-          <div className="border-t border-gray-400 mt-3 pt-2 flex items-center justify-between flex-wrap gap-2">
-            <span className="text-[10px] font-sans text-gray-500 tracking-wide">{today}</span>
-            <div className="flex items-center gap-3">
-              <div className={honking ? "honk-active" : "waddle"}>
-                <GooseSvg honking={honking} size={32}/>
-              </div>
-            </div>
-            <span className="text-[10px] font-sans text-gray-500 tracking-wide">Edition No. {edition}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ──────────── CATEGORY FILTER TABS ────────────────────────────────────── */}
-      <div className="bg-white border-b border-gray-300">
-        <div className="max-w-7xl mx-auto px-5">
-          <div className="flex items-center overflow-x-auto scrollbar-none gap-0" style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}>
-            {CATEGORIES.map(cat => (
-              <button key={cat}
-                onClick={() => setActiveCategory(cat)}
-                data-testid={`tab-category-${cat.toLowerCase()}`}
-                className={`shrink-0 px-4 py-3 text-[10px] font-black font-sans tracking-[0.2em] uppercase border-b-2 transition-colors ${
-                  activeCategory === cat
-                    ? "border-black text-black"
-                    : "border-transparent text-gray-400 hover:text-gray-700 hover:border-gray-300"
-                }`}>
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ──────────── FRONT PAGE ──────────────────────────────────────────────── */}
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-5 py-8">
-
+          {/* Featured story */}
           {cover && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-b border-gray-200 pb-8 mb-8">
-
-              {/* Cover story — left 2/3 */}
-              <div className="md:col-span-2 md:pr-8 md:border-r md:border-black cursor-pointer group article-hover"
-                onClick={() => setSelected(cover)} data-testid={`article-cover-${cover.id}`}>
-                <div className="overflow-hidden mb-4">
-                  <img src={cover.img} alt={cover.headline}
-                    className="w-full h-72 md:h-96 object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                    onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${cover.id}/900/600`; }}/>
+            <article className="border-b border-gray-200 pb-8 mb-2 cursor-pointer group article-hover"
+              onClick={() => setSelected(cover)} data-testid={`article-cover-${cover.id}`}>
+              <div className="flex gap-6">
+                <div className="flex-1 min-w-0">
+                  <TagBadge tag={cover.tag}/>
+                  <h2 className="font-serif font-black text-[24px] lg:text-[30px] leading-[1.15] mt-2 text-gray-900 group-hover:text-gray-600 transition-colors"
+                    style={{ fontFamily: "Georgia, serif" }}>
+                    {cover.headline}
+                  </h2>
+                  {cover.subhead && (
+                    <p className="font-serif italic text-gray-600 text-[14px] lg:text-[15px] mt-3 leading-snug">{cover.subhead}</p>
+                  )}
+                  <p className="text-[11px] font-sans text-gray-400 mt-4 tracking-wide">{cover.author} &nbsp;·&nbsp; {cover.date}</p>
                 </div>
-                <TagBadge tag={cover.tag}/>
-                <h2 className="font-serif font-black text-2xl md:text-3xl leading-tight mt-2 text-gray-900 group-hover:text-gray-600 transition-colors"
-                  style={{ fontFamily: "Georgia, serif" }}>
-                  {cover.headline}
-                </h2>
-                {cover.subhead && (
-                  <p className="font-serif italic text-gray-600 text-[15px] mt-2 leading-snug">{cover.subhead}</p>
-                )}
-                <p className="text-[11px] font-sans text-gray-400 mt-3 tracking-wide">
-                  {cover.author} &nbsp;·&nbsp; {cover.date}
-                </p>
+                <div className="shrink-0 w-32 lg:w-44 h-28 lg:h-36 overflow-hidden bg-gray-100">
+                  <img src={cover.img} alt=""
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${cover.id}/400/300`; }}/>
+                </div>
               </div>
-
-              {/* Secondary stack — right 1/3 */}
-              <div className="md:col-span-1 md:pl-8 mt-8 md:mt-0 flex flex-col gap-6">
-                {[secondary1, secondary2].filter(Boolean).map((a, i) => a && (
-                  <div key={a.id} className={`cursor-pointer group article-hover ${i === 0 ? "pb-6 border-b border-gray-200" : ""}`}
-                    onClick={() => setSelected(a)} data-testid={`article-secondary-${a.id}`}>
-                    <div className="overflow-hidden mb-2">
-                      <img src={a.img} alt={a.headline}
-                        className="w-full h-32 object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                        onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${a.id}/600/300`; }}/>
-                    </div>
-                    <TagBadge tag={a.tag}/>
-                    <h3 className="font-serif font-bold text-[15px] leading-snug mt-1.5 text-gray-900 group-hover:text-gray-600 transition-colors">
-                      {a.headline}
-                    </h3>
-                    <p className="text-[11px] font-sans text-gray-400 mt-1.5">{a.author} · {a.date}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            </article>
           )}
 
-          {/* ──── MORE STORIES — 4-col grid ──── */}
-          {gridStories.length > 0 && (
-            <div className="mb-10">
-              <SectionRule label="More Stories"/>
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-                {gridStories.map(a => (
-                  <div key={a.id} className="cursor-pointer group article-hover"
-                    onClick={() => setSelected(a)} data-testid={`article-card-${a.id}`}>
-                    <div className="overflow-hidden mb-3">
-                      <img src={a.img} alt={a.headline}
-                        className="w-full aspect-[4/3] object-cover group-hover:scale-[1.04] transition-transform duration-500 shadow-sm group-hover:shadow-md"
-                        onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${a.id}/600/450`; }}/>
-                    </div>
+          {/* Secondary stories — clean vertical feed */}
+          <div className="divide-y divide-gray-200">
+            {filtered.slice(1).map(a => (
+              <article key={a.id} className="py-6 cursor-pointer group article-hover"
+                onClick={() => setSelected(a)} data-testid={`article-feed-${a.id}`}>
+                <div className="flex gap-5 items-start">
+                  <div className="shrink-0 w-20 h-20 overflow-hidden bg-gray-100">
+                    <img src={a.img} alt=""
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${a.id}/200/200`; }}/>
+                  </div>
+                  <div className="flex-1 min-w-0">
                     <TagBadge tag={a.tag}/>
-                    <h3 className="font-serif font-bold text-[14px] leading-snug mt-1.5 text-gray-900 group-hover:text-gray-600 transition-colors">
+                    <h3 className="font-serif font-bold text-[16px] lg:text-[17px] leading-snug mt-1 text-gray-900 group-hover:text-gray-600 transition-colors"
+                      style={{ fontFamily: "Georgia, serif" }}>
                       {a.headline}
                     </h3>
                     {a.subhead && (
-                      <p className="text-[12px] font-serif italic text-gray-500 mt-1 line-clamp-2">{a.subhead}</p>
+                      <p className="text-[12px] lg:text-[13px] text-gray-600 italic mt-1 leading-snug line-clamp-2">{a.subhead}</p>
                     )}
-                    <p className="text-[10px] font-sans text-gray-400 mt-2">{a.author} · {a.date}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* ──── IN BRIEF + SIDEBAR ──── */}
-          {briefStories.length > 0 && (
-            <div>
-              <SectionRule label="In Brief"/>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-
-                {/* Compact story list — 2 col inside */}
-                <div className="lg:col-span-2">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
-                    {briefStories.map(a => (
-                      <div key={a.id} className="cursor-pointer group flex gap-3 pb-4 mb-0 border-b border-gray-100 last:border-0"
-                        onClick={() => setSelected(a)} data-testid={`article-brief-${a.id}`}>
-                        <div className="shrink-0 overflow-hidden w-20 h-16">
-                          <img src={a.img} alt=""
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${a.id}/300/200`; }}/>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <TagBadge tag={a.tag}/>
-                          <h4 className="font-serif text-[13px] font-bold leading-snug mt-0.5 text-gray-900 group-hover:text-gray-500 transition-colors line-clamp-2">
-                            {a.headline}
-                          </h4>
-                          <p className="text-[10px] font-sans text-gray-400 mt-1">{a.date}</p>
-                        </div>
-                      </div>
-                    ))}
+                    <p className="text-[10px] font-sans text-gray-400 mt-2 tracking-wide">{a.author} &nbsp;·&nbsp; {a.date}</p>
                   </div>
                 </div>
+              </article>
+            ))}
+            {filtered.length === 0 && (
+              <p className="py-12 text-center text-[12px] text-gray-400 font-sans">No stories in this section.</p>
+            )}
+          </div>
+        </main>
 
-                {/* Sidebar */}
-                <div className="border-l border-gray-200 pl-8 space-y-8">
-
-                  {/* Editor's Note */}
-                  <div>
-                    <div className="text-[9px] font-black font-sans tracking-[0.3em] uppercase text-gray-400 border-b-2 border-black pb-1 mb-3">
-                      Editor's Note
-                    </div>
-                    <div className="flex gap-3 mb-3">
-                      <div className="shrink-0 waddle">
-                        <GooseSvg honking={false} size={40}/>
-                      </div>
-                      <p className="font-serif text-[13px] leading-relaxed text-gray-700 italic">
-                        "The Goose Gazette reports what the standard press declines to frame correctly.
-                        We apply rigorous AP-wire discipline to premises that collapse under less precise handling.
-                        The goose does not explain the joke. There is no joke."
-                      </p>
-                    </div>
-                    <p className="text-[11px] text-gray-400 font-sans">— G. Honksworth, Editor-In-Chief</p>
-                  </div>
-
-                  {/* Most Honked */}
-                  <div>
-                    <div className="text-[9px] font-black font-sans tracking-[0.3em] uppercase text-gray-400 border-b-2 border-black pb-1 mb-3">
-                      Most Honked
-                    </div>
-                    <ol className="space-y-3">
-                      {mostHonked.map((a, i) => (
-                        <li key={a.id} className="flex gap-2 cursor-pointer group"
-                          onClick={() => setSelected(a)} data-testid={`most-honked-${i + 1}`}>
-                          <span className="font-black text-gray-300 text-lg leading-none shrink-0 w-5">{i + 1}</span>
-                          <div>
-                            <p className="font-serif text-[12px] font-bold leading-snug text-gray-800 group-hover:text-gray-500 transition-colors line-clamp-2">
-                              {a.headline}
-                            </p>
-                            <p className="text-[10px] font-sans text-gray-400 mt-0.5">{a.date}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-
-                  {/* About */}
-                  <div>
-                    <div className="text-[9px] font-black font-sans tracking-[0.3em] uppercase text-gray-400 border-b-2 border-black pb-1 mb-3">
-                      About This Publication
-                    </div>
-                    <p className="font-sans text-[12px] leading-relaxed text-gray-600">
-                      Content generated using the Ω-Council Engine — a multi-layer AI round-table
-                      structured on the GOS lattice (κ₁ = 4/π ≈ 1.273, φ = 1.618, Ψ = A × N = 1).
-                      Every article is shaped by live signal data from the KAPPA platform.
-                      The math is real. The facts are invented. The geese are real.
-                    </p>
-                  </div>
-                </div>
-              </div>
+        {/* RIGHT SIDEBAR */}
+        <aside className="hidden lg:block sticky top-0 self-start h-screen border-l border-gray-200 px-5 py-8 overflow-y-auto" data-testid="sidebar-right">
+          <div className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-500 text-center">INSIGHT BRIEFIF</div>
+          <div className="flex justify-center my-5">
+            <div className="waddle">
+              <GooseSvg honking={false} size={84}/>
             </div>
-          )}
+          </div>
+          <div className="text-[12px] font-serif text-center text-gray-800 mb-6" style={{ fontFamily: "Georgia, serif" }}>
+            Goose Gap<br/>
+            <span className="italic text-gray-500 text-[11px]">(Δ = 0.02)</span>
+          </div>
 
-        </div>
+          <div className="border-t border-gray-200 pt-4">
+            <div className="text-[9px] font-black tracking-[0.28em] uppercase text-gray-400 mb-3">Recent</div>
+            <ol className="space-y-4" data-testid="list-recent">
+              {mostHonked.slice(0, 5).map((a, i) => (
+                <li key={a.id} onClick={() => setSelected(a)} className="cursor-pointer group"
+                  data-testid={`recent-${i + 1}`}>
+                  <p className="font-serif text-[11px] font-bold leading-snug text-gray-800 group-hover:text-gray-500 transition-colors line-clamp-3"
+                    style={{ fontFamily: "Georgia, serif" }}>
+                    {a.headline}
+                  </p>
+                  <p className="text-[9px] font-sans text-gray-400 mt-1">{a.date}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="mt-8 pt-4 border-t border-gray-200 text-center">
+            <button onClick={handleGenerate} disabled={generating} data-testid="button-generate-article"
+              className="text-[10px] font-sans text-gray-400 hover:text-black transition-colors disabled:opacity-40 tracking-wide"
+              title="Generate new article (Ω-Council)">
+              {generating ? "⏳ generating…" : "↻ new edition"}
+            </button>
+          </div>
+        </aside>
+
       </div>
 
-      {/* ──────────── FOOTER ──────────────────────────────────────────────────── */}
-      <footer className="border-t-4 border-black bg-gray-950 text-gray-400 mt-6">
-        <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-[12px] font-sans">
-          <div className="md:col-span-2">
-            <div className="text-white font-black text-base mb-3 font-serif tracking-tight">THE GOOSE GAZETTE</div>
-            <p className="leading-relaxed mb-3 text-gray-500">
-              Satirical news for people who have noticed that the official version of events
-              leaves several details unaccounted for. We use AP-style wire discipline and
-              live signal data to generate articles structurally indistinguishable from reality,
-              except for the part where geese file LLC paperwork.
-            </p>
-            <p className="text-gray-600 text-[11px]">
-              goosegazette.org &nbsp;·&nbsp; All articles satirical &nbsp;·&nbsp; No persons depicted are real &nbsp;·&nbsp; The geese are real
-            </p>
-          </div>
-          <div>
-            <div className="text-white font-black text-xs mb-3 tracking-widest uppercase">Sections</div>
-            {CATEGORIES.slice(1).map(s => (
-              <div key={s} onClick={() => setActiveCategory(s)}
-                className="py-1 text-gray-500 hover:text-white transition-colors cursor-pointer">{s}</div>
-            ))}
-          </div>
-          <div>
-            <div className="text-white font-black text-xs mb-3 tracking-widest uppercase">Engine</div>
-            <div className="text-[11px] leading-relaxed text-gray-600 space-y-1">
-              <div>AP Invariant: Ψ = A × N = 1</div>
-              <div>κ₁ = 4/π = 1.27324</div>
-              <div>φ = 1.618033 (body structure)</div>
-              <div>CZ limit: 17 tokens</div>
-              <div>f₍ₛₙₐₚ₎ = 111 Hz (P3)</div>
-              <div className="pt-1 text-gray-700">L1: 3 council agents (parallel)</div>
-              <div className="text-gray-700">L3: Editorial arbiter (gpt-4o-mini)</div>
-            </div>
-          </div>
-        </div>
-        <div className="border-t border-gray-800 px-6 py-4 flex items-center justify-between text-[10px] font-sans text-gray-700 max-w-7xl mx-auto">
-          <span>© 2026 The Goose Gazette · Est. The Moment Things Got Weird · Edition No. {edition}</span>
-          <button data-testid="button-generate-article" onClick={handleGenerate} disabled={generating}
-            className="text-gray-600 hover:text-white transition-colors disabled:opacity-40 text-base"
-            title="Generate new article (Ω-Council)">
-            {generating ? "⏳" : "↻"}
-          </button>
-        </div>
-      </footer>
+      {/* ──────────── STICKY BOTTOM BAR ─────────────────────────────────────── */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 bg-gray-950 text-gray-300 border-t-2 border-black h-12 flex items-center justify-between px-4 lg:px-6" data-testid="bar-bottom">
+        <p className="font-serif italic text-[11px] truncate flex-1 mr-4 text-gray-400">
+          <span className="hidden lg:inline">*All conflicts declared 99.98% meaningless. — </span>
+          "Beauty is not a property of objects — it is the κ-constrained collapse of the observer-critic-synthesizer wavefunction."
+        </p>
+        <button onClick={handleHonk} data-testid="button-honk-bottom"
+          className={`shrink-0 text-[10px] font-black font-sans px-3 py-1.5 border-2 transition-all duration-200 ${
+            honking ? "bg-yellow-400 text-black border-yellow-400 scale-105" : "bg-transparent text-white border-white hover:bg-white hover:text-black"
+          }`}>
+          {honking ? "HONK!!!" : `HONK${honkCount > 0 ? ` (${honkCount})` : ""}`}
+        </button>
+      </div>
 
       {selected && <ArticleModal article={selected} onClose={() => setSelected(null)}/>}
     </div>
   );
 }
+
