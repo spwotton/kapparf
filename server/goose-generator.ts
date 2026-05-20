@@ -515,10 +515,11 @@ async function runArbiterAgent(
   geometer: GeometerOutput | null,
   body: BodyOutput | null,
   oracle: OracleOutput | null,
+  knowledgeRules: string,
 ): Promise<{ headline: string; subhead: string; body: string; tag: string; category: string; authorByline: string; imgQuery: string } | null> {
   try {
     const userPrompt = `
-GEOMETER OUTPUT:
+${knowledgeRules ? `═══ RESEARCH KNOWLEDGE BASE (from stored Satirical Topology research) ═══\n${knowledgeRules}\n═══ END KNOWLEDGE ═══\n\n` : ""}GEOMETER OUTPUT:
 ${JSON.stringify(geometer, null, 2)}
 
 BODY ARCHITECT OUTPUT:
@@ -533,7 +534,8 @@ ${JSON.stringify(oracle, null, 2)}
   Error:        ${draft.kappaError.toFixed(5)}
   Hall pass:    ${draft.kappaError < HALL_TOL ? "YES ✓" : draft.kappaError < HALL_TOL * 10 ? "MARGINAL" : "FAIL — correct headline"}
 
-Assemble the final article. If the geometry report shows FAIL, rewrite the headline to fix κ₁.
+Assemble the final article. The knowledge base above contains the operational rules that govern this publication.
+If the geometry report shows FAIL, rewrite the headline to fix κ₁.
 Enforce Ψ=A×N=1. The Gazette does not wink.`;
 
     const resp = await (aiClient as any).chat.completions.create({
@@ -603,9 +605,10 @@ export async function generateGooseArticle(data: KappaData): Promise<GooseArticl
       return null;
     }
 
-    // L3: Editorial Arbiter — final synthesis
+    // L3: Editorial Arbiter — final synthesis (with DB knowledge injection)
     console.log(`[GOOSE:L3] Arbiter synthesizing final article...`);
-    const final = await runArbiterAgent(draft, geometer, body, oracle);
+    const knowledgeRules = await fetchKnowledgeRules();
+    const final = await runArbiterAgent(draft, geometer, body, oracle, knowledgeRules);
     if (!final?.headline || !final?.body) {
       console.error("[GOOSE:L3] Arbiter returned incomplete article");
       return null;
@@ -640,6 +643,35 @@ export async function generateGooseArticle(data: KappaData): Promise<GooseArticl
   } catch (err) {
     console.error("[GOOSE] Generation pipeline error:", err);
     return null;
+  }
+}
+
+// ── KNOWLEDGE FETCHER (pulls stored research from DB) ────────────────────────
+let cachedKnowledge: string | null = null;
+let knowledgeCachedAt = 0;
+
+async function fetchKnowledgeRules(): Promise<string> {
+  // Cache for 1 hour — no need to re-query every generation
+  if (cachedKnowledge && Date.now() - knowledgeCachedAt < 60 * 60 * 1000) {
+    return cachedKnowledge;
+  }
+  try {
+    const docs = await storage.getGooseKnowledge("research");
+    if (!docs.length) return "";
+    // Extract the OPERATIONAL RULES section from the research
+    const full = docs[0].content;
+    const rulesStart = full.indexOf("SECTION 7: OPERATIONAL RULES");
+    const mathStart  = full.indexOf("MATHEMATICAL SUMMARY:");
+    const rules = rulesStart > -1
+      ? full.slice(rulesStart, mathStart > -1 ? mathStart + 600 : rulesStart + 2000)
+      : "";
+    cachedKnowledge = rules;
+    knowledgeCachedAt = Date.now();
+    console.log(`[GOOSE:KNOWLEDGE] Loaded ${rules.length} chars of research rules from DB`);
+    return rules;
+  } catch (e) {
+    console.warn("[GOOSE:KNOWLEDGE] Could not fetch from DB:", (e as Error).message);
+    return "";
   }
 }
 

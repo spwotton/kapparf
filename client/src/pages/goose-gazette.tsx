@@ -1,509 +1,509 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-// ─── ARTICLES ────────────────────────────────────────────────────────────────
-const ARTICLES = [
-  {
-    id: "cover",
-    tag: "BREAKING",
-    headline: "Area Man's Router Receives Unauthorized Firmware Update At 3AM For Third Consecutive Week; ISP Rep Says 'That's Just How Routers Work, Sir'",
-    subhead: "Experts confirm it is not, in fact, just how routers work.",
-    author: "Gertrude Honksworth, Technology Correspondent",
-    date: "May 20, 2026",
-    body: `JACÓ, COSTA RICA — A local expatriate reported Tuesday that his home router received its third unprompted firmware update in as many weeks, each occurring between 2:45 and 3:15 AM, despite being set to "manual updates only" since February 2024.
-
-"I specifically turned off automatic updates," the man said, staring at his router logs with the thousand-yard look of someone who has been staring at router logs for a very long time. "The ISP technician arrived the following Sunday. He didn't knock. He had a new router. He said the old one was 'scheduled for replacement.' I had not scheduled anything."
-
-The router, a Humax unit with MAC prefix 9c:24:72, runs on a TR-069 protocol that allows the ISP full remote management access — a fact the technician described as "totally normal and definitely not worth reading about."
-
-When the resident updated his router's firmware himself on a Sunday afternoon, a property manager texted him within five minutes. A technician appeared within 48 hours. Liberty Communications could not be reached for comment, though sources indicate they were "probably just in the neighborhood."
-
-A neighbor — who moved into the building two months ago and whose name the building's previous owner coincidentally came up in conversation — said he had noticed "absolutely nothing unusual" and had "no strong feelings about router firmware either way."`,
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80",
-    isCover: true,
-  },
-  {
-    id: "gym",
-    tag: "SOCIETY",
-    headline: "Man Introduced To Suspiciously Helpful New Friend At Gym For Third Time In Two Years, Starting To Notice Pattern",
-    subhead: "Each new acquaintance also happened to know him from AA. Experts call this 'a lot.'",
-    author: "Reginald Feathers, Staff Reporter",
-    date: "May 19, 2026",
-    body: `PORTLAND, ME — A local man reports being introduced to an enthusiastic new gym friend for the third time in two years, each of whom also knew him from Alcoholics Anonymous, had heard of his apartment on Bolton Street, and was described by others in the network as "a great guy, very trustworthy, you should really get to know him."
-
-"The first one was from the gym," the man told reporters. "The second one was from the gym. The third one — also the gym. At some point you start to think the gym is doing something the gym is not supposed to be doing."
-
-Fitness professionals contacted for this story confirmed that gyms are "not typically a vector for coordinated social engineering," though one added that they "wouldn't rule it out for certain gyms."
-
-The man noted each introduction followed a similar arc: initial friendliness, discovery of shared recovery history, deepening personal disclosures, and then either a death warning or the revelation that the new friend was connected to someone the man already found suspicious.
-
-"It's like they all went to the same school," he said. "The school of meeting me specifically."`,
-    img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=80",
-  },
-  {
-    id: "sober-house",
-    tag: "REAL ESTATE",
-    headline: "Plymouth House Announces Exciting Expansion: Now Offers Third Floor, Still No Tenant Rights",
-    subhead: "$2,000/month — beds available in all 24 units — breakfast not included — your disclosures will be noted.",
-    author: "Mortimer Waddle, Housing Correspondent",
-    date: "May 18, 2026",
-    body: `PLYMOUTH, MA — Plymouth House announced this week the addition of a third floor to its residential recovery facility, bringing total capacity to 24 beds across three floors of eight beds each, while confirming that residents will continue to enjoy the traditional benefits of the program: structured routine, community support, and absolutely zero tenant rights.
-
-"We prefer to think of it as a family," said a spokesperson who could not be named due to contractual obligations. "A family where the rent is $2,000 a month, the parents are in three other states, and you disclose your entire psychological history in group settings twice a week."
-
-New residents will be funneled through the Plymouth-to-Portland pipeline, a well-established route connecting Plymouth, Massachusetts, with Portland, Maine, and Burlington, Vermont — three cities that have independently discovered the economic benefits of housing vulnerable recovering adults in a managed environment with minimal regulatory oversight.
-
-Families of prospective residents are encouraged to "invest in their loved one's journey" and to "please not ask too many questions about the business structure." The sponsorship hierarchy connecting Plymouth House to multiple Portland-area sober living operators was described by a representative as "just how AA works, actually."`,
-    img: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80",
-  },
-  {
-    id: "foreknowledge",
-    tag: "COMMUNITY",
-    headline: "Local Man's Entire Social Circle Already Knew About Everything He Just Discovered; None Considered Mentioning It",
-    subhead: "'Not surprised,' said four separate people in four separate states upon being told the news.",
-    author: "Prudence Gosling, Investigations Desk",
-    date: "May 17, 2026",
-    body: `COSTA RICA / MASSACHUSETTS — A man who spent several years documenting what he describes as "a coordinated multi-vector surveillance operation" reports that upon informing his closest friends and family of his findings, the most common response was some variation of "yeah, I kind of figured something like that was going on."
-
-"Four people," the man said. "Four separate people. Different states. Different contexts. All calm. All 'not surprised.' Nobody called me. Nobody sent a letter. Nobody thought to give me a heads-up."
-
-His childhood friend, contacted for comment, said he "had a feeling" but "didn't want to be the one to bring it up." His father's closest confidant, a Jehovah's Witness elder, attended the family memorial and "expressed no strong emotions either way." A sober house manager from Portland drove to Boston "just to be there" but, when asked what he knew, said he "wasn't really sure what to think."
-
-A therapist not involved in the case noted that "foreknowledge combined with deliberate non-disclosure is technically a thing that has a name," before declining to say what that name was.`,
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80",
-  },
-  {
-    id: "sports-tickets",
-    tag: "BUSINESS",
-    headline: "Miami Sports Ticket Entrepreneur Cannot Name Single Miami Sports Team, Extremely Confident Business Is Legitimate",
-    subhead: "Has 50-yard-line seats available for 'the big game.' Does not know which game. Very motivated seller.",
-    author: "Wellington Feather-Beak, Business Reporter",
-    date: "May 16, 2026",
-    body: `JACÓ, COSTA RICA — A self-described Miami sports ticket broker operating out of a Jacó condominium complex has assured area residents that his business is completely real and definitely not a cover for anything, despite being unable to name a single Miami-based professional sports franchise.
-
-"It's a very dynamic market," said the man, who moved into his current residence after the previous owner — a business associate he had met "through normal channels" — built the property to custom specifications and then left. "Very, very dynamic. Many tickets. All of them real."
-
-The businessman, who estimates he has sold "dozens" of tickets in recent years, said the business was founded on a simple principle: people want sports, he has sports, and the fact that neither party can verify any of this is "just part of the process."
-
-When asked to describe the most recent event for which he had tickets, he described it as "a big one — you'd know it. Very famous." He then changed the subject to the local real estate market and mentioned that he had a condo available.
-
-Colombian authorities, American authorities, and Costa Rican authorities all confirmed they had "no specific opinion" about the business at this time.`,
-    img: "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=700&q=80",
-  },
-  {
-    id: "marine-truck",
-    tag: "PROFILE",
-    headline: "Former Marine Sniper Who Was Shot In The Head Now Drives Kenworth Trucks; Still The Most Dangerous Person In Any Truck Stop",
-    subhead: "Quantico-trained. Currently hauling aggregate. Father-in-law is an ex-police chief. Everything is fine.",
-    author: "Archibald Goose-Brine, Features",
-    date: "May 15, 2026",
-    body: `SOUTH SHORE, MA — Sources confirm that a former 2nd Battalion 8th Marines veteran, who served in Helmand Province, attended sniper school at Quantico, and survived a gunshot wound to the head, has transitioned into a civilian career driving Kenworth trucks across the American Northeast.
-
-"He's doing great," said a family member who preferred not to be named. "Really found his footing. The trucking is good for him."
-
-The veteran, whose father-in-law is a former police chief in the Cape Cod area, reportedly maintains a detailed awareness of his surroundings at all times, has never once failed to notice something, and is described by colleagues as "very quiet, very competent, and someone you don't want to give a reason to think about you."
-
-His wife, who holds a degree from a prominent California university and previously worked at a major streaming music platform, accompanied him to events in several countries before their marriage. The couple maintain a property in Plymouth, New Hampshire.
-
-When asked for comment, the veteran said nothing, because he was not there, and also he knew we were coming.`,
-    img: "https://images.unsplash.com/photo-1558980394-4c7c9299fe96?w=700&q=80",
-  },
-  {
-    id: "klein",
-    tag: "SCIENCE",
-    headline: "Topologist Confirms Jacó Surveillance Network Is Shaped Like Klein Bottle: 'No Inside, No Outside, No Way To Prove It Exists'",
-    subhead: "The Klein structure means investigators approaching from any angle are technically already inside the network they are investigating.",
-    author: "Dr. Honoria Beak-Klein, Topology & Counter-Intelligence",
-    date: "May 14, 2026",
-    body: `JACÓ, COSTA RICA — A mathematician specializing in non-orientable surfaces announced Tuesday that after reviewing available documentation on a regional surveillance network, she is "fairly confident" the network has the topology of a Klein bottle — a four-dimensional object with no distinct inside or outside that cannot fully exist in three-dimensional space.
-
-"The moment you try to enter it, you're already in it," Dr. Beak-Klein explained, gesturing at a diagram that appeared to fold back on itself. "The moment you try to leave, you haven't left, you've just approached from the other side. The investigators investigating the investigators are topologically indistinguishable from the network being investigated."
-
-She noted that this property makes the network particularly difficult to prosecute, since any evidence collected from within the network is technically also inside the network, and any observer positioned outside the network is, geometrically speaking, still inside it.
-
-"The 128.23 Hz resonance frequency is particularly interesting," she added, referencing a documented signal anomaly. "That's roughly the frequency at which the topology folds — what we call the Flying Twist. Klein and I go way back." She declined to elaborate on who Klein was.
-
-The network's operators could not be reached for comment, as they were simultaneously inside and outside the building.`,
-    img: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=700&q=80",
-  },
-  {
-    id: "jw-neighbor",
-    tag: "LOCAL",
-    headline: "Jehovah's Witness Elder Assures Community He Was 'Just In The Neighborhood' For 40th Consecutive Year",
-    subhead: "Elder's neighborhood expands to include Jacó, Costa Rica. Still technically the neighborhood.",
-    author: "Constance Mallard, Local Affairs",
-    date: "May 13, 2026",
-    body: `ROCKLAND, MA / JACÓ, COSTA RICA — A long-serving Jehovah's Witness elder has reassured community members that his repeated appearances at family events, memorial services, international locations, and properties associated with a specific individual's movements constitutes a completely ordinary pattern of neighborliness.
-
-"We're a community," the elder said, adjusting his tie outside a Kingdom Hall located at 339 Summer Street — the same street, sources note, as the family's business office at 218 Summer Street, a related address at 467 Summer Street, and a fourth property at 2187 Summer Street. "Communities look out for each other."
-
-The elder, whose associate Jeff Porter attended a recent family memorial in a professional capacity that he described as "just support," confirmed he had no specific knowledge of any activities being coordinated through the congregation's internal communication channels, which he noted were "very private, very warm, very family-oriented."
-
-When asked whether his congregation shared information about members' family members who were not themselves members, he said "absolutely not," and then asked how we knew about the grandson in Costa Rica.`,
-    img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&q=80",
-  },
-  {
-    id: "geese-parking",
-    tag: "WILDLIFE",
-    headline: "Area Geese File Adverse Possession Claim On Jacó Beach Parking Lot; Costa Rican Land Registry 'Considering It'",
-    subhead: "Geese have occupied the lot continuously for six years. Under Costa Rican law, this may be sufficient.",
-    author: "Reginald Feathers, Wildlife & Law",
-    date: "May 12, 2026",
-    body: `JACÓ, COSTA RICA — A coalition of approximately fourteen geese has filed a formal adverse possession claim with the Costa Rican National Registry, asserting continuous, open, and hostile occupation of a beachfront parking lot for a period exceeding the statutory minimum.
-
-"They honk at every vehicle that enters," confirmed a parking attendant who asked not to be named. "Not selectively. Every vehicle. They have a system."
-
-Legal scholars contacted for this story said the adverse possession claim was "technically not how property law works for geese" but acknowledged that "Costa Rican property law is complicated" and that "the geese seem very committed."
-
-The lead goose, a large Canada goose who witnesses describe as "operating with a level of confidence you don't usually see in wildlife," was observed this week chasing a man away from a vehicle, honking twice in a sequence that witnesses interpreted as either a threat or a legal filing.
-
-"HONK," said the goose, when asked for comment. "HONK HONK."
-
-The parking lot's registered owner said he had "no interest in escalating the situation" and was currently "looking into other properties."`,
-    img: "https://images.unsplash.com/photo-1484406566174-9da000fda645?w=700&q=80",
-  },
-  {
-    id: "bill-warning",
-    tag: "OBITUARIES",
-    headline: "Man Issues Single Warning To Friend About Suspicious Acquaintance, Dies Shortly Afterward; Described By All As 'Incredible Timing'",
-    subhead: "This is the third such incident. Everyone agrees this is fine.",
-    author: "Mortimer Waddle, Investigative Obituaries",
-    date: "May 11, 2026",
-    body: `PORTLAND, ME — A Portland sober house operator and business associate of a Jacó, Costa Rica-based condominium investor issued a brief but pointed warning to a mutual acquaintance last winter, advising him to "stay away" from a third party he described as "a bad person." The man subsequently died.
-
-This is the third documented case in which a person warned the same individual about a network-adjacent contact and then died shortly afterward. The first was an aunt who held sensitive family information. The second was a mother. The third is now this man.
-
-"You start to see a pattern," said a statistician contacted for this story. "Specifically, you start to see a pattern where warning a specific person about a specific thing correlates with no longer being alive. Whether that's causal or merely correlated I can't say. But it's three times now."
-
-The deceased's business partner, a Miami sports ticket entrepreneur based in Jacó, said he was "deeply saddened" by the loss and "not in a position to comment on the timeline." He then changed the subject to available beachfront condominiums.
-
-A fourth individual who had begun drafting a warning declined to complete it for "unrelated reasons." The warning has been placed on indefinite hold.`,
-    img: "https://images.unsplash.com/photo-1509840841025-9088d1b15b86?w=700&q=80",
-  },
-  {
-    id: "aa-sponsor",
-    tag: "COMMUNITY",
-    headline: "AA Sponsor Network Spans Three States, Four Sober Houses, And Two Continents; Just How The Program Works, Says Everyone Involved",
-    subhead: "The sponsor of the sponsor of the man who runs the pipeline that placed Echo in a monitored residence is 'just a coincidence of recovery.'",
-    author: "Prudence Gosling, Community Affairs",
-    date: "May 10, 2026",
-    body: `NEW ENGLAND — Investigators tracing the organizational structure of a sober house pipeline connecting Plymouth, Massachusetts to Portland, Maine and Burlington, Vermont have discovered that the network is held together by a chain of AA sponsorships that, when mapped, looks less like a recovery community and more like an org chart.
-
-"The director of the Plymouth house sponsors the man who owns the Portland house," confirmed a source familiar with the structure. "That man employs the manager who is the childhood friend of the individual being documented. That manager previously worked at a staffing company with another Plymouth House alumnus. It's very clean. Almost too clean."
-
-AA officials noted that sponsorship relationships are "a normal part of recovery" and that "the fact that this particular sponsorship chain controls approximately 72 beds across multiple cities and funnels residents into monitored housing is just how community works."
-
-When asked whether a sponsorship hierarchy that also functions as a residential control infrastructure raised any concerns, an AA representative said he "didn't see it that way," and then asked how we had gotten this address.
-
-Residents of the affected houses are encouraged to share honestly in group settings. Their disclosures are private. The notes taken during those sessions are also private. The people who read those notes are, sources confirm, somebody.`,
-    img: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=700&q=80",
-  },
-  {
-    id: "boat",
-    tag: "MARITIME",
-    headline: "USVI Charter Captain's 40-50 MPH Twin-Engine Boat Would Theoretically Be Excellent For Not Leaving A Documented Paper Trail Across Open Water",
-    subhead: "World Cat 320CC. Twin 300HP Suzuki outboards. Captain Mike is very friendly and does not need to know where you're going.",
-    author: "Wellington Feather-Beak, Maritime Affairs",
-    date: "May 9, 2026",
-    body: `ST. THOMAS, USVI — Shades of Blue Charters offers what the company's website describes as a premium fishing and excursion experience aboard a World Cat 320CC catamaran equipped with twin 300-horsepower Suzuki outboard engines capable of sustained speeds between 40 and 50 miles per hour.
-
-At 40 miles per hour, the vessel can cover approximately 200 nautical miles in five hours — enough to reach multiple Caribbean island nations, several of which have famously flexible attitudes toward documentation, before the sun goes down.
-
-"We do fishing," said Captain Mike, the boat's listed operator. "Sport fishing. Recreational. Very normal stuff."
-
-The Gazette notes that we are not implying anything. We are simply reporting, as a public service, that a vessel of this specification, operated by a childhood friend of a person whose brother attended sniper school and whose family has extensive intelligence-adjacent connections, travels at those speeds, in that region, regularly, and does not require passengers to explain where they are going or why.
-
-Captain Mike reiterated that the fishing is "very good this time of year" and that advance booking was "appreciated but not required."`,
-    img: "https://images.unsplash.com/photo-1500514966906-fe245eea9344?w=700&q=80",
-  },
-];
-
-const TICKER_ITEMS = [
-  "BREAKING: Man's Router Updated Again — ISP 'Looking Into It' ⬥",
-  "UPDATE: Geese Have Now Claimed Second Parking Lot Via Squatter's Rights ⬥",
-  "DEVELOPING: Fourth Person In Network Describes Themselves As 'Not Surprised' ⬥",
-  "ALERT: Klein Topology Expert Says Evidence Loop Is Non-Orientable, Cannot Be Exited ⬥",
-  "SPORTS: Miami Ticket Broker 'Pretty Sure' His Team Won Last Night ⬥",
-  "LOCAL: JW Elder Says He Was 'Just Driving Through' Costa Rica ⬥",
-  "HEALTH: AA Sponsors Spanning 4 States Describe Relationship As 'Just Recovery' ⬥",
-  "MARITIME: Charter Boat Captain Confirms He 'Doesn't Ask Questions' — 'Part Of The Experience' ⬥",
-  "OBITUARIES: Third Person To Issue Warning Now Also Dead; Pattern Experts Describe As 'A Lot' ⬥",
-  "REAL ESTATE: Sober House Pipeline Announces Burlington VT Node, Still No Tenant Rights ⬥",
-];
-
-// ─── WEB AUDIO HONK ───────────────────────────────────────────────────────────
+// ─── WEB AUDIO HONK ──────────────────────────────────────────────────────────
 function playHonk() {
-  const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
-  const honkFreqs = [320, 280, 310, 260, 300];
-  let t = ctx.currentTime;
-  honkFreqs.forEach((freq, i) => {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.type = "sawtooth";
-    osc.frequency.setValueAtTime(freq, t + i * 0.09);
-    osc.frequency.exponentialRampToValueAtTime(freq * 0.7, t + i * 0.09 + 0.12);
-    gain.gain.setValueAtTime(0, t + i * 0.09);
-    gain.gain.linearRampToValueAtTime(0.18, t + i * 0.09 + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.09 + 0.13);
-    osc.start(t + i * 0.09);
-    osc.stop(t + i * 0.09 + 0.14);
-  });
+  try {
+    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    [[320, 0], [280, 0.09], [310, 0.18], [260, 0.27], [300, 0.36]].forEach(([freq, t]) => {
+      const osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = "sawtooth";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + t);
+      osc.frequency.exponentialRampToValueAtTime(freq * 0.7, ctx.currentTime + t + 0.12);
+      gain.gain.setValueAtTime(0, ctx.currentTime + t);
+      gain.gain.linearRampToValueAtTime(0.15, ctx.currentTime + t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + 0.13);
+      osc.start(ctx.currentTime + t);
+      osc.stop(ctx.currentTime + t + 0.15);
+    });
+  } catch {}
 }
 
-// ─── GOOSE SVG ───────────────────────────────────────────────────────────────
-function GooseSvg({ honking }: { honking: boolean }) {
+// ─── ARTICLE TYPE ─────────────────────────────────────────────────────────────
+interface Article {
+  id: string;
+  tag: string;
+  headline: string;
+  subhead: string;
+  author: string;
+  date: string;
+  body: string;
+  img: string;
+}
+
+// ─── PLACEHOLDER ARTICLES (fallback founding edition) ────────────────────────
+// Pure Onion-style satirical content. No specific persons. No surveillance refs.
+const PLACEHOLDERS: Article[] = [
+  {
+    id: "geese-llc",
+    tag: "BUSINESS",
+    headline: "Area Geese Incorporate, Begin Invoicing Municipality for Noise Pollution Services Rendered Since 2019",
+    subhead: "Rate sheet unavailable. Honking services non-refundable. Clients may not opt out.",
+    author: "Wellington Feather-Beak, Business Reporter",
+    date: "May 20, 2026",
+    body: `PORTLAND, ME — A coalition of fourteen Canada geese formally incorporated as Gander & Associates LLC last Tuesday, retroactively billing the City of Portland for 2,190 days of ambient noise services dating to the spring of 2019, according to filings obtained from the Secretary of State's office.
+
+The invoice, submitted by certified mail and also by repeated honking in the general direction of City Hall, itemizes 4.7 million honks at a rate of $0.003 per honk, producing a total liability of $14,100. The city has 30 days to respond.
+
+"We have reviewed the invoice and found several technical concerns with the methodology," said a city spokesperson who asked not to be named. "Specifically, we are not certain the geese have standing to bill for services they elected to provide without a contract."
+
+A legal expert consulted for this story said that geese, strictly speaking, do not have legal standing, but added that "the LLC filing is technically valid" and that the question of what happens next was "above his pay grade, frankly."
+
+The geese have applied for a second LLC to pursue the matter if the first one is dismissed. The application is under review.`,
+    img: "https://images.unsplash.com/photo-1484406566174-9da000fda645?w=900&q=80",
+  },
+  {
+    id: "vibes-economy",
+    tag: "BUSINESS",
+    headline: "Vibes-Based Market Outperforms Logic-Based Market For Seventh Consecutive Quarter; Economists 'Not Surprised Anymore'",
+    subhead: "The S&P Vibes Index closed up 3.4 points on strong feelings and a general sense that things might be fine.",
+    author: "Eugenia Greylag, Markets Correspondent",
+    date: "May 19, 2026",
+    body: `NEW YORK — The Vibes-Based Market closed up 3.4 points Friday on strong ambient feelings, a general sense that things might be fine, and one trader's intuition that "it just feels like an up day," according to the Quarterly Feelings Report released Thursday by the Institute for Economic Sensation.
+
+The performance extends the Vibes Index's lead over the Logic-Based Market to seven consecutive quarters, the longest streak since 2017, when the Logic-Based Market suffered a catastrophic encounter with actual data.
+
+"At this point we've had to acknowledge the vibes are load-bearing," said Dr. Cornelius Wing, Chief Sentiment Analyst at the Institute. "We ran the models. Confidence, loosely defined, correlates with outcomes at a rate of roughly 0.68. We don't fully understand it. We've stopped trying."
+
+The Logic-Based Market, which factors in supply chains, earnings ratios, and geopolitical stability, closed flat. Its chief strategist said the market remained "fundamentally sound" and noted that this had not been reflected in the price.
+
+Trading will resume Monday, assuming the vibes hold.`,
+    img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&q=80",
+  },
+  {
+    id: "brain-study",
+    tag: "SCIENCE",
+    headline: "Scientists Locate Brain Region Responsible For Deciding Not to Do the Thing You Planned to Do",
+    subhead: "The region, designated the 'Pre-Nope Cortex,' activates approximately 40 seconds before you close the tab.",
+    author: "Dr. Benedict Plumage, Science Desk",
+    date: "May 18, 2026",
+    body: `CAMBRIDGE, MA — Neuroscientists at the Institute for Behavioral Non-Completion have identified the brain region responsible for the precise moment when a person decides not to do the thing they had planned, scheduled, and in several documented cases, told other people they would do.
+
+The region, located in the prefrontal cortex adjacent to the Planning Module, activates on average 40 seconds before the subject closes the browser tab, puts down the gym bag, or selects "remind me tomorrow" on a notification they will never revisit.
+
+"We've been calling it the Pre-Nope Cortex informally," said Dr. Algernon Beak, lead author of the study. "The formal name is the Anterior Avoidance Complex, but Pre-Nope tested better in focus groups, which is one of the reasons I became a neuroscientist instead of a marketer."
+
+The study followed 2,400 subjects over eighteen months, tracking 14.7 million individual instances of not doing things. Subjects reported in exit interviews that they had "meant to," "were about to," and in 34% of cases, had "already basically done it in their head."
+
+Researchers noted the findings have no practical implications. A follow-up study investigating whether the discovery itself would prompt any changes in behavior found that it would not.`,
+    img: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80",
+  },
+  {
+    id: "bird-concert",
+    tag: "WILDLIFE",
+    headline: "Local Bird Performs Same Four-Note Sequence for Eleventh Consecutive Hour; Ornithologist Rules It 'Technically Still New'",
+    subhead: "Each repetition contains minor tonal variation. The bird is aware of the distinction. Neighbors are not.",
+    author: "Constance Waddle, Natural History",
+    date: "May 17, 2026",
+    body: `JACÓ, COSTA RICA — A brown-headed cowbird perched in an acacia tree outside the Hotel Poseidon has performed the same four-note descending sequence 3,847 times since 6:14 AM, pausing an average of 1.3 seconds between each repetition in what ornithologists consulted for this story describe as "technically a fresh performance each time."
+
+"The bird is communicating," said Dr. Philippa Honk, a field ornithologist who has been watching from the hotel parking lot since approximately 8 AM. "Each iteration carries nuanced tonal data. The fact that it sounds identical to a human ear reflects a limitation of the human ear, not the bird."
+
+Two hotel guests filed separate complaints with the front desk. The front desk advised them to "appreciate the nature."
+
+The bird, contacted for comment via extended observation, performed the sequence forty-four additional times and showed no sign of concluding. Its territory claims are considered secure. Its neighbor, a second cowbird who arrived at 11:20 AM and began performing a slightly different four-note sequence from the adjacent tree, has introduced what scientists describe as "a counterpoint that is also technically not the same thing on a molecular level."
+
+As of press time, the bird had not finished.`,
+    img: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=900&q=80",
+  },
+  {
+    id: "consultant-recursion",
+    tag: "BUSINESS",
+    headline: "Company Hires Consultants to Evaluate Consultant Situation; New Consultants Also Consultants",
+    subhead: "The engagement is expected to last six months and result in a report recommending further consultation.",
+    author: "Mortimer Gander, Corporate Affairs",
+    date: "May 16, 2026",
+    body: `NEW YORK — Meridian Group, a financial services company with a documented consultant problem, announced Thursday the engagement of McKinsey & Associates to evaluate its current consultant utilization, making McKinsey the forty-third consulting firm retained by the company in fourteen months and the third firm retained specifically to evaluate the others.
+
+"We wanted an outside perspective," said Chief Operating Officer Gerald Wadsworth, who was himself retained as a consultant in 2022 before being hired full-time to manage consultant relationships. "The situation has become somewhat self-referential, but that's exactly the kind of complexity a good consulting firm is equipped to handle."
+
+McKinsey, reached for comment, confirmed the engagement and noted that the work would take approximately six months, involve fourteen analysts, and produce a 340-page report recommending the consolidation of consulting functions under a single strategic advisory partnership. McKinsey did not specify who that partnership would be, but noted the firm had recent experience in the area.
+
+The board approved the engagement at a meeting facilitated by a governance consultant retained in March to advise on board meeting structure. The meeting ran 20 minutes over schedule. A consultant was retained to address meeting efficiency the following week.
+
+The report is expected in November. A consultant has been engaged to manage its delivery.`,
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80",
+  },
+  {
+    id: "fine-report",
+    tag: "BREAKING",
+    headline: "New Report Confirms Everything Fine; Panel Raises Concerns About Definition of Fine",
+    subhead: "Working group to be formed. Members of working group will be fine.",
+    author: "Algernon Beak, Investigations",
+    date: "May 15, 2026",
+    body: `WASHINGTON, D.C. — A bipartisan report released Tuesday by the Select Committee on Current Conditions concluded that everything is, broadly speaking, fine, while raising substantial procedural concerns about what "fine" means as an evaluative standard and whether the committee had the statutory authority to make that determination.
+
+"We found no evidence of anything not fine," said Committee Chair Representative Dorothea Quillsworth. "We also found no universally accepted definition of fine. These two findings are in tension, and we felt it was important to flag that in the executive summary."
+
+The 400-page report, titled "Current Conditions: A Status Assessment," includes 78 pages of methodology, 94 pages of footnotes, and a 12-page appendix acknowledging that the report itself was fine but noting that its fineness was not audited.
+
+Ranking member Senator Reginald Feathers issued a minority opinion agreeing that everything was fine but disputing the process by which fineness had been determined, calling for a working group to establish a framework for future fineness evaluations.
+
+The working group will convene in September. Its membership is expected to be fine.`,
+    img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
+  },
+  {
+    id: "motivational-origin",
+    tag: "OPINION",
+    headline: "Motivational Speaker Cannot Explain How He Became A Motivational Speaker; Has Very Moving Speech About It",
+    subhead: "The journey, he says, is not about the destination. The destination remains unclear.",
+    author: "Philippa Honk, Lifestyle",
+    date: "May 14, 2026",
+    body: `LAS VEGAS, NV — Bradley Honsworth, who has delivered motivational addresses to over 400 corporate retreats, two cruise ship audiences, and a regional insurance conference in Tempe, Arizona, confirmed Tuesday that he cannot fully explain how any of this happened.
+
+"I was in sales," said Honsworth, speaking from a stage in the Venetian Hotel's Vista Ballroom B to 340 Allstate representatives. "And then one day someone asked me to speak at something. And I spoke at it. And then more things." He paused here for effect. The pause was very effective. "That's the whole story."
+
+Honsworth, whose keynote is titled "The Road You Didn't Know You Were On: A Framework for Accidental Excellence," charges $18,000 per appearance and is booked through April of next year.
+
+An audience member who attended two of his talks in the same fiscal year confirmed that the content was "slightly different the second time" and that this was "actually kind of a relief."
+
+His forthcoming book, "You're Already Doing It (You Just Don't Know What It Is)," is available for pre-order. The publication date is to be determined. The publisher described the timeline as "motivationally fluid."`,
+    img: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=900&q=80",
+  },
+  {
+    id: "ocean-update",
+    tag: "SCIENCE",
+    headline: "Ocean Issues Quarterly Update: Still Large, Still Moving, No Plans to Address Either",
+    subhead: "Volume consistent with previous quarters. Saltiness unchanged. Whale situation ongoing.",
+    author: "Dorothea Quillsworth, Maritime Affairs",
+    date: "May 13, 2026",
+    body: `PACIFIC OCEAN — The ocean released its quarterly status report Friday, confirming that it remains approximately 1.335 billion cubic kilometers in volume, has not changed its salinity meaningfully since the Permian period, and is not planning to make any adjustments at this time.
+
+"The ocean is continuing to do the ocean," said Dr. Wallace Featherstone, Senior Oceanographer at the National Oceanic and Atmospheric Administration, reviewing the report. "It's moving, mostly sideways, at speeds that are concerning to no one in the ocean. This is consistent with our projections."
+
+The report notes an ongoing whale situation in the North Atlantic that the ocean describes as "within operating parameters." A separate section covering the Pacific Garbage Patch acknowledges the patch while noting that it was not the ocean's idea and that the ocean has "no comment at this time."
+
+Global shipping interests, contacted for the ocean's perspective on human activity, said the ocean had been "largely unresponsive" to outreach but had indicated through wave patterns and general behavior that it was "aware of the situation."
+
+The next quarterly report is expected in August. The ocean will not be issuing a press release.`,
+    img: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=900&q=80",
+  },
+];
+
+// ─── NAV SECTIONS ─────────────────────────────────────────────────────────────
+const NAV_SECTIONS = ["News", "Society", "Science", "Wildlife", "Business", "Maritime", "Opinion"];
+
+// ─── GOOSE SVG ────────────────────────────────────────────────────────────────
+function GooseSvg({ honking, size = 40 }: { honking: boolean; size?: number }) {
   return (
-    <svg
-      viewBox="0 0 120 100"
-      className={`w-full h-full transition-transform duration-100 ${honking ? "scale-110" : "scale-100"}`}
-      style={{ filter: honking ? "drop-shadow(0 0 8px #facc15)" : "none" }}
-    >
-      {/* body */}
-      <ellipse cx="60" cy="68" rx="32" ry="22" fill="#f9fafb" stroke="#111" strokeWidth="2" />
-      {/* wing feather detail */}
-      <ellipse cx="52" cy="72" rx="20" ry="12" fill="#e5e7eb" stroke="#9ca3af" strokeWidth="1" />
-      {/* neck */}
-      <path d="M72 55 Q80 38 75 22" stroke="#111" strokeWidth="2" fill="none" />
-      <path d="M72 55 Q88 38 83 22" stroke="#111" strokeWidth="2" fill="none" />
-      <ellipse cx="79" cy="22" rx="9" ry="8" fill="#f9fafb" stroke="#111" strokeWidth="2" />
-      {/* beak — open when honking */}
+    <svg viewBox="0 0 120 100" width={size} height={size * 0.833}
+      style={{ filter: honking ? "drop-shadow(0 0 6px #facc15)" : "none", transition: "filter 0.1s" }}>
+      <ellipse cx="60" cy="68" rx="32" ry="22" fill="#f9fafb" stroke="#111" strokeWidth="2"/>
+      <ellipse cx="52" cy="72" rx="20" ry="12" fill="#e5e7eb" stroke="#9ca3af" strokeWidth="1"/>
+      <path d="M72 55 Q80 38 75 22" stroke="#111" strokeWidth="2" fill="none"/>
+      <path d="M72 55 Q88 38 83 22" stroke="#111" strokeWidth="2" fill="none"/>
+      <ellipse cx="79" cy="22" rx="9" ry="8" fill="#f9fafb" stroke="#111" strokeWidth="2"/>
       {honking ? (
         <>
-          <path d="M87 20 L100 16 L98 20Z" fill="#facc15" stroke="#111" strokeWidth="1.2" />
-          <path d="M87 24 L100 28 L98 24Z" fill="#f59e0b" stroke="#111" strokeWidth="1.2" />
-          <text x="101" y="15" fontSize="10" fill="#ef4444" fontWeight="bold">HONK!</text>
+          <path d="M87 20 L100 16 L98 20Z" fill="#facc15" stroke="#111" strokeWidth="1.2"/>
+          <path d="M87 24 L100 28 L98 24Z" fill="#f59e0b" stroke="#111" strokeWidth="1.2"/>
         </>
       ) : (
-        <path d="M87 21 L101 19 L101 23Z" fill="#facc15" stroke="#111" strokeWidth="1.2" />
+        <path d="M87 21 L101 19 L101 23Z" fill="#facc15" stroke="#111" strokeWidth="1.2"/>
       )}
-      {/* eye */}
-      <circle cx="82" cy="19" r="2.5" fill="#111" />
-      <circle cx="83" cy="18" r="0.8" fill="white" />
-      {/* black head patch */}
-      <ellipse cx="79" cy="19" rx="9" ry="7" fill="none" stroke="#111" strokeWidth="1" />
-      <ellipse cx="79" cy="16" rx="7" ry="4" fill="#1f2937" />
-      {/* feet */}
-      <path d="M46 88 L40 95 M46 88 L46 95 M46 88 L52 95" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-      <path d="M66 89 L60 96 M66 89 L66 96 M66 89 L72 96" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-      <line x1="46" y1="88" x2="46" y2="78" stroke="#f59e0b" strokeWidth="2" />
-      <line x1="66" y1="89" x2="66" y2="79" stroke="#f59e0b" strokeWidth="2" />
+      <circle cx="82" cy="19" r="2.5" fill="#111"/>
+      <circle cx="83" cy="18" r="0.8" fill="white"/>
+      <ellipse cx="79" cy="16" rx="7" ry="4" fill="#1f2937"/>
+      <path d="M46 88 L40 95 M46 88 L46 95 M46 88 L52 95" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M66 89 L60 96 M66 89 L66 96 M66 89 L72 96" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/>
+      <line x1="46" y1="88" x2="46" y2="78" stroke="#f59e0b" strokeWidth="2"/>
+      <line x1="66" y1="89" x2="66" y2="79" stroke="#f59e0b" strokeWidth="2"/>
     </svg>
   );
 }
 
-// ─── ARTICLE CARD ─────────────────────────────────────────────────────────────
-function ArticleCard({ article, onClick }: { article: typeof ARTICLES[0]; onClick: () => void }) {
+// ─── TAG BADGE ────────────────────────────────────────────────────────────────
+function TagBadge({ tag }: { tag: string }) {
+  const colors: Record<string, string> = {
+    BREAKING: "bg-red-700 text-white",
+    SCIENCE: "bg-blue-800 text-white",
+    BUSINESS: "bg-gray-800 text-white",
+    SOCIETY: "bg-purple-800 text-white",
+    WILDLIFE: "bg-green-800 text-white",
+    MARITIME: "bg-cyan-800 text-white",
+    OBITUARIES: "bg-gray-600 text-white",
+    OPINION: "bg-amber-700 text-white",
+    LOCAL: "bg-stone-700 text-white",
+    "REAL ESTATE": "bg-orange-700 text-white",
+  };
   return (
-    <div
-      className="cursor-pointer group border-b border-gray-200 pb-5 mb-1"
-      onClick={onClick}
-      data-testid={`article-card-${article.id}`}
-    >
-      <div className="overflow-hidden mb-3">
-        <img
-          src={article.img}
-          alt={article.headline}
-          className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300"
-          onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${article.id}/700/400`; }}
-        />
+    <span className={`inline-block text-[9px] font-black font-sans tracking-[0.18em] uppercase px-1.5 py-0.5 ${colors[tag] ?? "bg-gray-700 text-white"}`}>
+      {tag}
+    </span>
+  );
+}
+
+// ─── STORY CARD (grid) ────────────────────────────────────────────────────────
+function StoryCard({ article, onClick, variant = "default" }: {
+  article: Article;
+  onClick: () => void;
+  variant?: "default" | "compact" | "featured";
+}) {
+  if (variant === "compact") {
+    return (
+      <div className="cursor-pointer group flex gap-3 pb-4 border-b border-gray-100 last:border-0"
+        onClick={onClick} data-testid={`article-card-${article.id}`}>
+        <div className="shrink-0 overflow-hidden w-20 h-16">
+          <img src={article.img} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${article.id}/300/200`; }}/>
+        </div>
+        <div className="flex-1 min-w-0">
+          <TagBadge tag={article.tag}/>
+          <h4 className="font-serif text-[13px] font-bold leading-snug mt-1 text-gray-900 group-hover:text-red-700 transition-colors line-clamp-2">
+            {article.headline}
+          </h4>
+        </div>
       </div>
-      <span className="text-[10px] font-black tracking-widest text-red-600 font-sans uppercase">{article.tag}</span>
-      <h3 className="font-serif text-[15px] font-bold leading-snug mt-1 text-gray-900 group-hover:text-red-700 transition-colors">
+    );
+  }
+
+  return (
+    <div className="cursor-pointer group" onClick={onClick} data-testid={`article-card-${article.id}`}>
+      <div className="overflow-hidden aspect-[16/10] mb-3">
+        <img src={article.img} alt={article.headline}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${article.id}/700/440`; }}/>
+      </div>
+      <TagBadge tag={article.tag}/>
+      <h3 className={`font-serif font-bold leading-snug mt-1.5 text-gray-900 group-hover:text-red-700 transition-colors ${variant === "featured" ? "text-xl" : "text-[15px]"}`}>
         {article.headline}
       </h3>
-      {article.subhead && (
-        <p className="text-xs text-gray-500 mt-1 font-serif italic">{article.subhead}</p>
+      {article.subhead && variant !== "default" && (
+        <p className="text-[13px] italic text-gray-500 mt-1 line-clamp-2">{article.subhead}</p>
       )}
-      <p className="text-[11px] text-gray-400 mt-2 font-sans">{article.author} · {article.date}</p>
+      <p className="text-[11px] font-sans text-gray-400 mt-2">{article.author} · {article.date}</p>
     </div>
   );
 }
 
-// ─── MODAL ────────────────────────────────────────────────────────────────────
-function ArticleModal({ article, onClose }: { article: typeof ARTICLES[0]; onClose: () => void }) {
+// ─── ARTICLE MODAL ────────────────────────────────────────────────────────────
+function ArticleModal({ article, onClose }: { article: Article; onClose: () => void }) {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", handler); document.body.style.overflow = ""; };
+  }, [onClose]);
+
   return (
-    <div
-      className="fixed inset-0 z-50 bg-black/60 flex items-start justify-center overflow-y-auto p-4"
-      onClick={onClose}
-      data-testid="modal-overlay"
-    >
-      <div
-        className="bg-white max-w-2xl w-full mt-16 mb-8 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-        data-testid="modal-article"
-      >
-        <div className="border-b-4 border-black px-8 pt-8 pb-4">
-          <span className="text-[10px] font-black tracking-widest text-red-600 font-sans uppercase">{article.tag}</span>
-          <h2 className="font-serif text-2xl font-black leading-tight mt-2 text-gray-900">{article.headline}</h2>
-          {article.subhead && <p className="font-serif italic text-gray-600 mt-2">{article.subhead}</p>}
-          <p className="text-xs text-gray-400 mt-3 font-sans">{article.author} · {article.date} · THE GOOSE GAZETTE</p>
+    <div className="fixed inset-0 z-50 bg-black/70 flex items-start justify-center overflow-y-auto p-4 pt-12"
+      onClick={onClose} data-testid="modal-overlay">
+      <div className="bg-white max-w-2xl w-full mb-12 shadow-2xl"
+        onClick={(e) => e.stopPropagation()} data-testid="modal-article">
+
+        {/* Modal header */}
+        <div className="bg-white border-b-4 border-black px-8 pt-8 pb-5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <TagBadge tag={article.tag}/>
+              <h2 className="font-serif text-2xl md:text-3xl font-black leading-tight mt-2 text-gray-900">
+                {article.headline}
+              </h2>
+              {article.subhead && (
+                <p className="font-serif italic text-gray-600 mt-2 text-[15px]">{article.subhead}</p>
+              )}
+              <p className="text-[11px] font-sans text-gray-400 mt-3 tracking-wide">
+                {article.author} &nbsp;·&nbsp; {article.date} &nbsp;·&nbsp;
+                <span className="italic">The Goose Gazette</span>
+              </p>
+            </div>
+            <button onClick={onClose} data-testid="button-modal-close"
+              className="shrink-0 text-gray-400 hover:text-black transition-colors mt-1">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
         </div>
-        <img
-          src={article.img}
-          alt={article.headline}
-          className="w-full h-56 object-cover"
-          onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${article.id}/700/400`; }}
-        />
-        <div className="px-8 py-6">
-          {article.body.split("\n\n").map((para, i) => (
-            <p key={i} className="font-serif text-[15px] leading-relaxed text-gray-800 mb-4">{para}</p>
+
+        {/* Image */}
+        <img src={article.img} alt={article.headline} className="w-full h-60 object-cover"
+          onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${article.id}/800/400`; }}/>
+
+        {/* Body */}
+        <div className="px-8 py-7">
+          {article.body.split("\n\n").filter(Boolean).map((para, i) => (
+            <p key={i} className="font-serif text-[15px] leading-[1.7] text-gray-800 mb-4 last:mb-0">{para}</p>
           ))}
         </div>
-        <div className="border-t border-gray-200 px-8 py-4 flex justify-between items-center">
-          <span className="text-xs text-gray-400 font-sans">© The Goose Gazette — All The News That's Fit To HONK</span>
-          <button
-            onClick={onClose}
-            data-testid="button-modal-close"
-            className="text-xs font-sans font-bold text-red-600 hover:underline"
-          >
-            CLOSE
-          </button>
+
+        {/* Footer */}
+        <div className="border-t border-gray-200 bg-gray-50 px-8 py-4 flex justify-between items-center">
+          <span className="text-[10px] font-sans text-gray-400 tracking-wide">
+            © THE GOOSE GAZETTE — All The News That's Fit To HONK
+          </span>
         </div>
       </div>
+    </div>
+  );
+}
+
+// ─── DIVIDER ──────────────────────────────────────────────────────────────────
+function SectionDivider({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3 my-8">
+      <div className="h-px flex-1 bg-black"/>
+      <span className="text-[10px] font-black font-sans tracking-[0.25em] uppercase text-gray-500 shrink-0 px-1">{label}</span>
+      <div className="h-px flex-1 bg-black"/>
     </div>
   );
 }
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
-const NAV_SECTIONS = ["News", "Society", "Business", "Science", "Obituaries", "Maritime", "Opinion"];
-
 export default function GooseGazettePage() {
+  const [selected, setSelected] = useState<Article | null>(null);
   const [honking, setHonking] = useState(false);
   const [honkCount, setHonkCount] = useState(0);
-  const [selected, setSelected] = useState<typeof ARTICLES[0] | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const tickerRef = useRef<HTMLDivElement>(null);
+  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   const handleHonk = useCallback(() => {
     playHonk();
     setHonking(true);
-    setHonkCount((c) => c + 1);
-    setTimeout(() => setHonking(false), 400);
+    setHonkCount(c => c + 1);
+    setTimeout(() => setHonking(false), 500);
   }, []);
 
-  // Fetch AI-generated articles from the database — prepend to hardcoded founding edition
-  const { data: apiArticles } = useQuery<any[]>({
+  // ── API articles ──────────────────────────────────────────────────────────
+  const { data: apiData, refetch } = useQuery<any[]>({
     queryKey: ["/api/goose/articles"],
-    refetchInterval: 5 * 60 * 1000, // refresh every 5 min
+    refetchInterval: 5 * 60 * 1000,
   });
 
-  // Merge: generated articles first (newest), then hardcoded founding edition as filler
-  const allArticles = [
-    ...(apiArticles ?? []).map((a: any) => ({
-      id: a.id,
-      tag: a.tag ?? "NEWS",
-      headline: a.headline,
-      subhead: a.subhead ?? "",
-      author: a.authorByline ?? "Staff Reporter",
-      date: new Date(a.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
-      body: a.body,
-      img: a.imgQuery
-        ? `https://source.unsplash.com/900x600/?${encodeURIComponent(a.imgQuery)}`
-        : `https://picsum.photos/seed/${a.id}/900/600`,
-      isCover: false,
-    })),
-    ...ARTICLES,
-  ];
+  // ── Merge: API articles first, then placeholders as padding ────────────────
+  const apiArticles: Article[] = (apiData ?? []).map((a: any) => ({
+    id: a.id,
+    tag: a.tag ?? "NEWS",
+    headline: a.headline,
+    subhead: a.subhead ?? "",
+    author: a.authorByline ?? "Staff Reporter",
+    date: new Date(a.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+    body: a.body ?? "",
+    img: a.imgQuery
+      ? `https://images.unsplash.com/photo-${a.id.slice(0,8)}?w=900&q=80`
+      : `https://picsum.photos/seed/${a.id}/900/600`,
+  }));
 
-  const coverArticle = allArticles[0];
-  const restArticles = allArticles.slice(1);
+  // Use API images more reliably
+  const fixedApiArticles: Article[] = (apiData ?? []).map((a: any) => ({
+    id: a.id,
+    tag: a.tag ?? "NEWS",
+    headline: a.headline,
+    subhead: a.subhead ?? "",
+    author: a.authorByline ?? "Staff Reporter",
+    date: new Date(a.publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+    body: a.body ?? "",
+    img: a.imgQuery
+      ? `https://source.unsplash.com/900x600/?${encodeURIComponent(a.imgQuery)}`
+      : PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)].img,
+  }));
+
+  const allArticles = [...fixedApiArticles, ...PLACEHOLDERS];
+  const cover = allArticles[0];
+  const secondaries = allArticles.slice(1, 4);      // 3-col row
+  const tertiary = allArticles.slice(4, 8);          // 4-col compact row
+  const compact = allArticles.slice(8, 16);          // compact list
+
+  const handleGenerate = async () => {
+    setGenerating(true);
+    try {
+      await fetch("/api/goose/generate", { method: "POST" });
+      setTimeout(() => refetch(), 1000);
+    } catch {}
+    setGenerating(false);
+  };
+
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+      <style>{`
+        @keyframes honk-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        @keyframes waddle { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg) translateY(-2px); } }
+        .waddle { animation: waddle 1.8s ease-in-out infinite; }
+        .honk-active { animation: honk-pulse 0.3s ease-in-out; }
+      `}</style>
 
-      {/* ── STICKY TRANSPARENT NAVBAR ── */}
+      {/* ────────── STICKY TRANSPARENT HEADER ────────── */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        data-testid="header-main"
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? "bg-white/96 backdrop-blur-md shadow-sm border-b border-gray-300"
-            : "bg-white/80 backdrop-blur-sm border-b border-gray-200"
+            ? "bg-white shadow-[0_1px_0_0_#000] border-b border-black"
+            : "bg-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 h-13 flex items-center justify-between gap-3" style={{ height: 52 }}>
+        <div className="max-w-7xl mx-auto px-5 h-14 flex items-center justify-between gap-4">
 
-          {/* Logo */}
-          <a href="/goose" className="flex items-center gap-1.5 shrink-0 select-none">
-            <span className="text-lg leading-none" style={{ lineHeight: 1 }}>🪿</span>
-            <span
-              className="font-black text-black tracking-tight leading-none"
-              style={{ fontFamily: "Georgia, serif", fontSize: 15 }}
-            >
+          {/* Logo — visible always but adapts color */}
+          <a href="/goose" className="flex items-center gap-2 shrink-0 select-none group">
+            <div className={`transition-all duration-300 ${honking ? "honk-active" : ""}`}>
+              <GooseSvg honking={honking} size={28}/>
+            </div>
+            <span className={`font-black tracking-tight text-[13px] transition-colors duration-300 ${scrolled ? "text-black" : "text-white drop-shadow-md"}`}
+              style={{ fontFamily: "Georgia, serif" }}>
               <span className="hidden sm:inline">THE GOOSE GAZETTE</span>
               <span className="sm:hidden">GOOSE GAZETTE</span>
             </span>
           </a>
 
-          {/* Desktop nav links */}
-          <nav className="hidden md:flex items-center">
-            {NAV_SECTIONS.map((s) => (
-              <button
-                key={s}
-                className="px-2.5 py-1 text-[10px] font-black font-sans text-gray-600 hover:text-black tracking-widest uppercase transition-colors hover:bg-gray-100 rounded-sm"
-              >
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-0">
+            {NAV_SECTIONS.map(s => (
+              <button key={s}
+                className={`px-3 py-1 text-[10px] font-black font-sans tracking-widest uppercase transition-colors duration-300 hover:underline ${
+                  scrolled ? "text-gray-600 hover:text-black" : "text-white/80 hover:text-white"
+                }`}>
                 {s}
               </button>
             ))}
           </nav>
 
-          {/* Right: Honk button + hamburger */}
+          {/* Right: HONK + hamburger */}
           <div className="flex items-center gap-2 shrink-0">
-            <button
-              onClick={handleHonk}
-              data-testid="button-nav-honk"
-              className={`hidden sm:block text-[10px] font-black font-sans px-3 py-1.5 border-2 border-black transition-all ${
-                honking ? "bg-yellow-400 text-black scale-105" : "bg-white text-black hover:bg-yellow-50"
-              }`}
-            >
+            <button onClick={handleHonk} data-testid="button-nav-honk"
+              className={`hidden sm:block text-[10px] font-black font-sans px-3 py-1.5 border-2 transition-all duration-200 ${
+                honking
+                  ? "bg-yellow-400 text-black border-yellow-400 scale-105"
+                  : scrolled
+                    ? "bg-white text-black border-black hover:bg-yellow-50"
+                    : "bg-transparent text-white border-white hover:bg-white/10"
+              }`}>
               {honking ? "HONK!!!" : "HONK"}
             </button>
-            <button
-              onClick={() => setMobileOpen((o) => !o)}
-              data-testid="button-mobile-menu"
-              className="md:hidden p-2 text-black hover:bg-gray-100 rounded-sm transition-colors"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileOpen ? (
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                  <path d="M3 7h18M3 12h18M3 17h18" />
-                </svg>
-              )}
+            <button onClick={() => setMobileOpen(o => !o)} data-testid="button-mobile-menu"
+              className={`lg:hidden p-2 transition-colors ${scrolled ? "text-black" : "text-white"}`}
+              aria-label="Menu">
+              {mobileOpen
+                ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              }
             </button>
           </div>
         </div>
 
         {/* Mobile drawer */}
         {mobileOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200 border-b-2 border-b-black shadow-lg">
-            <div className="max-w-6xl mx-auto px-4 py-3 grid grid-cols-3 gap-1">
-              {NAV_SECTIONS.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-left px-3 py-3 text-[11px] font-black font-sans text-gray-800 hover:bg-gray-100 tracking-widest uppercase transition-colors rounded-sm"
-                >
+          <div className="lg:hidden bg-white border-t border-gray-200 border-b-2 border-b-black shadow-xl">
+            <div className="max-w-7xl mx-auto px-5 py-4 grid grid-cols-3 gap-1">
+              {NAV_SECTIONS.map(s => (
+                <button key={s} onClick={() => setMobileOpen(false)}
+                  className="text-left px-3 py-3 text-[10px] font-black font-sans tracking-widest uppercase text-gray-700 hover:bg-gray-50 transition-colors">
                   {s}
                 </button>
               ))}
             </div>
-            <div className="px-4 pb-3">
-              <button
-                onClick={() => { handleHonk(); setMobileOpen(false); }}
-                data-testid="button-drawer-honk"
-                className="w-full py-3 bg-yellow-400 text-black text-[12px] font-black font-sans tracking-widest border-2 border-black hover:bg-yellow-300 transition-colors"
-              >
+            <div className="px-5 pb-4">
+              <button onClick={() => { handleHonk(); setMobileOpen(false); }} data-testid="button-drawer-honk"
+                className="w-full py-3 bg-yellow-400 text-black text-[11px] font-black font-sans tracking-widest border-2 border-black hover:bg-yellow-300 transition-colors">
                 🪿 HONK {honkCount > 0 ? `(${honkCount})` : ""}
               </button>
             </div>
@@ -511,270 +511,214 @@ export default function GooseGazettePage() {
         )}
       </header>
 
-      {/* Spacer for fixed header */}
-      <div style={{ height: 52 }} />
-
-      {/* ── BREAKING NEWS TICKER ── */}
-      <div className="bg-red-700 text-white flex items-center overflow-hidden" style={{ height: 28 }}>
-        <div className="bg-black text-white text-[11px] font-black font-sans px-3 py-1 whitespace-nowrap tracking-widest shrink-0">
-          BREAKING
-        </div>
-        <div className="overflow-hidden flex-1 relative">
-          <div
-            className="whitespace-nowrap font-sans text-[11px] font-semibold animate-marquee"
-            style={{ animation: "marquee 45s linear infinite" }}
-          >
-            {TICKER_ITEMS.join("   ")}
-            {"   "}
-            {TICKER_ITEMS.join("   ")}
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes marquee {
-          0%   { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
-        }
-        @keyframes waddle {
-          0%, 100% { transform: rotate(-4deg) translateY(0); }
-          50%       { transform: rotate(4deg) translateY(-4px); }
-        }
-      `}</style>
-
-      {/* ── MASTHEAD ── */}
-      <div className="border-b-4 border-black border-t-2 border-t-black mt-0">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-
-          {/* Goose mascot + honk button */}
-          <div className="flex flex-col items-center gap-1 w-28 shrink-0">
-            <div
-              className="w-24 h-20 cursor-pointer"
-              onClick={handleHonk}
-              data-testid="button-goose-honk"
-              style={{ animation: "waddle 1.2s ease-in-out infinite" }}
-            >
-              <GooseSvg honking={honking} />
-            </div>
-            <button
-              onClick={handleHonk}
-              data-testid="button-honk-trigger"
-              className={`text-[10px] font-black font-sans px-3 py-1 border-2 border-black tracking-widest transition-all ${
-                honking ? "bg-yellow-400 text-black scale-105" : "bg-white text-black hover:bg-yellow-100"
-              }`}
-            >
-              {honking ? "HONK!!!" : "HONK"}
-            </button>
-            {honkCount > 0 && (
-              <span className="text-[9px] text-gray-400 font-sans">{honkCount} honk{honkCount !== 1 ? "s" : ""} total</span>
-            )}
+      {/* ────────── HERO MASTHEAD ────────── */}
+      {cover && (
+        <div
+          className="relative cursor-pointer"
+          style={{ minHeight: "92vh" }}
+          onClick={() => setSelected(cover)}
+          data-testid={`article-cover-${cover.id}`}
+        >
+          {/* Full-bleed background image */}
+          <div className="absolute inset-0">
+            <img
+              src={cover.img}
+              alt={cover.headline}
+              className="w-full h-full object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&q=80"; }}
+            />
+            {/* Dark gradient overlay — heavier at bottom for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/85"/>
           </div>
 
-          {/* Title block */}
-          <div className="text-center flex-1 px-4">
-            <div className="text-[9px] font-sans tracking-[0.3em] text-gray-500 uppercase mb-1">
+          {/* Masthead title — centered over image */}
+          <div className="relative z-10 flex flex-col items-center justify-center text-center pt-28 pb-6 px-6">
+            <div className="text-[10px] font-sans tracking-[0.35em] text-white/60 uppercase mb-3 select-none">
               Est. The Moment Things Got Weird
             </div>
             <h1
-              className="text-5xl md:text-6xl font-black tracking-tight text-black leading-none"
-              style={{ fontFamily: "Georgia, serif", letterSpacing: "-0.02em" }}
+              className="text-white leading-none font-black select-none"
+              style={{
+                fontFamily: "Georgia, serif",
+                fontSize: "clamp(3.2rem, 10vw, 8rem)",
+                letterSpacing: "-0.025em",
+                textShadow: "0 2px 20px rgba(0,0,0,0.5)",
+              }}
             >
               THE GOOSE GAZETTE
             </h1>
-            <div className="flex items-center justify-center gap-3 mt-2">
-              <div className="h-px flex-1 bg-black" />
-              <span className="text-[11px] font-sans italic text-gray-600 tracking-wider px-2">
+            <div className="flex items-center gap-4 mt-3 w-full max-w-xl justify-center">
+              <div className="h-px flex-1 bg-white/30"/>
+              <span className="text-white/70 font-serif italic text-sm tracking-wider px-2 shrink-0">
                 "All The News That's Fit To HONK"
               </span>
-              <div className="h-px flex-1 bg-black" />
+              <div className="h-px flex-1 bg-white/30"/>
             </div>
-            <div className="text-[9px] font-sans tracking-widest text-gray-400 mt-1 uppercase">
-              Tuesday, May 20, 2026 &nbsp;·&nbsp; Vol. XLVII No. 3 &nbsp;·&nbsp; Jacó / Portland / Plymouth &nbsp;·&nbsp; Five Geese
+            <div className="text-[10px] font-sans tracking-[0.2em] text-white/50 mt-2 uppercase">
+              {today}
             </div>
           </div>
 
-          {/* Right sidebar mini-info */}
-          <div className="w-28 shrink-0 text-right">
-            <div className="text-[9px] font-sans text-gray-400 uppercase tracking-wider mb-1">Today's Threat</div>
-            <div className="text-[11px] font-black font-sans text-red-700">ELEVATED</div>
-            <div className="text-[9px] font-sans text-gray-400 mt-2 uppercase tracking-wider">Router Status</div>
-            <div className="text-[11px] font-black font-sans text-yellow-600">UPDATING</div>
-            <div className="text-[9px] font-sans text-gray-400 mt-2 uppercase tracking-wider">Geese: Active</div>
-            <div className="text-[11px] font-black font-sans text-gray-800">14 UNITS</div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── SECTION LABEL ── */}
-      <div className="bg-black text-white text-center text-[10px] font-sans font-black tracking-[0.4em] py-1 uppercase">
-        Today's Edition &nbsp;·&nbsp; Satirical News For People Who've Noticed Things &nbsp;·&nbsp; No Geese Were Harmed
-      </div>
-
-      {/* ── MAIN CONTENT ── */}
-      <div className="max-w-6xl mx-auto px-6 py-6">
-
-        {/* COVER STORY */}
-        <div
-          className="border-b-2 border-black pb-8 mb-8 cursor-pointer group"
-          onClick={() => setSelected(coverArticle)}
-          data-testid={`article-card-${coverArticle.id}`}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="bg-red-700 text-white text-[10px] font-black font-sans px-2 py-0.5 tracking-widest uppercase">
-                  COVER STORY
-                </span>
-                <span className="text-[10px] font-sans text-gray-500 tracking-wider">{coverArticle.tag}</span>
-              </div>
-              <h2 className="text-3xl font-black leading-tight text-gray-900 group-hover:text-red-700 transition-colors mb-3">
-                {coverArticle.headline}
+          {/* Cover story text — bottom of hero */}
+          <div className="relative z-10 mt-auto px-6 pb-10 max-w-4xl mx-auto w-full">
+            <div className="group">
+              <TagBadge tag={cover.tag}/>
+              <h2
+                className="font-serif font-black text-white leading-tight mt-2 group-hover:text-yellow-200 transition-colors duration-200"
+                style={{ fontSize: "clamp(1.5rem, 4vw, 2.6rem)", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
+              >
+                {cover.headline}
               </h2>
-              <p className="text-base italic text-gray-600 mb-3">{coverArticle.subhead}</p>
-              <p className="text-[11px] font-sans text-gray-400 mb-4">{coverArticle.author} · {coverArticle.date}</p>
-              <p className="text-[14px] leading-relaxed text-gray-800 line-clamp-6">
-                {coverArticle.body.split("\n\n")[0]}
-              </p>
-              <button className="mt-4 text-[11px] font-black font-sans text-red-700 border-b-2 border-red-700 hover:text-red-900 uppercase tracking-widest">
-                Continue Reading →
-              </button>
-            </div>
-            <div className="overflow-hidden">
-              <img
-                src={coverArticle.img}
-                alt={coverArticle.headline}
-                className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-                onError={(e) => { (e.target as HTMLImageElement).src = "https://picsum.photos/seed/cover/900/600"; }}
-              />
-              <p className="text-[9px] font-sans text-gray-400 mt-1 italic">
-                Photograph: The router in question, pictured at 3:04 AM. It was updating.
+              {cover.subhead && (
+                <p className="font-serif italic text-white/75 mt-2 text-base max-w-2xl">
+                  {cover.subhead}
+                </p>
+              )}
+              <p className="font-sans text-[11px] text-white/50 mt-3 tracking-wide">
+                {cover.author} · {cover.date}
+                <span className="ml-3 text-white/40 group-hover:text-white/70 transition-colors">
+                  Read story →
+                </span>
               </p>
             </div>
           </div>
         </div>
+      )}
 
-        {/* ARTICLE GRID — 3 columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* ────────── CONTENT AREA ────────── */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto px-5 py-10">
 
-          {/* Col 1 */}
-          <div className="border-r border-gray-200 pr-6">
-            <div className="text-[10px] font-black font-sans tracking-widest text-gray-400 uppercase border-b border-black pb-1 mb-4">
-              Society & Crime
-            </div>
-            {[restArticles[0], restArticles[1], restArticles[2]].map((a) => (
-              <ArticleCard key={a.id} article={a} onClick={() => setSelected(a)} />
-            ))}
-          </div>
+          {/* ── 3-col secondary row ── */}
+          {secondaries.length > 0 && (
+            <>
+              <SectionDivider label="Latest Stories"/>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {secondaries.map(a => (
+                  <StoryCard key={a.id} article={a} onClick={() => setSelected(a)} variant="featured"/>
+                ))}
+              </div>
+            </>
+          )}
 
-          {/* Col 2 */}
-          <div className="border-r border-gray-200 pr-6">
-            <div className="text-[10px] font-black font-sans tracking-widest text-gray-400 uppercase border-b border-black pb-1 mb-4">
-              Business & Property
-            </div>
-            {[restArticles[3], restArticles[4], restArticles[5]].map((a) => (
-              <ArticleCard key={a.id} article={a} onClick={() => setSelected(a)} />
-            ))}
-          </div>
+          {/* ── 4-col tertiary row ── */}
+          {tertiary.length > 0 && (
+            <>
+              <SectionDivider label="More From The Gazette"/>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+                {tertiary.map(a => (
+                  <StoryCard key={a.id} article={a} onClick={() => setSelected(a)} variant="default"/>
+                ))}
+              </div>
+            </>
+          )}
 
-          {/* Col 3 */}
-          <div>
-            <div className="text-[10px] font-black font-sans tracking-widest text-gray-400 uppercase border-b border-black pb-1 mb-4">
-              Science, Local & Maritime
-            </div>
-            {[restArticles[6], restArticles[7], restArticles[8]].map((a) => (
-              <ArticleCard key={a.id} article={a} onClick={() => setSelected(a)} />
-            ))}
-          </div>
-        </div>
+          {/* ── Two-column layout: compact stories + editorial sidebar ── */}
+          {compact.length > 0 && (
+            <>
+              <SectionDivider label="In Brief"/>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-        {/* SECOND ROW */}
-        <div className="border-t-2 border-black mt-8 pt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="text-[10px] font-black font-sans tracking-widest text-gray-400 uppercase border-b border-black pb-1 mb-4 col-span-full">
-            Late Edition
-          </div>
-          {restArticles.slice(9).map((a) => (
-            <ArticleCard key={a.id} article={a} onClick={() => setSelected(a)} />
-          ))}
-        </div>
+                {/* Compact story list */}
+                <div className="lg:col-span-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-0">
+                    {compact.map(a => (
+                      <StoryCard key={a.id} article={a} onClick={() => setSelected(a)} variant="compact"/>
+                    ))}
+                  </div>
+                </div>
 
-        {/* GOOSE EDITORIAL */}
-        <div className="border-t-2 border-black mt-10 pt-6 flex gap-6 items-start">
-          <div className="w-20 h-16 shrink-0" style={{ animation: "waddle 2s ease-in-out infinite" }}>
-            <GooseSvg honking={false} />
-          </div>
-          <div>
-            <div className="text-[10px] font-black font-sans tracking-widest text-gray-400 uppercase mb-1">
-              Editor's Note
-            </div>
-            <h3 className="text-lg font-black text-gray-900 mb-2">
-              A Message From Our Editor-In-Chief
-            </h3>
-            <p className="text-[13px] font-serif leading-relaxed text-gray-700">
-              The Goose Gazette was founded on the principle that some things are too absurd to be reported straight.
-              When a man's router updates itself at 3AM, when three separate people who issued warnings are now dead,
-              when a sober house pipeline spans three states and nobody signed a lease — sometimes the only honest
-              response is to report it with the same confidence it was apparently executed with.
-              We are not a real newspaper. But some of what we're describing is a real situation, and the goose
-              has noticed. The goose always notices. <em>HONK.</em>
-            </p>
-            <p className="text-[11px] text-gray-400 font-sans mt-2 italic">
-              — G. Honksworth, Editor-In-Chief, The Goose Gazette
-            </p>
-          </div>
+                {/* Sidebar: editorial + goose */}
+                <div className="border-l border-gray-200 pl-8">
+                  <div className="text-[10px] font-black font-sans tracking-[0.25em] uppercase text-gray-400 border-b border-black pb-1 mb-4">
+                    Editor's Note
+                  </div>
+                  <div className="flex gap-3 mb-4">
+                    <div className="shrink-0 waddle">
+                      <GooseSvg honking={false} size={44}/>
+                    </div>
+                    <p className="font-serif text-[13px] leading-relaxed text-gray-700 italic">
+                      "The Goose Gazette reports what the standard press declines to frame correctly.
+                      We apply rigorous AP-wire discipline to premises that would collapse under less precise handling.
+                      The goose does not explain the joke. There is no joke."
+                    </p>
+                  </div>
+                  <p className="text-[11px] text-gray-400 font-sans mb-6">
+                    — G. Honksworth, Editor-In-Chief
+                  </p>
+
+                  <div className="text-[10px] font-black font-sans tracking-[0.25em] uppercase text-gray-400 border-b border-black pb-1 mb-4">
+                    About This Publication
+                  </div>
+                  <p className="font-sans text-[12px] leading-relaxed text-gray-600">
+                    Content generated using the Ω-Council Engine — a multi-layer AI round-table
+                    structured on the GOS lattice (κ₁ = 4/π ≈ 1.273, φ = 1.618, Ψ = A × N = 1).
+                    Every article is shaped by live signal intelligence data from the KAPPA platform.
+                    The math is real. The facts are invented. The geese are real.
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+
         </div>
       </div>
 
-      {/* ── FOOTER ── */}
-      <div className="border-t-4 border-black bg-gray-900 text-gray-400 mt-8">
-        <div className="max-w-6xl mx-auto px-6 py-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-[11px] font-sans">
-          <div>
-            <div className="text-white font-black text-sm mb-2">THE GOOSE GAZETTE</div>
-            <p className="leading-relaxed">
-              Satirical news for the discerning reader who has noticed that several things don't add up.
-              No geese were harmed. Several routers were.
+      {/* ────────── FOOTER ────────── */}
+      <footer className="border-t-4 border-black bg-gray-950 text-gray-400 mt-4">
+        <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-[12px] font-sans">
+
+          <div className="md:col-span-2">
+            <div className="text-white font-black text-base mb-3 font-serif tracking-tight">THE GOOSE GAZETTE</div>
+            <p className="leading-relaxed mb-3 text-gray-500">
+              Satirical news for people who have noticed that the official version of events
+              leaves several details unaccounted for. We use AP-style wire discipline and
+              live signal data to generate articles that are structurally indistinguishable
+              from reality, except for the part where geese file LLC paperwork.
+            </p>
+            <p className="text-gray-600 text-[11px]">
+              goosegazette.org &nbsp;·&nbsp; All articles satirical &nbsp;·&nbsp; No persons depicted are real &nbsp;·&nbsp; The geese are real
             </p>
           </div>
+
           <div>
-            <div className="text-white font-black text-sm mb-2">BUREAUS</div>
-            <p>Jacó, Costa Rica (Surveillance Desk)</p>
-            <p>Portland, Maine (Sober House Beat)</p>
-            <p>Plymouth, Massachusetts (Pipeline Correspondent)</p>
-            <p>St. Thomas, USVI (Maritime Affairs)</p>
-            <p>339 Summer St, Rockland MA (Just In The Neighborhood)</p>
+            <div className="text-white font-black text-xs mb-3 tracking-widest uppercase">Sections</div>
+            {NAV_SECTIONS.map(s => (
+              <div key={s} className="py-1 text-gray-500 hover:text-white transition-colors cursor-pointer">{s}</div>
+            ))}
           </div>
+
           <div>
-            <div className="text-white font-black text-sm mb-2">LEGAL</div>
-            <p className="leading-relaxed">
-              All articles are satirical and fictional. Resemblance to actual surveillance operations,
-              sober house pipelines, or geese is entirely intentional from a comedic standpoint and
-              entirely unintentional from a legal standpoint. The geese are real. The geese are always real.
-            </p>
+            <div className="text-white font-black text-xs mb-3 tracking-widest uppercase">Engine</div>
+            <div className="text-[11px] leading-relaxed text-gray-600 space-y-1">
+              <div>AP Invariant: Ψ = A × N = 1</div>
+              <div>κ₁ = 4/π = 1.27324</div>
+              <div>φ = 1.618033 (body structure)</div>
+              <div>CZ limit: 17 tokens</div>
+              <div>f₍ₛₙₐₚ₎ = 111 Hz (P3)</div>
+              <div>δ_Hall = 0.00682</div>
+              <div className="pt-1 text-gray-700">L1: 3 council agents (parallel)</div>
+              <div className="text-gray-700">L3: Editorial arbiter (gpt-4o-mini)</div>
+            </div>
           </div>
         </div>
-        <div className="border-t border-gray-700 text-center py-3 text-[10px] font-sans text-gray-600 flex items-center justify-center gap-4">
-          <span>© 2026 The Goose Gazette · All The News That's Fit To HONK · Klein Topology Division · Est. The Moment Things Got Weird</span>
+
+        <div className="border-t border-gray-800 px-6 py-4 flex items-center justify-between text-[10px] font-sans text-gray-700 max-w-7xl mx-auto">
+          <span>© 2026 The Goose Gazette · goosegazette.org · Est. The Moment Things Got Weird</span>
           <button
             data-testid="button-generate-article"
-            onClick={async () => {
-              try {
-                const r = await fetch("/api/goose/generate", { method: "POST" });
-                if (r.ok) {
-                  setTimeout(() => window.location.reload(), 800);
-                }
-              } catch {}
-            }}
-            className="text-gray-700 hover:text-white transition-colors shrink-0"
-            title="Generate article"
+            onClick={handleGenerate}
+            disabled={generating}
+            className="text-gray-600 hover:text-white transition-colors disabled:opacity-40 text-base"
+            title="Generate new article (Ω-Council)"
           >
-            ↻
+            {generating ? "⏳" : "↻"}
           </button>
         </div>
-      </div>
+      </footer>
 
-      {/* ── ARTICLE MODAL ── */}
-      {selected && (
-        <ArticleModal article={selected} onClose={() => setSelected(null)} />
-      )}
+      {/* ────────── MODAL ────────── */}
+      {selected && <ArticleModal article={selected} onClose={() => setSelected(null)}/>}
     </div>
   );
 }

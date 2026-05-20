@@ -42,6 +42,7 @@ export interface IStorage {
   getEventCountsByDomain(): Promise<Record<string, number>>;
   getCorrelations(limit?: number): Promise<Correlation[]>;
   createCorrelation(correlation: InsertCorrelation): Promise<Correlation>;
+  getGooseKnowledge(category?: string): Promise<Array<{ id: string; title: string; content: string; category: string }>>;
   getCorrelationCount(): Promise<number>;
   getSatellites(): Promise<SatellitePass[]>;
   upsertSatellite(pass: InsertSatellitePass): Promise<SatellitePass>;
@@ -165,6 +166,12 @@ export class DatabaseStorage implements IStorage {
   async createCorrelation(correlation: InsertCorrelation): Promise<Correlation> {
     const [created] = await db.insert(correlations).values(correlation).returning();
     return created;
+  }
+
+  async getGooseKnowledge(category?: string): Promise<Array<{ id: string; title: string; content: string; category: string }>> {
+    const where = category ? `WHERE category = '${category.replace(/'/g, "''")}'` : "";
+    const result = await db.execute(sql.raw(`SELECT id, title, content, category FROM goose_knowledge ${where} ORDER BY created_at DESC LIMIT 10`));
+    return (result.rows ?? []) as Array<{ id: string; title: string; content: string; category: string }>;
   }
 
   async getCorrelationCount(): Promise<number> {
