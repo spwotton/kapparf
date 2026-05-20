@@ -67,7 +67,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
     items: [
-      { titleKey: "sidebar.ciajwHome", fallback: "CIAJW Home", url: "/", icon: Shield },
+      { titleKey: "sidebar.ciajwHome", fallback: "CIAJW Home", url: "/whistleblower", icon: Shield },
       { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence", icon: FileWarning },
       { titleKey: "sidebar.audioForensics", fallback: "Audio Recordings", url: "/audio", icon: Mic },
       { titleKey: "sidebar.videoForensics", fallback: "Video Forensics Vault", url: "/video-forensics", icon: Mic },

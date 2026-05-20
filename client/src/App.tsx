@@ -58,7 +58,8 @@ import HyperobjectsPage from "@/pages/hyperobjects";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={WhistleblowerPage} />
+      <Route path="/" component={GooseGazettePage} />
+      <Route path="/whistleblower" component={WhistleblowerPage} />
       <Route path="/command" component={CommandCenterPage} />
       <Route path="/dashboard" component={DashboardPage} />
       <Route path="/events" component={EventsPage} />
