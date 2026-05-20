@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 import { cast } from "@/lib/goose-personas";
 import { BarneyTRex } from "@/components/barney-trex";
 import { PinkRabbit } from "@/components/pink-rabbit";
@@ -50,35 +51,99 @@ interface HumorStats {
   exemplars: Array<{ headline: string; overall: number }>;
   failures: Array<{ headline: string; overall: number }>;
 }
+interface RejudgeStatus {
+  rubricVersion: number;
+  running: boolean;
+  startedAt: number | null;
+  finishedAt: number | null;
+  batches: number;
+  scored: number;
+  rejudged: number;
+  lastError: string | null;
+}
 function HumorBadge() {
   const { data } = useQuery<HumorStats>({
     queryKey: ["/api/goose/humor-stats"],
     refetchInterval: 5 * 60 * 1000,
   });
+  const [pollWhileRunning, setPollWhileRunning] = useState(false);
+  const { data: status } = useQuery<RejudgeStatus>({
+    queryKey: ["/api/humor/rejudge-all/status"],
+    refetchInterval: pollWhileRunning ? 2000 : false,
+  });
+  const [flash, setFlash] = useState<string | null>(null);
+  const rejudge = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest("POST", "/api/humor/rejudge-all");
+      return res.json() as Promise<{
+        success?: boolean; batches: number; scored: number; rejudged: number;
+        durationMs: number; alreadyRunning?: boolean; rubricVersion: number;
+      }>;
+    },
+    onMutate: () => { setPollWhileRunning(true); setFlash(null); },
+    onSuccess: (r) => {
+      const secs = (r.durationMs / 1000).toFixed(1);
+      setFlash(
+        r.alreadyRunning
+          ? `already running · ${r.scored} scored so far`
+          : `done · ${r.scored} scored (${r.rejudged} re-judged) in ${secs}s`
+      );
+      queryClient.invalidateQueries({ queryKey: ["/api/goose/humor-stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/humor/rejudge-all/status"] });
+    },
+    onError: (e: Error) => setFlash(`error · ${e.message.slice(0, 80)}`),
+    onSettled: () => { setPollWhileRunning(false); setTimeout(() => setFlash(null), 8000); },
+  });
+
   const avg = data?.rollingAvg;
-  if (!avg || avg.sampleSize === 0) {
-    return (
-      <span data-testid="badge-humor-score"
-        className="px-2 py-0.5 border border-gray-800 rounded text-gray-600 font-mono"
-        title="Humor Hypervisor warming up">κ-humor: —</span>
-    );
-  }
-  const tone = avg.overall >= 75 ? "text-green-500 border-green-900"
-             : avg.overall >= 55 ? "text-amber-500 border-amber-900"
-             : "text-red-500 border-red-900";
-  const title = `Humor Hypervisor — rolling avg over ${avg.sampleSize} articles
+  const running = rejudge.isPending || status?.running;
+  const liveLabel = running
+    ? `judging · batch ${status?.batches ?? 0} · ${status?.scored ?? 0} scored`
+    : flash;
+
+  const badge = !avg || avg.sampleSize === 0 ? (
+    <span data-testid="badge-humor-score"
+      className="px-2 py-0.5 border border-gray-800 rounded text-gray-600 font-mono"
+      title="Humor Hypervisor warming up">κ-humor: —</span>
+  ) : (() => {
+    const tone = avg.overall >= 75 ? "text-green-500 border-green-900"
+               : avg.overall >= 55 ? "text-amber-500 border-amber-900"
+               : "text-red-500 border-red-900";
+    const title = `Humor Hypervisor — rolling avg over ${avg.sampleSize} articles
 AP Rigidity: ${avg.apRigidity}
 Premise Absurdity: ${avg.premiseAbsurdity}
 Joke Discipline: ${avg.jokeDiscipline}
 Specificity Carrier: ${avg.specificityCarrier}
 Resolution Unresolved: ${avg.resolutionUnresolved}`;
+    return (
+      <Link
+        href="/goose/humor"
+        data-testid="badge-humor-score"
+        className={`px-2 py-0.5 border rounded font-mono hover:opacity-80 cursor-pointer ${tone}`}
+        title={`${title}\n\nClick for full dashboard →`}
+      >κ-humor: {avg.overall.toFixed(1)}</Link>
+    );
+  })();
+
   return (
-    <Link
-      href="/goose/humor"
-      data-testid="badge-humor-score"
-      className={`px-2 py-0.5 border rounded font-mono hover:opacity-80 cursor-pointer ${tone}`}
-      title={`${title}\n\nClick for full dashboard →`}
-    >κ-humor: {avg.overall.toFixed(1)}</Link>
+    <span className="flex items-center gap-2 text-[10px] font-mono">
+      {badge}
+      <button
+        type="button"
+        onClick={() => rejudge.mutate()}
+        disabled={!!running}
+        data-testid="button-rejudge-all"
+        title="Re-judge every article whose latest score is older than the current rubric"
+        className="px-2 py-0.5 border border-gray-700 rounded text-gray-400 hover:text-white hover:border-white transition-colors disabled:opacity-50 disabled:cursor-wait"
+      >
+        {running ? "judging…" : "↻ re-judge all"}
+      </button>
+      {liveLabel && (
+        <span data-testid="text-rejudge-status" className="text-gray-400 truncate max-w-[260px]">
+          {liveLabel}
+        </span>
+      )}
+    </span>
   );
 }
 

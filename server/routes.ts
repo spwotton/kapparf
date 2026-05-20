@@ -5240,9 +5240,35 @@ export function registerGooseRoutes(app: express.Express) {
   // GET /api/goose/humor-stats — Humor Hypervisor rolling averages + bundle
   app.get("/api/goose/humor-stats", async (_req, res) => {
     try {
-      const { buildHumorFeedback, getHumorHypervisorStatus } = await import("./humor-hypervisor");
+      const { buildHumorFeedback, getHumorHypervisorStatus, getRejudgeProgress } = await import("./humor-hypervisor");
       const feedback = await buildHumorFeedback();
-      res.json({ ...feedback, hypervisor: getHumorHypervisorStatus() });
+      res.json({
+        ...feedback,
+        hypervisor: getHumorHypervisorStatus(),
+        rejudge: getRejudgeProgress(),
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // POST /api/humor/rejudge-all — sweep every article whose latest score is
+  // older than the current RUBRIC_VERSION and re-judge in rate-limited batches.
+  app.post("/api/humor/rejudge-all", async (_req, res) => {
+    try {
+      const { rejudgeAllStale, RUBRIC_VERSION } = await import("./humor-hypervisor");
+      const result = await rejudgeAllStale();
+      res.json({ success: true, rubricVersion: RUBRIC_VERSION, ...result });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // GET /api/humor/rejudge-all/status — poll progress while a sweep runs.
+  app.get("/api/humor/rejudge-all/status", async (_req, res) => {
+    try {
+      const { getRejudgeProgress, RUBRIC_VERSION } = await import("./humor-hypervisor");
+      res.json({ rubricVersion: RUBRIC_VERSION, ...getRejudgeProgress() });
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }

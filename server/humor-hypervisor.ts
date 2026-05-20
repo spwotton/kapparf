@@ -211,6 +211,84 @@ export async function scoreRecentArticles(): Promise<{ scored: number; skipped: 
   return { scored, skipped: rows.length - scored, rejudged };
 }
 
+/**
+ * Re-judge every article whose latest score is older than `RUBRIC_VERSION`
+ * (or which has never been scored). Loops `scoreRecentArticles` in batches
+ * until no more candidates remain, sleeping briefly between batches to
+ * respect OpenAI rate limits.
+ */
+interface RejudgeProgress {
+  running: boolean;
+  startedAt: number | null;
+  finishedAt: number | null;
+  batches: number;
+  scored: number;
+  rejudged: number;
+  lastError: string | null;
+}
+const rejudgeProgress: RejudgeProgress = {
+  running: false, startedAt: null, finishedAt: null,
+  batches: 0, scored: 0, rejudged: 0, lastError: null,
+};
+
+export function getRejudgeProgress(): RejudgeProgress {
+  return { ...rejudgeProgress };
+}
+
+export async function rejudgeAllStale(opts: { batchDelayMs?: number; maxBatches?: number } = {}): Promise<{
+  batches: number;
+  scored: number;
+  rejudged: number;
+  durationMs: number;
+  alreadyRunning?: boolean;
+}> {
+  if (rejudgeProgress.running) {
+    return {
+      batches: rejudgeProgress.batches,
+      scored: rejudgeProgress.scored,
+      rejudged: rejudgeProgress.rejudged,
+      durationMs: Date.now() - (rejudgeProgress.startedAt ?? Date.now()),
+      alreadyRunning: true,
+    };
+  }
+  const batchDelayMs = opts.batchDelayMs ?? 1500;
+  const maxBatches = opts.maxBatches ?? 500;
+  const t0 = Date.now();
+  rejudgeProgress.running = true;
+  rejudgeProgress.startedAt = t0;
+  rejudgeProgress.finishedAt = null;
+  rejudgeProgress.batches = 0;
+  rejudgeProgress.scored = 0;
+  rejudgeProgress.rejudged = 0;
+  rejudgeProgress.lastError = null;
+  try {
+    while (rejudgeProgress.batches < maxBatches) {
+      const { scored, rejudged } = await scoreRecentArticles();
+      rejudgeProgress.batches++;
+      rejudgeProgress.scored += scored;
+      rejudgeProgress.rejudged += rejudged;
+      if (scored === 0) break;
+      if (batchDelayMs > 0) await new Promise(r => setTimeout(r, batchDelayMs));
+    }
+    try {
+      cachedFeedback = await buildHumorFeedback();
+      cachedAt = Date.now();
+    } catch {}
+  } catch (e) {
+    rejudgeProgress.lastError = (e as Error).message;
+    throw e;
+  } finally {
+    rejudgeProgress.running = false;
+    rejudgeProgress.finishedAt = Date.now();
+  }
+  return {
+    batches: rejudgeProgress.batches,
+    scored: rejudgeProgress.scored,
+    rejudged: rejudgeProgress.rejudged,
+    durationMs: Date.now() - t0,
+  };
+}
+
 export interface HumorFeedback {
   exemplars: Array<{ headline: string; overall: number; whyItWorked: string }>;
   failures: Array<{ headline: string; overall: number; whatToAvoid: string }>;
