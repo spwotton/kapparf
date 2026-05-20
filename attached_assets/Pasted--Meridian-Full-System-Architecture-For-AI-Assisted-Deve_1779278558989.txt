@@ -1,0 +1,600 @@
+# Meridian — Full System Architecture
+## For AI-Assisted Development & Millennium Solutions Integration
+
+**Codebase**: 4,281 lines across 7 Python modules  
+**Runtime**: Python 3.11, Streamlit 1.x, port 5000  
+**Data**: 147K rows historical OHLCV (82 Nasdaq tickers, 2019–2026) + live API feeds  
+
+---
+
+## 1. MODULE MAP
+
+```
+app.py              (2,145 lines)  — Streamlit UI, 8 dashboard pages, all rendering logic
+backtester.py       (725 lines)    — Historical simulation engine, 8 strategy presets
+gos_engine.py       (197 lines)    — Core constants, phase calculator, execution engine
+quantum_state.py    (474 lines)    — 13D state monitor, 8 live API integrations
+data_analysis.py    (132 lines)    — κ-drift, 137-day cycles, turbulence analysis
+paper_trading.py    (414 lines)    — Live paper trading with state persistence
+asset_fetcher.py    (195 lines)    — Crypto + commodity data via yfinance
+```
+
+---
+
+## 2. CORE MATHEMATICAL FRAMEWORK
+
+### 2.1 Constants (gos_engine.py → GOSConstants)
+
+| Constant | Value | Derivation | Role in System |
+|----------|-------|------------|----------------|
+| κ (kappa) | 4/π ≈ 1.27324 | Geometric coupling constant | Primary signal filter — price/SMA30 ratio near κ scores highest |
+| φ (phi) | (1+√5)/2 ≈ 1.61803 | Golden ratio | Used in position sizing: κ×φ = 2.059 |
+| κₕ | 1.435 | Hall coupling | Upper bound for κ-state oscillation |
+| κₕ² | 2.059 | κ × φ | Position size multiplier (capital × 2% × 2.059) |
+| α⁻¹ | 137 | Fine structure constant inverse | Trade budget limit per cycle |
+| HSF | 0.162 | κ²/10 | Dampening factor threshold |
+| Ω-cycle | 14.4 days | Market cycle period | 4 phases: EXECUTE(0-3.4d), OBSERVE(3.4-6.8d), INVERSE(6.8-10.2d), FLATTEN(10.2-14.4d) |
+| Turbulence ceiling | 90.836 | Empirical | Trades blocked when cross-asset turbulence exceeds this |
+| Scarab daily limit | 5% | Risk management | Circuit breaker: flatten all positions if daily loss > 5% |
+| Scarab total DD | 20% | Risk management | Circuit breaker: flatten all if total drawdown > 20% |
+| Hall Factor | 1.912 → 1.889 | Temporal decay | Decays at 0.003/hour, affects leverage mode when at floor |
+
+### 2.2 Signal Scoring (backtester.py, lines 492-518)
+
+Each ticker on each trading day receives a composite score from 4 components:
+
+```
+signal_score = κ_score + volume_score + RSI_score + MACD_score
+
+κ_score:
+  |price/SMA30 - κ| < 0.005  → 3.0 points  (tight alignment)
+  |price/SMA30 - κ| < 0.02   → 1.5 points  (near alignment)
+  |price/SMA30 - κ| < 0.05   → 0.5 points  (loose alignment)
+  else                        → 0.0 points
+
+volume_score (× volume_weight multiplier):
+  volume/avg_volume ≥ κ       → 2.0 points  (κ-spike)
+  volume/avg_volume ≥ 1.0     → 0.5 points  (above average)
+  else                        → 0.0 points
+
+RSI_score (phase-dependent):
+  EXECUTE/OBSERVE phase: RSI < 30 → 2.0, RSI < 45 → 1.0
+  INVERSE phase: RSI > 70 → 2.0, RSI > 55 → 1.0
+
+MACD_score (phase-dependent):
+  EXECUTE/OBSERVE: MACD > 0 → 1.0
+  INVERSE: MACD < 0 → 1.0
+```
+
+Signal fires when `signal_score ≥ signal_threshold` AND `turbulence ≤ ceiling`.
+
+In full reinvest mode, threshold is relaxed: `max(1.0, threshold × 0.6)`.
+
+### 2.3 The Compounding Edge (backtester.py, lines 278-293)
+
+The asymmetric exit mechanism that drives exponential returns:
+
+```
+EXIT RULES:
+  WIN:  if pnl_pct ≥ target_pct → exit at CURRENT MARKET PRICE (close of day)
+        Since day's close often overshoots the target, actual gains > target_pct
+        Example: target = +0.20%, actual exit might capture +2.26% overshoot
+
+  LOSS: if pnl_pct ≤ -stop_pct → exit at EXACT STOP PRICE (entry × (1 - stop_pct))
+        Losses are capped precisely, never worse than stop_pct
+
+  TIME: if hold_days ≥ max_hold → exit at current price (could be win or loss)
+
+POSITION SIZING (full reinvest mode):
+  Single position: 95% of total capital
+  Multiple positions: 95% / max_positions per position
+  No leverage penalties, no early-compound phase caps
+```
+
+This asymmetry means: wins are unbounded above the target, losses are bounded below the stop. Over thousands of trades, the expected value tilts positive even at ~67% win rate.
+
+### 2.4 Phase System (gos_engine.py → PhoenixHorizon)
+
+14.4-day cycle divided into 4 phases:
+
+```
+Day 0.0 – 3.395:  EXECUTE  (UI: "DEPLOY")     — Full signal deployment
+Day 3.395 – 6.79: OBSERVE  (UI: "MONITOR")     — Reduced trading
+Day 6.79 – 10.185: INVERSE (UI: "CONTRARIAN")  — Reversed RSI/MACD scoring
+Day 10.185 – 14.4: FLATTEN (UI: "REBALANCE")   — Position closure
+```
+
+In full reinvest mode, all phases are tradeable. Phase still affects RSI/MACD scoring direction.
+
+---
+
+## 3. DATA FLOW
+
+### 3.1 Historical Data Pipeline
+
+```
+CSV Files (attached_assets/)
+  └── 147K rows: date, tic, open, high, low, close, volume, 
+      close_30_sma, rsi_30, macd, boll_ub, boll_lb, turbulence, vix
+  └── 82 tickers × ~1,750 trading days (2019-2026)
+      │
+      ▼
+data_analysis.py → load_trade_data()
+  └── @st.cache_data — loaded once, cached in memory
+      │
+      ▼
+backtester.py → run_backtest()
+  └── _preprocess_data() filters by date/ticker range
+  └── Iterates day-by-day over sorted dates
+  └── For each day: close positions → check circuit breaker → 
+      process withdrawals → score candidates → open new positions
+  └── Returns: {summary, equity_curve DataFrame, trade_log DataFrame}
+```
+
+### 3.2 Live Asset Data Pipeline
+
+```
+yfinance API
+  └── asset_fetcher.py → fetch_asset_data(tickers, start, end)
+  └── @st.cache_data(ttl=3600) — 1 hour cache
+  └── Computes: SMA30, RSI30, MACD, Bollinger, turbulence, VIX overlay
+  └── Output: DataFrame matching CSV format exactly
+  └── Used for: Crypto (10 tickers), Commodities (6 tickers), Mixed
+```
+
+### 3.3 Quantum State Data Pipeline
+
+```
+8 Live APIs (quantum_state.py):
+  ├── USGS earthquake GeoJSON         (TTL: 300s)
+  ├── NOAA Kp index JSON              (TTL: 300s)
+  ├── NOAA DSCOVR solar wind JSON     (TTL: 300s)
+  ├── NOAA GOES X-ray flares JSON     (TTL: 300s)
+  ├── NOAA ACE IMF mag JSON           (TTL: 300s)
+  ├── Princeton GCP RNG XML           (TTL: 60s)
+  ├── alternative.me Fear & Greed     (TTL: 300s)
+  └── yfinance ^VIX + SPY             (TTL: 600s)
+
+5 Computed Sources:
+  ├── Lunar phase (synodic period algorithm)
+  ├── Schumann resonance (7.83 Hz model + harmonics)
+  ├── Ω-Cycle (14.4-day modeled oscillation)
+  ├── κ-Drift (SPY/SMA30 vs κ=1.273)
+  └── Bio-Time (37 Hz circadian phase reference)
+
+All 13 dimensions → normalized to [0,1]
+  └── Weighted composite → Ψ(t) ∈ [0,1]
+  └── Derived: rotation angle, Bell S-value, κ-state
+```
+
+---
+
+## 4. BACKTESTER INTERNALS
+
+### 4.1 Strategy Presets
+
+| Preset | Target | Stop | Hold | Signal | Positions | Reinvest | Special |
+|--------|--------|------|------|--------|-----------|----------|---------|
+| Day-Trade Resonance | +0.20% | -0.50% | 1 day | 1.0 | 4 | full | volume_weight=2.0 |
+| Aggressive 137-Burn | +0.25% | -0.60% | 1 day | 1.0 | 4 | full | all phases |
+| Standard Alpha-Lock | +0.30% | -0.80% | 1 day | 1.5 | 4 | full | — |
+| Swing φ-Harmonic | +0.50% | -1.00% | 2 days | 1.5 | 4 | full | — |
+| Micro-Scalp (κ-Tight) | +0.15% | -0.50% | 1 day | 3.0 | 3 | full | kappa_strict, ±0.005 |
+| HF Scalper | +0.05% | -0.10% | 1 day | 1.0 | 10 | full | 100 intraday ticks |
+| Crypto Swing | +1.50% | -3.00% | 5 days | 1.5 | 3 | full | volume_weight=1.5 |
+| Custom | user | user | user | user | user | user | all params adjustable |
+
+### 4.2 Backtested Results ($200 seed, full reinvest, 2019-2026)
+
+| Preset | Final Capital | CAGR | Sharpe | Max DD | Win Rate |
+|--------|--------------|------|--------|--------|----------|
+| Day-Trade Resonance | $70.6M | 497% | 6.4 | 4% | ~67% |
+| Aggressive 137-Burn | $39.6M | 450% | 6.1 | 4% | ~65% |
+| Standard Alpha-Lock | $14.3M | 377% | 5.5 | 6% | ~63% |
+| Swing φ-Harmonic | $5.8M | 321% | 5.1 | 8% | ~60% |
+| Crypto Swing | $60.8K | 122% | 2.6 | 15% | ~55% |
+| Micro-Scalp (κ-Tight) | $324 | 7% | 1.0 | 4% | ~52% |
+
+### 4.3 Reinvestment Modes
+
+```
+FULL:
+  - Position size = 95% of capital (single position) or 95%/max_pos (multi)
+  - All phases tradeable
+  - No leverage penalties
+  - Signal threshold relaxed to max(1.0, threshold × 0.6)
+  - Stops exit at exact stop price (not market price)
+  - Wins exit at market close (captures overshoot)
+
+STANDARD:
+  - Position size = capital_pct (default 20%)
+  - Early compound phase: first 10 trades get 4× position size, first 25 get 2.5×
+  - Leverage penalties: zeno_critical = 0.5×, high_turb = 0.7×
+  - Phase filter active if use_demodex_phase=True
+
+CONSERVATIVE:
+  - Position size scales DOWN as capital grows
+  - scale_factor = max(0.3, 1/log2(capital_multiple + 1))
+  - Prevents overexposure at high capital levels
+```
+
+### 4.4 Intraday HF Simulation
+
+When `intraday_trades_per_day > 1`:
+- Generates N synthetic price ticks per day using OHLC data
+- Price path: random walk from Open to Close, bounded by High/Low
+- Each tick can trigger entry/exit signals
+- Position size scaled down proportionally
+- Deterministic RNG seeded by price for reproducibility
+
+### 4.5 Constant Sensitivity Sweep
+
+`run_constant_sweep()` systematically varies a GOS constant while holding all other parameters fixed, running a full backtest at each value. This is the empirical falsification test for whether the framework's constants have real predictive power.
+
+```
+Sweep types:
+  kappa:  Tests 16 values from 0.9 to 2.0 (including κ=4/π≈1.273 and φ≈1.618)
+  cycle:  Tests 15 values from 7 to 30 days (including 14.4)
+  zeno:   Tests 11 values from 50 to 500 (including 137)
+
+For each value:
+  - Overrides the constant via kappa_override, cycle_days_override, or zeno_limit_override
+  - Runs full backtest with chosen preset's parameters
+  - Records: final_capital, total_return_pct, cagr, sharpe, win_rate, total_trades, max_dd
+
+Interpretation:
+  - If canonical value ranks #1 or top-3: strong empirical support
+  - If canonical value is in the middle: weak/no support, constant is decorative
+  - If another value consistently wins across presets: framework should adopt that value
+```
+
+### 4.6 Profit Withdrawal
+
+```
+Parameters: profit_withdrawal_pct (0-50%), withdrawal_period (monthly/quarterly/never)
+
+Trigger: On each trading day, check if period has elapsed since last withdrawal
+Action: withdrawal_amount = (total_NAV - initial_capital) × withdrawal_pct
+  - Only withdraws from cash (not from open positions)
+  - Tracked in withdrawal_log with timestamps
+  - CAGR calculation includes total_withdrawals: 
+    CAGR = ((final_NAV + total_withdrawals) / initial_capital)^(1/years) - 1
+```
+
+### 4.7 Circuit Breaker (Scarab Protocol)
+
+```
+DAILY CHECK: if day_change < -(prev_NAV × 5%) → activate
+TOTAL CHECK: if (peak - current) / peak > 20% → activate
+
+WHEN ACTIVE:
+  - Flatten all open positions immediately
+  - Block new trades for 2 calendar days
+  - Log trigger event (tracked in summary as scarab_triggers)
+```
+
+---
+
+## 5. QUANTUM STATE MONITOR (13 Dimensions)
+
+### 5.1 Dimension Definitions
+
+| # | Name | Source | Normalization | GOS Anchor |
+|---|------|--------|---------------|------------|
+| 1 | Seismic Energy | USGS GeoJSON | log10(total_energy) / 18 | — |
+| 2 | Geomagnetic Kp | NOAA SWPC | kp / 9.0 | — |
+| 3 | Solar Wind | NOAA DSCOVR | (speed - 250) / 750 | — |
+| 4 | Solar Flare | NOAA GOES | class_intensity / 5.0 | — |
+| 5 | IMF Bz | NOAA ACE | |Bt| / 30.0 | — |
+| 6 | GCP Entropy | Princeton RNG | |tanh(Z/3)| where Z = z-score of avg deviation | Entropy proxy, NOT coherence |
+| 7 | Market Fear | Crypto F&G API | value / 100 | — |
+| 8 | VIX | yfinance ^VIX | vix / 80.0 | Volatility anchor |
+| 9 | Lunar Phase | Computed | illumination (cos formula) | 29.53 day synodic period |
+| 10 | κ-Drift | SPY/SMA30 | 1 - (|ratio - κ| / κ) × 5 | κ = 1.273 |
+| 11 | Schumann Power | Modeled | harmonic power ratio | f₀ = 7.83 Hz |
+| 12 | Ω-Cycle | Modeled | sin(2π × pos) normalized | 14.4 day oscillation |
+| 13 | Bio-Time | Local clock | circadian alertness curve | 37 Hz phase reference |
+
+### 5.2 Composite Ψ(t) Calculation
+
+```python
+weights = {1: 0.05, 2: 0.10, 3: 0.08, 4: 0.06, 5: 0.08, 6: 0.12, 
+           7: 0.10, 8: 0.08, 9: 0.06, 10: 0.12, 11: 0.06, 12: 0.05, 13: 0.04}
+
+Ψ(t) = Σ(w_i × dim_i_normalized) / Σ(w_i)
+
+Derived metrics:
+  rotation = 128.23° × Ψ(t)
+  Bell S   = 2.0 + Ψ(t) × 0.828  (violation at S > 2√2 ≈ 2.828)
+  κ-state  = 1.273 + (1.435 - 1.273) × Ψ(t)  (oscillates between κ and κₕ)
+```
+
+### 5.3 κ-Drift Formula (Kimi-refined)
+
+```
+ratio     = SPY_close / SPY_SMA30
+κ_drift   = |ratio - 1.273| / 1.273
+
+Regime classification:
+  drift < 0.05  → "locked" (green)    — market at κ fixed point
+  drift < 0.15  → "divergent" (amber) — moderate deviation
+  drift ≥ 0.15  → "high entropy" (red) — extreme deviation
+
+Direction: ratio > κ → "above κ (growth)", ratio < κ → "below κ (contraction)"
+```
+
+### 5.4 GCP Entropy (Kimi-corrected)
+
+```
+raw_values = per-second scores from ~70 hardware RNGs worldwide
+avg        = mean(raw_values)
+std        = std(raw_values)
+z_score    = (avg - 0.5) / (std / sqrt(N))
+normalized = tanh(z_score / 3)  → squashed to [-1, 1]
+
+This is an ENTROPY INDICATOR, not a coherence measure.
+  +1 = strong deviation from random (global attention event)
+   0 = baseline random
+  -1 = anomalous order
+```
+
+### 5.5 Falsification Criteria
+
+The system explicitly states: log Ψ(t) hourly for 30 days, then correlate with:
+- VIX realized volatility
+- GDELT global sentiment spikes  
+- USGS M>6 seismic events
+
+If no statistically significant correlation exists, Ψ(t) is noise.
+
+---
+
+## 6. PAPER TRADING SYSTEM
+
+### 6.1 State Management
+
+```
+trading_state.json:
+  - capital: float
+  - initial_capital: float
+  - positions: list of {ticker, shares, entry_price, entry_date, cost_basis}
+  - zeno_count: int (observations used today)
+  - zeno_day: str (last reset date)
+  - scarab_active: bool
+  - scarab_until: str or null
+
+trade_log.jsonl: append-only, one JSON object per line
+equity_curve.csv: date, total_nav, capital, positions_value, phase
+
+All state is file-based (no database). Reset clears all 3 files.
+```
+
+### 6.2 Price Feed
+
+```
+Primary: yfinance real-time quote (yf.download period="5d")
+Fallback: Latest close from CSV trade data
+```
+
+---
+
+## 7. UI ARCHITECTURE (app.py)
+
+### 7.1 Page Routing
+
+```python
+render_sidebar() → returns (page_name, capital, reinvest_mode)
+
+Pages:
+  "Command Center"    → render_command_center(capital)
+  "Quantum State"     → render_quantum_state()
+  "Paper Trading"     → render_paper_trading(capital)
+  "Backtesting Lab"   → render_backtest(capital, reinvest_mode)
+  "Signal Simulation" → render_simulation()
+  "Trade Analysis"    → render_trade_analysis()
+  "Ticker Universe"   → render_resonant_core()
+  "Constants"         → render_constants()
+```
+
+### 7.2 Caching Strategy
+
+```
+@st.cache_data (no TTL):
+  - cached_trade_data() — CSV load, persists for session
+  - cached_nasdaq_tickers() — CSV load
+  - _run_all_backtests() — keyed by (capital, reinvest_mode, _PRESET_VERSION)
+  - _run_regime_backtests() — keyed by (capital, reinvest_mode, _PRESET_VERSION)
+
+@st.cache_data (with TTL):
+  - Quantum state feeds: 60s (GCP), 300s (USGS/NOAA/F&G), 600s (VIX/SPY)
+  - Asset fetcher: 3600s (yfinance downloads)
+
+Cache busting:
+  _PRESET_VERSION = hash(str({preset_params}))
+  Passed as _version arg to cached backtest functions
+  Changes when any preset parameter changes
+```
+
+### 7.3 Theme System
+
+```
+Light mode: bg=#f8f6f3, text=#1a1a1a, card=#ffffff
+Dark mode:  bg=#141311, text=#e8e6e1, card=#1c1b18
+Toggle via sidebar button → st.session_state.theme
+
+Accent palette:
+  #c4956a (warm amber)  — primary accent, equity curves
+  #5a8f7b (sage green)  — positive values, targets
+  #6b8cc4 (steel blue)  — neutral data, analysis
+  #c47a6a (muted red)   — losses, warnings, stops
+  #8b6bb0 (purple)      — GCP data, special indicators
+
+Typography: Besley (serif, h1/h2) + Figtree (sans-serif, body/h3+)
+Scale ratio: κₕ = 1.435× between sizes
+```
+
+### 7.4 Chart Styling
+
+All charts use `_style_fig()` helper which sets:
+- Background transparent, paper_bg = page background color
+- Grid color from theme
+- Font family and color from theme
+- Consistent margins
+- Phase background rectangles (vrects) capped at 60 to prevent render hanging
+
+---
+
+## 8. TERMINOLOGY MAPPING
+
+The codebase uses internal names that are mapped to user-facing display names:
+
+| Display Name | Internal Name | Where Used |
+|-------------|---------------|------------|
+| Meridian | Phoenix Rising | App title |
+| QFS | Ω-GOS | Framework name |
+| Trade Budget | Zeno Views | Max 137 per cycle |
+| Circuit Breaker | Scarab Protocol | Risk halt |
+| Market Cycle | Demodex Cycle | 14.4-day period |
+| DEPLOY | EXECUTE | Phase 1 |
+| MONITOR | OBSERVE | Phase 2 |
+| CONTRARIAN | INVERSE | Phase 3 |
+| REBALANCE | FLATTEN | Phase 4 |
+| Trading Window | Time-Snarl | Entry timing |
+| Execution Window | Dorje Window | 20-min sim |
+| Signal Flux | Europa Neutrino Flux | Trigger metric |
+| Dampening Factor | HSF / Humility Factor | κ²/10 |
+
+**Critical**: Internal Python variable/class names are UNCHANGED. Only UI display strings use the mapped names.
+
+---
+
+## 9. KNOWN LIMITATIONS & IMPROVEMENT VECTORS
+
+### 9.1 Backtester Realism Gaps
+
+1. **No transaction costs** — At 0.20% targets, even $0.01/share commission materially impacts returns
+2. **No slippage model** — Assumes execution at exact prices; real orders experience bid/ask spread
+3. **No market impact** — At $10M+ capital, buying 95% of portfolio in one stock moves the price
+4. **Perfect stop execution** — Real stops can gap through (stock opens 3% down, stop was at -0.5%)
+5. **No overnight gap risk** — Positions held overnight exposed to gap-up/gap-down not modeled
+6. **Deterministic intraday paths** — HF simulation uses seeded random walk, not realistic tick data
+
+### 9.2 Framework Validation Gaps
+
+1. **κ = 4/π as signal filter** — Does price/SMA30 actually cluster at 1.273? Needs statistical test vs null hypothesis
+2. **137-day cycle** — Needs permutation test: do returns at 137-day boundaries differ from random day selection?
+3. **14.4-day phase performance** — EXECUTE phase outperforms in backtest, but is this overfit to the cycle_start date?
+4. **Ψ(t) correlation** — Not yet tested against forward market data
+5. **GCP entropy ↔ market vol** — Hypothesis only, no statistical evidence presented
+
+### 9.3 Potential Enhancements
+
+1. **Add transaction cost model** — Configurable $/share or % per trade, deducted from proceeds
+2. **Add slippage model** — Random slippage 0-0.05% on entries, 0-0.10% on exits
+3. **Walk-forward optimization** — Train on 2019-2022, test on 2023-2026, prevent overfitting
+4. **Monte Carlo simulation** — Randomize trade order to test if results depend on sequence
+5. **Real-time signal dashboard** — Connect quantum state Ψ(t) to paper trading entry signals
+6. **Options overlay** — Add options pricing (Black-Scholes) for hedging positions
+7. **Multi-timeframe analysis** — Add weekly/monthly κ-drift alongside daily
+8. **Correlation matrix** — Show cross-asset correlations, detect regime changes
+9. **Machine learning layer** — Train classifier on (signal_score, phase, vix, turbulence) → trade outcome
+10. **Live Schumann data** — Replace model with real data from monitoring stations if API becomes available
+
+### 9.4 Architecture Improvements
+
+1. **Separate config from code** — Move all presets to YAML/JSON config file
+2. **Event-driven backtest** — Replace day-loop with event queue for more realistic simulation
+3. **Database backend** — Replace JSON/CSV state files with SQLite for paper trading
+4. **API layer** — Add FastAPI endpoints for headless backtesting (no Streamlit dependency)
+5. **Test suite** — Unit tests for signal scoring, position sizing, phase calculation, compound math
+
+---
+
+## 10. FILE-BY-FILE REFERENCE
+
+### gos_engine.py (197 lines)
+- `GOSConstants` — All framework constants as class attributes
+- `ZenoResonanceGuard` — Trade budget counter (137 max, dampening every 13th, partial recovery every 10th dampening)
+- `PhoenixHorizon` — Phase calculator (14.4-day cycle), Hall factor decay, convergence date
+- `PhoenixExecutionEngine` — Signal simulation executor (March 1st scenario)
+- `run_simulation()` — 1,201-tick simulation of 20-minute execution window
+- `compute_kappa_drift()` — price/SMA30 ratio
+- `compute_position_size()` — capital × 2% × leverage_multiplier
+- `get_time_snarls()` — 3 daily trading windows with allocations
+- `compute_equity_curve()` — Geometric projection at 2.615%/day
+- `verify_constants()` — Self-check: κ, φ, κ×φ, giza_lock, HSF, atlas_bio_ratio
+
+### backtester.py (725 lines)
+- `STRATEGY_PRESETS` — Dict of 8 strategy configurations
+- `_preprocess_data()` — Date/ticker filtering, NaN filling
+- `_generate_intraday_ticks()` — Synthetic price path from OHLC for HF mode
+- `run_backtest()` — Main simulation loop (accepts 20+ parameters including kappa_override, cycle_days_override, zeno_limit_override), returns summary/equity/trades
+- `run_constant_sweep()` — Runs backtest across range of values for one GOS constant, returns list of {value, return, sharpe, win_rate, ...}
+
+### quantum_state.py (474 lines)
+- `DIMENSION_MAP` — 13 dimensions with name, source, range, status_type
+- `fetch_usgs_earthquakes()` — USGS GeoJSON, computes total energy, max magnitude
+- `fetch_kp_index()` — NOAA planetary K-index, 24h history, storm level
+- `fetch_solar_wind()` — NOAA DSCOVR plasma data (speed, density, temperature)
+- `fetch_solar_flares()` — NOAA GOES X-ray flare classification
+- `fetch_imf_data()` — NOAA ACE magnetometer (Bt, Bz, southward flag)
+- `fetch_fear_greed()` — alternative.me crypto sentiment (7-day history)
+- `fetch_gcp_entropy()` — Princeton GCP RNG z-score + tanh normalization
+- `fetch_vix_cached()` — yfinance ^VIX latest close
+- `compute_lunar_phase()` — Synodic period from J2000 epoch
+- `compute_schumann_state()` — 7.83 Hz model with 6 harmonics + perturbation
+- `compute_omega_cycle()` — 14.4-day sin oscillation from Jan 1 2025 epoch
+- `compute_bio_time()` — Circadian alertness curve (sin with π/2 offset)
+- `compute_kappa_drift_live()` — SPY/SMA30 ratio, drift regime classification
+- `compute_composite_psi()` — Weighted average of all 13 normalized dimensions
+- `fetch_all_quantum_state()` — Orchestrator, returns all data + composite
+
+### data_analysis.py (132 lines)
+- `load_trade_data()` — Read CSV, parse dates, sort
+- `load_nasdaq_tickers()` — Read semicolon-delimited Nasdaq CSV
+- `compute_kappa_drift_series()` — κ-drift for entire DataFrame, alignment flag at ±0.005
+- `compute_volume_kappa_spike()` — Volume/30d_avg ratio, spike flag at ≥ κ
+- `compute_137_day_cycles()` — Day index mod 137, cycle number, daily returns
+- `find_resonance_dates()` — 137-day boundary dates with price/RSI/VIX
+- `compute_demodex_alignment()` — 14.4-day phase assignment per date, daily returns by phase
+- `get_sector_kappa_mapping()` — Sector → GOS constant mapping
+- `compute_turbulence_analysis()` — Daily mean turbulence/VIX, ceiling flag
+- `compute_hall_factor_timeline()` — Hall factor decay over date range
+
+### paper_trading.py (414 lines)
+- File-based state: `trading_state.json`, `trade_log.jsonl`, `equity_curve.csv`
+- `load_state()` / `save_state()` / `reset_state()` — JSON state persistence
+- `execute_buy()` / `execute_sell()` — Order execution with budget check
+- `update_positions()` — Refresh prices from yfinance/CSV fallback
+- `flatten_all()` — Emergency close all positions (circuit breaker)
+- `get_portfolio_summary()` — NAV, P&L, position values
+- `fetch_price_fallback()` — yfinance with CSV fallback
+- `get_leverage_mode()` — Normal/dampened/high_turb/zeno_critical based on state
+- `reset_zeno_daily()` — Reset trade budget counter at day boundary
+
+### asset_fetcher.py (195 lines)
+- `CRYPTO_TICKERS` — 10 crypto pairs (BTC-USD through MATIC-USD)
+- `COMMODITY_TICKERS` — 6 futures (GC=F through PL=F)
+- `get_asset_categories()` — Returns category → ticker list dict
+- `_compute_rsi()` / `_compute_macd()` / `_compute_bollinger()` — Technical indicators
+- `_compute_turbulence()` — 60-day rolling covariance-based turbulence index
+- `_fetch_raw_data()` — yfinance download with MultiIndex handling
+- `_fetch_vix_data()` — VIX overlay series
+- `fetch_asset_data()` — Main entry point: tickers → formatted DataFrame matching CSV schema
+
+### app.py (2,145 lines)
+- Theme system (light/dark toggle, accent colors, typography)
+- `_style_fig()` — Universal Plotly chart styling helper
+- `_header_with_info()` — Section header with popover glossary tooltip
+- `_phase_badge()` — Colored HTML badge for phase display
+- `render_sidebar()` — Navigation, capital input, reinvest mode, theme toggle
+- `render_quantum_state()` — 13D radar, tabbed data feeds, dimensional state table
+- `render_command_center()` — Equity projection, trading windows, cycle status, Hall decay
+- `render_simulation()` — March 1st signal simulation with flux/budget charts
+- `render_trade_analysis()` — κ-drift, 137-day cycles, market cycle, turbulence tabs
+- `render_resonant_core()` — Nasdaq universe, sector mapping, volume scanner
+- `render_constants()` — Constants table, self-check, position calculator, pre-flight
+- `render_backtest()` — Full backtesting lab with preset/custom modes, asset class selector
+- `_render_backtest_results()` — Equity curve, drawdown, trade log, phase/exit analysis
+- `_render_comparison()` — Multi-strategy comparison charts and tables
+- `render_paper_trading()` — Live paper trading interface
