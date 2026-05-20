@@ -162,11 +162,13 @@ function AgentChip({
   layerId,
   onDelete,
   onPromptChange,
+  onAbort,
 }: {
   agent: HypervisorAgent;
   layerId: string;
   onDelete: (layerId: string, agentId: string) => void;
   onPromptChange: (layerId: string, agentId: string, prompt: string) => void;
+  onAbort?: (layerId: string, agentId: string) => void;
 }) {
   const role = getRoleInfo(agent.roleId);
   const [showPrompt, setShowPrompt] = useState(false);
@@ -179,6 +181,7 @@ function AgentChip({
     running: "bg-blue-500 animate-pulse",
     done: "bg-emerald-500",
     error: "bg-amber-500",
+    aborted: "bg-zinc-400 dark:bg-zinc-500",
   }[agent.status];
 
   const savePrompt = () => {
@@ -186,12 +189,15 @@ function AgentChip({
     setShowPrompt(false);
   };
 
+  const isActive = agent.status === "running" || agent.status === "queued";
+
   const statusLabel = {
     idle: null,
     queued: <span className="text-[10px] text-amber-600 dark:text-amber-400 animate-pulse">queued…</span>,
     running: !agent.output ? <span className="text-[10px] text-muted-foreground animate-pulse">generating…</span> : null,
     done: null,
     error: <span className="text-[10px] text-amber-500">error</span>,
+    aborted: <span className="text-[10px] text-zinc-400">aborted</span>,
   }[agent.status];
 
   return (
@@ -225,14 +231,25 @@ function AgentChip({
         >
           <Pencil className="h-2.5 w-2.5" />
         </button>
-        <button
-          onClick={() => onDelete(layerId, agent.id)}
-          className="shrink-0 text-muted-foreground hover:text-amber-500"
-          title="Remove agent"
-          data-testid={`button-delete-agent-${agent.id}`}
-        >
-          <X className="h-2.5 w-2.5" />
-        </button>
+        {isActive && onAbort ? (
+          <button
+            onClick={() => onAbort(layerId, agent.id)}
+            className="shrink-0 text-amber-500 hover:text-red-500"
+            title="Abort this agent"
+            data-testid={`button-abort-agent-${agent.id}`}
+          >
+            <X className="h-2.5 w-2.5" />
+          </button>
+        ) : (
+          <button
+            onClick={() => onDelete(layerId, agent.id)}
+            className="shrink-0 text-muted-foreground hover:text-amber-500"
+            title="Remove agent"
+            data-testid={`button-delete-agent-${agent.id}`}
+          >
+            <X className="h-2.5 w-2.5" />
+          </button>
+        )}
       </div>
 
       {showPrompt && (
@@ -297,6 +314,7 @@ interface LayerRowCallbacks {
   onAddAgent: (layerId: string, roleId: string) => void;
   onDeleteAgent: (layerId: string, agentId: string) => void;
   onAgentPromptChange: (layerId: string, agentId: string, prompt: string) => void;
+  onAbortAgent: (layerId: string, agentId: string) => void;
 }
 
 function LayerRow({
@@ -444,6 +462,7 @@ function LayerRow({
                 layerId={layer.id}
                 onDelete={callbacks.onDeleteAgent}
                 onPromptChange={callbacks.onAgentPromptChange}
+                onAbort={callbacks.onAbortAgent}
               />
             ))}
           </div>
@@ -580,6 +599,11 @@ export default function LocalLLMHypervisorPage() {
   const [selectedSession, setSelectedSession] = useState<RoundtableSession | null>(null);
   const [checkedSessionIds, setCheckedSessionIds] = useState<Set<string>>(new Set());
 
+  // Track agent IDs that were manually aborted so we can ignore their
+  // subsequent "done" messages from the worker (the worker still runs to
+  // completion but tokens are discarded client-side).
+  const abortedAgentsRef = useRef<Set<string>>(new Set());
+
   useEffect(() => {
     if (!historyOpen) {
       setCheckedSessionIds(new Set());
@@ -680,13 +704,18 @@ export default function LocalLLMHypervisorPage() {
           return "";
         });
       } else {
+        // If this done belongs to an aborted agent, leave the status as "aborted".
+        const isAborted = abortedAgentsRef.current.has(msg.agentId);
+
         setLayers((prev) => {
           const next = prev.map((l) => {
             if (l.id !== msg.layerId) return l;
             return {
               ...l,
               agents: l.agents.map((a) =>
-                a.id === msg.agentId ? { ...a, status: "done" as const, tokenCount: a.tokenCount + msg.totalTokens } : a
+                a.id === msg.agentId
+                  ? { ...a, status: (isAborted ? "aborted" : "done") as const, tokenCount: a.tokenCount + msg.totalTokens }
+                  : a
               ),
             };
           });
@@ -739,11 +768,17 @@ export default function LocalLLMHypervisorPage() {
         });
 
         // Advance roundtable tracker for non-hypervisor layers (triggers auto-Hypervisor).
+        // Skip if this agent was aborted — the tracker was already advanced at abort time.
         if (msg.layerId !== "layer-hypervisor" && roundtableTrackerRef.current) {
-          roundtableTrackerRef.current.done += 1;
-          if (roundtableTrackerRef.current.done >= roundtableTrackerRef.current.total) {
-            roundtableTrackerRef.current = null;
-            setTimeout(() => { triggerHypervisorFromRef(); }, 100);
+          if (!abortedAgentsRef.current.has(msg.agentId)) {
+            roundtableTrackerRef.current.done += 1;
+            if (roundtableTrackerRef.current.done >= roundtableTrackerRef.current.total) {
+              roundtableTrackerRef.current = null;
+              setTimeout(() => { triggerHypervisorFromRef(); }, 100);
+            }
+          } else {
+            // Clean up the aborted set once the worker's final message arrives.
+            abortedAgentsRef.current.delete(msg.agentId);
           }
         }
       }
@@ -753,6 +788,13 @@ export default function LocalLLMHypervisorPage() {
       if (!isAgentError) {
         setModelStatus("error");
         setChatStreaming(false);
+      }
+
+      // If this error is for an aborted agent, swallow the toast and skip
+      // the UI update — the agent is already shown as "aborted".
+      if (isAgentError && msg.agentId && abortedAgentsRef.current.has(msg.agentId)) {
+        abortedAgentsRef.current.delete(msg.agentId);
+        return;
       }
 
       toast({ title: "Worker error", description: msg.message, variant: "destructive" });
@@ -897,6 +939,8 @@ export default function LocalLLMHypervisorPage() {
     pendingPromptRef.current = prompt;
     pendingRunIdRef.current = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
     setChatInput("");
+    // Clear any stale aborted-agent tracking from the previous run.
+    abortedAgentsRef.current.clear();
 
     setLayers((prev) =>
       prev.map((l) => ({
@@ -1178,6 +1222,44 @@ export default function LocalLLMHypervisorPage() {
           a.id === agentId ? { ...a, customSystemPrompt: prompt || undefined } : a
         ),
       }));
+    },
+    onAbortAgent: (layerId, agentId) => {
+      if (!poolRef.current) return;
+
+      const result = poolRef.current.abort(agentId);
+      if (result === null) return;
+
+      // Immediately mark the agent as aborted in the UI.
+      updateLayer(layerId, (l) => ({
+        ...l,
+        agents: l.agents.map((a) =>
+          a.id === agentId ? { ...a, status: "aborted" as const } : a
+        ),
+      }));
+
+      if (result === "queued") {
+        // Queued agents never reach a worker, so no "done"/"error" will fire.
+        // Advance the tracker immediately so the Hypervisor can still trigger.
+        if (roundtableTrackerRef.current && layerId !== "layer-hypervisor") {
+          roundtableTrackerRef.current.done += 1;
+          if (roundtableTrackerRef.current.done >= roundtableTrackerRef.current.total) {
+            roundtableTrackerRef.current = null;
+            setTimeout(() => { triggerHypervisorFromRef(); }, 100);
+          }
+        }
+      } else {
+        // Running agents: track this ID so the incoming "done" message from
+        // the worker doesn't advance the tracker or reset the status.
+        abortedAgentsRef.current.add(agentId);
+        // Advance tracker now — the worker's "done" will be ignored.
+        if (roundtableTrackerRef.current && layerId !== "layer-hypervisor") {
+          roundtableTrackerRef.current.done += 1;
+          if (roundtableTrackerRef.current.done >= roundtableTrackerRef.current.total) {
+            roundtableTrackerRef.current = null;
+            setTimeout(() => { triggerHypervisorFromRef(); }, 100);
+          }
+        }
+      }
     },
   };
 
@@ -1531,6 +1613,7 @@ export default function LocalLLMHypervisorPage() {
                           layerId={layer.id}
                           onDelete={callbacks.onDeleteAgent}
                           onPromptChange={callbacks.onAgentPromptChange}
+                          onAbort={callbacks.onAbortAgent}
                         />
                       ))}
                     </div>

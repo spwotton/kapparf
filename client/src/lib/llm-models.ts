@@ -155,7 +155,7 @@ export interface HypervisorAgent {
   roleId: AgentRoleId;
   customSystemPrompt?: string;
   output: string;
-  status: "idle" | "queued" | "running" | "done" | "error";
+  status: "idle" | "queued" | "running" | "done" | "error" | "aborted";
   tokenCount: number;
 }
 

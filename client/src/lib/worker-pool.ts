@@ -29,6 +29,7 @@ type SlotState = "unloaded" | "loading" | "idle" | "busy";
 interface WorkerSlot {
   worker: Worker;
   state: SlotState;
+  currentAgentId: string | null;
 }
 
 /**
@@ -96,6 +97,7 @@ export class WorkerPool {
 
     if (idleSlot) {
       idleSlot.state = "busy";
+      idleSlot.currentAgentId = agentId;
       idleSlot.worker.postMessage({ type: "generate", agentId, layerId, messages, maxTokens });
     } else {
       this.queue.push({ agentId, layerId, messages, maxTokens });
@@ -113,14 +115,28 @@ export class WorkerPool {
     return () => this.subscriptions.delete(agentId);
   }
 
-  abort(agentId: string) {
-    // Send abort to all busy slots — the worker discards tokens for the
-    // current generation. Slots ignore abort if they are idle.
-    this.slots.forEach((s) => {
-      if (s.state === "busy") s.worker.postMessage({ type: "abort" });
-    });
+  /**
+   * Abort a specific agent by ID.
+   * - If the agent is queued (not yet dispatched), removes it from the queue
+   *   and returns "queued".
+   * - If the agent is currently running on a slot, sends abort to that slot
+   *   only and returns "running".
+   * - Returns null if the agent is not found in either place.
+   */
+  abort(agentId: string): "queued" | "running" | null {
     // Remove from queue if not yet started.
+    const queueLenBefore = this.queue.length;
     this.queue = this.queue.filter((e) => e.agentId !== agentId);
+    if (this.queue.length < queueLenBefore) return "queued";
+
+    // Find the slot currently running this agent and abort only that slot.
+    const slot = this.slots.find((s) => s.state === "busy" && s.currentAgentId === agentId);
+    if (slot) {
+      slot.worker.postMessage({ type: "abort" });
+      return "running";
+    }
+
+    return null;
   }
 
   abortAll() {
@@ -149,7 +165,7 @@ export class WorkerPool {
       { type: "module" }
     );
 
-    const slot: WorkerSlot = { worker, state: "unloaded" };
+    const slot: WorkerSlot = { worker, state: "unloaded", currentAgentId: null };
 
     worker.onmessage = (e: MessageEvent<WorkerOutMsg>) => {
       const msg = e.data;
@@ -177,6 +193,7 @@ export class WorkerPool {
         this.drainQueue();
       } else if (msg.type === "done" || msg.type === "error") {
         slot.state = "idle";
+        slot.currentAgentId = null;
         this.drainQueue();
       }
 
@@ -209,6 +226,7 @@ export class WorkerPool {
       if (!idleSlot) break;
       const next = this.queue.shift()!;
       idleSlot.state = "busy";
+      idleSlot.currentAgentId = next.agentId;
       idleSlot.worker.postMessage({ type: "generate", ...next });
     }
   }
