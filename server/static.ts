@@ -25,6 +25,18 @@ export function serveStatic(app: Express) {
     }));
   }
 
+  const publicScriptsPath = path.resolve(process.cwd(), "public");
+  if (fs.existsSync(publicScriptsPath)) {
+    app.use("/scripts", express.static(path.join(publicScriptsPath, "scripts"), {
+      setHeaders: (res, filePath) => {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        if (filePath.endsWith(".sh")) {
+          res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        }
+      },
+    }));
+  }
+
   app.use(express.static(distPath, {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".html")) {

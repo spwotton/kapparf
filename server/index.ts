@@ -2,6 +2,8 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 const httpServer = createServer(app);
@@ -21,6 +23,21 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false }));
+
+// Serve public/scripts/ at /scripts before any route or Vite catch-all, in all environments
+app.get("/scripts/:filename", (req, res) => {
+  const filename = path.basename(req.params.filename);
+  const filePath = path.join(process.cwd(), "public", "scripts", filename);
+  if (!fs.existsSync(filePath)) {
+    res.status(404).send("Not found");
+    return;
+  }
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  if (filename.endsWith(".sh")) {
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  }
+  res.sendFile(filePath);
+});
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -105,6 +122,19 @@ app.use((req, res, next) => {
 
     return res.status(status).json({ message });
   });
+
+  // Serve public/scripts/ at /scripts — must run before Vite/static catch-all in all environments
+  const publicScriptsDir = path.join(process.cwd(), "public", "scripts");
+  if (fs.existsSync(publicScriptsDir)) {
+    app.use("/scripts", express.static(publicScriptsDir, {
+      setHeaders: (res, filePath) => {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        if (filePath.endsWith(".sh")) {
+          res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        }
+      },
+    }));
+  }
 
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route

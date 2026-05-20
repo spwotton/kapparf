@@ -229,6 +229,44 @@ function DSEBackdoorTable() {
   );
 }
 
+function CopyBlock({ text, multiline }: { text: string; multiline?: boolean }) {
+  const [copied, setCopied] = useState(false);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }
+
+  return (
+    <div className="relative mb-3">
+      <button
+        onClick={handleCopy}
+        data-testid="button-copy-command"
+        className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-white/10 hover:bg-white/20 text-green-300 hover:text-white transition-colors"
+      >
+        {copied ? (
+          <>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3"><polyline points="20 6 9 17 4 12"/></svg>
+            Copied!
+          </>
+        ) : (
+          <>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </>
+        )}
+      </button>
+      <div className="bg-black border border-red-900/50 rounded p-3 pr-20 font-mono text-xs text-green-400 break-all">
+        {multiline
+          ? text.split("\n").map((line, i) => <div key={i}>{line}</div>)
+          : text}
+      </div>
+    </div>
+  );
+}
+
 export default function WhistleblowerPage() {
   const [activeSection, setActiveSection] = useState("overview");
 
@@ -314,9 +352,7 @@ export default function WhistleblowerPage() {
                     <h3 className="text-white font-bold text-lg">Linux</h3>
                   </div>
                   <p className="text-red-300 text-xs mb-3">One command. Run in terminal after every boot:</p>
-                  <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all mb-3">
-                    wget https://ciajw.com/scripts/harden.sh -O ~/harden.sh && sudo bash ~/harden.sh
-                  </div>
+                  <CopyBlock text="wget https://ciajw.com/scripts/harden.sh -O ~/harden.sh && sudo bash ~/harden.sh" />
                   <p className="text-muted-foreground/60 text-xs">Enables firewall, blocks 17 surveillance ports (Modbus, TR-069, Meterpreter, SNMP, backdoors), disables mDNS/UPnP discovery, installs Mullvad VPN (primary) or Cloudflare WARP (fallback). You become invisible on any hostile network.</p>
                 </div>
 
@@ -326,13 +362,7 @@ export default function WhistleblowerPage() {
                     <h3 className="text-white font-bold text-lg">Windows</h3>
                   </div>
                   <p className="text-red-300 text-xs mb-3">Run in PowerShell as Administrator:</p>
-                  <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all space-y-1">
-                    <div>Set-NetFirewallProfile -All -Enabled True -DefaultInboundAction Block</div>
-                    <div className="text-muted-foreground/40 mt-1"># Install Mullvad VPN (recommended):</div>
-                    <div>winget install MullvadVPN.Mullvad</div>
-                    <div className="text-muted-foreground/40 mt-1"># Or Cloudflare WARP (free fallback):</div>
-                    <div>winget install Cloudflare.Warp</div>
-                  </div>
+                  <CopyBlock text={`Set-NetFirewallProfile -All -Enabled True -DefaultInboundAction Block\nwinget install MullvadVPN.Mullvad\nwinget install Cloudflare.Warp`} multiline />
                   <p className="text-muted-foreground/60 text-xs mt-3">Enables Windows Firewall on all profiles, blocks all unsolicited inbound. Mullvad VPN (mullvad.net) is recommended — no email, no logs, 5 EUR/month, accepts crypto/cash. Cloudflare WARP is a free fallback.</p>
                 </div>
 
@@ -342,14 +372,7 @@ export default function WhistleblowerPage() {
                     <h3 className="text-white font-bold text-lg">macOS</h3>
                   </div>
                   <p className="text-red-300 text-xs mb-3">Run in Terminal:</p>
-                  <div className="bg-black border border-red-900/50 rounded p-3 font-mono text-xs text-green-400 break-all select-all space-y-1">
-                    <div>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on</div>
-                    <div>sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall on</div>
-                    <div className="text-muted-foreground/40 mt-1"># Install Mullvad VPN (recommended):</div>
-                    <div>brew install mullvadvpn</div>
-                    <div className="text-muted-foreground/40 mt-1"># Or Cloudflare WARP (free fallback):</div>
-                    <div>brew install cloudflare-warp</div>
-                  </div>
+                  <CopyBlock text={`sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on\nsudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall on\nbrew install mullvadvpn\nbrew install cloudflare-warp`} multiline />
                   <p className="text-muted-foreground/60 text-xs mt-3">Enables macOS Application Firewall, blocks all incoming connections. Mullvad VPN (mullvad.net) is recommended — no email, no logs, accepts crypto/cash. If no brew, download from mullvad.net or 1.1.1.1 for WARP.</p>
                 </div>
               </div>
