@@ -175,7 +175,10 @@ function CollapsibleGroup({ group, location }: { group: NavGroup; location: stri
                     : "border-transparent text-foreground hover:text-primary hover:bg-sidebar-accent/30"
                 }`}
               >
-                {itemTitle}
+                <span className={item.url === "/jaco" ? "italic" : ""}>{itemTitle}</span>
+                {item.url === "/jaco" && (
+                  <span className="ml-auto text-[9px] font-mono font-normal not-italic border border-muted-foreground/30 text-muted-foreground/50 rounded px-1 py-0.5 leading-none tracking-wide">WebGPU</span>
+                )}
               </Link>
             </li>
           );

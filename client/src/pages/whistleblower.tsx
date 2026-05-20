@@ -330,12 +330,30 @@ export default function WhistleblowerPage() {
 
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-amber-900/30 dark:border-amber-900/50">
         <div className="max-w-6xl mx-auto px-4 py-2">
-          <nav className="flex gap-1 flex-wrap justify-center">
+          {/* Mobile: compact select dropdown */}
+          <div className="sm:hidden">
+            <select
+              value={activeSection}
+              onChange={e => {
+                setActiveSection(e.target.value);
+                const el = document.getElementById(e.target.value);
+                if (el) el.scrollIntoView({ behavior: "smooth" });
+              }}
+              data-testid="nav-mobile-select"
+              className="w-full bg-background border border-amber-900/40 rounded px-2 py-1.5 text-xs font-sans text-foreground focus:outline-none focus:border-amber-600"
+            >
+              {navItems.map(item => (
+                <option key={item.id} value={item.id}>{item.label}</option>
+              ))}
+            </select>
+          </div>
+          {/* Desktop: wrapping pill nav */}
+          <nav className="hidden sm:flex gap-1 flex-wrap justify-center">
             {navItems.map(item => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className={`px-2 py-1 text-xs font-sans rounded transition-colors ${activeSection === item.id ? "bg-amber-900/50 text-amber-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
+                className={`px-2 py-1 text-[11px] font-sans rounded transition-colors ${activeSection === item.id ? "bg-amber-900/50 text-amber-300" : "text-muted-foreground/60 hover:text-muted-foreground"}`}
                 onClick={() => setActiveSection(item.id)}
                 data-testid={`nav-${item.id}`}
               >
