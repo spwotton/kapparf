@@ -106,7 +106,7 @@ DUNIA CONCIERGE SAFE HOUSES:
     connections: [
       { target: "jairo-alfaro", relationship: "Best friend / handler", strength: "confirmed", detail: "Worked together at Caliches Wishbone for years. Jairo moved her to Gracias Madre." },
       { target: "hector-mora", relationship: "Somehow related / connected", strength: "suspected", detail: "Echo was apparently drunk and yelled at Hector who is 'somehow related' to Genesis" },
-      { target: "pablo-mora", relationship: "Cover ex-boyfriend — BMX / fake gym employment", strength: "confirmed" },
+      { target: "dave-mira", relationship: "Cover ex-boyfriend — BMX / fake gym employment", strength: "confirmed" },
       { target: "gaia-natural-foods", relationship: "Employee (cash)", strength: "confirmed", detail: "Worked across the street when Echo met her — potential placement" },
       { target: "caliches-wishbone", relationship: "Employee (cash)", strength: "confirmed", detail: "Worked here with Jairo Alfaro for years" },
       { target: "gracias-madre", relationship: "Employee — waitress", strength: "confirmed", detail: "Moved here via Jairo. Honey trap operation at prime beach location." },
@@ -149,7 +149,7 @@ DUNIA CONCIERGE SAFE HOUSES:
     connections: [
       { target: "setecom", relationship: "Employee / operative", strength: "confirmed" },
       { target: "edson-martenal", relationship: "Associates — YouTube conversations", strength: "confirmed", detail: "hmora67 on YouTube talks with Edson Martenal" },
-      { target: "pablo-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Dave has motive (revenge), Hector has capability (180W HF, DSE, telecom)" },
+      { target: "dave-mira", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Dave has motive (revenge), Hector has capability (180W HF, DSE, telecom)" },
       { target: "genesis-peralta", relationship: "Related / connected", strength: "suspected" },
       { target: "ban-villas-costa", relationship: "SETECOM contracts", strength: "probable", detail: "Believed to have contracts at BAN Villas Costa and possibly other Jacó properties" },
       { target: "breakwater", relationship: "Proximity — adjacent properties", strength: "probable" },
@@ -512,7 +512,7 @@ Infrastructure modifications (between tenancies — premeditated):
     flags: ["Israeli national in CR", "Intelligence pattern", "First contact venue owner"],
   },
   {
-    id: "pablo-mora",
+    id: "dave-mira",
     name: "Dave Mira",
     aliases: ["Pasti", "P Mora"],
     nationality: "Costa Rican/Mexican",
@@ -1421,7 +1421,7 @@ SIBLING LINK — CALLE EUROPA + SCOTT RYAN:
     threatLevel: "tertiary",
     detail: "Olympic BMX rider (4th place Tokyo 2020), Red Bull sponsored. Owns BAC Park / 10cio Park — BMX training complex in Jacó. Dave Mira is a pro BMX rider connected through BAC Park sponsorship. YouTube evidence reportedly shows Hector Mora (SETECOM) with 'multiple BAC properties' visible during live login — linking the financial/property layer to the surveillance technical layer.",
     connections: [
-      { target: "pablo-mora", relationship: "BAC Park sponsor of Dave Mira", strength: "confirmed" },
+      { target: "dave-mira", relationship: "BAC Park sponsor of Dave Mira", strength: "confirmed" },
       { target: "bac-park", relationship: "Owner", strength: "confirmed" },
       { target: "hector-mora", relationship: "BAC property contracts (YouTube evidence)", strength: "suspected" },
     ],
@@ -2251,7 +2251,7 @@ CLIENTS AND OPERATIONS:
     detail: "Genesis Peralta traveled to CDMX in 2019 — the same year Jean Picado Solis was investigated for $2M tax fraud and sold Telefonica to Liberty. The 2019 convergence of events (Genesis's CDMX travel, Telefonica sale, Liberty acquisition of ISP infrastructure) suggests coordinated timeline. Dave Mira also has Mexico/Costa Rica dual presence. CDMX is a known staging point for Central American operations.",
     connections: [
       { target: "genesis-peralta", relationship: "Traveled here 2019", strength: "confirmed" },
-      { target: "pablo-mora", relationship: "Mexico-Costa Rica dual presence", strength: "confirmed" },
+      { target: "dave-mira", relationship: "Mexico-Costa Rica dual presence", strength: "confirmed" },
     ],
     incidents: ["2019 — same year as Telefonica→Liberty sale", "Genesis transit", "Dave Mira dual presence"],
     coordinates: "19.4326°N, 99.1332°W",
@@ -2809,7 +2809,7 @@ LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024 (TARGET ASSESSMENT EVENT):
     detail: "BMX training complex in Jacó owned by Kenneth Tencio (Olympic rider, 4th Tokyo 2020, Red Bull sponsored). Dave Mira is sponsored through this facility. YouTube evidence reportedly shows Hector Mora (SETECOM) with multiple BAC property logins visible — linking the financial/property layer to the surveillance technical layer through the BMX network.",
     connections: [
       { target: "kenneth-tencio", relationship: "Owner", strength: "confirmed" },
-      { target: "pablo-mora", relationship: "Sponsored rider", strength: "confirmed" },
+      { target: "dave-mira", relationship: "Sponsored rider", strength: "confirmed" },
       { target: "hector-mora", relationship: "BAC property contracts (YouTube)", strength: "suspected" },
     ],
     flags: ["Kenneth Tencio owned", "Dave Mira sponsorship", "Hector Mora property logins (YouTube)", "Financial bridge — BMX to surveillance"],
@@ -3091,7 +3091,7 @@ const EVIDENCE_DATA: Evidence[] = [
     category: "Financial Intelligence",
     severity: "high",
     detail: "Kenneth Tencio (Olympic BMX, 4th Tokyo 2020, Red Bull) owns BAC Park/10cio Park in Jacó. Dave Mira is a pro BMX rider sponsored through BAC Park. Echo's ex-girlfriend left Dave for Echo — establishing personal revenge motive. YouTube evidence shows Hector Mora (SETECOM) with multiple BAC property logins visible. Financial chain: BAC Park (Tencio) → sponsors Dave Mira (motive) → family connection to Hector Mora (capability) → BAC property contracts (YouTube evidence) → surveillance infrastructure access.",
-    linkedEntities: ["pablo-mora", "hector-mora", "kenneth-tencio", "bac-park"],
+    linkedEntities: ["dave-mira", "hector-mora", "kenneth-tencio", "bac-park"],
   },
   {
     id: "ghost-tp-link-device",
