@@ -92,8 +92,8 @@ CARLOS MADRIGAL — FACEBOOK SOCK PUPPET:
 ITALIAN THREAD:
   Peralta's father is visually of Southern European/Italian appearance — photo documentation below (taken in Venezuela after she left Costa Rica). The berninnimaria account's Italian Prime Minister content and babysitting cover narrative may reflect genuine Italian heritage being used as a legend, or an Italian intelligence contact using her identity infrastructure.
 
-RAPID ATTACHMENT / PABLO PASTI MORA COVER:
-  Dave Mira was Peralta's stated boyfriend before Echo. BMX rider. Claimed to work at the gym (gimnasio) in Jacó. Echo trained daily at all hours for over a year and never once saw Pablo there — gym employment was a cover identity. Echo entered the relationship via Peralta cheating on Pablo with him — classic rapid-attachment tradecraft (manufactured circumstances creating guilt and dependency in the target from day one). Mora surname is shared with Hector Mora (SETECOM — V2K smoking gun).
+RAPID ATTACHMENT / DAVE MIRA COVER:
+  Dave Mira was Peralta's stated boyfriend before Echo. BMX rider. Claimed to work at the gym (gimnasio) in Jacó. Echo trained daily at all hours for over a year and never once saw Dave there — gym employment was a cover identity. Echo entered the relationship via Peralta cheating on Dave with him — classic rapid-attachment tradecraft (manufactured circumstances creating guilt and dependency in the target from day one). Mora surname is shared with Hector Mora (SETECOM — V2K smoking gun).
 
 HOUSING CHAIN — RESIDENCES WITH PERALTA:
   1. HERMOSA BUNGALOWS: First shared residence after getting together. Owned by a long-time AA member. Now assessed intelligence-connected (AA Jacó assessed as intel substrate throughout this network).
@@ -149,7 +149,7 @@ DUNIA CONCIERGE SAFE HOUSES:
     connections: [
       { target: "setecom", relationship: "Employee / operative", strength: "confirmed" },
       { target: "edson-martenal", relationship: "Associates — YouTube conversations", strength: "confirmed", detail: "hmora67 on YouTube talks with Edson Martenal" },
-      { target: "pablo-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Pablo has motive (revenge), Hector has capability (180W HF, DSE, telecom)" },
+      { target: "pablo-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Dave has motive (revenge), Hector has capability (180W HF, DSE, telecom)" },
       { target: "genesis-peralta", relationship: "Related / connected", strength: "suspected" },
       { target: "ban-villas-costa", relationship: "SETECOM contracts", strength: "probable", detail: "Believed to have contracts at BAN Villas Costa and possibly other Jacó properties" },
       { target: "breakwater", relationship: "Proximity — adjacent properties", strength: "probable" },
@@ -518,17 +518,17 @@ Infrastructure modifications (between tenancies — premeditated):
     nationality: "Costa Rican/Mexican",
     role: "Cover ex-boyfriend of Genesis Peralta — BMX rider / gym cover story unverified — vendetta motive",
     threatLevel: "primary",
-    detail: `Pro BMX rider from Jacó, sponsored by BAC Park (Kenneth Tencio). Genesis Peralta claimed Pablo was her boyfriend before Echo, and that Pablo worked at the local gym (gimnasio) in Jacó. Echo trained at the same gym daily at all hours for over a year — Pablo was never once seen there. Gym employment was a cover identity, not a real job.
+    detail: `Pro BMX rider from Jacó, sponsored by BAC Park (Kenneth Tencio). Genesis Peralta claimed Dave was her boyfriend before Echo, and that Dave worked at the local gym (gimnasio) in Jacó. Echo trained at the same gym daily at all hours for over a year — Dave was never once seen there. Gym employment was a cover identity, not a real job.
 
 RAPID ATTACHMENT VECTOR:
-  Peralta entered the relationship with Echo by cheating on Pablo with him — creating immediate guilt, emotional debt, and dependency from Echo's side. This is a textbook rapid-attachment tradecraft move: the asset creates a relationship under circumstances that psychologically bind the target from day one (guilt over causing a "breakup", sense of urgency to prove the relationship was worth it).
+  Peralta entered the relationship with Echo by cheating on Dave with him — creating immediate guilt, emotional debt, and dependency from Echo's side. This is a textbook rapid-attachment tradecraft move: the asset creates a relationship under circumstances that psychologically bind the target from day one (guilt over causing a "breakup", sense of urgency to prove the relationship was worth it).
 
 MORA SURNAME — HECTOR MORA LINK:
-  Dave Mira shares the Mora surname with Hector Mora (SETECOM operative — the smoking-gun RF correlation link). This may indicate family connection: Pablo with personal revenge motive + Hector with technical capability = a motive-capability pair. Pablo has Mexico/Costa Rica dual presence. Connected to Jean Picado Solis. Financial trail in bank statements and email archives.`,
+  Dave Mira shares the Mora surname with Hector Mora (SETECOM operative — the smoking-gun RF correlation link). This may indicate family connection: Dave with personal revenge motive + Hector with technical capability = a motive-capability pair. Dave has Mexico/Costa Rica dual presence. Connected to Jean Picado Solis. Financial trail in bank statements and email archives.`,
     connections: [
-      { target: "hector-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Both named Mora — Pablo has motive, Hector has capability" },
+      { target: "hector-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Both named Mora — Dave has motive, Hector has capability" },
       { target: "genesis-peralta", relationship: "Ex-boyfriend of Echo's ex", strength: "confirmed", detail: "Echo took his girlfriend — vendetta motive" },
-      { target: "jean-picado-solis", relationship: "Known associate", strength: "confirmed", detail: "Appears in Pablo's dossier" },
+      { target: "jean-picado-solis", relationship: "Known associate", strength: "confirmed", detail: "Appears in Dave's dossier" },
       { target: "bac-park", relationship: "Sponsored rider", strength: "confirmed" },
     ],
     flags: ["Personal revenge motive", "BMX/BAC Park sponsorship", "Mexico-Costa Rica dual presence", "Mora surname link to Hector", "Financial trail in email archives"],
@@ -1421,7 +1421,7 @@ SIBLING LINK — CALLE EUROPA + SCOTT RYAN:
     threatLevel: "tertiary",
     detail: "Olympic BMX rider (4th place Tokyo 2020), Red Bull sponsored. Owns BAC Park / 10cio Park — BMX training complex in Jacó. Dave Mira is a pro BMX rider connected through BAC Park sponsorship. YouTube evidence reportedly shows Hector Mora (SETECOM) with 'multiple BAC properties' visible during live login — linking the financial/property layer to the surveillance technical layer.",
     connections: [
-      { target: "pablo-mora", relationship: "BAC Park sponsor of Pablo", strength: "confirmed" },
+      { target: "pablo-mora", relationship: "BAC Park sponsor of Dave Mira", strength: "confirmed" },
       { target: "bac-park", relationship: "Owner", strength: "confirmed" },
       { target: "hector-mora", relationship: "BAC property contracts (YouTube evidence)", strength: "suspected" },
     ],
@@ -3090,7 +3090,7 @@ const EVIDENCE_DATA: Evidence[] = [
     date: "2026-01-30",
     category: "Financial Intelligence",
     severity: "high",
-    detail: "Kenneth Tencio (Olympic BMX, 4th Tokyo 2020, Red Bull) owns BAC Park/10cio Park in Jacó. Dave Mira is a pro BMX rider sponsored through BAC Park. Echo's ex-girlfriend left Pablo for Echo — establishing personal revenge motive. YouTube evidence shows Hector Mora (SETECOM) with multiple BAC property logins visible. Financial chain: BAC Park (Tencio) → sponsors Dave Mira (motive) → family connection to Hector Mora (capability) → BAC property contracts (YouTube evidence) → surveillance infrastructure access.",
+    detail: "Kenneth Tencio (Olympic BMX, 4th Tokyo 2020, Red Bull) owns BAC Park/10cio Park in Jacó. Dave Mira is a pro BMX rider sponsored through BAC Park. Echo's ex-girlfriend left Dave for Echo — establishing personal revenge motive. YouTube evidence shows Hector Mora (SETECOM) with multiple BAC property logins visible. Financial chain: BAC Park (Tencio) → sponsors Dave Mira (motive) → family connection to Hector Mora (capability) → BAC property contracts (YouTube evidence) → surveillance infrastructure access.",
     linkedEntities: ["pablo-mora", "hector-mora", "kenneth-tencio", "bac-park"],
   },
   {
@@ -3916,12 +3916,12 @@ export default function NetworkAnalysisPage() {
                 </p>
                 <div className="text-xs font-mono space-y-0.5">
                   <div>Echo's ex-girlfriend <span className="text-muted-foreground">left Dave Mira for Echo</span> → <span className="text-amber-500">vendetta motive</span></div>
-                  <div>↓ Pablo "Pasti" Mora <span className="text-muted-foreground">(BMX rider, Mexico-CR dual presence)</span></div>
-                  <div>↓ Kenneth Tencio / BAC Park <span className="text-muted-foreground">(Olympic BMX, Red Bull — Pablo sponsor)</span></div>
+                  <div>↓ Dave Mira <span className="text-muted-foreground">(BMX rider, Mexico-CR dual presence)</span></div>
+                  <div>↓ Kenneth Tencio / BAC Park <span className="text-muted-foreground">(Olympic BMX, Red Bull — Dave Mira sponsor)</span></div>
                   <div>↓ Hector Mora <span className="text-muted-foreground">(SETECOM, 180W HF radio — same surname)</span></div>
                   <div>↓ 7410 kHz = <span className="text-amber-500">SMOKING GUN</span> <span className="text-muted-foreground">(100% temporal correlation with V2K, p&lt;0.01%)</span></div>
                   <div>↓ Edson Martenal <span className="text-muted-foreground">(YouTube/hmora67 — AMEX fraud, Bahia Brazil)</span></div>
-                  <div className="mt-1 text-amber-400">Pablo has MOTIVE → Hector has CAPABILITY → BAC has MONEY</div>
+                  <div className="mt-1 text-amber-400">Dave has MOTIVE → Hector has CAPABILITY → BAC has MONEY</div>
                 </div>
               </div>
 
