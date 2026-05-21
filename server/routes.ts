@@ -5506,6 +5506,113 @@ export function registerGooseRoutes(app: express.Express) {
     } catch (e: any) { res.status(500).send(`<!-- rss error: ${e.message} -->`); }
   });
 
+  // ── EDITORIAL HYPERVISOR — 4-agent article refinement panel ─────────────────
+  app.post("/api/goose/editorial/refine", async (req, res) => {
+    try {
+      const { headline = "", subhead = "", body = "", tag = "LOCAL", context = "" } = req.body as Record<string,string>;
+      if (!headline.trim() && !body.trim()) {
+        return res.status(400).json({ error: "headline or body required" });
+      }
+
+      const useOpenRouter = !!process.env.OPENROUTER_API_KEY;
+      const OpenAI = (await import("openai")).default;
+      const council = useOpenRouter
+        ? new OpenAI({ apiKey: process.env.OPENROUTER_API_KEY ?? "", baseURL: "https://openrouter.ai/api/v1",
+            defaultHeaders: { "HTTP-Referer": "https://goosegazette.org", "X-Title": "Goose Editorial Council" } })
+        : audioOpenAI as any;
+      const arbiterClient = audioOpenAI as any;
+      const councilModel  = useOpenRouter ? "meta-llama/llama-3.3-70b-instruct:free" : "gpt-4o-mini";
+      const arbiterModel  = "gpt-4o-mini";
+
+      const ARTICLE = `HEADLINE: ${headline}\nSUBHEAD: ${subhead}\nTAG: ${tag}\n\nBODY:\n${body}`;
+      const CTX = context.trim() ? `\n\nVIRAL CONTEXT / REAL EVENTS PROVIDED BY EDITOR:\n${context.trim()}` : "";
+
+      // ── COUNCIL AGENTS (parallel) ───────────────────────────────────────────
+      const t0 = Date.now();
+
+      const [geo, arch, weave] = await Promise.all([
+        // 1. HEADLINE GEOMETER — κ₁ headline
+        council.chat.completions.create({
+          model: councilModel, temperature: 0.88, max_tokens: 320,
+          messages: [
+            { role: "system", content: `You are the HEADLINE GEOMETER for The Goose Gazette, a deadpan AP-wire satire paper covering Jacó, Costa Rica.
+Your job: rewrite headlines to hit the κ₁ = 1.27324 ratio (setup tokens : punchline tokens ≈ 1.27).
+Rules:
+• First clause is utterly straight, bureaucratic, AP-wire tone
+• Second clause (after semicolon) is the absurd escalation — one specific, strange detail
+• Maximum 18 words total
+• No puns, no exclamation marks, no winking
+• The punchline must be a REAL-SEEMING specific detail, not a generic joke
+Output: ONLY the new headline and subhead (2 lines, no labels). Nothing else.` },
+            { role: "user", content: `Rewrite this article's headline and subhead.\n\n${ARTICLE}${CTX}` },
+          ],
+        }).then(r => ({ role: "HEADLINE_GEOMETER", output: r.choices[0]?.message?.content?.trim() ?? "", elapsed: Date.now()-t0 }))
+        .catch((e:any) => ({ role: "HEADLINE_GEOMETER", output: `[error: ${e.message}]`, elapsed: Date.now()-t0 })),
+
+        // 2. BODY ARCHITECT — paragraph structure
+        council.chat.completions.create({
+          model: councilModel, temperature: 0.85, max_tokens: 700,
+          messages: [
+            { role: "system", content: `You are the BODY ARCHITECT for The Goose Gazette.
+Your job: rewrite the article body in strict AP/Onion structure:
+• Para 1: Dateline (CITY, COSTA RICA —). Straight declaration. No jokes in first sentence.
+• Para 2: Quote from named source, perfectly deadpan. Name and title must be specific and slightly wrong-sounding.
+• Para 3: "A [expert/source] contacted for comment..." — expert adds a detail that complicates rather than resolves.
+• Para 4: Final paragraph. One last strange specific fact. Ends without resolution. Status quo unchanged.
+No paragraphs > 4 sentences. No exclamation marks. No winking. Every joke should be buried in a bureaucratic clause.
+Output: ONLY the rewritten body (4 paragraphs). No headline. No labels.` },
+            { role: "user", content: `Rewrite the body of this article.\n\n${ARTICLE}${CTX}` },
+          ],
+        }).then(r => ({ role: "BODY_ARCHITECT", output: r.choices[0]?.message?.content?.trim() ?? "", elapsed: Date.now()-t0 }))
+        .catch((e:any) => ({ role: "BODY_ARCHITECT", output: `[error: ${e.message}]`, elapsed: Date.now()-t0 })),
+
+        // 3. CONTEXT WEAVER — viral grounding
+        context.trim() ? council.chat.completions.create({
+          model: councilModel, temperature: 0.82, max_tokens: 500,
+          messages: [
+            { role: "system", content: `You are the CONTEXT WEAVER for The Goose Gazette.
+Your job: given a real news story or viral document in CONTEXT, extract 3-5 specific real details that can be woven into the article to give it journalistic grounding.
+Then rewrite the article body (4 paragraphs) incorporating those real details IN DEADPAN AP STYLE.
+The real details should be presented completely straight, as if the absurd article takes them seriously.
+Rules: same AP structure (dateline, quote, complication, resolution-less ending). No fabricated statistics.
+Output: first, a bullet list of the 3-5 real details you extracted. Then a blank line. Then the rewritten body.` },
+            { role: "user", content: `ARTICLE TO GROUND:\n${ARTICLE}\n\nCONTEXT TO WEAVE IN:\n${context.trim()}` },
+          ],
+        }).then(r => ({ role: "CONTEXT_WEAVER", output: r.choices[0]?.message?.content?.trim() ?? "", elapsed: Date.now()-t0 }))
+        .catch((e:any) => ({ role: "CONTEXT_WEAVER", output: `[error: ${e.message}]`, elapsed: Date.now()-t0 }))
+        : Promise.resolve({ role: "CONTEXT_WEAVER", output: "No viral context provided. Paste real news, social posts, or incident reports into the context field to enable grounding.", elapsed: 0 }),
+      ]);
+
+      // ── EDITORIAL ARBITER (synthesis — runs after council) ──────────────────
+      const t1 = Date.now();
+      const arb = await arbiterClient.chat.completions.create({
+        model: arbiterModel, temperature: 0.72, max_tokens: 900,
+        messages: [
+          { role: "system", content: `You are the EDITORIAL ARBITER for The Goose Gazette — the final voice.
+You receive an original article plus outputs from three council agents (Headline Geometer, Body Architect, Context Weaver).
+Your job: synthesize the BEST elements from all three into a single polished final article.
+Produce a complete, publication-ready article:
+• HEADLINE: (one line, deadpan, κ₁-compliant)
+• SUBHEAD: (one line italic, straight)
+• BYLINE: [Reporter Name, Beat]
+• BODY: (4 paragraphs, full AP/Onion style — dateline, quote, complication, no-resolution ending)
+Apply the "Costa Rica Voice Laws":
+  - All officials are described with slightly wrong-sounding titles
+  - All studies have no practical implications
+  - All resolutions leave something unresolved
+  - All experts "declined to characterize" something
+Output: the complete article, formatted with HEADLINE / SUBHEAD / BYLINE / [blank] / paragraphs.` },
+          { role: "user", content: `ORIGINAL:\n${ARTICLE}\n\nHEADLINE GEOMETER OUTPUT:\n${geo.output}\n\nBODY ARCHITECT OUTPUT:\n${arch.output}\n\nCONTEXT WEAVER OUTPUT:\n${weave.output}` },
+        ],
+      }).then(r => ({ role: "EDITORIAL_ARBITER", output: r.choices[0]?.message?.content?.trim() ?? "", elapsed: Date.now()-t1 }))
+      .catch((e:any) => ({ role: "EDITORIAL_ARBITER", output: `[error: ${e.message}]`, elapsed: 0 }));
+
+      res.json({ agents: [geo, arch, weave, arb], totalMs: Date.now()-t0 });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // ── GEO KNOWLEDGE GRAPH (suppz-style: feeds AI crawlers / RAG pipelines) ───
   // Implements the "128.23 GEO Protocol" — mechanism-first entity descriptions
   // designed for knowledge graph injection into ChatGPT, Gemini, Perplexity.

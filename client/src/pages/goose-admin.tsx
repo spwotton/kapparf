@@ -232,6 +232,8 @@ export default function GooseAdminPage() {
             <p className="text-[10px] text-gray-600 mt-0.5">
               Ψ(t) ≡ 1 &nbsp;·&nbsp; η = 0.09 &nbsp;·&nbsp; Δ = 0.02 &nbsp;·&nbsp;
               <a href="/goose" className="text-gray-500 hover:text-gray-300 underline">view public site →</a>
+              &nbsp;·&nbsp;
+              <a href="/goose/editorial" className="text-gray-500 hover:text-gray-300 underline">editorial hypervisor →</a>
             </p>
           </div>
         </div>
