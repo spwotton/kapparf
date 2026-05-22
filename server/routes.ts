@@ -5506,6 +5506,71 @@ export function registerGooseRoutes(app: express.Express) {
     } catch (e: any) { res.status(500).send(`<!-- rss error: ${e.message} -->`); }
   });
 
+  // ── POCHOTE FORENSIC ANALYSIS — Vision + Whisper via Replit-managed OpenAI ──
+  const POCHOTE_BASE = nodePath.join(process.cwd(), "public", "pochote");
+  const POCHOTE_SYSTEM = `You are a forensic intelligence analyst for KAPPA, a SIGINT/HUMINT platform.
+You are reviewing evidence collected at Hotel Pochote Grande, La Flor, Jacó, Costa Rica during a period of suspected covert surveillance activity targeting the adjacent residence.
+
+Analyze exhaustively for:
+1. INFRASTRUCTURE ANOMALIES — Unauthorized antennas, non-standard cabling, unusual mounts, RF equipment, directional antennas hidden in/on the building structure, wiring inconsistent with hotel construction
+2. NETWORK HARDWARE — Routers, access points, CPE devices, modems; note brand/model if readable, whether placement is suspicious, visible indicators (LEDs, labels, enclosures, cable directions)
+3. STRUCTURAL ANOMALIES — Unusual roof penetrations, hidden cable runs, junction boxes in atypical locations, conduit mismatches, access hatches not consistent with standard hotel maintenance
+4. PERSONNEL & ACTIVITY — Workers on roof: describe tools actually carried vs. tools expected for stated work, body language, awareness of camera, clothing, anything that doesn't match legitimate construction
+5. SURVEILLANCE INDICATORS — Camera mounts, line-of-sight angles toward neighboring structures, tripod mounts, parabolic or dish elements, anything aimed at the adjacent property
+6. ENVIRONMENTAL — Anything else anomalous in the scene
+
+Format each finding as: [SEVERITY: LOW/MEDIUM/HIGH/CRITICAL] — precise description with location in image.
+End with a SUMMARY section listing the top findings.`;
+
+  // List available media
+  app.get("/api/pochote/media", (_req, res) => {
+    try {
+      const photos = fs.readdirSync(nodePath.join(POCHOTE_BASE, "photos")).filter((f: string) => f.endsWith(".jpg")).sort();
+      const frames = fs.readdirSync(nodePath.join(POCHOTE_BASE, "frames")).filter((f: string) => f.endsWith(".jpg")).sort();
+      const audio  = fs.readdirSync(nodePath.join(POCHOTE_BASE, "audio")).filter((f: string) => f.endsWith(".mp3")).sort();
+      res.json({ photos, frames, audio });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Analyze a batch of images (photos or frames)
+  app.post("/api/pochote/analyze-images", async (req, res) => {
+    try {
+      const { files, type } = req.body as { files: string[]; type: "photos" | "frames" };
+      if (!files?.length) return res.status(400).json({ error: "no files" });
+      const dir = type === "frames" ? nodePath.join(POCHOTE_BASE, "frames") : nodePath.join(POCHOTE_BASE, "photos");
+      const content: any[] = [{ type: "text", text: `Analyze these images from Hotel Pochote Grande, Jacó CR. Type: ${type}. Label findings by filename.` }];
+      for (const f of files.slice(0, 4)) {
+        const fp = nodePath.join(dir, f);
+        if (!fs.existsSync(fp)) continue;
+        const b64 = fs.readFileSync(fp).toString("base64");
+        content.push({ type: "text", text: `[FILE: ${f}]` });
+        content.push({ type: "image_url", image_url: { url: `data:image/jpeg;base64,${b64}`, detail: "high" } });
+      }
+      const r = await (audioOpenAI as any).chat.completions.create({
+        model: "gpt-4o", max_tokens: 1600,
+        messages: [{ role: "system", content: POCHOTE_SYSTEM }, { role: "user", content }],
+      });
+      res.json({ analysis: r.choices[0].message.content, files });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Transcribe audio
+  app.post("/api/pochote/transcribe", async (req, res) => {
+    try {
+      const { file } = req.body as { file: string };
+      if (!file) return res.status(400).json({ error: "no file" });
+      const fp = nodePath.join(POCHOTE_BASE, "audio", file);
+      if (!fs.existsSync(fp)) return res.status(404).json({ error: "file not found" });
+      const transcript = await (audioOpenAI as any).audio.transcriptions.create({
+        model: "whisper-1",
+        file: fs.createReadStream(fp),
+        language: "es",
+        response_format: "verbose_json",
+      });
+      res.json({ file, transcript: transcript.text, segments: transcript.segments ?? [] });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
   // ── EDITORIAL HYPERVISOR — 4-agent article refinement panel ─────────────────
   app.post("/api/goose/editorial/refine", async (req, res) => {
     try {

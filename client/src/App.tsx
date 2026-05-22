@@ -58,6 +58,7 @@ import GooseGazettePage from "@/pages/goose-gazette";
 import GooseHumorPage from "@/pages/goose-humor";
 import GooseAdminPage from "@/pages/goose-admin";
 import GooseEditorialPage from "@/pages/goose-editorial";
+import PochoteAnalysisPage from "@/pages/pochote-analysis";
 import HyperobjectsPage from "@/pages/hyperobjects";
 
 function Router() {
@@ -158,6 +159,7 @@ function AppWithDossier() {
         <Route path="/" component={GooseGazettePage} />
         <Route path="/goose/admin" component={GooseAdminPage} />
         <Route path="/goose/editorial" component={GooseEditorialPage} />
+        <Route path="/pochote" component={PochoteAnalysisPage} />
         <Route path="/goose/humor" component={GooseHumorPage} />
         <Route path="/goose" component={GooseGazettePage} />
         {/* Main KAPPA platform */}
