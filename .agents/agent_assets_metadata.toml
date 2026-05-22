@@ -48,3 +48,9 @@ id = "Zodf-PVUGo8EbPueokDz0"
 uri = "file://kappa_intelligence_brief.pdf"
 type = "pdf"
 title = "KAPPA Intelligence Brief — Echo Network Analysis (May 2026)"
+
+[[outputs]]
+id = "zOPXcAh6BIp4YxiJe_06o"
+uri = "file://public/pochote/spectrograms/New_Recording_14_spec.png"
+type = "image"
+title = "New_Recording_14 — Spectrogram (log-freq, log-scale, 1m52s)"

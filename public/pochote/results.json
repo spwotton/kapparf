@@ -138,6 +138,39 @@
     "Voice_260314_155243_1779421051824.mp3": {
       "transcript": "I'm going to try to record you through this. You can see the pattern in your voice.\n",
       "sizeMB": "0.3"
+    },
+    "New_Recording_14_1779433348978.m4a": {
+      "transcript": "\n",
+      "forensics": {
+        "acoustic": {
+          "duration": "00:01:52.28",
+          "durSec": 112.28,
+          "meanVol": -37.3,
+          "maxVol": -3.2,
+          "dynamicRange": 34.1,
+          "silencePeriods": 0,
+          "totalSilenceSec": 0,
+          "speechRatioPercent": "100.0",
+          "micProximity": "distant_background"
+        },
+        "segments": 0,
+        "avgNoSpeechProb": 0.9,
+        "language": "auto-detected",
+        "attribution": {
+          "raw": "1. **SPEAKER_TYPE**: AMBIENT_ONLY  \n2. **SPEAKER_COUNT**: 0 distinct voices detected.  \n3. **VOICE_CHARACTERISTICS**: No intelligible speech is present; the recording captures distant background noise without identifiable voices.  \n4. **FORENSIC_SIGNIFICANCE**: The recording does not document any speech or conversation, indicating it may serve as ambient noise or background context for the surveillance activity.  \n5. **CONFIDENCE**: HIGH; the high no-speech probability and absence of any speech content support this attribution.",
+          "model": "gpt-4o-mini",
+          "provider": "openai-fallback",
+          "speakerType": "AMBIENT_ONLY",
+          "speakerCount": "0 distinct voices detected.",
+          "voiceCharacteristics": "No intelligible speech is present; the recording captures distant background noise without identifiable voices.",
+          "forensicSignificance": "The recording does not document any speech or conversation, indicating it may serve as ambient noise or background context for the surveillance activity.",
+          "confidence": "HIGH; the high no-speech probability and absence of any speech content support this attribution."
+        },
+        "analysisModel": "gpt-4o-mini",
+        "analysisProvider": "openai-fallback",
+        "analyzedAt": "2026-05-22T07:05:00.997Z"
+      },
+      "sizeMB": "0.92"
     }
   },
   "photos": {
