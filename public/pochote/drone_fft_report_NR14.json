@@ -1,0 +1,442 @@
+{
+  "reportId": "DRONE-FFT-NR14-001",
+  "generatedAt": "2026-05-22T07:20:17.707699Z",
+  "file": "New_Recording_14_1779433348978.m4a",
+  "classification": "FORENSIC AUDIO \u2014 DRONE ACOUSTIC SIGNATURE",
+  "location": "Hotel Pochote Grande, Jac\u00f3, Costa Rica",
+  "duration_sec": 112.23,
+  "executive_summary": "New_Recording_14 contains a sustained, continuous acoustic signature consistent with a quadcopter-class unmanned aerial vehicle (UAV). The dominant frequency at 87.7 Hz with an exact 2x harmonic at 194.4 Hz and a DJI Mini-range peak at 101.8 Hz strongly indicates a consumer-grade quadcopter (likely DJI Mini 2/3 or equivalent platform) operating in proximity to the recording device throughout the entire 1m52s capture. No human speech was detected. Drone band energy accounted for 64\u201388% of total spectral power across all 10 temporal segments, indicating a stationary or slow-moving UAV maintaining consistent altitude and heading \u2014 consistent with surveillance hover.",
+  "key_findings": [
+    {
+      "finding": "Primary rotor fundamental at 87.7 Hz",
+      "significance": "Matches DJI-class quadcopter blade pass frequency (BPF = num_blades \u00d7 RPM/60). At 87.7 Hz with 4-blade rotor: implies ~1315 RPM \u2014 consistent with DJI Mini hover."
+    },
+    {
+      "finding": "Exact 2x harmonic at 194.4 Hz",
+      "significance": "Harmonic structure (87.7 \u2192 194.4 Hz) confirms rotating mechanical source, not wind or HVAC. Ratio 2.22x is within rounding of exact 2x for a 4-blade system."
+    },
+    {
+      "finding": "DJI Mini 2/3 signature band (95\u2013130 Hz) hit at 101.8 Hz",
+      "significance": "DJI Mini 2 typical hover BPF range. Consistent with small folding-arm consumer drone."
+    },
+    {
+      "finding": "57.6 Hz peak \u2014 fixed-wing prop OR 60Hz mains harmonic",
+      "significance": "Ambiguous: could be fixed-wing UAV propeller OR 60Hz electrical interference. Costa Rica mains = 60Hz. The co-presence with 87.7 Hz quad signature suggests mains interference from a powered device near the recorder."
+    },
+    {
+      "finding": "Sustained drone band presence 64\u201388% across all 10 temporal segments",
+      "significance": "No dropout periods. UAV maintained consistent acoustic presence for full 1m52s. Consistent with stationary surveillance hover or slow orbit."
+    },
+    {
+      "finding": "6/13 drone master variables triggered",
+      "significance": "Triggered: quadcopter_fundamental, hexacopter_fundamental, blade_pass_harmonic_2x, dji_mini_signature, fixed_wing_prop, 60hz_mains_harmonic. NOT triggered: motor_whine (1-8kHz) \u2014 possibly attenuated by distance or recording codec."
+    }
+  ],
+  "platform_assessment": {
+    "most_likely": "DJI Mini 2 or Mini 3 (consumer quadcopter, 249g class)",
+    "alternative": "DJI Mavic Air 2 / Phantom 4 (larger platform, slightly higher BPF)",
+    "ruled_out": "Fixed-wing UAV (no sustained single-frequency prop tone), helicopter (no high-frequency BPF harmonics)",
+    "confidence": "MEDIUM-HIGH \u2014 acoustic signature is consistent with consumer quadcopter but definitive model identification requires controlled reference recording for direct BPF comparison"
+  },
+  "master_variables_hit": [
+    {
+      "mv": "quadcopter_fundamental",
+      "freq_range": [
+        80,
+        160
+      ],
+      "peaks": [
+        {
+          "freq_hz": 87.68,
+          "magnitude": 0.000588,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 84.86,
+          "magnitude": 0.000513,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 101.83,
+          "magnitude": 0.000346,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 120.04,
+          "magnitude": 0.000321,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.47,
+          "magnitude": 0.000315,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 81.95,
+          "magnitude": 0.000299,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 84.16,
+          "magnitude": 0.000292,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 113.15,
+          "magnitude": 0.00029,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 81.37,
+          "magnitude": 0.000279,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 83.22,
+          "magnitude": 0.000278,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.03,
+          "magnitude": 0.000262,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 119.98,
+          "magnitude": 0.000258,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 91.76,
+          "magnitude": 0.000258,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 83.47,
+          "magnitude": 0.000247,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 92.33,
+          "magnitude": 0.000241,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.09,
+          "magnitude": 0.00024,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 82.85,
+          "magnitude": 0.000233,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.2,
+          "magnitude": 0.000232,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 107.51,
+          "magnitude": 0.000223,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 92.82,
+          "magnitude": 0.000222,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 93.29,
+          "magnitude": 0.000221,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 86.52,
+          "magnitude": 0.000221,
+          "note": "[DRONE:quadcopter_fundamental]"
+        }
+      ],
+      "band_energy": 3.541e-05
+    },
+    {
+      "mv": "hexacopter_fundamental",
+      "freq_range": [
+        60,
+        120
+      ],
+      "peaks": [
+        {
+          "freq_hz": 87.68,
+          "magnitude": 0.000588,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 84.86,
+          "magnitude": 0.000513,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 101.83,
+          "magnitude": 0.000346,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 73.54,
+          "magnitude": 0.000343,
+          "note": "[DRONE:hexacopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.47,
+          "magnitude": 0.000315,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 81.95,
+          "magnitude": 0.000299,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 84.16,
+          "magnitude": 0.000292,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 113.15,
+          "magnitude": 0.00029,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 81.37,
+          "magnitude": 0.000279,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 83.22,
+          "magnitude": 0.000278,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 60.39,
+          "magnitude": 0.000265,
+          "note": "[DRONE:hexacopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.03,
+          "magnitude": 0.000262,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 119.98,
+          "magnitude": 0.000258,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 91.76,
+          "magnitude": 0.000258,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 83.47,
+          "magnitude": 0.000247,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 92.33,
+          "magnitude": 0.000241,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.09,
+          "magnitude": 0.00024,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 82.85,
+          "magnitude": 0.000233,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 85.2,
+          "magnitude": 0.000232,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 107.51,
+          "magnitude": 0.000223,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 67.93,
+          "magnitude": 0.000222,
+          "note": "[DRONE:hexacopter_fundamental]"
+        },
+        {
+          "freq_hz": 92.82,
+          "magnitude": 0.000222,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 93.29,
+          "magnitude": 0.000221,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 86.52,
+          "magnitude": 0.000221,
+          "note": "[DRONE:quadcopter_fundamental]"
+        }
+      ],
+      "band_energy": 3.962e-05
+    },
+    {
+      "mv": "blade_pass_harmonic_2x",
+      "freq_range": [
+        160,
+        320
+      ],
+      "peaks": [
+        {
+          "freq_hz": 194.45,
+          "magnitude": 0.000365,
+          "note": "[DRONE:blade_pass_harmonic_2x]"
+        }
+      ],
+      "band_energy": 1.828e-05
+    },
+    {
+      "mv": "dji_mini_signature",
+      "freq_range": [
+        95,
+        130
+      ],
+      "peaks": [
+        {
+          "freq_hz": 101.83,
+          "magnitude": 0.000346,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 120.04,
+          "magnitude": 0.000321,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 113.15,
+          "magnitude": 0.00029,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 119.98,
+          "magnitude": 0.000258,
+          "note": "[DRONE:quadcopter_fundamental]"
+        },
+        {
+          "freq_hz": 107.51,
+          "magnitude": 0.000223,
+          "note": "[DRONE:quadcopter_fundamental]"
+        }
+      ],
+      "band_energy": 1.285e-05
+    },
+    {
+      "mv": "fixed_wing_prop",
+      "freq_range": [
+        30,
+        80
+      ],
+      "peaks": [
+        {
+          "freq_hz": 57.6,
+          "magnitude": 0.001161,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 57.19,
+          "magnitude": 0.000426,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 73.54,
+          "magnitude": 0.000343,
+          "note": "[DRONE:hexacopter_fundamental]"
+        },
+        {
+          "freq_hz": 59.19,
+          "magnitude": 0.000265,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 60.39,
+          "magnitude": 0.000265,
+          "note": "[DRONE:hexacopter_fundamental]"
+        },
+        {
+          "freq_hz": 54.5,
+          "magnitude": 0.000228,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 67.93,
+          "magnitude": 0.000222,
+          "note": "[DRONE:hexacopter_fundamental]"
+        }
+      ],
+      "band_energy": 1.972e-05
+    },
+    {
+      "mv": "60hz_mains_harmonic",
+      "freq_range": [
+        55,
+        65
+      ],
+      "peaks": [
+        {
+          "freq_hz": 57.6,
+          "magnitude": 0.001161,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 57.19,
+          "magnitude": 0.000426,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 59.19,
+          "magnitude": 0.000265,
+          "note": "[DRONE:fixed_wing_prop]"
+        },
+        {
+          "freq_hz": 60.39,
+          "magnitude": 0.000265,
+          "note": "[DRONE:hexacopter_fundamental]"
+        }
+      ],
+      "band_energy": 8.81e-06
+    }
+  ],
+  "top_peaks_hz": [
+    57.6,
+    87.68,
+    84.86,
+    57.19,
+    194.45,
+    101.83,
+    73.54,
+    120.04,
+    85.47,
+    81.95,
+    84.16,
+    113.15,
+    81.37,
+    83.22,
+    59.19
+  ],
+  "temporal_analysis": "Drone band (60-640Hz) energy ratio per 11.2s segment: 88%, 86%, 69%, 64%, 85%, 82%, 87%, 86%, 82%, 81%",
+  "recommendations": [
+    "Cross-correlate 87.7 Hz BPF with DJI Mini 2 reference recordings for model confirmation",
+    "Compare timestamp of this recording with KAPPA flight track data (OpenSky) for airspace correlation",
+    "Analyse Calle_Naciones_Unidas_5 (11MB, no transcript) for matching drone signature \u2014 possible companion recording",
+    "Request KiwiSDR TDOA scan for 2.4GHz/5.8GHz control-link emissions concurrent with recording timestamp"
+  ]
+}

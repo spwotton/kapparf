@@ -54,3 +54,15 @@ id = "zOPXcAh6BIp4YxiJe_06o"
 uri = "file://public/pochote/spectrograms/New_Recording_14_spec.png"
 type = "image"
 title = "New_Recording_14 — Spectrogram (log-freq, log-scale, 1m52s)"
+
+[[outputs]]
+id = "KqeWCt_FQ3cWqYOc-QvE8"
+uri = "file://public/pochote/spectrograms/New_Recording_14_drone_0-1kHz.png"
+type = "image"
+title = "New_Recording_14 — Drone-Range Spectrogram 0–1kHz (87.7Hz + 194.4Hz harmonics visible)"
+
+[[outputs]]
+id = "hiw6mWgD2SChbCTWVhrl9"
+uri = "file://public/pochote/drone_fft_report_NR14.json"
+type = "unspecified"
+title = "DRONE-FFT-NR14-001 — Forensic Report"
