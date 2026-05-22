@@ -1,28 +1,37 @@
 /**
  * KAPPA Gemini Router
- * Tries Gemini models in priority order, falls back to Replit OpenAI proxy.
- * Caches the working model for the session to avoid re-probing every call.
+ * Priority: GEM_2 first (confirmed billing account), then other keys.
+ * Probes models in order — caches winner. Instant switchover when credits activate.
  */
 
-// Priority order — best to cheapest
+// Priority order — newest/best first, then reliable fallbacks
 export const GEMINI_MODELS = [
-  "gemini-3.5-flash",
-  "gemini-3-flash-preview",
+  "gemini-2.5-flash-preview-05-20",  // latest 2.5 flash preview
   "gemini-2.5-flash",
   "gemini-2.5-pro",
-  "nano-banana-pro-preview",
-  "gemini-3.1-flash-lite",
   "gemini-2.0-flash",
   "gemini-2.0-flash-lite",
+  "gemini-1.5-flash",
+  "gemini-1.5-pro",
+  // Experimental / named variants
+  "gemini-3.5-flash",
+  "gemini-3-flash-preview",
+  "nano-banana-pro-preview",
+  "gemini-3.1-flash-lite",
+  "gemini-flash-latest",
 ];
 
 const GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
-const GEMINI_KEYS = ["GEMINI_API_KEY", "GOOGLE_ALT", "GOOGLE_API_E"];
+
+// Key priority — GEM_2 first (confirmed billing), then others.
+// GOOGLE_API_KEY is excluded: API_KEY_SERVICE_BLOCKED on project 527218426604 (different project, API not enabled)
+const GEMINI_KEYS = ["GEM_2", "GEMINI_API_KEY", "GOOGLE_ALT", "GOOGLE_API_E"];
 
 let _cachedKey: string | null = null;
 let _cachedModel: string | null = null;
 let _lastProbe = 0;
-const PROBE_TTL = 5 * 60 * 1000; // re-probe every 5 min
+// Short TTL — re-probe every 2 min so we catch the moment credits top up
+const PROBE_TTL = 2 * 60 * 1000;
 
 export interface GeminiPart {
   text?: string;
@@ -33,7 +42,6 @@ export interface GeminiResult {
   text: string;
   model: string;
   provider: "gemini" | "openai-fallback";
-  key?: string;
 }
 
 async function probeGemini(): Promise<{ key: string; model: string } | null> {
@@ -53,13 +61,19 @@ async function probeGemini(): Promise<{ key: string; model: string } | null> {
           body,
           signal: AbortSignal.timeout(8000),
         });
+        if (!r.ok && r.status === 404) continue; // model not found for this key, try next model
         const d: any = await r.json();
         const ok = d?.candidates?.[0]?.content?.parts?.[0]?.text;
         if (ok) {
-          console.log(`[GeminiRouter] Active: ${keyName} / ${model}`);
+          console.log(`[GeminiRouter] ✓ Active: ${keyName} / ${model}`);
           return { key, model };
         }
-      } catch { /* try next */ }
+        const errMsg: string = d?.error?.message ?? "";
+        // If blocked entirely (API not enabled), skip all models for this key
+        if (errMsg.includes("API_KEY_SERVICE_BLOCKED") || errMsg.includes("blocked")) break;
+        // Depleted = try next model (maybe a lite/legacy model has free quota)
+        // Not found = try next model
+      } catch { /* network error, try next */ }
     }
   }
   return null;
@@ -78,13 +92,21 @@ export async function getGeminiClient(): Promise<{ key: string; model: string } 
   } else {
     _cachedKey = null;
     _cachedModel = null;
+    // Don't update _lastProbe on failure — re-probe next call
   }
   return result;
 }
 
+/** Force-invalidate cache (e.g. after a credits-depleted response) */
+export function invalidateGeminiCache() {
+  _cachedKey = null;
+  _cachedModel = null;
+  _lastProbe = 0;
+}
+
 /**
  * Generate content via Gemini. Parts can include text and/or inline_data (audio/image).
- * Falls back to openai-fallback signal if Gemini unavailable.
+ * Returns null if Gemini unavailable (caller should fall back to OpenAI).
  */
 export async function geminiGenerate(
   parts: GeminiPart[],
@@ -120,10 +142,10 @@ export async function geminiGenerate(
     const d: any = await r.json();
     const text = d?.candidates?.[0]?.content?.parts?.[0]?.text;
     if (text) return { text, model, provider: "gemini" };
-    // If this model failed, invalidate cache and try next
-    const errMsg = d?.error?.message ?? "";
-    if (errMsg.includes("depleted") || errMsg.includes("quota") || errMsg.includes("billing")) {
-      _cachedKey = null; _cachedModel = null; _lastProbe = 0;
+    // Credits just ran out mid-session — invalidate so next call re-probes
+    const errMsg: string = d?.error?.message ?? "";
+    if (errMsg.includes("depleted") || errMsg.includes("quota") || errMsg.includes("RESOURCE_EXHAUSTED")) {
+      invalidateGeminiCache();
     }
     return null;
   } catch {
@@ -133,7 +155,7 @@ export async function geminiGenerate(
 
 /**
  * Analyze audio via Gemini native audio understanding.
- * Sends the raw audio bytes as base64 inline_data.
+ * Sends the raw audio bytes as base64 inline_data — Gemini actually listens.
  */
 export async function geminiAnalyzeAudio(
   audioBuf: Buffer,
@@ -150,12 +172,24 @@ export async function geminiAnalyzeAudio(
   );
 }
 
-/** Quick status check — useful for health endpoints */
+/** Status check — shows active model and all candidates */
 export async function geminiStatus(): Promise<{
   available: boolean;
   model: string | null;
+  keySlot: string | null;
   allModels: string[];
+  keyPriority: string[];
 }> {
   const client = await getGeminiClient();
-  return { available: !!client, model: client?.model ?? null, allModels: GEMINI_MODELS };
+  // Find which key slot matched
+  const keySlot = client
+    ? GEMINI_KEYS.find(k => process.env[k] === client.key) ?? null
+    : null;
+  return {
+    available: !!client,
+    model: client?.model ?? null,
+    keySlot,
+    allModels: GEMINI_MODELS,
+    keyPriority: GEMINI_KEYS.filter(k => !!process.env[k]),
+  };
 }
