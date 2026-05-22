@@ -141,7 +141,23 @@ import {
   generateImage as droneBlogGenImage,
   seedInitialPosts as droneBlogSeed,
   deletePost as droneBlogDelete,
+  refinePost as droneBlogRefine,
+  sweepMissingImages as droneBlogSweep,
 } from "./drone-blog-engine";
+import {
+  runGazetteSnapshot,
+  proposeGazetteChange,
+  applyGazetteVersion,
+  rollbackGazetteTo,
+  clearGazetteOverrides,
+  tagGazetteVersion,
+  getGazetteLog,
+  getActiveCss,
+  setAutoRun,
+  getGazetteRefinerStatus,
+  initGazetteRefiner,
+  CONSTITUTION as GAZETTE_CONSTITUTION,
+} from "./gazette-refiner";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -6149,7 +6165,113 @@ Output: the complete article, formatted with HEADLINE / SUBHEAD / BYLINE / [blan
     const ok = droneBlogDelete(req.params.id);
     res.json({ ok });
   });
+
+  app.post("/api/drone-blog/refine/:id", async (req, res) => {
+    try {
+      const { kappaCtx = {} } = req.body ?? {};
+      await droneBlogRefine(req.params.id, kappaCtx);
+      const posts = droneBlogGetFeed(100);
+      const post = posts.find(p => p.id === req.params.id);
+      res.json({ ok: true, post: post ?? null });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/drone-blog/hypervisor/:id", async (req, res) => {
+    try {
+      const { kappaCtx = {} } = req.body ?? {};
+      const posts = droneBlogGetFeed(100);
+      const post = posts.find(p => p.id === req.params.id);
+      if (!post) return res.status(404).json({ error: "Post not found" });
+      const { runDroneHypervisor } = await import("./drone-hypervisor");
+      const result = await runDroneHypervisor(post, kappaCtx);
+      res.json(result);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/drone-blog/sweep-images", async (_req, res) => {
+    res.json({ ok: true, message: "Image sweep started in background" });
+    droneBlogSweep().catch(() => {});
+  });
+
+  // Startup: sweep any existing posts that are missing images
+  setTimeout(() => {
+    droneBlogSweep().catch(() => {});
+  }, 15000);
+
   // ── END DRONE BLOG ─────────────────────────────────────────────────────────
+
+  // ── GAZETTE PRESS ROOM VISION REFINER ───────────────────────────────────────
+  initGazetteRefiner().catch(e => console.warn("[GAZETTE-REFINER] init:", e.message));
+
+  app.get("/api/gazette-refiner/active-css", (_req, res) => {
+    res.set("Content-Type", "text/css").send(getActiveCss());
+  });
+
+  app.get("/api/gazette-refiner/status", (_req, res) => {
+    res.json(getGazetteRefinerStatus());
+  });
+
+  app.get("/api/gazette-refiner/constitution", (_req, res) => {
+    res.json(GAZETTE_CONSTITUTION);
+  });
+
+  app.get("/api/gazette-refiner/log", async (_req, res) => {
+    try {
+      const rows = await getGazetteLog(60);
+      res.json(rows);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/snapshot", async (_req, res) => {
+    try {
+      const snap = await runGazetteSnapshot();
+      res.json(snap);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/propose/:snapshotId", async (req, res) => {
+    try {
+      const proposal = await proposeGazetteChange(req.params.snapshotId);
+      res.json(proposal);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/apply/:id", async (req, res) => {
+    try {
+      await applyGazetteVersion(req.params.id);
+      res.json({ ok: true });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/rollback/:id", async (req, res) => {
+    try {
+      await rollbackGazetteTo(req.params.id);
+      res.json({ ok: true });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/clear", async (_req, res) => {
+    try {
+      await clearGazetteOverrides();
+      res.json({ ok: true });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/tag/:id", async (req, res) => {
+    try {
+      const { tag } = req.body ?? {};
+      if (!tag) return res.status(400).json({ error: "tag required" });
+      await tagGazetteVersion(req.params.id, tag);
+      res.json({ ok: true });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/gazette-refiner/auto-run", (req, res) => {
+    const { enabled } = req.body ?? {};
+    setAutoRun(!!enabled);
+    res.json({ ok: true, enabled: !!enabled });
+  });
+  // ── END GAZETTE PRESS ROOM ──────────────────────────────────────────────────
 
   // GET /api/goose/status — scheduler status
   app.get("/api/goose/status", async (_req, res) => {

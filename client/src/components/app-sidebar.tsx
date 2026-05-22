@@ -33,6 +33,7 @@ import {
   Waves,
   Cpu,
   Mic,
+  Camera,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -181,6 +182,7 @@ const navGroups: NavGroup[] = [
     labelKey: "sidebar.public", fallbackLabel: "PUBLIC",
     items: [
       { titleKey: "sidebar.gooseGazette", fallback: "🪿 The Goose Gazette", url: "/goose", icon: Globe },
+      { titleKey: "sidebar.pressRoom", fallback: "Press Room", url: "/goose/press-room", icon: Camera },
       { titleKey: "sidebar.hyperobjects", fallback: "⬡ Hyperobject Intel", url: "/hyperobjects", icon: Atom },
     ],
   },

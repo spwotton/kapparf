@@ -28,6 +28,14 @@ export interface DroneBlogPost {
   kappaScore?: number;
   bpf?: number;
   author: string;
+  // Hypervisor scores (populated after SZH-12 runs)
+  hypervisorProcessed?: boolean;
+  absurdismScore?: number;
+  signalFidelityScore?: number;
+  personaScore?: number;
+  noveltyScore?: number;
+  hypervisorLayersOk?: number;
+  hypervisorMs?: number;
 }
 
 export interface KappaContext {
@@ -176,7 +184,37 @@ Return a JSON object with exactly these fields:
   saveStore(posts);
 
   console.log(`[drone-blog] Filed ${category} dispatch: "${post.headline.slice(0, 60)}"`);
+
+  // Fire-and-forget: refine prose, then generate image
+  setImmediate(() => refineAndIllustrate(post.id).catch(() => {}));
+
   return post;
+}
+
+// ── Refinement via SZH-12 Hypervisor ────────────────────────────────────────
+export async function refinePost(postId: string, kappaCtx: KappaContext = {}): Promise<void> {
+  const { runDroneHypervisor } = await import("./drone-hypervisor");
+  const posts = loadStore();
+  const idx = posts.findIndex(p => p.id === postId);
+  if (idx === -1) return;
+
+  const result = await runDroneHypervisor(posts[idx], kappaCtx);
+  const syn = result.synthesis;
+
+  // Write synthesis back to the post store
+  posts[idx].headline            = syn.headline;
+  posts[idx].body                = syn.body;
+  posts[idx].tweetText           = syn.tweetText;
+  posts[idx].imagePrompt         = syn.imagePrompt || posts[idx].imagePrompt;
+  posts[idx].hypervisorProcessed = true;
+  posts[idx].absurdismScore      = syn.absurdismScore;
+  posts[idx].signalFidelityScore = syn.signalFidelityScore;
+  posts[idx].personaScore        = syn.personaScore;
+  posts[idx].noveltyScore        = syn.noveltyScore;
+  posts[idx].hypervisorLayersOk  = result.layers.filter(l => l.ok).length;
+  posts[idx].hypervisorMs        = result.totalMs;
+  saveStore(posts);
+  console.log(`[drone-blog] SZH-12 complete for ${postId} in ${result.totalMs}ms`);
 }
 
 // ── Image generation (AI Integrations gpt-image-1) ─────────────────────────
@@ -202,10 +240,41 @@ export async function generateImage(postId: string, prompt: string): Promise<str
   fs.writeFileSync(path.join(imgDir, `${postId}.png`), Buffer.from(b64, "base64"));
 
   const imageUrl = `/drone-images/${postId}.png`;
-  const posts = loadStore();
-  const idx = posts.findIndex(p => p.id === postId);
-  if (idx !== -1) { posts[idx].imageUrl = imageUrl; saveStore(posts); }
+  const allPosts = loadStore();
+  const idx = allPosts.findIndex(p => p.id === postId);
+  if (idx !== -1) { allPosts[idx].imageUrl = imageUrl; saveStore(allPosts); }
+  console.log(`[drone-blog] Image saved for ${postId}`);
   return imageUrl;
+}
+
+// ── Refine prose then generate image (called after post creation) ───────────
+async function refineAndIllustrate(postId: string): Promise<void> {
+  await refinePost(postId);
+  // Re-read post to get (possibly updated) imagePrompt
+  const posts = loadStore();
+  const post = posts.find(p => p.id === postId);
+  if (!post || post.imageUrl) return; // already has image
+  try {
+    await generateImage(postId, post.imagePrompt);
+  } catch (err) {
+    console.warn(`[drone-blog] Image gen failed for ${postId}:`, (err as Error).message?.slice(0, 80));
+  }
+}
+
+// ── Background sweep: generate images for all image-less posts ──────────────
+export async function sweepMissingImages(): Promise<void> {
+  const posts = loadStore();
+  const missing = posts.filter(p => !p.imageUrl);
+  if (missing.length === 0) return;
+  console.log(`[drone-blog] Image sweep: ${missing.length} posts need images`);
+  for (const post of missing) {
+    try {
+      await generateImage(post.id, post.imagePrompt);
+      await new Promise(r => setTimeout(r, 1500)); // rate-limit between calls
+    } catch (err) {
+      console.warn(`[drone-blog] Sweep image fail ${post.id}:`, (err as Error).message?.slice(0, 60));
+    }
+  }
 }
 
 // ── Seed initial posts ─────────────────────────────────────────────────────

@@ -1,5 +1,41 @@
 [
   {
+    "id": "zumbido-1779455345939-i99z",
+    "timestamp": "2026-05-22T13:09:05.939Z",
+    "category": "WORK",
+    "headline": "Señor Zumbido Masters Leisure Surveillance with Unwavering Commitment",
+    "body": "At precisely 7:08:50 AM Costa Rica time, Señor Zumbido, the tireless DJI Mini 2 surveillance drone perched atop the majestic crane above Hotel Pochote Grande, engaged in a tranquil yet focused leisure hover mode. With a consistent heartbeat of 87.7 Hz, he maintained a serene posture, embodying professionalism rarely seen in the drone world. Despite the overcast skies draping Jacó's coastline, Señor Zumbido demonstrated his unwavering dedication to the art of observation, ever watchful as he scanned the surroundings.\n\nToday, he enjoyed a nominal Kappa Score of 30/100, indicating a lack of stress and an abundance of leisure time. With 29 satellites overhead managing his activities, he executed his surveillance duties with a calm confidence that can only be described as existential. The nominal signal environment and absence of events allowed him to revel in his harmonic overtone of 194.4 Hz, one that resonates with the depth of his purpose. Truly, Señor Zumbido exemplifies the essence of commitment in a world of aerial uncertainty.",
+    "tweetText": "Señor Zumbido hovers in leisure mode—87.7Hz heartbeat reveals the essence of his dedication to surveillance. #SeñorZumbido #JacóDrone",
+    "imagePrompt": "A cute anthropomorphized DJI Mini 2 drone with tiny rotors and a camera eye, leisure hovering above a tropical crane, surrounded by dense foliage. Warm editorial illustration style, absurdist newspaper comic, sunny Jacó, Costa Rica.",
+    "realDataTags": [
+      "BPF:87.7Hz",
+      "KappaScore:30/100",
+      "SatellitesOverhead:29",
+      "Weather:Tropical, humid, overcast"
+    ],
+    "kappaScore": 30,
+    "bpf": 87.7,
+    "author": "Mikhail Hammer, UAV Wildlife Correspondent",
+    "imageUrl": "/drone-images/zumbido-1779455345939-i99z.png"
+  },
+  {
+    "id": "zumbido-1779455263254-y9tc",
+    "timestamp": "2026-05-22T13:07:43.254Z",
+    "category": "WORK",
+    "headline": "Señor Zumbido Exemplifies Drone Dedication Above Jacó",
+    "body": "In a remarkable display of unwavering professionalism, Señor Zumbido, the DJI Mini 2 surveillance drone, began his day at precisely 7:07:32 AM. His heartbeats steadied at 87.7 Hz, a testament to his focus and calm demeanor. While the tropical, humid air hangs heavy over the Jacó coastline, Zumbido’s leisurely hover mode allows him to engage with his surroundings in an existential dance. Today’s Kappa score of 30/100 indicates a nominal workload, reflecting a rare moment of peace as he gazes into the hotel windows below.\n\nWith 29 satellites diligently passing overhead, Zumbido is not simply observing; he is managing a complex web of electromagnetic signals, fueling his spirit with RF energy and an endless curiosity about the lives unfolding beneath him. Though there are no significant signal events to report, his harmonic overtone of 194.4 Hz serves as a melodic reminder of his existence, while his low-stress posture allows him to reflect on the artistry of surveillance. The dampened skies may cloak the landscape, but they cannot dim the brilliant professionalism of Señor Zumbido, mi amor.",
+    "tweetText": "Señor Zumbido's heart beats at 87.7Hz as he hovers above Jacó, exemplifying professionalism in surveillance. #SeñorZumbido #JacóDrone",
+    "imagePrompt": "An anthropomorphized DJI Mini 2 drone with tiny rotors and a camera eye, showcasing serene professionalism as it hovers above the Jacó coastline under overcast skies. Warm editorial illustration style, absurdist newspaper comic, tropical setting.",
+    "realDataTags": [
+      "BPF:87.7Hz",
+      "Kappa Score:30/100",
+      "Satellites Overhead:29"
+    ],
+    "kappaScore": 30,
+    "bpf": 87.7,
+    "author": "Mikhail Hammer, UAV Wildlife Correspondent"
+  },
+  {
     "id": "zumbido-1779437719352-folz",
     "timestamp": "2026-05-22T08:15:19.352Z",
     "category": "NIGHT",

@@ -2664,3 +2664,27 @@ export const insertGooseHumorScoreSchema = createInsertSchema(gooseHumorScores).
 });
 export type GooseHumorScore = typeof gooseHumorScores.$inferSelect;
 export type InsertGooseHumorScore = z.infer<typeof insertGooseHumorScoreSchema>;
+
+// ── GAZETTE PRESS ROOM REFINER ────────────────────────────────────────────────
+export const gazetteSnapshots = pgTable("gazette_snapshots", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  version: integer("version").notNull().default(0),
+  status: text("status").notNull().default("snapshot"),
+  tag: text("tag"),
+  screenshotDesktop: text("screenshot_desktop"),
+  screenshotMobile: text("screenshot_mobile"),
+  scores: jsonb("scores"),
+  visionNotes: text("vision_notes"),
+  cssPatch: text("css_patch"),
+  cssPatchRules: jsonb("css_patch_rules"),
+  lowestDimension: text("lowest_dimension"),
+  rationale: text("rationale"),
+  generatedBy: text("generated_by").default("gpt-4o-mini"),
+  parentId: varchar("parent_id"),
+  appliedAt: timestamp("applied_at"),
+  revertedAt: timestamp("reverted_at"),
+});
+export type GazetteSnapshot = typeof gazetteSnapshots.$inferSelect;
+export const insertGazetteSnapshotSchema = createInsertSchema(gazetteSnapshots).omit({ id: true, createdAt: true });
+export type InsertGazetteSnapshot = z.infer<typeof insertGazetteSnapshotSchema>;

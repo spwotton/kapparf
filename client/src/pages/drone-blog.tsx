@@ -11,8 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
-  RefreshCw, Zap, Camera, Trash2, Radio, Wifi,
-  CloudRain, Moon, Sun, Briefcase, Coffee, AlertTriangle, Eye
+  RefreshCw, Zap, Camera, Trash2, Radio,
+  CloudRain, Moon, Sun, Briefcase, Coffee, AlertTriangle, Eye, Cpu
 } from "lucide-react";
 
 interface DroneBlogPost {
@@ -28,6 +28,14 @@ interface DroneBlogPost {
   kappaScore?: number;
   bpf?: number;
   author: string;
+  // SZH-12 Hypervisor scores
+  hypervisorProcessed?: boolean;
+  absurdismScore?: number;
+  signalFidelityScore?: number;
+  personaScore?: number;
+  noveltyScore?: number;
+  hypervisorLayersOk?: number;
+  hypervisorMs?: number;
 }
 
 const CATEGORY_META: Record<string, { icon: any; color: string; label: string }> = {
@@ -65,20 +73,35 @@ function BpfIndicator({ bpf = 87.7 }: { bpf?: number }) {
   );
 }
 
+function ScorePip({ value, label, color }: { value?: number; label: string; color: string }) {
+  if (value === undefined) return null;
+  return (
+    <span className={`inline-flex items-center gap-0.5 text-[9px] font-mono px-1.5 py-0.5 border ${color}`}>
+      <span className="font-black">{value}</span>
+      <span className="text-[8px] opacity-70">{label}</span>
+    </span>
+  );
+}
+
 function PostCard({
   post,
   onDelete,
   onGenImage,
+  onRunHypervisor,
   imageLoading,
+  hypervisorLoading,
 }: {
   post: DroneBlogPost;
   onDelete: (id: string) => void;
   onGenImage: (id: string, prompt: string) => void;
+  onRunHypervisor: (id: string) => void;
   imageLoading: string | null;
+  hypervisorLoading: string | null;
 }) {
   const [expanded, setExpanded] = useState(false);
   const meta = CATEGORY_META[post.category] ?? CATEGORY_META.WORK;
   const Icon = meta.icon;
+  const hvPending = hypervisorLoading === post.id;
 
   return (
     <article
@@ -93,6 +116,14 @@ function PostCard({
         </span>
         {post.category === "BREAKING" && (
           <span className="animate-pulse text-[10px] font-black text-red-600 tracking-widest">● LIVE</span>
+        )}
+        {/* SZH-12 status badge */}
+        {post.hypervisorProcessed ? (
+          <span className="inline-flex items-center gap-1 text-[9px] font-mono text-violet-600 dark:text-violet-400 border border-violet-200 dark:border-violet-800 px-1.5 py-0.5">
+            <Cpu size={8} />SZH-12
+          </span>
+        ) : (
+          <span className="text-[9px] font-mono text-gray-300 dark:text-gray-700 border border-dashed border-gray-200 dark:border-gray-800 px-1.5 py-0.5">draft</span>
         )}
         <span className="ml-auto text-[10px] text-gray-400 font-mono">{formatTime(post.timestamp)}</span>
         <BpfIndicator bpf={post.bpf} />
@@ -176,6 +207,21 @@ function PostCard({
         </div>
       </div>
 
+      {/* Hypervisor scores row */}
+      {post.hypervisorProcessed && (
+        <div className="flex items-center gap-1.5 px-5 py-2 border-t border-violet-100 dark:border-violet-900/30 bg-violet-50/50 dark:bg-violet-950/20">
+          <Cpu size={9} className="text-violet-400 shrink-0" />
+          <span className="text-[9px] font-mono text-violet-500 dark:text-violet-400 mr-1">SZH-12</span>
+          <ScorePip value={post.absurdismScore} label="absurd" color="bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/30 dark:text-amber-400 dark:border-amber-800" />
+          <ScorePip value={post.personaScore} label="persona" color="bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/30 dark:text-blue-400 dark:border-blue-800" />
+          <ScorePip value={post.signalFidelityScore} label="signal" color="bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-800" />
+          <ScorePip value={post.noveltyScore} label="novel" color="bg-slate-50 text-slate-600 border-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-700" />
+          {post.hypervisorLayersOk !== undefined && (
+            <span className="ml-auto text-[8px] font-mono text-violet-400">{post.hypervisorLayersOk}/12 layers · {post.hypervisorMs ? `${(post.hypervisorMs/1000).toFixed(1)}s` : ""}</span>
+          )}
+        </div>
+      )}
+
       {/* Footer actions */}
       <div className="flex items-center gap-2 px-5 py-2 border-t border-gray-100 dark:border-gray-800">
         {!post.imageUrl && (
@@ -191,6 +237,17 @@ function PostCard({
             {imageLoading === post.id ? "Generating…" : "Generate Image"}
           </Button>
         )}
+        <Button
+          size="sm"
+          variant="outline"
+          className={`h-6 text-xs gap-1 ${post.hypervisorProcessed ? "text-violet-500 border-violet-200 dark:border-violet-800" : "text-gray-500"}`}
+          disabled={hvPending}
+          onClick={() => onRunHypervisor(post.id)}
+          data-testid={`hypervisor-btn-${post.id}`}
+        >
+          <Cpu size={10} className={hvPending ? "animate-spin" : ""} />
+          {hvPending ? "12 layers running…" : post.hypervisorProcessed ? "Re-run SZH-12" : "Run SZH-12"}
+        </Button>
         <Button
           size="sm"
           variant="ghost"
@@ -269,11 +326,13 @@ export default function DroneBlogPage() {
   const qc = useQueryClient();
   const [selectedCategory, setSelectedCategory] = useState<typeof CATEGORIES[number]>("WORK");
   const [imageLoading, setImageLoading] = useState<string | null>(null);
+  const [hypervisorLoading, setHypervisorLoading] = useState<string | null>(null);
   const [kappaCtx, setKappaCtx] = useState<any>({});
 
+  // Poll frequently so background hypervisor + image results appear quickly
   const { data: feedData, isLoading } = useQuery<{ posts: DroneBlogPost[]; count: number }>({
     queryKey: ["/api/drone-blog/feed"],
-    refetchInterval: 60000,
+    refetchInterval: 12000,
   });
 
   const generateMutation = useMutation({
@@ -302,8 +361,19 @@ export default function DroneBlogPage() {
     onError: () => setImageLoading(null),
   });
 
+  const hypervisorMutation = useMutation({
+    mutationFn: (id: string) =>
+      apiRequest("POST", `/api/drone-blog/refine/${id}`, { kappaCtx }),
+    onSuccess: () => {
+      setHypervisorLoading(null);
+      qc.invalidateQueries({ queryKey: ["/api/drone-blog/feed"] });
+    },
+    onError: () => setHypervisorLoading(null),
+  });
+
   const posts = feedData?.posts ?? [];
   const isEmpty = !isLoading && posts.length === 0;
+  const unprocessedCount = posts.filter(p => !p.hypervisorProcessed).length;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 font-serif">
@@ -366,6 +436,16 @@ export default function DroneBlogPage() {
             </div>
           )}
 
+          {/* SZH-12 queue banner */}
+          {unprocessedCount > 0 && (
+            <div className="flex items-center gap-2 border border-dashed border-violet-200 dark:border-violet-800 bg-violet-50/50 dark:bg-violet-950/20 px-4 py-2 mb-4">
+              <Cpu size={11} className="text-violet-400 animate-pulse" />
+              <span className="text-[10px] font-mono text-violet-500 dark:text-violet-400">
+                {unprocessedCount} dispatch{unprocessedCount > 1 ? "es" : ""} awaiting SZH-12 processing
+              </span>
+            </div>
+          )}
+
           {posts.map(post => (
             <PostCard
               key={post.id}
@@ -375,7 +455,12 @@ export default function DroneBlogPage() {
                 setImageLoading(id);
                 imageMutation.mutate({ postId: id, prompt });
               }}
+              onRunHypervisor={id => {
+                setHypervisorLoading(id);
+                hypervisorMutation.mutate(id);
+              }}
               imageLoading={imageLoading}
+              hypervisorLoading={hypervisorLoading}
             />
           ))}
         </div>

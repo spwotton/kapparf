@@ -60,6 +60,7 @@ import GooseAdminPage from "@/pages/goose-admin";
 import GooseEditorialPage from "@/pages/goose-editorial";
 import DroneBlogPage from "@/pages/drone-blog";
 import PochoteAnalysisPage from "@/pages/pochote-analysis";
+import GazetteRefinerPage from "@/pages/gazette-refiner";
 import HyperobjectsPage from "@/pages/hyperobjects";
 
 function Router() {
@@ -161,6 +162,7 @@ function AppWithDossier() {
         <Route path="/goose/admin" component={GooseAdminPage} />
         <Route path="/goose/editorial" component={GooseEditorialPage} />
         <Route path="/goose/drone" component={DroneBlogPage} />
+        <Route path="/goose/press-room" component={GazetteRefinerPage} />
         <Route path="/pochote" component={PochoteAnalysisPage} />
         <Route path="/goose/humor" component={GooseHumorPage} />
         <Route path="/goose" component={GooseGazettePage} />

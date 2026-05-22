@@ -651,6 +651,27 @@ export default function GooseGazettePage() {
     }
   }, [navigate]);
 
+  // ── GAZETTE REFINER: inject active CSS overrides from Press Room ──────────
+  useEffect(() => {
+    let cancelled = false;
+    async function injectActiveCss() {
+      try {
+        const res = await fetch("/api/gazette-refiner/active-css");
+        if (!res.ok || cancelled) return;
+        const { css } = await res.json();
+        let el = document.getElementById("gazette-overrides") as HTMLStyleElement | null;
+        if (!el) {
+          el = document.createElement("style");
+          el.id = "gazette-overrides";
+          document.head.appendChild(el);
+        }
+        el.textContent = css || "";
+      } catch { /* silent */ }
+    }
+    injectActiveCss();
+    return () => { cancelled = true; };
+  }, []);
+
   // ── EASTER EGG: Tier 2 — HONK × 7 → classified article flashes ──────────
   const [classifiedVisible, setClassifiedVisible] = useState(false);
   const classifiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
