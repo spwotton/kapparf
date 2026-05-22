@@ -5506,6 +5506,44 @@ export function registerGooseRoutes(app: express.Express) {
     } catch (e: any) { res.status(500).send(`<!-- rss error: ${e.message} -->`); }
   });
 
+  // ── POCHOTE BATCH AUDIO TRANSCRIPTION ────────────────────────────────────────
+  app.post("/api/pochote/transcribe-all", async (_req, res) => {
+    try {
+      const audioDir = nodePath.join(process.cwd(), "public", "pochote", "audio");
+      const resultFile = nodePath.join(process.cwd(), "public", "pochote", "results.json");
+      const files = fs.readdirSync(audioDir).filter((f: string) => f.endsWith(".mp3")).sort();
+      const results: Record<string, any> = {};
+      // Load existing results to merge into
+      let existing: any = {};
+      if (fs.existsSync(resultFile)) {
+        try { existing = JSON.parse(fs.readFileSync(resultFile, "utf-8")); } catch {}
+      }
+      // Transcribe in sequential batches of 3
+      for (let i = 0; i < files.length; i += 3) {
+        const batch = files.slice(i, i + 3);
+        await Promise.all(batch.map(async (f: string) => {
+          const fp = nodePath.join(audioDir, f);
+          try {
+            const buf = fs.readFileSync(fp);
+            const fileObj = await audioToFile(buf, f, { type: "audio/mpeg" });
+            const r = await audioOpenAI.audio.transcriptions.create({
+              file: fileObj, model: "whisper-1",
+              response_format: "verbose_json", language: undefined,
+            });
+            results[f] = { transcript: (r as any).text || "", sizeMB: (buf.length / 1048576).toFixed(1) };
+          } catch (e: any) {
+            results[f] = { transcript: `[error: ${e.message}]`, sizeMB: "0" };
+          }
+        }));
+      }
+      // Merge into existing results file
+      existing.audio = { ...(existing.audio || {}), ...results };
+      existing.audioTranscribedAt = new Date().toISOString();
+      fs.writeFileSync(resultFile, JSON.stringify(existing, null, 2));
+      res.json({ done: Object.keys(results).length, results });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
   // ── POCHOTE FORENSIC ANALYSIS — Vision + Whisper via Replit-managed OpenAI ──
   const POCHOTE_BASE = nodePath.join(process.cwd(), "public", "pochote");
   const POCHOTE_SYSTEM = `You are a forensic intelligence analyst for KAPPA, a SIGINT/HUMINT platform.
@@ -5554,20 +5592,38 @@ End with a SUMMARY section listing the top findings.`;
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
-  // Transcribe audio
+  // Serve pre-computed results.json (visual analysis + synthesis from batch run)
+  app.get("/api/pochote/results", (_req, res) => {
+    const fp = nodePath.join(POCHOTE_BASE, "results.json");
+    if (!fs.existsSync(fp)) return res.json({ photos: {}, frames: {}, audio: {}, synthesis: "" });
+    try { res.json(JSON.parse(fs.readFileSync(fp, "utf-8"))); }
+    catch { res.json({ photos: {}, frames: {}, audio: {}, synthesis: "" }); }
+  });
+
+  // Transcribe audio — uses gpt-4o-mini-transcribe via Replit integration (confirmed supported model)
   app.post("/api/pochote/transcribe", async (req, res) => {
     try {
       const { file } = req.body as { file: string };
       if (!file) return res.status(400).json({ error: "no file" });
       const fp = nodePath.join(POCHOTE_BASE, "audio", file);
       if (!fs.existsSync(fp)) return res.status(404).json({ error: "file not found" });
-      const transcript = await (audioOpenAI as any).audio.transcriptions.create({
-        model: "whisper-1",
-        file: fs.createReadStream(fp),
-        language: "es",
-        response_format: "verbose_json",
+      const buf = fs.readFileSync(fp);
+      const sizeMB = buf.length / 1048576;
+      const fileObj = await audioToFile(buf, file, { type: "audio/mpeg" });
+      const result = await audioOpenAI.audio.transcriptions.create({
+        file: fileObj,
+        model: "gpt-4o-mini-transcribe",
+        response_format: "text",
       });
-      res.json({ file, transcript: transcript.text, segments: transcript.segments ?? [] });
+      const transcript = typeof result === "string" ? result : (result as any).text ?? "[no output]";
+      // Persist transcript to results.json
+      const resultsPath = nodePath.join(POCHOTE_BASE, "results.json");
+      let existing: any = {};
+      if (fs.existsSync(resultsPath)) { try { existing = JSON.parse(fs.readFileSync(resultsPath, "utf-8")); } catch {} }
+      if (!existing.audio) existing.audio = {};
+      existing.audio[file] = { transcript, sizeMB: sizeMB.toFixed(1) };
+      fs.writeFileSync(resultsPath, JSON.stringify(existing, null, 2));
+      res.json({ file, transcript, sizeMB: sizeMB.toFixed(1), model: "gpt-4o-mini-transcribe" });
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
