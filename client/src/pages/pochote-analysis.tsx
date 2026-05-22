@@ -477,10 +477,351 @@ const KEY_FINDINGS = [
   { label: "Emergency Exit", detail: "Evacuation sign confirms Hotel Pochote Grande location — IMG_0462", level: "LOW" },
 ];
 
+// ─── MORSE TYPES ──────────────────────────────────────────────────────────────
+interface MorseHeads {
+  A_duration: { dits: number; dahs: number; ratio: number; unitT_ms: number };
+  B_gap: { elementGaps: number; charGaps: number; wordGaps: number };
+  C_pattern: { topPatterns: Array<{ pattern: string; count: number; decoded: string }> };
+}
+interface MorseResult {
+  file: string;
+  transcript: string;
+  wordCount: number;
+  unitT_ms: number;
+  morseSequence: string;
+  decodedMessage: string;
+  confidence: number;
+  heads: MorseHeads;
+  latticeSignature: string;
+  anomalies: string[];
+  processedAt: string;
+}
+interface LatticeCorrelation {
+  files: string[];
+  sharedPattern: string;
+  decodedShared: string;
+  occurrences: number;
+  relayProbability: number;
+}
+interface MorseBatchResult {
+  results: MorseResult[];
+  latticeCorrelations: LatticeCorrelation[];
+  count: number;
+}
+
+// ─── MORSE TAB COMPONENT ──────────────────────────────────────────────────────
+function MorseAnalysisTab({
+  transcripts,
+  audioFiles,
+}: {
+  transcripts: TranscriptState;
+  audioFiles: string[];
+}) {
+  const { toast } = useToast();
+  const [batchRunning, setBatchRunning] = useState(false);
+  const [singleRunning, setSingleRunning] = useState<Set<string>>(new Set());
+  const [results, setResults] = useState<MorseBatchResult | null>(null);
+  const [expandedFile, setExpandedFile] = useState<string | null>(null);
+
+  // Fetch cached results on mount
+  const { data: cached } = useQuery<MorseBatchResult>({
+    queryKey: ["/api/morse-syllable/results"],
+    staleTime: 30_000,
+  });
+
+  const displayData = results ?? cached;
+
+  // Run batch — use existing transcripts first for speed
+  const runBatch = async () => {
+    setBatchRunning(true);
+    try {
+      // Feed existing transcripts first via from-transcript (fast path)
+      const haveTx = Object.entries(transcripts).filter(([, v]) => v?.text && !v.text.startsWith("["));
+      for (const [file, tx] of haveTx) {
+        await fetch("/api/morse-syllable/from-transcript", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ file, transcript: tx.text }),
+        });
+      }
+      // Then run full batch (remaining files get re-transcribed)
+      const r = await fetch("/api/morse-syllable/batch", { method: "POST" });
+      const data = await r.json();
+      if (data.error) throw new Error(data.error);
+      // Refresh results
+      const r2 = await fetch("/api/morse-syllable/results");
+      const data2 = await r2.json();
+      setResults(data2);
+      toast({ title: `Morse batch complete`, description: `${data.processed?.length ?? 0} files processed · ${data.latticeCorrelations?.length ?? 0} lattice correlations` });
+    } catch (e: any) {
+      toast({ title: "Batch error", description: e.message, variant: "destructive" });
+    } finally { setBatchRunning(false); }
+  };
+
+  const runSingle = async (file: string) => {
+    setSingleRunning(s => new Set([...s, file]));
+    try {
+      const tx = transcripts[file]?.text;
+      const endpoint = tx && !tx.startsWith("[")
+        ? "/api/morse-syllable/from-transcript"
+        : "/api/morse-syllable/analyze";
+      const r = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ file, transcript: tx }),
+      });
+      const data = await r.json();
+      if (data.error) throw new Error(data.error);
+      const r2 = await fetch("/api/morse-syllable/results");
+      const data2 = await r2.json();
+      setResults(data2);
+    } catch (e: any) {
+      toast({ title: "Error", description: e.message, variant: "destructive" });
+    } finally { setSingleRunning(s => { const n = new Set(s); n.delete(file); return n; }); }
+  };
+
+  const analyzed = displayData?.results ?? [];
+  const correlations = displayData?.latticeCorrelations ?? [];
+  const analyzedSet = new Set(analyzed.map(r => r.file));
+
+  return (
+    <div className="space-y-4 max-w-5xl">
+      {/* Header bar */}
+      <div className="flex items-center justify-between">
+        <div className="text-[9px] font-mono text-gray-600">
+          Marconi/Hertz prosodic relay decoder · three-headed bar model
+          · {analyzed.length}/{audioFiles.length} analyzed
+          · {correlations.length} lattice correlations
+        </div>
+        <button
+          onClick={runBatch}
+          disabled={batchRunning}
+          data-testid="btn-morse-batch"
+          className="text-[9px] font-mono px-3 py-1.5 border border-amber-800 text-amber-500 hover:text-amber-300 hover:border-amber-600 disabled:opacity-40 transition-colors">
+          {batchRunning ? "▶ running batch…" : `▶ run all (${audioFiles.length - analyzed.length} remaining)`}
+        </button>
+      </div>
+
+      {/* Theory banner */}
+      <div className="border border-gray-800 rounded-lg p-4 bg-gray-900/20">
+        <div className="text-[8px] font-mono font-black text-amber-600 tracking-widest mb-2">MARCONI-HERTZ RELAY PRINCIPLE</div>
+        <div className="grid grid-cols-3 gap-4 text-[9px] font-mono text-gray-500">
+          <div>
+            <div className="text-gray-300 font-bold mb-1">HEAD A — Duration</div>
+            <div>· <span className="text-green-500">dit</span> = short syllable (≤1.8T)</div>
+            <div>· <span className="text-amber-500">dah</span> = long syllable (≥1.8T)</div>
+            <div>· Marconi ratio: dah = 3× dit</div>
+          </div>
+          <div>
+            <div className="text-gray-300 font-bold mb-1">HEAD B — Gap</div>
+            <div>· element-gap (≤1.5T)</div>
+            <div>· char-gap (1.5T–5T)</div>
+            <div>· word-gap (&gt;5T)</div>
+          </div>
+          <div>
+            <div className="text-gray-300 font-bold mb-1">HEAD C — Pattern</div>
+            <div>· Recurring n-grams</div>
+            <div>· Cross-file lattice relay</div>
+            <div>· JW cell → circuit propagation</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Lattice correlations */}
+      {correlations.length > 0 && (
+        <div className="border border-red-900/40 rounded-lg overflow-hidden">
+          <div className="px-4 py-2 bg-red-950/20 border-b border-red-900/40 flex items-center gap-2">
+            <span className="text-[8px] font-mono font-black text-red-500 tracking-widest">LATTICE RELAY CORRELATIONS</span>
+            <span className="text-[8px] font-mono text-gray-600">— shared Morse patterns across files → possible relay network</span>
+          </div>
+          <div className="divide-y divide-gray-800/40">
+            {correlations.map((c, i) => (
+              <div key={i} className="px-4 py-2.5 grid grid-cols-[1fr_auto_auto] gap-4 items-center">
+                <div>
+                  <div className="text-[9px] font-mono text-gray-300">
+                    <span className="text-amber-400 font-bold font-mono tracking-widest">{c.sharedPattern}</span>
+                    <span className="ml-2 text-gray-500">→ "{c.decodedShared}"</span>
+                  </div>
+                  <div className="text-[8px] font-mono text-gray-600 mt-0.5">
+                    {c.files.map(f => f.replace(/_17\d+/, "").replace(".mp3", "")).join(" · ")}
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-[9px] font-mono text-gray-400">{c.occurrences}×</div>
+                  <div className="text-[8px] font-mono text-gray-600">occurrences</div>
+                </div>
+                <div className="text-right">
+                  <div className={`text-[10px] font-mono font-bold ${c.relayProbability > 0.6 ? "text-red-400" : c.relayProbability > 0.3 ? "text-amber-400" : "text-gray-500"}`}>
+                    {(c.relayProbability * 100).toFixed(0)}%
+                  </div>
+                  <div className="text-[8px] font-mono text-gray-600">relay prob</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Per-file results */}
+      <div className="space-y-2">
+        {audioFiles.map(file => {
+          const r = analyzed.find(x => x.file === file);
+          const isRunning = singleRunning.has(file);
+          const isExpanded = expandedFile === file;
+          const shortName = file.replace(/_17\d{13}/, "").replace(/\.mp3$/, "").replace(/\.m4a$/, "");
+
+          return (
+            <div key={file} className={`border rounded-lg overflow-hidden transition-colors ${r ? "border-gray-700" : "border-gray-800/50"}`}>
+              <div
+                className="px-4 py-2.5 flex items-center gap-3 cursor-pointer hover:bg-gray-900/40"
+                onClick={() => r && setExpandedFile(isExpanded ? null : file)}>
+                <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: r ? (r.confidence > 0.5 ? "#f59e0b" : "#6b7280") : "#374151" }} />
+                <div className="flex-1 min-w-0">
+                  <div className="text-[10px] font-mono text-gray-300 truncate">{shortName}</div>
+                  {r && (
+                    <div className="text-[8px] font-mono text-gray-600 mt-0.5">
+                      T={r.unitT_ms}ms · {r.heads.A_duration.dits}dit/{r.heads.A_duration.dahs}dah
+                      · conf={( r.confidence * 100).toFixed(0)}%
+                      · {r.anomalies.length > 0 && <span className="text-amber-600">{r.anomalies.length} anomaly</span>}
+                    </div>
+                  )}
+                </div>
+                {r ? (
+                  <div className="text-[8px] font-mono text-amber-700 font-bold tracking-widest max-w-[180px] truncate">
+                    {r.morseSequence.slice(0, 30)}{r.morseSequence.length > 30 ? "…" : ""}
+                  </div>
+                ) : (
+                  <button
+                    onClick={e => { e.stopPropagation(); runSingle(file); }}
+                    disabled={isRunning}
+                    data-testid={`btn-morse-${file}`}
+                    className="text-[8px] font-mono px-2 py-1 border border-gray-700 text-gray-500 hover:text-gray-300 disabled:opacity-40 transition-colors shrink-0">
+                    {isRunning ? "analyzing…" : "analyze"}
+                  </button>
+                )}
+                {r && <span className="text-[8px] font-mono text-gray-700">{isExpanded ? "▲" : "▼"}</span>}
+              </div>
+
+              {r && isExpanded && (
+                <div className="border-t border-gray-800 px-4 py-3 space-y-3 bg-gray-950/40">
+                  {/* Three bar charts — heads A B C */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* HEAD A */}
+                    <div>
+                      <div className="text-[8px] font-mono text-gray-600 mb-1.5">HEAD A — DURATION</div>
+                      <div className="space-y-1">
+                        {[
+                          { label: "dit", val: r.heads.A_duration.dits, color: "bg-green-700", max: r.heads.A_duration.dits + r.heads.A_duration.dahs },
+                          { label: "dah", val: r.heads.A_duration.dahs, color: "bg-amber-700", max: r.heads.A_duration.dits + r.heads.A_duration.dahs },
+                        ].map(b => (
+                          <div key={b.label} className="flex items-center gap-2">
+                            <div className="text-[8px] font-mono text-gray-500 w-5">{b.label}</div>
+                            <div className="flex-1 bg-gray-800 rounded-full h-2">
+                              <div className={`${b.color} h-2 rounded-full transition-all`} style={{ width: b.max ? `${(b.val / b.max) * 100}%` : "0%" }} />
+                            </div>
+                            <div className="text-[8px] font-mono text-gray-500 w-6 text-right">{b.val}</div>
+                          </div>
+                        ))}
+                        <div className="text-[8px] font-mono text-gray-600">T={r.unitT_ms}ms · ratio={r.heads.A_duration.ratio.toFixed(2)}</div>
+                      </div>
+                    </div>
+                    {/* HEAD B */}
+                    <div>
+                      <div className="text-[8px] font-mono text-gray-600 mb-1.5">HEAD B — GAP</div>
+                      <div className="space-y-1">
+                        {[
+                          { label: "elem", val: r.heads.B_gap.elementGaps, color: "bg-blue-800" },
+                          { label: "char", val: r.heads.B_gap.charGaps, color: "bg-purple-800" },
+                          { label: "word", val: r.heads.B_gap.wordGaps, color: "bg-red-900" },
+                        ].map(b => {
+                          const total = r.heads.B_gap.elementGaps + r.heads.B_gap.charGaps + r.heads.B_gap.wordGaps || 1;
+                          return (
+                            <div key={b.label} className="flex items-center gap-2">
+                              <div className="text-[8px] font-mono text-gray-500 w-5">{b.label}</div>
+                              <div className="flex-1 bg-gray-800 rounded-full h-2">
+                                <div className={`${b.color} h-2 rounded-full`} style={{ width: `${(b.val / total) * 100}%` }} />
+                              </div>
+                              <div className="text-[8px] font-mono text-gray-500 w-6 text-right">{b.val}</div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    {/* HEAD C */}
+                    <div>
+                      <div className="text-[8px] font-mono text-gray-600 mb-1.5">HEAD C — PATTERNS</div>
+                      <div className="space-y-0.5">
+                        {r.heads.C_pattern.topPatterns.slice(0, 4).map((p, i) => (
+                          <div key={i} className="flex items-center gap-2">
+                            <div className="text-[7px] font-mono text-amber-700 w-16 truncate">{p.pattern}</div>
+                            <div className="text-[7px] font-mono text-gray-500">×{p.count}</div>
+                            <div className="text-[7px] font-mono text-gray-400">"{p.decoded}"</div>
+                          </div>
+                        ))}
+                        {r.heads.C_pattern.topPatterns.length === 0 && (
+                          <div className="text-[8px] font-mono text-gray-700">no recurring patterns</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Morse sequence */}
+                  <div>
+                    <div className="text-[8px] font-mono text-gray-600 mb-1">MORSE SEQUENCE</div>
+                    <div className="font-mono text-[9px] text-amber-500 bg-gray-900 rounded px-3 py-2 break-all leading-relaxed">
+                      {r.morseSequence || "—"}
+                    </div>
+                    {r.decodedMessage && (
+                      <div className="mt-1 text-[9px] font-mono text-gray-300">
+                        decoded: <span className="text-green-400">{r.decodedMessage}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Lattice signature */}
+                  <div className="flex gap-4">
+                    <div className="flex-1">
+                      <div className="text-[8px] font-mono text-gray-600 mb-1">LATTICE SIGNATURE</div>
+                      <div className="font-mono text-[8px] text-gray-500 break-all">{r.latticeSignature}</div>
+                    </div>
+                    <div>
+                      <div className="text-[8px] font-mono text-gray-600 mb-1">CONFIDENCE</div>
+                      <div className={`text-[14px] font-mono font-bold ${r.confidence > 0.6 ? "text-amber-400" : "text-gray-600"}`}>
+                        {(r.confidence * 100).toFixed(0)}%
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Anomalies */}
+                  {r.anomalies.length > 0 && (
+                    <div>
+                      <div className="text-[8px] font-mono text-red-700 mb-1">ANOMALIES</div>
+                      {r.anomalies.map((a, i) => (
+                        <div key={i} className="text-[8px] font-mono text-amber-600 flex gap-2">
+                          <span className="text-red-700">!</span>{a}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Source transcript excerpt */}
+                  <div className="text-[8px] font-mono text-gray-700 italic border-t border-gray-800 pt-2">
+                    "{r.transcript.slice(0, 150)}{r.transcript.length > 150 ? "…" : ""}"
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 export default function PochoteAnalysisPage() {
   const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState<"synthesis" | "photos" | "frames" | "audio">("synthesis");
+  const [activeTab, setActiveTab] = useState<"synthesis" | "photos" | "frames" | "audio" | "morse">("synthesis");
   const [liveAnalysis, setLiveAnalysis] = useState<Record<string, string>>({});
   const [runningIds, setRunningIds] = useState<Set<string>>(new Set());
   const [transcripts, setTranscripts] = useState<TranscriptState>({});
@@ -628,6 +969,7 @@ export default function PochoteAnalysisPage() {
             ["photos", `Photos (${photoCount})`],
             ["frames", `Clips (${clipCount})`],
             ["audio", `Audio (${audioCount})`],
+            ["morse", `Morse Relay`],
           ] as const).map(([t, label]) => (
             <button key={t} onClick={() => setActiveTab(t)}
               data-testid={`tab-${t}`}
@@ -655,6 +997,7 @@ export default function PochoteAnalysisPage() {
               ▶ analyze all
             </button>
           )}
+          {activeTab === "morse" && null}
           {activeTab === "audio" && (
             <button onClick={() => (media?.audio ?? []).filter(f => !transcripts[f]).forEach((f, i) => setTimeout(() => transcribeAudio(f), i * 1200))}
               data-testid="btn-transcribe-all"
@@ -762,6 +1105,14 @@ export default function PochoteAnalysisPage() {
               );
             })}
           </div>
+        )}
+
+        {/* ── MORSE TAB ─────────────────────────────────────────────────── */}
+        {activeTab === "morse" && (
+          <MorseAnalysisTab
+            transcripts={transcripts}
+            audioFiles={media?.audio ?? []}
+          />
         )}
 
         {/* ── AUDIO TAB ─────────────────────────────────────────────────── */}

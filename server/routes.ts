@@ -127,6 +127,21 @@ import {
   type LatticeAllResponse,
 } from "@shared/lattice-data";
 import { runSpokeWheel } from "./lib/spoke-wheel";
+import {
+  analyzeFromVerboseJson as morseSyllableFromVerbose,
+  analyzeFromTranscript as morseSyllableFromTranscript,
+  correlateLattice as morseLatticeCorrelate,
+  setCachedResult as morseSetCache,
+  getCachedResult as morseGetCache,
+  getAllCachedResults as morseGetAll,
+} from "./morse-syllable-engine";
+import {
+  getFeed as droneBlogGetFeed,
+  generatePost as droneBlogGenerate,
+  generateImage as droneBlogGenImage,
+  seedInitialPosts as droneBlogSeed,
+  deletePost as droneBlogDelete,
+} from "./drone-blog-engine";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -5829,6 +5844,104 @@ Listen carefully to the actual audio. Be specific and clinical.`;
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
+  // ── MORSE SYLLABLE ENGINE — Marconi/Hertz prosodic relay decoder ────────────
+  // Audio → Whisper verbose_json → three-headed bar model → Morse decode → lattice correlation
+
+  // Analyze single file — uses cached transcript or re-transcribes with word timestamps
+  app.post("/api/morse-syllable/analyze", async (req, res) => {
+    try {
+      const { file, transcript } = req.body as { file?: string; transcript?: string };
+      if (transcript && !file) {
+        res.json(morseSyllableFromTranscript("manual", transcript));
+        return;
+      }
+      if (!file) return res.status(400).json({ error: "file or transcript required" });
+      const cached = morseGetCache(file);
+      if (cached) return res.json(cached);
+      const fp = nodePath.join(process.cwd(), "public", "pochote", "audio", file);
+      if (!fs.existsSync(fp)) return res.status(404).json({ error: "audio file not found" });
+      const buf = fs.readFileSync(fp);
+      const mime = file.endsWith(".m4a") ? "audio/mp4" : "audio/mpeg";
+      const fileObj = await audioToFile(buf, file, { type: mime });
+      let result;
+      try {
+        const verboseResult = await audioOpenAI.audio.transcriptions.create({
+          file: fileObj, model: "gpt-4o-mini-transcribe",
+          response_format: "verbose_json", timestamp_granularities: ["word"],
+        } as any);
+        result = morseSyllableFromVerbose(file, verboseResult as any);
+      } catch {
+        const fileObj2 = await audioToFile(buf, file, { type: mime });
+        const plain = await audioOpenAI.audio.transcriptions.create({
+          file: fileObj2, model: "gpt-4o-mini-transcribe", response_format: "text",
+        });
+        result = morseSyllableFromTranscript(file, typeof plain === "string" ? plain : (plain as any).text ?? "");
+      }
+      morseSetCache(file, result);
+      res.json(result);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Analyze from existing plain transcript (no audio re-fetch)
+  app.post("/api/morse-syllable/from-transcript", (req, res) => {
+    try {
+      const { file, transcript } = req.body as { file: string; transcript: string };
+      if (!transcript) return res.status(400).json({ error: "transcript required" });
+      const result = morseSyllableFromTranscript(file || "manual", transcript);
+      if (file) morseSetCache(file, result);
+      res.json(result);
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // All cached results + lattice correlation
+  app.get("/api/morse-syllable/results", (_req, res) => {
+    try {
+      const all = morseGetAll();
+      res.json({ results: all, latticeCorrelations: morseLatticeCorrelate(all), count: all.length });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Batch: process all audio files
+  app.post("/api/morse-syllable/batch", async (req, res) => {
+    try {
+      const audioDir = nodePath.join(process.cwd(), "public", "pochote", "audio");
+      const files = fs.readdirSync(audioDir).filter((f: string) => f.endsWith(".mp3") || f.endsWith(".m4a")).sort();
+      const resultsPath = nodePath.join(process.cwd(), "public", "pochote", "results.json");
+      let existingResults: any = {};
+      if (fs.existsSync(resultsPath)) { try { existingResults = JSON.parse(fs.readFileSync(resultsPath, "utf-8")); } catch {} }
+      const processed: string[] = [];
+      const errors: string[] = [];
+      for (const file of files) {
+        try {
+          if (morseGetCache(file)) { processed.push(file); continue; }
+          const existing = existingResults?.audio?.[file];
+          if (existing?.transcript && !existing.transcript.startsWith("[error")) {
+            morseSetCache(file, morseSyllableFromTranscript(file, existing.transcript));
+            processed.push(file); continue;
+          }
+          const fp = nodePath.join(audioDir, file);
+          const buf = fs.readFileSync(fp);
+          const mime = file.endsWith(".m4a") ? "audio/mp4" : "audio/mpeg";
+          const fileObj = await audioToFile(buf, file, { type: mime });
+          try {
+            const vr = await audioOpenAI.audio.transcriptions.create({
+              file: fileObj, model: "gpt-4o-mini-transcribe",
+              response_format: "verbose_json", timestamp_granularities: ["word"],
+            } as any);
+            morseSetCache(file, morseSyllableFromVerbose(file, vr as any));
+          } catch {
+            const fo2 = await audioToFile(buf, file, { type: mime });
+            const pl = await audioOpenAI.audio.transcriptions.create({ file: fo2, model: "gpt-4o-mini-transcribe", response_format: "text" });
+            morseSetCache(file, morseSyllableFromTranscript(file, typeof pl === "string" ? pl : (pl as any).text ?? ""));
+          }
+          processed.push(file);
+        } catch (e: any) { errors.push(`${file}: ${e.message}`); }
+      }
+      const all = morseGetAll();
+      res.json({ processed, errors, total: files.length, latticeCorrelations: morseLatticeCorrelate(all) });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
   // Gemini model status — which model is active
   app.get("/api/gemini/status", async (_req, res) => {
     try {
@@ -5996,6 +6109,47 @@ Output: the complete article, formatted with HEADLINE / SUBHEAD / BYLINE / [blan
       res.json(geo);
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
+
+  // ── DRONE BLOG: Mikhail Hammer Energy / Señor Zumbido ─────────────────────
+  app.get("/api/drone-blog/feed", (_req, res) => {
+    try {
+      const limit = Math.min(parseInt(String(_req.query.limit ?? "50")), 100);
+      res.json({ posts: droneBlogGetFeed(limit), count: droneBlogGetFeed(limit).length });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/drone-blog/generate", async (req, res) => {
+    try {
+      const { category = "WORK", kappaCtx = {} } = req.body ?? {};
+      const validCats = ["MORNING","WORK","LUNCH","SURVEILLANCE","INCIDENT","EVENING","NIGHT","BREAKING"];
+      if (!validCats.includes(category)) return res.status(400).json({ error: "Invalid category" });
+      const post = await droneBlogGenerate(category as any, kappaCtx);
+      res.json({ post });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/drone-blog/generate-image", async (req, res) => {
+    try {
+      const { postId, prompt } = req.body ?? {};
+      if (!postId || !prompt) return res.status(400).json({ error: "postId and prompt required" });
+      const imageUrl = await droneBlogGenImage(postId, prompt);
+      res.json({ imageUrl });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/drone-blog/seed", async (req, res) => {
+    try {
+      const { kappaCtx = {} } = req.body ?? {};
+      await droneBlogSeed(kappaCtx);
+      res.json({ ok: true, posts: droneBlogGetFeed(10) });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.delete("/api/drone-blog/post/:id", (req, res) => {
+    const ok = droneBlogDelete(req.params.id);
+    res.json({ ok });
+  });
+  // ── END DRONE BLOG ─────────────────────────────────────────────────────────
 
   // GET /api/goose/status — scheduler status
   app.get("/api/goose/status", async (_req, res) => {

@@ -865,6 +865,25 @@ export default function GooseGazettePage() {
               </button>
             ))}
           </nav>
+
+          <div className="mt-6 pt-5 border-t border-gray-200">
+            <p className="text-[9px] font-black tracking-[0.2em] uppercase text-gray-400 mb-2">Sub-Publications</p>
+            <a href="/goose/drone"
+              data-testid="link-drone-blog"
+              className="block text-[11px] font-sans tracking-[0.12em] py-1.5 text-gray-500 hover:text-black transition-colors">
+              🚁 Mikhail Hammer Energy
+            </a>
+            <a href="/goose/humor"
+              data-testid="link-humor"
+              className="block text-[11px] font-sans tracking-[0.12em] py-1.5 text-gray-500 hover:text-black transition-colors">
+              ✒️ The Humor Pages
+            </a>
+            <a href="/goose/editorial"
+              data-testid="link-editorial"
+              className="block text-[11px] font-sans tracking-[0.12em] py-1.5 text-gray-500 hover:text-black transition-colors">
+              📋 Editorial
+            </a>
+          </div>
         </aside>
 
         {/* CENTER FEED */}
