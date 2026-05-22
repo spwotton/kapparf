@@ -1,19 +1,118 @@
 /**
- * KAPPA Gemini Router
- * Priority: GEM_2 first (confirmed billing account), then other keys.
- * Probes models in order — caches winner. Instant switchover when credits activate.
+ * KAPPA Multi-Model Router
+ * Per MODEL_SELECTION_GUIDE (Atlantis Hub · vertex 1 · May 2026)
+ *
+ * Priority for text synthesis/attribution:
+ *   1. OpenRouter free models  — confirmed working, zero cost
+ *   2. Gemini native audio     — when credits activate (native audio understanding)
+ *   3. gpt-4o-mini proxy       — guaranteed fallback
  */
 
-// Priority order — newest/best first, then reliable fallbacks
+// ─── OPENROUTER FREE TIER ────────────────────────────────────────────────────
+// Oracle-safe free models per guide. Reject list excluded (coding agents,
+// perception models, audio generation, video pipelines).
+const OR_FREE_MODELS = [
+  "deepseek/deepseek-v4-flash:free",          // oracle-safe · mathematical/analytical · 1M ctx
+  "meta-llama/llama-3.3-70b-instruct:free",   // confirmed working · general synthesis
+  "nousresearch/hermes-3-llama-3.1-405b:free",// literary/hermetic synthesis (try — may activate)
+];
+
+const OR_BASE = "https://openrouter.ai/api/v1/chat/completions";
+const OR_HEADERS = {
+  "Content-Type": "application/json",
+  "HTTP-Referer": "https://replit.com",
+  "X-Title": "KAPPA Forensics",
+};
+
+let _orModel: string | null = null;
+let _orLastProbe = 0;
+const OR_PROBE_TTL = 3 * 60 * 1000;
+
+async function probeOpenRouter(): Promise<string | null> {
+  const key = process.env.OPENROUTER_API_KEY;
+  if (!key) return null;
+  const body = JSON.stringify({
+    messages: [{ role: "user", content: "Reply: OK" }],
+    max_tokens: 5,
+  });
+  for (const model of OR_FREE_MODELS) {
+    try {
+      const r = await fetch(OR_BASE, {
+        method: "POST",
+        headers: { ...OR_HEADERS, Authorization: `Bearer ${key}` },
+        body: JSON.stringify({ ...JSON.parse(body), model }),
+        signal: AbortSignal.timeout(15000),
+      });
+      const d: any = await r.json();
+      const text = d?.choices?.[0]?.message?.content;
+      if (text) {
+        console.log(`[ModelRouter] OpenRouter active: ${model}`);
+        return model;
+      }
+    } catch { /* try next */ }
+  }
+  return null;
+}
+
+export async function getOpenRouterModel(): Promise<string | null> {
+  const now = Date.now();
+  if (_orModel && now - _orLastProbe < OR_PROBE_TTL) return _orModel;
+  const m = await probeOpenRouter();
+  _orModel = m;
+  if (m) _orLastProbe = now;
+  return m;
+}
+
+/**
+ * Call OpenRouter with a text prompt. Uses the first working free model.
+ */
+export async function openRouterGenerate(
+  prompt: string,
+  opts: { maxTokens?: number; temperature?: number; system?: string } = {}
+): Promise<{ text: string; model: string; provider: "openrouter-free" } | null> {
+  const model = await getOpenRouterModel();
+  if (!model) return null;
+  const key = process.env.OPENROUTER_API_KEY;
+  if (!key) return null;
+
+  const messages: any[] = [];
+  if (opts.system) messages.push({ role: "system", content: opts.system });
+  messages.push({ role: "user", content: prompt });
+
+  try {
+    const r = await fetch(OR_BASE, {
+      method: "POST",
+      headers: { ...OR_HEADERS, Authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        model, messages,
+        max_tokens: opts.maxTokens ?? 600,
+        temperature: opts.temperature ?? 0,
+      }),
+      signal: AbortSignal.timeout(60000),
+    });
+    const d: any = await r.json();
+    const text = d?.choices?.[0]?.message?.content;
+    if (text) return { text, model, provider: "openrouter-free" };
+    // If this model stopped working, clear cache
+    const err: string = d?.error?.message ?? "";
+    if (err.includes("No endpoints") || err.includes("Provider returned")) {
+      _orModel = null; _orLastProbe = 0;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// ─── GEMINI (native audio when credits active) ────────────────────────────────
 export const GEMINI_MODELS = [
-  "gemini-2.5-flash-preview-05-20",  // latest 2.5 flash preview
+  "gemini-2.5-flash-preview-05-20",
   "gemini-2.5-flash",
   "gemini-2.5-pro",
   "gemini-2.0-flash",
   "gemini-2.0-flash-lite",
   "gemini-1.5-flash",
   "gemini-1.5-pro",
-  // Experimental / named variants
   "gemini-3.5-flash",
   "gemini-3-flash-preview",
   "nano-banana-pro-preview",
@@ -22,34 +121,19 @@ export const GEMINI_MODELS = [
 ];
 
 const GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models";
-
-// Key priority — GEM_2 first (confirmed billing), then others.
-// GOOGLE_API_KEY is excluded: API_KEY_SERVICE_BLOCKED on project 527218426604 (different project, API not enabled)
+// GEM_2 first — confirmed billing account. GOOGLE_API_KEY excluded (API_KEY_SERVICE_BLOCKED).
 const GEMINI_KEYS = ["GEM_2", "GEMINI_API_KEY", "GOOGLE_ALT", "GOOGLE_API_E"];
 
-let _cachedKey: string | null = null;
-let _cachedModel: string | null = null;
-let _lastProbe = 0;
-// Short TTL — re-probe every 2 min so we catch the moment credits top up
-const PROBE_TTL = 2 * 60 * 1000;
-
-export interface GeminiPart {
-  text?: string;
-  inline_data?: { mime_type: string; data: string }; // base64 audio/image
-}
-
-export interface GeminiResult {
-  text: string;
-  model: string;
-  provider: "gemini" | "openai-fallback";
-}
+let _gemKey: string | null = null;
+let _gemModel: string | null = null;
+let _gemLastProbe = 0;
+const GEM_PROBE_TTL = 2 * 60 * 1000;
 
 async function probeGemini(): Promise<{ key: string; model: string } | null> {
   const body = JSON.stringify({
     contents: [{ parts: [{ text: "Reply: OK" }] }],
     generationConfig: { maxOutputTokens: 5 },
   });
-
   for (const keyName of GEMINI_KEYS) {
     const key = process.env[keyName];
     if (!key) continue;
@@ -61,19 +145,16 @@ async function probeGemini(): Promise<{ key: string; model: string } | null> {
           body,
           signal: AbortSignal.timeout(8000),
         });
-        if (!r.ok && r.status === 404) continue; // model not found for this key, try next model
+        if (!r.ok && r.status === 404) continue;
         const d: any = await r.json();
         const ok = d?.candidates?.[0]?.content?.parts?.[0]?.text;
         if (ok) {
-          console.log(`[GeminiRouter] ✓ Active: ${keyName} / ${model}`);
+          console.log(`[ModelRouter] Gemini active: ${keyName} / ${model}`);
           return { key, model };
         }
-        const errMsg: string = d?.error?.message ?? "";
-        // If blocked entirely (API not enabled), skip all models for this key
-        if (errMsg.includes("API_KEY_SERVICE_BLOCKED") || errMsg.includes("blocked")) break;
-        // Depleted = try next model (maybe a lite/legacy model has free quota)
-        // Not found = try next model
-      } catch { /* network error, try next */ }
+        const err: string = d?.error?.message ?? "";
+        if (err.includes("API_KEY_SERVICE_BLOCKED") || err.includes("blocked")) break;
+      } catch { /* try next */ }
     }
   }
   return null;
@@ -81,59 +162,45 @@ async function probeGemini(): Promise<{ key: string; model: string } | null> {
 
 export async function getGeminiClient(): Promise<{ key: string; model: string } | null> {
   const now = Date.now();
-  if (_cachedKey && _cachedModel && now - _lastProbe < PROBE_TTL) {
-    return { key: _cachedKey, model: _cachedModel };
+  if (_gemKey && _gemModel && now - _gemLastProbe < GEM_PROBE_TTL) {
+    return { key: _gemKey, model: _gemModel };
   }
-  const result = await probeGemini();
-  if (result) {
-    _cachedKey = result.key;
-    _cachedModel = result.model;
-    _lastProbe = now;
-  } else {
-    _cachedKey = null;
-    _cachedModel = null;
-    // Don't update _lastProbe on failure — re-probe next call
-  }
-  return result;
+  const r = await probeGemini();
+  if (r) { _gemKey = r.key; _gemModel = r.model; _gemLastProbe = now; }
+  else { _gemKey = null; _gemModel = null; }
+  return r;
 }
 
-/** Force-invalidate cache (e.g. after a credits-depleted response) */
 export function invalidateGeminiCache() {
-  _cachedKey = null;
-  _cachedModel = null;
-  _lastProbe = 0;
+  _gemKey = null; _gemModel = null; _gemLastProbe = 0;
 }
 
-/**
- * Generate content via Gemini. Parts can include text and/or inline_data (audio/image).
- * Returns null if Gemini unavailable (caller should fall back to OpenAI).
- */
+export interface GeminiPart {
+  text?: string;
+  inline_data?: { mime_type: string; data: string };
+}
+
+export interface GeminiResult {
+  text: string;
+  model: string;
+  provider: "gemini" | "openrouter-free" | "openai-fallback";
+}
+
 export async function geminiGenerate(
   parts: GeminiPart[],
-  opts: {
-    maxTokens?: number;
-    temperature?: number;
-    systemInstruction?: string;
-    forceModel?: string;
-  } = {}
+  opts: { maxTokens?: number; temperature?: number; systemInstruction?: string } = {}
 ): Promise<GeminiResult | null> {
   const client = await getGeminiClient();
   if (!client) return null;
-
-  const model = opts.forceModel || client.model;
   const body: any = {
     contents: [{ parts }],
-    generationConfig: {
-      maxOutputTokens: opts.maxTokens ?? 800,
-      temperature: opts.temperature ?? 0,
-    },
+    generationConfig: { maxOutputTokens: opts.maxTokens ?? 800, temperature: opts.temperature ?? 0 },
   };
   if (opts.systemInstruction) {
     body.systemInstruction = { parts: [{ text: opts.systemInstruction }] };
   }
-
   try {
-    const r = await fetch(`${GEMINI_BASE}/${model}:generateContent?key=${client.key}`, {
+    const r = await fetch(`${GEMINI_BASE}/${client.model}:generateContent?key=${client.key}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
@@ -141,55 +208,37 @@ export async function geminiGenerate(
     });
     const d: any = await r.json();
     const text = d?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (text) return { text, model, provider: "gemini" };
-    // Credits just ran out mid-session — invalidate so next call re-probes
-    const errMsg: string = d?.error?.message ?? "";
-    if (errMsg.includes("depleted") || errMsg.includes("quota") || errMsg.includes("RESOURCE_EXHAUSTED")) {
-      invalidateGeminiCache();
-    }
+    if (text) return { text, model: client.model, provider: "gemini" };
+    const err: string = d?.error?.message ?? "";
+    if (err.includes("depleted") || err.includes("RESOURCE_EXHAUSTED")) invalidateGeminiCache();
     return null;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
-/**
- * Analyze audio via Gemini native audio understanding.
- * Sends the raw audio bytes as base64 inline_data — Gemini actually listens.
- */
+/** Send actual audio bytes to Gemini — it listens to the recording directly */
 export async function geminiAnalyzeAudio(
-  audioBuf: Buffer,
-  mimeType: string,
-  prompt: string,
+  audioBuf: Buffer, mimeType: string, prompt: string,
   opts: { maxTokens?: number; systemInstruction?: string } = {}
 ): Promise<GeminiResult | null> {
   return geminiGenerate(
-    [
-      { inline_data: { mime_type: mimeType, data: audioBuf.toString("base64") } },
-      { text: prompt },
-    ],
+    [{ inline_data: { mime_type: mimeType, data: audioBuf.toString("base64") } }, { text: prompt }],
     { maxTokens: opts.maxTokens ?? 1000, systemInstruction: opts.systemInstruction }
   );
 }
 
-/** Status check — shows active model and all candidates */
-export async function geminiStatus(): Promise<{
-  available: boolean;
-  model: string | null;
-  keySlot: string | null;
-  allModels: string[];
-  keyPriority: string[];
-}> {
-  const client = await getGeminiClient();
-  // Find which key slot matched
-  const keySlot = client
-    ? GEMINI_KEYS.find(k => process.env[k] === client.key) ?? null
-    : null;
+// ─── UNIFIED STATUS ───────────────────────────────────────────────────────────
+export async function geminiStatus() {
+  const [orModel, gemClient] = await Promise.all([getOpenRouterModel(), getGeminiClient()]);
   return {
-    available: !!client,
-    model: client?.model ?? null,
-    keySlot,
-    allModels: GEMINI_MODELS,
+    openrouter: { available: !!orModel, model: orModel },
+    gemini: {
+      available: !!gemClient,
+      model: gemClient?.model ?? null,
+      keySlot: gemClient ? (GEMINI_KEYS.find(k => process.env[k] === gemClient.key) ?? null) : null,
+    },
+    activeProvider: orModel ? "openrouter-free" : gemClient ? "gemini" : "openai-fallback",
+    allOrFreeModels: OR_FREE_MODELS,
+    allGeminiModels: GEMINI_MODELS,
     keyPriority: GEMINI_KEYS.filter(k => !!process.env[k]),
   };
 }

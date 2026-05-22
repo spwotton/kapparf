@@ -121,14 +121,18 @@
         "avgNoSpeechProb": 0.1,
         "language": "auto-detected",
         "attribution": {
-          "raw": "1. **SPEAKER_TYPE**: INVESTIGATOR_NARRATING - The investigator is directly addressing the recording device, indicating deliberate documentation of observations.\n\n2. **SPEAKER_COUNT**: 1 - The recording features a single voice, that of the investigator.\n\n3. **VOICE_CHARACTERISTICS**: Male, neutral tone, mid-range distance from the mic, emotional state appears calm and focused.\n\n4. **FORENSIC_SIGNIFICANCE**: The recording captures the investigator's attempt to document vocal patterns, which may be relevant for analyzing voice characteristics in the context of surveillance. The phrase \"you can see the pattern in your voice\" suggests an analytical approach to the audio.\n\n5. **CONFIDENCE**: HIGH - The clear intent of the investigator to document and the nature of the speech strongly support the attribution as narration.",
+          "raw": "1. **SPEAKER_TYPE**: INVESTIGATOR_NARRATING - The investigator is directly addressing the recording device, indicating deliberate documentation of observations.\n\n2. **SPEAKER_COUNT**: 1 - The recording features a single voice, that of the investigator.\n\n3. **VOICE_CHARACTERISTICS**: Male, neutral tone, close proximity to the mic, with no apparent emotional state due to the nature of the narration.\n\n4. **FORENSIC_SIGNIFICANCE**: The recording captures the investigator's attempt to document observations related to voice patterns, which may be relevant for analysis of interactions or behaviors at the location. The phrase \"you can see the pattern in your voice\" suggests a focus on vocal analysis.\n\n5. **CONFIDENCE**: HIGH - The clear context of the investigator narrating directly into the phone supports a strong attribution to the speaker type and purpose of the recording.",
+          "model": "gpt-4o-mini",
+          "provider": "openai-fallback",
           "speakerType": "INVESTIGATOR_NARRATING - The investigator is directly addressing the recording device, indicating deliberate documentation of observations.",
           "speakerCount": "1 - The recording features a single voice, that of the investigator.",
-          "voiceCharacteristics": "Male, neutral tone, mid-range distance from the mic, emotional state appears calm and focused.",
-          "forensicSignificance": "The recording captures the investigator's attempt to document vocal patterns, which may be relevant for analyzing voice characteristics in the context of surveillance. The phrase \"you can see the patt",
-          "confidence": "HIGH - The clear intent of the investigator to document and the nature of the speech strongly support the attribution as narration."
+          "voiceCharacteristics": "Male, neutral tone, close proximity to the mic, with no apparent emotional state due to the nature of the narration.",
+          "forensicSignificance": "The recording captures the investigator's attempt to document observations related to voice patterns, which may be relevant for analysis of interactions or behaviors at the location. The phrase \"you can see the pattern in your voice\" suggests a focus",
+          "confidence": "HIGH - The clear context of the investigator narrating directly into the phone supports a strong attribution to the speaker type and purpose of the recording."
         },
-        "analyzedAt": "2026-05-22T05:20:09.694Z"
+        "analysisModel": "gpt-4o-mini",
+        "analysisProvider": "openai-fallback",
+        "analyzedAt": "2026-05-22T05:51:35.057Z"
       }
     },
     "Voice_260314_155243_1779421051824.mp3": {

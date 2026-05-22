@@ -39,7 +39,7 @@ import multer from "multer";
 import { execFile } from "child_process";
 import { openai as audioOpenAI } from "./replit_integrations/audio/client";
 import { toFile as audioToFile } from "openai";
-import { geminiAnalyzeAudio, geminiGenerate, geminiStatus, getGeminiClient, GEMINI_MODELS } from "./gemini-router";
+import { geminiAnalyzeAudio, geminiGenerate, geminiStatus, getGeminiClient, GEMINI_MODELS, openRouterGenerate } from "./gemini-router";
 import {
   runForensicAnalysis, analyzePcap, scanGitHubRepos, getForensicReports,
   getPcapUploads, startHypervisor, stopHypervisor, getHypervisorStatus,
@@ -5704,9 +5704,6 @@ TRANSCRIPT: "${transcript.slice(0, 800)}"
 AVG NO-SPEECH PROBABILITY: ${avgNoSpeechProb.toFixed(3)} (>0.5 = likely no speech)
 LANGUAGE DETECTED: ${language}
 
-SEGMENT DETAILS (first 20):
-${segSummary || "(none)"}
-
 CONTEXT: Investigator (male) is documenting covert surveillance activity at Hotel Pochote Grande, Jacó, Costa Rica. Recordings may be:
 A) Investigator narrating directly INTO their phone (close mic, deliberate documentation)
 B) Investigator recording an overheard conversation they were part of (mixed proximity)
@@ -5774,7 +5771,20 @@ Listen carefully to the actual audio. Be specific and clinical.`;
         }
       }
 
-      // PATH B — Gemini text analysis (if audio too large or Gemini returned nothing)
+      // PATH B — OpenRouter free models (confirmed working: deepseek-v4-flash, llama-3.3-70b)
+      // These run NOW even while Gemini credits are depleted
+      if (attribution.error || (!attribution.speakerType && !attribution.forensicSignificance)) {
+        const orRes = await openRouterGenerate(attributionPrompt, {
+          maxTokens: 600, temperature: 0, system: FORENSIC_SYSTEM,
+        });
+        if (orRes) {
+          attribution = parseAttribution(orRes.text, orRes.model, "openrouter-free");
+          analysisModel = orRes.model;
+          analysisProvider = "openrouter-free";
+        }
+      }
+
+      // PATH C — Gemini text analysis (when credits activate — better reasoning)
       if (attribution.error || (!attribution.speakerType && !attribution.forensicSignificance)) {
         const gemText = await geminiGenerate(
           [{ text: attributionPrompt }],
@@ -5787,7 +5797,7 @@ Listen carefully to the actual audio. Be specific and clinical.`;
         }
       }
 
-      // PATH C — gpt-4o-mini via Replit proxy (guaranteed fallback)
+      // PATH D — gpt-4o-mini via Replit proxy (guaranteed fallback)
       if (attribution.error || (!attribution.speakerType && !attribution.forensicSignificance)) {
         try {
           const r = await (audioOpenAI as any).chat.completions.create({
