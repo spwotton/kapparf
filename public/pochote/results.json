@@ -104,7 +104,32 @@
     },
     "Voice_260314_155243.mp3": {
       "transcript": "I'm gonna try to record you through this. You can see the pattern in your voice.\n",
-      "sizeMB": "0.3"
+      "sizeMB": "0.29",
+      "forensics": {
+        "acoustic": {
+          "duration": "00:00:38.59",
+          "durSec": 38.59,
+          "meanVol": -35.9,
+          "maxVol": -6.2,
+          "dynamicRange": 29.7,
+          "silencePeriods": 18,
+          "totalSilenceSec": 32.9,
+          "speechRatioPercent": "14.7",
+          "micProximity": "mid_range"
+        },
+        "segments": 0,
+        "avgNoSpeechProb": 0.1,
+        "language": "auto-detected",
+        "attribution": {
+          "raw": "1. **SPEAKER_TYPE**: INVESTIGATOR_NARRATING - The investigator is directly addressing the recording device, indicating deliberate documentation of observations.\n\n2. **SPEAKER_COUNT**: 1 - The recording features a single voice, that of the investigator.\n\n3. **VOICE_CHARACTERISTICS**: Male, neutral tone, mid-range distance from the mic, emotional state appears calm and focused.\n\n4. **FORENSIC_SIGNIFICANCE**: The recording captures the investigator's attempt to document vocal patterns, which may be relevant for analyzing voice characteristics in the context of surveillance. The phrase \"you can see the pattern in your voice\" suggests an analytical approach to the audio.\n\n5. **CONFIDENCE**: HIGH - The clear intent of the investigator to document and the nature of the speech strongly support the attribution as narration.",
+          "speakerType": "INVESTIGATOR_NARRATING - The investigator is directly addressing the recording device, indicating deliberate documentation of observations.",
+          "speakerCount": "1 - The recording features a single voice, that of the investigator.",
+          "voiceCharacteristics": "Male, neutral tone, mid-range distance from the mic, emotional state appears calm and focused.",
+          "forensicSignificance": "The recording captures the investigator's attempt to document vocal patterns, which may be relevant for analyzing voice characteristics in the context of surveillance. The phrase \"you can see the patt",
+          "confidence": "HIGH - The clear intent of the investigator to document and the nature of the speech strongly support the attribution as narration."
+        },
+        "analyzedAt": "2026-05-22T05:20:09.694Z"
+      }
     },
     "Voice_260314_155243_1779421051824.mp3": {
       "transcript": "I'm going to try to record you through this. You can see the pattern in your voice.\n",

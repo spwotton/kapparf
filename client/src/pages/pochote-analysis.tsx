@@ -10,10 +10,46 @@ interface MediaIndex {
   audio: string[];
 }
 
+interface AcousticStats {
+  duration: string;
+  durSec: number;
+  meanVol: number;
+  maxVol: number;
+  dynamicRange: number;
+  silencePeriods: number;
+  totalSilenceSec: number;
+  speechRatioPercent: string;
+  micProximity: "very_close_mic" | "close_mic" | "mid_range" | "distant_background" | "unknown";
+  error?: string;
+}
+
+interface ForensicsAttribution {
+  raw: string;
+  speakerType: string;
+  speakerCount: string;
+  voiceCharacteristics: string;
+  forensicSignificance: string;
+  confidence: string;
+  model?: string;
+  provider?: string;
+  error?: string;
+}
+
+interface ForensicsResult {
+  acoustic: AcousticStats;
+  segments: number;
+  avgNoSpeechProb: number;
+  language: string;
+  attribution: ForensicsAttribution;
+  analysisModel?: string;
+  analysisProvider?: string;
+  analyzedAt: string;
+}
+
 interface PreResults {
   photos: Record<string, string>;
   frames: Record<string, { analysis: string }>;
-  audio: Record<string, { transcript?: string; sizeMB?: string }>;
+  audio: Record<string, { transcript?: string; sizeMB?: string; forensics?: ForensicsResult }>;
   synthesis?: string;
   generatedAt?: string;
 }
@@ -192,60 +228,188 @@ function ClipCard({ clip, frames, analysis, onAnalyze, running }: {
 }
 
 // ─── AUDIO ROW ────────────────────────────────────────────────────────────────
-function AudioRow({ file, transcript, onTranscribe, running, onManualSave }: {
+const PROXIMITY_LABEL: Record<string, { label: string; color: string }> = {
+  very_close_mic:    { label: "VERY CLOSE MIC", color: "text-red-400 border-red-900 bg-red-950/30" },
+  close_mic:         { label: "CLOSE MIC", color: "text-orange-400 border-orange-900 bg-orange-950/20" },
+  mid_range:         { label: "MID-RANGE", color: "text-yellow-400 border-yellow-900 bg-yellow-950/20" },
+  distant_background:{ label: "BACKGROUND", color: "text-blue-400 border-blue-900 bg-blue-950/20" },
+  unknown:           { label: "UNKNOWN", color: "text-gray-500 border-gray-700 bg-gray-900" },
+};
+
+const SPEAKER_TYPE_COLOR: Record<string, string> = {
+  INVESTIGATOR_NARRATING: "text-green-400",
+  CONVERSATION_PARTICIPANT: "text-yellow-400",
+  OVERHEARD_THIRD_PARTY: "text-orange-400",
+  AMBIENT_ONLY: "text-blue-400",
+  MIXED: "text-purple-400",
+};
+
+function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, running, forensicsRunning, onManualSave }: {
   file: string;
   transcript?: string;
+  forensics?: ForensicsResult;
   onTranscribe: () => void;
+  onForensics: () => void;
   running: boolean;
+  forensicsRunning: boolean;
   onManualSave: (text: string) => void;
 }) {
   const [manualMode, setManualMode] = useState(false);
   const [manualText, setManualText] = useState(transcript || "");
   const [expanded, setExpanded] = useState(false);
+  const [showForensics, setShowForensics] = useState(false);
 
   const hasTranscript = !!transcript && !transcript.startsWith("[error");
   const isError = transcript?.startsWith("[error");
+  const hasForensics = !!forensics?.acoustic && !forensics.acoustic.error;
+  const ac = forensics?.acoustic;
+  const prox = ac ? PROXIMITY_LABEL[ac.micProximity] ?? PROXIMITY_LABEL.unknown : null;
+  const attr = forensics?.attribution;
+  const speakerTypeKey = attr?.speakerType?.trim().toUpperCase().replace(/\s+/g, "_");
 
   return (
     <div className="border border-gray-800 rounded-lg bg-gray-900/30" data-testid={`audio-row-${file}`}>
-      <div className="px-4 py-3 flex items-center justify-between">
-        <div className="min-w-0">
+      {/* ── HEADER ROW ── */}
+      <div className="px-4 py-3 flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
           <div className="text-[10px] font-mono font-bold text-gray-200 truncate">{clipLabel(file.replace(".mp3", ""))}</div>
-          <div className="flex items-center gap-2 mt-0.5">
+          <div className="flex items-center gap-2 mt-1 flex-wrap">
             <audio src={`/pochote/audio/${file}`} controls
               className="h-5 opacity-60 hover:opacity-100 transition-opacity"
               style={{ width: "160px" }} />
             {hasTranscript && (
               <span className="text-[7px] font-mono px-1.5 py-0.5 bg-amber-950/60 border border-amber-900 text-amber-500 rounded">✓ transcribed</span>
             )}
+            {hasForensics && prox && (
+              <span className={`text-[7px] font-mono px-1.5 py-0.5 border rounded ${prox.color}`}>{prox.label}</span>
+            )}
+            {hasForensics && attr?.speakerType && (
+              <span className={`text-[7px] font-mono ${SPEAKER_TYPE_COLOR[speakerTypeKey ?? ""] ?? "text-gray-400"}`}>
+                {attr.speakerType.trim()}
+              </span>
+            )}
           </div>
+          {/* Quick acoustic bar */}
+          {hasForensics && ac && (
+            <div className="flex items-center gap-3 mt-1.5 flex-wrap">
+              <span className="text-[8px] font-mono text-gray-600">dur <span className="text-gray-400">{ac.duration}</span></span>
+              <span className="text-[8px] font-mono text-gray-600">mean <span className="text-gray-400">{ac.meanVol}dB</span></span>
+              <span className="text-[8px] font-mono text-gray-600">speech <span className="text-gray-400">{ac.speechRatioPercent}%</span></span>
+              <span className="text-[8px] font-mono text-gray-600">lang <span className="text-gray-400">{forensics?.language}</span></span>
+            </div>
+          )}
         </div>
-        <div className="flex items-center gap-2 shrink-0 ml-3">
+
+        <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
           {hasTranscript && (
             <button onClick={() => setExpanded(e => !e)}
               className="text-[8px] font-mono px-2 py-1 border border-gray-700 text-gray-500 hover:border-gray-500 hover:text-gray-300 transition-colors">
-              {expanded ? "collapse" : "show"}
+              {expanded ? "▲ text" : "▼ text"}
+            </button>
+          )}
+          {hasForensics && (
+            <button onClick={() => setShowForensics(f => !f)}
+              className="text-[8px] font-mono px-2 py-1 border border-cyan-900 text-cyan-600 hover:border-cyan-700 hover:text-cyan-400 transition-colors">
+              {showForensics ? "▲ forensics" : "▼ forensics"}
             </button>
           )}
           <button onClick={() => setManualMode(m => !m)}
             className="text-[8px] font-mono px-2 py-1 border border-gray-700 text-gray-500 hover:border-gray-500 hover:text-gray-300 transition-colors">
-            ✏ manual
+            ✏
+          </button>
+          <button onClick={onForensics} disabled={forensicsRunning}
+            data-testid={`btn-forensics-${file}`}
+            className={`text-[9px] font-mono px-2 py-1.5 border transition-colors ${
+              forensicsRunning ? "border-gray-700 text-gray-600 cursor-not-allowed" :
+              hasForensics ? "border-cyan-900 text-cyan-700 hover:bg-cyan-950/20" :
+              "border-cyan-800 text-cyan-500 hover:border-cyan-600"
+            }`}>
+            {forensicsRunning ? "analysing…" : hasForensics ? "↺ reanalyse" : "⊕ forensics"}
           </button>
           <button onClick={onTranscribe} disabled={running}
             data-testid={`btn-transcribe-${file}`}
-            className={`text-[9px] font-mono px-3 py-1.5 border transition-colors ${
+            className={`text-[9px] font-mono px-2 py-1.5 border transition-colors ${
               running ? "border-gray-700 text-gray-600 cursor-not-allowed" :
               hasTranscript ? "border-amber-900 text-amber-600 hover:bg-amber-950/20" :
               isError ? "border-red-900 text-red-500 hover:border-red-700" :
               "border-gray-500 text-gray-300 hover:border-gray-200"
             }`}>
-            {running ? "transcribing…" : hasTranscript ? "↺ redo" : "▶ transcribe"}
+            {running ? "…" : hasTranscript ? "↺" : "▶ transcribe"}
           </button>
         </div>
       </div>
 
+      {/* ── FORENSICS PANEL ── */}
+      {showForensics && hasForensics && (
+        <div className="px-4 pb-4 border-t border-gray-800/60">
+          <div className="mt-3 grid grid-cols-1 gap-3">
+            {/* Acoustic stats */}
+            <div className="bg-gray-950 border border-cyan-900/40 rounded p-3">
+              <div className="text-[8px] font-mono text-cyan-700 mb-2 tracking-widest">ACOUSTIC SIGNAL ANALYSIS · ffmpeg</div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+                {[
+                  ["Duration", ac?.duration],
+                  ["Mean Vol", `${ac?.meanVol} dBFS`],
+                  ["Max Vol", `${ac?.maxVol} dBFS`],
+                  ["Dynamic Range", `${ac?.dynamicRange} dB`],
+                  ["Silence Periods", String(ac?.silencePeriods)],
+                  ["Total Silence", `${ac?.totalSilenceSec}s`],
+                  ["Speech Ratio", `${ac?.speechRatioPercent}%`],
+                  ["Mic Proximity", prox?.label ?? "—"],
+                  ["Segments", String(forensics?.segments)],
+                  ["No-Speech Prob", forensics?.avgNoSpeechProb?.toFixed(3)],
+                  ["Language", forensics?.language],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex gap-2">
+                    <span className="text-[8px] font-mono text-gray-600 w-24 shrink-0">{k}</span>
+                    <span className="text-[8px] font-mono text-gray-300">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Voice attribution */}
+            {attr && !attr.error && (
+              <div className="bg-gray-950 border border-purple-900/40 rounded p-3">
+                <div className="text-[8px] font-mono text-purple-700 mb-2 tracking-widest flex items-center gap-2">
+                  <span>VOICE ATTRIBUTION</span>
+                  {forensics?.analysisProvider === "gemini" ? (
+                    <span className="text-[7px] px-1.5 py-0.5 bg-blue-950/60 border border-blue-700 text-blue-400 rounded font-mono">
+                      ★ {forensics.analysisModel ?? "gemini"} · native audio
+                    </span>
+                  ) : forensics?.analysisProvider === "gemini-text" ? (
+                    <span className="text-[7px] px-1.5 py-0.5 bg-blue-950/40 border border-blue-900 text-blue-500 rounded font-mono">
+                      {forensics.analysisModel ?? "gemini"} · text
+                    </span>
+                  ) : (
+                    <span className="text-[7px] px-1.5 py-0.5 bg-gray-900 border border-gray-700 text-gray-500 rounded font-mono">
+                      {forensics?.analysisModel ?? "gpt-4o-mini"} · fallback
+                    </span>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  {[
+                    ["Speaker Type", attr.speakerType],
+                    ["Speaker Count", attr.speakerCount],
+                    ["Voice Characteristics", attr.voiceCharacteristics],
+                    ["Forensic Significance", attr.forensicSignificance],
+                    ["Confidence", attr.confidence],
+                  ].filter(([, v]) => v).map(([k, v]) => (
+                    <div key={k}>
+                      <div className="text-[7px] font-mono text-gray-600 uppercase tracking-wider">{k}</div>
+                      <div className="text-[10px] font-mono text-gray-300 leading-relaxed mt-0.5">{v}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── TRANSCRIPT ── */}
       {expanded && hasTranscript && (
-        <div className="px-4 pb-3">
+        <div className="px-4 pb-3 border-t border-gray-800/60 pt-3">
           <div className="bg-gray-950 border border-gray-800 rounded p-3">
             <div className="text-[8px] font-mono text-amber-600 mb-1.5">TRANSCRIPT · gpt-4o-mini-transcribe</div>
             <p className="text-[11px] font-mono text-gray-300 leading-relaxed whitespace-pre-wrap">{transcript}</p>
@@ -253,9 +417,10 @@ function AudioRow({ file, transcript, onTranscribe, running, onManualSave }: {
         </div>
       )}
 
+      {/* ── MANUAL INPUT ── */}
       {manualMode && (
-        <div className="px-4 pb-3">
-          <div className="text-[8px] font-mono text-gray-600 mb-1">Manual transcription (enter what you hear):</div>
+        <div className="px-4 pb-3 border-t border-gray-800/60 pt-3">
+          <div className="text-[8px] font-mono text-gray-600 mb-1">Manual transcription:</div>
           <textarea
             value={manualText}
             onChange={e => setManualText(e.target.value)}
@@ -268,7 +433,7 @@ function AudioRow({ file, transcript, onTranscribe, running, onManualSave }: {
             <button onClick={() => { onManualSave(manualText); setManualMode(false); setExpanded(true); }}
               className="text-[9px] font-mono px-3 py-1.5 border border-gray-500 text-gray-300 hover:border-gray-200 transition-colors"
               data-testid={`btn-save-manual-${file}`}>
-              save transcript
+              save
             </button>
           </div>
         </div>
@@ -319,6 +484,8 @@ export default function PochoteAnalysisPage() {
   const [liveAnalysis, setLiveAnalysis] = useState<Record<string, string>>({});
   const [runningIds, setRunningIds] = useState<Set<string>>(new Set());
   const [transcripts, setTranscripts] = useState<TranscriptState>({});
+  const [forensicsData, setForensicsData] = useState<Record<string, ForensicsResult>>({});
+  const [forensicsRunning, setForensicsRunning] = useState<Set<string>>(new Set());
 
   const { data: media } = useQuery<MediaIndex>({ queryKey: ["/api/pochote/media"] });
   const { data: preResults } = useQuery<PreResults>({
@@ -326,16 +493,19 @@ export default function PochoteAnalysisPage() {
     staleTime: 60_000,
   });
 
-  // Seed transcripts from pre-computed results
+  // Seed transcripts + forensics from pre-computed results
   useEffect(() => {
     if (!preResults?.audio) return;
     const seed: TranscriptState = {};
+    const fseed: Record<string, ForensicsResult> = {};
     for (const [f, d] of Object.entries(preResults.audio)) {
       if (d.transcript && !d.transcript.startsWith("[error")) {
         seed[f] = { text: d.transcript, source: "computed" };
       }
+      if (d.forensics) fseed[f] = d.forensics;
     }
     setTranscripts(prev => ({ ...seed, ...prev }));
+    setForensicsData(prev => ({ ...fseed, ...prev }));
   }, [preResults]);
 
   const startRunning = (id: string) => setRunningIds(s => new Set([...s, id]));
@@ -364,6 +534,33 @@ export default function PochoteAnalysisPage() {
     } catch (e: any) {
       toast({ title: "Transcription error", description: e.message, variant: "destructive" });
     } finally { stopRunning(file); }
+  };
+
+  const runForensics = async (file: string) => {
+    setForensicsRunning(s => new Set([...s, file]));
+    try {
+      const r = await apiRequest("POST", "/api/pochote/audio-forensics", { file });
+      const data = await r.json();
+      if (data.error) throw new Error(data.error);
+      setForensicsData(prev => ({ ...prev, [file]: {
+        acoustic: data.acoustic,
+        segments: data.segments,
+        avgNoSpeechProb: data.avgNoSpeechProb,
+        language: data.language,
+        attribution: data.attribution,
+        analysisModel: data.analysisModel,
+        analysisProvider: data.analysisProvider,
+        analyzedAt: new Date().toISOString(),
+      }}));
+      if (data.transcript) {
+        setTranscripts(prev => ({ ...prev, [file]: { text: data.transcript, source: "live" } }));
+      }
+      toast({ title: "Forensics complete", description: file.replace(".mp3", "") });
+    } catch (e: any) {
+      toast({ title: "Forensics error", description: e.message, variant: "destructive" });
+    } finally {
+      setForensicsRunning(s => { const n = new Set(s); n.delete(file); return n; });
+    }
   };
 
   const saveManual = (file: string, text: string) => {
@@ -580,8 +777,11 @@ export default function PochoteAnalysisPage() {
                 key={f}
                 file={f}
                 transcript={transcripts[f]?.text}
+                forensics={forensicsData[f]}
                 onTranscribe={() => transcribeAudio(f)}
+                onForensics={() => runForensics(f)}
                 running={runningIds.has(f)}
+                forensicsRunning={forensicsRunning.has(f)}
                 onManualSave={(text) => saveManual(f, text)}
               />
             ))}

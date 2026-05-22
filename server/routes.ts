@@ -39,6 +39,7 @@ import multer from "multer";
 import { execFile } from "child_process";
 import { openai as audioOpenAI } from "./replit_integrations/audio/client";
 import { toFile as audioToFile } from "openai";
+import { geminiAnalyzeAudio, geminiGenerate, geminiStatus, getGeminiClient, GEMINI_MODELS } from "./gemini-router";
 import {
   runForensicAnalysis, analyzePcap, scanGitHubRepos, getForensicReports,
   getPcapUploads, startHypervisor, stopHypervisor, getHypervisorStatus,
@@ -5624,6 +5625,205 @@ End with a SUMMARY section listing the top findings.`;
       existing.audio[file] = { transcript, sizeMB: sizeMB.toFixed(1) };
       fs.writeFileSync(resultsPath, JSON.stringify(existing, null, 2));
       res.json({ file, transcript, sizeMB: sizeMB.toFixed(1), model: "gpt-4o-mini-transcribe" });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Audio forensics — acoustic analysis + verbose transcription + voice attribution
+  app.post("/api/pochote/audio-forensics", async (req, res) => {
+    try {
+      const { file } = req.body as { file: string };
+      if (!file) return res.status(400).json({ error: "no file" });
+      const fp = nodePath.join(POCHOTE_BASE, "audio", file);
+      if (!fs.existsSync(fp)) return res.status(404).json({ error: "file not found" });
+
+      const buf = fs.readFileSync(fp);
+      const sizeMB = (buf.length / 1048576).toFixed(2);
+
+      // 1. ffmpeg acoustic analysis
+      const { execSync } = await import("child_process");
+      let acoustic: Record<string, any> = { error: "ffmpeg unavailable" };
+      try {
+        const ffOut = execSync(
+          `ffmpeg -i ${JSON.stringify(fp)} -af "volumedetect,silencedetect=noise=-35dB:d=0.3" -f null - 2>&1`,
+          { timeout: 12000 }
+        ).toString();
+        const dur = (ffOut.match(/Duration:\s*([\d:\.]+)/) || [])[1] || "?";
+        const meanVol = parseFloat((ffOut.match(/mean_volume:\s*([\-\d\.]+)/) || [])[1] || "0");
+        const maxVol = parseFloat((ffOut.match(/max_volume:\s*([\-\d\.]+)/) || [])[1] || "0");
+        const silenceEnds = [...ffOut.matchAll(/silence_duration:\s*([\d\.]+)/g)].map(m => parseFloat(m[1]));
+        const totalSilence = silenceEnds.reduce((a, b) => a + b, 0);
+        const silencePeriods = silenceEnds.length;
+        // Parse duration to seconds
+        const durParts = dur.split(":").map(Number);
+        const durSec = durParts.length === 3 ? durParts[0]*3600 + durParts[1]*60 + durParts[2] : 0;
+        const speechRatio = durSec > 0 ? Math.max(0, ((durSec - totalSilence) / durSec * 100)).toFixed(1) : "?";
+        // Classify by mean volume
+        let micProximity = "unknown";
+        if (meanVol > -25) micProximity = "very_close_mic";
+        else if (meanVol > -30) micProximity = "close_mic";
+        else if (meanVol > -36) micProximity = "mid_range";
+        else micProximity = "distant_background";
+        acoustic = { duration: dur, durSec, meanVol, maxVol, dynamicRange: +(maxVol - meanVol).toFixed(1), silencePeriods, totalSilenceSec: +totalSilence.toFixed(1), speechRatioPercent: speechRatio, micProximity };
+      } catch (e: any) { acoustic = { error: e.message.slice(0, 80) }; }
+
+      // 2. Transcription via gpt-4o-mini-transcribe (reliable Replit proxy)
+      let transcript = "";
+      let segments: any[] = [];
+      let avgNoSpeechProb = 0.0;
+      let language = "unknown";
+      try {
+        if (buf.length < 25 * 1024 * 1024) {
+          const fileObj = await audioToFile(buf, file, { type: "audio/mpeg" });
+          const tResult = await audioOpenAI.audio.transcriptions.create({
+            file: fileObj, model: "gpt-4o-mini-transcribe", response_format: "text",
+          } as any);
+          transcript = typeof tResult === "string" ? tResult : (tResult as any).text ?? "";
+          language = "auto-detected";
+          avgNoSpeechProb = transcript.trim().length < 5 ? 0.9 : 0.1;
+        }
+      } catch (e: any) { transcript = "[transcription unavailable]"; }
+
+      // 3. Voice attribution — Gemini native audio first (actually listens), fallback to gpt-4o-mini text
+      const FORENSIC_SYSTEM = `You are a forensic audio analyst. The recording was made on the investigator's own iPhone at Hotel Pochote Grande, Jacó, Costa Rica during a documented surveillance investigation.`;
+
+      const attributionPrompt = `You are a forensic audio analyst. The recording device is the investigator's own iPhone.
+
+FILE: ${file}
+SIZE: ${sizeMB} MB
+ACOUSTIC STATS:
+  Duration: ${acoustic.duration}
+  Mean volume: ${acoustic.meanVol} dBFS
+  Max volume: ${acoustic.maxVol} dBFS
+  Dynamic range: ${acoustic.dynamicRange} dB
+  Silence periods: ${acoustic.silencePeriods}
+  Total silence: ${acoustic.totalSilenceSec}s
+  Speech ratio: ${acoustic.speechRatioPercent}%
+  Mic proximity classification: ${acoustic.micProximity}
+
+TRANSCRIPT: "${transcript.slice(0, 800)}"
+AVG NO-SPEECH PROBABILITY: ${avgNoSpeechProb.toFixed(3)} (>0.5 = likely no speech)
+LANGUAGE DETECTED: ${language}
+
+SEGMENT DETAILS (first 20):
+${segSummary || "(none)"}
+
+CONTEXT: Investigator (male) is documenting covert surveillance activity at Hotel Pochote Grande, Jacó, Costa Rica. Recordings may be:
+A) Investigator narrating directly INTO their phone (close mic, deliberate documentation)
+B) Investigator recording an overheard conversation they were part of (mixed proximity)
+C) Ambient/covert capture of third-party speech (distant mic, not addressed to phone)
+D) Ambient noise / no intelligible speech
+
+Provide a concise forensic attribution:
+1. SPEAKER_TYPE: one of [INVESTIGATOR_NARRATING, CONVERSATION_PARTICIPANT, OVERHEARD_THIRD_PARTY, AMBIENT_ONLY, MIXED]
+2. SPEAKER_COUNT: estimated number of distinct voices
+3. VOICE_CHARACTERISTICS: gender, tone, distance from mic, emotional state if apparent
+4. FORENSIC_SIGNIFICANCE: what this recording documents, any phrases of note
+5. CONFIDENCE: LOW/MEDIUM/HIGH with brief reason
+
+Keep each field to 1-2 sentences. Be specific, clinical, forensic.`;
+
+      // parse attribution from raw LLM text regardless of formatting style
+      const extractField = (raw: string, labels: string[]) => {
+        for (const label of labels) {
+          const pattern = new RegExp(`(?:\\*{0,2}\\d*\\.?\\s*${label}\\*{0,2})[:\\s]+([^\\n]{5,250})`, "i");
+          const m = raw.match(pattern);
+          if (m) return m[1].replace(/\*\*/g, "").trim();
+        }
+        return "";
+      };
+      const parseAttribution = (raw: string, model: string, provider: string) => {
+        const r: any = {
+          raw, model, provider,
+          speakerType: extractField(raw, ["SPEAKER_TYPE", "SPEAKER TYPE"]),
+          speakerCount: extractField(raw, ["SPEAKER_COUNT", "SPEAKER COUNT"]),
+          voiceCharacteristics: extractField(raw, ["VOICE_CHARACTERISTICS", "VOICE CHARACTERISTICS", "VOICE"]),
+          forensicSignificance: extractField(raw, ["FORENSIC_SIGNIFICANCE", "FORENSIC SIGNIFICANCE", "FORENSIC"]),
+          confidence: extractField(raw, ["CONFIDENCE"]),
+        };
+        if (!r.speakerType && !r.forensicSignificance) r.forensicSignificance = raw.slice(0, 600);
+        return r;
+      };
+
+      let attribution: any = { error: "analysis unavailable" };
+      let analysisModel = "gpt-4o-mini";
+      let analysisProvider = "openai-fallback";
+
+      // PATH A — Gemini native audio (actually listens to the recording)
+      const GEMINI_AUDIO_PROMPT = `You are a forensic audio analyst for a SIGINT platform. This recording was made on the investigator's iPhone at Hotel Pochote Grande, Jacó, Costa Rica.
+
+Provide a forensic attribution with these exact labels:
+1. SPEAKER_TYPE: [INVESTIGATOR_NARRATING / CONVERSATION_PARTICIPANT / OVERHEARD_THIRD_PARTY / AMBIENT_ONLY / MIXED]
+2. SPEAKER_COUNT: number of distinct voices heard
+3. VOICE_CHARACTERISTICS: gender, distance from mic, tone, accent, emotional state
+4. FORENSIC_SIGNIFICANCE: what this recording documents forensically, any key phrases
+5. CONFIDENCE: LOW/MEDIUM/HIGH — brief reason
+
+Acoustic pre-analysis: duration=${acoustic.duration}, mean_vol=${acoustic.meanVol}dBFS, speech_ratio=${acoustic.speechRatioPercent}%, mic_proximity=${acoustic.micProximity}
+Transcript: "${transcript.slice(0, 400)}"
+
+Listen carefully to the actual audio. Be specific and clinical.`;
+
+      if (buf.length < 20 * 1024 * 1024) { // Gemini audio limit ~20MB
+        const gemRes = await geminiAnalyzeAudio(buf, "audio/mpeg", GEMINI_AUDIO_PROMPT, {
+          maxTokens: 600, systemInstruction: FORENSIC_SYSTEM,
+        });
+        if (gemRes) {
+          attribution = parseAttribution(gemRes.text, gemRes.model, "gemini");
+          analysisModel = gemRes.model;
+          analysisProvider = "gemini";
+        }
+      }
+
+      // PATH B — Gemini text analysis (if audio too large or Gemini returned nothing)
+      if (attribution.error || (!attribution.speakerType && !attribution.forensicSignificance)) {
+        const gemText = await geminiGenerate(
+          [{ text: attributionPrompt }],
+          { maxTokens: 500, systemInstruction: FORENSIC_SYSTEM }
+        );
+        if (gemText) {
+          attribution = parseAttribution(gemText.text, gemText.model, "gemini-text");
+          analysisModel = gemText.model;
+          analysisProvider = "gemini-text";
+        }
+      }
+
+      // PATH C — gpt-4o-mini via Replit proxy (guaranteed fallback)
+      if (attribution.error || (!attribution.speakerType && !attribution.forensicSignificance)) {
+        try {
+          const r = await (audioOpenAI as any).chat.completions.create({
+            model: "gpt-4o-mini", max_tokens: 400, temperature: 0,
+            messages: [{ role: "user", content: attributionPrompt }],
+          });
+          const raw = r.choices[0]?.message?.content ?? "";
+          attribution = parseAttribution(raw, "gpt-4o-mini", "openai-fallback");
+          analysisModel = "gpt-4o-mini";
+          analysisProvider = "openai-fallback";
+        } catch (e: any) { attribution = { error: e.message.slice(0, 80) }; }
+      }
+
+      // 4. Persist to results.json
+      const resultsPath = nodePath.join(POCHOTE_BASE, "results.json");
+      let existing: any = {};
+      try { existing = JSON.parse(fs.readFileSync(resultsPath, "utf-8")); } catch {}
+      if (!existing.audio) existing.audio = {};
+      if (!existing.audio[file]) existing.audio[file] = {};
+      existing.audio[file].transcript = transcript || existing.audio[file].transcript;
+      existing.audio[file].forensics = {
+        acoustic, segments: segments.length, avgNoSpeechProb: +avgNoSpeechProb.toFixed(3),
+        language, attribution, analysisModel, analysisProvider, analyzedAt: new Date().toISOString(),
+      };
+      existing.audio[file].sizeMB = sizeMB;
+      fs.writeFileSync(resultsPath, JSON.stringify(existing, null, 2));
+
+      res.json({ file, acoustic, transcript, segments: segments.length, avgNoSpeechProb: +avgNoSpeechProb.toFixed(3), language, attribution, analysisModel, analysisProvider });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // Gemini model status — which model is active
+  app.get("/api/gemini/status", async (_req, res) => {
+    try {
+      const status = await geminiStatus();
+      res.json(status);
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
