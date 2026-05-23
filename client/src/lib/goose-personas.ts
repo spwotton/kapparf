@@ -1,6 +1,6 @@
 // ─── LICENSE PLATE SYSTEM ─────────────────────────────────────────────────────
 // Flip this ONE boolean to switch every alias to the real name everywhere.
-export const REVEAL_NAMES = false;
+export const REVEAL_NAMES = true;
 
 export const CAST = {
   DAVE:    { alias: "Dave Mira",           real: "Pablo Mora" },
