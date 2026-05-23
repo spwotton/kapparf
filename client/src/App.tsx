@@ -64,6 +64,7 @@ import DroneBlogPage from "@/pages/drone-blog";
 import PochoteAnalysisPage from "@/pages/pochote-analysis";
 import GazetteRefinerPage from "@/pages/gazette-refiner";
 import HyperobjectsPage from "@/pages/hyperobjects";
+import AtlasObservatoryPage from "@/pages/atlas-observatory";
 
 function Router() {
   return (
@@ -114,6 +115,7 @@ function Router() {
       <Route path="/video-forensics" component={VideoForensicsPage} />
       <Route path="/goose" component={GooseGazettePage} />
       <Route path="/hyperobjects" component={HyperobjectsPage} />
+      <Route path="/atlas" component={AtlasObservatoryPage} />
       <Route component={NotFound} />
     </Switch>
   );

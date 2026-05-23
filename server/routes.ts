@@ -7154,6 +7154,34 @@ export function registerGazetteIntelRoutes(app: express.Express) {
     }
   });
 
+  // ─── 3I/ATLAS Observatory ──────────────────────────────────────────────────
+  app.get("/api/3i-atlas/spectrum", async (_req, res) => {
+    try {
+      const filePath = nodePath.join(process.cwd(), "docs/evidence/3i-atlas/SOAR_spectroscopy.dat");
+      const raw = fs.readFileSync(filePath, "utf8");
+      const lines = raw.split("\n").filter(l => l.trim() && !l.startsWith("#"));
+      const points: any[] = [];
+      for (let i = 0; i < lines.length; i += 3) {
+        const cols = lines[i].trim().split(/\s+/);
+        if (cols.length < 16) continue;
+        const wl = parseFloat(cols[0]);
+        const sa = parseFloat(cols[10]);
+        const sol = parseFloat(cols[11]);
+        const uncSA = parseFloat(cols[14]);
+        if (isNaN(wl) || isNaN(sa)) continue;
+        points.push({
+          wl: Math.round(wl * 10) / 10,
+          sa: isNaN(sa) ? null : Math.round(sa * 10000) / 10000,
+          sol: isNaN(sol) ? null : Math.round(sol * 10000) / 10000,
+          unc: isNaN(uncSA) ? null : Math.round(uncSA * 10000) / 10000,
+        });
+      }
+      res.json({ ok: true, points, count: points.length });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   app.post("/api/goose/intel/publish/:id", async (req, res) => {
     try {
       const { publishDraft } = await import("./gazette-intel");
