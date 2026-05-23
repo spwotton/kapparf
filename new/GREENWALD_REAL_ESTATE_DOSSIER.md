@@ -140,7 +140,7 @@ This is consistent with the activity CSV showing many near-identical Uber charge
 
 **Cable Tica AS27882** appears in activity log as user's main ISP. This is the same Cable Tica network where the fraud originated (different IP block, same carrier). Liberty CR (AS52228) technically operates Cable Tica-branded services per ARIN registrant j.medrano@libertycr.com.
 
-**The implication:** The user's home internet provider (Cable Tica) is the same carrier that processed the $80K Uber fraud. Liberty CR operates both the infrastructure that hit the user financially AND provides the internet service the user uses daily.
+**The implication:** Samuel's home internet provider (Cable Tica) is the same carrier that processed the $80K Uber fraud. Liberty CR operates both the infrastructure that hit Samuel financially AND provides the internet service Samuel uses daily.
 
 ### Surveillance Detection App Purchase Timeline
 
@@ -156,7 +156,7 @@ This is consistent with the activity CSV showing many near-identical Uber charge
 | Nov 9, 2025 | NordVPN renewal ($131.18 USD) | VPN renewal |
 | Nov-Dec 2025 | Reverse Image Search (biweekly) | Facial recognition/OSINT of people encountered |
 
-**Key finding:** The surveillance detection behavior began **August 17, 2025** — months before the December 2025 Airbnb investigation escalation. The user was actively detecting hidden cameras, scanning Bluetooth (tracking devices), monitoring network traffic, and setting up virtual numbers starting in late summer 2025. This establishes a documented timeline of awareness that predates the most acute documented events.
+**Key finding:** The surveillance detection behavior began **August 17, 2025** — months before the December 2025 Airbnb investigation escalation. Samuel was actively detecting hidden cameras, scanning Bluetooth (tracking devices), monitoring network traffic, and setting up virtual numbers starting in late summer 2025. This establishes a documented timeline of awareness that predates the most acute documented events.
 
 ---
 
@@ -181,7 +181,7 @@ This is consistent with the activity CSV showing many near-identical Uber charge
 - Jonathan Smith had a referral arrangement **specifically with Ryan Streitelmeyer** for merchant processing
 - User was referred to Streitelmeyer **through** Jonathan Smith
 - Jonathan is the node who connected the Dorado Beach supplement network to the MPP/Streitelmeyer payment processing network
-- This referral is what led to the user submitting family identity documents to Streitelmeyer in 2019
+- This referral is what led to Samuel submitting family identity documents to Streitelmeyer in 2019
 
 
 ---
@@ -286,7 +286,7 @@ If V-SEK provides the security/monitoring infrastructure for Greenwald's propert
 
 ## CIA / INTELLIGENCE CLAIM — SOURCING NOTE
 
-User has **first-hand knowledge**: Greenwald stated this in conversation while intoxicated. This is the source. It is not in any public record for the Jaco Realty Michael Greenwald specifically. However:
+**Source:** Adam Harper told Samuel Wotton (the subject of this case) directly. Harper lives inside Greenwald's own Hermosa Palms development — he is not a casual acquaintance but someone embedded in Greenwald's social and residential circle. This is a **third-party disclosure from a proximate insider**, which is a more credible intelligence signal than a self-report. It is not in any public record for the Jaco Realty Michael Greenwald specifically. However:
 
 - GW School of Business (George Washington University) is a documented recruitment pipeline for CIA, DIA, and State Department
 - A CPA running $100M+ in real estate across two CR provinces while maintaining a Las Vegas phone number and active U.S. capital markets career background represents an unusual profile for a career real estate broker
@@ -302,9 +302,9 @@ User has **first-hand knowledge**: Greenwald stated this in conversation while i
 
 This is the thread that ties the Florida supplement industry directly into Greenwald's Costa Rica property empire.
 
-### Confirmed Chain: Brent → Adam Harper → User
+### Confirmed Chain: Brent → Adam Harper → Samuel
 
-The user did business with **Adam Harper** through **Brent**. Brent = **Brent Sheckler**, CEO & Co-Owner of Suppz Inc. This is confirmed via the Suppz advertising manager connection (Wotton) building Greenwald's website.
+**Samuel Wotton** (subject / case author) did business with **Adam Harper** through **Brent Sheckler**. Samuel was already working at Suppz.com as Advertising Manager under Sheckler — so this referral came through his own employer. Sheckler connected Samuel to Harper (a Suppz-adjacent supplement retailer living in Greenwald's development), and Greenwald separately hired Samuel to build his Hermosa Real website. Samuel therefore had **two independent entry points** into Greenwald's world: through the Suppz/Sheckler/Harper chain, and directly as a web development contractor.
 
 ### Brent Sheckler — Suppz.com CEO
 
@@ -338,7 +338,7 @@ Origin story: Sheckler started a small gym (Fennimore Fitness) to make ends meet
 | Amazon presence | GET FIT FAST SUPPLEMENTS on Amazon |
 | Costa Rica residence | **Hermosa Palms** (Greenwald's development) |
 
-Adam Harper is a Florida supplement retailer with an expired FL real estate broker license — living inside Greenwald's luxury gated beachfront community. He came into the user's network through Brent Sheckler (Suppz CEO).
+Adam Harper is a Florida supplement retailer with an expired FL real estate broker license — living inside Greenwald's luxury gated beachfront community. He came into Samuel's network through Brent Sheckler (Suppz CEO).
 
 ### The Full Suppz ↔ Greenwald Network Map
 
@@ -361,7 +361,7 @@ Hermosa Palms (Greenwald's development, Playa Hermosa)
 ```
 
 **The same supplement industry hub (Suppz/Sheckler) connects:**
-- The user (via Sheckler → Harper referral)
+- Samuel (via Sheckler → Harper referral)
 - The Greenwald web developer (Wotton, who is Suppz's advertising manager)
 - A Costa Rica surveillance company (V-SEK, built by Wotton)
 - A supplement retailer living inside Greenwald's luxury development (Harper)
@@ -385,7 +385,7 @@ Per user testimony:
 - **Dec 28, 2024:** User left **Casa Rexa** (42 Calle Norte Unidas, Jaco — Jaco Vacations property) and moved into **Greenwald's Breakwater condo**
 - **Shortly after:** **Michael Lipman** (Tickets of America, Miami) moved into **Greenwald's personal house** at Hermosa Palms
 - Lipman is the partner of **Jesse Talty** (Breakwater condo connection, Bill Kimball warning)
-- Lipman's presence at Greenwald's personal residence after the user vacated represents a transition of access — the same property network cycling occupants
+- Lipman's presence at Greenwald's personal residence after Samuel vacated represents a transition of access — the same property network cycling occupants
 
 ### Lipman Full Profile (Tickets of America)
 
