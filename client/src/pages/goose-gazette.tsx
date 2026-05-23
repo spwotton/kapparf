@@ -377,18 +377,37 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
         {article.id === "drone-investigation-2026" && (
           <div className="px-6 pt-4">
             <DroneInvestigationInfographic />
+
+            {/* Primary evidence video — 25s, March 2026, Hotel Pochote Grande */}
+            <div className="mb-5">
+              <div className="text-[9px] font-black tracking-[0.22em] text-gray-500 uppercase mb-2">Field Video — Exhibit A · March 2026 · Hotel Pochote Grande, North End</div>
+              <div className="relative w-full bg-black overflow-hidden" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  src="https://www.youtube.com/embed/8kv2xwucOt0?modestbranding=1&rel=0&playsinline=1&color=white&iv_load_policy=3"
+                  className="absolute inset-0 w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  data-testid="video-evidence-1"
+                  title="Surveillance footage — Hotel Pochote Grande north end, March 2026"
+                />
+              </div>
+              <p className="text-[9px] font-mono text-gray-400 mt-1">25 s · March 2026 · Hotel Pochote Grande, Jacó — single white-yellow point light, periodic cutoff pattern, above treeline</p>
+            </div>
+
+            {/* Corroborating video — 2022, Playa Hermosa */}
             <div className="mb-4">
-              <div className="text-[9px] font-black tracking-[0.22em] text-gray-500 uppercase mb-2">Field Video — Exhibit C</div>
-              <video
-                src="/evidence/surveillance_20260328.mp4"
-                controls
-                className="w-full border border-gray-200 bg-black"
-                style={{ maxHeight: 220 }}
-                data-testid="video-evidence-1"
-              >
-                Your browser does not support video playback.
-              </video>
-              <p className="text-[9px] font-mono text-gray-400 mt-1">surveillance_20260328.mp4 · 37 MB · March 28, 2026 · Hotel Pochote Grande, north end</p>
+              <div className="text-[9px] font-black tracking-[0.22em] text-gray-500 uppercase mb-2">Corroborating Record — Exhibit B · 2022 · Playa Hermosa</div>
+              <div className="relative w-full bg-black overflow-hidden" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  src="https://www.youtube.com/embed/tONcvH0fAeE?modestbranding=1&rel=0&playsinline=1&color=white&iv_load_policy=3"
+                  className="absolute inset-0 w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  data-testid="video-evidence-2"
+                  title="Aerial platform, Playa Hermosa, 2022"
+                />
+              </div>
+              <p className="text-[9px] font-mono text-gray-400 mt-1">2022 · Playa Hermosa, Puntarenas — identical operational profile documented four years prior; same airspace corridor</p>
             </div>
           </div>
         )}
