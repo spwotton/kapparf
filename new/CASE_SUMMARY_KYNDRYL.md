@@ -168,3 +168,42 @@ DSE WebNet training session (presenter: Edson Martendal, Deepsea Technical Suppo
 - Post-Guácima period
 - Raw IP (LinkType=101) — captured at protocol layer, not Ethernet
 
+
+---
+
+## 7. DSE TRAINING TRANSCRIPT — CLEAN ANALYSIS
+
+**Source:** SETECOM DSE WEBNET Training, Session 3 of series  
+**Presenter:** Edson Martendal, DeepSea Technical Support Engineer for Latin America  
+**Platform:** Zoom  
+**Setecom Coordinators named:** Mauricio, José Pablo
+
+### Confirmed Technical Capabilities
+
+| System | Detail | Forensic Significance |
+|---|---|---|
+| Modbus TCP/IP | Cleartext, port 502, RS-485 or RS-232 | Zero authentication — any LAN device can read/write generator registers |
+| SNMP v2 | Community strings: public/private; max 2 IP whitelist managers | Weak auth, v2 only (no v3 encryption) |
+| DSC Webnet | Free, 4-second refresh, unlimited accounts | No financial barrier to scale |
+| Gateway 890 MK-II | GSM + Ethernet + GPS simultaneously | Cellular uplink bypasses local LAN blocking; GPS = real-time asset tracking |
+| Dual-path comms | 335 controller confirmed to handle 890 gateway + 855 converter simultaneously | Redundant comms = no single point of failure |
+| Scale | Live walkthrough of 400+ generator account | Mora has root-level visibility of all generators |
+
+### Register Math (Modbus)
+`Register = (Page_hex × 256) + Offset`  
+Example: Page 0x166 (358 dec), Offset 0 → Register 42496  
+This formula is needed to map any parameter (power, battery voltage, fuel level) to a Modbus register for read/write access.
+
+### Operational Security Risk
+Default credentials documented as `Admin / Password1234`. Modbus TCP/IP on port 502 = unauthenticated cleartext. Any device on the same LAN segment can send Force Start / Force Stop / destructive commands to any generator in the fleet without credentials.
+
+---
+
+## 8. LIBERTY SIM + WIFI DUAL-PATH NOTE
+
+When a Liberty CR SIM is active in the phone while connected to WiFi:
+- Liberty's CGNAT stack (`10.215.173.1`) can appear in captures even when traffic routes primarily over WiFi
+- VoWiFi/IMS registration uses WiFi transport but Liberty infrastructure
+- Some apps (especially Liberty-linked services) may prefer the cellular path
+- **Conclusion:** Presence of `10.215.173.1` in a PCAP does not conclusively mean the device was on mobile data only — it confirms the Liberty SIM was active and partially routed
+
