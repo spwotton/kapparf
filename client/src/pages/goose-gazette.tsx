@@ -456,6 +456,30 @@ He has not been charged with anything in Costa Rica. He has not been accused of 
       img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80",
     },
     {
+      id: "wotton-geodetic",
+      tag: "INVESTIGATION",
+      headline: "USC Business Graduate's Annual Employment at an 11-Day Film Festival Appears to Have Funded Geodetic Surveys of All 400-Plus U.S. National Parks, a Melbourne Residency, and Solo Expeditions Into State Department–Flagged Regions; She Has Not Explained This",
+      subhead: "Alison Wotton, whose primary identified employer hosts a festival in Park City each January, has also logged 400-plus concerts, mapped terrain across the national park system, and most recently traveled to Mexico City to hike what she described as 'an avalanche mountain' alone. She has not responded to communications since.",
+      author: "Algernon Beak, Investigations",
+      date: "May 22, 2026",
+      body: `PARK CITY, UTAH / MEXICO CITY — The Sundance Film Festival runs approximately 11 days each January in Park City, Utah. Alison Wotton has listed it as her primary employment for several years running. She is a 2014 graduate of the USC Marshall School of Business. These are the inputs. The outputs are harder to reconcile.
+
+Prior to her current arrangement, Wotton logged several years at Amazon in Seattle, followed by six months at Warner Bros Records in Melbourne, Australia. Neither position appears to have led to a subsequent role in either city or industry. She returned from each. The returns were not explained in any public statement reviewed by the Gazette.
+
+In the years since, Wotton has documented visits to every unit of the U.S. National Park System — more than 400 sites across 50 states, two territories, and the District of Columbia. She has described the work as geodetic survey. Geodetic survey is the discipline of measuring and mapping Earth's surface with precision instruments, typically conducted by government agencies, academic research programs, or contracted survey firms operating under federal or state permits. The Gazette contacted four such institutions to ask whether Wotton had been engaged for fieldwork. None had a record of her.
+
+Alongside the national park project, Wotton has attended in excess of 400 concerts. The Gazette did not ask how one schedules both. It seemed like a lot.
+
+In the past two years, Wotton has made solo trips to Ecuador, Guatemala, and most recently Mexico, describing each as a hiking expedition. Ecuador's northeastern provinces were designated a zone of armed conflict by presidential decree in January 2024. Guatemala's western highlands carry a current State Department Level 2 advisory citing organized crime activity along primary corridor routes. Wotton completed both expeditions without documented incident. Her most recent trip brought her to Mexico City, where she indicated she planned to ascend what she described as "an avalanche mountain" by herself. The prominent peaks accessible from Mexico City include Popocatépetl — an active stratovolcano under continuous CENAPRED monitoring with a current exclusion radius — and Iztaccíhuatl, a dormant summit at 5,230 meters above sea level. Mexican civil protection regulations require guides on both. Documentation of the ascent has not appeared on any of her public platforms. The Gazette checked.
+
+Wotton was closely connected to a woman who died recently. By the account of family members and mutual acquaintances, this woman was among Wotton's longest-standing relationships — spanning several decades and including regular contact that others in the woman's life described as unusually consistent. Wotton was, by the accounts of those present in the final days, the last person outside the immediate household to see her. She has not responded to communications from the family since. "We've tried," said one family member who asked not to be identified. They did not say what trying had looked like.
+
+At the 2014 USC Marshall School of Business commencement — which Wotton attended as a graduating student — the keynote address was delivered by Elon Musk, who told the assembled graduates that if something mattered enough, one should pursue it even if the odds were not favorable. The Gazette did not ask Wotton about this. She has not responded to the Gazette either.
+
+Three outreach attempts were made through separate channels. Two generated read receipts. One did not. From the summit of Iztaccíhuatl, on a clear day, it is possible to see four Mexican states simultaneously. This information was not provided by Wotton. It is publicly available on the mountain's Wikipedia page.`,
+      img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80",
+    },
+    {
       id: "st-johns-thread",
       tag: "LOCAL",
       headline: "Decorated Veteran's Favorite Island Now Home to Charter Business Founded by His Best Man; Both Describe the Arrangement as Coincidental",
