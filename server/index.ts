@@ -191,6 +191,10 @@ app.use((req, res, next) => {
     },
   ]).catch(e => console.error("[GazetteIntel] article ingestion error:", e.message));
 
+  // Seed manually authored field-discovery articles (idempotent)
+  const { seedFieldDiscoveryArticles } = await import("./goose-seeds");
+  seedFieldDiscoveryArticles().catch(e => console.error("[GOOSE:SEED] error:", e.message));
+
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
