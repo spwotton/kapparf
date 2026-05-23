@@ -433,7 +433,20 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
         <div className="px-4 pb-3 border-t border-gray-800/60 pt-3">
           <div className="bg-gray-950 border border-gray-800 rounded p-3">
             <div className="text-[8px] font-mono text-amber-600 mb-1.5">TRANSCRIPT · gpt-4o-mini-transcribe</div>
-            <p className="text-[11px] font-mono text-gray-300 leading-relaxed whitespace-pre-wrap">{transcript}</p>
+            <div className="space-y-3">
+              {transcript.split(/\n\n+/).map((chunk, idx) => {
+                const tsMatch = chunk.match(/^\[(\d{2}:\d{2}[–-]\d{2}:\d{2})\]\n?([\s\S]*)$/);
+                if (tsMatch) {
+                  return (
+                    <div key={idx}>
+                      <span className="text-[9px] font-mono text-gray-600 tracking-widest select-none">[{tsMatch[1]}]</span>
+                      <p className="text-[11px] font-mono text-gray-300 leading-relaxed mt-0.5 whitespace-pre-wrap">{tsMatch[2].trim()}</p>
+                    </div>
+                  );
+                }
+                return <p key={idx} className="text-[11px] font-mono text-gray-300 leading-relaxed whitespace-pre-wrap">{chunk}</p>;
+              })}
+            </div>
           </div>
         </div>
       )}

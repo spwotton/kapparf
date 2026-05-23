@@ -5742,7 +5742,11 @@ End with a SUMMARY section listing the top findings.`;
           response_format: "text",
         });
         const text = (typeof result === "string" ? result : (result as any).text ?? "").trim();
-        if (text) parts.push(text);
+        if (text) {
+          const endSec = Math.min(startSec + CHUNK_SEC, durationSec);
+          const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+          parts.push(`[${fmt(startSec)}–${fmt(endSec)}]\n${text}`);
+        }
 
         try { fs.unlinkSync(chunkPath); } catch {}
       }
