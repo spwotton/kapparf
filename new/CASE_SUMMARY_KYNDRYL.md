@@ -207,3 +207,24 @@ When a Liberty CR SIM is active in the phone while connected to WiFi:
 - Some apps (especially Liberty-linked services) may prefer the cellular path
 - **Conclusion:** Presence of `10.215.173.1` in a PCAP does not conclusively mean the device was on mobile data only — it confirms the Liberty SIM was active and partially routed
 
+
+---
+
+## 9. CREDIT CARD FRAUD — SALVADOR, BAHIA ROUTING
+
+**Primary source:** Target's credit card statement (self-reported, May 2026)
+
+**Incident:** Duplicate/fraudulent transactions at **Fruteria Pueblo** (Costa Rica) processed through **Salvador, Bahia, Brazil** as the merchant acquirer location.
+
+**Cross-reference:**
+- Edson Martendal = DSE Technical Support Latin America, confirmed location: **Salvador, Bahia, Brazil**
+- Martendal conducted the HMORA67 DSE training session (Session 3 of series)
+- The SETECOM_DSE dossier independently flagged the $80K Amex fraud geography overlapping Salvador, Bahia
+- Two independent sources (credit card statement + prior dossier) both point to Salvador, Bahia as a financial routing node
+
+**What this means operationally:** A Costa Rican merchant (Fruteria Pueblo) routing card transactions through a Brazilian acquirer in Salvador, Bahia is anomalous — standard CR merchant processing uses local acquirers (Credomatic, BAC, Promerica) or US-based gateways. Routing through Salvador, Bahia specifically suggests either: (a) a Brazilian payment gateway is being used as a processing intermediary, or (b) the transaction descriptor is being spoofed and the actual processor is Brazil-based infrastructure shared with the DSE/Setecom distribution network.
+
+**Scott Ryan angle:** Ryan is documented in the dossier as "data trafficking, identity fraud" with alias "Scott Aaronson" and listed as FDLE Registered Sex Offender. A merchant processing infrastructure connection is plausible but unverified — flag for later, don't chase now.
+
+**STATUS:** Unverified — needs credit card statement documentation (screenshot/PDF of the transaction with merchant descriptor and processing geography)
+
