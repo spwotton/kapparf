@@ -438,21 +438,21 @@ function buildPlaceholders(): Article[] {
     {
       id: "scott-ryan-profile",
       tag: "LOCAL",
-      headline: "Canadian National Describes Jacó Lifestyle as 'Flexible'; Weekly Schedule Described by Observers as 'Surprisingly Regimented'",
-      subhead: "Subject reports no fixed employer, no fixed hours, and no fixed address. Associates note he is nonetheless reliably in specific places at specific times.",
+      headline: "Florida Expat, Resident of Jacó for 'Several Decades,' Describes Lifestyle as 'Flexible'; Weekly Schedule Described by Observers as 'Surprisingly Regimented'",
+      subhead: "Subject reports no fixed employer, no fixed hours, and no fixed commitments. Associates note he is nonetheless reliably in specific places at specific times.",
       author: "Algernon Beak, Investigations",
       date: "May 22, 2026",
-      body: `JACÓ, PUNTARENAS — Scott Ryan, a Canadian national who describes his occupation as "independent" and his residency status as "in progress," has maintained a presence in the greater Jacó area for a period that neighbors estimate at over two years, during which time he has been observed at consistent locations on what multiple sources describe as a schedule that, while unacknowledged, is legible to anyone paying attention.
+      body: `JACÓ, PUNTARENAS — A Florida-born expat who has resided in the greater Jacó area for what neighbors estimate at several decades describes his occupation as "independent" and his daily schedule as "whatever makes sense." Multiple sources describe the schedule as considerably more structured than that characterization implies.
 
 "He's there most mornings," said one source, who asked not to be named but described their vantage point as "fixed and elevated." "Same general window. He's not a tourist. Tourists don't have a regular spot."
 
-Ryan, reached by telephone, confirmed he lived in the area and described his activities as "varied." When asked to elaborate, he said elaboration wasn't something he was doing right now. He was polite about it.
+The subject, reached by telephone, confirmed he lived in the area and described his activities as "varied." When asked to elaborate, he said elaboration wasn't something he was doing right now. He was polite about it.
 
-A review of publicly available information produced a LinkedIn profile listing Ryan as a consultant in an industry not specified, recommendations from former colleagues who describe him as "results-oriented" and "effective in complex environments," and a profile photo in which he is not smiling but appears to be about to. The profile has not been updated since 2021.
+Sources familiar with the Jacó expat community describe the man as "well-connected" in the sense that he appears to know people across multiple unrelated social circles — a characteristic several contacts described as unusual in a town where social circles tend to be both small and sticky. One contact, who has herself lived in Jacó for nine years, said she had been introduced to him through three separate mutual acquaintances, each of whom believed they were the primary connection. She described this as "a specific kind of networking." She did not specify what kind.
 
-Sources familiar with the Jacó expat community describe Ryan as "well-connected" in the sense that he appears to know people across multiple unrelated social circles, which several contacts described as unusual in a town where social circles tend to be both small and sticky. One contact, who has lived in Jacó for nine years, said Ryan had been introduced to her through three separate mutual acquaintances, each of whom believed they were the primary connection. She described this as "a specific kind of networking." She did not say what kind.
+After several decades, the subject is not a newcomer to the area, which is itself notable: long-term residents of Jacó tend to be known, and known people tend to be legible. Multiple sources, when asked to describe him in detail, produced descriptions that were accurate in outline and thin on specifics. One source, after a long pause, said: "He's just around." This was the most complete characterization available.
 
-Ryan has not been charged with anything. He has not been accused of anything. He was nonetheless the subject of this article, which he declined to be quoted in further.`,
+He has not been charged with anything. He has not been accused of anything. He was nonetheless the subject of this article.`,
       img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80",
     },
     {
