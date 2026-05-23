@@ -998,6 +998,37 @@ function SectionRule({ label }: { label: string }) {
 
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
+// ─── BH53 THREAD MAP ────────────────────────────────────────────────────────
+const BH53_THREAD_MAP: Record<string, string> = {
+  "drone-jaco": "5iXVvU",
+  "maritime-bvi": "5V5MfG",
+  "veteran-network": "5232nu",
+  "geodetic-corridor": "AJ4ujc",
+  "property-network": "r8FMpG",
+  "expat-jurisdiction": "4LK22N",
+};
+
+// ─── GOLDEN SPIRAL COMPONENT ────────────────────────────────────────────────
+function GoldenSpiral({ className, width = 90, height = 90 }: { className?: string; width?: number; height?: number }) {
+  const phi = 1.61803398875;
+  // Logarithmic spiral: r = a·e^(b·θ), b = ln(φ)/(π/2)
+  const b = Math.log(phi) / (Math.PI / 2);
+  const a = 0.8; // tighter start so 4 rotations fit in 90px viewBox
+  const pts: string[] = [];
+  for (let i = 0; i <= 240; i++) {
+    const theta = i * (Math.PI / 60); // 0 → 4π (4 full rotations)
+    const r = a * Math.exp(b * theta);
+    const x = 45 + r * Math.cos(theta);
+    const y = 45 + r * Math.sin(theta);
+    pts.push(i === 0 ? `M${x.toFixed(2)},${y.toFixed(2)}` : `L${x.toFixed(2)},${y.toFixed(2)}`);
+  }
+  return (
+    <svg width={width} height={height} viewBox="0 0 90 90" className={className}>
+      <path d={pts.join(" ")} stroke="currentColor" strokeWidth="1" fill="none" className="kappa-draw" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 export default function GooseGazettePage() {
   const [, navigate] = useLocation();
   const [selected, setSelected] = useState<Article | null>(null);
@@ -1147,12 +1178,19 @@ export default function GooseGazettePage() {
   const today = new Date().toLocaleDateString("en-US", { weekday:"long", month:"long", day:"numeric", year:"numeric" });
   const edition = Math.floor((Date.now() - new Date("2026-01-01").getTime()) / (86400000)) + 1;
 
+  const { data: threads } = useQuery<any[]>({
+    queryKey: ["/api/goose/intel/threads"],
+    refetchInterval: 30000,
+  });
+
   return (
     <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: "Georgia,'Times New Roman',serif" }}>
       <style>{`
         @keyframes honk-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1) rotate(-3deg)} }
         @keyframes waddle { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg) translateY(-2px)} }
         @keyframes lore-in { 0%{opacity:0;transform:translateY(-8px)} 100%{opacity:1;transform:translateY(0)} }
+        @keyframes kappa-spiral { from{stroke-dashoffset:600} to{stroke-dashoffset:0} }
+        .kappa-draw { stroke-dasharray:600; animation:kappa-spiral 4s ease forwards; }
         .waddle { animation: waddle 1.8s ease-in-out infinite; }
         .honk-active { animation: honk-pulse 0.35s ease-in-out; }
         .article-hover:hover h2,.article-hover:hover h3 { color:#374151; }
@@ -1287,68 +1325,110 @@ export default function GooseGazettePage() {
 
           {/* Featured story */}
           {cover && (
-            <article className="border-b border-gray-200 pb-8 mb-2 cursor-pointer group article-hover"
-              onClick={() => setSelected(cover)} data-testid={`article-cover-${cover.id}`}>
-              <div className="flex gap-6">
-                <div className="flex-1 min-w-0">
-                  <TagBadge tag={cover.tag}/>
-                  <h2 className="font-serif font-black text-[24px] lg:text-[30px] leading-[1.15] mt-2 text-gray-900 group-hover:text-gray-600 transition-colors"
-                    style={{ fontFamily:"Georgia,serif" }}>
-                    {cover.headline}
-                  </h2>
-                  {cover.subhead && (
-                    <p className="font-serif italic text-gray-600 text-[14px] lg:text-[15px] mt-3 leading-snug">{cover.subhead}</p>
+            <article
+              className="relative w-full h-[240px] md:h-[380px] overflow-hidden cursor-pointer group mb-8"
+              onClick={() => setSelected(cover)}
+              data-testid={`hero-cover-${cover.id}`}
+            >
+              <img
+                src={cover.img}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${cover.id}/1200/800`; }}
+              />
+              {/* Overlay: Desktop left-to-transparent, Mobile bottom-up */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent hidden md:block" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent md:hidden" />
+
+              <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-end md:justify-center md:w-2/3">
+                <div className="absolute top-6 left-6 flex gap-2">
+                  <TagBadge tag={cover.tag} />
+                  {cover._intel?.threads[0] && BH53_THREAD_MAP[cover._intel.threads[0]] && (
+                    <span className="font-mono text-[9px] bg-gray-900 text-green-400 px-1.5 py-0.5 tracking-wider">
+                      {BH53_THREAD_MAP[cover._intel.threads[0]]}
+                    </span>
                   )}
-                  <p className="text-[11px] font-sans text-gray-400 mt-4 tracking-wide">{cover.author} &nbsp;·&nbsp; {cover.date}</p>
                 </div>
-                <div className="shrink-0 w-32 lg:w-44 h-28 lg:h-36 overflow-hidden bg-gray-100">
-                  <img src={cover.img} alt=""
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    onError={e => { (e.target as HTMLImageElement).src=`https://picsum.photos/seed/${cover.id}/400/300`; }}/>
+
+                <h2 className="font-serif font-black text-2xl md:text-4xl text-white leading-tight line-clamp-4">
+                  {cover.headline}
+                </h2>
+                {cover.subhead && (
+                  <p className="italic text-gray-200 text-base mt-3 line-clamp-2 md:line-clamp-none">
+                    {cover.subhead}
+                  </p>
+                )}
+                <p className="text-gray-400 text-xs font-sans mt-4">
+                  {cover.author} &nbsp;·&nbsp; {cover.date}
+                </p>
+                <div className="mt-6">
+                  <span className="text-white border-b border-white pb-0.5 text-sm font-bold">Read story →</span>
                 </div>
+              </div>
+
+              <div className="absolute bottom-2 left-6">
+                <span className="font-mono text-[9px] text-gray-500/80">
+                  κ = 1.2732 · φ = 1.6180 · Δ = 0.02
+                </span>
               </div>
             </article>
           )}
 
-          {/* Secondary feed — emoji icon column + text, thin rule separators */}
-          <div>
-            {filtered.slice(1).slice(0, mobileShowCount).map((a, idx) => (
-              <div key={a.id}>
-                {idx > 0 && <hr className="border-gray-200"/>}
-                <article className="py-5 cursor-pointer group article-hover"
-                  onClick={() => setSelected(a)} data-testid={`article-feed-${a.id}`}>
-                  <div className="flex gap-5 items-start">
-                    <div className="shrink-0 w-16 h-16 bg-gray-50 border border-gray-100 flex items-center justify-center text-[28px] select-none">
-                      {TAG_EMOJI[a.tag.toUpperCase()] ?? "📰"}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-serif font-bold text-[16px] leading-snug text-gray-900 group-hover:text-gray-600 transition-colors"
-                        style={{ fontFamily:"Georgia,serif" }}>
-                        {a.headline}
-                      </h3>
-                      {a.subhead && (
-                        <p className="text-[12px] text-gray-600 italic mt-1 leading-snug line-clamp-2">{a.subhead}</p>
-                      )}
-                      <p className="text-[10px] font-sans text-gray-400 mt-2 tracking-wide">{a.author} &nbsp;·&nbsp; {a.date}</p>
-                    </div>
+          {/* Secondary feed */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6">
+            {filtered.slice(1).slice(0, mobileShowCount).map((a) => (
+              <article
+                key={a.id}
+                className="border border-gray-100 hover:border-gray-300 cursor-pointer group transition-all rounded-none flex flex-col"
+                onClick={() => setSelected(a)}
+                data-testid={`card-${a.id}`}
+              >
+                <div className="h-36 w-full overflow-hidden bg-gray-100">
+                  <img
+                    src={a.img}
+                    alt=""
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${a.id}/400/300`; }}
+                  />
+                </div>
+                <div className="px-3 py-3 flex flex-col gap-1 flex-1">
+                  <div className="flex items-center gap-2">
+                    <TagBadge tag={a.tag} />
+                    {a._intel?.priority === "HIGH" && (
+                      <div className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
+                    )}
                   </div>
-                </article>
-              </div>
+                  <h3 className="font-serif font-bold text-[15px] leading-snug line-clamp-3 text-gray-900 group-hover:text-gray-600 transition-colors">
+                    {a.headline}
+                  </h3>
+                  <div className="mt-auto pt-2">
+                    <p className="text-[10px] font-sans text-gray-400">{a.author} · {a.date}</p>
+                    {a._intel?.threads[0] && BH53_THREAD_MAP[a._intel.threads[0]] && (
+                      <p className="font-mono text-[8px] text-gray-400 mt-0.5">
+                        BH53: {BH53_THREAD_MAP[a._intel.threads[0]]}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </article>
             ))}
-            {filtered.length === 0 && (
-              <p className="py-12 text-center text-[12px] text-gray-400 font-sans">No stories in this section.</p>
-            )}
-            {filtered.slice(1).length > mobileShowCount && (
-              <div className="lg:hidden py-6 text-center border-t border-gray-200">
-                <button
-                  onClick={() => setMobileShowCount(c => c + 6)}
-                  data-testid="button-show-more"
-                  className="font-sans text-[11px] font-bold tracking-[0.15em] uppercase px-6 py-2.5 border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
-                  Load More Stories
-                </button>
-              </div>
-            )}
           </div>
+
+          {filtered.length === 0 && (
+            <p className="py-12 text-center text-[12px] text-gray-400 font-sans">No stories in this section.</p>
+          )}
+
+          {filtered.length > mobileShowCount + 1 && (
+            <div className="py-10 text-center">
+              <button
+                onClick={() => setMobileShowCount((c) => c + 6)}
+                data-testid="button-show-more"
+                className="font-sans text-[11px] font-bold tracking-[0.15em] uppercase px-6 py-2.5 border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
+              >
+                Load More Stories
+              </button>
+            </div>
+          )}
         </main>
 
         {/* RIGHT SIDEBAR */}
@@ -1360,7 +1440,7 @@ export default function GooseGazettePage() {
           </div>
 
           {/* Δ = 0.02 — Tier 3 egg trigger */}
-          <div className="text-[12px] font-serif text-center text-gray-800 mb-6 select-none cursor-default"
+          <div className="text-[12px] font-serif text-center text-gray-800 mb-2 select-none cursor-default"
             style={{ fontFamily:"Georgia,serif" }}
             onMouseDown={startDeltaPress} onMouseUp={cancelDeltaPress}
             onMouseLeave={cancelDeltaPress} onTouchStart={startDeltaPress}
@@ -1368,6 +1448,30 @@ export default function GooseGazettePage() {
             Goose Gap<br/>
             <span className="italic text-gray-500 text-[11px]">(Δ = 0.02)</span>
           </div>
+
+          <div className="flex flex-col items-center mb-6">
+            <GoldenSpiral className="text-gray-300 kappa-draw" width={90} height={90} />
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[9px] text-gray-500 mt-3 border-t border-gray-100 pt-3 w-full max-w-[140px]">
+              <div>κ 1.2732</div>
+              <div>φ 1.6180</div>
+              <div>Δ 0.02</div>
+              <div>θ 51.84°</div>
+            </div>
+          </div>
+
+          {threads && threads.length > 0 && (
+            <div className="mb-6 border-t border-amber-100 pt-4">
+              <div className="text-[8px] font-black tracking-[0.2em] text-gray-400 mb-2 uppercase">Active Intel Threads</div>
+              <div className="space-y-1.5">
+                {threads.slice(0, 4).map((t: any) => (
+                  <div key={t.slug} className="flex items-center justify-between gap-2">
+                    <span className="text-[9px] text-gray-500 truncate">{t.slug}</span>
+                    <span className="font-mono text-[8px] bg-gray-100 px-1 text-gray-600 shrink-0">{t.bh53_id}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="border-t border-gray-200 pt-5">
             <div className="text-[9px] font-black tracking-[0.28em] uppercase text-gray-400 mb-3">Recent</div>
