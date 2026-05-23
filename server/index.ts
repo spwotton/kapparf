@@ -122,6 +122,70 @@ app.use((req, res, next) => {
   ak7.start();
   const { startAtlantisSatellite } = await import("./atlantis-satellite");
   setTimeout(() => startAtlantisSatellite().catch(e => console.warn("[AtlantisSatellite]", e.message)), 8000);
+
+  // Gazette Intel Hypervisor — thread correlation research engine
+  const { initGazetteIntel, startIntelHypervisor, ingestArticleIntel } = await import("./gazette-intel");
+  await initGazetteIntel().catch(e => console.error("[GazetteIntel] init error:", e.message));
+  startIntelHypervisor();
+  // Ingest static investigation article intel tags into Memory Cortex
+  ingestArticleIntel([
+    {
+      id: "drone-investigation-2026",
+      body: `JACÓ, PUNTARENAS — Unmanned aerial platform DJI Mini 2 documented over residential property Calle Vista Las Palmas. Spectral analysis: 87.6–87.7 Hz motor signature in two independent recordings. No DGAC flight plan filed. KAPPA scores 49–60 ELEVATED during hover windows. 29 satellite correlation events logged. Phi-harmonic ELF correlations at 119-second intervals. Platform operating from Hotel Pochote Grande construction crane, 8 meters elevation.`,
+      _intel: {
+        threads: ["drone-jaco"],
+        entities: { places: ["jaco-cr", "calle-vista-las-palmas", "hotel-pochote-grande"] },
+        themes: ["rf-surveillance", "drone-activity", "unauthorized-airspace", "spectral-signature"],
+        research_seeds: ["DJI Mini 2 87.6 Hz motor acoustic signature surveillance Costa Rica 2026", "drone spectral FFT 87.7 Hz hover dual independent recording KAPPA elevated"],
+        priority: "HIGH", classification: "SIGINT",
+      },
+    },
+    {
+      id: "wotton-geodetic",
+      body: `PARK CITY, UTAH / MEXICO CITY — USC Marshall 2014 graduate. Sundance Film Festival 11-day annual employment. 400+ US National Park geodetic surveys, no institutional record. Amazon Seattle, Warner Bros Records Melbourne — no subsequent role either city. Solo trips Ecuador 2024 (armed conflict zone decree), Guatemala (Level 2 State Dept advisory organized crime corridors), Mexico City 2026. Planned solo ascent Iztaccíhuatl 5,230m — guides required, undocumented. Last contact: read receipt. Most recent post: clouds. Elon Musk USC 2014 commencement keynote.`,
+      _intel: {
+        threads: ["geodetic-corridor"],
+        entities: { places: ["park-city-utah", "mexico-city", "ecuador", "guatemala", "iztaccihuatl"], businesses: ["sundance-film-festival", "amazon", "warner-bros-records"] },
+        themes: ["unexplained-funding", "cover-travel", "geodetic-terrain-mapping", "drug-corridor-geography", "communication-blackout"],
+        research_seeds: ["geodetic survey national park 400 unauthorized terrain mapping route intelligence", "Ecuador Guatemala Mexico solo travel drug corridor State Dept advisory 2024 2026", "Iztaccihuatl Mexico City cartel territory solo ascent undocumented 2026"],
+        priority: "HIGH", classification: "HUMINT",
+      },
+    },
+    {
+      id: "st-johns-thread",
+      body: `ST. JOHN, USVI — Shades of Blue Charters, Cruz Bay. World Cat 320CC twin 300hp Suzuki = 600hp total. Standard snorkeling: 80–120hp required. USCG Response Boat-Medium interceptor: twin 225hp. Charter vessel has 75hp per side MORE than USCG pursuit craft. Marine engineers: not standard charter tourism, associated with vessel categories declined to name. Operator: best man to decorated Afghanistan veteran, two tours 2010-2011, Quantico sniper training. Veteran: Stoughton MA, Kenworth trucking sales, no prior industry experience to shop floor to sales — timeline colleagues describe as compressed. Both describe BVI arrangement as coincidental. Veteran unresponsive since parent death November. 600hp. The ride was smooth.`,
+      _intel: {
+        threads: ["maritime-bvi", "veteran-network"],
+        entities: { places: ["st-john-usvi", "bvi", "stoughton-ma", "helmand-af"], businesses: ["shades-of-blue-charters"] },
+        themes: ["go-fast-vessel", "drug-corridor", "cover-business", "power-discrepancy", "veteran-skills", "career-anomaly"],
+        research_seeds: ["World Cat 320CC 600hp charter go-fast BVI Caribbean USCG pursuit performance", "Afghanistan Helmand veteran sniper logistics Kenworth compressed career USVI"],
+        priority: "HIGH", classification: "SIGINT",
+      },
+    },
+    {
+      id: "los-rios-parcels",
+      body: `LOS RÍOS, PUNTARENAS — 14 parcels transferred January 2024–June 2025. Entities: 2–3 initials + Inversiones SA or Gestión SRL. All: same Escazú street address, same registered agent. Total: 4.2 hectares along secondary road network Route 34 to eastern agricultural boundary. 9 of 14: rezoning consultations filed same window. 6: preliminary approvals mixed residential-commercial. Beneficial owner: unidentifiable through public filings for any of 14. One adjacent owner received offer from entity not in public registry. She described offer as reasonable, which she described as part of what made it feel off.`,
+      _intel: {
+        threads: ["property-network"],
+        entities: { places: ["los-rios-cr", "escazu-cr"] },
+        themes: ["property-laundering", "shell-company", "agent-clustering", "beneficial-owner-concealment"],
+        research_seeds: ["Los Rios Costa Rica 14 parcels same registered agent Escazu shell company Inversiones Gestión 18 months"],
+        priority: "MEDIUM", classification: "FINANCIAL",
+      },
+    },
+    {
+      id: "scott-ryan-profile",
+      body: `JACÓ, PUNTARENAS — Florida-born expat, several decades residence. Occupation: independent. Schedule: whatever makes sense. Observer reports: considerably more structured. Same general window each morning, same spot. Not a tourist. Well-connected across multiple unrelated social circles — introduced via three separate mutual acquaintances, each believing they were primary connection. Long-term residents of Jacó tend to be known and legible. He is known but not legible. Most complete characterization available: he's just around. Not charged. Not accused. Nonetheless the subject of this article.`,
+      _intel: {
+        threads: ["expat-jurisdiction"],
+        entities: { places: ["jaco-cr"], descriptors: ["florida-expat", "long-term-resident"] },
+        themes: ["jurisdiction-shopping", "social-network-anomaly", "unexplained-income"],
+        research_seeds: ["Florida US expat decades Jaco Costa Rica unexplained income regimented undisclosed schedule social network anomaly"],
+        priority: "MEDIUM", classification: "HUMINT",
+      },
+    },
+  ]).catch(e => console.error("[GazetteIntel] article ingestion error:", e.message));
+
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {

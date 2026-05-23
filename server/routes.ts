@@ -5050,6 +5050,7 @@ done
   registerCortexRoutes(app);
   registerAtlantisRoutes(app);
   registerGooseRoutes(app);
+  registerGazetteIntelRoutes(app);
 
   return httpServer;
 }
@@ -6938,6 +6939,60 @@ Be factual and precise. This is real evidence for a legal case.`,
         max_tokens: 2000,
       });
       res.json({ analysis: completion.choices[0]?.message?.content ?? "", files: audioTranscriptionCache.size });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+}
+
+// ── GAZETTE INTEL HYPERVISOR ─────────────────────────────────────────────────
+
+export function registerGazetteIntelRoutes(app: express.Express) {
+  app.get("/api/goose/intel/status", async (_req, res) => {
+    try {
+      const { getIntelStatus } = await import("./gazette-intel");
+      res.json(getIntelStatus());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/goose/intel/threads", async (_req, res) => {
+    try {
+      const { getThreadsDb } = await import("./gazette-intel");
+      res.json(await getThreadsDb());
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/goose/intel/findings", async (req, res) => {
+    try {
+      const { getResearchLog } = await import("./gazette-intel");
+      const thread = typeof req.query.thread === "string" ? req.query.thread : undefined;
+      const limit  = parseInt(String(req.query.limit ?? "25"), 10);
+      res.json(await getResearchLog(thread, limit));
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/goose/intel/cycle", async (_req, res) => {
+    try {
+      const { runResearchCycle } = await import("./gazette-intel");
+      const result = await runResearchCycle();
+      res.json({ ok: true, result });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/goose/intel/publish/:id", async (req, res) => {
+    try {
+      const { publishDraft } = await import("./gazette-intel");
+      const draft = await publishDraft(req.params.id);
+      if (!draft) return res.status(404).json({ error: "Draft not found or already published" });
+      res.json({ ok: true, draft });
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }

@@ -52,9 +52,19 @@ function shareUrl(id: string) {
 }
 
 // ─── TYPES ───────────────────────────────────────────────────────────────────
+interface ArticleIntelTag {
+  threads: string[];
+  entities: { places?: string[]; businesses?: string[]; descriptors?: string[] };
+  themes: string[];
+  research_seeds: string[];
+  priority: "HIGH" | "MEDIUM" | "LOW";
+  classification: string;
+}
+
 interface Article {
   id: string; tag: string; headline: string; subhead: string;
   author: string; date: string; body: string; img: string;
+  _intel?: ArticleIntelTag;
 }
 
 // ─── CATEGORIES ──────────────────────────────────────────────────────────────
@@ -122,6 +132,14 @@ The KAPPA engine recorded scores of 49–60/100 during documented hover windows 
 
 No flight plan for the airspace above Calle Vista Las Palmas was filed with DGAC Costa Rica. DGAC could not be reached for comment. A spokesperson for the platform could not be reached for comment. The platform was reached. It did not respond. Señor Zumbido, as the drone has been designated in KAPPA operational logs, remains on station as of press time. Its feelings on the matter are unconfirmed.`,
   img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900&q=80",
+  _intel: {
+    threads: ["drone-jaco"],
+    entities: { places: ["jaco-cr", "calle-vista-las-palmas", "hotel-pochote-grande"], businesses: ["hotel-pochote-grande"] },
+    themes: ["rf-surveillance", "drone-activity", "unauthorized-airspace", "spectral-signature"],
+    research_seeds: ["DJI Mini 2 87.6 Hz motor acoustic signature surveillance Costa Rica residential 2026", "drone spectral analysis FFT 87.7 Hz hover pattern dual independent recording KAPPA"],
+    priority: "HIGH",
+    classification: "SIGINT",
+  },
 };
 
 // ─── DRONE INVESTIGATION INFOGRAPHIC ─────────────────────────────────────────
@@ -454,6 +472,14 @@ After several decades, the subject is not a newcomer to the area, which is itsel
 
 He has not been charged with anything in Costa Rica. He has not been accused of anything in Costa Rica. He was nonetheless the subject of this article.`,
       img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80",
+      _intel: {
+        threads: ["expat-jurisdiction"],
+        entities: { places: ["jaco-cr"], descriptors: ["florida-expat", "long-term-resident", "well-connected"] },
+        themes: ["jurisdiction-shopping", "unexplained-income", "social-network-anomaly"],
+        research_seeds: ["Florida US expat decades Jaco Costa Rica unexplained income legal status social network breadth", "long-term expat no fixed employer unexplained regimented schedule Jaco Puntarenas"],
+        priority: "MEDIUM",
+        classification: "HUMINT",
+      },
     },
     {
       id: "wotton-geodetic",
@@ -478,6 +504,14 @@ At the 2014 USC Marshall School of Business commencement — which the Enthusias
 
 Three outreach attempts were made through separate channels. Two generated read receipts. One did not. From the summit of Iztaccíhuatl, on a clear day, it is possible to see four Mexican states simultaneously. This information was not provided by the Enthusiast. It is publicly available on the mountain's Wikipedia page, which the Gazette visited at 2:14 a.m. while writing this article.`,
       img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80",
+      _intel: {
+        threads: ["geodetic-corridor"],
+        entities: { places: ["park-city-utah", "mexico-city", "ecuador", "guatemala", "iztaccihuatl", "melbourne-au"], businesses: ["sundance-film-festival", "amazon", "warner-bros-records"] },
+        themes: ["unexplained-funding", "cover-travel", "geodetic-terrain-mapping", "drug-corridor-geography", "communication-blackout"],
+        research_seeds: ["geodetic survey national park system 400 unauthorized terrain mapping route intelligence", "Ecuador Guatemala Mexico solo travel drug corridors State Dept advisory 2024 2025 2026", "Sundance Film Festival 11-day employment income discrepancy international travel funding", "Iztaccihuatl Mexico City cartel corridor solo ascent no guide documentation 2026"],
+        priority: "HIGH",
+        classification: "HUMINT",
+      },
     },
     {
       id: "st-johns-thread",
@@ -498,6 +532,14 @@ The veteran currently works in sales for a commercial trucking manufacturer in S
 
 Shades of Blue is bookable at shadesofbluecharters.com. Reviews are uniformly positive. Guests report smooth, quiet engines and beautiful water. The itineraries are flexible. The boat can reportedly reach the British Virgin Islands very quickly. No one has specified how quickly. The Gazette asked. The captain said it depends on conditions.`,
       img: "/shades-of-blue-boat.jpg",
+      _intel: {
+        threads: ["maritime-bvi", "veteran-network"],
+        entities: { places: ["st-john-usvi", "bvi", "cruz-bay", "stoughton-ma", "quantico-va", "helmand-af"], businesses: ["shades-of-blue-charters"] },
+        themes: ["go-fast-vessel", "drug-corridor", "cover-business", "power-discrepancy", "veteran-skills", "career-anomaly", "communication-blackout"],
+        research_seeds: ["World Cat 320CC 600hp charter go-fast BVI Caribbean drug interdiction USCG pursuit performance", "Afghanistan Helmand veteran sniper logistics Kenworth trucking compressed career timeline USVI", "charter vessel overpowered 600hp snorkeling tour British Virgin Islands drug trafficking cover"],
+        priority: "HIGH",
+        classification: "SIGINT",
+      },
     },
     {
       id: "jw-coordination",
@@ -516,6 +558,14 @@ Representatives of the local congregation confirmed that visit scheduling was co
 
 Residents report the teams are unfailingly courteous and leave promptly when asked. Three residents noted independently that the teams appeared to note — without recording in any visible way — whether the household answered, and that follow-up timing adjusted accordingly. The congregation's spokesperson confirmed that "patterns of receptiveness inform scheduling." The logistics consultant said that was called "response-weighted routing" and that most commercial operators didn't implement it until their third year.`,
       img: "https://images.unsplash.com/photo-1448376561459-dbe8868fa34c?w=900&q=80",
+      _intel: {
+        threads: [],
+        entities: { places: ["jaco-cr", "los-rios-cr"], descriptors: ["jehovah-witness", "door-to-door", "route-optimization"] },
+        themes: ["route-optimization", "coordinated-coverage", "surveillance-cover"],
+        research_seeds: ["Jehovah Witness territory management tablet route optimization 94% consistency 340 households Costa Rica logistics"],
+        priority: "LOW",
+        classification: "HUMINT",
+      },
     },
     {
       id: "los-rios-parcels",
@@ -534,6 +584,14 @@ Three Los Ríos residents who own adjacent properties said they had received inf
 
 The Gazette was unable to identify a beneficial owner for any of the fourteen entities through public filings. This is not, of itself, unusual. The concentration of similar names, same agent, same address, and same corridor within the same 18-month window was described by a real estate attorney consulted for background as "a pattern worth noting," though she also noted she noted patterns for a living and was therefore, professionally, inclined to note them.`,
       img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",
+      _intel: {
+        threads: ["property-network"],
+        entities: { places: ["los-rios-cr", "escazu-cr"], businesses: ["multiple-sa-srl-entities"] },
+        themes: ["property-laundering", "shell-company", "agent-clustering", "beneficial-owner-concealment"],
+        research_seeds: ["Los Rios Costa Rica 14 parcels 18 months same registered agent Escazu address shell company Inversiones Gestión", "Costa Rica real estate beneficial ownership concealment Registro Nacional pattern analysis"],
+        priority: "MEDIUM",
+        classification: "FINANCIAL",
+      },
     },
     {
       id: "jaco-vacation-rotation",
