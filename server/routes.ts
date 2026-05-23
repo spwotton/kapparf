@@ -5684,6 +5684,91 @@ End with a SUMMARY section listing the top findings.`;
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
+  // Chunked transcription via SSE — splits large files into overlapping 5-min chunks
+  app.get("/api/pochote/transcribe-chunked", async (req, res) => {
+    const file = (req.query.file as string) || "";
+    if (!file) { res.status(400).end(); return; }
+
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+    res.setHeader("X-Accel-Buffering", "no");
+    res.flushHeaders();
+
+    const send = (event: string, data: any) => {
+      res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+      if ((res as any).flush) (res as any).flush();
+    };
+
+    try {
+      const { execSync } = await import("child_process");
+      const os = await import("os");
+
+      const fp = nodePath.join(POCHOTE_BASE, "audio", file);
+      if (!fs.existsSync(fp)) { send("error", { error: "file not found" }); res.end(); return; }
+
+      // Get duration via ffprobe
+      const probeRaw = execSync(
+        `ffprobe -v quiet -print_format json -show_format ${JSON.stringify(fp)} 2>&1`
+      ).toString();
+      const probe = JSON.parse(probeRaw);
+      const durationSec = parseFloat(probe.format.duration);
+
+      const CHUNK_SEC = 300;
+      const OVERLAP_SEC = 30;
+      const STEP_SEC = CHUNK_SEC - OVERLAP_SEC;
+      const totalChunks = Math.ceil(durationSec / STEP_SEC);
+
+      send("start", { total: totalChunks, file, durationSec: Math.round(durationSec) });
+
+      const tmpDir = fs.mkdtempSync(nodePath.join(os.tmpdir(), "kappa-chunks-"));
+      const parts: string[] = [];
+
+      for (let i = 0; i < totalChunks; i++) {
+        const startSec = i * STEP_SEC;
+        const chunkPath = nodePath.join(tmpDir, `chunk_${String(i).padStart(3, "0")}.mp3`);
+
+        send("progress", { chunk: i + 1, total: totalChunks, startSec: Math.round(startSec) });
+
+        execSync(
+          `ffmpeg -y -i ${JSON.stringify(fp)} -ss ${startSec} -t ${CHUNK_SEC} -c copy ${JSON.stringify(chunkPath)} 2>&1`
+        );
+
+        const buf = fs.readFileSync(chunkPath);
+        const fileObj = await audioToFile(buf, `chunk_${i}.mp3`, { type: "audio/mpeg" });
+        const result = await audioOpenAI.audio.transcriptions.create({
+          file: fileObj,
+          model: "gpt-4o-mini-transcribe",
+          response_format: "text",
+        });
+        const text = (typeof result === "string" ? result : (result as any).text ?? "").trim();
+        if (text) parts.push(text);
+
+        try { fs.unlinkSync(chunkPath); } catch {}
+      }
+
+      try { fs.rmdirSync(tmpDir); } catch {}
+
+      const fullTranscript = parts.join("\n\n");
+      const nonEmptyChunks = parts.length;
+
+      // Persist to results.json
+      const resultsPath = nodePath.join(POCHOTE_BASE, "results.json");
+      let existing: any = {};
+      if (fs.existsSync(resultsPath)) { try { existing = JSON.parse(fs.readFileSync(resultsPath, "utf-8")); } catch {} }
+      if (!existing.audio) existing.audio = {};
+      const sizeMB = (fs.statSync(fp).size / 1048576).toFixed(1);
+      existing.audio[file] = { transcript: fullTranscript, sizeMB, chunked: true, totalChunks, nonEmptyChunks };
+      fs.writeFileSync(resultsPath, JSON.stringify(existing, null, 2));
+
+      send("done", { transcript: fullTranscript, totalChunks, nonEmptyChunks, file, sizeMB });
+      res.end();
+    } catch (e: any) {
+      send("error", { error: e.message });
+      res.end();
+    }
+  });
+
   // Audio forensics — acoustic analysis + verbose transcription + voice attribution
   app.post("/api/pochote/audio-forensics", async (req, res) => {
     try {

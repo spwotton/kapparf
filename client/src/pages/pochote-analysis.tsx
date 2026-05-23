@@ -244,7 +244,7 @@ const SPEAKER_TYPE_COLOR: Record<string, string> = {
   MIXED: "text-purple-400",
 };
 
-function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, running, forensicsRunning, onManualSave }: {
+function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, running, forensicsRunning, onManualSave, sizeMB, onTranscribeChunked, chunkProgress }: {
   file: string;
   transcript?: string;
   forensics?: ForensicsResult;
@@ -253,12 +253,16 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
   running: boolean;
   forensicsRunning: boolean;
   onManualSave: (text: string) => void;
+  sizeMB?: string;
+  onTranscribeChunked?: () => void;
+  chunkProgress?: { chunk: number; total: number } | null;
 }) {
   const [manualMode, setManualMode] = useState(false);
   const [manualText, setManualText] = useState(transcript || "");
   const [expanded, setExpanded] = useState(false);
   const [showForensics, setShowForensics] = useState(false);
 
+  const isLarge = sizeMB ? parseFloat(sizeMB) > 18 : false;
   const hasTranscript = !!transcript && !transcript.startsWith("[error");
   const isError = transcript?.startsWith("[error");
   const hasForensics = !!forensics?.acoustic && !forensics.acoustic.error;
@@ -326,16 +330,33 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
             }`}>
             {forensicsRunning ? "analysing…" : hasForensics ? "↺ reanalyse" : "⊕ forensics"}
           </button>
-          <button onClick={onTranscribe} disabled={running}
-            data-testid={`btn-transcribe-${file}`}
-            className={`text-[9px] font-mono px-2 py-1.5 border transition-colors ${
-              running ? "border-gray-700 text-gray-600 cursor-not-allowed" :
-              hasTranscript ? "border-amber-900 text-amber-600 hover:bg-amber-950/20" :
-              isError ? "border-red-900 text-red-500 hover:border-red-700" :
-              "border-gray-500 text-gray-300 hover:border-gray-200"
-            }`}>
-            {running ? "…" : hasTranscript ? "↺" : "▶ transcribe"}
-          </button>
+          {isLarge && onTranscribeChunked ? (
+            <button onClick={onTranscribeChunked} disabled={running}
+              data-testid={`btn-transcribe-chunked-${file}`}
+              title="Chunked transcription — splits into 5-min segments"
+              className={`text-[9px] font-mono px-2 py-1.5 border transition-colors ${
+                running ? "border-gray-700 text-gray-600 cursor-not-allowed" :
+                hasTranscript ? "border-amber-900 text-amber-600 hover:bg-amber-950/20" :
+                "border-violet-800 text-violet-400 hover:border-violet-600"
+              }`}>
+              {running
+                ? chunkProgress
+                  ? `chunk ${chunkProgress.chunk}/${chunkProgress.total}…`
+                  : "splitting…"
+                : hasTranscript ? "↺ chunked" : "▶ chunked"}
+            </button>
+          ) : (
+            <button onClick={onTranscribe} disabled={running}
+              data-testid={`btn-transcribe-${file}`}
+              className={`text-[9px] font-mono px-2 py-1.5 border transition-colors ${
+                running ? "border-gray-700 text-gray-600 cursor-not-allowed" :
+                hasTranscript ? "border-amber-900 text-amber-600 hover:bg-amber-950/20" :
+                isError ? "border-red-900 text-red-500 hover:border-red-700" :
+                "border-gray-500 text-gray-300 hover:border-gray-200"
+              }`}>
+              {running ? "…" : hasTranscript ? "↺" : "▶ transcribe"}
+            </button>
+          )}
         </div>
       </div>
 
@@ -827,6 +848,7 @@ export default function PochoteAnalysisPage() {
   const [transcripts, setTranscripts] = useState<TranscriptState>({});
   const [forensicsData, setForensicsData] = useState<Record<string, ForensicsResult>>({});
   const [forensicsRunning, setForensicsRunning] = useState<Set<string>>(new Set());
+  const [chunkProgress, setChunkProgress] = useState<Record<string, { chunk: number; total: number } | null>>({});
 
   const { data: media } = useQuery<MediaIndex>({ queryKey: ["/api/pochote/media"] });
   const { data: preResults } = useQuery<PreResults>({
@@ -875,6 +897,49 @@ export default function PochoteAnalysisPage() {
     } catch (e: any) {
       toast({ title: "Transcription error", description: e.message, variant: "destructive" });
     } finally { stopRunning(file); }
+  };
+
+  const transcribeChunked = (file: string) => {
+    startRunning(file);
+    setChunkProgress(prev => ({ ...prev, [file]: null }));
+    const es = new EventSource(`/api/pochote/transcribe-chunked?file=${encodeURIComponent(file)}`);
+
+    es.addEventListener("start", (e) => {
+      const d = JSON.parse(e.data);
+      setChunkProgress(prev => ({ ...prev, [file]: { chunk: 0, total: d.total } }));
+      toast({ title: "Chunked transcription started", description: `${d.total} chunks · ${Math.round(d.durationSec / 60)} min recording` });
+    });
+
+    es.addEventListener("progress", (e) => {
+      const d = JSON.parse(e.data);
+      setChunkProgress(prev => ({ ...prev, [file]: { chunk: d.chunk, total: d.total } }));
+    });
+
+    es.addEventListener("done", (e) => {
+      const d = JSON.parse(e.data);
+      setTranscripts(prev => ({ ...prev, [file]: { text: d.transcript, source: "live" } }));
+      setChunkProgress(prev => ({ ...prev, [file]: null }));
+      stopRunning(file);
+      es.close();
+      toast({ title: "Chunked transcription complete", description: `${d.totalChunks} chunks processed · ${d.nonEmptyChunks} with speech` });
+    });
+
+    es.addEventListener("error", (e: any) => {
+      let msg = "SSE error";
+      try { msg = JSON.parse(e.data).error; } catch {}
+      toast({ title: "Chunked transcription error", description: msg, variant: "destructive" });
+      setChunkProgress(prev => ({ ...prev, [file]: null }));
+      stopRunning(file);
+      es.close();
+    });
+
+    es.onerror = () => {
+      if (es.readyState === EventSource.CLOSED) return;
+      toast({ title: "Connection lost", description: "SSE stream closed unexpectedly", variant: "destructive" });
+      setChunkProgress(prev => ({ ...prev, [file]: null }));
+      stopRunning(file);
+      es.close();
+    };
   };
 
   const runForensics = async (file: string) => {
@@ -1121,7 +1186,7 @@ export default function PochoteAnalysisPage() {
             <div className="text-[9px] font-mono text-gray-700 pb-1 flex items-center gap-2">
               <span>Transcription: gpt-4o-mini-transcribe · {transcribedCount}/{audioCount} complete</span>
               <span>·</span>
-              <span>Large files (&gt;19MB) not supported via inline API</span>
+              <span>Large files (&gt;18MB) use chunked mode (violet button)</span>
             </div>
             {(media?.audio ?? []).map(f => (
               <AudioRow
@@ -1134,6 +1199,9 @@ export default function PochoteAnalysisPage() {
                 running={runningIds.has(f)}
                 forensicsRunning={forensicsRunning.has(f)}
                 onManualSave={(text) => saveManual(f, text)}
+                sizeMB={preResults?.audio?.[f]?.sizeMB}
+                onTranscribeChunked={() => transcribeChunked(f)}
+                chunkProgress={chunkProgress[f]}
               />
             ))}
           </div>
