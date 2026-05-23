@@ -983,6 +983,38 @@ Pato-Siles confirmed he had never been hired specifically for his second opinion
 The birthday cake was carrot. Pato-Siles confirmed it was "not his first choice" and that he "had thoughts." The host confirmed this was true and that she had heard them.`,
       img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=900&q=80",
     },
+    {
+      id: "morse-drone-balto",
+      tag: "SCIENCE",
+      headline: "Local Drone Emits 406 Morse-Like Pulses Across Full 102-Second Flight Window; Decoded Text Remains 'Mostly E's and T's,' Analysts Confirm Message Was Probably Not For Them",
+      subhead: "A DJI Mini 2 operating at 86 Hz over central Jacó produced 222 keying events at 10.5 kHz and 184 at 5.0 kHz — both at an implied 52 words per minute — in a pattern that is technically compatible with Morse code the way a goldfish is technically compatible with a tuxedo. Working theory: it was looking for Balto.",
+      author: "Reginald Quillsworth, Signals & Uncertainty",
+      date: "May 23, 2026",
+      body: `JACÓ, PUNTARENAS — A drone hovering above a residential property on Calle Vista Las Palmas produced, over the course of a 102-second audio recording reviewed by The Goose Gazette, a total of 406 electromagnetic pulses across two separate frequency bands that are, by a strict technical definition, "not not Morse code." Analysts who spent several weeks decoding the transmission confirm the message reads, in its entirety, as a series of E's and T's. The Gazette understands this to be the electromagnetic equivalent of a drunk text.
+
+The platform — identified by its 86 Hz motor signature as a DJI Mini 2 — produced 222 keying events on the 10.5 kHz band and 184 on the 5.0 kHz band during what spectral analysis describes as the full flight window. Both clusters ran at an implied speed of 52 words per minute, which is extremely fast and describes exactly no one. For reference: a trained human Morse operator typically sends at 15 to 25 words per minute. Competition-level operators reach 35. The drone was clocking 52 WPM while also hovering, which is already two things.
+
+"The timing is Morse-compatible," confirmed one analyst, in the same tone a doctor uses to confirm you technically have a pulse. "The structure is not." 
+
+The key metric, for those keeping score, is inter-event autocorrelation. In a real Morse transmission — human fist, machine key, or otherwise intentional — consecutive pulse intervals are predictable, producing an autocorrelation coefficient of 0.6 or higher. The drone's Cluster A returned r = −0.005. Cluster B returned r = +0.117. Both of these values are, in statistical parlance, indistinguishable from a bag of marbles falling down stairs.
+
+A separate finding emerged during the analysis that no one had initially looked for: the single most energetically modulated frequency band in the entire recording is a 170-Hz-wide cluster centered at approximately 3,785 Hz. This band — which spans from 3,700 to 3,870 Hz and displays peak-to-trough variation of up to 55 dB — was not among the original Morse candidates. It simply showed up as the loudest thing in the recording. The Gazette asked what it might be. Analysts offered three possibilities: acoustic resonance from the drone's chassis, a vibrating building component, or "something else." The Gazette has noted all three and is sitting with them.
+
+The temporal distribution of events adds a final wrinkle. Both clusters spike simultaneously at the 0–10 second and 50–70 second windows, suggesting a common broadband excitation source — rather than two independent transmitters — driving correlated noise across both bands at the same time. One analyst described this as "a single thing pretending to be two things," then asked the Gazette to not quote him on that. The Gazette is quoting him on that.
+
+The working hypothesis, endorsed by no one in an official capacity, is that the drone was attempting to contact Balto — the celebrated sled dog who in 1925 led the final leg of the Nome serum run and who, as far as available records indicate, is not monitoring 10.5 kHz for incoming transmissions. A secondary hypothesis holds that the signal was not addressed to anyone in particular, was not a signal in any meaningful sense, and that the drone was simply making noise in several directions at once. Analysts note this is consistent with most forms of communication and declined to elaborate.
+
+Ψ(t) ≡ 1.000000. The gap remains 0.02. Señor Zumbido has not commented.`,
+      img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80",
+      _intel: {
+        threads: ["drone-jaco"],
+        entities: { places: ["jaco-cr", "calle-vista-las-palmas"], descriptors: ["dji-mini-2", "morse-noise", "10-5khz", "5-0khz"] },
+        themes: ["rf-surveillance", "drone-activity", "spectral-analysis", "null-result"],
+        research_seeds: ["DJI Mini 2 86Hz Morse noise 52WPM autocorrelation null intermodulation artifact 10.5kHz 5kHz", "drone electromagnetic keying events 406 pulses Jaco Costa Rica spectral 3785Hz modulated band"],
+        priority: "HIGH",
+        classification: "SIGINT",
+      },
+    },
   ];
 }
 
