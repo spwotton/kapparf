@@ -17,40 +17,10 @@ interface KiwiNode {
   lon: number;
 }
 
+// CR-ONLY: 2 local nodes — TI0RC San José + Puntarenas Pacific coast
 const KIWI_NODES: KiwiNode[] = [
-  { id: "ti0rc", name: "TI0RC Zapote", url: "http://ti0rc.proxy.kiwisdr.com:8073", lat: 9.9360, lon: -84.1088 },
-  { id: "puntarenas", name: "Puntarenas", url: "http://kiwisdr.puntarenas.cr:8073", lat: 9.9764, lon: -84.8385 },
-  { id: "pj4g", name: "PJ4G Bonaire", url: "http://pj4g.proxy.kiwisdr.com:8073", lat: 12.1500, lon: -68.2667 },
-  { id: "panama-city", name: "Panama City", url: "http://hp1av.proxy.kiwisdr.com:8073", lat: 9.0000, lon: -79.5000 },
-  { id: "colombia-bogota", name: "Bogotá HK4", url: "http://hk4.proxy.kiwisdr.com:8073", lat: 4.7110, lon: -74.0721 },
-  { id: "venezuela-caracas", name: "Caracas YV5", url: "http://yv5.proxy.kiwisdr.com:8073", lat: 10.4806, lon: -66.9036 },
-  { id: "mexico-guadalajara", name: "Guadalajara XE2", url: "http://xe2at.proxy.kiwisdr.com:8073", lat: 20.6597, lon: -103.3496 },
-  { id: "mexico-cdmx", name: "Mexico City XE1", url: "http://xe1rcs.proxy.kiwisdr.com:8073", lat: 19.4326, lon: -99.1332 },
-  { id: "puerto-rico", name: "Puerto Rico NP4", url: "http://np4a.proxy.kiwisdr.com:8073", lat: 18.2208, lon: -66.5901 },
-  { id: "trinidad", name: "Trinidad 9Y4", url: "http://9y4.proxy.kiwisdr.com:8073", lat: 10.6918, lon: -61.2225 },
-  { id: "florida-miami", name: "South Florida", url: "http://w4ax.proxy.kiwisdr.com:8073", lat: 26.1224, lon: -80.1373 },
-  { id: "texas", name: "Texas W5", url: "http://w5.proxy.kiwisdr.com:8073", lat: 29.7604, lon: -95.3698 },
-  { id: "peru-lima", name: "Lima OA4", url: "http://oa4.proxy.kiwisdr.com:8073", lat: -12.0464, lon: -77.0428 },
-  { id: "ecuador-quito", name: "Quito HC1", url: "http://hc1.proxy.kiwisdr.com:8073", lat: -0.1807, lon: -78.4678 },
-  { id: "brazil-saopaulo", name: "São Paulo PY2", url: "http://py2gn.proxy.kiwisdr.com:8073", lat: -23.5505, lon: -46.6333 },
-  { id: "chile-santiago", name: "Santiago CE3", url: "http://ce3.proxy.kiwisdr.com:8073", lat: -33.4489, lon: -70.6693 },
-  { id: "argentina-buenosaires", name: "Buenos Aires LU", url: "http://lu4aa.proxy.kiwisdr.com:8073", lat: -34.6037, lon: -58.3816 },
-  { id: "guatemala", name: "Guatemala TG9", url: "http://tg9.proxy.kiwisdr.com:8073", lat: 14.6349, lon: -90.5069 },
-  { id: "honduras", name: "Honduras HR", url: "http://hr2.proxy.kiwisdr.com:8073", lat: 14.0723, lon: -87.1921 },
-  { id: "nicaragua", name: "Nicaragua YN", url: "http://yn.proxy.kiwisdr.com:8073", lat: 12.1149, lon: -86.2362 },
-  { id: "jamaica", name: "Jamaica 6Y5", url: "http://6y5.proxy.kiwisdr.com:8073", lat: 18.1096, lon: -77.2975 },
-  { id: "dominican-rep", name: "Dominican Republic HI", url: "http://hi8.proxy.kiwisdr.com:8073", lat: 18.4861, lon: -69.9312 },
-  { id: "cuba-havana", name: "Cuba CO2", url: "http://co2.proxy.kiwisdr.com:8073", lat: 23.1136, lon: -82.3666 },
-  { id: "guadeloupe", name: "Guadeloupe FG", url: "http://fg8oj.proxy.kiwisdr.com:8073", lat: 16.2650, lon: -61.5510 },
-  { id: "hawaii", name: "Hawaii KH6", url: "http://kh6.proxy.kiwisdr.com:8073", lat: 21.3069, lon: -157.8583 },
-  { id: "california", name: "California W6", url: "http://w6.proxy.kiwisdr.com:8073", lat: 37.7749, lon: -122.4194 },
-  { id: "new-zealand", name: "New Zealand ZL", url: "http://zl2sft.proxy.kiwisdr.com:8073", lat: -41.2865, lon: 174.7762 },
-  { id: "uk-cambridge", name: "UK Cambridge G4", url: "http://g4fph.proxy.kiwisdr.com:8073", lat: 52.2053, lon: 0.1218 },
-  { id: "netherlands", name: "Netherlands PA", url: "http://pa0rdt.proxy.kiwisdr.com:8073", lat: 52.3676, lon: 4.9041 },
-  { id: "japan-tokyo", name: "Tokyo JA1", url: "http://ja1.proxy.kiwisdr.com:8073", lat: 35.6762, lon: 139.6503 },
-  { id: "australia-sydney", name: "Sydney VK2", url: "http://vk2.proxy.kiwisdr.com:8073", lat: -33.8688, lon: 151.2093 },
-  { id: "south-africa", name: "South Africa ZS", url: "http://zs6bkw.proxy.kiwisdr.com:8073", lat: -26.2041, lon: 28.0473 },
-  { id: "india-mumbai", name: "Mumbai VU2", url: "http://vu2.proxy.kiwisdr.com:8073", lat: 19.0760, lon: 72.8777 },
+  { id: "ti0rc",      name: "TI0RC San José",  url: "http://ti0rc.proxy.kiwisdr.com:8073",        lat: 9.9360, lon: -84.1088 },
+  { id: "puntarenas", name: "Puntarenas CR",    url: "http://kiwisdr.puntarenas.cr:8073",           lat: 9.9764, lon: -84.8385 },
 ];
 
 const VLF_STATION_TARGETS = [
@@ -198,14 +168,116 @@ const YAM5_SBAND_TARGETS = [
   },
 ];
 
-const ALL_SCAN_TARGETS = [...VLF_STATION_TARGETS, ...VLF_SCAN_TARGETS, ...RIEMANN_SCAN_TARGETS, ...META_SCAN_TARGETS, ...BLACKJACK_SCAN_TARGETS, ...RADIO_IMPACTO_SCAN_TARGETS, ...LEOLABS_SBAND_TARGETS, ...YAM5_SBAND_TARGETS];
+// ─── WIDE-BAND HF SWEEP — full KiwiSDR 0.1–30 MHz spectrum ───────────────────
+// Covers every major allocation: VLF beacons, AM broadcast, maritime, aeronautical
+// HF amateur bands, SW broadcast, VOLMET, NOAA weather, V2K surveillance freqs
+const WIDE_BAND_HF_TARGETS = [
+  // LF / MW broadcast
+  { name: "lf_160khz",  freqHz:  160000, harmonicOf:  160, harmonicOrder: 1, desc: "LF 160 kHz — beacon / NDB band" },
+  { name: "ndb_275",    freqHz:  275000, harmonicOf:  275, harmonicOrder: 1, desc: "NDB 275 kHz — aeronautical non-directional beacon" },
+  { name: "ndb_400",    freqHz:  400000, harmonicOf:  400, harmonicOrder: 1, desc: "NDB 400 kHz — aeronautical NDB (SJO approach)" },
+  { name: "mw_540",     freqHz:  540000, harmonicOf:  540, harmonicOrder: 1, desc: "MW 540 kHz — AM broadcast low edge" },
+  { name: "mw_730",     freqHz:  730000, harmonicOf:  730, harmonicOrder: 1, desc: "MW 730 kHz — regional AM CR" },
+  { name: "mw_1000",    freqHz: 1000000, harmonicOf: 1000, harmonicOrder: 1, desc: "MW 1000 kHz — AM broadcast midband" },
+  { name: "mw_1530",    freqHz: 1530000, harmonicOf: 1530, harmonicOrder: 1, desc: "MW 1530 kHz — AM broadcast high edge" },
+  // 160m amateur
+  { name: "ham_160m_lo", freqHz: 1800000, harmonicOf: 1800, harmonicOrder: 1, desc: "160m amateur 1.8 MHz — CR regional night" },
+  { name: "ham_160m_hi", freqHz: 2000000, harmonicOf: 2000, harmonicOrder: 1, desc: "160m amateur 2.0 MHz — upper edge" },
+  // 120m SW broadcast
+  { name: "sw_120m",    freqHz: 2300000, harmonicOf: 2300, harmonicOrder: 1, desc: "SW 120m broadcast 2.3 MHz" },
+  // Maritime / USCG
+  { name: "maritime_hf4", freqHz: 4000000, harmonicOf: 4000, harmonicOrder: 1, desc: "Maritime HF 4 MHz — ITU Region 2" },
+  { name: "maritime_usgg_4428", freqHz: 4428000, harmonicOf: 4428, harmonicOrder: 1, desc: "USCG/JRCC distress watch 4.428 MHz" },
+  // 90m SW
+  { name: "sw_90m",     freqHz: 3200000, harmonicOf: 3200, harmonicOrder: 1, desc: "SW 90m broadcast 3.2 MHz" },
+  // 80m amateur
+  { name: "ham_80m_lo", freqHz: 3500000, harmonicOf: 3500, harmonicOrder: 1, desc: "80m amateur 3.5 MHz LSB — primary CR DX night band" },
+  { name: "ham_80m_ssb",freqHz: 3800000, harmonicOf: 3800, harmonicOrder: 1, desc: "80m amateur 3.8 MHz — CR SSB voice" },
+  // 75m SW / VOLMET
+  { name: "sw_75m",     freqHz: 3900000, harmonicOf: 3900, harmonicOrder: 1, desc: "SW 75m broadcast 3.9 MHz" },
+  { name: "volmet_san_jose", freqHz: 3485000, harmonicOf: 3485, harmonicOrder: 1, desc: "VOLMET HF SJO aviation weather 3.485 MHz — Aeronáutica Civil" },
+  // 60m
+  { name: "ham_60m",    freqHz: 5330000, harmonicOf: 5330, harmonicOrder: 1, desc: "60m channel 1 — 5.330 MHz" },
+  { name: "ham_60m_2",  freqHz: 5405000, harmonicOf: 5405, harmonicOrder: 1, desc: "60m channel 5 — 5.405 MHz" },
+  // SW 49m
+  { name: "sw_49m",     freqHz: 5900000, harmonicOf: 5900, harmonicOrder: 1, desc: "SW 49m broadcast 5.9 MHz — VOA, BBC relay" },
+  { name: "sw_49m_hi",  freqHz: 6200000, harmonicOf: 6200, harmonicOrder: 1, desc: "SW 49m high edge 6.2 MHz" },
+  // Maritime 6 MHz
+  { name: "maritime_hf6", freqHz: 6000000, harmonicOf: 6000, harmonicOrder: 1, desc: "Maritime HF 6 MHz band" },
+  // 40m amateur — HMORA67 surveillance band
+  { name: "ham_40m_lo", freqHz: 7000000, harmonicOf: 7000, harmonicOrder: 1, desc: "40m amateur 7.0 MHz — CR night DX" },
+  { name: "ham_40m_ssb",freqHz: 7200000, harmonicOf: 7200, harmonicOrder: 1, desc: "40m amateur 7.2 MHz — SSB voice" },
+  { name: "hmora67_primary", freqHz: 7410000, harmonicOf: 7410, harmonicOrder: 1, desc: "HMORA67 PRIMARY — 7410 kHz 40m — SMOKING GUN: 100% V2K temporal correlation (p<0.01%)" },
+  { name: "hmora67_v2k_h1",  freqHz: 4687000, harmonicOf: 4687, harmonicOrder: 1, desc: "HMORA67 V2K harmonic 1 — 4687 kHz — offset beat product of 7410 kHz tx" },
+  // SW 41m
+  { name: "sw_41m",     freqHz: 7300000, harmonicOf: 7300, harmonicOrder: 1, desc: "SW 41m broadcast 7.3 MHz" },
+  // Maritime 8 MHz
+  { name: "maritime_hf8", freqHz: 8000000, harmonicOf: 8000, harmonicOrder: 1, desc: "Maritime HF 8 MHz distress / comms" },
+  // SW 31m
+  { name: "sw_31m",     freqHz: 9400000, harmonicOf: 9400, harmonicOrder: 1, desc: "SW 31m broadcast 9.4 MHz — strongest CR SW band" },
+  { name: "sw_31m_hi",  freqHz: 9900000, harmonicOf: 9900, harmonicOrder: 1, desc: "SW 31m high 9.9 MHz" },
+  { name: "hmora67_v2k_h2", freqHz: 9375000, harmonicOf: 9375, harmonicOrder: 1, desc: "HMORA67 V2K harmonic 2 — 9375 kHz — modulated subcarrier correlation" },
+  // 30m amateur
+  { name: "ham_30m",    freqHz: 10100000, harmonicOf: 10100, harmonicOrder: 1, desc: "30m amateur 10.1 MHz — CW/digital, no phone" },
+  // Aeronautical HF
+  { name: "aero_hf_8",  freqHz: 8815000, harmonicOf: 8815, harmonicOrder: 1, desc: "Aeronautical HF 8.815 MHz — ICAO Region 2 primary" },
+  { name: "aero_hf_11", freqHz: 11300000, harmonicOf: 11300, harmonicOrder: 1, desc: "Aeronautical HF 11.3 MHz — ICAO oceanic" },
+  { name: "aero_hf_13", freqHz: 13300000, harmonicOf: 13300, harmonicOrder: 1, desc: "Aeronautical HF 13.3 MHz — ICAO Region 2" },
+  // SW 25m
+  { name: "sw_25m",     freqHz: 11600000, harmonicOf: 11600, harmonicOrder: 1, desc: "SW 25m broadcast 11.6 MHz" },
+  { name: "sw_25m_hi",  freqHz: 12100000, harmonicOf: 12100, harmonicOrder: 1, desc: "SW 25m high 12.1 MHz" },
+  // Maritime 12 MHz
+  { name: "maritime_hf12", freqHz: 12000000, harmonicOf: 12000, harmonicOrder: 1, desc: "Maritime HF 12 MHz band" },
+  // 20m amateur
+  { name: "ham_20m_lo", freqHz: 14000000, harmonicOf: 14000, harmonicOrder: 1, desc: "20m amateur 14.0 MHz — primary DX band, day/night" },
+  { name: "ham_20m_ssb",freqHz: 14200000, harmonicOf: 14200, harmonicOrder: 1, desc: "20m amateur 14.2 MHz — SSB voice DX" },
+  // SW 22m / 19m
+  { name: "sw_19m",     freqHz: 15600000, harmonicOf: 15600, harmonicOrder: 1, desc: "SW 19m broadcast 15.6 MHz" },
+  { name: "wwv_15mhz",  freqHz: 15000000, harmonicOf: 15000, harmonicOrder: 1, desc: "WWV NIST 15 MHz time standard — propagation reference" },
+  // 17m amateur
+  { name: "ham_17m",    freqHz: 18068000, harmonicOf: 18068, harmonicOrder: 1, desc: "17m amateur 18.068 MHz — daytime DX" },
+  // SW 16m
+  { name: "sw_16m",     freqHz: 17600000, harmonicOf: 17600, harmonicOrder: 1, desc: "SW 16m broadcast 17.6 MHz" },
+  // Maritime 16 MHz / 22 MHz
+  { name: "maritime_hf16", freqHz: 16000000, harmonicOf: 16000, harmonicOrder: 1, desc: "Maritime HF 16 MHz band" },
+  { name: "maritime_hf22", freqHz: 22000000, harmonicOf: 22000, harmonicOrder: 1, desc: "Maritime HF 22 MHz band" },
+  // 15m amateur
+  { name: "ham_15m_lo", freqHz: 21000000, harmonicOf: 21000, harmonicOrder: 1, desc: "15m amateur 21.0 MHz — CW/SSB" },
+  { name: "ham_15m_ssb",freqHz: 21300000, harmonicOf: 21300, harmonicOrder: 1, desc: "15m amateur 21.3 MHz — SSB voice" },
+  // SW 13m
+  { name: "sw_13m",     freqHz: 21450000, harmonicOf: 21450, harmonicOrder: 1, desc: "SW 13m broadcast 21.45 MHz" },
+  // Aeronautical HF
+  { name: "aero_hf_21", freqHz: 21924000, harmonicOf: 21924, harmonicOrder: 1, desc: "Aeronautical HF 21.924 MHz — ICAO oceanic / Caribbean" },
+  { name: "aero_hf_23", freqHz: 23210000, harmonicOf: 23210, harmonicOrder: 1, desc: "Aeronautical HF 23.210 MHz — ICAO Region 2" },
+  // 12m amateur
+  { name: "ham_12m",    freqHz: 24890000, harmonicOf: 24890, harmonicOrder: 1, desc: "12m amateur 24.89 MHz" },
+  // SW 11m
+  { name: "sw_11m",     freqHz: 25600000, harmonicOf: 25600, harmonicOrder: 1, desc: "SW 11m broadcast 25.6 MHz" },
+  // 10m amateur
+  { name: "ham_10m_lo", freqHz: 28000000, harmonicOf: 28000, harmonicOrder: 1, desc: "10m amateur 28.0 MHz — CW/SSB" },
+  { name: "ham_10m_ssb",freqHz: 28500000, harmonicOf: 28500, harmonicOrder: 1, desc: "10m amateur 28.5 MHz — SSB voice" },
+  // NOAA weather radio (CR 60m analog)
+  { name: "noaa_wx_162", freqHz: 162400000, harmonicOf: 162.4, harmonicOrder: 1, desc: "NOAA Weather Radio 162.4 MHz — out of KiwiSDR HF range, marker only" },
+  // CB / 11m
+  { name: "cb_27mhz",   freqHz: 27000000, harmonicOf: 27000, harmonicOrder: 1, desc: "CB 11m 27 MHz — regional point-to-point, taxi dispatch CR" },
+  { name: "cb_27185",   freqHz: 27185000, harmonicOf: 27185, harmonicOrder: 1, desc: "CB 11m ch19 27.185 MHz — truck/highway comms" },
+];
 
-const PRIORITY_NODE_IDS = new Set(["ti0rc", "puntarenas", "pj4g", "panama-city", "guatemala", "honduras", "nicaragua", "colombia-bogota"]);
-const TDOA_CORE_TARGETS = [...VLF_STATION_TARGETS, ...BLACKJACK_SCAN_TARGETS];
+const ALL_SCAN_TARGETS = [
+  ...VLF_STATION_TARGETS,
+  ...VLF_SCAN_TARGETS,
+  ...RIEMANN_SCAN_TARGETS,
+  ...META_SCAN_TARGETS,
+  ...BLACKJACK_SCAN_TARGETS,
+  ...RADIO_IMPACTO_SCAN_TARGETS,
+  ...LEOLABS_SBAND_TARGETS,
+  ...YAM5_SBAND_TARGETS,
+  ...WIDE_BAND_HF_TARGETS,
+];
 
-function getNodeTargets(nodeId: string): typeof ALL_SCAN_TARGETS {
-  if (PRIORITY_NODE_IDS.has(nodeId)) return ALL_SCAN_TARGETS;
-  return TDOA_CORE_TARGETS;
+// Both CR nodes receive all targets — no tiered routing needed
+function getNodeTargets(_nodeId: string): typeof ALL_SCAN_TARGETS {
+  return ALL_SCAN_TARGETS;
 }
 
 const ECHO_LT_CHAIN = K.ECHO_LT_HARMONIC_CHAIN;
