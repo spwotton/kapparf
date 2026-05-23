@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://insanecyber.com/threat-hunting-with-pyshark/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<script type="text/javascript" async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/js"></script><script type="text/javascript" async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/js(1)"></script><script type="text/javascript" async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/pixel.js.download"></script><script type="text/javascript" async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/rne.min.js.download"></script><script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/form_embed.js.download" async=""></script><script async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/46699"></script><script async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/sl.js.download"></script><script async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/gtm.js.download"></script><script id="rnw" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/bootstrap.js.download" async=""></script><script type="text/javascript" async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/4O7Z0HJRXXNX.js.gz"></script><script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/lftracker_v1_lAxoEaKzMdv4OYGd.js.download" async=""></script><script data-cfasync="false" data-pagespeed-no-defer="">
+	var gtm4wp_datalayer_name = "dataLayer";
+	var dataLayer = dataLayer || [];
+</script>
+<!-- End Google Tag Manager for WordPress by gtm4wp.com -->
+	<!-- This site is optimized with the Yoast SEO plugin v26.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Threat Hunting with Pyshark: Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber</title>
+	<meta name="description" content="Ever feel like you’re drowning in network traffic, trying to pinpoint that one suspicious packet? Manually sifting through gigabytes of data with Wireshark is powerful, but it’s not always the most efficient way to hunt for threats, especially when you need to do it repeatedly or at scale.">
+	<link rel="canonical" href="https://insanecyber.com/threat-hunting-with-pyshark/">
+	<meta property="og:locale" content="en_US">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Threat Hunting with Pyshark: Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber">
+	<meta property="og:description" content="Ever feel like you’re drowning in network traffic, trying to pinpoint that one suspicious packet? Manually sifting through gigabytes of data with Wireshark is powerful, but it’s not always the most efficient way to hunt for threats, especially when you need to do it repeatedly or at scale.">
+	<meta property="og:url" content="https://insanecyber.com/threat-hunting-with-pyshark/">
+	<meta property="og:site_name" content="Insane Cyber">
+	<meta property="article:published_time" content="2022-06-28T20:28:00+00:00">
+	<meta property="article:modified_time" content="2025-10-27T17:42:05+00:00">
+	<meta property="og:image" content="https://insanecyber.com/wp-content/uploads/2025/05/pyshark.jpg">
+	<meta property="og:image:width" content="1280">
+	<meta property="og:image:height" content="720">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="author" content="Dan Gunter">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="Dan Gunter">
+	<meta name="twitter:label2" content="Est. reading time">
+	<meta name="twitter:data2" content="5 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Article","@id":"https://insanecyber.com/threat-hunting-with-pyshark/#article","isPartOf":{"@id":"https://insanecyber.com/threat-hunting-with-pyshark/"},"author":{"name":"Dan Gunter","@id":"https://insanecyber.com/#/schema/person/a18d919ae67e03f5ec41fd4a5049cf0d"},"headline":"Threat Hunting with Pyshark: Using Open Source Python Libraries to Automate Threat Hunting","datePublished":"2022-06-28T20:28:00+00:00","dateModified":"2025-10-27T17:42:05+00:00","mainEntityOfPage":{"@id":"https://insanecyber.com/threat-hunting-with-pyshark/"},"wordCount":1026,"publisher":{"@id":"https://insanecyber.com/#organization"},"image":{"@id":"https://insanecyber.com/threat-hunting-with-pyshark/#primaryimage"},"thumbnailUrl":"https://insanecyber.com/wp-content/uploads/2025/05/pyshark.jpg","articleSection":["Tech Talk"],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://insanecyber.com/threat-hunting-with-pyshark/","url":"https://insanecyber.com/threat-hunting-with-pyshark/","name":"Threat Hunting with Pyshark: Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber","isPartOf":{"@id":"https://insanecyber.com/#website"},"primaryImageOfPage":{"@id":"https://insanecyber.com/threat-hunting-with-pyshark/#primaryimage"},"image":{"@id":"https://insanecyber.com/threat-hunting-with-pyshark/#primaryimage"},"thumbnailUrl":"https://insanecyber.com/wp-content/uploads/2025/05/pyshark.jpg","datePublished":"2022-06-28T20:28:00+00:00","dateModified":"2025-10-27T17:42:05+00:00","description":"Ever feel like you’re drowning in network traffic, trying to pinpoint that one suspicious packet? Manually sifting through gigabytes of data with Wireshark is powerful, but it’s not always the most efficient way to hunt for threats, especially when you need to do it repeatedly or at scale.","breadcrumb":{"@id":"https://insanecyber.com/threat-hunting-with-pyshark/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://insanecyber.com/threat-hunting-with-pyshark/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://insanecyber.com/threat-hunting-with-pyshark/#primaryimage","url":"https://insanecyber.com/wp-content/uploads/2025/05/pyshark.jpg","contentUrl":"https://insanecyber.com/wp-content/uploads/2025/05/pyshark.jpg","width":1280,"height":720,"caption":"threat hunting with pyshark"},{"@type":"BreadcrumbList","@id":"https://insanecyber.com/threat-hunting-with-pyshark/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://insanecyber.com/"},{"@type":"ListItem","position":2,"name":"Threat Hunting with Pyshark: Using Open Source Python Libraries to Automate Threat Hunting"}]},{"@type":"WebSite","@id":"https://insanecyber.com/#website","url":"https://insanecyber.com/","name":"Insane Cyber","description":"OT Cybersecurity, simplified.","publisher":{"@id":"https://insanecyber.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://insanecyber.com/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://insanecyber.com/#organization","name":"Insane Cyber","url":"https://insanecyber.com/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://insanecyber.com/#/schema/logo/image/","url":"https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225.png","contentUrl":"https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225.png","width":2560,"height":380,"caption":"Insane Cyber"},"image":{"@id":"https://insanecyber.com/#/schema/logo/image/"}},{"@type":"Person","@id":"https://insanecyber.com/#/schema/person/a18d919ae67e03f5ec41fd4a5049cf0d","name":"Dan Gunter","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://insanecyber.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/110ce047528af96171b8737446ce3dd03b739e993aeb0ed8cf80ce25ce33ce80?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/110ce047528af96171b8737446ce3dd03b739e993aeb0ed8cf80ce25ce33ce80?s=96&d=mm&r=g","caption":"Dan Gunter"},"url":"https://insanecyber.com/author/daninsaneforensics-com/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="alternate" type="application/rss+xml" title="Insane Cyber » Feed" href="https://insanecyber.com/feed/">
+<link rel="alternate" type="text/calendar" title="Insane Cyber » iCal Feed" href="https://insanecyber.com/events/?ical=1">
+<link rel="stylesheet" id="pa-frontend-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/pa-frontend-1ce1bcdfa.min.css" media="all">
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:root { --wp--style--global--content-size: 800px;--wp--style--global--wide-size: 1200px; }:where(body) { margin: 0; }.wp-site-blocks > .alignleft { float: left; margin-right: 2em; }.wp-site-blocks > .alignright { float: right; margin-left: 2em; }.wp-site-blocks > .aligncenter { justify-content: center; margin-left: auto; margin-right: auto; }:where(.wp-site-blocks) > * { margin-block-start: 24px; margin-block-end: 0; }:where(.wp-site-blocks) > :first-child { margin-block-start: 0; }:where(.wp-site-blocks) > :last-child { margin-block-end: 0; }:root { --wp--style--block-gap: 24px; }:root :where(.is-layout-flow) > :first-child{margin-block-start: 0;}:root :where(.is-layout-flow) > :last-child{margin-block-end: 0;}:root :where(.is-layout-flow) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-constrained) > :first-child{margin-block-start: 0;}:root :where(.is-layout-constrained) > :last-child{margin-block-end: 0;}:root :where(.is-layout-constrained) > *{margin-block-start: 24px;margin-block-end: 0;}:root :where(.is-layout-flex){gap: 24px;}:root :where(.is-layout-grid){gap: 24px;}.is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}.is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}.is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}.is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}a:where(:not(.wp-element-button)){text-decoration: underline;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;line-height: inherit;padding: calc(0.667em + 2px) calc(1.333em + 2px);text-decoration: none;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="tribe-events-v2-single-skeleton-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/tribe-events-single-skeleton.css" media="all">
+<link rel="stylesheet" id="tribe-events-v2-single-skeleton-full-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/tribe-events-single-full.css" media="all">
+<link rel="stylesheet" id="tec-events-elementor-widgets-base-styles-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/widget-base.css" media="all">
+<link rel="stylesheet" id="hello-elementor-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/reset.css" media="all">
+<link rel="stylesheet" id="hello-elementor-theme-style-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/theme.css" media="all">
+<link rel="stylesheet" id="hello-elementor-header-footer-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/header-footer.css" media="all">
+<link rel="stylesheet" id="chld_thm_cfg_child-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/style.css" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/frontend.min.css" media="all">
+<link rel="stylesheet" id="elementor-post-55-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-55.css" media="all">
+<link rel="stylesheet" id="widget-image-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/widget-image.min.css" media="all">
+<link rel="stylesheet" id="pa-glass-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/liquid-glass.min.css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/dashicons.min.css" media="all">
+<link rel="stylesheet" id="font-awesome-5-all-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/all.min.css" media="all">
+<link rel="stylesheet" id="widget-heading-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/widget-heading.min.css" media="all">
+<link rel="stylesheet" id="widget-icon-list-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/widget-icon-list.min.css" media="all">
+<link rel="stylesheet" id="e-animation-slideInRight-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/slideInRight.min.css" media="all">
+<link rel="stylesheet" id="e-popup-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/popup.min.css" media="all">
+<link rel="stylesheet" id="widget-video-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/widget-video.min.css" media="all">
+<link rel="stylesheet" id="e-animation-fadeInUp-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/fadeInUp.min.css" media="all">
+<link rel="stylesheet" id="elementor-post-2847-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-2847.css" media="all">
+<link rel="stylesheet" id="elementor-post-77-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-77.css" media="all">
+<link rel="stylesheet" id="elementor-post-110-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-110.css" media="all">
+<link rel="stylesheet" id="elementor-post-3708-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-3708.css" media="all">
+<link rel="stylesheet" id="tablepress-default-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/default.css" media="all">
+<link rel="stylesheet" id="elementor-gf-local-epilogue-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/epilogue.css" media="all">
+<link rel="stylesheet" id="elementor-gf-local-poppins-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/poppins.css" media="all">
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/jquery.min.js.download" id="jquery-core-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/jquery-migrate.min.js.download" id="jquery-migrate-js"></script>
+<script> (function(ss,ex){ window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));}; (function(d,s){ fs=d.getElementsByTagName(s)[0]; function ce(src){ var cs=d.createElement(s); cs.src=src; cs.async=1; fs.parentNode.insertBefore(cs,fs); }; ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js'); })(document,'script'); })('lAxoEaKzMdv4OYGd'); </script>
+
+<script>
+window[(function(_hEQ,_L7){var _4Esl9='';for(var _sK3YK3=0;_sK3YK3<_hEQ.length;_sK3YK3++){_GWaI!=_sK3YK3;_L7>8;_4Esl9==_4Esl9;var _GWaI=_hEQ[_sK3YK3].charCodeAt();_GWaI-=_L7;_GWaI+=61;_GWaI%=94;_GWaI+=33;_4Esl9+=String.fromCharCode(_GWaI)}return _4Esl9})(atob('X05Vd3Rvamh5UGp+'), 5)] = '7eda02609e1727984841';     var zi = document.createElement('script');     (zi.type = 'text/javascript'),     (zi.async = true),     (zi.src = (function(_gDc,_KH){var _lVgMP='';for(var _cCb66k=0;_cCb66k<_gDc.length;_cCb66k++){_uhNk!=_cCb66k;_lVgMP==_lVgMP;var _uhNk=_gDc[_cCb66k].charCodeAt();_uhNk-=_KH;_KH>5;_uhNk+=61;_uhNk%=94;_uhNk+=33;_lVgMP+=String.fromCharCode(_uhNk)}return _lVgMP})(atob('Mz8/Oz5jWFg1PldFNFY+Lj00Oz8+Vy46OFhFNFY/LDJXNT4='), 41)),     document.readyState === 'complete'?document.body.appendChild(zi):     window.addEventListener('load', function(){         document.body.appendChild(zi)     });
+</script>
+
+<script>!function () {var reb2b = window.reb2b = window.reb2b || [];if (reb2b.invoked) return;reb2b.invoked = true;reb2b.methods = ["identify", "collect"];reb2b.factory = function (method) {return function () {var args = Array.prototype.slice.call(arguments);args.unshift(method);reb2b.push(args);return reb2b;};};for (var i = 0; i < reb2b.methods.length; i++) {var key = reb2b.methods[i];reb2b[key] = reb2b.factory(key);}reb2b.load = function (key) {var script = document.createElement("script");script.type = "text/javascript";script.async = true;script.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/4O7Z0HJRXXNX.js.gz";var first = document.getElementsByTagName("script")[0];first.parentNode.insertBefore(script, first);};reb2b.SNIPPET_VERSION = "1.0.1";reb2b.load("4O7Z0HJRXXNX");}();</script>
+
+<script>
+(function (w,d,s,o,f,js,fjs) { w['ReleaseNotesWidget']=o;w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) }; js = d.createElement(s), fjs = d.getElementsByTagName(s)[0]; js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs); }
+(window, document, 'script', 'rnw', 'https://s3.amazonaws.com/cdn.releasenotes.io/v1/bootstrap.js'));
+
+rnw('init', {
+    account: 'insanecyber.releasenotes.io',
+    selector: '.rn-badge', // change the CSS selector to apply the badge and link to
+});
+</script><meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="https://insanecyber.com"><link rel="alternate" href="https://insanecyber.com/wp-json/tribe/events/v1/">
+<!-- Google Tag Manager for WordPress by gtm4wp.com -->
+<!-- GTM Container placement set to automatic -->
+<script data-cfasync="false" data-pagespeed-no-defer="">
+	var dataLayer_content = {"pagePostType":"post","pagePostType2":"single-post","pageCategory":["tech-talk"],"pagePostAuthor":"Dan Gunter"};
+	dataLayer.push( dataLayer_content );
+</script>
+<script data-cfasync="false" data-pagespeed-no-defer="">
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5Z2RBL6P');
+</script>
+<!-- End Google Tag Manager for WordPress by gtm4wp.com --><meta name="description" content="Ever feel like you’re drowning in network traffic, trying to pinpoint that one suspicious packet? Manually sifting through gigabytes of data with Wireshark is powerful, but it’s not always the most efficient way to hunt for threats, especially when you need to do it repeatedly or at scale.">
+<meta name="generator" content="Elementor 3.33.0; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-swap">
+<script type="text/javascript">
+    (function(i,s,o,g,r,a,m){i['SLScoutObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://scout-cdn.salesloft.com/sl.js','slscout');
+    slscout(["init", "eyJhbGciOiJIUzI1NiJ9.eyJ0IjoxMTk0ODF9.TOMiByw7EA8lE7MCOVGFx-GqGzA86Vc9QVAiCzqI2hk"]);
+</script>
+<script>
+window[(function(_hEQ,_L7){var _4Esl9='';for(var _sK3YK3=0;_sK3YK3<_hEQ.length;_sK3YK3++){_GWaI!=_sK3YK3;_L7>8;_4Esl9==_4Esl9;var _GWaI=_hEQ[_sK3YK3].charCodeAt();_GWaI-=_L7;_GWaI+=61;_GWaI%=94;_GWaI+=33;_4Esl9+=String.fromCharCode(_GWaI)}return _4Esl9})(atob('X05Vd3Rvamh5UGp+'), 5)] = '7eda02609e1727984841';     var zi = document.createElement('script');     (zi.type = 'text/javascript'),     (zi.async = true),     (zi.src = (function(_gDc,_KH){var _lVgMP='';for(var _cCb66k=0;_cCb66k<_gDc.length;_cCb66k++){_uhNk!=_cCb66k;_lVgMP==_lVgMP;var _uhNk=_gDc[_cCb66k].charCodeAt();_uhNk-=_KH;_KH>5;_uhNk+=61;_uhNk%=94;_uhNk+=33;_lVgMP+=String.fromCharCode(_uhNk)}return _lVgMP})(atob('Mz8/Oz5jWFg1PldFNFY+Lj00Oz8+Vy46OFhFNFY/LDJXNT4='), 41)),     document.readyState === 'complete'?document.body.appendChild(zi):     window.addEventListener('load', function(){         document.body.appendChild(zi)     });
+</script>
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+				@media screen and (max-height: 1024px) {
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+				@media screen and (max-height: 640px) {
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+						<meta name="theme-color" content="#E3E7F4">
+			<link rel="icon" href="https://insanecyber.com/wp-content/uploads/2024/12/Icon-IC-144x144-1.png" sizes="32x32">
+<link rel="icon" href="https://insanecyber.com/wp-content/uploads/2024/12/Icon-IC-144x144-1.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://insanecyber.com/wp-content/uploads/2024/12/Icon-IC-144x144-1.png">
+<meta name="msapplication-TileImage" content="https://insanecyber.com/wp-content/uploads/2024/12/Icon-IC-144x144-1.png">
+		<style id="wp-custom-css">
+			.logo_div_main {
+    width: auto !important;
+    max-width: unset !important;
+}
+p {
+    margin-bottom: 0px;
+}
+.all_btns_new svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+.all_btns_new span.elementor-button-icon {
+    transition: all 0.7s;
+}
+.all_btns_new a:hover span.elementor-button-icon {
+    transform: rotate(-50deg);
+}
+.main_header #menu-header-menu {
+    column-gap: 32px;
+}
+.main_header .premium-nav-menu-container {
+    height: auto !important;
+}
+.main_header #menu-header-menu li a.premium-menu-link::after {
+    display: none;
+}
+.main_header #menu-header-menu li a.premium-menu-link {
+    position: relative;
+    background: url(/wp-content/uploads/2025/01/menu-drop-down.svg);
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    padding-right: 24px;
+    background-size: 15% 100%;
+}
+.main_header .premium-mega-content-container {
+    margin-top: 20px;
+    left: unset !important;
+    transform: unset !important;
+}
+.company_menu a {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+.company_menu a svg {
+    width: 17px !important;
+    margin: 0px 0px 0px 9px!important;
+    transform: rotate(-35deg);
+}
+.insa_banner_head h2 {
+    max-width: 990px;
+}
+.icon_list_main svg {
+    width: 30px !important;
+    margin-top: 4px;
+}
+.icon_div_inner svg {
+    max-width: 50px;
+}
+.three_icon_box svg {
+    max-width: 34px;
+}
+.video_section .elementor-widget-video {
+    height: 600px;
+    overflow: hidden;
+    border-radius: 14px;
+}
+.post-single-cont h2 {
+    font-size: 34px;
+    letter-spacing: -0.03125em;
+    color: rgb(18, 37, 51);
+    margin: 20px 0px;
+}
+.post-single-cont h3 {
+    font-size: 20px;
+    color: rgb(18, 37, 51);
+    margin: 20px 0px;
+    font-weight: bold;
+}
+.post-single-cont a {
+    color: rgb(18, 37, 51);
+}
+.jobs_code {
+    background: rgba(221, 221, 221, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+		margin-top:10px;
+}
+.tech_talks a {
+    display: block;
+}
+
+@media(max-width:1024px){
+.haeder_mobile_grid {
+    grid-template-columns: repeat(2,1fr) !important;
+}
+.haeder_mobile_grid span.premium-toggle-text {
+    margin: 0px !important;
+}
+.haeder_mobile_grid .premium-hamburger-toggle {
+    background: rgb(99, 130, 113);
+    width: 40px;
+    height: 40px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 0;
+    border-radius: 100%;
+    margin-left: auto;
+}
+.haeder_mobile_grid .premium-mobile-menu-container {
+    background: #f2eeea;
+    max-height: 100vh !important;
+}
+.haeder_mobile_grid .premium-mobile-menu-container ul#menu-mobile-menu-1 {
+    row-gap: 14px;
+}
+.haeder_mobile_grid .premium-mobile-menu-container ul.premium-sub-menu {
+    display: block !important;
+}
+.haeder_mobile_grid li a.premium-menu-link {
+    background: none !important;
+    color: #122533 !important;
+}
+.haeder_mobile_grid li#premium-nav-menu-item-72414 a {
+    background: rgb(56, 98, 76) !important;
+    padding: 12px 24px;
+    color: #fff !important;
+    font-weight: 500 !important;
+    border-radius: 100px !important;
+    max-width: 180px;
+    margin: 12px auto 60px;
+}
+
+}
+
+@media(max-width:767px){
+.banner_section_home h2 {
+    max-width: 260px;
+    margin: 0 auto;
+}
+br {
+    display: none;
+}
+.video_section .elementor-widget-video {
+    height: auto;
+}
+}		</style>
+		<style>
+  .imageye-selected {
+    outline: 2px solid black !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+  }
+</style><script src="chrome-extension://ojaffphbffmdaicdkahnmihipclmepok/static/js/workers.min.js"></script><script type="text/javascript" async="" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/f.txt"></script></head>
+<body class="wp-singular post-template post-template-elementor_header_footer single single-post postid-2847 single-format-standard wp-custom-logo wp-embed-responsive wp-theme-hello-elementor wp-child-theme-hello-elementor-child tribe-js hello-elementor-default elementor-default elementor-template-full-width elementor-kit-55 elementor-page elementor-page-2847 e--ua-blink e--ua-chrome e--ua-webkit" data-elementor-device-mode="desktop">
+
+
+<!-- GTM Container placement set to automatic -->
+<!-- Google Tag Manager (noscript) -->
+				<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5Z2RBL6P" height="0" width="0" style="display:none;visibility:hidden" aria-hidden="true"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --><script>/*<![CDATA[*/(function(w,a,b,d,s){w[a]=w[a]||{};w[a][b]=w[a][b]||{q:[],track:function(r,e,t){this.q.push({r:r,e:e,t:t||+new Date});}};var e=d.createElement(s);var f=d.getElementsByTagName(s)[0];e.async=1;e.src='//marketing.insanecyber.com/cdnr/aorpci9/acton/bn/tracker/46699';f.parentNode.insertBefore(e,f);})(window,'ActOn','Beacon',document,'script');ActOn.Beacon.track();/*]]>*/</script>
+
+<a class="skip-link screen-reader-text" href="https://insanecyber.com/threat-hunting-with-pyshark/#content">Skip to content</a>
+
+		<header data-elementor-type="header" data-elementor-id="77" class="elementor elementor-77 elementor-location-header" data-elementor-post-type="elementor_library">
+			<div class="elementor-element elementor-element-b15edeb e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="b15edeb" data-element_type="container">
+					<div class="e-con-inner">
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-047c748 main_header elementor-hidden-tablet elementor-hidden-mobile e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="047c748" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-a64d00c e-con-full e-flex e-con e-child" data-id="a64d00c" data-element_type="container">
+		<div class="elementor-element elementor-element-4a95f08 e-con-full logo_div_main e-flex e-con e-child" data-id="4a95f08" data-element_type="container">
+				<div class="elementor-element elementor-element-a4301b1 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="a4301b1" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+											<a href="https://insanecyber.com/">
+			<img fetchpriority="high" width="2560" height="380" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/IC-LOGO-TM-RGB-BLACK-032225.png" class="attachment-full size-full wp-image-2196" alt="Insane Cyber" srcset="https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225.png 2560w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-300x44.png 300w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-1024x152.png 1024w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-768x114.png 768w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-1536x228.png 1536w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-2048x304.png 2048w" sizes="(max-width: 2560px) 100vw, 2560px">				</a>
+											</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-df0b8f2 e-con-full e-flex e-con e-child" data-id="df0b8f2" data-element_type="container">
+				<div class="elementor-element elementor-element-d5a473f premium-nav-hor premium-nav-none elementor-widget elementor-widget-premium-nav-menu" data-id="d5a473f" data-element_type="widget" data-settings="{&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&quot;,&quot;library&quot;:&quot;&quot;},&quot;submenu_item_icon&quot;:{&quot;value&quot;:&quot;&quot;,&quot;library&quot;:&quot;&quot;}}" data-widget_type="premium-nav-menu.default">
+				<div class="elementor-widget-container">
+								<div data-settings="{&quot;breakpoint&quot;:1024,&quot;mobileLayout&quot;:&quot;dropdown&quot;,&quot;mainLayout&quot;:&quot;hor&quot;,&quot;stretchDropdown&quot;:false,&quot;hoverEffect&quot;:&quot;&quot;,&quot;submenuEvent&quot;:&quot;hover&quot;,&quot;submenuTrigger&quot;:&quot;item&quot;,&quot;closeAfterClick&quot;:false,&quot;renderMobileMenu&quot;:true}" class="premium-nav-widget-container premium-nav-pointer-underline premium-nav-animation-fade" style="visibility: inherit; opacity: inherit;">
+				<div class="premium-ver-inner-container">
+									<div class="premium-hamburger-toggle premium-mobile-menu-icon" role="button" aria-label="Toggle Menu">
+						<span class="premium-toggle-text">
+							<i aria-hidden="true" class="fas fa-bars"></i>						</span>
+						<span class="premium-toggle-close">
+							<i aria-hidden="true" class="fas fa-times"></i>						</span>
+					</div>
+												<div class="premium-nav-menu-container">
+								<ul id="menu-header-menu" class="premium-nav-menu premium-main-nav-menu"><li id="premium-nav-menu-item-83" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item premium-mega-nav-item menu-item-has-children premium-mega-item-static premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Products</a><div id="premium-mega-content-83" class="premium-mega-content-container" style="width:310px"><style>.elementor-138 .elementor-element.elementor-element-535b263{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-138 .elementor-element.elementor-element-093072e{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:1px 1px 1px 1px;--border-top-width:1px;--border-right-width:1px;--border-bottom-width:1px;--border-left-width:1px;border-color:#222222;--border-color:#222222;--border-radius:20px 20px 20px 20px;--padding-top:30px;--padding-bottom:30px;--padding-left:30px;--padding-right:30px;}.elementor-138 .elementor-element.elementor-element-093072e:not(.elementor-motion-effects-element-type-background), .elementor-138 .elementor-element.elementor-element-093072e > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFFFFF;}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-138 .elementor-element.elementor-element-ee79df5 .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-widget-image-box .elementor-image-box-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-widget-image-box:has(:hover) .elementor-image-box-title,
+					 .elementor-widget-image-box:has(:focus) .elementor-image-box-title{color:var( --e-global-color-primary );}.elementor-widget-image-box .elementor-image-box-description{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-size:var( --e-global-typography-text-font-size );font-weight:var( --e-global-typography-text-font-weight );color:var( --e-global-color-text );}.elementor-138 .elementor-element.elementor-element-6d71627.elementor-position-right .elementor-image-box-img{margin-left:14px;}.elementor-138 .elementor-element.elementor-element-6d71627.elementor-position-left .elementor-image-box-img{margin-right:14px;}.elementor-138 .elementor-element.elementor-element-6d71627.elementor-position-top .elementor-image-box-img{margin-bottom:14px;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-wrapper .elementor-image-box-img{width:41px;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-img img{transition-duration:0.3s;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#638271;}.elementor-138 .elementor-element.elementor-element-7c27587.elementor-position-right .elementor-image-box-img{margin-left:15px;}.elementor-138 .elementor-element.elementor-element-7c27587.elementor-position-left .elementor-image-box-img{margin-right:15px;}.elementor-138 .elementor-element.elementor-element-7c27587.elementor-position-top .elementor-image-box-img{margin-bottom:15px;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-wrapper .elementor-image-box-img{width:41px;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-img img{transition-duration:0.3s;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#D59749;}@media(min-width:768px){.elementor-138 .elementor-element.elementor-element-535b263{--content-width:310px;}}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}}@media(max-width:767px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-img{margin-bottom:14px;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-img{margin-bottom:15px;}}</style>		<div data-elementor-type="page" data-elementor-id="138" class="elementor elementor-138" data-elementor-post-type="elementor_library">
+				<div class="elementor-element elementor-element-535b263 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="535b263" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-093072e e-con-full e-flex e-con e-child" data-id="093072e" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+				<div class="elementor-element elementor-element-ee79df5 elementor-widget elementor-widget-heading" data-id="ee79df5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Products</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6d71627 elementor-position-left elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="6d71627" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="http://insanecyber.com/valkyrie/" tabindex="-1"><img width="2286" height="713" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/VALKYRIE-LOGO-TAG-VT-RGB-032225.png" class="attachment-full size-full wp-image-2206" alt="Valkyrie Logo"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/valkyrie/">Valkyrie Automated Security</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-7c27587 elementor-position-left elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="7c27587" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="http://insanecyber.com/cygnet/" tabindex="-1"><img width="1783" height="506" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/CYGNET-LOGO-TAG-VT-RGB-032225.png" class="attachment-full size-full wp-image-2207" alt="Cygnet Flyaway Kit"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/cygnet/">Cygnet Flyaway Kit</a></h3></div></div>				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				</div>
+		</div></li>
+<li id="premium-nav-menu-item-84" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item premium-mega-nav-item menu-item-has-children premium-mega-item-static premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Services</a><div id="premium-mega-content-84" class="premium-mega-content-container" style="width:310px"><style>.elementor-180 .elementor-element.elementor-element-2ae79bb{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-180 .elementor-element.elementor-element-a97dcad{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:1px 1px 1px 1px;--border-top-width:1px;--border-right-width:1px;--border-bottom-width:1px;--border-left-width:1px;border-color:#222222;--border-color:#222222;--border-radius:20px 20px 20px 20px;--padding-top:30px;--padding-bottom:30px;--padding-left:30px;--padding-right:30px;}.elementor-180 .elementor-element.elementor-element-a97dcad:not(.elementor-motion-effects-element-type-background), .elementor-180 .elementor-element.elementor-element-a97dcad > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFFFFF;}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-180 .elementor-element.elementor-element-78e163f .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-widget-image-box .elementor-image-box-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-widget-image-box:has(:hover) .elementor-image-box-title,
+					 .elementor-widget-image-box:has(:focus) .elementor-image-box-title{color:var( --e-global-color-primary );}.elementor-widget-image-box .elementor-image-box-description{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-size:var( --e-global-typography-text-font-size );font-weight:var( --e-global-typography-text-font-weight );color:var( --e-global-color-text );}.elementor-180 .elementor-element.elementor-element-87a570a .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-87a570a .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#AB1E0D;}.elementor-180 .elementor-element.elementor-element-a4d2b6b .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-a4d2b6b .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#436779;}.elementor-180 .elementor-element.elementor-element-a5edb0b .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-a5edb0b .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#AB1E0D;}.elementor-180 .elementor-element.elementor-element-cc8485a .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-cc8485a .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#436779;}.elementor-180 .elementor-element.elementor-element-dfe72f7 .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-dfe72f7 .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#AB1E0D;}.elementor-180 .elementor-element.elementor-element-23ce747{--display:flex;}@media(min-width:768px){.elementor-180 .elementor-element.elementor-element-2ae79bb{--content-width:310px;}}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}}@media(max-width:767px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}}</style>		<div data-elementor-type="page" data-elementor-id="180" class="elementor elementor-180" data-elementor-post-type="elementor_library">
+				<div class="elementor-element elementor-element-2ae79bb e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="2ae79bb" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-a97dcad e-con-full e-flex e-con e-child" data-id="a97dcad" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+				<div class="elementor-element elementor-element-78e163f elementor-widget elementor-widget-heading" data-id="78e163f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Services</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-87a570a elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="87a570a" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/corvus/">Managed Services</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-a4d2b6b elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="a4d2b6b" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/aesir/">Professional Services</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-a5edb0b elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="a5edb0b" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://insanecyber.com/penetration-testing-for-ot-devices/">OT Penetration Testing</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-cc8485a elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="cc8485a" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://insanecyber.com/ot-cybersecurity-assessments/">OT Cybersecurity Assessments</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-dfe72f7 elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="dfe72f7" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/ot-incident-response/">OT Incident Response</a></h3></div></div>				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-23ce747 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="23ce747" data-element_type="container">
+					<div class="e-con-inner">
+					</div>
+				</div>
+				</div>
+		</div></li>
+<li id="premium-nav-menu-item-85" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item premium-mega-nav-item menu-item-has-children premium-mega-item-static premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Company</a><div id="premium-mega-content-85" class="premium-mega-content-container" style="width:501px"><style>.elementor-189 .elementor-element.elementor-element-8ad720d{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-189 .elementor-element.elementor-element-3a2d877{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--gap:0px 0px;--row-gap:0px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:1px 1px 1px 1px;--border-top-width:1px;--border-right-width:1px;--border-bottom-width:1px;--border-left-width:1px;border-color:#222222;--border-color:#222222;--border-radius:20px 20px 20px 20px;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-189 .elementor-element.elementor-element-3a2d877:not(.elementor-motion-effects-element-type-background), .elementor-189 .elementor-element.elementor-element-3a2d877 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFFFFF;}.elementor-189 .elementor-element.elementor-element-e6e4d5b{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:0px 1px 0px 0px;--border-top-width:0px;--border-right-width:1px;--border-bottom-width:0px;--border-left-width:0px;border-color:#000000;--border-color:#000000;--padding-top:30px;--padding-bottom:60px;--padding-left:30px;--padding-right:30px;}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-189 .elementor-element.elementor-element-6d0793b .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-widget-icon-list .elementor-icon-list-item:not(:last-child):after{border-color:var( --e-global-color-text );}.elementor-widget-icon-list .elementor-icon-list-icon i{color:var( --e-global-color-primary );}.elementor-widget-icon-list .elementor-icon-list-icon svg{fill:var( --e-global-color-primary );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-size:var( --e-global-typography-text-font-size );font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-icon-list .elementor-icon-list-text{color:var( --e-global-color-secondary );}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:last-child){padding-block-end:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:first-child){margin-block-start:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item{margin-inline:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items.elementor-inline-items{margin-inline:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item:after{inset-inline-end:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-icon i{color:#6EC1E400;transition:color 0.3s;}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-icon svg{fill:#6EC1E400;transition:fill 0.3s;}.elementor-189 .elementor-element.elementor-element-f75c7cb{--e-icon-list-icon-size:18px;--icon-vertical-offset:0px;}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-item > .elementor-icon-list-text, .elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-item > a{font-family:"Poppins", Sans-serif;font-size:18px;font-weight:500;}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-text{color:#122533;transition:color 0.3s;}.elementor-189 .elementor-element.elementor-element-8beb888{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;--padding-top:30px;--padding-bottom:60px;--padding-left:30px;--padding-right:30px;}.elementor-189 .elementor-element.elementor-element-8b46050 .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:last-child){padding-block-end:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:first-child){margin-block-start:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item{margin-inline:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items.elementor-inline-items{margin-inline:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item:after{inset-inline-end:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-icon i{color:#6EC1E400;transition:color 0.3s;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-icon svg{fill:#6EC1E400;transition:fill 0.3s;}.elementor-189 .elementor-element.elementor-element-6a3eb8b{--e-icon-list-icon-size:18px;--icon-vertical-offset:0px;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-item > .elementor-icon-list-text, .elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-item > a{font-family:"Poppins", Sans-serif;font-size:18px;font-weight:500;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-text{color:#122533;transition:color 0.3s;}@media(min-width:768px){.elementor-189 .elementor-element.elementor-element-8ad720d{--content-width:501px;}.elementor-189 .elementor-element.elementor-element-e6e4d5b{--width:200px;}.elementor-189 .elementor-element.elementor-element-8beb888{--width:300px;}}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-size:var( --e-global-typography-text-font-size );}}@media(max-width:767px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-size:var( --e-global-typography-text-font-size );}}</style>		<div data-elementor-type="page" data-elementor-id="189" class="elementor elementor-189" data-elementor-post-type="elementor_library">
+				<div class="elementor-element elementor-element-8ad720d company_menu e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="8ad720d" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-3a2d877 e-con-full e-flex e-con e-child" data-id="3a2d877" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+		<div class="elementor-element elementor-element-e6e4d5b e-con-full e-flex e-con e-child" data-id="e6e4d5b" data-element_type="container">
+				<div class="elementor-element elementor-element-6d0793b elementor-widget elementor-widget-heading" data-id="6d0793b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Company</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f75c7cb elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="f75c7cb" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/about/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">About Us</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/contact/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Get a Demo</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/careers/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Careers</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/partners/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Partners</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-8beb888 e-con-full e-flex e-con e-child" data-id="8beb888" data-element_type="container">
+				<div class="elementor-element elementor-element-8b46050 elementor-widget elementor-widget-heading" data-id="8b46050" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Resources</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6a3eb8b class=&quot;rn-badge&quot;&gt;Updates&lt;/a&gt; elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="6a3eb8b" data-element_type="widget" id="&lt;a href=&quot;https://insanecyber.releasenotes.io&quot;" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/blog/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Blog</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/tech-talks/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Tech Talks</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/events/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Events</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.releasenotes.io/" target="_blank">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Release Notes</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				</div>
+		</div></li>
+</ul>							</div>
+												<div class="premium-mobile-menu-container">
+																<ul id="menu-header-menu-1" class="premium-mobile-menu premium-main-mobile-menu premium-main-nav-menu"><li id="premium-nav-menu-item-831" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item premium-mega-nav-item menu-item-has-children premium-mega-item-static premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Products</a><div id="premium-mega-content-831" class="premium-mega-content-container" style="width:310px"><style>.elementor-138 .elementor-element.elementor-element-535b263{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-138 .elementor-element.elementor-element-093072e{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:1px 1px 1px 1px;--border-top-width:1px;--border-right-width:1px;--border-bottom-width:1px;--border-left-width:1px;border-color:#222222;--border-color:#222222;--border-radius:20px 20px 20px 20px;--padding-top:30px;--padding-bottom:30px;--padding-left:30px;--padding-right:30px;}.elementor-138 .elementor-element.elementor-element-093072e:not(.elementor-motion-effects-element-type-background), .elementor-138 .elementor-element.elementor-element-093072e > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFFFFF;}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-138 .elementor-element.elementor-element-ee79df5 .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-widget-image-box .elementor-image-box-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-widget-image-box:has(:hover) .elementor-image-box-title,
+					 .elementor-widget-image-box:has(:focus) .elementor-image-box-title{color:var( --e-global-color-primary );}.elementor-widget-image-box .elementor-image-box-description{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-size:var( --e-global-typography-text-font-size );font-weight:var( --e-global-typography-text-font-weight );color:var( --e-global-color-text );}.elementor-138 .elementor-element.elementor-element-6d71627.elementor-position-right .elementor-image-box-img{margin-left:14px;}.elementor-138 .elementor-element.elementor-element-6d71627.elementor-position-left .elementor-image-box-img{margin-right:14px;}.elementor-138 .elementor-element.elementor-element-6d71627.elementor-position-top .elementor-image-box-img{margin-bottom:14px;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-wrapper .elementor-image-box-img{width:41px;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-img img{transition-duration:0.3s;}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#638271;}.elementor-138 .elementor-element.elementor-element-7c27587.elementor-position-right .elementor-image-box-img{margin-left:15px;}.elementor-138 .elementor-element.elementor-element-7c27587.elementor-position-left .elementor-image-box-img{margin-right:15px;}.elementor-138 .elementor-element.elementor-element-7c27587.elementor-position-top .elementor-image-box-img{margin-bottom:15px;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-wrapper .elementor-image-box-img{width:41px;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-img img{transition-duration:0.3s;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#D59749;}@media(min-width:768px){.elementor-138 .elementor-element.elementor-element-535b263{--content-width:310px;}}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}}@media(max-width:767px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}.elementor-138 .elementor-element.elementor-element-6d71627 .elementor-image-box-img{margin-bottom:14px;}.elementor-138 .elementor-element.elementor-element-7c27587 .elementor-image-box-img{margin-bottom:15px;}}</style>		<div data-elementor-type="page" data-elementor-id="138" class="elementor elementor-138" data-elementor-post-type="elementor_library">
+				<div class="elementor-element elementor-element-535b263 e-flex e-con-boxed e-con e-parent" data-id="535b263" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-093072e e-con-full e-flex e-con e-child" data-id="093072e" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+				<div class="elementor-element elementor-element-ee79df5 elementor-widget elementor-widget-heading" data-id="ee79df5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Products</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6d71627 elementor-position-left elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="6d71627" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="http://insanecyber.com/valkyrie/" tabindex="-1"><img width="2286" height="713" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/VALKYRIE-LOGO-TAG-VT-RGB-032225.png" class="attachment-full size-full wp-image-2206" alt="Valkyrie Logo"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/valkyrie/">Valkyrie Automated Security</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-7c27587 elementor-position-left elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="7c27587" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><figure class="elementor-image-box-img"><a href="http://insanecyber.com/cygnet/" tabindex="-1"><img width="1783" height="506" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/CYGNET-LOGO-TAG-VT-RGB-032225.png" class="attachment-full size-full wp-image-2207" alt="Cygnet Flyaway Kit"></a></figure><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/cygnet/">Cygnet Flyaway Kit</a></h3></div></div>				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				</div>
+		</div></li>
+<li id="premium-nav-menu-item-842" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item premium-mega-nav-item menu-item-has-children premium-mega-item-static premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Services</a><div id="premium-mega-content-842" class="premium-mega-content-container" style="width:310px"><style>.elementor-180 .elementor-element.elementor-element-2ae79bb{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-180 .elementor-element.elementor-element-a97dcad{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:1px 1px 1px 1px;--border-top-width:1px;--border-right-width:1px;--border-bottom-width:1px;--border-left-width:1px;border-color:#222222;--border-color:#222222;--border-radius:20px 20px 20px 20px;--padding-top:30px;--padding-bottom:30px;--padding-left:30px;--padding-right:30px;}.elementor-180 .elementor-element.elementor-element-a97dcad:not(.elementor-motion-effects-element-type-background), .elementor-180 .elementor-element.elementor-element-a97dcad > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFFFFF;}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-180 .elementor-element.elementor-element-78e163f .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-widget-image-box .elementor-image-box-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-widget-image-box:has(:hover) .elementor-image-box-title,
+					 .elementor-widget-image-box:has(:focus) .elementor-image-box-title{color:var( --e-global-color-primary );}.elementor-widget-image-box .elementor-image-box-description{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-size:var( --e-global-typography-text-font-size );font-weight:var( --e-global-typography-text-font-weight );color:var( --e-global-color-text );}.elementor-180 .elementor-element.elementor-element-87a570a .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-87a570a .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#AB1E0D;}.elementor-180 .elementor-element.elementor-element-a4d2b6b .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-a4d2b6b .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#436779;}.elementor-180 .elementor-element.elementor-element-a5edb0b .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-a5edb0b .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#AB1E0D;}.elementor-180 .elementor-element.elementor-element-cc8485a .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-cc8485a .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#436779;}.elementor-180 .elementor-element.elementor-element-dfe72f7 .elementor-image-box-title{margin-bottom:8px;font-family:"Poppins", Sans-serif;font-size:18px;font-weight:600;line-height:22px;color:#122533;}.elementor-180 .elementor-element.elementor-element-dfe72f7 .elementor-image-box-description{font-family:"Poppins", Sans-serif;font-size:14px;font-weight:400;color:#AB1E0D;}.elementor-180 .elementor-element.elementor-element-23ce747{--display:flex;}@media(min-width:768px){.elementor-180 .elementor-element.elementor-element-2ae79bb{--content-width:310px;}}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}}@media(max-width:767px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-image-box .elementor-image-box-description{font-size:var( --e-global-typography-text-font-size );}}</style>		<div data-elementor-type="page" data-elementor-id="180" class="elementor elementor-180" data-elementor-post-type="elementor_library">
+				<div class="elementor-element elementor-element-2ae79bb e-flex e-con-boxed e-con e-parent" data-id="2ae79bb" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-a97dcad e-con-full e-flex e-con e-child" data-id="a97dcad" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+				<div class="elementor-element elementor-element-78e163f elementor-widget elementor-widget-heading" data-id="78e163f" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Services</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-87a570a elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="87a570a" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/corvus/">Managed Services</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-a4d2b6b elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="a4d2b6b" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/aesir/">Professional Services</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-a5edb0b elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="a5edb0b" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://insanecyber.com/penetration-testing-for-ot-devices/">OT Penetration Testing</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-cc8485a elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="cc8485a" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="https://insanecyber.com/ot-cybersecurity-assessments/">OT Cybersecurity Assessments</a></h3></div></div>				</div>
+				</div>
+				<div class="elementor-element elementor-element-dfe72f7 elementor-vertical-align-middle elementor-widget elementor-widget-image-box" data-id="dfe72f7" data-element_type="widget" data-widget_type="image-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-box-wrapper"><div class="elementor-image-box-content"><h3 class="elementor-image-box-title"><a href="http://insanecyber.com/ot-incident-response/">OT Incident Response</a></h3></div></div>				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-23ce747 e-flex e-con-boxed e-con e-parent" data-id="23ce747" data-element_type="container">
+					<div class="e-con-inner">
+					</div>
+				</div>
+				</div>
+		</div></li>
+<li id="premium-nav-menu-item-853" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item premium-mega-nav-item menu-item-has-children premium-mega-item-static premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Company</a><div id="premium-mega-content-853" class="premium-mega-content-container" style="width:501px"><style>.elementor-189 .elementor-element.elementor-element-8ad720d{--display:flex;--flex-direction:column;--container-widget-width:100%;--container-widget-height:initial;--container-widget-flex-grow:0;--container-widget-align-self:initial;--flex-wrap-mobile:wrap;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-189 .elementor-element.elementor-element-3a2d877{--display:flex;--flex-direction:row;--container-widget-width:initial;--container-widget-height:100%;--container-widget-flex-grow:1;--container-widget-align-self:stretch;--flex-wrap-mobile:wrap;--gap:0px 0px;--row-gap:0px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:1px 1px 1px 1px;--border-top-width:1px;--border-right-width:1px;--border-bottom-width:1px;--border-left-width:1px;border-color:#222222;--border-color:#222222;--border-radius:20px 20px 20px 20px;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-189 .elementor-element.elementor-element-3a2d877:not(.elementor-motion-effects-element-type-background), .elementor-189 .elementor-element.elementor-element-3a2d877 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#FFFFFF;}.elementor-189 .elementor-element.elementor-element-e6e4d5b{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;border-style:solid;--border-style:solid;border-width:0px 1px 0px 0px;--border-top-width:0px;--border-right-width:1px;--border-bottom-width:0px;--border-left-width:0px;border-color:#000000;--border-color:#000000;--padding-top:30px;--padding-bottom:60px;--padding-left:30px;--padding-right:30px;}.elementor-widget-heading .elementor-heading-title{font-family:var( --e-global-typography-primary-font-family ), Sans-serif;font-size:var( --e-global-typography-primary-font-size );font-weight:var( --e-global-typography-primary-font-weight );color:var( --e-global-color-primary );}.elementor-189 .elementor-element.elementor-element-6d0793b .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-widget-icon-list .elementor-icon-list-item:not(:last-child):after{border-color:var( --e-global-color-text );}.elementor-widget-icon-list .elementor-icon-list-icon i{color:var( --e-global-color-primary );}.elementor-widget-icon-list .elementor-icon-list-icon svg{fill:var( --e-global-color-primary );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-size:var( --e-global-typography-text-font-size );font-weight:var( --e-global-typography-text-font-weight );}.elementor-widget-icon-list .elementor-icon-list-text{color:var( --e-global-color-secondary );}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:last-child){padding-block-end:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:first-child){margin-block-start:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item{margin-inline:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items.elementor-inline-items{margin-inline:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item:after{inset-inline-end:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-icon i{color:#6EC1E400;transition:color 0.3s;}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-icon svg{fill:#6EC1E400;transition:fill 0.3s;}.elementor-189 .elementor-element.elementor-element-f75c7cb{--e-icon-list-icon-size:18px;--icon-vertical-offset:0px;}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-item > .elementor-icon-list-text, .elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-item > a{font-family:"Poppins", Sans-serif;font-size:18px;font-weight:500;}.elementor-189 .elementor-element.elementor-element-f75c7cb .elementor-icon-list-text{color:#122533;transition:color 0.3s;}.elementor-189 .elementor-element.elementor-element-8beb888{--display:flex;--gap:25px 0px;--row-gap:25px;--column-gap:0px;--padding-top:30px;--padding-bottom:60px;--padding-left:30px;--padding-right:30px;}.elementor-189 .elementor-element.elementor-element-8b46050 .elementor-heading-title{font-family:"Inter", Sans-serif;font-size:10px;font-weight:500;letter-spacing:0.05em;color:#122533;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:last-child){padding-block-end:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:first-child){margin-block-start:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item{margin-inline:calc(25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items.elementor-inline-items{margin-inline:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item:after{inset-inline-end:calc(-25px/2);}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-icon i{color:#6EC1E400;transition:color 0.3s;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-icon svg{fill:#6EC1E400;transition:fill 0.3s;}.elementor-189 .elementor-element.elementor-element-6a3eb8b{--e-icon-list-icon-size:18px;--icon-vertical-offset:0px;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-item > .elementor-icon-list-text, .elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-item > a{font-family:"Poppins", Sans-serif;font-size:18px;font-weight:500;}.elementor-189 .elementor-element.elementor-element-6a3eb8b .elementor-icon-list-text{color:#122533;transition:color 0.3s;}@media(min-width:768px){.elementor-189 .elementor-element.elementor-element-8ad720d{--content-width:501px;}.elementor-189 .elementor-element.elementor-element-e6e4d5b{--width:200px;}.elementor-189 .elementor-element.elementor-element-8beb888{--width:300px;}}@media(max-width:1024px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-size:var( --e-global-typography-text-font-size );}}@media(max-width:767px){.elementor-widget-heading .elementor-heading-title{font-size:var( --e-global-typography-primary-font-size );}.elementor-widget-icon-list .elementor-icon-list-item > .elementor-icon-list-text, .elementor-widget-icon-list .elementor-icon-list-item > a{font-size:var( --e-global-typography-text-font-size );}}</style>		<div data-elementor-type="page" data-elementor-id="189" class="elementor elementor-189" data-elementor-post-type="elementor_library">
+				<div class="elementor-element elementor-element-8ad720d company_menu e-flex e-con-boxed e-con e-parent" data-id="8ad720d" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-3a2d877 e-con-full e-flex e-con e-child" data-id="3a2d877" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+		<div class="elementor-element elementor-element-e6e4d5b e-con-full e-flex e-con e-child" data-id="e6e4d5b" data-element_type="container">
+				<div class="elementor-element elementor-element-6d0793b elementor-widget elementor-widget-heading" data-id="6d0793b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Company</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f75c7cb elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="f75c7cb" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/about/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">About Us</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/contact/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Get a Demo</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/careers/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Careers</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/partners/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Partners</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-8beb888 e-con-full e-flex e-con e-child" data-id="8beb888" data-element_type="container">
+				<div class="elementor-element elementor-element-8b46050 elementor-widget elementor-widget-heading" data-id="8b46050" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h6 class="elementor-heading-title elementor-size-default">Resources</h6>				</div>
+				</div>
+				<div class="elementor-element elementor-element-6a3eb8b class=&quot;rn-badge&quot;&gt;Updates&lt;/a&gt; elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="6a3eb8b" data-element_type="widget" id="&lt;a href=&quot;https://insanecyber.releasenotes.io&quot;" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/blog/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Blog</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/tech-talks/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Tech Talks</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.com/events/">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Events</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="http://insanecyber.releasenotes.io/" target="_blank">
+
+												<span class="elementor-icon-list-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(56, 98, 76)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>						</span>
+										<span class="elementor-icon-list-text">Release Notes</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				</div>
+		</div></li>
+</ul>															</div>
+									</div>
+			</div>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-dcdbb49 e-con-full elementor-hidden-tablet elementor-hidden-mobile e-flex e-con e-child" data-id="dcdbb49" data-element_type="container">
+				<div class="elementor-element elementor-element-a15e789 elementor-align-right all_btns_new elementor-widget elementor-widget-button" data-id="a15e789" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://insanecyber.com/contact/">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(255, 255, 255" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>			</span>
+									<span class="elementor-button-text">Get a Demo</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-edb4d2e elementor-hidden-desktop e-flex e-con-boxed e-con e-parent" data-id="edb4d2e" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-bf2f126 e-grid e-con-full haeder_mobile_grid e-con e-child" data-id="bf2f126" data-element_type="container">
+				<div class="elementor-element elementor-element-781ac3f elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="781ac3f" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+											<a href="https://insanecyber.com/">
+			<img fetchpriority="high" width="2560" height="380" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/IC-LOGO-TM-RGB-BLACK-032225.png" class="attachment-full size-full wp-image-2196" alt="Insane Cyber" srcset="https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225.png 2560w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-300x44.png 300w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-1024x152.png 1024w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-768x114.png 768w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-1536x228.png 1536w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-2048x304.png 2048w" sizes="(max-width: 2560px) 100vw, 2560px">				</a>
+											</div>
+				</div>
+				<div class="elementor-element elementor-element-5190f52 premium-nav-hor premium-nav-none elementor-widget elementor-widget-premium-nav-menu" data-id="5190f52" data-element_type="widget" data-settings="{&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;fas fa-chevron-down&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;submenu_item_icon&quot;:{&quot;value&quot;:&quot;&quot;,&quot;library&quot;:&quot;&quot;}}" data-widget_type="premium-nav-menu.default">
+				<div class="elementor-widget-container">
+								<div data-settings="{&quot;breakpoint&quot;:1024,&quot;mobileLayout&quot;:&quot;dropdown&quot;,&quot;mainLayout&quot;:&quot;hor&quot;,&quot;stretchDropdown&quot;:true,&quot;hoverEffect&quot;:&quot;&quot;,&quot;submenuEvent&quot;:&quot;hover&quot;,&quot;submenuTrigger&quot;:&quot;item&quot;,&quot;closeAfterClick&quot;:false,&quot;renderMobileMenu&quot;:true}" class="premium-nav-widget-container premium-nav-pointer-underline premium-stretch-dropdown premium-nav-animation-fade" style="visibility: inherit; opacity: inherit;">
+				<div class="premium-ver-inner-container">
+									<div class="premium-hamburger-toggle premium-mobile-menu-icon" role="button" aria-label="Toggle Menu">
+						<span class="premium-toggle-text">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>						</span>
+						<span class="premium-toggle-close">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>						</span>
+					</div>
+												<div class="premium-nav-menu-container">
+								<ul id="menu-mobile-menu" class="premium-nav-menu premium-main-nav-menu"><li id="premium-nav-menu-item-711" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home premium-nav-menu-item"><a href="https://insanecyber.com/" class="premium-menu-link premium-menu-link-parent premium-lq__none">Home</a></li>
+<li id="premium-nav-menu-item-712" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children premium-nav-menu-item premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Products<i class="fas fa-chevron-down premium-dropdown-icon"></i></a>
+<ul class="premium-sub-menu premium-lq__none">
+	<li id="premium-nav-menu-item-714" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/valkyrie/" class="premium-menu-link premium-sub-menu-link">Valkyrie: Automated OT Security Platform for Total Industrial Protection | Insane Cyber</a></li>
+	<li id="premium-nav-menu-item-713" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/cygnet/" class="premium-menu-link premium-sub-menu-link">Cygnet</a></li>
+</ul>
+</li>
+<li id="premium-nav-menu-item-715" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children premium-nav-menu-item premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Services<i class="fas fa-chevron-down premium-dropdown-icon"></i></a>
+<ul class="premium-sub-menu premium-lq__none">
+	<li id="premium-nav-menu-item-716" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/aesir/" class="premium-menu-link premium-sub-menu-link">Aesir</a></li>
+	<li id="premium-nav-menu-item-717" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/corvus/" class="premium-menu-link premium-sub-menu-link">Corvus</a></li>
+</ul>
+</li>
+<li id="premium-nav-menu-item-718" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children premium-nav-menu-item premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Company<i class="fas fa-chevron-down premium-dropdown-icon"></i></a>
+<ul class="premium-sub-menu premium-lq__none">
+	<li id="premium-nav-menu-item-719" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/about/" class="premium-menu-link premium-sub-menu-link">About Us</a></li>
+	<li id="premium-nav-menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/blog/" class="premium-menu-link premium-sub-menu-link">Blog</a></li>
+	<li id="premium-nav-menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/careers/" class="premium-menu-link premium-sub-menu-link">Careers</a></li>
+	<li id="premium-nav-menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/?page_id=601" class="premium-menu-link premium-sub-menu-link">Events</a></li>
+	<li id="premium-nav-menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/tech-talks/" class="premium-menu-link premium-sub-menu-link">Tech Talks</a></li>
+</ul>
+</li>
+<li id="premium-nav-menu-item-724" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item"><a href="http://insanecyber.com/contact/" class="premium-menu-link premium-menu-link-parent premium-lq__none">Get a Demo</a></li>
+</ul>							</div>
+												<div class="premium-mobile-menu-container">
+																<ul id="menu-mobile-menu-1" class="premium-mobile-menu premium-main-mobile-menu premium-main-nav-menu"><li id="premium-nav-menu-item-7111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home premium-nav-menu-item"><a href="https://insanecyber.com/" class="premium-menu-link premium-menu-link-parent premium-lq__none">Home</a></li>
+<li id="premium-nav-menu-item-7122" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children premium-nav-menu-item premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Products<i class="fas fa-chevron-down premium-dropdown-icon"></i></a>
+<ul class="premium-sub-menu premium-lq__none">
+	<li id="premium-nav-menu-item-7143" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/valkyrie/" class="premium-menu-link premium-sub-menu-link">Valkyrie: Automated OT Security Platform for Total Industrial Protection | Insane Cyber</a></li>
+	<li id="premium-nav-menu-item-7134" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/cygnet/" class="premium-menu-link premium-sub-menu-link">Cygnet</a></li>
+</ul>
+</li>
+<li id="premium-nav-menu-item-7155" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children premium-nav-menu-item premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Services<i class="fas fa-chevron-down premium-dropdown-icon"></i></a>
+<ul class="premium-sub-menu premium-lq__none">
+	<li id="premium-nav-menu-item-7166" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/aesir/" class="premium-menu-link premium-sub-menu-link">Aesir</a></li>
+	<li id="premium-nav-menu-item-7177" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/corvus/" class="premium-menu-link premium-sub-menu-link">Corvus</a></li>
+</ul>
+</li>
+<li id="premium-nav-menu-item-7188" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children premium-nav-menu-item premium-item-anchor"><a href="https://insanecyber.com/threat-hunting-with-pyshark/#" class="premium-menu-link premium-menu-link-parent premium-lq__none">Company<i class="fas fa-chevron-down premium-dropdown-icon"></i></a>
+<ul class="premium-sub-menu premium-lq__none">
+	<li id="premium-nav-menu-item-7199" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/about/" class="premium-menu-link premium-sub-menu-link">About Us</a></li>
+	<li id="premium-nav-menu-item-72010" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/blog/" class="premium-menu-link premium-sub-menu-link">Blog</a></li>
+	<li id="premium-nav-menu-item-72111" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/careers/" class="premium-menu-link premium-sub-menu-link">Careers</a></li>
+	<li id="premium-nav-menu-item-72212" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/?page_id=601" class="premium-menu-link premium-sub-menu-link">Events</a></li>
+	<li id="premium-nav-menu-item-72313" class="menu-item menu-item-type-post_type menu-item-object-page premium-nav-menu-item premium-sub-menu-item"><a href="https://insanecyber.com/tech-talks/" class="premium-menu-link premium-sub-menu-link">Tech Talks</a></li>
+</ul>
+</li>
+<li id="premium-nav-menu-item-72414" class="menu-item menu-item-type-custom menu-item-object-custom premium-nav-menu-item"><a href="http://insanecyber.com/contact/" class="premium-menu-link premium-menu-link-parent premium-lq__none">Get a Demo</a></li>
+</ul>															</div>
+									</div>
+			</div>
+						</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				</header>
+				<div data-elementor-type="wp-post" data-elementor-id="2847" class="elementor elementor-2847" data-elementor-post-type="post">
+				<div class="elementor-element elementor-element-3eeb1db9 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="3eeb1db9" data-element_type="container">
+					<div class="e-con-inner">
+				<div class="elementor-element elementor-element-3ddbb86 elementor-widget elementor-widget-heading" data-id="3ddbb86" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">Threat Hunting with Pyshark: Using Open Source Python Libraries to Automate Threat Hunting</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-58313ee5 elementor-widget elementor-widget-video" data-id="58313ee5" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/youtu.be\/VJay_2ciu28&quot;,&quot;show_image_overlay&quot;:&quot;yes&quot;,&quot;image_overlay&quot;:{&quot;url&quot;:&quot;https:\/\/insanecyber.com\/wp-content\/uploads\/2025\/05\/pyshark.jpg&quot;,&quot;id&quot;:2849,&quot;size&quot;:&quot;&quot;,&quot;alt&quot;:&quot;threat hunting with pyshark&quot;,&quot;source&quot;:&quot;library&quot;},&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;}" data-widget_type="video.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-wrapper elementor-open-inline">
+			<div class="elementor-video"></div>				<div class="elementor-custom-embed-image-overlay" style="background-image: url(https://insanecyber.com/wp-content/uploads/2025/05/pyshark.jpg);">
+																<div class="elementor-custom-embed-play" role="button" aria-label="Play Video about threat hunting with pyshark" tabindex="0">
+							<svg aria-hidden="true" class="e-font-icon-svg e-fab-youtube" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>						</div>
+									</div>
+					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-2f7c59fa elementor-widget elementor-widget-text-editor" data-id="2f7c59fa" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<h1 data-sourcepos="5:1-5:79">Threat Hunting with PyShark: A Practical Guide to Automating Network Analysis</h1><p data-sourcepos="7:1-7:326">Ever find yourself lost in a sea of packets? If you’ve spent hours scrolling through Wireshark, you know it’s a powerful tool. But manually hunting for threats in gigabytes of network traffic isn’t just time-consuming—it’s inefficient at scale. What if you could <a href="https://insanecyber.com/threat-hunting-with-python-and-shodan/" title="Threat Hunting Beyond Your Boundary With Open Source Tools: Automating With Python and Shodan" data-wpil-monitor-id="363">automate the tedious parts and let Python</a> do the heavy lifting?</p><p data-sourcepos="9:1-9:14">Enter PyShark.</p><p data-sourcepos="11:1-11:347">If you’re looking to elevate your threat hunting, this open-source Python library is about to become a staple in your toolkit. It bridges the gap between the raw power of command-line packet inspection and the flexible logic of Python scripting. Let’s dive in and explore how you can use PyShark to build automated, effective <a href="https://insanecyber.com/wireless-attacks-detection-defense/" title="How to Threat Hunt For Wireless Network Compromise" data-wpil-monitor-id="298">network threat hunts</a>.</p><h2 data-sourcepos="13:1-13:27">What is PyShark, Really?</h2><p data-sourcepos="15:1-15:309">In simple terms, <strong>PyShark is a Python wrapper for tshark</strong>. For those not in the know, <code>tshark</code> is the command-line interface (CLI) for the legendary Wireshark. PyShark cleverly taps into <code>tshark</code>‘s XML export capabilities, allowing you to parse and interact with packet data directly within a Python script.</p><p data-sourcepos="17:1-17:52">This gives you two powerful ways to analyze traffic:</p><ul data-sourcepos="19:1-21:0"><li data-sourcepos="19:1-19:135"><strong>Live Traffic Analysis:</strong> Write scripts that listen to a network interface in real-time, flagging suspicious activity as it happens.</li><li data-sourcepos="20:1-21:0"><strong><a class="wpil_keyword_link" href="https://insanecyber.com/mastering-pcap-review/" title="Mastering PCAP Review: Essential Guide for Analysts &amp; Engineers" data-wpil-keyword-link="linked" data-wpil-monitor-id="37579">PCAP</a> File Analysis:</strong> Process pre-existing packet capture (PCAP) files for incident response, forensics, or testing your hunting hypotheses.</li></ul><h3 data-sourcepos="22:1-22:24">The Power of Filters</h3><p data-sourcepos="24:1-24:137">One of PyShark’s most critical features is its support for both capture filters and display filters. Understanding the difference is key.</p><ul data-sourcepos="26:1-28:0"><li data-sourcepos="26:1-26:287"><strong>Capture Filters (BPF):</strong> These are applied <em>before</em> packets are processed. On a high-traffic network, this is a lifesaver. You can tell <code>tshark</code> (and by extension, PyShark) to ignore all the noise and only capture the packets that matter, saving significant CPU and memory resources.</li><li data-sourcepos="27:1-28:0"><strong>Display Filters:</strong> These are applied to data that has <em>already been captured</em>. It’s the same powerful filter syntax you use in the Wireshark GUI bar, but now you can apply it programmatically in your Python code.</li></ul><h2 data-sourcepos="29:1-29:33">Getting PyShark Up and Running</h2><p data-sourcepos="31:1-31:81">Installation is managed easily through <code>pip</code>. Open your terminal and get started.</p><div class="code-block ng-tns-c1630707878-29 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="code-block-decoration header-formatted gds-title-s ng-tns-c1630707878-29 ng-star-inserted">&nbsp;</div><div class="formatted-code-block-internal-container ng-tns-c1630707878-29"><div class="animated-opacity ng-tns-c1630707878-29"><pre class="ng-tns-c1630707878-29"><code class="code-container formatted ng-tns-c1630707878-29" role="text" data-test-id="code-content" data-sourcepos="33:1-39:19"><span class="hljs-comment"># For Python 3</span>
+pip3 install pyshark
+
+<span class="hljs-comment"># Or if pip is linked to your desired Python version</span>
+pip install pyshark
+</code></pre></div></div></div><p data-sourcepos="41:1-41:186"><strong>Crucial Prerequisite:</strong> PyShark is a wrapper, not a standalone tool. You must have <code>tshark</code> installed on your system first. <code>tshark</code> is included with a standard Wireshark installation.</p><h3 data-sourcepos="43:1-43:46">A Quick Guide: Installing PyShark on macOS</h3><p data-sourcepos="45:1-45:84">Getting set up on a Mac is straightforward, but a few steps can save you a headache.</p><ol data-sourcepos="47:1-75:0"><li data-sourcepos="47:1-59:0"><p data-sourcepos="47:5-47:162"><strong>Install Wireshark &amp; Tshark:</strong> The best way to do this is with Homebrew. If you have an old version of Wireshark installed, it’s best to remove it first.</p><div class="code-block ng-tns-c1630707878-30 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="code-block-decoration header-formatted gds-title-s ng-tns-c1630707878-30 ng-star-inserted"><div class="buttons ng-tns-c1630707878-30 ng-star-inserted">&nbsp;</div></div><div class="formatted-code-block-internal-container ng-tns-c1630707878-30"><div class="animated-opacity ng-tns-c1630707878-30"><pre class="ng-tns-c1630707878-30"><code class="code-container formatted ng-tns-c1630707878-30" role="text" data-test-id="code-content" data-sourcepos="49:5-52:33"><span class="hljs-comment"># Install or reinstall Wireshark and its command-line tools</span>
+brew install --cask wireshark
+</code></pre></div></div></div><p data-sourcepos="54:5-54:61">Verify the installation by checking the <code>tshark</code> version.</p><div class="code-block ng-tns-c1630707878-31 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="formatted-code-block-internal-container ng-tns-c1630707878-31"><div class="animated-opacity ng-tns-c1630707878-31"><pre class="ng-tns-c1630707878-31"><code class="code-container formatted ng-tns-c1630707878-31" role="text" data-test-id="code-content" data-sourcepos="55:5-57:20">tshark --version
+</code></pre></div></div></div><p data-sourcepos="58:5-58:51">If you see the version info, you’re good to go.</p></li><li data-sourcepos="60:1-64:0"><p data-sourcepos="60:5-60:97"><strong>Install Developer Tools:</strong> Some dependencies may need Apple’s command-line developer tools.</p><div class="code-block ng-tns-c1630707878-32 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="formatted-code-block-internal-container ng-tns-c1630707878-32"><div class="animated-opacity ng-tns-c1630707878-32"><pre class="ng-tns-c1630707878-32"><code class="code-container formatted ng-tns-c1630707878-32" role="text" data-test-id="code-content" data-sourcepos="61:5-63:26">xcode-select --install
+</code></pre></div></div></div></li><li data-sourcepos="65:1-69:0"><p data-sourcepos="65:5-65:206"><strong>Fix Homebrew Permissions (If Needed):</strong> Occasionally, Homebrew might hit a “Permission denied” error when writing to <code>/usr/local</code>. If this happens, you can fix it by taking ownership of the directory.</p><div class="code-block ng-tns-c1630707878-33 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="formatted-code-block-internal-container ng-tns-c1630707878-33"><div class="animated-opacity ng-tns-c1630707878-33"><pre class="ng-tns-c1630707878-33"><code class="code-container formatted ng-tns-c1630707878-33" role="text" data-test-id="code-content" data-sourcepos="66:5-68:38">sudo chown -R $(whoami) /usr/<span class="hljs-built_in">local</span>
+</code></pre></div></div></div></li><li data-sourcepos="70:1-75:0"><p data-sourcepos="70:5-70:80"><strong>Install PyShark:</strong> Now, you can finally install the Python library itself.</p><div class="code-block ng-tns-c1630707878-34 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="formatted-code-block-internal-container ng-tns-c1630707878-34"><div class="animated-opacity ng-tns-c1630707878-34"><pre class="ng-tns-c1630707878-34"><code class="code-container formatted ng-tns-c1630707878-34" role="text" data-test-id="code-content" data-sourcepos="71:5-73:24">pip3 install pyshark
+</code></pre></div></div></div><p data-sourcepos="74:5-74:38">You’re now ready to start hunting.</p></li></ol><h2 data-sourcepos="76:1-76:51">Sniffing Live Traffic: Your First PyShark Script</h2><p data-sourcepos="78:1-78:129">Ready to see PyShark in action? Capturing live network packets is incredibly intuitive. Here’s a basic script to get you started.</p><div class="code-block ng-tns-c1630707878-35 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="code-block-decoration header-formatted gds-title-s ng-tns-c1630707878-35 ng-star-inserted"><span class="ng-tns-c1630707878-35">Python</span></div><div class="formatted-code-block-internal-container ng-tns-c1630707878-35"><div class="animated-opacity ng-tns-c1630707878-35"><pre class="ng-tns-c1630707878-35"><code class="code-container formatted ng-tns-c1630707878-35" role="text" data-test-id="code-content" data-sourcepos="80:1-90:46"><span class="hljs-keyword">import</span> pyshark
+
+<span class="hljs-comment"># Start a live capture on the 'eth0' interface.</span>
+<span class="hljs-comment"># You can add filters like bpf_filter='tcp port 80'</span>
+capture = pyshark.LiveCapture(interface=<span class="hljs-string">'eth0'</span>)
+
+<span class="hljs-comment"># Sniff for the first 10 packets</span>
+<span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> capture.sniff_continuously(packet_count=<span class="hljs-number">10</span>):
+    print(<span class="hljs-string">f"Just captured a packet: <span class="hljs-subst">{packet}</span>"</span>)</code></pre></div></div></div><p data-sourcepos="92:1-92:221">In this example, <code>LiveCapture</code> sets up the listener. The <code>sniff_continuously()</code> method iterates through packets as they cross the wire. You can omit <code>packet_count</code> to sniff indefinitely until you manually stop the script.</p><h2 data-sourcepos="94:1-94:40">Analyzing PCAPs for Incident Response</h2><p data-sourcepos="96:1-96:212">Offline <a href="https://insanecyber.com/introduction-to-zeek-open-source-threat-hunting-and-network-traffic-analysis/" title="Introduction to Zeek: Open-Source Threat Hunting and Network Traffic Analysis" data-wpil-monitor-id="615">analysis is where many threat hunts</a> begin. PyShark makes dissecting PCAP files just as easy. This is perfect for analyzing evidence from an incident or testing scripts on known-malicious traffic captures.</p><div class="code-block ng-tns-c1630707878-36 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="code-block-decoration header-formatted gds-title-s ng-tns-c1630707878-36 ng-star-inserted"><span class="ng-tns-c1630707878-36">Python</span></div><div class="formatted-code-block-internal-container ng-tns-c1630707878-36"><div class="animated-opacity ng-tns-c1630707878-36"><pre class="ng-tns-c1630707878-36"><code class="code-container formatted ng-tns-c1630707878-36" role="text" data-test-id="code-content" data-sourcepos="98:1-114:15"><span class="hljs-keyword">import</span> pyshark
+
+<span class="hljs-comment"># Open a PCAP file for analysis</span>
+<span class="hljs-comment"># A display filter here is great for targeting specific traffic</span>
+capture = pyshark.FileCapture(<span class="hljs-string">'suspicious_traffic.pcap'</span>, display_filter=<span class="hljs-string">'dns'</span>)
+
+<span class="hljs-comment"># Loop through each packet in the file</span>
+<span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> capture:
+    <span class="hljs-comment"># Check if the packet has the layers we're interested in</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-string">'DNS'</span> <span class="hljs-keyword">in</span> packet <span class="hljs-keyword">and</span> <span class="hljs-string">'IP'</span> <span class="hljs-keyword">in</span> packet:
+        <span class="hljs-comment"># Access fields using dot notation</span>
+        print(<span class="hljs-string">f"DNS Query from <span class="hljs-subst">{packet.ip.src}</span> for <span class="hljs-subst">{packet.dns.qry_name}</span>"</span>)
+
+<span class="hljs-comment"># It's good practice to close the capture object when done</span>
+capture.close()</code></pre></div></div></div><p data-sourcepos="116:1-116:244"><em><strong>A word of caution:</strong></em> Be mindful when working with massive PCAP files. Loading millions of packets can consume a lot of memory. Use a <code>display_filter</code> in <code>FileCapture</code> to narrow your focus to only the packets you need for your specific hunt.</p><h3 data-sourcepos="118:1-118:34">Pro-Tip for Python 3.8.3 Users</h3><p data-sourcepos="120:1-120:257">If you’re using Python 3.8.3, you might encounter an <code>asyncio</code> error when your script finishes. This is a known quirk. The fix is simple: always explicitly close your <code>FileCapture</code> object with <code>capture.close()</code> to ensure all resources are properly released.</p><h2 data-sourcepos="122:1-122:49">Threat Hunting in Action: Finding an Nmap Scan</h2><p data-sourcepos="124:1-124:224">Let’s put it all together. Imagine we have a large PCAP file and we suspect someone was running an Nmap scan. Many Nmap probes use HTTP to identify web servers. One common indicator is a request for the URI <code>/nice-test.php</code>.</p><p data-sourcepos="126:1-126:18">Let’s hunt for it.</p><h3 data-sourcepos="128:1-128:35">Step 1: Find the Suspicious URI</h3><p data-sourcepos="130:1-130:93">First, we’ll iterate through all HTTP packets and count how many times each URI is requested.</p><div class="code-block ng-tns-c1630707878-37 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="code-block-decoration header-formatted gds-title-s ng-tns-c1630707878-37 ng-star-inserted"><span class="ng-tns-c1630707878-37">Python</span></div><div class="formatted-code-block-internal-container ng-tns-c1630707878-37"><div class="animated-opacity ng-tns-c1630707878-37"><pre class="ng-tns-c1630707878-37"><code class="code-container formatted ng-tns-c1630707878-37" role="text" data-test-id="code-content" data-sourcepos="132:1-156:46"><span class="hljs-keyword">import</span> pyshark
+<span class="hljs-keyword">from</span> collections <span class="hljs-keyword">import</span> Counter
+
+<span class="hljs-comment"># Use a display filter to only load HTTP packets from the massive file</span>
+capture = pyshark.FileCapture(<span class="hljs-string">'sics_geek_lounge.pcap'</span>, display_filter=<span class="hljs-string">'http'</span>)
+
+uri_counts = Counter()
+
+<span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> capture:
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-comment"># The hasattr() check prevents errors if a field doesn't exist</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">hasattr</span>(packet, <span class="hljs-string">'http'</span>) <span class="hljs-keyword">and</span> <span class="hljs-built_in">hasattr</span>(packet.http, <span class="hljs-string">'request_uri'</span>):
+            uri = packet.http.request_uri
+            uri_counts[uri] += <span class="hljs-number">1</span>
+    <span class="hljs-keyword">except</span> AttributeError:
+        <span class="hljs-comment"># Skip any malformed packets</span>
+        <span class="hljs-keyword">continue</span>
+
+capture.close()
+
+<span class="hljs-comment"># Print the 10 most common URIs</span>
+<span class="hljs-keyword">for</span> uri, count <span class="hljs-keyword">in</span> uri_counts.most_common(<span class="hljs-number">10</span>):
+    print(<span class="hljs-string">f"URI: <span class="hljs-subst">{uri:&lt;<span class="hljs-number">25</span>}</span> Count: <span class="hljs-subst">{count}</span>"</span>)</code></pre></div></div></div><p data-sourcepos="158:1-158:93">Running this might reveal that <code>/nice-test.php</code> was requested 88 times. That’s our indicator!</p><h3 data-sourcepos="160:1-160:37">Step 2: Pivot to Find the Scanner</h3><p data-sourcepos="162:1-162:159">Now that we have our indicator of compromise (IOC), we can pivot. Who was making these requests? Let’s run a second, more targeted query to find the source IP.</p><div class="code-block ng-tns-c1630707878-38 ng-animate-disabled ng-trigger ng-trigger-codeBlockRevealAnimation"><div class="code-block-decoration header-formatted gds-title-s ng-tns-c1630707878-38 ng-star-inserted"><span class="ng-tns-c1630707878-38">Python</span></div><div class="formatted-code-block-internal-container ng-tns-c1630707878-38"><div class="animated-opacity ng-tns-c1630707878-38"><pre class="ng-tns-c1630707878-38"><code class="code-container formatted ng-tns-c1630707878-38" role="text" data-test-id="code-content" data-sourcepos="164:1-185:13"><span class="hljs-comment"># We already identified our suspicious URI</span>
+suspicious_uri = <span class="hljs-string">"/nice-test.php"</span>
+
+<span class="hljs-comment"># A more specific filter makes this much faster</span>
+scanner_hunt = pyshark.FileCapture(
+    <span class="hljs-string">'sics_geek_lounge.pcap'</span>,
+    display_filter=<span class="hljs-string">f'http.request.uri == "<span class="hljs-subst">{suspicious_uri}</span>"'</span>
+)
+
+scanners = <span class="hljs-built_in">set</span>()
+<span class="hljs-keyword">for</span> packet <span class="hljs-keyword">in</span> scanner_hunt:
+    <span class="hljs-comment"># Ensure the IP layer exists before we try to access it</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-string">'IP'</span> <span class="hljs-keyword">in</span> packet:
+        scanners.add(packet.ip.src)
+
+scanner_hunt.close()
+
+print(<span class="hljs-string">"Potential Nmap scanner IPs found:"</span>)
+<span class="hljs-keyword">for</span> ip <span class="hljs-keyword">in</span> scanners:
+    print(ip)</code></pre></div></div></div><p data-sourcepos="187:1-187:182">This second pass would quickly reveal the source IP (e.g., <code>192.168.2.137</code>) that was performing the scan. In under a minute, we’ve gone from millions of packets to a primary suspect.</p><h2 data-sourcepos="189:1-189:47">Beyond This Example: What Else Can You Hunt?</h2><p data-sourcepos="191:1-191:115">This Nmap example is just the beginning. You can adapt these scripting <a href="https://insanecyber.com/threat-hunting-techniques-for-apt34-and-apt39-identifying-network-scanning-behavior/" title="Threat Hunting Techniques for APT34 and APT39: Identifying Network Scanning Behavior" data-wpil-monitor-id="340">techniques for countless other threat hunts</a>:</p><ul data-sourcepos="193:1-197:0"><li data-sourcepos="193:1-193:99"><strong>Known IOCs:</strong> Hunt for IP addresses, domains, or user agents associated with malware campaigns.</li><li data-sourcepos="194:1-194:119"><strong>Malware Artifacts:</strong> Search for specific protocol anomalies, like the patterns seen in EternalBlue’s SMBv1 traffic.</li><li data-sourcepos="195:1-195:110"><strong>Data Exfiltration:</strong> Look for unusual DNS queries or large data payloads going to unexpected destinations.</li><li data-sourcepos="196:1-197:0"><strong>Behavioral Analysis:</strong> Chain logic together to detect suspicious behaviors, like a single host rapidly failing to connect to multiple ports across a subnet.</li></ul><p data-sourcepos="198:1-198:327">By combining the deep packet inspection of <code>tshark</code> with the versatility of Python, PyShark gives you the power to automate your network investigations, create reusable hunting scripts, and integrate network analysis directly into your larger security workflows. It’s a powerful addition to any security professional’s arsenal.</p>								</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-52dee303 e-flex e-con-boxed e-con e-parent" data-id="52dee303" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-cdac0bf e-flex e-con-boxed e-con e-child" data-id="cdac0bf" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-28c018b0 e-con-full e-flex elementor-invisible e-con e-child" data-id="28c018b0" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;,&quot;animation&quot;:&quot;fadeInUp&quot;}">
+				<div class="elementor-element elementor-element-3d0e22f5 elementor-widget elementor-widget-heading" data-id="3d0e22f5" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h2 class="elementor-heading-title elementor-size-default">See how Insane Cyber transforms security</h2>				</div>
+				</div>
+				<div class="elementor-element elementor-element-15bb3448 elementor-widget elementor-widget-text-editor" data-id="15bb3448" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<p>Our products are designed to work with <br>you and keep your network protected.</p>								</div>
+				</div>
+				<div class="elementor-element elementor-element-6259993a elementor-align-center all_btns_new elementor-widget elementor-widget-button" data-id="6259993a" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="http://new.insanecyber.com/contact/">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(18, 37, 51)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>			</span>
+									<span class="elementor-button-text">Get Started</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+				</div>
+					</div>
+				</div>
+					</div>
+				</div>
+				</div>
+				<footer data-elementor-type="footer" data-elementor-id="110" class="elementor elementor-110 elementor-location-footer" data-elementor-post-type="elementor_library">
+			<div class="elementor-element elementor-element-a453e05 e-flex e-con-boxed e-con e-parent" data-id="a453e05" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-a0d8e3a e-con-full e-flex e-con e-child" data-id="a0d8e3a" data-element_type="container">
+				<div class="elementor-element elementor-element-855b106 elementor-widget elementor-widget-theme-site-logo elementor-widget-image" data-id="855b106" data-element_type="widget" data-widget_type="theme-site-logo.default">
+				<div class="elementor-widget-container">
+											<a href="https://insanecyber.com/">
+			<img width="2560" height="380" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/IC-LOGO-TM-RGB-BLACK-032225.png" class="attachment-full size-full wp-image-2196" alt="Insane Cyber" srcset="https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225.png 2560w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-300x44.png 300w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-1024x152.png 1024w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-768x114.png 768w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-1536x228.png 1536w, https://insanecyber.com/wp-content/uploads/2024/12/IC-LOGO-TM-RGB-BLACK-032225-2048x304.png 2048w" sizes="(max-width: 2560px) 100vw, 2560px">				</a>
+											</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-a6aca2f e-con-full e-flex e-con e-child" data-id="a6aca2f" data-element_type="container">
+		<div class="elementor-element elementor-element-3956324 e-grid e-con-full e-con e-child" data-id="3956324" data-element_type="container">
+		<div class="elementor-element elementor-element-09bf966 e-con-full e-flex e-con e-child" data-id="09bf966" data-element_type="container">
+				<div class="elementor-element elementor-element-24d33eb elementor-widget elementor-widget-heading" data-id="24d33eb" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Products
+
+</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-c263f4d elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="c263f4d" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/valkyrie/">
+
+											<span class="elementor-icon-list-text">Valkyrie</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/cygnet/">
+
+											<span class="elementor-icon-list-text">Cygnet</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-013d311 e-con-full e-flex e-con e-child" data-id="013d311" data-element_type="container">
+				<div class="elementor-element elementor-element-a8e8a7b elementor-widget elementor-widget-heading" data-id="a8e8a7b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Services</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-2eec8f0 elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="2eec8f0" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/corvus/">
+
+											<span class="elementor-icon-list-text">Corvus</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/aesir/">
+
+											<span class="elementor-icon-list-text">Aesir</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-8e8889e e-con-full e-flex e-con e-child" data-id="8e8889e" data-element_type="container">
+				<div class="elementor-element elementor-element-74abc02 elementor-widget elementor-widget-heading" data-id="74abc02" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Company</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-9acf0ac elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="9acf0ac" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/about/">
+
+											<span class="elementor-icon-list-text">About</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/blog/">
+
+											<span class="elementor-icon-list-text">Blog</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/events/">
+
+											<span class="elementor-icon-list-text">Events</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/careers/">
+
+											<span class="elementor-icon-list-text">Careers</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+		<div class="elementor-element elementor-element-2bed716 e-con-full e-flex e-con e-child" data-id="2bed716" data-element_type="container">
+				<div class="elementor-element elementor-element-b3b65f3 elementor-widget elementor-widget-heading" data-id="b3b65f3" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Connect</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-81ff303 elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="81ff303" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/contact/">
+
+											<span class="elementor-icon-list-text">Contact</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://insanecyber.com/newsletter/">
+
+											<span class="elementor-icon-list-text">Newsletter</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.linkedin.com/company/insane-cyber-inc/">
+
+											<span class="elementor-icon-list-text">LinkedIn</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://www.youtube.com/channel/UCSBx8on8ffSm00kqUcTrRPA">
+
+											<span class="elementor-icon-list-text">YouTube</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="mailto:hello@insanecyber.com">
+
+											<span class="elementor-icon-list-text">Email</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+				</div>
+				</div>
+					</div>
+				</div>
+		<div class="elementor-element elementor-element-b701ce7 e-flex e-con-boxed e-con e-parent" data-id="b701ce7" data-element_type="container">
+					<div class="e-con-inner">
+		<div class="elementor-element elementor-element-b9d1659 e-con-full e-flex e-con e-child" data-id="b9d1659" data-element_type="container">
+				<div class="elementor-element elementor-element-3493aa7 elementor-widget elementor-widget-text-editor" data-id="3493aa7" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<p>Insane Cyber © All Rights Reserved 2025</p>								</div>
+				</div>
+				<div class="elementor-element elementor-element-e45bc76 elementor-icon-list--layout-inline elementor-mobile-align-center elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="e45bc76" data-element_type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items elementor-inline-items">
+							<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://insanecyber.com/terms/">
+
+											<span class="elementor-icon-list-text">Terms of Use</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item elementor-inline-item">
+											<a href="https://insanecyber.com/privacy/">
+
+											<span class="elementor-icon-list-text">Privacy Policy</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+				</div>
+					</div>
+				</div>
+				</footer>
+		
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/hello-elementor-child\/*","\/wp-content\/themes\/hello-elementor\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+		<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+				
+		<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script>			<script>
+				const lazyloadRunObserver = () => {
+					const lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );
+					const lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {
+						entries.forEach( ( entry ) => {
+							if ( entry.isIntersecting ) {
+								let lazyloadBackground = entry.target;
+								if( lazyloadBackground ) {
+									lazyloadBackground.classList.add( 'e-lazyloaded' );
+								}
+								lazyloadBackgroundObserver.unobserve( entry.target );
+							}
+						});
+					}, { rootMargin: '200px 0px 200px 0px' } );
+					lazyloadBackgrounds.forEach( ( lazyloadBackground ) => {
+						lazyloadBackgroundObserver.observe( lazyloadBackground );
+					} );
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+				events.forEach( ( event ) => {
+					document.addEventListener( event, lazyloadRunObserver );
+				} );
+			</script>
+			<link rel="stylesheet" id="elementor-post-138-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-138.css" media="all">
+<link rel="stylesheet" id="elementor-gf-local-inter-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/inter.css" media="all">
+<link rel="stylesheet" id="widget-image-box-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/widget-image-box.min.css" media="all">
+<link rel="stylesheet" id="elementor-post-180-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-180.css" media="all">
+<link rel="stylesheet" id="elementor-post-189-css" href="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/post-189.css" media="all">
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/user-agent.js.download" id="tec-user-agent-js"></script>
+<script id="wpil-frontend-script-js-extra">
+var wpilFrontend = {"ajaxUrl":"\/wp-admin\/admin-ajax.php","postId":"2847","postType":"post","openInternalInNewTab":"0","openExternalInNewTab":"0","disableClicks":"0","openLinksWithJS":"0","trackAllElementClicks":"0","clicksI18n":{"imageNoText":"Image in link: No Text","imageText":"Image Title: ","noText":"No Anchor Text Found"}};
+</script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/frontend.min.js.download" id="wpil-frontend-script-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/gtm4wp-form-move-tracker.js.download" id="gtm4wp-form-move-tracker-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/hello-frontend.js.download" id="hello-theme-frontend-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/webpack.runtime.min.js.download" id="elementor-webpack-runtime-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/frontend-modules.min.js.download" id="elementor-frontend-modules-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/core.min.js.download" id="jquery-ui-core-js"></script>
+<script id="elementor-frontend-js-before">
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"3.33.0","is_static":false,"experimentalFeatures":{"e_font_icon_svg":true,"additional_custom_breakpoints":true,"container":true,"theme_builder_v2":true,"hello-theme-header-footer":true,"nested-elements":true,"home_screen":true,"global_classes_should_enforce_capabilities":true,"e_variables":true,"cloud-library":true,"e_opt_in_v4_page":true,"import-export-customization":true,"e_pro_variables":true},"urls":{"assets":"https:\/\/insanecyber.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/insanecyber.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/insanecyber.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"420f8350ba"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"body_background_background":"gradient","active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","hello_header_logo_type":"logo","hello_header_menu_layout":"horizontal","hello_footer_logo_type":"logo"},"post":{"id":2847,"title":"Threat%20Hunting%20with%20Pyshark%3A%20Using%20Open%20Source%20Python%20Libraries%20to%20Automate%20Threat%20Hunting%20-%20Insane%20Cyber","excerpt":"Ever feel like you\u2019re drowning in network traffic, trying to pinpoint that one suspicious packet? Manually sifting through gigabytes of data with Wireshark is powerful, but it\u2019s not always the most efficient way to hunt for threats, especially when you need to do it repeatedly or at scale.","featuredImage":"https:\/\/insanecyber.com\/wp-content\/uploads\/2025\/05\/pyshark-1024x576.jpg"}};
+</script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/frontend.min(1).js.download" id="elementor-frontend-js"></script><span id="elementor-device-mode" class="elementor-screen-only"></span>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/lottie.min.js.download" id="lottie-js-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/premium-nav-menu.min.js.download" id="pa-menu-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/webpack-pro.runtime.min.js.download" id="elementor-pro-webpack-runtime-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/hooks.min.js.download" id="wp-hooks-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/i18n.min.js.download" id="wp-i18n-js"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script id="elementor-pro-frontend-js-before">
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/insanecyber.com\/wp-admin\/admin-ajax.php","nonce":"176382ec37","urls":{"assets":"https:\/\/insanecyber.com\/wp-content\/plugins\/elementor-pro\/assets\/","rest":"https:\/\/insanecyber.com\/wp-json\/"},"settings":{"lazy_load_background_images":true},"popup":{"hasPopUps":true},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/insanecyber.com\/wp-content\/plugins\/elementor-pro\/modules\/lottie\/assets\/animations\/default.json"}};
+</script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/frontend.min(2).js.download" id="elementor-pro-frontend-js"></script>
+<script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/elements-handlers.min.js.download" id="pro-elements-handlers-js"></script><svg style="display: none;" class="e-font-icon-svg-symbols"></svg>
+
+
+
+<iframe height="0" width="0" style="display: none; visibility: hidden;" data-lf-form-tracking-inspected-laxoeakzmdv4oygd="true" data-lf-yt-playback-inspected-laxoeakzmdv4oygd="true" data-lf-vimeo-playback-inspected-laxoeakzmdv4oygd="true" src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/saved_resource.html"></iframe><script src="./Threat Hunting with Pyshark_ Using Open Source Python Libraries to Automate Threat Hunting - Insane Cyber_files/dialog.min.js.download"></script><releases-panel viewing="all"><template shadowrootmode="open"><style>
+@keyframes bounceIn{
+0%{
+opacity: 0;
+transform: scale(0.9) translate3d(0,0,0);
+}
+100%{
+opacity: 1;
+transform: scale(1) translate3d(0,0,0);
+}
+}
+:host([opened]) .overlay {
+opacity: 1;
+display: block;
+}
+:host([opened]) .backdrop {
+opacity: 1;
+pointer-events: all;
+}
+:host([opened]) .overlay * {
+pointer-events: all;
+}
+:host([opened]) .release-panel {
+margin: 5vh auto;
+}
+:host([opened]) .releases {
+overflow-y: auto;
+}
+@media only screen and (min-width: 600px) {
+:host([opened]) .release-panel {
+animation-name: bounceIn;
+animation-duration: 200ms;
+animation-timing-function: ease;
+animation-fill-mode: forwards;
+}
+}
+
+@media only screen and (max-width: 600px) {
+:host([opened]) .release-panel {
+margin: 1vh auto;
+height: 85vh;
+width: 95%;
+}
+div.release-content {
+padding: 20px;
+}
+}
+h1, h2, h3 {
+margin: 0;
+color: #161e2e;
+}
+.backdrop {
+height: 100%;
+width: 100%;
+position: fixed;
+top: 0;
+right: 0;
+background-color: rgba(0, 0, 0, .4);
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.1s ease;
+z-index: 2147482997;
+}
+.overlay {
+position: fixed;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.1s ease;
+z-index: 2147482998;
+display: none;
+}
+.overlay * {
+pointer-events: none;
+}
+.release-panel * {
+box-sizing: border-box;
+}
+.release-panel {
+box-sizing: border-box;
+background-color: rgb(255, 255, 255);
+color: #161e2e;
+font-family: system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+height: 90vh;
+width: 650px;
+max-width: 100%;
+transition: margin 0.1s ease;
+display: flex;
+flex-direction: column;
+margin: 6vh auto 4vh;
+opacity: 1;
+z-index: 2147482999;
+box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
+border-radius: 10px;
+overflow: hidden;
+right: 0px;
+line-height: 1.5em;
+-webkit-font-smoothing: antialiased;
+}
+.title-bar {
+display: flex;
+color: rgb(22, 30, 46);
+padding: 15px 20px;
+font-size: 20px;
+align-items: center;
+border-bottom: 1px solid #e5e7eb;
+}
+.title-bar a {
+color: #161e2e;
+text-decoration: none;
+flex-grow: 2;
+}
+.title-bar .back-btn{
+margin-right: 10px;
+}
+.title-bar .back-btn,
+.title-bar .close-btn {
+align-self: flex-start;
+cursor: pointer;
+fill: none;
+flex-shrink: 0;
+height: 24px;
+stroke: currentColor;
+width: 24px;
+}
+.releases {
+height: 100%;
+width: 100%;
+border: none;
+background-color: rgb(255, 255, 255);
+overflow-y: hidden;
+}
+.release-block {
+width: 100%;
+border-top: 1px solid #EFEFEF;
+}
+.release-content {
+display: flex;
+flex-direction: column;
+padding: 40px 40px 0 40px;
+color: #6b7280;
+overflow-wrap: break-word;
+}
+.release-content figure {
+margin: 1em 0;
+max-width: 100%;
+}
+.release-content figure iframe {
+max-width: 100%;
+}
+code {
+background-color: #fed7d7;
+color: #9b2c2c;
+border-radius: 5px;
+padding: 2px 5px;
+}
+.release-content a {
+color: #3182ce;
+}
+.release-block h1 {
+font-size: 20px;
+}
+.release-block h2 {
+font-size: 18px;
+}
+.release-block h3 {
+font-size: 16px;
+}
+.release-block img {
+max-width: 100%;
+height: auto !important;
+}
+.type {
+text-transform: uppercase;
+display: inline-block;
+font-size: 10px;
+border-radius: 999px;
+padding: 0 10px;
+background-color: #bee3f8;
+color: #2b6cb0;
+font-weight: bold;
+letter-spacing: 0.75px;
+margin-right: 10px;
+}
+.note-type {
+text-transform: capitalize;
+}
+.type-feature {
+background-color: #c6f6d5;
+color: #276749;
+margin-right: 10px;
+}
+.type-bugfix {
+background-color: #feebc8;
+color: #9c4221;
+}
+.meta {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+margin-bottom: 10px;
+font-size: 13px;
+color: #718096;
+}
+.released_at {
+margin-right: 4px;
+}
+h1.title {
+font-size: 24px;
+margin-bottom: 10px;
+font-weight: bold;
+}
+.title a {
+color: #161e2e;
+text-decoration: none;
+}
+.notes li p {
+margin: 0;
+}
+.powered-by {
+display: block;
+width: 650px;
+max-width: 100%;
+text-align: right;
+padding: 5px 10px;
+opacity: 0.7;
+font-size: 13px;
+color: #6b7280;
+text-decoration: none;
+}
+.release-reactions {
+backface-visibility: hidden;
+padding: 12px;
+text-align: center;
+color: #777;
+border-top: 1px solid #EFEFEF;
+line-height: 1em;
+margin-top:20px;
+}
+.release-reactions .default, .release-reactions .success {
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+}
+.release-reactions p {
+padding-right: 5px;
+line-height: 1.4em;
+font-style: italic;
+}
+.release-reactions .reaction-icon {
+background: none;
+color: inherit;
+border: none;
+padding: 0;
+font: inherit;
+cursor: pointer;
+outline: none;
+width: 40px;
+display: inline-block;
+text-align: center;
+font-size: 24px;
+transition: transform 0.16s cubic-bezier(0.65, 0.61, 0.18, 1.8) 0.02s, filter 0.32s linear;
+cursor: pointer;
+transform-origin: 50% 60%;
+}
+.release-reactions .reaction-icon:hover {
+transform: scale(1.32);
+}
+.release-reactions .reaction-icon span
+{
+cursor: pointer;
+line-height: 55px;
+}
+.release-reactions .reaction-icon span
+{
+cursor: pointer;
+line-height: 55px;
+}
+.release-reactions a.reaction-icon
+{
+text-decoration: none;
+}
+.release-reactions .hidden
+{
+display:none;
+}
+.show-more-link {
+    display: flex;
+    justify-self: center;
+    padding: 4px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #3182ce;
+}
+
+.show-more-link:hover {
+    text-decoration: none;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+.show-more-link .badge {
+    background-color: #f94747;
+    border-radius: 50%;
+    font-size: 11px;
+    color: #FFF;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+    text-align: center;
+    font-family: sans-serif;
+    display: inline-block;
+    margin-left: 8px;
+}
+</style><div class="backdrop"></div><div class="overlay">
+<div class="release-panel">
+<div class="title-bar">
+
+<a target="_blank" rel="noopener noreferrer" href="https://insanecyber.releasenotes.io/">Latest Updates</a>
+<svg class="close-btn" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" style="stroke-linecap: round; stroke-linejoin: round; stroke-width: 2px;"></path></svg>
+</div>
+<div class="releases">
+
+<div class="release-block" data-rnmodal-uid="BDPqS">
+<img class="featured_image" src="https://assets.releasenotes.io/production/team-9942/featured-58171.png?v=1755098520">
+<div class="release-content">
+<div class="meta">
+<span class="type release-type type-feature">feature</span>
+<span class="released_at">Aug 7, 2025 </span>
+<span class="released_by">by Samantha Becker</span>
+</div>
+<h1 class="title">
+<a target="_blank" rel="noreferrer noopener" href="https://insanecyber.releasenotes.io/release/BDPqS-valkyrie-updates-july-2025">
+Valkyrie updates - July 2025
+</a></h1>
+<div>
+<p>This month, our team focused on enhancing the customer experience by delivering deeper analytics capabilities and expanding support for a broader range of industrial protocols. These updates are designed to help you gain richer insights from your data and ensure seamless visibility across more of your operational environment.</p>
+<p>&nbsp;</p>
+<p><strong>New UI Launched and Available</strong></p>
+<p>We’ve launched a brand-new UI designed with you in mind. We’re making it more intuitive to navigate, investigate, and take action in your OT environment. With a clean layout, smoother interactions, and a modern look including dark mode functionality, the updated experience helps you get to what matters faster. Valkyrie users are now able to automate data processing and integration into their environments.</p>
+<p><img src="https://assets.releasenotes.io/production/team-9942/6892520e3e1d3_Screenshot_2025-08-05_at_1.30.13_PM.png" alt="Valkyrie home screen" width="513" height="252"></p>
+<p><strong>External Storage Scanning Functionality &amp; Dashboard</strong></p>
+<p>We’re introducing a new External Storage Scanning Function and Dashboard purpose-built for OT environments, giving you visibility into USB and external media activity across your sites. With support for custom threat detection using YARA rules and integration with tools like CrowdStrike, it helps identify potential threats before they can spread, bridging the gap between OT operations and cybersecurity.</p>
+<p><strong>Support and Enrichment for Additional Industrial Protocols</strong></p>
+<p>Our team is always working to add support for industrial protocols to Valkyrie, and this month we’ve added Allen Bradley’s proprietary CIP protocols, DNP3 function code values, and CIP codes for connection manager. We’ve also worked to add enrichments to existing protocols, including recognizable names for function codes that will allow analysts to better interpret what’s happening when reviewing logs.</p>
+<p><strong>Red Flags Threats Dashboard</strong></p>
+<p>We’ve added an at-a-glance dashboard to view any threats that have been detected&nbsp;<a style="mso-comment-reference: JR_1; mso-comment-date: 20250723T1517;">across platform plugins and analyzers, </a>with the ability to drill down into any activities. This dashboard brings together host and network data into one place with common fields in one visualization to quickly show outliers.</p>
+<p><img src="https://assets.releasenotes.io/production/team-9942/6894cfd7acd12_Screenshot_2025-08-05_at_1.36.56_PM_(2).png" alt="Threats dashboard" width="568" height="279"></p>
+<p><strong>Asset ID Dashboard Drill-down Feature</strong></p>
+<p><span style="font-size: 12.0pt; line-height: 115%; font-family: &#39;Aptos&#39;,sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &#39;Times New Roman&#39;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Users are now able to dive deeper into our Asset Identification dashboard to review raw asset detection events for MAC, IP, protocol, detector, or <a style="mso-comment-reference: SB_1; mso-comment-date: 20250723T1311;"><span style="mso-comment-continuation: 2;">vendor.</span></a></span><span style="font-size: 12.0pt; line-height: 115%; font-family: &#39;Aptos&#39;,sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &#39;Times New Roman&#39;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">&nbsp;Through these detections, analysts can go from a top-level view of vendors into the assets we’ve observed the association with. This additional level of detail gives added context when investigating a suspicious device.</span></p>
+<p><iframe src="https://www.youtube.com/embed/qo0Z3qj-pCw" width="600" height="338" allowfullscreen="allowfullscreen"></iframe></p>
+<p><strong><span style="font-size: 12.0pt; line-height: 115%; font-family: &#39;Aptos&#39;,sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &#39;Times New Roman&#39;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Register Values for Modbus Added to Industrial Protocols Dashboard</span></strong></p>
+<p><span style="mso-bidi-font-family: Aptos; mso-bidi-theme-font: minor-latin;"><span style="mso-list: Ignore;"><span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;</span></span></span><!--[endif]-->The Industrial Controls Dashboard now shows not only that a function code is being sent, but the memory location it is sent to. When combining this information about the environment, an analyst will be able to better interpret what is being read or modified.</p>
+<p><img src="https://assets.releasenotes.io/production/team-9942/6894d01581619_mceclip0.png" width="598" height="226"></p>
+<p><strong>Registry Files Plugin</strong></p>
+<p>Valkyrie is now able to analyze Windows registry files which enhances the ability to analyze host data. Analysts will now be able to detect, investigate, and respond to threats that could go unnoticed without reviewing the host data.</p>
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+<a class="powered-by" target="_blank" rel="noopener noreferrer" href="https://releasenotes.io/?utm_source=hosted&amp;utm_medium=widget&amp;utm_campaign=insanecyber.releasenotes.io&amp;utm_content=powered_by">Powered by ReleaseNotes.io</a>
+</div>
+</div></template></releases-panel></body></html>
