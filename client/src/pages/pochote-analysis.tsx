@@ -49,7 +49,7 @@ interface ForensicsResult {
 interface PreResults {
   photos: Record<string, string>;
   frames: Record<string, { analysis: string }>;
-  audio: Record<string, { transcript?: string; sizeMB?: string; forensics?: ForensicsResult }>;
+  audio: Record<string, { transcript?: string; sizeMB?: string; forensics?: ForensicsResult; chunked?: boolean; totalChunks?: number; nonEmptyChunks?: number }>;
   synthesis?: string;
   generatedAt?: string;
 }
@@ -244,7 +244,7 @@ const SPEAKER_TYPE_COLOR: Record<string, string> = {
   MIXED: "text-purple-400",
 };
 
-function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, running, forensicsRunning, onManualSave, sizeMB, onTranscribeChunked, chunkProgress }: {
+function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, running, forensicsRunning, onManualSave, sizeMB, onTranscribeChunked, chunkProgress, chunkedMeta }: {
   file: string;
   transcript?: string;
   forensics?: ForensicsResult;
@@ -256,6 +256,7 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
   sizeMB?: string;
   onTranscribeChunked?: () => void;
   chunkProgress?: { chunk: number; total: number } | null;
+  chunkedMeta?: { totalChunks: number; nonEmptyChunks: number };
 }) {
   const [manualMode, setManualMode] = useState(false);
   const [manualText, setManualText] = useState(transcript || "");
@@ -432,7 +433,18 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
       {expanded && hasTranscript && (
         <div className="px-4 pb-3 border-t border-gray-800/60 pt-3">
           <div className="bg-gray-950 border border-gray-800 rounded p-3">
-            <div className="text-[8px] font-mono text-amber-600 mb-1.5">TRANSCRIPT · gpt-4o-mini-transcribe</div>
+            <div className="flex items-center gap-3 mb-1.5 flex-wrap">
+              <span className="text-[8px] font-mono text-amber-600">TRANSCRIPT · gpt-4o-mini-transcribe</span>
+              {chunkedMeta && (
+                <>
+                  <span className="text-[7px] font-mono px-1.5 py-0.5 bg-violet-950/60 border border-violet-800 text-violet-400 rounded">chunked · {chunkedMeta.totalChunks} segments</span>
+                  <span className="text-[7px] font-mono text-green-500">{chunkedMeta.nonEmptyChunks} with speech</span>
+                  {chunkedMeta.totalChunks - chunkedMeta.nonEmptyChunks > 0 && (
+                    <span className="text-[7px] font-mono text-gray-600">{chunkedMeta.totalChunks - chunkedMeta.nonEmptyChunks} silent</span>
+                  )}
+                </>
+              )}
+            </div>
             <div className="space-y-3">
               {transcript.split(/\n\n+/).map((chunk, idx) => {
                 const tsMatch = chunk.match(/^\[(\d{2}:\d{2}[–-]\d{2}:\d{2})\]\n?([\s\S]*)$/);
@@ -1215,6 +1227,10 @@ export default function PochoteAnalysisPage() {
                 sizeMB={preResults?.audio?.[f]?.sizeMB}
                 onTranscribeChunked={() => transcribeChunked(f)}
                 chunkProgress={chunkProgress[f]}
+                chunkedMeta={preResults?.audio?.[f]?.chunked ? {
+                  totalChunks: preResults.audio[f].totalChunks ?? 0,
+                  nonEmptyChunks: preResults.audio[f].nonEmptyChunks ?? 0,
+                } : undefined}
               />
             ))}
           </div>
