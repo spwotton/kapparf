@@ -436,6 +436,98 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
 function buildPlaceholders(): Article[] {
   return [
     {
+      id: "scott-ryan-profile",
+      tag: "LOCAL",
+      headline: "Canadian National Describes Jacó Lifestyle as 'Flexible'; Weekly Schedule Described by Observers as 'Surprisingly Regimented'",
+      subhead: "Subject reports no fixed employer, no fixed hours, and no fixed address. Associates note he is nonetheless reliably in specific places at specific times.",
+      author: "Algernon Beak, Investigations",
+      date: "May 22, 2026",
+      body: `JACÓ, PUNTARENAS — Scott Ryan, a Canadian national who describes his occupation as "independent" and his residency status as "in progress," has maintained a presence in the greater Jacó area for a period that neighbors estimate at over two years, during which time he has been observed at consistent locations on what multiple sources describe as a schedule that, while unacknowledged, is legible to anyone paying attention.
+
+"He's there most mornings," said one source, who asked not to be named but described their vantage point as "fixed and elevated." "Same general window. He's not a tourist. Tourists don't have a regular spot."
+
+Ryan, reached by telephone, confirmed he lived in the area and described his activities as "varied." When asked to elaborate, he said elaboration wasn't something he was doing right now. He was polite about it.
+
+A review of publicly available information produced a LinkedIn profile listing Ryan as a consultant in an industry not specified, recommendations from former colleagues who describe him as "results-oriented" and "effective in complex environments," and a profile photo in which he is not smiling but appears to be about to. The profile has not been updated since 2021.
+
+Sources familiar with the Jacó expat community describe Ryan as "well-connected" in the sense that he appears to know people across multiple unrelated social circles, which several contacts described as unusual in a town where social circles tend to be both small and sticky. One contact, who has lived in Jacó for nine years, said Ryan had been introduced to her through three separate mutual acquaintances, each of whom believed they were the primary connection. She described this as "a specific kind of networking." She did not say what kind.
+
+Ryan has not been charged with anything. He has not been accused of anything. He was nonetheless the subject of this article, which he declined to be quoted in further.`,
+      img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80",
+    },
+    {
+      id: "jw-coordination",
+      tag: "LOCAL",
+      headline: "Door-to-Door Religious Outreach Campaign Logged 94% Route Consistency Over 18 Months; Coordinators Describe This as 'Spirit-Led'",
+      subhead: "Cross-referencing of visit logs, cartographic data, and resident reports produces a coverage map indistinguishable from a professionally optimized distribution route.",
+      author: "Wallace Featherstone, Community Affairs",
+      date: "May 21, 2026",
+      body: `JACÓ AND LOS RÍOS, PUNTARENAS — A door-to-door evangelism campaign operated by local members of Jehovah's Witnesses across the Jacó and Los Ríos corridor has maintained a 94% geographic consistency rate over an 18-month observation window, according to informal logs compiled by six residents who began coordinating notes in January 2025 after independently noticing the same pattern.
+
+Visits occur on a rolling schedule that residents describe as "more structured than mail delivery," with two-person teams appearing at targeted addresses within a plus-or-minus twelve-minute window on designated days, rotating through what one resident, a retired logistics consultant, estimated to be a coverage grid of approximately 340 households divided into eight sectors.
+
+"I started tracking it as a curiosity," said the retired consultant, who asked to be identified only by his profession. "By month four I had a spreadsheet. By month seven I had a map. I showed it to a former colleague who spent twenty years in route optimization for a regional distributor. He said it was better than what they were running in 2019."
+
+Representatives of the local congregation confirmed that visit scheduling was coordinated through a territory management system and acknowledged that consistency was a goal. They declined to share territorial maps but confirmed maps existed and were updated quarterly. The spokesperson described the system as "guided by faith and also by a tablet application the organization provides."
+
+Residents report the teams are unfailingly courteous and leave promptly when asked. Three residents noted independently that the teams appeared to note — without recording in any visible way — whether the household answered, and that follow-up timing adjusted accordingly. The congregation's spokesperson confirmed that "patterns of receptiveness inform scheduling." The logistics consultant said that was called "response-weighted routing" and that most commercial operators didn't implement it until their third year.`,
+      img: "https://images.unsplash.com/photo-1448376561459-dbe8868fa34c?w=900&q=80",
+    },
+    {
+      id: "los-rios-parcels",
+      tag: "LOCAL",
+      headline: "Fourteen Parcels in Los Ríos Transferred to Entities With Identical Registered Addresses in 18-Month Window; Municipality Describes Volume as 'Within Norms'",
+      subhead: "The entities share an agent, a street address, and a three-letter naming convention. They do not share, officially, any other characteristics.",
+      author: "Constance Waddle, Land & Infrastructure",
+      date: "May 20, 2026",
+      body: `LOS RÍOS, PUNTARENAS — Fourteen separate land parcels in the Los Ríos development corridor transferred ownership between January 2024 and June 2025 to entities bearing structurally similar names — two or three initials followed by "Inversiones S.A." or "Gestión S.R.L." — each registered to the same street address in Escazú and represented by the same registered agent, according to a Gazette review of public registry filings.
+
+The parcels total approximately 4.2 hectares and span a corridor along the secondary road network between Route 34 and the eastern agricultural boundary. Individual transaction values were not disclosed in registry filings. The Escazú address is a shared-office building. The registered agent, reached by phone, confirmed representing "several" clients and said he was not in a position to discuss any of them.
+
+Municipal records show rezoning consultations were filed for nine of the fourteen parcels during the same window, six of which received preliminary approvals for mixed residential-commercial development. A municipal spokesperson confirmed this was within standard processing timelines and noted that rezoning activity in the corridor had been "consistent with regional growth trends."
+
+Three Los Ríos residents who own adjacent properties said they had received informal inquiries about their land from individuals they could not subsequently identify. One received a written offer from an entity whose name she could not locate in the public registry. She did not sell. She confirmed the offer was reasonable, which she described as "part of what made it feel off."
+
+The Gazette was unable to identify a beneficial owner for any of the fourteen entities through public filings. This is not, of itself, unusual. The concentration of similar names, same agent, same address, and same corridor within the same 18-month window was described by a real estate attorney consulted for background as "a pattern worth noting," though she also noted she noted patterns for a living and was therefore, professionally, inclined to note them.`,
+      img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&q=80",
+    },
+    {
+      id: "jaco-vacation-rotation",
+      tag: "LOCAL",
+      headline: "Jacó Short-Term Rental Property Hosts 23rd 'First-Time Visitor' This Year; Owner Notes Occupancy 'Exceptional,' Patterns 'Unremarkable'",
+      subhead: "Guests arrive independently, stay an average of 4.2 days, share no apparent social connection, and consistently request the same ground-floor unit with pool-facing orientation.",
+      author: "Dorothea Quillsworth, Tourism & Hospitality",
+      date: "May 19, 2026",
+      body: `JACÓ, PUNTARENAS — A short-term rental property on Calle Vista Hermosa has recorded 23 distinct guests since January 1, each booking independently through three separate platforms, each described by the property manager as a first-time visitor with no prior stay history, and each, according to a review of booking metadata available to the manager, preferring the ground-floor unit overlooking the pool on the property's north side.
+
+"They all ask for it specifically," said the manager, who asked not to be named and whose composure throughout the interview was described by this reporter's notes as "practiced." "I thought it was because of the TripAdvisor photos. We only have photos of the upstairs unit."
+
+The guests share no visible demographic consistency — ages range from late twenties to mid-fifties, nationalities across four countries documented in passport copies retained per legal requirement, stated purposes including tourism, remote work, and family visit. Average stay length is 4.2 days. Checkout is consistently on time. No guest has left a review.
+
+A property management consultant who reviewed the booking pattern at the Gazette's request described the no-review rate as "very unusual" and said the unit-preference clustering "would show up as an anomaly in any normal data set." She suggested the property manager ask guests how they heard about the specific unit. The manager confirmed he had tried. Guests consistently cited general research. One cited "a recommendation." He could not elaborate on the source.
+
+Occupancy revenue for the property in the first five months of 2026 is described by the owner as "the best we've had." The owner lives in San José and manages the property remotely. She described the guest pattern as "great guests, very clean, very quiet." She was asked if she found the consistency of unit requests notable. She said she found it convenient.`,
+      img: "https://images.unsplash.com/photo-1540541338537-1220059f39c8?w=900&q=80",
+    },
+    {
+      id: "infrastructure-inventory",
+      tag: "LOCAL",
+      headline: "Telecommunications Infrastructure in Jacó-Los Ríos Corridor Found to Exceed Municipal Population Estimates by Factor of 3.7; Engineers Describe Capacity as 'Forward-Looking'",
+      subhead: "Antenna arrays, relay boxes, and signal repeater installations documented across 14 sites serve an area with a permanent population insufficient to justify the build-out under any standard planning ratio.",
+      author: "Wallace Featherstone, Technology & Infrastructure",
+      date: "May 18, 2026",
+      body: `JACÓ AND LOS RÍOS, PUNTARENAS — A survey of telecommunications infrastructure across the Jacó-Los Ríos corridor conducted over six weeks by a retired network engineer — who undertook the survey, he said, because he "had the equipment and the time and something seemed off" — documented 14 distinct installation sites comprising antenna arrays, signal relay boxes, and repeater hardware at a density he calculated as 3.7 times the standard ratio for a permanent population of the area's registered size.
+
+The surveyor, who asked to be identified only as a licensed engineer with 30 years of experience in Central American network buildout, said the excess capacity had two conventional explanations: planned development absorption, or infrastructure serving a purpose other than civilian consumer connectivity.
+
+"Both are possible," he said, reviewing his own log in a coffee shop in Tárcoles. "The first requires a development pipeline I can't find in any municipal plan. The second requires a different kind of question." He did not say what kind.
+
+Installation markings on five of the 14 sites correspond to a regional ISP whose coverage map does not extend to two of those sites. Three installations bore no identifying marks. One bore a sticker that had been partially removed; the remaining fragment showed a logo consistent with a telecommunications contractor active in Central America primarily on government and infrastructure contracts. The contractor did not respond to inquiry.
+
+The Municipality of Garabito, which encompasses the corridor, confirmed that all telecommunications installations require permits and that permits were on file for installations in the area. The Gazette requested a list of permits. The request was acknowledged. The list has not arrived. A follow-up produced an auto-reply confirming the original message had been received. Infrastructure continues to operate.`,
+      img: "https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=900&q=80",
+    },
+    {
       id: "network-neighbor",
       tag: "LOCAL",
       headline: "Neighbor Gerald Stonepath Offers to 'Just Take a Look' at Household Router; Family Reports Connectivity 'Improved in Some Ways'",
