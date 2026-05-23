@@ -89,14 +89,18 @@ app.use((req, res, next) => {
   const { startPipeline } = await import("./pipeline");
   const { startNetworkThreatScanner } = await import("./network-threat-scanner");
   const { hypervisor } = await import("./hypervisor");
-  const { startKiwiVision } = await import("./kiwisdr-vision");
   startCollectors();
   startAutoCorrelator();
   startKiwiSDRScanner();
   startNetworkWatchdog();
   startPipeline();
   startNetworkThreatScanner();
-  startKiwiVision(300_000);
+  // KiwiSDR Vision requires Playwright/Chromium — only run in explicit development mode.
+  // Deployment container has no PulseAudio and port 8073 is unreachable from cloud.
+  if (process.env.NODE_ENV === "development") {
+    const { startKiwiVision } = await import("./kiwisdr-vision");
+    startKiwiVision(300_000);
+  }
   hypervisor.start();
 
   // Goose Gazette — automated satirical content engine
