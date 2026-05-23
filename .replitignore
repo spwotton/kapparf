@@ -1,0 +1,57 @@
+# ── Large dev-uploaded binaries in attached_assets ────────────────────────────
+# Keep: attached_assets/edge_detection/ (referenced by drone analysis routes)
+# Keep: attached_assets/screenshots/ (small, referenced)
+# Exclude: large uploaded binaries that were dev-only analysis artifacts
+attached_assets/*.mov
+attached_assets/*.mp4
+attached_assets/*.zip
+attached_assets/*.pcap
+attached_assets/*.wav
+attached_assets/*.MP4
+attached_assets/*.MOV
+attached_assets/*.avi
+attached_assets/*.mkv
+attached_assets/*.tar
+attached_assets/*.gz
+attached_assets/*.7z
+attached_assets/*.rar
+attached_assets/*.pcapng
+
+# ── Research/intelligence document archives (not served at runtime) ────────────
+drive-download-20260513T020452Z-3-001/
+JW_PHYSICAL_LAYER_DOSSIER/
+AAWSAP-DIRDs-1-37/
+new_audio_evidence/
+docs/
+new/
+drone defense/
+alignment/
+surveillance_frames/
+base53_hyper/
+Quake-2-Engine/
+REEL_STANDALONE/
+auto_scan/
+analysis_results/
+suppz_supercharger/
+QuantumRenderer/
+sentinel/
+kiwisdr_scans/
+captures/
+
+# ── KiwiSDR screenshots — written at runtime, empty on fresh deploy ───────────
+kiwisdr_screenshots/
+
+# ── Video forensics raw media (only JSON results are read by routes) ──────────
+server/data/video_forensics/*.wav
+server/data/video_forensics/*.mp4
+server/data/video_forensics/*.mov
+server/data/video_forensics/*.avi
+server/data/video_forensics/cnu_compare/
+server/data/video_forensics/vid2/*.wav
+server/data/video_forensics/vid2/*.mp4
+
+# ── Build artifacts (rebuilt by npm run build during deploy) ──────────────────
+dist/
+
+# ── Dev tooling / test output ─────────────────────────────────────────────────
+.local/

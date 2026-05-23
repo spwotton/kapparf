@@ -53,7 +53,16 @@ const openrouter = new OpenAI({
     "X-Title": "Tico Satire Hypervisor",
   },
 });
-const BLEND_MODEL = "meta-llama/llama-3.3-70b-instruct:free";
+const FREE_MODEL_CHAIN = [
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "deepseek/deepseek-v4-flash:free",
+  "qwen/qwen3-next-80b-a3b-instruct:free",
+  "openai/gpt-oss-120b:free",
+  "google/gemma-4-31b-it:free",
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "meta-llama/llama-3.2-3b-instruct:free",
+];
+const BLEND_MODEL = FREE_MODEL_CHAIN[0];
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 interface SectorState {
@@ -172,32 +181,36 @@ async function blendSector(
   sectorName: string
 ): Promise<{ blends: any[]; briefing: string } | null> {
   if (headlines.length === 0) return null;
-  try {
-    const resp = await openrouter.chat.completions.create({
-      model: BLEND_MODEL,
-      temperature: 0.85,
-      max_tokens: 1200,
-      messages: [
-        { role: "system", content: BLEND_SYSTEM },
-        {
-          role: "user",
-          content: `SECTOR ${sectorId} (${sectorName}) — Real CR headlines to blend:\n\n${
-            headlines.map((h, i) => `${i + 1}. ${h}`).join("\n")
-          }\n\nBlend these into Onion-style satirical versions. Output JSON only.`,
-        },
-      ],
-    });
-    const raw = resp.choices[0]?.message?.content ?? "";
-    const cleaned = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/i, "").trim();
-    const parsed = JSON.parse(cleaned.match(/\{[\s\S]*\}/)?.[0] ?? "{}");
-    return {
-      blends: parsed.blends ?? [],
-      briefing: parsed.briefing ?? "",
-    };
-  } catch (e: any) {
-    console.warn(`[TICO-HYPER] Blend failed for sector ${sectorId}: ${e.message}`);
-    return null;
+  const userMsg = `SECTOR ${sectorId} (${sectorName}) — Real CR headlines to blend:\n\n${
+    headlines.map((h, i) => `${i + 1}. ${h}`).join("\n")
+  }\n\nBlend these into Onion-style satirical versions. Output JSON only.`;
+
+  for (const model of FREE_MODEL_CHAIN) {
+    try {
+      const resp = await openrouter.chat.completions.create({
+        model,
+        temperature: 0.85,
+        max_tokens: 1200,
+        messages: [
+          { role: "system", content: BLEND_SYSTEM },
+          { role: "user", content: userMsg },
+        ],
+      });
+      const raw = resp.choices[0]?.message?.content ?? "";
+      if (!raw.trim()) continue;
+      const cleaned = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/i, "").trim();
+      const parsed = JSON.parse(cleaned.match(/\{[\s\S]*\}/)?.[0] ?? "{}");
+      console.log(`[TICO-HYPER] Sector ${sectorId} blended via ${model.split("/").pop()}`);
+      return {
+        blends: parsed.blends ?? [],
+        briefing: parsed.briefing ?? "",
+      };
+    } catch (e: any) {
+      console.warn(`[TICO-HYPER] ${model.split("/").pop()} failed for sector ${sectorId}: ${e.message?.slice(0,60)}`);
+    }
   }
+  console.error(`[TICO-HYPER] All free models failed for sector ${sectorId}`);
+  return null;
 }
 
 // ── SECTOR RUNNER ─────────────────────────────────────────────────────────────

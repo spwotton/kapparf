@@ -338,8 +338,17 @@ export async function ingestArticleIntel(articles: ArticleIntel[]): Promise<void
 // ── Research Cycle ────────────────────────────────────────────────────────────
 
 const PRIORITY_WEIGHT: Record<string, number> = { HIGH: 3, MEDIUM: 2, LOW: 1 };
-const PRIMARY_MODEL  = "meta-llama/llama-3.3-70b-instruct:free";
-const FALLBACK_MODEL = "deepseek/deepseek-r1:free";
+const FREE_MODEL_CHAIN = [
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "deepseek/deepseek-v4-flash:free",
+  "qwen/qwen3-next-80b-a3b-instruct:free",
+  "openai/gpt-oss-120b:free",
+  "google/gemma-4-31b-it:free",
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "meta-llama/llama-3.2-3b-instruct:free",
+];
+const PRIMARY_MODEL  = FREE_MODEL_CHAIN[0];
+const FALLBACK_MODEL = FREE_MODEL_CHAIN[1];
 
 async function pickThread(): Promise<string | null> {
   const { rows } = await pool.query<{ slug: string; priority: string; last_cycle: Date | null }>(
@@ -427,26 +436,29 @@ Respond ONLY as valid JSON — no preamble, no markdown:
   let raw = "";
   let usedModel = PRIMARY_MODEL;
 
-  try {
-    const resp = await openrouter.chat.completions.create({
-      model: PRIMARY_MODEL, messages: [{ role: "user", content: prompt }],
-      max_tokens: 1000, temperature: 0.25,
-    });
-    raw = resp.choices[0]?.message?.content ?? "";
-  } catch (e: any) {
-    console.warn(`[GazetteIntel] Primary model failed: ${e.message?.slice(0, 80)}`);
+  let modelSuccess = false;
+  for (const model of FREE_MODEL_CHAIN) {
     try {
-      const resp2 = await openrouter.chat.completions.create({
-        model: FALLBACK_MODEL, messages: [{ role: "user", content: prompt }],
+      const resp = await openrouter.chat.completions.create({
+        model, messages: [{ role: "user", content: prompt }],
         max_tokens: 1000, temperature: 0.25,
       });
-      raw = resp2.choices[0]?.message?.content ?? "";
-      usedModel = FALLBACK_MODEL;
-    } catch (e2: any) {
-      console.error("[GazetteIntel] All models failed:", e2.message?.slice(0, 80));
+      const candidate = resp.choices[0]?.message?.content ?? "";
+      if (candidate.trim().length > 0) {
+        raw = candidate;
+        usedModel = model;
+        modelSuccess = true;
+        break;
+      }
+    } catch (e: any) {
+      console.warn(`[GazetteIntel] ${model} failed: ${e.message?.slice(0, 60)}`);
+    }
+  }
+
+  if (!modelSuccess) {
+      console.error("[GazetteIntel] All free models failed — chain exhausted");
       await pool.query(`UPDATE gazette_intel_threads SET last_cycle=NOW(), cycle_count=$1 WHERE slug=$2`, [cycleNum, slug]);
       return null;
-    }
   }
 
   let parsed: any = {};

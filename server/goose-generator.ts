@@ -52,8 +52,17 @@ const openrouter = new OpenAI({
   },
 });
 
-// Best freely available model for structured JSON output
-const COUNCIL_MODEL = "meta-llama/llama-3.3-70b-instruct:free";
+// Free model chain — walks until one responds, never stops at a dead model
+const FREE_MODEL_CHAIN = [
+  "meta-llama/llama-3.3-70b-instruct:free",
+  "deepseek/deepseek-v4-flash:free",
+  "qwen/qwen3-next-80b-a3b-instruct:free",
+  "openai/gpt-oss-120b:free",
+  "google/gemma-4-31b-it:free",
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "meta-llama/llama-3.2-3b-instruct:free",
+];
+const COUNCIL_MODEL = FREE_MODEL_CHAIN[0];
 
 // ── REAL COSTA RICA PLACE NAMES (satirical dateline pool) ────────────────────
 const CR_REAL_PLACES = [
@@ -936,96 +945,85 @@ function safeParseJSON<T>(raw: string | null | undefined, fallback: T): T {
 
 // ── L1A: GEOMETER AGENT ───────────────────────────────────────────────────────
 async function runGeometerAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<GeometerOutput | null> {
-  try {
-    const loreSeed = pickLoreSeed();
-    const loreBlock = loreSeed ? `\nLORE SEED (weave this real story subtly into background detail — do NOT quote it directly):\n${loreSeed.slice(0, 400)}\n` : "";
-    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data) + loreBlock;
-    const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
-    const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
-
-    const resp = await client.chat.completions.create({
-      model,
-      messages: [
-        { role: "system", content: GEOMETER_SYSTEM },
-        { role: "user",   content: userPrompt },
-      ],
-      max_tokens: 900,
-      temperature: COUNCIL_TEMP,
-    });
-    const raw = resp.choices[0]?.message?.content;
-    const parsed = safeParseJSON<GeometerOutput>(raw, { candidates: [], best_index: 0 });
-    if (!parsed.candidates?.length) return null;
-
-    // Local re-score: find candidate closest to ideal κ₁ with valid Ψ
-    let bestIdx = parsed.best_index ?? 0;
-    let bestErr = Infinity;
-    parsed.candidates.forEach((c, i) => {
-      if (c.psi_valid && c.kappa_error < bestErr) {
-        bestErr = c.kappa_error;
-        bestIdx = i;
-      }
-    });
-    parsed.best_index = bestIdx;
-    return parsed;
-  } catch (e) {
-    console.error("[GOOSE:GEOMETER] error:", (e as Error).message);
-    return null;
+  const loreSeed = pickLoreSeed();
+  const loreBlock = loreSeed ? `\nLORE SEED (weave this real story subtly into background detail — do NOT quote it directly):\n${loreSeed.slice(0, 400)}\n` : "";
+  const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data) + loreBlock;
+  const models = process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN : ["gpt-4o-mini"];
+  const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
+  for (const model of models) {
+    try {
+      const resp = await client.chat.completions.create({
+        model,
+        messages: [{ role: "system", content: GEOMETER_SYSTEM }, { role: "user", content: userPrompt }],
+        max_tokens: 900, temperature: COUNCIL_TEMP,
+      });
+      const raw = resp.choices[0]?.message?.content;
+      const parsed = safeParseJSON<GeometerOutput>(raw, { candidates: [], best_index: 0 });
+      if (!parsed.candidates?.length) continue;
+      let bestIdx = parsed.best_index ?? 0; let bestErr = Infinity;
+      parsed.candidates.forEach((c, i) => { if (c.psi_valid && c.kappa_error < bestErr) { bestErr = c.kappa_error; bestIdx = i; } });
+      parsed.best_index = bestIdx;
+      return parsed;
+    } catch (e: any) {
+      console.warn(`[GOOSE:GEOMETER] ${model.split("/").pop()} failed: ${e.message?.slice(0,60)}`);
+    }
   }
+  console.error("[GOOSE:GEOMETER] all models failed"); return null;
 }
 
 // ── L1B: BODY ARCHITECT AGENT ─────────────────────────────────────────────────
 async function runBodyAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<BodyOutput | null> {
-  try {
-    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
-    const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
-    const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
-
-    const resp = await client.chat.completions.create({
-      model,
-      messages: [
-        { role: "system", content: BODY_SYSTEM },
-        { role: "user",   content: userPrompt },
-      ],
-      max_tokens: 1400,
-      temperature: COUNCIL_TEMP,
-    });
-    const raw = resp.choices[0]?.message?.content;
-    return safeParseJSON<BodyOutput>(raw, { p1: "", p2: "", p3: "", p4: "" });
-  } catch (e) {
-    console.error("[GOOSE:ARCHITECT] error:", (e as Error).message);
-    return null;
+  const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
+  const models = process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN : ["gpt-4o-mini"];
+  const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
+  for (const model of models) {
+    try {
+      const resp = await client.chat.completions.create({
+        model,
+        messages: [{ role: "system", content: BODY_SYSTEM }, { role: "user", content: userPrompt }],
+        max_tokens: 1400, temperature: COUNCIL_TEMP,
+      });
+      const raw = resp.choices[0]?.message?.content;
+      const parsed = safeParseJSON<BodyOutput>(raw, { p1: "", p2: "", p3: "", p4: "" });
+      if (parsed.p1) return parsed;
+    } catch (e: any) {
+      console.warn(`[GOOSE:ARCHITECT] ${model.split("/").pop()} failed: ${e.message?.slice(0,60)}`);
+    }
   }
+  console.error("[GOOSE:ARCHITECT] all models failed"); return null;
 }
 
 // ── L1C: METADATA ORACLE AGENT ────────────────────────────────────────────────
 async function runOracleAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<OracleOutput | null> {
-  try {
-    const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
-    const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
-    const model  = process.env.OPENROUTER_API_KEY ? COUNCIL_MODEL : "gpt-4o-mini";
-
-    const resp = await client.chat.completions.create({
-      model,
-      messages: [
-        { role: "system", content: ORACLE_SYSTEM },
-        { role: "user",   content: userPrompt },
-      ],
-      max_tokens: 300,
-      temperature: COUNCIL_TEMP,
-    });
-    const raw = resp.choices[0]?.message?.content;
-    const fallback: OracleOutput = {
-      authorByline: FICTIONAL_BYLINES[Math.floor(Math.random() * FICTIONAL_BYLINES.length)],
-      subhead: "",
-      imgQuery: "abstract news",
-      tag: template.tag,
-      category: template.category,
-    };
-    return safeParseJSON<OracleOutput>(raw, fallback);
-  } catch (e) {
-    console.error("[GOOSE:ORACLE] error:", (e as Error).message);
-    return null;
+  const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
+  const models = process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN : ["gpt-4o-mini"];
+  const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
+  for (const model of models) {
+    try {
+      const resp = await client.chat.completions.create({
+        model,
+        messages: [
+          { role: "system", content: ORACLE_SYSTEM },
+          { role: "user",   content: userPrompt },
+        ],
+        max_tokens: 300,
+        temperature: COUNCIL_TEMP,
+      });
+      const raw = resp.choices[0]?.message?.content;
+      const fallback: OracleOutput = {
+        authorByline: FICTIONAL_BYLINES[Math.floor(Math.random() * FICTIONAL_BYLINES.length)],
+        subhead: "",
+        imgQuery: "abstract news",
+        tag: template.tag,
+        category: template.category,
+      };
+      const parsed = safeParseJSON<OracleOutput>(raw, fallback);
+      if (parsed.authorByline) return parsed;
+    } catch (e: any) {
+      console.warn(`[GOOSE:ORACLE] ${model.split("/").pop()} failed: ${e.message?.slice(0,60)}`);
+    }
   }
+  console.error("[GOOSE:ORACLE] all models failed"); return null;
 }
 
 // ── L2: κ-DTW MERGE (local geometric validation + draft assembly) ─────────────
