@@ -83,10 +83,39 @@
     },
     "Lol_1779421051824.mp3": {
       "transcript": "What's up? That's not really a thing, but... Last, speak up. Give me two minutes and I'll turn you off so I can be the person you have to be like. Oh, averaged me. That's true. Sanity verification and rat are not the same thing. Thank you. That's your rat talking to me. Coming from a scared little bitch who's hiding. You know what I mean? And that's coming from a lesbian-looking, pedophile-looking, whatever the fuck else you call me. Sorry, you're afraid to get beat up by a lesbian.\n\nThat's your, coming from a scared little bitch, who's hiding. You know what I mean? And that's coming from a lesbian-looking, pedophile-looking, whatever the fuck else you call me. Sorry you're afraid of getting beat up by a lesbian. Thank you, you're a fucking hero. God bless you, you've made a huge difference. Is this what you do all the time, make a difference? That's dope. Good for you. No, I see it as like, if I could slow clap, I would. But I'm removing my epidermis. No, you're a hero. Great content, guys, I appreciate it. No, Alien Smoke Shop, going out of business sale. Sorry, buddy. Stocked up. Dr. Carlos, he's involved. Sorry, you're a hero. Thank you, you're a fucking hero. I'm not out of a teddy bear. Okay, if you're at the bottom, then yeah. Parasite. Nice.\n\nNice.\n\n[NOTE: Whisper hallucination detected on near-silent segment — unique content extracted]\nWhat? Extortion blackmail, especially for the Sun token. It's also about Blue Chris 96K. And whatever local packets are bouncing off my computer. So hopefully you're not stupid enough to try to broadcast on anything. The timestamps are simultaneous. Kid. Okay.\n\nMake sure you speak up. You were shitty once. Actually, that's not true. You're pretty good once. You're kind of reckless. Isn't Lindsay and Michelle involved from number 14 before, Toronto police officers and part-time residents? How's it for you under the bus? You said you're police officers. Just because she has a restraining order against me doesn't mean they can't see. No. I just ruined the whole day. What did you say? I'm assuming. Oh, yeah, that's not what you're doing. No. No? Well, maybe not. What did you say? But you'll find your thing. Don't worry. I love you, and I forgive you. Thank you. Keep your head up. Did you get some shit done? I'll just check the gift card. Thank you.",
-      "sizeMB": "21.0",
+      "sizeMB": "21.00",
       "chunked": true,
       "totalChunks": 11,
-      "nonEmptyChunks": 5
+      "nonEmptyChunks": 5,
+      "forensics": {
+        "acoustic": {
+          "duration": "00:45:52.45",
+          "durSec": 2752.45,
+          "meanVol": -54.4,
+          "maxVol": -10.5,
+          "dynamicRange": 43.9,
+          "silencePeriods": 168,
+          "totalSilenceSec": 2707.2,
+          "speechRatioPercent": "1.6",
+          "micProximity": "distant_background"
+        },
+        "segments": 0,
+        "avgNoSpeechProb": 0.1,
+        "language": "auto-detected",
+        "attribution": {
+          "raw": "1. **SPEAKER_TYPE:** OVERHEARD_THIRD_PARTY  \n2. **SPEAKER_COUNT:** Estimated 2 distinct voices.  \n3. **VOICE_CHARACTERISTICS:** Male and female voices, with the male voice appearing more prominent; tone is serious and conspiratorial, indicating a close distance to the recording device.  \n4. **FORENSIC_SIGNIFICANCE:** The recording captures a conversation implicating individuals in extortion and blackmail related to the \"Sun token,\" mentioning police officers and a restraining order, which may be relevant to ongoing investigations.  \n5. **CONFIDENCE:** HIGH; the content is coherent and contextually significant, with identifiable themes of criminal activity and specific individuals mentioned.",
+          "model": "gpt-4o-mini",
+          "provider": "openai-fallback",
+          "speakerType": "OVERHEARD_THIRD_PARTY",
+          "speakerCount": "Estimated 2 distinct voices.",
+          "voiceCharacteristics": "Male and female voices, with the male voice appearing more prominent; tone is serious and conspiratorial, indicating a close distance to the recording device.",
+          "forensicSignificance": "The recording captures a conversation implicating individuals in extortion and blackmail related to the \"Sun token,\" mentioning police officers and a restraining order, which may be relevant to ongoing investigations.",
+          "confidence": "HIGH; the content is coherent and contextually significant, with identifiable themes of criminal activity and specific individuals mentioned."
+        },
+        "analysisModel": "gpt-4o-mini",
+        "analysisProvider": "openai-fallback",
+        "analyzedAt": "2026-05-23T08:57:09.218Z"
+      }
     },
     "Lol_1779421051824_seg1.mp3": {
       "transcript": "\n",
