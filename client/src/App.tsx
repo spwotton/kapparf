@@ -65,6 +65,7 @@ import PochoteAnalysisPage from "@/pages/pochote-analysis";
 import GazetteRefinerPage from "@/pages/gazette-refiner";
 import HyperobjectsPage from "@/pages/hyperobjects";
 import AtlasObservatoryPage from "@/pages/atlas-observatory";
+import SetecomExposePage from "@/pages/setecom-expose";
 
 function Router() {
   return (
@@ -116,6 +117,7 @@ function Router() {
       <Route path="/goose" component={GooseGazettePage} />
       <Route path="/hyperobjects" component={HyperobjectsPage} />
       <Route path="/atlas" component={AtlasObservatoryPage} />
+      <Route path="/setecom" component={SetecomExposePage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -162,6 +164,7 @@ function AppWithDossier() {
     <>
       <Switch>
         {/* Standalone sites — no KAPPA sidebar */}
+        <Route path="/setecom-report" component={SetecomExposePage} />
         <Route path="/" component={GooseGazettePage} />
         <Route path="/goose/signals" component={GooseSignalsPage} />
         <Route path="/goose/lattice" component={SignalLatticePage} />

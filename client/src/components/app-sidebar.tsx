@@ -34,6 +34,7 @@ import {
   Cpu,
   Mic,
   Camera,
+  AlertTriangle,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -114,6 +115,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
     items: [
+      { titleKey: "sidebar.setecomExpose", fallback: "SETECOM Exposé", url: "/setecom", icon: AlertTriangle },
       { titleKey: "sidebar.ciajwHome", fallback: "CIAJW Home", url: "/whistleblower", icon: Shield },
       { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence", icon: FileWarning },
       { titleKey: "sidebar.audioForensics", fallback: "Audio Recordings", url: "/audio", icon: Mic },
