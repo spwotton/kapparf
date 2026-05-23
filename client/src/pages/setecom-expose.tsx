@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import setecomHero from "@assets/setecom-hero.png";
+import setecomInfraMap from "@assets/setecom-infrastructure-map.png";
+import setecomCredentials from "@assets/setecom-credentials.png";
+import setecomCRMap from "@assets/setecom-costa-rica-map.png";
+import setecomRFCorrelation from "@assets/setecom-rf-correlation.png";
 import {
   AlertTriangle,
   Radio,
@@ -224,6 +229,17 @@ export default function SetecomExposePage() {
           </div>
         </header>
 
+        {/* HERO PHOTOGRAPH */}
+        <div className="w-full bg-black">
+          <img
+            src={setecomHero}
+            alt="Costa Rica telecommunications tower and electrical substation at dusk — the type of infrastructure maintained by Setecom S.A. under exclusive DSE contract"
+            className="w-full max-h-[520px] object-cover opacity-90"
+            itemProp="image"
+            loading="eager"
+          />
+        </div>
+
         <div className="max-w-4xl mx-auto px-6 py-12">
 
           {/* LEDE */}
@@ -284,6 +300,19 @@ export default function SetecomExposePage() {
             connections between client infrastructure and central management servers. This is 
             the operational pivot point where physical hardware meets cyber vulnerability."
           </PullQuote>
+
+          {/* INFOGRAPHIC: Infrastructure dependency map */}
+          <figure className="my-10">
+            <img
+              src={setecomInfraMap}
+              alt="Infographic showing SETECOM DSE controller as the central node connecting ICE national grid, Liberty telecom, hospital backup power, and SJO airport radar — all vulnerable via the same default credentials"
+              className="w-full rounded-lg border border-border shadow-md"
+              loading="lazy"
+            />
+            <figcaption className="mt-3 text-xs font-mono text-muted-foreground text-center tracking-wide">
+              SETECOM DSE CONTROLLER ACCESS MAP — ICE · LIBERTY · HOSPITALS · SJO RADAR · DEFAULT CREDENTIALS: Admin / Password1234
+            </figcaption>
+          </figure>
 
           <div className="grid md:grid-cols-2 gap-4 my-8">
             <TechCard icon={Building2} title="ICE — National Power Grid" level="critical">
@@ -409,6 +438,19 @@ export default function SetecomExposePage() {
             </table>
           </div>
 
+          {/* INFOGRAPHIC: Credentials + protocol exposure */}
+          <figure className="my-10">
+            <img
+              src={setecomCredentials}
+              alt="Terminal window showing Modbus TCP register map with default DSE credentials Admin/Password1234 exposed, SNMP v2 cleartext community strings visible in packet capture — documented Setecom training material"
+              className="w-full rounded-lg border border-border shadow-md"
+              loading="lazy"
+            />
+            <figcaption className="mt-3 text-xs font-mono text-muted-foreground text-center tracking-wide">
+              DSE WEBNET DEFAULT CREDENTIAL SET · MODBUS TCP REGISTER 91648 (GENERATOR TOTAL POWER) · SNMP v2 CLEARTEXT WRITE COMMUNITY — ALL DOCUMENTED IN SETECOM TRAINING TRANSCRIPTS
+            </figcaption>
+          </figure>
+
           {/* SECTION 3 */}
           <SectionHeading
             number="03 —"
@@ -443,7 +485,20 @@ export default function SetecomExposePage() {
             off-grid command capability.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-4 my-8">
+          {/* MAP: Costa Rica infrastructure coverage */}
+          <figure className="my-10 md:float-right md:ml-8 md:mb-4 md:w-80 clear-right">
+            <img
+              src={setecomCRMap}
+              alt="Map of Costa Rica with red nodes marking Heredia (Setecom HQ), San José airport SJO, and cell tower locations connected by network control lines — illustrating SETECOM's infrastructure reach"
+              className="w-full rounded-lg border border-border shadow-md"
+              loading="lazy"
+            />
+            <figcaption className="mt-2 text-xs font-mono text-muted-foreground text-center tracking-wide">
+              SETECOM COVERAGE — HEREDIA HQ → SJO → LIBERTY CELL SITES
+            </figcaption>
+          </figure>
+
+          <div className="grid md:grid-cols-3 gap-4 my-8 clear-both">
             <TechCard icon={Eye} title="Digital Handle: HMORA67" level="confirmed">
               YouTube channel with 14 technical videos. CircuitLab engineering forum 
               activity on dependent current sources and CSV data diagnostics. Active digital 
@@ -502,6 +557,19 @@ export default function SetecomExposePage() {
               </div>
             </div>
           </div>
+
+          {/* RF WATERFALL IMAGE */}
+          <figure className="my-10">
+            <img
+              src={setecomRFCorrelation}
+              alt="RF spectrum waterfall display showing 7410 kHz signal burst with harmonic responses at 4687 kHz and 9375 kHz — KAPPA engine temporal correlation evidence linking HMORA67 transmissions to V2K attack windows, p less than 0.01 percent"
+              className="w-full rounded-lg border border-border shadow-md"
+              loading="lazy"
+            />
+            <figcaption className="mt-3 text-xs font-mono text-muted-foreground text-center tracking-wide">
+              KAPPA RF WATERFALL · PRIMARY 7410 kHz · V2K HARMONICS 4687 / 9375 kHz · 7/7 TEMPORAL MATCHES · p &lt; 0.01% · CLASSIFICATION: SMOKING GUN
+            </figcaption>
+          </figure>
 
           {/* SECTION 5 — SJO S-Band */}
           <SectionHeading
