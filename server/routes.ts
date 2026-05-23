@@ -5723,12 +5723,19 @@ End with a SUMMARY section listing the top findings.`;
 
       const tmpDir = fs.mkdtempSync(nodePath.join(os.tmpdir(), "kappa-chunks-"));
       const parts: string[] = [];
+      const chunkMap: { startSec: number; endSec: number; hasSpeech: boolean }[] = [];
 
       for (let i = 0; i < totalChunks; i++) {
         const startSec = i * STEP_SEC;
+        const endSec = Math.min(startSec + CHUNK_SEC, durationSec);
         const chunkPath = nodePath.join(tmpDir, `chunk_${String(i).padStart(3, "0")}.mp3`);
 
-        send("progress", { chunk: i + 1, total: totalChunks, startSec: Math.round(startSec) });
+        send("progress", {
+          chunk: i + 1,
+          total: totalChunks,
+          startSec: Math.round(startSec),
+          endSec: Math.round(endSec),
+        });
 
         execSync(
           `ffmpeg -y -i ${JSON.stringify(fp)} -ss ${startSec} -t ${CHUNK_SEC} -c copy ${JSON.stringify(chunkPath)} 2>&1`
@@ -5742,8 +5749,9 @@ End with a SUMMARY section listing the top findings.`;
           response_format: "text",
         });
         const text = (typeof result === "string" ? result : (result as any).text ?? "").trim();
-        if (text) {
-          const endSec = Math.min(startSec + CHUNK_SEC, durationSec);
+        const hasSpeech = text.length > 0;
+        chunkMap.push({ startSec: Math.round(startSec), endSec: Math.round(endSec), hasSpeech });
+        if (hasSpeech) {
           const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
           parts.push(`[${fmt(startSec)}–${fmt(endSec)}]\n${text}`);
         }
@@ -5754,7 +5762,7 @@ End with a SUMMARY section listing the top findings.`;
       try { fs.rmdirSync(tmpDir); } catch {}
 
       const fullTranscript = parts.join("\n\n");
-      const nonEmptyChunks = parts.length;
+      const nonEmptyChunks = parts.filter(p => p).length;
 
       // Persist to results.json
       const resultsPath = nodePath.join(POCHOTE_BASE, "results.json");
@@ -5762,10 +5770,10 @@ End with a SUMMARY section listing the top findings.`;
       if (fs.existsSync(resultsPath)) { try { existing = JSON.parse(fs.readFileSync(resultsPath, "utf-8")); } catch {} }
       if (!existing.audio) existing.audio = {};
       const sizeMB = (fs.statSync(fp).size / 1048576).toFixed(1);
-      existing.audio[file] = { transcript: fullTranscript, sizeMB, chunked: true, totalChunks, nonEmptyChunks };
+      existing.audio[file] = { transcript: fullTranscript, sizeMB, chunked: true, totalChunks, nonEmptyChunks, chunkMap };
       fs.writeFileSync(resultsPath, JSON.stringify(existing, null, 2));
 
-      send("done", { transcript: fullTranscript, totalChunks, nonEmptyChunks, file, sizeMB });
+      send("done", { transcript: fullTranscript, totalChunks, nonEmptyChunks, chunkMap, file, sizeMB });
       res.end();
     } catch (e: any) {
       send("error", { error: e.message });

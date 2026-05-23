@@ -49,7 +49,7 @@ interface ForensicsResult {
 interface PreResults {
   photos: Record<string, string>;
   frames: Record<string, { analysis: string }>;
-  audio: Record<string, { transcript?: string; sizeMB?: string; forensics?: ForensicsResult; chunked?: boolean; totalChunks?: number; nonEmptyChunks?: number }>;
+  audio: Record<string, { transcript?: string; sizeMB?: string; forensics?: ForensicsResult; chunked?: boolean; totalChunks?: number; nonEmptyChunks?: number; chunkMap?: { startSec: number; endSec: number; hasSpeech: boolean }[] }>;
   synthesis?: string;
   generatedAt?: string;
 }
@@ -256,7 +256,7 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
   sizeMB?: string;
   onTranscribeChunked?: () => void;
   chunkProgress?: { chunk: number; total: number } | null;
-  chunkedMeta?: { totalChunks: number; nonEmptyChunks: number };
+  chunkedMeta?: { totalChunks: number; nonEmptyChunks: number; chunkMap?: { startSec: number; endSec: number; hasSpeech: boolean }[] };
 }) {
   const [manualMode, setManualMode] = useState(false);
   const [manualText, setManualText] = useState(transcript || "");
@@ -445,6 +445,34 @@ function AudioRow({ file, transcript, forensics, onTranscribe, onForensics, runn
                 </>
               )}
             </div>
+            {chunkedMeta?.chunkMap && chunkedMeta.chunkMap.length > 0 && (() => {
+              const map = chunkedMeta.chunkMap!;
+              const totalDur = map[map.length - 1].endSec - map[0].startSec;
+              const fmt = (s: number) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+              return (
+                <div className="mb-2">
+                  <div className="text-[7px] font-mono text-gray-600 mb-1 tracking-widest">TIMELINE · speech=amber · silence=gray</div>
+                  <div className="flex h-3 w-full rounded overflow-hidden gap-px" data-testid="timeline-bar">
+                    {map.map((seg, i) => {
+                      const width = totalDur > 0 ? ((seg.endSec - seg.startSec) / totalDur) * 100 : (100 / map.length);
+                      return (
+                        <div
+                          key={i}
+                          title={`${fmt(seg.startSec)}–${fmt(seg.endSec)} · ${seg.hasSpeech ? "speech" : "silent"}`}
+                          style={{ width: `${width}%` }}
+                          className={`h-full transition-colors ${seg.hasSpeech ? "bg-amber-500/80" : "bg-gray-700/60"}`}
+                          data-testid={`timeline-seg-${i}`}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="flex justify-between mt-0.5">
+                    <span className="text-[6px] font-mono text-gray-700">{fmt(map[0].startSec)}</span>
+                    <span className="text-[6px] font-mono text-gray-700">{fmt(map[map.length - 1].endSec)}</span>
+                  </div>
+                </div>
+              );
+            })()}
             <div className="space-y-3">
               {transcript.split(/\n\n+/).map((chunk, idx) => {
                 const tsMatch = chunk.match(/^\[(\d{2}:\d{2}[–-]\d{2}:\d{2})\]\n?([\s\S]*)$/);
@@ -874,6 +902,7 @@ export default function PochoteAnalysisPage() {
   const [forensicsData, setForensicsData] = useState<Record<string, ForensicsResult>>({});
   const [forensicsRunning, setForensicsRunning] = useState<Set<string>>(new Set());
   const [chunkProgress, setChunkProgress] = useState<Record<string, { chunk: number; total: number } | null>>({});
+  const [liveChunkMaps, setLiveChunkMaps] = useState<Record<string, { startSec: number; endSec: number; hasSpeech: boolean }[]>>({});
 
   const { data: media } = useQuery<MediaIndex>({ queryKey: ["/api/pochote/media"] });
   const { data: preResults } = useQuery<PreResults>({
@@ -944,6 +973,9 @@ export default function PochoteAnalysisPage() {
       const d = JSON.parse(e.data);
       setTranscripts(prev => ({ ...prev, [file]: { text: d.transcript, source: "live" } }));
       setChunkProgress(prev => ({ ...prev, [file]: null }));
+      if (d.chunkMap) {
+        setLiveChunkMaps(prev => ({ ...prev, [file]: d.chunkMap }));
+      }
       stopRunning(file);
       es.close();
       toast({ title: "Chunked transcription complete", description: `${d.totalChunks} chunks processed · ${d.nonEmptyChunks} with speech` });
@@ -1230,6 +1262,7 @@ export default function PochoteAnalysisPage() {
                 chunkedMeta={preResults?.audio?.[f]?.chunked ? {
                   totalChunks: preResults.audio[f].totalChunks ?? 0,
                   nonEmptyChunks: preResults.audio[f].nonEmptyChunks ?? 0,
+                  chunkMap: liveChunkMaps[f] ?? preResults.audio[f].chunkMap,
                 } : undefined}
               />
             ))}
