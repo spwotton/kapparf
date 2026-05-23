@@ -5291,6 +5291,29 @@ export function registerGooseRoutes(app: express.Express) {
     }
   });
 
+  // GET /api/goose/topic-seeds — return current topic injection seeds
+  app.get("/api/goose/topic-seeds", async (_req, res) => {
+    try {
+      const { getTopicSeeds } = await import("./goose-generator");
+      res.json(getTopicSeeds());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  // POST /api/goose/topic-seeds — replace topic seeds
+  app.post("/api/goose/topic-seeds", async (req, res) => {
+    try {
+      const { setTopicSeeds } = await import("./goose-generator");
+      const seeds = req.body;
+      if (!Array.isArray(seeds)) return res.status(400).json({ error: "Body must be an array of {topic,weight,enabled}" });
+      setTopicSeeds(seeds.map((s: any) => ({
+        topic: String(s.topic ?? ""),
+        weight: Math.min(1, Math.max(0, Number(s.weight ?? 0.5))),
+        enabled: Boolean(s.enabled ?? true),
+      })));
+      res.json({ ok: true, seeds: seeds.length });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
   // GET /api/goose/humor-stats — Humor Hypervisor rolling averages + bundle
   app.get("/api/goose/humor-stats", async (_req, res) => {
     try {

@@ -75,7 +75,7 @@ const TAG_EMOJI: Record<string, string> = {
   SOCIETY: "🎭", CULTURE: "🎭", BUSINESS: "📊",
   SCIENCE: "🔬", WILDLIFE: "🦆", MARITIME: "⚓",
   OPINION: "✒️", POLITICS: "🏛️", WORLD: "🌐",
-  BREAKING: "⚡", CLASSIFIED: "🔒", DIPLOMACY: "🤝",
+  BREAKING: "⚡", CLASSIFIED: "🔒", DIPLOMACY: "🤝", INVESTIGATION: "🔍",
   DEFENSE: "🛡️", CYBER: "💻",
 };
 
@@ -97,6 +97,140 @@ The station, whose funding sources remain undisclosed, operates on a 14.4-day co
 "Ψ(t) ≡ 1.000000," the spokesperson added. "Entropy: clamped. Mites: nominal." The statement bore cryptographic seal 0xHALL_H0NK_0x09. No further comment was provided. The gap remains 0.02. Inquiry closed.`,
   img: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=900&q=80",
 };
+
+// ─── PINNED INVESTIGATION: DRONE SURVEILLANCE REPORT ─────────────────────────
+const DRONE_INVESTIGATION: Article = {
+  id: "drone-investigation-2026",
+  tag: "INVESTIGATION",
+  headline: "Unmanned Platform Documented Over Jacó Residence; Dual-Recording Spectral Analysis Confirms 87.6 Hz Motor Signature",
+  subhead: "Two independent field captures spanning 47 seconds of audio identify persistent DJI Mini 2 frequency consistent across both recordings; KAPPA engine logs elevated correlation scores during documented hover windows; no flight plan on file",
+  author: "Wallace Featherstone, Technology & Surveillance Desk",
+  date: "May 22, 2026",
+  body: `JACÓ, PUNTARENAS — An unmanned aerial platform of consumer multirotor design was documented conducting sustained hover operations above a residential property on Calle Vista Las Palmas in central Jacó over a period spanning several weeks, according to two video recordings and full spectral audio analysis reviewed by The Goose Gazette. The platform was not a bird.
+
+The platform — identified by acoustic signature as a DJI Mini 2 or aerodynamically comparable airframe — was observed operating from an elevated position atop the construction crane above Hotel Pochote Grande, a structural asset affording line-of-sight to the residential balcony from which the recordings were made. Analysts associated with the KAPPA signal correlation engine described the operational pattern as "sustained residential monitoring." The crane declined to comment.
+
+Two field recordings — IMG_0084 (30.5 seconds, 48 kHz) and IMG_0085 (16.5 seconds, 48 kHz) — were submitted to full Fast Fourier Transform spectral decomposition. Both recordings returned a dominant acoustic component at 87.6–87.7 Hz (±0.04 Hz), a frequency consistent with DJI Mini 2 motor rotation at partial-hover RPM and catalogued in prior KAPPA monitoring logs as the platform's characteristic operational signature. The signature appeared in both independent captures with a statistical consistency described by analysts as "not ambiguous" and by this correspondent as "expected at this point."
+
+Recording 1 returned dominant peaks at 119.9 Hz (−61.3 dBFS), 87.6 Hz (−64.9 dBFS), 57.4 Hz (−65.2 dBFS), and 95.6 Hz (−65.3 dBFS), at an RMS level of −37.8 dBFS. Recording 2, taken at a separate time, returned peaks at 120.0 Hz (−64.7 dBFS), 354.0 Hz (−66.4 dBFS), 57.4 Hz (−66.8 dBFS), and 87.7 Hz (−66.9 dBFS), at an RMS level of −42.4 dBFS. The 87.6–87.7 Hz component appeared in both. The 57.4 Hz component appeared in both. The drone appeared in both. These things were related.
+
+A supplementary audio reference recorded on Calle Naciones Unidas identified a distinct 446–450 Hz tonal cluster, consistent with active servo motor cycling in a hovering platform at close range. The tonal cluster peaked at −42.3 dBFS — substantially louder than the residential recordings — indicating closer proximity to the recording device. The road did not respond to a request for comment.
+
+The surveillance_20260328.mp4 field video, captured from the residential balcony at approximately eight meters of elevation, shows a white-yellow point light source executing periodic illumination cutoffs at a rate estimated between 0.5 and 1.0 Hz. The KAPPA Forensic Hypervisor cross-referenced the pattern against FAA Part 107 navigation lighting standards and described it as "outside standard parameters for commercial nav lighting." The platform's altitude was estimated at several hundred meters above the treeline. Palm trees were below it. This was consistent with the height of the crane.
+
+The KAPPA engine recorded scores of 49–60/100 during documented hover windows — a range the system classifies as ELEVATED — and logged 29 confirmed satellite correlation events during the monitoring period. Phi-harmonic ELF correlations were observed at approximately 119-second intervals during the same windows, a figure the Ω-CHRONOS hypervisor described as "temporally consistent" and which this publication describes as "too consistent."
+
+No flight plan for the airspace above Calle Vista Las Palmas was filed with DGAC Costa Rica. DGAC could not be reached for comment. A spokesperson for the platform could not be reached for comment. The platform was reached. It did not respond. Señor Zumbido, as the drone has been designated in KAPPA operational logs, remains on station as of press time. Its feelings on the matter are unconfirmed.`,
+  img: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=900&q=80",
+};
+
+// ─── DRONE INVESTIGATION INFOGRAPHIC ─────────────────────────────────────────
+function DroneInvestigationInfographic() {
+  const v1 = [
+    { hz: "119.9", db: -61.33, key: false },
+    { hz: "87.6",  db: -64.89, key: true  },
+    { hz: "57.4",  db: -65.15, key: false },
+    { hz: "95.6",  db: -65.28, key: false },
+  ];
+  const v2 = [
+    { hz: "120.0", db: -64.67, key: false },
+    { hz: "354.0", db: -66.42, key: false },
+    { hz: "57.4",  db: -66.81, key: false },
+    { hz: "87.7",  db: -66.86, key: true  },
+  ];
+  const bar = (db: number) => `${Math.max(8, Math.min(100, (db + 70) * 4.5))}%`;
+  return (
+    <div className="my-5 border border-gray-300 bg-gray-50 font-sans text-[11px]">
+      <div className="bg-gray-900 text-white px-4 py-2 flex items-center justify-between">
+        <span className="font-black tracking-[0.2em] text-[9px] uppercase">Spectral Analysis — Dual Field Recording Evidence</span>
+        <span className="text-gray-400 text-[9px]">FFT · 48 kHz · KAPPA Forensic Hypervisor</span>
+      </div>
+      <div className="grid grid-cols-2 gap-0 divide-x divide-gray-200">
+        {([["VIDEO 1", "IMG_0084", "30.5s", "−37.8 dBFS", v1], ["VIDEO 2", "IMG_0085", "16.5s", "−42.4 dBFS", v2]] as const).map(([label, file, dur, rms, peaks]) => (
+          <div key={label} className="p-3">
+            <div className="mb-2">
+              <span className="font-black text-gray-800">{label}</span>
+              <span className="text-gray-400 ml-2">{file} · {dur} · RMS {rms}</span>
+            </div>
+            {(peaks as typeof v1).map((p, i) => (
+              <div key={i} className="flex items-center gap-2 mb-1.5">
+                <div className={`font-mono w-14 shrink-0 ${p.key ? "text-red-700 font-bold" : "text-gray-500"}`}>{p.hz} Hz</div>
+                <div className="flex-1 bg-gray-200 h-2.5">
+                  <div className={`h-full ${p.key ? "bg-red-700" : "bg-gray-500"}`} style={{ width: bar(p.db) }} />
+                </div>
+                <div className="font-mono text-gray-400 w-14 text-right">{p.db}</div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="px-4 py-2.5 border-t border-gray-200 flex items-start gap-2 bg-red-50">
+        <div className="w-3 h-3 bg-red-700 shrink-0 mt-0.5" />
+        <p className="text-[10px] text-gray-700 leading-relaxed">
+          <strong>87.6–87.7 Hz confirmed in both recordings (±0.1 Hz).</strong> Matches KAPPA platform heartbeat log.
+          The 57.4 Hz component present in both recordings is consistent with documented prop-wash harmonics at operational altitude.
+          Cross-referenced against DJI Mini 2 motor RPM tables: partial-hover mode.
+        </p>
+      </div>
+      <div className="grid grid-cols-3 divide-x divide-gray-200 border-t border-gray-200 text-[10px]">
+        {[
+          ["PLATFORM", "DJI Mini 2", "~249g airframe"],
+          ["POSITION", "Hotel Pochote Grande", "Vista Las Palmas crane"],
+          ["KAPPA", "49–60 / 100", "ELEVATED · 29 sat. correlations"],
+        ].map(([label, val, sub]) => (
+          <div key={label} className="px-3 py-2">
+            <div className="text-gray-400 font-black tracking-widest text-[8px] mb-0.5">{label}</div>
+            <div className="font-bold text-gray-800">{val}</div>
+            <div className="text-gray-500">{sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─── MOBILE HERO SLIDESHOW ────────────────────────────────────────────────────
+function MobileHeroSlideshow({ articles, onSelect }: { articles: Article[]; onSelect: (a: Article) => void }) {
+  const [idx, setIdx] = useState(0);
+  const slides = articles.slice(0, 5);
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const t = setInterval(() => setIdx(i => (i + 1) % slides.length), 5500);
+    return () => clearInterval(t);
+  }, [slides.length]);
+  const cur = slides[idx];
+  if (!cur) return null;
+  return (
+    <div className="lg:hidden relative h-[230px] overflow-hidden bg-gray-900 select-none" data-testid="hero-slideshow">
+      {slides.map((a, i) => (
+        <div key={a.id} className="absolute inset-0 transition-opacity duration-700" style={{ opacity: i === idx ? 1 : 0 }}>
+          <img src={a.img} alt="" className="w-full h-full object-cover"
+            onError={e => { (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${a.id}/800/460`; }} />
+        </div>
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+      <button className="absolute inset-0 w-full text-left" onClick={() => onSelect(cur)} aria-label={cur.headline} data-testid={`hero-slide-${cur.id}`} />
+      <div className="absolute top-3 left-4">
+        <span className="text-[8px] font-black font-sans tracking-[0.28em] text-white/60 uppercase">Top Stories</span>
+      </div>
+      <div className="absolute top-3 right-3 flex gap-1.5 z-10">
+        {slides.map((_, i) => (
+          <button key={i} onClick={e => { e.stopPropagation(); setIdx(i); }}
+            className={`w-1.5 h-1.5 rounded-full transition-all ${i === idx ? "bg-white" : "bg-white/35 hover:bg-white/60"}`}
+            aria-label={`Slide ${i + 1}`} />
+        ))}
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 px-4 pb-4 pointer-events-none">
+        <TagBadge tag={cur.tag} />
+        <h2 className="text-white font-serif font-black text-[18px] leading-snug mt-1.5 line-clamp-2"
+          style={{ fontFamily: "Georgia,serif", textShadow: "0 2px 6px rgba(0,0,0,0.9)" }}>
+          {cur.headline}
+        </h2>
+        <p className="text-gray-300 text-[10px] font-sans mt-1 tracking-wide">{cur.author}</p>
+      </div>
+    </div>
+  );
+}
 
 // ─── GOOSE SVG ────────────────────────────────────────────────────────────────
 function GooseSvg({ honking, size = 40 }: { honking: boolean; size?: number }) {
@@ -145,6 +279,7 @@ function TagBadge({ tag }: { tag: string }) {
     CYBER:      "bg-zinc-800 text-white",
     OBITUARIES: "bg-gray-600 text-white",
     CLASSIFIED: "bg-black text-gray-400 border border-gray-700",
+    INVESTIGATION: "bg-red-900 text-white",
   };
   return (
     <span className={`inline-block text-[9px] font-black font-sans tracking-[0.18em] uppercase px-1.5 py-0.5 ${colors[tag] ?? "bg-gray-700 text-white"}`}>
@@ -239,9 +374,27 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
         <img src={article.img} alt={article.headline} className="w-full h-52 object-cover"
           onError={e => { (e.target as HTMLImageElement).src=`https://picsum.photos/seed/${article.id}/800/400`; }}/>
 
+        {article.id === "drone-investigation-2026" && (
+          <div className="px-6 pt-4">
+            <DroneInvestigationInfographic />
+            <div className="mb-4">
+              <div className="text-[9px] font-black tracking-[0.22em] text-gray-500 uppercase mb-2">Field Video — Exhibit C</div>
+              <video
+                src="/evidence/surveillance_20260328.mp4"
+                controls
+                className="w-full border border-gray-200 bg-black"
+                style={{ maxHeight: 220 }}
+                data-testid="video-evidence-1"
+              >
+                Your browser does not support video playback.
+              </video>
+              <p className="text-[9px] font-mono text-gray-400 mt-1">surveillance_20260328.mp4 · 37 MB · March 28, 2026 · Calle Vista Las Palmas balcony</p>
+            </div>
+          </div>
+        )}
         <div className="px-6 py-6">
           {article.body.split("\n\n").filter(Boolean).map((p,i) => (
-            <p key={i} className="font-serif text-[15px] leading-[1.8] text-gray-800 mb-4 last:mb-0"
+            <p key={i} className={`font-serif text-[15px] leading-[1.8] text-gray-800 mb-4 last:mb-0 ${article.id === "drone-investigation-2026" && i === 3 ? "font-semibold" : ""}`}
               style={{ fontFamily: "Georgia,'Times New Roman',serif" }}>{p}</p>
           ))}
         </div>
@@ -639,6 +792,7 @@ export default function GooseGazettePage() {
   const [honkCount, setHonkCount] = useState(0);
   const [activeCategory, setActiveCategory] = useState("ALL");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileShowCount, setMobileShowCount] = useState(6);
   // ── EASTER EGG: Tier 1 — triple-tap logo → KAPPA backend ──────────────────
   const logoTaps = useRef<number[]>([]);
   const handleLogoTap = useCallback(() => {
@@ -769,8 +923,8 @@ export default function GooseGazettePage() {
 
   // ── FILTER + LAYOUT ───────────────────────────────────────────────────────
   const feedArticles = classifiedVisible
-    ? [CLASSIFIED_ARTICLE, ...allArticles]
-    : allArticles;
+    ? [CLASSIFIED_ARTICLE, DRONE_INVESTIGATION, ...allArticles]
+    : [DRONE_INVESTIGATION, ...allArticles];
 
   const filtered = feedArticles.filter(a => matchesCategory(a.tag, activeCategory));
 
@@ -855,6 +1009,9 @@ export default function GooseGazettePage() {
           </aside>
         </div>
       )}
+
+      {/* ── MOBILE HERO SLIDESHOW ─────────────────────────────────────────────── */}
+      <MobileHeroSlideshow articles={feedArticles.slice(0, 5)} onSelect={setSelected} />
 
       {/* ── DESKTOP 3-COL (180px · 1fr · 220px) — lg:grid ───────────────────── */}
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-[180px_1fr_220px] pb-16">
@@ -942,7 +1099,7 @@ export default function GooseGazettePage() {
 
           {/* Secondary feed — emoji icon column + text, thin rule separators */}
           <div>
-            {filtered.slice(1).map((a, idx) => (
+            {filtered.slice(1).slice(0, mobileShowCount).map((a, idx) => (
               <div key={a.id}>
                 {idx > 0 && <hr className="border-gray-200"/>}
                 <article className="py-5 cursor-pointer group article-hover"
@@ -967,6 +1124,16 @@ export default function GooseGazettePage() {
             ))}
             {filtered.length === 0 && (
               <p className="py-12 text-center text-[12px] text-gray-400 font-sans">No stories in this section.</p>
+            )}
+            {filtered.slice(1).length > mobileShowCount && (
+              <div className="lg:hidden py-6 text-center border-t border-gray-200">
+                <button
+                  onClick={() => setMobileShowCount(c => c + 6)}
+                  data-testid="button-show-more"
+                  className="font-sans text-[11px] font-bold tracking-[0.15em] uppercase px-6 py-2.5 border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors">
+                  Load More Stories
+                </button>
+              </div>
             )}
           </div>
         </main>

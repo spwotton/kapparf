@@ -878,6 +878,35 @@ Punchline position: The final procession element and the attendee quote together
   },
 ];
 
+// ── TOPIC SEEDS: user-injected bias topics ────────────────────────────────────
+export interface TopicSeed { topic: string; weight: number; enabled: boolean }
+let _topicSeeds: TopicSeed[] = [
+  { topic: "Los Rios urbanization and development pressures", weight: 0.8, enabled: true },
+  { topic: "Jehovah's Witnesses community organizing and door-to-door activity", weight: 0.7, enabled: true },
+  { topic: "Jacó beach vacation tourism, rentals, and foreign visitors", weight: 0.9, enabled: true },
+  { topic: "Scott Ryan", weight: 0.8, enabled: true },
+];
+export function getTopicSeeds(): TopicSeed[] { return _topicSeeds; }
+export function setTopicSeeds(seeds: TopicSeed[]): void { _topicSeeds = seeds; }
+
+function buildTopicSeedBlock(): string {
+  const active = _topicSeeds.filter(s => s.enabled && s.weight > 0);
+  if (!active.length) return "";
+  const weighted = active
+    .sort((a, b) => b.weight - a.weight)
+    .slice(0, 3); // max 3 seeds per generation to avoid dilution
+  // Select one probabilistically by weight
+  const total = weighted.reduce((s, t) => s + t.weight, 0);
+  let r = Math.random() * total;
+  for (const seed of weighted) {
+    r -= seed.weight;
+    if (r <= 0) {
+      return `\nTOPIC INJECTION (weight ${seed.weight.toFixed(1)}): Naturally incorporate a connection to "${seed.topic}" in this article. It can appear as the dateline, a named source, a location, or a background detail. Do NOT make it the main subject unless it fits the template naturally.\n`;
+    }
+  }
+  return "";
+}
+
 // ── LORE SEED INTEGRATION: pick a seed 25% of the time ───────────────────────
 export function pickLoreSeed(): string | null {
   const seeds: Array<{ story: string; used: number }> = (global as any).__gooseLoreSeeds ?? [];
@@ -1062,8 +1091,9 @@ async function runArbiterAgent(
       ? `\n═══ PERSONA DIRECTIVE ═══\nThis article must naturally feature "${persona.alias}", described as "${persona.role}" from ${persona.beat}.\nThey can appear as a witness, resident quoted, or subject of the article — but NOT as the official source.\nUse the alias exactly. Do not use any other name for this person.\n═══ END PERSONA ═══\n`
       : "";
 
+    const topicBlock = buildTopicSeedBlock();
     const userPrompt = `
-${knowledgeRules ? `═══ RESEARCH KNOWLEDGE BASE (from stored Satirical Topology research) ═══\n${knowledgeRules}\n═══ END KNOWLEDGE ═══\n\n` : ""}${personaBlock}GEOMETER OUTPUT:
+${knowledgeRules ? `═══ RESEARCH KNOWLEDGE BASE (from stored Satirical Topology research) ═══\n${knowledgeRules}\n═══ END KNOWLEDGE ═══\n\n` : ""}${personaBlock}${topicBlock ? `═══ EDITORIAL TOPIC INJECTION ═══\n${topicBlock}\n═══ END TOPIC ═══\n\n` : ""}GEOMETER OUTPUT:
 ${JSON.stringify(geometer, null, 2)}
 
 BODY ARCHITECT OUTPUT:
