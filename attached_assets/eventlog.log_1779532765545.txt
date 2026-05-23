@@ -1,0 +1,505 @@
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:52:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:52:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:03 2025 daemon.notice netifd: wan1 (764): udhcpc: Changed listen mode to LISTEN_RAW
+Sun Oct 26 16:53:03 2025 daemon.notice netifd: wan1 (764): udhcpc: sending renew to 172.16.9.159
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:53:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:54:55 2025 daemon.notice netifd: wan1 (764): udhcpc: Changed listen mode to LISTEN_RAW
+Sun Oct 26 16:54:55 2025 daemon.notice netifd: wan1 (764): udhcpc: sending renew to 172.16.9.159
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:54:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:04 2025 daemon.notice miniupnpd[4108]: shutting down MiniUPnPd
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:51 2025 daemon.notice netifd: wan1 (764): udhcpc: sending renew to 0.0.0.0
+Sun Oct 26 16:55:51 2025 daemon.notice netifd: wan1 (764): udhcpc: lease of 172.27.68.166 obtained, lease time 900
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:55:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:02 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:07 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:12 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:17 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:22 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:27 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:32 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:37 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:42 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:47 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:52 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: reading /tmp/resolv.conf.auto
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain test
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain onion
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain localhost
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain local
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain invalid
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain bind
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using local addresses only for domain lan
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.224.84#53
+Sun Oct 26 16:56:57 2025 daemon.info dnsmasq[8080]: using nameserver 186.15.225.75#53
