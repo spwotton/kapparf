@@ -1,0 +1,6 @@
+technique_id,technique_description,tactic_description,matched_malicious_indicators_count,matched_suspicious_indicators_count,matched_informative_indicators_count
+T1059.007,JavaScript,Execution,0,0,1
+T1547.006,"Kernel Modules and Extensions",Persistence,0,1,0
+T1547.006,"Kernel Modules and Extensions","Privilege Escalation",0,1,0
+T1071,"Application Layer Protocol","Command and Control",0,0,1
+T1105,"Ingress Tool Transfer","Command and Control",0,0,1
