@@ -123,6 +123,11 @@ app.use((req, res, next) => {
   const { startAtlantisSatellite } = await import("./atlantis-satellite");
   setTimeout(() => startAtlantisSatellite().catch(e => console.warn("[AtlantisSatellite]", e.message)), 8000);
 
+  // Signal Lattice Hypervisor — κ-constrained peg-hole pattern engine
+  const { initSignalLattice, startLatticeHypervisor } = await import("./signal-lattice");
+  await initSignalLattice().catch(e => console.error("[Lattice] init error:", e instanceof Error ? e.message : String(e)));
+  startLatticeHypervisor();
+
   // Gazette Intel Hypervisor — thread correlation research engine
   const { initGazetteIntel, startIntelHypervisor, ingestArticleIntel } = await import("./gazette-intel");
   await initGazetteIntel().catch(e => console.error("[GazetteIntel] init error:", e.message));

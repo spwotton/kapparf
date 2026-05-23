@@ -56,6 +56,7 @@ import AudioForensicsPage from "@/pages/audio-forensics";
 import VideoForensicsPage from "@/pages/video-forensics";
 import GooseGazettePage from "@/pages/goose-gazette";
 import GooseSignalsPage from "@/pages/goose-signals";
+import SignalLatticePage from "@/pages/signal-lattice";
 import GooseHumorPage from "@/pages/goose-humor";
 import GooseAdminPage from "@/pages/goose-admin";
 import GooseEditorialPage from "@/pages/goose-editorial";
@@ -161,6 +162,7 @@ function AppWithDossier() {
         {/* Standalone sites — no KAPPA sidebar */}
         <Route path="/" component={GooseGazettePage} />
         <Route path="/goose/signals" component={GooseSignalsPage} />
+        <Route path="/goose/lattice" component={SignalLatticePage} />
         <Route path="/goose/admin" component={GooseAdminPage} />
         <Route path="/goose/editorial" component={GooseEditorialPage} />
         <Route path="/goose/drone" component={DroneBlogPage} />

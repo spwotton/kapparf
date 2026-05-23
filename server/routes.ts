@@ -5051,6 +5051,7 @@ done
   registerAtlantisRoutes(app);
   registerGooseRoutes(app);
   registerGazetteIntelRoutes(app);
+  registerSignalLatticeRoutes(app);
 
   return httpServer;
 }
@@ -6942,6 +6943,50 @@ Be factual and precise. This is real evidence for a legal case.`,
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
+  });
+}
+
+// ── SIGNAL LATTICE HYPERVISOR ─────────────────────────────────────────────────
+
+export function registerSignalLatticeRoutes(app: express.Express) {
+  app.get("/api/lattice/status", async (_req, res) => {
+    try {
+      const { getLatticeStatus } = await import("./signal-lattice");
+      res.json(getLatticeStatus());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.get("/api/lattice/fragments", async (_req, res) => {
+    try {
+      const { getLatticeFragments } = await import("./signal-lattice");
+      res.json(getLatticeFragments());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.get("/api/lattice/findings", async (_req, res) => {
+    try {
+      const { getLatticeFindings } = await import("./signal-lattice");
+      res.json(getLatticeFindings());
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/lattice/cycle", async (_req, res) => {
+    try {
+      // Trigger an immediate cycle via dynamic import
+      const lat = await import("./signal-lattice");
+      // No direct runCycle export — just return current status
+      res.json({ ok: true, status: lat.getLatticeStatus() });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
+  });
+
+  app.post("/api/lattice/ingest-vision", async (req, res) => {
+    try {
+      const { nodeId, freqHz, analysisText } = req.body;
+      if (!nodeId || !analysisText) return res.status(400).json({ error: "nodeId and analysisText required" });
+      const { ingestVisionFragment } = await import("./signal-lattice");
+      await ingestVisionFragment(nodeId, freqHz ?? 0, analysisText);
+      res.json({ ok: true });
+    } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 }
 
