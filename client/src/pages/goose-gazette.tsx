@@ -997,6 +997,23 @@ function SectionRule({ label }: { label: string }) {
 }
 
 
+// ─── BH53 BADGE COMPONENT ────────────────────────────────────────────────────
+function BH53Badge({ id }: { id: string }) {
+  return (
+    <span className="font-mono text-[9px] bg-gray-900 text-green-400 px-1.5 py-0.5 rounded-none tracking-wider"
+      data-testid={`badge-bh53-${id}`}>
+      {id}
+    </span>
+  );
+}
+
+// ─── INTEL DOT COMPONENT ─────────────────────────────────────────────────────
+function IntelDot({ priority }: { priority?: "HIGH" | "MEDIUM" | "LOW" }) {
+  if (priority === "HIGH") return <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse inline-block" data-testid="dot-intel-high" />;
+  if (priority === "MEDIUM") return <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" data-testid="dot-intel-medium" />;
+  return null;
+}
+
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 // ─── BH53 THREAD MAP ────────────────────────────────────────────────────────
 const BH53_THREAD_MAP: Record<string, string> = {
@@ -1344,9 +1361,7 @@ export default function GooseGazettePage() {
                 <div className="absolute top-6 left-6 flex gap-2">
                   <TagBadge tag={cover.tag} />
                   {cover._intel?.threads[0] && BH53_THREAD_MAP[cover._intel.threads[0]] && (
-                    <span className="font-mono text-[9px] bg-gray-900 text-green-400 px-1.5 py-0.5 tracking-wider">
-                      {BH53_THREAD_MAP[cover._intel.threads[0]]}
-                    </span>
+                    <BH53Badge id={BH53_THREAD_MAP[cover._intel.threads[0]]} />
                   )}
                 </div>
 
@@ -1394,9 +1409,7 @@ export default function GooseGazettePage() {
                 <div className="px-3 py-3 flex flex-col gap-1 flex-1">
                   <div className="flex items-center gap-2">
                     <TagBadge tag={a.tag} />
-                    {a._intel?.priority === "HIGH" && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
-                    )}
+                    <IntelDot priority={a._intel?.priority} />
                   </div>
                   <h3 className="font-serif font-bold text-[15px] leading-snug line-clamp-3 text-gray-900 group-hover:text-gray-600 transition-colors">
                     {a.headline}
@@ -1404,9 +1417,9 @@ export default function GooseGazettePage() {
                   <div className="mt-auto pt-2">
                     <p className="text-[10px] font-sans text-gray-400">{a.author} · {a.date}</p>
                     {a._intel?.threads[0] && BH53_THREAD_MAP[a._intel.threads[0]] && (
-                      <p className="font-mono text-[8px] text-gray-400 mt-0.5">
-                        BH53: {BH53_THREAD_MAP[a._intel.threads[0]]}
-                      </p>
+                      <div className="mt-0.5">
+                        <BH53Badge id={BH53_THREAD_MAP[a._intel.threads[0]]} />
+                      </div>
                     )}
                   </div>
                 </div>
@@ -1434,7 +1447,7 @@ export default function GooseGazettePage() {
         {/* RIGHT SIDEBAR */}
         <aside className="hidden lg:block sticky top-0 self-start h-screen border-l border-gray-200 px-5 py-8 overflow-y-auto"
           data-testid="sidebar-right">
-          <div className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-500 text-center">INSIGHT BRIEFIF</div>
+          <div className="text-[10px] font-black tracking-[0.3em] uppercase text-gray-500 text-center">INSIGHT BRIEF</div>
           <div className="flex justify-center my-5">
             <div className="waddle"><GooseSvg honking={false} size={84}/></div>
           </div>
