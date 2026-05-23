@@ -1,5 +1,34 @@
 uploads = []
-generated = []
+
+[[generated]]
+id = "4lzkx3O601u7U7oP3-mAO"
+uri = "file://client/src/assets/setecom-hero.png"
+type = "image"
+title = "setecom hero editorial"
+
+[[generated]]
+id = "GnGx8Ae_ejhv_P3xaDxtH"
+uri = "file://client/src/assets/setecom-infrastructure-map.png"
+type = "image"
+title = "setecom infrastructure dependency map"
+
+[[generated]]
+id = "HBP-GWzoZucu23yZFpBh4"
+uri = "file://client/src/assets/setecom-credentials.png"
+type = "image"
+title = "setecom default credentials technical"
+
+[[generated]]
+id = "wONcD6JgG-Hgg2knOJonv"
+uri = "file://client/src/assets/setecom-costa-rica-map.png"
+type = "image"
+title = "setecom costa rica infrastructure map"
+
+[[generated]]
+id = "owO7EpkKCEvjEnUUYpIYt"
+uri = "file://client/src/assets/setecom-rf-correlation.png"
+type = "image"
+title = "rf correlation waterfall 7410khz"
 
 [[outputs]]
 id = "zDaxSKuCcHB3e4ieprb38"
