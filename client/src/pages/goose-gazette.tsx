@@ -456,6 +456,24 @@ He has not been charged with anything in Costa Rica. He has not been accused of 
       img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80",
     },
     {
+      id: "st-johns-thread",
+      tag: "LOCAL",
+      headline: "Decorated Veteran's Favorite Island Now Home to Charter Business Founded by His Best Man; Both Describe the Arrangement as Coincidental",
+      subhead: "Shades of Blue Charters launched operations in St. John, USVI — where a decorated two-tour Afghanistan veteran has vacationed for years, proposed to his wife, and continues to visit regularly — within the same period the veteran transitioned into a sales role he has not elaborated on.",
+      author: "Algernon Beak, Investigations",
+      date: "May 22, 2026",
+      body: `ST. JOHN, USVI — Shades of Blue Charters, a pleasure cruise operation running a World Cat 320CC power catamaran with twin 300-horsepower Suzuki four-stroke motors out of Cruz Bay, St. John, launched within the past year under the ownership of a married couple who relocated from the mainland to establish the business. The operation has received strong reviews. The boat is described in guest accounts as immaculate. The itineraries are flexible.
+
+The couple's closest stateside friend — a decorated veteran of two combat tours in Afghanistan, 2010 and 2011, with an intermediate deployment to Quantico, Virginia for what records and family members describe as sniper training — has been visiting St. John for years. He proposed to his wife there. He returns regularly. When asked by a family member to describe the island's appeal, he said it was beautiful and changed the subject.
+
+The veteran and the charter operator have been friends for over two decades, a duration that acquaintances note is unusual given an approximate twenty-year age difference. The operator served as the veteran's best man. The friendship has been described by those familiar with both men as close, consistent, and not easily categorized. "They're just close," said one person. "I don't know how else to put it." They were not asked to put it any other way.
+
+The veteran currently works in sales for a commercial trucking manufacturer in Stoughton, Massachusetts, a position he reached after moving, by multiple accounts, from no prior industry experience to managing the shop floor to his current role over a compressed timeline. The manufacturer confirmed his employment. The veteran did not respond to requests for comment through a family intermediary. The family intermediary noted that responses from the veteran had become infrequent following the death of a parent in November and characterized the silence as "not typical of how he used to be." The veteran has not responded to the family intermediary either.
+
+Shades of Blue Charters is bookable at shadesofbluecharters.com. The catamaran runs day trips to the British Virgin Islands, snorkeling coves on St. John's north side, and several beach bars the captain describes as essential. Reviews are uniformly positive. The boat is white. The water is very blue. These are the facts available.`,
+      img: "/shades-of-blue-boat.jpg",
+    },
+    {
       id: "jw-coordination",
       tag: "LOCAL",
       headline: "Door-to-Door Religious Outreach Campaign Logged 94% Route Consistency Over 18 Months; Coordinators Describe This as 'Spirit-Led'",
