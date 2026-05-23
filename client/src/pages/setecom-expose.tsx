@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import setecomHero from "@assets/setecom-hero.png";
-import setecomInfraMap from "@assets/setecom-infrastructure-map.png";
-import setecomCredentials from "@assets/setecom-credentials.png";
-import setecomCRMap from "@assets/setecom-costa-rica-map.png";
-import setecomRFCorrelation from "@assets/setecom-rf-correlation.png";
+const setecomHero = "/assets/setecom-hero.png";
+const setecomInfraMap = "/assets/setecom-infrastructure-map.png";
+const setecomCredentials = "/assets/setecom-credentials.png";
+const setecomCRMap = "/assets/setecom-costa-rica-map.png";
+const setecomRFCorrelation = "/assets/setecom-rf-correlation.png";
 import {
   AlertTriangle,
   Radio,
