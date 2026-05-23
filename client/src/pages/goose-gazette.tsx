@@ -452,7 +452,7 @@ Sources familiar with the Jacó expat community describe the man as "well-connec
 
 After several decades, the subject is not a newcomer to the area, which is itself notable: long-term residents of Jacó tend to be known, and known people tend to be legible. Multiple sources, when asked to describe him in detail, produced descriptions that were accurate in outline and thin on specifics. One source, after a long pause, said: "He's just around." This was the most complete characterization available.
 
-He has not been charged with anything. He has not been accused of anything. He was nonetheless the subject of this article.`,
+He has not been charged with anything in Costa Rica. He has not been accused of anything in Costa Rica. He was nonetheless the subject of this article.`,
       img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=80",
     },
     {
