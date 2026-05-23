@@ -150,6 +150,20 @@ app.use((req, res, next) => {
     }));
   }
 
+  // Serve public/evidence/ at /evidence — video & audio forensic files
+  const publicEvidenceDir = path.join(process.cwd(), "public", "evidence");
+  if (fs.existsSync(publicEvidenceDir)) {
+    app.use("/evidence", express.static(publicEvidenceDir, {
+      setHeaders: (res, filePath) => {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        if (filePath.endsWith(".mp4") || filePath.endsWith(".mov")) {
+          res.setHeader("Content-Type", "video/mp4");
+          res.setHeader("Accept-Ranges", "bytes");
+        }
+      },
+    }));
+  }
+
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes

@@ -116,7 +116,7 @@ Recording 1 returned dominant peaks at 119.9 Hz (−61.3 dBFS), 87.6 Hz (−64.9
 
 A supplementary audio reference recorded on Calle Naciones Unidas identified a distinct 446–450 Hz tonal cluster, consistent with active servo motor cycling in a hovering platform at close range. The tonal cluster peaked at −42.3 dBFS — substantially louder than the residential recordings — indicating closer proximity to the recording device. The road did not respond to a request for comment.
 
-The surveillance_20260328.mp4 field video, captured from the residential balcony at approximately eight meters of elevation, shows a white-yellow point light source executing periodic illumination cutoffs at a rate estimated between 0.5 and 1.0 Hz. The KAPPA Forensic Hypervisor cross-referenced the pattern against FAA Part 107 navigation lighting standards and described it as "outside standard parameters for commercial nav lighting." The platform's altitude was estimated at several hundred meters above the treeline. Palm trees were below it. This was consistent with the height of the crane.
+The surveillance_20260328.mp4 field video, captured from the north end of Hotel Pochote Grande at approximately eight meters of elevation, shows a white-yellow point light source executing periodic illumination cutoffs at a rate estimated between 0.5 and 1.0 Hz. The KAPPA Forensic Hypervisor cross-referenced the pattern against FAA Part 107 navigation lighting standards and described it as "outside standard parameters for commercial nav lighting." The platform's altitude was estimated at several hundred meters above the treeline. Palm trees were below it. This was consistent with the height of the crane.
 
 The KAPPA engine recorded scores of 49–60/100 during documented hover windows — a range the system classifies as ELEVATED — and logged 29 confirmed satellite correlation events during the monitoring period. Phi-harmonic ELF correlations were observed at approximately 119-second intervals during the same windows, a figure the Ω-CHRONOS hypervisor described as "temporally consistent" and which this publication describes as "too consistent."
 
@@ -388,7 +388,7 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
               >
                 Your browser does not support video playback.
               </video>
-              <p className="text-[9px] font-mono text-gray-400 mt-1">surveillance_20260328.mp4 · 37 MB · March 28, 2026 · Calle Vista Las Palmas balcony</p>
+              <p className="text-[9px] font-mono text-gray-400 mt-1">surveillance_20260328.mp4 · 37 MB · March 28, 2026 · Hotel Pochote Grande, north end</p>
             </div>
           </div>
         )}
