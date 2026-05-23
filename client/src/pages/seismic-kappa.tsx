@@ -3,10 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { AlertTriangle, Activity, Zap, Eye, Radio, Globe } from "lucide-react";
-import cell17 from "@assets/omega_specimen_cell17_gen44_1778729921620.png";
-import cell1 from "@assets/omega_specimen_cell1_gen31_1778729921620.png";
-import cell8 from "@assets/omega_specimen_cell8_gen34_1778729921620.png";
-import cell18 from "@assets/omega_specimen_cell18_gen26_1778729921620.png";
+const cell17 = "/assets/omega_specimen_cell17_gen44_1778729921620.png";
+const cell1 = "/assets/omega_specimen_cell1_gen31_1778729921620.png";
+const cell8 = "/assets/omega_specimen_cell8_gen34_1778729921620.png";
+const cell18 = "/assets/omega_specimen_cell18_gen26_1778729921620.png";
 
 const PI = Math.PI;
 const KAPPA = 4 / PI;

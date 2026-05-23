@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useRef } from "react";
 import { ZoomableImage } from "@/components/zoomable-image";
-import nexusImg from "@assets/complete_nexus_all_threads_1774025171694.png";
-import confirmedImg from "@assets/jaco_nexus_confirmed_evidence_1774025171697.png";
-import apocalypseImg from "@assets/apocalypse_architecture_1774025171693.png";
-import dewaveImg from "@assets/dewave_architecture_1774025171694.png";
-import activationImg from "@assets/january_14_2025_activation_complete_1774025171697.png";
-import photo1 from "@assets/20260321_100629_(2)_1774201049911.jpg";
-import photo2 from "@assets/20260322_095645_1774201049912.jpg";
-import photo3 from "@assets/20260322_095708_1774215130710.jpg";
-import photo4 from "@assets/20260322_151136_1774215130713.jpg";
-import threeVoicesImg from "@assets/three_voices_analysis_1774025171698.png";
-import dewaveDeepImg from "@assets/dewave_bart_deep_dive_1774025171695.png";
-import theNexusImg from "@assets/the_nexus_analysis_1774025171698.png";
+const nexusImg = "/assets/complete_nexus_all_threads_1774025171694.png";
+const confirmedImg = "/assets/jaco_nexus_confirmed_evidence_1774025171697.png";
+const apocalypseImg = "/assets/apocalypse_architecture_1774025171693.png";
+const dewaveImg = "/assets/dewave_architecture_1774025171694.png";
+const activationImg = "/assets/january_14_2025_activation_complete_1774025171697.png";
+const photo1 = "/assets/20260321_100629_(2)_1774201049911.jpg";
+const photo2 = "/assets/20260322_095645_1774201049912.jpg";
+const photo3 = "/assets/20260322_095708_1774215130710.jpg";
+const photo4 = "/assets/20260322_151136_1774215130713.jpg";
+const threeVoicesImg = "/assets/three_voices_analysis_1774025171698.png";
+const dewaveDeepImg = "/assets/dewave_bart_deep_dive_1774025171695.png";
+const theNexusImg = "/assets/the_nexus_analysis_1774025171698.png";
 
 function VennDiagram({ sets, title }: { sets: { label: string; color: string; items: string[] }[]; title: string }) {
   const cx = [180, 320, 250];

@@ -10,10 +10,10 @@ import { TOOL_CATALOG, DOMAINS, type ToolEntry, type ToolGitHubMeta } from "@sha
 import { ExternalLink, Star, GitFork, Wrench, Zap, Radio, Activity, AlertTriangle, Clock, FileCode } from "lucide-react";
 import { IntegratedTools } from "@/components/integrated-tools";
 
-import elfScan1Path from "@assets/elf_scan_1775119306_1775184925863.png";
-import elfScan2Path from "@assets/elf_scan_1775119564_1775184925862.png";
-import elfScan3Path from "@assets/elf_scan_1775119878_1775184925862.png";
-import fullSpectrumPath from "@assets/full_spectrum_scan_1775119900_1775184925861.png";
+const elfScan1Path = "/assets/elf_scan_1775119306_1775184925863.png";
+const elfScan2Path = "/assets/elf_scan_1775119564_1775184925862.png";
+const elfScan3Path = "/assets/elf_scan_1775119878_1775184925862.png";
+const fullSpectrumPath = "/assets/full_spectrum_scan_1775119900_1775184925861.png";
 
 const domainColors: Record<string, string> = {
   satellite: "bg-purple-500/10 text-purple-700 dark:text-purple-400",

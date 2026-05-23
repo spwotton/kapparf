@@ -1,22 +1,22 @@
 import { useState } from "react";
-import omegaCell4 from "@assets/omega_cell4_gen60_1779260852176.png";
-import omegaCell04 from "@assets/omega_cell04_gen8_36_1779260852176.png";
-import omegaCell02 from "@assets/omega_cell02_gen8_10_1779260852176.png";
-import omegaCell3 from "@assets/omega_cell3_gen7_1779260852176.png";
-import omegaCell07 from "@assets/omega_cell07_gen43_8_1779260852176.png";
-import omegaCell03a from "@assets/omega_cell03_gen41_1_1779260852176.png";
-import omegaCell03b from "@assets/omega_cell03_gen37_34_1779260852176.png";
-import omegaCell09a from "@assets/omega_cell09_gen43_33_1779260852176.png";
-import omegaCell11 from "@assets/omega_cell11_gen40_26_1779260852176.png";
-import omegaCell01 from "@assets/omega_cell01_gen49_31_1779260852176.png";
-import omegaCell23 from "@assets/omega_cell23_gen46_24_1779260852176.png";
-import omegaCell13 from "@assets/omega_cell13_gen48_15_1779260852176.png";
-import omegaCell20 from "@assets/omega_cell20_gen44_16_1779260852176.png";
-import omegaCell09b from "@assets/omega_cell09_gen14_16_1779260852176.png";
-import cosmicFalcon from "@assets/6_1779260852176.jpeg";
-import trexAnchor from "@assets/Untitled_(1)_1779260852176.jpeg";
-import ogosStatus from "@assets/image_4f624aa6_1779260852176.png";
-import ogosFinal from "@assets/image_8762611b_1779260852176.png";
+const omegaCell4 = "/assets/omega_cell4_gen60_1779260852176.png";
+const omegaCell04 = "/assets/omega_cell04_gen8_36_1779260852176.png";
+const omegaCell02 = "/assets/omega_cell02_gen8_10_1779260852176.png";
+const omegaCell3 = "/assets/omega_cell3_gen7_1779260852176.png";
+const omegaCell07 = "/assets/omega_cell07_gen43_8_1779260852176.png";
+const omegaCell03a = "/assets/omega_cell03_gen41_1_1779260852176.png";
+const omegaCell03b = "/assets/omega_cell03_gen37_34_1779260852176.png";
+const omegaCell09a = "/assets/omega_cell09_gen43_33_1779260852176.png";
+const omegaCell11 = "/assets/omega_cell11_gen40_26_1779260852176.png";
+const omegaCell01 = "/assets/omega_cell01_gen49_31_1779260852176.png";
+const omegaCell23 = "/assets/omega_cell23_gen46_24_1779260852176.png";
+const omegaCell13 = "/assets/omega_cell13_gen48_15_1779260852176.png";
+const omegaCell20 = "/assets/omega_cell20_gen44_16_1779260852176.png";
+const omegaCell09b = "/assets/omega_cell09_gen14_16_1779260852176.png";
+const cosmicFalcon = "/assets/6_1779260852176.jpeg";
+const trexAnchor = "/assets/Untitled_(1)_1779260852176.jpeg";
+const ogosStatus = "/assets/image_4f624aa6_1779260852176.png";
+const ogosFinal = "/assets/image_8762611b_1779260852176.png";
 
 // ── Symbol tag colors ──────────────────────────────────────────────────────
 const TAG: Record<string, string> = {

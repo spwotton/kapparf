@@ -143,3 +143,7 @@ attached_assets/pkc_1779533437962.pcap filter=lfs diff=lfs merge=lfs -text
 /dist/public/assets/20260322_151136_1774215130713-Bo5JxPic.jpg filter=lfs diff=lfs merge=lfs -text
 /dist/public/assets/ort-wasm-simd-threaded.asyncify-DMmc6YqF.wasm filter=lfs diff=lfs merge=lfs -text
 /dist/public/piri-reis-1513.jpg filter=lfs diff=lfs merge=lfs -text
+/client/public/assets/20260322_095708_1774215130710.jpg filter=lfs diff=lfs merge=lfs -text
+/client/public/assets/20260322_151136_1774215130713.jpg filter=lfs diff=lfs merge=lfs -text
+/dist/public/assets/20260322_095708_1774215130710.jpg filter=lfs diff=lfs merge=lfs -text
+/dist/public/assets/20260322_151136_1774215130713.jpg filter=lfs diff=lfs merge=lfs -text

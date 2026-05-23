@@ -9,6 +9,8 @@ import {
 env.allowLocalModels = false;
 env.useBrowserCache = true;
 
+env.backends.onnx.wasm.wasmPaths = "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0/dist/";
+
 type WorkerInMsg =
   | { type: "load"; modelId: string; hfToken?: string; dtype?: string }
   | { type: "generate"; layerId: string; agentId: string; messages: { role: string; content: string }[]; maxTokens?: number }

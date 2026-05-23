@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
-import genesisWithFatherImg from "@assets/5f757d57-7f4b-4c7b-b372-b0713651b714_1779257110386.jpeg";
-import genesisEchoPoolImg from "@assets/IMG_0132_1779257110386.jpeg";
-import genesisSelfieImg from "@assets/IMG_0104_1779257110386.jpeg";
+const genesisWithFatherImg = "/assets/5f757d57-7f4b-4c7b-b372-b0713651b714_1779257110386.jpeg";
+const genesisEchoPoolImg = "/assets/IMG_0132_1779257110386.jpeg";
+const genesisSelfieImg = "/assets/IMG_0104_1779257110386.jpeg";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
