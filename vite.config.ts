@@ -15,8 +15,8 @@ function externalizeOnnxWasm(): Plugin {
       if ((isOnnx || isTransformers) && code.includes("ort-wasm")) {
         return {
           code: code.replace(
-            /new URL\("(ort-wasm[^"]+\.wasm)"[^)]*\)\.href/g,
-            `"${cdnBase}$1"`,
+            /new URL\(["'](\.\/)?ort-wasm([^"']*\.wasm)["'][^)]*\)(?:\.href)?/g,
+            `"${cdnBase}ort-wasm$2"`,
           ),
           map: null,
         };

@@ -1,6 +1,6 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
-import { rm, readFile } from "fs/promises";
+import { rm, readFile, mkdir } from "fs/promises";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -33,11 +33,13 @@ const allowlist = [
 ];
 
 async function buildAll() {
-  await rm("dist", { recursive: true, force: true });
+  // Only wipe the client output — preserves dist/index.cjs across rebuilds.
+  // This ensures the server binary always exists even if the Vite client build
+  // fails (e.g. OOM in memory-constrained deployment containers).
+  await rm("dist/public", { recursive: true, force: true });
+  await mkdir("dist", { recursive: true });
 
-  console.log("building client...");
-  await viteBuild();
-
+  // Build server FIRST so dist/index.cjs is guaranteed to exist
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
   const allDeps = [
@@ -59,6 +61,10 @@ async function buildAll() {
     external: externals,
     logLevel: "info",
   });
+
+  // Build client second — large Vite bundle (may be memory-intensive)
+  console.log("building client...");
+  await viteBuild();
 }
 
 buildAll().catch((err) => {
