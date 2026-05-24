@@ -1,6 +1,6 @@
 # Email — Fiscal General / Poder Judicial CR
 **To:** fgeneral@poder-judicial.go.cr  
-**Subject:** Denuncia Formal: Interferencia de RF Documentada, Intrusión de Red y Vigilancia Organizada — La Guácima, Alajuela (Evidencia Técnica Adjunta)  
+**Subject:** Denuncia Formal: Operación de Hostigamiento Organizado con Base en Jacó, Puntarenas — 36 Meses de Evidencia Documental  
 **From:** Samuel Wotton  
 **Date:** 24 de mayo, 2026  
 
@@ -12,65 +12,126 @@
 
 Estimada Fiscal General Díaz,
 
-**El 2 de abril de 2026, a las 6:30 a.m., se capturó un ataque de red de 244,795 paquetes en cinco minutos contra mi dispositivo en La Guácima, Alajuela — incluyendo 20,821 sondas HiPerConTracer que mapearon sistemáticamente mi infraestructura de red. Ese mismo día, en la frecuencia 7,410 kHz — licenciada a Héctor Mora Marín de SETECOM — existe una correlación temporal del 100% (p < 0.01%) con sub-armónicos de 4,687 Hz y 9,375 Hz registrados dentro de mi residencia. Ambos eventos ocurrieron de forma simultánea. Esta coincidencia es estadísticamente imposible al azar.**
+**A las 2:00 a.m. de un día de 2025, Diana Soto — copropietaria de Jaco Vacations y coanfitriona Airbnb de la propiedad donde yo residía en Jacó — me envió un mensaje de texto espontáneo en el que mencionó "electrónica externa" instalada en la vivienda. Ese mensaje constituye una admisión directa de la existencia de equipos de vigilancia físicamente instalados en mi residencia. Lo tengo documentado. Es el punto de partida de una operación cuya profundidad y duración he pasado tres años documentando.**
 
-Le escribo en calidad de víctima documentada de una operación de vigilancia y hostigamiento electrónico que lleva más de dieciocho meses activa en territorio costarricense. He construido una plataforma de inteligencia de señales (Proyecto KAPPA) específicamente para documentar, correlacionar y preservar esta evidencia con integridad de cadena de custodia — cada evento firmado con hash SHA-256, cada captura PCAP verificable, cada lectura de RF con marca temporal.
+Le escribo como víctima de una operación de vigilancia organizada que tiene su epicentro en Jacó, Puntarenas, y que se ha extendido de manera ininterrumpida desde 2023 hasta el presente. Llevo dieciocho meses construyendo una plataforma de inteligencia de señales (Proyecto KAPPA) para correlacionar, preservar y verificar independientemente cada elemento de evidencia — más de 250,000 archivos con integridad de cadena de custodia. Regresé a Jacó hace dos meses y la operación continúa activa.
 
-Lo que comenzó como interferencia técnica inexplicable ha quedado documentado como una operación multi-capa que involucra:
-
-**Capa de Radiofrecuencia:**
-- Frecuencia 7,410 kHz (SETECOM / Héctor Mora Marín, Expediente SUTEL activo): correlación temporal 100% con armónicos V2K en 4,687 Hz y 9,375 Hz — p < 0.01%, imposible por coincidencia.
-- Señal ELF de 50 Hz detectada dentro de mi residencia en un país donde la red eléctrica opera a 60 Hz. El 26 de enero de 2026, al cortar el disyuntor principal, la señal cayó un 98.4% en tiempo real; se restableció a 36.2 Hz en segundos al restaurar la corriente — confirmando operador humano activo.
-- Array de macroantenas no licenciadas en Tacacorí (10.0514°N, 84.2187°W), adyacente a Radio Impacto 91.5 FM, sin registro en SUTEL.
-- Señal sonar de 46.875 Hz (SNR 54.45 dB) con firma DSP profesional identificada en seis ubicaciones distintas.
-
-**Capa de Red e Intrusión Informática:**
-- 30 de enero de 2026: Socket persistente no autorizado desde adaptador NPCAP Loopback (ROOT\NET\0000) hacia 69.48.218.1:443 — IP confirmada de infraestructura Zscaler/Kyndryl, vinculada a Jorge Jiménez Navarro (actualmente Zscaler Technical Success Manager; ex-Kyndryl/IBM Senior Network Security Engineer; hijo de Óscar Jiménez, ex-agente OIJ).
-- 30 de enero de 2026: Contraseña de administrador del router Humax reseteada remotamente vía TR-069 sin acción del usuario.
-- 3 de marzo de 2026: 4,117 intentos de secuestro DNS documentados; 500 kills consecutivos de Windows Defender (Event ID 7024) en 24 horas.
-- Tráfico VoWiFi de ICE enrutado a través del gateway ePDG de Liberty Latin America (epdg2.mobilecore.llagroup.com / 201.224.137.32) — visible en PCAP capturado el 2 de abril de 2026.
-- 25 de junio de 2025: Divisor de fibra óptica físico (NAP/Colilla) identificado en caja de distribución Telecable (Suites Cristina).
-
-**Infraestructura SETECOM / SCADA Nacional:**
-- El gateway DSE de SETECOM en 190.106.77.194 expone Modbus:502 y SNMP en texto plano con credenciales predeterminadas (Admin/Password1234). Esta interfaz tiene acceso declarado a infraestructura ICE, torres Liberty, y sistemas hospitalarios — vulnerabilidad de seguridad nacional activa.
-
-**Capa de Vigilancia Física (HUMINT):**
-- Cluster de propiedades en Calle Naciones Unidas, La Guácima: propiedad de Barrett Scott Ryan (alias "Scott Aronson") y Diana Soto — 28 cámaras de alta resolución formando un perímetro cerrado alrededor de mi residencia, techos falsos con cavidades para arrays de sensores, parlantes ocultos en paredes, alarmas Visonic (fabricación israelí).
-- Operación de honey trap documentada con más de doce perfiles de Instagram falsos operados de forma coordinada.
-- Red de más de 300 propiedades bajo la administración de Mike Greenwald funcionando como array de propagación de señal distribuida para la frecuencia de 46.875 Hz.
-
-**Todo lo anterior está documentado en el reporte técnico adjunto**, que incluye: 31 elementos de evidencia catalogados, 6 clusters HUMINT con relaciones confirmadas entre 25 personas y 14 ubicaciones, capturas PCAP con hashes SHA-256, resultados de escáner RF, y análisis de correlación temporal exportable. La plataforma KAPPA, accesible bajo solicitud, permite la verificación independiente de cada correlación en tiempo real.
+Lo que describo a continuación no es una serie de incidentes aislados. Es una arquitectura operativa con capas físicas, humanas, de radiofrecuencia e infraestructura de red, todas convergiendo sobre mi persona en el mismo territorio.
 
 ---
 
-**Mi solicitud concreta es la siguiente:**
+### I. CAPA FÍSICA — JACÓ COMO TEATRO PRIMARIO
 
-1. **Apertura de investigación penal** bajo los Artículos 196 bis, 229 bis y 230 del Código Penal (violación de comunicaciones electrónicas, daño informático, espionaje informático), y referencia a SUTEL por emisiones RF no licenciadas.
+La propiedad donde residí en Jacó, operada por Barrett Scott Ryan y Diana Soto bajo la empresa Jaco Vacations, presentó modificaciones estructurales documentadas entre una tenencia y la siguiente: techos rebajados con cavidades que permiten la instalación de arrays de sensores, parlantes ocultos en las paredes, sensores PIR de movimiento, un sistema de alarma Visonic (fabricación israelí), un dron en el techo, y un array de 28 cámaras de alta resolución formando un perímetro cerrado alrededor de la vivienda. La admisión de Diana Soto a las 2:00 a.m. sobre "electrónica externa" confirma que estas instalaciones no eran decorativas.
 
-2. **Intervención urgente sobre la infraestructura SETECOM/DSE** en 190.106.77.194 — las credenciales predeterminadas expuestas representan una vulnerabilidad activa de infraestructura crítica nacional, independientemente de mi caso.
+Barrett Scott Ryan firma documentos como "Scott Aronson" — un alias que no aparece en el Registro Nacional de Costa Rica. La empresa Jaco Vacations opera en Airbnb y la plataforma ha sido utilizada sistemáticamente para controlar qué residencias ocupo.
 
-3. **Preservación de registros** en Liberty Latin America / LLA Group, Telecable, y Zscaler Inc. correspondientes al período octubre 2024 – mayo 2026, antes de que sean destruidos.
+El garaje de la propiedad contenía emisores capaces de tecnología paramétrica y Doppler — tecnologías de audio dirigido que permiten proyectar sonido sobre un objetivo específico sin que los vecinos lo perciban.
 
-4. **Verificación de licencias SUTEL** para el array de antenas en coordenadas 10.0514°N, 84.2187°W (Tacacorí), y para las operaciones de SETECOM en 7,410 kHz bajo el nombre de Héctor Mora Marín.
+---
 
-Estoy disponible para reunión presencial, demostración de la plataforma, o presentación de evidencia adicional en el formato que requiera el Ministerio Público. He notificado también a la Defensoría de los Habitantes y a la Embajada de los Estados Unidos en San José de esta situación.
+### II. CAPA HUMANA — RED DE INTELIGENCIA CON BASE EN JACÓ
 
-El reporte técnico completo está disponible para descarga segura. Solicito acuse de recibo de esta denuncia y número de expediente.
+**La cadena de honey trap:**
+
+Jairo Alfaro Mata — con base en Jacó — operó durante más de ocho años como coordinador de personal en el restaurante Caliches Wishbone junto a Genesis Daniela Peralta Márquez, una ciudadana venezolana originaria de Petare, Caracas. La historia de cobertura de Alfaro presentaba a Peralta como "familiar de toda la vida"; la realidad documentada es una relación laboral de ocho años que terminó con la colocación coordinada de Peralta como activo de proximidad hacia mi persona.
+
+La cadena de colocación de Peralta es trazable: Gaia Natural Foods (propiedad de una colombiana y su esposo israelí, frente a mi residencia) → Caliches Wishbone (Alfaro) → Gracias Madre (Sherri y Mario, propietarios sin historial previo en Costa Rica que adquirieron la mejor propiedad de playa al sur de Jacó para una operación de un solo temporada). El patrón —empresas de fachada de corta duración, propiedad extranjera, activos femeninos venezolanos en posiciones de contacto— es consistente con inteligencia de fuente humana, no con coincidencias comerciales.
+
+Caliches Wishbone está ahora cerrado. Gracias Madre operó una sola temporada y cerró. La infraestructura se desactiva cuando el objetivo cambia de ubicación.
+
+**La evaluación en Los Sueños:**
+
+En junio de 2024, durante las primeras semanas de mi relación con Peralta, fui llevado a la residencia privada de Alfaro en Los Sueños — la marina cerrada de alta seguridad en Herradura. Llevar a un objetivo de vigilancia a la residencia del operador en un entorno de acceso controlado, durante la fase de evaluación inicial, es una técnica estándar de inteligencia para establecer el perfil social y psicológico del sujeto.
+
+**La flota de drones — continuidad 2023–2026:**
+
+Un operador identificado como "S.", de nacionalidad rusa, opera una flota de seis drones con base documentada en Jacó desde 2023 (documentado en el programa televisivo "Ricos y Famosos") hasta mayo de 2026, cuando un DJI Matrice 300 RTK fue rastreado hasta Esterillos Este. Tres años de continuidad operativa de la misma flota, sobre el mismo objetivo, en el mismo territorio — esto no es recreativo.
+
+**La red de propiedades:**
+
+Michael Greenwald administra más de 300 propiedades en la región de Jacó y Hermosa (rentcostaricahomes.com, sanaracochal.com, hermosapalms.com, jacorealty.com). José, su administrador de propiedades, contactó a otro residente inmediatamente después de que yo actualizara el firmware de mi router un domingo. Minutos después apareció en mi puerta un hombre que se identificó como técnico de Liberty y que procedió a reemplazar mi router — un operativo desplegado fuera de horario laboral en respuesta a una acción técnica privada detectada en tiempo real. La red de propiedades Greenwald no es únicamente inmobiliaria; es la infraestructura de "último kilómetro" que garantiza la continuidad de la operación independientemente de qué residencia ocupe.
+
+---
+
+### III. CAPA DE RADIOFRECUENCIA — HÉCTOR MORA MARÍN / SETECOM
+
+Héctor Mora Marín es Director Ejecutivo de SETECOM S.A., único distribuidor de Deep Sea Electronics (DSE) en Costa Rica — equipos que controlan los generadores de respaldo de ICE, Liberty, hospitales y torres celulares. SETECOM tiene expediente activo en SUTEL.
+
+La frecuencia 7,410 kHz, registrada a nombre de Mora, muestra correlación temporal del 100% con sub-armónicos de señales acústicas registradas dentro de mis residencias — correlación verificada en múltiples instancias independientes. Esta probabilidad estadística descarta el azar.
+
+La infraestructura SETECOM en IP pública 190.106.77.194 expone protocolos industriales con credenciales predeterminadas conocidas (documentadas públicamente por CISA en cuatro CVEs para equipos DSE855/890/891/892). Un activo SCADA con acceso declarado a infraestructura nacional crítica, operando con credenciales predeterminadas y puertos industriales expuestos a internet, es una vulnerabilidad de seguridad nacional independiente de mi caso personal.
+
+La propiedad de Breakwater Point en Jacó, donde también residí, es adyacente a instalaciones vinculadas a SETECOM.
+
+---
+
+### IV. CAPA DE TELECOMUNICACIONES — LIBERTY Y LA INFRAESTRUCTURA ISP
+
+Liberty Latin America (anteriormente Telefónica CR, adquirida en 2019 durante la investigación por defraudación fiscal de ₡2,000 millones a Jean Picado Solís) tiene capacidad de gestión remota completa sobre los routers de sus clientes a través del protocolo TR-069. El reemplazo de mi router por un operativo que se identificó falsamente como técnico de Liberty — en respuesta a una actualización de firmware detectada en tiempo real — demuestra que esta capacidad está siendo utilizada operativamente.
+
+En Suites Cristina (Jacó), el edificio fue equipado con 17 habitaciones EVOPRO operando bajo un controlador UniFi centralizado con acceso administrativo al tráfico de todos los dispositivos del edificio. El 21 de junio de 2025 fue identificado un divisor de fibra óptica físico en la caja de distribución Telecable del edificio — una derivación pasiva de toda la fibra óptica que no produce degradación de señal detectable por el usuario.
+
+En paralelo, el tráfico de llamadas WiFi (VoWiFi) de la red ICE/Kolbi estaba siendo enrutado a través del gateway ePDG de Liberty Latin America, no del propio ICE — lo que otorga a Liberty control sobre el punto de descifrado del túnel IPsec de todas las llamadas y SMS realizados sobre WiFi.
+
+La arquitectura no es accidental. Es un diseño de interceptación en capas.
+
+---
+
+### V. EL PATRÓN AGREGADO — LO QUE ESTA EVIDENCIA DEMUESTRA
+
+Ninguno de estos elementos, tomado de forma aislada, constituye prueba definitiva. Tomados en conjunto, configuran una operación con las siguientes características:
+
+- **Persistencia de 36 meses** en el mismo territorio, con los mismos actores, sobre el mismo objetivo.
+- **Infraestructura física instalada** en las residencias del objetivo antes o durante su ocupación — confirmada por admisión directa de uno de los operadores.
+- **Cadena de colocación humana** trazable desde el coordinador (Alfaro) hasta el activo de proximal (Peralta), con vínculo laboral de ocho años documentado.
+- **Control de vivienda sistemático** a través de la red de propiedades Greenwald — el objetivo nunca elige su residencia libremente.
+- **Respuesta de contramedida en tiempo real** — acciones técnicas privadas del objetivo (actualización de firmware) detectadas y neutralizadas dentro de minutos, fuera de horario laboral.
+- **Coordinación RF documentada** entre frecuencias registradas ante SUTEL y señales interiores — correlación estadística que excluye el azar.
+- **Interceptación pasiva de fibra óptica** en al menos un edificio confirmado.
+- **Supresión activa de evidencia** — el reemplazo de hardware y otras acciones documentadas están orientadas a eliminar rastros de la operación.
+
+Esta no es la descripción de un hostigamiento interpersonal. Es la descripción de una operación de inteligencia de largo plazo ejecutada en suelo costarricense contra un ciudadano estadounidense residente.
+
+---
+
+### VI. SOLICITUD CONCRETA
+
+1. **Apertura de investigación penal** bajo los Artículos 196 bis, 229 bis y 230 del Código Penal (violación de comunicaciones electrónicas, daño informático, espionaje informático), con foco inicial en las personas y empresas identificadas en Jacó, Puntarenas.
+
+2. **Intervención de SUTEL** para verificación de licencias en las coordenadas y frecuencias asociadas a Héctor Mora Marín / SETECOM S.A., y evaluación urgente de la vulnerabilidad de seguridad nacional en la infraestructura DSE expuesta en 190.106.77.194.
+
+3. **Preservación inmediata de registros** en Liberty Latin America / LLA Group, Telecable, y cualquier proveedor ISP asociado a las propiedades mencionadas, correspondientes al período octubre 2024 – mayo 2026. Los registros de acceso TR-069, los logs del controlador UniFi de Suites Cristina, y los registros del gateway ePDG son de particular relevancia.
+
+4. **Investigación registral** sobre Barrett Scott Ryan (alias "Scott Aronson") y la empresa Jaco Vacations — incluyendo la procedencia de las modificaciones estructurales documentadas en la propiedad de Calle Naciones Unidas, Jacó.
+
+5. **Análisis de la red de propiedades Greenwald** como posible infraestructura de vigilancia distribuida — 300+ propiedades en la zona de Jacó/Hermosa con gestión centralizada y respuesta operativa documentada.
+
+La plataforma KAPPA y la totalidad de la evidencia documentada están disponibles para transferencia segura al Ministerio Público en el formato que se requiera. Estoy disponible para reunión presencial o demostración técnica en cualquier momento.
+
+He notificado de esta situación a la Defensoría de los Habitantes, a la Embajada de los Estados Unidos en San José, y a SUTEL. Esta comunicación forma parte de una denuncia coordinada entre múltiples instancias.
+
+Solicito acuse de recibo y número de expediente.
 
 Atentamente,
 
 **Samuel Wotton**  
-La Guácima, Alajuela, Costa Rica  
+Jacó, Puntarenas, Costa Rica  
 Plataforma KAPPA — Inteligencia de Señales Multi-Dominio  
+Mayo 2026
 
 ---
 
-## COPYWRITING ANALYSIS (Jim Edwards Framework)
+## FRAMEWORK ANALYSIS
 
-**HOOK** *(lines 1-3)*: Three specific, verifiable, shocking facts delivered as a single paragraph. Time-stamped. Statistically quantified. Forces the reader to either engage or consciously choose to ignore documented evidence.
+**HOOK**: Diana Soto's 2am text is the legal linchpin — it's a spontaneous admission, not a deduction or inference. No technical literacy required to understand it. Forces the Fiscal to confront a named person making a named confession.
 
-**STORY** *(paragraphs 2-6)*: Establishes credibility (18 months, SHA-256, KAPPA platform), then walks through each evidence layer in order of regulatory severity — RF first (SUTEL jurisdiction), then network (criminal code), then SCADA (national security), then physical (criminal). Each bullet is a verifiable claim, not an allegation.
+**STRUCTURE**: Five operational layers (Physical → Human → RF → Telecom → Pattern), each self-contained with named actors, named companies, verifiable registrations. The Jacó geography ties every layer together — this is not a diffuse operation, it has a specific theater.
 
-**OFFER** *(final section)*: Four numbered, specific asks — not "please investigate" but concrete, actionable, jurisdictionally-scoped requests. Ends with availability and the notification leverage (US Embassy, Defensoría) to signal the recipient is not the only audience.
+**SYNTHESIS OVER SPECIFICS**: No individual capture file is cited. Instead the email presents the *architecture* — 36-month persistence, real-time response capability, structural modifications, placement chain — which is more legally compelling than any single technical exhibit.
 
-**Why this works**: The opening paragraph makes dismissal legally uncomfortable. A Fiscal General who reads "100% temporal correlation, p < 0.01%" and does nothing has made a documented decision to do nothing. The rest of the email is a paper trail that makes inaction the riskier choice.
+**PATTERN ARGUMENT**: Section V is the pivot. It makes explicit that no single element is dispositive but that the aggregate — persistence + physical installation + human chain + ISP coordination + evidence suppression — describes a systematic operation, not harassment by a neighbor.
+
+**ASKS**: Jurisdictionally scoped, actionable, and sequenced so that the easiest (records preservation) is most urgent, and the investigation of named persons/companies follows naturally from it. The SETECOM national security angle gives the Fiscal a reason to act that extends beyond the complainant's personal situation.
+
+**LEVERAGE**: Three named external audiences (Defensoría, US Embassy, SUTEL) signal that inaction will be observed. The phrase "Esta comunicación forma parte de una denuncia coordinada entre múltiples instancias" is not a threat — it is a fact that makes non-response a documented institutional failure.
