@@ -54,62 +54,64 @@ function extractTextContent(html: string): string {
   return text;
 }
 
-function isBlockedHost(hostname: string): boolean {
-  const blocked = [
-    "localhost", "127.0.0.1", "0.0.0.0", "::1", "[::1]",
-    "metadata.google.internal", "169.254.169.254",
-    "metadata.google", "metadata",
-  ];
-  if (blocked.includes(hostname.toLowerCase())) return true;
-  if (hostname.endsWith(".internal") || hostname.endsWith(".local")) return true;
-  const parts = hostname.split(".").map(Number);
-  if (parts.length === 4 && parts.every(n => !isNaN(n))) {
-    if (parts[0] === 10) return true;
-    if (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) return true;
-    if (parts[0] === 192 && parts[1] === 168) return true;
-    if (parts[0] === 127) return true;
-    if (parts[0] === 169 && parts[1] === 254) return true;
-    if (parts[0] === 0) return true;
-  }
-  return false;
-}
+import { pinnedFetch, SsrfError } from "./ssrf-guard.js";
 
 const MAX_RESPONSE_BYTES = 2 * 1024 * 1024;
+
+const FETCH_HEADERS = {
+  "User-Agent": "Mozilla/5.0 (compatible; KAPPA-Research/1.0)",
+  "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
+  "Accept-Language": "en-US,en;q=0.5",
+};
+
+const MAX_REDIRECTS = 5;
 
 export async function fetchUrl(url: string): Promise<WebFetchResult> {
   const fetchedAt = new Date().toISOString();
 
   try {
-    const parsedUrl = new URL(url);
+    let currentUrl = url;
+
+    const parsedUrl = new URL(currentUrl);
     if (!["http:", "https:"].includes(parsedUrl.protocol)) {
       return { url, title: "", content: "", contentLength: 0, statusCode: 0, fetchedAt, error: "Only HTTP/HTTPS URLs are supported" };
-    }
-
-    if (isBlockedHost(parsedUrl.hostname)) {
-      return { url, title: "", content: "", contentLength: 0, statusCode: 0, fetchedAt, error: "Access to internal/private hosts is not allowed" };
     }
 
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
 
-    const response = await fetch(url, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; KAPPA-Research/1.0)",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
-        "Accept-Language": "en-US,en;q=0.5",
-      },
-      signal: controller.signal,
-      redirect: "follow",
-    });
+    let response: Response;
+    let redirectsFollowed = 0;
 
-    const finalUrl = response.url || url;
-    try {
-      const finalParsed = new URL(finalUrl);
-      if (isBlockedHost(finalParsed.hostname)) {
+    while (true) {
+      response = await pinnedFetch(currentUrl, {
+        headers: FETCH_HEADERS,
+        signal: controller.signal,
+        redirect: "manual",
+      });
+
+      const isRedirect = response.status >= 300 && response.status < 400;
+      if (!isRedirect) break;
+
+      if (redirectsFollowed >= MAX_REDIRECTS) {
         clearTimeout(timeout);
-        return { url, title: "", content: "", contentLength: 0, statusCode: 0, fetchedAt, error: "Redirect to internal/private host blocked" };
+        return { url, title: "", content: "", contentLength: 0, statusCode: response.status, fetchedAt, error: "Too many redirects" };
       }
-    } catch {}
+
+      const location = response.headers.get("location");
+      if (!location) break;
+
+      const nextUrl = new URL(location, currentUrl).toString();
+      const nextParsed = new URL(nextUrl);
+
+      if (!["http:", "https:"].includes(nextParsed.protocol)) {
+        clearTimeout(timeout);
+        return { url, title: "", content: "", contentLength: 0, statusCode: 0, fetchedAt, error: "Redirect to non-HTTP protocol blocked" };
+      }
+
+      currentUrl = nextUrl;
+      redirectsFollowed++;
+    }
 
     const contentLength = parseInt(response.headers.get("content-length") || "0", 10);
     if (contentLength > MAX_RESPONSE_BYTES) {
@@ -152,6 +154,9 @@ export async function fetchUrl(url: string): Promise<WebFetchResult> {
       fetchedAt,
     };
   } catch (err: any) {
+    if (err instanceof SsrfError) {
+      return { url, title: "", content: "", contentLength: 0, statusCode: 0, fetchedAt, error: err.message };
+    }
     return {
       url,
       title: "",

@@ -18,6 +18,7 @@ import { runSyncCapture, getSyncCaptureStatus, getSyncCaptureHistory, getScreens
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
 import { executeDeepResearchRun } from "./deep-research";
 import { fetchUrl } from "./research-web";
+import { pinnedFetch, SsrfError } from "./ssrf-guard";
 import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetragon-engine";
 import { RESEARCH_CONSTANTS } from "./research-constants";
 import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, getDemodexSimState, getTychoAntipodeData, getBellCHSHData } from "./wifi-csi-engine";
@@ -955,17 +956,11 @@ export async function registerRoutes(
     }
 
     try {
-      const parsedUrl = new URL(targetUrl);
-      const hostname = parsedUrl.hostname;
-      if (/^(127\.|10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|0\.|169\.254\.|localhost)/i.test(hostname)) {
-        return res.status(400).json({ error: "Private/reserved addresses are not allowed" });
-      }
-
       const startTime = Date.now();
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
 
-      const response = await fetch(targetUrl, {
+      const response = await pinnedFetch(targetUrl, {
         method: "HEAD",
         headers: { "User-Agent": "KAPPA-SIGINT/1.0" },
         signal: controller.signal,
@@ -1005,6 +1000,9 @@ export async function registerRoutes(
         timestamp: new Date().toISOString(),
       });
     } catch (err: unknown) {
+      if (err instanceof SsrfError) {
+        return res.status(400).json({ error: err.message });
+      }
       const message = err instanceof Error ? err.message : "HTTP probe failed";
       res.status(500).json({ error: message });
     }
