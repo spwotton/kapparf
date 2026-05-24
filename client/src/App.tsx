@@ -69,6 +69,7 @@ import HyperobjectsPage from "@/pages/hyperobjects";
 import AtlasObservatoryPage from "@/pages/atlas-observatory";
 import SetecomExposePage from "@/pages/setecom-expose";
 import ReelPage from "@/pages/reel";
+import MailerPage from "@/pages/mailer";
 
 function Router() {
   return (
@@ -122,6 +123,7 @@ function Router() {
       <Route path="/atlas" component={AtlasObservatoryPage} />
       <Route path="/setecom" component={SetecomExposePage} />
       <Route path="/reel" component={ReelPage} />
+      <Route path="/mailer" component={MailerPage} />
       <Route component={NotFound} />
     </Switch>
   );

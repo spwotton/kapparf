@@ -7242,6 +7242,47 @@ export function registerGazetteIntelRoutes(app: express.Express) {
       res.status(500).json({ error: e.message });
     }
   });
+
+  // ── Mailgun secure mailer ──────────────────────────────────────────────────
+  app.post("/api/mailer/send", requireAuth, async (req, res) => {
+    const { to, subject, body, fromName, fromEmail } = req.body;
+    if (!to || !subject || !body) {
+      return res.status(400).json({ error: "Missing required fields: to, subject, body" });
+    }
+    const apiKey = process.env.MAILGUN_API_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    if (!apiKey || !domain) {
+      return res.status(500).json({ error: "Mailgun not configured — check MAILGUN_API_KEY and MAILGUN_DOMAIN secrets" });
+    }
+    try {
+      const FormData = (await import("form-data")).default;
+      const Mailgun = (await import("mailgun.js")).default;
+      const mg = new Mailgun(FormData);
+      const client = mg.client({ username: "api", key: apiKey });
+      const sender = fromEmail
+        ? `${fromName || "Samuel Wotton"} <${fromEmail}>`
+        : `Samuel Wotton <postmaster@${domain}>`;
+      const result = await client.messages.create(domain, {
+        from: sender,
+        to: Array.isArray(to) ? to : [to],
+        subject,
+        text: body,
+      });
+      res.json({ ok: true, id: result.id, message: result.message });
+    } catch (err: any) {
+      const detail = err?.response?.body || err?.message || String(err);
+      res.status(500).json({ error: "Mailgun send failed", detail });
+    }
+  });
+
+  app.get("/api/mailer/status", requireAuth, (_req, res) => {
+    const apiKey = process.env.MAILGUN_API_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    res.json({
+      configured: !!(apiKey && domain),
+      domain: domain || null,
+    });
+  });
 }
 
 
