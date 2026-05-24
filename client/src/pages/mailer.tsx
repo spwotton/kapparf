@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield } from "lucide-react";
+import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield, Zap, AlertTriangle } from "lucide-react";
 
 const TEMPLATES: { label: string; to: string; subject: string; body: string }[] = [
   {
@@ -142,15 +142,25 @@ interface SendResult {
   detail?: unknown;
 }
 
+interface CampaignResult {
+  ok: boolean;
+  sent: number;
+  failed: number;
+  total: number;
+  results: { id: number; to: string; org: string; ok: boolean; mgId?: string; error?: string }[];
+}
+
 export default function MailerPage() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [fromEmail, setFromEmail] = useState("");
+  const [fromEmail, setFromEmail] = useState("hello@ekhokappa.com");
   const [fromName, setFromName] = useState("Samuel Wotton");
   const [lastResult, setLastResult] = useState<SendResult | null>(null);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [log, setLog] = useState<{ ts: string; to: string; subject: string; ok: boolean; id?: string }[]>([]);
+  const [campaignResult, setCampaignResult] = useState<CampaignResult | null>(null);
+  const [showCampaignResults, setShowCampaignResults] = useState(false);
 
   const { data: status } = useQuery<{ configured: boolean; domain: string | null }>({
     queryKey: ["/api/mailer/status"],
@@ -171,6 +181,19 @@ export default function MailerPage() {
     },
     onError: (err: any) => {
       setLastResult({ ok: false, error: err.message });
+    },
+  });
+
+  const campaignMutation = useMutation({
+    mutationFn: (payload: { fromEmail: string; fromName: string; dryRun?: boolean }) =>
+      apiRequest("POST", "/api/mailer/campaign", payload),
+    onSuccess: async (res) => {
+      const data: CampaignResult = await res.json();
+      setCampaignResult(data);
+      setShowCampaignResults(true);
+    },
+    onError: (err: any) => {
+      setCampaignResult({ ok: false, sent: 0, failed: 0, total: 0, results: [] });
     },
   });
 
@@ -348,6 +371,90 @@ export default function MailerPage() {
           </div>
         </div>
       )}
+
+      {/* ── Campaign: Send All 46 ── */}
+      <div className="border border-border rounded-lg p-4 space-y-3 bg-muted/20">
+        <div className="flex items-center gap-2">
+          <Zap className="w-4 h-4 text-amber-500" />
+          <p className="text-sm font-medium">Send All 46 Contacts</p>
+          <Badge variant="outline" className="text-xs ml-auto">
+            A · B · C · D · E
+          </Badge>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Sends category-appropriate emails to all 46 unique addresses (350ms stagger).
+          From address defaults to <span className="font-mono">hello@ekhokappa.com</span>.
+        </p>
+
+        {/* Confirm warning */}
+        <div className="flex items-start gap-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded px-3 py-2">
+          <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+          <span>This sends real emails. Use Dry Run first to verify the contact list without sending.</span>
+        </div>
+
+        <div className="flex gap-2">
+          <Button
+            data-testid="button-dry-run"
+            variant="outline"
+            size="sm"
+            onClick={() => campaignMutation.mutate({ fromEmail: fromEmail || "hello@ekhokappa.com", fromName, dryRun: true })}
+            disabled={campaignMutation.isPending}
+          >
+            Dry Run (list only)
+          </Button>
+          <Button
+            data-testid="button-send-campaign"
+            size="sm"
+            className="gap-2 bg-amber-600 hover:bg-amber-700 text-white"
+            onClick={() => campaignMutation.mutate({ fromEmail: fromEmail || "hello@ekhokappa.com", fromName })}
+            disabled={campaignMutation.isPending || !status?.configured}
+          >
+            <Zap className="w-3.5 h-3.5" />
+            {campaignMutation.isPending ? "Sending… (46 emails, ~17s)" : "Send All 46 Now"}
+          </Button>
+        </div>
+
+        {/* Campaign results */}
+        {campaignResult && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-3 text-sm">
+              <span className="text-green-600 font-medium">{campaignResult.sent} sent</span>
+              {campaignResult.failed > 0 && (
+                <span className="text-red-500 font-medium">{campaignResult.failed} failed</span>
+              )}
+              <button
+                className="text-xs text-muted-foreground underline ml-auto"
+                onClick={() => setShowCampaignResults(!showCampaignResults)}
+                data-testid="toggle-campaign-results"
+              >
+                {showCampaignResults ? "hide" : "show"} details
+              </button>
+            </div>
+
+            {showCampaignResults && (
+              <div className="max-h-64 overflow-y-auto space-y-0.5 border border-border rounded p-2">
+                {campaignResult.results.map((r) => (
+                  <div
+                    key={r.id}
+                    data-testid={`campaign-result-${r.id}`}
+                    className="flex items-center gap-2 text-xs font-mono py-0.5"
+                  >
+                    {r.ok ? (
+                      <CheckCircle className="w-3 h-3 text-green-500 shrink-0" />
+                    ) : (
+                      <XCircle className="w-3 h-3 text-red-500 shrink-0" />
+                    )}
+                    <span className="text-muted-foreground w-5 shrink-0">{r.id}</span>
+                    <span className="truncate text-foreground">{r.to}</span>
+                    <span className="text-muted-foreground shrink-0">{r.org}</span>
+                    {r.error && <span className="text-red-400 truncate">{r.error}</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

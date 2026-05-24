@@ -7283,6 +7283,53 @@ export function registerGazetteIntelRoutes(app: express.Express) {
       domain: domain || null,
     });
   });
+
+  app.post("/api/mailer/campaign", requireAuth, async (req, res) => {
+    const { fromEmail, fromName, dryRun } = req.body as {
+      fromEmail?: string;
+      fromName?: string;
+      dryRun?: boolean;
+    };
+    const apiKey = process.env.MAILGUN_API_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    if (!apiKey || !domain) {
+      return res.status(500).json({ error: "Mailgun not configured" });
+    }
+
+    const { CAMPAIGN_CONTACTS } = await import("./mailer-campaign");
+    const FormData = (await import("form-data")).default;
+    const Mailgun = (await import("mailgun.js")).default;
+    const mg = new Mailgun(FormData);
+    const client = mg.client({ username: "api", key: apiKey });
+    const sender = `${fromName || "Samuel Wotton"} <${fromEmail || `hello@ekhokappa.com`}>`;
+
+    const results: { id: number; to: string; org: string; ok: boolean; mgId?: string; error?: string }[] = [];
+
+    for (const contact of CAMPAIGN_CONTACTS) {
+      if (dryRun) {
+        results.push({ id: contact.id, to: contact.to, org: contact.org, ok: true, mgId: "dry-run" });
+        continue;
+      }
+      try {
+        const result = await client.messages.create(domain, {
+          from: sender,
+          to: [contact.to],
+          subject: contact.subject,
+          text: contact.body,
+        });
+        results.push({ id: contact.id, to: contact.to, org: contact.org, ok: true, mgId: result.id });
+      } catch (err: any) {
+        const detail = err?.response?.body?.message || err?.message || String(err);
+        results.push({ id: contact.id, to: contact.to, org: contact.org, ok: false, error: detail });
+      }
+      // 350ms stagger to stay well within Mailgun's rate limits
+      await new Promise((r) => setTimeout(r, 350));
+    }
+
+    const sent = results.filter((r) => r.ok).length;
+    const failed = results.filter((r) => !r.ok).length;
+    res.json({ ok: true, sent, failed, total: results.length, results });
+  });
 }
 
 
