@@ -1,4 +1,5 @@
 import { Switch, Route } from "wouter";
+import { useState, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -11,6 +12,7 @@ import { DossierProvider, useDossier } from "@/lib/dossier";
 import { useArrowSequence } from "@/hooks/useArrowSequence";
 import { I18nProvider } from "@/lib/i18n";
 import NotFound from "@/pages/not-found";
+import LoginPage from "@/pages/login";
 import CommandCenterPage from "@/pages/command-center";
 import DashboardPage from "@/pages/overview";
 import EventsPage from "@/pages/events";
@@ -198,6 +200,31 @@ function AppWithDossier() {
   );
 }
 
+function AuthGate({ children }: { children: React.ReactNode }) {
+  const [authState, setAuthState] = useState<"loading" | "authenticated" | "unauthenticated">("loading");
+
+  useEffect(() => {
+    fetch("/api/auth/status", { credentials: "include" })
+      .then(r => r.json())
+      .then(d => setAuthState(d.authenticated ? "authenticated" : "unauthenticated"))
+      .catch(() => setAuthState("unauthenticated"));
+  }, []);
+
+  if (authState === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <span className="text-sm text-muted-foreground">Loading…</span>
+      </div>
+    );
+  }
+
+  if (authState === "unauthenticated") {
+    return <LoginPage />;
+  }
+
+  return <>{children}</>;
+}
+
 function App() {
   return (
     <ThemeProvider>
@@ -205,7 +232,9 @@ function App() {
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <AppWithDossier />
+            <AuthGate>
+              <AppWithDossier />
+            </AuthGate>
           </TooltipProvider>
         </QueryClientProvider>
       </I18nProvider>

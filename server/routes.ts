@@ -2,6 +2,7 @@ import express, { type Express } from "express";
 import { createServer, type Server } from "http";
 import * as fs from "fs";
 import * as nodePath from "path";
+import { requireAuth } from "./middleware/auth";
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
@@ -200,7 +201,7 @@ export async function registerRoutes(
     res.sendFile(scriptPath);
   });
 
-  app.use("/evidence", express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
+  app.use("/evidence", requireAuth, express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".mp4")) {
         res.setHeader("Content-Type", "video/mp4");
@@ -209,7 +210,7 @@ export async function registerRoutes(
     },
   }));
 
-  app.get("/api/evidence/videos", (_req, res) => {
+  app.get("/api/evidence/videos", requireAuth, (_req, res) => {
     const evidenceDir = nodePath.resolve(process.cwd(), "public/evidence");
     if (!fs.existsSync(evidenceDir)) return res.json([]);
     const files = fs.readdirSync(evidenceDir)
@@ -1804,6 +1805,32 @@ export async function registerRoutes(
   });
 
   // ─── Google OAuth 2.0 Auth Flow ──────────────────────────────────────────────
+  app.post("/api/auth/login", (req, res) => {
+    const adminPassword = process.env.KAPPA_ADMIN_PASSWORD;
+    if (!adminPassword) {
+      return res.status(503).json({ error: "Server authentication not configured — set KAPPA_ADMIN_PASSWORD" });
+    }
+    const { password } = req.body;
+    if (!password || password !== adminPassword) {
+      return res.status(401).json({ error: "Invalid access key" });
+    }
+    req.session.authenticated = true;
+    req.session.save(err => {
+      if (err) return res.status(500).json({ error: "Session error" });
+      res.json({ ok: true });
+    });
+  });
+
+  app.post("/api/auth/logout", (req, res) => {
+    req.session.destroy(() => {
+      res.json({ ok: true });
+    });
+  });
+
+  app.get("/api/auth/status", (req, res) => {
+    res.json({ authenticated: req.session?.authenticated === true });
+  });
+
   app.get("/api/auth/google", (_req, res) => {
     const url = buildAuthUrl();
     res.redirect(url);
@@ -2543,7 +2570,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/research/sessions", async (_req, res) => {
+  app.get("/api/research/sessions", requireAuth, async (_req, res) => {
     try {
       const sessions = await storage.getResearchSessions();
       res.json(sessions);
@@ -2553,7 +2580,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/research/sessions/:id", async (req, res) => {
+  app.get("/api/research/sessions/:id", requireAuth, async (req, res) => {
     try {
       const session = await storage.getResearchSession(req.params.id);
       if (!session) return res.status(404).json({ error: "Session not found" });
@@ -2659,7 +2686,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/research/findings/:sessionId", async (req, res) => {
+  app.get("/api/research/findings/:sessionId", requireAuth, async (req, res) => {
     try {
       const findings = await storage.getResearchFindings(req.params.sessionId);
       res.json(findings);
@@ -3920,7 +3947,7 @@ export async function registerRoutes(
   // BETTERCAP BRIDGE — Multi-Instance Management
   // ═══════════════════════════════════════════════════════════════
 
-  app.get("/api/bettercap/instances", (_req, res) => {
+  app.get("/api/bettercap/instances", requireAuth, (_req, res) => {
     const instances = getInstances();
     const hasLocal = instances.some((i: any) => i.id === "kappa-local");
     if (!hasLocal) {
@@ -3939,7 +3966,7 @@ export async function registerRoutes(
     res.json(instances);
   });
 
-  app.post("/api/bettercap/instances", (req, res) => {
+  app.post("/api/bettercap/instances", requireAuth, (req, res) => {
     const { name, host, port, scheme, username, password } = req.body;
     if (!name || !host || !port || !username || !password) {
       return res.status(400).json({ error: "Missing required fields: name, host, port, username, password" });
@@ -3948,12 +3975,12 @@ export async function registerRoutes(
     res.json(instance);
   });
 
-  app.delete("/api/bettercap/instances/:id", (req, res) => {
+  app.delete("/api/bettercap/instances/:id", requireAuth, (req, res) => {
     const removed = removeInstance(req.params.id);
     res.json({ ok: removed });
   });
 
-  app.get("/api/bettercap/instances/:id/session", async (req, res) => {
+  app.get("/api/bettercap/instances/:id/session", requireAuth, async (req, res) => {
     if (req.params.id === "kappa-local") {
       return res.json(getLocalSession());
     }
@@ -3967,7 +3994,7 @@ export async function registerRoutes(
     res.json(session);
   });
 
-  app.get("/api/bettercap/instances/:id/events", async (req, res) => {
+  app.get("/api/bettercap/instances/:id/events", requireAuth, async (req, res) => {
     if (req.params.id === "kappa-local") {
       return res.json(getLocalEvents());
     }
@@ -3976,7 +4003,7 @@ export async function registerRoutes(
     res.json(events);
   });
 
-  app.post("/api/bettercap/instances/:id/command", async (req, res) => {
+  app.post("/api/bettercap/instances/:id/command", requireAuth, async (req, res) => {
     const { cmd } = req.body;
     if (!cmd) return res.status(400).json({ error: "Missing cmd field" });
     if (req.params.id === "kappa-local") {
@@ -3986,14 +4013,14 @@ export async function registerRoutes(
     res.json(result);
   });
 
-  app.get("/api/bettercap/instances/:id/history", (req, res) => {
+  app.get("/api/bettercap/instances/:id/history", requireAuth, (req, res) => {
     if (req.params.id === "kappa-local") {
       return res.json([]);
     }
     res.json(getCommandHistory(req.params.id));
   });
 
-  app.get("/api/bettercap/instances/:id/summary", (req, res) => {
+  app.get("/api/bettercap/instances/:id/summary", requireAuth, (req, res) => {
     if (req.params.id === "kappa-local") {
       const s = getLocalSession();
       return res.json({
@@ -4171,7 +4198,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/evidence-chain/timeline", async (req, res) => {
+  app.get("/api/evidence-chain/timeline", requireAuth, async (req, res) => {
     try {
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 100;
       const from = req.query.from ? new Date(req.query.from as string) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
@@ -4202,7 +4229,7 @@ export async function registerRoutes(
     }
   });
 
-  app.get("/api/evidence-chain/export", async (req, res) => {
+  app.get("/api/evidence-chain/export", requireAuth, async (req, res) => {
     try {
       const incidentsList = await storage.getIncidents(500);
       const events = await storage.getRecentSignalEvents(200);
@@ -4560,7 +4587,7 @@ done
 
   // ── Fleet Tracker — KAPPA UI read routes ─────────────────────────────────
 
-  app.get("/api/tracker/status", async (_req, res) => {
+  app.get("/api/tracker/status", requireAuth, async (_req, res) => {
     try {
       const [devices, alerts] = await Promise.all([
         getTrackerDevices(),
@@ -4581,7 +4608,7 @@ done
     } catch (err: any) { res.status(500).json({ error: err.message }); }
   });
 
-  app.get("/api/tracker/stats", async (_req, res) => {
+  app.get("/api/tracker/stats", requireAuth, async (_req, res) => {
     try {
       const devices = await getTrackerDevices();
       const total = devices.length;
@@ -4593,7 +4620,7 @@ done
     } catch (err: any) { res.status(500).json({ error: err.message }); }
   });
 
-  app.get("/api/tracker/devices", async (req, res) => {
+  app.get("/api/tracker/devices", requireAuth, async (req, res) => {
     try {
       const type = req.query.type as string | undefined;
       const online = req.query.online !== undefined ? req.query.online === "true" : undefined;
@@ -4604,7 +4631,7 @@ done
     }
   });
 
-  app.get("/api/tracker/devices/:deviceId", async (req, res) => {
+  app.get("/api/tracker/devices/:deviceId", requireAuth, async (req, res) => {
     try {
       const device = await getTrackerDevice(req.params.deviceId);
       if (!device) return res.status(404).json({ error: "Device not found" });
@@ -4614,7 +4641,7 @@ done
     }
   });
 
-  app.get("/api/tracker/alerts", async (req, res) => {
+  app.get("/api/tracker/alerts", requireAuth, async (req, res) => {
     try {
       const alerts = await getTrackerAlerts({
         deviceId: req.query.deviceId as string,
@@ -4628,7 +4655,7 @@ done
     }
   });
 
-  app.get("/api/tracker/alerts/active", async (_req, res) => {
+  app.get("/api/tracker/alerts/active", requireAuth, async (_req, res) => {
     try {
       const alerts = await getActiveAlerts();
       res.json(alerts);
@@ -4646,7 +4673,7 @@ done
     }
   });
 
-  app.get("/api/tracker/sensors/:deviceId", async (req, res) => {
+  app.get("/api/tracker/sensors/:deviceId", requireAuth, async (req, res) => {
     try {
       const readings = await getDeviceSensors(req.params.deviceId, {
         type: req.query.type as string,
@@ -4659,7 +4686,7 @@ done
     }
   });
 
-  app.get("/api/tracker/sensors/:deviceId/latest", async (req, res) => {
+  app.get("/api/tracker/sensors/:deviceId/latest", requireAuth, async (req, res) => {
     try {
       const latest = await getDeviceLatestSensors(req.params.deviceId);
       res.json(latest);
@@ -4668,7 +4695,7 @@ done
     }
   });
 
-  app.get("/api/tracker/heartbeat/:deviceId/history", async (req, res) => {
+  app.get("/api/tracker/heartbeat/:deviceId/history", requireAuth, async (req, res) => {
     try {
       const hours = req.query.hours ? parseInt(req.query.hours as string) : 24;
       const limit = req.query.limit ? parseInt(req.query.limit as string) : 1000;
@@ -4703,7 +4730,7 @@ done
     });
   });
 
-  app.get("/api/tracker/bulk-status", async (_req, res) => {
+  app.get("/api/tracker/bulk-status", requireAuth, async (_req, res) => {
     try {
       const statuses = await getBulkStatus();
       res.json(statuses);
@@ -4712,7 +4739,7 @@ done
     }
   });
 
-  app.get("/api/tracker/devices/:deviceId/health", async (req, res) => {
+  app.get("/api/tracker/devices/:deviceId/health", requireAuth, async (req, res) => {
     try {
       const health = await getDeviceHealthScore(req.params.deviceId);
       if (!health) return res.status(404).json({ error: "Device not found or health unavailable" });
@@ -4722,7 +4749,7 @@ done
     }
   });
 
-  app.get("/api/tracker/commands/log", async (req, res) => {
+  app.get("/api/tracker/commands/log", requireAuth, async (req, res) => {
     try {
       const log = await getCommandLog(
         req.query.deviceId as string,
@@ -4734,7 +4761,7 @@ done
     }
   });
 
-  app.get("/api/tracker/uptime/:deviceId/history", async (req, res) => {
+  app.get("/api/tracker/uptime/:deviceId/history", requireAuth, async (req, res) => {
     try {
       const hours = req.query.hours ? parseInt(req.query.hours as string) : 48;
       const history = await getUptimeHistory(req.params.deviceId, hours);
@@ -4744,7 +4771,7 @@ done
     }
   });
 
-  app.get("/api/tracker/sensors/:deviceId/thresholds", async (req, res) => {
+  app.get("/api/tracker/sensors/:deviceId/thresholds", requireAuth, async (req, res) => {
     try {
       const thresholds = await getSensorThresholds(req.params.deviceId);
       res.json(thresholds);

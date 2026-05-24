@@ -1,4 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
+import session from "express-session";
+import crypto from "crypto";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
@@ -23,6 +25,17 @@ app.use(
 );
 
 app.use(express.urlencoded({ extended: false }));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || crypto.randomBytes(32).toString("hex"),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: 12 * 60 * 60 * 1000,
+  },
+}));
 
 // Serve public/scripts/ at /scripts before any route or Vite catch-all, in all environments
 app.get("/scripts/:filename", (req, res) => {
@@ -50,25 +63,23 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
+const SENSITIVE_API_PREFIXES = [
+  "/api/research/",
+  "/api/evidence",
+  "/api/evidence-chain/",
+  "/api/bettercap/",
+  "/api/tracker/",
+];
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse: Record<string, any> | undefined = undefined;
-
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
 
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
-      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-      }
-
+      const isSensitive = SENSITIVE_API_PREFIXES.some(p => path.startsWith(p));
+      const logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms${isSensitive ? "" : ""}`;
       log(logLine);
     }
   });
@@ -227,12 +238,12 @@ app.use((req, res, next) => {
     }));
   }
 
-  // Serve public/evidence/ at /evidence — video & audio forensic files
+  // Serve public/evidence/ at /evidence — video & audio forensic files (auth-gated)
   const publicEvidenceDir = path.join(process.cwd(), "public", "evidence");
   if (fs.existsSync(publicEvidenceDir)) {
-    app.use("/evidence", express.static(publicEvidenceDir, {
+    const { requireAuth: evidenceAuth } = await import("./middleware/auth");
+    app.use("/evidence", evidenceAuth, express.static(publicEvidenceDir, {
       setHeaders: (res, filePath) => {
-        res.setHeader("Access-Control-Allow-Origin", "*");
         if (filePath.endsWith(".mp4") || filePath.endsWith(".mov")) {
           res.setHeader("Content-Type", "video/mp4");
           res.setHeader("Accept-Ranges", "bytes");
