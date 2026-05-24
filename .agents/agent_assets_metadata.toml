@@ -95,3 +95,9 @@ id = "hiw6mWgD2SChbCTWVhrl9"
 uri = "file://public/pochote/drone_fft_report_NR14.json"
 type = "unspecified"
 title = "DRONE-FFT-NR14-001 — Forensic Report"
+
+[[outputs]]
+id = "TDtnuABdZtMjejvRvFq7S"
+uri = "file://docs/legal-submissions/AG_Email_FiscalGeneral_CR.md"
+type = "text"
+title = "AG Email — Fiscal General CR (Draft)"
