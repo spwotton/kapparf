@@ -35,6 +35,7 @@ import {
   Mic,
   Camera,
   AlertTriangle,
+  Film,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -178,6 +179,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.memoryCortex", fallback: "Memory Cortex", url: "/memory", icon: Database },
       { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },
       { titleKey: "sidebar.omegaGos", fallback: "Ω-GOS 7/4 LNN", url: "/omega-gos", icon: Atom },
+      { titleKey: "sidebar.reel", fallback: "Ω-REEL", url: "/reel", icon: Film },
     ],
   },
   {

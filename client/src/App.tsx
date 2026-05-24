@@ -66,6 +66,7 @@ import GazetteRefinerPage from "@/pages/gazette-refiner";
 import HyperobjectsPage from "@/pages/hyperobjects";
 import AtlasObservatoryPage from "@/pages/atlas-observatory";
 import SetecomExposePage from "@/pages/setecom-expose";
+import ReelPage from "@/pages/reel";
 
 function Router() {
   return (
@@ -118,6 +119,7 @@ function Router() {
       <Route path="/hyperobjects" component={HyperobjectsPage} />
       <Route path="/atlas" component={AtlasObservatoryPage} />
       <Route path="/setecom" component={SetecomExposePage} />
+      <Route path="/reel" component={ReelPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -159,6 +159,7 @@ import {
   initGazetteRefiner,
   CONSTITUTION as GAZETTE_CONSTITUTION,
 } from "./gazette-refiner";
+import { reelRouter } from "./reel-routes";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -186,6 +187,8 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+  app.use("/api/reel", reelRouter);
 
   app.get("/dl/kappa_capture.sh", (_req, res) => {
     const scriptPath = nodePath.resolve(process.cwd(), "kappa_tshark_capture.sh");

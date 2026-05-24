@@ -436,8 +436,17 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
           ))}
         </div>
 
-        <div className="border-t border-gray-200 px-6 py-4">
+        <div className="border-t border-gray-200 px-6 py-4 flex items-center justify-between gap-3 flex-wrap">
           <ShareBar article={article}/>
+          <Link
+            href={makeReelUrl(article)}
+            onClick={() => makeReelUrl(article)}
+            className="shrink-0 inline-flex items-center gap-1.5 text-[10px] font-black font-sans tracking-[0.15em] uppercase text-gray-500 hover:text-gray-900 border border-gray-300 hover:border-gray-700 px-3 py-1.5 transition-colors"
+            data-testid={`button-make-reel-modal-${article.id}`}
+          >
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M17 7h5M2 17h5M17 17h5"/></svg>
+            Make Reel
+          </Link>
         </div>
 
         <div className="border-t border-gray-100 bg-gray-50 px-6 py-3">
@@ -1078,6 +1087,20 @@ function GoldenSpiral({ className, width = 90, height = 90 }: { className?: stri
   );
 }
 
+function makeReelUrl(a: { id: string; headline: string; subhead?: string; body: string; author: string; date: string }) {
+  try {
+    sessionStorage.setItem("reel_article", JSON.stringify({
+      id: a.id,
+      headline: a.headline,
+      subhead: a.subhead ?? "",
+      body: a.body,
+      author: a.author,
+      date: a.date,
+    }));
+  } catch { /* ignore quota errors */ }
+  return `/reel?articleId=${encodeURIComponent(a.id)}&title=${encodeURIComponent(a.headline)}&subhead=${encodeURIComponent(a.subhead ?? "")}`;
+}
+
 export default function GooseGazettePage() {
   const [, navigate] = useLocation();
   const [selected, setSelected] = useState<Article | null>(null);
@@ -1408,8 +1431,17 @@ export default function GooseGazettePage() {
                 <p className="text-gray-400 text-xs font-sans mt-4">
                   {cover.author} &nbsp;·&nbsp; {cover.date}
                 </p>
-                <div className="mt-6">
+                <div className="mt-6 flex items-center gap-3">
                   <span className="text-white border-b border-white pb-0.5 text-sm font-bold">Read story →</span>
+                  <Link
+                    href={makeReelUrl(cover)}
+                    onClick={(e) => { e.stopPropagation(); makeReelUrl(cover); }}
+                    className="inline-flex items-center gap-1 text-[9px] font-black font-sans tracking-[0.15em] uppercase text-white/70 hover:text-white border border-white/30 hover:border-white px-2 py-1 transition-colors"
+                    data-testid={`button-make-reel-cover-${cover.id}`}
+                  >
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M17 7h5M2 17h5M17 17h5"/></svg>
+                    Make Reel
+                  </Link>
                 </div>
               </div>
 
@@ -1453,6 +1485,15 @@ export default function GooseGazettePage() {
                         <BH53Badge id={BH53_THREAD_MAP[a._intel.threads[0]]} />
                       </div>
                     )}
+                    <Link
+                      href={makeReelUrl(a)}
+                      onClick={(e) => { e.stopPropagation(); makeReelUrl(a); }}
+                      className="mt-1.5 inline-flex items-center gap-1 text-[9px] font-black font-sans tracking-[0.15em] uppercase text-gray-400 hover:text-gray-800 border border-gray-200 hover:border-gray-500 px-2 py-0.5 transition-colors"
+                      data-testid={`button-make-reel-${a.id}`}
+                    >
+                      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M17 7h5M2 17h5M17 17h5"/></svg>
+                      Make Reel
+                    </Link>
                   </div>
                 </div>
               </article>
