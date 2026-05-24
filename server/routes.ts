@@ -160,6 +160,28 @@ import {
   CONSTITUTION as GAZETTE_CONSTITUTION,
 } from "./gazette-refiner";
 
+import type { Request, Response, NextFunction } from "express";
+
+function requireWriteAuth(req: Request, res: Response, next: NextFunction): void {
+  const writeKey = process.env.KAPPA_WRITE_KEY;
+  if (!writeKey) {
+    const ip = req.ip || req.socket?.remoteAddress || "";
+    const isLocal = ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1";
+    if (!isLocal) {
+      res.status(403).json({ error: "Write operations require authentication. Set KAPPA_WRITE_KEY and pass it via X-Kappa-Key header." });
+      return;
+    }
+    next();
+    return;
+  }
+  const provided = req.headers["x-kappa-key"];
+  if (!provided || provided !== writeKey) {
+    res.status(403).json({ error: "Forbidden: invalid or missing X-Kappa-Key header." });
+    return;
+  }
+  next();
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
@@ -3987,7 +4009,7 @@ export async function registerRoutes(
     res.json(getCortexStatus());
   });
 
-  app.post("/api/research-cortex/index", async (_req, res) => {
+  app.post("/api/research-cortex/index", requireWriteAuth, async (_req, res) => {
     try {
       const result = await indexAllDocuments();
       res.json(result);
@@ -4011,7 +4033,7 @@ export async function registerRoutes(
     res.json(doc);
   });
 
-  app.put("/api/research-cortex/documents/:docId", (req, res) => {
+  app.put("/api/research-cortex/documents/:docId", requireWriteAuth, (req, res) => {
     const { content } = req.body;
     if (!content) return res.status(400).json({ error: "Missing content" });
     const ok = writeDocumentContent(req.params.docId, content);
@@ -4019,7 +4041,7 @@ export async function registerRoutes(
     res.json({ success: true });
   });
 
-  app.post("/api/research-cortex/documents", (req, res) => {
+  app.post("/api/research-cortex/documents", requireWriteAuth, (req, res) => {
     const { filename, content } = req.body;
     if (!filename || !content) return res.status(400).json({ error: "Missing filename or content" });
     const doc = createDocument(filename, content);
@@ -4086,7 +4108,7 @@ export async function registerRoutes(
     }
   });
 
-  app.post("/api/incidents", async (req, res) => {
+  app.post("/api/incidents", requireWriteAuth, async (req, res) => {
     try {
       const { insertIncidentSchema } = await import("@shared/schema");
       const parsed = insertIncidentSchema.safeParse(req.body);
@@ -4119,7 +4141,7 @@ export async function registerRoutes(
     }
   });
 
-  app.patch("/api/incidents/:id", async (req, res) => {
+  app.patch("/api/incidents/:id", requireWriteAuth, async (req, res) => {
     try {
       const existing = await storage.getIncident(req.params.id);
       if (!existing) return res.status(404).json({ error: "Not found" });
@@ -4135,7 +4157,7 @@ export async function registerRoutes(
     }
   });
 
-  app.delete("/api/incidents/:id", async (req, res) => {
+  app.delete("/api/incidents/:id", requireWriteAuth, async (req, res) => {
     try {
       const existing = await storage.getIncident(req.params.id);
       if (!existing) return res.status(404).json({ error: "Not found" });
@@ -4316,7 +4338,7 @@ export async function registerRoutes(
     }
   });
 
-  app.post("/api/memory/store", async (req, res) => {
+  app.post("/api/memory/store", requireWriteAuth, async (req, res) => {
     try {
       const { category, title, content, metadata, source, importance } = req.body;
       if (!category || !title || !content) {
@@ -4361,7 +4383,7 @@ export async function registerRoutes(
     }
   });
 
-  app.delete("/api/memory/:id", async (req, res) => {
+  app.delete("/api/memory/:id", requireWriteAuth, async (req, res) => {
     try {
       const deleted = await deleteMemory(req.params.id);
       res.json({ deleted });
@@ -4370,7 +4392,7 @@ export async function registerRoutes(
     }
   });
 
-  app.patch("/api/memory/:id/importance", async (req, res) => {
+  app.patch("/api/memory/:id/importance", requireWriteAuth, async (req, res) => {
     try {
       const { importance } = req.body;
       if (importance === undefined) return res.status(400).json({ error: "importance is required" });
@@ -4381,7 +4403,7 @@ export async function registerRoutes(
     }
   });
 
-  app.post("/api/memory/ingest", async (_req, res) => {
+  app.post("/api/memory/ingest", requireWriteAuth, async (_req, res) => {
     try {
       const results = await ingestAllQuantumFiles();
       res.json(results);

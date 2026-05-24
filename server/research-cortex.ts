@@ -568,14 +568,23 @@ export function writeDocumentContent(docId: string, content: string): boolean {
 }
 
 export function createDocument(filename: string, content: string): CortexDocument {
-  const filePath = nodePath.join(DOCS_DIR, filename);
+  const safeName = nodePath.basename(filename);
+  if (!safeName || safeName !== filename || safeName.startsWith(".")) {
+    throw new Error("Invalid filename: must be a plain basename with no path separators or traversal sequences");
+  }
+  const filePath = nodePath.join(DOCS_DIR, safeName);
+  const resolvedPath = nodePath.resolve(filePath);
+  const resolvedDocs = nodePath.resolve(DOCS_DIR);
+  if (!resolvedPath.startsWith(resolvedDocs + nodePath.sep) && resolvedPath !== resolvedDocs) {
+    throw new Error("Path traversal detected: filename resolves outside the documents directory");
+  }
   fs.writeFileSync(filePath, content, "utf-8");
   const stat = fs.statSync(filePath);
-  const docId = filename.replace(/\.md$/, "");
+  const docId = safeName.replace(/\.md$/, "");
   const doc: CortexDocument = {
     id: docId,
-    filename,
-    title: extractTitle(content, filename),
+    filename: safeName,
+    title: extractTitle(content, safeName),
     sizeBytes: stat.size,
     wordCount: countWords(content),
     lastModified: stat.mtimeMs,
