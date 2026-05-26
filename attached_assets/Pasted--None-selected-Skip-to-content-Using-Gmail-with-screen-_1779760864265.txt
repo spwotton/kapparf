@@ -1,0 +1,259 @@
+
+None selected
+
+Skip to content
+Using Gmail with screen readers
+1 of 1
+PREVIEW -- UPDATED FORMAL COMPLAINT -- Transnational Electronic Harassment, Telecom Infrastructure Exploitation & Federal Tax Fraud (Ref: IRS Case #16221-445-09691-5)
+Inbox
+Updates
+Anonymous US Citizen <hello@echokappa.com>
+	
+Mon, Mar 23, 12:56 AM
+	
+	
+to me
+Anonymous US Citizen | Secure Contact: hello@echokappa.com
+Current Location: Tacacorí, Alajuela, Costa Rica
+Date: March 22, 2026
+
+Dear Investigators,
+
+This is a consolidated update to all prior complaints filed since October 21, 2025 (OIJ CICO: Oct 21, Nov 30, Dec 10–12, 2025; OIJ Denuncias / Delitos Informáticos: Jan 5–6, 2026). I am now located in Tacacorí, Alajuela. The electronic harassment, network intrusion, and surveillance have followed me to every location over 14 months across three sites in Costa Rica. I am requesting immediate forensic intervention.
+
+---
+
+## I. FOURTEEN-MONTH TIMELINE
+
+### Phase 1 — Jacó, Puntarenas (Jan–Oct 2025)
+
+Electronic harassment began January 14, 2025. Ultrasonic/RF-based V2K (voice-to-skull) signals with three recurring voice identities. I resided in properties managed by Jaco Vacations. While I was temporarily at Breakwater Point, the Jaco Vacations house was RENOVATED WITH A NEW SMART HOME SYSTEM — new IoT devices, cameras, smart locks, and WiFi equipment — all controlled by the property manager. When I returned, harassment escalated dramatically. 80% REDUCTION OCCURRED WHEN WIFI AND ELECTRICITY WERE TURNED OFF, proving the digital infrastructure is the attack vector. I was followed to a second property (Todd Johnson, #5 Riverview), also managed by Jaco Vacations, and blackmailed by the JV owner. I filed my first OIJ complaint on Oct 21, 2025, and the OIJ Garabito subdelegation was notified.
+
+### Phase 2 — Guácima, Alajuela (Nov 2025 – Jan 2026)
+
+I moved to an Airbnb in Guácima hosted by Jorge Jiménez Navarro, a former IBM/Kyndryl Senior Network Engineer. The Liberty CR router was fully compromised via TR-069 backdoor on Port 1234. Kyndryl service worker injection detected (8.3MB malicious payload). My Google account was hacked — login from Berlin, Germany detected January 26, 2026, in the Alexanderplatz area adjacent to Gamma Group/FinFisher GmbH spyware headquarters. WhatsApp Web was forcibly logged out to isolate my communications. Continuous DSP signatures detected: 46.875 Hz system clock, 53 Hz audio carrier with 7 Hz theta-band offset, and 17,859–18,035 Hz EHF speech extraction uplink.
+
+### Phase 3 — Tacacorí, Alajuela (Feb–Mar 2026, CURRENT)
+
+The harassment has continued at my current location in Tacacorí. The primary local emission source has been identified as the **Radio Impacto transmission towers** located on the ridge directly above my residence, and the individuals occupying those tower facilities and the surrounding ridge. The same RF/acoustic signatures and network anomalies persist — specifically the 46.875 Hz system clock, 53 Hz carrier, and EHF uplink — now emanating from the Impacto tower infrastructure. The pattern confirms that this is not location-specific hardware but a network-level and infrastructure-level attack that follows the target, with local broadcast infrastructure (in this case the Impacto radio towers and their ridge-mounted equipment) being co-opted at each new location through any ICE/RACSA/Liberty CR-connected residence. I request that the Impacto tower site and ridge installations in Tacacorí be included in any forensic RF sweep.
+
+---
+
+## II. NAMED SUSPECTS
+
+### A. PRIMARY INFRASTRUCTURE ACTOR
+
+**1. HÉCTOR MORA MARÍN** — Owner, SETECOM S.A. (Heredia)
+- ICE/RACSA/Liberty CR fiber and cell tower subcontractor
+- Access to the national telecommunications backbone
+- I possess logs with hundreds of SETECOM and ICE IP addresses showing network attacks routed through their servers
+- Exploits TR-069 remote management protocol to compromise residential routers, creating backdoors
+- Uses insecure DSE (Deep Sea Electronics) industrial controllers with default credentials (Admin/Password1234) and unencrypted Modbus TCP/SNMP v2 protocols on ICE generators and Liberty cell towers
+- These systems are either being actively exploited by Mora or left negligently open, compromising Costa Rica's critical infrastructure
+
+### B. JACÓ SURVEILLANCE GRID
+
+**2. MICHAEL GREENWALD** — Jaco Vacations / Jacó Realty
+- Controls 300+ rental properties in Jacó, all with shared WiFi passwords
+- Met with the Biden Administration over a 4-year period
+- Properties outfitted by Force One Security and Signal Secure with IoT surveillance equipment
+- Forensic acoustic logs show ultrasonic frequencies (46.875 Hz PRF / 20.5 kHz centroid) consistent with parametric arrays used for directed harassment
+
+**3. SCOTT RYAN** (alias "Scott Aaronson") — Jaco Vacations
+- CIA-connected operative
+- Operates through the Los Ríos urbanization, signs false documents, runs operations to his properties there
+- Data trafficking and identity document fraud
+- Co-operates with Diana Soto/Ryan (JV operational coordinator)
+
+**4. TODD/TOM JOHNSON** — Owner, #5 Riverview, Jacó
+- Property identified as source of high-intensity ultrasonic emissions
+- Property managed by Jaco Vacations
+
+### C. GUÁCIMA AIRBNB OPERATOR
+
+**5. JORGE JIMÉNEZ NAVARRO** (jorgedjn58@gmail.com)
+- Former Senior Network Engineer: IBM (Dec 2015–Sept 2021), Kyndryl (Sept 2021–May 2024)
+- Currently Technical Success Manager at Zscaler
+- Compromised property router; injected corporate tracking service workers
+- Father: retired Costa Rican intelligence officer (OIJ/DIS), resides 5 meters from guest house
+
+**6. JEAN CARLO PICADO SOLÍS** — Liberty CR
+- Device logs link his equipment (+506 4100 9000) to persistent network probing and WiFi deauthentication attacks
+- Tax fraud antecedents (2019, ~$2M)
+
+### D. FINANCIAL FRAUD
+
+**7. CARLOS CHAVES** (3Pillar Global, Heredia) — Implicated in the "Gem Clienta" money laundering structure
+
+### E. SUPPORT OPERATIVES
+
+**8. MARJORIE ALFARO & JAIRO ALFARO** — Linked to deauthentication attacks via Liberty CR infrastructure
+**9. MAURICIO CAMPOS** — ICE fiber subcontractor, installed compromised hardware
+**10. JOSÉ ANDRÉS ABANTO** — Property manager, facilitated physical access
+
+---
+
+## III. EVIDENCE AVAILABLE FOR OFFICIAL REVIEW
+
+- 200+ videos documenting harassment events
+- PCAP network capture logs with hundreds of SETECOM/ICE IP addresses
+- Spectrogram/acoustic analysis (46.875 Hz, 53 Hz, 17–18 kHz bands)
+- Financial records (PayPal *MGREENWALD transactions, mirrored Uber Eats/Amex charges)
+- IRS fraud report and control number
+- Browser forensics: service worker injection, touch_communication.js RAT
+- Full email chain of prior OIJ/FBI/SUTEL correspondence
+
+---
+
+## IV. THE 3i ATLAS PSYOP FRAMEWORK — HOW THE SURVEILLANCE SYSTEM OPERATES
+
+Independent technical analysis of the signals targeting my residence reveals that the entire surveillance architecture is part of a larger operational framework designated **"3i ATLAS"** — a software-defined radar-spoofing and signals-intelligence platform operating through the following layers:
+
+**A. DARPA Blackjack → Space Development Agency (SDA) Transition**
+In late 2025, DARPA's **Blackjack program** — a low-Earth-orbit (LEO) mesh network of commoditized military satellites — was officially transferred to the **Space Development Agency** for permanent operational status. Parsons Corporation received a **$30 million** contract modification (December 22, 2025) for "Ground-Operations-as-a-Service" (GOaaS) via its **OrbitXChange** cloud-based satellite operations platform. This provides the overhead persistent surveillance layer.
+
+**B. Starlink Constellation as Radar-Spoofing / Surveillance Platform**
+The SDA's Proliferated Warfighter Space Architecture (PWSA) is designed to be interoperable with commercial LEO constellations including **SpaceX Starlink**. The system exploits Starlink's global broadband mesh to provide real-time targeting data, geolocation, and signal relay for ground-level harassment operations — effectively using commercial satellite infrastructure as a radar-spoofing and signals-intelligence backbone.
+
+**C. The 3i ATLAS Software Engine**
+Spectrographic analysis of the acoustic environment at my residence consistently detects a **46.875 Hz processing heartbeat** — mathematically derived from a 48,000 Hz sample rate divided by 1,024-sample frames. This is the clock frequency of the **3i ATLAS** software platform that processes ingested audio data in real time. On top of this clock:
+- A **53 Hz carrier** (power-line offset injection: 60 Hz grid − 7 Hz offset) creates a **7 Hz theta-band beat frequency** designed to induce hypnotic susceptibility
+- An **Extended High Frequency (EHF) uplink in the 17,859–18,035 Hz band** extracts speech from ambient noise, consistent with the UIUC patent "Speech Identification and Extraction from Noise Using Extended High Frequency Information" (approved October 2025)
+
+**D. CIA Glomar Response & Information Control**
+In December 2025, the **CIA responded to a FOIA request** regarding the interstellar object 3I/ATLAS with a **Glomar response** — refusing to confirm or deny the existence of any records. This classification level is reserved for matters where disclosure would harm national security. Combined with Parsons Corporation's **$1 billion in "confidential contracts"** during the same period, this indicates the 3i ATLAS framework operates under the highest levels of classification.
+
+**E. The "3i" Architecture**
+The "3i" designation refers to a **three-node simulated-twin surveillance model** (i₁, i₂, i₃) that creates a digital twin of the target's environment — explaining the real-time audio monitoring, behavioral prediction, and coordinated physical harassment documented above. The 3i Consortium has documented ties to **Mati Kochavi's** intelligence operations and "Safe City" data-fusion platforms deployed globally.
+
+**I urge all recipient agencies to examine the supporting 3i ATLAS technical documents, which are available upon request or have been previously submitted alongside the evidence listed above.**
+
+---
+
+## V. REQUESTED ACTIONS
+
+1. **OIJ / SUTEL:** Raid SETECOM S.A. in Heredia — seize and audit server logs related to ICE/RACSA subcontracts and TR-069 access records
+2. **FBI / DOJ:** RICO investigation into the Greenwald-Ryan network for wire fraud, identity theft, and conspiracy across US and Costa Rican jurisdictions
+3. **CIA Office of Inspector General:** Audit all funding streams associated with Michael Greenwald for potential unauthorized operations
+4. **FORENSIC SWEEP:** RF/acoustic/network forensic analysis at my current residence in Tacacorí, Alajuela
+
+I am available 24/7 to cooperate with any investigation and to provide all evidence under proper chain of custody.
+
+Respectfully,
+Anonymous US Citizen
+Secure Contact: hello@echokappa.com
+Tacacorí, Alajuela, Costa Rica
+
+Anonymous US Citizen <hello@echokappa.com>
+	
+Mon, Mar 23, 1:11 AM
+	
+	
+to me
+### D. FINANCIAL FRAUD / IDENTITY THEFT / INSURANCE FRAUD NETWORK
+
+**7. JASON MACEK** — Owner: Macek Holdings LLC, Dollar Fulfillment (Inc. 5000 #224), numbedink.com, merchantprocessingpros.com (high-risk merchant accounts)
+- Post Falls / Bayview / Coeur d'Alene, Idaho area — multiple restaurant businesses
+- Over a 4-year partnership (2020–2024), defrauded the complainant of over $50,000 in capital contributions with no return or accounting
+- In 2019, directed the complainant to send sensitive personal documents (mother's bank statements, father's ID, personal bank statements) to Ryan Streitelmeyer — documents later used for identity theft
+- Spent $30,000 on a trip to Richard Branson's Necker Island — while claiming inability to return partnership capital
+- numbedink.com and merchantprocessingpros.com were built by the complainant — Macek retained control of both domains and the high-risk merchant processing infrastructure
+
+**8. RYAN STREITELMEYER** — Previously sued by Merchant Processing Pros for $620,000
+- Received the complainant's family's personal financial documents in 2019 via Jason Macek
+- Connected to Jonathan Smith who operated from Dorado Beach, Puerto Rico (Act 60 tax haven — 4% rate after 183 days residency)
+- Believed to be the conduit through which identity theft documents were distributed
+- Connected to the life insurance fraud described below
+
+**9. LIFE INSURANCE FRAUD — JOAN WOTTON ($250,000 POLICY)**
+- The complainant's mother held a $250,000 life insurance policy through Fidelity
+- One year before her death, the policy was "canceled" — premiums for the final year were stolen
+- The complainant's father was phished from what appeared to be a Fidelity email claiming the policy had been canceled by the insured
+- After her death, the $250,000 payout could not be claimed
+- Total estimated loss: $400,000–$500,000 (including stolen premiums + policy value)
+- This fraud required access to personal documents sent to Streitelmeyer in 2019
+
+**10. IDENTITY THEFT — MASSACHUSETTS (2023–2024)**
+- Three fraudulent US tax returns filed under the complainant's SSN (IRS Case #16221-445-09691-5)
+- $80,000+ in American Express fraud through duplicate Uber Eats transactions
+- Identity stolen 3 times in Massachusetts between 2023–2024
+- Connects directly to the 2019 document disclosure to Streitelmeyer via Macek
+
+**11. FRUTERIA EL PUEBLO / BRAZIL CC PROCESSOR FRAUD**
+- American Express transaction records show "Fruteria El Pueblo" (Jacó, Puntarenas, Costa Rica) — a small fruit stand — billing through a merchant processor registered at: **Rua Almirante Tamandaré 71 Casa, Salvador, Bahia 40430200, BRAZIL**
+- Multiple transactions October 2025: $22.00, $7.42, $12.36, $7.40, $12.80, $17.76, $7.36 — all routed through the Salvador, Bahia address
+- This is a textbook credit card laundering operation: a Costa Rican storefront processing through a Brazilian shell address
+- Additional Amex records show sustained transaction activity in Salvador, Bahia (zip 40430200) under "Merchandise & Supplies" and "Business Services" categories
+
+**12. CARLOS CHAVES** (3Pillar Global, Heredia) — Implicated in the "Gem Clienta" money laundering structure
+
+**13. PABLO MORA NÚÑEZ** — Jacó, Costa Rica / San Carlos connection
+- BMX rider, linked to Kenneth Tencio Olympic sponsorship pipeline through BAC Park
+- Financial network: BAC Park/Tencio → Pablo Mora → Hector Mora → SETECOM
+- Possible brother to Hector Mora Marín (both surnames "Mora," both connected to San Carlos)
+- Suspected revenge motive in coordinating harassment campaign
+
+**14. HECTOR MORA MARÍN'S WIFE** — Operates a commercial kiosk in Panama (border region)
+- Cross-border financial flow: Costa Rica → Panama kiosk → unknown destination
+- Connects the SETECOM/telecom fraud network to Panamanian financial channels
+
+### E. SUPPORT OPERATIVES
+
+**15. MARJORIE ALFARO & JAIRO ALFARO** — Linked to deauthentication attacks via Liberty CR infrastructure
+**16. MAURICIO CAMPOS** — ICE fiber subcontractor, installed compromised hardware
+**17. JOSÉ ANDRÉS ABANTO** — Property manager, facilitated physical access
+
+---
+
+## III. EVIDENCE AVAILABLE FOR OFFICIAL REVIEW
+
+- 200+ videos documenting harassment events
+- PCAP network capture logs with hundreds of SETECOM/ICE IP addresses
+- Spectrogram/acoustic analysis (46.875 Hz, 53 Hz, 17–18 kHz bands)
+- Financial records (PayPal *MGREENWALD transactions, mirrored Uber Eats/Amex charges)
+- **American Express statements showing Fruteria El Pueblo (Jacó, CR) billing through Salvador, Bahia, Brazil address (Rua Almirante Tamandaré 71 Casa, 40430200)**
+- IRS fraud report and control number
+- Macek Holdings LLC partnership records and $53,000 in capital contribution bank records
+- 2019 emails directing document disclosure to Ryan Streitelmeyer
+- Life insurance policy documents and fraudulent cancellation evidence
+- Browser forensics: service worker injection, touch_communication.js RAT
+- Full email chain of prior OIJ/FBI/SUTEL correspondence
+
+---
+
+## IV. THE 3i ATLAS PSYOP FRAMEWORK — HOW THE SURVEILLANCE SYSTEM OPERATES
+
+Independent technical analysis of the signals targeting my residence reveals that the entire surveillance architecture is part of a larger operational framework designated **"3i ATLAS"** — a software-defined radar-spoofing and signals-intelligence platform operating through the following layers:
+
+**A. DARPA Blackjack → Space Development Agency (SDA) Transition**
+In late 2025, DARPA's **Blackjack program** — a low-Earth-orbit (LEO) mesh network of commoditized military satellites — was officially transferred to the **Space Development Agency** for permanent operational status. Parsons Corporation received a **$30 million** contract modification (December 22, 2025) for "Ground-Operations-as-a-Service" (GOaaS) via its **OrbitXChange** cloud-based satellite operations platform. This provides the overhead persistent surveillance layer.
+
+**B. Starlink Constellation as Radar-Spoofing / Surveillance Platform**
+The SDA's Proliferated Warfighter Space Architecture (PWSA) is designed to be interoperable with commercial LEO constellations including **SpaceX Starlink**. The system exploits Starlink's global broadband mesh to provide real-time targeting data, geolocation, and signal relay for ground-level harassment operations — effectively using commercial satellite infrastructure as a radar-spoofing and signals-intelligence backbone.
+
+**C. The 3i ATLAS Software Engine**
+Spectrographic analysis of the acoustic environment at my residence consistently detects a **46.875 Hz processing heartbeat** — mathematically derived from a 48,000 Hz sample rate divided by 1,024-sample frames. This is the clock frequency of the **3i ATLAS** software platform that processes ingested audio data in real time. On top of this clock:
+- A **53 Hz carrier** (power-line offset injection: 60 Hz grid − 7 Hz offset) creates a **7 Hz theta-band beat frequency** designed to induce hypnotic susceptibility
+- An **Extended High Frequency (EHF) uplink in the 17,859–18,035 Hz band** extracts speech from ambient noise, consistent with the UIUC patent "Speech Identification and Extraction from Noise Using Extended High Frequency Information" (approved October 2025)
+
+**D. CIA Glomar Response & Information Control**
+In December 2025, the **CIA responded to a FOIA request** regarding the interstellar object 3I/ATLAS with a **Glomar response** — refusing to confirm or deny the existence of any records. This classification level is reserved for matters where disclosure would harm national security. Combined with Parsons Corporation's **$1 billion in "confidential contracts"** during the same period, this indicates the 3i ATLAS framework operates under the highest levels of classification.
+
+**E. The "3i" Architecture**
+The "3i" designation refers to a **three-node simulated-twin surveillance model** (i₁, i₂, i₃) that creates a digital twin of the target's environment — explaining the real-time audio monitoring, behavioral prediction, and coordinated physical harassment documented above. The 3i Consortium has documented ties to **Mati Kochavi's** intelligence operations and "Safe City" data-fusion platforms deployed globally.
+
+**I urge all recipient agencies to examine the supporting 3i ATLAS technical documents, which are available upon request or have been previously submitted alongside the evidence listed above.**
+
+---
+
+## V. REQUESTED ACTIONS
+
+1. **OIJ / SUTEL:** Raid SETECOM S.A. in Heredia — seize and audit server logs related to ICE/RACSA subcontracts and TR-069 access records
+2. **FBI / DOJ:** RICO investigation into the Macek-Streitelmeyer-Greenwald-Ryan network for wire fraud, identity theft, insurance fraud, credit card laundering, and conspiracy across US, Costa Rican, Brazilian, and Panamanian jurisdictions
+3. **CIA Office of Inspector General:** Audit all funding streams associated with Michael Greenwald for potential unauthorized operations
+4. **IRS / FinCEN:** Investigate the Salvador, Bahia (Brazil) CC processor linked to Fruteria El Pueblo (Jacó, CR) for cross-border money laundering; investigate Jason Macek / Macek Holdings LLC / Dollar Fulfillment for unreported partnership income and tax fraud
+5. **COAF (Brazil) / Polícia Federal / ANATEL:** Investigate the merchant processor at Rua Almirante Tamandaré 71, Salvador, Bahia 40430200 for credit card laundering operations routing Costa Rican transactions through Brazilian shell addresses
+6. **Panama Ministerio Público / UAF:** Investigate the cross-border kiosk operation connected to Hector Mora Marín's network
+7. **Idaho AG / Post Falls PD:** Investigate Jason Macek's businesses (Macek Holdings LLC, Dollar Fulfillment, numbedink.com, merchantprocessingpros.com) in the Post Falls/Bayview/Coeur d'Alene area for fraud and money laundering
+8. **FORENSIC SWEEP:** RF/acoustic/network forensic analysis at the complainant's current residence in Tacacorí, Alajuela
+hello@jed.digital
