@@ -353,7 +353,7 @@ This was not the third location. By May 2026, Echo had lived in approximately tw
 
 **December 28, 2024 — Breakwater:** Echo moved out of Ricos y Famosos and into the condo of **Michael Lipman** at Breakwater, the development on the north end of Jacó. Lipman subsequently moved into Michael Greenwald's personally constructed house at **Hermosa Palms** — a residential development Greenwald owns. Greenwald moved out of his own house to accommodate Lipman. The relationship between Lipman and Greenwald is therefore not transactional but operational.
 
-Lipman's daughter-in-law is engaged or married to **Jesse Talty** — a man Echo knew from Maine, formerly connected to Echo's personal network there through AA, a gym, and a supplement center where Echo worked.
+Lipman's daughter-in-law is engaged or married to **Jesse Talty** — a man Echo knew from Maine, formerly connected to Echo's personal network there through AA, a gym, and a supplement center where Echo worked. Echo spent approximately ten years in the supplement industry — wholesaling and exporting. The dominant national distributor in that space was **Europa Sports Products**, which no longer exists. The supplement industry, like the sober living industry, is a cash-adjacent, relationship-driven network where personal connections move product, money, and people across long distances with minimal paper trail.
 
 The Jesse Talty thread carries a specific weight. **Bill Kimball** — former owner of Hill View Sober Living, where Echo had lived — had a business partner in a mortgage company, a company Echo's network described as operating in a legally ambiguous register. That partner died. In the approximately three months before his death, while his organs were failing, he told Echo directly: Jesse Talty was a very bad person. Stay away from him.
 
@@ -377,7 +377,19 @@ The CDMX thread intersects the JW thread, the financial infrastructure thread, a
 
 Echo's sister recently traveled to Mexico City. She has no current employment. Prior to CDMX, she traveled to Guatemala and Ecuador — both countries with documented JW organizational infrastructure and, in the case of Guatemala, significant historical overlap between religious organizational networks and paramilitary structures. Her travel is noted as a factual sequence, not an inference about motive.
 
-**The Chris Gabriel thread:** Chris Gabriel works for Google AI. He operates in the same regional corridor where Echo's contact at DHS is based. This is noted as a factual proximity, not an inference of coordination.
+**The Chris Gabriel thread:** In 2012, Echo got sober from heroin and moved into **Skip Murphy's sober living** in Portland, Maine. The house manager was **Chris Gabriel**.
+
+Chris Gabriel subsequently moved through Tyler Technologies — where he reportedly earned approximately $800,000 annually — was recruited by Google, relocated to **Broad Alden, New York**, and now sells AI products to government agencies. He operates in the same regional corridor as Echo's contact at DHS.
+
+Gabriel's sponsor in sobriety was **Matt Howe**, manager of a Plymouth-area sober living house. The network Howe and others operated functioned as follows: parents were steered into paying significant sums for their children to spend a month at the Plymouth house, after which the residents were funneled to either Burlington, Vermont or Portland, Maine — into houses operated by people like **Joe Riley** and **Tommy Shepp**, who maintained 18 beds in a three-unit with no tenant rights infrastructure and charged parents approximately $1,800 per month per bed.
+
+Joe Riley was separately charged with purchasing a urine testing laboratory and submitting his own urine to it in order to bill insurance fraudulently. He was later indicted for heroin trafficking.
+
+**Eric Stafford** owned Green Mountain Treatment Centers, where Echo attended treatment twice.
+
+A pattern runs through this network: people connected to it have died. Not all at once, not conspicuously — quietly, in their sleep, overdoses that arrive without obvious cause. This is noted as a pattern of observation, not a specific allegation against any named individual.
+
+Chris Gabriel — house manager, Maine, 2012 → Tyler Technologies → Google → government AI sales, Broad Alden, New York, 2026. The trajectory is documented.
 
 **Hotel Flamboyant / Hotel Pochote Grande:** The crane footage. The Las Palmas analysis. The April 29, 2026 drone at 2:13 AM. All of it happened here, on the north end, within the same two-kilometer corridor.
 
