@@ -349,6 +349,16 @@ This was not the third location. By May 2026, Echo had lived in approximately tw
 
 **The Greenwald Circuit:** Michael Greenwald, operator of Jaco Vacations and developer of 300+ properties across the Jacó region, had been Echo's primary landlord across multiple residences: a house on Madrigal, a house on Sunset Boulevard, a property in Hacienda del Sol, one in Tres Ríos, and Riverwalk. This is not coincidental concentration — it is market capture. When a single operator controls the rental supply across a geographic area, they control where a target sleeps.
 
+The reason Echo is in Costa Rica at all connects to a specific individual — a former Michigan law enforcement officer who became an Amazon seller, sold his business, and relocated to Hermosa Palms, Greenwald's own residential development. Echo has known him since 2012. They have a documented social history — Vegas, shared business dealings — and a real friendship that frayed: a deal went bad, Echo had a confrontation with a woman who is his wife's best friend, and the relationship broke down.
+
+This man is an investor in **Hotel Amavi** in Jacó. He lives inside the Greenwald development. He had direct personal proximity to Greenwald.
+
+At some point during their friendship, while intoxicated, he told Echo that **Michael Greenwald had met with Biden administration officials and the CIA over a period of approximately four years**.
+
+This is reported as hearsay, delivered while the source was drunk, and is unverified. It is placed in the document because the source had the access and proximity to make the claim credible, because Greenwald's position — controlling the dominant share of rental property in a Pacific Coast town that functions as a waypoint for international travelers, retirees, and the social networks documented in this case — is the kind of position that would attract institutional interest, and because the claim, if accurate, would reframe every other Greenwald thread in this document.
+
+It is not argued as fact. It is documented as a disclosure.
+
 **Quebrada Seca:** For two to three months, Echo lived in a property directly across the street from the Jehovah's Witness congregation. The JW property documented in the physical layer dossier — the artificial green screening, the elevated terrace, the RF-transparent camouflage positioned toward the target's residence — was not observed from a distance. It was the neighbor.
 
 **December 28, 2024 — Breakwater:** Echo moved out of Ricos y Famosos and into the condo of **Michael Lipman** at Breakwater, the development on the north end of Jacó. Lipman subsequently moved into Michael Greenwald's personally constructed house at **Hermosa Palms** — a residential development Greenwald owns. Greenwald moved out of his own house to accommodate Lipman. The relationship between Lipman and Greenwald is therefore not transactional but operational.
