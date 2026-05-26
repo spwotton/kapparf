@@ -355,6 +355,16 @@ This was not the third location. By May 2026, Echo had lived in approximately tw
 
 Lipman's daughter-in-law is engaged or married to a man Echo knew from Maine — a former business partner of someone in Echo's personal network.
 
+**The AA Network:** Echo arrived in Jacó sober — forty-five days clean when he met Peralta. The Alcoholics Anonymous community in Jacó is small and tight, as these communities are everywhere: shared vulnerability, shared schedule, known faces, known history. It is also, structurally, a perfect social penetration surface. Membership is public by presence. Attendance is predictable. The emotional bonds formed there are real and load-bearing.
+
+Hermosa Bungalows — where Echo and Peralta first lived together — is owned by a man who has been in AA for a long time. This is documented through the social network, not as accusation.
+
+The cat: Peralta arrived at Echo's house with a cat. The cat disappeared when they moved into the Madrigal house — a Greenwald property. Within days of the move, a kitten appeared behind the trash barrel at the Madrigal address. At the same time, Jairo — Peralta's friend — appeared. The kitten was adopted. Echo cared for it for months, including an injury on barbed wire that caused significant stress and veterinary investment. Peralta eventually gave it away. The recipient was the wife of a man who had been in AA for ten years — his wife had been sober with him for eight of those years before she left him for someone connected to Peralta's social circle. That woman now has the cat and is posting photographs of it on Instagram.
+
+The cat is not the point. The cat is documentation of a chain: an object of emotional investment, attached to the target through an animal bond, transferred through the social network into the hands of someone already inside that network, who is now publicly displaying evidence of the transfer. The chain is verifiable through Instagram timestamps.
+
+**The Chris Gabriel thread:** Chris Gabriel works for Google AI. He operates in the same regional corridor where Echo's contact at DHS is based. This is noted as a factual proximity, not an inference of coordination.
+
 **Hotel Flamboyant / Hotel Pochote Grande:** The crane footage. The Las Palmas analysis. The April 29, 2026 drone at 2:13 AM. All of it happened here, on the north end, within the same two-kilometer corridor.
 
 **April 2026 — Return to Ricos y Famosos:** Echo moved back into Ricos y Famosos. The property had been renovated in his absence.
