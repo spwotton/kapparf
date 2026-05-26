@@ -342,7 +342,40 @@ Echo photographed everything. He left Guácima in February 2026.
 
 ---
 
-## IX. LA FLOR
+## IX. THE CIRCUIT
+*Properties — Jacó, 2023–2026*
+
+This was not the third location. By May 2026, Echo had lived in approximately twenty separate properties across Costa Rica, tracing an arc from the Pacific coast through the Central Valley and back. What follows is not a complete inventory — it is the pattern.
+
+**The Greenwald Circuit:** Michael Greenwald, operator of Jaco Vacations and developer of 300+ properties across the Jacó region, had been Echo's primary landlord across multiple residences: a house on Madrigal, a house on Sunset Boulevard, a property in Hacienda del Sol, one in Tres Ríos, and Riverwalk. This is not coincidental concentration — it is market capture. When a single operator controls the rental supply across a geographic area, they control where a target sleeps.
+
+**Quebrada Seca:** For two to three months, Echo lived in a property directly across the street from the Jehovah's Witness congregation. The JW property documented in the physical layer dossier — the artificial green screening, the elevated terrace, the RF-transparent camouflage positioned toward the target's residence — was not observed from a distance. It was the neighbor.
+
+**December 28, 2024 — Breakwater:** Echo moved out of Ricos y Famosos and into the condo of **Michael Lipman** at Breakwater, the development on the north end of Jacó. Lipman subsequently moved into Michael Greenwald's personally constructed house at **Hermosa Palms** — a residential development Greenwald owns. Greenwald moved out of his own house to accommodate Lipman. The relationship between Lipman and Greenwald is therefore not transactional but operational.
+
+Lipman's daughter-in-law is engaged or married to a man Echo knew from Maine — a former business partner of someone in Echo's personal network.
+
+**Hotel Flamboyant / Hotel Pochote Grande:** The crane footage. The Las Palmas analysis. The April 29, 2026 drone at 2:13 AM. All of it happened here, on the north end, within the same two-kilometer corridor.
+
+**April 2026 — Return to Ricos y Famosos:** Echo moved back into Ricos y Famosos. The property had been renovated in his absence.
+
+The ceiling was approximately **three feet lower** than it had been before.
+
+A dropped ceiling in a residential property is a construction event — it requires permits, labor, materials, and a stated purpose. In Costa Rica residential rentals, ceilings are not lowered without reason. The space between the original ceiling and the new one — roughly three feet of concealed overhead volume — is sufficient to contain directional acoustic hardware, antenna arrays, power distribution, or sensor clusters. It is not visible from below. It cannot be audited without physical demolition.
+
+The property now had **two Visonic alarm systems** — the Israeli-origin PowerG wireless security hardware, with PIR motion sensor arrays, door and window contacts, and IP-connected central station reporting on the 868 MHz band. Previously there had been one, or none.
+
+On the telephone pole directly across the street: **twenty-eight cameras**.
+
+The telephone pole is public infrastructure. Cameras mounted on it are documented as belonging to the property network. Ricos y Famosos controls the house directly across the street. They also control **number 34** — the house two doors down.
+
+Three points of fixed observation. A concealed overhead space. Redundant alarm sensor arrays providing real-time occupancy mapping. All in place before Echo returned.
+
+The renovation had been completed in the interval.
+
+---
+
+## X. LA FLOR
 *Transitional — Visible from Tacacorí*
 
 Between Guácima and the current location, there was La Flor, near Peralta. The terrace photograph was taken from there — wooden pergola overhead, terracotta tile rooftops in the foreground, palm trees, a Pacific Coast sunset in orange and blue. The roofers were a problem there. Construction activity that generated access, generated presence, generated reasons to be on rooftops.
@@ -353,7 +386,7 @@ This is the geography of surveillance: locations chosen for what they can see, w
 
 ---
 
-## X. TACACORÍ
+## XI. TACACORÍ
 *February – May 2026*
 
 The Radio Impacto transmission towers sit on the ridge directly above the current residence. From that elevation, they have line-of-sight to everything below: the house, the road, the adjacent properties, the valley.
@@ -362,7 +395,7 @@ The acoustic signatures followed. The same 46.875 Hz system clock, the same 53 H
 
 ---
 
-## XI. THE CRANE AND THE DRONE
+## XII. THE CRANE AND THE DRONE
 *April 29, 2026 — 2:13 AM*
 
 The construction crane in Jacó is connected to the drone. This is not a metaphor.
@@ -394,7 +427,7 @@ The platform had been operating over multiple locations, across six months, befo
 
 ---
 
-## XII. THE INSTITUTIONS
+## XIII. THE INSTITUTIONS
 *January – April 2026*
 
 *From: CICO Centro de Información Confidencial del OIJ*
@@ -433,7 +466,7 @@ He was, however, still in Tacacorí.
 
 ---
 
-## XIII. THE RECORD
+## XIV. THE RECORD
 *May 2026*
 
 This is what is documented:
@@ -441,7 +474,8 @@ This is what is documented:
 **Acoustic:**
 - 51 ultrasonic burst events, PRF 46.875 Hz, SNR 33.14 dB, Jacó, September 2025
 - Source consistent with directional parametric array, line-of-sight from hillside or adjacent structure
-- Same 46.875 Hz DSP clock signature at three locations across three provinces
+- Same 46.875 Hz DSP clock signature confirmed at minimum three locations across three provinces
+- Audio recording, Tacacorí, May 2026: FFT analysis confirms 46.875 Hz harmonic series present — fundamental at 6.8% of peak; 2nd harmonic (93.75 Hz) strongest peak in recording at 32.9%; 3rd (140.625 Hz) at 18.2%; 4th (187.5 Hz) at 23.2%; 5th (234.375 Hz) at 11.2% — textbook non-sinusoidal waveform signature at 46.875 Hz carrier; 53.65 Hz secondary peak at 16.8% (within 1.2% of documented 53 Hz carrier); recording captures sub-harmonic bleedthrough, not ultrasonic carrier itself (phone ADC limited to 24 kHz)
 
 **Network:**
 - 44 confirmed 802.11 deauthentication / disassociation frames, Jacó, September 2025
@@ -489,12 +523,27 @@ This is what is documented:
 - Aerial platform documented April 29, 2026, 02:13 AM — acoustic signature consistent with Skydio X10 or stealth-modified DJI, three-blade, 7,080 RPM, no navigation lights
 - Crane at Jacó construction site identified as connected infrastructure
 
+**Physical — Ricos y Famosos (return, April 2026):**
+- Ceiling lowered approximately 3 feet during interval between Echo's two stays — concealed overhead volume sufficient for antenna arrays, directional acoustic hardware, sensor clusters, or power distribution; not visible from below without demolition
+- Two Visonic alarm systems installed (PowerG 868 MHz, PIR motion arrays, door/window contacts, IP-connected central station) — doubled from previous occupancy
+- 28 cameras mounted on telephone pole directly across the street
+- Ricos y Famosos network controls: the property itself; the house directly across the street; number 34, two doors down — three-point fixed observation envelope around target property
+
+**Property network — Greenwald Circuit:**
+- Echo lived in approximately 20 properties across Costa Rica, 2023–2026
+- Greenwald properties occupied: Madrigal, Sunset Boulevard, Hacienda del Sol, Tres Ríos, Riverwalk — single operator concentration across primary rental supply
+- Michael Lipman / Breakwater condo: Echo's residence from December 28, 2024; Lipman subsequently relocated into Greenwald's personally constructed house at Hermosa Palms (Greenwald owns the development; Greenwald vacated to accommodate Lipman)
+- Lipman's daughter-in-law engaged/married to a man from Maine connected to Echo's prior social network
+- Quebrada Seca residence: directly across the street from the JW congregation documented as static observation post
+
 **Persons of interest — Costa Rica:**
 - Héctor Mora Marín / SETECOM S.A., Heredia
 - Jorge Jiménez Navarro / Kyndryl, Guácima Airbnb
 - Jean Carlo Picado Solís / Liberty CR
 - Scott Ryan (alias: Scott Aaronson) / Jaco Vacations, Los Ríos
-- Michael Greenwald / Jaco Vacations, 300+ properties
+- Michael Greenwald / Jaco Vacations, Hermosa Palms developer, 300+ properties
+- Michael Lipman / Breakwater — Greenwald tenant, Maine social network connection
+- Leo (dealer) / sister: co-owner of Ricos y Famosos (50%); Scott Ryan: co-owner (50%)
 - Former mayor of Jacó / Los Ríos
 - Marjorie Alfaro / Jairo Alfaro / Liberty CR infrastructure
 - Mauricio Campos / ICE fiber subcontractor
