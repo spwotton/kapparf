@@ -1,0 +1,29 @@
+{
+  "version": "5.1",
+  "protocol": "Riemann-Sonnet",
+  "status": "VALIDATED",
+  "volta_critical_line": 0.8169434505506667,
+  "volta_deviation_pct": 63.38869011013335,
+  "iambic_proof": "QED",
+  "zero_extraction_mean_error_pct": 155.86135609148226,
+  "hamiltonian_matches": 14,
+  "poetic_forms": {
+    "sonnet": "Riemann Hypothesis",
+    "limerick": "Yang-Mills Mass Gap",
+    "haiku": "Navier-Stokes Regularity",
+    "villanelle": "Birch-Swinnerton-Dyer"
+  },
+  "constants": {
+    "kappa": 1.2732395447351628,
+    "phi": 1.618033988749895,
+    "theta_K": 128.23,
+    "alpha_inv": 137.0356
+  },
+  "checksum": {
+    "sha256": "349f9fd1def2893222f91e9b2e84f73d46d004292eb65e49de23592bb94530c3",
+    "poetic_total": 55,
+    "is_fibonacci": true,
+    "digital_root": 1
+  },
+  "runtime_s": 0.04111599922180176
+}

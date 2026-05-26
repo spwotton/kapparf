@@ -1,0 +1,268 @@
+{
+  "results": {
+    "aws_sv1": {
+      "A_Control_GHZ": {
+        "n_0000": 1027,
+        "n_1111": 1021,
+        "total": 2048,
+        "ratio": 0.9942,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_sv1-spwotton-qjob-mm21zf9c2mfffzpnjzml",
+        "device_name": "aws_sv1"
+      },
+      "B_Tycho_Twist": {
+        "n_0000": 392,
+        "n_1111": 1656,
+        "total": 2048,
+        "ratio": 4.2245,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_sv1-spwotton-qjob-l28hbqq753fv0kgtmvmb",
+        "device_name": "aws_sv1"
+      },
+      "C_Phi_Optimal": {
+        "n_0000": 851,
+        "n_1111": 1197,
+        "total": 2048,
+        "ratio": 1.4066,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_sv1-spwotton-qjob-e2o79ohiko8wi5m7toeb",
+        "device_name": "AWS SV1 (Simulator)"
+      },
+      "D_Anti_Tycho": {
+        "n_0000": 1646,
+        "n_1111": 402,
+        "total": 2048,
+        "ratio": 0.2442,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_sv1-spwotton-qjob-9uf7gwxj94u5auwzx4d7",
+        "device_name": "AWS SV1 (Simulator)"
+      },
+      "E_Original_PhiPi": {
+        "n_0000": 1369,
+        "n_1111": 679,
+        "total": 2048,
+        "ratio": 0.496,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_sv1-spwotton-qjob-qo9eit5m7x6x5wy37vdj",
+        "device_name": "aws_sv1"
+      }
+    },
+    "aws_dm1": {
+      "A_Control_GHZ": {
+        "n_0000": 1016,
+        "n_1111": 1032,
+        "total": 2048,
+        "ratio": 1.0157,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_dm1-spwotton-qjob-hsh33jl4hmzxp1vsts8a",
+        "device_name": "aws_dm1"
+      },
+      "B_Tycho_Twist": {
+        "n_0000": 422,
+        "n_1111": 1626,
+        "total": 2048,
+        "ratio": 3.8531,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_dm1-spwotton-qjob-kpsjkmvr1nttuv7x53bk",
+        "device_name": "aws_dm1"
+      },
+      "D_Anti_Tycho": {
+        "n_0000": 1657,
+        "n_1111": 391,
+        "total": 2048,
+        "ratio": 0.236,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_dm1-spwotton-qjob-8y452zv6wl1jdyalbay4",
+        "device_name": "AWS DM1 (Simulator)"
+      },
+      "E_Original_PhiPi": {
+        "n_0000": 1399,
+        "n_1111": 649,
+        "total": 2048,
+        "ratio": 0.4639,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_dm1-spwotton-qjob-hjecseed7ct764k8u2q4",
+        "device_name": "aws_dm1"
+      }
+    },
+    "ionq_simulator": {
+      "A_Control_GHZ": {
+        "n_0000": 1024,
+        "n_1111": 1024,
+        "total": 2048,
+        "ratio": 1.0,
+        "ghz_fidelity": 1.0,
+        "job_id": "ionq_simulator-spwotton-qjob-2jy0gag67f7fq5m1d9t9",
+        "device_name": "ionq_simulator"
+      },
+      "B_Tycho_Twist": {
+        "n_0000": 391,
+        "n_1111": 1657,
+        "total": 2048,
+        "ratio": 4.2379,
+        "ghz_fidelity": 1.0,
+        "job_id": "ionq_simulator-spwotton-qjob-fcojlt8ol6875cseqpbi",
+        "device_name": "ionq_simulator"
+      },
+      "C_Phi_Optimal": {
+        "n_0000": 815,
+        "n_1111": 1233,
+        "total": 2048,
+        "ratio": 1.5129,
+        "ghz_fidelity": 1.0,
+        "job_id": "ionq_simulator-spwotton-qjob-iq26gtl7atge125gjjdo",
+        "device_name": "IonQ Simulator"
+      },
+      "D_Anti_Tycho": {
+        "n_0000": 1657,
+        "n_1111": 391,
+        "total": 2048,
+        "ratio": 0.236,
+        "ghz_fidelity": 1.0,
+        "job_id": "ionq_simulator-spwotton-qjob-ruhnlg0yz5dchoql4t3u",
+        "device_name": "IonQ Simulator"
+      },
+      "E_Original_PhiPi": {
+        "n_0000": 1395,
+        "n_1111": 653,
+        "total": 2048,
+        "ratio": 0.4681,
+        "ghz_fidelity": 1.0,
+        "job_id": "ionq_simulator-spwotton-qjob-30apmr2g57sxr37e12eg",
+        "device_name": "ionq_simulator"
+      }
+    },
+    "aws_ionq_forte1": {
+      "E_Original_PhiPi": {
+        "n_0000": 68,
+        "n_1111": 32,
+        "total": 100,
+        "ratio": 0.4706,
+        "ghz_fidelity": 1.0,
+        "job_id": "aws_ionq_forte1-spwotton-qjob-4erdetsb7kjeqrogmv7k",
+        "device_name": "aws_ionq_forte1"
+      },
+      "D_Anti_Tycho": {
+        "n_0000": 80,
+        "n_1111": 15,
+        "total": 100,
+        "ratio": 0.1875,
+        "ghz_fidelity": 0.95,
+        "job_id": "aws_ionq_forte1-spwotton-qjob-p2qurwwcz2pm2xucw8vk",
+        "device_name": "aws_ionq_forte1"
+      },
+      "C_Phi_Optimal": {
+        "n_0000": 38,
+        "n_1111": 58,
+        "total": 100,
+        "ratio": 1.5263,
+        "ghz_fidelity": 0.96,
+        "job_id": "aws_ionq_forte1-spwotton-qjob-byp6izza5epxx09vx7qw",
+        "device_name": "aws_ionq_forte1"
+      },
+      "A_Control_GHZ": {
+        "n_0000": 52,
+        "n_1111": 43,
+        "total": 100,
+        "ratio": 0.8269,
+        "ghz_fidelity": 0.95,
+        "job_id": "aws_ionq_forte1-spwotton-qjob-3idf0xbo7u5o4aql4zec",
+        "device_name": "aws_ionq_forte1"
+      },
+      "B_Tycho_Twist": {
+        "n_0000": 15,
+        "n_1111": 84,
+        "total": 100,
+        "ratio": 5.6,
+        "ghz_fidelity": 0.99,
+        "job_id": "aws_ionq_forte1-spwotton-qjob-gwtechyqgdjyt06oi9tp",
+        "device_name": "aws_ionq_forte1"
+      }
+    },
+    "numpy_local": {
+      "A_Control_GHZ": {
+        "ratio": 1.0,
+        "ghz_fidelity": 1.0,
+        "n_0000": 1035,
+        "n_1111": 1013,
+        "device_name": "numpy (exact)"
+      },
+      "B_Tycho_Twist": {
+        "ratio": 4.2469,
+        "ghz_fidelity": 1.0,
+        "n_0000": 400,
+        "n_1111": 1648,
+        "device_name": "numpy (exact)"
+      },
+      "C_Phi_Optimal": {
+        "ratio": 1.5098,
+        "ghz_fidelity": 1.0,
+        "n_0000": 805,
+        "n_1111": 1243,
+        "device_name": "numpy (exact)"
+      },
+      "D_Anti_Tycho": {
+        "ratio": 0.2355,
+        "ghz_fidelity": 1.0,
+        "n_0000": 1646,
+        "n_1111": 402,
+        "device_name": "numpy (exact)"
+      },
+      "E_Original_PhiPi": {
+        "ratio": 0.468,
+        "ghz_fidelity": 1.0,
+        "n_0000": 1392,
+        "n_1111": 656,
+        "device_name": "numpy (exact)"
+      }
+    },
+    "rigetti_ankaa_3_original": {
+      "A_Control_GHZ": {
+        "ratio": 0.845395,
+        "ghz_fidelity": 0.8218,
+        "n_0000": 912,
+        "n_1111": 771,
+        "device_name": "Rigetti Ankaa-3 (QPU)"
+      },
+      "B_Tycho_Twist": {
+        "ratio": 3.132678,
+        "ghz_fidelity": 0.8213,
+        "n_0000": 407,
+        "n_1111": 1275,
+        "device_name": "Rigetti Ankaa-3 (QPU)"
+      },
+      "C_Phi_Optimal": {
+        "ratio": 1.283967,
+        "ghz_fidelity": 0.8208,
+        "n_0000": 736,
+        "n_1111": 945,
+        "device_name": "Rigetti Ankaa-3 (QPU)"
+      },
+      "D_Anti_Tycho": {
+        "ratio": 0.202765,
+        "ghz_fidelity": 0.8921,
+        "n_0000": 1519,
+        "n_1111": 308,
+        "device_name": "Rigetti Ankaa-3 (QPU)"
+      },
+      "E_Original_PhiPi": {
+        "ratio": 0.443366,
+        "ghz_fidelity": 0.8711,
+        "n_0000": 1236,
+        "n_1111": 548,
+        "device_name": "Rigetti Ankaa-3 (QPU)"
+      }
+    }
+  },
+  "pending": [
+    "  \u23f3 iqm_garnet / A_Control_GHZ: QUEUED",
+    "  \u23f3 iqm_garnet / E_Original_PhiPi: QUEUED",
+    "  \u23f3 iqm_garnet / B_Tycho_Twist: QUEUED"
+  ],
+  "failed": [
+    "  \u274c aws_dm1 / C_Phi_Optimal: FAILED",
+    "  \u274c aws_tn1 / A_Control_GHZ: FAILED",
+    "  \u274c aws_tn1 / E_Original_PhiPi: FAILED",
+    "  \u274c aws_tn1 / B_Tycho_Twist: FAILED"
+  ]
+}

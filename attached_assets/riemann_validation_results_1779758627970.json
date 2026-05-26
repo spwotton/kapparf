@@ -1,0 +1,15 @@
+{
+  "test1_kappa_slope": {
+    "kappa": 1.2721009595916732,
+    "passed": true
+  },
+  "test2_heat_kernel": {
+    "max_imaginary": 0.0,
+    "passed": true
+  },
+  "test3_klein_twist": {
+    "optimal_angle": 128.23,
+    "error": 0.0,
+    "passed": true
+  }
+}

@@ -1,0 +1,267 @@
+  {
+    "experiment_id": "GOLDEN_GHZ_Tycho_Validation_2026_02_07",
+    "analyzed_at": "2026-02-07T00:33:33.318415",
+    "device": "rigetti_ankaa_3",
+    "results": [
+      {
+        "circuit": "A_Control_GHZ",
+        "label": "A \u2014 Control GHZ (Ry=90\u00b0)",
+        "angle_deg": 90.0,
+        "job_id": "rigetti_ankaa_3-spwotton-qjob-jpbqlc7j3pvbvy0ef6v1",
+        "status": "COMPLETED",
+        "analysis": {
+          "total_shots": 2048,
+          "n_0000": 912,
+          "n_1111": 771,
+          "P0000": 0.445312,
+          "P1111": 0.376465,
+          "ratio_P1111_over_P0000": 0.845395,
+          "ghz_fidelity": 0.8218,
+          "noise_fraction": 0.1782,
+          "top_bitstrings": [
+            [
+              "0000",
+              912
+            ],
+            [
+              "1111",
+              771
+            ],
+            [
+              "1000",
+              71
+            ],
+            [
+              "1110",
+              71
+            ],
+            [
+              "0111",
+              55
+            ],
+            [
+              "1101",
+              35
+            ],
+            [
+              "1011",
+              29
+            ],
+            [
+              "1100",
+              23
+            ]
+          ]
+        },
+        "expected_ratio": 0.9999999999999998
+      },
+      {
+        "circuit": "B_Tycho_Twist",
+        "label": "B \u2014 Tycho Twist (Ry=128.23\u00b0)",
+        "angle_deg": 128.23,
+        "job_id": "rigetti_ankaa_3-spwotton-qjob-5yultc1etj9it59w9if4",
+        "status": "COMPLETED",
+        "analysis": {
+          "total_shots": 2048,
+          "n_0000": 407,
+          "n_1111": 1275,
+          "P0000": 0.19873,
+          "P1111": 0.622559,
+          "ratio_P1111_over_P0000": 3.132678,
+          "ghz_fidelity": 0.8213,
+          "noise_fraction": 0.1787,
+          "top_bitstrings": [
+            [
+              "1111",
+              1275
+            ],
+            [
+              "0000",
+              407
+            ],
+            [
+              "1110",
+              92
+            ],
+            [
+              "1000",
+              49
+            ],
+            [
+              "1011",
+              47
+            ],
+            [
+              "1101",
+              46
+            ],
+            [
+              "0111",
+              41
+            ],
+            [
+              "1100",
+              40
+            ]
+          ]
+        },
+        "expected_ratio": 4.246862028764679
+      },
+      {
+        "circuit": "C_Phi_Optimal",
+        "label": "C \u2014 \u03c6-Optimal (Ry=101.72\u00b0)",
+        "angle_deg": 101.72,
+        "job_id": "rigetti_ankaa_3-spwotton-qjob-6b7hs0n3t7s3qd8jt4j0",
+        "status": "COMPLETED",
+        "analysis": {
+          "total_shots": 2048,
+          "n_0000": 736,
+          "n_1111": 945,
+          "P0000": 0.359375,
+          "P1111": 0.461426,
+          "ratio_P1111_over_P0000": 1.283967,
+          "ghz_fidelity": 0.8208,
+          "noise_fraction": 0.1792,
+          "top_bitstrings": [
+            [
+              "1111",
+              945
+            ],
+            [
+              "0000",
+              736
+            ],
+            [
+              "1110",
+              80
+            ],
+            [
+              "1000",
+              50
+            ],
+            [
+              "0111",
+              45
+            ],
+            [
+              "1011",
+              42
+            ],
+            [
+              "1100",
+              40
+            ],
+            [
+              "1101",
+              37
+            ]
+          ]
+        },
+        "expected_ratio": 1.5098168229741178
+      },
+      {
+        "circuit": "D_Anti_Tycho",
+        "label": "D \u2014 Anti-Tycho (Ry=51.77\u00b0)",
+        "angle_deg": 51.77,
+        "job_id": "rigetti_ankaa_3-spwotton-qjob-vcwra666i5vzywmn78sj",
+        "status": "COMPLETED",
+        "analysis": {
+          "total_shots": 2048,
+          "n_0000": 1519,
+          "n_1111": 308,
+          "P0000": 0.741699,
+          "P1111": 0.150391,
+          "ratio_P1111_over_P0000": 0.202765,
+          "ghz_fidelity": 0.8921,
+          "noise_fraction": 0.1079,
+          "top_bitstrings": [
+            [
+              "0000",
+              1519
+            ],
+            [
+              "1111",
+              308
+            ],
+            [
+              "1000",
+              59
+            ],
+            [
+              "0001",
+              29
+            ],
+            [
+              "0111",
+              23
+            ],
+            [
+              "1110",
+              22
+            ],
+            [
+              "0010",
+              20
+            ],
+            [
+              "1011",
+              14
+            ]
+          ]
+        },
+        "expected_ratio": 0.23546797452491716
+      },
+      {
+        "circuit": "E_Original_PhiPi",
+        "label": "E \u2014 Original GoldenGHZ (Ry=\u03c6\u03c0=291.25\u00b0)",
+        "angle_deg": 291.2461,
+        "job_id": "rigetti_ankaa_3-spwotton-qjob-jjoa47u8eoclc22r06ab",
+        "status": "COMPLETED",
+        "analysis": {
+          "total_shots": 2048,
+          "n_0000": 1236,
+          "n_1111": 548,
+          "P0000": 0.603516,
+          "P1111": 0.267578,
+          "ratio_P1111_over_P0000": 0.443366,
+          "ghz_fidelity": 0.8711,
+          "noise_fraction": 0.1289,
+          "top_bitstrings": [
+            [
+              "0000",
+              1236
+            ],
+            [
+              "1111",
+              548
+            ],
+            [
+              "1000",
+              58
+            ],
+            [
+              "1110",
+              45
+            ],
+            [
+              "0001",
+              32
+            ],
+            [
+              "0111",
+              21
+            ],
+            [
+              "1011",
+              20
+            ],
+            [
+              "1101",
+              19
+            ]
+          ]
+        },
+        "expected_ratio": 0.468025022930263
+      }
+    ]
+  }

@@ -1,0 +1,431 @@
+{
+  "job_id": "AQC-20260226-003406",
+  "timestamp": "2026-02-26T00:26:55.005956+00:00",
+  "provenance": "LOCAL_LINDBLAD",
+  "hardware_diagnostic": {
+    "target_requested": "rigetti.qpu.ankaa-3",
+    "sdk_version": "3.6.0",
+    "credentials_found": true,
+    "workspace_connected": true,
+    "target_available": true,
+    "auth_method": "CONNECTION_STRING",
+    "errors": [],
+    "credential_status": {
+      "SubscriptionId": "4bbb0278...",
+      "ResourceGroupName": "AzureQuantum",
+      "WorkspaceName": "quantumrecursion",
+      "QuantumEndpoint": "https://eastus.quantum.azure.com/",
+      "ApiKey": "SET"
+    }
+  },
+  "hardware_errors": [
+    "Job submission failed: invalid literal for int() with base 10: 'ro'"
+  ],
+  "target_requested": "rigetti.qpu.ankaa-3",
+  "shots": 10000,
+  "input_validation": {
+    "kappa_verified": true,
+    "eigenvalues_verified": true,
+    "hamiltonian_source": "Adolphs_Renger_2006",
+    "json_firmware": "AlgaeQuantumComputer_FMO_v1"
+  },
+  "constants": {
+    "phi": 1.618033988749895,
+    "kappa_1": 1.2732395447351628,
+    "kappa_2": 1.4346327151126494,
+    "theta_klein_rad": 2.2380356998323285,
+    "theta_klein_deg": 128.23,
+    "hall_offset_mm": 0.595,
+    "omega_0": 8.391108389241555e-23
+  },
+  "scenarios": {
+    "baseline_raw": {
+      "label": "baseline_raw",
+      "naqt_efficiency": 0.14994453617097492,
+      "naqt_rc_population": 0.06538713812677018,
+      "naqt_trapped": 0.08455739804420473,
+      "quantum_rc_population": 0.012223339488989182,
+      "full_distribution": [
+        0.28005040319805485,
+        0.27270298786284497,
+        0.07117782652320785,
+        0.06538713812677018,
+        0.08318149247044833,
+        0.08025361952348216,
+        0.06270549766032656
+      ],
+      "eigenvalues_cm": [
+        12179.99113421662,
+        12291.696147861758,
+        12365.08641875243,
+        12454.796098962915,
+        12469.667602935095,
+        12577.559542849933,
+        12681.203054421254
+      ],
+      "7/4_clamp_ratio": 1.75,
+      "bridge_value_7_over_pi": 2.228169203286535,
+      "klein_angle_deg": 128.23,
+      "delta_bridge_pct": 0.44085519040347354,
+      "gamma_dephasing": 0.005
+    },
+    "gos_corrected": {
+      "label": "gos_corrected",
+      "naqt_efficiency": 0.21079726169414292,
+      "naqt_rc_population": 0.08694106711462403,
+      "naqt_trapped": 0.12385619457951888,
+      "quantum_rc_population": 0.0069376640473954665,
+      "full_distribution": [
+        0.20803489679148873,
+        0.20575642603330443,
+        0.09143538773308571,
+        0.08694106711462403,
+        0.10021673867513986,
+        0.09585942740801935,
+        0.08792161884706252
+      ],
+      "eigenvalues_cm": [
+        12167.980185815519,
+        12282.445579291505,
+        12354.858321979124,
+        12451.369249173706,
+        12475.299344552768,
+        12615.02784490362,
+        12714.341064436298
+      ],
+      "7/4_clamp_ratio": 1.75,
+      "bridge_value_7_over_pi": 2.228169203286535,
+      "klein_angle_deg": 128.23,
+      "delta_bridge_pct": 0.44085519040347354,
+      "gamma_dephasing": 0.005
+    },
+    "gamma_sweep": {
+      "sweep": [
+        {
+          "gamma": 0.0001,
+          "naqt_efficiency": 0.03148198678026078
+        },
+        {
+          "gamma": 0.0001438449888287663,
+          "naqt_efficiency": 0.034592057804685265
+        },
+        {
+          "gamma": 0.00020691380811147902,
+          "naqt_efficiency": 0.03897201837362489
+        },
+        {
+          "gamma": 0.00029763514416313193,
+          "naqt_efficiency": 0.045087868189646496
+        },
+        {
+          "gamma": 0.00042813323987193956,
+          "naqt_efficiency": 0.05352877950238145
+        },
+        {
+          "gamma": 0.0006158482110660267,
+          "naqt_efficiency": 0.06499848792908341
+        },
+        {
+          "gamma": 0.0008858667904100823,
+          "naqt_efficiency": 0.0802660945763041
+        },
+        {
+          "gamma": 0.0012742749857031334,
+          "naqt_efficiency": 0.10004461605609336
+        },
+        {
+          "gamma": 0.0018329807108324356,
+          "naqt_efficiency": 0.12474599492552105
+        },
+        {
+          "gamma": 0.0026366508987303583,
+          "naqt_efficiency": 0.15404688492619018
+        },
+        {
+          "gamma": 0.00379269019073225,
+          "naqt_efficiency": 0.1862966593415239
+        },
+        {
+          "gamma": 0.005455594781168515,
+          "naqt_efficiency": 0.21818803837485679
+        },
+        {
+          "gamma": 0.007847599703514606,
+          "naqt_efficiency": 0.24549794163370336
+        },
+        {
+          "gamma": 0.011288378916846883,
+          "naqt_efficiency": 0.2649627149818925
+        },
+        {
+          "gamma": 0.01623776739188721,
+          "naqt_efficiency": 0.2756209315033825
+        },
+        {
+          "gamma": 0.023357214690901212,
+          "naqt_efficiency": 0.2781742133026462
+        },
+        {
+          "gamma": 0.03359818286283781,
+          "naqt_efficiency": 0.2735037639820205
+        },
+        {
+          "gamma": 0.04832930238571752,
+          "naqt_efficiency": 0.2620029249214034
+        },
+        {
+          "gamma": 0.06951927961775606,
+          "naqt_efficiency": 0.2435506012918026
+        },
+        {
+          "gamma": 0.1,
+          "naqt_efficiency": 0.21769888143941085
+        },
+        {
+          "gamma": 0.15,
+          "naqt_efficiency": 0.18071470229247405
+        },
+        {
+          "gamma": 0.2,
+          "naqt_efficiency": 0.15126381795537208
+        },
+        {
+          "gamma": 0.3,
+          "naqt_efficiency": 0.10996754124405991
+        },
+        {
+          "gamma": 0.5,
+          "naqt_efficiency": 0.06575193140974815
+        },
+        {
+          "gamma": 1.0,
+          "naqt_efficiency": 0.027177434998979552
+        }
+      ],
+      "optimal_gamma": 0.023357214690901212,
+      "optimal_efficiency": 0.2781742133026462
+    },
+    "combined_all": {
+      "label": "combined_all_corrections",
+      "naqt_efficiency": 0.2649978983639636,
+      "naqt_rc_population": 0.10404447728795244,
+      "naqt_trapped": 0.16095342107601118,
+      "quantum_rc_population": 0.013682324343540586,
+      "full_distribution": [
+        0.1490883222907617,
+        0.1457664999324495,
+        0.12607566289023112,
+        0.10404447728795244,
+        0.10458381919366073,
+        0.10533344868815538,
+        0.10418038572518827
+      ],
+      "eigenvalues_cm": [
+        12203.36369127535,
+        12373.280137879463,
+        12444.027454305247,
+        12629.204870108633,
+        12675.42697132855,
+        12691.49377733324,
+        12836.165474421916
+      ],
+      "7/4_clamp_ratio": 1.75,
+      "bridge_value_7_over_pi": 2.228169203286535,
+      "klein_angle_deg": 128.23,
+      "delta_bridge_pct": 0.44085519040347354,
+      "gamma_dephasing": 0.023357214690901212
+    }
+  },
+  "options": {
+    "A_fibonacci": {
+      "status": "COMPLETE",
+      "phi_verification": {
+        "sorted_energies": [
+          12210.0,
+          12410.0,
+          12533.606797749979,
+          12610.0,
+          12657.213595499958,
+          12686.393202250021,
+          12704.427190999915
+        ],
+        "gaps": [
+          200.0,
+          123.6067977499788,
+          76.3932022500212,
+          47.21359549995759,
+          29.179606750063613,
+          18.03398874989398
+        ],
+        "consecutive_ratios": [
+          1.6180339887498971,
+          1.618033988749889,
+          1.6180339887499104,
+          1.618033988749854,
+          1.6180339887500017
+        ],
+        "phi_errors_pct": [
+          1.3723111286221163e-13,
+          3.7052400472797143e-13,
+          9.606177900354816e-13,
+          2.5250524766646944e-12,
+          6.6008165286723796e-12
+        ],
+        "mean_phi_error_pct": 2.1188483825925477e-12,
+        "is_fibonacci": true
+      },
+      "simulation": {
+        "label": "fibonacci_gos",
+        "naqt_efficiency": 0.26499653958171127,
+        "naqt_rc_population": 0.10404422172488549,
+        "naqt_trapped": 0.16095231785682576,
+        "quantum_rc_population": 0.013655650895819415,
+        "full_distribution": [
+          0.14909092916955452,
+          0.14576895159834533,
+          0.12607274669328547,
+          0.10404422172488549,
+          0.10458364424534707,
+          0.1053333845701875,
+          0.10417984116203743
+        ],
+        "eigenvalues_cm": [
+          12203.379370316707,
+          12373.297190340356,
+          12444.00789476677,
+          12629.200929988632,
+          12675.43049607901,
+          12691.493908792689,
+          12836.152586368236
+        ],
+        "7/4_clamp_ratio": 1.75,
+        "bridge_value_7_over_pi": 2.228169203286535,
+        "klein_angle_deg": 128.23,
+        "delta_bridge_pct": 0.44085519040347354,
+        "gamma_dephasing": 0.023357214690901212
+      }
+    },
+    "B_lake_cote": {
+      "status": "COMPLETE",
+      "site_report": {
+        "location": "Lake Cot\u00e9, Costa Rica",
+        "coordinates": {
+          "lat": 10.3053,
+          "lon": -84.9147
+        },
+        "magnetic_declination_deg": -2.5,
+        "magnetic_inclination_deg": 38.2,
+        "total_field_uT": 38.0,
+        "horizontal_uT": 29.9,
+        "vertical_uT": 24.1,
+        "hall_offset_mm": 0.595,
+        "kappa_correction_cm": 2.2594908960870202e-05
+      },
+      "simulation": {
+        "label": "lake_cote_gos",
+        "naqt_efficiency": 0.2781742123700758,
+        "naqt_rc_population": 0.10689059110846826,
+        "naqt_trapped": 0.17128362126160754,
+        "quantum_rc_population": 0.006937663221499859,
+        "full_distribution": [
+          0.13999869566511783,
+          0.1393196201560407,
+          0.11077164242328372,
+          0.10689059110846826,
+          0.11142230459211104,
+          0.11152593968524732,
+          0.10881433436212927
+        ],
+        "eigenvalues_cm": [
+          12167.980178424457,
+          12282.44557699913,
+          12354.858338191052,
+          12451.369246077486,
+          12475.299339322648,
+          12615.027855199298,
+          12714.341055938494
+        ],
+        "7/4_clamp_ratio": 1.75,
+        "bridge_value_7_over_pi": 2.228169203286535,
+        "klein_angle_deg": 128.23,
+        "delta_bridge_pct": 0.44085519040347354,
+        "gamma_dephasing": 0.023357214690901212
+      }
+    },
+    "C_church_bell": {
+      "status": "COMPLETE",
+      "closest_mode": {
+        "mode_n": 51,
+        "frequency_hz": 91545.2927368261,
+        "corrected_hz": 92671.15018569907,
+        "clapper_shift_hz": 1125.8574488729646,
+        "phase_deg": 251.78576654227672,
+        "klein_proximity_deg": 123.55576654227673,
+        "is_resonant": false,
+        "target_frequency_hz": 132500,
+        "delta_hz": 39828.849814300935,
+        "delta_pct": 30.059509293812027
+      },
+      "resonant_modes_count": 0,
+      "acoustic_coupling": {
+        "acoustic_impedance_Pa_s_m": 52254400.0,
+        "reference_power_W": 0.001,
+        "bell_area_m2": 0.7853981633974483,
+        "acoustic_intensity_W_m2": 0.0012732395447351628,
+        "rms_pressure_Pa": 257.93869129389856,
+        "fmo_coupling_cm_inv": 0.025793869129389857,
+        "coupling_significant": true
+      },
+      "simulation": {
+        "label": "church_bell_gos",
+        "naqt_efficiency": 0.2781714600061158,
+        "naqt_rc_population": 0.10688998821956248,
+        "naqt_trapped": 0.1712814717865533,
+        "quantum_rc_population": 0.006910338634555993,
+        "full_distribution": [
+          0.14000151165770205,
+          0.13932227355691637,
+          0.11077167842660748,
+          0.10688998821956248,
+          0.11142160725255124,
+          0.11152495748565419,
+          0.10881326071760296
+        ],
+        "eigenvalues_cm": [
+          12167.97165187953,
+          12282.446681868198,
+          12354.841566604804,
+          12451.384403956074,
+          12475.30924881527,
+          12615.006466856688,
+          12714.361570171972
+        ],
+        "7/4_clamp_ratio": 1.75,
+        "bridge_value_7_over_pi": 2.228169203286535,
+        "klein_angle_deg": 128.23,
+        "delta_bridge_pct": 0.44085519040347354,
+        "gamma_dephasing": 0.023357214690901212
+      }
+    }
+  },
+  "ground_truth_validation": {
+    "provenance": "LOCAL_LINDBLAD",
+    "best_scenario": "combined_all",
+    "best_naqt_efficiency": 0.2649978983639636,
+    "biological_target": 0.99,
+    "gap_to_biological_pct": 72.50021016360364,
+    "7_4_clamp_ratio_measured": 1.75,
+    "7_4_clamp_ratio_valid": true,
+    "klein_angle_measured_deg": 128.23,
+    "klein_angle_valid": true,
+    "hall_offset_measured_mm": 0.595,
+    "phi_ratios": [
+      1.618033988749895,
+      1.618033988749895,
+      1.618033988749895,
+      1.618033988749895,
+      1.618033988749895
+    ],
+    "assertions_passed": true
+  }
+}

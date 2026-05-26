@@ -1,0 +1,37 @@
+{
+  "model": "AlgaeQuantumComputer_FMO_v1",
+  "constants": {
+    "phi": 1.618033988749895,
+    "kappa": 1.2732395447351628,
+    "theta_klein_rad": 2.2380356998323285,
+    "fmo_bridge_7_over_pi": 2.228169203286535,
+    "delta_bridge_pct": 0.44085519040347354
+  },
+  "rc_efficiency": {
+    "classical": 0.2051,
+    "quantum": 0.012223339488989182,
+    "gos": 0.0069376640473954665,
+    "naqt_population": 0.0653871381267704,
+    "naqt_trapped": 0.08455741444066894,
+    "gos_naqt_population": 0.08694106711462234,
+    "gos_naqt_trapped": 0.1238562163804621,
+    "biological": 0.99
+  },
+  "peak_rc_time_fs": 172.3446893787575,
+  "eigenvalues_cm": [
+    12179.991134216623,
+    12291.696147861761,
+    12365.08641875243,
+    12454.796098962915,
+    12469.667602935097,
+    12577.559542849931,
+    12681.203054421248
+  ],
+  "seven_four_bridge": {
+    "hardware_ratio": 1.75,
+    "bridge_value": 2.228169203286535,
+    "theta_klein": 2.2380356998323285,
+    "delta_pct": 0.44085519040347354,
+    "primary_couplings": 5
+  }
+}
