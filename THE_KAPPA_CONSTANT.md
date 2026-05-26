@@ -449,10 +449,30 @@ This is what is documented:
 - `kyndryl.com` GTM service worker registered on device that never visited the domain
 - `touch_communication.js` with `base64js` import running as persistent background worker
 - TP-Link extender creating MITM loop position in Guácima guest room
-- Evofusion 4K stick on already-smart TV, logged into host's Google account
-- Liberty CR router: TR-069 backdoor active on port 1234
+- Kenwood 4K Smart TV (Google TV) logged into host's personal Google account; redundant streaming stick in HDMI port
+- Liberty CR router: TR-069 backdoor active on port 1234; admin credentials remotely reset 2026-01-30 — **DOCUMENTED** (CVE-2017-17215, CVE-2018-10561, AAWSAP/DIRD-042)
+- PartyTown script registered from `airbnb.com.co` — domain never visited; only reachable via network-layer HTTP injection — **DOCUMENTED** (Sandvine / China's Great Cannon technique class)
+- Second injected script traced to Setecom's own website domain
+- Ghost TP-Link Deco X55 node appearing active while physically unplugged — **PLAUSIBLE-UNDOCUMENTED** (802.11 MAC spoofing feasible; no public case parallel)
 - Malicious extension `ebongfbmlegepmkkdjlnlmdcmckedlal` with auto-restart persistence
-- IP `142.111.48.253`: VirusTotal MALICIOUS, reputation −39
+- IP `142.111.48.253`: VirusTotal MALICIOUS (2/94), reputation −39
+- L3mon Android RAT: GitHub-hosted payload, audio/GPS/camera/SMS exfiltration — **DOCUMENTED** (Check Point 2021 malware reports)
+
+**Physical — Guácima:**
+- Six power outlets behind kitchen sink, all glowing red/green from inside — electrical code violation, non-standard hardware; video documentation
+- Diodes and LiFi injection points installed by workers while resident was present — LiFi as covert optical channel: **DOCUMENTED** technology (IEEE 802.15.7, DARPA VLC program, AAWSAP/DIRD-055); covert residential deployment: **PLAUSIBLE-UNDOCUMENTED**
+- Security camera at property entrance: non-functional for one week, looping alert "You are being surveilled" — consistent with signal saturation or C2 command injection
+- Microwave transmission tower 100m from property; six additional radio towers within line-of-sight
+
+**Telecable infrastructure:**
+- NAP splice box at target property: handwritten "NAP — Colilla — 21/06/25" — physical fiber modification dated June 21, 2025, predating all documented attacks — passive optical tap consistent with this annotation — **DOCUMENTED** (NSA ANT catalog, Snowden MUSCULAR program, AAWSAP/DIRD-009)
+
+**Digital actor — `danish2210` / `danich2210`:**
+- GitHub handle `danish2210`: Lahore, Pakistan; repositories include L3mon RAT deployment tools
+- Handle string appears in target's local file paths — not publicly common
+- Follows Jeff Geerling (Geerlingguy) — documented creator of ESP32, Raspberry Pi, and offline GPS triangulation systems; indicates working knowledge of embedded surveillance-capable hardware
+- Instagram `danich2210`: AI facial authenticity analysis ~35% real; only documented followers are target's drug dealer and dealer's girlfriend; account never encountered organically in nearly 3 years of in-country residency
+- Pattern consistent with honeypot profile inserted via known social proxies
 
 **Infrastructure:**
 - SETECOM S.A. holds exclusive DSE distribution contract for Costa Rica
