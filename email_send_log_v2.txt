@@ -1,0 +1,1442 @@
+2026-05-26 13:58:28,128 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 13:58:28,129 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 13:58:28,129 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 13:58:28,130 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 13:58:28,130 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 13:58:28,131 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 13:58:28,131 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 13:58:28,132 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 13:58:28,132 [INFO] ==============================================================
+2026-05-26 13:58:28,132 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 13:58:28,133 [INFO]   Date:               2026-05-26
+2026-05-26 13:58:28,133 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 13:58:28,133 [INFO]   Total in list:      154
+2026-05-26 13:58:28,134 [INFO]   Already sent:       0
+2026-05-26 13:58:28,134 [INFO]   Queued to send:     154
+2026-05-26 13:58:28,135 [INFO]   Dry run:            YES
+2026-05-26 13:58:28,135 [INFO] ==============================================================
+2026-05-26 13:58:28,136 [INFO] [1/154] DRY RUN — 9-AJI-SMS@faa.gov (EN)
+2026-05-26 13:58:28,136 [INFO] [2/154] DRY RUN — 9-AVS-AIR-SMS@faa.gov (EN)
+2026-05-26 13:58:28,136 [INFO] [3/154] DRY RUN — 9-NATL-SMS-ProgramOffice@faa.gov (EN)
+2026-05-26 13:58:28,137 [INFO] [4/154] DRY RUN — 9-SMS-AVP-300@faa.gov (EN)
+2026-05-26 13:58:28,137 [INFO] [5/154] DRY RUN — EASec@alpa.org (EN)
+2026-05-26 13:58:28,138 [INFO] [6/154] DRY RUN — EmRussell@munichre.com (EN)
+2026-05-26 13:58:28,138 [INFO] [7/154] DRY RUN — Flightsafety@delta.com (EN)
+2026-05-26 13:58:28,138 [INFO] [8/154] DRY RUN — Joshua.down@atrium-uw.com (EN)
+2026-05-26 13:58:28,139 [INFO] [9/154] DRY RUN — Julian.Payne@edelman.com (EN)
+2026-05-26 13:58:28,139 [INFO] [10/154] DRY RUN — KThompson@munichre.com (EN)
+2026-05-26 13:58:28,139 [INFO] [11/154] DRY RUN — MRSL-central@munichre.com (EN)
+2026-05-26 13:58:28,140 [INFO] [12/154] DRY RUN — OPSInbox@icao.int (EN)
+2026-05-26 13:58:28,140 [INFO] [13/154] DRY RUN — ScHarris@munichre.com (EN)
+2026-05-26 13:58:28,141 [INFO] [14/154] DRY RUN — Scott.bradbury@atrium-uw.com (EN)
+2026-05-26 13:58:28,141 [INFO] [15/154] DRY RUN — William.Shepherd@hklaw.com (EN)
+2026-05-26 13:58:28,142 [INFO] [16/154] DRY RUN — abuse@amazonaws.com (EN)
+2026-05-26 13:58:28,142 [INFO] [17/154] DRY RUN — accidentesincidentes@dgac.go.cr (ES)
+2026-05-26 13:58:28,143 [INFO] [18/154] DRY RUN — adinwiddy@munichre.com (EN)
+2026-05-26 13:58:28,143 [INFO] [19/154] DRY RUN — adriana.lamirande@knightcolumbia.org (EN)
+2026-05-26 13:58:28,144 [INFO] [20/154] DRY RUN — amoncureno@selendygay.com (EN)
+2026-05-26 13:58:28,144 [INFO] [21/154] DRY RUN — aviation.claims@msamlin.com (EN)
+2026-05-26 13:58:28,145 [INFO] [22/154] DRY RUN — aviation.safety@dhl.com (EN)
+2026-05-26 13:58:28,145 [INFO] [23/154] DRY RUN — aviation_info@lloyds.com (EN)
+2026-05-26 13:58:28,146 [INFO] [24/154] DRY RUN — aviationuw@munichre.com (EN)
+2026-05-26 13:58:28,146 [INFO] [25/154] DRY RUN — brmail@itu.int (EN)
+2026-05-26 13:58:28,146 [INFO] [26/154] DRY RUN — brmail_interference@itu.int (EN)
+2026-05-26 13:58:28,147 [INFO] [27/154] DRY RUN — businessconduct@meta.com (EN)
+2026-05-26 13:58:28,147 [INFO] [28/154] DRY RUN — celinecanu@ifalpa.org (EN)
+2026-05-26 13:58:28,147 [INFO] [29/154] DRY RUN — charters@aerobell.com (ES)
+2026-05-26 13:58:28,148 [INFO] [30/154] DRY RUN — clickhere@theintercept.com (EN)
+2026-05-26 13:58:28,148 [INFO] [31/154] DRY RUN — competencia@sutel.go.cr (ES)
+2026-05-26 13:58:28,148 [INFO] [32/154] DRY RUN — complaints2786@everestglobal.com (EN)
+2026-05-26 13:58:28,149 [INFO] [33/154] DRY RUN — complaints@lloyds.com (EN)
+2026-05-26 13:58:28,149 [INFO] [34/154] DRY RUN — compliance@zscaler.com (EN)
+2026-05-26 13:58:28,150 [INFO] [35/154] DRY RUN — corpcom@jetblue.com (EN)
+2026-05-26 13:58:28,150 [INFO] [36/154] DRY RUN — corporate.affairs@wnco.com (EN)
+2026-05-26 13:58:28,151 [INFO] [37/154] DRY RUN — corporate.safety@aa.com (EN)
+2026-05-26 13:58:28,151 [INFO] [38/154] DRY RUN — corporate.security@aa.com (EN)
+2026-05-26 13:58:28,151 [INFO] [39/154] DRY RUN — corporate.security@westjet.com (EN)
+2026-05-26 13:58:28,152 [INFO] [40/154] DRY RUN — corporate@flyfrontier.com (EN)
+2026-05-26 13:58:28,152 [INFO] [41/154] DRY RUN — costarica@jw.org (ES)
+2026-05-26 13:58:28,153 [INFO] [42/154] DRY RUN — cr@jw.org (ES)
+2026-05-26 13:58:28,153 [INFO] [43/154] DRY RUN — cstoughton@selendygay.com (EN)
+2026-05-26 13:58:28,154 [INFO] [44/154] DRY RUN — eca@eurocockpit.eu (EN)
+2026-05-26 13:58:28,154 [INFO] [45/154] DRY RUN — ed.louth@libertyglobalgroup.com (EN)
+2026-05-26 13:58:28,154 [INFO] [46/154] DRY RUN — edward.kang@alston.com (EN)
+2026-05-26 13:58:28,155 [INFO] [47/154] DRY RUN — enquiries@lloyds.com (EN)
+2026-05-26 13:58:28,155 [INFO] [48/154] DRY RUN — ethics@ibm.com (EN)
+2026-05-26 13:58:28,155 [INFO] [49/154] DRY RUN — flightsafety@boeing.com (EN)
+2026-05-26 13:58:28,156 [INFO] [50/154] DRY RUN — google-whistleblower@google.com (EN)
+2026-05-26 13:58:28,156 [INFO] [51/154] DRY RUN — greg.andres@davispolk.com (EN)
+2026-05-26 13:58:28,156 [INFO] [52/154] DRY RUN — hello@echokappa.com (EN)
+2026-05-26 13:58:28,157 [INFO] [53/154] DRY RUN — helpline@accessnow.org (EN)
+2026-05-26 13:58:28,157 [INFO] [54/154] DRY RUN — heredia@jw.org (ES)
+2026-05-26 13:58:28,158 [INFO] [55/154] DRY RUN — houhq@ifalpa.org (EN)
+2026-05-26 13:58:28,158 [INFO] [56/154] DRY RUN — ida.aduwa@leighday.co.uk (EN)
+2026-05-26 13:58:28,158 [INFO] [57/154] DRY RUN — info@aclu.org (EN)
+2026-05-26 13:58:28,159 [INFO] [58/154] DRY RUN — integrity@spacex.com (EN)
+2026-05-26 13:58:28,159 [INFO] [59/154] DRY RUN — investigations@nytimes.com (EN)
+2026-05-26 13:58:28,160 [INFO] [60/154] DRY RUN — invoicereceptionCosta.Rica@kyndryl.com (EN)
+2026-05-26 13:58:28,160 [INFO] [61/154] DRY RUN — jack@darknetdiaries.com (EN)
+2026-05-26 13:58:28,160 [INFO] [62/154] DRY RUN — james.schroeder@faa.gov (EN)
+2026-05-26 13:58:28,161 [INFO] [63/154] DRY RUN — jlap@pb-iplaw.com (EN)
+2026-05-26 13:58:28,161 [INFO] [64/154] DRY RUN — joerogan@joerogan.com (EN)
+2026-05-26 13:58:28,162 [INFO] [65/154] DRY RUN — jtdb@pb-iplaw.com (EN)
+2026-05-26 13:58:28,162 [INFO] [66/154] DRY RUN — kate.gordge@atrium-uw.com (EN)
+2026-05-26 13:58:28,162 [INFO] [67/154] DRY RUN — kim.peretti@alston.com (EN)
+2026-05-26 13:58:28,163 [INFO] [68/154] DRY RUN — kvoss@cov.com (EN)
+2026-05-26 13:58:28,163 [INFO] [69/154] DRY RUN — legal@airtransat.com (EN)
+2026-05-26 13:58:28,164 [INFO] [70/154] DRY RUN — legal@delta.com (EN)
+2026-05-26 13:58:28,164 [INFO] [71/154] DRY RUN — legal@spirit.com (EN)
+2026-05-26 13:58:28,164 [INFO] [72/154] DRY RUN — legal@zscaler.com (EN)
+2026-05-26 13:58:28,165 [INFO] [73/154] DRY RUN — lexfridman@gmail.com (EN)
+2026-05-26 13:58:28,165 [INFO] [74/154] DRY RUN — lma@lmalloyds.com (EN)
+2026-05-26 13:58:28,166 [INFO] [75/154] DRY RUN — mburner@cov.com (EN)
+2026-05-26 13:58:28,167 [INFO] [76/154] DRY RUN — micah.block@davispolk.com (EN)
+2026-05-26 13:58:28,167 [INFO] [77/154] DRY RUN — mike.maccoll@atrium-uw.com (EN)
+2026-05-26 13:58:28,167 [INFO] [78/154] DRY RUN — modem@wired.com (EN)
+2026-05-26 13:58:28,168 [INFO] [79/154] DRY RUN — nacc-cns@icao.int (EN)
+2026-05-26 13:58:28,168 [INFO] [80/154] DRY RUN — nacc-fs@icao.int (EN)
+2026-05-26 13:58:28,169 [INFO] [81/154] DRY RUN — nspintake@aclu.org (EN)
+2026-05-26 13:58:28,169 [INFO] [82/154] DRY RUN — operaciones@sansa.com (ES)
+2026-05-26 13:58:28,170 [INFO] [83/154] DRY RUN — ops@greenairways.com (ES)
+2026-05-26 13:58:28,170 [INFO] [84/154] DRY RUN — patrick@risky.biz (EN)
+2026-05-26 13:58:28,171 [INFO] [85/154] DRY RUN — podcast@aviationweek.com (EN)
+2026-05-26 13:58:28,171 [INFO] [86/154] DRY RUN — podcast@privacyinternational.org (EN)
+2026-05-26 13:58:28,172 [INFO] [87/154] DRY RUN — press@eff.org (EN)
+2026-05-26 13:58:28,172 [INFO] [88/154] DRY RUN — product.safety@airbus.com (EN)
+2026-05-26 13:58:28,173 [INFO] [89/154] DRY RUN — ran@malicious.life (EN)
+2026-05-26 13:58:28,173 [INFO] [90/154] DRY RUN — regulatory@aa.com (EN)
+2026-05-26 13:58:28,173 [INFO] [91/154] DRY RUN — regulatory@aeromexico.com (ES)
+2026-05-26 13:58:28,174 [INFO] [92/154] DRY RUN — regulatory@aircanada.ca (EN)
+2026-05-26 13:58:28,174 [INFO] [93/154] DRY RUN — regulatory@airfrance.fr (EN)
+2026-05-26 13:58:28,175 [INFO] [94/154] DRY RUN — regulatory@alaskaair.com (EN)
+2026-05-26 13:58:28,175 [INFO] [95/154] DRY RUN — regulatory@arajet.com (ES)
+2026-05-26 13:58:28,176 [INFO] [96/154] DRY RUN — regulatory@avianca.com (ES)
+2026-05-26 13:58:28,176 [INFO] [97/154] DRY RUN — regulatory@ba.com (EN)
+2026-05-26 13:58:28,177 [INFO] [98/154] DRY RUN — regulatory@condor.com (EN)
+2026-05-26 13:58:28,177 [INFO] [99/154] DRY RUN — regulatory@copaair.com (ES)
+2026-05-26 13:58:28,177 [INFO] [100/154] DRY RUN — regulatory@dlh.de (EN)
+2026-05-26 13:58:28,178 [INFO] [101/154] DRY RUN — regulatory@edelweiss.com (EN)
+2026-05-26 13:58:28,178 [INFO] [102/154] DRY RUN — regulatory@iberia.es (ES)
+2026-05-26 13:58:28,179 [INFO] [103/154] DRY RUN — regulatory@iberojet.com (EN)
+2026-05-26 13:58:28,179 [INFO] [104/154] DRY RUN — regulatory@klm.com (EN)
+2026-05-26 13:58:28,180 [INFO] [105/154] DRY RUN — regulatory@latam.com (ES)
+2026-05-26 13:58:28,180 [INFO] [106/154] DRY RUN — regulatory@sunwing.ca (EN)
+2026-05-26 13:58:28,180 [INFO] [107/154] DRY RUN — regulatory@tuifly.com (EN)
+2026-05-26 13:58:28,181 [INFO] [108/154] DRY RUN — regulatory@united.com (EN)
+2026-05-26 13:58:28,181 [INFO] [109/154] DRY RUN — regulatory@volaris.com (ES)
+2026-05-26 13:58:28,182 [INFO] [110/154] DRY RUN — regulatory@wingo.com (ES)
+2026-05-26 13:58:28,182 [INFO] [111/154] DRY RUN — regulatory@wnco.com (EN)
+2026-05-26 13:58:28,183 [INFO] [112/154] DRY RUN — research@citizenlab.ca (EN)
+2026-05-26 13:58:28,183 [INFO] [113/154] DRY RUN — richard.bayman@msamlin.com (EN)
+2026-05-26 13:58:28,184 [INFO] [114/154] DRY RUN — safety@aeromexico.com (ES)
+2026-05-26 13:58:28,184 [INFO] [115/154] DRY RUN — safety@aircanada.ca (EN)
+2026-05-26 13:58:28,185 [INFO] [116/154] DRY RUN — safety@airfrance.fr (EN)
+2026-05-26 13:58:28,185 [INFO] [117/154] DRY RUN — safety@airtransat.com (EN)
+2026-05-26 13:58:28,186 [INFO] [118/154] DRY RUN — safety@alaskaair.com (EN)
+2026-05-26 13:58:28,186 [INFO] [119/154] DRY RUN — safety@alpa.org (EN)
+2026-05-26 13:58:28,187 [INFO] [120/154] DRY RUN — safety@arajet.com (ES)
+2026-05-26 13:58:28,187 [INFO] [121/154] DRY RUN — safety@avianca.com (ES)
+2026-05-26 13:58:28,187 [INFO] [122/154] DRY RUN — safety@ba.com (EN)
+2026-05-26 13:58:28,188 [INFO] [123/154] DRY RUN — safety@condor.com (EN)
+2026-05-26 13:58:28,188 [INFO] [124/154] DRY RUN — safety@copaair.com (ES)
+2026-05-26 13:58:28,189 [INFO] [125/154] DRY RUN — safety@dlh.de (EN)
+2026-05-26 13:58:28,189 [INFO] [126/154] DRY RUN — safety@edelweiss.com (EN)
+2026-05-26 13:58:28,189 [INFO] [127/154] DRY RUN — safety@flyfrontier.com (EN)
+2026-05-26 13:58:28,190 [INFO] [128/154] DRY RUN — safety@greenairways.com (ES)
+2026-05-26 13:58:28,190 [INFO] [129/154] DRY RUN — safety@iberia.es (ES)
+2026-05-26 13:58:28,191 [INFO] [130/154] DRY RUN — safety@iberojet.com (EN)
+2026-05-26 13:58:28,191 [INFO] [131/154] DRY RUN — safety@jetblue.com (EN)
+2026-05-26 13:58:28,191 [INFO] [132/154] DRY RUN — safety@klm.com (EN)
+2026-05-26 13:58:28,192 [INFO] [133/154] DRY RUN — safety@latam.com (ES)
+2026-05-26 13:58:28,192 [INFO] [134/154] DRY RUN — safety@spirit.com (EN)
+2026-05-26 13:58:28,193 [INFO] [135/154] DRY RUN — safety@sunwing.ca (EN)
+2026-05-26 13:58:28,193 [INFO] [136/154] DRY RUN — safety@tuifly.com (EN)
+2026-05-26 13:58:28,194 [INFO] [137/154] DRY RUN — safety@united.com (EN)
+2026-05-26 13:58:28,194 [INFO] [138/154] DRY RUN — safety@volaris.com (ES)
+2026-05-26 13:58:28,195 [INFO] [139/154] DRY RUN — safety@westjet.com (EN)
+2026-05-26 13:58:28,195 [INFO] [140/154] DRY RUN — safety@wingo.com (ES)
+2026-05-26 13:58:28,195 [INFO] [141/154] DRY RUN — safety@wnco.com (EN)
+2026-05-26 13:58:28,196 [INFO] [142/154] DRY RUN — sarah.griffiths@libertyglobalgroup.com (EN)
+2026-05-26 13:58:28,196 [INFO] [143/154] DRY RUN — security@google.com (EN)
+2026-05-26 13:58:28,197 [INFO] [144/154] DRY RUN — security@united.com (EN)
+2026-05-26 13:58:28,197 [INFO] [145/154] DRY RUN — securitynow@twit.tv (EN)
+2026-05-26 13:58:28,197 [INFO] [146/154] DRY RUN — seguridad@aerobell.com (ES)
+2026-05-26 13:58:28,198 [INFO] [147/154] DRY RUN — seguridad@sansa.com (ES)
+2026-05-26 13:58:28,198 [INFO] [148/154] DRY RUN — shawn@vigilance.media (EN)
+2026-05-26 13:58:28,199 [INFO] [149/154] DRY RUN — skovac@zscaler.com (EN)
+2026-05-26 13:58:28,199 [INFO] [150/154] DRY RUN — spacehelp@itu.int (EN)
+2026-05-26 13:58:28,199 [INFO] [151/154] DRY RUN — sugerencias@aeris.cr (EN)
+2026-05-26 13:58:28,200 [INFO] [152/154] DRY RUN — vipul.gupta@msamlin.com (EN)
+2026-05-26 13:58:28,200 [INFO] [153/154] DRY RUN — warzone@thedrive.com (EN)
+2026-05-26 13:58:28,200 [INFO] [154/154] DRY RUN — whistleblower@kyndryl.com (EN)
+2026-05-26 13:58:28,201 [INFO] ==============================================================
+2026-05-26 13:58:28,201 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 13:58:28,201 [INFO]   Sent:    0
+2026-05-26 13:58:28,202 [INFO]   Failed:  0
+2026-05-26 13:58:28,202 [INFO]   Total sent (cumulative): 0
+2026-05-26 13:58:28,202 [INFO] ==============================================================
+2026-05-26 13:58:42,594 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 13:58:42,595 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 13:58:42,595 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 13:58:42,596 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 13:58:42,596 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 13:58:42,596 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 13:58:42,597 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 13:58:42,597 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 13:58:42,598 [INFO] ==============================================================
+2026-05-26 13:58:42,598 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 13:58:42,599 [INFO]   Date:               2026-05-26
+2026-05-26 13:58:42,599 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 13:58:42,600 [INFO]   Total in list:      154
+2026-05-26 13:58:42,600 [INFO]   Already sent:       0
+2026-05-26 13:58:42,600 [INFO]   Queued to send:     154
+2026-05-26 13:58:42,601 [INFO]   Dry run:            NO
+2026-05-26 13:58:42,601 [INFO] ==============================================================
+2026-05-26 13:58:42,602 [INFO] [1/154] Sending → 9-AJI-SMS@faa.gov (EN) ...
+2026-05-26 13:58:42,971 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135842.cffb80954d6309cb@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:58:42,973 [INFO]   ⏳ 16s delay ...
+2026-05-26 13:58:58,974 [INFO] [2/154] Sending → 9-AVS-AIR-SMS@faa.gov (EN) ...
+2026-05-26 13:58:59,263 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135859.b34985cb4368e7a4@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:58:59,265 [INFO]   ⏳ 9s delay ...
+2026-05-26 13:59:08,266 [INFO] [3/154] Sending → 9-NATL-SMS-ProgramOffice@faa.gov (EN) ...
+2026-05-26 13:59:08,569 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135908.d68dafe37c00dad6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:59:08,571 [INFO]   ⏳ 11s delay ...
+2026-05-26 13:59:19,571 [INFO] [4/154] Sending → 9-SMS-AVP-300@faa.gov (EN) ...
+2026-05-26 13:59:19,847 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135919.d9a82ec61c0d4194@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:59:19,849 [INFO]   ⏳ 14s delay ...
+2026-05-26 13:59:33,850 [INFO] [5/154] Sending → EASec@alpa.org (EN) ...
+2026-05-26 13:59:34,129 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135934.2257d9857125ef53@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:59:34,131 [INFO]   ⏳ 14s delay ...
+2026-05-26 13:59:48,132 [INFO] [6/154] Sending → EmRussell@munichre.com (EN) ...
+2026-05-26 13:59:48,458 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135948.696aed91bc7380ac@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:59:48,460 [INFO]   ⏳ 10s delay ...
+2026-05-26 13:59:58,461 [INFO] [7/154] Sending → Flightsafety@delta.com (EN) ...
+2026-05-26 13:59:58,773 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526135958.c0fed3103fc9c5c2@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 13:59:58,775 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:00:06,776 [INFO] [8/154] Sending → Joshua.down@atrium-uw.com (EN) ...
+2026-05-26 14:00:07,077 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140007.9597f869b1116096@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:00:07,078 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:00:23,079 [INFO] [9/154] Sending → Julian.Payne@edelman.com (EN) ...
+2026-05-26 14:00:23,406 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140023.e393459fea0f78e1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:00:23,407 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:00:32,408 [INFO] [10/154] Sending → KThompson@munichre.com (EN) ...
+2026-05-26 14:00:32,687 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140032.7c625ffe80206d61@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:00:32,689 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:00:52,555 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:00:52,556 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:00:52,556 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:00:52,557 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:00:52,557 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:00:52,558 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:00:52,558 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:00:52,558 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:01:06,977 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:01:06,977 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:01:06,978 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:01:06,978 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:01:06,979 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:01:06,979 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:01:06,979 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:01:06,980 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:01:28,417 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:01:28,417 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:01:28,418 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:01:28,418 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:01:28,418 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:01:28,419 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:01:28,419 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:01:28,420 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:01:28,420 [INFO] ==============================================================
+2026-05-26 14:01:28,420 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:01:28,421 [INFO]   Date:               2026-05-26
+2026-05-26 14:01:28,421 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:01:28,422 [INFO]   Total in list:      154
+2026-05-26 14:01:28,422 [INFO]   Already sent:       10
+2026-05-26 14:01:28,423 [INFO]   Queued to send:     5
+2026-05-26 14:01:28,423 [INFO]   Dry run:            NO
+2026-05-26 14:01:28,424 [INFO] ==============================================================
+2026-05-26 14:01:28,424 [INFO] [1/5] Sending → MRSL-central@munichre.com (EN) ...
+2026-05-26 14:01:28,748 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140128.6a560c91acfeeb82@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:01:28,750 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:01:45,751 [INFO] [2/5] Sending → OPSInbox@icao.int (EN) ...
+2026-05-26 14:01:46,070 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140146.500d470f2c2c4d12@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:01:46,072 [INFO]   ⏳ 14s delay ...
+2026-05-26 14:02:00,073 [INFO] [3/5] Sending → ScHarris@munichre.com (EN) ...
+2026-05-26 14:02:00,397 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140200.08382b297d53da4c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:02:00,399 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:02:17,400 [INFO] [4/5] Sending → Scott.bradbury@atrium-uw.com (EN) ...
+2026-05-26 14:02:17,713 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140217.2f4e9dbcf4627e25@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:02:17,715 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:02:30,716 [INFO] [5/5] Sending → William.Shepherd@hklaw.com (EN) ...
+2026-05-26 14:02:30,986 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140230.217bdf775475d726@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:02:30,988 [INFO] ==============================================================
+2026-05-26 14:02:30,988 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:02:30,989 [INFO]   Sent:    5
+2026-05-26 14:02:30,989 [INFO]   Failed:  0
+2026-05-26 14:02:30,990 [INFO]   Total sent (cumulative): 15
+2026-05-26 14:02:30,990 [INFO] ==============================================================
+2026-05-26 14:02:36,650 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:02:36,651 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:02:36,651 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:02:36,651 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:02:36,652 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:02:36,652 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:02:36,653 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:02:36,653 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:02:36,653 [INFO] ==============================================================
+2026-05-26 14:02:36,654 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:02:36,654 [INFO]   Date:               2026-05-26
+2026-05-26 14:02:36,655 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:02:36,655 [INFO]   Total in list:      154
+2026-05-26 14:02:36,655 [INFO]   Already sent:       15
+2026-05-26 14:02:36,656 [INFO]   Queued to send:     5
+2026-05-26 14:02:36,656 [INFO]   Dry run:            NO
+2026-05-26 14:02:36,657 [INFO] ==============================================================
+2026-05-26 14:02:36,657 [INFO] [1/5] Sending → abuse@amazonaws.com (EN) ...
+2026-05-26 14:02:36,973 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140236.2b00161eec2a5075@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:02:36,975 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:02:48,976 [INFO] [2/5] Sending → accidentesincidentes@dgac.go.cr (ES) ...
+2026-05-26 14:02:49,272 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526140249.a641824725588fcd@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:02:49,273 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:02:59,274 [INFO] [3/5] Sending → adinwiddy@munichre.com (EN) ...
+2026-05-26 14:02:59,576 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140259.2c7fa5e0a6770597@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:02:59,578 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:03:17,578 [INFO] [4/5] Sending → adriana.lamirande@knightcolumbia.org (EN) ...
+2026-05-26 14:03:17,902 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140317.f996c713a994d13c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:03:17,904 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:03:26,905 [INFO] [5/5] Sending → amoncureno@selendygay.com (EN) ...
+2026-05-26 14:03:27,215 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140327.8d77d57788e27d24@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:03:27,217 [INFO] ==============================================================
+2026-05-26 14:03:27,218 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:03:27,218 [INFO]   Sent:    5
+2026-05-26 14:03:27,219 [INFO]   Failed:  0
+2026-05-26 14:03:27,219 [INFO]   Total sent (cumulative): 20
+2026-05-26 14:03:27,220 [INFO] ==============================================================
+2026-05-26 14:03:33,252 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:03:33,252 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:03:33,253 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:03:33,253 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:03:33,253 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:03:33,254 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:03:33,254 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:03:33,255 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:03:33,255 [INFO] ==============================================================
+2026-05-26 14:03:33,255 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:03:33,256 [INFO]   Date:               2026-05-26
+2026-05-26 14:03:33,256 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:03:33,257 [INFO]   Total in list:      154
+2026-05-26 14:03:33,257 [INFO]   Already sent:       20
+2026-05-26 14:03:33,258 [INFO]   Queued to send:     5
+2026-05-26 14:03:33,258 [INFO]   Dry run:            NO
+2026-05-26 14:03:33,259 [INFO] ==============================================================
+2026-05-26 14:03:33,259 [INFO] [1/5] Sending → aviation.claims@msamlin.com (EN) ...
+2026-05-26 14:03:33,548 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140333.703ffacfd89e541c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:03:33,550 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:03:43,551 [INFO] [2/5] Sending → aviation.safety@dhl.com (EN) ...
+2026-05-26 14:03:43,855 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140343.76b4d97cbf759fdc@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:03:43,856 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:04:01,857 [INFO] [3/5] Sending → aviation_info@lloyds.com (EN) ...
+2026-05-26 14:04:02,189 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140402.1d8c1c27138d8688@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:04:02,191 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:04:10,192 [INFO] [4/5] Sending → aviationuw@munichre.com (EN) ...
+2026-05-26 14:04:10,513 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140410.f91833dc4da23021@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:04:10,515 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:04:25,515 [INFO] [5/5] Sending → brmail@itu.int (EN) ...
+2026-05-26 14:04:25,868 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140425.0b57827be52f159c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:04:25,870 [INFO] ==============================================================
+2026-05-26 14:04:25,870 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:04:25,871 [INFO]   Sent:    5
+2026-05-26 14:04:25,872 [INFO]   Failed:  0
+2026-05-26 14:04:25,872 [INFO]   Total sent (cumulative): 25
+2026-05-26 14:04:25,873 [INFO] ==============================================================
+2026-05-26 14:04:31,929 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:04:31,929 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:04:31,930 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:04:31,930 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:04:31,931 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:04:31,931 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:04:31,931 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:04:31,932 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:04:31,932 [INFO] ==============================================================
+2026-05-26 14:04:31,933 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:04:31,933 [INFO]   Date:               2026-05-26
+2026-05-26 14:04:31,933 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:04:31,934 [INFO]   Total in list:      154
+2026-05-26 14:04:31,934 [INFO]   Already sent:       25
+2026-05-26 14:04:31,935 [INFO]   Queued to send:     5
+2026-05-26 14:04:31,935 [INFO]   Dry run:            NO
+2026-05-26 14:04:31,936 [INFO] ==============================================================
+2026-05-26 14:04:31,936 [INFO] [1/5] Sending → brmail_interference@itu.int (EN) ...
+2026-05-26 14:04:32,234 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140432.601c0cda8df9980c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:04:32,236 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:04:40,237 [INFO] [2/5] Sending → businessconduct@meta.com (EN) ...
+2026-05-26 14:04:40,556 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140440.1895b7378ec15ee7@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:04:40,558 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:04:56,559 [INFO] [3/5] Sending → celinecanu@ifalpa.org (EN) ...
+2026-05-26 14:04:56,878 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140456.0cc76456c01915d2@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:04:56,880 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:05:14,881 [INFO] [4/5] Sending → charters@aerobell.com (ES) ...
+2026-05-26 14:05:15,198 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526140515.c72df9018fc634f7@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:05:15,200 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:05:25,201 [INFO] [5/5] Sending → clickhere@theintercept.com (EN) ...
+2026-05-26 14:05:25,490 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140525.458499d22dfca9cf@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:05:25,492 [INFO] ==============================================================
+2026-05-26 14:05:25,492 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:05:25,493 [INFO]   Sent:    5
+2026-05-26 14:05:25,493 [INFO]   Failed:  0
+2026-05-26 14:05:25,494 [INFO]   Total sent (cumulative): 30
+2026-05-26 14:05:25,494 [INFO] ==============================================================
+2026-05-26 14:05:31,475 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:05:31,476 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:05:31,476 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:05:31,476 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:05:31,477 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:05:31,478 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:05:31,478 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:05:31,479 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:05:31,479 [INFO] ==============================================================
+2026-05-26 14:05:31,480 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:05:31,480 [INFO]   Date:               2026-05-26
+2026-05-26 14:05:31,480 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:05:31,481 [INFO]   Total in list:      154
+2026-05-26 14:05:31,481 [INFO]   Already sent:       30
+2026-05-26 14:05:31,482 [INFO]   Queued to send:     5
+2026-05-26 14:05:31,482 [INFO]   Dry run:            NO
+2026-05-26 14:05:31,483 [INFO] ==============================================================
+2026-05-26 14:05:31,483 [INFO] [1/5] Sending → competencia@sutel.go.cr (ES) ...
+2026-05-26 14:05:31,821 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526140531.a99e6ba1bf02c66c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:05:31,823 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:05:43,824 [INFO] [2/5] Sending → complaints2786@everestglobal.com (EN) ...
+2026-05-26 14:05:44,146 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140544.6d1404f3b22485e5@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:05:44,148 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:05:53,149 [INFO] [3/5] Sending → complaints@lloyds.com (EN) ...
+2026-05-26 14:05:53,441 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140553.4e4fe0aa94181e5c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:05:53,443 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:06:10,444 [INFO] [4/5] Sending → compliance@zscaler.com (EN) ...
+2026-05-26 14:06:10,595 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140610.003a588b165fd7c4@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:06:10,597 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:06:22,598 [INFO] [5/5] Sending → corpcom@jetblue.com (EN) ...
+2026-05-26 14:06:22,717 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140622.90b7ec921cc02f44@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:06:22,719 [INFO] ==============================================================
+2026-05-26 14:06:22,719 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:06:22,720 [INFO]   Sent:    5
+2026-05-26 14:06:22,720 [INFO]   Failed:  0
+2026-05-26 14:06:22,721 [INFO]   Total sent (cumulative): 35
+2026-05-26 14:06:22,721 [INFO] ==============================================================
+2026-05-26 14:06:27,963 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:06:27,964 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:06:27,964 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:06:27,965 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:06:27,965 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:06:27,966 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:06:27,966 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:06:27,967 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:06:27,967 [INFO] ==============================================================
+2026-05-26 14:06:27,967 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:06:27,968 [INFO]   Date:               2026-05-26
+2026-05-26 14:06:27,968 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:06:27,968 [INFO]   Total in list:      154
+2026-05-26 14:06:27,969 [INFO]   Already sent:       35
+2026-05-26 14:06:27,969 [INFO]   Queued to send:     5
+2026-05-26 14:06:27,970 [INFO]   Dry run:            NO
+2026-05-26 14:06:27,970 [INFO] ==============================================================
+2026-05-26 14:06:27,970 [INFO] [1/5] Sending → corporate.affairs@wnco.com (EN) ...
+2026-05-26 14:06:28,129 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140628.de5b2595b64ecf0d@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:06:28,131 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:06:44,132 [INFO] [2/5] Sending → corporate.safety@aa.com (EN) ...
+2026-05-26 14:06:44,251 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140644.c1d4eeca006e8cb1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:06:44,253 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:06:53,254 [INFO] [3/5] Sending → corporate.security@aa.com (EN) ...
+2026-05-26 14:06:53,353 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140653.224612b71eb55c85@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:06:53,355 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:07:04,355 [INFO] [4/5] Sending → corporate.security@westjet.com (EN) ...
+2026-05-26 14:07:04,526 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140704.b0472e2e7c8f99a6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:07:04,528 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:07:20,528 [INFO] [5/5] Sending → corporate@flyfrontier.com (EN) ...
+2026-05-26 14:07:20,662 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140720.b9140f42cad3af28@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:07:20,664 [INFO] ==============================================================
+2026-05-26 14:07:20,664 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:07:20,665 [INFO]   Sent:    5
+2026-05-26 14:07:20,665 [INFO]   Failed:  0
+2026-05-26 14:07:20,666 [INFO]   Total sent (cumulative): 40
+2026-05-26 14:07:20,666 [INFO] ==============================================================
+2026-05-26 14:07:25,868 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:07:25,869 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:07:25,869 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:07:25,869 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:07:25,870 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:07:25,870 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:07:25,871 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:07:25,871 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:07:25,871 [INFO] ==============================================================
+2026-05-26 14:07:25,872 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:07:25,872 [INFO]   Date:               2026-05-26
+2026-05-26 14:07:25,873 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:07:25,873 [INFO]   Total in list:      154
+2026-05-26 14:07:25,873 [INFO]   Already sent:       40
+2026-05-26 14:07:25,874 [INFO]   Queued to send:     5
+2026-05-26 14:07:25,874 [INFO]   Dry run:            NO
+2026-05-26 14:07:25,875 [INFO] ==============================================================
+2026-05-26 14:07:25,875 [INFO] [1/5] Sending → costarica@jw.org (ES) ...
+2026-05-26 14:07:26,022 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526140725.788189b90e4182b4@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:07:26,024 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:07:42,024 [INFO] [2/5] Sending → cr@jw.org (ES) ...
+2026-05-26 14:07:42,133 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526140742.e4bf9abed9e0a095@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:07:42,135 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:07:53,136 [INFO] [3/5] Sending → cstoughton@selendygay.com (EN) ...
+2026-05-26 14:07:53,305 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140753.0c160e3961fb37d3@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:07:53,307 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:08:08,308 [INFO] [4/5] Sending → eca@eurocockpit.eu (EN) ...
+2026-05-26 14:08:08,435 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140808.ecc2fb9dd654bb90@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:08:08,437 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:08:17,438 [INFO] [5/5] Sending → ed.louth@libertyglobalgroup.com (EN) ...
+2026-05-26 14:08:17,571 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140817.e1451ecdebef7612@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:08:17,573 [INFO] ==============================================================
+2026-05-26 14:08:17,573 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:08:17,574 [INFO]   Sent:    5
+2026-05-26 14:08:17,574 [INFO]   Failed:  0
+2026-05-26 14:08:17,575 [INFO]   Total sent (cumulative): 45
+2026-05-26 14:08:17,575 [INFO] ==============================================================
+2026-05-26 14:08:23,136 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:08:23,137 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:08:23,137 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:08:23,138 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:08:23,138 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:08:23,138 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:08:23,139 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:08:23,139 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:08:23,140 [INFO] ==============================================================
+2026-05-26 14:08:23,140 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:08:23,141 [INFO]   Date:               2026-05-26
+2026-05-26 14:08:23,141 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:08:23,141 [INFO]   Total in list:      154
+2026-05-26 14:08:23,142 [INFO]   Already sent:       45
+2026-05-26 14:08:23,142 [INFO]   Queued to send:     5
+2026-05-26 14:08:23,143 [INFO]   Dry run:            NO
+2026-05-26 14:08:23,143 [INFO] ==============================================================
+2026-05-26 14:08:23,144 [INFO] [1/5] Sending → edward.kang@alston.com (EN) ...
+2026-05-26 14:08:23,297 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140823.7bfc45537bfb89e0@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:08:23,299 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:08:38,300 [INFO] [2/5] Sending → enquiries@lloyds.com (EN) ...
+2026-05-26 14:08:38,426 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140838.031f2162a7da4c64@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:08:38,428 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:08:48,429 [INFO] [3/5] Sending → ethics@ibm.com (EN) ...
+2026-05-26 14:08:48,542 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140848.bf761bcb0449a2f1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:08:48,544 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:09:00,545 [INFO] [4/5] Sending → flightsafety@boeing.com (EN) ...
+2026-05-26 14:09:00,634 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140900.94d6adfb2a56c438@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:09:00,636 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:09:16,636 [INFO] [5/5] Sending → google-whistleblower@google.com (EN) ...
+2026-05-26 14:09:16,942 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140916.4ad3dcb0952e5fcd@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:09:16,944 [INFO] ==============================================================
+2026-05-26 14:09:16,944 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:09:16,945 [INFO]   Sent:    5
+2026-05-26 14:09:16,945 [INFO]   Failed:  0
+2026-05-26 14:09:16,946 [INFO]   Total sent (cumulative): 50
+2026-05-26 14:09:16,946 [INFO] ==============================================================
+2026-05-26 14:09:23,449 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:09:23,449 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:09:23,450 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:09:23,450 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:09:23,451 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:09:23,451 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:09:23,452 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:09:23,452 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:09:23,452 [INFO] ==============================================================
+2026-05-26 14:09:23,453 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:09:23,453 [INFO]   Date:               2026-05-26
+2026-05-26 14:09:23,454 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:09:23,454 [INFO]   Total in list:      154
+2026-05-26 14:09:23,455 [INFO]   Already sent:       50
+2026-05-26 14:09:23,455 [INFO]   Queued to send:     5
+2026-05-26 14:09:23,456 [INFO]   Dry run:            NO
+2026-05-26 14:09:23,456 [INFO] ==============================================================
+2026-05-26 14:09:23,457 [INFO] [1/5] Sending → greg.andres@davispolk.com (EN) ...
+2026-05-26 14:09:23,752 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140923.aac7ef0911a71e8d@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:09:23,754 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:09:33,755 [INFO] [2/5] Sending → hello@echokappa.com (EN) ...
+2026-05-26 14:09:34,071 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140934.0e41014b392dd9e9@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:09:34,073 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:09:52,073 [INFO] [3/5] Sending → helpline@accessnow.org (EN) ...
+2026-05-26 14:09:52,369 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526140952.a1d0e3c40e774585@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:09:52,371 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:10:09,372 [INFO] [4/5] Sending → heredia@jw.org (ES) ...
+2026-05-26 14:10:09,683 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141009.d9b4788af1d7dcb6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:10:09,685 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:10:18,686 [INFO] [5/5] Sending → houhq@ifalpa.org (EN) ...
+2026-05-26 14:10:18,975 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141018.45574469a15c9f8b@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:10:18,976 [INFO] ==============================================================
+2026-05-26 14:10:18,977 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:10:18,977 [INFO]   Sent:    5
+2026-05-26 14:10:18,978 [INFO]   Failed:  0
+2026-05-26 14:10:18,978 [INFO]   Total sent (cumulative): 55
+2026-05-26 14:10:18,979 [INFO] ==============================================================
+2026-05-26 14:10:23,440 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:10:23,441 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:10:23,441 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:10:23,442 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:10:23,442 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:10:23,442 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:10:23,443 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:10:23,443 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:10:23,444 [INFO] ==============================================================
+2026-05-26 14:10:23,444 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:10:23,444 [INFO]   Date:               2026-05-26
+2026-05-26 14:10:23,445 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:10:23,445 [INFO]   Total in list:      154
+2026-05-26 14:10:23,445 [INFO]   Already sent:       55
+2026-05-26 14:10:23,446 [INFO]   Queued to send:     5
+2026-05-26 14:10:23,446 [INFO]   Dry run:            NO
+2026-05-26 14:10:23,447 [INFO] ==============================================================
+2026-05-26 14:10:23,447 [INFO] [1/5] Sending → ida.aduwa@leighday.co.uk (EN) ...
+2026-05-26 14:10:23,781 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141023.2eea19f06f5b7e3c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:10:23,783 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:10:40,784 [INFO] [2/5] Sending → info@aclu.org (EN) ...
+2026-05-26 14:10:41,086 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141041.f55a17d42e8cf424@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:10:41,088 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:10:49,089 [INFO] [3/5] Sending → integrity@spacex.com (EN) ...
+2026-05-26 14:10:49,400 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141049.b2ecc89d80dae194@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:10:49,402 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:11:06,403 [INFO] [4/5] Sending → investigations@nytimes.com (EN) ...
+2026-05-26 14:11:06,722 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141106.94007dc56450d230@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:11:06,724 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:11:23,724 [INFO] [5/5] Sending → invoicereceptionCosta.Rica@kyndryl.com (EN) ...
+2026-05-26 14:11:24,037 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141123.073fa673e205abd3@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:11:24,039 [INFO] ==============================================================
+2026-05-26 14:11:24,040 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:11:24,040 [INFO]   Sent:    5
+2026-05-26 14:11:24,041 [INFO]   Failed:  0
+2026-05-26 14:11:24,041 [INFO]   Total sent (cumulative): 60
+2026-05-26 14:11:24,042 [INFO] ==============================================================
+2026-05-26 14:11:29,298 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:11:29,298 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:11:29,299 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:11:29,299 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:11:29,300 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:11:29,300 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:11:29,301 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:11:29,301 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:11:29,302 [INFO] ==============================================================
+2026-05-26 14:11:29,302 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:11:29,302 [INFO]   Date:               2026-05-26
+2026-05-26 14:11:29,303 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:11:29,303 [INFO]   Total in list:      154
+2026-05-26 14:11:29,304 [INFO]   Already sent:       60
+2026-05-26 14:11:29,304 [INFO]   Queued to send:     5
+2026-05-26 14:11:29,304 [INFO]   Dry run:            NO
+2026-05-26 14:11:29,305 [INFO] ==============================================================
+2026-05-26 14:11:29,305 [INFO] [1/5] Sending → jack@darknetdiaries.com (EN) ...
+2026-05-26 14:11:29,600 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141129.125710d250d1c9a0@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:11:29,601 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:11:42,602 [INFO] [2/5] Sending → james.schroeder@faa.gov (EN) ...
+2026-05-26 14:11:42,907 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141142.10afba1695495a02@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:11:42,908 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:11:59,909 [INFO] [3/5] Sending → jlap@pb-iplaw.com (EN) ...
+2026-05-26 14:12:00,237 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141200.4c6cd16539e17073@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:12:00,239 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:12:09,239 [INFO] [4/5] Sending → joerogan@joerogan.com (EN) ...
+2026-05-26 14:12:09,552 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141209.a81408e7fe9d11be@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:12:09,554 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:12:19,555 [INFO] [5/5] Sending → jtdb@pb-iplaw.com (EN) ...
+2026-05-26 14:12:19,838 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141219.838e40b8a748c937@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:12:19,840 [INFO] ==============================================================
+2026-05-26 14:12:19,840 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:12:19,840 [INFO]   Sent:    5
+2026-05-26 14:12:19,841 [INFO]   Failed:  0
+2026-05-26 14:12:19,841 [INFO]   Total sent (cumulative): 65
+2026-05-26 14:12:19,842 [INFO] ==============================================================
+2026-05-26 14:12:24,698 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:12:24,698 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:12:24,699 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:12:24,699 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:12:24,700 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:12:24,700 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:12:24,700 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:12:24,701 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:12:24,701 [INFO] ==============================================================
+2026-05-26 14:12:24,702 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:12:24,702 [INFO]   Date:               2026-05-26
+2026-05-26 14:12:24,702 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:12:24,703 [INFO]   Total in list:      154
+2026-05-26 14:12:24,703 [INFO]   Already sent:       65
+2026-05-26 14:12:24,704 [INFO]   Queued to send:     5
+2026-05-26 14:12:24,704 [INFO]   Dry run:            NO
+2026-05-26 14:12:24,705 [INFO] ==============================================================
+2026-05-26 14:12:24,705 [INFO] [1/5] Sending → kate.gordge@atrium-uw.com (EN) ...
+2026-05-26 14:12:25,013 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141224.853ab31de8cedcdf@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:12:25,015 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:12:35,016 [INFO] [2/5] Sending → kim.peretti@alston.com (EN) ...
+2026-05-26 14:12:35,312 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141235.e353994d3391ac89@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:12:35,314 [INFO]   ⏳ 14s delay ...
+2026-05-26 14:12:49,315 [INFO] [3/5] Sending → kvoss@cov.com (EN) ...
+2026-05-26 14:12:49,650 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141249.002e5e8bf66192f8@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:12:49,652 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:13:04,653 [INFO] [4/5] Sending → legal@airtransat.com (EN) ...
+2026-05-26 14:13:04,951 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141304.053e28d013200309@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:13:04,953 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:13:21,953 [INFO] [5/5] Sending → legal@delta.com (EN) ...
+2026-05-26 14:13:22,335 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141322.b1a1d0bca992cfc4@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:13:22,336 [INFO] ==============================================================
+2026-05-26 14:13:22,337 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:13:22,337 [INFO]   Sent:    5
+2026-05-26 14:13:22,337 [INFO]   Failed:  0
+2026-05-26 14:13:22,338 [INFO]   Total sent (cumulative): 70
+2026-05-26 14:13:22,338 [INFO] ==============================================================
+2026-05-26 14:13:27,156 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:13:27,157 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:13:27,157 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:13:27,158 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:13:27,158 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:13:27,159 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:13:27,159 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:13:27,160 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:13:27,160 [INFO] ==============================================================
+2026-05-26 14:13:27,160 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:13:27,161 [INFO]   Date:               2026-05-26
+2026-05-26 14:13:27,161 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:13:27,161 [INFO]   Total in list:      154
+2026-05-26 14:13:27,162 [INFO]   Already sent:       70
+2026-05-26 14:13:27,162 [INFO]   Queued to send:     5
+2026-05-26 14:13:27,163 [INFO]   Dry run:            NO
+2026-05-26 14:13:27,163 [INFO] ==============================================================
+2026-05-26 14:13:27,164 [INFO] [1/5] Sending → legal@spirit.com (EN) ...
+2026-05-26 14:13:27,443 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141327.02479246320a0629@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:13:27,445 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:13:42,446 [INFO] [2/5] Sending → legal@zscaler.com (EN) ...
+2026-05-26 14:13:42,744 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141342.5c6b2261da3d1eab@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:13:42,746 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:13:53,747 [INFO] [3/5] Sending → lexfridman@gmail.com (EN) ...
+2026-05-26 14:13:54,040 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141354.7ed4e783712437db@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:13:54,042 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:14:03,042 [INFO] [4/5] Sending → lma@lmalloyds.com (EN) ...
+2026-05-26 14:14:03,340 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141403.c4e7ca47d1e67516@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:14:03,342 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:14:20,343 [INFO] [5/5] Sending → mburner@cov.com (EN) ...
+2026-05-26 14:14:20,650 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141420.d383a77dda89de02@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:14:20,652 [INFO] ==============================================================
+2026-05-26 14:14:20,652 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:14:20,653 [INFO]   Sent:    5
+2026-05-26 14:14:20,653 [INFO]   Failed:  0
+2026-05-26 14:14:20,653 [INFO]   Total sent (cumulative): 75
+2026-05-26 14:14:20,654 [INFO] ==============================================================
+2026-05-26 14:14:25,538 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:14:25,538 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:14:25,539 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:14:25,539 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:14:25,539 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:14:25,540 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:14:25,540 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:14:25,541 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:14:25,541 [INFO] ==============================================================
+2026-05-26 14:14:25,541 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:14:25,542 [INFO]   Date:               2026-05-26
+2026-05-26 14:14:25,542 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:14:25,542 [INFO]   Total in list:      154
+2026-05-26 14:14:25,543 [INFO]   Already sent:       75
+2026-05-26 14:14:25,543 [INFO]   Queued to send:     5
+2026-05-26 14:14:25,544 [INFO]   Dry run:            NO
+2026-05-26 14:14:25,544 [INFO] ==============================================================
+2026-05-26 14:14:25,545 [INFO] [1/5] Sending → micah.block@davispolk.com (EN) ...
+2026-05-26 14:14:25,866 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141425.ca2ac7270e7570d0@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:14:25,868 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:14:36,869 [INFO] [2/5] Sending → mike.maccoll@atrium-uw.com (EN) ...
+2026-05-26 14:14:37,177 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141437.7d4a06014a621706@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:14:37,179 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:14:48,180 [INFO] [3/5] Sending → modem@wired.com (EN) ...
+2026-05-26 14:14:48,486 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141448.cec516a2e54c7140@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:14:48,488 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:15:04,489 [INFO] [4/5] Sending → nacc-cns@icao.int (EN) ...
+2026-05-26 14:15:04,761 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141504.8e4a4094a1fcddae@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:15:04,764 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:15:19,764 [INFO] [5/5] Sending → nacc-fs@icao.int (EN) ...
+2026-05-26 14:15:20,054 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141519.6ca847787f059848@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:15:20,055 [INFO] ==============================================================
+2026-05-26 14:15:20,056 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:15:20,056 [INFO]   Sent:    5
+2026-05-26 14:15:20,057 [INFO]   Failed:  0
+2026-05-26 14:15:20,058 [INFO]   Total sent (cumulative): 80
+2026-05-26 14:15:20,058 [INFO] ==============================================================
+2026-05-26 14:15:25,010 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:15:25,010 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:15:25,011 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:15:25,011 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:15:25,011 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:15:25,012 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:15:25,012 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:15:25,013 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:15:25,013 [INFO] ==============================================================
+2026-05-26 14:15:25,014 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:15:25,014 [INFO]   Date:               2026-05-26
+2026-05-26 14:15:25,015 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:15:25,015 [INFO]   Total in list:      154
+2026-05-26 14:15:25,015 [INFO]   Already sent:       80
+2026-05-26 14:15:25,016 [INFO]   Queued to send:     5
+2026-05-26 14:15:25,016 [INFO]   Dry run:            NO
+2026-05-26 14:15:25,016 [INFO] ==============================================================
+2026-05-26 14:15:25,017 [INFO] [1/5] Sending → nspintake@aclu.org (EN) ...
+2026-05-26 14:15:25,359 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141525.ed84d2b9fdf55846@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:15:25,361 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:15:42,362 [INFO] [2/5] Sending → operaciones@sansa.com (ES) ...
+2026-05-26 14:15:42,658 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141542.3bfd972cef269197@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:15:42,659 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:15:55,660 [INFO] [3/5] Sending → ops@greenairways.com (ES) ...
+2026-05-26 14:15:55,929 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141555.5d08bc0efc134fc0@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:15:55,931 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:16:06,932 [INFO] [4/5] Sending → patrick@risky.biz (EN) ...
+2026-05-26 14:16:07,231 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141607.27c1b0d2c5f89179@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:16:07,233 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:16:24,233 [INFO] [5/5] Sending → podcast@aviationweek.com (EN) ...
+2026-05-26 14:16:24,536 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141624.a3a1e1581e33a316@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:16:24,538 [INFO] ==============================================================
+2026-05-26 14:16:24,539 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:16:24,539 [INFO]   Sent:    5
+2026-05-26 14:16:24,540 [INFO]   Failed:  0
+2026-05-26 14:16:24,540 [INFO]   Total sent (cumulative): 85
+2026-05-26 14:16:24,541 [INFO] ==============================================================
+2026-05-26 14:16:29,431 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:16:29,432 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:16:29,432 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:16:29,432 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:16:29,433 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:16:29,433 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:16:29,434 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:16:29,434 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:16:29,434 [INFO] ==============================================================
+2026-05-26 14:16:29,435 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:16:29,435 [INFO]   Date:               2026-05-26
+2026-05-26 14:16:29,436 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:16:29,436 [INFO]   Total in list:      154
+2026-05-26 14:16:29,436 [INFO]   Already sent:       85
+2026-05-26 14:16:29,437 [INFO]   Queued to send:     5
+2026-05-26 14:16:29,437 [INFO]   Dry run:            NO
+2026-05-26 14:16:29,438 [INFO] ==============================================================
+2026-05-26 14:16:29,438 [INFO] [1/5] Sending → podcast@privacyinternational.org (EN) ...
+2026-05-26 14:16:29,776 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141629.6fdf3322bab158d5@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:16:29,778 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:16:37,779 [INFO] [2/5] Sending → press@eff.org (EN) ...
+2026-05-26 14:16:38,152 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141638.ee2c2df4f72627a2@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:16:38,154 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:16:54,155 [INFO] [3/5] Sending → product.safety@airbus.com (EN) ...
+2026-05-26 14:16:54,463 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141654.8aec26847fe3c5b5@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:16:54,465 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:17:07,466 [INFO] [4/5] Sending → ran@malicious.life (EN) ...
+2026-05-26 14:17:07,710 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141707.0b0c2ef0138f9296@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:17:07,712 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:17:25,713 [INFO] [5/5] Sending → regulatory@aa.com (EN) ...
+2026-05-26 14:17:26,011 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141725.aa75b7c3174bc365@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:17:26,013 [INFO] ==============================================================
+2026-05-26 14:17:26,013 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:17:26,014 [INFO]   Sent:    5
+2026-05-26 14:17:26,014 [INFO]   Failed:  0
+2026-05-26 14:17:26,015 [INFO]   Total sent (cumulative): 90
+2026-05-26 14:17:26,015 [INFO] ==============================================================
+2026-05-26 14:17:31,385 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:17:31,385 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:17:31,386 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:17:31,386 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:17:31,387 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:17:31,387 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:17:31,387 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:17:31,388 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:17:31,388 [INFO] ==============================================================
+2026-05-26 14:17:31,388 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:17:31,389 [INFO]   Date:               2026-05-26
+2026-05-26 14:17:31,389 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:17:31,389 [INFO]   Total in list:      154
+2026-05-26 14:17:31,390 [INFO]   Already sent:       90
+2026-05-26 14:17:31,390 [INFO]   Queued to send:     5
+2026-05-26 14:17:31,391 [INFO]   Dry run:            NO
+2026-05-26 14:17:31,391 [INFO] ==============================================================
+2026-05-26 14:17:31,392 [INFO] [1/5] Sending → regulatory@aeromexico.com (ES) ...
+2026-05-26 14:17:31,662 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141731.f2d24fa9586e086e@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:17:31,664 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:17:41,664 [INFO] [2/5] Sending → regulatory@aircanada.ca (EN) ...
+2026-05-26 14:17:41,940 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141741.6866cf5e4899e6bb@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:17:41,942 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:17:58,943 [INFO] [3/5] Sending → regulatory@airfrance.fr (EN) ...
+2026-05-26 14:17:59,253 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141759.be1549ae7cdc3909@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:17:59,255 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:18:10,255 [INFO] [4/5] Sending → regulatory@alaskaair.com (EN) ...
+2026-05-26 14:18:10,596 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141810.70bd12f0eed41ea2@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:18:10,598 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:18:25,599 [INFO] [5/5] Sending → regulatory@arajet.com (ES) ...
+2026-05-26 14:18:25,884 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141825.bba33f891db363d5@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:18:25,886 [INFO] ==============================================================
+2026-05-26 14:18:25,887 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:18:25,887 [INFO]   Sent:    5
+2026-05-26 14:18:25,888 [INFO]   Failed:  0
+2026-05-26 14:18:25,888 [INFO]   Total sent (cumulative): 95
+2026-05-26 14:18:25,889 [INFO] ==============================================================
+2026-05-26 14:18:30,666 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:18:30,667 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:18:30,667 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:18:30,668 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:18:30,668 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:18:30,669 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:18:30,669 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:18:30,670 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:18:30,670 [INFO] ==============================================================
+2026-05-26 14:18:30,671 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:18:30,671 [INFO]   Date:               2026-05-26
+2026-05-26 14:18:30,672 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:18:30,672 [INFO]   Total in list:      154
+2026-05-26 14:18:30,672 [INFO]   Already sent:       95
+2026-05-26 14:18:30,673 [INFO]   Queued to send:     5
+2026-05-26 14:18:30,673 [INFO]   Dry run:            NO
+2026-05-26 14:18:30,674 [INFO] ==============================================================
+2026-05-26 14:18:30,674 [INFO] [1/5] Sending → regulatory@avianca.com (ES) ...
+2026-05-26 14:18:31,012 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141830.bf6bacca7023b671@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:18:31,014 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:18:48,015 [INFO] [2/5] Sending → regulatory@ba.com (EN) ...
+2026-05-26 14:18:48,329 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141848.f34f62b024084ade@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:18:48,330 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:18:59,331 [INFO] [3/5] Sending → regulatory@condor.com (EN) ...
+2026-05-26 14:18:59,616 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141859.8592061233668c96@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:18:59,618 [INFO]   ⏳ 9s delay ...
+2026-05-26 14:19:08,618 [INFO] [4/5] Sending → regulatory@copaair.com (ES) ...
+2026-05-26 14:19:08,918 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141908.76d881e50ad88866@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:19:08,920 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:19:20,921 [INFO] [5/5] Sending → regulatory@dlh.de (EN) ...
+2026-05-26 14:19:21,093 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141921.216672f8d1b6e9e1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:19:21,095 [INFO] ==============================================================
+2026-05-26 14:19:21,095 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:19:21,096 [INFO]   Sent:    5
+2026-05-26 14:19:21,096 [INFO]   Failed:  0
+2026-05-26 14:19:21,097 [INFO]   Total sent (cumulative): 100
+2026-05-26 14:19:21,097 [INFO] ==============================================================
+2026-05-26 14:19:25,730 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:19:25,730 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:19:25,731 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:19:25,731 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:19:25,732 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:19:25,732 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:19:25,732 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:19:25,733 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:19:25,733 [INFO] ==============================================================
+2026-05-26 14:19:25,733 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:19:25,734 [INFO]   Date:               2026-05-26
+2026-05-26 14:19:25,734 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:19:25,735 [INFO]   Total in list:      154
+2026-05-26 14:19:25,735 [INFO]   Already sent:       100
+2026-05-26 14:19:25,736 [INFO]   Queued to send:     5
+2026-05-26 14:19:25,736 [INFO]   Dry run:            NO
+2026-05-26 14:19:25,737 [INFO] ==============================================================
+2026-05-26 14:19:25,737 [INFO] [1/5] Sending → regulatory@edelweiss.com (EN) ...
+2026-05-26 14:19:25,868 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141925.0564b2d4f1c6c923@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:19:25,870 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:19:38,871 [INFO] [2/5] Sending → regulatory@iberia.es (ES) ...
+2026-05-26 14:19:38,966 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526141938.4e9f504acf21fc5d@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:19:38,967 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:19:49,968 [INFO] [3/5] Sending → regulatory@iberojet.com (EN) ...
+2026-05-26 14:19:50,067 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526141950.6078137d152a23e7@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:19:50,069 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:20:00,070 [INFO] [4/5] Sending → regulatory@klm.com (EN) ...
+2026-05-26 14:20:00,164 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142000.5b9b483e6e6e750e@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:20:00,166 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:20:15,167 [INFO] [5/5] Sending → regulatory@latam.com (ES) ...
+2026-05-26 14:20:15,288 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142015.ee52952b23ad6b1f@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:20:15,290 [INFO] ==============================================================
+2026-05-26 14:20:15,291 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:20:15,291 [INFO]   Sent:    5
+2026-05-26 14:20:15,291 [INFO]   Failed:  0
+2026-05-26 14:20:15,292 [INFO]   Total sent (cumulative): 105
+2026-05-26 14:20:15,292 [INFO] ==============================================================
+2026-05-26 14:20:20,137 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:20:20,138 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:20:20,138 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:20:20,139 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:20:20,139 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:20:20,139 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:20:20,140 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:20:20,140 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:20:20,141 [INFO] ==============================================================
+2026-05-26 14:20:20,141 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:20:20,141 [INFO]   Date:               2026-05-26
+2026-05-26 14:20:20,142 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:20:20,142 [INFO]   Total in list:      154
+2026-05-26 14:20:20,142 [INFO]   Already sent:       105
+2026-05-26 14:20:20,143 [INFO]   Queued to send:     5
+2026-05-26 14:20:20,143 [INFO]   Dry run:            NO
+2026-05-26 14:20:20,144 [INFO] ==============================================================
+2026-05-26 14:20:20,144 [INFO] [1/5] Sending → regulatory@sunwing.ca (EN) ...
+2026-05-26 14:20:20,341 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142020.90d995d4572b8cf2@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:20:20,343 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:20:30,344 [INFO] [2/5] Sending → regulatory@tuifly.com (EN) ...
+2026-05-26 14:20:30,550 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142030.076d6baa8b3e62e7@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:20:30,552 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:20:48,552 [INFO] [3/5] Sending → regulatory@united.com (EN) ...
+2026-05-26 14:20:48,659 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142048.4efec92b504a5f33@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:20:48,661 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:20:56,662 [INFO] [4/5] Sending → regulatory@volaris.com (ES) ...
+2026-05-26 14:20:56,782 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142056.fd57f92d7124fdeb@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:20:56,783 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:21:06,784 [INFO] [5/5] Sending → regulatory@wingo.com (ES) ...
+2026-05-26 14:21:06,873 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142106.c075901f4c75f205@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:21:06,875 [INFO] ==============================================================
+2026-05-26 14:21:06,875 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:21:06,876 [INFO]   Sent:    5
+2026-05-26 14:21:06,876 [INFO]   Failed:  0
+2026-05-26 14:21:06,877 [INFO]   Total sent (cumulative): 110
+2026-05-26 14:21:06,877 [INFO] ==============================================================
+2026-05-26 14:21:12,118 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:21:12,119 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:21:12,119 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:21:12,120 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:21:12,120 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:21:12,120 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:21:12,121 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:21:12,121 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:21:12,122 [INFO] ==============================================================
+2026-05-26 14:21:12,122 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:21:12,123 [INFO]   Date:               2026-05-26
+2026-05-26 14:21:12,123 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:21:12,123 [INFO]   Total in list:      154
+2026-05-26 14:21:12,124 [INFO]   Already sent:       110
+2026-05-26 14:21:12,124 [INFO]   Queued to send:     5
+2026-05-26 14:21:12,124 [INFO]   Dry run:            NO
+2026-05-26 14:21:12,125 [INFO] ==============================================================
+2026-05-26 14:21:12,125 [INFO] [1/5] Sending → regulatory@wnco.com (EN) ...
+2026-05-26 14:21:12,253 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142112.ab5502e532e0b1e6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:21:12,255 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:21:27,256 [INFO] [2/5] Sending → research@citizenlab.ca (EN) ...
+2026-05-26 14:21:27,345 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142127.864e6fb2bceeb7e7@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:21:27,346 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:21:38,347 [INFO] [3/5] Sending → richard.bayman@msamlin.com (EN) ...
+2026-05-26 14:21:38,422 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142138.668ee78878dc347a@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:21:38,424 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:21:55,424 [INFO] [4/5] Sending → safety@aeromexico.com (ES) ...
+2026-05-26 14:21:55,529 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142155.872db152f919b7fd@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:21:55,531 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:22:13,531 [INFO] [5/5] Sending → safety@aircanada.ca (EN) ...
+2026-05-26 14:22:13,677 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142213.7139bf6de4faa974@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:22:13,679 [INFO] ==============================================================
+2026-05-26 14:22:13,679 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:22:13,680 [INFO]   Sent:    5
+2026-05-26 14:22:13,680 [INFO]   Failed:  0
+2026-05-26 14:22:13,681 [INFO]   Total sent (cumulative): 115
+2026-05-26 14:22:13,681 [INFO] ==============================================================
+2026-05-26 14:22:18,688 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:22:18,688 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:22:18,689 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:22:18,689 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:22:18,689 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:22:18,690 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:22:18,690 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:22:18,691 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:22:18,691 [INFO] ==============================================================
+2026-05-26 14:22:18,692 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:22:18,692 [INFO]   Date:               2026-05-26
+2026-05-26 14:22:18,692 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:22:18,693 [INFO]   Total in list:      154
+2026-05-26 14:22:18,693 [INFO]   Already sent:       115
+2026-05-26 14:22:18,694 [INFO]   Queued to send:     5
+2026-05-26 14:22:18,694 [INFO]   Dry run:            NO
+2026-05-26 14:22:18,695 [INFO] ==============================================================
+2026-05-26 14:22:18,695 [INFO] [1/5] Sending → safety@airfrance.fr (EN) ...
+2026-05-26 14:22:18,825 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142218.ffc402521358ce39@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:22:18,827 [INFO]   ⏳ 17s delay ...
+2026-05-26 14:22:35,828 [INFO] [2/5] Sending → safety@airtransat.com (EN) ...
+2026-05-26 14:22:36,024 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142235.5c04853e8148ebce@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:22:36,026 [INFO]   ⏳ 14s delay ...
+2026-05-26 14:22:50,027 [INFO] [3/5] Sending → safety@alaskaair.com (EN) ...
+2026-05-26 14:22:50,160 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142250.f31c0b8dcf8722ce@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:22:50,162 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:22:58,163 [INFO] [4/5] Sending → safety@alpa.org (EN) ...
+2026-05-26 14:22:58,304 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142258.bf33b8febd34be22@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:22:58,306 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:23:09,307 [INFO] [5/5] Sending → safety@arajet.com (ES) ...
+2026-05-26 14:23:09,394 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142309.38476c84624abdd6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:23:09,396 [INFO] ==============================================================
+2026-05-26 14:23:09,397 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:23:09,397 [INFO]   Sent:    5
+2026-05-26 14:23:09,397 [INFO]   Failed:  0
+2026-05-26 14:23:09,398 [INFO]   Total sent (cumulative): 120
+2026-05-26 14:23:09,398 [INFO] ==============================================================
+2026-05-26 14:23:14,962 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:23:14,962 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:23:14,962 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:23:14,963 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:23:14,963 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:23:14,963 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:23:14,964 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:23:14,964 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:23:14,965 [INFO] ==============================================================
+2026-05-26 14:23:14,965 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:23:14,965 [INFO]   Date:               2026-05-26
+2026-05-26 14:23:14,966 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:23:14,966 [INFO]   Total in list:      154
+2026-05-26 14:23:14,967 [INFO]   Already sent:       120
+2026-05-26 14:23:14,967 [INFO]   Queued to send:     5
+2026-05-26 14:23:14,967 [INFO]   Dry run:            NO
+2026-05-26 14:23:14,968 [INFO] ==============================================================
+2026-05-26 14:23:14,968 [INFO] [1/5] Sending → safety@avianca.com (ES) ...
+2026-05-26 14:23:15,094 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142315.67ec703e1db47d04@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:23:15,096 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:23:23,097 [INFO] [2/5] Sending → safety@ba.com (EN) ...
+2026-05-26 14:23:23,196 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142323.3d8fb09210b21cc3@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:23:23,198 [INFO]   ⏳ 14s delay ...
+2026-05-26 14:23:37,198 [INFO] [3/5] Sending → safety@condor.com (EN) ...
+2026-05-26 14:23:37,282 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142337.f05efa3be04eeac6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:23:37,284 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:23:52,285 [INFO] [4/5] Sending → safety@copaair.com (ES) ...
+2026-05-26 14:23:52,398 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142352.469de16186ddaec5@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:23:52,400 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:24:03,401 [INFO] [5/5] Sending → safety@dlh.de (EN) ...
+2026-05-26 14:24:03,496 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142403.0ada20c3122ec8e9@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:24:03,498 [INFO] ==============================================================
+2026-05-26 14:24:03,499 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:24:03,499 [INFO]   Sent:    5
+2026-05-26 14:24:03,500 [INFO]   Failed:  0
+2026-05-26 14:24:03,500 [INFO]   Total sent (cumulative): 125
+2026-05-26 14:24:03,501 [INFO] ==============================================================
+2026-05-26 14:24:11,089 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:24:11,090 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:24:11,090 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:24:11,091 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:24:11,091 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:24:11,091 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:24:11,092 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:24:11,092 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:24:11,093 [INFO] ==============================================================
+2026-05-26 14:24:11,093 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:24:11,093 [INFO]   Date:               2026-05-26
+2026-05-26 14:24:11,094 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:24:11,094 [INFO]   Total in list:      154
+2026-05-26 14:24:11,095 [INFO]   Already sent:       125
+2026-05-26 14:24:11,095 [INFO]   Queued to send:     5
+2026-05-26 14:24:11,095 [INFO]   Dry run:            NO
+2026-05-26 14:24:11,096 [INFO] ==============================================================
+2026-05-26 14:24:11,096 [INFO] [1/5] Sending → safety@edelweiss.com (EN) ...
+2026-05-26 14:24:11,214 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142411.34d9641f81bc7b0f@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:24:11,216 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:24:21,216 [INFO] [2/5] Sending → safety@flyfrontier.com (EN) ...
+2026-05-26 14:24:21,342 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142421.1aaaca771d42fc55@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:24:21,344 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:24:36,345 [INFO] [3/5] Sending → safety@greenairways.com (ES) ...
+2026-05-26 14:24:36,465 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142436.d221c6e91887f072@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:24:36,467 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:24:48,468 [INFO] [4/5] Sending → safety@iberia.es (ES) ...
+2026-05-26 14:24:48,542 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142448.692ac385717db6f3@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:24:48,543 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:24:59,544 [INFO] [5/5] Sending → safety@iberojet.com (EN) ...
+2026-05-26 14:24:59,657 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142459.884a0f5a92a67e6f@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:24:59,659 [INFO] ==============================================================
+2026-05-26 14:24:59,660 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:24:59,660 [INFO]   Sent:    5
+2026-05-26 14:24:59,661 [INFO]   Failed:  0
+2026-05-26 14:24:59,661 [INFO]   Total sent (cumulative): 130
+2026-05-26 14:24:59,662 [INFO] ==============================================================
+2026-05-26 14:25:04,643 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:25:04,643 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:25:04,644 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:25:04,644 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:25:04,645 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:25:04,645 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:25:04,646 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:25:04,646 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:25:04,647 [INFO] ==============================================================
+2026-05-26 14:25:04,647 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:25:04,647 [INFO]   Date:               2026-05-26
+2026-05-26 14:25:04,648 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:25:04,648 [INFO]   Total in list:      154
+2026-05-26 14:25:04,649 [INFO]   Already sent:       130
+2026-05-26 14:25:04,649 [INFO]   Queued to send:     5
+2026-05-26 14:25:04,649 [INFO]   Dry run:            NO
+2026-05-26 14:25:04,650 [INFO] ==============================================================
+2026-05-26 14:25:04,650 [INFO] [1/5] Sending → safety@jetblue.com (EN) ...
+2026-05-26 14:25:04,791 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142504.0bec281bec27e4a6@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:25:04,793 [INFO]   ⏳ 14s delay ...
+2026-05-26 14:25:18,794 [INFO] [2/5] Sending → safety@klm.com (EN) ...
+2026-05-26 14:25:18,874 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142518.7546836891bc061b@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:25:18,876 [INFO]   ⏳ 10s delay ...
+2026-05-26 14:25:28,877 [INFO] [3/5] Sending → safety@latam.com (ES) ...
+2026-05-26 14:25:28,993 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142528.cd7fb9d7c1253ee1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:25:28,995 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:25:44,996 [INFO] [4/5] Sending → safety@spirit.com (EN) ...
+2026-05-26 14:25:45,106 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142545.3a4a4e346beb3bb9@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:25:45,108 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:25:57,109 [INFO] [5/5] Sending → safety@sunwing.ca (EN) ...
+2026-05-26 14:25:57,240 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142557.e5fbb954bf4859c1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:25:57,242 [INFO] ==============================================================
+2026-05-26 14:25:57,243 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:25:57,243 [INFO]   Sent:    5
+2026-05-26 14:25:57,244 [INFO]   Failed:  0
+2026-05-26 14:25:57,245 [INFO]   Total sent (cumulative): 135
+2026-05-26 14:25:57,245 [INFO] ==============================================================
+2026-05-26 14:26:02,880 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:26:02,880 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:26:02,881 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:26:02,881 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:26:02,882 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:26:02,882 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:26:02,883 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:26:02,883 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:26:02,883 [INFO] ==============================================================
+2026-05-26 14:26:02,884 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:26:02,884 [INFO]   Date:               2026-05-26
+2026-05-26 14:26:02,885 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:26:02,885 [INFO]   Total in list:      154
+2026-05-26 14:26:02,885 [INFO]   Already sent:       135
+2026-05-26 14:26:02,886 [INFO]   Queued to send:     5
+2026-05-26 14:26:02,886 [INFO]   Dry run:            NO
+2026-05-26 14:26:02,887 [INFO] ==============================================================
+2026-05-26 14:26:02,887 [INFO] [1/5] Sending → safety@tuifly.com (EN) ...
+2026-05-26 14:26:02,992 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142602.04991f20630b6531@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:02,994 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:26:14,995 [INFO] [2/5] Sending → safety@united.com (EN) ...
+2026-05-26 14:26:15,086 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142615.c83bfbc3cd75d8e3@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:15,087 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:26:23,088 [INFO] [3/5] Sending → safety@volaris.com (ES) ...
+2026-05-26 14:26:23,164 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142623.bea70d285d64d4cf@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:23,166 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:26:34,166 [INFO] [4/5] Sending → safety@westjet.com (EN) ...
+2026-05-26 14:26:34,257 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142634.459c67bf4a6742f1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:34,259 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:26:46,260 [INFO] [5/5] Sending → safety@wingo.com (ES) ...
+2026-05-26 14:26:46,358 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142646.10e6855d554e3cc4@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:46,360 [INFO] ==============================================================
+2026-05-26 14:26:46,361 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:26:46,361 [INFO]   Sent:    5
+2026-05-26 14:26:46,361 [INFO]   Failed:  0
+2026-05-26 14:26:46,362 [INFO]   Total sent (cumulative): 140
+2026-05-26 14:26:46,362 [INFO] ==============================================================
+2026-05-26 14:26:51,257 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:26:51,257 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:26:51,258 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:26:51,258 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:26:51,259 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:26:51,259 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:26:51,259 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:26:51,260 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:26:51,260 [INFO] ==============================================================
+2026-05-26 14:26:51,261 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:26:51,261 [INFO]   Date:               2026-05-26
+2026-05-26 14:26:51,261 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:26:51,262 [INFO]   Total in list:      154
+2026-05-26 14:26:51,262 [INFO]   Already sent:       140
+2026-05-26 14:26:51,263 [INFO]   Queued to send:     5
+2026-05-26 14:26:51,263 [INFO]   Dry run:            NO
+2026-05-26 14:26:51,264 [INFO] ==============================================================
+2026-05-26 14:26:51,264 [INFO] [1/5] Sending → safety@wnco.com (EN) ...
+2026-05-26 14:26:51,356 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142651.71c8d624484bae63@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:51,358 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:26:59,359 [INFO] [2/5] Sending → sarah.griffiths@libertyglobalgroup.com (EN) ...
+2026-05-26 14:26:59,488 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142659.d3638adb90e126e3@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:26:59,490 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:27:17,491 [INFO] [3/5] Sending → security@google.com (EN) ...
+2026-05-26 14:27:17,614 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142717.214c2f8eeded7c37@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:27:17,616 [INFO]   ⏳ 11s delay ...
+2026-05-26 14:27:28,617 [INFO] [4/5] Sending → security@united.com (EN) ...
+2026-05-26 14:27:28,782 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142728.9f468b3443dcd9de@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:27:28,784 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:27:41,784 [INFO] [5/5] Sending → securitynow@twit.tv (EN) ...
+2026-05-26 14:27:41,903 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142741.d9210ccac25ebba8@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:27:41,905 [INFO] ==============================================================
+2026-05-26 14:27:41,905 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:27:41,906 [INFO]   Sent:    5
+2026-05-26 14:27:41,906 [INFO]   Failed:  0
+2026-05-26 14:27:41,907 [INFO]   Total sent (cumulative): 145
+2026-05-26 14:27:41,907 [INFO] ==============================================================
+2026-05-26 14:27:47,966 [INFO]   [SKIP] Placeholder excluded: YOUR_LIVE_EMAIL@live.com
+2026-05-26 14:27:47,967 [INFO]   [SKIP] Placeholder excluded: acadiasupplyco@gmail.com
+2026-05-26 14:27:47,967 [INFO]   [SKIP] Placeholder excluded: hello@yourdomain.com
+2026-05-26 14:27:47,968 [INFO]   [SKIP] Placeholder excluded: pupplussupplement@gmail.com
+2026-05-26 14:27:47,968 [INFO]   [SKIP] Placeholder excluded: sam@yourdomain.com
+2026-05-26 14:27:47,969 [INFO]   [SKIP] Placeholder excluded: samwotton1@gmail.com
+2026-05-26 14:27:47,969 [INFO]   [SKIP] Placeholder excluded: spwotton@live.com
+2026-05-26 14:27:47,970 [INFO]   [SKIP] Placeholder excluded: yourname@proton.me
+2026-05-26 14:27:47,970 [INFO] ==============================================================
+2026-05-26 14:27:47,970 [INFO]   KAPPA INVESTIGATION EMAIL CAMPAIGN v2
+2026-05-26 14:27:47,971 [INFO]   Date:               2026-05-26
+2026-05-26 14:27:47,971 [INFO]   Focus:              SETECOM/SETECOM Air + GRIDTIDE + Mora
+2026-05-26 14:27:47,972 [INFO]   Total in list:      154
+2026-05-26 14:27:47,972 [INFO]   Already sent:       145
+2026-05-26 14:27:47,972 [INFO]   Queued to send:     9
+2026-05-26 14:27:47,973 [INFO]   Dry run:            NO
+2026-05-26 14:27:47,973 [INFO] ==============================================================
+2026-05-26 14:27:47,974 [INFO] [1/9] Sending → seguridad@aerobell.com (ES) ...
+2026-05-26 14:27:48,089 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142748.9fd12d94b0926c9c@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:27:48,090 [INFO]   ⏳ 16s delay ...
+2026-05-26 14:28:04,091 [INFO] [2/9] Sending → seguridad@sansa.com (ES) ...
+2026-05-26 14:28:04,186 [INFO]   ✓ HTTP 200 [ES]: {"id":"<20260526142804.973190d142a9aaf0@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:28:04,188 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:28:19,189 [INFO] [3/9] Sending → shawn@vigilance.media (EN) ...
+2026-05-26 14:28:19,300 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142819.92ff472de3ac1bdc@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:28:19,302 [INFO]   ⏳ 12s delay ...
+2026-05-26 14:28:31,303 [INFO] [4/9] Sending → skovac@zscaler.com (EN) ...
+2026-05-26 14:28:31,408 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142831.9830e12cd2a3c1e1@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:28:31,410 [INFO]   ⏳ 15s delay ...
+2026-05-26 14:28:46,411 [INFO] [5/9] Sending → spacehelp@itu.int (EN) ...
+2026-05-26 14:28:46,510 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142846.414eddda22bf01e9@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:28:46,511 [INFO]   ⏳ 14s delay ...
+2026-05-26 14:29:00,512 [INFO] [6/9] Sending → sugerencias@aeris.cr (EN) ...
+2026-05-26 14:29:00,645 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142900.15680918d864db91@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:29:00,647 [INFO]   ⏳ 8s delay ...
+2026-05-26 14:29:08,648 [INFO] [7/9] Sending → vipul.gupta@msamlin.com (EN) ...
+2026-05-26 14:29:08,732 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142908.f48c3622dc7c9ffd@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:29:08,734 [INFO]   ⏳ 18s delay ...
+2026-05-26 14:29:26,735 [INFO] [8/9] Sending → warzone@thedrive.com (EN) ...
+2026-05-26 14:29:27,036 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142926.e16bff6cf08b66ee@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:29:27,037 [INFO]   ⏳ 13s delay ...
+2026-05-26 14:29:40,038 [INFO] [9/9] Sending → whistleblower@kyndryl.com (EN) ...
+2026-05-26 14:29:40,389 [INFO]   ✓ HTTP 200 [EN]: {"id":"<20260526142940.8bb436464b704507@echokappa.com>","message":"Queued. Thank you."}
+
+2026-05-26 14:29:40,391 [INFO] ==============================================================
+2026-05-26 14:29:40,392 [INFO]   CAMPAIGN COMPLETE
+2026-05-26 14:29:40,392 [INFO]   Sent:    9
+2026-05-26 14:29:40,393 [INFO]   Failed:  0
+2026-05-26 14:29:40,393 [INFO]   Total sent (cumulative): 154
+2026-05-26 14:29:40,393 [INFO] ==============================================================
