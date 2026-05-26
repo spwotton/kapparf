@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-01-30T10:01:19.979038",
+  "location": {
+    "lat": 9.9535043,
+    "lon": -84.2908709,
+    "name": "Guacima, Costa Rica"
+  },
+  "blackjack_constellation": [
+    {
+      "name": "BLACKJACK 1 (LMNTRIX)",
+      "norad": 48912,
+      "launched": "2021-06-30"
+    },
+    {
+      "name": "BLACKJACK 2 (LMNTRIX)",
+      "norad": 48913,
+      "launched": "2021-06-30"
+    },
+    {
+      "name": "MANDRAKE 2A",
+      "norad": 49262,
+      "launched": "2021-09-14"
+    },
+    {
+      "name": "MANDRAKE 2B",
+      "norad": 49263,
+      "launched": "2021-09-14"
+    },
+    {
+      "name": "BLACKJACK A",
+      "norad": 56192,
+      "launched": "2023-04-15"
+    },
+    {
+      "name": "BLACKJACK B",
+      "norad": 56193,
+      "launched": "2023-04-15"
+    }
+  ],
+  "notes": "DARPA Blackjack is LEO mesh network for military comms - potential surveillance relay"
+}
