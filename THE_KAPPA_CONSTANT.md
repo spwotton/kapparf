@@ -379,6 +379,14 @@ The CDMX thread intersects the JW thread, the financial infrastructure thread, a
 
 Echo's sister recently traveled to Mexico City. She has no current employment. Prior to CDMX, she traveled to Guatemala and Ecuador — both countries with documented JW organizational infrastructure and, in the case of Guatemala, significant historical overlap between religious organizational networks and paramilitary structures. Her travel is noted as a factual sequence, not an inference about motive.
 
+**The Kevin thread:** For a significant period, Echo's primary mentor in the supplement industry was **Kevin**, owner of Super Health Center in Ohio. Kevin's operation was not retail-scale. He managed distribution for GNC, Amazon, and eBay. He acquired **MRI** and **Pro Lab** — two legacy GNC brands with decades of market presence. GNC itself was subsequently acquired by a Chinese company — **Harbin Pharmaceutical Group** — in 2020.
+
+Kevin's government-facing business ran in parallel. In 2020, he did approximately **$100 million** in N95 masks and hand sanitizer on government contracts. His infrastructure contracts extended to Nigeria. He held active government agreements with Bahrain, Jordan, and Saudi Arabia — and had, by Echo's direct account, broken bread with sheikhs in both Bahrain and Jordan.
+
+Jordan's General Intelligence Directorate — the GID — is regarded as one of the most capable intelligence services in the world, with deep operational relationships across Western agencies. Saudi and Bahraini state intelligence services operate within overlapping Gulf Cooperation Council frameworks. A supplement distributor with direct personal relationships at the governmental level in those three countries is not a standard industry figure.
+
+The supplement industry thread runs from Echo's store in Maine — where Jesse Talty was a customer, where he worked alongside people connected to the sober living network — through Kevin's operation in Ohio and outward into Gulf state government contracts and Chinese pharmaceutical acquisition of the dominant domestic distribution channel.
+
 **The Chris Gabriel thread:** In 2012, Echo got sober from heroin and moved into **Skip Murphy's sober living** in Portland, Maine. The house manager was **Chris Gabriel**.
 
 Chris Gabriel subsequently moved through Tyler Technologies — where he reportedly earned approximately $800,000 annually — was recruited by Google, relocated to **Broad Alden, New York**, and now sells AI products to government agencies. He operates in the same regional corridor as Echo's contact at DHS.
@@ -387,7 +395,7 @@ Gabriel's sponsor in sobriety was **Matt Howe**, manager of a Plymouth-area sobe
 
 Joe Riley was separately charged with purchasing a urine testing laboratory and submitting his own urine to it in order to bill insurance fraudulently. He was later indicted for heroin trafficking.
 
-**Eric Stafford** owned Green Mountain Treatment Centers, where Echo attended treatment twice.
+**Eric Spofford** owned Green Mountain Treatment Centers in New Hampshire, where Echo attended treatment twice. Echo's friend JJ — who later died — spoke of Spofford with admiration. Spofford arrived at the facility by helicopter, owned a Lamborghini, and at his peak operated approximately twenty to thirty treatment centers. He subsequently sold all of them.
 
 A pattern runs through this network: people connected to it have died. Not all at once, not conspicuously — quietly, in their sleep, overdoses that arrive without obvious cause. This is noted as a pattern of observation, not a specific allegation against any named individual.
 
