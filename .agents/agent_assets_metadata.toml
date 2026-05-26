@@ -113,3 +113,9 @@ id = "K1WTu9Hkng56UbgHrCvKQ"
 uri = "file://attached_assets/spectrum_analysis.png"
 type = "image"
 title = "Spectral Analysis — New_Recording_17"
+
+[[outputs]]
+id = "5lLDrRZaIuw1u88DPLHsK"
+uri = "file://THE_FREQUENCY_OVERVIEW.md"
+type = "text"
+title = "THE FREQUENCY — Audio Overview Version"
