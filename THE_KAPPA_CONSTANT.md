@@ -363,7 +363,7 @@ The cat: Peralta arrived at Echo's house with a cat. The cat disappeared when th
 
 The cat is not the point. The cat is documentation of a chain: an object of emotional investment, attached to the target through an animal bond, transferred through the social network into the hands of someone already inside that network, who is now publicly displaying evidence of the transfer. The chain is verifiable through Instagram timestamps.
 
-**The Sinaloa thread:** Echo's AA sponsor travels to Sinaloa every year — fishing, with his father. Multiple members of the Jacó AA community have accompanied him. This is noted as a geographical fact. Sinaloa requires no elaboration.
+**The Sinaloa thread:** Echo's AA sponsor — **Lance Clinton**, Instagram: *The Fish Rustler* — travels to Sinaloa every year, fishing with his father. Multiple members of the Jacó AA community have accompanied him on these trips. This is noted as a geographical fact. Sinaloa requires no elaboration.
 
 **The Mexico City convergence:** Almost every significant person in Echo's documented social network in Jacó carries a connection to Mexico City — CDMX. The convergence is not incidental.
 
