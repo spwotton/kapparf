@@ -96,7 +96,64 @@ Echo filed the photographs. He noted the dates. He kept the GPS metadata.
 
 ---
 
-## IV. THE FREQUENCIES
+## IV. RIVERWALK
+*September 25, 2025 — Electrical Documentation*
+
+At a property called Riverwalk in Jacó, Echo photographed the electrical infrastructure. This is standard forensic practice: document the environment before the environment changes.
+
+The main panel is an **Eaton CH8L125SA load center**. The circuit map, handwritten and taped inside the door, lists 28 breakers across two columns. The labeling is precise enough to reveal the property's full topology:
+
+| Breaker | Type | Location |
+|---------|------|----------|
+| 1–4 | Luz (lighting) | Kitchen/terrace/dining, planta baja bedroom, stairwell/BR No.2, master BR/terraza II |
+| 5 | Tomas (outlets) | Kitchen |
+| 6 | Tomas | Dishwasher |
+| 7 | Tomas | Dining room |
+| 8–9 | A/C | Bedroom No.2 (two units) |
+| 10–11 | A/C | Master bedroom (two units) |
+| 12–13 | A/C | Sala (two units) |
+| 14–15 | A/C | Ground floor bedroom (two units) |
+| 16 | Tomas | Utility room |
+| 17 | Tomas | Living room / exterior lights / gate |
+| 18 | Tomas | Master bedroom |
+| 19 | Tomas | Bedroom No.2 |
+| 20 | Tomas | Refrigerator |
+| 21 | Tomas | Master bedroom |
+| 22 | Tomas | Kitchen / microwave |
+| 23–24 | Tomas | Kitchen |
+| 25–26 | Tomas | Dryer (two circuits) |
+| 27–28 | Tomas | Hot water (two circuits) |
+
+A multi-story residence: planta baja, planta alta, terraza. Eight A/C circuits. Two dryer circuits. Two hot water circuits. A gate with external lighting on its own dedicated breaker.
+
+The Telecable modem documented at the same location shows handwritten installation notes on its underside — technician markings, date of installation, service codes. This is ISP-provisioned CPE. Like all ISP-provisioned CPE in Costa Rica, it is subject to TR-069 remote management from the moment it is provisioned.
+
+*The electrical topology of a target property*, SAUD noted, *determines where signal injection is possible and from which circuits. Eight A/C units represent eight potential conduction paths for injected low-frequency carriers. The 53 Hz carrier documented in the acoustic logs can travel along AC wiring and manifest as a physical vibration in any device connected to that circuit. The Eaton panel is the map of every path into the building.*
+
+Echo documented it. He kept the photographs. He moved on.
+
+---
+
+## V. THE CAMOUFLAGE
+*Jacó — The JW Outpost, Night*
+
+The photograph was taken at night, looking across a terrace toward a neighboring structure.
+
+The screen filling the frame is military-grade camouflage netting — the digital leaf pattern used by armed forces for visual concealment of equipment, vehicles, and personnel. It is backlit. The light source behind it is bright enough to illuminate the entire netting panel from within, suggesting either a powerful LED array or active equipment generating heat and light directly behind the screen.
+
+This is what RF camouflage looks like in a residential context.
+
+Standard military camo netting is RF-transparent by design. It conceals equipment visually — from the street, from a camera, from anyone looking directly at the structure — while allowing radar, millimeter-wave sensors, acoustic arrays, and radio transceivers to operate through it without attenuation. The netting is not a shield. It is a hide.
+
+*The placement is deliberate*, SAUD said. *A camo net hung at this position — between the equipment and the adjacent property — creates a visual barrier while preserving the RF line-of-sight to the target. Anyone photographing the structure from the adjacent property sees netting. Anyone with a spectrum analyzer sees emissions.*
+
+This is the physical layer of the operation at Los Ríos. The street view photograph from October 21st shows the exterior — a white building, a residential street, unremarkable. The night photograph shows what is behind the facade when the lights come on: military netting, bright, operational.
+
+Echo photographed it. He noted the date, the time, the GPS coordinates. He kept the photograph.
+
+---
+
+## VI. THE FREQUENCIES
 *September 2025, Jacó — Case Reference: Case-Jaco-20250913*
 
 The forensic case file has a reference number because it was built to be read by someone who had not yet arrived.
