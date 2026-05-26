@@ -1,0 +1,970 @@
+{
+  "files": {
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28000kHz_usb_20260130_121100.png": {
+      "hash": "e9b1bff1c51672f79cc5faded8fa1f6d",
+      "analyzed_at": "2026-01-30T12:18:22.300580",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28150kHz_usb_20260130_121105.png": {
+      "hash": "e9b1bff1c51672f79cc5faded8fa1f6d",
+      "analyzed_at": "2026-01-30T12:18:22.303701",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28300kHz_usb_20260130_121109.png": {
+      "hash": "0d8d87225476bb63abd0fe7f1cebc2d5",
+      "analyzed_at": "2026-01-30T12:18:22.306938",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28450kHz_usb_20260130_121114.png": {
+      "hash": "e9b1bff1c51672f79cc5faded8fa1f6d",
+      "analyzed_at": "2026-01-30T12:18:22.310115",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28600kHz_usb_20260130_121119.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.313275",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28750kHz_usb_20260130_121124.png": {
+      "hash": "c3dda2c07665fadcce8e3d897bdf71f5",
+      "analyzed_at": "2026-01-30T12:18:22.316693",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_28900kHz_usb_20260130_121128.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.320017",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_29050kHz_usb_20260130_121133.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.323498",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_29200kHz_usb_20260130_121138.png": {
+      "hash": "28a97b5cb15a41e6f50e25e94e634b10",
+      "analyzed_at": "2026-01-30T12:18:22.328176",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_29350kHz_usb_20260130_121143.png": {
+      "hash": "78d8773a38455cfb7e89df650dae001d",
+      "analyzed_at": "2026-01-30T12:18:22.332178",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_29500kHz_usb_20260130_121147.png": {
+      "hash": "96e3944809b40703f2c59c3fd02f4bb1",
+      "analyzed_at": "2026-01-30T12:18:22.335671",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\10m_29650kHz_usb_20260130_121152.png": {
+      "hash": "e9b1bff1c51672f79cc5faded8fa1f6d",
+      "analyzed_at": "2026-01-30T12:18:22.338760",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\12m_24890kHz_usb_20260130_120913.png": {
+      "hash": "48595bdd4c2065bc8ab7b9ed79e81001",
+      "analyzed_at": "2026-01-30T12:18:22.341767",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\12m_24940kHz_usb_20260130_120917.png": {
+      "hash": "5a2067c111d14c47a6fd1ff58579c3b5",
+      "analyzed_at": "2026-01-30T12:18:22.344778",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\12m_24990kHz_usb_20260130_120924.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.345235",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21000kHz_usb_20260130_120839.png": {
+      "hash": "62e47e92263f774227fdb0c3dcbc9bda",
+      "analyzed_at": "2026-01-30T12:18:22.348457",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21075kHz_usb_20260130_120844.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.351716",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21150kHz_usb_20260130_120849.png": {
+      "hash": "96e3944809b40703f2c59c3fd02f4bb1",
+      "analyzed_at": "2026-01-30T12:18:22.354736",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21225kHz_usb_20260130_120853.png": {
+      "hash": "412bb8068057cfe129769a249e9700ff",
+      "analyzed_at": "2026-01-30T12:18:22.356938",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21300kHz_usb_20260130_120858.png": {
+      "hash": "fb618552af937f3cca9132f5ba0a7df3",
+      "analyzed_at": "2026-01-30T12:18:22.359978",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21375kHz_usb_20260130_120903.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.363115",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\15m_21450kHz_usb_20260130_120908.png": {
+      "hash": "0d8d87225476bb63abd0fe7f1cebc2d5",
+      "analyzed_at": "2026-01-30T12:18:22.367064",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1800kHz_lsb_20260130_111740.png": {
+      "hash": "d215d2fda8c3104210de6b1e24110fb9",
+      "analyzed_at": "2026-01-30T12:18:22.369247",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1800kHz_lsb_20260130_113221.png": {
+      "hash": "07a26950bbe901f8dff709607d4f6bab",
+      "analyzed_at": "2026-01-30T12:18:22.372538",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1800kHz_lsb_20260130_113633.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.373222",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1800kHz_lsb_20260130_120542.png": {
+      "hash": "fb618552af937f3cca9132f5ba0a7df3",
+      "analyzed_at": "2026-01-30T12:18:22.376267",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1850kHz_lsb_20260130_113227.png": {
+      "hash": "653f43d8eb842c5078c1fba8dc18647f",
+      "analyzed_at": "2026-01-30T12:18:22.379388",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1850kHz_lsb_20260130_113637.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.380351",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1850kHz_lsb_20260130_120546.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.381604",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1900kHz_lsb_20260130_113231.png": {
+      "hash": "8e82e91d2a6cd6a3f0be0a7a746f7658",
+      "analyzed_at": "2026-01-30T12:18:22.384857",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1900kHz_lsb_20260130_113641.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.385534",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1900kHz_lsb_20260130_120551.png": {
+      "hash": "fb618552af937f3cca9132f5ba0a7df3",
+      "analyzed_at": "2026-01-30T12:18:22.388674",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1950kHz_lsb_20260130_113236.png": {
+      "hash": "8e82e91d2a6cd6a3f0be0a7a746f7658",
+      "analyzed_at": "2026-01-30T12:18:22.391605",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1950kHz_lsb_20260130_113646.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.392122",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_1950kHz_lsb_20260130_120556.png": {
+      "hash": "96e3944809b40703f2c59c3fd02f4bb1",
+      "analyzed_at": "2026-01-30T12:18:22.395308",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_2000kHz_lsb_20260130_113241.png": {
+      "hash": "117b0435476cff2200d89ab861fe916a",
+      "analyzed_at": "2026-01-30T12:18:22.400011",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_2000kHz_lsb_20260130_113650.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.400638",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\160m_2000kHz_lsb_20260130_120600.png": {
+      "hash": "c3dda2c07665fadcce8e3d897bdf71f5",
+      "analyzed_at": "2026-01-30T12:18:22.403581",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\17m_18068kHz_usb_20260130_120824.png": {
+      "hash": "0b93f9fef4f7e6d769ce41ac56bc4878",
+      "analyzed_at": "2026-01-30T12:18:22.406704",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\17m_18118kHz_usb_20260130_120829.png": {
+      "hash": "96e3944809b40703f2c59c3fd02f4bb1",
+      "analyzed_at": "2026-01-30T12:18:22.409994",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\17m_18168kHz_usb_20260130_120834.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.413179",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14000kHz_usb_20260130_113423.png": {
+      "hash": "12adb4ca668d01cf1c726bd624fbac34",
+      "analyzed_at": "2026-01-30T12:18:22.417083",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14000kHz_usb_20260130_120746.png": {
+      "hash": "62e47e92263f774227fdb0c3dcbc9bda",
+      "analyzed_at": "2026-01-30T12:18:22.419935",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14050kHz_usb_20260130_113427.png": {
+      "hash": "d794ff23d196afdeb75662ddfbc198e9",
+      "analyzed_at": "2026-01-30T12:18:22.422841",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14050kHz_usb_20260130_120750.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.423596",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14100kHz_usb_20260130_113432.png": {
+      "hash": "55448502c24952ee9db64de6b8ce5298",
+      "analyzed_at": "2026-01-30T12:18:22.426653",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14100kHz_usb_20260130_120755.png": {
+      "hash": "c3dda2c07665fadcce8e3d897bdf71f5",
+      "analyzed_at": "2026-01-30T12:18:22.429442",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14150kHz_usb_20260130_113437.png": {
+      "hash": "6925b28d854bb98b82adf1598526598a",
+      "analyzed_at": "2026-01-30T12:18:22.432870",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14150kHz_usb_20260130_120800.png": {
+      "hash": "016b18026fba5fda02540a2b399bce6e",
+      "analyzed_at": "2026-01-30T12:18:22.435808",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14200kHz_usb_20260130_113442.png": {
+      "hash": "d611bfa47807e3d09a9bd81845472883",
+      "analyzed_at": "2026-01-30T12:18:22.437955",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14200kHz_usb_20260130_120804.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.440936",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14250kHz_usb_20260130_113446.png": {
+      "hash": "995c01d1d8a25c4d71e14c84b8ecaebd",
+      "analyzed_at": "2026-01-30T12:18:22.443687",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14250kHz_usb_20260130_120810.png": {
+      "hash": "78d8773a38455cfb7e89df650dae001d",
+      "analyzed_at": "2026-01-30T12:18:22.448043",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14300kHz_usb_20260130_113451.png": {
+      "hash": "0e2bb5446d64b23f47daec0f2e034eba",
+      "analyzed_at": "2026-01-30T12:18:22.451326",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14300kHz_usb_20260130_120814.png": {
+      "hash": "96e3944809b40703f2c59c3fd02f4bb1",
+      "analyzed_at": "2026-01-30T12:18:22.454047",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14350kHz_usb_20260130_113456.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:22.454527",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\20m_14350kHz_usb_20260130_120819.png": {
+      "hash": "1f27cea54337866cadc9024935ad4795",
+      "analyzed_at": "2026-01-30T12:18:22.457940",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\30m_10100kHz_cw_20260130_113409.png": {
+      "hash": "653f43d8eb842c5078c1fba8dc18647f",
+      "analyzed_at": "2026-01-30T12:18:22.460996",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\30m_10100kHz_cw_20260130_120732.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.464255",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\30m_10125kHz_cw_20260130_113413.png": {
+      "hash": "cfd1b18affbff537b605ee33bfd4e2d2",
+      "analyzed_at": "2026-01-30T12:18:22.467535",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\30m_10125kHz_cw_20260130_120737.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.470479",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\30m_10150kHz_cw_20260130_113418.png": {
+      "hash": "8e82e91d2a6cd6a3f0be0a7a746f7658",
+      "analyzed_at": "2026-01-30T12:18:22.473371",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\30m_10150kHz_cw_20260130_120741.png": {
+      "hash": "1f27cea54337866cadc9024935ad4795",
+      "analyzed_at": "2026-01-30T12:18:22.476447",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7000kHz_lsb_20260130_113336.png": {
+      "hash": "34a6afdb2da8a20bf371fba20be3b566",
+      "analyzed_at": "2026-01-30T12:18:22.479435",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7000kHz_lsb_20260130_120659.png": {
+      "hash": "c3dda2c07665fadcce8e3d897bdf71f5",
+      "analyzed_at": "2026-01-30T12:18:22.483058",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7050kHz_lsb_20260130_113341.png": {
+      "hash": "12adb4ca668d01cf1c726bd624fbac34",
+      "analyzed_at": "2026-01-30T12:18:22.486195",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7050kHz_lsb_20260130_120704.png": {
+      "hash": "ec912d86109d5b1b34f31d1609f7d59c",
+      "analyzed_at": "2026-01-30T12:18:22.489035",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7100kHz_lsb_20260130_113345.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:22.489467",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7100kHz_lsb_20260130_120708.png": {
+      "hash": "38a23b66369bde0f43193e232d525ce8",
+      "analyzed_at": "2026-01-30T12:18:22.492338",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7150kHz_lsb_20260130_113350.png": {
+      "hash": "34a6afdb2da8a20bf371fba20be3b566",
+      "analyzed_at": "2026-01-30T12:18:22.495486",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7150kHz_lsb_20260130_120713.png": {
+      "hash": "e9b1bff1c51672f79cc5faded8fa1f6d",
+      "analyzed_at": "2026-01-30T12:18:22.499051",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7200kHz_lsb_20260130_113355.png": {
+      "hash": "cfd1b18affbff537b605ee33bfd4e2d2",
+      "analyzed_at": "2026-01-30T12:18:22.502438",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7200kHz_lsb_20260130_120718.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.505600",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7250kHz_lsb_20260130_113359.png": {
+      "hash": "34a6afdb2da8a20bf371fba20be3b566",
+      "analyzed_at": "2026-01-30T12:18:22.508718",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7250kHz_lsb_20260130_120722.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.512076",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7300kHz_lsb_20260130_113404.png": {
+      "hash": "653f43d8eb842c5078c1fba8dc18647f",
+      "analyzed_at": "2026-01-30T12:18:22.515689",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\40m_7300kHz_lsb_20260130_120727.png": {
+      "hash": "a4475833ee500830ff8d508183d4f959",
+      "analyzed_at": "2026-01-30T12:18:22.518966",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5300kHz_usb_20260130_113313.png": {
+      "hash": "55448502c24952ee9db64de6b8ce5298",
+      "analyzed_at": "2026-01-30T12:18:22.521875",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5300kHz_usb_20260130_120636.png": {
+      "hash": "38a23b66369bde0f43193e232d525ce8",
+      "analyzed_at": "2026-01-30T12:18:22.524777",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5350kHz_usb_20260130_113318.png": {
+      "hash": "6925b28d854bb98b82adf1598526598a",
+      "analyzed_at": "2026-01-30T12:18:22.527868",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5350kHz_usb_20260130_120641.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.528320",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5400kHz_usb_20260130_113322.png": {
+      "hash": "4b569e6e99140940bd10128b2b475526",
+      "analyzed_at": "2026-01-30T12:18:22.531638",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5400kHz_usb_20260130_120645.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.532204",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5450kHz_usb_20260130_113327.png": {
+      "hash": "653f43d8eb842c5078c1fba8dc18647f",
+      "analyzed_at": "2026-01-30T12:18:22.535527",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5450kHz_usb_20260130_120650.png": {
+      "hash": "48595bdd4c2065bc8ab7b9ed79e81001",
+      "analyzed_at": "2026-01-30T12:18:22.538693",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5500kHz_usb_20260130_113332.png": {
+      "hash": "55448502c24952ee9db64de6b8ce5298",
+      "analyzed_at": "2026-01-30T12:18:22.542129",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\60m_5500kHz_usb_20260130_120654.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.545852",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3500kHz_lsb_20260130_113245.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:22.546927",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3500kHz_lsb_20260130_113654.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.547880",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3500kHz_lsb_20260130_120605.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.548656",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3600kHz_lsb_20260130_113250.png": {
+      "hash": "653f43d8eb842c5078c1fba8dc18647f",
+      "analyzed_at": "2026-01-30T12:18:22.551922",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3600kHz_lsb_20260130_113659.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.552557",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3600kHz_lsb_20260130_120609.png": {
+      "hash": "016b18026fba5fda02540a2b399bce6e",
+      "analyzed_at": "2026-01-30T12:18:22.556053",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3700kHz_lsb_20260130_113254.png": {
+      "hash": "117b0435476cff2200d89ab861fe916a",
+      "analyzed_at": "2026-01-30T12:18:22.559591",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3700kHz_lsb_20260130_120614.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.564180",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3800kHz_lsb_20260130_113259.png": {
+      "hash": "14a7bb51c504617096d7707225b98773",
+      "analyzed_at": "2026-01-30T12:18:22.568258",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3800kHz_lsb_20260130_120620.png": {
+      "hash": "45484ff601e88be472dedf5100cfc96d",
+      "analyzed_at": "2026-01-30T12:18:22.570479",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3900kHz_lsb_20260130_113304.png": {
+      "hash": "117b0435476cff2200d89ab861fe916a",
+      "analyzed_at": "2026-01-30T12:18:22.573659",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_3900kHz_lsb_20260130_120625.png": {
+      "hash": "a4475833ee500830ff8d508183d4f959",
+      "analyzed_at": "2026-01-30T12:18:22.577398",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_4000kHz_lsb_20260130_113309.png": {
+      "hash": "55448502c24952ee9db64de6b8ce5298",
+      "analyzed_at": "2026-01-30T12:18:22.580875",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\80m_4000kHz_lsb_20260130_120630.png": {
+      "hash": "83745ba930fdf7d90858d2fd23816528",
+      "analyzed_at": "2026-01-30T12:18:22.583126",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_26960kHz_am_20260130_120928.png": {
+      "hash": "016b18026fba5fda02540a2b399bce6e",
+      "analyzed_at": "2026-01-30T12:18:22.586546",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_26985kHz_am_20260130_120934.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.589969",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27010kHz_am_20260130_120939.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.590480",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27035kHz_am_20260130_120943.png": {
+      "hash": "62e47e92263f774227fdb0c3dcbc9bda",
+      "analyzed_at": "2026-01-30T12:18:22.593530",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27060kHz_am_20260130_120948.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.596638",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27085kHz_am_20260130_120953.png": {
+      "hash": "a4475833ee500830ff8d508183d4f959",
+      "analyzed_at": "2026-01-30T12:18:22.599926",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27110kHz_am_20260130_120958.png": {
+      "hash": "48595bdd4c2065bc8ab7b9ed79e81001",
+      "analyzed_at": "2026-01-30T12:18:22.603058",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27135kHz_am_20260130_121003.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.606292",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27160kHz_am_20260130_121007.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:22.606907",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27185kHz_am_20260130_121012.png": {
+      "hash": "1f27cea54337866cadc9024935ad4795",
+      "analyzed_at": "2026-01-30T12:18:22.610228",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27210kHz_am_20260130_121017.png": {
+      "hash": "016b18026fba5fda02540a2b399bce6e",
+      "analyzed_at": "2026-01-30T12:18:22.613727",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27235kHz_am_20260130_121022.png": {
+      "hash": "62e47e92263f774227fdb0c3dcbc9bda",
+      "analyzed_at": "2026-01-30T12:18:22.617016",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27260kHz_am_20260130_121027.png": {
+      "hash": "df4f9027629fe82c18eb1bf77977697c",
+      "analyzed_at": "2026-01-30T12:18:22.620147",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27285kHz_am_20260130_121032.png": {
+      "hash": "fb618552af937f3cca9132f5ba0a7df3",
+      "analyzed_at": "2026-01-30T12:18:22.623286",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27310kHz_am_20260130_121037.png": {
+      "hash": "62e47e92263f774227fdb0c3dcbc9bda",
+      "analyzed_at": "2026-01-30T12:18:22.626449",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27335kHz_am_20260130_121041.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.629576",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27360kHz_am_20260130_121046.png": {
+      "hash": "016b18026fba5fda02540a2b399bce6e",
+      "analyzed_at": "2026-01-30T12:18:22.632887",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27385kHz_am_20260130_121051.png": {
+      "hash": "c3dda2c07665fadcce8e3d897bdf71f5",
+      "analyzed_at": "2026-01-30T12:18:22.636102",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\CB_27410kHz_am_20260130_121055.png": {
+      "hash": "4b8dbc4e73a84427468ca328d0244b4d",
+      "analyzed_at": "2026-01-30T12:18:22.639231",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_150kHz_am_20260130_111643.png": {
+      "hash": "885223a6da423b014d760ac7ca4d2f09",
+      "analyzed_at": "2026-01-30T12:18:22.641328",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_150kHz_am_20260130_113136.png": {
+      "hash": "b1b9f266560e33225253d3a7ece1e863",
+      "analyzed_at": "2026-01-30T12:18:22.644259",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_150kHz_am_20260130_113550.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.644744",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_150kHz_am_20260130_120452.png": {
+      "hash": "575119b25339731ddc0041ac209d1113",
+      "analyzed_at": "2026-01-30T12:18:22.647802",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_250kHz_am_20260130_111649.png": {
+      "hash": "d41f32d2b8d1adff73012e00182d26c9",
+      "analyzed_at": "2026-01-30T12:18:22.650064",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_250kHz_am_20260130_113140.png": {
+      "hash": "07a26950bbe901f8dff709607d4f6bab",
+      "analyzed_at": "2026-01-30T12:18:22.653118",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_250kHz_am_20260130_113555.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.653656",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_250kHz_am_20260130_120457.png": {
+      "hash": "1f27cea54337866cadc9024935ad4795",
+      "analyzed_at": "2026-01-30T12:18:22.656500",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_350kHz_am_20260130_111654.png": {
+      "hash": "be84f1a64c7f41f96e0198b98e90e921",
+      "analyzed_at": "2026-01-30T12:18:22.658535",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_350kHz_am_20260130_113145.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:22.658948",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_350kHz_am_20260130_113559.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.659326",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_350kHz_am_20260130_120502.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.662178",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_450kHz_am_20260130_111700.png": {
+      "hash": "5ff958eac540ffb43134910d151dc365",
+      "analyzed_at": "2026-01-30T12:18:22.664501",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_450kHz_am_20260130_113149.png": {
+      "hash": "8dbaffcd801a2c9fbad125dc5882a26b",
+      "analyzed_at": "2026-01-30T12:18:22.668007",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_450kHz_am_20260130_113603.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.668552",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\LW_450kHz_am_20260130_120507.png": {
+      "hash": "48595bdd4c2065bc8ab7b9ed79e81001",
+      "analyzed_at": "2026-01-30T12:18:22.671441",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1130kHz_am_20260130_111722.png": {
+      "hash": "5fdef1a82e20fa315271e75f2624fc66",
+      "analyzed_at": "2026-01-30T12:18:22.673511",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1130kHz_am_20260130_113208.png": {
+      "hash": "8e82e91d2a6cd6a3f0be0a7a746f7658",
+      "analyzed_at": "2026-01-30T12:18:22.676491",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1130kHz_am_20260130_113620.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.677044",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1130kHz_am_20260130_120527.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.680008",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1330kHz_am_20260130_111727.png": {
+      "hash": "3ee77f33b4b92644b09fa5f580e8c07f",
+      "analyzed_at": "2026-01-30T12:18:22.682476",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1330kHz_am_20260130_113212.png": {
+      "hash": "34a6afdb2da8a20bf371fba20be3b566",
+      "analyzed_at": "2026-01-30T12:18:22.685520",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1330kHz_am_20260130_113625.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.686155",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1330kHz_am_20260130_120531.png": {
+      "hash": "62e47e92263f774227fdb0c3dcbc9bda",
+      "analyzed_at": "2026-01-30T12:18:22.689054",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1530kHz_am_20260130_111734.png": {
+      "hash": "ddd983641564d46a8fe53cd0c11adb64",
+      "analyzed_at": "2026-01-30T12:18:22.691072",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1530kHz_am_20260130_113217.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:22.691542",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1530kHz_am_20260130_113629.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.692005",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_1530kHz_am_20260130_120536.png": {
+      "hash": "1f27cea54337866cadc9024935ad4795",
+      "analyzed_at": "2026-01-30T12:18:22.694874",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_530kHz_am_20260130_111705.png": {
+      "hash": "78d1bfa9c8a32c92dc2b8bff67e1c896",
+      "analyzed_at": "2026-01-30T12:18:22.696998",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_530kHz_am_20260130_113154.png": {
+      "hash": "55448502c24952ee9db64de6b8ce5298",
+      "analyzed_at": "2026-01-30T12:18:22.699988",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_530kHz_am_20260130_113607.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.700493",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_530kHz_am_20260130_120511.png": {
+      "hash": "38a23b66369bde0f43193e232d525ce8",
+      "analyzed_at": "2026-01-30T12:18:22.703311",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_730kHz_am_20260130_111711.png": {
+      "hash": "d41f32d2b8d1adff73012e00182d26c9",
+      "analyzed_at": "2026-01-30T12:18:22.705252",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_730kHz_am_20260130_113159.png": {
+      "hash": "8e82e91d2a6cd6a3f0be0a7a746f7658",
+      "analyzed_at": "2026-01-30T12:18:22.708178",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_730kHz_am_20260130_113612.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.708746",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_730kHz_am_20260130_120517.png": {
+      "hash": "96e3944809b40703f2c59c3fd02f4bb1",
+      "analyzed_at": "2026-01-30T12:18:22.711693",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_930kHz_am_20260130_111716.png": {
+      "hash": "d215d2fda8c3104210de6b1e24110fb9",
+      "analyzed_at": "2026-01-30T12:18:22.713813",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_930kHz_am_20260130_113203.png": {
+      "hash": "117b0435476cff2200d89ab861fe916a",
+      "analyzed_at": "2026-01-30T12:18:22.716944",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_930kHz_am_20260130_113616.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.717510",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\MW_AM_930kHz_am_20260130_120522.png": {
+      "hash": "83408f08821b03190268888a170c3c90",
+      "analyzed_at": "2026-01-30T12:18:22.720446",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_11175kHz_usb_20260130_111632.png": {
+      "hash": "e77888132825e13b8198b84a7039f644",
+      "analyzed_at": "2026-01-30T12:18:22.722441",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_11175kHz_usb_20260130_113126.png": {
+      "hash": "f154352f54fa7f2c56a0dd35dd42b4b8",
+      "analyzed_at": "2026-01-30T12:18:22.725407",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_11175kHz_usb_20260130_113542.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:22.725984",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_11175kHz_usb_20260130_120442.png": {
+      "hash": "ce7e607ad7379f9bbe10ed9432a0e78c",
+      "analyzed_at": "2026-01-30T12:18:22.728602",
+      "is_suspect": false
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_1234kHz_am_20260130_111605.png": {
+      "hash": "a1b2199c32b19e45fc127e19932ab96b",
+      "analyzed_at": "2026-01-30T12:18:22.729444",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_1234kHz_am_20260130_111926.png": {
+      "hash": "8dd11a4a7254b33ef4c4dd606c0bf08d",
+      "analyzed_at": "2026-01-30T12:18:24.576826",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_1234kHz_am_20260130_113104.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:25.981376",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_1234kHz_am_20260130_113521.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:27.530977",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_1234kHz_am_20260130_120417.png": {
+      "hash": "f2a7e456ade5365d1cc60318806c97eb",
+      "analyzed_at": "2026-01-30T12:18:28.990550",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_14062kHz_am_20260130_111638.png": {
+      "hash": "c1c387b44e359ed42924ded00c099be4",
+      "analyzed_at": "2026-01-30T12:18:30.191637",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_14062kHz_am_20260130_113131.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:31.359846",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_14062kHz_am_20260130_113546.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:32.482396",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_14062kHz_am_20260130_120447.png": {
+      "hash": "9724eeed9149a54b91ba8972493db702",
+      "analyzed_at": "2026-01-30T12:18:33.773895",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_4687kHz_am_20260130_111610.png": {
+      "hash": "243464e1e21e01a05ac5bfa07f321d2f",
+      "analyzed_at": "2026-01-30T12:18:35.200987",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_4687kHz_am_20260130_111931.png": {
+      "hash": "8dd11a4a7254b33ef4c4dd606c0bf08d",
+      "analyzed_at": "2026-01-30T12:18:36.321550",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_4687kHz_am_20260130_113109.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:37.396450",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_4687kHz_am_20260130_113525.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:38.499312",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_4687kHz_am_20260130_120423.png": {
+      "hash": "56a52300439457ed3b4b2f09d6b52d0c",
+      "analyzed_at": "2026-01-30T12:18:40.189465",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_6925kHz_am_20260130_111615.png": {
+      "hash": "316160eb3788dd113a1f341664380af9",
+      "analyzed_at": "2026-01-30T12:18:41.525195",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_6925kHz_am_20260130_111936.png": {
+      "hash": "8dd11a4a7254b33ef4c4dd606c0bf08d",
+      "analyzed_at": "2026-01-30T12:18:42.874386",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_6925kHz_am_20260130_113112.png": {
+      "hash": "4e344fe7694372fb668b65fe2c7897f4",
+      "analyzed_at": "2026-01-30T12:18:44.170112",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_6925kHz_am_20260130_113529.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:45.381777",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_6925kHz_am_20260130_120427.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:46.618557",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_7410kHz_am_20260130_111621.png": {
+      "hash": "1adee410d3e25f7d0e1f59f9ac64673a",
+      "analyzed_at": "2026-01-30T12:18:47.669034",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_7410kHz_am_20260130_111940.png": {
+      "hash": "8dd11a4a7254b33ef4c4dd606c0bf08d",
+      "analyzed_at": "2026-01-30T12:18:48.823387",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_7410kHz_am_20260130_113117.png": {
+      "hash": "c2a14f7c28d0689e1f1b0badf416acd1",
+      "analyzed_at": "2026-01-30T12:18:50.051004",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_7410kHz_am_20260130_113533.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:51.469075",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_7410kHz_am_20260130_120432.png": {
+      "hash": "4e5184fb26f8e687c1fe055ca0d7a155",
+      "analyzed_at": "2026-01-30T12:18:52.771815",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_9375kHz_am_20260130_111626.png": {
+      "hash": "dd3cbbacf9859156547f0054cf24088b",
+      "analyzed_at": "2026-01-30T12:18:54.063451",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_9375kHz_am_20260130_111945.png": {
+      "hash": "8dd11a4a7254b33ef4c4dd606c0bf08d",
+      "analyzed_at": "2026-01-30T12:18:55.531314",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_9375kHz_am_20260130_113122.png": {
+      "hash": "0fb35b06fd432fe881bb60b51fbca483",
+      "analyzed_at": "2026-01-30T12:18:56.629312",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_9375kHz_am_20260130_113538.png": {
+      "hash": "f7d8b98762b1d95d4e204244d68c1006",
+      "analyzed_at": "2026-01-30T12:18:57.927108",
+      "is_suspect": true
+    },
+    "C:\\Users\\echo\\Downloads\\LLM\\ToroidalRecursion\\signal_forensics\\full_sweep\\SUSPECT_9375kHz_am_20260130_120436.png": {
+      "hash": "22bdbf79ab2b18ace52c6603e1997080",
+      "analyzed_at": "2026-01-30T12:18:59.211182",
+      "is_suspect": true
+    }
+  },
+  "last_synthesis": "2026-01-30T12:24:00.836047"
+}
