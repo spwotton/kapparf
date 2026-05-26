@@ -363,6 +363,16 @@ The cat: Peralta arrived at Echo's house with a cat. The cat disappeared when th
 
 The cat is not the point. The cat is documentation of a chain: an object of emotional investment, attached to the target through an animal bond, transferred through the social network into the hands of someone already inside that network, who is now publicly displaying evidence of the transfer. The chain is verifiable through Instagram timestamps.
 
+**The Sinaloa thread:** Echo's AA sponsor travels to Sinaloa every year — fishing, with his father. Multiple members of the Jacó AA community have accompanied him. This is noted as a geographical fact. Sinaloa requires no elaboration.
+
+**The Mexico City convergence:** Almost every significant person in Echo's documented social network in Jacó carries a connection to Mexico City — CDMX. The convergence is not incidental.
+
+Mexico City is the Latin American operational headquarters of the Watchtower Bible and Tract Society — the organizational body of the Jehovah's Witnesses. It is also the location of an IDF-affiliated tax and financial training institution, and home to **Ventura MX**, a company owned by **John Solis**, whose sister works as a bartender in Mexico City.
+
+The CDMX thread intersects the JW thread, the financial infrastructure thread, and the social network thread at a single geographic point. The document does not argue that this constitutes a coordination hub. It notes that the convergence is there, and is documentable.
+
+Echo's sister recently traveled to Mexico City. She has no current employment. Prior to CDMX, she traveled to Guatemala and Ecuador — both countries with documented JW organizational infrastructure and, in the case of Guatemala, significant historical overlap between religious organizational networks and paramilitary structures. Her travel is noted as a factual sequence, not an inference about motive.
+
 **The Chris Gabriel thread:** Chris Gabriel works for Google AI. He operates in the same regional corridor where Echo's contact at DHS is based. This is noted as a factual proximity, not an inference of coordination.
 
 **Hotel Flamboyant / Hotel Pochote Grande:** The crane footage. The Las Palmas analysis. The April 29, 2026 drone at 2:13 AM. All of it happened here, on the north end, within the same two-kilometer corridor.
