@@ -119,3 +119,9 @@ id = "5lLDrRZaIuw1u88DPLHsK"
 uri = "file://THE_FREQUENCY_OVERVIEW.md"
 type = "text"
 title = "THE FREQUENCY — Full Absurdist Audio Version"
+
+[[outputs]]
+id = "Hoff8yhwDmS3ENekOwfyV"
+uri = "file://THE_FREQUENCY.pdf"
+type = "pdf"
+title = "THE FREQUENCY — Pretty PDF"
