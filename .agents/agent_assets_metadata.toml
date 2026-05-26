@@ -107,3 +107,9 @@ id = "I57IhcCfqvqFTK8mwa_Fy"
 uri = "file://THE_KAPPA_CONSTANT.md"
 type = "text"
 title = "THE KAPPA CONSTANT — Updated Draft"
+
+[[outputs]]
+id = "K1WTu9Hkng56UbgHrCvKQ"
+uri = "file://attached_assets/spectrum_analysis.png"
+type = "image"
+title = "Spectral Analysis — New_Recording_17"
