@@ -1,0 +1,145 @@
+{
+  "metadata": {
+    "ingest_date": "2026-02-07T17:19:52.022426",
+    "source_file": "evidence\\osint_xray_dump_batch3.txt",
+    "stats": {
+      "total": 5,
+      "jorge_matches": 0,
+      "carlos_matches": 0,
+      "uncategorized": 5
+    }
+  },
+  "targets": {
+    "Jorge Jiminez Navarro": [],
+    "Carlos Chavez Murillo": [],
+    "Other": [
+      {
+        "source": "OSINT_XRAY_DUMP",
+        "timestamp_ingested": "2026-02-07T17:19:52.020535",
+        "names": [
+          "\"Genesis Queso\" and \"Yojhan - Nevera Lt\" contain unusual or descriptive words."
+        ],
+        "addresses": [
+          "phones",
+          "Bogota, Colombia",
+          "Colombia",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "phones": [
+          "Bogota, Colombia",
+          "Colombia",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "jobs": [
+          "0",
+          "Educations",
+          "22",
+          "Online references"
+        ],
+        "dob": null,
+        "gender": null,
+        "raw_text": "Platform Logo\n20\nSam Wotton\nspwotton@gmail.com\n\n\nSearch\nSanctions Check\nHistory\nStore\nSettings\nX-Ray Upgrade Sale!\nSave up to 15% until February 15!\n\n07:06:58:17\n\nHome\nPlatform\nSearch\nSearch results for Chama_Genesis_____e3a28824-742e-4198-98c7-ea0e4dc20407\n\nGenesis Venezolana\nPerson summary\n\n\nGenesis Venezolana is associated with Colombia and has aliases including Genesis Ejercicios, Genesis Chama, Genesis Veneca, and Genesis Queso, as well as Yojhan - Nevera Lt. Online references indicate she is a Venezuelan who arrived in Buenos Aires six years ago and now owns a Beauty Studio. She has also shared her experience opening a business in Panama and has been identified as a social media influencer. Other online content suggests an interest in fitness and female empowerment. The profile contains multiple \"Requires Attention\" risk factors related to unusual names, changes of residence, and negative online reputation due to links to sexually explicit content and prostitution in Colombia.\n\n0\nRisks\n4\nWarnings\n11\nChecks\n0\nJobs\n0\nEducations\n22\nOnline references\n\nOverview\n\nContacts\nRisk factors analysis\n\n\nwarnings\n\npassed\nOther\nUnusual or uncommon names, which are different to others in a list\n\nThe names \"Genesis Queso\" and \"Yojhan - Nevera Lt\" contain unusual or descriptive words.\n\nPersonal\nChange of residence\n\nOnline references for \"Genesis Venezolana\" indicate residence in multiple countries, suggesting changes of residence.\n\nReputation\nNegative online reputation and media coverage\n\nOnline references for alias \"Genesis Chama\" link to sexually explicit content and prostitution in Colombia.\n\nRegistration on negative websites\n\nOnline references for alias \"Genesis Chama\" link to content on pornographic websites (hermanodeleche.com, xnxx.com).\n\nOnline references\n\n\nbusiness\n\nhealth\n\nxx NSFW xx\n\nsocial\n\nmusic\n\npolitical\n\nmisc\n\nhobby\n\nnews\nGenesis Baquero\nhttps://www.instagram.com/popular/genesis-baquero/\n... Colombia y Venezuela. Génesis, venezolana, comparte su experiencia real abriendo su negocio en Panamá, los retos de empezar desde cero, y cómo sus valores ...\n\nFactú on Instagram: \"🎙️ Nuevo episodio del podcast de ...\nhttps://www.instagram.com/reel/DTVkrE0joGa/\n... Colombia y Venezuela. Génesis, venezolana, comparte su experiencia real abriendo su negocio en Panamá, los retos de empezar desde cero, y ...\n\nGeoanalysis\n\n\naddresses\n\nphones\nBogota, Colombia\nColombia\n+\n−\n Leaflet | © OpenStreetMap contributors\nNames\nGenesis Venezolana\n\nShow 4 aliases\nYojhan - Nevera Lt\nLanguages\nes"
+      },
+      {
+        "source": "OSINT_XRAY_DUMP",
+        "timestamp_ingested": "2026-02-07T17:19:52.021721",
+        "names": [
+          "Genesis Chama"
+        ],
+        "addresses": [
+          "phones",
+          "San Jose, Costa Rica",
+          "Costa Rica",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "phones": [
+          "San Jose, Costa Rica",
+          "Costa Rica",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "jobs": [
+          "0",
+          "Educations",
+          "14",
+          "Online references"
+        ],
+        "dob": null,
+        "gender": null,
+        "raw_text": "Good\n\nBadPlatform Logo\n20\nSam Wotton\nspwotton@gmail.com\n\n\nSearch\nSanctions Check\nHistory\nStore\nSettings\nX-Ray Upgrade Sale!\nSave up to 15% until February 15!\n\n07:06:55:52\n\nHome\nPlatform\nSearch\nSearch results for Chama_Genesis_____60cd5335-7d25-428b-b6b3-e1e41f81fde4\n\nGenesis Chama\nPerson summary\n\n\nGenesis Chama, also known as Génesis Gal and Génesis Morales, is associated with Costa Rica. Online references indicate an interest in football and American Bully dogs. Some references also link to academic discussions in linguistic anthropology. One LinkedIn profile identifies a \"Génesis Morales\" as an IT Student in Computer Engineering in Costa Rica, while another mentions a \"Genesis Morales Mora\" at Bill Gosling Outsourcing and Universidad Hispanoamericana (CR). A \"Genesis Calderon\" is noted as a Senior Administrative Clerk at Auxis in San Jose, Costa Rica. No \"Critical\" or \"Requires Attention\" risk factors were identified in the profile.\n\n0\nRisks\n0\nWarnings\n12\nChecks\n0\nJobs\n0\nEducations\n14\nOnline references\n\nOverview\n\nContacts\nRisk factors analysis\n\n\npassed\n\nfacts\nBelarus Summary\nNo connections to Belarus found\n\nCareer Summary\nNo career-related risk factors identified\n\nChina Summary\nNo connections to China found\n\nConnections Summary\nNo concerning connections identified\n\nFinance Summary\nNo financial risk factors identified\n\nInterests Summary\nNo concerning interests identified\n\nIran Summary\nNo connections to Iran found\n\nLegal Summary\nNo legal risk factors identified\n\nOther Summary\nNo other risk factors identified\n\nProperty Summary\nNo property-related risk factors identified\n\nReputation Summary\nNo reputation risk factors identified\n\nRussia Summary\nNo connections to Russia found\n\nOnline references\n\n\nbusiness\n\nmisc\n\nimages\n\nsocial\nGénesis Morales - IT Student in Computer Engineering\nhttps://cr.linkedin.com/in/g%C3%A9nesismoralescastro\n... Costa Rica · Ubicación: Costa Rica · 374 contactos en LinkedIn. Mira el perfil de Génesis Morales en LinkedIn, una red profesional de más de 1.000 millones ...\n\nGenesis Morales Mora\nhttps://cr.linkedin.com/in/genesis-morales-mora-02b580293\nGenesis Morales Mora. --. Bill Gosling Outsourcing Universidad Hispanoamericana (CR). Costa Rica. Ver tus contactos en común. Ver tus ...\n\nContact Genesis Morales, Email: g***@auxis.com & Phone ...\nhttps://www.zoominfo.com/p/Genesis-Morales/8181808867\nWho is Genesis Morales. Genesis Calderon is a Senior Administrative Clerk at Auxis, a management consulting firm based in San Jose, Costa Rica. With ...\n\nGenesis Morales Brack's email & phone number\nhttps://www.signalhire.com/profiles/genesis-morales-brack/240902758\nLocation:Costa Rica. How to contact Genesis Morales Brack. Found 1 email address for Genesis Morales Brack: Search for emails. m******s@mckinsey.com. Found 1 ...\n\nGeoanalysis\n\n\naddresses\n\nphones\nSan Jose, Costa Rica\nCosta Rica\n+\n−\n Leaflet | © OpenStreetMap contributors\nNames\nGenesis Chama\n\nShow 2 aliases\nLanguages\nes"
+      },
+      {
+        "source": "OSINT_XRAY_DUMP",
+        "timestamp_ingested": "2026-02-07T17:19:52.021938",
+        "names": [
+          "Genesis Chama"
+        ],
+        "addresses": [
+          "phones",
+          "Guayaquil, Ecuador",
+          "Guayaquil ecuador, Guayaquil, Ecuador",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "phones": [
+          "Costa Rica",
+          "20",
+          "Sam Wotton",
+          "spwotton@gmail.com"
+        ],
+        "jobs": [
+          "0",
+          "Educations",
+          "6",
+          "Online references"
+        ],
+        "dob": null,
+        "gender": null,
+        "raw_text": "Good\n\nBad notice this one lists genesis morales mora.. phones\nCosta Rica\n+50660635649Platform Logo\n20\nSam Wotton\nspwotton@gmail.com\n\n\nSearch\nSanctions Check\nHistory\nStore\nSettings\nX-Ray Upgrade Sale!\nSave up to 15% until February 15!\n\n07:06:53:21\n\nHome\nPlatform\nSearch\nSearch results for Chama_Genesis_____dc476e0b-4353-496b-90fa-7f8e65fc1037\n\nGenesis Chama\nPerson summary\n\n\nGenesis Chama is associated with Guayaquil, Ecuador, and a phone number from Ecuador. She operates a business named Fornituras, specializing in custom wooden furniture for homes, offices, and businesses. The business emphasizes customer satisfaction, offers customizable furniture options, and actively promotes sales, particularly for beds, including specialized features like storage and LED lighting. Fornituras provides delivery services and accepts card payments, indicating modern business practices. The business maintains a presence in both Quito and Guayaquil, suggesting a regional reach within Ecuador, and utilizes WhatsApp for customer communication. No \"Critical\" or \"Requires Attention\" risk factors were identified in the profile.\n\n0\nRisks\n0\nWarnings\n13\nChecks\n0\nJobs\n0\nEducations\n6\nOnline references\n\nOverview\n\nContacts\nRisk factors analysis\n\n\npassed\n\nfacts\nBelarus Summary\nNo connections to Belarus found\n\nCareer Summary\nNo career-related risk factors identified\n\nChina Summary\nNo connections to China found\n\nConnections Summary\nNo concerning connections identified\n\nFinance Summary\nNo financial risk factors identified\n\nInterests Summary\nNo concerning interests identified\n\nIran Summary\nNo connections to Iran found\n\nLegal Summary\nNo legal risk factors identified\n\nOther Summary\nNo other risk factors identified\n\nPersonal Summary\nNo personal risk factors identified\n\nProperty Summary\nNo property-related risk factors identified\n\nReputation Summary\nNo reputation risk factors identified\n\nRussia Summary\nNo connections to Russia found\n\nImages\nSource: Facebook\n\nOnline references\n\n\nbusiness\n\nmisc\n\nsocial\nhttps://www.facebook.com/profile.php?i\nhttps://www.facebook.com/profile.php?i\nMissing: 111453764534865 | Show results with:111453764534865\n\nGenesis Garces (garcesgenesis) - Profile\nhttps://www.pinterest.com/garcesgenesis/\nSee what Genesis Garces (garcesgenesis) has discovered on Pinterest, the world's biggest collection of ideas.\n\nGeoanalysis\n\n\naddresses\n\nphones\nGuayaquil, Ecuador\nGuayaquil ecuador, Guayaquil, Ecuador\n+\n−\n Leaflet | © OpenStreetMap contributors\nNames\nGenesis Chama\n\nShow 4 aliases\nLanguages\nes"
+      },
+      {
+        "source": "OSINT_XRAY_DUMP",
+        "timestamp_ingested": "2026-02-07T17:19:52.022086",
+        "names": [
+          "Genesis Chama"
+        ],
+        "addresses": [
+          "phones",
+          "Venezuela, Bolivarian Republic of",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "phones": [
+          "Venezuela, Bolivarian Republic of",
+          "−",
+          "Leaflet | © OpenStreetMap contributors"
+        ],
+        "jobs": [
+          "0",
+          "Educations",
+          "10",
+          "Online references"
+        ],
+        "dob": null,
+        "gender": null,
+        "raw_text": "Good\n\nBadPlatform Logo\n20\nSam Wotton\nspwotton@gmail.com\n\n\nSearch\nSanctions Check\nHistory\nStore\nSettings\nX-Ray Upgrade Sale!\nSave up to 15% until February 15!\n\n07:06:52:51\n\nHome\nPlatform\nSearch\nSearch results for Chama_Genesis_____94a7cd10-52c5-4c9c-9b25-42ff66ed67ac\n\nGenesis Chama\nPerson summary\n\n\nGenesis Chama is associated with Venezuela and has a phone number with a Venezuelan region code. She is also known as Natasha Genesis Chama, a photo editor and a fan of Chelsea FC, and has a presence on Facebook and TikTok. No \"Critical\" or \"Requires Attention\" risk factors were identified in the profile.\n\n0\nRisks\n0\nWarnings\n14\nChecks\n0\nJobs\n0\nEducations\n10\nOnline references\n\nOverview\n\nContacts\nRisk factors analysis\n\n\npassed\nBelarus Summary\nNo connections to Belarus found\n\nBusiness Summary\nNo business-related risk factors identified\n\nCareer Summary\nNo career-related risk factors identified\n\nChina Summary\nNo connections to China found\n\nConnections Summary\nNo concerning connections identified\n\nFinance Summary\nNo financial risk factors identified\n\nInterests Summary\nNo concerning interests identified\n\nIran Summary\nNo connections to Iran found\n\nLegal Summary\nNo legal risk factors identified\n\nOther Summary\nNo other risk factors identified\n\nPersonal Summary\nNo personal risk factors identified\n\nProperty Summary\nNo property-related risk factors identified\n\nReputation Summary\nNo reputation risk factors identified\n\nRussia Summary\nNo connections to Russia found\n\nOnline references\n\n\nmisc\n\nsocial\nRanking del Miss Universo. Venezuela #1 de ...\nhttps://www.facebook.com/groups/278196824306014/posts/1351233500335669/\nYenny Yenny Genesis chama cálmate y antes de ponerte histérica al menos “Investiga” es tan fácil como buscar en Google “que país del mundo ...\n\nWe were honored to take part in Aviation Week Africa ...\nhttps://www.facebook.com/SAASTzambia/posts/we-were-honored-to-take-part-in-aviation-week-africa-a-platform-bringing-togethe/1137154848425526/\nNatasha Genesis Chama. I'm definitely coming for this course I wish to be selected in the next intake. 9 mos. 1. Profile photo of Margaret.\n\nGeoanalysis\n\n\naddresses\n\nphones\nVenezuela, Bolivarian Republic of\n+584248669101\n+\n−\n Leaflet | © OpenStreetMap contributors\nNames\nGenesis Chama\n\nShow 1 aliases\nArgelis Bolivariano\nLanguages\nes"
+      },
+      {
+        "source": "OSINT_XRAY_DUMP",
+        "timestamp_ingested": "2026-02-07T17:19:52.022247",
+        "names": [
+          "Good"
+        ],
+        "addresses": [],
+        "phones": [],
+        "jobs": [],
+        "dob": null,
+        "gender": null,
+        "raw_text": "Good\n\nBadGenesis Veneca"
+      }
+    ]
+  }
+}

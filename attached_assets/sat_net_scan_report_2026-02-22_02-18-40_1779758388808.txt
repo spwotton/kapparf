@@ -1,0 +1,145 @@
+========================================================================
+SATELLITE & NETWORK FORENSIC SCAN
+Date: 2026-02-22 02:18:40 CST (UTC-6)
+Location: 9.9535°N, -84.2908°W — Guácima, Alajuela, Costa Rica
+Elevation: 900m
+========================================================================
+
+╔══════════════════════════════════════════╗
+║  COSMO-SkyMed (Italian SAR Constellation)  ║
+╚══════════════════════════════════════════╝
+  COSMO-SkyMed 1 (FM1): FETCH FAILED — <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+  COSMO-SkyMed 2 (FM2): FETCH FAILED — <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+  COSMO-SkyMed 3 (FM3): FETCH FAILED — <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+  COSMO-SkyMed 4 (FM4): FETCH FAILED — <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+  CSG-1 (2nd Generation): FETCH FAILED — <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+  CSG-2 (2nd Generation): FETCH FAILED — <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+
+╔══════════════════════════════════════════╗
+║  DARPA Blackjack / SDA Tranche Satellites  ║
+╚══════════════════════════════════════════╝
+  'BLACKJACK': <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+  'SDA': <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+
+╔══════════════════════════════════════════╗
+║  Starlink Constellation                     ║
+╚══════════════════════════════════════════╝
+  Starlink fetch: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+
+╔══════════════════════════════════════════╗
+║  Other Surveillance / Radar Satellites      ║
+╚══════════════════════════════════════════╝
+  Copernicus Sentinel (EU SAR): no results or error
+  RADARSAT (Canadian SAR): no results or error
+  ICEYE (Finnish SAR): no results or error
+  Capella Space (US SAR): no results or error
+  SAR keyword search: no results or error
+
+  OneWeb constellation:
+    OneWeb: <urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>
+
+╔══════════════════════════════════════════╗
+║  Wireless Network Environment               ║
+╚══════════════════════════════════════════╝
+ 
+Interface name : Wi-Fi 
+There are 2 networks currently visible. 
+
+SSID 1 : 
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+    BSSID 1                 : f6:09:0d:20:c2:4e
+         Signal             : 38%  
+         Radio type         : 802.11ax
+         Band               : 2.4 GHz
+         Channel            : 4 
+         QoS MSCS Supported    : 0
+         QoS Map Supported     : 0
+         Basic rates (Mbps) : 1 2 5.5 11
+         Other rates (Mbps) : 6 9 12 18 24 36 48 54
+
+SSID 2 : OSLU
+    Network type            : Infrastructure
+    Authentication          : WPA2-Personal
+    Encryption              : CCMP 
+    BSSID 1                 : f0:09:0d:20:c2:4e
+         Signal             : 33%  
+         Radio type         : 802.11ax
+         Band               : 2.4 GHz
+         Channel            : 4 
+         QoS MSCS Supported    : 0
+         QoS Map Supported     : 0
+         Basic rates (Mbps) : 1 2 5.5 11
+         Other rates (Mbps) : 6 9 12 18 24 36 48 54
+    BSSID 2                 : fe:09:0d:20:c2:46
+         Signal             : 70%  
+         Radio type         : 802.11ax
+         Band               : 2.4 GHz
+         Channel            : 4 
+         QoS MSCS Supported    : 0
+         QoS Map Supported     : 0
+         Basic rates (Mbps) : 1 2 5.5 11
+         Other rates (Mbps) : 6 9 12 18 24 36 48 54
+
+
+
+╔══════════════════════════════════════════╗
+║  Hosts File Sinkhole Check                  ║
+╚══════════════════════════════════════════╝
+  Active sinkhole entries: 26
+    0.0.0.0 186.15.224.84
+    0.0.0.0 api.kyndryl.com
+    0.0.0.0 kyndryl.com
+    0.0.0.0 www.kyndryl.com
+    0.0.0.0 libertycr.com
+    0.0.0.0 kyndryl.com
+    0.0.0.0 www.kyndryl.com
+    0.0.0.0 api.kyndryl.com
+    0.0.0.0 cdn.kyndryl.com
+    0.0.0.0 auth.kyndryl.com
+    0.0.0.0 login.kyndryl.com
+    0.0.0.0 sso.kyndryl.com
+    0.0.0.0 cloud.kyndryl.com
+    0.0.0.0 services.kyndryl.com
+    0.0.0.0 portal.kyndryl.com
+    0.0.0.0 gamma-international.de
+    0.0.0.0 gammagroup.com
+    0.0.0.0 finfisher.com
+    0.0.0.0 finspy.com
+    0.0.0.0 elaman.de
+    0.0.0.0 acs.isp.com
+    0.0.0.0 tr069.net
+    0.0.0.0 186.15.236.138
+    0.0.0.0 airbnb.com.co
+    0.0.0.0 www.airbnb.com.co
+    0.0.0.0 partytown.airbnb.com.co
+
+╔══════════════════════════════════════════╗
+║  Suspicious Process Check                   ║
+╚══════════════════════════════════════════╝
+
+ProcessName                Id Path                                                                                                                     
+-----------                -- ----                                                                                                                     
+ApplicationFrameHost    10732 C:\WINDOWS\system32\ApplicationFrameHost.exe                                                                             
+backgroundTaskHost      14308 C:\WINDOWS\system32\backgroundTaskHost.exe                                                                               
+brave                   21892 C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe                                                       
+Code                    19128 C:\Users\echo\AppData\Local\Programs\Microsoft VS Code\Code.exe                                                          
+conhost                 19872 C:\WINDOWS\system32\conhost.exe                                                                                          
+CrossDeviceResume        7852 C:\WINDOWS\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\CrossDeviceResume.exe                                    
+ctfmon                  11016 C:\WINDOWS\system32\ctfmon.exe                                                                                           
+dasHost                  4920 C:\WINDOWS\system32\dashost.exe                                                                                          
+DataExchangeHost        23808 C:\Windows\System32\DataExchangeHost.exe                                                                                 
+dllhost                 21148 C:\WINDOWS\system32\DllHost.exe                                                                                          
+dwm                     23504 C:\WINDOWS\system32\dwm.exe                                                                                              
+esif_uf                  4720 C:\WINDOWS\System32\DriverStore\FileRepository\dptf_cpu.inf_amd64_c2c5b0e17a28a48f\esif_uf.exe                           
+explorer                 7564 C:\WINDOWS\Explorer.EXE                                                                                                  
+FMService64              4168 C:\WINDOWS\System32\FMService64.exe                                                                                      
+fontdrvhost              1268 C:\WINDOWS\system32\fontdrvhost.exe                                                                                      
+igfxCUIService           2580 C:\WINDOWS\System32\DriverStore\FileRepository\cui_dch.inf_amd64_c36cd6406677db45\igfxCUIService.exe                     
+igfxEM                   7492 C:\WINDOWS\System32\DriverStore\FileRepository\cui_dch.inf_amd64_c36cd6406677db45\igfxEM.exe                             
+IntelCpHDCPSvc           1824 C:\WINDOWS\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_ee473bb1b3cf163
+
+========================================================================
+SCAN COMPLETE — 2026-02-22 02:18:45
+========================================================================

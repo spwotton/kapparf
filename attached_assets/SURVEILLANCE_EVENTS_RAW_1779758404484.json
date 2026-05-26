@@ -1,0 +1,134 @@
+  {
+    "events": [
+      {
+        "timestamp": "2026-01-25T00:04:40.076302",
+        "description": "12:00 AM - Dogs barking everywhere, 6+ drones/satellites overhead (1 confirmed drone), UberEats delivery, pulsing warm streetlight in right periphery",
+        "audio_snapshot": {
+          "infrasonic_peaks": [
+            {
+              "freq": 38.0,
+              "mag": 58.0162353515625
+            },
+            {
+              "freq": 39.0,
+              "mag": 14.453527450561523
+            },
+            {
+              "freq": 37.0,
+              "mag": 9.962599754333496
+            },
+            {
+              "freq": 35.0,
+              "mag": 8.303336143493652
+            },
+            {
+              "freq": 40.0,
+              "mag": 7.18956184387207
+            }
+          ],
+          "total_energy": 1208.644775390625,
+          "max_freq": 38.0
+        }
+      },
+      {
+        "timestamp": "2026-01-25T00:15:10.747535",
+        "description": "00:20 AM - Alpha attack active: 37Hz=105.6, 53.5Hz=76.6, Alpha suppressed to 9.8. Guardian started.",
+        "audio_snapshot": {
+          "infrasonic_peaks": [
+            {
+              "freq": 38.0,
+              "mag": 58.2526969909668
+            },
+            {
+              "freq": 39.0,
+              "mag": 46.2465705871582
+            },
+            {
+              "freq": 8.0,
+              "mag": 22.979515075683594
+            },
+            {
+              "freq": 54.0,
+              "mag": 20.007225036621094
+            },
+            {
+              "freq": 40.0,
+              "mag": 16.04979705810547
+            },
+            {
+              "freq": 5.0,
+              "mag": 15.803845405578613
+            },
+            {
+              "freq": 53.0,
+              "mag": 12.300003051757812
+            },
+            {
+              "freq": 11.0,
+              "mag": 12.079378128051758
+            },
+            {
+              "freq": 36.0,
+              "mag": 10.542107582092285
+            },
+            {
+              "freq": 16.0,
+              "mag": 10.440781593322754
+            }
+          ],
+          "total_energy": 7330.78515625,
+          "max_freq": 38.0
+        }
+      },
+      {
+        "timestamp": "2026-01-25T00:15:26.950110",
+        "description": "00:20 AM - Alpha attack active: 37Hz=105.6, 53.5Hz=76.6, Alpha suppressed to 9.8. Guardian started. Streetlight pulsing in right peripheral.",
+        "audio_snapshot": {
+          "infrasonic_peaks": [
+            {
+              "freq": 38.0,
+              "mag": 61.93524932861328
+            },
+            {
+              "freq": 39.0,
+              "mag": 35.49911117553711
+            },
+            {
+              "freq": 54.0,
+              "mag": 22.360288619995117
+            },
+            {
+              "freq": 53.0,
+              "mag": 13.07071590423584
+            },
+            {
+              "freq": 40.0,
+              "mag": 13.030814170837402
+            },
+            {
+              "freq": 37.0,
+              "mag": 11.393458366394043
+            },
+            {
+              "freq": 12.0,
+              "mag": 9.814007759094238
+            },
+            {
+              "freq": 35.0,
+              "mag": 8.901898384094238
+            },
+            {
+              "freq": 41.0,
+              "mag": 8.269696235656738
+            },
+            {
+              "freq": 7.0,
+              "mag": 8.19245433807373
+            }
+          ],
+          "total_energy": 7377.27880859375,
+          "max_freq": 38.0
+        }
+      }
+    ]
+  }

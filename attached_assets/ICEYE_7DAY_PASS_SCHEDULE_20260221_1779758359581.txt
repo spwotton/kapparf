@@ -1,0 +1,463 @@
+======================================================================
+ICEYE CONSTELLATION PASS PREDICTOR
+Observer: 9.93N, -84.09E, 950m (Guacima, Costa Rica)
+======================================================================
+
+[1] Fetching ICEYE TLE data from CelesTrak...
+   Loaded 46 ICEYE satellites
+
+[2] Predicting passes: 2026-02-21 06:26 UTC + 7 days
+   Minimum elevation: 5.0░
+
+   WARNING: Error processing ICEYE-X2: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X5: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X4: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X7: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X6: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X11: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X21: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X30: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X26: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X25: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X31: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X34: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X35: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X38: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X37: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X36: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X43: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X39: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X33: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X40: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X49: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X47: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X42: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X41: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X45: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X44: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X48: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X50: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X51: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X46: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X54: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X52: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X56: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X57: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X55: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X53: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X65: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X66: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X67: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X58: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X59: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X60: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X61: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X62: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X63: this is a single Time, not an array
+   WARNING: Error processing ICEYE-X64: this is a single Time, not an array
+======================================================================
+ICEYE-X48 (NORAD 63253) ù TARGET SATELLITE PASSES
+======================================================================
+  No passes found for ICEYE-X48 in 7-day window
+
+======================================================================
+HIGH ELEVATION PASSES (>30░) ù All ICEYE Satellites
+======================================================================
+Total high-elevation passes: 0
+
+======================================================================
+MULTI-SATELLITE CONVERGENCE EVENTS (>=2 ICEYE simultaneously >10░)
+======================================================================
+Found 88 multi-satellite windows:
+
+  2026-02-21 07:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X66            El:  19.0░ Az:  90.7░
+    ICEYE-X38            El:  13.4░ Az: 133.3░
+
+  2026-02-21 09:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X30            El:  22.7░ Az: 254.5░
+    ICEYE-X66            El:  10.7░ Az: 272.2░
+
+  2026-02-21 14:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X2             El:  20.2░ Az: 167.5░
+    ICEYE-X5             El:  13.5░ Az: 239.8░
+
+  2026-02-21 15:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X31            El:  22.0░ Az: 104.4░
+    ICEYE-X60            El:  11.8░ Az: 150.9░
+
+  2026-02-21 16:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X59            El:  48.7░ Az: 303.8░
+    ICEYE-X41            El:  14.4░ Az:  17.9░
+
+  2026-02-21 18:16 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X57            El:  21.0░ Az: 126.1░
+    ICEYE-X56            El:  13.3░ Az: 149.6░
+
+  2026-02-21 18:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X53            El:  75.4░ Az:  57.7░
+    ICEYE-X52            El:  26.7░ Az: 192.0░
+
+  2026-02-22 00:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X47            El:  28.8░ Az: 196.1░
+    ICEYE-X4             El:  12.1░ Az:  24.9░
+
+  2026-02-22 03:41 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X51            El:  25.7░ Az: 135.6░
+    ICEYE-X46            El:  23.1░ Az:  39.4░
+
+  2026-02-22 04:16 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X42            El:  29.6░ Az: 171.1░
+    ICEYE-X59            El:  10.9░ Az: 192.6░
+
+  2026-02-22 06:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X56            El:  45.0░ Az:  97.8░
+    ICEYE-X57            El:  35.6░ Az:  43.0░
+
+  2026-02-22 06:56 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X53            El:  53.3░ Az: 232.1░
+    ICEYE-X52            El:  27.7░ Az: 206.1░
+
+  2026-02-22 07:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X66            El:  12.1░ Az: 114.8░
+    ICEYE-X38            El:  10.1░ Az: 125.9░
+
+  2026-02-22 08:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X7             El:  31.1░ Az:  64.8░
+    ICEYE-X37            El:  23.4░ Az: 329.5░
+
+  2026-02-22 11:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X11            El:  53.8░ Az: 172.2░
+    ICEYE-X63            El:  52.0░ Az: 310.5░
+
+  2026-02-22 16:06 UTC ù 2 ICEYE sats overhead: *** X48 PRESENT ***
+    ICEYE-X59            El:  49.1░ Az:  12.7░
+    ICEYE-X48            El:  18.5░ Az: 192.2░
+
+  2026-02-22 16:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X34            El:  59.5░ Az:  26.6░
+    ICEYE-X60            El:  17.4░ Az: 284.5░
+
+  2026-02-22 18:16 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X57            El:  21.2░ Az: 125.2░
+    ICEYE-X56            El:  12.7░ Az:  42.4░
+
+  2026-02-22 20:01 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X37            El:  56.8░ Az:  40.7░
+    ICEYE-X7             El:  10.9░ Az: 148.8░
+
+  2026-02-22 21:16 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X26            El:  22.5░ Az:  23.0░
+    ICEYE-X30            El:  19.8░ Az: 207.6░
+
+  2026-02-22 21:56 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X65            El:  18.9░ Az: 354.3░
+    ICEYE-X63            El:  10.6░ Az:  97.9░
+
+  2026-02-23 03:41 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X51            El:  25.9░ Az: 135.1░
+    ICEYE-X44            El:  21.9░ Az: 101.1░
+
+  2026-02-23 04:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X33            El:  51.8░ Az: 328.5░
+    ICEYE-X21            El:  37.4░ Az: 291.7░
+
+  2026-02-23 06:26 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X56            El:  38.8░ Az: 136.9░
+    ICEYE-X65            El:  11.9░ Az:  65.8░
+
+  2026-02-23 07:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X66            El:  58.6░ Az:  40.6░
+    ICEYE-X55            El:  11.1░ Az: 310.5░
+
+  2026-02-23 08:01 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X36            El:  16.2░ Az: 351.1░
+    ICEYE-X65            El:  12.9░ Az: 297.0░
+
+  2026-02-23 15:41 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X44            El:  13.4░ Az: 124.7░
+    ICEYE-X21            El:  11.6░ Az:  70.0░
+    ICEYE-X2             El:  10.1░ Az: 249.8░
+
+  2026-02-23 16:16 UTC ù 4 ICEYE sats overhead: *** X48 PRESENT ***
+    ICEYE-X62            El:  59.9░ Az: 242.9░
+    ICEYE-X33            El:  42.0░ Az: 158.3░
+    ICEYE-X31            El:  27.7░ Az: 200.1░
+    ICEYE-X48            El:  10.3░ Az: 329.9░
+
+  2026-02-23 19:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X36            El:  39.1░ Az: 119.8░
+    ICEYE-X57            El:  10.3░ Az: 263.9░
+
+  2026-02-23 20:56 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X25            El:  19.7░ Az: 263.3░
+    ICEYE-X66            El:  15.5░ Az: 238.5░
+    ICEYE-X38            El:  12.5░ Az: 218.0░
+
+  2026-02-23 21:41 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X65            El:  17.4░ Az: 294.7░
+    ICEYE-X6             El:  12.2░ Az: 142.3░
+
+  2026-02-23 23:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X63            El:  17.4░ Az: 264.0░
+    ICEYE-X47            El:  16.9░ Az: 211.5░
+
+  2026-02-24 03:51 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X59            El:  58.4░ Az:  25.8░
+    ICEYE-X61            El:  19.9░ Az: 162.7░
+    ICEYE-X46            El:  16.0░ Az:  19.7░
+    ICEYE-X44            El:  10.1░ Az:  16.6░
+
+  2026-02-24 04:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X45            El:  79.3░ Az:  57.0░
+    ICEYE-X42            El:  41.0░ Az: 290.2░
+
+  2026-02-24 07:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X66            El:  38.6░ Az: 133.7░
+    ICEYE-X52            El:  19.5░ Az: 221.8░
+
+  2026-02-24 07:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X65            El:  25.3░ Az: 259.0░
+    ICEYE-X36            El:  21.8░ Az: 157.9░
+
+  2026-02-24 08:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X38            El:  15.7░ Az: 215.9░
+    ICEYE-X7             El:  15.5░ Az: 345.2░
+
+  2026-02-24 11:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X63            El:  22.3░ Az: 302.0░
+    ICEYE-X47            El:  17.1░ Az:  51.3░
+
+  2026-02-24 15:41 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X50            El:  41.0░ Az: 143.4░
+    ICEYE-X61            El:  26.5░ Az: 126.4░
+    ICEYE-X58            El:  13.9░ Az:  38.8░
+    ICEYE-X59            El:  12.1░ Az: 157.8░
+
+  2026-02-24 16:16 UTC ù 3 ICEYE sats overhead: *** X48 PRESENT ***
+    ICEYE-X33            El:  41.4░ Az: 158.9░
+    ICEYE-X48            El:  35.5░ Az: 269.9░
+    ICEYE-X60            El:  13.4░ Az: 358.6░
+
+  2026-02-24 19:51 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X65            El:  35.2░ Az: 100.6░
+    ICEYE-X37            El:  15.9░ Az:  27.2░
+    ICEYE-X57            El:  10.3░ Az: 264.2░
+
+  2026-02-24 20:41 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X38            El:  25.3░ Az: 348.6░
+    ICEYE-X30            El:  23.1░ Az: 108.2░
+    ICEYE-X26            El:  11.2░ Az:  99.6░
+
+  2026-02-24 23:41 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X11            El:  15.3░ Az: 201.2░
+    ICEYE-X49            El:  10.7░ Az: 228.2░
+
+  2026-02-25 03:36 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X59            El:  38.6░ Az:  79.6░
+    ICEYE-X61            El:  31.1░ Az: 117.3░
+    ICEYE-X31            El:  16.3░ Az: 137.9░
+    ICEYE-X21            El:  13.2░ Az: 114.5░
+
+  2026-02-25 04:11 UTC ù 2 ICEYE sats overhead: *** X48 PRESENT ***
+    ICEYE-X39            El:  77.8░ Az: 330.2░
+    ICEYE-X48            El:  39.6░ Az: 343.2░
+
+  2026-02-25 04:46 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X41            El:  34.4░ Az: 252.4░
+    ICEYE-X40            El:  23.5░ Az: 257.9░
+    ICEYE-X42            El:  20.8░ Az: 309.8░
+    ICEYE-X43            El:  11.7░ Az: 315.2░
+
+  2026-02-25 06:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X67            El:  31.0░ Az: 118.5░
+    ICEYE-X56            El:  18.4░ Az: 168.0░
+
+  2026-02-25 07:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X36            El:  24.7░ Az:   7.2░
+    ICEYE-X25            El:  23.0░ Az: 122.6░
+
+  2026-02-25 11:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X11            El:  33.4░ Az: 132.1░
+    ICEYE-X6             El:  13.1░ Az: 259.4░
+
+  2026-02-25 15:26 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X58            El:  16.0░ Az:  71.8░
+    ICEYE-X59            El:  10.8░ Az: 140.1░
+    ICEYE-X61            El:  10.5░ Az: 139.3░
+
+  2026-02-25 16:06 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X39            El:  51.2░ Az:  77.2░
+    ICEYE-X46            El:  30.3░ Az: 202.1░
+    ICEYE-X60            El:  16.5░ Az: 185.4░
+
+  2026-02-25 16:41 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X40            El:  27.8░ Az: 327.2░
+    ICEYE-X42            El:  27.3░ Az: 345.1░
+    ICEYE-X41            El:  23.1░ Az: 353.2░
+    ICEYE-X43            El:  19.8░ Az: 217.7░
+
+  2026-02-25 19:41 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X36            El:  28.6░ Az:  86.9░
+    ICEYE-X65            El:  15.8░ Az:  56.0░
+
+  2026-02-25 20:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X66            El:  27.3░ Az: 313.2░
+    ICEYE-X38            El:  16.0░ Az: 195.7░
+
+  2026-02-25 21:41 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X47            El:  55.3░ Az:  72.2░
+    ICEYE-X6             El:  18.7░ Az:  29.5░
+
+  2026-02-26 00:06 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X4             El:  21.4░ Az:  84.1░
+    ICEYE-X11            El:  17.1░ Az: 269.9░
+
+  2026-02-26 03:11 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X2             El:  13.5░ Az: 314.6░
+    ICEYE-X31            El:  13.0░ Az:  76.5░
+    ICEYE-X43            El:  10.1░ Az:  57.2░
+
+  2026-02-26 04:01 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X60            El:  56.0░ Az: 333.5░
+    ICEYE-X21            El:  47.1░ Az:  35.1░
+    ICEYE-X44            El:  17.2░ Az:  13.1░
+
+  2026-02-26 04:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X43            El:  20.3░ Az: 292.8░
+    ICEYE-X31            El:  10.3░ Az: 296.9░
+
+  2026-02-26 05:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X52            El:  15.8░ Az: 104.6░
+    ICEYE-X65            El:  13.7░ Az: 106.3░
+
+  2026-02-26 06:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X56            El:  44.1░ Az: 332.0░
+    ICEYE-X66            El:  42.5░ Az: 248.0░
+
+  2026-02-26 07:26 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X65            El:  13.0░ Az: 256.1░
+    ICEYE-X52            El:  12.8░ Az: 231.1░
+
+  2026-02-26 08:36 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X38            El:  16.3░ Az: 331.4░
+    ICEYE-X25            El:  10.8░ Az: 200.4░
+
+  2026-02-26 15:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X51            El:  42.3░ Az:  25.9░
+    ICEYE-X60            El:  30.3░ Az:  59.0░
+
+  2026-02-26 16:26 UTC ù 2 ICEYE sats overhead: *** X48 PRESENT ***
+    ICEYE-X31            El:  37.3░ Az: 239.6░
+    ICEYE-X48            El:  11.2░ Az: 318.3░
+
+  2026-02-26 18:16 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X54            El:  24.3░ Az:  67.6░
+    ICEYE-X57            El:  21.4░ Az: 123.8░
+
+  2026-02-26 19:26 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X65            El:  70.6░ Az:  64.9░
+    ICEYE-X52            El:  24.1░ Az: 289.4░
+
+  2026-02-26 20:26 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X66            El:  16.8░ Az: 345.0░
+    ICEYE-X38            El:  16.0░ Az: 183.1░
+
+  2026-02-26 21:36 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X49            El:  52.4░ Az: 301.7░
+    ICEYE-X6             El:  26.7░ Az:  83.6░
+    ICEYE-X26            El:  25.0░ Az: 216.0░
+    ICEYE-X30            El:  14.7░ Az: 319.1░
+
+  2026-02-26 23:01 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X64            El:  23.2░ Az: 178.2░
+    ICEYE-X11            El:  16.8░ Az:  83.2░
+
+  2026-02-27 03:06 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X59            El:  12.4░ Az:  97.9░
+    ICEYE-X58            El:  10.0░ Az: 108.8░
+
+  2026-02-27 03:41 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X51            El:  26.1░ Az: 134.0░
+    ICEYE-X35            El:  14.5░ Az:  79.0░
+    ICEYE-X60            El:  12.2░ Az: 154.4░
+
+  2026-02-27 04:16 UTC ù 4 ICEYE sats overhead: *** X48 PRESENT ***
+    ICEYE-X31            El:  39.6░ Az: 233.2░
+    ICEYE-X39            El:  31.5░ Az: 339.3░
+    ICEYE-X48            El:  14.3░ Az: 353.0░
+    ICEYE-X33            El:  10.4░ Az: 173.0░
+
+  2026-02-27 04:56 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X41            El:  25.0░ Az: 268.2░
+    ICEYE-X66            El:  16.6░ Az:  61.4░
+
+  2026-02-27 06:06 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X67            El:  26.3░ Az: 302.8░
+    ICEYE-X55            El:  20.9░ Az: 119.5░
+
+  2026-02-27 07:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X37            El:  36.3░ Az:   7.0░
+    ICEYE-X25            El:  15.9░ Az: 136.0░
+
+  2026-02-27 09:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X30            El:  40.9░ Az: 258.2░
+    ICEYE-X7             El:  15.0░ Az: 243.9░
+
+  2026-02-27 11:06 UTC ù 3 ICEYE sats overhead:
+    ICEYE-X64            El:  42.8░ Az: 183.2░
+    ICEYE-X47            El:  40.1░ Az: 327.0░
+    ICEYE-X6             El:  14.2░ Az: 250.5░
+
+  2026-02-27 15:46 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X51            El:  42.2░ Az:  26.0░
+    ICEYE-X21            El:  10.5░ Az: 136.0░
+
+  2026-02-27 16:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X46            El:  18.3░ Az: 313.1░
+    ICEYE-X61            El:  10.2░ Az: 355.3░
+
+  2026-02-27 18:06 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X55            El:  19.4░ Az: 106.0░
+    ICEYE-X67            El:  19.3░ Az: 128.0░
+
+  2026-02-27 18:51 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X53            El:  74.3░ Az:  57.4░
+    ICEYE-X56            El:  21.5░ Az: 189.2░
+
+  2026-02-27 19:31 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X36            El:  18.2░ Az:  72.0░
+    ICEYE-X52            El:  11.0░ Az: 327.3░
+
+  2026-02-27 20:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X38            El:  23.0░ Az:  38.8░
+    ICEYE-X66            El:  11.4░ Az: 286.2░
+
+  2026-02-28 03:26 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X60            El:  15.7░ Az: 129.1░
+    ICEYE-X41            El:  13.3░ Az:  65.5░
+
+  2026-02-28 04:16 UTC ù 4 ICEYE sats overhead:
+    ICEYE-X39            El:  70.8░ Az: 273.4░
+    ICEYE-X46            El:  53.1░ Az: 290.6░
+    ICEYE-X67            El:  12.6░ Az:  48.4░
+    ICEYE-X33            El:  10.7░ Az: 173.0░
+
+  2026-02-28 05:21 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X65            El:  23.2░ Az: 329.2░
+    ICEYE-X34            El:  15.0░ Az: 237.7░
+
+  2026-02-28 06:11 UTC ù 2 ICEYE sats overhead:
+    ICEYE-X55            El:  14.4░ Az: 139.9░
+    ICEYE-X52            El:  10.9░ Az:  15.9░
+
+======================================================================
+SUMMARY STATISTICS
+======================================================================
+Total ICEYE passes (all satellites): 0
+Total ICEYE-X48 passes: 0
+High-elevation (>30░) passes: 0
+Multi-constellation convergence events: 88
+
+Report generated: 2026-02-21 06:26:13 UTC
+======================================================================
