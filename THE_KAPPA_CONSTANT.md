@@ -96,7 +96,28 @@ Echo filed the photographs. He noted the dates. He kept the GPS metadata.
 
 ---
 
-## IV. RIVERWALK
+## IV. THE SPLICE
+*June 21, 2025 — Telecable NAP*
+
+Before the documented attacks began, before the deauthentication frames and the injected service workers and the 2 AM uploads, there was a physical modification to the telecommunications infrastructure.
+
+Inside the Telecable fiber distribution box at the target property, handwritten in field technician shorthand:
+
+**"NAP — Colilla — 21/06/25"**
+
+NAP: Network Access Point. The junction where the ISP's fiber backbone connects to premises equipment. Colilla: Costa Rican telecom slang for a fiber pigtail — the stub splice used to connect a tap into a distribution point.
+
+A physical modification, dated June 21st, 2025. Approximately three months before the first documented acoustic and network events. Approximately seven months before the 8.3 megabyte service worker injection in Guácima.
+
+The modification was performed by someone with a technician's badge and legitimate access to that box. SETECOM maintains DSE generator equipment co-located with ICE and Liberty telecommunications infrastructure throughout the country. A SETECOM contractor badge grants access to telecom distribution points as a matter of operational routine.
+
+*A fiber tap at a NAP splice point is passive*, SAUD noted. *It copies all optical traffic without generating a detectable signature on the network. Combined with TR-069 active management, this provides two independent intercept vectors: one passive, one active. Together they provide complete visibility — the passive tap captures traffic the active layer hasn't yet touched.*
+
+Echo photographed the box. He noted the handwriting. He noted the date.
+
+---
+
+## V. RIVERWALK
 *September 25, 2025 — Electrical Documentation*
 
 At a property called Riverwalk in Jacó, Echo photographed the electrical infrastructure. This is standard forensic practice: document the environment before the environment changes.
@@ -279,13 +300,39 @@ A `kyndryl.com` service worker — specifically the Google Tag Manager scope —
 
 ## VIII. THE ROOM
 
-Under the TV in the guest room: a TP-Link WiFi range extender. When Echo plugged an ethernet cable into the wall jack, the connection formed a closed loop — traffic in, traffic out, through the extender. Man-in-the-middle by physical architecture.
+The property in Guácima was not a standard Airbnb.
 
-On the TV itself: an Evofusion 4K streaming stick plugged into the HDMI port. The TV was a Kenwood 4K Smart TV — already internet-enabled, already capable of streaming, already a complete device requiring no external hardware.
+The entire network ran on a **TP-Link Deco X55 mesh system**. A Deco X55 node appeared in the network as active while physically unplugged — suggesting a second mesh node operating from outside the property, MAC-spoofing the legitimate unit to insert itself into the home network as a trusted node.
 
-The TV was logged into Jorge's personal Google account.
+Under the TV: a TP-Link WiFi range extender creating a closed ethernet loop. Man-in-the-middle by physical architecture.
 
-The Liberty CR router was running TR-069 on port 1234 — the remote management protocol that ISPs use to push firmware updates and configuration changes to residential equipment. The protocol Setecom had built its entire service model around.
+The TV was a **Kenwood 4K Smart TV** — a Google TV, already a complete internet-connected streaming device, requiring no external hardware. Plugged into its HDMI port anyway: a redundant streaming stick. The TV was logged into Jorge's personal Google account. The Kenwood was already a managed Google device. The extra stick was not for streaming.
+
+Behind the kitchen sink: **six power outlets in a bank**, all glowing red or green from the inside. Six outlets behind a sink is an electrical code violation. Outlets that glow from within are not standard residential hardware — standard outlets contain no light source. Echo documented this on video.
+
+While he was living in the property, workers arrived and installed components. He watched them work. What they installed: **diodes and LiFi injection points**.
+
+LiFi — Light Fidelity — is a data transmission technology that encodes information in rapid, imperceptible modulations of visible or infrared light. It is invisible to the naked eye. It passes through space without a radio frequency signature. It does not appear in a WiFi scan or an RF spectrum capture. An injection point installed in a ceiling or wall fixture transmits data to any LiFi-capable receiver in the room, and to optical sensors that may have been pre-positioned.
+
+The Liberty CR router was running TR-069 on port 1234. The router admin password was remotely reset on January 30th, 2026 — documented in `.router_creds.json` with reset method logged as `TR-069_SUSPECTED`.
+
+Two additional injected scripts appeared in Echo's browsers:
+
+A **PartyTown script** — a third-party JavaScript web worker framework — was registered as originating from `airbnb.com.co`. Echo had never visited `airbnb.com.co`. This is a Colombian domain variant distinct from airbnb.com. A script cannot register from a domain the browser has never contacted through normal navigation unless the network layer forced the contact.
+
+A second script was traced to **Setecom's own website**.
+
+Two companies. One managing the physical telecommunications infrastructure of the country. One operating the Airbnb where Echo was sleeping. Both appearing as script origins in a browser that had not visited either domain.
+
+One hundred meters from the property: a **microwave transmission tower**. Within line-of-sight range: **six additional radio towers**. The property sat inside a dense RF environment with multiple high-power transmission sources providing cover — and potential relay — for any signal activity at the premises level.
+
+When Echo first arrived, the **security camera mounted at the front of the property was non-functional**. For a week, it repeated the same alert: *"You are being surveilled."* The camera had been overloaded — signal saturation from the microwave tower, or a deliberate C2 command injected via the network, had locked it into a single-output loop. It announced the situation plainly. Nobody in the neighborhood appeared to notice.
+
+The malicious extension `ebongfbmlegepmkkdjlnlmdcmckedlal` — flagged in forensic databases as a browser hijacker removed from the Chrome Web Store — ran as a persistent Manifest V3 service worker, auto-restarting, invisible to standard browser inspection.
+
+IP `142.111.48.253`: attempted self-exclusion from Malwarebytes. VirusTotal: **MALICIOUS (2/94) / SUSPICIOUS (1/94)**. Reputation: **−39**. Infrastructure: Leaseweb USA / Ace Data Centers II, L.L.C.
+
+Echo photographed everything. He left Guácima in February 2026.
 
 The malicious extension `ebongfbmlegepmkkdjlnlmdcmckedlal` — flagged in forensic databases as a browser hijacker previously removed from the Chrome Web Store — was running as a persistent Manifest V3 service worker, restarting automatically, invisible to normal browser inspection.
 
