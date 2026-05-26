@@ -101,3 +101,9 @@ id = "TDtnuABdZtMjejvRvFq7S"
 uri = "file://docs/legal-submissions/AG_Email_FiscalGeneral_CR.md"
 type = "text"
 title = "AG Email — Fiscal General CR (Draft)"
+
+[[outputs]]
+id = "I57IhcCfqvqFTK8mwa_Fy"
+uri = "file://THE_KAPPA_CONSTANT.md"
+type = "text"
+title = "THE KAPPA CONSTANT — Complete Draft"
