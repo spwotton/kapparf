@@ -125,3 +125,9 @@ id = "Hoff8yhwDmS3ENekOwfyV"
 uri = "file://THE_FREQUENCY.pdf"
 type = "pdf"
 title = "THE FREQUENCY — Pretty PDF"
+
+[[outputs]]
+id = "a8HCkS7dJ5uVuxJJQ2elL"
+uri = "file://KAPPA_CONSOLIDATED_NOTES.md"
+type = "text"
+title = "KAPPA Consolidated Notes — Full Reference Document"
