@@ -353,7 +353,11 @@ This was not the third location. By May 2026, Echo had lived in approximately tw
 
 **December 28, 2024 — Breakwater:** Echo moved out of Ricos y Famosos and into the condo of **Michael Lipman** at Breakwater, the development on the north end of Jacó. Lipman subsequently moved into Michael Greenwald's personally constructed house at **Hermosa Palms** — a residential development Greenwald owns. Greenwald moved out of his own house to accommodate Lipman. The relationship between Lipman and Greenwald is therefore not transactional but operational.
 
-Lipman's daughter-in-law is engaged or married to **Jesse Talty** — a man Echo knew from Maine, formerly connected to Echo's personal network there.
+Lipman's daughter-in-law is engaged or married to **Jesse Talty** — a man Echo knew from Maine, formerly connected to Echo's personal network there through AA, a gym, and a supplement center where Echo worked.
+
+The Jesse Talty thread carries a specific weight. **Bill Kimball** — former owner of Hill View Sober Living, where Echo had lived — had a business partner in a mortgage company, a company Echo's network described as operating in a legally ambiguous register. That partner died. In the approximately three months before his death, while his organs were failing, he told Echo directly: Jesse Talty was a very bad person. Stay away from him.
+
+A dying man's warning about a specific individual who subsequently appears, years later, as a connection point to Echo's landlord in Costa Rica.
 
 **The AA Network:** Echo arrived in Jacó sober — forty-five days clean when he met Peralta. The Alcoholics Anonymous community in Jacó is small and tight, as these communities are everywhere: shared vulnerability, shared schedule, known faces, known history. It is also, structurally, a perfect social penetration surface. Membership is public by presence. Attendance is predictable. The emotional bonds formed there are real and load-bearing.
 
@@ -563,6 +567,8 @@ This is what is documented:
 - Scott Ryan (alias: Scott Aaronson) / Jaco Vacations, Los Ríos
 - Michael Greenwald / Jaco Vacations, Hermosa Palms developer, 300+ properties
 - Michael Lipman / Breakwater — Greenwald tenant; daughter-in-law connected to Jesse Talty (Maine, prior Echo network)
+- Jesse Talty / Maine — prior Echo network (AA, gym, supplement center); subject of deathbed warning by Bill Kimball's business partner; now family-connected to Lipman
+- Bill Kimball / Maine — former owner, Hill View Sober Living; former partner in mortgage company; partner died warning Echo about Talty
 - Leo (dealer) / sister: co-owner of Ricos y Famosos (50%); Scott Ryan: co-owner (50%)
 - Former mayor of Jacó / Los Ríos
 - Marjorie Alfaro / Jairo Alfaro / Liberty CR infrastructure
