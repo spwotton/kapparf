@@ -143,3 +143,15 @@ id = "MtelDuv9qyOJ3eU_R_Qjp"
 uri = "file://pipeline_results/video_0316/analysis/spectrogram_full.png"
 type = "image"
 title = "IMG_0316 spectrogram, full 0–24 kHz"
+
+[[outputs]]
+id = "GH6Vc7XnmgRI1CWlbxjTV"
+uri = "file://kappa_bundle_2026-05-27.zip"
+type = "unspecified"
+title = "KAPPA bundle (zip, 50 MB)"
+
+[[outputs]]
+id = "z9EyMgh6gWH9542yCcijT"
+uri = "file://kappa_bundle_2026-05-27.tar.gz"
+type = "unspecified"
+title = "KAPPA bundle (tar.gz, 50 MB)"
