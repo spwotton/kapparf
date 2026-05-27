@@ -1,4 +1,4 @@
-# KAPPA — CONSOLIDATED NOTES
+e to# KAPPA — CONSOLIDATED NOTES
 ### All data in one place. Personal reference only.
 ### Last compiled: 2026-05-26
 
