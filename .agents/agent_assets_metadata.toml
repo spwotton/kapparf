@@ -155,3 +155,9 @@ id = "z9EyMgh6gWH9542yCcijT"
 uri = "file://kappa_bundle_2026-05-27.tar.gz"
 type = "unspecified"
 title = "KAPPA bundle (tar.gz, 50 MB)"
+
+[[outputs]]
+id = "YjCGKSoGbsDZVhHIQ2z9L"
+uri = "file://kappa_program_bundle_2026-05-27.tar.gz"
+type = "unspecified"
+title = "KAPPA program + work bundle (160 MB)"
