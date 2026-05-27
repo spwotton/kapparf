@@ -3,3 +3,60 @@ node_modules
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# ── Build artifacts (rebuilt by npm run build during deploy) ──────────────────
+dist/
+
+# ── Attached assets (large dev uploads) ───────────────────────────────────────
+# Keep edge_detection/ and screenshots/ subfolders (referenced by routes).
+attached_assets/*
+!attached_assets/edge_detection/
+!attached_assets/screenshots/
+
+# ── Research / intelligence document archives (not served at runtime) ─────────
+drive-download-20260513T020452Z-3-001/
+JW_PHYSICAL_LAYER_DOSSIER/
+AAWSAP-DIRDs-1-37/
+new_audio_evidence/
+docs/
+new/
+drone defense/
+alignment/
+surveillance_frames/
+base53_hyper/
+Quake-2-Engine/
+REEL_STANDALONE/
+auto_scan/
+analysis_results/
+suppz_supercharger/
+QuantumRenderer/
+sentinel/
+kiwisdr_scans/
+kiwisdr_screenshots/
+captures/
+evidence/
+OIJ_EVIDENCE_VAULT/
+pass_correlations/
+satellite_tracking/
+smart_audio/
+mora_monitoring/
+cr_kiwi_scans/
+kiwi_captures/
+kiwisdr_recordings/
+signal_forensics/
+toroidal_reasoning/
+quantum_viewer/
+Synthesis/
+biometric_correlator/
+OSINT_Forge/
+script/
+analysis/
+
+# ── Pipeline results (keep two recent reports) ────────────────────────────────
+pipeline_results/*
+!pipeline_results/FINDINGS_REPORT.md
+!pipeline_results/multimodal_orbital_summary.md
+
+# ── Stray root files ──────────────────────────────────────────────────────────
+email_send_log_v2.txt
+email_send_state_v2.json
