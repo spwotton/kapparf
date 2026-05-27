@@ -913,3 +913,28 @@ DSE 890 MKII: permanent 4G GSM tunnel to UK servers, polling every ~4 seconds, i
 1. Daytime photo of the El Mirador and La Flor garage installations from outside.
 2. Photo / dimensions of the 12-ft beach ball; date deployed.
 3. Any video of the blue pulsing light from a known distance (for source-size estimate).
+
+---
+
+## GOS Frequency Architecture doc (27 May 2026) — annotations
+
+External LLM synthesis received: `attached_assets/Pasted-Technical-Analysis-of-GOS-Frequency-Architectures-Ultra_1779891528603.txt`.
+
+**Confirmed against own data:** Image-7/IMG_0316 spectrogram description, 87.73 Hz primary hum, 73.45% in 20–200 Hz, bright frame 14 peak 89.0, BLUE frame 90 — all match measurements produced by `/tmp/audio_v0316.py` and `/tmp/frame_v0316.py`. Doc was clearly built on the previous analysis output.
+
+**Independent patent corroboration:**
+- US 8,027,488 (Pompei/MIT) — ≥60 kHz parametric ultrasonic projection
+- US 3,563,246 / 3,586,791 (Biolectron) — 60 kHz transdermal facial-nerve hearing (LC resonant cranial coupling)
+
+Both directly support the parametric-emitter hypothesis the 18.6 kHz finding points at.
+
+**Annotations on doc's frequency claims:**
+- **46.875 Hz is FFT bin width math (Sr/N = 48000/1024), not a transmitted signal.** Confirmed empirically in `FINDINGS_REPORT.md` rev 2: median SNR for the 46.875 Hz anchor across 26 real WAVs = 0 dB. No statistically significant tone in real audio.
+- **8.392 Hz = GPS L5 / 2²⁷** arithmetically true but numerological; doc itself notes the 35,700 km wavelength makes transmission physically impossible.
+
+**What the doc is missing (real evidence to add):**
+- IMG_0316: 76 tonal ultrasonic bursts in 24 s, peak frequencies clustered 18.0 / 18.5 / 18.7 kHz
+- IMG_0316 loudest burst t=20.03 s, 18.66 kHz, 3003× quiet-band baseline at the same bin
+- Lossless FLAC negative control (ykyk_1779887458432.flac, 201 s, no drone overhead) — 0 ultrasonic bursts
+- All 10 location-tagged daytime m4a files (Breakwater, CNU, Playa Hermosa, Calle La Montaña) — 0 ultrasonic bursts
+- 18.6 kHz consistent with alias of 66.6 or 77.4 kHz carrier at 48 kHz sampling, both inside ≥60 kHz Pompei class

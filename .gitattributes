@@ -157,3 +157,4 @@ attached_assets/ykyk_1779887458432.flac filter=lfs diff=lfs merge=lfs -text
 /attached_assets/IMG_0547_1779764092798.mov filter=lfs diff=lfs merge=lfs -text
 /attached_assets/gemini_generated_video_FEC6BE53_1779764092798.mp4 filter=lfs diff=lfs merge=lfs -text
 /attached_assets/IMG_0315_1779870578732.mov filter=lfs diff=lfs merge=lfs -text
+/attached_assets/uuuuu_1779889380465.wav filter=lfs diff=lfs merge=lfs -text
