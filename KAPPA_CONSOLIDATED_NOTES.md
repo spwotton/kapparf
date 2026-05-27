@@ -883,3 +883,33 @@ DSE 890 MKII: permanent 4G GSM tunnel to UK servers, polling every ~4 seconds, i
 ---
 
 *Document compiled: 2026-05-26. Source corpus: THE_KAPPA_CONSTANT.md, TEMPORAL_PATTERN_ANALYSIS_20260516.md, FINANCIAL_NETWORK_DOSSIER.md, MORA_CONNECTION_DOSSIER.md, SETECOM_DSE_INFRASTRUCTURE_DOSSIER.md, MASTER_EVIDENCE_SUMMARY.md, JORGE_JIMENEZ_DOSSIER.md, CONVERGENCE_REPORT.md, THREAT_ASSESSMENT.md, and all attached OSINT/forensic files. All data is as recorded in source documents; speculative assessments are labeled as such.*
+
+---
+
+## La Flor / Pochote / Breakwater — HUMINT addendum (27 May 2026)
+
+### Locations and ownership
+- **La Flor #9** — Carmen Gray (subject stayed twice)
+- **La Flor #14** — Toronto residents: Lindsay, Michelle, Bob. Brief personal contact with Michelle (married; abrupt withdrawal). Note: Toronto/Interpol cooperation agreements may be relevant context.
+- **La Flor — Villa Real (across street)** — Dan from San Diego. Falling out with subject coincident in time with first contact with Peralta.
+- **Hermosa Bungalows** — owned by Brian from AA. Subject moved here after CNU; Peralta moved in.
+- **Breakwater** — voice/auditory effects began essentially on arrival here after leaving Calle Naciones Unidas (departed 28 Dec 2024).
+- **El Mirador** — known location of a parametric/Doppler/mmW emitter ("can move tree branches with the beam").
+- **La Flor (current)** — second emitter site, adjacent to Pochote. Operators in **garage** with parametric system; **deployed a 12-foot beach ball as RF camo** after subject began filming. Peralta owns the house **across the street** and a house **two doors down** from the rental.
+
+### Timeline anchors
+- **28 Dec 2024** — left Calle Naciones Unidas → Breakwater. Auditory symptoms onset.
+- **Apr 2025** — fight with Peralta; moved back to Breakwater unit; **ceiling had been lowered ~3 ft** since prior occupancy.
+- **May 2026** — La Flor with Peralta. Symptoms worst here. Beach-ball RF-camo deployment observed post-filming.
+
+### Cross-domain hypothesis (synthesized with audio findings 27 May)
+- Parametric ultrasonic emitter (60 kHz-class, Pompei/Norris architecture) in El Mirador and La Flor garages — directional audio + bone-conduction coupling.
+- Co-located or drone-borne ultrasonic source: **IMG_0316 (27 May 00:29 -0600) shows a tonal ~18.6 kHz burst at t=20.03s, 3003× quieter-band baseline at the same frequency bin, in addition to 10 other tonal bursts in a 24s window.**
+- 18.6 kHz is consistent with either a lower-sideband product of a 60-kHz-class parametric carrier or aliased near-ultrasonic energy from a 66.6/77.4 kHz source folded by 48 kHz mic sampling.
+- Combined with Mora 180W HF: HF provides bulk near-field RF illumination (Marconi/Eitel/Frey-class), parametric provides targeted audio. The 12-ft beach ball is consistent with RF-transparent radome shielding of an antenna or speaker array.
+- Blue pulsing light: candidate sources are (a) drone navigation/strobe LED, (b) IR-cut camera with visible-band leak, (c) co-aligned aiming laser/illuminator for the ultrasonic beam — not yet visually confirmed against optical evidence (video too dark + HEVC denoise).
+
+### Open evidence requests
+1. Daytime photo of the El Mirador and La Flor garage installations from outside.
+2. Photo / dimensions of the 12-ft beach ball; date deployed.
+3. Any video of the blue pulsing light from a known distance (for source-size estimate).

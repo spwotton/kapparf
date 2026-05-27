@@ -131,3 +131,15 @@ id = "a8HCkS7dJ5uVuxJJQ2elL"
 uri = "file://KAPPA_CONSOLIDATED_NOTES.md"
 type = "text"
 title = "KAPPA Consolidated Notes — Full Reference Document"
+
+[[outputs]]
+id = "PvaelNb9xAvnqS6aZRcWA"
+uri = "file://pipeline_results/video_0316/analysis/spectrogram_15_22kHz.png"
+type = "image"
+title = "IMG_0316 spectrogram, 15–22 kHz band (ultrasound bursts visible across 24s)"
+
+[[outputs]]
+id = "MtelDuv9qyOJ3eU_R_Qjp"
+uri = "file://pipeline_results/video_0316/analysis/spectrogram_full.png"
+type = "image"
+title = "IMG_0316 spectrogram, full 0–24 kHz"
