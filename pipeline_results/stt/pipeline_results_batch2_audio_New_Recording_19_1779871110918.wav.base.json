@@ -1,0 +1,12 @@
+{
+  "file": "pipeline_results/batch2/audio/New_Recording_19_1779871110918.wav",
+  "lang": "nn",
+  "lang_prob": 0.4884854853153229,
+  "segments": [
+    {
+      "t0": 0.0,
+      "t1": 3.3200000000000003,
+      "text": "4.\u6253\u958b"
+    }
+  ]
+}
