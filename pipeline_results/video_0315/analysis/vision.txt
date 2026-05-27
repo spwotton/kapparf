@@ -1,0 +1,17 @@
+To analyze the images and audio for indications of a small drone or aircraft:
+
+1. **Image Analysis**:
+   - **Image 1**: The brightness-boosted max-projection shows some bright spots, possibly indicating light sources. However, without specific outlines or clear shapes, it's difficult to definitively identify a drone silhouette. 
+  
+   - **Image 2**: The single mid-video frame also displays bright spots. Depending on their arrangement, if they are regularly spaced, they might suggest LEDs. However, the exact count and arrangement are indeterminate.
+  
+   - **Image 3**: The blue-dominance map highlights blue hues. This suggests that the bright areas in previous images may be blue lights, which could be consistent with certain types of drones, often equipped with colored LEDs for visibility.
+
+2. **LED/Nav Lights**: 
+   - Based on the bright areas in the images, there may be colored lights, but the exact colors, counts, and positions are not clearly identifiable.
+
+3. **Audio Analysis**: 
+   - The presence of a strong fundamental frequency at 107.6 Hz, with harmonics, could be indicative of a small multirotor drone. The lack of ultrasonic noise further supports this if the drone is not using ultrasonic sensors.
+
+### Conclusion:
+While the visual evidence may tentatively suggest the presence of lights typical of a drone, the images lack definitive silhouettes or clear LED patterns. The audio does correlate with small drone signatures. Therefore, there is reasonable suspicion that a small drone is overhead, but without clearer visual confirmation, it remains inconclusive.

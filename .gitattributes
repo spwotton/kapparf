@@ -155,3 +155,4 @@ attached_assets/tshark_capture_2026-02-22_02-22-27_noPortmaster_1779758388808.pc
 /attached_assets/IMG_0459_1779764092798.mov filter=lfs diff=lfs merge=lfs -text
 /attached_assets/IMG_0547_1779764092798.mov filter=lfs diff=lfs merge=lfs -text
 /attached_assets/gemini_generated_video_FEC6BE53_1779764092798.mp4 filter=lfs diff=lfs merge=lfs -text
+/attached_assets/IMG_0315_1779870578732.mov filter=lfs diff=lfs merge=lfs -text
