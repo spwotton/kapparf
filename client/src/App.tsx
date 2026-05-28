@@ -9,6 +9,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { HeaderControls } from "@/components/header-controls";
 import { ThemeProvider } from "@/lib/theme";
 import { DossierProvider, useDossier } from "@/lib/dossier";
+import { SiteModeProvider, useSiteMode } from "@/lib/site-mode";
 import { useArrowSequence } from "@/hooks/useArrowSequence";
 import { I18nProvider } from "@/lib/i18n";
 import NotFound from "@/pages/not-found";
@@ -57,6 +58,7 @@ import BioAcousticPage from "@/pages/bio-acoustic";
 import AudioForensicsPage from "@/pages/audio-forensics";
 import VideoForensicsPage from "@/pages/video-forensics";
 import GooseGazettePage from "@/pages/goose-gazette";
+import EvidenceDirectoryPage from "@/pages/evidence-directory";
 import GooseSignalsPage from "@/pages/goose-signals";
 import SignalLatticePage from "@/pages/signal-lattice";
 import GooseHumorPage from "@/pages/goose-humor";
@@ -162,6 +164,11 @@ function DossierBadge() {
   );
 }
 
+function HomeRoute() {
+  const { mode } = useSiteMode();
+  return mode === "evidence" ? <EvidenceDirectoryPage /> : <GooseGazettePage />;
+}
+
 function AppWithDossier() {
   const { toggleDossierMode } = useDossier();
   useArrowSequence(toggleDossierMode);
@@ -171,7 +178,7 @@ function AppWithDossier() {
       <Switch>
         {/* Standalone sites — no KAPPA sidebar */}
         <Route path="/setecom-report" component={SetecomExposePage} />
-        <Route path="/" component={GooseGazettePage} />
+        <Route path="/" component={HomeRoute} />
         <Route path="/goose/signals" component={GooseSignalsPage} />
         <Route path="/goose/lattice" component={SignalLatticePage} />
         <Route path="/goose/admin" component={GooseAdminPage} />
@@ -231,6 +238,7 @@ function App() {
   return (
     <ThemeProvider>
     <DossierProvider>
+    <SiteModeProvider>
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
@@ -240,6 +248,7 @@ function App() {
           </TooltipProvider>
         </QueryClientProvider>
       </I18nProvider>
+    </SiteModeProvider>
     </DossierProvider>
     </ThemeProvider>
   );
