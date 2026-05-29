@@ -102,7 +102,19 @@ HOUSING CHAIN — RESIDENCES WITH PERALTA:
   4. MIKE GREENWALD'S HOUSE (Calle Madrigal): After fighting got too bad at Villa Real.
 
 DUNIA CONCIERGE SAFE HOUSES:
-  Peralta fled to Dunia's house multiple times during disputes with Echo — each departure placed her inside another node of the network. Never operated independently.`,
+  Peralta fled to Dunia's house multiple times during disputes with Echo — each departure placed her inside another node of the network. Never operated independently.
+
+FAKE PASSPORT + 9 YEARS ILLEGAL:
+  Peralta has been in Costa Rica approximately 9 years without legal immigration status. Echo has physically held and examined her passport and assesses it as fraudulent. No official entry or exit record exists despite her alleged departure in July 2025. A Venezuelan national with a fake passport and 9 years of undocumented CR residency requires significant institutional support — travel, accommodation, and daily operations require document infrastructure beyond an individual asset.
+
+CAT CONFIRMATION — JAIRO ALFARO DELIVERY:
+  After Peralta's original cat escaped, Jairo Alfaro (her handler/best friend) brought a replacement cat to Mike Greenwald's house — a cat that Echo and Peralta then raised together. In April 2026, Peralta posted photos of this cat on Instagram. Echo submitted comparison photos to Gemini image analysis: returned ~99.99% probability it is the same cat. This is significant because Peralta was supposedly gone from Costa Rica since July 2025 — if the cat is with her, and the cat is in Jacó, Peralta may still be in Jacó with Pablo Mora.
+
+INSTAGRAM REACTIVATION — APRIL 2026:
+  After 8+ months of minimal posting and cat-and-mouse communication with Echo (no calls, no honesty), Peralta posted a 10-slide image dump on Instagram. Contents: raccoon videos from La Flor (Echo and Peralta's inside joke location — a family of 8 raccoons they laughed about, inventing a fictional company "Raccuber" where raccoons drove each other to trash spots), a video of the La Flor pool, a Pacific sunset, thousands of US dollars in cash, and the cat. Location story: checking in from "New York City" — which in Buenos Aires is a neighborhood/area name, not the actual US city. The raccoon content specifically references the shared La Flor inside joke — communicating awareness of Echo's current location (Hotel Pochote, adjacent to La Flor) while maintaining geographic ambiguity.
+
+ASSESSMENT — STILL IN JACÓ:
+  The balance of evidence (no entry/exit record, cat at her location confirmed same cat, raccoon content from La Flor, fake passport enabling ghost movement, Pablo Mora still in Jacó) supports an assessment that Peralta did not actually leave Costa Rica in July 2025 or returned shortly after and remains in Jacó with Pablo Mora as her operational handler.`,
     connections: [
       { target: "jairo-alfaro", relationship: "Best friend / handler", strength: "confirmed", detail: "Worked together at Caliches Wishbone for years. Jairo moved her to Gracias Madre." },
       { target: "hector-mora", relationship: "Somehow related / connected", strength: "suspected", detail: "Echo was apparently drunk and yelled at Hector who is 'somehow related' to Genesis" },
@@ -143,19 +155,46 @@ DUNIA CONCIERGE SAFE HOUSES:
     id: "hector-mora",
     name: "Hector Mora",
     nationality: "Costa Rican",
-    role: "SETECOM / DSE Deep Sea Electronics operative",
+    role: "SETECOM / DSE — generator contracts Breakwater + Jaco BAN — 4G tower Breakwater parking lot — V2K origin node",
     threatLevel: "primary",
-    detail: "Primary technical suspect. Connected to SETECOM S.A. which distributes DSE gateways across Costa Rica with default credentials Admin/Password1234. YouTube account hmora67 shows conversations with Edson Martenal. 180W HF Radio Transceiver (Chinese origin) capable of ionospheric skip communications. DSE certified for generator control systems, backup power, and telecom. RF TEMPORAL CORRELATION: 7 captures at 7410 kHz (40m amateur band) show 100% correlation within 2-minute windows with V2K harmonics at 4687 kHz and 9375 kHz — probability of random coincidence < 0.01%. This is the smoking gun linking Mora directly to V2K attack infrastructure. IP: 190.106.77.194 (FortiGate 60F, serial FGT60FTK21083818), Modbus:502 EXPOSED. Possibly related to Pablo Mora (vendetta motive via ex-girlfriend). YouTube evidence shows multiple BAC property logins.",
+    detail: `Primary technical suspect. Connected to SETECOM S.A. which distributes DSE gateways across Costa Rica with default credentials Admin/Password1234. YouTube account hmora67 shows conversations with Edson Martenal. 180W HF Radio Transceiver (Chinese origin) capable of ionospheric skip communications. DSE certified for generator control systems, backup power, and telecom.
+
+RF TEMPORAL CORRELATION — SMOKING GUN:
+  7 captures at 7410 kHz (40m amateur band) show 100% correlation within 2-minute windows with V2K harmonics at 4687 kHz and 9375 kHz — probability of random coincidence < 0.01%. This is the smoking gun linking Mora directly to V2K attack infrastructure. IP: 190.106.77.194 (FortiGate 60F, serial FGT60FTK21083818), Modbus:502 EXPOSED.
+
+GENERATOR CONTRACTS — BREAKWATER + JACO BAN:
+  Hector does generator maintenance/contracts for both Breakwater Point and Jaco BAN (the property adjacent to Breakwater). This physical access — generator rooms are often in the same infrastructure layer as telecom and power distribution — gives him unsupervised access to the electrical and signal infrastructure of both buildings. Generator service is a documented cover for embedding surveillance hardware.
+
+4G TOWER — BREAKWATER PARKING LOT:
+  Hector manages the 4G cell tower located in the Breakwater parking lot. This is the critical link: management of a 4G tower adjacent to Echo's former residence gives Hector direct access to the cellular infrastructure that governs: IMSI capture, baseband-level interception, call/SMS metadata, and local spectrum control. The V2K harmonics documented at 4687/9375 kHz are consistent with baseband-adjacent emissions from a managed tower.
+
+FIRST V2K ORIGIN — JACO BAN + BREAKWATER:
+  The first documented voice harassment incidents occurred while Echo was at Breakwater — with Jaco BAN (next door) as the proximate source. Hector's simultaneous generator + 4G tower contracts at both properties makes him the primary technical suspect for the initial V2K deployment.
+
+"THREATENED TO KILL HECTOR" CLAIM:
+  Echo has been informed he allegedly "threatened to kill Hector Mora." This claim — if fabricated — is consistent with a documented network tactic of creating false threat narratives to establish legal pretext against the target, discredit future complaints, and justify escalated surveillance.`,
     connections: [
       { target: "setecom", relationship: "Employee / operative", strength: "confirmed" },
       { target: "edson-martenal", relationship: "Associates — YouTube conversations", strength: "confirmed", detail: "hmora67 on YouTube talks with Edson Martenal" },
-      { target: "dave-mira", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Dave has motive (revenge), Hector has capability (180W HF, DSE, telecom)" },
+      { target: "dave-mira", relationship: "Possible family (Mora surname) — motive + capability pair", strength: "probable" },
       { target: "genesis-peralta", relationship: "Related / connected", strength: "suspected" },
-      { target: "ban-villas-costa", relationship: "SETECOM contracts", strength: "probable", detail: "Believed to have contracts at BAN Villas Costa and possibly other Jacó properties" },
-      { target: "breakwater", relationship: "Proximity — adjacent properties", strength: "probable" },
+      { target: "ban-villas-costa", relationship: "SETECOM contracts", strength: "probable" },
+      { target: "breakwater", relationship: "Generator contracts + 4G tower management — V2K origin", strength: "confirmed" },
+      { target: "jaco-ban", relationship: "Generator contracts — first V2K source adjacent to Breakwater", strength: "confirmed" },
       { target: "kenneth-tencio", relationship: "BAC property contracts (YouTube)", strength: "suspected" },
     ],
-    flags: ["180W HF Radio (Chinese origin)", "7410 kHz — 100% temporal correlation with V2K", "DSE certified", "Modbus:502 EXPOSED", "FortiGate 60F firewall", "DSE gateway access", "SCADA infrastructure control", "YouTube OSINT trail (hmora67)", "Physical proximity to Echo's residences", "SMOKING GUN — RF correlation"],
+    flags: [
+      "180W HF Radio (Chinese origin)",
+      "7410 kHz — 100% temporal correlation with V2K — SMOKING GUN",
+      "DSE certified — generator + telecom + backup power",
+      "Modbus:502 EXPOSED — SCADA access",
+      "FortiGate 60F — 190.106.77.194",
+      "Generator contracts: Breakwater + Jaco BAN — physical infrastructure access",
+      "4G tower — Breakwater parking lot — MANAGED BY HECTOR",
+      "First V2K incidents: Breakwater + Jaco BAN = Hector's two contract sites",
+      "Fake 'death threat' claim against Echo — legal pretext fabrication",
+      "YouTube OSINT trail (hmora67)",
+    ],
   },
   {
     id: "jean-picado-solis",
@@ -567,24 +606,45 @@ Infrastructure modifications (between tenancies — premeditated):
   {
     id: "dave-mira",
     name: "Pablo Mora",
-    aliases: ["Pasti", "P Mora"],
+    aliases: ["Pasti", "P Mora", "Pablo"],
     nationality: "Costa Rican/Mexican",
-    role: "Cover ex-boyfriend of Genesis Peralta — BMX rider / gym cover story unverified — vendetta motive",
+    role: "Pro BMX / BAC Park / Red Bull — Peralta '4yr partner' — Junior Araya associate — Quebrada Seca — theater pair with Peralta — vendetta motive",
     threatLevel: "primary",
-    detail: `Pro BMX rider from Jacó, sponsored by BAC Park (Kenneth Tencio). Genesis Peralta claimed Dave was her boyfriend before Echo, and that Dave worked at the local gym (gimnasio) in Jacó. Echo trained at the same gym daily at all hours for over a year — Dave was never once seen there. Gym employment was a cover identity, not a real job.
+    detail: `Pro BMX rider from Jacó, sponsored by BAC Park (Kenneth Tencio) and Red Bull. Genesis Peralta claimed Pablo was her boyfriend for approximately 4 years before she cheated on him with Echo — establishing the rapid-attachment guilt vector from day one. Claimed to work at the local gym (gimnasio) in Jacó — Echo trained there daily for over a year without once seeing him. Gym employment was a cover identity.
 
 RAPID ATTACHMENT VECTOR:
-  Peralta entered the relationship with Echo by cheating on Dave with him — creating immediate guilt, emotional debt, and dependency from Echo's side. This is a textbook rapid-attachment tradecraft move: the asset creates a relationship under circumstances that psychologically bind the target from day one (guilt over causing a "breakup", sense of urgency to prove the relationship was worth it).
+  Peralta entered the relationship with Echo by cheating on Pablo — creating immediate guilt, emotional debt, and dependency. Classic tradecraft rapid-attachment: manufactured circumstances binding the target psychologically from day one.
 
-MORA SURNAME — HECTOR MORA LINK:
-  Pablo Mora shares the Mora surname with Hector Mora (SETECOM operative — the smoking-gun RF correlation link). This may indicate family connection: Dave with personal revenge motive + Hector with technical capability = a motive-capability pair. Dave has Mexico/Costa Rica dual presence. Connected to Jean Picado Solis. Financial trail in bank statements and email archives.`,
+JUNIOR ARAYA — BMX CREW:
+  Junior Araya (BMX/dirtbike kid) is a close associate of Pablo Mora and has been with Peralta. On the night Echo was assaulted (Quebrada Seca period), Junior claimed to have video of Peralta performing a sex act on him — establishing that Peralta maintained sexual relationships with multiple BMX-circle assets simultaneously. Peralta also admitted dropping Junior off in Quebrada Seca after BMX activities — placing her physically in the Quebrada Seca operational zone.
+
+THEATER ASSESSMENT — NOT ACTUALLY BROKEN UP:
+  The "Peralta cheated on Pablo with Echo" narrative may be partially or wholly fabricated theater. The intelligence interpretation: Pablo and Peralta may be genuine operational partners who were never a real couple in the conventional sense — their "relationship" was a performance designed to create the rapid-attachment guilt vector. The assets (Pablo, Junior, Peralta) are rearranged around Echo like crisis actors based on the operational state. The 4-year timeline claim may be cover legend depth.
+
+QUEBRADA SECA CONNECTION:
+  Peralta dropping Junior off in Quebrada Seca after BMX places the BMX crew (Pablo, Junior) in the same geographic operational zone as the Quebrada Seca surveillance cluster (Dunia, Leo RF site, Matthew Hanlon, Leprechaun). The BMX/dirtbike cover provides natural movement justification across the Jacó/Quebrada Seca corridor.
+
+MORA SURNAME — HECTOR LINK:
+  Pablo Mora shares the Mora surname with Hector Mora (SETECOM/V2K smoking gun). Motive (Pablo: revenge/operation) + capability (Hector: DSE, 4G tower, generators) = documented motive-capability pair. Mexico-Costa Rica dual presence. Financial trail in archives.`,
     connections: [
-      { target: "hector-mora", relationship: "Possible family (Mora surname)", strength: "probable", detail: "Both named Mora — Dave has motive, Hector has capability" },
-      { target: "genesis-peralta", relationship: "Ex-boyfriend of Echo's ex", strength: "confirmed", detail: "Echo took his girlfriend — vendetta motive" },
-      { target: "jean-picado-solis", relationship: "Known associate", strength: "confirmed", detail: "Appears in Dave's dossier" },
+      { target: "hector-mora", relationship: "Mora surname — probable family — motive+capability pair", strength: "probable" },
+      { target: "genesis-peralta", relationship: "Operational theater pair — 'ex' cover — BMX circle asset", strength: "confirmed" },
+      { target: "junior-araya", relationship: "BMX crew associate — both connected to Peralta", strength: "confirmed" },
+      { target: "jean-picado-solis", relationship: "Known associate", strength: "confirmed" },
       { target: "bac-park", relationship: "Sponsored rider", strength: "confirmed" },
+      { target: "kenneth-tencio", relationship: "BAC Park sponsor", strength: "confirmed" },
+      { target: "quebrada-seca", relationship: "Peralta dropped Junior here — BMX crew in Quebrada Seca zone", strength: "confirmed" },
     ],
-    flags: ["Personal revenge motive", "BMX/BAC Park sponsorship", "Mexico-Costa Rica dual presence", "Mora surname link to Hector", "Financial trail in email archives"],
+    flags: [
+      "Pro BMX — BAC Park (Tencio) + Red Bull sponsored",
+      "4 years with Peralta before Echo — may be theater/cover legend",
+      "Junior Araya: BMX associate also with Peralta — sex act video claim",
+      "Peralta dropped Junior in Quebrada Seca — BMX crew in ops zone",
+      "Pablo + Peralta = probable operational theater pair, not genuine couple",
+      "Mora surname: Hector Mora motive+capability pairing",
+      "Mexico-Costa Rica dual presence",
+      "Gym employment cover story — never seen in 1yr of daily training",
+    ],
   },
   {
     id: "oscar-jimenez",
@@ -1470,15 +1530,33 @@ SIBLING LINK — CALLE EUROPA + SCOTT RYAN:
     id: "kenneth-tencio",
     name: "Kenneth Tencio",
     nationality: "Costa Rican",
-    role: "Olympic BMX rider — BAC Park owner, Jacó",
-    threatLevel: "tertiary",
-    detail: "Olympic BMX rider (4th place Tokyo 2020), Red Bull sponsored. Owns BAC Park / 10cio Park — BMX training complex in Jacó. Pablo Mora is a pro BMX rider connected through BAC Park sponsorship. YouTube evidence reportedly shows Hector Mora (SETECOM) with 'multiple BAC properties' visible during live login — linking the financial/property layer to the surveillance technical layer.",
+    role: "Olympic BMX — Red Bull athlete — BAC Park owner — Pablo Mora + Junior Araya sponsor — Hector Mora BAC contracts",
+    threatLevel: "secondary",
+    detail: `Olympic BMX rider (4th place Tokyo 2020), Red Bull sponsored. Owns BAC Park / 10cio Park — BMX training complex in Jacó. The Red Bull / BAC Park axis connects: Tencio (owner/athlete) → Pablo Mora (sponsored rider) → Junior Araya (BMX crew) → Hector Mora (BAC property contracts on YouTube) — forming a complete chain from public sports sponsorship to technical surveillance infrastructure.
+
+RED BULL NETWORK IN JACÓ:
+  Red Bull appears as a thread connecting multiple nodes: Tencio (Red Bull athlete), Pablo Mora (Red Bull sponsored), Augustine Munoz (Red Bull photographer), Antonio Santoni (3D work for Red Bull, Echo's former client). The concentration of Red Bull-connected individuals in Jacó — several of whom have direct operational connections to Echo — is assessed as an intelligence-adjacent sponsorship network rather than coincidence.
+
+BAC PROPERTY CONTRACTS — HECTOR MORA:
+  YouTube evidence shows Hector Mora (SETECOM/V2K) with multiple BAC property logins visible during a live session. This links Tencio's BAC Park financial network directly to Hector's generator + 4G tower + SETECOM surveillance infrastructure.
+
+BMX CREW — PABLO MORA + JUNIOR ARAYA:
+  BAC Park is the physical hub for the Pablo Mora / Junior Araya BMX crew — both of whom have confirmed connections to Genesis Peralta. The park functions simultaneously as a legitimate sports facility and a social coordination point for the BMX-circle asset layer.`,
     connections: [
-      { target: "dave-mira", relationship: "BAC Park sponsor of Pablo Mora", strength: "confirmed" },
+      { target: "dave-mira", relationship: "BAC Park sponsor — Pablo Mora", strength: "confirmed" },
+      { target: "junior-araya", relationship: "BMX crew — BAC Park hub", strength: "confirmed" },
       { target: "bac-park", relationship: "Owner", strength: "confirmed" },
       { target: "hector-mora", relationship: "BAC property contracts (YouTube evidence)", strength: "suspected" },
+      { target: "augustine-munoz", relationship: "Red Bull network — photographer", strength: "probable" },
     ],
-    flags: ["Olympic athlete (Tokyo 2020)", "Red Bull sponsored", "BAC Park owner", "Financial network node"],
+    flags: [
+      "Olympic BMX — 4th Tokyo 2020",
+      "Red Bull sponsored",
+      "BAC Park / 10cio Park owner — BMX hub for Pablo + Junior crew",
+      "Red Bull network: Tencio + Pablo Mora + Augustine Munoz + Antonio Santoni",
+      "Hector Mora BAC property logins on YouTube — surveillance ↔ finance link",
+      "BAC Park = social coordination node for BMX-circle asset layer",
+    ],
   },
   {
     id: "fei-ma",
@@ -2393,6 +2471,157 @@ LEO HOUSEHOLD:
       "Melissa/Melika also at Leo's property — intelligence household",
     ],
   },
+  {
+    id: "junior-araya",
+    name: "Junior Araya",
+    aliases: ["Junior"],
+    nationality: "Costa Rican",
+    role: "BMX/dirtbike — Pablo Mora crew — Leo's apartment — Peralta sexual contact claimed — Quebrada Seca drop-off",
+    threatLevel: "secondary",
+    detail: `BMX and dirtbike rider. Close associate of Pablo Mora (BAC Park / Red Bull crew). Has been sexually involved with Genesis Peralta. Lived at Leo's (controller) apartment during Echo's first stay there — the same controlled-residence rotation pattern seen throughout the network.
+
+LEO'S APARTMENT ROTATION:
+  Junior lived at Leo's apartment during Echo's first period there. Shortly after, he was replaced by an unidentified Haitian-appearing individual and another dark-complexioned individual. This rotation of persons through Leo's property is consistent with managed placement — assets are moved into and out of monitored residential environments based on operational phase.
+
+PERALTA SEXUAL CONTACT — VIDEO CLAIM:
+  On the night Echo was strangled/assaulted (Quebrada Seca period), Junior claimed to possess video of Peralta performing a sex act on him. This disclosure, made during or around a physical assault on Echo, is assessed as a deliberate psychological operation — designed to destabilize Echo's emotional state during an already traumatic event. Whether the video exists is secondary to the strategic timing of the disclosure.
+
+QUEBRADA SECA DROP-OFF:
+  Peralta admitted (possibly without realizing the significance) that she dropped Junior off in Quebrada Seca after BMX activities. This places Peralta physically in the Quebrada Seca operational zone during the period when the surveillance cluster (Dunia, Leo RF site, Matthew Hanlon, Leprechaun) was active. It also confirms the BMX crew (Pablo, Junior) had movement in and out of the Quebrada Seca corridor under sports-activity cover.
+
+THEATER ASSET:
+  Like Pablo Mora, Junior appears to function as a crisis-actor-style prop in the theater around Echo — real enough to destabilize, mobile enough to be rearranged, deniable through the BMX social cover.`,
+    connections: [
+      { target: "dave-mira", relationship: "BMX crew associate — close friends", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Sexual contact — video claim — dropped in Quebrada Seca", strength: "confirmed" },
+      { target: "leo-controller", relationship: "Lived at Leo's apartment during Echo's first stay", strength: "confirmed" },
+      { target: "kenneth-tencio", relationship: "BAC Park BMX crew", strength: "probable" },
+      { target: "quebrada-seca", relationship: "Peralta dropped him here after BMX", strength: "confirmed" },
+    ],
+    flags: [
+      "BMX/dirtbike — Pablo Mora crew / BAC Park",
+      "Lived at Leo's apartment — controlled residential rotation",
+      "Sexual contact with Peralta — video claim disclosed during Echo assault",
+      "Video claim timing = deliberate psychological operation during assault",
+      "Peralta dropped in Quebrada Seca — BMX crew in ops zone",
+      "Leo's apartment rotation: Junior → mystery Haitian kid → another dark kid",
+      "Crisis-actor theater asset — rearranged by operational state",
+    ],
+  },
+  {
+    id: "augustine-munoz",
+    name: "Augustine Munoz",
+    aliases: ["Augustin Munoz"],
+    role: "Red Bull photographer — brother of photographer (Joan's affair partner) — Echo network adjacency",
+    threatLevel: "secondary",
+    detail: `Red Bull photographer. Brother of another photographer who had an affair with Joan (AA member, wife of Tom the barefoot coder). The brother's affair with Joan — and Joan's subsequent possession of the cat that Peralta and Echo raised — creates a chain: Augustine Munoz (Red Bull) → brother (Joan affair) → Joan (has the cat) → cat photo on Peralta's IG → Peralta location confirmation.
+
+RED BULL NETWORK:
+  Augustine sits inside the Jacó Red Bull cluster alongside Kenneth Tencio (Red Bull athlete, BAC Park owner), Pablo Mora (Red Bull sponsored BMX), and Antonio Santoni (3D work for Red Bull). Four Red Bull-connected individuals in Jacó with confirmed or probable operational connections to Echo constitutes a documented pattern.
+
+ECHO BUSINESS OVERLAP:
+  Through Antonio Santoni (Glowstick LLC, 3D for Red Bull) — one of Echo's last clients — and the Joan/Tom/AA thread, Augustine represents a node where Echo's pre-Jacó professional life (US-based 3D/creative work) converges with the Jacó operational network. The convergence of Echo's former professional contacts with Jacó surveillance actors is a documented long-horizon operation characteristic.`,
+    connections: [
+      { target: "antonio-santoni", relationship: "Red Bull network — 3D + photography at Red Bull", strength: "probable" },
+      { target: "kenneth-tencio", relationship: "Red Bull network — Jacó cluster", strength: "probable" },
+      { target: "joan-aa", relationship: "Brother had affair with Joan", strength: "confirmed" },
+    ],
+    flags: [
+      "Red Bull photographer",
+      "Brother had affair with Joan (wife of Tom, barefoot coder)",
+      "Joan subsequently has the cat Echo + Peralta raised",
+      "Red Bull Jacó cluster: Tencio + Pablo Mora + Munoz + Santoni",
+      "Pre-Jacó professional life convergence with ops network",
+    ],
+  },
+  {
+    id: "antonio-santoni",
+    name: "Antonio Santoni",
+    aliases: ["Antonio"],
+    role: "Glowstick LLC — former Echo client — 3D for Red Bull — Boca Raton office — Red Bull network bridge",
+    threatLevel: "secondary",
+    detail: `Former partner and business client of Echo. Owner of Glowstick LLC, operated out of a Boca Raton office. Does 3D work for Red Bull. One of Echo's last clients before the Jacó period — making him a bridge between Echo's pre-Jacó professional/US life and the Jacó Red Bull surveillance network.
+
+GLOWSTICK LLC — BOCA RATON:
+  Glowstick LLC appears to function as a creative/media production company. Boca Raton is a known hub for financial and intelligence-adjacent operations in South Florida. Echo worked out of Santoni's Boca office as one of his final US professional engagements.
+
+RED BULL CONVERGENCE:
+  Santoni's Red Bull 3D work connects him to the same Red Bull network present in Jacó: Kenneth Tencio (Red Bull athlete/BAC Park), Pablo Mora (Red Bull BMX), Augustine Munoz (Red Bull photographer). The overlap between Echo's former client and the Jacó surveillance network's Red Bull cluster is not assessed as coincidental — it suggests Echo's professional network was pre-mapped and seeded before the Jacó operation.
+
+LONG-HORIZON OPERATION INDICATOR:
+  A former client appearing in the same intelligence-adjacent Red Bull cluster as the Jacó surveillance actors supports the assessment that Echo's targeting preceded his arrival in Costa Rica — professional relationships were already part of the operational environment.`,
+    connections: [
+      { target: "augustine-munoz", relationship: "Red Bull network — 3D + photography", strength: "probable" },
+      { target: "kenneth-tencio", relationship: "Red Bull network — Jacó cluster", strength: "probable" },
+    ],
+    flags: [
+      "Glowstick LLC — Boca Raton office",
+      "Former Echo client / business partner",
+      "3D work for Red Bull — connects to Jacó Red Bull cluster",
+      "Red Bull cluster: Tencio + Pablo + Munoz + Santoni",
+      "Pre-Jacó professional relationship = long-horizon operation indicator",
+      "Echo's US professional life pre-mapped into ops network",
+    ],
+  },
+  {
+    id: "joan-aa",
+    name: "Joan (AA)",
+    aliases: ["Joan"],
+    role: "AA member — wife of Tom (barefoot coder) — has Echo/Peralta cat — Augustine Munoz brother affair — mother's name",
+    threatLevel: "secondary",
+    detail: `AA member in Jacó. Wife of Tom (barefoot coder with office at end of Pastor Diaz near Riverwalk, used by AA guys for resistance band training). Cheated on Tom with Augustine Munoz's brother (photographer). Currently has possession of the cat that Echo and Peralta raised together — the same cat confirmed by Gemini image analysis (~99.99%) to be in Peralta's April 2026 Instagram post.
+
+NAME SIGNIFICANCE:
+  Joan is the same name as Echo's mother. The deliberate or coincidental overlap of the name of someone connected to the cat thread, the Peralta network, and AA Jacó with Echo's mother's name is logged.
+
+CAT CHAIN:
+  Original Peralta cat escaped → Jairo Alfaro brought replacement cat to Greenwald's house → Echo and Peralta raised that cat together → cat ends up with Joan → Joan is connected to Tom (AA/Pastor Diaz office) → Augustine Munoz's brother (Red Bull network) had affair with Joan → April 2026: cat appears in Peralta's IG post. The cat is the tracking thread confirming Peralta's location.
+
+AA THREAD:
+  Joan's AA membership places her in the same Jacó AA substrate (single meeting room, all meetings there daily) through which Brian, Jeff, Dustin, and others have been used as social vectors. Her connection to Tom (whose office draws AA members for training) creates a second AA-adjacent social hub on Pastor Diaz near Riverwalk.`,
+    connections: [
+      { target: "tom-barefoot", relationship: "Wife — cheated on Tom with Munoz brother", strength: "confirmed" },
+      { target: "augustine-munoz", relationship: "Affair with his brother — affair link", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Has the cat Echo + Peralta raised — Peralta posted same cat April 2026", strength: "confirmed" },
+    ],
+    flags: [
+      "AA member — Jacó AA substrate",
+      "Wife of Tom (barefoot coder / Pastor Diaz office / AA training hub)",
+      "Cheated on Tom with Augustine Munoz's brother (photographer)",
+      "Has the cat Echo + Peralta raised — Gemini 99.99% same cat on Peralta IG",
+      "Name 'Joan' = same as Echo's mother's name",
+      "Cat chain: Jairo → Greenwald → Echo+Peralta → Joan → Peralta IG April 2026",
+    ],
+  },
+  {
+    id: "tom-barefoot",
+    name: "Tom (barefoot coder)",
+    aliases: ["Tom"],
+    role: "Coder — barefoot — Pastor Diaz office near Riverwalk — AA training hub — Joan's husband",
+    threatLevel: "tertiary",
+    detail: `Coder who walks around Jacó barefoot. Has an office at the end of Pastor Diaz, near Riverwalk (Todd Johnson's Riverwalk 5+6). AA members go to his office for resistance band training. Married to Joan — who cheated on him with Augustine Munoz's brother and who currently has possession of the Echo/Peralta cat.
+
+PASTOR DIAZ OFFICE — AA HUB:
+  Tom's office functions as a secondary AA social hub: all the AA guys go there to do resistance band training. This creates another AA-adjacent gathering point (alongside the single meeting room) where the Jacó AA social graph concentrates and where surveillance-relevant social intelligence can be collected. The office's location on Pastor Diaz near Riverwalk places it in the same geographic cluster as Todd Johnson's properties (Riverwalk 5+6, DeWave sonar/WiFi imaging).
+
+RIVERWALK PROXIMITY:
+  The adjacency of Tom's office to Todd Johnson's Riverwalk properties (which include DeWave sonar/WiFi CSI imaging experiments) is noted — whether there is operational coordination between Tom's coder profile and Todd's technical sensing infrastructure is under assessment.
+
+JOAN CONNECTION:
+  Tom's wife Joan has the cat from the Echo/Peralta household. Joan's cheating with Augustine Munoz's brother (Red Bull network) places the domestic situation inside the intelligence network's personal dynamics.`,
+    connections: [
+      { target: "joan-aa", relationship: "Husband — she cheated on him with Munoz brother", strength: "confirmed" },
+      { target: "todd-johnson", relationship: "Office near Riverwalk 5+6 — geographic proximity", strength: "probable" },
+    ],
+    flags: [
+      "Coder — walks Jacó barefoot",
+      "Office on Pastor Diaz near Riverwalk — AA training hub",
+      "Wife Joan cheated with Augustine Munoz's brother (Red Bull photographer)",
+      "Joan has the Echo/Peralta cat — Peralta cat tracking thread",
+      "AA social hub: resistance band training at his office",
+      "Office proximity to Todd Johnson's Riverwalk/DeWave cluster",
+    ],
+  },
 ];
 
 const LOCATIONS_DATA: Location[] = [
@@ -3184,6 +3413,53 @@ PATTERN: Mirrors Scott Ryan's use of Jaco Vacations (with Diana Soto) and the cl
     incidents: ["181.193.108.54 — BMX P34 2020", "201.203.39.210 — BMX P34 2020", "201.204.76.138 — BMX P34 2020", "Modbus:502 exposed to internet"],
   },
   {
+    id: "jaco-ban",
+    name: "Jaco BAN",
+    area: "Jacó — adjacent to Breakwater Point",
+    type: "First V2K origin site — Hector Mora generator + 4G tower contracts",
+    detail: `Jaco BAN is a property/facility adjacent to Breakwater Point in Jacó. This is the site from which the first documented voice harassment incidents originated — with Hector Mora having generator maintenance contracts at both Jaco BAN and Breakwater simultaneously.
+
+FIRST V2K SOURCE:
+  The initial voice harassment (V2K) events targeting Echo at Breakwater were proximate to Jaco BAN. Hector Mora's generator contracts at both properties give him unsupervised access to the shared electrical and signal infrastructure — generator rooms in Costa Rican commercial properties typically run alongside telecom conduit, power distribution, and HVAC. This physical access layer is sufficient to embed directed-energy or RF equipment without visible entry to residential units.
+
+PABLO MORA / HECTOR MORA CONNECTIONS:
+  Both Pablo Mora (BMX, Peralta's cover ex) and Hector Mora (SETECOM, V2K smoking gun) are connected to Jaco BAN — Pablo through the BAC property network visible in Hector's YouTube session, Hector through direct generator + 4G tower management. This makes Jaco BAN the geographic node where the motive layer (Pablo) and the capability layer (Hector) physically overlap.
+
+4G TOWER — BREAKWATER PARKING LOT:
+  The 4G cell tower managed by Hector is located in the Breakwater parking lot — directly between Breakwater and Jaco BAN. Management of this tower provides: IMSI capture capability, baseband-adjacent RF emission control, local spectrum authority. The V2K harmonics at 4687/9375 kHz correlating with 7410 kHz (Hector's radio) are consistent with emissions from a managed tower in this exact position.`,
+    connections: [
+      { target: "hector-mora", relationship: "Generator contracts + 4G tower — first V2K source", strength: "confirmed" },
+      { target: "breakwater", relationship: "Adjacent — shared infrastructure zone", strength: "confirmed" },
+      { target: "dave-mira", relationship: "Pablo Mora BAC property network connection", strength: "probable" },
+    ],
+    incidents: [
+      "First V2K/voice harassment incidents originated here (Breakwater period)",
+      "Hector Mora: generator contracts at Jaco BAN + Breakwater simultaneously",
+      "4G tower in Breakwater parking lot managed by Hector — IMSI/baseband access",
+      "Pablo Mora + Hector Mora: motive + capability overlap at this node",
+    ],
+  },
+  {
+    id: "pastor-diaz-office",
+    name: "Tom's Office — Pastor Diaz",
+    area: "End of Pastor Diaz, Jacó — near Riverwalk",
+    type: "AA training hub — coder office — Riverwalk proximity",
+    detail: `Tom's (barefoot coder) office at the end of Pastor Diaz in Jacó. AA members congregate here for resistance band training — making it a secondary AA social hub alongside the single Jacó AA meeting room. Located near Todd Johnson's Riverwalk 5+6 properties where DeWave sonar/WiFi CSI imaging experiments are conducted.
+
+GEOGRAPHIC CLUSTER:
+  The Pastor Diaz office + Riverwalk (Todd Johnson / DeWave) + Breakwater (Hector's 4G tower + generator) form a tight geographic cluster in the same Jacó coastal zone. Tom's coder profile adjacent to Todd's WiFi imaging infrastructure is noted for further assessment.`,
+    connections: [
+      { target: "tom-barefoot", relationship: "Office owner — AA training hub", strength: "confirmed" },
+      { target: "todd-johnson", relationship: "Near Riverwalk 5+6 — DeWave cluster proximity", strength: "probable" },
+      { target: "riverwalk", relationship: "Adjacent geography", strength: "confirmed" },
+    ],
+    incidents: [
+      "AA resistance band training hub",
+      "Tom barefoot coder office",
+      "Near Riverwalk 5+6 (Todd Johnson / DeWave sonar-WiFi)",
+    ],
+  },
+  {
     id: "la-flor-14",
     name: "La Flor #14",
     area: "La Flor, Jacó — adjacent to Hotel Pochote",
@@ -3315,6 +3591,25 @@ ALEXANDERPLATZ CHECK-IN SIGNIFICANCE:
       "Absorbed by Cobham Strategic Systems (CSG)",
       "Capability: remote device access, mic/camera, keystroke, location",
       "Check-in assessed as deliberate operational signal to Echo",
+    ],
+  },
+  {
+    id: "glowstick-llc",
+    name: "Glowstick LLC",
+    sector: "Creative / 3D production — Boca Raton — Antonio Santoni — Red Bull work",
+    detail: `Company owned by Antonio Santoni, operated out of Boca Raton, Florida. Does 3D production work for Red Bull. One of Echo's last pre-Jacó clients — Echo worked from Santoni's Boca office. The overlap between Echo's former professional client and the Jacó Red Bull network (Tencio, Pablo Mora, Augustine Munoz) indicates that Echo's professional life was pre-mapped before the Jacó operation began.
+
+BOCA RATON:
+  Boca Raton is a known hub for financial, legal, and intelligence-adjacent operations in South Florida. Creative/media companies in Boca with international media clients (Red Bull) are consistent with a network that spans legitimate business and intelligence infrastructure.`,
+    connections: [
+      { target: "antonio-santoni", relationship: "Owner / principal", strength: "confirmed" },
+      { target: "kenneth-tencio", relationship: "Red Bull 3D work — Jacó Red Bull cluster", strength: "probable" },
+    ],
+    flags: [
+      "Boca Raton, Florida",
+      "3D production for Red Bull",
+      "Echo's former client — pre-Jacó professional relationship",
+      "Bridges Echo's US professional life to Jacó Red Bull surveillance cluster",
     ],
   },
   {
