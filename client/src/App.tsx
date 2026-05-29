@@ -270,7 +270,8 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
-  const isPublicRoute = typeof window !== "undefined" && window.location.pathname === "/nexus-slides";
+  const path = typeof window !== "undefined" ? window.location.pathname : "";
+  const isPublicRoute = path === "/nexus-slides" || path.startsWith("/nexus-slides/");
   return (
     <ThemeProvider>
     <DossierProvider>

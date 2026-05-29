@@ -865,8 +865,72 @@ const SLIDES = [
   { id: 10, title: "Just a Coincidence", component: Slide10 },
 ];
 
+// ── Gallery mode — all 10 slides in a 5×2 grid for quick preview ─────────────
+const SCALE = 0.21;
+const TW = Math.round(1080 * SCALE); // ~227
+const TH = Math.round(1920 * SCALE); // ~403
+
+export function NexusGallery() {
+  return (
+    <div style={{ background: "#050505", padding: 20 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+        {SLIDES.map((s) => {
+          const C = s.component;
+          return (
+            <div key={s.id} style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <div style={{ fontSize: 10, color: "#666", letterSpacing: "0.08em", textAlign: "center" }}>
+                {String(s.id).padStart(2,"0")} · {s.title}
+              </div>
+              {/* Clip container — exact scaled size */}
+              <div
+                style={{
+                  width: TW,
+                  height: TH,
+                  overflow: "hidden",
+                  flexShrink: 0,
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.9)",
+                }}
+              >
+                <div
+                  style={{
+                    transform: `scale(${SCALE})`,
+                    transformOrigin: "top left",
+                    width: 1080,
+                    height: 1920,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <C />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Single-slide preview mode (used by screenshot script) ────────────────────
+export function NexusSingleSlide() {
+  const params = new URLSearchParams(window.location.search);
+  const n = parseInt(params.get("n") || "1", 10);
+  const idx = Math.max(0, Math.min(n - 1, SLIDES.length - 1));
+  const SlideComp = SLIDES[idx].component;
+  return (
+    <div style={{ width: 1080, height: 1920, overflow: "hidden" }}>
+      <SlideComp />
+    </div>
+  );
+}
+
 // ── Main page ─────────────────────────────────────────────────────────────────
 export default function NexusSlidesPage() {
+  const params = new URLSearchParams(
+    typeof window !== "undefined" ? window.location.search : ""
+  );
+  if (params.get("n")) return <NexusSingleSlide />;
+  if (params.get("gallery")) return <NexusGallery />;
   const [activeIndex, setActiveIndex] = useState(0);
   const [exporting, setExporting] = useState(false);
   const [exportingAll, setExportingAll] = useState(false);

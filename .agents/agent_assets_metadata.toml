@@ -281,3 +281,9 @@ id = "iIGeGjrHm4HOWUhhn3XQE"
 uri = "file://attached_assets/nexus_slide_10.png"
 type = "image"
 title = "Slide 10 — Just a Coincidence (46.875)"
+
+[[outputs]]
+id = "81Wy6ItRz5IfP8swYwfop"
+uri = "file://screenshots/nexus_gallery_row1.jpg"
+type = "image"
+title = "All 10 Jaco Nexus Slides"
