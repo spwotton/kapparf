@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield, Zap, AlertTriangle } from "lucide-react";
+import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield, Zap, AlertTriangle, Radio } from "lucide-react";
 
 const TEMPLATES: { label: string; to: string; subject: string; body: string }[] = [
   {
@@ -321,6 +321,8 @@ export default function MailerPage() {
   const [log, setLog] = useState<{ ts: string; to: string; subject: string; ok: boolean; id?: string }[]>([]);
   const [campaignResult, setCampaignResult] = useState<CampaignResult | null>(null);
   const [showCampaignResults, setShowCampaignResults] = useState(false);
+  const [wbResult, setWbResult] = useState<CampaignResult | null>(null);
+  const [showWbResults, setShowWbResults] = useState(false);
 
   const { data: status } = useQuery<{ configured: boolean; domain: string | null }>({
     queryKey: ["/api/mailer/status"],
@@ -352,8 +354,21 @@ export default function MailerPage() {
       setCampaignResult(data);
       setShowCampaignResults(true);
     },
-    onError: (err: any) => {
+    onError: (_err: any) => {
       setCampaignResult({ ok: false, sent: 0, failed: 0, total: 0, results: [] });
+    },
+  });
+
+  const wbMutation = useMutation({
+    mutationFn: (payload: { dryRun?: boolean }) =>
+      apiRequest("POST", "/api/mailer/whistleblower", payload),
+    onSuccess: async (res) => {
+      const data: CampaignResult = await res.json();
+      setWbResult(data);
+      setShowWbResults(true);
+    },
+    onError: (_err: any) => {
+      setWbResult({ ok: false, sent: 0, failed: 0, total: 0, results: [] });
     },
   });
 
@@ -632,6 +647,98 @@ export default function MailerPage() {
                     <span className="text-muted-foreground w-5 shrink-0">{r.id}</span>
                     <span className="truncate text-foreground">{r.to}</span>
                     <span className="text-muted-foreground shrink-0">{r.org}</span>
+                    {r.error && <span className="text-red-400 truncate">{r.error}</span>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* ── Whistleblower Blast — Italy's Long Leash ── */}
+      <div className="border border-red-200 dark:border-red-900 rounded-lg p-4 space-y-3 bg-red-50/30 dark:bg-red-950/20">
+        <div className="flex items-center gap-2">
+          <Radio className="w-4 h-4 text-red-500" />
+          <p className="text-sm font-medium">Whistleblower Blast — Italy's Long Leash</p>
+          <Badge variant="outline" className="text-xs ml-auto border-red-300 dark:border-red-700 text-red-600 dark:text-red-400">
+            ~118 recipients
+          </Badge>
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          Sends the Leonardo S.p.A. / CSG SAR / Costa Rica whistleblower letter to all contacts:
+          grassroots US media (Tucker Carlson, Shawn Ryan, Jimmy Dore, Taibbi, Kim Iversen, Russell Brand,
+          Greenwald, Whitney Webb, Shellenberger…), investigative press (The Intercept, Bellingcat,
+          Forbidden Stories, Lighthouse Reports…), digital rights watchdogs (Access Now, Privacy International,
+          Citizen Lab, EDRi, Amnesty Tech, RSF…), JW accountability groups (JW Survey, Silent Lambs, AAWA,
+          JW Facts…), Costa Rica press (CRHoy, La Nación, Teletica, Semanario Universidad…),
+          plus all 52 existing government/regulatory contacts.
+        </p>
+        <p className="text-xs font-mono text-muted-foreground truncate">
+          Subject: ITALY'S LONG LEASH: Leonardo S.p.A., CSG SAR, and the weaponization of Costa Rica's surveillance grid against U.S. citizens
+        </p>
+
+        <div className="flex items-start gap-2 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded px-3 py-2">
+          <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+          <span>Sends real emails to ~118 addresses. Dry Run first to verify the list without sending. Allow ~42 seconds at 350ms stagger.</span>
+        </div>
+
+        <div className="flex gap-2">
+          <Button
+            data-testid="button-wb-dry-run"
+            variant="outline"
+            size="sm"
+            className="border-red-300 dark:border-red-700"
+            onClick={() => wbMutation.mutate({ dryRun: true })}
+            disabled={wbMutation.isPending}
+          >
+            Dry Run (list only)
+          </Button>
+          <Button
+            data-testid="button-wb-send"
+            size="sm"
+            className="gap-2 bg-red-600 hover:bg-red-700 text-white"
+            onClick={() => wbMutation.mutate({})}
+            disabled={wbMutation.isPending || !status?.configured}
+          >
+            <Radio className="w-3.5 h-3.5" />
+            {wbMutation.isPending ? "Broadcasting… (~42s)" : "Send Whistleblower Blast"}
+          </Button>
+        </div>
+
+        {/* Whistleblower results */}
+        {wbResult && (
+          <div className="space-y-2">
+            <div className="flex items-center gap-3 text-sm">
+              <span className="text-green-600 font-medium">{wbResult.sent} sent</span>
+              {wbResult.failed > 0 && (
+                <span className="text-red-500 font-medium">{wbResult.failed} failed</span>
+              )}
+              <span className="text-muted-foreground text-xs">/ {wbResult.total} total</span>
+              <button
+                className="text-xs text-muted-foreground underline ml-auto"
+                onClick={() => setShowWbResults(!showWbResults)}
+                data-testid="toggle-wb-results"
+              >
+                {showWbResults ? "hide" : "show"} details
+              </button>
+            </div>
+            {showWbResults && (
+              <div className="max-h-72 overflow-y-auto space-y-0.5 border border-border rounded p-2">
+                {wbResult.results.map((r) => (
+                  <div
+                    key={r.id}
+                    data-testid={`wb-result-${r.id}`}
+                    className="flex items-center gap-2 text-xs font-mono py-0.5"
+                  >
+                    {r.ok ? (
+                      <CheckCircle className="w-3 h-3 text-green-500 shrink-0" />
+                    ) : (
+                      <XCircle className="w-3 h-3 text-red-500 shrink-0" />
+                    )}
+                    <span className="text-muted-foreground w-6 shrink-0">{r.id}</span>
+                    <span className="truncate text-foreground">{r.to}</span>
+                    <span className="text-muted-foreground shrink-0 ml-auto pl-2">{r.org}</span>
                     {r.error && <span className="text-red-400 truncate">{r.error}</span>}
                   </div>
                 ))}
