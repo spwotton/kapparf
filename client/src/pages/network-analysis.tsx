@@ -48,6 +48,7 @@ interface Location {
   connections: Connection[];
   incidents?: string[];
   coordinates?: string;
+  satelliteImg?: string;
 }
 
 interface Company {
@@ -4083,6 +4084,46 @@ PERALTA EXIT POINT:
     ],
   },
   {
+    id: "hotel-pochote-grande",
+    name: "Hotel Pochote Grande",
+    area: "La Flor, Jacó, Costa Rica",
+    type: "Echo current residence — precision GPS fix confirmed",
+    detail: `Echo's current primary residence. 3-star hotel on the La Flor block, Jacó.
+
+PRECISION GPS FIX (Google Maps satellite, 93m altitude):
+  Coordinates: 9.6216833°N, 84.6399475°W
+  Building direct in center of satellite frame — main hotel structure visible.
+  Google Maps aerial confirms the building layout: pool (blue), orange/red tile roof cluster, dense palm canopy perimeter.
+
+ENCIRCLEMENT ASSESSMENT:
+  La Flor #14 (Toronto PD cluster: Lindsey + Bob + Michelle) — immediately adjacent.
+  La Flor #9 (Carmen Gray) — same block; first and last Jacó rental address for Echo.
+  Dan from San Diego (Villa Real owner) — lives in La Flor directly adjacent to Pochote.
+  Three confirmed network actors within 50–100m of Echo's room.
+
+RACCOON SIGNAL:
+  Peralta's Instagram 10-slide post (from Buenos Aires alias "New York City") included raccoon footage from the La Flor pool — the shared Raccuber in-joke. The location-specific content confirms the network's real-time awareness of Echo's Pochote position, broadcast to Peralta while she maintains geographic ambiguity.
+
+SURVEILLANCE GEOMETRY:
+  La Flor #14 + La Flor #9 + Dan's residence form a three-node encirclement. Any ground-floor or pool-area movement by Echo is within line-of-sight of at least one confirmed network property.`,
+    connections: [
+      { target: "la-flor-14", relationship: "Immediately adjacent — Toronto PD cluster encirclement", strength: "confirmed" },
+      { target: "la-flor-9", relationship: "Same La Flor block — Carmen Gray property", strength: "confirmed" },
+      { target: "villa-real-jaco", relationship: "Dan (owner) lives in La Flor adjacent to Pochote", strength: "confirmed" },
+      { target: "dan-san-diego", relationship: "Owner of Villa Real — resides directly adjacent", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Raccoon IG signal confirms network awareness of this location", strength: "confirmed" },
+    ],
+    incidents: [
+      "Precision GPS: 9.6216833°N, 84.6399475°W — building direct in center of satellite frame",
+      "93m altitude Google Maps aerial — main structure confirmed",
+      "Three-node encirclement: La Flor #14 + #9 + Dan (Villa Real owner)",
+      "Peralta raccoon IG signal — confirmed network awareness of position",
+      "Echo current residence — active surveillance geometry",
+    ],
+    coordinates: "9.6216833°N, 84.6399475°W",
+    satelliteImg: "/pochote-satellite.png",
+  },
+  {
     id: "lapa-verde-dentist",
     name: "Dentist — Lapa Verde",
     area: "Lapa Verde, Jacó area",
@@ -5513,6 +5554,16 @@ export default function NetworkAnalysisPage() {
               <div className="space-y-2">
                 {loc.coordinates && (
                   <div className="text-[10px] font-mono text-muted-foreground">{loc.coordinates}</div>
+                )}
+                {loc.satelliteImg && (
+                  <div className="border border-border rounded overflow-hidden">
+                    <div className="text-[9px] font-mono text-muted-foreground px-2 py-1 bg-muted/40 border-b border-border tracking-widest uppercase">Satellite — Google Maps aerial · 93m altitude</div>
+                    <img
+                      src={loc.satelliteImg}
+                      alt={`Satellite view — ${loc.name}`}
+                      className="w-full max-h-64 object-cover object-center"
+                    />
+                  </div>
                 )}
                 <p className="text-xs leading-relaxed">{loc.detail}</p>
                 {loc.incidents && loc.incidents.length > 0 && (
