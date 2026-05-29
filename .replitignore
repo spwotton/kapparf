@@ -61,6 +61,21 @@ QuantumRenderer/
 sentinel/
 kiwisdr_scans/
 captures/
+evidence/
+pipeline_results/
+sounds/
+
+# ── Root-level archives (build artifacts / bundles, not needed at runtime) ────
+*.tar.gz
+*.tar
+*.zip
+
+# ── Playwright browser binaries (dev/testing only — 622 MB) ──────────────────
+pw-browsers/
+
+# ── attached_assets video frame subdirectories (extracted frames, dev only) ───
+attached_assets/mov_frames/
+attached_assets/mov341_frames/
 
 # ── KiwiSDR screenshots — written at runtime, empty on fresh deploy ───────────
 kiwisdr_screenshots/
