@@ -72,6 +72,8 @@ import AtlasObservatoryPage from "@/pages/atlas-observatory";
 import SetecomExposePage from "@/pages/setecom-expose";
 import ReelPage from "@/pages/reel";
 import MailerPage from "@/pages/mailer";
+import MediaPitchPage from "@/pages/media-pitch";
+import SatoshiLatticePage from "@/pages/satoshi-lattice";
 
 function Router() {
   return (
@@ -126,6 +128,8 @@ function Router() {
       <Route path="/setecom" component={SetecomExposePage} />
       <Route path="/reel" component={ReelPage} />
       <Route path="/mailer" component={MailerPage} />
+      <Route path="/media-pitch" component={MediaPitchPage} />
+      <Route path="/satoshi-lattice" component={SatoshiLatticePage} />
       <Route component={NotFound} />
     </Switch>
   );

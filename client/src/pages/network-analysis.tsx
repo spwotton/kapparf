@@ -2046,25 +2046,43 @@ PERALTA RELATIONSHIP:
     id: "leo-controller",
     name: "Leo (Controller)",
     aliases: ["Leo"],
-    role: "Controller / dealer — compromised device supplier — housing node delivery — Melissa's landlord",
+    role: "Controller / dealer — compromised device supplier — housing node delivery — Melissa's landlord — drone video shed — JW disclosure — RF camo site — Quebrada Seca ops hub",
     threatLevel: "primary",
-    detail: `Assessed primary handler/controller for Echo in Jacó. Functions simultaneously as Echo's drug dealer (creating financial debt and dependency), device supplier (always giving compromised/malware-laden hardware), and transport coordinator (drove Echo to key network nodes including La Guácima).
+    detail: `Assessed primary handler/controller for Echo in Jacó. Functions simultaneously as Echo's drug dealer (creating financial debt and dependency), device supplier (always giving compromised/malware-laden hardware), and transport coordinator (drove Echo to key network nodes including La Guácima). Leo's 3-unit property sits directly across from Los Ríos — the assessed administration node of the Quebrada Seca intelligence campus — and was surrounded on all sides by active surveillance infrastructure during Echo's residency.
+
+DRONE VIDEO PROCESSING SHED — SMOKING GUN:
+  Leo had a shed on his Quebrada Seca property that he claimed no knowledge of. The shed was actively processing drone video throughout Echo's stay. Echo cut the connection wire with a butcher knife — and the drone feed terminated. Leo's reaction: he pretended not to care. This is the behavioral tell. A property owner who discovers that a structure on his land has been secretly wired to process live drone surveillance footage, and responds with complete indifference, is either: (a) fully aware and performing deniability, or (b) under operational instruction to let it pass. Either way, Leo's non-reaction is a confession. A person with no knowledge of the operation would be alarmed.
+
+JW DISCLOSURE — STRATEGIC SOCIAL ENGINEERING:
+  Leo casually informed Echo that all the neighbors directly across the street were Jehovah's Witnesses — and that they used the RF camo structure as a meeting place. This disclosure was not incidental. It served a specific cover function: framing the DARPA-grade RF camouflage netting and associated hardware as a benign Kingdom Hall meeting infrastructure. In reality, the "JW meeting place" had a table with microphones and headsets positioned to directly face Echo's terrace — the exact geometry of an acoustic collection post, not a congregation. The JW framing provides deniability for the surveillance equipment to any casual observer who asks questions.
+
+RF CAMO — DARPA-GRADE DEPLOYMENT WITHIN 72 HOURS:
+  The house next to Leo's 3-unit — directly across from Los Ríos — had DARPA-grade RF camouflage installed within approximately 3 days of Echo's arrival at the property. RF-transparent camo netting of military specification is not commercially available at hardware stores; it is military/intelligence procurement. Its appearance within 72 hours of Echo moving in is the deployment signature — the infrastructure was standing by and activated on a schedule tied to Echo's arrival. The same structure also had LiFi data injection points documented in the same geographic zone, consistent with an active covert communications layer running parallel to standard RF.
+
+PARAMETRIC SPEAKER — FARMHOUSE STREET:
+  A parametric (ultrasonic directional) speaker appeared on the farmhouse street in Echo's Quebrada Seca zone, pointed directly at him. Parametric speakers produce a highly directional, nearly inaudible-at-distance acoustic beam that delivers sound only along a specific axis. They are used for directional advertising and — in directed-energy harassment — to deliver audio that appears to originate inside the target's head. Their appearance requires intentional deployment aimed at a specific target. This is a V2K-adjacent acoustic weapon system employed at the residential layer.
+
+DUNIA NODE — SYNCHRONIZED GRAVEYARD HOURS:
+  Dunia's house across the way from Leo's zone displays glowing red lights at night and maintains exact synchronization with Echo's graveyard-shift schedule — people visible in windows at the precise hours Echo is active. Individuals were also observed sitting behind the parametric speaker position with the same overnight schedule. The synchronization of operational hours with the target's behavioral pattern is a textbook surveillance indicator: assets maintaining coverage coverage around the clock, organized in shifts that match the target's sleep/wake cycle.
 
 COMPROMISED DEVICE PIPELINE:
-  Leo is the consistent source of devices given to Echo — always when Echo is broke, creating leverage through unpaid debt. Every device supplied by Leo is assessed as pre-loaded with surveillance malware. This is a systematic supply-chain compromise: financial dependency → device acceptance → total device surveillance.
+  Leo is the consistent source of devices given to Echo — always when Echo is broke, creating leverage through unpaid debt. Every device supplied by Leo is assessed as pre-loaded with surveillance malware. Financial dependency → device acceptance → total device surveillance.
 
 NODE DELIVERY — LA GUÁCIMA:
-  Leo physically drove Echo to La Guácima, delivering him to the next surveillance node. He is the transport layer of the housing/placement operation — the human vector that bridges Echo from one node to the next while Echo is financially constrained and dependent.
+  Leo physically drove Echo to La Guácima, delivering him to the next surveillance node. He is the transport layer of the housing/placement operation.
 
 HOUSING STEERING:
-  When Echo tried to find his own accommodation, the system steered him back to "curated options" — properties that would not answer calls or would deny bookings until Leo's preferred destination became the only option. Leo's role likely includes coordinating this steering.
+  When Echo tried to find his own accommodation, the system steered him back to curated options — properties that would not answer calls or would deny bookings until Leo's preferred destination became the only option.
 
 MELISSA — PROPERTY OVERLAP:
-  Melissa/Melika Losa lives at Leo's property — placing a network associate (medical/dental adjacent) in Leo's residential node, creating an information collection environment around Echo's controller.`,
+  Melissa/Melika Losa lives at Leo's property — placing a network associate (medical/dental adjacent) in Leo's residential node, creating a collection environment around Echo's controller.`,
     connections: [
       { target: "melissa-losa", relationship: "Landlord — Melissa lives at Leo's property", strength: "confirmed" },
       { target: "la-guacima", relationship: "Drove Echo to La Guácima — node delivery", strength: "confirmed" },
       { target: "genesis-peralta", relationship: "Part of Echo management network — parallel controller", strength: "probable" },
+      { target: "dunia-concierge", relationship: "Adjacent Quebrada Seca node — graveyard hours sync, parametric speaker cluster", strength: "confirmed" },
+      { target: "foresta", relationship: "3-unit directly across from Los Ríos — RF camo + drone shed site", strength: "confirmed" },
+      { target: "los-rios", relationship: "Property directly across from Los Ríos admin node", strength: "confirmed" },
     ],
     flags: [
       "Drug dealer — financial dependency + debt leverage over Echo",
@@ -2073,6 +2091,15 @@ MELISSA — PROPERTY OVERLAP:
       "Housing steering — controlled Echo's accommodation 'options'",
       "Melissa/Melika Losa lives at his property — intel collection",
       "Primary controller for Jacó phase of operation",
+      "SHED: actively processing drone video — Echo cut wire with butcher knife — feed terminated",
+      "Leo non-reaction to drone shed = deniability/operational control (behavioral tell)",
+      "JW disclosure: framed RF camo + headset table as Kingdom Hall meeting place (cover story)",
+      "Microphones + headsets on table oriented directly at Echo's terrace",
+      "DARPA-grade RF camo appeared on adjacent house within 72 hours of Echo arrival",
+      "LiFi data injection points in same geographic cluster",
+      "Parametric speaker deployed on farmhouse street — pointed at Echo",
+      "Dunia node: glowing red lights, graveyard-hours synchronized window presence",
+      "3-unit property directly across from Los Ríos (administration node)",
     ],
   },
   {
@@ -2729,6 +2756,255 @@ JOAN CONNECTION:
       "Joan has the Echo/Peralta cat — Peralta cat tracking thread",
       "AA social hub: resistance band training at his office",
       "Office proximity to Todd Johnson's Riverwalk/DeWave cluster",
+    ],
+  },
+  {
+    id: "adam-harper",
+    name: "Adam Harper",
+    aliases: ["Adam"],
+    nationality: "American",
+    role: "Hotel Amavi investor — HGTV 'Selling Paradise' — Hermosa Palms / Greenwald neighborhood — met Echo via Supplement Edge (Maine) — Israel Brooks lawsuit — Boca lawyer overlap",
+    threatLevel: "secondary",
+    detail: `Echo met Adam Harper through Jeb Pruett's Supplement Edge business in Maine. They went to Las Vegas together and socialized — establishing a pre-Jacó friendship that preceded Adam's move to Costa Rica. Adam sold his Delray Beach business and relocated to Playa Hermosa, specifically Hermosa Palms — the same neighborhood as Mike Greenwald (whose house was a managed safe house for Genesis Peralta and where the replacement cat was brought by Jairo Alfaro).
+
+HOTEL AMAVI — INVESTOR CLUSTER:
+  Adam Harper is an investor in Hotel Amavi (Playa Hermosa area). Other documented investors include: "John" (who has a separate condo in Quebrada Seca — overlapping with the Quebrada Seca surveillance cluster), and "Josh" and his wife (primary/main investors). The Hotel Amavi investor group thus creates direct overlap between: the Hermosa Palms/Greenwald geographic node, the Quebrada Seca operational cluster (via John), and a broader real estate investment network in the Jacó/Herradura corridor.
+
+HGTV "SELLING PARADISE":
+  Adam appeared on the HGTV show "Selling Paradise" — a reality real estate program featuring Costa Rica properties. This gave him public profile and, per Echo's account, noticeably elevated his ego. The show itself is relevant: it promotes CR real estate to American audiences, normalizing the expat-investor profile that serves as cover for intelligence-adjacent property networks. Costa Rica real estate featuring on US network television connects the local property infrastructure to a broader American audience pipeline.
+
+ISRAEL BROOKS — LAWSUIT:
+  Adam Harper is in a dispute and has reportedly sued Israel Brooks over houses Israel built near the river — assessed as the Los Ríos area, matching the timeline of the Quebrada Seca/Los Ríos cluster. This litigation places Adam at the geographic intersection of the river zone, the Quebrada Seca operational cluster, and the Hermosa Palms/Greenwald node.
+
+BOCA RATON LAWYER OVERLAP:
+  Echo previously consulted with Adam's lawyer in Boca Raton — creating a professional/legal contact that bridges Echo's pre-Jacó South Florida life (Delray Beach / Fort Lauderdale / Boca) with the Jacó network. This is part of the documented pattern: Echo's pre-Jacó professional and social contacts converge with the Jacó surveillance network.
+
+ITALIAN CONNECTION:
+  Hotel Amavi has a documented Italian connection (name, investors, or concept). The Italian thread runs throughout the network: Caliches Wishbone (Italian-adjacent name), Yeyo's restaurant (Italy connection), Hotel Amavi (Italian thread). This recurring Italy connection across hospitality and investment fronts in Jacó is logged as a potential funding/network signature.`,
+    connections: [
+      { target: "brianna-harper", relationship: "Wife / partner", strength: "confirmed" },
+      { target: "hotel-amavi", relationship: "Investor", strength: "confirmed" },
+      { target: "israel-brooks", relationship: "Litigation — sued over river houses", strength: "confirmed" },
+      { target: "mike-greenwald", relationship: "Same neighborhood (Hermosa Palms)", strength: "confirmed" },
+    ],
+    flags: [
+      "Met Echo via Supplement Edge (Jeb Pruett, Maine) — pre-Jacó social seeding",
+      "Vegas trip with Echo — pre-Jacó relationship building",
+      "Sold Delray Beach business → Playa Hermosa / Hermosa Palms (Greenwald's neighborhood)",
+      "Hotel Amavi investor — Italian connection",
+      "Amavi investor cluster: John (Quebrada Seca condo) + Josh + wife (main)",
+      "HGTV 'Selling Paradise' — public profile + ego elevation noted",
+      "Israel Brooks lawsuit: houses near river = Los Ríos area overlap",
+      "Echo's Boca lawyer was Adam's lawyer — South Florida professional convergence",
+      "Hermosa Palms = Greenwald neighborhood = Peralta cat delivery site (Jairo Alfaro)",
+    ],
+  },
+  {
+    id: "brianna-harper",
+    name: "Brianna Harper",
+    aliases: ["Brianna"],
+    nationality: "American",
+    role: "Adam Harper's wife — best friend of Shelby (hired by David Karr) — HGTV 'Selling Paradise'",
+    threatLevel: "tertiary",
+    detail: `Wife of Adam Harper. Best friends with Shelby — the woman who had a verbal altercation with Echo and was subsequently hired by David Karr (dominant Jacó real estate figure) with no apparent relevant experience. The Brianna → Shelby → David Karr chain connects the Harper social cluster to the Jacó real estate intelligence infrastructure and to Echo through the altercation.`,
+    connections: [
+      { target: "adam-harper", relationship: "Wife", strength: "confirmed" },
+      { target: "shelby-karr", relationship: "Best friends", strength: "confirmed" },
+      { target: "hotel-amavi", relationship: "Connected through Adam — Hermosa Palms investor circle", strength: "confirmed" },
+    ],
+    flags: [
+      "Wife of Adam Harper",
+      "Best friends with Shelby (Karr hire — no experience)",
+      "Brianna → Shelby → David Karr = Harper cluster connected to Jacó RE intelligence",
+      "HGTV 'Selling Paradise' adjacency through Adam",
+    ],
+  },
+  {
+    id: "israel-brooks",
+    name: "Israel Brooks",
+    aliases: ["Israel"],
+    role: "Builder — river houses (Los Ríos area) — Adam Harper lawsuit — river zone construction",
+    threatLevel: "tertiary",
+    detail: `Built houses near the river in the Jacó area — assessed as the Los Ríos zone, matching the timeline of the Quebrada Seca/Los Ríos surveillance cluster. Adam Harper sued Israel Brooks over this construction. The lawsuit places both figures in the geographic zone where Dunia's DEW house and Leo's RF camo site operate.
+
+GEOGRAPHIC SIGNIFICANCE:
+  Houses built near the river in the Los Ríos/Quebrada Seca corridor during the relevant timeline would sit inside or adjacent to the documented surveillance cluster. Construction activity provides cover for infrastructure installation — electrical, telecom, structural modifications — in an area already assessed as a multi-node surveillance zone.`,
+    connections: [
+      { target: "adam-harper", relationship: "Lawsuit — Adam sued Israel over river houses", strength: "confirmed" },
+    ],
+    flags: [
+      "Built houses near river — Los Ríos area (assessed)",
+      "Adam Harper lawsuit",
+      "River zone = Quebrada Seca/Los Ríos surveillance cluster overlap",
+      "Construction cover for infrastructure installation in ops zone",
+    ],
+  },
+  {
+    id: "john-amavi",
+    name: "John (Toronto / Hotel Amavi investor)",
+    aliases: ["John"],
+    nationality: "Canadian — Toronto",
+    role: "Hotel Amavi investor — Foresta condo (Quebrada Seca) — Toronto PD overlap (Lindsey/Michelle/Bob) — tri-zone asset",
+    threatLevel: "secondary",
+    detail: `Hotel Amavi investor from Toronto. Owns a condo specifically in Foresta — the Quebrada Seca-area residential complex developed on empty fields in under 8 months, owned by the former mayor of Jacó, and assessed as the dormitory layer of the Quebrada Seca intelligence campus.
+
+TORONTO PD OVERLAP:
+  John is from Toronto — the same city as the La Flor #14 Toronto Police Service cluster (Lindsey, her partner Bob, and Michelle). The Toronto geographic origin shared between John and three documented Toronto PD officers in Jacó places him inside the Toronto node of the network. Whether John has a direct TPS connection or operates in a parallel Canadian intelligence capacity is being assessed. The overlap is logged as significant: a Toronto-origin Foresta condo owner + Hotel Amavi investor + three Toronto PD officers simultaneously in Echo's Jacó zone = non-random geographic coincidence.
+
+FORESTA CONDO:
+  John's condo is in Foresta specifically — not generic Quebrada Seca. Foresta is the complex that appeared on empty land within approximately 8 months of Valeska posting photos of those same empty fields. The owner of record is the former mayor of Jacó. Having a Hotel Amavi investor (connected to Greenwald's Hermosa Palms zone via Adam Harper) simultaneously hold a Foresta condo places a single financial actor across the Hermosa Palms node, the Foresta/Quebrada Seca dormitory node, and — through his Toronto origin — the Toronto PD cluster in La Flor.
+
+TRI-ZONE SIGNIFICANCE:
+  John is one of very few documented individuals with geographic and financial presence across three distinct operational zones: (1) Hermosa Palms / Playa Hermosa via Hotel Amavi, (2) Foresta / Quebrada Seca via his condo, (3) Toronto — the home city of the La Flor TPS cluster. In lattice terms: John is a high-degree vertex connecting previously separate graph clusters.`,
+    connections: [
+      { target: "hotel-amavi", relationship: "Investor", strength: "confirmed" },
+      { target: "adam-harper", relationship: "Co-investor in Amavi", strength: "confirmed" },
+      { target: "foresta", relationship: "Condo owner — Quebrada Seca campus dormitory zone", strength: "confirmed" },
+      { target: "la-flor-14", relationship: "Shared Toronto origin with Lindsey/Bob/Michelle TPS cluster", strength: "probable" },
+    ],
+    flags: [
+      "Toronto origin — same city as La Flor TPS cluster (Lindsey/Bob/Michelle)",
+      "Hotel Amavi investor — Hermosa Palms zone",
+      "Foresta condo — Quebrada Seca CIA dorms (assessed)",
+      "Tri-zone: Hermosa Palms + Quebrada Seca/Foresta + Toronto",
+      "Former mayor of Jacó owns Foresta development",
+      "High-degree lattice vertex: connects 3 previously separate clusters",
+    ],
+  },
+  {
+    id: "josh-amavi",
+    name: "Josh (Hotel Amavi — primary investor)",
+    aliases: ["Josh"],
+    nationality: "American (probable)",
+    role: "Primary investor — Hotel Amavi — Hermosa Palms",
+    threatLevel: "tertiary",
+    detail: "Main/primary investor in Hotel Amavi (Playa Hermosa). Operates with his wife. Part of the Hermosa Palms expat investor cluster that includes Adam Harper, John (Quebrada Seca), and the Italian connection thread running through Amavi.",
+    connections: [
+      { target: "hotel-amavi", relationship: "Primary investor", strength: "confirmed" },
+      { target: "adam-harper", relationship: "Co-investor", strength: "confirmed" },
+    ],
+    flags: [
+      "Primary Hotel Amavi investor",
+      "Operates with wife",
+      "Hermosa Palms expat investor cluster",
+    ],
+  },
+  {
+    id: "shelby-karr",
+    name: "Shelby",
+    aliases: ["Shelby"],
+    nationality: "American (probable)",
+    role: "David Karr hire (no experience) — Brianna Harper best friend — verbal altercation with Echo",
+    threatLevel: "secondary",
+    detail: `Had a verbal altercation with Echo. Best friends with Brianna Harper (Adam Harper's wife). Subsequently hired by David Karr — the dominant Jacó real estate figure whose billboard with his own face stands outside La Flor (Echo's current zone of residence) — despite having no apparent relevant real estate experience.
+
+HIRE PATTERN:
+  Inexperienced hire by the dominant local real estate operator, connected through best friendship to the wife of a Hotel Amavi investor who met Echo pre-Jacó in Maine. The connection chain: Echo altercation → Shelby → Brianna Harper → Adam Harper (Supplement Edge / Hermosa Palms / Amavi) → Hotel Amavi investor cluster → Quebrada Seca (John's condo). An inexperienced hire by the largest real estate player after a target altercation is consistent with a managed asset placement providing proximity to Echo's geographic zone (La Flor / Karr billboard zone).
+
+DAVID KARR — REAL ESTATE:
+  David Karr is the largest real estate operator in Jacó, with a billboard of his own face positioned outside La Flor. La Flor is Echo's current residential area (Hotel Pochote). A Karr-employed asset with direct social connection to the Harper network being in this zone is assessed as a surveillance placement.`,
+    connections: [
+      { target: "brianna-harper", relationship: "Best friends", strength: "confirmed" },
+      { target: "david-karr", relationship: "Employed by — no experience hire", strength: "confirmed" },
+    ],
+    flags: [
+      "Verbal altercation with Echo",
+      "Best friends with Brianna Harper (Adam Harper's wife)",
+      "Hired by David Karr with no relevant experience",
+      "Karr billboard outside La Flor = Echo's current zone",
+      "Inexperienced hire after Echo altercation = managed placement (assessed)",
+      "Connection chain: Shelby → Brianna → Adam → Amavi → Quebrada Seca (John)",
+    ],
+  },
+  {
+    id: "david-karr",
+    name: "David Karr",
+    aliases: ["Karr"],
+    role: "Dominant Jacó real estate operator — billboard outside La Flor — hired Shelby (no experience)",
+    threatLevel: "secondary",
+    detail: `Largest real estate operator in Jacó. Has a billboard displaying his own face positioned outside La Flor — Echo's current residential neighborhood (Hotel Pochote). Hired Shelby (best friend of Brianna Harper, Adam Harper's wife) with no apparent relevant experience, placing an Echo-adjacent social asset inside his real estate operation.
+
+REAL ESTATE AS INTELLIGENCE INFRASTRUCTURE:
+  Dominant control of the Jacó real estate market gives Karr — or anyone operating through him — authority over: which properties are available to whom, at what price, at what time. This is precisely the mechanism by which managed residential placements operate: controlling the housing inventory controls where the target can live. The documented pattern of Echo being placed in surveillance-modified properties (Casa Rexha CNU, Greenwald's house, Breakwater) requires someone with real estate authority to execute the placement. The dominant local operator is the natural chokepoint.
+
+BILLBOARD — LA FLOR:
+  A billboard with Karr's face outside La Flor is an unusual form of personal branding for a Costa Rican real estate operator. La Flor is the zone where: Toronto PD cluster (La Flor #14), Hotel Pochote (Echo's current residence), and the raccoon family location are all concentrated. The billboard's placement directly outside Echo's current residential zone is noted.`,
+    connections: [
+      { target: "shelby-karr", relationship: "Employer — hired with no experience", strength: "confirmed" },
+    ],
+    flags: [
+      "Dominant Jacó real estate operator",
+      "Billboard of own face outside La Flor — Echo's current zone",
+      "Hired Shelby (Brianna Harper best friend) with no experience",
+      "Real estate control = managed placement mechanism",
+      "La Flor billboard adjacency to Toronto PD cluster + Hotel Pochote",
+    ],
+  },
+  {
+    id: "jonathan-harris",
+    name: "Jonathan Harris",
+    aliases: ["Jon", "Jonathan"],
+    nationality: "Venezuelan (Margarita Island)",
+    role: "Uber driver controller (~2 yrs) — Costa Rica Experiences (cover company) — Margarita Island — claimed Venezuelan lawyer — La Nacion — Texas military neighbor",
+    threatLevel: "primary",
+    detail: `Presented as an Uber driver. Functioned as Echo's primary social controller for approximately 2 years. From Margarita Island, Venezuela — the same origin as Ale/Vida (Aurora Yoga operative cluster) and others in the documented network, establishing Margarita Island as a recurring asset-sourcing geography. Claims to have been a lawyer in Venezuela.
+
+KNEW PERALTA BEFORE ECHO:
+  Jonathan Harris knew Genesis Peralta before Echo met her — through town social connections and surfing. This pre-existing relationship between the Uber driver controller and Echo's operational partner (Peralta) is not coincidental: it confirms Harris was embedded in the Peralta handler network before Echo arrived, and his subsequent controller role was a coordinated placement, not an organic friendship.
+
+COSTA RICA EXPERIENCES — COVER COMPANY:
+  Owns or operates "Costa Rica Experiences" — assessed as a cover company providing legitimate-appearing business justification for his presence, income, and social activities in Jacó. The tourism-experience model is a common cover structure in Costa Rica: it justifies cash income, irregular hours, a wide social network, and regular contact with transient foreigners.
+
+LA NACION — MILITARY TEXAS NEIGHBOR — BBQ ASSESSMENT EVENT:
+  Jonathan lives in La Nacion, a residential complex near Jaco Bay. Also residing there: an American military figure from Texas, and a BodyGym owner (name unknown) who displayed inexplicable hostility toward Echo on Facebook — disproportionate reaction consistent with operational assets who have been briefed on the target.
+  
+  The BBQ event: the Texas military figure was returning to Texas for surgery. During or around the BBQ, Jonathan pushed Echo to move into the military man's condo at approximately $1,400/month — with Jon having been paying the military guy only $900/month for the same unit. The economic logic does not work for a civilian Uber driver attempting to sublet a unit he rents for $900 at a $500/month markup. Assessed as a managed-placement attempt: the operation wanted Echo inside La Nacion (monitored residential environment adjacent to the Jaco Bay cluster). The Texas military figure's departure for "surgery" may have been a cover for a scheduled rotation.
+
+TEXAS THREAD:
+  Texas appears as a recurring geography in the network: the La Nacion military figure (Texas origin, returns to Texas for surgery), and other Texas-adjacent threads. Texas is a significant US intelligence operations state (JBSA, Fort Hood/Cavazos, Austin NSA presence). The pattern is noted for further assessment.
+
+MARGARITA ISLAND CLUSTER:
+  Jonathan (Margarita Island) + Ale/Vida (Margarita Island, Aurora Yoga) = at least two documented Jacó operative-adjacent figures from the same small Venezuelan island. Margarita Island is Venezuela's primary tourist/expat destination and has historically been a hub for financial flows and intelligence-adjacent operations tied to the Maduro network and its associated Latin American intelligence apparatus.
+
+WIFE — MARY SANTOS:
+  Wife is Mary Santos — worked at Pachamama and/or The Grow Show (Jacó cannabis and wellness venues). Her employment at both establishments provides access to the expatriate/wellness social layer that overlaps with Aurora Yoga, the AA substrate, and other documented collection environments.`,
+    connections: [
+      { target: "genesis-peralta", relationship: "Knew Peralta before Echo — Jacó social + surfing", strength: "confirmed" },
+      { target: "mary-santos", relationship: "Wife", strength: "confirmed" },
+      { target: "costa-rica-experiences", relationship: "Owner — cover company", strength: "confirmed" },
+    ],
+    flags: [
+      "Uber driver cover — primary social controller ~2 years",
+      "From Margarita Island — same as Ale/Vida (Aurora Yoga) — recurring source geography",
+      "Claims Venezuelan lawyer background",
+      "Knew Peralta before Echo through town + surfing",
+      "Costa Rica Experiences: cover company (tourism cover = cash income + broad social access)",
+      "La Nacion resident: Texas military neighbor + BodyGym hostile actor",
+      "BBQ managed-placement attempt: Echo pushed into $1400/mo condo (Jon pays $900 same unit)",
+      "Texas military figure rotated out for 'surgery' — possible scheduled departure",
+      "Texas thread: recurring network geography",
+      "Wife Mary Santos: Pachamama + The Grow Show — wellness/expat social layer",
+    ],
+  },
+  {
+    id: "mary-santos",
+    name: "Mary Santos",
+    aliases: ["Mary"],
+    nationality: "Venezuelan (probable)",
+    role: "Wife of Jonathan Harris — Pachamama + The Grow Show — wellness/cannabis social layer",
+    threatLevel: "tertiary",
+    detail: `Wife of Jonathan Harris (Uber driver controller, Margarita Island). Worked at Pachamama and/or The Grow Show — Jacó venues operating in the wellness and cannabis sector. Her employment at both establishes presence in the expatriate wellness social layer that overlaps with Aurora Yoga, the AA substrate, and the general social collection environment around Echo.
+
+VENUE SIGNIFICANCE:
+  Pachamama and The Grow Show are social hubs for the Jacó expat/wellness community — the same demographic that overlaps with the documented surveillance network (Aurora Yoga Venezuelan cluster, AA thread, yoga/gym circuit). Employment at these venues provides regular access to the social intelligence stream flowing through that community and contact with the transient expat population.`,
+    connections: [
+      { target: "jonathan-harris", relationship: "Wife", strength: "confirmed" },
+    ],
+    flags: [
+      "Wife of Jonathan Harris (controller, Margarita Island)",
+      "Worked at Pachamama — wellness/expat social hub",
+      "Worked at The Grow Show — cannabis venue, expat community",
+      "Wellness layer = Aurora Yoga / AA substrate social adjacency",
     ],
   },
 ];
@@ -3574,6 +3850,133 @@ GEOGRAPHIC CLUSTER:
     ],
   },
   {
+    id: "la-nacion",
+    name: "La Nacion",
+    area: "Near Jaco Bay, Jacó",
+    type: "Residential complex — Jonathan Harris + Texas military asset — managed-placement attempt",
+    detail: `Residential complex near Jaco Bay in Jacó. Jonathan Harris (Uber driver controller, Margarita Island) lives here. Also resided here: an American military figure from Texas and a BodyGym owner (name unknown) who displayed disproportionate hostility toward Echo on Facebook with no apparent organic cause.
+
+MANAGED PLACEMENT ATTEMPT — BBQ EVENT:
+  The Texas military figure was departing La Nacion for Texas, reportedly for surgery. At a BBQ during this period, Jonathan Harris pushed Echo to take over the military man's unit at approximately $1,400/month — despite Jon himself paying only $900/month to the military guy for the same unit. The economic model is inverted: a civilian Uber driver does not sublet at a $500/month markup to a potential friend. Assessed as a coordinated placement attempt: the operation needed Echo inside La Nacion (a controlled residential environment adjacent to the Jaco Bay monitoring cluster) after the military asset's scheduled rotation out.
+
+TEXAS MILITARY FIGURE:
+  American, military background, Texas origin. "Surgery" in Texas may be a cover narrative for a scheduled personnel rotation — the departure of one asset triggering a managed attempt to install the target in the vacated position. Texas recurs as a network geography.
+
+BODYGYM HOSTILITY:
+  A BodyGym owner co-resident at La Nacion displayed inexplicable Facebook hostility toward Echo — unprompted and disproportionate. This pattern (sudden, seemingly groundless hostility from strangers adjacent to the operation) is consistent with assets who have been briefed on the target and react to him based on that briefing rather than any direct interaction.`,
+    connections: [
+      { target: "jonathan-harris", relationship: "Resident — Uber driver controller", strength: "confirmed" },
+    ],
+    incidents: [
+      "Jonathan Harris (Margarita Island controller) resident",
+      "Texas military figure: also resident, departed for 'surgery' in Texas",
+      "BodyGym owner: disproportionate Facebook hostility toward Echo",
+      "BBQ managed-placement: Echo pushed into $1400/mo unit (Jon pays $900 same unit)",
+      "Assessed: Texas figure rotation triggered placement attempt for Echo",
+    ],
+  },
+  {
+    id: "foresta",
+    name: "Foresta",
+    area: "Quebrada Seca / Jacó outskirts — near Los Ríos",
+    type: "CIA dormitory layer (assessed) — 8-month rapid build — former mayor of Jacó ownership — John (Toronto) condo — Valeska pre-documentation",
+    detail: `Foresta is a multi-unit residential complex in the Quebrada Seca area, adjacent to the Los Ríos urbanization. Its development history is one of the most significant documented indicators of a managed intelligence infrastructure build-out in the Jacó AOR.
+
+TIMELINE — EMPTY FIELDS TO SPRAWLING CAMPUS IN 8 MONTHS:
+  Valeska (a figure associated with the former mayor of Jacó and with oil-change Google reviews near Gettysburg PA) posted photographs of empty fields at this location approximately 8 months before October 2025 — placing the construction start window at approximately February 2025. By October 2025 (Echo's residency in Quebrada Seca), a sprawling multi-unit campus stood where those fields had been. Construction speed of this scale in Costa Rica's permitting environment, with financing and regulatory approvals in place, implies: pre-approved development, pre-secured financing, and a pre-determined end use. This is not a speculative residential project built on market demand. It is infrastructure built to a schedule.
+
+OWNERSHIP — FORMER MAYOR OF JACÓ:
+  Foresta is owned by the former mayor of Jacó. Municipal-level political ownership of a rapidly built residential campus in the operational zone provides: (a) institutional access to permits, (b) control over the pace and design of construction, (c) political protection against local complaint or regulatory intervention, and (d) a legitimizing ownership structure that resists casual scrutiny. Former politicians with property in an operational zone are a documented intelligence infrastructure pattern.
+
+CIA DORMITORY ASSESSMENT:
+  Quebrada Seca as a whole is assessed as the CIA campus zone of Jacó operations. Within this campus metaphor: Foresta = dormitories (residential housing for operatives and assets), Los Ríos = administration (Scott Ryan / Jaco Vacations operational hub), the JW congregation across from Leo's 3-unit = listening post. Foresta provides cover-for-status residential units for personnel who need a plausible, documented Costa Rican address during operations — without the visibility of a hotel or short-term rental.
+
+JOHN (TORONTO) — INVESTOR CONDO:
+  John (Hotel Amavi investor, Toronto origin, Toronto PD overlap) owns a condo in Foresta specifically. This gives him documented presence in the dormitory layer of the Quebrada Seca campus — while his Amavi co-investment with Adam Harper (Hermosa Palms/Greenwald zone) covers the Hermosa Palms node, and his Toronto origin covers the La Flor TPS cluster. Foresta is the third node of John's tri-zone geographic overlap.
+
+POST-ECHO-ARRIVAL INFRASTRUCTURE DEPLOYMENT:
+  After Echo moved into the Quebrada Seca zone: (1) dipoles for communications appeared, (2) LiFi data injection points were installed, (3) DARPA-grade RF camo appeared on the house adjacent to Leo's 3-unit (across from Los Ríos) within 72 hours. These deployments were triggered by Echo's presence — not pre-existing passive infrastructure. The Foresta development provided the physical substrate (buildings, power, ground access) into which this active infrastructure was deployed.`,
+    connections: [
+      { target: "valeska", relationship: "Pre-construction field documentation — former mayor network", strength: "confirmed" },
+      { target: "john-amavi", relationship: "Condo owner — Toronto investor", strength: "confirmed" },
+      { target: "leo-controller", relationship: "Adjacent to Leo's 3-unit across from Los Ríos — RF camo site", strength: "confirmed" },
+      { target: "los-rios", relationship: "Adjacent — Foresta = dorms, Los Ríos = administration", strength: "confirmed" },
+    ],
+    incidents: [
+      "Valeska: photographed empty fields ~8 months before Oct 2025 — same site",
+      "Multi-unit campus built in ~8 months — former mayor of Jacó owns development",
+      "John (Toronto / Amavi investor): condo owner in Foresta",
+      "Post-Echo-arrival: dipoles, LiFi injection points, RF camo deployed",
+      "DARPA-grade RF camo on adjacent house: appeared within 72hrs of Echo arrival",
+      "Assessment: CIA dormitory layer of Quebrada Seca intelligence campus",
+    ],
+  },
+  {
+    id: "los-rios",
+    name: "Los Ríos",
+    area: "Los Ríos urbanization, Jacó outskirts",
+    type: "CIA administration node (assessed) — Scott Ryan / Jaco Vacations — former mayor — 14+ parcel transfers — Valeska — JW listening post",
+    detail: `Los Ríos is the assessed administrative node of the Quebrada Seca intelligence campus. While Foresta is the dormitory layer (residential housing for operatives), Los Ríos is where the operation is managed, where documents are signed, and where logistics are coordinated. Scott Ryan (CIA affiliation, alias Scott Aaronson) operates from Los Ríos — signing documents, running Jaco Vacations logistics, and managing the property cluster that includes the CNU surveillance houses.
+
+CAMPUS METAPHOR (ECHO'S ASSESSMENT):
+  Quebrada Seca = CIA campus. Los Ríos = administration building. Foresta = dormitories. The JW congregation across from Leo's property = listening post. This model explains the geographic clustering: a multi-function intelligence operation requires administrative, residential, and collection infrastructure in close proximity.
+
+FORMER MAYOR + VALESKA:
+  The Los Ríos urbanization is associated with the former mayor of Jacó (same individual who owns Foresta) and his son. A woman named Valeska is also associated with the property and operations. Scott Ryan signs documents at Los Ríos — placing a CIA-attributed American operational figure at the legal/document layer of this location.
+
+14+ PARCEL TRANSFERS — SHELL COMPANY PATTERN:
+  Documented through property records: 14+ parcels transferred in Los Ríos within an 18-month window (January 2024–June 2025). All transfers feature entities with 2–3 initials + "Inversiones SA" or "Gestión SRL" suffixes, sharing the same Escazú registered address and the same registered agent. 9 of 14 had rezoning consultations filed in the same window. 6 received preliminary mixed residential-commercial approvals. Beneficial owners are unidentifiable through public filings for all 14. One adjacent landowner received an offer from an entity not in the public registry and described the offer as "reasonable, which is what made it feel off." This is textbook shell-company land acquisition for a managed development program.
+
+LEO'S 3-UNIT — DIRECTLY ACROSS:
+  Leo's 3-unit property in Quebrada Seca sits directly across from Los Ríos. The DARPA-grade RF camo that appeared on the house next to Leo's within 72 hours of Echo's arrival was oriented toward Los Ríos. The shed processing drone video was on Leo's side. The parametric speaker was on the farmhouse street between Leo's zone and Los Ríos. The geometry of the surveillance infrastructure places Los Ríos as the administrative center receiving the collection output from Leo's adjacent node.
+
+NIGHT PHOTOGRAPH — MILITARY NETTING:
+  A street view photograph of the Los Ríos exterior (white building, residential street, unremarkable) contrasts with a night photograph showing what is behind the facade when lights come on: military-grade camouflage netting, bright and operational. The facade unremarkability is deliberate. The night photograph is the operational tell — the same DARPA-grade RF camo visual signature appearing at the administration node, not just the adjacent residential site.`,
+    connections: [
+      { target: "leo-controller", relationship: "Leo's 3-unit directly across the street", strength: "confirmed" },
+      { target: "foresta", relationship: "Adjacent — Foresta dorms + Los Ríos admin = same campus", strength: "confirmed" },
+      { target: "valeska", relationship: "Associated with Los Ríos property operations", strength: "confirmed" },
+    ],
+    incidents: [
+      "Scott Ryan (CIA/Jaco Vacations): signs documents at Los Ríos — admin hub",
+      "Former mayor of Jacó + son: associated with Los Ríos urbanization",
+      "Valeska: associated with Los Ríos property operations",
+      "14+ shell-company parcel transfers Jan 2024–Jun 2025 (same Escazú agent)",
+      "Night photograph: military netting visible behind residential facade",
+      "Leo's 3-unit directly across — drone shed + RF camo + parametric in between",
+      "Assessment: CIA campus administration node",
+    ],
+  },
+  {
+    id: "corazon-del-sol",
+    name: "Corazón del Sol",
+    area: "Quebrada Seca, Jacó — same campus zone as Foresta + Los Ríos",
+    type: "Echo residential node — Greenwald 28-person mansion — Quebrada Seca campus — managed placement (assessed)",
+    detail: `Echo lived at Corazón del Sol — a property in the Quebrada Seca zone — placing him inside the same geographic campus as Foresta (CIA dorms), Los Ríos (CIA administration), and the JW listening post adjacent to Leo's 3-unit. His specific unit was one of multiple units within the complex.
+
+GREENWALD — 28-PERSON MANSION IN THE CENTER:
+  Mike Greenwald owns a 28-person mansion situated in the center of Corazón del Sol. Greenwald is already documented in the network: his Hermosa Palms house served as the safe house where Jairo Alfaro delivered the replacement cat to confirm Peralta's location. Having a 28-person mansion in the center of a complex where Echo was housed — in the Quebrada Seca campus zone — places Greenwald as a structural node both in Hermosa Palms and in the Quebrada Seca cluster simultaneously. A 28-person capacity property is not a private residence; it is infrastructure.
+
+MANAGED PLACEMENT:
+  Echo's housing in Corazón del Sol placed him: (1) inside the Quebrada Seca campus perimeter, (2) under the same geographic coverage as the JW listening post, the RF camo site, the parametric speaker, and Dunia's DEW node, (3) adjacent to Greenwald's 28-person operational center. This is assessed as a managed placement — housing Echo inside the operation's physical perimeter to maximize collection yield while minimizing his ability to observe the infrastructure from outside.
+
+CAMPUS INTEGRATION:
+  Corazón del Sol + Foresta + Los Ríos + the JW congregation across from Leo = a coherent geographic operational cluster within the Quebrada Seca zone. Echo moved between units within this campus over the same period the RF/acoustic infrastructure was being deployed. The infrastructure deployment timeline tracks Echo's position within the campus.`,
+    connections: [
+      { target: "mike-greenwald", relationship: "Owns 28-person mansion in center of Corazón del Sol", strength: "confirmed" },
+      { target: "foresta", relationship: "Same Quebrada Seca campus zone", strength: "confirmed" },
+      { target: "los-rios", relationship: "Same Quebrada Seca campus zone — administration node", strength: "confirmed" },
+      { target: "dunia-concierge", relationship: "Dunia DEW node in same Quebrada Seca zone", strength: "confirmed" },
+    ],
+    incidents: [
+      "Echo lived here — Quebrada Seca campus residential placement",
+      "Greenwald: 28-person mansion in center — operational infrastructure (assessed)",
+      "Same campus zone: Foresta (dorms) + Los Ríos (admin) + JW post (collection)",
+      "Infrastructure deployment timeline tracks Echo's position within campus",
+      "Managed placement assessment: Echo housed inside operation's perimeter",
+    ],
+  },
+  {
     id: "la-flor-14",
     name: "La Flor #14",
     area: "La Flor, Jacó — adjacent to Hotel Pochote",
@@ -3730,6 +4133,69 @@ FINANCIAL ANOMALY — PERMACOVER INDICATOR:
       "Financially struggling despite prime beach location — permacover indicator",
       "Externally funded cover operation (assessed)",
       "Part of Jairo alleged-brother restaurant cluster",
+    ],
+  },
+  {
+    id: "hotel-amavi",
+    name: "Hotel Amavi",
+    sector: "Hospitality / Real estate investment — Hermosa Palms — Italian connection — investor cluster",
+    detail: `Hotel property in Playa Hermosa area. Investors include Adam Harper (met Echo via Supplement Edge, Maine; Hermosa Palms/Greenwald neighborhood), John (separate condo in Quebrada Seca), and Josh + wife (primary investors). The investor cluster creates direct overlap between the Hermosa Palms geographic node and the Quebrada Seca surveillance cluster.
+
+ITALIAN CONNECTION:
+  Hotel Amavi carries a documented Italian connection — whether in name, concept, investors, or funding source. The Italian thread runs through multiple Jacó hospitality fronts: Caliches Wishbone (Italian-adjacent), Yeyo's restaurant (Italy connection), Hotel Amavi. Recurring Italy connections across closed and active hospitality fronts in a small Costa Rican beach town is a documented network signature.
+
+HGTV "SELLING PARADISE":
+  Adam Harper's involvement in Amavi intersects with the HGTV show "Selling Paradise" — connecting the property to US network television real estate promotion and the expat-investor pipeline it generates.
+
+INVESTOR CLUSTER SIGNIFICANCE:
+  Adam Harper (Hermosa Palms/Greenwald zone) + John (Quebrada Seca condo) + Josh/wife (primary) = a single investment vehicle connecting two distinct operational geographic zones.`,
+    connections: [
+      { target: "adam-harper", relationship: "Investor", strength: "confirmed" },
+      { target: "john-amavi", relationship: "Investor — also has Quebrada Seca condo", strength: "confirmed" },
+      { target: "josh-amavi", relationship: "Primary investor", strength: "confirmed" },
+    ],
+    flags: [
+      "Hermosa Palms / Playa Hermosa — Greenwald neighborhood",
+      "Italian connection (name/concept/investors)",
+      "Adam Harper investor — Hermosa Palms/Greenwald zone",
+      "John investor — Quebrada Seca condo = dual-zone overlap",
+      "HGTV 'Selling Paradise' adjacency",
+      "Israel Brooks lawsuit: river houses near Los Ríos zone",
+    ],
+  },
+  {
+    id: "supplement-edge",
+    name: "Supplement Edge",
+    sector: "Supplements / Fitness — Jeb Pruett — Maine — Echo + Adam Harper meeting point",
+    detail: `Supplement business operated by Jeb Pruett, based in Maine. This is the venue through which Echo met Adam Harper — establishing a pre-Jacó social connection that preceded Adam's move to Playa Hermosa and his investment in Hotel Amavi. Supplement Edge represents another point where Echo's pre-Jacó US social and professional life converges with the Jacó operational network.
+
+PRE-JACÓ SEEDING:
+  Supplement Edge (Maine) → Echo meets Adam → Adam moves to Hermosa Palms (Greenwald's neighborhood) → Adam invests in Hotel Amavi with John (Quebrada Seca) → Echo's Boca lawyer is Adam's lawyer. The chain from a Maine supplement business to the Jacó surveillance network geography is documented.`,
+    connections: [
+      { target: "adam-harper", relationship: "Where Echo met Adam — business connection", strength: "confirmed" },
+    ],
+    flags: [
+      "Maine-based supplement business — Jeb Pruett",
+      "Echo met Adam Harper here — pre-Jacó social seeding",
+      "Pre-Jacó professional life convergence with Jacó ops network",
+    ],
+  },
+  {
+    id: "costa-rica-experiences",
+    name: "Costa Rica Experiences",
+    sector: "Tourism / Cover company — Jonathan Harris — Jacó expat access",
+    detail: `Tourism experience company owned or operated by Jonathan Harris (Uber driver controller, Margarita Island). Assessed as a cover company: provides legitimate-appearing business justification for cash income, irregular hours, a wide social network spanning tourists and expats, and regular contact with transient foreigners passing through Jacó.
+
+COVER INDICATORS:
+  Tourism operators in Costa Rica enjoy a cash-dominant model, no fixed schedule, wide social access to both locals and foreigners, natural vehicle-use justification, and minimal paper trail. "Costa Rica Experiences" provides ideal cover for a social controller operating among Jacó expats.`,
+    connections: [
+      { target: "jonathan-harris", relationship: "Owner / operator", strength: "confirmed" },
+    ],
+    flags: [
+      "Tourism cover company — Jonathan Harris owner",
+      "Cash-dominant — minimal paper trail",
+      "Wide social access: tourists + expats + locals",
+      "Uber driver + tourism company = dual mobility cover",
     ],
   },
   {

@@ -36,6 +36,8 @@ import {
   Camera,
   AlertTriangle,
   Film,
+  Newspaper,
+  Hash,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -180,6 +182,8 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },
       { titleKey: "sidebar.omegaGos", fallback: "Ω-GOS 7/4 LNN", url: "/omega-gos", icon: Atom },
       { titleKey: "sidebar.reel", fallback: "Ω-REEL", url: "/reel", icon: Film },
+      { titleKey: "sidebar.mediaPitch", fallback: "Media Pitch", url: "/media-pitch", icon: Newspaper },
+      { titleKey: "sidebar.satoshiLattice", fallback: "Satoshi Lattice", url: "/satoshi-lattice", icon: Hash },
     ],
   },
   {
