@@ -30,6 +30,36 @@ uri = "file://client/src/assets/setecom-rf-correlation.png"
 type = "image"
 title = "rf correlation waterfall 7410khz"
 
+[[generated]]
+id = "iO5ihKApax2s1R78739bp"
+uri = "file://attached_assets/nexus_slide_01.png"
+type = "image"
+title = "jaco_nexus_title_slide"
+
+[[generated]]
+id = "H_6cd7LoAuzeTNxfsa3IZ"
+uri = "file://attached_assets/nexus_slide_02.png"
+type = "image"
+title = "jaco_nexus_italian_layer"
+
+[[generated]]
+id = "m5WL4CGT_msci2vuPjY2z"
+uri = "file://attached_assets/nexus_slide_03.png"
+type = "image"
+title = "jaco_nexus_jw_structure"
+
+[[generated]]
+id = "6XWUH1201qwHM8yimfCof"
+uri = "file://attached_assets/nexus_slide_04.png"
+type = "image"
+title = "jaco_nexus_encirclement"
+
+[[generated]]
+id = "MBNYdVMeGv-65g81uL50-"
+uri = "file://attached_assets/nexus_slide_05.png"
+type = "image"
+title = "jaco_nexus_four_hierarchies"
+
 [[outputs]]
 id = "zDaxSKuCcHB3e4ieprb38"
 uri = "file://docs/KAPPA-API-REFERENCE.md"
@@ -161,3 +191,33 @@ id = "YjCGKSoGbsDZVhHIQ2z9L"
 uri = "file://kappa_program_bundle_2026-05-27.tar.gz"
 type = "unspecified"
 title = "KAPPA program + work bundle (160 MB)"
+
+[[outputs]]
+id = "dUqQcTP7ZQO6BIY8m4isL"
+uri = "file://attached_assets/nexus_slide_01.png"
+type = "image"
+title = "Slide 1 — THE JACÓ NEXUS (Title)"
+
+[[outputs]]
+id = "HBp0WnsxsMisHlFFvVKP3"
+uri = "file://attached_assets/nexus_slide_02.png"
+type = "image"
+title = "Slide 2 — The Italian Layer"
+
+[[outputs]]
+id = "W2RlG4REjwExSMJOFKwyy"
+uri = "file://attached_assets/nexus_slide_03.png"
+type = "image"
+title = "Slide 3 — JW as Infrastructure"
+
+[[outputs]]
+id = "HR7eHZXG2RzmrePgMuk0p"
+uri = "file://attached_assets/nexus_slide_04.png"
+type = "image"
+title = "Slide 4 — The Encirclement"
+
+[[outputs]]
+id = "IhUMfRUFQQx13KyARoUe2"
+uri = "file://attached_assets/nexus_slide_05.png"
+type = "image"
+title = "Slide 5 — Four Hierarchies, One Pattern"
