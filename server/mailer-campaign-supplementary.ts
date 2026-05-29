@@ -6,7 +6,7 @@
 //   SUPP-PODCAST   — security / defense / aviation podcasts
 //   SUPP-CORPORATE — whistleblower/compliance channels (IBM/Kyndryl, Zscaler)
 //   SUPP-LAW-EN    — CR law enforcement, Ministerio Público, CSIRT, UIF, US Embassy, FDLE
-// From: Samuel Wotton <hello@ekhokappa.com>
+// From: Samuel Wotton <hello@echokappa.com>
 
 export interface SuppContact {
   id: number;
@@ -38,7 +38,7 @@ I have eighteen months of forensic documentation on the operator (Setecom S.A.) 
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── SUPP-AUTHORITY: New authority contacts ────────────────────────────────────
 
@@ -56,7 +56,7 @@ I am available to provide the full technical dossier upon request.
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── SUPP-LEGAL: Litigation firms, NGOs, aircraft lessors, DSE ────────────────
 
@@ -95,7 +95,7 @@ I am prepared to transmit the full evidence package under standard source protec
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── SUPP-PODCAST: Security / Defense / Aviation podcast pitches ───────────────
 
@@ -122,7 +122,7 @@ I'm happy to do a call, share the evidence package under standard source protect
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── SUPP-CORPORATE: Internal compliance / whistleblower channels ──────────────
 
@@ -147,7 +147,7 @@ I am available to provide the full technical evidence package upon request.
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── SUPP-LAW-EN: CR law enforcement, US Embassy, FDLE ────────────────────────
 
@@ -155,7 +155,7 @@ const bodyLawEn = `Estimados señores / Dear Officers,
 
 I am filing this as a formal criminal and regulatory complaint regarding a sustained electronic surveillance and harassment operation in Costa Rica, supported by eighteen months of forensic documentation.
 
-COMPLAINANT: Samuel P. Wotton, British-Canadian national, Jacó, Puntarenas, Costa Rica. Phone: +506 6377-3099. Email: hello@ekhokappa.com.
+COMPLAINANT: Samuel P. Wotton, British-Canadian national, Jacó, Puntarenas, Costa Rica. Phone: +506 6377-3099. Email: hello@echokappa.com.
 
 PRIMARY SUSPECT: Héctor Mora Marín, Director, Setecom S.A. (Jacó, Puntarenas, Costa Rica). Setecom holds national distribution and maintenance contracts for Deep Sea Electronics (DSE) backup generator controllers deployed at ICE (national power grid), Liberty telecom, CCSS hospitals, and Juan Santamaría International Airport (SJO).
 
@@ -199,7 +199,7 @@ This complaint has been simultaneously submitted to MICITT, CSIRT-CR, SUTEL, DIS
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-+506 6377-3099 | hello@ekhokappa.com`;
++506 6377-3099 | hello@echokappa.com`;
 
 // ── DSE: Direct to the hardware manufacturer ──────────────────────────────────
 
@@ -219,7 +219,7 @@ I have eighteen months of forensic documentation available and am prepared to tr
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── CONTACTS ──────────────────────────────────────────────────────────────────
 

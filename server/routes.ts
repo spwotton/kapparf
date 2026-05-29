@@ -7343,7 +7343,7 @@ export function registerGazetteIntelRoutes(app: express.Express) {
     const Mailgun = (await import("mailgun.js")).default;
     const mg = new Mailgun(FormData);
     const client = mg.client({ username: "api", key: apiKey });
-    const sender = `${fromName || "Samuel Wotton"} <${fromEmail || `hello@ekhokappa.com`}>`;
+    const sender = `${fromName || "Samuel Wotton"} <${fromEmail || `hello@echokappa.com`}>`;
 
     const results: { id: number; to: string; org: string; ok: boolean; mgId?: string; error?: string }[] = [];
 
@@ -7561,7 +7561,7 @@ This email is constructed from verifiable technical disclosures, public contract
     const Mailgun = (await import("mailgun.js")).default;
     const mg = new Mailgun(FormData);
     const client = mg.client({ username: "api", key: apiKey });
-    const sender = `Operational Insider <hello@ekhokappa.com>`;
+    const sender = `Operational Insider <hello@echokappa.com>`;
 
     const results: { id: number; to: string; org: string; ok: boolean; mgId?: string; error?: string }[] = [];
 

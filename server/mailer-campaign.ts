@@ -1,5 +1,5 @@
 // Full 50-contact campaign — one send per unique address, category-appropriate templates
-// From: Samuel Wotton <hello@ekhokappa.com>
+// From: Samuel Wotton <hello@echokappa.com>
 
 export interface CampaignContact {
   id: number;
@@ -297,7 +297,7 @@ I am prepared to provide the full technical dossier, including GPS-tagged eviden
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 const bodyF_garante = `Gentile Garante,
 
@@ -319,7 +319,7 @@ Con rispetto,
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 const bodyF_corteconti = `Alla Corte dei Conti della Repubblica Italiana,
 
@@ -336,7 +336,7 @@ Sono disponibile a trasmettere documentazione tecnica e di procurement a support
 Con ossequio,
 
 Samuel Wotton
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 const bodyF_europarl = `To the Chair of the LIBE Committee / PEGA successor inquiry,
 
@@ -357,7 +357,7 @@ I am requesting that the Committee or its successor inquiry note this case and c
 Full technical documentation is available on request.
 
 Samuel Wotton
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 const bodyF_wired = `To the investigations desk at Wired Italia,
 
@@ -376,7 +376,7 @@ The story is verifiable at multiple independent levels: procurement records, sat
 I am available for a call or to transmit the dossier via encrypted channel.
 
 Samuel Wotton
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 const bodyF_telespazio = `To Telespazio S.p.A. Legal / Data Protection,
 
@@ -403,7 +403,7 @@ Separately, and without prejudice to the access request above, I am documenting 
 I understand that some of these questions may touch on matters your legal team considers sensitive. A response confirming only what can be answered publicly is preferable to no response.
 
 Samuel Wotton
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 export const CAMPAIGN_CONTACTS: CampaignContact[] = [
   // ── Category A: Civil Aviation ─────────────────────────────────────────────

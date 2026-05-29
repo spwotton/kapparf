@@ -3,7 +3,7 @@
 // CISA CVEs (incl. unauthenticated remote shutdown), default creds on YouTube, Modbus:502 exposed.
 // 18 months forensic documentation linking operator to unauthorized electronic access.
 // JW angle: organizational infrastructure used as HUMINT collection substrate in Costa Rica.
-// From: Samuel Wotton <hello@ekhokappa.com>
+// From: Samuel Wotton <hello@echokappa.com>
 
 export interface AvCampaignContact {
   id: number;
@@ -38,7 +38,7 @@ I am not asking you to take my assessment at face value. I am asking whether you
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── AV-AIRLINE: Airline Safety Departments ───────────────────────────────────
 
@@ -61,7 +61,7 @@ I am available to transmit the full technical dossier under standard confidentia
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── AV-INSURANCE: Aviation Insurance Underwriters ────────────────────────────
 
@@ -83,7 +83,7 @@ I have eighteen months of forensic documentation on this operator available for 
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── AV-AUTHORITY: Aviation Regulatory Authorities ────────────────────────────
 
@@ -110,7 +110,7 @@ I have eighteen months of supporting forensic documentation available on request
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── AV-MEDIA: Aviation Trade Press ───────────────────────────────────────────
 
@@ -136,7 +136,7 @@ I am available for a call or to transmit the full dossier via encrypted channel.
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── JW: Jehovah's Witness Accountability Organisations ───────────────────────
 
@@ -169,7 +169,7 @@ I have an eighteen-month evidence package available. I am happy to share it unde
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`;
+hello@echokappa.com`;
 
 // ── CONTACTS ─────────────────────────────────────────────────────────────────
 

@@ -159,7 +159,7 @@ I am prepared to provide the full technical dossier, including GPS-tagged eviden
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`,
+hello@echokappa.com`,
   },
 
   {
@@ -186,7 +186,7 @@ Con rispetto,
 
 Samuel Wotton
 Jacó, Puntarenas, Costa Rica
-hello@ekhokappa.com`,
+hello@echokappa.com`,
   },
 
   {
@@ -208,7 +208,7 @@ Sono disponibile a trasmettere documentazione tecnica e di procurement a support
 Con ossequio,
 
 Samuel Wotton
-hello@ekhokappa.com`,
+hello@echokappa.com`,
   },
 
   {
@@ -234,7 +234,7 @@ I am requesting that the Committee or its successor inquiry note this case and c
 Full technical documentation is available on request.
 
 Samuel Wotton
-hello@ekhokappa.com`,
+hello@echokappa.com`,
   },
 
   {
@@ -258,7 +258,7 @@ The story is verifiable at multiple independent levels: procurement records, sat
 I am available for a call or to transmit the dossier via encrypted channel.
 
 Samuel Wotton
-hello@ekhokappa.com`,
+hello@echokappa.com`,
   },
 
   {
@@ -290,7 +290,7 @@ Separately, and without prejudice to the access request above, I am documenting 
 I understand that some of these questions may touch on matters your legal team considers sensitive. A response confirming only what can be answered publicly is preferable to no response.
 
 Samuel Wotton
-hello@ekhokappa.com`,
+hello@echokappa.com`,
   },
 ];
 
@@ -314,7 +314,7 @@ export default function MailerPage() {
   const [to, setTo] = useState("");
   const [subject, setSubject] = useState("");
   const [body, setBody] = useState("");
-  const [fromEmail, setFromEmail] = useState("hello@ekhokappa.com");
+  const [fromEmail, setFromEmail] = useState("hello@echokappa.com");
   const [fromName, setFromName] = useState("Samuel Wotton");
   const [lastResult, setLastResult] = useState<SendResult | null>(null);
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -583,7 +583,7 @@ export default function MailerPage() {
         </div>
         <p className="text-xs text-muted-foreground">
           Sends category-appropriate emails to all 52 unique addresses (350ms stagger).
-          From address defaults to <span className="font-mono">hello@ekhokappa.com</span>.
+          From address defaults to <span className="font-mono">hello@echokappa.com</span>.
         </p>
 
         {/* Confirm warning */}
@@ -597,7 +597,7 @@ export default function MailerPage() {
             data-testid="button-dry-run"
             variant="outline"
             size="sm"
-            onClick={() => campaignMutation.mutate({ fromEmail: fromEmail || "hello@ekhokappa.com", fromName, dryRun: true })}
+            onClick={() => campaignMutation.mutate({ fromEmail: fromEmail || "hello@echokappa.com", fromName, dryRun: true })}
             disabled={campaignMutation.isPending}
           >
             Dry Run (list only)
@@ -606,7 +606,7 @@ export default function MailerPage() {
             data-testid="button-send-campaign"
             size="sm"
             className="gap-2 bg-amber-600 hover:bg-amber-700 text-white"
-            onClick={() => campaignMutation.mutate({ fromEmail: fromEmail || "hello@ekhokappa.com", fromName })}
+            onClick={() => campaignMutation.mutate({ fromEmail: fromEmail || "hello@echokappa.com", fromName })}
             disabled={campaignMutation.isPending || !status?.configured}
           >
             <Zap className="w-3.5 h-3.5" />
