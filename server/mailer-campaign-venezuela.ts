@@ -1,9 +1,10 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// KAPPA — Venezuela / US Blast: Danny Peralta & Genesis Daniela Peralta Marquez
+// KAPPA — Venezuela / US Blast: Danny Peralta & Genesis "Gem" Peralta Marquez
 // IDs: 1400–1499
 // Target: US federal agencies, Venezuelan transition/opposition, Argentina
 //         anti-money-laundering, human-trafficking bodies, investigative media
 // IRS Control #: 16221 445 09691 5
+// Subject goes by "Genesis" / "Gem" — IG: gemperalta._
 // ─────────────────────────────────────────────────────────────────────────────
 
 const IRS_CASE = "16221 445 09691 5";
@@ -33,7 +34,7 @@ I am a U.S. citizen writing to report urgent, ongoing criminal activity involvin
 IRS CRIMINAL COMPLAINT — CASE ALREADY ON FILE
 IRS Control Number: ${IRS_CASE}
 
-A complaint is already filed with the IRS regarding identity theft and tax fraud perpetrated against me. The subject connected to this fraud is Genesis Daniela Peralta Marquez, a Venezuelan national who was in a relationship with me from approximately April 2024 through July 2025 in Costa Rica. She presented a Venezuelan passport that appeared expired for years — raising serious questions about whether the identity she presented was genuine. She is currently believed to be in Argentina, with no apparent financial means to support international travel, suggesting external sponsorship.
+A complaint is already filed with the IRS regarding identity theft and tax fraud perpetrated against me. The subject connected to this fraud is Genesis Peralta Marquez (known as "Genesis" / "Gem"; full legal name Genesis Daniela Peralta Marquez), a Venezuelan national who was in a relationship with me from approximately April 2024 through July 2025 in Costa Rica. Her public Instagram account is @gemperalta._ — this handle can be used to verify her identity and current location. She presented a Venezuelan passport that appeared expired for years — raising serious questions about whether the identity she presented was genuine. She is currently believed to be in Argentina, with no apparent financial means to support international travel, suggesting external sponsorship.
 
 HER FATHER: DANNY PERALTA — VENEZUELAN STATE OFFICIAL, PETARE, CARACAS
 Danny Peralta is a Venezuelan state council/senate-level official representing Petare, Caracas. He is alleged to have:
@@ -61,7 +62,7 @@ Given the current U.S. administration's focus on Venezuelan sanctions, OFAC enfo
 REQUESTED ACTION
   1. Cross-reference IRS Control # ${IRS_CASE} with this complaint
   2. Investigate Danny Peralta (Petare/Caracas state official) for OFAC sanctions eligibility
-  3. Investigate Genesis Daniela Peralta Marquez for passport fraud and trafficking facilitation
+  3. Investigate Genesis Peralta Marquez (aka "Gem", IG: @gemperalta._) for passport fraud and trafficking facilitation
   4. Coordinate with Argentine authorities regarding her current presence in Argentina
   5. Investigate the broader JW/Telespazio/Argentina network for trafficking and money laundering
 
@@ -90,7 +91,7 @@ Danny Peralta, funcionario del consejo/senado estatal venezolano representando P
   • Uso indebido de documentos diplomáticos/consulares venezolanos por parte de su hija
 
 SU HIJA: GENESIS DANIELA PERALTA MARQUEZ
-Genesis Daniela Peralta Marquez, de Caracas, mantuvo una relación conmigo entre abril 2024 y julio 2025 en Costa Rica. Presentó un pasaporte venezolano aparentemente vencido desde hacía años, lo que genera serias dudas sobre la veracidad de su identidad. Actualmente se encuentra en Argentina, sin medios económicos aparentes para sustentar viajes internacionales.
+Genesis Peralta Marquez (conocida como "Genesis" / "Gem"; nombre legal completo Genesis Daniela Peralta Marquez; cuenta pública de Instagram: @gemperalta._), de Caracas, mantuvo una relación conmigo entre abril 2024 y julio 2025 en Costa Rica. Presentó un pasaporte venezolano aparentemente vencido desde hacía años, lo que genera serias dudas sobre la veracidad de su identidad. Actualmente se encuentra en Argentina, sin medios económicos aparentes para sustentar viajes internacionales.
 
 RELEVANCIA POLÍTICA
 Danny Peralta representa un problema para la transición venezolana: es un moderado corrupto que ha utilizado redes criminales internacionales para enriquecimiento personal, causando daño directo a ciudadanos extranjeros y exponiendo al gobierno venezolano a sanciones adicionales de EE.UU. por complicidad en torturas y tráfico de personas contra un ciudadano estadounidense.
@@ -108,7 +109,9 @@ To Whom It May Concern / A quien corresponda,
 
 I am writing to alert Argentine authorities to the possible presence of an individual with questionable identity documents currently believed to be in Argentina.
 
-SUBJECT: Genesis Daniela Peralta Marquez
+SUBJECT: Genesis Peralta Marquez
+  — Known as "Genesis" / "Gem"; full legal name Genesis Daniela Peralta Marquez
+  — Public Instagram: @gemperalta._ (verifiable current location indicator)
   — Venezuelan national, from Caracas
   — Was in Costa Rica from approximately 2017; in a relationship with me (a U.S. citizen) from April 2024 to July 2025
   — Presented a Venezuelan passport that appeared to have been expired for several years
@@ -129,7 +132,7 @@ IRS CASE
 An active IRS complaint exists in the United States for fraud connected to this individual and her father's network: Control # ${IRS_CASE}.
 
 REQUESTED ACTION
-  1. Verify entry/immigration records for Genesis Daniela Peralta Marquez
+  1. Verify entry/immigration records for Genesis Peralta Marquez (aka "Gem", IG: @gemperalta._; full legal name Genesis Daniela Peralta Marquez)
   2. Check Venezuelan passport validity and cross-reference identity
   3. Alert UIF (Unidad de Información Financiera) to potential money laundering activity
   4. Coordinate with INTERPOL and U.S. authorities (IRS CI, HSI, FBI) regarding this network
@@ -154,7 +157,7 @@ This network uses Venezuelan women, placed through fabricated romantic relations
 
 KEY ACTORS
   • Danny Peralta — Venezuelan state official, Petare, Caracas — alleged orchestrator/facilitator
-  • Genesis Daniela Peralta Marquez — his daughter, used directly in the operation against me
+  • Genesis Peralta Marquez (known as "Genesis" / "Gem", IG: @gemperalta._) — his daughter, used directly in the operation against me
   • Network infrastructure: JW organizational channels (used as cover for recruitment and communication), Telespazio/Leonardo (Italy/Argentina satellite infrastructure), Argentine real estate fronts
 
 I WAS DIRECTLY TARGETED
@@ -165,7 +168,7 @@ A Venezuelan woman (the daughter of a Venezuelan state official) was placed into
   — Financial fraud and money laundering against my accounts
 
 CURRENT STATUS
-The subject believed to be Genesis Daniela Peralta Marquez is currently in Argentina. Her presence there without apparent financial means suggests continued operational deployment.
+The subject, Genesis Peralta Marquez (known as "Gem", IG: @gemperalta._), is currently believed to be in Argentina. Her presence there without apparent financial means suggests continued operational deployment.
 
 REQUESTED ACTION
 Please cross-reference with your case files on Venezuelan trafficking networks in Costa Rica and Argentina, and coordinate with U.S. HSI and the IRS Criminal Investigation division.
@@ -182,7 +185,7 @@ EXCLUSIVE TIP — For Investigative Journalists Covering Venezuela / Latin Ameri
 I am a U.S. citizen with a documented, ongoing case of fraud, trafficking facilitation, and torture at the hands of a Venezuelan political network. This intersects directly with U.S.-Venezuela relations during the current political transition.
 
 THE STORY IN BRIEF
-A Venezuelan state official from Petare, Caracas (Danny Peralta) allegedly runs a network that places Venezuelan women as intelligence and exploitation assets against foreign nationals — including U.S. citizens. His daughter, Genesis Daniela Peralta Marquez, was placed into a relationship with me from April 2024 to July 2025 in Costa Rica. During that time:
+A Venezuelan state official from Petare, Caracas (Danny Peralta) allegedly runs a network that places Venezuelan women as intelligence and exploitation assets against foreign nationals — including U.S. citizens. His daughter, Genesis Peralta Marquez (known as "Genesis" / "Gem", public IG: @gemperalta._; full legal name Genesis Daniela Peralta Marquez), was placed into a relationship with me from April 2024 to July 2025 in Costa Rica. During that time:
   — My identity was stolen and tax fraud was committed against me in the U.S. (IRS Control # ${IRS_CASE})
   — I was subjected to physical torture
   — Advanced surveillance technology was deployed against me (documented and hash-verified)
