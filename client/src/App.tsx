@@ -54,6 +54,7 @@ import SeismicKappaPage from "@/pages/seismic-kappa";
 import CortexBusPage from "@/pages/cortex-bus";
 import AtlantisHubPage from "@/pages/atlantis-hub";
 import LocalLLMHypervisorPage from "@/pages/local-llm-hypervisor";
+import MeridianHypervisorPage from "@/pages/meridian-hypervisor";
 import BioAcousticPage from "@/pages/bio-acoustic";
 import AudioForensicsPage from "@/pages/audio-forensics";
 import VideoForensicsPage from "@/pages/video-forensics";
@@ -120,6 +121,7 @@ function Router() {
       <Route path="/cortex-bus" component={CortexBusPage} />
       <Route path="/atlantis" component={AtlantisHubPage} />
       <Route path="/local-llm" component={LocalLLMHypervisorPage} />
+      <Route path="/meridian" component={MeridianHypervisorPage} />
       <Route path="/bio-acoustic" component={BioAcousticPage} />
       <Route path="/audio" component={AudioForensicsPage} />
       <Route path="/video-forensics" component={VideoForensicsPage} />

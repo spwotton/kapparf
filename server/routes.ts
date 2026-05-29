@@ -46,6 +46,7 @@ import {
   runForensicAnalysis, analyzePcap, scanGitHubRepos, getForensicReports,
   getPcapUploads, startHypervisor, stopHypervisor, getHypervisorStatus,
 } from "./forensic-hypervisor";
+import { meridianHypervisor } from "./meridian-hypervisor";
 import {
   storeMemory, searchMemory, getMemoryById, deleteMemory, updateMemoryImportance,
   getMemoryStats, listMemories, ingestAllQuantumFiles, contextualRecall, MEMORY_CATEGORIES,
@@ -4337,6 +4338,47 @@ export async function registerRoutes(
   });
 
   startHypervisor(30);
+
+  // ============== MERIDIAN SYNTHESIS HYPERVISOR ==============
+
+  app.get("/api/meridian/stats", (_req, res) => {
+    res.json(meridianHypervisor.getLatticeStats());
+  });
+
+  app.get("/api/meridian/entities", (req, res) => {
+    const domain = req.query.domain as string | undefined;
+    res.json(meridianHypervisor.getEntities(domain as any));
+  });
+
+  app.get("/api/meridian/history", (_req, res) => {
+    res.json(meridianHypervisor.getHistory());
+  });
+
+  app.post("/api/meridian/split-test", async (req, res) => {
+    try {
+      const { query, domains, variants: customVariants } = req.body ?? {};
+      if (!query || typeof query !== "string") {
+        return res.status(400).json({ error: "query is required" });
+      }
+      const variants = customVariants ?? meridianHypervisor.buildVariants(query, domains);
+      const run = await meridianHypervisor.runSplitTest(query, variants);
+      res.json(run);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/meridian/synthesize", async (req, res) => {
+    try {
+      const { query, variant } = req.body ?? {};
+      if (!query || !variant) return res.status(400).json({ error: "query and variant required" });
+      const entities = meridianHypervisor.getEntities();
+      const result = await meridianHypervisor.synthesize(query, variant, entities);
+      res.json(result);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
 
   // ============== MEMORY CORTEX ==============
 
