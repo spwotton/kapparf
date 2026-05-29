@@ -226,61 +226,61 @@ title = "KAPPA program + work bundle (160 MB)"
 id = "dUqQcTP7ZQO6BIY8m4isL"
 uri = "file://attached_assets/nexus_slide_01.png"
 type = "image"
-title = "Slide 1 (fixed) — THE JACO NEXUS"
+title = "01 — The Jaco Nexus"
 
 [[outputs]]
 id = "HBp0WnsxsMisHlFFvVKP3"
 uri = "file://attached_assets/nexus_slide_02.png"
 type = "image"
-title = "Slide 2 — The Italian Architecture (rewritten)"
+title = "02 — Italian Architecture"
 
 [[outputs]]
 id = "W2RlG4REjwExSMJOFKwyy"
 uri = "file://attached_assets/nexus_slide_03.png"
 type = "image"
-title = "Slide 3 — JW as Infrastructure (typos fixed)"
+title = "03 — JW as Infrastructure"
 
 [[outputs]]
 id = "HR7eHZXG2RzmrePgMuk0p"
 uri = "file://attached_assets/nexus_slide_04.png"
 type = "image"
-title = "Slide 4 — The Encirclement"
+title = "04 — The Encirclement"
 
 [[outputs]]
 id = "IhUMfRUFQQx13KyARoUe2"
 uri = "file://attached_assets/nexus_slide_05.png"
 type = "image"
-title = "Slide 5 — Four Layers (typos fixed)"
+title = "05 — Four Layers"
 
 [[outputs]]
 id = "UnCef2D71wm86N5Snx3hW"
 uri = "file://attached_assets/nexus_slide_06.png"
 type = "image"
-title = "Slide 6 — SETECOM / SETECOM Air (typos fixed)"
+title = "06 — SETECOM / SETECOM Air"
 
 [[outputs]]
 id = "yBfQWsqaLZVV2iJZXA720"
 uri = "file://attached_assets/nexus_slide_07.png"
 type = "image"
-title = "Slide 7 — Toronto · Breakwater · Crane · El Miro · Drone"
+title = "07 — The Physical Layer"
 
 [[outputs]]
 id = "z5mis2BcxXC80H23TXKUc"
 uri = "file://attached_assets/nexus_slide_08.png"
 type = "image"
-title = "Slide 8 — Liberty ISP Layer"
+title = "08 — Liberty ISP Layer"
 
 [[outputs]]
 id = "X659XHOOt5dXH6GYrh3Kf"
 uri = "file://attached_assets/nexus_slide_09.png"
 type = "image"
-title = "Slide 9 — 3i ATLAS Architecture"
+title = "09 — 3i ATLAS Architecture"
 
 [[outputs]]
 id = "iIGeGjrHm4HOWUhhn3XQE"
 uri = "file://attached_assets/nexus_slide_10.png"
 type = "image"
-title = "Slide 10 — Just a Coincidence (46.875)"
+title = "10 — Just a Coincidence"
 
 [[outputs]]
 id = "81Wy6ItRz5IfP8swYwfop"
