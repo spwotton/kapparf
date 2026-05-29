@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield, Zap, AlertTriangle, Radio } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const TEMPLATES: { label: string; to: string; subject: string; body: string }[] = [
   {
@@ -747,6 +748,128 @@ export default function MailerPage() {
           </div>
         )}
       </div>
+
+      {/* ── CR Authorities Blast — Physical Proximity Threat / JW Ground Layer ── */}
+      <CRAuthPanel />
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CR Authorities Panel
+// ─────────────────────────────────────────────────────────────────────────────
+function CRAuthPanel() {
+  const { toast } = useToast();
+  const [showResults, setShowResults] = React.useState(false);
+
+  const mutation = useMutation({
+    mutationFn: (payload: { dryRun?: boolean }) =>
+      apiRequest("POST", "/api/mailer/cr-authorities", payload),
+    onSuccess: (data: any) => {
+      if (data.dryRun) {
+        toast({ title: `Dry run: ${data.total} recipients queued`, description: data.contacts.map((c: any) => c.org).join(", ") });
+      } else {
+        toast({ title: `Sent ${data.sent}/${data.total}`, description: data.failed > 0 ? `${data.failed} failed` : "All delivered" });
+      }
+    },
+    onError: (err: any) => {
+      toast({ title: "Error", description: err?.message || String(err), variant: "destructive" });
+    },
+  });
+
+  const result = mutation.data as any;
+
+  return (
+    <div className="border border-orange-200 dark:border-orange-900 rounded-lg p-4 space-y-3 bg-orange-50/30 dark:bg-orange-950/20">
+      <div className="flex items-center gap-2">
+        <AlertTriangle className="w-4 h-4 text-orange-500" />
+        <p className="text-sm font-medium">CR Authorities — Physical Threat / JW Ground Layer</p>
+        <Badge variant="outline" className="text-xs ml-auto border-orange-300 dark:border-orange-700 text-orange-600 dark:text-orange-400">
+          36 recipients
+        </Badge>
+      </div>
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Targeted formal complaints to Costa Rican law enforcement (OIJ, Ministerio Público, Fiscalía Informáticos,
+        CSIRT-CR, DIS, SUTEL, MICITT, AERIS, DGAC, Contraloría, Procuraduría, MSP, Defensoría), U.S. Embassy
+        ACS / RSO, FBI IC3, CISA, and the IACHR / OAS — detailing the JW territory-card HUMINT network, rotating
+        physical surveillance shifts, drone overflights, Héctor Mora / Setecom infrastructure nexus, and the
+        Italian satellite collection architecture. Each agency receives a tailored letter in Spanish or English.
+      </p>
+      <div className="text-xs font-mono text-muted-foreground space-y-0.5">
+        <p className="truncate">ES: Denuncia urgente: Amenazas físicas continuas, hostigamiento coordinado…</p>
+        <p className="truncate">EN: Urgent formal complaint: Continuous physical threats, organized group proximity…</p>
+        <p className="truncate">IACHR: Precautionary measures petition — Article 25 IACHR Rules…</p>
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>Sends formal complaints to 36 CR/US/IACHR addresses. Each receives a tailored letter (~400ms stagger, ~15s total).</span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-cra-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-orange-300 dark:border-orange-700"
+          onClick={() => mutation.mutate({ dryRun: true })}
+          disabled={mutation.isPending}
+        >
+          Dry Run (list only)
+        </Button>
+        <Button
+          data-testid="button-cra-send"
+          size="sm"
+          className="gap-2 bg-orange-600 hover:bg-orange-700 text-white"
+          onClick={() => mutation.mutate({})}
+          disabled={mutation.isPending}
+        >
+          <Send className="w-3.5 h-3.5" />
+          {mutation.isPending ? "Sending… (~15s)" : "Send to CR Authorities"}
+        </Button>
+      </div>
+
+      {result && !result.dryRun && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-3 text-sm">
+            <span className="text-green-600 font-medium">{result.sent} sent</span>
+            {result.failed > 0 && <span className="text-red-500 font-medium">{result.failed} failed</span>}
+            <span className="text-muted-foreground text-xs">/ {result.total} total</span>
+            <button
+              className="text-xs text-muted-foreground underline ml-auto"
+              onClick={() => setShowResults(!showResults)}
+              data-testid="toggle-cra-results"
+            >
+              {showResults ? "hide" : "show"} details
+            </button>
+          </div>
+          {showResults && (
+            <div className="max-h-60 overflow-y-auto space-y-0.5 border border-border rounded p-2">
+              {result.results.map((r: any) => (
+                <div key={r.id} data-testid={`cra-result-${r.id}`} className="flex items-center gap-2 text-xs font-mono py-0.5">
+                  {r.ok ? <CheckCircle className="w-3 h-3 text-green-500 shrink-0" /> : <XCircle className="w-3 h-3 text-red-500 shrink-0" />}
+                  <span className="text-muted-foreground w-6 shrink-0">{r.id}</span>
+                  <span className="truncate text-foreground">{r.to}</span>
+                  <span className="text-muted-foreground shrink-0 ml-auto pl-2">{r.org}</span>
+                  {r.error && <span className="text-red-400 truncate">{r.error}</span>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {result?.dryRun && (
+        <div className="max-h-60 overflow-y-auto space-y-0.5 border border-border rounded p-2">
+          {result.contacts.map((c: any) => (
+            <div key={c.id} data-testid={`cra-dry-${c.id}`} className="flex items-center gap-2 text-xs font-mono py-0.5">
+              <span className="text-muted-foreground w-6 shrink-0">{c.id}</span>
+              <span className="truncate text-foreground">{c.to}</span>
+              <Badge variant="outline" className="text-xs shrink-0 ml-auto">{c.category}</Badge>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
