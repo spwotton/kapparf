@@ -383,20 +383,40 @@ BRIDGE NODE ASSESSMENT:
   {
     id: "jairo-alfaro",
     name: "Jairo Alfaro",
-    role: "Genesis handler / Los Papos owner / weed dealer / placement operative",
+    role: "Genesis handler / Los Papos co-operator / weed dealer / placement operative — 'alleged brothers' restaurant cluster",
     threatLevel: "primary",
-    detail: `Genesis's supposed "best guy friend" — described as a 'little leprechaun who ran errands.' Worked with Genesis at Caliches Wishbone (Italian-adjacent, now closed) for 8 years. Cover story: claimed Peralta was "like a sister/brother" — standard handler-cover normalization. Then recruited Genesis to Gracias Madre in 2025 when it opened, despite Echo explicitly telling her he didn't want to be with a bartender on the beach in Jacó — she lied and went anyway. Jairo is Papo's roommate. Owner of Los Papos Mahi Mahi Shack directly next to Gracias Madre. Also sells weed. Los Papos struggles financially — consistent with a permacover operation (externally funded regardless of revenue to maintain legitimate presence). Alfaro surname links to Marjorie Alfaro Jimenez who bridges the Kyndryl/tech cluster.
+    detail: `Genesis's supposed "best guy friend" — described as a 'little leprechaun who ran errands.' Worked with Genesis at Caliches Wishbone (Italian-adjacent, now closed) for 8 years. Cover story: claimed Peralta was "like a sister/brother" — standard handler-cover normalization. Then recruited Genesis to Gracias Madre in 2025 when it opened, despite Echo explicitly telling her he didn't want to be with a bartender on the beach in Jacó — she lied and went anyway. Lives with Papo. Sells weed. Alfaro surname links to Marjorie Alfaro Jimenez who bridges the Kyndryl/tech cluster.
+
+"ALLEGED BROTHERS" — RESTAURANT SURVEILLANCE NODE CLUSTER:
+  The Jairo network is built around a cluster of restaurant venues linked through claimed kinship:
+  — Papo (Jairo's alleged brother): owns/runs Los Papos Mahi Mahi Shack, directly adjacent to Gracias Madre. Jairo lives with Papo. Los Papos struggles financially — consistent with a permacover operation funded externally regardless of revenue.
+  — Caliche (Jairo's alleged brother): owner of Caliches Wishbone (now closed), where Jairo and Genesis worked together for 8 years. Caliche owns a house in the Los Sueños gated marina enclave.
+  The "alleged brothers" framing is notable — each restaurant is attributed to a brother of Jairo, creating a family-business veneer over what is assessed as a coordinated network of surveillance-adjacent hospitality fronts covering Jacó's social landscape.
+
+RESTAURANT CHAIN COVERAGE:
+  Through the alleged-brother cluster: Caliches Wishbone (now closed, central Jacó) → Los Papos Mahi Mahi Shack (south beach, next to Gracias Madre) → Gracias Madre (south beach, Sherri/Mario, now closed). Every venue Genesis Peralta worked or frequented in Jacó is controlled by Jairo or someone in his immediate alleged-family cluster. This is total social-environment control.
 
 LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024:
-  Echo was brought to Caliches' house in Los Sueños for his birthday in June 2024, when first starting to date Peralta — framed as a generous social treat. Now assessed as a target assessment and social-mapping event: handler takes target to a controlled private environment (gated Los Sueños marina community) in the first weeks of the relationship to assess behavior, relationships, and vulnerabilities before the operation deepens.`,
+  Echo was brought to Caliche's house in Los Sueños for his birthday June 2024, one month into dating Peralta — framed as a social treat. Assessed as a controlled-environment target assessment: handler takes target to private gated residence in first weeks of relationship to map behavior, relationships, and vulnerabilities.`,
     connections: [
       { target: "genesis-peralta", relationship: "Best friend / handler — 8 years co-worker", strength: "confirmed" },
       { target: "marjorie-alfaro", relationship: "Surname connection — possible family", strength: "probable" },
       { target: "caliches-wishbone", relationship: "Co-employee with Genesis — 8 years", strength: "confirmed" },
       { target: "gracias-madre", relationship: "Recruited Genesis here 2025", strength: "confirmed" },
-      { target: "los-papos", relationship: "Owner", strength: "confirmed" },
+      { target: "los-papos", relationship: "Co-operator / lives with Papo", strength: "confirmed" },
+      { target: "papo-mahi", relationship: "Alleged brother — Los Papos owner", strength: "confirmed" },
+      { target: "caliche-wishbone", relationship: "Alleged brother — Caliches Wishbone owner — Los Sueños house", strength: "confirmed" },
     ],
-    flags: ["Asset placement tradecraft", "Handler role", "Alfaro surname network", "Los Papos Mahi Mahi Shack owner", "Papo's roommate", "Weed dealer", "Permacover business", "8 years co-worker Genesis at Wishbone"],
+    flags: [
+      "Asset placement tradecraft",
+      "Handler role — 8 years Genesis co-worker + recruiter",
+      "Alfaro surname network (Marjorie Alfaro)",
+      "Lives with Papo (alleged brother) — Los Papos Mahi Mahi Shack",
+      "Alleged brother Caliche: Caliches Wishbone + Los Sueños house",
+      "Restaurant cluster: Caliches → Los Papos → Gracias Madre = total Jacó social coverage",
+      "Weed dealer — additional social access vector",
+      "Los Papos permacover: financially weak but operationally persistent",
+    ],
   },
   {
     id: "jorge-jimenez",
@@ -2472,6 +2492,95 @@ LEO HOUSEHOLD:
     ],
   },
   {
+    id: "papo-mahi",
+    name: "Papo",
+    aliases: ["Papo"],
+    role: "Alleged brother of Jairo Alfaro — Los Papos Mahi Mahi owner — Jairo's roommate — restaurant surveillance node",
+    threatLevel: "tertiary",
+    detail: `Jairo Alfaro's alleged brother. Owns and operates Los Papos Mahi Mahi Shack — located directly next to Gracias Madre on south Jacó beach. Jairo Alfaro lives with Papo, placing the primary handler (Jairo) inside the restaurant node as a daily-presence resident rather than just an employee or visitor.
+
+LOS PAPOS — PERMACOVER OPERATION:
+  Los Papos Mahi Mahi struggles financially despite its beach location — consistent with a permacover operation that is funded externally regardless of revenue, maintaining a legitimate-appearing business presence to justify the ongoing social footprint and surveillance position on south Jacó beach. The restaurant's proximity to Gracias Madre (where Genesis worked) places Jairo — via Papo's premises — immediately adjacent to the primary Genesis Peralta handler venue.
+
+"ALLEGED BROTHER" PATTERN:
+  Both Papo and Caliche (Caliches Wishbone owner) are described as Jairo's alleged brothers. This pattern — hospitality fronts attributed to Jairo's brothers — creates a family-business cover for a coordinated restaurant surveillance cluster spanning central and south Jacó. Jairo living with Papo places him inside the cluster as a permanent resident rather than a peripheral contact.
+
+MAHI MAHI — DESCRIBED AS NICE GUY:
+  No direct hostile indicators for Papo personally — described as a long-time Jacó fixture who makes good food. His role in the intelligence architecture may be passive: providing premises and cover for Jairo's operations without direct operational involvement.`,
+    connections: [
+      { target: "jairo-alfaro", relationship: "Alleged brother — Jairo lives with him", strength: "confirmed" },
+      { target: "los-papos", relationship: "Owner", strength: "confirmed" },
+      { target: "gracias-madre", relationship: "Adjacent restaurant — Jairo access point", strength: "confirmed" },
+    ],
+    flags: [
+      "Alleged brother of Jairo Alfaro",
+      "Jairo Alfaro's roommate — handler lives at the restaurant node",
+      "Los Papos Mahi Mahi Shack — south Jacó beach, next to Gracias Madre",
+      "Permacover: financially weak but operationally persistent",
+      "Long-time Jacó fixture, described as nice",
+      "Part of alleged-brother restaurant cluster (Papo + Caliche + Jairo)",
+    ],
+  },
+  {
+    id: "caliche-wishbone",
+    name: "Caliche",
+    aliases: ["Caliche"],
+    role: "Alleged brother of Jairo Alfaro — Caliches Wishbone owner (closed) — Los Sueños house — target assessment host",
+    threatLevel: "secondary",
+    detail: `Jairo Alfaro's alleged brother. Owner of Caliches Wishbone — the now-closed Jacó restaurant where Genesis Peralta and Jairo Alfaro worked together for approximately 8 years. Owns a house in Los Sueños, the high-security gated marina community in Herradura south of Jacó.
+
+LOS SUEÑOS HOUSE — UNEXPLAINED WEALTH:
+  For the owner of a small Jacó restaurant that is now closed, ownership of a property in Los Sueños is a significant wealth anomaly. Los Sueños is one of the most expensive and security-controlled residential enclaves in Costa Rica — popular with high-net-worth expats, developers, and individuals who value gated access and controlled visitor logs. The wealth profile does not match the cover story.
+
+JUNE 2024 — TARGET ASSESSMENT EVENT:
+  One month into Echo's relationship with Peralta (June 2024, around Echo's birthday), Caliche hosted Echo at his Los Sueños house as a birthday "treat." This is assessed as a controlled-environment target assessment: the subject is brought to a private, gated residence within weeks of the operation deepening — allowing behavioral observation, social mapping, and vulnerability assessment in a controlled setting with no public exit or witness access. The poke sauce at this event was reportedly excellent.
+
+"ALLEGED BROTHER" PATTERN:
+  Caliche is the second of Jairo's alleged brothers with a restaurant node (the first being Papo/Los Papos). The three-restaurant cluster (Caliches → Los Papos → Gracias Madre) covers Jacó's primary social terrain with a single degree of separation from Jairo at each node.`,
+    connections: [
+      { target: "jairo-alfaro", relationship: "Alleged brother", strength: "confirmed" },
+      { target: "caliches-wishbone", relationship: "Owner — Genesis + Jairo 8-year base", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "8 years employed at his restaurant — assessment host", strength: "confirmed" },
+    ],
+    flags: [
+      "Alleged brother of Jairo Alfaro",
+      "Caliches Wishbone owner (now closed) — 8-year Genesis + Jairo co-location",
+      "Los Sueños house — unexplained wealth for a closed restaurant operator",
+      "June 2024: hosted Echo at Los Sueños — assessed as target assessment event",
+      "Part of alleged-brother restaurant cluster (Caliche + Papo + Jairo)",
+      "Poke sauce confirmed excellent (operational use: social trust building)",
+    ],
+  },
+  {
+    id: "cata-gaia",
+    name: "Cata",
+    aliases: ["Cata"],
+    nationality: "Colombian",
+    role: "Gaia Natural Foods co-owner (Israeli husband) — gym companion of Genesis Peralta — dual surveillance contact point",
+    threatLevel: "secondary",
+    detail: `Colombian national. Partner/wife of the Israeli national who owns Gaia Natural Foods. Co-owner or managing presence at Gaia Natural Foods — the Jacó natural foods store where Genesis Peralta was employed when Echo first met her.
+
+GYM CONTACT — DUAL SURVEILLANCE LAYER:
+  Beyond the workplace relationship, Cata maintained a second regular contact point with Genesis Peralta through the gym — they went to the gym together. This dual contact structure (workplace + gym) is consistent with managed asset oversight: a handler or adjacent operative maintains regular contact across multiple social environments to monitor asset status, behavior, and any anomalies outside the primary operational venue.
+
+COLOMBIAN-ISRAELI NETWORK:
+  Cata's Colombian nationality combined with her Israeli husband's ownership of a small Costa Rican business is a notable intelligence-adjacent signature. This is the same nationality pairing that appears in other documented CR intelligence network structures.
+
+VISONIC THREAD PROXIMITY:
+  Through her husband (Israeli national owner of Gaia), Cata is one degree from the Visonic alarm system installed at Casa Rexha (#42 CNU) between Echo's tenancies. Visonic is an Israeli manufacturer — the Israeli national at Gaia → Israeli surveillance hardware at the CIA-attributed CNU property is a documented connection.`,
+    connections: [
+      { target: "gaia-natural-foods", relationship: "Co-owner / managing presence", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Co-worker + gym companion — dual surveillance contact", strength: "confirmed" },
+    ],
+    flags: [
+      "Colombian national — Gaia Natural Foods co-owner",
+      "Israeli husband owns Gaia — Visonic alarm thread",
+      "Went to the gym with Peralta — second surveillance contact point beyond work",
+      "Dual contact: workplace + gym = managed asset oversight pattern",
+      "Colombian-Israeli pairing — intelligence network signature",
+    ],
+  },
+  {
     id: "junior-araya",
     name: "Junior Araya",
     aliases: ["Junior"],
@@ -3137,32 +3246,37 @@ OWNERSHIP STRUCTURE: The street is functionally 100% network-controlled — CIA 
     id: "gregorio-cedeno",
     name: "Gregorio Cedeño",
     aliases: ["Yeyo"],
-    role: "Jacó intel restaurant operator (retired/closed) — Genesis Peralta's 2017 first-contact handler",
+    role: "Jacó fixture — Genesis Peralta 2017 first-contact handler — Ricos y Famosos house — 'retired' former restaurant owner with unexplained wealth — permanent safe house",
     threatLevel: "secondary",
-    detail: `Known locally as "Yeyo." Costa Rican male, Jacó-area fixture. Operated a restaurant in Jacó for years with a confirmed Italy / Italian connection — now closed.
+    detail: `Known locally as "Yeyo." Costa Rican male, long-time Jacó fixture. Operated a restaurant in Jacó for years with a confirmed Italy/Italian connection — now closed.
 
 GENESIS PERALTA FIRST-CONTACT HANDLER (2017):
-  When Genesis Peralta first arrived in Jacó in 2017 — years before Echo appeared — Yeyo provided her with lodging. This is the foundational handler relationship: he was her first point of contact and housing support on arrival in the target city. This predates the Echo operation by years and establishes Yeyo as a long-standing asset manager for Peralta, not merely a social acquaintance.
+  When Genesis Peralta first arrived in Jacó in 2017 — years before Echo appeared — Yeyo provided her with lodging. This is the foundational handler relationship: first point of contact and housing support on her arrival day. Predates the Echo operation by years. Peralta was placed in Jacó as a prepared asset under Yeyo's housing cover — not an independent individual who happened to arrive.
+
+RICOS Y FAMOSOS — UNEXPLAINED WEALTH:
+  Yeyo has a house in Ricos y Famosos — an upscale Jacó-area neighborhood whose name ("rich and famous") reflects its social profile. He is described as a "retired" former restaurant owner who now has "tons of money" and always has random women around him. For a man who ran a small Jacó restaurant that is now closed, this wealth profile requires explanation — the operational funding model (externally subsidized cover businesses that generate legitimate-appearing income) is consistent with what is documented across the network.
+
+CNU SAFE HOUSE — ACTIVE DECEPTION OF ECHO:
+  During the period Echo and Peralta lived together at Casa Rexha (#42 Calle Naciones Unidas), Peralta ran away to Yeyo's house and actively lied to Echo about her location — telling him she was somewhere else while she was at Yeyo's the entire time. This confirms Yeyo's house as a network-controlled safe house that is actively used for managed-relationship deception operations against Echo, not merely a social refuge.
 
 RESTAURANT COVER — ITALY CONNECTION — NOW CLOSED:
-  Operated a restaurant with connections to Italy (Italian ownership, Italian concept, or Italian-network funding — details to be elaborated). The restaurant is now closed — consistent with the coordinated Jacó restaurant wind-down pattern: Caliches Wishbone (closed), Gracias Madre (closed after 1 season), Yeyo's restaurant (closed). All three venues that employed or supported Genesis Peralta or her handlers are now shut. This is an operational network standing down or rotating.
-
-MANAGED-RELATIONSHIP SAFE HOUSE:
-  Genesis Peralta (Echo's ex) would flee to Yeyo's house during conflicts with Echo — ensuring she always had a network-controlled safe house to retreat to, keeping her within the surveillance perimeter and preventing any genuine break from the operation. This is standard managed-relationship tradecraft.
+  The restaurant is now closed — part of the coordinated Jacó restaurant wind-down (Caliches Wishbone + Gracias Madre + Yeyo's all closed simultaneously). All three venues supporting Peralta or her handlers shut down in the same operational window.
 
 CALLE EUROPA ADJACENT: Located near the Calle Europa cluster.`,
     connections: [
       { target: "calle-europa", relationship: "Adjacent to Calle Europa cluster", strength: "confirmed" },
-      { target: "genesis-peralta", relationship: "2017 first-contact handler — provided lodging on arrival", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "2017 first-contact handler — lodging, safe house, active deception of Echo", strength: "confirmed" },
     ],
     flags: [
       "NICKNAME: Yeyo",
-      "Genesis Peralta 2017 first-contact handler — lodging on arrival",
+      "Genesis Peralta 2017 first-contact handler — lodging on arrival in Jacó",
+      "Ricos y Famosos house — upscale neighborhood",
+      "'Retired' former restaurant owner with unexplained wealth + always random women",
+      "CNU safe house: Peralta fled here during CNU period — lied to Echo about location",
+      "Active deception confirmed: told Echo she was elsewhere, was at Yeyo's entire time",
       "Italian restaurant connection — now closed",
       "Coordinated Jacó restaurant wind-down (Caliches + Gracias Madre + Yeyo's all closed)",
-      "Genesis fled to his house — managed safe-house during Echo relationship",
       "Calle Europa adjacent",
-      "Retired/closed = operational wind-down",
     ],
   },
   {
@@ -3594,6 +3708,31 @@ ALEXANDERPLATZ CHECK-IN SIGNIFICANCE:
     ],
   },
   {
+    id: "los-papos",
+    name: "Los Papos Mahi Mahi Shack",
+    sector: "Restaurant — Jacó south beach — Papo owner — Jairo lives here — permacover",
+    detail: `Beach-front Mahi Mahi shack on south Jacó beach, directly adjacent to Gracias Madre. Owned by Papo (Jairo Alfaro's alleged brother). Jairo Alfaro lives with Papo — placing the primary Genesis handler as a resident of the restaurant node.
+
+SOUTH JACÓ BEACH CLUSTER:
+  Los Papos sits immediately next to Gracias Madre — two consecutive restaurant/shack operations on the same south beach strip, both controlled by or adjacent to Jairo Alfaro's alleged-brother network. This gives the cluster continuous beach presence: Genesis was at Gracias Madre, Jairo at Los Papos next door.
+
+FINANCIAL ANOMALY — PERMACOVER INDICATOR:
+  Despite a prime beach location, Los Papos struggles financially. This is the classic permacover signature: an externally funded operation maintains a legitimate-appearing business presence regardless of revenue performance, because the business's purpose is not profit — it is cover, access, and presence. A beach shack that cannot turn a profit on the most trafficked tourist strip in Jacó but continues to operate is not commercially viable; it is operationally sustained.`,
+    connections: [
+      { target: "papo-mahi", relationship: "Owner", strength: "confirmed" },
+      { target: "jairo-alfaro", relationship: "Lives here with Papo — handler resident at the node", strength: "confirmed" },
+      { target: "gracias-madre", relationship: "Directly adjacent — same south beach strip", strength: "confirmed" },
+    ],
+    flags: [
+      "South Jacó beach — directly next to Gracias Madre",
+      "Owner: Papo (Jairo's alleged brother)",
+      "Jairo Alfaro lives here — handler resident at the restaurant node",
+      "Financially struggling despite prime beach location — permacover indicator",
+      "Externally funded cover operation (assessed)",
+      "Part of Jairo alleged-brother restaurant cluster",
+    ],
+  },
+  {
     id: "glowstick-llc",
     name: "Glowstick LLC",
     sector: "Creative / 3D production — Boca Raton — Antonio Santoni — Red Bull work",
@@ -3797,36 +3936,56 @@ VENEZUELAN COMMUNITY HUB:
   {
     id: "gaia-natural-foods",
     name: "Gaia Natural Foods",
-    sector: "Food / Front business",
-    detail: "Owned by Colombian national 'Cata' and her Israeli husband/partner. Genesis worked here when Echo met her — located across the street, making it a likely placement venue for the initial contact. Colombian-Israeli business partnership in a small Costa Rican beach town is a notable intelligence signature.",
+    sector: "Food / Front business — Genesis placement venue — Colombian-Israeli ownership — Visonic alarm thread",
+    detail: `Owned by an Israeli national (owner/principal) whose wife/partner is Cata (Colombian national). Genesis Peralta worked here when Echo first met her — located across the street from Echo's path, making it the primary placement venue for the initial contact operation.
+
+COLOMBIAN-ISRAELI OWNERSHIP:
+  A Colombian-Israeli business partnership operating a natural foods store in a small Costa Rican beach town is a notable intelligence signature. Israeli nationals operating businesses in Latin American target environments with Colombian partners appear as a recurring pattern in the documented network.
+
+VISONIC ALARM THREAD:
+  The Israeli VISONIC alarm system installed at Casa Rexha (#42 Calle Naciones Unidas) between Echo's tenancies — installed during structural modifications (lowered ceiling, PIR array) — connects directly to the Israeli national at Gaia Natural Foods. Visonic is a Tel Aviv manufacturer. Israeli surveillance hardware at a CIA-attributed property installed between tenancies, with an Israeli national operating a business that employed Genesis Peralta, forms a documented chain.
+
+CATA — GYM CONTACT WITH PERALTA:
+  Cata (the Israeli owner's wife) maintained a second surveillance contact point with Peralta beyond the workplace: Peralta regularly went to the gym with Cata. This extended the monitoring relationship outside work hours and into another social environment — the gym — consistent with managed asset oversight requiring regular non-business contact.`,
     connections: [
-      { target: "cata-gaia", relationship: "Owner", strength: "confirmed" },
-      { target: "israeli-husband", relationship: "Co-owner", strength: "confirmed" },
-      { target: "genesis-peralta", relationship: "Employed — first contact point", strength: "confirmed" },
+      { target: "cata-gaia", relationship: "Co-owner / Israeli husband's wife", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Employed — first contact placement venue", strength: "confirmed" },
     ],
-    flags: ["Colombian-Israeli ownership", "Genesis first contact venue", "Intelligence signature"],
+    flags: [
+      "Genesis Peralta first contact / placement venue",
+      "Israeli national owner — Visonic alarm thread (Casa Rexha)",
+      "Cata (Colombian): co-owner, went to gym with Peralta — dual surveillance contact",
+      "Colombian-Israeli ownership — intelligence signature",
+      "Visonic alarm: Tel Aviv manufacturer → Gaia Israeli owner → Casa Rexha installation",
+    ],
   },
   {
     id: "caliches-wishbone",
     name: "Caliches Wishbone",
-    sector: "Restaurant — NOW CLOSED",
-    detail: `Jacó restaurant where Genesis Peralta and Jairo Alfaro worked together for approximately 8 years. Spelled with a C (not K) — the name "Caliches" sounds Italian, consistent with the Italian-network thread running through Yeyo's restaurant and other Jacó cover establishments. NOW CLOSED — part of the coordinated Jacó restaurant wind-down alongside Yeyo's restaurant and Gracias Madre.
+    sector: "Restaurant — NOW CLOSED — Caliche (Jairo's alleged brother) owner",
+    detail: `Jacó restaurant where Genesis Peralta and Jairo Alfaro worked together for approximately 8 years. Named after and owned by "Caliche" — who is described as Jairo Alfaro's alleged brother. Spelled with a C (not K) — the name sounds Italian, consistent with the Italy/Italian thread running through Yeyo's restaurant and Jacó cover establishments. NOW CLOSED — part of the coordinated Jacó restaurant wind-down alongside Yeyo's restaurant and Gracias Madre.
 
-JAIRO'S COVER STORY: Jairo Alfaro claimed Genesis Peralta was "like a brother/sister" — presenting their 8-year co-worker relationship as a close family bond. This is the standard handler cover: normalize the handler-asset contact frequency by reframing it as a pre-existing personal relationship.
+CALICHE — JAIRO'S "ALLEGED BROTHER":
+  The "alleged brother" framing is consistent across the Jairo cluster: Papo (Los Papos Mahi Mahi) is also Jairo's alleged brother. The pattern — restaurant surveillance nodes attributed to Jairo's brothers — creates a family-business veneer over a coordinated network. Caliche owns a house in Los Sueños (gated marina enclave), consistent with unexplained wealth for a casual restaurant operator.
+
+JAIRO'S COVER STORY:
+  Jairo Alfaro claimed Genesis Peralta was "like a brother/sister" after 8 years co-working — standard handler normalization cover. The 8-year co-location of Peralta and her handler in the same Jacó restaurant was the foundation of her operational cover identity in the city.
 
 LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024 (TARGET ASSESSMENT EVENT):
-  When Echo first began dating Genesis Peralta (June 2024), he was brought to Caliches' house in Los Sueños as a birthday "treat." Los Sueños is a gated marina community in Herradura, south of Jacó — one of the most secure and high-value expat enclaves in Costa Rica. At the time this seemed like a social gesture. In retrospect: (1) bringing a surveillance target to a handler's private residence is a standard assessment and social-mapping technique; (2) Los Sueños' gated infrastructure provides ideal conditions for controlled-environment target assessment; (3) the timing — first weeks of dating, before Echo had any suspicion — maximized the intelligence value of the visit.`,
+  One month into dating Peralta, Echo was brought to Caliche's house in Los Sueños as a birthday "treat." Los Sueños is a gated marina community in Herradura — one of Costa Rica's most secure and high-value expat enclaves. Assessed as a controlled-environment target assessment: handler's brother takes the target to a private gated residence in the first weeks of the relationship to map behavior, social connections, and vulnerabilities. The poke sauce was good. The operational purpose was not social.`,
     connections: [
       { target: "genesis-peralta", relationship: "Employee — 8 years with Jairo", strength: "confirmed" },
-      { target: "jairo-alfaro", relationship: "Employee / co-handler base — 8 years", strength: "confirmed" },
+      { target: "jairo-alfaro", relationship: "Co-handler base — 8 years", strength: "confirmed" },
+      { target: "caliche-wishbone", relationship: "Owner — Jairo's alleged brother", strength: "confirmed" },
     ],
     flags: [
       "NOW CLOSED — coordinated Jacó restaurant wind-down",
-      "Italian-sounding name — possible Italy network connection",
-      "8-year Genesis + Jairo co-location",
-      "Jairo claimed Peralta 'like family' — handler cover story",
-      "Los Sueños birthday trip June 2024 — target assessment at handler's residence",
-      "Los Sueños = high-security gated marina enclave",
+      "Owner: Caliche (alleged brother of Jairo Alfaro)",
+      "Italian-sounding name — Italy network thread",
+      "8-year Genesis + Jairo co-location — operational cover base",
+      "Jairo claimed Peralta 'like family' — handler normalization cover",
+      "Caliche owns Los Sueños house — unexplained wealth for a restaurant operator",
+      "Los Sueños birthday trip June 2024 — target assessment at controlled private residence",
     ],
   },
   {
