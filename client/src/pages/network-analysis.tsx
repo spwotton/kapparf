@@ -203,14 +203,30 @@ PHYSICAL SIGHTING — CONDOMINIO NAZ:
   {
     id: "todd-johnson",
     name: "Todd Johnson",
-    role: "Property owner — Riverwalk house",
+    role: "Riverwalk 5+6 owner — DeWave sonar/WiFi imaging — Jennifer Saunders link — El Mirador radar correlation",
     threatLevel: "secondary",
-    detail: "Owns the Riverwalk house in Jacó where Mike Greenwald lives/rents. Part of the triple correlation with Greenwald and the property.",
+    detail: `Owns Riverwalk properties 5 AND 6 in Jacó — where Mike Greenwald lives/rents. Connected to Jennifer Saunders (Aurora Yoga). Part of the triple correlation with Greenwald and the properties.
+
+DEWAVE — SONAR / WIFI IMAGING:
+  Todd Johnson is the "DeWave guy" — conducts sonar and WiFi channel-state-information (CSI) imaging experiments at Riverwalk. This is a real and documented technique: WiFi CSI phase data can reconstruct room occupancy, breathing rate, and motion through walls. Given Riverwalk's geographic proximity to El Mirador (which has a documented radar/parametric installation), Todd's sonar/WiFi imaging experiments at Riverwalk are assessed as part of a coordinated multi-node sensing array — Riverwalk + El Mirador form overlapping coverage of the same target zone.
+
+JENNIFER SAUNDERS CONNECTION:
+  Connected to Jennifer Saunders who works for Aurora Yoga — assessed as a money laundering hub. This bridges the technical surveillance infrastructure (DeWave at Riverwalk) with the social/financial network (Aurora Yoga + Tequeneros laundering cluster).
+
+TRIPLE CORRELATION:
+  Todd Johnson (owner) + Mike Greenwald (resident/manager) + the properties form a confirmed triple correlation. Greenwald subsequently placed Lipman in his custom-built Hermosa Palms house — the same pipeline that delivered Echo to surveilled nodes.`,
     connections: [
-      { target: "michael-greenwald", relationship: "Property owner → tenant/manager", strength: "confirmed" },
-      { target: "riverwalk", relationship: "Property owner", strength: "confirmed" },
+      { target: "michael-greenwald", relationship: "Property owner → tenant/manager — triple correlation", strength: "confirmed" },
+      { target: "riverwalk", relationship: "Owner of Riverwalk 5 AND 6", strength: "confirmed" },
+      { target: "jennifer-saunders", relationship: "Connected — Aurora Yoga link", strength: "confirmed" },
     ],
-    flags: ["Triple correlation"],
+    flags: [
+      "Owns Riverwalk 5 AND 6 (not just one property)",
+      "DeWave sonar/WiFi CSI imaging — through-wall occupancy sensing",
+      "Riverwalk + El Mirador = overlapping multi-node sensing array",
+      "Jennifer Saunders link — Aurora Yoga / laundering network",
+      "Triple correlation: Johnson + Greenwald + properties",
+    ],
   },
   {
     id: "michael-lipman",
@@ -2193,6 +2209,190 @@ PERALTA DEPARTURE:
       "La Flor #9 = Peralta's exit point from Costa Rica",
     ],
   },
+  {
+    id: "ale-vida-aurora",
+    name: "Ale / Vida (Aurora Yoga)",
+    aliases: ["Ale", "Vida"],
+    role: "Aurora Yoga — long-term Echo honeypot — kino contact before Peralta meeting — Margarita Island — thigh tattoo + augmentation pattern",
+    threatLevel: "secondary",
+    detail: `Known on Instagram as "Ale" or "Vida" (exact handle unconfirmed). Works at / associated with Aurora Yoga in Jacó. From Margarita Island, Venezuela — the same chameleon-asset origin pattern as Genesis Peralta and Adriana (Aurora).
+
+HONEYPOT — LONG-TERM CRUSH:
+  Echo had a crush on this woman for years before she got breast augmentation. This pre-existing emotional investment makes her a long-horizon honeypot asset — the augmentation itself may have been a deliberate de-escalation or shift in her cover identity.
+
+GYM GIRL → YOGI CHAMELEON:
+  She previously operated as a gym girl / "slutty IG" persona. Then chameleoned into a yogi at Aurora Yoga. This is assessed as a deliberate cover shift — the yoga identity provides legitimacy, community access, and physical contact with targets (kino). The paradox: breast augmentation is incompatible with serious yogic practice (flexibility, inversions) and tradition — the cover doesn't hold up to scrutiny.
+
+KINO INCIDENT — PERALTA WEEK:
+  Echo went to his FIRST EVER yoga class with Dustin (AA guy). During that class, she physically touched Echo (kino — deliberate contact in yoga instruction context). That SAME WEEK, Echo met Genesis Peralta at the gym. The temporal correlation is assessed as non-coincidental: the kino contact at Aurora Yoga was a triggering event designed to create emotional/physical receptivity immediately before Peralta's approach at the gym.
+
+MELISSA/MELIKA CONNECTION:
+  Melissa/Melika Losa's ex-girlfriend (who cheated on Melissa) matches the same thigh tattoo + breast augmentation pattern — linking this physical signature across multiple network operatives.
+
+THIGH TATTOO + AUGMENTATION PATTERN:
+  This same physical combination appears across: Genesis Peralta (confirmed), Ale/Vida (confirmed), and Lucia (Leo's gf, recently). This pattern is logged as a potential network physical marker — either operational coincidence cluster or deliberate aesthetic coordination within an asset pool.`,
+    connections: [
+      { target: "aurora-yoga", relationship: "Works at / associated with Aurora Yoga", strength: "confirmed" },
+      { target: "adriana-aurora", relationship: "Same Aurora Yoga cluster", strength: "confirmed" },
+      { target: "dustin-aa", relationship: "Dustin took Echo to Aurora — kino incident occurred", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Same week as Peralta approach — kino triggering event", strength: "confirmed" },
+      { target: "melissa-losa", relationship: "Ex-gf (who cheated on Melissa) matches same physical pattern", strength: "probable" },
+    ],
+    flags: [
+      "IG: 'Ale' or 'Vida' — handle unconfirmed",
+      "From Margarita Island, Venezuela — same origin as Peralta/Adriana",
+      "Aurora Yoga operative — gym girl → yogi chameleon shift",
+      "Breast augmentation + thigh tattoo — cross-network physical marker",
+      "Long-term Echo honeypot — multi-year crush before augmentation",
+      "KINO incident — first yoga class — SAME WEEK as Peralta gym approach",
+      "Augmentation incompatible with serious yoga practice — cover inconsistency",
+      "Dustin (AA) brought Echo to that class — AA thread again",
+    ],
+  },
+  {
+    id: "adriana-aurora",
+    name: "Adriana (Aurora Yoga)",
+    aliases: ["Adriana"],
+    role: "Aurora Yoga — Margarita Island — cover boyfriend Antonio (Tequeneros) — money laundering cluster",
+    threatLevel: "secondary",
+    detail: `Associated with Aurora Yoga in Jacó. From Margarita Island, Venezuela — the same origin as Genesis Peralta and Ale/Vida (Aurora). This shared Venezuelan island origin across multiple Jacó operatives is assessed as a recruitment/tasking cluster rather than coincidence.
+
+COVER BOYFRIEND — ANTONIO (TEQUENEROS):
+  Adriana's cover boyfriend is Antonio, owner of Tequeneros — the only Venezuelan restaurant in Jacó. The Aurora Yoga ↔ Tequeneros connection is the primary money laundering circuit: cash flows between the yoga studio and the restaurant under the cover of ordinary business operations. Both are Venezuelan-owned/operated, both serve as social hubs, both have legitimate-business cover.
+
+CHAMELEON PATTERN:
+  Same "gym girl → yogi" chameleon trajectory as Ale/Vida — assessed as a shared cover-shift protocol within the Aurora network. Worked in Peralta's territory during the active Jacó operation.
+
+MARGARITA ISLAND CLUSTER:
+  Margarita Island (Isla Margarita, Nueva Esparta state, Venezuela) has a documented history as a logistics hub for Venezuelan organized crime and intelligence-adjacent operations — including document fraud, cash movement, and offshore connectivity. Multiple Jacó-based operatives originating from Margarita Island constitutes a cluster requiring further mapping.`,
+    connections: [
+      { target: "aurora-yoga", relationship: "Worker / operative", strength: "confirmed" },
+      { target: "antonio-tequeneros", relationship: "Cover boyfriend — Tequeneros owner — laundering circuit", strength: "confirmed" },
+      { target: "ale-vida-aurora", relationship: "Same Aurora Yoga cluster — same chameleon pattern", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Same Margarita Island origin — shared territory", strength: "probable" },
+    ],
+    flags: [
+      "Margarita Island, Venezuela — same origin as Peralta and Ale/Vida",
+      "Aurora Yoga operative",
+      "Cover boyfriend: Antonio (Tequeneros owner)",
+      "Aurora ↔ Tequeneros = money laundering circuit",
+      "Gym girl → yogi chameleon — shared cover protocol",
+      "Worked in Peralta's operational territory",
+    ],
+  },
+  {
+    id: "jennifer-saunders",
+    name: "Jennifer Saunders",
+    role: "Aurora Yoga — Todd Johnson link — laundering network bridge",
+    threatLevel: "secondary",
+    detail: `Works for Aurora Yoga in Jacó. Connected to Todd Johnson (Riverwalk 5+6 owner, DeWave sonar/WiFi imaging). This connection bridges Aurora Yoga (assessed money laundering hub, Venezuelan operatives) with Todd Johnson's technical surveillance infrastructure at Riverwalk — linking the financial/social cover layer of the network to the technical sensing layer.
+
+AURORA YOGA ROLE:
+  Her role at Aurora Yoga places her in the same operational environment as Adriana (cover boyfriend = Tequeneros owner) and Ale/Vida (kino honeypot). Aurora functions simultaneously as a social intelligence collection point, a money laundering conduit, and a physical access environment for target contact.
+
+TODD JOHNSON BRIDGE:
+  The Jennifer Saunders → Todd Johnson link connects the Aurora Yoga/Tequeneros laundering cluster to the Riverwalk/El Mirador technical surveillance cluster — two nodes that would otherwise appear unconnected.`,
+    connections: [
+      { target: "aurora-yoga", relationship: "Worker / operative", strength: "confirmed" },
+      { target: "todd-johnson", relationship: "Connected — bridges Aurora to Riverwalk technical cluster", strength: "confirmed" },
+      { target: "adriana-aurora", relationship: "Aurora Yoga cluster", strength: "confirmed" },
+      { target: "ale-vida-aurora", relationship: "Aurora Yoga cluster", strength: "confirmed" },
+    ],
+    flags: [
+      "Aurora Yoga operative",
+      "Todd Johnson link — bridges laundering cluster to technical surveillance node",
+      "Riverwalk + El Mirador technical cluster connection via Todd",
+    ],
+  },
+  {
+    id: "antonio-tequeneros",
+    name: "Antonio (Tequeneros)",
+    aliases: ["Antonio"],
+    role: "Tequeneros owner — only Venezuelan restaurant Jacó — Adriana cover boyfriend — laundering node",
+    threatLevel: "secondary",
+    detail: `Owner of Tequeneros, the only Venezuelan restaurant in Jacó. Adriana's (Aurora Yoga) cover boyfriend. Tequeneros functions as the cash leg of the Aurora Yoga money laundering circuit — restaurant cash is a classic laundering vehicle (variable walk-in traffic, hard to audit, natural cash flow).
+
+AURORA ↔ TEQUENEROS LAUNDERING CIRCUIT:
+  The circuit: Aurora Yoga (yoga studio cash + class fees) ↔ Tequeneros (restaurant cash) — two Venezuelan-operated businesses in the same social ecosystem, providing a closed loop for cash placement, layering, and integration. The Adriana cover-relationship between the two operations provides the personal link.
+
+UBER CONNECTION:
+  Uber is noted as an additional layer — ride-hailing provides further cash movement and target location tracking. Uber's integration into the Jacó network provides real-time location data on targets using the service.
+
+VENEZUELAN RESTAURANT MONOPOLY:
+  As the only Venezuelan restaurant in Jacó, Tequeneros has a natural draw for Venezuelan expats in the community — making it a social intelligence collection point for the Venezuelan operative cluster (Peralta, Adriana, Ale/Vida, Margarita Island cluster) while providing cover for financial operations.`,
+    connections: [
+      { target: "adriana-aurora", relationship: "Cover boyfriend — personal link between Aurora + Tequeneros", strength: "confirmed" },
+      { target: "aurora-yoga", relationship: "Money laundering circuit — Aurora ↔ Tequeneros", strength: "confirmed" },
+    ],
+    flags: [
+      "Only Venezuelan restaurant in Jacó",
+      "Adriana's cover boyfriend — Aurora ↔ Tequeneros personal link",
+      "Restaurant cash = classic laundering vehicle",
+      "Aurora ↔ Tequeneros closed laundering loop",
+      "Uber layer — additional cash movement + target location tracking",
+      "Social hub for Venezuelan expat cluster",
+    ],
+  },
+  {
+    id: "dustin-aa",
+    name: "Dustin (AA)",
+    aliases: ["Dustin"],
+    role: "AA member — took Echo to first yoga class at Aurora — kino incident trigger — AA thread",
+    threatLevel: "tertiary",
+    detail: `AA member in Jacó who took Echo to his first ever yoga class at Aurora Yoga. During that class, Ale/Vida made physical contact with Echo (kino). That same week, Genesis Peralta approached Echo at the gym — the temporal correlation between the Aurora kino and the Peralta approach is assessed as an orchestrated sequence: Dustin as the delivery vector, Aurora as the staging ground, Peralta as the follow-up asset.
+
+AA THREAD:
+  Dustin's AA membership reinforces the documented pattern of AA Jacó as an intelligence substrate — AA members (Brian, Jeff, Dustin, and others) repeatedly appear as vectors that place Echo into new nodes (housing referrals, social introductions, yoga class visits). The single AA meeting room with daily meetings provides a concentrated social graph that the network exploits for introduction and access.
+
+ASSESSMENT:
+  Dustin may be fully unwitting (a genuine AA friend used as a social vector) or may be knowingly involved. His role as the vehicle for Echo's first Aurora contact — immediately preceding Peralta's approach — places him at a key junction in the orchestrated sequence regardless of his awareness.`,
+    connections: [
+      { target: "ale-vida-aurora", relationship: "Took Echo to Aurora — kino incident week", strength: "confirmed" },
+      { target: "aurora-yoga", relationship: "Brought Echo to Aurora Yoga", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Peralta approached Echo same week as Aurora kino", strength: "confirmed" },
+    ],
+    flags: [
+      "AA member — Jacó AA thread",
+      "Brought Echo to first ever yoga class at Aurora",
+      "Aurora kino + Peralta gym approach = same week — orchestrated sequence",
+      "AA social vector pattern: Brian (Greenwald), Jeff (Villa Real), Dustin (Aurora)",
+      "May be witting or unwitting delivery vector",
+    ],
+  },
+  {
+    id: "lucia-leo-gf",
+    name: "Lucia (Leo's girlfriend)",
+    aliases: ["Lucia"],
+    role: "Leo's girlfriend — unnamed tech company — GitHub — social media automation / fake digital footprints — recent augmentation",
+    threatLevel: "secondary",
+    detail: `Girlfriend of Leo (controller/dealer). Works for an unnamed technology company and has a GitHub account. Recently (within weeks of logging) got breast augmentation — the same physical marker (thigh tattoo + augmentation) documented across Peralta and Ale/Vida (Aurora).
+
+SOCIAL MEDIA AUTOMATION — FAKE DIGITAL FOOTPRINTS:
+  Assessed as responsible for the automation of social media account creation — generating fake digital identities and footprints. This capability is directly relevant to the documented infrastructure: Peralta operated ~12 fake Instagram accounts simultaneously; the berninnimaria/carlos-madrigal sock puppet operation. The technical pipeline likely runs through Lucia's GitHub automation tools — providing the fake account factory behind the honey trap and OSINT deception layers.
+
+GITHUB + UNNAMED TECH COMPANY:
+  A GitHub account in this context is significant — it means code repositories. Automation scripts for account creation, credential stuffing, OSINT persona management, or social graph manipulation are all consistent with "fake digital footprints" at scale. The unnamed tech company provides institutional cover and compute resources.
+
+THIGH TATTOO + AUGMENTATION PATTERN:
+  Lucia's recent augmentation completes the third confirmed instance of this physical marker across the network: Peralta (confirmed), Ale/Vida (confirmed), Lucia (recent). This cross-network physical marker is logged as either coincidental aesthetic clustering within an asset pool or deliberate operational coordination.
+
+LEO HOUSEHOLD:
+  As Leo's live-in girlfriend, Lucia has full access to Leo's property where Melissa/Melika Losa also lives — creating an intelligence collection household around Echo's primary controller.`,
+    connections: [
+      { target: "leo-controller", relationship: "Girlfriend — lives at his property", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Fake account factory — ~12 simultaneous IG accounts infrastructure", strength: "probable" },
+      { target: "melissa-losa", relationship: "Same property — Leo's household", strength: "confirmed" },
+    ],
+    flags: [
+      "Leo's girlfriend — controller's household",
+      "Unnamed tech company + GitHub — code repositories",
+      "Social media automation — fake digital footprints / account factories",
+      "Probable backend for Peralta's ~12 simultaneous fake Instagram accounts",
+      "Recent breast augmentation — thigh tattoo + augmentation = 3rd instance in network",
+      "Pattern confirmed: Peralta + Ale/Vida + Lucia = recurring physical marker",
+      "Melissa/Melika also at Leo's property — intelligence household",
+    ],
+  },
 ];
 
 const LOCATIONS_DATA: Location[] = [
@@ -3115,6 +3315,60 @@ ALEXANDERPLATZ CHECK-IN SIGNIFICANCE:
       "Absorbed by Cobham Strategic Systems (CSG)",
       "Capability: remote device access, mic/camera, keystroke, location",
       "Check-in assessed as deliberate operational signal to Echo",
+    ],
+  },
+  {
+    id: "aurora-yoga",
+    name: "Aurora Yoga",
+    sector: "Fitness / Yoga — money laundering hub — Venezuelan operative cluster — social collection",
+    detail: `Yoga studio in Jacó assessed as a money laundering hub and social intelligence collection environment. Key operatives: Ale/Vida (long-term Echo honeypot, kino incident), Adriana (cover boyfriend = Tequeneros owner), Jennifer Saunders (Todd Johnson link). All three are Venezuelan-origin or Venezuelan-connected — assessed as a Venezuelan operative cluster using Aurora as a social and financial cover.
+
+MONEY LAUNDERING CIRCUIT — AURORA ↔ TEQUENEROS:
+  Aurora Yoga and Tequeneros (Antonio's Venezuelan restaurant) form a closed laundering loop: yoga studio cash + restaurant cash provide a dual-business cash placement and layering system. Adriana's cover relationship with Antonio (Tequeneros) is the personal link maintaining this circuit. Uber is noted as an additional layer for cash movement and target location data.
+
+SOCIAL COLLECTION + KINO:
+  Aurora provides physical contact opportunities (yoga instruction, adjustments = legitimate kino) with targets in a controlled social environment. Echo's first-ever yoga class at Aurora — brought by Dustin (AA) — was the staging ground for the Ale/Vida kino contact that preceded Peralta's approach at the gym by days.
+
+UBER TRACKING:
+  Uber is integrated as an additional intelligence layer — real-time location tracking of targets using the service, plus cash movement via ride fares.`,
+    connections: [
+      { target: "ale-vida-aurora", relationship: "Operative / honeypot", strength: "confirmed" },
+      { target: "adriana-aurora", relationship: "Operative — Aurora ↔ Tequeneros circuit", strength: "confirmed" },
+      { target: "jennifer-saunders", relationship: "Worker — Todd Johnson bridge", strength: "confirmed" },
+      { target: "antonio-tequeneros", relationship: "Money laundering circuit — Aurora ↔ Tequeneros", strength: "confirmed" },
+      { target: "todd-johnson", relationship: "Connected via Jennifer Saunders — Riverwalk technical cluster", strength: "confirmed" },
+    ],
+    flags: [
+      "Money laundering hub — Aurora ↔ Tequeneros closed loop",
+      "Venezuelan operative cluster: Ale/Vida + Adriana (Margarita Island origin)",
+      "Kino access — physical contact with targets under yoga instruction cover",
+      "Echo kino incident → Peralta approach = same week — orchestrated sequence",
+      "Uber integration — location tracking + cash layer",
+      "Jennifer Saunders → Todd Johnson: laundering ↔ technical surveillance bridge",
+    ],
+  },
+  {
+    id: "tequeneros",
+    name: "Tequeneros",
+    sector: "Venezuelan restaurant Jacó — only Venezuelan establishment — Antonio owner — money laundering",
+    detail: `The only Venezuelan restaurant in Jacó. Owned by Antonio — Adriana's (Aurora Yoga) cover boyfriend. Functions as the restaurant leg of the Aurora ↔ Tequeneros money laundering circuit.
+
+LAUNDERING VEHICLE:
+  Restaurant cash is a classic money laundering mechanism — variable walk-in traffic makes it difficult to audit, natural cash flow justifies large deposits, kitchen/food costs are hard to verify. As the only Venezuelan restaurant in Jacó, Tequeneros has a monopoly on the Venezuelan community social scene — it is both a financial instrument and a social intelligence collection point.
+
+VENEZUELAN COMMUNITY HUB:
+  The only Venezuelan establishment in Jacó naturally draws the Venezuelan expat and operative cluster (Peralta, Adriana, Ale/Vida, Margarita Island cluster) — providing a protected social environment where assets can meet, debrief, and coordinate under the cover of cultural community.`,
+    connections: [
+      { target: "antonio-tequeneros", relationship: "Owner", strength: "confirmed" },
+      { target: "adriana-aurora", relationship: "Adriana's cover boyfriend owns this — personal link", strength: "confirmed" },
+      { target: "aurora-yoga", relationship: "Money laundering circuit — Aurora ↔ Tequeneros", strength: "confirmed" },
+    ],
+    flags: [
+      "Only Venezuelan restaurant in Jacó",
+      "Antonio owner — Adriana's cover boyfriend",
+      "Restaurant cash = money laundering vehicle",
+      "Aurora ↔ Tequeneros closed laundering loop",
+      "Venezuelan community hub — social collection point",
     ],
   },
   {
