@@ -76,11 +76,14 @@ import MailerPage from "@/pages/mailer";
 import MediaPitchPage from "@/pages/media-pitch";
 import SatoshiLatticePage from "@/pages/satoshi-lattice";
 import QuantumSolverPage from "@/pages/quantum-solver";
+import StatusReportPage from "@/pages/status-report";
 
-function Router() {
+// ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
+function KappaRouter() {
   return (
     <Switch>
-      <Route path="/" component={GooseGazettePage} />
+      <Route path="/" component={CommandCenterPage} />
+      <Route path="/status" component={StatusReportPage} />
       <Route path="/whistleblower" component={WhistleblowerPage} />
       <Route path="/command" component={CommandCenterPage} />
       <Route path="/dashboard" component={DashboardPage} />
@@ -126,6 +129,13 @@ function Router() {
       <Route path="/audio" component={AudioForensicsPage} />
       <Route path="/video-forensics" component={VideoForensicsPage} />
       <Route path="/goose" component={GooseGazettePage} />
+      <Route path="/goose/signals" component={GooseSignalsPage} />
+      <Route path="/goose/lattice" component={SignalLatticePage} />
+      <Route path="/goose/admin" component={GooseAdminPage} />
+      <Route path="/goose/editorial" component={GooseEditorialPage} />
+      <Route path="/goose/drone" component={DroneBlogPage} />
+      <Route path="/goose/press-room" component={GazetteRefinerPage} />
+      <Route path="/goose/humor" component={GooseHumorPage} />
       <Route path="/hyperobjects" component={HyperobjectsPage} />
       <Route path="/atlas" component={AtlasObservatoryPage} />
       <Route path="/setecom" component={SetecomExposePage} />
@@ -134,7 +144,27 @@ function Router() {
       <Route path="/media-pitch" component={MediaPitchPage} />
       <Route path="/satoshi-lattice" component={SatoshiLatticePage} />
       <Route path="/quantum-solver" component={QuantumSolverPage} />
+      <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+// ── Goose Gazette standalone router (default mode) ───────────────────────────
+function GooseRouter() {
+  return (
+    <Switch>
+      <Route path="/setecom-report" component={SetecomExposePage} />
+      <Route path="/pochote" component={PochoteAnalysisPage} />
+      <Route path="/goose/signals" component={GooseSignalsPage} />
+      <Route path="/goose/lattice" component={SignalLatticePage} />
+      <Route path="/goose/admin" component={GooseAdminPage} />
+      <Route path="/goose/editorial" component={GooseEditorialPage} />
+      <Route path="/goose/drone" component={DroneBlogPage} />
+      <Route path="/goose/press-room" component={GazetteRefinerPage} />
+      <Route path="/goose/humor" component={GooseHumorPage} />
+      <Route path="/goose" component={GooseGazettePage} />
+      <Route component={GooseGazettePage} />
     </Switch>
   );
 }
@@ -172,31 +202,26 @@ function DossierBadge() {
   );
 }
 
-function HomeRoute() {
-  const { mode } = useSiteMode();
-  return mode === "evidence" ? <EvidenceDirectoryPage /> : <GooseGazettePage />;
-}
-
 function AppWithDossier() {
   const { toggleDossierMode } = useDossier();
+  const { mode } = useSiteMode();
   useArrowSequence(toggleDossierMode);
 
+  // ── Goose Gazette mode (default) — standalone, no KAPPA sidebar ───────────
+  if (mode === "goose") {
+    return (
+      <>
+        <GooseRouter />
+        <Toaster />
+      </>
+    );
+  }
+
+  // ── CIA JW / KAPPA mode — full intel platform with sidebar ────────────────
   return (
     <>
       <Switch>
-        {/* Standalone sites — no KAPPA sidebar */}
         <Route path="/setecom-report" component={SetecomExposePage} />
-        <Route path="/" component={HomeRoute} />
-        <Route path="/goose/signals" component={GooseSignalsPage} />
-        <Route path="/goose/lattice" component={SignalLatticePage} />
-        <Route path="/goose/admin" component={GooseAdminPage} />
-        <Route path="/goose/editorial" component={GooseEditorialPage} />
-        <Route path="/goose/drone" component={DroneBlogPage} />
-        <Route path="/goose/press-room" component={GazetteRefinerPage} />
-        <Route path="/pochote" component={PochoteAnalysisPage} />
-        <Route path="/goose/humor" component={GooseHumorPage} />
-        <Route path="/goose" component={GooseGazettePage} />
-        {/* Main KAPPA platform */}
         <Route>
           <SidebarProvider>
             <div className="flex h-screen w-full">
@@ -204,7 +229,7 @@ function AppWithDossier() {
               <div className="flex flex-col flex-1 min-w-0">
                 <HeaderControls />
                 <main className="flex-1 overflow-auto min-h-0">
-                  <Router />
+                  <KappaRouter />
                 </main>
               </div>
             </div>

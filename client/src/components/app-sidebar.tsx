@@ -39,6 +39,7 @@ import {
   Newspaper,
   Hash,
   Zap,
+  ClipboardList,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -48,6 +49,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useI18n } from "@/lib/i18n";
 import { useDossier } from "@/lib/dossier";
+import { useSiteMode } from "@/lib/site-mode";
 import { type KappaStatus, type PhoenixCountdown, THREAT_LEVELS } from "@shared/schema";
 
 function HiddenBookshelf() {
@@ -138,6 +140,7 @@ const navGroups: NavGroup[] = [
     items: [
       { titleKey: "sidebar.commandCenter", fallback: "Command Center", url: "/command", icon: Terminal },
       { titleKey: "sidebar.dashboard", fallback: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+      { titleKey: "sidebar.statusReport", fallback: "Status Report", url: "/status", icon: ClipboardList },
     ],
   },
   {
@@ -193,6 +196,7 @@ const navGroups: NavGroup[] = [
     labelKey: "sidebar.public", fallbackLabel: "PUBLIC",
     items: [
       { titleKey: "sidebar.hyperobjects", fallback: "⬡ Hyperobject Intel", url: "/hyperobjects", icon: Atom },
+      { titleKey: "sidebar.gooseGazette", fallback: "Goose Gazette", url: "/goose", icon: Newspaper },
     ],
   },
   {
@@ -224,11 +228,11 @@ function CollapsibleGroup({ group, location }: { group: NavGroup; location: stri
           const isActive = location === item.url;
           return (
             <li key={item.url}>
-              <Link 
+              <Link
                 href={item.url}
                 className={`flex items-center gap-3 px-4 py-1.5 text-sm font-serif transition-colors border-l-2 ${
-                  isActive 
-                    ? "border-primary text-primary font-bold bg-sidebar-accent/50" 
+                  isActive
+                    ? "border-primary text-primary font-bold bg-sidebar-accent/50"
                     : "border-transparent text-foreground hover:text-primary hover:bg-sidebar-accent/30"
                 }`}
               >
@@ -247,6 +251,7 @@ function CollapsibleGroup({ group, location }: { group: NavGroup; location: stri
 
 export function AppSidebar() {
   const [location] = useLocation();
+  const { toggle: toggleMode } = useSiteMode();
 
   const { data: kappaStatus } = useQuery<KappaStatus>({
     queryKey: ["/api/kappa/status"],
@@ -266,8 +271,23 @@ export function AppSidebar() {
   return (
     <Sidebar className="border-r border-border bg-sidebar h-full flex flex-col w-[260px]">
       <div className="p-6 border-b border-border mb-4">
-        <h1 className="text-3xl font-serif tracking-tight font-bold text-foreground">KAPPA</h1>
-        
+        <div className="flex items-start justify-between">
+          <h1 className="text-3xl font-serif tracking-tight font-bold text-foreground">KAPPA</h1>
+          {/* Mode toggle pill */}
+          <button
+            onClick={() => {
+              toggleMode();
+              window.location.href = "/";
+            }}
+            data-testid="button-sidebar-mode-toggle"
+            title="Switch to Goose Gazette"
+            className="mt-1 flex items-center gap-1 rounded-full border border-border px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+          >
+            <Newspaper className="h-2.5 w-2.5" />
+            GAZETTE
+          </button>
+        </div>
+
         <div className="mt-4 flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <div
@@ -285,7 +305,7 @@ export function AppSidebar() {
           )}
         </div>
       </div>
-      
+
       <SidebarContent className="flex-1 overflow-y-auto overflow-x-hidden pb-8">
         {navGroups.map((group) => (
           <CollapsibleGroup key={group.fallbackLabel} group={group} location={location} />

@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState } from "react";
 
-type SiteMode = "satire" | "evidence";
+export type SiteMode = "goose" | "kappa";
 
 interface SiteModeContextValue {
   mode: SiteMode;
@@ -9,17 +9,22 @@ interface SiteModeContextValue {
 }
 
 const SiteModeContext = createContext<SiteModeContextValue>({
-  mode: "satire",
+  mode: "goose",
   toggle: () => {},
   setMode: () => {},
 });
 
+function resolveStoredMode(raw: string | null): SiteMode {
+  if (raw === "kappa") return "kappa";
+  return "goose";
+}
+
 export function SiteModeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<SiteMode>(() => {
     try {
-      return (localStorage.getItem("kappa_site_mode") as SiteMode) || "satire";
+      return resolveStoredMode(localStorage.getItem("kappa_site_mode"));
     } catch {
-      return "satire";
+      return "goose";
     }
   });
 
@@ -28,7 +33,7 @@ export function SiteModeProvider({ children }: { children: React.ReactNode }) {
     try { localStorage.setItem("kappa_site_mode", m); } catch {}
   };
 
-  const toggle = () => setMode(mode === "satire" ? "evidence" : "satire");
+  const toggle = () => setMode(mode === "goose" ? "kappa" : "goose");
 
   return (
     <SiteModeContext.Provider value={{ mode, toggle, setMode }}>
@@ -47,10 +52,10 @@ export function SiteModeToggle({ className }: { className?: string }) {
     <button
       onClick={toggle}
       data-testid="button-site-mode-toggle"
-      title={mode === "satire" ? "Switch to evidence directory" : "Switch to Goose Gazette"}
+      title={mode === "goose" ? "Switch to CIA JW — full intel platform" : "Switch to Goose Gazette"}
       className={className}
     >
-      {mode === "satire" ? "EVIDENCE" : "GAZETTE"}
+      {mode === "goose" ? "CIA JW" : "GAZETTE"}
     </button>
   );
 }

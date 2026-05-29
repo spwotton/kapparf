@@ -9,14 +9,20 @@ import { HypervisorPanel } from "@/components/hypervisor-panel";
 import { useSiteMode } from "@/lib/site-mode";
 
 function SiteModeToggleBtn() {
-  const { mode, toggle } = useSiteMode();
+  const { toggle } = useSiteMode();
+  const [, navigate] = useLocation();
+  const handleToggle = () => {
+    toggle();
+    navigate("/command");
+  };
   return (
     <button
-      onClick={toggle}
+      onClick={handleToggle}
       data-testid="button-site-mode-toggle"
+      title="Switch to CIA JW — full intel platform"
       className="text-[10px] font-bold tracking-widest uppercase text-gray-500 hover:text-black border border-gray-300 rounded px-2 py-1 transition-colors bg-white w-[76px] text-center"
     >
-      {mode === "satire" ? "EVIDENCE" : "GAZETTE"}
+      CIA JW
     </button>
   );
 }
