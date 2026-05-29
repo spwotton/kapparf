@@ -40,13 +40,13 @@ title = "jaco_nexus_title_fixed"
 id = "H_6cd7LoAuzeTNxfsa3IZ"
 uri = "file://attached_assets/nexus_slide_02.png"
 type = "image"
-title = "jaco_nexus_italian_layer"
+title = "slide02_italian_big_picture"
 
 [[generated]]
 id = "m5WL4CGT_msci2vuPjY2z"
 uri = "file://attached_assets/nexus_slide_03.png"
 type = "image"
-title = "jaco_nexus_jw_structure"
+title = "slide03_jw_infrastructure_typos_fixed"
 
 [[generated]]
 id = "6XWUH1201qwHM8yimfCof"
@@ -58,13 +58,13 @@ title = "jaco_nexus_encirclement"
 id = "MBNYdVMeGv-65g81uL50-"
 uri = "file://attached_assets/nexus_slide_05.png"
 type = "image"
-title = "jaco_nexus_leonardo_darpa"
+title = "slide05_four_layers_typos_fixed"
 
 [[generated]]
 id = "ANU1IUb8wgaY_4qjRuB2l"
 uri = "file://attached_assets/nexus_slide_06.png"
 type = "image"
-title = "jaco_nexus_setecom"
+title = "slide06_setecom_typos_fixed"
 
 [[generated]]
 id = "hHJslokGkRO7f9i1DSJUI"
@@ -232,13 +232,13 @@ title = "Slide 1 (fixed) — THE JACO NEXUS"
 id = "HBp0WnsxsMisHlFFvVKP3"
 uri = "file://attached_assets/nexus_slide_02.png"
 type = "image"
-title = "Slide 2 — The Italian Layer"
+title = "Slide 2 — The Italian Architecture (rewritten)"
 
 [[outputs]]
 id = "W2RlG4REjwExSMJOFKwyy"
 uri = "file://attached_assets/nexus_slide_03.png"
 type = "image"
-title = "Slide 3 — JW as Infrastructure"
+title = "Slide 3 — JW as Infrastructure (typos fixed)"
 
 [[outputs]]
 id = "HR7eHZXG2RzmrePgMuk0p"
@@ -250,13 +250,13 @@ title = "Slide 4 — The Encirclement"
 id = "IhUMfRUFQQx13KyARoUe2"
 uri = "file://attached_assets/nexus_slide_05.png"
 type = "image"
-title = "Slide 5 (revised) — Leonardo / DARPA / Starlink Layer"
+title = "Slide 5 — Four Layers (typos fixed)"
 
 [[outputs]]
 id = "UnCef2D71wm86N5Snx3hW"
 uri = "file://attached_assets/nexus_slide_06.png"
 type = "image"
-title = "Slide 6 — SETECOM / SETECOM Air"
+title = "Slide 6 — SETECOM / SETECOM Air (typos fixed)"
 
 [[outputs]]
 id = "yBfQWsqaLZVV2iJZXA720"
