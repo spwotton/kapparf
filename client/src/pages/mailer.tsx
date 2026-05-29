@@ -751,6 +751,9 @@ export default function MailerPage() {
 
       {/* ── CR Authorities Blast — Physical Proximity Threat / JW Ground Layer ── */}
       <CRAuthPanel />
+
+      {/* ── Expansion Blast — UK/DSE, Italy, Argentina, EU, Brazil, ICS, Aviation ── */}
+      <ExpansionPanel />
     </div>
   );
 }
@@ -868,6 +871,113 @@ function CRAuthPanel() {
               <Badge variant="outline" className="text-xs shrink-0 ml-auto">{c.category}</Badge>
             </div>
           ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Expansion Panel — UK/DSE, Italy, Argentina, EU, Brazil, ICS/OT, Aviation
+// ─────────────────────────────────────────────────────────────────────────────
+function ExpansionPanel() {
+  const { toast } = useToast();
+  const [showResults, setShowResults] = React.useState(false);
+  const [fired, setFired] = React.useState<{ sent?: number; failed?: number; total?: number } | null>(null);
+
+  const fireExpansion = async (dryRun: boolean) => {
+    try {
+      const res = await fetch("/api/mailer/fire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: "kappa-fire-2026", target: "expansion", dryRun }),
+      });
+      const data = await res.json();
+      if (dryRun) {
+        toast({ title: "Dry run queued", description: "341 expansion contacts listed in server log — check console." });
+      } else {
+        toast({ title: "Expansion blast fired", description: "341 contacts queued async (~120s). Monitor server log." });
+        setFired({ total: 341 });
+      }
+      return data;
+    } catch (err: any) {
+      toast({ title: "Error", description: err?.message || String(err), variant: "destructive" });
+    }
+  };
+
+  const VERTICALS = [
+    { label: "UK / Deep Sea Electronics",  count: 28, color: "bg-blue-500" },
+    { label: "Italy (Leonardo/Telespazio)", count: 25, color: "bg-green-500" },
+    { label: "Argentina (Telespazio AR)",   count: 22, color: "bg-yellow-500" },
+    { label: "EU Institutions",             count: 20, color: "bg-purple-500" },
+    { label: "Brazil (ANATEL/MPF/Press)",   count: 17, color: "bg-pink-500" },
+    { label: "ICS/OT Security Community",  count: 31, color: "bg-red-500" },
+    { label: "Aviation Expansion",          count: 41, color: "bg-indigo-500" },
+  ];
+
+  return (
+    <div className="border border-blue-200 dark:border-blue-900 rounded-lg p-4 space-y-3 bg-blue-50/30 dark:bg-blue-950/20">
+      <div className="flex items-center gap-2">
+        <Radio className="w-4 h-4 text-blue-500" />
+        <p className="text-sm font-medium">Expansion Blast — DSE/Setecom Dossier</p>
+        <Badge variant="outline" className="text-xs ml-auto border-blue-300 dark:border-blue-700 text-blue-600 dark:text-blue-400">
+          341 recipients
+        </Badge>
+      </div>
+
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Multi-vertical campaign focused on the Héctor Mora Marín / Setecom / DSE critical infrastructure nexus.
+        Covers Deep Sea Electronics UK home jurisdiction, Italian Garante + press (Leonardo/Telespazio),
+        Argentine regulators (ENACOM, UIF), EU institutions (EDPB, OLAF, ENISA, Europol, EP committees),
+        Brazilian authorities (ANATEL, MPF, COAF), ICS/OT security researchers (Dragos, Claroty, CISA ICS-CERT,
+        KrebsOnSecurity), and expanded aviation (ICAO, FAA, NTSB, TSA + 20 airlines).
+        Evidence anchor: Edson Martendal's public training video teaching Admin/Password1234 doctrine.
+      </p>
+
+      <div className="grid grid-cols-2 gap-1.5">
+        {VERTICALS.map((v) => (
+          <div key={v.label} className="flex items-center gap-2 text-xs">
+            <span className={`w-2 h-2 rounded-full shrink-0 ${v.color}`} />
+            <span className="text-muted-foreground truncate">{v.label}</span>
+            <span className="ml-auto font-mono text-foreground shrink-0">{v.count}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          Fires async via internal endpoint (~341 × 350ms ≈ 120s). Each vertical receives a tailored letter
+          in the relevant language (EN/IT/ES/PT). Evidence: Martendal training video, CISA CVEs, Modbus:502 open IP.
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-expansion-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-blue-300 dark:border-blue-700"
+          onClick={() => fireExpansion(true)}
+        >
+          Dry Run (log only)
+        </Button>
+        <Button
+          data-testid="button-expansion-send"
+          size="sm"
+          className="gap-2 bg-blue-600 hover:bg-blue-700 text-white"
+          onClick={() => fireExpansion(false)}
+        >
+          <Send className="w-3.5 h-3.5" />
+          Fire Expansion Blast
+        </Button>
+      </div>
+
+      {fired && (
+        <div className="flex items-center gap-3 text-sm">
+          <CheckCircle className="w-4 h-4 text-green-500" />
+          <span className="text-green-600 font-medium">Blast queued — {fired.total} contacts firing async</span>
+          <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
         </div>
       )}
     </div>
