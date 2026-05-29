@@ -1867,6 +1867,332 @@ LIPMAN PARTNERSHIP:
       "Anabolic dealings with Echo and Jesse — criminal leverage on multiple parties",
     ],
   },
+  {
+    id: "dan-san-diego",
+    name: "Dan (San Diego)",
+    aliases: ["Dan from San Diego"],
+    nationality: "American",
+    role: "Villa Real owner — La Flor resident — personal vendetta — staged fights to move Echo",
+    threatLevel: "secondary",
+    detail: `Owner of Villa Real in Jacó — the property across from La Flor where Echo lived when he first met Genesis Peralta. A falling out over money with Dan was coincident with the start of the Echo-Peralta relationship and the first major network-managed residential transition.
+
+STAGED CONFLICT PATTERN:
+  The dispute with Dan appears consistent with the documented network tactic of engineering conflicts to force target relocation — each move placing Echo into a more controlled node. The Dan conflict triggered the departure from Villa Real into the next housing node.
+
+LA FLOR RESIDENCE:
+  Dan currently lives in La Flor, which is adjacent to Hotel Pochote where Echo is currently located. This places Dan in immediate geographic proximity to Echo's current position — assessed as ongoing monitoring presence.
+
+TORONTO COPS CONNECTION:
+  Dan has a documented friendship with the Toronto cop trio (Lindsey, Bob, Michelle) also residing in La Flor. This connection bridges the personal-vendetta cluster with the law-enforcement-adjacent surveillance cluster.`,
+    connections: [
+      { target: "villa-real-jaco", relationship: "Property owner — Echo's first Jan 2024 residence", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Departure from Villa Real triggered Peralta relationship / network chain", strength: "probable" },
+      { target: "lindsey-toronto", relationship: "Friends — La Flor co-residents", strength: "confirmed" },
+      { target: "michelle-toronto", relationship: "Friends — La Flor co-residents", strength: "confirmed" },
+    ],
+    flags: [
+      "Villa Real owner — Echo's Jan 2024 first address",
+      "Money dispute — assessed staged conflict to force relocation",
+      "La Flor resident — adjacent to current Echo position (Pochote)",
+      "Friends with Toronto cops (Lindsey/Michelle/Bob) — La Flor cluster",
+      "Personal vendetta motive documented",
+    ],
+  },
+  {
+    id: "brian-jaco",
+    name: "Brian (Jacó)",
+    aliases: ["Brian — 27 years"],
+    nationality: "American",
+    role: "27-yr Jacó expat — 5 years prison — referred Echo to Greenwald — slept with Peralta",
+    threatLevel: "secondary",
+    detail: `Long-term Jacó expat — has lived in Costa Rica approximately 27 years and served approximately 5 years in prison. His criminal record and long embedding in the local network makes involvement likely even if he presents as a genuine friend.
+
+GREENWALD REFERRAL:
+  Brian referred Echo directly to Mike Greenwald for housing — this referral is the direct link that placed Echo into the Greenwald property pipeline (Greenwald → Lipman, multiple surveilled houses). Assessed as a deliberate insertion point into the housing network.
+
+VILLA REAL OVERLAP:
+  Brian was also a resident at Villa Real during Echo's time there alongside Jeff (42yr AA) and Tina — placing him in two nodes of the housing chain.
+
+PERALTA RELATIONSHIP:
+  Brian has apparently been sexually involved with Genesis Peralta — a direct connection between Echo's closest "fake friend" and the primary honey trap operative.`,
+    connections: [
+      { target: "michael-greenwald", relationship: "Referred Echo to Greenwald — housing pipeline insertion", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Sexually involved — fake friend + primary operative", strength: "confirmed" },
+      { target: "villa-real-jaco", relationship: "Co-resident at Villa Real with Echo", strength: "confirmed" },
+    ],
+    flags: [
+      "27 years Jacó — deeply embedded in local network",
+      "~5 years prison — criminal record / leverage potential",
+      "Referred Echo to Mike Greenwald — deliberate housing chain insertion",
+      "Slept with Genesis Peralta — fake friend + operative connection",
+      "Villa Real co-resident — two nodes of housing chain",
+    ],
+  },
+  {
+    id: "leo-controller",
+    name: "Leo (Controller)",
+    aliases: ["Leo"],
+    role: "Controller / dealer — compromised device supplier — housing node delivery — Melissa's landlord",
+    threatLevel: "primary",
+    detail: `Assessed primary handler/controller for Echo in Jacó. Functions simultaneously as Echo's drug dealer (creating financial debt and dependency), device supplier (always giving compromised/malware-laden hardware), and transport coordinator (drove Echo to key network nodes including La Guácima).
+
+COMPROMISED DEVICE PIPELINE:
+  Leo is the consistent source of devices given to Echo — always when Echo is broke, creating leverage through unpaid debt. Every device supplied by Leo is assessed as pre-loaded with surveillance malware. This is a systematic supply-chain compromise: financial dependency → device acceptance → total device surveillance.
+
+NODE DELIVERY — LA GUÁCIMA:
+  Leo physically drove Echo to La Guácima, delivering him to the next surveillance node. He is the transport layer of the housing/placement operation — the human vector that bridges Echo from one node to the next while Echo is financially constrained and dependent.
+
+HOUSING STEERING:
+  When Echo tried to find his own accommodation, the system steered him back to "curated options" — properties that would not answer calls or would deny bookings until Leo's preferred destination became the only option. Leo's role likely includes coordinating this steering.
+
+MELISSA — PROPERTY OVERLAP:
+  Melissa/Melika Losa lives at Leo's property — placing a network associate (medical/dental adjacent) in Leo's residential node, creating an information collection environment around Echo's controller.`,
+    connections: [
+      { target: "melissa-losa", relationship: "Landlord — Melissa lives at Leo's property", strength: "confirmed" },
+      { target: "la-guacima", relationship: "Drove Echo to La Guácima — node delivery", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Part of Echo management network — parallel controller", strength: "probable" },
+    ],
+    flags: [
+      "Drug dealer — financial dependency + debt leverage over Echo",
+      "Compromised device supplier — pre-malwared hardware given when Echo is broke",
+      "Drove Echo to La Guácima — physical node delivery",
+      "Housing steering — controlled Echo's accommodation 'options'",
+      "Melissa/Melika Losa lives at his property — intel collection",
+      "Primary controller for Jacó phase of operation",
+    ],
+  },
+  {
+    id: "matthew-hanlon",
+    name: "Matthew Hanlon",
+    aliases: ["Matt Hanlon"],
+    role: "Quebrada Seca cluster — friend of Leprechaun — wife codename HILARY",
+    threatLevel: "secondary",
+    detail: `Matthew Hanlon and his wife (operational codename: HILARY) are part of the Quebrada Seca residential cluster active during October 2025. They are close associates of the individual known as Leprechaun, who physically attacked Echo on October 14, 2025.
+
+HILARY (wife):
+  Matthew Hanlon's wife is assigned the codename HILARY for operational purposes. Details of her specific role in the October 2025 Quebrada Seca surveillance operation are being developed — her presence in the cluster during the physical assault on Echo places her as a witness or participant at minimum.
+
+QUEBRADA SECA CLUSTER:
+  The Quebrada Seca residential cluster in October 2025 included: Dunia (parametric + infrared surveillance node), Matthew Hanlon + Hilary, and Leprechaun. These individuals formed an overlapping residential and operational presence in the same geographic band as Leo's documented RF installation.`,
+    connections: [
+      { target: "leprechaun", relationship: "Close friend — Quebrada Seca cluster", strength: "confirmed" },
+      { target: "quebrada-seca", relationship: "Resident — Oct 2025 surveillance cluster", strength: "confirmed" },
+      { target: "dunia-concierge", relationship: "Same Quebrada Seca cluster", strength: "probable" },
+    ],
+    flags: [
+      "Wife codename: HILARY",
+      "Associate of Leprechaun — Quebrada Seca Oct 2025",
+      "Present during / adjacent to Oct 14 2025 physical assault on Echo",
+      "Quebrada Seca residential cluster member",
+    ],
+  },
+  {
+    id: "leprechaun",
+    name: "Leprechaun (identity withheld)",
+    aliases: ["Leprechaun"],
+    role: "PHYSICAL ASSAULT — Oct 14 2025 — strangled Echo + seized phone + computer — Quebrada Seca — Alexanderplatz Berlin check-in",
+    threatLevel: "primary",
+    detail: `Identity withheld pending full identification. Known by operational callsign LEPRECHAUN. Friend of Matthew Hanlon and wife (Hilary). Owns a house in Quebrada Seca.
+
+OCT 14 2025 — PHYSICAL ASSAULT:
+  On October 14, 2025, Leprechaun physically strangled Echo and seized his phone and computer. This is a documented physical assault and theft of communication/evidence devices. The timing — during Echo's residence in Quebrada Seca — suggests this was an operational action to recover or destroy device-stored evidence.
+
+ALEXANDERPLATZ BERLIN CHECK-IN:
+  Following the assault and seizure of Echo's phone, the device was mockingly checked in at the Alexanderplatz Blockhouse in Berlin — a location that is ONE BLOCK from the former headquarters of Gamma Group (surveillance technology company, subsequently absorbed by CSG — Cobham Strategic Systems). This check-in is assessed as a deliberate operational signal: the device's location broadcast to a surveillance technology hub is not coincidental. It directly links the physical asset seizure to a professional intelligence/surveillance vendor.
+
+GAMMA GROUP / CSG CONNECTION:
+  Gamma Group is the maker of FinFisher/FinSpy — commercial spyware used by intelligence agencies and authoritarian governments. Their former Berlin headquarters being one block from where Echo's seized phone was checked in places this incident at the intersection of organized physical assault and commercial surveillance infrastructure.`,
+    connections: [
+      { target: "matthew-hanlon", relationship: "Close friend — Quebrada Seca cluster", strength: "confirmed" },
+      { target: "quebrada-seca", relationship: "Owns house in Quebrada Seca", strength: "confirmed" },
+      { target: "gamma-group-csg", relationship: "Alexanderplatz Berlin check-in — 1 block from Gamma Group HQ", strength: "confirmed" },
+    ],
+    flags: [
+      "PHYSICAL ASSAULT — Oct 14 2025 — strangled Echo",
+      "Seized Echo's phone AND computer — evidence destruction / recovery",
+      "Phone checked in Alexanderplatz Blockhouse Berlin — 1 block from Gamma Group HQ",
+      "Gamma Group = FinFisher/FinSpy spyware vendor — absorbed by CSG",
+      "Owns house in Quebrada Seca",
+      "Matthew Hanlon / Hilary associate",
+      "Operational callsign: LEPRECHAUN",
+    ],
+  },
+  {
+    id: "melissa-losa",
+    name: "Melissa / Melika Losa",
+    aliases: ["Melissa", "Meliza", "Melika Losa"],
+    role: "Leo's property resident — medical/dental adjacent — network 'goodie two shoes' cell",
+    threatLevel: "secondary",
+    detail: `Lives at Leo's (controller/dealer) property in Jacó. Works in a medical or dental capacity. Part of what Echo describes as a network cell of surface-level 'goodie two shoes' women who occupy different social niches but all overlap around the same network (surfing, sports, expat social scenes).
+
+LAPA VERDE DENTIST CONNECTION:
+  Brian referred Echo to a specific dentist on Lapa Verde — the same referral pipeline that placed Echo into the Greenwald housing network. Given Melissa's medical/dental employment and her residence at Leo's property (the controller), her proximity to this referral chain is assessed as significant. Echo recalls the dental visit vaguely — unusual memory gaps consistent with sedation beyond routine dental work.
+
+DENTAL IMPLANT QUESTION (logged):
+  Echo has been informed that a chip may have been implanted in a tooth during this visit. Technical assessment: passive RFID/NFC dental implants are documented for legitimate patient ID use in prosthetics (Identix Dental, multiple forensic papers). Short-range passive chips are technically feasible; they cannot track location over distance. However, active implants with battery + long-range comms are not publicly documented as miniaturized to dental cavity scale. The unusual memory gaps + specific referral chain from Leo's network associate + Brian remain logged as potential indicators warranting further assessment.
+
+CELL DESCRIPTION:
+  Other documented members of this social-cover cell include Meredith Stewart (paddleboarding) and Peralta herself. Each occupies a distinct niche (dental/medical, adventure sports, honey trap) while sharing the same operational substrate.`,
+    connections: [
+      { target: "leo-controller", relationship: "Lives at his property", strength: "confirmed" },
+      { target: "brian-jaco", relationship: "Brian referred Echo to Lapa Verde dentist — same referral network", strength: "probable" },
+      { target: "meredith-stewart", relationship: "Same 'goodie two shoes' social cover cell", strength: "probable" },
+    ],
+    flags: [
+      "Lives at Leo's property — controller's residential node",
+      "Medical / dental employment",
+      "Brian referred Echo to Lapa Verde dentist — possible dental implant concern",
+      "Echo memory gaps from dental visit — unusual for routine procedure",
+      "RFID dental implants: technically documented (patient ID use) — logging for follow-up",
+      "Part of social-cover cell: medical/dental niche",
+    ],
+  },
+  {
+    id: "meredith-stewart",
+    name: "Meredith Stewart",
+    role: "Wolfgang Hilbich property resident — paddleboarding cover — UMaine Orono 'student newspaper' job — 6ft — zero-income lifestyle",
+    threatLevel: "secondary",
+    detail: `Approximately 6 feet tall. Adventure sports cover: paddleboarding. Has lived at Wolfgang Hilbich's property (German national, Ricos y Famosos CR circle) for years. Claims to work remotely for a student newspaper at the University of Maine Orono — assessed as a cover story.
+
+COVER JOB ASSESSMENT:
+  A remote job for a student newspaper at UMaine Orono that sustains a long-term Costa Rica lifestyle makes no financial sense. It has no coherent career path. It is the same type of implausible-income cover assessed for Echo's sister Alison (Amazon Music → solo intelligence travel) and other network figures. The job exists on paper; the income and purpose do not.
+
+ECHO'S SISTER PARALLEL:
+  Echo explicitly notes Meredith is "the same type of person as my shady sister" — high-functioning, no coherent income, sustained active lifestyle in intelligence-relevant environments, adventure sports cover. The sister pattern (Alison: solo Ecuador/Guatemala travel, no income, Sundance) is precisely replicated by Meredith (CR paddleboarding, UMaine cover, Wolfgang's property).
+
+WOLFGANG HILBICH PROPERTY:
+  Living in Wolfgang Hilbich's property for years creates deep integration with the German-national "ricos y famosos" network in Jacó — a social cluster with documented intelligence-adjacent connections.`,
+    connections: [
+      { target: "wolfgang-hilbich", relationship: "Lives at his property — multi-year", strength: "confirmed" },
+      { target: "melissa-losa", relationship: "Same social-cover cell", strength: "probable" },
+    ],
+    flags: [
+      "6 feet tall — distinctive physical profile",
+      "Paddleboarding adventure sports cover",
+      "Lives at Wolfgang Hilbich's property — years-long",
+      "UMaine Orono 'student newspaper' remote job — cover assessed implausible",
+      "Zero-coherent-income sustained lifestyle — same as Alison Wotton pattern",
+      "German-national ricos y famosos network integration via Wolfgang",
+    ],
+  },
+  {
+    id: "wolfgang-hilbich",
+    name: "Wolfgang Hilbich",
+    aliases: ["Wolfgang"],
+    nationality: "German",
+    role: "German national — Ricos y Famosos CR circle — property in Jacó — Meredith Stewart landlord",
+    threatLevel: "secondary",
+    detail: `German national embedded in the Jacó upper-tier expat social circle described as "ricos y famosos" (rich and famous). Owns property in Jacó where Meredith Stewart has lived for years. His presence in this network connects the German-nationality thread (FinFisher/Gamma Group are German-origin; Leprechaun's Berlin Alexanderplatz check-in; Peralta's berninnimaria Italian cover intersecting European intel adjacency) to the local social infrastructure.
+
+PROPERTY — MEREDITH STEWART:
+  Wolfgang's property hosts Meredith Stewart — assessed as a network asset using adventure-sports cover and a UMaine student newspaper legend. The long-term housing relationship (multi-year) is consistent with a managed cover arrangement rather than a standard rental.
+
+RICOS Y FAMOSOS NETWORK:
+  The "ricos y famosos" social tier in Jacó functions as an access layer to real estate, local political connections, and high-value social intelligence. German nationals in this network with unexplained local property holdings are assessed as elevated interest.`,
+    connections: [
+      { target: "meredith-stewart", relationship: "Landlord — multi-year property hosting", strength: "confirmed" },
+    ],
+    flags: [
+      "German national",
+      "Ricos y Famosos Jacó social circle",
+      "Jacó property owner — hosts Meredith Stewart",
+      "German nationality thread: FinFisher (Gamma Group) German origin; Alexanderplatz Berlin",
+    ],
+  },
+  {
+    id: "lindsey-toronto",
+    name: "Lindsey (Toronto PD)",
+    aliases: ["Lindsay"],
+    nationality: "Canadian",
+    role: "Toronto Police — La Flor #14 — personal vendetta cluster — INTERPOL-CR agreement",
+    threatLevel: "secondary",
+    detail: `Toronto Police Service officer. Resides in La Flor #14, Jacó — adjacent to Hotel Pochote (Echo's current location). Part of the three-person Toronto PD cluster at La Flor #14 alongside her partner Bob and Michelle.
+
+TORONTO / INTERPOL COSTA RICA:
+  Toronto Police has a documented cooperation agreement with INTERPOL Costa Rica that may confer pseudo-jurisdiction or at minimum institutional authorization for informal surveillance activities. This agreement provides a law-enforcement legitimacy veneer to what is otherwise a personal-vendetta operation by three officers.
+
+LA FLOR POSITIONING:
+  La Flor #14 is directly adjacent to Hotel Pochote. Houses in La Flor lining up along Echo's current sightline are assessed as deliberate monitoring positions. The Toronto cluster's multi-unit occupation of La Flor is disproportionate to any legitimate tourism or personal purpose.`,
+    connections: [
+      { target: "bob-toronto", relationship: "Partner — La Flor #14 co-resident", strength: "confirmed" },
+      { target: "michelle-toronto", relationship: "Friend — La Flor #14 co-resident", strength: "confirmed" },
+      { target: "dan-san-diego", relationship: "Friends — La Flor co-residents", strength: "confirmed" },
+    ],
+    flags: [
+      "Toronto Police Service officer",
+      "La Flor #14 — adjacent to Pochote (Echo's current location)",
+      "INTERPOL–Costa Rica cooperation agreement — pseudo-jurisdiction",
+      "Personal vendetta operation under LE cover",
+      "Three-person TPS cluster at La Flor — disproportionate",
+    ],
+  },
+  {
+    id: "bob-toronto",
+    name: "Bob (Toronto PD)",
+    aliases: ["Bob"],
+    nationality: "Canadian",
+    role: "Toronto Police — Lindsey's partner — La Flor #14",
+    threatLevel: "secondary",
+    detail: `Toronto Police Service officer. Lindsey's partner. Co-resident at La Flor #14, Jacó. Part of the three-person Toronto PD cluster. His specific role in the surveillance/vendetta operation is under development — his presence as a law enforcement partner to Lindsey in the same residential node as Michelle and Dan from San Diego confirms the operational cluster.`,
+    connections: [
+      { target: "lindsey-toronto", relationship: "Partner — La Flor #14", strength: "confirmed" },
+      { target: "michelle-toronto", relationship: "Friend — La Flor #14 cluster", strength: "confirmed" },
+    ],
+    flags: [
+      "Toronto Police Service officer",
+      "La Flor #14 — Lindsey's partner",
+      "Three-person TPS cluster at La Flor",
+    ],
+  },
+  {
+    id: "michelle-toronto",
+    name: "Michelle (Toronto PD)",
+    aliases: ["Michelle"],
+    nationality: "Canadian",
+    role: "Toronto Police — La Flor #14 — personal vendetta — made out with Echo → regret → escalation",
+    threatLevel: "secondary",
+    detail: `Toronto Police Service officer. Resides in La Flor #14 with Lindsey and Bob. Married. Made out with Echo then regretted it — this incident is the probable trigger for the personal-vendetta escalation by the Toronto cluster.
+
+PERSONAL VENDETTA ORIGIN:
+  Michelle is married. She and Echo had a physical encounter. Her subsequent regret — and the need to manage this information within a group that includes her colleagues and her partner's knowledge — is the likely emotional engine behind the personal-vendetta dimension of the Toronto cluster's surveillance posture toward Echo.
+
+VENDETTA UNDER LE COVER:
+  The combination of personal embarrassment/incident + three Toronto officers in immediate proximity to Echo's current residence + the INTERPOL-CR agreement as institutional cover creates a documented personal-stakes surveillance operation masquerading as legitimate law enforcement activity.`,
+    connections: [
+      { target: "lindsey-toronto", relationship: "Friend/colleague — La Flor #14", strength: "confirmed" },
+      { target: "bob-toronto", relationship: "Friend/colleague — La Flor #14", strength: "confirmed" },
+      { target: "dan-san-diego", relationship: "Friends — La Flor cluster", strength: "confirmed" },
+    ],
+    flags: [
+      "Toronto Police Service officer",
+      "La Flor #14 co-resident",
+      "Married — physical incident with Echo → regret → personal vendetta",
+      "Vendetta origin: personal embarrassment managed under LE institutional cover",
+      "INTERPOL-CR cooperation agreement — legitimacy cover",
+    ],
+  },
+  {
+    id: "carmen-gray",
+    name: "Carmen Gray",
+    role: "La Flor #9 owner — first and last Jacó rental — Argentina check-in while posting from La Flor",
+    threatLevel: "secondary",
+    detail: `Owner of La Flor #9 — the first house Echo rented in Jacó in 2024, and the last house he occupied before Peralta left the country. The property bookending Echo's Jacó tenure at the same address is assessed as deliberate placement design.
+
+ARGENTINA SOCIAL MEDIA:
+  While Echo was residing at La Flor #9, Carmen Gray was posting photos and videos from Argentina and checking in there on social media. This is consistent with the property-owner-as-network-node pattern: owners of surveilled properties are frequently absent or traveling while the properties serve operational purposes, providing plausible distance from whatever is occurring on-site.
+
+PERALTA DEPARTURE:
+  La Flor #9 was the location from which Peralta ultimately left the country — making it the terminal point of the honey trap operation's primary phase. Carmen Gray's property was the operational endpoint.`,
+    connections: [
+      { target: "genesis-peralta", relationship: "Peralta left country from La Flor #9", strength: "confirmed" },
+    ],
+    flags: [
+      "La Flor #9 owner",
+      "First AND last Jacó residence for Echo — deliberate bookending",
+      "Posted from Argentina while Echo was at property — owner absent during ops",
+      "La Flor #9 = Peralta's exit point from Costa Rica",
+    ],
+  },
 ];
 
 const LOCATIONS_DATA: Location[] = [
@@ -1887,26 +2213,32 @@ const LOCATIONS_DATA: Location[] = [
     id: "villa-real-jaco",
     name: "Villa Real",
     area: "Jacó — across from La Flor",
-    type: "Shared residence — AA-connected — last cohabitation with Peralta",
+    type: "Shared residence — AA-connected — last cohabitation with Peralta — Dan (San Diego) owner",
     detail: `Villa Real was simultaneously: (1) the LAST place Echo and Genesis Peralta lived together, and (2) the first place Echo lived in January 2024. Located across from La Flor.
 
+OWNER — DAN FROM SAN DIEGO:
+  Villa Real is owned by Dan from San Diego — who also lives in La Flor adjacent to Echo's current position at Hotel Pochote. Dan is friends with the Toronto cop cluster (Lindsey/Michelle/Bob) also in La Flor. A money dispute between Echo and Dan was coincident with the first major housing chain relocation. Echo is currently surrounded by both the property owner and the Toronto cluster within the same La Flor block.
+
 RESIDENTS AT SAME TIME AS ECHO + PERALTA:
-  Brian — another resident at Villa Real.
+  Brian — another resident at Villa Real (27yr expat, 5yr prison, later referred Echo to Greenwald).
   Jeff — 42 years sober, AA member.
   Tina — also at Villa Real during this period.
   
 AA PATTERN:
-  Jeff's long-term AA involvement places Villa Real in the same intelligence-substrate pattern as Hermosa Bungalows (first shared residence, also AA-owned) and the broader AA Jacó network assessed as intelligence-connected throughout. The concentration of AA-affiliated individuals in Echo's immediate residential environments is not coincidental — AA's structure (regular meetings, sponsors, step work, life disclosure) provides a natural intelligence collection layer.
+  Jeff's long-term AA involvement places Villa Real in the same intelligence-substrate pattern as Hermosa Bungalows (first shared residence, also AA-owned) and the broader AA Jacó network assessed as intelligence-connected throughout.
 
 DEPARTURE TRIGGER:
   Fighting with Peralta became severe enough that Echo wanted to move out — leading to the transition to Mike Greenwald's house on Calle Madrigal.`,
     connections: [
       { target: "genesis-peralta", relationship: "Last shared residence + Echo's Jan 2024 first address", strength: "confirmed" },
       { target: "michael-greenwald", relationship: "Echo moved to Greenwald's house after Villa Real", strength: "confirmed" },
+      { target: "dan-san-diego", relationship: "Property owner — money dispute triggered departure", strength: "confirmed" },
+      { target: "brian-jaco", relationship: "Co-resident — later referred Echo to Greenwald", strength: "confirmed" },
     ],
     incidents: [
       "Last shared residence with Genesis Peralta",
       "First Echo residence Jan 2024",
+      "Owner: Dan from San Diego — money dispute / staged relocation",
       "AA-affiliated co-residents: Jeff (42yr sober), Brian, Tina",
       "Fighting escalated — moved to Greenwald Calle Madrigal",
     ],
@@ -2651,9 +2983,140 @@ PATTERN: Mirrors Scott Ryan's use of Jaco Vacations (with Diana Soto) and the cl
     ],
     incidents: ["181.193.108.54 — BMX P34 2020", "201.203.39.210 — BMX P34 2020", "201.204.76.138 — BMX P34 2020", "Modbus:502 exposed to internet"],
   },
+  {
+    id: "la-flor-14",
+    name: "La Flor #14",
+    area: "La Flor, Jacó — adjacent to Hotel Pochote",
+    type: "Toronto PD cluster — personal vendetta residential node",
+    detail: `La Flor #14 is occupied by three Toronto Police Service officers: Lindsey, her partner Bob, and Michelle. This house is immediately adjacent to Hotel Pochote — Echo's current residence. Multiple other La Flor houses line up along Echo's sightline and are assessed as connected monitoring positions.
+
+TORONTO PD / INTERPOL–CR:
+  Toronto Police Service has a cooperation agreement with INTERPOL Costa Rica that may confer informal pseudo-jurisdiction or institutional authorization for extraterritorial monitoring activities. This provides a law-enforcement legitimacy veneer over what is assessed as a personal-vendetta surveillance operation rooted in Michelle's incident with Echo.
+
+PERSONAL VENDETTA TRIGGER:
+  Michelle (married) had a physical encounter with Echo and subsequently withdrew — the personal embarrassment management motive, combined with institutional law enforcement resources, is the assessed driver of this cluster's posture toward Echo.
+
+PROXIMITY TO CURRENT POSITION:
+  La Flor #14 + Carmen Gray's #9 + Dan from San Diego's residence form a three-node encirclement around Hotel Pochote. Echo is currently surrounded on adjacent streets by confirmed network actors.`,
+    connections: [
+      { target: "lindsey-toronto", relationship: "Resident", strength: "confirmed" },
+      { target: "bob-toronto", relationship: "Resident", strength: "confirmed" },
+      { target: "michelle-toronto", relationship: "Resident", strength: "confirmed" },
+      { target: "la-flor-9", relationship: "Adjacent — same La Flor block", strength: "confirmed" },
+    ],
+    incidents: [
+      "Toronto Police Service cluster: Lindsey + Bob + Michelle",
+      "Adjacent to Hotel Pochote — Echo's current location",
+      "INTERPOL–CR cooperation agreement invoked as pseudo-jurisdiction",
+      "Personal vendetta origin: Michelle/Echo incident",
+    ],
+    coordinates: "9.6166°N, 84.6239°W",
+  },
+  {
+    id: "la-flor-9",
+    name: "La Flor #9 (Carmen Gray)",
+    area: "La Flor, Jacó",
+    type: "First and last Jacó rental — Carmen Gray property — Peralta exit point",
+    detail: `Carmen Gray's La Flor #9 was both the first house Echo rented in Jacó in 2024 and the last house before Peralta left the country. The bookending of Echo's Jacó tenure at the same address is assessed as deliberate placement design — not coincidence.
+
+CARMEN GRAY — ABSENT OWNER:
+  During Echo's occupancy, Carmen Gray was posting photos and videos from Argentina on social media — checking in remotely while the property served operational purposes. This is consistent with the documented pattern of property-owner absence during active surveillance operations at their properties.
+
+PERALTA EXIT POINT:
+  La Flor #9 was the terminal location from which Peralta departed Costa Rica — making it the operational endpoint of the honey trap operation's primary Jacó phase. The property's dual role as first and last node is architecturally significant.`,
+    connections: [
+      { target: "carmen-gray", relationship: "Owner", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Peralta departed CR from this address", strength: "confirmed" },
+      { target: "la-flor-14", relationship: "Adjacent — La Flor cluster", strength: "confirmed" },
+    ],
+    incidents: [
+      "First Echo Jacó rental — 2024",
+      "Last Echo Jacó rental before Peralta departure",
+      "Peralta left country from this address",
+      "Owner Carmen Gray in Argentina during occupancy — social media check-ins",
+    ],
+  },
+  {
+    id: "lapa-verde-dentist",
+    name: "Dentist — Lapa Verde",
+    area: "Lapa Verde, Jacó area",
+    type: "Suspicious dental referral — Brian referral chain — memory gap incident",
+    detail: `A specific dentist on Lapa Verde referred to Echo by Brian (27yr expat, 5yr prison, Greenwald pipeline inserter). Echo attended this dentist and reports unusual memory gaps from the visit — waking or coming to in a manner inconsistent with standard dental procedure. The referral source (Brian, who is assessed as network-involved) and the unusual subjective experience are logged as potential indicators.
+
+DENTAL IMPLANT ASSESSMENT (logged per Echo report):
+  Echo has been informed it is possible a chip was implanted in a tooth during this visit. Technical assessment:
+  - Passive RFID/NFC chips embedded in dental prosthetics are REAL and commercially documented (Identix Dental, multiple forensic science papers on patient ID in dentures/crowns)
+  - Short-range passive chips can store an ID number readable by a scanner placed within centimeters
+  - Long-range tracking capability in a tooth-scale device is NOT documented with current public technology (would require active transmitter + battery at sub-millimeter scale)
+  - Assessment: passive dental RFID = technically plausible for short-range ID/tagging; long-range GPS tracking via tooth = not currently feasible
+  - Memory gaps + network referral chain + controlled environment = logging for follow-up; dental X-ray comparison (pre/post) would be the primary confirmation method
+
+REFERRAL CHAIN:
+  Brian → Lapa Verde dentist follows the same pipeline pattern as Brian → Greenwald (housing). Brian appears to function as a local insertion point for multiple network-curated services.`,
+    connections: [
+      { target: "brian-jaco", relationship: "Referred Echo to this dentist", strength: "confirmed" },
+      { target: "melissa-losa", relationship: "Melissa medical/dental employment — Leo's property — same referral network", strength: "probable" },
+    ],
+    incidents: [
+      "Brian referral — same pipeline as Brian→Greenwald housing",
+      "Echo memory gaps from visit — unusual for routine dental",
+      "Possible passive RFID dental implant — technically feasible, logged for follow-up",
+      "Dental X-ray comparison (pre/post) recommended as primary confirmation",
+    ],
+  },
+  {
+    id: "alexanderplatz-berlin",
+    name: "Alexanderplatz Blockhouse, Berlin",
+    area: "Alexanderplatz, Berlin Mitte, Germany",
+    type: "Seized device check-in — 1 block from Gamma Group HQ",
+    detail: `Following Leprechaun's physical assault on Echo (October 14, 2025, Quebrada Seca) and the seizure of Echo's phone and computer, the seized phone was mockingly checked in at the Alexanderplatz Blockhouse in Berlin. This location is approximately one block from the former headquarters of Gamma Group — the German surveillance technology company that produced FinFisher/FinSpy commercial spyware, subsequently absorbed by Cobham Strategic Systems (CSG).
+
+GAMMA GROUP / CSG SIGNIFICANCE:
+  Gamma Group is the maker of FinFisher — commercial spyware used by intelligence agencies and authoritarian governments for lawful interception and covert device exploitation. Their Berlin location adjacent to the check-in point is not coincidental: the broadcast of a seized device location to within one block of a professional surveillance vendor's HQ is assessed as a deliberate operational signal — a communication to the target (Echo) and/or to network participants that the device seizure was carried out under professional surveillance-industry auspices.
+
+CHECK-IN AS SIGNAL:
+  "Mocking" check-ins at operationally significant locations (rather than simply keeping the device dark) are consistent with intelligence tradecraft designed to communicate capability and reach to the target — psychological warfare dimension of the operation.`,
+    connections: [
+      { target: "leprechaun", relationship: "Leprechaun seized Echo's phone — checked in here post-assault", strength: "confirmed" },
+      { target: "gamma-group-csg", relationship: "1 block from Gamma Group (FinFisher) Berlin HQ", strength: "confirmed" },
+    ],
+    incidents: [
+      "Echo's seized phone checked in here post-assault Oct 14 2025",
+      "1 block from Gamma Group (FinFisher/FinSpy) Berlin HQ",
+      "Gamma Group absorbed by Cobham Strategic Systems (CSG)",
+      "Check-in assessed as deliberate operational signal / psychological operation",
+    ],
+    coordinates: "52.5219°N, 13.4132°E",
+  },
 ];
 
 const COMPANIES_DATA: Company[] = [
+  {
+    id: "gamma-group-csg",
+    name: "Gamma Group / CSG (Cobham Strategic Systems)",
+    sector: "Surveillance Technology — FinFisher/FinSpy — Berlin HQ",
+    detail: `Gamma Group is a UK/German surveillance technology company best known as the maker of FinFisher (also marketed as FinSpy) — commercial spyware sold to intelligence agencies and governments for covert device exploitation, lawful interception, and remote monitoring. Gamma Group's Berlin office was located at Alexanderplatz — one block from where Leprechaun checked in Echo's seized phone following the October 14, 2025 physical assault in Quebrada Seca.
+
+FINFISHER / FINSPY:
+  FinFisher/FinSpy is commercial spyware documented in use by authoritarian governments and intelligence services worldwide for: remote device access, communications interception, location tracking, microphone/camera activation, and keystroke logging. It is the type of platform consistent with the device-level surveillance documented across Echo's hardware.
+
+CSG ABSORPTION:
+  Gamma Group was subsequently absorbed by Cobham Strategic Systems (CSG) — a defense electronics conglomerate. The operational capability and client relationships continued under the CSG umbrella.
+
+ALEXANDERPLATZ CHECK-IN SIGNIFICANCE:
+  The deliberate check-in of Echo's seized phone at a location one block from this company's headquarters is assessed as an operational signal — communicating that the device seizure was conducted in a professional intelligence/surveillance context, not a random crime. It is psychological warfare: demonstrating reach and professional capability.`,
+    connections: [
+      { target: "leprechaun", relationship: "Leprechaun checked seized phone in at Alexanderplatz — 1 block from HQ", strength: "confirmed" },
+      { target: "alexanderplatz-berlin", relationship: "Berlin HQ location", strength: "confirmed" },
+    ],
+    flags: [
+      "FinFisher/FinSpy — commercial spyware to intelligence agencies",
+      "Berlin Alexanderplatz — 1 block from seized phone check-in",
+      "Absorbed by Cobham Strategic Systems (CSG)",
+      "Capability: remote device access, mic/camera, keystroke, location",
+      "Check-in assessed as deliberate operational signal to Echo",
+    ],
+  },
   {
     id: "sterling-resources",
     name: "Sterling Resources",
