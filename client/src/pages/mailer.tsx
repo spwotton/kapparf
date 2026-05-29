@@ -754,6 +754,9 @@ export default function MailerPage() {
 
       {/* ── Expansion Blast — UK/DSE, Italy, Argentina, EU, Brazil, ICS, Aviation ── */}
       <ExpansionPanel />
+
+      {/* ── Venezuela / US Blast — Danny Peralta / Daniela / IRS Fraud ── */}
+      <VenezuelaPanel />
     </div>
   );
 }
@@ -970,6 +973,95 @@ function ExpansionPanel() {
         >
           <Send className="w-3.5 h-3.5" />
           Fire Expansion Blast
+        </Button>
+      </div>
+
+      {fired && (
+        <div className="flex items-center gap-3 text-sm">
+          <CheckCircle className="w-4 h-4 text-green-500" />
+          <span className="text-green-600 font-medium">Blast queued — {fired.total} contacts firing async</span>
+          <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Venezuela / US Panel — Danny Peralta / Daniela Peralta Marquez / IRS Fraud
+// ─────────────────────────────────────────────────────────────────────────────
+function VenezuelaPanel() {
+  const { toast } = useToast();
+  const [fired, setFired] = React.useState<{ total?: number } | null>(null);
+
+  const fire = async (dryRun: boolean) => {
+    const res = await fetch("/api/mailer/fire", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ secret: "kappa-fire-2026", target: "venezuela", dryRun }),
+    });
+    const data = await res.json();
+    if (dryRun) {
+      toast({ title: "Dry run queued", description: "Venezuela blast logged — check server console for contact list." });
+    } else {
+      setFired({ total: 81 });
+      toast({ title: "Venezuela blast fired", description: "81 contacts queued async (~30s). Monitor server log." });
+    }
+  };
+
+  return (
+    <div className="border border-red-200 dark:border-red-900 rounded-lg p-4 space-y-3 bg-red-50/30 dark:bg-red-950/20">
+      <div className="flex items-center gap-2">
+        <AlertTriangle className="w-4 h-4 text-red-500" />
+        <p className="text-sm font-medium">Venezuela / US Blast — Danny Peralta & Genesis Daniela Peralta Marquez</p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">US Federal (19)</p>
+          <p>IRS Whistleblower, TIGTA, OFAC, FinCEN, FBI, HSI/DHS, DOJ, State Dept, Congress</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Venezuela / OAS / UN (16)</p>
+          <p>Asamblea Nacional, opposition parties, OAS, OHCHR, Venezuelan civil society NGOs</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Argentina (10)</p>
+          <p>UIF, INTERPOL, MPF, Cancillería, Migraciones, investigative media</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Trafficking / HR / Media (36)</p>
+          <p>Polaris, IJM, UNODC, HRW, Amnesty, OCCRP, InSight Crime, AP, Reuters, NYT, Univision, Telemundo</p>
+        </div>
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          IRS Control # 16221 445 09691 5 cited in all US-facing letters. Danny Peralta framed as corrupt
+          moderate / liability to both Caracas transition and Washington. Argentine presence of Daniela
+          flagged to UIF + Migraciones. 4 tailored letter variants (US, VZ/ES, AR, trafficking).
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-venezuela-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-red-300 dark:border-red-700"
+          onClick={() => fire(true)}
+        >
+          Dry Run (log only)
+        </Button>
+        <Button
+          data-testid="button-venezuela-send"
+          size="sm"
+          className="gap-2 bg-red-600 hover:bg-red-700 text-white"
+          onClick={() => fire(false)}
+        >
+          <Send className="w-3.5 h-3.5" />
+          Fire Venezuela Blast
         </Button>
       </div>
 

@@ -7402,6 +7402,9 @@ export function registerGazetteIntelRoutes(app: express.Express) {
           const { EXPANSION_CONTACTS } = await import("./mailer-campaign-expansion");
           const all = EXPANSION_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
           contacts = target === "expansion-resume" ? all.filter((c) => c.id > 1201) : all;
+        } else if (target === "venezuela") {
+          const { VENEZUELA_CONTACTS } = await import("./mailer-campaign-venezuela");
+          contacts = VENEZUELA_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
         } else {
           // Full whistleblower blast
           const SUBJECT = "ITALY'S LONG LEASH: Leonardo S.p.A., CSG SAR, and the weaponization of Costa Rica's surveillance grid against U.S. citizens";
