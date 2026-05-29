@@ -74,6 +74,7 @@ import ReelPage from "@/pages/reel";
 import MailerPage from "@/pages/mailer";
 import MediaPitchPage from "@/pages/media-pitch";
 import SatoshiLatticePage from "@/pages/satoshi-lattice";
+import QuantumSolverPage from "@/pages/quantum-solver";
 
 function Router() {
   return (
@@ -130,6 +131,7 @@ function Router() {
       <Route path="/mailer" component={MailerPage} />
       <Route path="/media-pitch" component={MediaPitchPage} />
       <Route path="/satoshi-lattice" component={SatoshiLatticePage} />
+      <Route path="/quantum-solver" component={QuantumSolverPage} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -2759,6 +2759,59 @@ JOAN CONNECTION:
     ],
   },
   {
+    id: "kevin-staab",
+    name: "Kevin Staab",
+    aliases: ["Kevin"],
+    nationality: "American",
+    role: "SuperHealth Center / MaxQ Nutrition (Fairfield OH) — COVID PPE $100M — Saudi Arabia 90k units/month — Nigeria infrastructure contracts — Bahrain + Jordan (sheikh diplomacy) — GNC 3PL — $80k Adam Harper dispute resolution — Echo business hub",
+    threatLevel: "secondary",
+    detail: `Kevin Staab is the owner of SuperHealth Center and MaxQ Nutrition, based in Fairfield, Ohio. He is the central node of Echo's pre-Jacó supplement industry network — the business infrastructure through which Echo met Adam Harper, conducted over $500,000 in transactions, and operated in the GNC/Amazon export economy.
+
+COVID PPE — $100M WINDFALL:
+  During the COVID-19 pandemic, Kevin made approximately $100 million through N95 masks and hand sanitizer distribution. This scale of COVID PPE revenue places him in a cohort of operators who (a) had pre-existing distribution infrastructure capable of handling that volume, (b) had relationships with large institutional buyers (government, healthcare, retail), and (c) had the financial agility to move fast in a chaotic procurement environment. $100M in PPE revenue is not individual hustle — it implies pre-positioned supply chain relationships and institutional access.
+
+SAUDI ARABIA — 90,000 UNITS/MONTH:
+  MaxQ Nutrition ships approximately 90,000 supplement units per month to Saudi Arabia — a market where supplement brand approval is extraordinarily difficult due to SFDA (Saudi Food and Drug Authority) regulatory requirements, halal certification, and ingredient restrictions. Achieving and maintaining this volume implies: years of regulatory relationship management, Saudi commercial partnerships, and likely government-adjacent facilitation on the Saudi side. This is not a normal supplement export. Saudi Arabia at this volume is a strategic market penetration with institutional backing — whether commercial or otherwise.
+
+NIGERIA INFRASTRUCTURE CONTRACTS:
+  Kevin told Echo he has infrastructure contracts for Nigeria. The post-COVID transition from PPE distribution to Nigeria infrastructure contracts follows a pattern documented across intelligence-adjacent commercial operators: COVID PPE created relationships with government procurement networks; those relationships were monetized into infrastructure contracting in high-corruption, high-resource extraction markets. Nigeria infrastructure contracts at any meaningful scale require relationships with Nigerian federal or state government procurement, which in turn requires either legitimate Nigerian commercial partners or facilitators with political access.
+
+BAHRAIN + JORDAN — SHEIKH DIPLOMACY:
+  Kevin spent time in Bahrain and Jordan "breaking bread with sheikhs" in his own words. For an Ohio supplement entrepreneur, this level of Gulf State relationship access is anomalous. Bahrain is the headquarters of the US Fifth Fleet (NAVCENT) and is assessed as one of the most intelligence-active small states in the Middle East. Jordan is a key US intelligence partner (GID — General Intelligence Directorate — is one of CIA's most productive Arab liaison relationships). An American businessman with Gulf State sheikh-level access, simultaneous Saudi supplement distribution infrastructure, and Nigeria infrastructure contracts is operating at a level of diplomatic and commercial access that exceeds the profile of a standard supplement industry executive.
+
+GNC 3PL — CHINESE OWNERSHIP:
+  Kevin's company does third-party logistics (3PL) for GNC's eBay and Amazon fulfillment. GNC was acquired by Harbin Pharmaceutical Group (Chinese state-adjacent pharmaceutical company) in 2020. Kevin's 3PL relationship with GNC therefore gives him logistical visibility into a Chinese-owned US retail distribution network — and by extension, gives the Chinese ownership of GNC visibility into Kevin's fulfillment operations. The supply chain intelligence value of a 3PL relationship at GNC scale is significant.
+
+ECHO — BUSINESS RELATIONSHIP ($500k+):
+  Echo did over $500,000 in business transactions with Adam Harper, routed primarily through Kevin Staab and MaxQ/SuperHealth. The business was supplement export — predominantly GNC products. Adam Harper was Echo's largest customer for exports; Adam's business model was Amazon selling (building Amazon storefronts with export-sourced supplement inventory). The transactions involved navigating export documentation — Adam would misrepresent or decline to specify export destinations; Echo operated without full transparency into where product was going and did not press for it ("wasn't my business").
+
+C4 RIPPED — $80,000 DISPUTE:
+  The last major deal in this chain: 4,000 units of C4 Ripped (pre-workout supplement) were held on a loading dock. The holding was directly related to export destination documentation — C4 Ripped contains ingredients that trigger export restrictions to certain jurisdictions. Adam threatened a chargeback to resolve the dispute. Kevin Staab had to wire approximately $80,000 to Adam Harper to settle. This is the documented financial blowup that marked the end of Echo's supplement export business career.
+
+ADAM HARPER'S COMPANY SALE — OUTSTANDING PAYMENT:
+  The final deal Echo conducted was with the company that had bought Adam's Delray Beach business. That company was subsequently sold again. Adam Harper remains embroiled in legal proceedings to this day attempting to recover his payment from the original sale — telling people he is "retired" while actually being in an unresolved litigation over the proceeds of his own company sale. This legal limbo is noted: a person who sold a business but has not been paid for it is financially motivated, legally exposed, and in a state of manufactured "retirement" that may explain the Costa Rica move.
+
+JW / SUPPLEMENT / RECOVERY NETWORK INTERSECTION:
+  The supplement industry, AA/recovery communities, and Jehovah's Witness organizational infrastructure share a structural overlap that is underexplored as an intelligence substrate: (1) Supplement buyers cluster around fitness/health-conscious demographics that also over-index in recovery communities. (2) Recovery communities (AA/NA) provide institutional infrastructure — regular meetings, hierarchical sponsor relationships, geographic chapters — that mirrors intelligence asset management. (3) JW organizational infrastructure is global, hierarchically controlled, self-policing, and systematically resistant to external oversight — the same properties that make it valuable as a cover for intelligence networks. Kevin's supplement empire → Adam Harper → Echo's Jacó network → AA substrate → JW JW overlay is a single continuous relationship chain from Ohio to Costa Rica.`,
+    connections: [
+      { target: "adam-harper", relationship: "Business partner — $500k+ supplement export — $80k dispute resolution", strength: "confirmed" },
+    ],
+    flags: [
+      "SuperHealth Center + MaxQ Nutrition — Fairfield OH",
+      "COVID PPE: ~$100M (N95 + sanitizer) — institutional procurement access",
+      "Saudi Arabia: 90,000 units/month MaxQ — SFDA approval (extremely difficult)",
+      "Nigeria: infrastructure contracts — post-COVID government procurement pivot",
+      "Bahrain + Jordan: sheikh-level diplomatic access (self-disclosed)",
+      "GNC 3PL: eBay + Amazon fulfillment — GNC = Harbin Pharmaceutical (Chinese state-adjacent)",
+      "Echo: $500k+ business — GNC product export chain",
+      "C4 Ripped: 4,000 units held on dock — export docs — Adam chargeback threat — Kevin wired $80k",
+      "Last Echo deal: to buyer of Adam's Delray Beach company (itself later sold again)",
+      "JW/supplement/recovery network intersection: documented structural overlap",
+      "Adam Harper: largest Echo export customer — Amazon storefront model",
+      "Saudi supplement regulatory access at 90k units implies government-adjacent facilitation",
+    ],
+  },
+  {
     id: "adam-harper",
     name: "Adam Harper",
     aliases: ["Adam"],

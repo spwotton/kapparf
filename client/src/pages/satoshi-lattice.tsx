@@ -35,6 +35,8 @@ const ENTITY_POOL: Omit<LatticeVertex, "coords" | "norm">[] = [
   { id: "gaia-natural-foods",label:"Gaia Natural Foods",      category: "company",  connections: ["genesis-peralta"],                                           flags: ["Colombian-Israeli","Visonic thread","Placement"] },
   { id: "caliches-wishbone",label: "Caliches Wishbone",       category: "company",  connections: ["jairo-alfaro","genesis-peralta"],                            flags: ["CLOSED","8yr handler base","Italian"] },
   { id: "bac-park",         label: "BAC Park / 10cio",        category: "company",  connections: ["kenneth-tencio","dave-mira"],                               flags: ["Olympic hub","Hector BAC logins"] },
+  { id: "kevin-staab",      label: "Kevin Staab",             category: "person",   connections: ["adam-harper"],                                               flags: ["SuperHealth","MaxQ","$100M PPE","Saudi 90k/mo","Nigeria","Bahrain/Jordan","GNC 3PL","Chinese supply chain"] },
+  { id: "supplement-chain", label: "Supplement/Recovery/JW",  category: "event",    connections: ["kevin-staab","adam-harper","jeff-porter"],                   flags: ["Structural isomorph","Pre-positioning","AA/JW/Supplement overlap"] },
 ];
 
 function latticeCoords(seed: number, idx: number, n: number): [number, number] {

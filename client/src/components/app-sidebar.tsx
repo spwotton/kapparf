@@ -38,6 +38,7 @@ import {
   Film,
   Newspaper,
   Hash,
+  Zap,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -184,6 +185,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.reel", fallback: "Ω-REEL", url: "/reel", icon: Film },
       { titleKey: "sidebar.mediaPitch", fallback: "Media Pitch", url: "/media-pitch", icon: Newspaper },
       { titleKey: "sidebar.satoshiLattice", fallback: "Satoshi Lattice", url: "/satoshi-lattice", icon: Hash },
+      { titleKey: "sidebar.quantumSolver",  fallback: "Quantum Solver",  url: "/quantum-solver",  icon: Zap },
     ],
   },
   {
