@@ -77,6 +77,7 @@ import MediaPitchPage from "@/pages/media-pitch";
 import SatoshiLatticePage from "@/pages/satoshi-lattice";
 import QuantumSolverPage from "@/pages/quantum-solver";
 import StatusReportPage from "@/pages/status-report";
+import NexusSlidesPage from "@/pages/nexus-slides";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -145,6 +146,7 @@ function KappaRouter() {
       <Route path="/satoshi-lattice" component={SatoshiLatticePage} />
       <Route path="/quantum-solver" component={QuantumSolverPage} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
+      <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -268,6 +270,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
+  const isPublicRoute = typeof window !== "undefined" && window.location.pathname === "/nexus-slides";
   return (
     <ThemeProvider>
     <DossierProvider>
@@ -275,9 +278,13 @@ function App() {
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            <AuthGate>
-              <AppWithDossier />
-            </AuthGate>
+            {isPublicRoute ? (
+              <NexusSlidesPage />
+            ) : (
+              <AuthGate>
+                <AppWithDossier />
+              </AuthGate>
+            )}
           </TooltipProvider>
         </QueryClientProvider>
       </I18nProvider>
