@@ -34,7 +34,7 @@ title = "rf correlation waterfall 7410khz"
 id = "iO5ihKApax2s1R78739bp"
 uri = "file://attached_assets/nexus_slide_01.png"
 type = "image"
-title = "jaco_nexus_title_slide"
+title = "jaco_nexus_title_fixed"
 
 [[generated]]
 id = "H_6cd7LoAuzeTNxfsa3IZ"
@@ -59,6 +59,24 @@ id = "MBNYdVMeGv-65g81uL50-"
 uri = "file://attached_assets/nexus_slide_05.png"
 type = "image"
 title = "jaco_nexus_leonardo_darpa"
+
+[[generated]]
+id = "ANU1IUb8wgaY_4qjRuB2l"
+uri = "file://attached_assets/nexus_slide_06.png"
+type = "image"
+title = "jaco_nexus_setecom"
+
+[[generated]]
+id = "hHJslokGkRO7f9i1DSJUI"
+uri = "file://attached_assets/nexus_slide_07.png"
+type = "image"
+title = "jaco_nexus_physical_layer"
+
+[[generated]]
+id = "rkE2v3ozC_yZGpMagoJeZ"
+uri = "file://attached_assets/nexus_slide_08.png"
+type = "image"
+title = "jaco_nexus_liberty_isp"
 
 [[outputs]]
 id = "zDaxSKuCcHB3e4ieprb38"
@@ -196,7 +214,7 @@ title = "KAPPA program + work bundle (160 MB)"
 id = "dUqQcTP7ZQO6BIY8m4isL"
 uri = "file://attached_assets/nexus_slide_01.png"
 type = "image"
-title = "Slide 1 — THE JACÓ NEXUS (Title)"
+title = "Slide 1 (fixed) — THE JACO NEXUS"
 
 [[outputs]]
 id = "HBp0WnsxsMisHlFFvVKP3"
@@ -221,3 +239,21 @@ id = "IhUMfRUFQQx13KyARoUe2"
 uri = "file://attached_assets/nexus_slide_05.png"
 type = "image"
 title = "Slide 5 (revised) — Leonardo / DARPA / Starlink Layer"
+
+[[outputs]]
+id = "UnCef2D71wm86N5Snx3hW"
+uri = "file://attached_assets/nexus_slide_06.png"
+type = "image"
+title = "Slide 6 — SETECOM / SETECOM Air"
+
+[[outputs]]
+id = "yBfQWsqaLZVV2iJZXA720"
+uri = "file://attached_assets/nexus_slide_07.png"
+type = "image"
+title = "Slide 7 — Toronto · Breakwater · Crane · El Miro · Drone"
+
+[[outputs]]
+id = "z5mis2BcxXC80H23TXKUc"
+uri = "file://attached_assets/nexus_slide_08.png"
+type = "image"
+title = "Slide 8 — Liberty ISP Layer"
