@@ -1,7 +1,8 @@
-# ── Large dev-uploaded binaries in attached_assets ────────────────────────────
-# Keep: attached_assets/edge_detection/ (referenced by drone analysis routes)
-# Keep: attached_assets/screenshots/ (small, referenced)
-# Exclude: large uploaded binaries that were dev-only analysis artifacts
+# ── attached_assets — dev context only, not served at runtime ─────────────────
+# Keep: attached_assets/edge_detection/ (drone analysis routes)
+# Keep: attached_assets/screenshots/ (small, route-referenced)
+# Everything else is research/intelligence context for the agent, not production
+# Binaries
 attached_assets/*.mov
 attached_assets/*.mp4
 attached_assets/*.zip
@@ -16,6 +17,29 @@ attached_assets/*.gz
 attached_assets/*.7z
 attached_assets/*.rar
 attached_assets/*.pcapng
+# Images (user photos, analysis outputs — dev context only)
+attached_assets/*.jpg
+attached_assets/*.JPG
+attached_assets/*.jpeg
+attached_assets/*.JPEG
+attached_assets/*.png
+attached_assets/*.PNG
+attached_assets/*.webp
+attached_assets/*.gif
+attached_assets/*.bmp
+attached_assets/*.tiff
+attached_assets/*.heic
+attached_assets/*.HEIC
+# Documents / data (research context, not served)
+attached_assets/*.pdf
+attached_assets/*.PDF
+attached_assets/*.txt
+attached_assets/*.md
+attached_assets/*.json
+attached_assets/*.csv
+attached_assets/*.xlsx
+attached_assets/*.xls
+attached_assets/*.jsonl
 
 # ── Research/intelligence document archives (not served at runtime) ────────────
 drive-download-20260513T020452Z-3-001/
@@ -47,6 +71,7 @@ server/data/video_forensics/*.mp4
 server/data/video_forensics/*.mov
 server/data/video_forensics/*.avi
 server/data/video_forensics/cnu_compare/
+server/data/video_forensics/cnu_comparison_report.json
 server/data/video_forensics/vid2/*.wav
 server/data/video_forensics/vid2/*.mp4
 
