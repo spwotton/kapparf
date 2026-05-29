@@ -78,6 +78,18 @@ uri = "file://attached_assets/nexus_slide_08.png"
 type = "image"
 title = "jaco_nexus_liberty_isp"
 
+[[generated]]
+id = "sibwsKpXdUG1XXdY1_YAg"
+uri = "file://attached_assets/nexus_slide_09.png"
+type = "image"
+title = "jaco_nexus_3i_atlas_architecture"
+
+[[generated]]
+id = "_L3Jco2G9vXNN5GMmE6Ov"
+uri = "file://attached_assets/nexus_slide_10.png"
+type = "image"
+title = "jaco_nexus_frequency_coincidence"
+
 [[outputs]]
 id = "zDaxSKuCcHB3e4ieprb38"
 uri = "file://docs/KAPPA-API-REFERENCE.md"
@@ -257,3 +269,15 @@ id = "z5mis2BcxXC80H23TXKUc"
 uri = "file://attached_assets/nexus_slide_08.png"
 type = "image"
 title = "Slide 8 — Liberty ISP Layer"
+
+[[outputs]]
+id = "X659XHOOt5dXH6GYrh3Kf"
+uri = "file://attached_assets/nexus_slide_09.png"
+type = "image"
+title = "Slide 9 — 3i ATLAS Architecture"
+
+[[outputs]]
+id = "iIGeGjrHm4HOWUhhn3XQE"
+uri = "file://attached_assets/nexus_slide_10.png"
+type = "image"
+title = "Slide 10 — Just a Coincidence (46.875)"
