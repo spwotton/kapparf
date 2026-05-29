@@ -6,7 +6,7 @@ export interface CampaignContact {
   to: string;
   name: string;
   org: string;
-  category: "A" | "B" | "C" | "D" | "E";
+  category: "A" | "B" | "C" | "D" | "E" | "F";
   subject: string;
   body: string;
 }
@@ -275,6 +275,136 @@ Cuento con el expediente técnico y el nombre del director. ¿Cuál es el canal 
 
 Samuel Wotton — Jacó, Puntarenas`;
 
+// ── Category F: Italian Connection ────────────────────────────────────────────
+
+const bodyF_copasir = `To the President of COPASIR,
+
+I am writing to bring to your committee's attention a matter that intersects Italian defence industrial interests, the dual-use application of civilian procurement contracts, and the deployment of offensive cyber-intelligence tools against individuals in Central America.
+
+I am a British-Canadian national resident in Jacó, Puntarenas, Costa Rica. Since December 2024 I have been subjected to a sustained electronic harassment operation that I have documented with technical precision over eighteen months. That documentation — signal logs, packet captures, drone acoustic signatures, RF recordings — is available in full.
+
+The reason I am addressing COPASIR specifically is that my investigation has identified an Italian industrial nexus as a structural layer of the surveillance architecture operating in this region.
+
+In March 2020, Telespazio Argentina S.A. — a subsidiary of Telespazio SpA, the joint venture between Leonardo S.p.A. (67%) and Thales (33%) — was awarded contract 2019LN-000002-0005900001 by the Registro Nacional of Costa Rica. Valued at approximately USD 20 million, the contract mandated a cadastral survey covering more than one million land parcels across 50% of Costa Rican territory. The stated purpose was municipal tax modernisation under Ley 7509.
+
+The technical parameters of that survey — sub-centimetre geodetic precision, dense parcel distribution at 10°N latitude, integration with the national Registro — correspond precisely to the calibration requirements of the COSMO-SkyMed Second Generation X-band SAR constellation, jointly operated by ASI and the Italian Ministry of Defence. The equatorial positioning at 10°N is optimal for sub-metric phase calibration of sun-synchronous orbits at 619 km altitude, reducing clutter from tropical canopy returns that degrade higher-latitude reference grids.
+
+Compounding this, the Leonardo group exercises indirect control over Cy4gate S.p.A. via its minority stake in Elettronica S.p.A. (31.3%), which holds 38.38% of Cy4gate. Cy4gate's D-SINT platform ingests social media, deep web, and dark web data streams to construct target profiles and deliver those profiles to operators of the Aurora Group's RCS forensic implant suite. The convergence of space-based SAR calibration, terrestrial sensor networks, and offensive civilian cyber tools in the same operational geography is not, in my assessment, coincidental.
+
+I am not asserting that Leonardo or Telespazio have direct knowledge of or responsibility for the individual harassment I have experienced. I am asserting that the infrastructure they have built and calibrated here has been leveraged by actors operating within or adjacent to it.
+
+I am prepared to provide the full technical dossier, including GPS-tagged evidence, signal captures, and procurement cross-references, to COPASIR or to any parliamentary investigator you designate.
+
+Samuel Wotton
+Jacó, Puntarenas, Costa Rica
+hello@ekhokappa.com`;
+
+const bodyF_garante = `Gentile Garante,
+
+Mi rivolgo alla sua autorità per segnalare una potenziale violazione dei principi del GDPR applicabili ai titolari del trattamento stabiliti nel territorio dell'Unione Europea.
+
+Cy4gate S.p.A., società italiana con sede a Roma, commercializza la piattaforma di "decision intelligence" denominata D-SINT. Tale piattaforma acquisisce in modo continuo flussi di dati provenienti da social media, dal deep web e dal dark web, li correla attraverso algoritmi di intelligenza artificiale, e genera profili comportamentali di soggetti target — inclusi soggetti che non si trovano nel territorio dell'Unione Europea e che non hanno fornito alcun consenso al trattamento dei propri dati.
+
+Sono cittadino britannico-canadese residente a Jacó, Puntarenas, Costa Rica. Ho documentato nel corso di diciotto mesi un'operazione di sorveglianza e interferenza elettronica sostenuta nei miei confronti. L'infrastruttura tecnica che ho identificato include componenti satellite (costellazione COSMO-SkyMed, operata da ASI e Ministero della Difesa italiano), reti di trasmissione dati transatlantiche gestite da Telecom Italia Sparkle (AS6762), e — stando alla documentazione disponibile — strumenti di accesso remoto riconducibili alla famiglia di prodotti distribuiti da Aurora Group in associazione con Cy4gate.
+
+Domande specifiche che pongo alla sua attenzione:
+
+1. Cy4gate S.p.A. è soggetta alla normativa GDPR in qualità di titolare o responsabile del trattamento per i dati personali acquisiti tramite D-SINT su soggetti extra-UE?
+2. Esiste una base giuridica ai sensi dell'art. 6 GDPR per il trattamento sistematico di dati personali a fini di profilazione offensiva su soggetti non europei condotto da un operatore commerciale italiano?
+3. Il Garante ha ricevuto notifiche di trattamenti ad alto rischio da parte di Cy4gate ai sensi dell'art. 35 GDPR (DPIA)?
+
+Sono disponibile a fornire documentazione tecnica dettagliata a supporto di questa segnalazione.
+
+Con rispetto,
+
+Samuel Wotton
+Jacó, Puntarenas, Costa Rica
+hello@ekhokappa.com`;
+
+const bodyF_corteconti = `Alla Corte dei Conti della Repubblica Italiana,
+
+Segnalo una questione che potrebbe rilevare ai fini del controllo sulla gestione delle partecipate pubbliche italiane operanti all'estero, in particolare con riferimento a Telespazio S.p.A. (partecipata da Leonardo S.p.A. al 67%, a sua volta partecipata dal Ministero dell'Economia).
+
+Nel marzo 2020, Telespazio Argentina S.A. — controllata di Telespazio SpA — si è aggiudicata il contratto 2019LN-000002-0005900001 emesso dal Registro Nacional della Repubblica di Costa Rica. Il contratto, del valore di circa 20 milioni di USD, prevedeva il rilievo catastale di oltre un milione di particelle su circa il 50% del territorio costaricano.
+
+La mia analisi dei parametri tecnici del contratto — precisione geodetica sub-centimetrica, distribuzione capillare dei punti di controllo a 10°N di latitudine, integrazione con il Registro Nacional — indica una corrispondenza funzionale con i requisiti di calibrazione della costellazione SAR COSMO-SkyMed Seconda Generazione, operata congiuntamente da ASI e Ministero della Difesa italiano. COSMO-SkyMed è un asset militare-civile dual use; la calibrazione a terra in banda equatoriale riduce significativamente l'errore di fase nelle acquisizioni ad alta risoluzione.
+
+Non è mia intenzione affermare che il contratto sia illegittimo in sé. Chiedo invece se la Corte dei Conti abbia valutato, nell'ambito del controllo sulla gestione di Leonardo/Telespazio, se i benefici derivanti dall'uso militare-duale dell'infrastruttura geodetica costaricana siano stati rendicontati separatamente rispetto ai ricavi commerciali del contratto, e se l'uso della partecipata argentina come veicolo per contratti di rilevanza strategica sia stato soggetto a preventiva autorizzazione ministeriale.
+
+Sono disponibile a trasmettere documentazione tecnica e di procurement a supporto di questa segnalazione.
+
+Con ossequio,
+
+Samuel Wotton
+hello@ekhokappa.com`;
+
+const bodyF_europarl = `To the Chair of the LIBE Committee / PEGA successor inquiry,
+
+I am writing in my capacity as a British-Canadian national with European family ties, currently resident in Costa Rica, who has been subjected to an eighteen-month surveillance and interference operation that I have documented with technical rigor.
+
+This communication concerns the extraterritorial deployment of Italian-origin surveillance technology and the structural role of Leonardo-group companies in enabling that deployment.
+
+Cy4gate S.p.A., an Italian cyber-intelligence firm whose controlling shareholder is Elettronica S.p.A. (in which Leonardo S.p.A. holds 31.3% and Thales 33.3%), markets the D-SINT decision intelligence platform. D-SINT is engineered to continuously ingest social media, dark web, and OSINT streams, construct individual target profiles, and deliver those profiles to operators of offensive remote access tools — including the Aurora Group's RCS forensic implant suite.
+
+In parallel, Telespazio Argentina — a subsidiary of the Leonardo-Thales joint venture Telespazio — executed a USD 20 million cadastral survey contract in Costa Rica between 2020 and 2024, establishing a geodetic calibration grid that serves the COSMO-SkyMed Second Generation military SAR constellation. The geographic node I am located in — Jacó, Puntarenas — is identified in open-source technical analysis as a primary terrestrial anchor point for this orbital calibration infrastructure.
+
+The PEGA Committee's final report identified a systemic failure in EU member-state oversight of spyware exports. The Cy4gate / Elettronica / Leonardo ownership chain represents exactly the type of laundered control structure PEGA identified — where military-industrial shareholders exercise effective operational influence over offensive cyber vendors while maintaining plausible institutional separation.
+
+I am requesting that the Committee or its successor inquiry note this case and consider whether:
+— Cy4gate's D-SINT constitutes a dual-use export subject to Regulation (EU) 2021/821 when deployed against targets in third countries;
+— The Leonardo group's simultaneous operation of cadastral ground-truth infrastructure (via Telespazio) and offensive targeting tools (via Cy4gate) in the same operational geography represents an undeclared vertical integration of surveillance capability that merits scrutiny under the EU Digital Services Act and dual-use export controls.
+
+Full technical documentation is available on request.
+
+Samuel Wotton
+hello@ekhokappa.com`;
+
+const bodyF_wired = `To the investigations desk at Wired Italia,
+
+I am offering a story lead that connects Italian defence procurement, satellite calibration infrastructure, and offensive cyber tools in Central America.
+
+In 2020, Telespazio Argentina — the Latin American subsidiary of the Leonardo-Thales space joint venture — won a USD 20 million public contract to survey one million land parcels across 50% of Costa Rica. The contract is verifiable in the Registro Nacional's public procurement database (contract ID: 2019LN-000002-0005900001, awarded September 2019). The stated purpose was municipal tax modernisation.
+
+The technical parameters — sub-centimetre geodetic precision distributed across equatorial territory at 10°N latitude — match the ground-truth calibration requirements for the COSMO-SkyMed Second Generation X-band SAR constellation, a joint ASI/Italian Ministry of Defence military-civil dual-use system. Calibration grids at equatorial latitudes provide a coverage advantage that higher-latitude European reference stations cannot replicate.
+
+Layered on top of this: the Leonardo group holds 31.3% of Elettronica S.p.A., which controls 38.38% of Cy4gate S.p.A. Cy4gate's D-SINT platform is an offensive intelligence product that generates target profiles for RCS-class forensic implant operators. The marketing materials and procurement records are public.
+
+I am a resident of Jacó, Costa Rica — a town identified in technical analysis as the primary terrestrial anchor of this regional sensor network. I have spent eighteen months documenting what I assess to be a targeted surveillance and electronic harassment operation against me personally, with signal logs, acoustic drone recordings, packet captures, and RF frequency documentation.
+
+The story is verifiable at multiple independent levels: procurement records, satellite orbital parameters, corporate ownership filings, and my own technical dossier. I am not asking you to accept my interpretation — I am asking whether your team has capacity to verify the procurement and corporate chain independently, which I believe would take two working days.
+
+I am available for a call or to transmit the dossier via encrypted channel.
+
+Samuel Wotton
+hello@ekhokappa.com`;
+
+const bodyF_telespazio = `To Telespazio S.p.A. Legal / Data Protection,
+
+I am writing in two capacities: as a data subject under GDPR Article 15, and as an affected resident of the geographic area covered by your company's cadastral survey operations in Costa Rica.
+
+Data Subject Access Request
+
+I request confirmation of whether Telespazio S.p.A., Telespazio Argentina S.A., or any entity acting under their instruction has processed personal data relating to me — Samuel Wotton, British-Canadian national, currently resident in Jacó, Puntarenas, Costa Rica — in connection with:
+
+(a) the cadastral survey contract 2019LN-000002-0005900001 awarded by the Registro Nacional of Costa Rica;
+(b) any satellite imagery, SAR acquisition, or derived geospatial product covering the Jacó, Puntarenas region between 2020 and the present;
+(c) any data sharing arrangement with e-GEOS S.p.A., ASI, the Italian Ministry of Defence, or any third-party intelligence customer relating to ground observations or imagery from the COSMO-SkyMed constellation over Costa Rican territory.
+
+Please provide this confirmation within 30 days as required under GDPR Article 12(3).
+
+Public Interest Inquiry
+
+Separately, and without prejudice to the access request above, I am documenting the dual-use characteristics of your Costa Rica cadastral contract for a public interest investigation. I would welcome a formal response from your communications or legal team to the following questions:
+
+1. Did Telespazio Argentina's performance of contract 2019LN-000002-0005900001 involve the installation of any geodetic reference markers, corner reflectors, or passive radar calibration targets?
+2. Has any data product derived from that survey been made available to COSMO-SkyMed operators at ASI or the Italian Ministry of Defence?
+3. Does Telespazio have a commercial or operational relationship with Cy4gate S.p.A. or any Aurora Group entity in the Central American region?
+
+I understand that some of these questions may touch on matters your legal team considers sensitive. A response confirming only what can be answered publicly is preferable to no response.
+
+Samuel Wotton
+hello@ekhokappa.com`;
+
 export const CAMPAIGN_CONTACTS: CampaignContact[] = [
   // ── Category A: Civil Aviation ─────────────────────────────────────────────
   { id: 1,  to: "comunicaciones@aeris.cr",         name: "Rafael Mencia Ochoa",        org: "AERIS",               category: "A", subject: "Consulta sobre seguridad de generadores de respaldo en SJO",                           body: bodyA_named("Rafael Mencia Ochoa") },
@@ -327,4 +457,11 @@ export const CAMPAIGN_CONTACTS: CampaignContact[] = [
   { id: 44, to: "denuncias@pgr.go.cr",             name: "Procuraduría General",       org: "PGR",                 category: "E", subject: "Solicitud medida cautelar — infraestructura crítica con vulnerabilidad activa",           body: bodyE_procuraduria },
   { id: 45, to: "casapresidencial@presidencia.go.cr", name: "Casa Presidencial",       org: "Presidencia",         category: "E", subject: "Alerta de seguridad nacional — monopolio en infraestructura crítica con backdoor activo", body: bodyE_presidencia },
   { id: 46, to: "transparencia@presidencia.go.cr", name: "Transparencia Presidencia",  org: "Presidencia",         category: "E", subject: "Denuncia de integridad — contratista de infraestructura crítica incumple contratos",     body: bodyE_transparencia },
+  // ── Category F: Italian Connection ────────────────────────────────────────
+  { id: 47, to: "copasir@camera.it",              name: "COPASIR President",           org: "Italian Parliament",  category: "F", subject: "Dual-use cadastral contract in Costa Rica — Telespazio Argentina, COSMO-SkyMed calibration, and Cy4gate D-SINT deployment",   body: bodyF_copasir },
+  { id: 48, to: "garante@gpdp.it",               name: "Garante Privacy",             org: "Garante GDPR Italy",  category: "F", subject: "Richiesta di verifica — Cy4gate D-SINT e profilazione di soggetti extra-UE tramite infrastruttura italiana",                 body: bodyF_garante },
+  { id: 49, to: "urp@corteconti.it",             name: "Corte dei Conti",             org: "Corte dei Conti",     category: "F", subject: "Segnalazione — contratto Telespazio Argentina / Registro Nacional Costa Rica: uso duale non dichiarato",                      body: bodyF_corteconti },
+  { id: 50, to: "PEGA@europarl.europa.eu",        name: "LIBE / PEGA Committee",       org: "European Parliament", category: "F", subject: "Italian offensive cyber tools in Central America — Cy4gate D-SINT and Leonardo group targeting of a European-origin national", body: bodyF_europarl },
+  { id: 51, to: "redazione@wired.it",            name: "Wired Italia Investigations", org: "Wired Italia",        category: "F", subject: "Story lead: Telespazio cadastral contract in Costa Rica, Cy4gate targeting, and the Leonardo surveillance stack in Latin America", body: bodyF_wired },
+  { id: 52, to: "info@telespazio.com",           name: "Telespazio Legal / DPO",      org: "Telespazio S.p.A.",   category: "F", subject: "Data subject access request and public interest inquiry — cadastral survey contract Costa Rica 2019LN-000002-0005900001",       body: bodyF_telespazio },
 ];

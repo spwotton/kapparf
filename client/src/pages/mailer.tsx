@@ -561,13 +561,13 @@ export default function MailerPage() {
       <div className="border border-border rounded-lg p-4 space-y-3 bg-muted/20">
         <div className="flex items-center gap-2">
           <Zap className="w-4 h-4 text-amber-500" />
-          <p className="text-sm font-medium">Send All 46 Contacts</p>
+          <p className="text-sm font-medium">Send All 52 Contacts</p>
           <Badge variant="outline" className="text-xs ml-auto">
-            A · B · C · D · E
+            A · B · C · D · E · F
           </Badge>
         </div>
         <p className="text-xs text-muted-foreground">
-          Sends category-appropriate emails to all 46 unique addresses (350ms stagger).
+          Sends category-appropriate emails to all 52 unique addresses (350ms stagger).
           From address defaults to <span className="font-mono">hello@ekhokappa.com</span>.
         </p>
 
