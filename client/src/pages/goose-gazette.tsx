@@ -6,26 +6,6 @@ import { cast } from "@/lib/goose-personas";
 import { BarneyTRex } from "@/components/barney-trex";
 import { PinkRabbit } from "@/components/pink-rabbit";
 import { HypervisorPanel } from "@/components/hypervisor-panel";
-import { useSiteMode } from "@/lib/site-mode";
-
-function SiteModeToggleBtn() {
-  const { toggle } = useSiteMode();
-  const [, navigate] = useLocation();
-  const handleToggle = () => {
-    toggle();
-    navigate("/command");
-  };
-  return (
-    <button
-      onClick={handleToggle}
-      data-testid="button-site-mode-toggle"
-      title="Switch to CIA JW — full intel platform"
-      className="text-[10px] font-bold tracking-widest uppercase text-gray-500 hover:text-black border border-gray-300 rounded px-2 py-1 transition-colors bg-white w-[76px] text-center"
-    >
-      CIA JW
-    </button>
-  );
-}
 
 // ─── WEB AUDIO HONK ──────────────────────────────────────────────────────────
 function playHonk() {
@@ -1322,7 +1302,6 @@ export default function GooseGazettePage() {
           <span className="font-black text-[12px] tracking-tight text-black"
             style={{ fontFamily:"Georgia,serif" }}>THE GOOSE GAZETTE</span>
         </button>
-        <SiteModeToggleBtn />
       </header>
 
       {/* Mobile drawer */}
@@ -1386,10 +1365,6 @@ export default function GooseGazettePage() {
               </button>
             ))}
           </nav>
-
-          <div className="mt-6 pt-5 border-t border-gray-200">
-            <SiteModeToggleBtn />
-          </div>
 
           <div className="mt-4 pt-4 border-t border-gray-200">
             <p className="text-[9px] font-black tracking-[0.2em] uppercase text-gray-400 mb-2">Sub-Publications</p>
