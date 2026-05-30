@@ -60,3 +60,6 @@ pipeline_results/*
 # ── Stray root files ──────────────────────────────────────────────────────────
 email_send_log_v2.txt
 email_send_state_v2.json
+
+# ── Playwright browser binaries (dev only, 622 MB) ──────────────────────────
+pw-browsers/
