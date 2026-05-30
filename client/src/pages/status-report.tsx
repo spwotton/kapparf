@@ -154,11 +154,10 @@ export default function StatusReportPage() {
         </div>
 
         {/* Summary cards */}
-        <div className="mt-6 grid grid-cols-3 gap-4">
+        <div className="mt-6 grid grid-cols-2 gap-4">
           {[
             { label: "Total Modules", value: totalModules, color: "#6366f1" },
             { label: "LIVE", value: liveCount, color: "#22c55e" },
-            { label: "Active Mode", value: "CIA JW", color: "#3b82f6" },
           ].map(c => (
             <div key={c.label} className="rounded-lg border border-border bg-card px-4 py-3">
               <div className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">{c.label}</div>
