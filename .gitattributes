@@ -169,3 +169,4 @@ pw-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-he
 /pw-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/icudtl.dat filter=lfs diff=lfs merge=lfs -text
 /pw-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/libGLESv2.so filter=lfs diff=lfs merge=lfs -text
 /pw-browsers/ffmpeg-1011/ffmpeg-linux filter=lfs diff=lfs merge=lfs -text
+/public/denuncia/los_rios_compound_20251021.jpg filter=lfs diff=lfs merge=lfs -text

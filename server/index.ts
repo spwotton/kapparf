@@ -94,6 +94,10 @@ app.get("/evidence/DENUNCIA_SAM_WOTTON_20260530.html", (_req, res) => {
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.sendFile(filePath);
 });
+// Public denuncia photo assets — served from /denuncia/ (no auth gate)
+app.use("/denuncia", express.static(path.join(process.cwd(), "public", "denuncia"), {
+  setHeaders: (res) => { res.setHeader("Cache-Control", "no-cache"); },
+}));
 
 (async () => {
   const { seedDatabase } = await import("./seed");
