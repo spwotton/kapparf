@@ -119,15 +119,29 @@ const STATUS_COLORS = {
   beta:   { dot: "#f59e0b", label: "BETA",   bg: "rgba(245,158,11,0.08)",  border: "rgba(245,158,11,0.2)" },
 };
 
+const MODE_COLORS: Record<string, { color: string; label: string }> = {
+  STANDBY:  { color: "#6366f1", label: "STANDBY" },
+  PATROL:   { color: "#3b82f6", label: "PATROL" },
+  ELEVATED: { color: "#f59e0b", label: "ELEVATED" },
+  SURGE:    { color: "#ef4444", label: "SURGE" },
+};
+
 export default function StatusReportPage() {
   const { data: kappa } = useQuery<KappaStatus>({
     queryKey: ["/api/kappa/status"],
     refetchInterval: 10000,
   });
 
+  const { data: pipeline } = useQuery<{ mode: string; running: boolean }>({
+    queryKey: ["/api/pipeline/status"],
+    refetchInterval: 10000,
+  });
+
   const score = kappa?.score ?? 0;
   const totalModules = MODULES.reduce((a, g) => a + g.items.length, 0);
   const liveCount = MODULES.flatMap(g => g.items).filter(i => i.status === "live").length;
+  const mode = pipeline?.mode ?? "STANDBY";
+  const modeStyle = MODE_COLORS[mode] ?? MODE_COLORS.STANDBY;
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10 font-sans">
@@ -154,16 +168,19 @@ export default function StatusReportPage() {
         </div>
 
         {/* Summary cards */}
-        <div className="mt-6 grid grid-cols-2 gap-4">
-          {[
-            { label: "Total Modules", value: totalModules, color: "#6366f1" },
-            { label: "LIVE", value: liveCount, color: "#22c55e" },
-          ].map(c => (
-            <div key={c.label} className="rounded-lg border border-border bg-card px-4 py-3">
-              <div className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">{c.label}</div>
-              <div className="text-2xl font-mono font-semibold mt-1" style={{ color: c.color }}>{c.value}</div>
-            </div>
-          ))}
+        <div className="mt-6 grid grid-cols-3 gap-4">
+          <div className="rounded-lg border border-border bg-card px-4 py-3">
+            <div className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">Total Modules</div>
+            <div className="text-2xl font-mono font-semibold mt-1" style={{ color: "#6366f1" }}>{totalModules}</div>
+          </div>
+          <div className="rounded-lg border border-border bg-card px-4 py-3">
+            <div className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">LIVE</div>
+            <div className="text-2xl font-mono font-semibold mt-1" style={{ color: "#22c55e" }}>{liveCount}</div>
+          </div>
+          <div className="rounded-lg border border-border bg-card px-4 py-3" data-testid="card-active-mode">
+            <div className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">Active Mode</div>
+            <div className="text-2xl font-mono font-semibold mt-1" style={{ color: modeStyle.color }}>{modeStyle.label}</div>
+          </div>
         </div>
       </div>
 
