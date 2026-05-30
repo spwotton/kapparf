@@ -1,5 +1,4 @@
 import { Switch, Route } from "wouter";
-import { useState, useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -7,13 +6,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { HeaderControls } from "@/components/header-controls";
-import { ThemeProvider } from "@/lib/theme";
+import { ThemeProvider, useTheme } from "@/lib/theme";
 import { DossierProvider, useDossier } from "@/lib/dossier";
 import { SiteModeProvider, useSiteMode } from "@/lib/site-mode";
 import { useArrowSequence } from "@/hooks/useArrowSequence";
 import { I18nProvider } from "@/lib/i18n";
+import { Moon, Sun, Newspaper, Shield } from "lucide-react";
+import { useLocation } from "wouter";
 import NotFound from "@/pages/not-found";
-import LoginPage from "@/pages/login";
 import CommandCenterPage from "@/pages/command-center";
 import DashboardPage from "@/pages/overview";
 import EventsPage from "@/pages/events";
@@ -156,6 +156,7 @@ function KappaRouter() {
 function GooseRouter() {
   return (
     <Switch>
+      <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route path="/setecom-report" component={SetecomExposePage} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route path="/goose/signals" component={GooseSignalsPage} />
@@ -204,6 +205,42 @@ function DossierBadge() {
   );
 }
 
+// ── Slim public header for Goose Gazette mode ────────────────────────────────
+function GooseHeader() {
+  const { mode, toggle } = useSiteMode();
+  const { theme, toggle: toggleTheme } = useTheme();
+  const [, navigate] = useLocation();
+
+  const handleModeToggle = () => {
+    toggle();
+    navigate("/command");
+  };
+
+  return (
+    <header className="flex items-center justify-end gap-2 px-4 h-9 border-b border-gray-200 bg-white">
+      <button
+        onClick={handleModeToggle}
+        data-testid="button-site-mode-toggle-gazette"
+        title="Switch to CIA JW — full intel platform"
+        className="flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase text-gray-500 hover:text-gray-900 border border-gray-300 rounded px-2 py-1 transition-colors"
+      >
+        <Shield className="h-2.5 w-2.5" />
+        <span>CIA JW</span>
+      </button>
+      <div className="h-3 w-px bg-gray-200" />
+      <button
+        onClick={toggleTheme}
+        data-testid="button-theme-toggle-gazette"
+        title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+        className="flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase text-gray-500 hover:text-gray-900 transition-colors"
+      >
+        {theme === "light" ? <Moon className="h-3 w-3" /> : <Sun className="h-3 w-3" />}
+        <span>{theme === "light" ? "DARK" : "LIGHT"}</span>
+      </button>
+    </header>
+  );
+}
+
 function AppWithDossier() {
   const { toggleDossierMode } = useDossier();
   const { mode } = useSiteMode();
@@ -213,7 +250,12 @@ function AppWithDossier() {
   if (mode === "goose") {
     return (
       <>
-        <GooseRouter />
+        <div className="flex flex-col h-screen">
+          <GooseHeader />
+          <div className="flex-1 overflow-auto min-h-0">
+            <GooseRouter />
+          </div>
+        </div>
         <Toaster />
       </>
     );
@@ -244,34 +286,7 @@ function AppWithDossier() {
   );
 }
 
-function AuthGate({ children }: { children: React.ReactNode }) {
-  const [authState, setAuthState] = useState<"loading" | "authenticated" | "unauthenticated">("loading");
-
-  useEffect(() => {
-    fetch("/api/auth/status", { credentials: "include" })
-      .then(r => r.json())
-      .then(d => setAuthState(d.authenticated ? "authenticated" : "unauthenticated"))
-      .catch(() => setAuthState("unauthenticated"));
-  }, []);
-
-  if (authState === "loading") {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <span className="text-sm text-muted-foreground">Loading…</span>
-      </div>
-    );
-  }
-
-  if (authState === "unauthenticated") {
-    return <LoginPage />;
-  }
-
-  return <>{children}</>;
-}
-
 function App() {
-  const path = typeof window !== "undefined" ? window.location.pathname : "";
-  const isPublicRoute = path === "/nexus-slides" || path.startsWith("/nexus-slides/");
   return (
     <ThemeProvider>
     <DossierProvider>
@@ -279,13 +294,7 @@ function App() {
       <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
-            {isPublicRoute ? (
-              <NexusSlidesPage />
-            ) : (
-              <AuthGate>
-                <AppWithDossier />
-              </AuthGate>
-            )}
+            <AppWithDossier />
           </TooltipProvider>
         </QueryClientProvider>
       </I18nProvider>
