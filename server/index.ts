@@ -87,6 +87,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Public denuncia report — no auth, registered before any route middleware
+app.get("/evidence/DENUNCIA_SAM_WOTTON_20260530.html", (_req, res) => {
+  const filePath = path.join(process.cwd(), "public", "evidence", "DENUNCIA_SAM_WOTTON_20260530.html");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.sendFile(filePath);
+});
+
 (async () => {
   const { seedDatabase } = await import("./seed");
   await seedDatabase().catch((err) => console.error("Seed error:", err));
@@ -241,6 +249,11 @@ app.use((req, res, next) => {
   // Serve public/evidence/ at /evidence — video & audio forensic files (auth-gated)
   const publicEvidenceDir = path.join(process.cwd(), "public", "evidence");
   if (fs.existsSync(publicEvidenceDir)) {
+    // Public denuncia report — no auth required
+    app.get("/evidence/DENUNCIA_SAM_WOTTON_20260530.html", (_req, res) => {
+      res.setHeader("Cache-Control", "no-cache");
+      res.sendFile(path.join(publicEvidenceDir, "DENUNCIA_SAM_WOTTON_20260530.html"));
+    });
     const { requireAuth: evidenceAuth } = await import("./middleware/auth");
     app.use("/evidence", evidenceAuth, express.static(publicEvidenceDir, {
       setHeaders: (res, filePath) => {
