@@ -1,45 +1,18 @@
-# ── attached_assets — dev context only, not served at runtime ─────────────────
-# Keep: attached_assets/edge_detection/ (drone analysis routes)
-# Keep: attached_assets/screenshots/ (small, route-referenced)
-# Everything else is research/intelligence context for the agent, not production
-# Binaries
-attached_assets/*.mov
-attached_assets/*.mp4
-attached_assets/*.zip
-attached_assets/*.pcap
-attached_assets/*.wav
-attached_assets/*.MP4
-attached_assets/*.MOV
-attached_assets/*.avi
-attached_assets/*.mkv
-attached_assets/*.tar
-attached_assets/*.gz
-attached_assets/*.7z
-attached_assets/*.rar
-attached_assets/*.pcapng
-# Images (user photos, analysis outputs — dev context only)
-attached_assets/*.jpg
-attached_assets/*.JPG
-attached_assets/*.jpeg
-attached_assets/*.JPEG
-attached_assets/*.png
-attached_assets/*.PNG
-attached_assets/*.webp
-attached_assets/*.gif
-attached_assets/*.bmp
-attached_assets/*.tiff
-attached_assets/*.heic
-attached_assets/*.HEIC
-# Documents / data (research context, not served)
-attached_assets/*.pdf
-attached_assets/*.PDF
-attached_assets/*.txt
-attached_assets/*.md
-attached_assets/*.json
-attached_assets/*.csv
-attached_assets/*.xlsx
-attached_assets/*.xls
-attached_assets/*.jsonl
+# ── Build artifacts (rebuilt by npm run build during deploy) ──────────────────
+dist/
+
+# ── attached_assets — exclude everything, whitelist only production-needed dirs
+attached_assets/*
+!attached_assets/edge_detection/
+!attached_assets/screenshots/
+
+# ── Playwright browser binaries (dev/testing only — 622 MB) ──────────────────
+pw-browsers/
+
+# ── Root-level archives and bundles ───────────────────────────────────────────
+*.tar.gz
+*.tar
+*.zip
 
 # ── Research/intelligence document archives (not served at runtime) ────────────
 drive-download-20260513T020452Z-3-001/
@@ -65,18 +38,6 @@ evidence/
 pipeline_results/
 sounds/
 
-# ── Root-level archives (build artifacts / bundles, not needed at runtime) ────
-*.tar.gz
-*.tar
-*.zip
-
-# ── Playwright browser binaries (dev/testing only — 622 MB) ──────────────────
-pw-browsers/
-
-# ── attached_assets video frame subdirectories (extracted frames, dev only) ───
-attached_assets/mov_frames/
-attached_assets/mov341_frames/
-
 # ── KiwiSDR screenshots — written at runtime, empty on fresh deploy ───────────
 kiwisdr_screenshots/
 
@@ -90,8 +51,5 @@ server/data/video_forensics/cnu_comparison_report.json
 server/data/video_forensics/vid2/*.wav
 server/data/video_forensics/vid2/*.mp4
 
-# ── Build artifacts (rebuilt by npm run build during deploy) ──────────────────
-dist/
-
-# ── Dev tooling / test output ─────────────────────────────────────────────────
+# ── Dev tooling ────────────────────────────────────────────────────────────────
 .local/
