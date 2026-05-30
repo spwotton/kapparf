@@ -51,5 +51,11 @@ server/data/video_forensics/cnu_comparison_report.json
 server/data/video_forensics/vid2/*.wav
 server/data/video_forensics/vid2/*.mp4
 
+# ── Caches (build caches, ML model downloads, package manager caches) ─────────
+.cache/
+
+# ── Python local libs (dev-only, not used by Node.js production server) ───────
+.pythonlibs/
+
 # ── Dev tooling ────────────────────────────────────────────────────────────────
 .local/
