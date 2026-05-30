@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { SiteModeToggle } from "@/lib/site-mode";
 import {
   Radio, Network, FileText, Map, Shield, Cpu,
   Activity, Mic, Video, Zap, ExternalLink, Database
@@ -144,7 +143,6 @@ export default function EvidenceDirectoryPage() {
             <span className="text-sm font-semibold tracking-tight">KAPPA Evidence Directory</span>
             <span className="hidden sm:inline text-xs text-muted-foreground">— Jacó, Puntarenas · Dec 2024–present</span>
           </div>
-          <SiteModeToggle className="text-[11px] font-semibold tracking-widest uppercase text-muted-foreground hover:text-foreground border border-border rounded px-2.5 py-1 transition-colors" />
         </div>
       </header>
 

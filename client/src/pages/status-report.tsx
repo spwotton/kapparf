@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { useSiteMode } from "@/lib/site-mode";
-import { useLocation } from "wouter";
 import {
   Terminal, LayoutDashboard, Activity, Link2, Satellite, Server, Wrench,
   MapIcon, Fingerprint, Search, Crosshair, FlaskConical, Brain, Sparkles,
@@ -126,14 +124,6 @@ export default function StatusReportPage() {
     queryKey: ["/api/kappa/status"],
     refetchInterval: 10000,
   });
-
-  const { toggle, mode } = useSiteMode();
-  const [, navigate] = useLocation();
-
-  const handleModeSwitch = () => {
-    toggle();
-    navigate(mode === "kappa" ? "/" : "/command");
-  };
 
   const score = kappa?.score ?? 0;
   const totalModules = MODULES.reduce((a, g) => a + g.items.length, 0);
