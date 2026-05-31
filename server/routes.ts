@@ -7405,6 +7405,9 @@ export function registerGazetteIntelRoutes(app: express.Express) {
         } else if (target === "venezuela") {
           const { VENEZUELA_CONTACTS } = await import("./mailer-campaign-venezuela");
           contacts = VENEZUELA_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "us-intel") {
+          const { US_INTEL_CONTACTS } = await import("./mailer-campaign-us-intel");
+          contacts = US_INTEL_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
         } else {
           // Full whistleblower blast
           const SUBJECT = "ITALY'S LONG LEASH: Leonardo S.p.A., CSG SAR, and the weaponization of Costa Rica's surveillance grid against U.S. citizens";
@@ -7812,6 +7815,47 @@ This email is constructed from verifiable technical disclosures, public contract
       } catch (err: any) {
         const detail = err?.response?.body?.message || err?.message || String(err);
         results.push({ id: contact.id, to: contact.to, org: contact.org, ok: false, error: detail });
+      }
+      await new Promise((r) => setTimeout(r, 400));
+    }
+
+    const sent = results.filter((r) => r.ok).length;
+    const failed = results.filter((r) => !r.ok).length;
+    res.json({ ok: true, sent, failed, total: results.length, results });
+  });
+
+  // ── US Intelligence / CR Judicial targeted blast ──────────────────────────
+  app.post("/api/mailer/us-intel-blast", async (req, res) => {
+    const { secret, dryRun } = req.body as { secret?: string; dryRun?: boolean };
+    if (secret !== "kappa-fire-2026") return res.status(403).json({ error: "Forbidden" });
+    const apiKey = process.env.MAILGUN_API_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    if (!apiKey || !domain) return res.status(500).json({ error: "Mailgun not configured" });
+
+    const { US_INTEL_CONTACTS } = await import("./mailer-campaign-us-intel");
+
+    if (dryRun) {
+      return res.json({ ok: true, dryRun: true, total: US_INTEL_CONTACTS.length,
+        contacts: US_INTEL_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, category: c.category })) });
+    }
+
+    const Mailgun = (await import("mailgun.js")).default;
+    const mg = new Mailgun(FormData);
+    const client = mg.client({ username: "api", key: apiKey });
+    const sender = `Samuel Wotton <hello@echokappa.com>`;
+    const results: { id: number; to: string; org: string; ok: boolean; msgId?: string; error?: string }[] = [];
+
+    for (const c of US_INTEL_CONTACTS) {
+      try {
+        const r = await client.messages.create(domain, {
+          from: sender, to: [c.to], subject: c.subject, text: c.body,
+        });
+        results.push({ id: c.id, to: c.to, org: c.org, ok: true, msgId: r.id });
+        console.log(`[us-intel-blast] OK [${c.id}] ${c.org} → ${c.to}`);
+      } catch (err: any) {
+        const detail = err?.response?.body?.message || err?.message || String(err);
+        results.push({ id: c.id, to: c.to, org: c.org, ok: false, error: detail });
+        console.error(`[us-intel-blast] FAIL [${c.id}] ${c.org}: ${detail}`);
       }
       await new Promise((r) => setTimeout(r, 400));
     }
