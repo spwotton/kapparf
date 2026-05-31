@@ -156,6 +156,7 @@ function KappaRouter() {
 function GooseRouter() {
   return (
     <Switch>
+      <Route path="/whistleblower" component={WhistleblowerPage} />
       <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route path="/setecom-report" component={SetecomExposePage} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
