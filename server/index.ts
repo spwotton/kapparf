@@ -87,17 +87,27 @@ app.use((req, res, next) => {
   next();
 });
 
-// Public denuncia report — no auth, registered before any route middleware
+// Public denuncia documents + photos — no auth, registered before any route middleware
+const PUBLIC_DENUNCIA: Record<string, string> = {
+  "DENUNCIA_SAM_WOTTON_20260530.html": "text/html; charset=utf-8",
+  "ICWPA_WOTTON_20260530.html": "text/html; charset=utf-8",
+  "los_rios_rf_camouflage_0282.jpg": "image/jpeg",
+  "los_rios_compound_20251021.jpg": "image/jpeg",
+};
+// Evidence HTML (served from public/evidence/)
 app.get("/evidence/DENUNCIA_SAM_WOTTON_20260530.html", (_req, res) => {
-  const filePath = path.join(process.cwd(), "public", "evidence", "DENUNCIA_SAM_WOTTON_20260530.html");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.sendFile(filePath);
+  res.sendFile(path.join(process.cwd(), "public", "evidence", "DENUNCIA_SAM_WOTTON_20260530.html"));
 });
-// Public denuncia photo assets — served from /denuncia/ (no auth gate)
-app.use("/denuncia", express.static(path.join(process.cwd(), "public", "denuncia"), {
-  setHeaders: (res) => { res.setHeader("Cache-Control", "no-cache"); },
-}));
+// Denuncia assets + ICWPA form (served from public/denuncia/)
+Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
+  app.get(`/denuncia/${filename}`, (_req, res) => {
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Content-Type", contentType);
+    res.sendFile(path.join(process.cwd(), "public", "denuncia", filename));
+  });
+});
 
 (async () => {
   const { seedDatabase } = await import("./seed");
