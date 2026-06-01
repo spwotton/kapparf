@@ -2688,3 +2688,68 @@ export const gazetteSnapshots = pgTable("gazette_snapshots", {
 export type GazetteSnapshot = typeof gazetteSnapshots.$inferSelect;
 export const insertGazetteSnapshotSchema = createInsertSchema(gazetteSnapshots).omit({ id: true, createdAt: true });
 export type InsertGazetteSnapshot = z.infer<typeof insertGazetteSnapshotSchema>;
+
+// ── Radiogoniometry Spectrum Sweeper ────────────────────────────────────────
+export const spectrumSweeps = pgTable("spectrum_sweeps", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  startTime: timestamp("start_time").defaultNow().notNull(),
+  endTime: timestamp("end_time"),
+  status: text("status").notNull().default("active"), // active | stopped | completed
+  config: jsonb("config").notNull().default({}),      // { freqStart, freqStop, stepHz, nodes[] }
+  label: text("label"),
+});
+
+export const spectrumBins = pgTable("spectrum_bins", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sweepId: varchar("sweep_id").notNull().references(() => spectrumSweeps.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+  frequency: real("frequency").notNull(),   // Hz
+  amplitude: real("amplitude").notNull(),   // dBm
+  nodeId: varchar("node_id"),
+});
+
+export const directionBearings = pgTable("direction_bearings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sweepId: varchar("sweep_id").notNull().references(() => spectrumSweeps.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+  frequency: real("frequency").notNull(),
+  bearing: real("bearing").notNull(),       // degrees 0–360
+  confidence: real("confidence").notNull(), // 0–1
+  method: text("method").notNull().default("music"), // music | tdoa | manual
+  pseudoSpectrum: jsonb("pseudo_spectrum"), // 360-point MUSIC spectrum array
+});
+
+// ── Multi-Domain Ω-Correlator ────────────────────────────────────────────────
+export const omegaCorrelatorReadings = pgTable("omega_correlator_readings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+  domain: text("domain").notNull(),           // spoke name: drone_acoustic, seismic, schumann, etc.
+  spoke: integer("spoke").notNull(),          // 1–24 AK7 lattice spoke
+  rawValue: real("raw_value").notNull(),
+  normalizedValue: real("normalized_value").notNull(), // κ₁-scaled 0–1
+  unit: text("unit"),
+  source: text("source"),
+  metadata: jsonb("metadata"),
+});
+
+export const omegaCorrelatorEvents = pgTable("omega_correlator_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+  spokesActive: jsonb("spokes_active").notNull(), // array of spoke numbers that spiked
+  domainCount: integer("domain_count").notNull(), // how many domains fired simultaneously
+  kappaScore: real("kappa_score"),
+  description: text("description"),
+  severity: text("severity").notNull().default("info"), // info | warning | critical
+});
+
+export type SpectrumSweep = typeof spectrumSweeps.$inferSelect;
+export type SpectrumBin = typeof spectrumBins.$inferSelect;
+export type DirectionBearing = typeof directionBearings.$inferSelect;
+export type OmegaCorrelatorReading = typeof omegaCorrelatorReadings.$inferSelect;
+export type OmegaCorrelatorEvent = typeof omegaCorrelatorEvents.$inferSelect;
+
+export const insertSpectrumSweepSchema = createInsertSchema(spectrumSweeps).omit({ id: true, startTime: true });
+export const insertSpectrumBinSchema = createInsertSchema(spectrumBins).omit({ id: true, timestamp: true });
+export const insertDirectionBearingSchema = createInsertSchema(directionBearings).omit({ id: true, timestamp: true });
+export const insertOmegaReadingSchema = createInsertSchema(omegaCorrelatorReadings).omit({ id: true, timestamp: true });
+export const insertOmegaEventSchema = createInsertSchema(omegaCorrelatorEvents).omit({ id: true, timestamp: true });

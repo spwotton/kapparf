@@ -7824,6 +7824,168 @@ This email is constructed from verifiable technical disclosures, public contract
     res.json({ ok: true, sent, failed, total: results.length, results });
   });
 
+  // ── Radiogoniometry Spectrum Sweeper ─────────────────────────────────────
+  app.post("/api/spectrum/upload-csv", async (req, res) => {
+    try {
+      const { csv, label, freqStart, freqStop } = req.body as {
+        csv: string; label?: string; freqStart?: number; freqStop?: number;
+      };
+      if (!csv?.trim()) return res.status(400).json({ error: "No CSV data provided" });
+      const { sweeper, parseSpectrumCsv, computeMUSIC } = await import("./spectrum-sweeper");
+      const bins = parseSpectrumCsv(csv);
+      if (!bins.length) return res.status(400).json({ error: "No valid bins parsed from CSV" });
+      const sweepId = await sweeper.createSweep({ freqStart, freqStop, source: "csv_upload" }, label);
+      await sweeper.insertBins(sweepId, bins);
+      await sweeper.stopSweep(sweepId);
+      // If we have enough bins, compute a bearing at the peak frequency
+      if (bins.length >= 2) {
+        const peak = bins.reduce((a, b) => a.amplitude > b.amplitude ? a : b);
+        // Single-channel upload — store as manual bearing at 0° confidence 0
+        await sweeper.insertBearing(sweepId, {
+          frequency: peak.frequency, bearing: 0, confidence: 0,
+          method: "manual", pseudoSpectrum: [],
+        });
+      }
+      res.json({ ok: true, sweepId, binCount: bins.length });
+    } catch (e: any) {
+      console.error("[spectrum/upload-csv]", e);
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/spectrum/ingest-iq", async (req, res) => {
+    try {
+      const { iqData, freqHz, arrayRadiusM, antennaCount, label } = req.body as {
+        iqData: Array<Array<{ re: number; im: number }>>;
+        freqHz: number; arrayRadiusM?: number; antennaCount?: number; label?: string;
+      };
+      if (!iqData?.length || !freqHz) return res.status(400).json({ error: "Missing iqData or freqHz" });
+      const { sweeper, computeMUSIC, amplitudeToDbm } = await import("./spectrum-sweeper");
+      const sweepId = await sweeper.createSweep({ freqHz, source: "iq_upload" }, label);
+      // Compute amplitude bin from first antenna
+      const amp = amplitudeToDbm(
+        Math.sqrt(iqData[0].reduce((s, c) => s + c.re * c.re + c.im * c.im, 0) / iqData[0].length)
+      );
+      await sweeper.insertBins(sweepId, [{ frequency: freqHz, amplitude: amp, nodeId: "iq_upload" }]);
+      // Compute MUSIC bearing if multi-antenna
+      if (iqData.length >= 2) {
+        const radius = arrayRadiusM ?? 0.1;
+        const result = computeMUSIC(iqData, freqHz, radius);
+        await sweeper.insertBearing(sweepId, {
+          frequency: freqHz,
+          bearing: result.peakBearing,
+          confidence: result.confidence,
+          method: "music",
+          pseudoSpectrum: result.pseudoSpectrum,
+        });
+      }
+      await sweeper.stopSweep(sweepId);
+      res.json({ ok: true, sweepId });
+    } catch (e: any) {
+      console.error("[spectrum/ingest-iq]", e);
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/spectrum/current", async (_req, res) => {
+    try {
+      const { sweeper } = await import("./spectrum-sweeper");
+      const [bins, bearings] = await Promise.all([
+        sweeper.getLatestBins(500),
+        sweeper.getLatestBearings(20),
+      ]);
+      res.json({ bins, bearings });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/spectrum/sweeps", async (_req, res) => {
+    try {
+      const { sweeper } = await import("./spectrum-sweeper");
+      const sweeps = await sweeper.getSweeps(30);
+      res.json({ sweeps });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/spectrum/sweep/:id", async (req, res) => {
+    try {
+      const { sweeper } = await import("./spectrum-sweeper");
+      const [bins, bearings] = await Promise.all([
+        sweeper.getBinsForSweep(req.params.id),
+        sweeper.getBearingsForSweep(req.params.id),
+      ]);
+      res.json({ bins, bearings });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // ── Ω-Correlator multi-domain ─────────────────────────────────────────────
+  app.post("/api/omega-correlator/ingest", async (req, res) => {
+    try {
+      const { domain, value, unit, source, metadata } = req.body as {
+        domain: string; value: number; unit?: string; source?: string; metadata?: Record<string, unknown>;
+      };
+      if (!domain || value === undefined) return res.status(400).json({ error: "Missing domain or value" });
+      const { omegaCorrelator } = await import("./spectrum-sweeper");
+      await omegaCorrelator.ingestReading(domain, value, unit, source, metadata);
+      await omegaCorrelator.checkCorrelationEvent();
+      res.json({ ok: true });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.post("/api/omega-correlator/ingest-batch", async (req, res) => {
+    try {
+      const { readings } = req.body as {
+        readings: Array<{ domain: string; value: number; unit?: string; source?: string }>;
+      };
+      const { omegaCorrelator } = await import("./spectrum-sweeper");
+      for (const r of readings) {
+        await omegaCorrelator.ingestReading(r.domain, r.value, r.unit, r.source);
+      }
+      await omegaCorrelator.checkCorrelationEvent();
+      res.json({ ok: true, count: readings.length });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/omega-correlator/latest", async (_req, res) => {
+    try {
+      const { omegaCorrelator, AK7_DOMAINS } = await import("./spectrum-sweeper");
+      const domains = await omegaCorrelator.getLatestPerDomain();
+      res.json({ domains, spokeDefs: AK7_DOMAINS });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/omega-correlator/events", async (_req, res) => {
+    try {
+      const { omegaCorrelator } = await import("./spectrum-sweeper");
+      const events = await omegaCorrelator.getRecentEvents(30);
+      res.json({ events });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  app.get("/api/omega-correlator/history", async (req, res) => {
+    try {
+      const sinceMs = parseInt(req.query.sinceMs as string) || 300_000;
+      const { omegaCorrelator } = await import("./spectrum-sweeper");
+      const readings = await omegaCorrelator.getRecentReadings(sinceMs);
+      res.json({ readings });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   // ── US Intelligence / CR Judicial targeted blast ──────────────────────────
   app.post("/api/mailer/us-intel-blast", async (req, res) => {
     const { secret, dryRun } = req.body as { secret?: string; dryRun?: boolean };

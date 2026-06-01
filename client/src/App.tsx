@@ -78,6 +78,7 @@ import SatoshiLatticePage from "@/pages/satoshi-lattice";
 import QuantumSolverPage from "@/pages/quantum-solver";
 import StatusReportPage from "@/pages/status-report";
 import NexusSlidesPage from "@/pages/nexus-slides";
+import SpectrumPage from "@/pages/spectrum";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -127,6 +128,7 @@ function KappaRouter() {
       <Route path="/local-llm" component={LocalLLMHypervisorPage} />
       <Route path="/meridian" component={MeridianHypervisorPage} />
       <Route path="/bio-acoustic" component={BioAcousticPage} />
+      <Route path="/spectrum" component={SpectrumPage} />
       <Route path="/audio" component={AudioForensicsPage} />
       <Route path="/video-forensics" component={VideoForensicsPage} />
       <Route path="/goose" component={GooseGazettePage} />

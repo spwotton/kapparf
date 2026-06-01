@@ -166,6 +166,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.sigint", fallbackLabel: "SIGINT",
     items: [
+      { titleKey: "sidebar.spectrumSweeper", fallback: "Spectrum Sweeper", url: "/spectrum", icon: Radio },
       { titleKey: "sidebar.kiwiNodes", fallback: "KiwiSDR Nodes", url: "/nodes", icon: Server },
       { titleKey: "sidebar.satellites", fallback: "Satellites", url: "/satellites", icon: Satellite },
       { titleKey: "sidebar.bioAcoustic", fallback: "Bio-Acoustic Correlator", url: "/bio-acoustic", icon: Activity },
