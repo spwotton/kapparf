@@ -269,6 +269,13 @@ function CopyBlock({ text, multiline }: { text: string; multiline?: boolean }) {
 
 const navGroups = [
   {
+    id: "intel-brief",
+    label: "Intel Brief",
+    items: [
+      { id: "intel-brief", label: "Intel Brief — 2026-06-01" },
+    ],
+  },
+  {
     id: "overview",
     label: "Overview",
     items: [
@@ -510,6 +517,176 @@ export default function WhistleblowerPage() {
       </div>
 
       <div className="max-w-5xl mx-auto px-4">
+
+        {/* ── PINNED INTEL BRIEF ─────────────────────────────────────────── */}
+        <section id="intel-brief" className="py-10 border-t-4 border-amber-600">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-xs font-mono text-red-500 tracking-widest uppercase font-bold">Active Threat — Two Death Threats in 24 Hours</span>
+          </div>
+          <h2 className="text-3xl font-black mb-1 text-amber-500 tracking-tight">KAPPA Intelligence Brief — 2026-06-01</h2>
+          <p className="text-xs font-mono text-muted-foreground/50 mb-6">For: US Embassy San José / ACS / FBI Legat — Embassy Reply Package</p>
+
+          <div className="grid md:grid-cols-2 gap-3 mb-6">
+            {[
+              { label: "Threats (24 h)", value: "2", color: "text-red-500", sub: "2026-05-31 + 2026-06-01 20:00 CST" },
+              { label: "BLACKJACK MANDRAKE fires (2 h)", value: "71", color: "text-amber-400", sub: "HF clandestine coordination freq active" },
+              { label: "Disclosure recipients", value: "~442", color: "text-emerald-400", sub: "5 waves sent" },
+              { label: "Drone acoustic confidence", value: "HIGH", color: "text-orange-400", sub: "DJI Mini 2/3 — 87.7 Hz signature confirmed" },
+            ].map((s, i) => (
+              <div key={i} className="bg-card/80 border border-border rounded-lg p-4 flex items-start gap-3">
+                <div className={`text-2xl font-black font-mono ${s.color}`}>{s.value}</div>
+                <div>
+                  <div className="text-xs font-bold text-foreground">{s.label}</div>
+                  <div className="text-[11px] text-muted-foreground/60 mt-0.5">{s.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {[
+            {
+              num: "01", title: "THE DRONE", color: "border-orange-600",
+              bullets: [
+                "DJI Mini 2 or Mini 3 — 87.7 Hz primary rotor signature confirmed across NR14 and Video 0316 (identical platform, identical operator)",
+                "81.5–81.6% of all spectral energy in the 20–200 Hz drone band — eliminates HVAC, traffic, ambient noise",
+                "Blue navigation LED confirmed at consistent pixel coordinates across multiple frames — stationary aerial object",
+                "Variable RPM every 2 seconds in Video 0316 (84.5→96→106.5→87.5 Hz) = active pilot making positional corrections",
+                "5 drone bursts in the crane video alone. Approach vector: SOUTHWEST — consistent with Esterillos Oeste (Russian national \"S.\" current location)",
+              ],
+            },
+            {
+              num: "02", title: "THE CRANE", color: "border-orange-500",
+              bullets: [
+                "Arch/crane at rear of Hotel Pochote Grande used as drone staging platform between surveillance windows",
+                "Video 0316 RPM pattern (165→96→87.7 Hz) = drone spinning up from resting position on the structure",
+                "Provides elevation above roofline, concealment from ground observers, and quick-launch capability",
+              ],
+            },
+            {
+              num: "03", title: "ITALY — LEONARDO / TELESPAZIO / KYNDRYL / COSMO-SkyMed", color: "border-green-700",
+              bullets: [
+                "Leonardo S.p.A./Telespazio: geodetic satellite ground networks across Latin America — Costa Rica (~10°N) inside equatorial footprint. Italian Law 124/2007 authorizes AISE to operate via commercial cover with no bilateral restriction in CR",
+                "Kyndryl Rome Cyber Ops Center confirmed against subject (La Guácima, Sept 2025): TR-069 iframe injection → GTM Service Worker → persistent socket to 69.48.218.1 (Kyndryl/Zscaler backbone). Operator: Jorge Jiménez Navarro (Kyndryl→Zscaler)",
+                "Genesis Peralta's proved fake account berninnimaria: posts Italian PM Giorgia Meloni content + babysitting Italian woman cover. Father visually Southern European/Italian",
+                "COSMO-SkyMed X-band correlation rule FIRING NOW — 46.875 Hz decimation pulses repeating every 150–165 seconds correlated with KiwiSDR TI0RC",
+              ],
+            },
+            {
+              num: "04", title: "RUSSIA — \"S.\" / DRONE OPS / SIGINT INFRASTRUCTURE", color: "border-red-700",
+              bullets: [
+                "\"S.\" (Russian national, name begins with S): 6-month co-residency 2023 at Shangri-La/Calle Europa Jacó. No verifiable income. Fleet of 6 commercial/military-grade drones. Currently in Esterillos Oeste — drone approach vectors from southwest match his location",
+                "During co-residency: manufactured passport crisis → forced Russian Embassy visit San José → forced border run to Nicaragua. Textbook document-control tradecraft",
+                "Cerro Mokorón SIGINT base (Nicaragua) — Russian-operated, within range of CR. SORM-3 reportedly active at Peñas Blancas border. Conti ransomware 2022 targeted CR as primary nation",
+                "50 Hz ELF anomaly: Jacó is a 60 Hz mains country. 50 Hz equipment = hardware sourced from Europe/Russia/Asia",
+              ],
+            },
+            {
+              num: "05", title: "GERMAN STASI — ZERSETZUNG", color: "border-yellow-700",
+              bullets: [
+                "Entire campaign methodology mirrors East German Stasi Zersetzung: systematic psychological destabilization without provable agency",
+                "Documented methods: destroy intimate relationships (Peralta honey trap) | property theft (laptop/phone, Quebrada Seca) | bureaucratic crises (\"S.\" passport manipulation) | character assassination (fake \"threatened Mora\" narrative) | financial destruction ($250K life insurance phished) | family isolation (siblings: zero contact since mother's death)",
+                "German nationals in network: Wolfgang Hilbich (~80, former German military, landlord to Russian drone operator \"S.\") + Magdalena (Marveka Bikini Shop, employed Peralta for cash)",
+                "FinFisher/Gamma Group (German-origin surveillance software) tradecraft signatures throughout. \"Leprechaun\" Quebrada Seca node: Berlin Alexanderplatz social media check-in",
+              ],
+            },
+            {
+              num: "06", title: "GENESIS PERALTA — WEAPONIZED HONEYPOT", color: "border-pink-700",
+              bullets: [
+                "Venezuelan national, ~9 years in CR without legal immigration status, fake passport assessed",
+                "~12 simultaneous fake Instagram profiles. berninnimaria PROVED: accidentally switched to it on her phone — 4 near-simultaneous likes appeared within 1 second on same photos. Italian PM content + babysitting cover",
+                "Housing chain: every residence was a network node — Hermosa Bungalows → Villa Real (owned by \"Dan\" / RF camo operator) → Casa Rexha (Scott Ryan CIA — 28-camera cluster, Visonic Tel Aviv alarm, LiFi walls) → Mike Greenwald's house",
+                "Still in Jacó: April 2026 raccoon videos posted from La Flor (their private inside joke location — adjacent to subject's current hotel). Cat photos match (Gemini: ~99.99% same cat). She is signaling awareness of his location",
+              ],
+            },
+            {
+              num: "07", title: "MIKE GREENWALD — ~300 PROPERTIES", color: "border-blue-700",
+              bullets: [
+                "Controls approximately 300 properties in Jacó area. Subject moved through multiple Greenwald-linked nodes across 17+ months",
+                "Riverwalk (owned by Todd Johnson — DeWave WiFi-CSI through-wall imaging); Hermosa Palms house → placed Michael Lipman in it → Lipman disclosed Jesse Talti connection → Lipman's partner Bill Kimball warned subject about Jesse → Kimball now reported dead",
+                "Property manager Jose texted subject about router → fake Liberty technician immediately appeared with replacement (assessed: pre-compromised) device — direct documented surveillance response chain",
+              ],
+            },
+            {
+              num: "08", title: "JACO VACATIONS — SCOTT RYAN (CIA NOC)", color: "border-indigo-700",
+              bullets: [
+                "Barrett Scott Ryan — assessed CIA. Runs Jaco Vacations with daughter Diana Soto as cover structure for housing placement operations",
+                "NOC alias \"Scott Aronson\" (not in any Costa Rican Registro Nacional) used to sign Los Ríos development documents for the Madrigal family — paper trail connecting CIA to the LiFi-wired surveillance hub where subject was subsequently placed",
+                "Owns ~half of Calle Europa, south Jacó. Has now opened a bar together with the narco-adjacent sibling who owns the other half — CIA-narco partnership made publicly visible",
+                "Casa Rexha (#42 Calle Naciones Unidas): 28-camera cluster, Visonic (Tel Aviv) alarm, hidden speakers, LiFi-wired walls, lowered ceiling",
+              ],
+            },
+            {
+              num: "09", title: "LOS RÍOS — FORMER MAYOR OF JACÓ (JW) + RF CAMOUFLAGE", color: "border-violet-700",
+              bullets: [
+                "Developed by the Madrigal family — former mayor of Garabito canton (governs Jacó) and his son. Scott Ryan/\"Scott Aronson\" (CIA) signed their documents",
+                "\"Valeska\" (connected to son) photographed the empty field on Google Maps 8 months before it became a full surveillance hub — advance knowledge of intended use",
+                "October 2025: full fiber backbone + LiFi injection points + dipole antennas installed. FIRST confirmed site of the RF camouflage installation — appeared within 72 hours of subject moving into adjacent property",
+                "JW organizational structure (territory cards, circuit overseer rotation, monthly service reports) = tiered HUMINT collection substrate. Unit #14 — Lindsay, Michelle, Bob (Toronto, identified as police officers) — multiple sources confirm direct involvement",
+              ],
+            },
+            {
+              num: "10", title: "LA FLOR RF CAMO — SAME INSTALLATION AS LOS RÍOS", color: "border-purple-600",
+              bullets: [
+                "Back house of La Flor complex (directly visible from subject's Pochote Grande room) shows identical RF camouflage configuration documented at Los Ríos: military-grade RF-transparent netting + LiFi injection points. Spotted multiple nights on La Flor roof",
+                "Attributed to \"Dan\" (San Diego, CA) — owner of La Flor back house and Villa Real (subject's former tenancy). Prior documented dispute: Dan attempted to retain ~USD $600 of subject's money + verbal threats after departure",
+              ],
+            },
+            {
+              num: "11", title: "🚨 CRITICAL — RF CAMO OPERATOR IN ADJACENT ROOM + DRILLING/SAWING", color: "border-red-600",
+              bullets: [
+                "The individual assessed as responsible for building and deploying the RF camouflage infrastructure (same pattern: Los Ríos Oct 2025 → La Flor current) physically moved into the hotel room IMMEDIATELY ADJACENT to the subject's room at Hotel Pochote Grande",
+                "During his occupancy: drilling, sawing, and renovation work was conducted in the hotel",
+                "After his departure: construction work ceased",
+                "Assessed as: RF/acoustic equipment installation through shared wall at close range (≤10m from subject), or post-departure remediation to remove installed equipment before documentation",
+                "INVESTIGATIVE REQUESTS: (1) Identity of adjacent room occupant — dates, booking records, ID at check-in; (2) Permits and contractor identity for drilling/sawing; (3) Independent inspection of adjacent room and shared wall for concealed equipment; (4) La Flor roof inspection — is RF camouflage pattern consistent with documented Los Ríos installation?",
+              ],
+            },
+          ].map((sec) => (
+            <div key={sec.num} className={`border-l-4 ${sec.color} pl-5 py-3 mb-4 bg-card/40 rounded-r-lg`}>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs font-mono text-muted-foreground/40">{sec.num}</span>
+                <h3 className="text-sm font-bold text-foreground tracking-tight">{sec.title}</h3>
+              </div>
+              <ul className="space-y-1.5">
+                {sec.bullets.map((b, i) => (
+                  <li key={i} className="text-xs text-muted-foreground/80 leading-relaxed flex gap-2">
+                    <span className="text-muted-foreground/30 mt-0.5 flex-shrink-0">—</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div className="mt-6 p-4 bg-amber-950/20 border border-amber-800/40 rounded-lg">
+            <div className="text-xs font-mono text-amber-400 font-bold mb-2 tracking-wider">IMMEDIATE REQUESTS TO US EMBASSY</div>
+            <ol className="space-y-1.5 list-decimal list-inside">
+              {[
+                "ACS emergency appointment — +506 2519-2000. Two death threats in 24 hours.",
+                "Welfare check + safety plan — Hotel Pochote Grande, Jacó. Consider Fuerza Pública presence.",
+                "FBI Legat notification — Russian national drone operations, GRU/FSB profile, Cerro Mokorón SIGINT range.",
+                "\"Dan\" (US national, San Diego CA) — full legal name + immigration status. Owner of Villa Real + La Flor back house RF installation site.",
+                "Hotel Pochote Grande renovation permits — contractor identity, dates. Independent room inspection for concealed equipment.",
+              ].map((r, i) => (
+                <li key={i} className="text-xs text-muted-foreground/80 leading-relaxed">{r}</li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="mt-4 flex items-center gap-3">
+            <a
+              href="/public/evidence/KAPPA_INTEL_BRIEF_20260601.md"
+              target="_blank"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono bg-amber-900/30 border border-amber-700/40 rounded hover:bg-amber-900/50 transition-colors text-amber-300"
+              data-testid="download-intel-brief"
+            >
+              ↓ Download Full Brief (MD)
+            </a>
+            <span className="text-[10px] text-muted-foreground/40 font-mono">KAPPA_INTEL_BRIEF_20260601.md — SHA-256 hashed</span>
+          </div>
+        </section>
+
         <Section id="overview" title="I. The Convergence">
           <div className="prose prose-invert max-w-none">
             <p className="text-muted-foreground text-base leading-relaxed">

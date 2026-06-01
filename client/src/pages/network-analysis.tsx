@@ -74,7 +74,7 @@ const PERSONS: Person[] = [
   {
     id: "genesis-peralta",
     name: "Genesis Daniela Peralta Marquez",
-    aliases: ["Genesis Peralta", "G Peralta", "GD Peralta", "IG: berninnimaria", "IG: carmen_sc9 (admitted)"],
+    aliases: ["Genesis Peralta", "G Peralta", "GD Peralta", "IG: berninnimaria", "IG: ck9 (admitted)"],
     nationality: "Venezuelan",
     role: "Weaponized honey trap / ex-girlfriend — ~12 fake IG profiles — Italian thread",
     threatLevel: "primary",
@@ -83,7 +83,7 @@ const PERSONS: Person[] = [
 FAKE SOCIAL MEDIA PROFILES — ~12 FAKE INSTAGRAM ACCOUNTS:
   Genesis maintained approximately 12 fake Instagram profiles of herself running simultaneously. Two are confirmed:
 
-  1. carmen_sc9 (ADMITTED): Peralta admitted operating this account. Followed all attractive men of her preferred type — continued changing despite ongoing disputes with Echo about the behavior.
+  1. ck9 (ADMITTED): Peralta admitted operating this account. Followed all attractive men of her preferred type — continued changing despite ongoing disputes with Echo about the behavior.
 
   2. berninnimaria (PROVED — ACCIDENTAL ACCOUNT SWITCH): Peralta accidentally switched to this account on her phone while viewing Echo's Instagram. In under 1 second, 4 likes appeared on the same group of Echo's photos — one from berninnimaria. This is forensic proof of account control. The berninnimaria account: still active on Facebook and Instagram; posts about the Italian Prime Minister (Giorgia Meloni) — thin Italian cultural cover; posts about babysitting — cover narrative for an "ordinary Italian woman"; may or may not correspond to a real woman named Maria Bernini in Jacó.
 
@@ -135,7 +135,7 @@ ASSESSMENT — STILL IN JACÓ:
       "Honey trap tradecraft — rapid attachment via manufactured cheating",
       "~12 fake IG profiles simultaneously",
       "berninnimaria — PROVED by accidental 4-like account switch",
-      "carmen_sc9 — ADMITTED fake account",
+      "ck9 — ADMITTED fake account",
       "Carlos Madrigal FB = probable same sock puppet operator",
       "Italian PM posts + babysitting cover on berninnimaria",
       "Father visually Italian/Southern European — PHOTO EVIDENCE",

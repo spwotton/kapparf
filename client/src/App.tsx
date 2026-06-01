@@ -84,7 +84,8 @@ import SpectrumPage from "@/pages/spectrum";
 function KappaRouter() {
   return (
     <Switch>
-      <Route path="/" component={CommandCenterPage} />
+      <Route path="/" component={WhistleblowerPage} />
+      <Route path="/command-center" component={CommandCenterPage} />
       <Route path="/status" component={StatusReportPage} />
       <Route path="/whistleblower" component={WhistleblowerPage} />
       <Route path="/command" component={CommandCenterPage} />

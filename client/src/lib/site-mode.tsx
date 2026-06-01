@@ -9,14 +9,14 @@ interface SiteModeContextValue {
 }
 
 const SiteModeContext = createContext<SiteModeContextValue>({
-  mode: "goose",
+  mode: "kappa",
   toggle: () => {},
   setMode: () => {},
 });
 
 function resolveStoredMode(raw: string | null): SiteMode {
-  if (raw === "kappa") return "kappa";
-  return "goose";
+  if (raw === "goose") return "goose";
+  return "kappa";
 }
 
 export function SiteModeProvider({ children }: { children: React.ReactNode }) {
@@ -24,7 +24,7 @@ export function SiteModeProvider({ children }: { children: React.ReactNode }) {
     try {
       return resolveStoredMode(localStorage.getItem("kappa_site_mode"));
     } catch {
-      return "goose";
+      return "kappa";
     }
   });
 
