@@ -80,6 +80,7 @@ import StatusReportPage from "@/pages/status-report";
 import NexusSlidesPage from "@/pages/nexus-slides";
 import SpectrumPage from "@/pages/spectrum";
 import ArticleJacoConvergencePage from "@/pages/article-jaco-convergence";
+import FollowTheMoneyPage from "@/pages/follow-the-money";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -152,6 +153,7 @@ function KappaRouter() {
       <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
+      <Route path="/follow-the-money" component={FollowTheMoneyPage} />
       <Route component={NotFound} />
     </Switch>
   );

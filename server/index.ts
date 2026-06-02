@@ -232,6 +232,10 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
   const { seedFieldDiscoveryArticles } = await import("./goose-seeds");
   seedFieldDiscoveryArticles().catch(e => console.error("[GOOSE:SEED] error:", e.message));
 
+  // FTM — Follow the Money Entity Lattice Hypervisor
+  const { startFtmHypervisor } = await import("./lib/ftm/ftmHypervisor");
+  setTimeout(() => startFtmHypervisor().catch(e => console.warn("[FTM] startup error:", e.message)), 12_000);
+
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 
   app.use((err: any, _req: Request, res: Response, next: NextFunction) => {

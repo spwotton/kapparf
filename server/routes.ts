@@ -162,6 +162,7 @@ import {
   CONSTITUTION as GAZETTE_CONSTITUTION,
 } from "./gazette-refiner";
 import { reelRouter } from "./reel-routes";
+import { registerFtmRoutes } from "./lib/ftm/ftmRoutes";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -5144,6 +5145,7 @@ done
   registerGooseRoutes(app);
   registerGazetteIntelRoutes(app);
   registerSignalLatticeRoutes(app);
+  registerFtmRoutes(app);
 
   return httpServer;
 }
@@ -8026,6 +8028,5 @@ This email is constructed from verifiable technical disclosures, public contract
     const failed = results.filter((r) => !r.ok).length;
     res.json({ ok: true, sent, failed, total: results.length, results });
   });
+
 }
-
-

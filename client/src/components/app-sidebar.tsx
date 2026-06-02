@@ -191,6 +191,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.mediaPitch", fallback: "Media Pitch", url: "/media-pitch", icon: Newspaper },
       { titleKey: "sidebar.satoshiLattice", fallback: "Satoshi Lattice", url: "/satoshi-lattice", icon: Hash },
       { titleKey: "sidebar.quantumSolver",  fallback: "Quantum Solver",  url: "/quantum-solver",  icon: Zap },
+      { titleKey: "sidebar.followTheMoney", fallback: "Follow the Money", url: "/follow-the-money", icon: Network },
     ],
   },
   {
