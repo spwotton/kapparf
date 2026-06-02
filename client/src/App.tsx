@@ -79,6 +79,7 @@ import QuantumSolverPage from "@/pages/quantum-solver";
 import StatusReportPage from "@/pages/status-report";
 import NexusSlidesPage from "@/pages/nexus-slides";
 import SpectrumPage from "@/pages/spectrum";
+import ArticleJacoConvergencePage from "@/pages/article-jaco-convergence";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -150,6 +151,7 @@ function KappaRouter() {
       <Route path="/quantum-solver" component={QuantumSolverPage} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route path="/nexus-slides" component={NexusSlidesPage} />
+      <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -162,6 +164,7 @@ function GooseRouter() {
       <Route path="/whistleblower" component={WhistleblowerPage} />
       <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route path="/setecom-report" component={SetecomExposePage} />
+      <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route path="/goose/signals" component={GooseSignalsPage} />
       <Route path="/goose/lattice" component={SignalLatticePage} />
