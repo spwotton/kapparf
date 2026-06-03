@@ -41,6 +41,7 @@ import NetworkForensicsPage from "@/pages/network-forensics";
 import EvidenceChainPage from "@/pages/evidence-chain";
 import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
 import WhistleblowerPage from "@/pages/whistleblower";
+import HomePage from "@/pages/home";
 import MemoryCortexPage from "@/pages/memory-cortex";
 import GalliumPage from "@/pages/gallium";
 import SuitesCristinaPage from "@/pages/suites-cristina";
@@ -88,7 +89,7 @@ import QuasarHydraPage from "@/pages/quasar-hydra";
 function KappaRouter() {
   return (
     <Switch>
-      <Route path="/" component={WhistleblowerPage} />
+      <Route path="/" component={HomePage} />
       <Route path="/command-center" component={CommandCenterPage} />
       <Route path="/status" component={StatusReportPage} />
       <Route path="/whistleblower" component={WhistleblowerPage} />

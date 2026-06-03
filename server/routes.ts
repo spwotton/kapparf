@@ -5611,6 +5611,40 @@ export function registerGooseRoutes(app: express.Express) {
     } catch (e: any) { res.status(500).json({ error: e.message }); }
   });
 
+  // ── ROOT SITEMAP (CIAJW investigations) ─────────────────────────────────────
+  app.get("/sitemap.xml", async (_req, res) => {
+    try {
+      const base = "https://ciajw.com";
+      const today = new Date().toISOString().split("T")[0];
+      const pages: Array<{ path: string; priority: string; changefreq: string }> = [
+        { path: "/", priority: "1.0", changefreq: "daily" },
+        { path: "/setecom", priority: "0.9", changefreq: "weekly" },
+        { path: "/zersetzung", priority: "0.8", changefreq: "daily" },
+        { path: "/forensics", priority: "0.8", changefreq: "weekly" },
+        { path: "/evidence", priority: "0.8", changefreq: "daily" },
+        { path: "/tools", priority: "0.7", changefreq: "weekly" },
+        { path: "/audio", priority: "0.7", changefreq: "weekly" },
+        { path: "/video-forensics", priority: "0.7", changefreq: "weekly" },
+        { path: "/cristina", priority: "0.6", changefreq: "monthly" },
+        { path: "/jaco", priority: "0.6", changefreq: "monthly" },
+        { path: "/board", priority: "0.6", changefreq: "weekly" },
+        { path: "/whistleblower", priority: "0.6", changefreq: "weekly" },
+      ];
+      const urls = pages
+        .map(
+          (p) =>
+            `<url><loc>${base}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${p.changefreq}</changefreq><priority>${p.priority}</priority></url>`,
+        )
+        .join("\n  ");
+      res.setHeader("Content-Type", "application/xml; charset=utf-8");
+      res.send(
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  ${urls}\n</urlset>`,
+      );
+    } catch (e: any) {
+      res.status(500).send(`<!-- error: ${e.message} -->`);
+    }
+  });
+
   // ── SITEMAP ────────────────────────────────────────────────────────────────
   app.get("/goose/sitemap.xml", async (_req, res) => {
     try {
