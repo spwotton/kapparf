@@ -15,6 +15,8 @@ import {
   Shield,
   BookOpen,
   ArrowRight,
+  Activity,
+  Zap,
 } from "lucide-react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -803,11 +805,151 @@ export default function ZersetzungPage() {
         </Card>
       </section>
 
+      {/* ── Live KAPPA Event Feed ────────────────────────────────────────────── */}
+      <section data-testid="section-live-event-feed">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Activity className="h-4 w-4 text-muted-foreground" />
+            <h2 className="text-base font-semibold tracking-tight">Live KAPPA Event Feed</h2>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span className="text-[10px] font-mono text-muted-foreground">AUTO-REFRESH 30s</span>
+          </div>
+        </div>
+        <p className="text-xs text-muted-foreground mb-3">
+          Real-time ingestion from KAPPA signal database. Events near documented V2K bands (2004 Hz, 2511 Hz, 17.9 kHz) are highlighted.
+        </p>
+        <LiveEventFeed />
+      </section>
+
       {/* ── Footer note ─────────────────────────────────────────────────────── */}
       <div className="border-t pt-4 text-xs text-muted-foreground/60 space-y-1">
         <p>All content sourced from open-source research corpus, FOIA-released documents, and KAPPA live event data.</p>
         <p>No simulated, mock, or synthetic data is present on this page. RF event matches reflect real detections from the live KAPPA signal database.</p>
       </div>
     </div>
+  );
+}
+
+// ── Live Event Feed Component ──────────────────────────────────────────────────
+
+const V2K_BANDS = [
+  { label: "F2", lo: 1904, hi: 2104 },
+  { label: "F3", lo: 2385, hi: 2637 },
+  { label: "EHF", lo: 16966, hi: 18937 },
+  { label: "DSP-CLK", lo: 44.5, hi: 49.3 },
+  { label: "V2K-7Hz", lo: 6.3, hi: 7.7 },
+];
+
+function isV2KBand(freq: number | null | undefined): string | null {
+  if (freq == null) return null;
+  for (const b of V2K_BANDS) {
+    if (freq >= b.lo && freq <= b.hi) return b.label;
+  }
+  return null;
+}
+
+function domainColor(domain: string) {
+  const d = domain.toLowerCase();
+  if (d.includes("rf") || d.includes("signal") || d.includes("acoustic")) return "text-violet-600 dark:text-violet-400";
+  if (d.includes("network") || d.includes("deauth") || d.includes("cyber")) return "text-blue-600 dark:text-blue-400";
+  if (d.includes("drone") || d.includes("aerial") || d.includes("flight")) return "text-amber-600 dark:text-amber-400";
+  if (d.includes("satellite")) return "text-cyan-600 dark:text-cyan-400";
+  if (d.includes("seismic") || d.includes("weather")) return "text-green-600 dark:text-green-400";
+  return "text-muted-foreground";
+}
+
+function LiveEventFeed() {
+  const { data: events = [], dataUpdatedAt } = useQuery<SignalEvent[]>({
+    queryKey: ["/api/events"],
+    refetchInterval: 30000,
+  });
+
+  const sorted = [...events]
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .slice(0, 50);
+
+  const v2kCount = sorted.filter(e => isV2KBand(e.frequency)).length;
+
+  return (
+    <Card data-testid="card-live-event-feed">
+      <CardHeader className="pb-2">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-sm font-medium">
+            Signal Events — Last {sorted.length} records
+          </CardTitle>
+          <div className="flex items-center gap-2">
+            {v2kCount > 0 && (
+              <Badge variant="destructive" className="text-[10px] font-mono gap-1" data-testid="badge-v2k-hit-count">
+                <Zap className="h-3 w-3" />
+                {v2kCount} V2K-BAND
+              </Badge>
+            )}
+            <span className="text-[10px] text-muted-foreground font-mono">
+              {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleTimeString() : "—"}
+            </span>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="p-0">
+        {sorted.length === 0 ? (
+          <div className="px-4 py-8 text-center text-xs text-muted-foreground" data-testid="text-no-events">
+            No events in database. KAPPA collectors will populate this feed as data arrives.
+          </div>
+        ) : (
+          <div className="max-h-96 overflow-y-auto divide-y divide-border/50" data-testid="list-live-events">
+            {sorted.map((ev) => {
+              const band = isV2KBand(ev.frequency);
+              return (
+                <div
+                  key={ev.id}
+                  data-testid={`row-event-${ev.id}`}
+                  className={`px-4 py-2.5 flex items-start gap-3 text-xs hover:bg-muted/30 transition-colors ${band ? "bg-red-50/40 dark:bg-red-950/20" : ""}`}
+                >
+                  <div className="flex-shrink-0 mt-0.5">
+                    {band ? (
+                      <Zap className="h-3.5 w-3.5 text-red-500" />
+                    ) : (
+                      <Radio className="h-3.5 w-3.5 text-muted-foreground/50" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className={`font-mono font-medium uppercase text-[10px] tracking-wide ${domainColor(ev.domain)}`}>
+                        {ev.domain}
+                      </span>
+                      {ev.frequency != null && (
+                        <span className="font-mono text-[10px] text-muted-foreground">
+                          {ev.frequency < 1000
+                            ? `${ev.frequency.toFixed(3)} Hz`
+                            : ev.frequency < 1_000_000
+                            ? `${(ev.frequency / 1000).toFixed(3)} kHz`
+                            : `${(ev.frequency / 1_000_000).toFixed(3)} MHz`}
+                        </span>
+                      )}
+                      {band && (
+                        <Badge variant="destructive" className="text-[9px] px-1 py-0 font-mono h-4">
+                          {band}
+                        </Badge>
+                      )}
+                    </div>
+                    {ev.description && (
+                      <p className="text-muted-foreground mt-0.5 truncate max-w-lg">{ev.description}</p>
+                    )}
+                  </div>
+                  <div className="flex-shrink-0 text-[10px] font-mono text-muted-foreground/60 whitespace-nowrap">
+                    {new Date(ev.timestamp).toLocaleTimeString()}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
