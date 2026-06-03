@@ -293,3 +293,9 @@ id = "yn1f9iagsJdXei9lROnHz"
 uri = "file://attached_assets/denuncia_finalized.md"
 type = "text"
 title = "Denuncia Penal — Finalized"
+
+[[outputs]]
+id = "ZPcpSSfJfzpCNMf11wMvA"
+uri = "file://attached_assets/authority_emails.md"
+type = "text"
+title = "Authority Emails — FBI / Embassy / OIJ / Fiscalía"
