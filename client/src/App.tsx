@@ -42,6 +42,7 @@ import EvidenceChainPage from "@/pages/evidence-chain";
 import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
 import WhistleblowerPage from "@/pages/whistleblower";
 import HomePage from "@/pages/home";
+import CrankEditorPage from "@/pages/crank";
 import MemoryCortexPage from "@/pages/memory-cortex";
 import GalliumPage from "@/pages/gallium";
 import SuitesCristinaPage from "@/pages/suites-cristina";
@@ -159,6 +160,7 @@ function KappaRouter() {
       <Route path="/follow-the-money" component={FollowTheMoneyPage} />
       <Route path="/zersetzung" component={ZersetzungPage} />
       <Route path="/quasar-hydra" component={QuasarHydraPage} />
+      <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
     </Switch>
   );
