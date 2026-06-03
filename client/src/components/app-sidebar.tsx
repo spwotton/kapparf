@@ -40,6 +40,7 @@ import {
   Hash,
   Zap,
   ClipboardList,
+  BrainCog,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -192,6 +193,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.satoshiLattice", fallback: "Satoshi Lattice", url: "/satoshi-lattice", icon: Hash },
       { titleKey: "sidebar.quantumSolver",  fallback: "Quantum Solver",  url: "/quantum-solver",  icon: Zap },
       { titleKey: "sidebar.followTheMoney", fallback: "Follow the Money", url: "/follow-the-money", icon: Network },
+      { titleKey: "sidebar.zersetzung", fallback: "Zersetzung Doctrine", url: "/zersetzung", icon: BrainCog },
     ],
   },
   {
