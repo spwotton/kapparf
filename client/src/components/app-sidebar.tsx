@@ -41,6 +41,7 @@ import {
   Zap,
   ClipboardList,
   BrainCog,
+  Compass,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -167,6 +168,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.sigint", fallbackLabel: "SIGINT",
     items: [
+      { titleKey: "sidebar.quasarHydra", fallback: "QUASAR-HYDRA", url: "/quasar-hydra", icon: Compass },
       { titleKey: "sidebar.spectrumSweeper", fallback: "Spectrum Sweeper", url: "/spectrum", icon: Radio },
       { titleKey: "sidebar.kiwiNodes", fallback: "KiwiSDR Nodes", url: "/nodes", icon: Server },
       { titleKey: "sidebar.satellites", fallback: "Satellites", url: "/satellites", icon: Satellite },

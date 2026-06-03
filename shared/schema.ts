@@ -2753,3 +2753,41 @@ export const insertSpectrumBinSchema = createInsertSchema(spectrumBins).omit({ i
 export const insertDirectionBearingSchema = createInsertSchema(directionBearings).omit({ id: true, timestamp: true });
 export const insertOmegaReadingSchema = createInsertSchema(omegaCorrelatorReadings).omit({ id: true, timestamp: true });
 export const insertOmegaEventSchema = createInsertSchema(omegaCorrelatorEvents).omit({ id: true, timestamp: true });
+
+// ── QUASAR-HYDRA Radiogoniometry Tables ─────────────────────────────────────
+
+export const spectralSweeps = pgTable("spectral_sweeps", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+  centerFreqHz: real("center_freq_hz").notNull(),
+  bandwidthHz: real("bandwidth_hz").notNull(),
+  antennaCount: integer("antenna_count").notNull().default(4),
+  arrayRadiusM: real("array_radius_m").notNull().default(0.5),
+  noiseFloorDb: real("noise_floor_db"),
+  iqSnapshotLength: integer("iq_snapshot_length").notNull().default(0),
+  eigenvalues: jsonb("eigenvalues"),
+  signalComponents: integer("signal_components").notNull().default(0),
+  status: text("status").notNull().default("complete"),
+  metadata: jsonb("metadata"),
+});
+
+export const detectedBearings = pgTable("detected_bearings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sweepId: varchar("sweep_id").notNull().references(() => spectralSweeps.id, { onDelete: "cascade" }),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+  azimuthDeg: real("azimuth_deg").notNull(),
+  pseudoSpectrumPeak: real("pseudo_spectrum_peak"),
+  normalizedPeak: real("normalized_peak"),
+  confidence: real("confidence").notNull().default(0.5),
+  frequencyHz: real("frequency_hz").notNull(),
+  method: text("method").notNull().default("music"),
+  pseudoSpectrum: jsonb("pseudo_spectrum"),
+});
+
+export type SpectralSweep = typeof spectralSweeps.$inferSelect;
+export type InsertSpectralSweep = typeof spectralSweeps.$inferInsert;
+export type DetectedBearing = typeof detectedBearings.$inferSelect;
+export type InsertDetectedBearing = typeof detectedBearings.$inferInsert;
+
+export const insertSpectralSweepSchema = createInsertSchema(spectralSweeps).omit({ id: true, timestamp: true });
+export const insertDetectedBearingSchema = createInsertSchema(detectedBearings).omit({ id: true, timestamp: true });

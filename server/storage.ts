@@ -19,6 +19,8 @@ import {
   type CorticalLog, type InsertCorticalLog,
   type NeuralSnapshot, type InsertNeuralSnapshot,
   type Incident, type InsertIncident,
+  type SpectralSweep, type InsertSpectralSweep,
+  type DetectedBearing, type InsertDetectedBearing,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
   researchSessions, researchQueries, researchFindings,
@@ -26,6 +28,7 @@ import {
   deepResearchRuns, deepResearchReports,
   corticalNodes, latentSpace as latentSpaceTable, corticalLogs, neuralSnapshots,
   incidents,
+  spectralSweeps, detectedBearings,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
@@ -100,6 +103,11 @@ export interface IStorage {
   getGooseArticle(id: string): Promise<GooseArticle | null>;
   createGooseArticle(article: InsertGooseArticle): Promise<GooseArticle>;
   approveGooseArticle(id: string): Promise<void>;
+  createSpectralSweep(sweep: InsertSpectralSweep): Promise<SpectralSweep>;
+  listSpectralSweeps(limit?: number, offset?: number): Promise<SpectralSweep[]>;
+  getSpectralSweep(id: string): Promise<SpectralSweep | undefined>;
+  createDetectedBearing(bearing: InsertDetectedBearing): Promise<DetectedBearing>;
+  getDetectedBearings(sweepId: string): Promise<DetectedBearing[]>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -529,6 +537,34 @@ export class DatabaseStorage implements IStorage {
 
   async approveGooseArticle(id: string): Promise<void> {
     await db.update(gooseArticles).set({ approved: true }).where(eq(gooseArticles.id, id));
+  }
+
+  async createSpectralSweep(sweep: InsertSpectralSweep): Promise<SpectralSweep> {
+    const [created] = await db.insert(spectralSweeps).values(sweep).returning();
+    return created;
+  }
+
+  async listSpectralSweeps(limit = 50, offset = 0): Promise<SpectralSweep[]> {
+    return db.select().from(spectralSweeps)
+      .orderBy(desc(spectralSweeps.timestamp))
+      .limit(limit)
+      .offset(offset);
+  }
+
+  async getSpectralSweep(id: string): Promise<SpectralSweep | undefined> {
+    const [row] = await db.select().from(spectralSweeps).where(eq(spectralSweeps.id, id));
+    return row;
+  }
+
+  async createDetectedBearing(bearing: InsertDetectedBearing): Promise<DetectedBearing> {
+    const [created] = await db.insert(detectedBearings).values(bearing).returning();
+    return created;
+  }
+
+  async getDetectedBearings(sweepId: string): Promise<DetectedBearing[]> {
+    return db.select().from(detectedBearings)
+      .where(eq(detectedBearings.sweepId, sweepId))
+      .orderBy(desc(detectedBearings.azimuthDeg));
   }
 }
 

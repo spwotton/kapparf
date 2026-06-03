@@ -163,6 +163,9 @@ import {
 } from "./gazette-refiner";
 import { reelRouter } from "./reel-routes";
 import { registerFtmRoutes } from "./lib/ftm/ftmRoutes";
+import { runLscsa } from "./lib/lscsa";
+import { runMusic } from "./lib/music";
+import { insertSpectralSweepSchema } from "@shared/schema";
 
 import type { Request, Response, NextFunction } from "express";
 
@@ -8027,6 +8030,127 @@ This email is constructed from verifiable technical disclosures, public contract
     const sent = results.filter((r) => r.ok).length;
     const failed = results.filter((r) => !r.ok).length;
     res.json({ ok: true, sent, failed, total: results.length, results });
+  });
+
+  // ── QUASAR-HYDRA Radiogoniometry ─────────────────────────────────────────
+
+  app.post("/api/radiogoniometry/sweep", async (req, res) => {
+    try {
+      const {
+        centerFreqHz,
+        bandwidthHz,
+        iqSamples,
+        antennaCount = 4,
+        arrayRadiusM = 0.5,
+        sampleRate = 2.4e6,
+        numSources,
+      } = req.body;
+
+      if (!centerFreqHz || !bandwidthHz || !Array.isArray(iqSamples)) {
+        return res.status(400).json({ error: "centerFreqHz, bandwidthHz, and iqSamples (array) are required" });
+      }
+      if (iqSamples.length < 8) {
+        return res.status(400).json({ error: "iqSamples must have at least 8 elements" });
+      }
+      if (iqSamples.length > 65536) {
+        return res.status(400).json({ error: "iqSamples exceeds max length of 65536" });
+      }
+
+      const lscsaResult = runLscsa(iqSamples, sampleRate, 8);
+
+      const musicResult = runMusic(
+        iqSamples,
+        Math.max(2, Math.min(32, antennaCount)),
+        Math.max(0.01, Math.min(10, arrayRadiusM)),
+        centerFreqHz,
+        numSources,
+        360,
+      );
+
+      const sweep = await storage.createSpectralSweep({
+        centerFreqHz,
+        bandwidthHz,
+        antennaCount,
+        arrayRadiusM,
+        noiseFloorDb: lscsaResult.noiseFloorDb,
+        iqSnapshotLength: iqSamples.length,
+        eigenvalues: lscsaResult.eigenvalues,
+        signalComponents: lscsaResult.signalComponents,
+        status: "complete",
+        metadata: {
+          noiseSubspaceDim: musicResult.noiseSubspaceDim,
+          signalSubspaceDim: musicResult.signalSubspaceDim,
+          sampleRate,
+        },
+      });
+
+      const bearingRecords = await Promise.all(
+        musicResult.bearings.map((b) =>
+          storage.createDetectedBearing({
+            sweepId: sweep.id,
+            azimuthDeg: b.azimuthDeg,
+            pseudoSpectrumPeak: b.pseudoSpectrumValue,
+            normalizedPeak: b.normalizedPeak,
+            confidence: b.normalizedPeak,
+            frequencyHz: centerFreqHz,
+            method: "music",
+            pseudoSpectrum: musicResult.pseudoSpectrum,
+          }),
+        ),
+      );
+
+      res.json({
+        sweep,
+        bearings: bearingRecords,
+        lscsa: {
+          eigenvalues: lscsaResult.eigenvalues,
+          noiseFloorDb: lscsaResult.noiseFloorDb,
+          signalComponents: lscsaResult.signalComponents,
+        },
+        music: {
+          bearings: musicResult.bearings,
+          noiseSubspaceDim: musicResult.noiseSubspaceDim,
+          signalSubspaceDim: musicResult.signalSubspaceDim,
+        },
+      });
+    } catch (err: any) {
+      console.error("[radiogoniometry/sweep]", err);
+      res.status(500).json({ error: err.message ?? "Sweep failed" });
+    }
+  });
+
+  app.get("/api/radiogoniometry/sweeps", async (req, res) => {
+    try {
+      const n = parseInt(req.query.limit as string);
+      const o = parseInt(req.query.offset as string);
+      const limit = Number.isFinite(n) ? Math.max(1, Math.min(n, 200)) : 50;
+      const offset = Number.isFinite(o) ? Math.max(0, o) : 0;
+
+      const sweeps = await storage.listSpectralSweeps(limit, offset);
+
+      const sweepsWithBearings = await Promise.all(
+        sweeps.map(async (sweep) => {
+          const bearings = await storage.getDetectedBearings(sweep.id);
+          return { ...sweep, bearings };
+        }),
+      );
+
+      res.json({ sweeps: sweepsWithBearings, limit, offset });
+    } catch (err: any) {
+      console.error("[radiogoniometry/sweeps]", err);
+      res.status(500).json({ error: err.message ?? "Failed to list sweeps" });
+    }
+  });
+
+  app.get("/api/radiogoniometry/sweeps/:id", async (req, res) => {
+    try {
+      const sweep = await storage.getSpectralSweep(req.params.id);
+      if (!sweep) return res.status(404).json({ error: "Sweep not found" });
+      const bearings = await storage.getDetectedBearings(sweep.id);
+      res.json({ ...sweep, bearings });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message ?? "Failed" });
+    }
   });
 
 }
