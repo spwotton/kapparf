@@ -386,6 +386,377 @@ function SweepsTable() {
   );
 }
 
+// ── Client-side FFT (Cooley-Tukey radix-2 DIT, in-place) ─────────────────────
+function fftInPlace(re: Float64Array, im: Float64Array): void {
+  const n = re.length;
+  // bit-reversal permutation
+  for (let i = 1, j = 0; i < n; i++) {
+    let bit = n >> 1;
+    for (; j & bit; bit >>= 1) j ^= bit;
+    j ^= bit;
+    if (i < j) {
+      let t = re[i]; re[i] = re[j]; re[j] = t;
+      t = im[i]; im[i] = im[j]; im[j] = t;
+    }
+  }
+  for (let len = 2; len <= n; len <<= 1) {
+    const ang = -2 * Math.PI / len;
+    const wRe = Math.cos(ang);
+    const wIm = Math.sin(ang);
+    for (let i = 0; i < n; i += len) {
+      let curRe = 1, curIm = 0;
+      for (let j = 0; j < (len >> 1); j++) {
+        const uRe = re[i + j], uIm = im[i + j];
+        const vRe = re[i + j + (len >> 1)] * curRe - im[i + j + (len >> 1)] * curIm;
+        const vIm = re[i + j + (len >> 1)] * curIm + im[i + j + (len >> 1)] * curRe;
+        re[i + j] = uRe + vRe;         im[i + j] = uIm + vIm;
+        re[i + j + (len >> 1)] = uRe - vRe; im[i + j + (len >> 1)] = uIm - vIm;
+        const nr = curRe * wRe - curIm * wIm;
+        curIm = curRe * wIm + curIm * wRe;
+        curRe = nr;
+      }
+    }
+  }
+}
+
+function hanning(n: number): Float64Array {
+  const w = new Float64Array(n);
+  for (let i = 0; i < n; i++) w[i] = 0.5 * (1 - Math.cos((2 * Math.PI * i) / (n - 1)));
+  return w;
+}
+
+// plasma-like colormap: value 0..1 → [r,g,b]
+function plasma(t: number): [number, number, number] {
+  t = Math.max(0, Math.min(1, t));
+  if (t < 0.25) {
+    const s = t / 0.25;
+    return [Math.round(13 + s * (80 - 13)), Math.round(8 + s * (18 - 8)), Math.round(135 + s * (190 - 135))];
+  } else if (t < 0.5) {
+    const s = (t - 0.25) / 0.25;
+    return [Math.round(80 + s * (190 - 80)), Math.round(18 + s * (55 - 18)), Math.round(190 + s * (120 - 190))];
+  } else if (t < 0.75) {
+    const s = (t - 0.5) / 0.25;
+    return [Math.round(190 + s * (253 - 190)), Math.round(55 + s * (174 - 55)), Math.round(120 + s * (97 - 120))];
+  } else {
+    const s = (t - 0.75) / 0.25;
+    return [Math.round(253 + s * (240 - 253)), Math.round(174 + s * (249 - 174)), Math.round(97 + s * (33 - 97))];
+  }
+}
+
+interface WavAnalysis {
+  bins: Array<{ freqHz: number; ampDbfs: number }>;
+  frames: Float32Array[];
+  sampleRate: number;
+  fftSize: number;
+  durationSec: number;
+}
+
+async function analyseWav(file: File, fftSize = 4096): Promise<WavAnalysis> {
+  const ab = await file.arrayBuffer();
+  const ctx = new AudioContext();
+  const buffer = await ctx.decodeAudioData(ab);
+  await ctx.close();
+
+  const sr = buffer.sampleRate;
+  const samples = buffer.getChannelData(0); // mono/L
+  const hop = fftSize >> 1;
+  const win = hanning(fftSize);
+
+  const re = new Float64Array(fftSize);
+  const im = new Float64Array(fftSize);
+  const powerSum = new Float64Array(fftSize >> 1);
+  const frames: Float32Array[] = [];
+  let frameCount = 0;
+
+  for (let start = 0; start + fftSize <= samples.length; start += hop) {
+    re.fill(0); im.fill(0);
+    for (let i = 0; i < fftSize; i++) re[i] = samples[start + i] * win[i];
+    fftInPlace(re, im);
+
+    const frame = new Float32Array(fftSize >> 1);
+    for (let k = 0; k < (fftSize >> 1); k++) {
+      const mag = Math.sqrt(re[k] * re[k] + im[k] * im[k]) / fftSize;
+      frame[k] = mag;
+      powerSum[k] += mag;
+    }
+    frames.push(frame);
+    frameCount++;
+  }
+
+  const bins = [];
+  for (let k = 0; k < (fftSize >> 1); k++) {
+    const avgMag = powerSum[k] / frameCount;
+    const dbfs = avgMag > 0 ? 20 * Math.log10(avgMag) : -120;
+    bins.push({ freqHz: (k * sr) / fftSize, ampDbfs: dbfs });
+  }
+
+  return { bins, frames, sampleRate: sr, fftSize, durationSec: samples.length / sr };
+}
+
+function drawSpectrogram(canvas: HTMLCanvasElement, frames: Float32Array[], fftSize: number): void {
+  const numBins = fftSize >> 1;
+  const W = frames.length;
+  const H = numBins;
+  canvas.width  = Math.min(W, 900);
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  // find global min/max for normalisation
+  let gMin = Infinity, gMax = -Infinity;
+  for (const frame of frames) {
+    for (let k = 0; k < numBins; k++) {
+      const v = frame[k];
+      if (v < gMin) gMin = v;
+      if (v > gMax) gMax = v;
+    }
+  }
+  const range = gMax - gMin || 1;
+
+  const imgData = ctx.createImageData(canvas.width, canvas.height);
+  const xStep = W / canvas.width;
+  const yStep = H / canvas.height;
+
+  for (let px = 0; px < canvas.width; px++) {
+    const fi = Math.min(Math.floor(px * xStep), frames.length - 1);
+    for (let py = 0; py < canvas.height; py++) {
+      // flip y: high freq at top → low at bottom
+      const ki = Math.min(Math.floor((canvas.height - 1 - py) * yStep), numBins - 1);
+      const t = (frames[fi][ki] - gMin) / range;
+      const [r, g, b] = plasma(t);
+      const idx = (py * canvas.width + px) * 4;
+      imgData.data[idx]     = r;
+      imgData.data[idx + 1] = g;
+      imgData.data[idx + 2] = b;
+      imgData.data[idx + 3] = 255;
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+}
+
+// ── WAV → FFT → Spectrogram → MUSIC ingest tab ───────────────────────────────
+function WavFftTab() {
+  const { toast } = useToast();
+  const qc = useQueryClient();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fileRef   = useRef<HTMLInputElement>(null);
+  const [label, setLabel] = useState("audacity-export");
+  const [status, setStatus] = useState<"idle" | "decoding" | "fft" | "uploading" | "done" | "error">("idle");
+  const [info, setInfo] = useState<{
+    fileName: string; duration: number; sr: number; bins: number; peak: { hz: number; db: number } | null;
+  } | null>(null);
+  const [sweepId, setSweepId] = useState<string | null>(null);
+
+  const uploadMutation = useMutation({
+    mutationFn: async (csv: string) =>
+      apiRequest("POST", "/api/spectrum/upload-csv", { csv, label }),
+    onSuccess: (data: any) => {
+      setSweepId(data.sweepId);
+      setStatus("done");
+      qc.invalidateQueries({ queryKey: ["/api/radiogoniometry/sweeps"] });
+      toast({ title: "Sweep ingested", description: `${data.binCount} bins → sweep ${data.sweepId?.slice(0, 8)}` });
+    },
+    onError: (e: any) => {
+      setStatus("error");
+      toast({ title: "Upload failed", description: e.message, variant: "destructive" });
+    },
+  });
+
+  const handleFile = useCallback(async (file: File) => {
+    setStatus("decoding");
+    setInfo(null);
+    setSweepId(null);
+    try {
+      setStatus("fft");
+      const analysis = await analyseWav(file);
+
+      if (canvasRef.current) {
+        drawSpectrogram(canvasRef.current, analysis.frames, analysis.fftSize);
+      }
+
+      const peak = analysis.bins.reduce((a, b) => b.ampDbfs > a.ampDbfs ? b : a, analysis.bins[0]);
+      setInfo({
+        fileName: file.name,
+        duration: analysis.durationSec,
+        sr: analysis.sampleRate,
+        bins: analysis.bins.length,
+        peak: peak ? { hz: peak.freqHz, db: peak.ampDbfs } : null,
+      });
+
+      // build CSV: header + frequency_hz,amplitude_dbm
+      const rows = ["frequency_hz,amplitude_dbm",
+        ...analysis.bins.map(b => `${b.freqHz.toFixed(4)},${b.ampDbfs.toFixed(4)}`)
+      ].join("\n");
+
+      setStatus("uploading");
+      uploadMutation.mutate(rows);
+    } catch (e: any) {
+      setStatus("error");
+      toast({ title: "FFT failed", description: e.message, variant: "destructive" });
+    }
+  }, [label, uploadMutation, toast]);
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (f) handleFile(f);
+  };
+
+  const onDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const f = e.dataTransfer.files?.[0];
+    if (f) handleFile(f);
+  };
+
+  const statusLabel: Record<typeof status, string> = {
+    idle: "Drop a WAV/FLAC/MP3 here or click to browse",
+    decoding: "Decoding audio…",
+    fft: "Running STFT (Hanning window, 4096-pt FFT, 50% overlap)…",
+    uploading: "Uploading bins to MUSIC DOA pipeline…",
+    done: "Complete — sweep stored in DB",
+    error: "Error — see toast",
+  };
+
+  return (
+    <div className="space-y-5" data-testid="tab-wav-fft">
+      <div className="space-y-1">
+        <p className="text-sm text-muted-foreground">
+          Export your Audacity recording as <span className="font-mono">WAV (32-bit float)</span> or any supported format.
+          The browser decodes it, runs a Short-Time Fourier Transform client-side, renders a spectrogram,
+          then sends the averaged power spectrum (frequency → dBFS bins) directly into the MUSIC DOA pipeline.
+          Zero synthesis — all math on your real file.
+        </p>
+        <div className="flex items-center gap-2 text-[10px] font-mono text-muted-foreground/70">
+          <span>FFT_SIZE=4096</span><span>·</span>
+          <span>HOP=2048 (50% overlap)</span><span>·</span>
+          <span>WINDOW=Hanning</span><span>·</span>
+          <span>OUTPUT=frequency_hz,amplitude_dbfs CSV</span>
+        </div>
+      </div>
+
+      {/* Label */}
+      <div className="flex items-center gap-3">
+        <Label className="text-xs text-muted-foreground w-16 shrink-0">Sweep label</Label>
+        <Input
+          data-testid="input-wav-label"
+          value={label}
+          onChange={e => setLabel(e.target.value)}
+          className="font-mono text-xs h-8 max-w-xs"
+          placeholder="e.g. jaco-hotel-room-2026-06-03"
+        />
+      </div>
+
+      {/* Drop zone */}
+      <div
+        data-testid="dropzone-wav"
+        onDrop={onDrop}
+        onDragOver={e => e.preventDefault()}
+        onClick={() => fileRef.current?.click()}
+        className={`border-2 border-dashed rounded cursor-pointer transition-colors px-6 py-10 text-center
+          ${status === "idle" || status === "done" || status === "error"
+            ? "border-border hover:border-primary/50 hover:bg-muted/10"
+            : "border-primary/40 bg-muted/10 cursor-not-allowed"}`}
+      >
+        <input
+          ref={fileRef}
+          type="file"
+          accept="audio/*,.wav,.flac,.mp3,.ogg,.aiff,.aif"
+          className="hidden"
+          onChange={onFileChange}
+          data-testid="input-wav-file"
+          disabled={status === "fft" || status === "decoding" || status === "uploading"}
+        />
+        <div className="flex flex-col items-center gap-2">
+          <Waves className="h-8 w-8 text-muted-foreground/40" />
+          <p className="text-sm text-muted-foreground">{statusLabel[status]}</p>
+          {(status === "fft" || status === "decoding" || status === "uploading") && (
+            <div className="flex gap-1 mt-1">
+              {[0,1,2].map(i => (
+                <span key={i} className="w-2 h-2 rounded-full bg-primary animate-bounce"
+                  style={{ animationDelay: `${i * 0.15}s` }} />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Info bar */}
+      {info && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono" data-testid="info-wav-analysis">
+          {[
+            { label: "File", value: info.fileName },
+            { label: "Duration", value: `${info.duration.toFixed(2)} s` },
+            { label: "Sample Rate", value: `${(info.sr / 1000).toFixed(1)} kHz` },
+            { label: "FFT Bins", value: `${info.bins.toLocaleString()}` },
+          ].map(row => (
+            <div key={row.label} className="border border-border rounded p-2 space-y-0.5">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wide">{row.label}</p>
+              <p className="text-foreground truncate">{row.value}</p>
+            </div>
+          ))}
+          {info.peak && (
+            <div className="border border-primary/40 rounded p-2 space-y-0.5 col-span-2">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Peak Frequency</p>
+              <p className="text-primary font-bold">
+                {info.peak.hz < 1000
+                  ? `${info.peak.hz.toFixed(2)} Hz`
+                  : `${(info.peak.hz / 1000).toFixed(4)} kHz`}
+                <span className="text-muted-foreground font-normal ml-2">{info.peak.db.toFixed(1)} dBFS</span>
+              </p>
+            </div>
+          )}
+          {sweepId && (
+            <div className="border border-green-500/40 rounded p-2 space-y-0.5 col-span-2">
+              <p className="text-[10px] text-muted-foreground uppercase tracking-wide">Sweep ID</p>
+              <p className="text-green-600 dark:text-green-400 font-mono text-[11px]">{sweepId}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Spectrogram canvas */}
+      <div className="space-y-1" data-testid="container-spectrogram">
+        <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wide">
+          Spectrogram — time (x) × frequency (y, low→high) · colour = amplitude (plasma scale)
+        </p>
+        <canvas
+          ref={canvasRef}
+          className="w-full rounded border border-border bg-black"
+          style={{ height: "256px", imageRendering: "pixelated" }}
+          data-testid="canvas-spectrogram"
+        />
+      </div>
+
+      {/* V2K band overlay guide */}
+      <Card data-testid="card-v2k-band-guide">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-xs font-mono">V2K / Targeting Band Reference</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-[10px] font-mono">
+            {[
+              { band: "θ-carrier", range: "6.3–7.7 Hz", note: "Theta entrainment" },
+              { band: "DSP-CLK", range: "44.5–49.3 Hz", note: "46.875 Hz harmonic series" },
+              { band: "F2", range: "1.9–2.1 kHz", note: "Speech formant carrier" },
+              { band: "F3", range: "2.4–2.6 kHz", note: "Speech formant carrier" },
+              { band: "EHF", range: "16.9–18.9 kHz", note: "Ultrasonic sub-carrier" },
+            ].map(b => (
+              <div key={b.band} className="border border-border rounded p-1.5 space-y-0.5">
+                <p className="text-primary font-bold">{b.band}</p>
+                <p className="text-foreground">{b.range}</p>
+                <p className="text-muted-foreground">{b.note}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-[10px] text-muted-foreground/60 mt-2">
+            Look for persistent peaks in these bands in your spectrogram. The averaged power spectrum fed to MUSIC
+            will flag any bin within these ranges in the Sweep × Phoneme Cross-Reference table.
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
 // ── Sweep console (POST /api/radiogoniometry/sweep) ───────────────────────────
 function SweepConsole() {
   const { toast } = useToast();
@@ -777,8 +1148,11 @@ export default function QuasarHydraPage() {
           <TabsTrigger value="wheel" className="rounded-none text-xs h-8 px-4 data-[state=active]:bg-muted" data-testid="tab-wheel">
             TYCHO WHEEL
           </TabsTrigger>
-          <TabsTrigger value="history" className="rounded-none text-xs h-8 px-4 data-[state=active]:bg-muted" data-testid="tab-history">
+            <TabsTrigger value="history" className="rounded-none text-xs h-8 px-4 data-[state=active]:bg-muted" data-testid="tab-history">
             SWEEP HISTORY
+          </TabsTrigger>
+          <TabsTrigger value="wav" className="rounded-none text-xs h-8 px-4 data-[state=active]:bg-muted" data-testid="tab-wav">
+            WAV → FFT
           </TabsTrigger>
         </TabsList>
 
@@ -876,6 +1250,10 @@ export default function QuasarHydraPage() {
 
         <TabsContent value="history" className="mt-4">
           <SweepsTable />
+        </TabsContent>
+
+        <TabsContent value="wav" className="mt-4">
+          <WavFftTab />
         </TabsContent>
       </Tabs>
     </div>
