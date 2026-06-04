@@ -8,6 +8,7 @@ export interface LLMModel {
   requiresToken: boolean;
   description: string;
   device: "webgpu" | "wasm" | "auto";
+  uncensored?: boolean;
 }
 
 export const LLM_MODELS: LLMModel[] = [
@@ -34,6 +35,28 @@ export const LLM_MODELS: LLMModel[] = [
     device: "webgpu",
   },
   {
+    id: "onnx-community/Llama-3.2-1B-Instruct",
+    label: "Llama-3.2-1B",
+    sizeLabel: "~600 MB",
+    sizeMB: 600,
+    hfRepo: "onnx-community/Llama-3.2-1B-Instruct",
+    dtype: "q4f16",
+    requiresToken: false,
+    description: "Meta Llama 3.2 1B — tiny and fast, WebGPU",
+    device: "webgpu",
+  },
+  {
+    id: "onnx-community/Llama-3.2-3B-Instruct",
+    label: "Llama-3.2-3B",
+    sizeLabel: "~1.8 GB",
+    sizeMB: 1800,
+    hfRepo: "onnx-community/Llama-3.2-3B-Instruct",
+    dtype: "q4f16",
+    requiresToken: false,
+    description: "Meta Llama 3.2 3B — good quality/speed balance",
+    device: "webgpu",
+  },
+  {
     id: "onnx-community/gemma-3-1b-it-ONNX",
     label: "Gemma-3-1B-IT",
     sizeLabel: "~600 MB",
@@ -41,7 +64,51 @@ export const LLM_MODELS: LLMModel[] = [
     hfRepo: "onnx-community/gemma-3-1b-it-ONNX",
     dtype: "q4",
     requiresToken: true,
-    description: "Google Gemma 3 ONNX — requires HF token",
+    description: "Google Gemma 3 1B — requires HF token",
+    device: "webgpu",
+  },
+  {
+    id: "onnx-community/gemma-2-2b-it-ONNX",
+    label: "Gemma-2-2B-IT",
+    sizeLabel: "~1.4 GB",
+    sizeMB: 1400,
+    hfRepo: "onnx-community/gemma-2-2b-it-ONNX",
+    dtype: "q4f16",
+    requiresToken: true,
+    description: "Google Gemma 2 2B — solid reasoning, requires HF token",
+    device: "webgpu",
+  },
+  {
+    id: "onnx-community/Phi-3.5-mini-instruct-onnx-web",
+    label: "Phi-3.5-mini",
+    sizeLabel: "~2.3 GB",
+    sizeMB: 2300,
+    hfRepo: "onnx-community/Phi-3.5-mini-instruct-onnx-web",
+    dtype: "q4f16",
+    requiresToken: false,
+    description: "Microsoft Phi-3.5 mini — punches above its weight",
+    device: "webgpu",
+  },
+  {
+    id: "onnx-community/Mistral-7B-Instruct-v0.3-ONNX",
+    label: "Mistral-7B-v0.3",
+    sizeLabel: "~4.1 GB",
+    sizeMB: 4100,
+    hfRepo: "onnx-community/Mistral-7B-Instruct-v0.3-ONNX",
+    dtype: "q4f16",
+    requiresToken: false,
+    description: "Mistral 7B Instruct v0.3 — lightly filtered, strong reasoning",
+    device: "webgpu",
+  },
+  {
+    id: "onnx-community/Qwen2.5-7B-Instruct",
+    label: "Qwen2.5-7B",
+    sizeLabel: "~4.4 GB",
+    sizeMB: 4400,
+    hfRepo: "onnx-community/Qwen2.5-7B-Instruct",
+    dtype: "q4f16",
+    requiresToken: false,
+    description: "Qwen 2.5 7B — very capable, strong at code & analysis",
     device: "webgpu",
   },
   {
@@ -52,7 +119,7 @@ export const LLM_MODELS: LLMModel[] = [
     hfRepo: "onnx-community/Mistral-Nemo-Instruct-2407-ONNX",
     dtype: "q4f16",
     requiresToken: false,
-    description: "Mistral Nemo 12B Instruct — runs 100% locally via WebGPU. One-time ~6.5 GB download, cached in browser.",
+    description: "Mistral Nemo 12B Instruct — best in-browser quality. One-time ~6.5 GB download.",
     device: "webgpu",
   },
   {
@@ -69,6 +136,19 @@ export const LLM_MODELS: LLMModel[] = [
 ];
 
 export const DEFAULT_MODEL_ID = LLM_MODELS[0].id;
+
+export const OLLAMA_SUGGESTED_MODELS = [
+  { id: "dolphin-mistral",       label: "dolphin-mistral",       note: "Uncensored Mistral 7B fine-tune" },
+  { id: "dolphin-llama3",        label: "dolphin-llama3",        note: "Uncensored Llama 3 8B fine-tune" },
+  { id: "dolphin3",              label: "dolphin3",              note: "Dolphin 3.0 — fully uncensored" },
+  { id: "mistral",               label: "mistral",               note: "Mistral 7B Instruct (lightly filtered)" },
+  { id: "llama3.2",              label: "llama3.2",              note: "Meta Llama 3.2 3B" },
+  { id: "llama3.1",              label: "llama3.1",              note: "Meta Llama 3.1 8B" },
+  { id: "qwen2.5",               label: "qwen2.5",               note: "Qwen 2.5 7B" },
+  { id: "phi4-mini",             label: "phi4-mini",             note: "Microsoft Phi-4 mini" },
+  { id: "gemma3:1b",             label: "gemma3:1b",             note: "Google Gemma 3 1B" },
+  { id: "wizardlm2",             label: "wizardlm2",             note: "WizardLM 2 — strong reasoning" },
+];
 
 export interface AgentRole {
   id: string;

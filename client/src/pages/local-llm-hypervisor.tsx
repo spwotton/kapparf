@@ -22,7 +22,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import JSZip from "jszip";
 import {
-  LLM_MODELS, DEFAULT_MODEL_ID, AGENT_ROLES, makeDefaultLayers, getRoleInfo, getEffectiveSystemPrompt,
+  LLM_MODELS, DEFAULT_MODEL_ID, OLLAMA_SUGGESTED_MODELS, AGENT_ROLES, makeDefaultLayers, getRoleInfo, getEffectiveSystemPrompt,
   type HypervisorLayer, type HypervisorAgent, type BlendMode,
 } from "@/lib/llm-models";
 import { WorkerPool, type WorkerOutMsg, type AgentSubscription } from "@/lib/worker-pool";
@@ -570,6 +570,297 @@ function saveLayersToStorage(layers: HypervisorLayer[]) {
   } catch {}
 }
 
+const OLLAMA_URL_KEY = "kappa_ollama_url";
+const OLLAMA_MODEL_KEY = "kappa_ollama_model";
+const OLLAMA_SYS_KEY = "kappa_ollama_sys";
+
+interface OllamaMsg { role: "user" | "assistant" | "system"; content: string }
+
+function OllamaPanel() {
+  const { toast } = useToast();
+  const [baseUrl, setBaseUrl] = useState(() => localStorage.getItem(OLLAMA_URL_KEY) ?? "http://localhost:11434");
+  const [urlDraft, setUrlDraft] = useState(baseUrl);
+  const [connected, setConnected] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const [availableModels, setAvailableModels] = useState<string[]>([]);
+  const [selectedModel, setSelectedModel] = useState(() => localStorage.getItem(OLLAMA_MODEL_KEY) ?? "");
+  const [systemPrompt, setSystemPrompt] = useState(() => localStorage.getItem(OLLAMA_SYS_KEY) ?? "");
+  const [messages, setMessages] = useState<OllamaMsg[]>([]);
+  const [input, setInput] = useState("");
+  const [streaming, setStreaming] = useState(false);
+  const [showSetup, setShowSetup] = useState(false);
+  const abortRef = useRef<AbortController | null>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, streaming]);
+
+  const connect = async (url = baseUrl) => {
+    setConnecting(true);
+    try {
+      const r = await fetch(`${url}/api/tags`, { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const data = await r.json();
+      const names: string[] = (data.models ?? []).map((m: { name: string }) => m.name);
+      setAvailableModels(names);
+      setConnected(true);
+      localStorage.setItem(OLLAMA_URL_KEY, url);
+      if (names.length > 0 && !selectedModel) setSelectedModel(names[0]);
+      toast({ title: `Connected — ${names.length} model${names.length !== 1 ? "s" : ""} found` });
+    } catch (e: unknown) {
+      setConnected(false);
+      toast({ title: "Cannot reach Ollama", description: String(e), variant: "destructive" });
+    } finally {
+      setConnecting(false);
+    }
+  };
+
+  const send = async () => {
+    if (!input.trim() || streaming || !selectedModel) return;
+    const userMsg: OllamaMsg = { role: "user", content: input.trim() };
+    const history: OllamaMsg[] = [...messages, userMsg];
+    setMessages(history);
+    setInput("");
+    setStreaming(true);
+
+    const msgs: OllamaMsg[] = systemPrompt.trim()
+      ? [{ role: "system", content: systemPrompt.trim() }, ...history]
+      : history;
+
+    abortRef.current = new AbortController();
+    let assistantText = "";
+    setMessages(prev => [...prev, { role: "assistant", content: "" }]);
+
+    try {
+      const resp = await fetch(`${baseUrl}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ model: selectedModel, messages: msgs, stream: true }),
+        signal: abortRef.current.signal,
+      });
+      if (!resp.ok) throw new Error(`Ollama error: HTTP ${resp.status}`);
+      const reader = resp.body!.getReader();
+      const dec = new TextDecoder();
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = dec.decode(value);
+        for (const line of chunk.split("\n")) {
+          if (!line.trim()) continue;
+          try {
+            const j = JSON.parse(line);
+            if (j.message?.content) {
+              assistantText += j.message.content;
+              setMessages(prev => {
+                const copy = [...prev];
+                copy[copy.length - 1] = { role: "assistant", content: assistantText };
+                return copy;
+              });
+            }
+          } catch { /* partial line */ }
+        }
+      }
+    } catch (e: unknown) {
+      if ((e as Error).name !== "AbortError") {
+        toast({ title: "Generation error", description: String(e), variant: "destructive" });
+        setMessages(prev => prev.slice(0, -1));
+      }
+    } finally {
+      setStreaming(false);
+      abortRef.current = null;
+    }
+  };
+
+  const stop = () => { abortRef.current?.abort(); };
+
+  const allModelOptions = [
+    ...availableModels,
+    ...OLLAMA_SUGGESTED_MODELS.filter(s => !availableModels.includes(s.id)).map(s => s.id),
+  ];
+
+  return (
+    <div className="flex-1 grid grid-cols-[280px_1fr] gap-4 min-h-0">
+      {/* LEFT — config */}
+      <div className="flex flex-col gap-3 min-h-0">
+        <Card className="shrink-0">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+              <Cpu className="h-3.5 w-3.5" /> Ollama Connection
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-3 pt-0 space-y-2">
+            <div className="space-y-1">
+              <label className="text-[10px] text-muted-foreground uppercase tracking-wider">Base URL</label>
+              <Input
+                value={urlDraft}
+                onChange={e => setUrlDraft(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter") { setBaseUrl(urlDraft); connect(urlDraft); } }}
+                placeholder="http://localhost:11434"
+                className="h-8 text-xs font-mono"
+                data-testid="input-ollama-url"
+              />
+            </div>
+            <Button
+              className="w-full h-8 text-xs"
+              onClick={() => { setBaseUrl(urlDraft); connect(urlDraft); }}
+              disabled={connecting}
+              data-testid="button-ollama-connect"
+            >
+              {connecting ? <><RefreshCw className="h-3 w-3 mr-1 animate-spin" />Connecting…</> : connected ? <><RefreshCw className="h-3 w-3 mr-1" />Reconnect</> : "Connect"}
+            </Button>
+            {connected && (
+              <div className="flex items-center gap-1.5 text-[10px] text-emerald-600 dark:text-emerald-400">
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                Connected · {availableModels.length} model{availableModels.length !== 1 ? "s" : ""}
+              </div>
+            )}
+
+            {connected && (
+              <div className="space-y-1">
+                <label className="text-[10px] text-muted-foreground uppercase tracking-wider">Model</label>
+                <Select value={selectedModel} onValueChange={v => { setSelectedModel(v); localStorage.setItem(OLLAMA_MODEL_KEY, v); }}>
+                  <SelectTrigger className="h-8 text-xs" data-testid="select-ollama-model">
+                    <SelectValue placeholder="Select model…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {availableModels.length > 0 && (
+                      <>
+                        <div className="px-2 py-1 text-[9px] text-muted-foreground uppercase tracking-wider">Installed</div>
+                        {availableModels.map(m => <SelectItem key={m} value={m} className="text-xs">{m}</SelectItem>)}
+                        <Separator className="my-1" />
+                      </>
+                    )}
+                    <div className="px-2 py-1 text-[9px] text-muted-foreground uppercase tracking-wider">Suggested (pull first)</div>
+                    {OLLAMA_SUGGESTED_MODELS.filter(s => !availableModels.includes(s.id)).map(s => (
+                      <SelectItem key={s.id} value={s.id} className="text-xs">
+                        <span>{s.label}</span>
+                        <span className="ml-1.5 text-[9px] text-muted-foreground">{s.note}</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+            <div className="space-y-1">
+              <label className="text-[10px] text-muted-foreground uppercase tracking-wider">System prompt</label>
+              <Textarea
+                value={systemPrompt}
+                onChange={e => { setSystemPrompt(e.target.value); localStorage.setItem(OLLAMA_SYS_KEY, e.target.value); }}
+                placeholder="Optional system prompt…"
+                rows={4}
+                className="text-[10px] resize-none"
+                data-testid="textarea-ollama-system"
+              />
+            </div>
+
+            <Button variant="outline" size="sm" className="w-full h-7 text-[10px]" onClick={() => setShowSetup(v => !v)}>
+              {showSetup ? "Hide" : "Show"} setup instructions
+            </Button>
+          </CardContent>
+        </Card>
+
+        {showSetup && (
+          <Card className="shrink-0">
+            <CardContent className="p-3 space-y-2 text-[10px] text-muted-foreground leading-relaxed">
+              <p className="font-semibold text-foreground text-xs">Setting up Ollama</p>
+              <p>1. Install from <span className="font-mono text-primary">ollama.com/download</span></p>
+              <p>2. Enable CORS so the browser can call it:</p>
+              <pre className="bg-muted rounded px-2 py-1 text-[9px] font-mono overflow-x-auto">OLLAMA_ORIGINS=* ollama serve</pre>
+              <p>3. Pull an uncensored model:</p>
+              <pre className="bg-muted rounded px-2 py-1 text-[9px] font-mono overflow-x-auto">ollama pull dolphin-mistral{"\n"}ollama pull dolphin-llama3{"\n"}ollama pull dolphin3</pre>
+              <p>4. If Ollama is on a remote machine, put its URL above instead of localhost.</p>
+              <p className="text-amber-600 dark:text-amber-400 font-medium">dolphin-mistral and dolphin-llama3 are fully uncensored Mistral/Llama fine-tunes.</p>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card className="shrink-0">
+          <CardContent className="p-3 space-y-1">
+            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">Uncensored models</p>
+            <div className="space-y-1">
+              {OLLAMA_SUGGESTED_MODELS.filter(m => m.note.toLowerCase().includes("uncensored")).map(m => (
+                <div key={m.id} className="flex items-start gap-1.5">
+                  <Badge variant="outline" className="text-[8px] shrink-0 mt-0.5 font-mono">{m.label}</Badge>
+                  <span className="text-[9px] text-muted-foreground">{m.note}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* RIGHT — chat */}
+      <Card className="flex flex-col min-h-0">
+        <CardHeader className="pb-2 shrink-0">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5">
+              <Brain className="h-3.5 w-3.5" /> {selectedModel || "Ollama Chat"}
+            </CardTitle>
+            <Button variant="ghost" size="sm" className="h-6 text-[10px]" onClick={() => setMessages([])} data-testid="button-ollama-clear">
+              <Trash2 className="h-3 w-3 mr-1" />Clear
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent className="flex-1 flex flex-col min-h-0 p-3 pt-0 gap-2">
+          {!connected ? (
+            <div className="flex-1 flex flex-col items-center justify-center gap-3 text-center text-muted-foreground">
+              <Cpu className="h-8 w-8 opacity-20" />
+              <p className="text-sm">Connect to an Ollama instance to start chatting.</p>
+              <p className="text-xs">Default: <span className="font-mono">http://localhost:11434</span> — run Ollama locally with <span className="font-mono">OLLAMA_ORIGINS=*</span></p>
+            </div>
+          ) : (
+            <ScrollArea className="flex-1 min-h-0 pr-1">
+              <div className="space-y-3">
+                {messages.length === 0 && (
+                  <div className="text-center text-xs text-muted-foreground pt-8">
+                    No messages yet — type below to start.
+                  </div>
+                )}
+                {messages.map((m, i) => (
+                  <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed whitespace-pre-wrap ${
+                      m.role === "user"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted/60 border border-border/50"
+                    }`}>
+                      {m.content || <span className="animate-pulse text-muted-foreground text-xs">generating…</span>}
+                    </div>
+                  </div>
+                ))}
+                <div ref={endRef} />
+              </div>
+            </ScrollArea>
+          )}
+
+          {connected && (
+            <div className="flex gap-2 shrink-0">
+              <Textarea
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+                placeholder={`Message ${selectedModel || "model"}… (Enter to send)`}
+                rows={2}
+                className="flex-1 resize-none text-sm"
+                disabled={streaming}
+                data-testid="textarea-ollama-input"
+              />
+              {streaming ? (
+                <Button variant="outline" onClick={stop} className="h-full px-3" data-testid="button-ollama-stop">
+                  <Square className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button onClick={send} disabled={!input.trim() || !selectedModel} className="h-full px-3" data-testid="button-ollama-send">
+                  <Send className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
 const DEFAULT_MAX_CONCURRENT = 3;
 
 export default function LocalLLMHypervisorPage() {
@@ -586,6 +877,10 @@ export default function LocalLLMHypervisorPage() {
   const [loadLoaded, setLoadLoaded] = useState(0);
   const [loadTotal, setLoadTotal] = useState(0);
   const [totalTokens, setTotalTokens] = useState(0);
+
+  const [activeEngine, setActiveEngine] = useState<"webgpu" | "ollama">(() =>
+    (localStorage.getItem("kappa_engine") as "webgpu" | "ollama" | null) ?? "webgpu"
+  );
 
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [chatInput, setChatInput] = useState("");
@@ -1381,7 +1676,11 @@ export default function LocalLLMHypervisorPage() {
     toast({ title: "Layer stack reset to defaults" });
   };
 
-  const selectedModel = LLM_MODELS.find((m) => m.id === modelId)!;
+  const selectedModel = LLM_MODELS.find((m) => m.id === modelId) ?? {
+    id: modelId, label: modelId, sizeLabel: "custom", sizeMB: 0,
+    hfRepo: modelId, dtype: "q4f16", requiresToken: false,
+    description: "Custom HuggingFace ONNX model", device: "webgpu" as const,
+  };
   const synthId = findSynthLayerId();
   const reversedLayers = [...layers].reverse();
 
@@ -1399,8 +1698,27 @@ export default function LocalLLMHypervisorPage() {
             Monadic Hypervisor
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Photoshop-style agent layers · WebGPU local inference · parallel workers
+            {activeEngine === "webgpu" ? "Photoshop-style agent layers · WebGPU local inference · parallel workers" : "Ollama local server · uncensored models · streaming chat"}
           </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="flex rounded-md border border-border overflow-hidden shrink-0">
+            <button
+              className={`px-3 py-1.5 text-xs font-medium transition-colors ${activeEngine === "webgpu" ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground hover:text-foreground"}`}
+              onClick={() => { setActiveEngine("webgpu"); localStorage.setItem("kappa_engine", "webgpu"); }}
+              data-testid="button-engine-webgpu"
+            >
+              ⚡ WebGPU
+            </button>
+            <button
+              className={`px-3 py-1.5 text-xs font-medium transition-colors border-l border-border ${activeEngine === "ollama" ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground hover:text-foreground"}`}
+              onClick={() => { setActiveEngine("ollama"); localStorage.setItem("kappa_engine", "ollama"); }}
+              data-testid="button-engine-ollama"
+            >
+              🦙 Ollama
+            </button>
+          </div>
         </div>
 
         <div className="flex items-center gap-3 text-xs font-mono">
@@ -1453,7 +1771,9 @@ export default function LocalLLMHypervisorPage() {
         </div>
       )}
 
-      <div className="flex-1 grid grid-cols-[240px_1fr_280px] gap-4 min-h-0">
+      {activeEngine === "ollama" && <OllamaPanel />}
+
+      {activeEngine === "webgpu" && <div className="flex-1 grid grid-cols-[240px_1fr_280px] gap-4 min-h-0">
 
         {/* LEFT — Layer Stack */}
         <div className="flex flex-col gap-3 min-h-0">
@@ -1584,9 +1904,21 @@ export default function LocalLLMHypervisorPage() {
                           {m.label} — {m.sizeLabel}
                         </SelectItem>
                       ))}
+                      <SelectItem value="__custom__" className="text-xs text-muted-foreground italic">
+                        Custom HF repo…
+                      </SelectItem>
                     </SelectContent>
                   </Select>
-                  {LLM_MODELS.find((m) => m.id === modelId)!.sizeMB > 2000 && (
+                  {modelId === "__custom__" && (
+                    <Input
+                      placeholder="onnx-community/My-Model-ONNX"
+                      className="h-7 text-xs font-mono mt-1"
+                      data-testid="input-custom-model"
+                      onBlur={e => { if (e.target.value.trim()) setModelId(e.target.value.trim()); }}
+                      onKeyDown={e => { if (e.key === "Enter" && (e.target as HTMLInputElement).value.trim()) setModelId((e.target as HTMLInputElement).value.trim()); }}
+                    />
+                  )}
+                  {(LLM_MODELS.find((m) => m.id === modelId)?.sizeMB ?? 0) > 2000 && (
                     <p className="text-[10px] text-amber-600 dark:text-amber-400 mt-0.5 flex items-center gap-1">
                       <AlertTriangle className="h-2.5 w-2.5 shrink-0" />
                       {LLM_MODELS.find((m) => m.id === modelId)!.sizeLabel} download — cached after first load. Requires WebGPU + sufficient VRAM.
@@ -1862,7 +2194,7 @@ export default function LocalLLMHypervisorPage() {
             </CardContent>
           </Card>
         </div>
-      </div>
+      </div>}
 
       {/* Session History Sheet */}
       <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
