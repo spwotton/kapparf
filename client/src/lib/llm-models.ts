@@ -45,6 +45,17 @@ export const LLM_MODELS: LLMModel[] = [
     device: "webgpu",
   },
   {
+    id: "onnx-community/Mistral-Nemo-Instruct-2407-ONNX",
+    label: "Mistral Nemo 12B",
+    sizeLabel: "~6.5 GB",
+    sizeMB: 6656,
+    hfRepo: "onnx-community/Mistral-Nemo-Instruct-2407-ONNX",
+    dtype: "q4f16",
+    requiresToken: false,
+    description: "Mistral Nemo 12B Instruct — runs 100% locally via WebGPU. One-time ~6.5 GB download, cached in browser.",
+    device: "webgpu",
+  },
+  {
     id: "spwotton/bonsai-ternary-webgpu",
     label: "Bonsai Ternary",
     sizeLabel: "~200 MB",

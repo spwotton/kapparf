@@ -1586,6 +1586,12 @@ export default function LocalLLMHypervisorPage() {
                       ))}
                     </SelectContent>
                   </Select>
+                  {LLM_MODELS.find((m) => m.id === modelId)!.sizeMB > 2000 && (
+                    <p className="text-[10px] text-amber-600 dark:text-amber-400 mt-0.5 flex items-center gap-1">
+                      <AlertTriangle className="h-2.5 w-2.5 shrink-0" />
+                      {LLM_MODELS.find((m) => m.id === modelId)!.sizeLabel} download — cached after first load. Requires WebGPU + sufficient VRAM.
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-1">
                   <label className="text-[10px] text-muted-foreground uppercase tracking-wider">HF Token</label>
