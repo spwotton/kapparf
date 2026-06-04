@@ -13,7 +13,7 @@ import { getWatchdogStatus } from "./network-watchdog";
 import { getNetworkThreatStatus, processPacket, processBatch, parsePacketLine, type NetworkPacket } from "./network-threat-scanner";
 import { biometricCorrelator, type PhoneSensorReading, type KymaReading } from "./biometric-correlator";
 import { getVisionStatus, getVisionAnalyses, getContextMemory, runVisionOnce } from "./kiwisdr-vision";
-import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption } from "./llm-analyst";
+import { analyzeCorrelation, generateReport, suggestRuleWeights, generateSocialCaption, getRouterStats } from "./llm-analyst";
 import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type PipelineStatus, type PipelineResult } from "./pipeline";
 import { runSyncCapture, getSyncCaptureStatus, getSyncCaptureHistory, getScreenshotFiles, getScanResultFiles } from "./sync-capture";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
@@ -1622,6 +1622,10 @@ export async function registerRoutes(
   app.post("/api/pipeline/stop", (_req, res) => {
     stopPipeline();
     res.json(getPipelineStatus());
+  });
+
+  app.get("/api/router/stats", (_req, res) => {
+    res.json(getRouterStats());
   });
 
   app.get("/api/kiwisdr-screenshots/:filename", (req, res) => {

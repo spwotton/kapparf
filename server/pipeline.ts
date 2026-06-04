@@ -4,6 +4,7 @@ import { runScanCycleOnce, getScannerStatus } from "./kiwisdr-scanner";
 import { runHeartbeatOnce, getWatchdogStatus } from "./network-watchdog";
 import { kappaEngine } from "./kappa-engine";
 import { runCorticalCycle, isRunning as isCortexRunning } from "./quantum-cortex";
+import { adaptiveTau } from "./kappa-router";
 
 export type PipelineMode = "STANDBY" | "PATROL" | "ELEVATED" | "SURGE";
 
@@ -161,6 +162,17 @@ async function runPipelineCycle(): Promise<PipelineResult> {
     result.rampedUp = INTERVALS[newMode] < INTERVALS[state.mode];
     state.mode = newMode;
     state.intervalMs = INTERVALS[newMode];
+  }
+
+  // Adaptive τ refinement: within SURGE mode, compress interval further
+  // based on continuous KAPPA score (15s min at κ=100, 2min at κ=80).
+  // This implements the LNN time-constant principle — hotter signal field,
+  // faster observer sampling.
+  if (state.mode === "SURGE") {
+    const tau = adaptiveTau(kappaStatus.score);
+    if (tau < state.intervalMs) {
+      state.intervalMs = tau;
+    }
   }
 
   state.lastRun = Date.now();
