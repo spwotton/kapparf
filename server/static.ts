@@ -17,6 +17,14 @@ export function serveStatic(app: Express) {
     return;
   }
 
+  // Serve attached_assets directly so large files work even when Vite skips copying them
+  const attachedAssetsPath = path.resolve(process.cwd(), "attached_assets");
+  if (fs.existsSync(attachedAssetsPath)) {
+    app.use("/attached-assets", express.static(attachedAssetsPath, {
+      setHeaders: (res) => { res.setHeader("Access-Control-Allow-Origin", "*"); },
+    }));
+  }
+
   // Serve raw capture files before SPA catch-all
   const capturesPath = path.resolve(process.cwd(), "captures");
   if (fs.existsSync(capturesPath)) {
