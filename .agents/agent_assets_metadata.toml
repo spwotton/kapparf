@@ -347,3 +347,9 @@ id = "c4rmOtJzh6lkVZ87xIo5R"
 uri = "file://public/forensic_slides/crocs_forensic_slideshow.mp4"
 type = "video"
 title = "Full Slideshow Video (MP4 — Instagram Reels)"
+
+[[outputs]]
+id = "3WRFyz0Z5eQKsYNEer4Ls"
+uri = "file://public/forensic_slides/kappa_forensic_FINAL.mp4"
+type = "video"
+title = "KAPPA Forensic Video — Final Cut with Narration (59s)"
