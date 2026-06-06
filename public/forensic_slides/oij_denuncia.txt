@@ -2,132 +2,176 @@ ORGANISMO DE INVESTIGACIÓN JUDICIAL (OIJ)
 Departamento de Criminalística / Unidad de Delitos Informáticos y Tecnológicos
 San José, Costa Rica
 
-Fecha: 6 de junio de 2026
-
 DENUNCIA FORMAL — ACOSO SISTEMÁTICO, INTERFERENCIA ELECTROMAGNÉTICA,
-AGRESIÓN FÍSICA, FRAUDE Y EXTORSIÓN
+AGRESIÓN FÍSICA, FRAUDE, EXTORSIÓN Y CRIMEN ORGANIZADO
 
 Estimados señores del OIJ:
 
-Por medio de la presente, yo, Sam Wotton, ciudadano extranjero con residencia
-temporal en Costa Rica, interpongo denuncia formal por los siguientes delitos
-cometidos en mi contra entre diciembre de 2024 y junio de 2026, en múltiples
-propiedades en Jacó, Puntarenas, Costa Rica.
+Yo, Sam Wotton, ciudadano extranjero con residencia temporal en Costa Rica,
+interpongo denuncia formal por hechos ocurridos entre diciembre de 2024 y
+junio de 2026 en Jacó, Puntarenas, Costa Rica.
 
-═══════════════════════════════════════════════
-I. ORIGEN DEL CASO Y CRONOLOGÍA
-═══════════════════════════════════════════════
+══════════════════════════════════════════════════════
+I. RESUMEN DE HECHOS
+══════════════════════════════════════════════════════
 
-OCT–DIC 2024 — Jaco Vacations (Diana Soto)
-  Residí con mi pareja Genesis Daniela Peralta Márquez en una propiedad
-  administrada por Diana Soto (empresa: Jaco Vacations). Me retiré el 28
-  de diciembre de 2024 sin previo aviso.
+Campaña de acoso sistemático de 18+ meses que incluye interferencia
+electromagnética activa, agresión física, extorsión y fraude. Los
+perpetradores se desplazan junto al denunciante entre distintas
+ubicaciones. Equipos de RF / acústica dirigida operados desde
+propiedades cercanas con malla de camuflaje militar. Daño psicológico
+intencional mediante contenido auditivo dirigido (anclaje de trauma
+repetitivo — técnica de hostigamiento documentada).
 
-DIC 28 2024 — INICIO DE EXTORSIÓN
-  Diana Soto exige $2,500 desde esa fecha. Me niego. La campaña de
-  acoso comienza de inmediato.
+══════════════════════════════════════════════════════
+II. DELITOS
+══════════════════════════════════════════════════════
 
-DIC 28 2024 – ABR 2025 — Breakwater Point (Condo de Michael Lipman)
-  El acoso se vuelve extremo en enero de 2025.
+  Art. 214 CP     — Extorsión ($2,500 exigidos desde dic 2024)
+  Art. 217 CP     — Fraude con tarjetas de crédito ($80,000+)
+  Art. 123 CP     — Lesiones graves (estrangulamiento, oct 2025)
+  Art. 22 L.8589  — Hostigamiento y acoso sistemático
+  Ley 7593 SUTEL  — Interferencia radioeléctrica ilegal
+  Art. 274 CP     — Asociación ilícita (operación multi-persona coordinada)
 
-ABR 2025 — Regreso a propiedad de Diana Soto (Jaco Vacations)
-  Al regresar, encontré modificaciones físicas en la propiedad:
-  • El techo había sido bajado ~90 cm (3 pies)
-  • Sistema de alarma Vison con sensores PIR instalados
-  • Emisores paramétricos activos desde el garaje constantemente
-  • Se compró una pelota de playa de ~3.6 metros como obstrucción visual
-  • Diana Soto es propietaria de la casa directamente al frente
+══════════════════════════════════════════════════════
+III. PERSONAS A INVESTIGAR
+══════════════════════════════════════════════════════
 
-25 SET 2025 — Malla de camuflaje RF fotografiada
-  Quebrada Seca (Los Ríos): malla de camuflaje militar en ventana
-  fotografiada desde terraza de usuario (22:21 hora local).
+── CONFIRMADAS / ALTA CONFIANZA ──────────────────────
 
-14 OCT 2025 — AGRESIÓN FÍSICA (Riverwalk)
-  Hombre de cabello rojo (residente en Riverwalk con Matthew Hanlon)
-  estranguló físicamente al denunciante. Lesiones documentadas
-  fotográficamente. Misma fecha: Junior Araya y asociados intentaron
-  atraer al denunciante fuera del apartamento de su amigo Leo para
-  agredirle en la calle.
-
-OCT 2025 – JUN 2026 — Crocs Hotel, Jacó
-  Diez (10) eventos de interferencia electromagnética documentados.
-  Tres modalidades de ataque. Último evento: 6 jun 2026, 04:05 UTC.
-
-═══════════════════════════════════════════════
-II. PERSONAS INVOLUCRADAS
-═══════════════════════════════════════════════
-
-1. DIANA SOTO — Jaco Vacations
-   Extorsión $2,500. Modificaciones estructurales en propiedad.
-   Propietaria de casa al frente. Conectada a TODAS las propiedades.
+1. DIANA SOTO — Jaco Vacations, Jacó
+   Nodo de origen. Extorsión $2,500 desde 28 dic 2024.
+   Al regreso (abr 2025): techo bajado ~90 cm, sistema Vison con
+   sensores PIR, emisores paramétricos desde garaje, pelota de 3.6m
+   como obstrucción visual. Propietaria de casa al frente.
+   Conectada a TODAS las propiedades en la cadena.
+   INSPECCIONAR: garaje, casa al frente, sensores PIR.
 
 2. GENESIS DANIELA PERALTA MÁRQUEZ — IG: gemperalta._
-   Pareja anterior. Ha afirmado hoy 100+ veces ser la responsable.
-   Sospechosa de fraude con tarjetas de crédito ($80,000+).
+   Expareja. Vivió en Jaco Vacations oct–dic 2024.
+   Afirmó directamente ser responsable (100+ veces en un día).
+   Sospecha fraude tarjetas: $80,000+.
+   Relación paralela sospechada con Pablo Mora (IG: pastibmx).
+   Confirmó haber transportado a Junior Araya al apartamento de Leo
+   el día del intento de emboscada (14 oct 2025).
 
 3. MATTHEW HANLON — Riverwalk, Jacó
-   Operativo de largo plazo. Identificado fotográficamente.
+   POSIBLE COORDINADOR / HANDLER DE LA OPERACIÓN.
+   IDENTIFICADO FOTOGRÁFICAMENTE. Operativo de largo plazo.
+   Riverwalk: debajo de El Miro, prop. Todd Johnson, adm. Greenwald.
+   Su compañero de cuarto (cabello rojo) cometió el estrangulamiento
+   el 14 oct 2025. Riverwalk = sitio de operación de acústica dirigida.
+   Su esposa/pareja aparece en su foto de perfil de Instagram.
+   Nombre desconocido — identificar por registros de Riverwalk.
 
-4. HOMBRE DE CABELLO ROJO (nombre desconocido)
-   Perpetrador de estrangulamiento. Riverwalk. 14 oct 2025.
+4. ESPOSA / PAREJA DE MATTHEW HANLON — nombre desconocido
+   Aparece en foto de perfil de Instagram de Hanlon.
+   Identificar nombre y rol mediante registros de residencia.
 
-5. JUNIOR ARAYA — IG: junior_araya (BMX, Jacó CR)
-   Intento de emboscada 14 oct 2025. Amigo de Pablo Mora.
-   Vinculado a Genesis Peralta por confirmación directa de ella.
+5. HOMBRE DE CABELLO ROJO — nombre desconocido
+   Perpetrador estrangulamiento, 14 oct 2025.
+   Compañero de cuarto de Hanlon en Riverwalk.
+   IDENTIFICAR mediante registros de residentes.
 
-6. PABLO MORA — IG: pastibmx (BMX rider profesional)
-   Periférico. Posible pareja paralela de Genesis. Tournón/El Garza.
+6. JUNIOR ARAYA — IG: junior_araya (#bmx Jaco CR)
+   Presente en apartamento de Leo, 14 oct 2025.
+   Usado para atraer al denunciante a la calle para agredirlo.
+   Genesis Peralta confirmó haberlo transportado ese día.
+   Asociado de Pablo Mora (BMX).
 
-7. MARJORIE ALFARO (posiblemente Jiménez)
+── INDIRECTOS / PERIFÉRICOS ──────────────────────────
+
+7. PABLO MORA — IG: pastibmx (BMX, Tournón/El Garza)
+   Sospechado pareja paralela de Genesis Peralta.
+   No conoce al denunciante directamente. Asociado de Araya.
+
+8. MARJORIE ALFARO (posible Jiménez — casada)
    Asociada de la red. Posible vínculo con Jorge Jiménez.
 
-8. JAIRO ALFARO
-   Operativo de campo en Jacó. Asociado directo de Genesis Peralta.
+9. JAIRO ALFARO
+   Operativo de campo, Jacó. Asociado directo de Genesis Peralta.
 
-9. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
-   Vista en persona oct 2025. Presente en apartamento de Leo
-   el día del retiro. Nivel de participación incierto.
+10. TODD JOHNSON — propietario Riverwalk
+    Investigar conocimiento de actividades en su propiedad.
 
-═══════════════════════════════════════════════
-III. PROPIEDADES CLAVE A INSPECCIONAR
-═══════════════════════════════════════════════
+11. GREENWALD — administrador Riverwalk
+    Registros de residentes e incidentes.
 
-1. Jaco Vacations (Diana Soto) — Jacó, Puntarenas
-   Emisores en garaje, techo modificado, PIR, propiedad al frente.
+12. MICHAEL LIPMAN + DANIELA (esposa) — Breakwater Point, Jacó
+    Propietarios del condo donde residió el denunciante dic 2024–abr 2025.
+    Periodo de escalada extrema (ene 2025).
 
-2. Quebrada Seca, Los Ríos — malla de camuflaje RF fotografiada
+13. MICHAEL GREENFIELD — Hermosa Palms, Jacó
+    Propietario. Recibió a Lipman family. Cadena de propiedad.
 
-3. Riverwalk (Todd Johnson / Greenwald) — debajo de El Miro
-   Escena de agresión. Equipos de sonar reportados.
+── ESPECULATIVOS (a solicitud del denunciante) ────────
 
-4. Crocs Hotel, Jacó — escena principal interferencia EM
+14. DANIEL WAGNER — IG: danwaysouth
+    Conocido del denunciante de Alcohólicos Anónimos.
+    Reside en Vista Las Palmas, Jacó (piso estimado 7–8).
+    Primer "like" en publicaciones de alevida89.
+    Viajes recientes: Dubái, Cannes, Barcelona, Berlín (sep–oct 2024).
+    Likeado por: dustinharrington92.
 
-═══════════════════════════════════════════════
-IV. DELITOS DENUNCIADOS
-═══════════════════════════════════════════════
+15. ALE VIDA — IG: alevida89
+    Likeada por danwaysouth. Posible pareja de Melissa López Sánchez.
 
-  • Extorsión: $2,500 (Art. 214 Código Penal CR)
-  • Fraude tarjetas de crédito: $80,000+ (Art. 217 CP)
-  • Agresión física / estrangulamiento: 14 oct 2025 (Art. 123 CP)
-  • Interferencia electromagnética ilegal (Ley 7593 SUTEL)
-  • Acoso y hostigamiento sistemático (Art. 22 Ley 8589)
-  • Modificación ilegal de propiedad con fines de vigilancia
+16. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
+    Vista en persona oct 2025. Presente en apartamento de Leo
+    el día del retiro. Posible testigo. Participación incierta.
 
-═══════════════════════════════════════════════
-V. EVIDENCIA DISPONIBLE
-═══════════════════════════════════════════════
+17. DUSTIN HARRINGTON — IG: dustinharrington92
+    Aparece likeando múltiples publicaciones de danwaysouth.
 
-  • 10 clips de video (ProRes HQ y H.264, iPhone 14 Pro)
-  • 4 fotografías RAW DNG 48MP — canal azul = 0.000%
-  • Fotografías de lesiones físicas (14 oct 2025)
-  • Fotografías malla de camuflaje RF (25 sep 2025)
-  • Análisis forense cuantitativo por fotograma (KAPPA platform)
-  • Registros de red PCAP
+══════════════════════════════════════════════════════
+IV. PROPIEDADES A INSPECCIONAR
+══════════════════════════════════════════════════════
+
+A. JACO VACATIONS (Diana Soto) — garaje, casa al frente, sensores PIR
+B. RIVERWALK (Todd Johnson / Greenwald) — debajo de El Miro
+C. QUEBRADA SECA, LOS RÍOS — malla RF fotografiada 25 sep 2025
+D. VISTA LAS PALMAS piso 7–8 — posible Daniel Wagner
+E. CROCS HOTEL — registros huéspedes oct 2025 – jun 2026
+
+══════════════════════════════════════════════════════
+V. EVIDENCIA FORENSE
+══════════════════════════════════════════════════════
+
+  • 10 clips video iPhone 14 Pro (ProRes HQ + H.264, EXIF intacto)
+  • 4 RAW DNG 48MP — canal B = 0.000%, max pixel = 0
+  • Fotografías lesiones físicas (14 oct 2025)
+  • Fotografías malla RF (25 sep 2025, 22:21 hrs)
+  • Análisis forense por fotograma — KAPPA SIGINT
+  • PCAP / registros red: 240,000+ archivos
   • Análisis ELF: 50 Hz anómalo vs red CR 60 Hz
-  • Capturas OSINT de redes sociales
+  • Capturas OSINT redes sociales
+  • Identificación fotográfica Matthew Hanlon
   • Todo hasheado SHA-256 con marca de tiempo
+
+══════════════════════════════════════════════════════
+VI. SOLICITUDES
+══════════════════════════════════════════════════════
+
+  1. Investigación formal por crimen organizado
+  2. Identificar y detener perpetrador del estrangulamiento
+  3. Inspección técnica Jaco Vacations
+  4. Coordinar con SUTEL: Crocs Hotel y Quebrada Seca
+  5. Investigar fraude $80,000+ tarjetas de crédito
+  6. Registros de residencia Riverwalk
+  7. Registros huéspedes Crocs Hotel
+  8. Preservar evidencia bajo cadena de custodia
 
 OIJ Hotline: 800-8000-645
 informacion@poder-judicial.go.cr
 
-Sam Wotton — Jacó, Puntarenas, Costa Rica — 6 de junio de 2026
+─────────────────────────────────────────────────────
+AVISO LEGAL
+─────────────────────────────────────────────────────
+Las personas en sección "ESPECULATIVOS" (14–17) e "INDIRECTOS" (10–13)
+son incluidas a solicitud del denunciante para fines de investigación.
+El denunciante reconoce que su participación puede no estar confirmada.
+El OIJ debe verificar independientemente antes de tomar acción legal.
+─────────────────────────────────────────────────────
+
+Sam Wotton — Jacó, Puntarenas, Costa Rica — Junio 2026
