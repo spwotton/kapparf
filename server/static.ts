@@ -25,6 +25,14 @@ export function serveStatic(app: Express) {
     }));
   }
 
+  // Serve forensic slides
+  const forensicSlidesPath = path.resolve(process.cwd(), "public/forensic_slides");
+  if (fs.existsSync(forensicSlidesPath)) {
+    app.use("/forensic-slides", express.static(forensicSlidesPath, {
+      setHeaders: (res) => { res.setHeader("Access-Control-Allow-Origin", "*"); },
+    }));
+  }
+
   // Serve raw capture files before SPA catch-all
   const capturesPath = path.resolve(process.cwd(), "captures");
   if (fs.existsSync(capturesPath)) {

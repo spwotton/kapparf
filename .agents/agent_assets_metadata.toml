@@ -299,3 +299,51 @@ id = "ZPcpSSfJfzpCNMf11wMvA"
 uri = "file://attached_assets/authority_emails.md"
 type = "text"
 title = "Authority Emails — FBI / Embassy / OIJ / Fiscalía"
+
+[[outputs]]
+id = "oXdOqRa8fd0lZbRXH8muL"
+uri = "file://public/forensic_slides/slide_01_cover.jpg"
+type = "image"
+title = "Slide 1 — Cover / Context"
+
+[[outputs]]
+id = "fLXTBcMc6sd4FXWatqXT0"
+uri = "file://public/forensic_slides/slide_02_peak_distortion.jpg"
+type = "image"
+title = "Slide 2 — Peak Distortion (t=0.367s, BLUR=6.22)"
+
+[[outputs]]
+id = "7JIiM6Z25JQLGzn5fscB1"
+uri = "file://public/forensic_slides/slide_03_transition.jpg"
+type = "image"
+title = "Slide 3 — Device Detects Camera (−41% blur in 33ms)"
+
+[[outputs]]
+id = "-bgbCzOkggQ7CM4V2VeIo"
+uri = "file://public/forensic_slides/slide_04_baseline.jpg"
+type = "image"
+title = "Slide 4 — Baseline Clear (BLUR=2.36 minimum)"
+
+[[outputs]]
+id = "ggqANtCkBiMktQNxVrD2g"
+uri = "file://public/forensic_slides/slide_05_activation.jpg"
+type = "image"
+title = "Slide 5 — Major Activation (YAVG +40% in 0.2s)"
+
+[[outputs]]
+id = "QVLtYWFvT-whqtudy3exv"
+uri = "file://public/forensic_slides/slide_06_data_graph.jpg"
+type = "image"
+title = "Slide 6 — Full 452-Frame Signal Graph"
+
+[[outputs]]
+id = "o2CYzHXVhJ23LhWBod_Rj"
+uri = "file://public/forensic_slides/slide_07_summary.jpg"
+type = "image"
+title = "Slide 7 — Verbal Threats + OIJ Summary"
+
+[[outputs]]
+id = "c4rmOtJzh6lkVZ87xIo5R"
+uri = "file://public/forensic_slides/crocs_forensic_slideshow.mp4"
+type = "video"
+title = "Full Slideshow Video (MP4 — Instagram Reels)"
