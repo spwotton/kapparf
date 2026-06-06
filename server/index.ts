@@ -277,5 +277,18 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
   const { startFtmHypervisor } = await import("./lib/ftm/ftmHypervisor");
   setTimeout(() => startFtmHypervisor().catch(e => console.warn("[FTM] startup error:", e.message)), 12_000);
 
+  // Liquid Cortex — start background polling from KAPPA event stream
+  const { liquidCortex } = await import("./liquid-cortex");
+  const { storage: lcStorage } = await import("./storage");
+  liquidCortex.startPolling(async () => {
+    const evts = await lcStorage.getSignalEventsByWindow(60);
+    return evts.map(e => ({
+      frequency: e.frequency,
+      domain: e.domain,
+      confidence: e.confidence ?? 0.5,
+      timestamp: new Date(e.timestamp).getTime(),
+    }));
+  });
+
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
 })();

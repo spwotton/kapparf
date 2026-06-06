@@ -26,6 +26,7 @@ import { processCSIFrame, recordMetrics, getMetricsHistory, ENGINE_CONSTANTS, ge
 import { computeChitinTransduction, getLifecycleMap, getChitinConstants } from "./signal/chitin-transducer";
 import { addInstance, removeInstance, getInstances, getInstance, fetchSession, fetchEvents, sendCommand, getCommandHistory, getSessionSummary } from "./bettercap/bridge";
 import { cortexBus } from "./cortex-bus";
+import { liquidCortex } from "./liquid-cortex";
 import { atlantisHub } from "./atlantis-hub";
 import { GOS_CONSTANTS, ATLANTIS_CANDIDATES, RESEARCH_CORPUS } from "./atlantis-probe";
 import { ak7, AK7_INVARIANTS, AK7_LAYERS, BLOCK_COLORS, getChronoPosition } from "./ak7-hypervisor";
@@ -8230,6 +8231,36 @@ This email is constructed from verifiable technical disclosures, public contract
     } catch (err: any) {
       res.status(500).json({ error: err.message ?? "Failed" });
     }
+  });
+
+  // ── Liquid Cortex — LTC Neural Network ─────────────────────────────────────
+  app.get("/api/liquid-cortex/state", (_req, res) => {
+    res.json(liquidCortex.getState());
+  });
+
+  app.post("/api/liquid-cortex/ingest", async (_req, res) => {
+    try {
+      const events = await storage.getSignalEventsByWindow(60);
+      let count = 0;
+      for (const evt of events.slice(-20)) {
+        liquidCortex.ingest({
+          frequency: evt.frequency,
+          domain: evt.domain,
+          confidence: evt.confidence ?? 0.5,
+          score: 0,
+          timestamp: new Date(evt.timestamp).getTime(),
+        });
+        count++;
+      }
+      res.json({ ok: true, ingested: count, state: liquidCortex.getState() });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message ?? "Failed" });
+    }
+  });
+
+  app.post("/api/liquid-cortex/reset", (_req, res) => {
+    liquidCortex.reset();
+    res.json({ ok: true });
   });
 
 }

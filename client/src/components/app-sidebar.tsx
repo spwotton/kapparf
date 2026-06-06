@@ -188,6 +188,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.localLLM", fallback: "Local LLM", url: "/local-llm", icon: Cpu },
       { titleKey: "sidebar.meridian", fallback: "Meridian Hypervisor", url: "/meridian", icon: Atom },
       { titleKey: "sidebar.researchCortex", fallback: "Research Cortex", url: "/cortex", icon: BookOpen },
+      { titleKey: "sidebar.liquidCortex", fallback: "Liquid Cortex", url: "/liquid-cortex", icon: Brain },
       { titleKey: "sidebar.memoryCortex", fallback: "Memory Cortex", url: "/memory", icon: Database },
       { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },
       { titleKey: "sidebar.omegaGos", fallback: "Ω-GOS 7/4 LNN", url: "/omega-gos", icon: Atom },

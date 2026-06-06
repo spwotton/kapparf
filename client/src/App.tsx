@@ -37,6 +37,7 @@ import ConspiracyBoardPage from "@/pages/conspiracy-board";
 import SuperpositionPage from "@/pages/superposition";
 import BettercapPage from "@/pages/bettercap";
 import ResearchCortexPage from "@/pages/research-cortex";
+import LiquidCortexPage from "@/pages/liquid-cortex";
 import NetworkForensicsPage from "@/pages/network-forensics";
 import EvidenceChainPage from "@/pages/evidence-chain";
 import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
@@ -118,6 +119,7 @@ function KappaRouter() {
       <Route path="/superposition" component={SuperpositionPage} />
       <Route path="/bettercap" component={BettercapPage} />
       <Route path="/cortex" component={ResearchCortexPage} />
+      <Route path="/liquid-cortex" component={LiquidCortexPage} />
       <Route path="/forensics" component={NetworkForensicsPage} />
       <Route path="/evidence" component={EvidenceChainPage} />
       <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
