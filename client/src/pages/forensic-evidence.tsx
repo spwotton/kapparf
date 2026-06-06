@@ -449,14 +449,12 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
     Incluido a solicitud del denunciante. OIJ a verificar
     independientemente antes de cualquier acción.
 
-19. NOMBRE CLAVE: "FROG" (designación operacional asignada por
-    el denunciante) — identidad reservada, iniciales M.S.
+19. FNT-1 — identidad reservada, iniciales M.S.
     Presente físicamente en el apartamento de Leo,
     octubre 2025, día del retiro. Posible testigo.
     Participación activa incierta.
 
-20. NOMBRE CLAVE: "TOAD" (designación operacional asignada por
-    el denunciante) — identidad reservada, iniciales A.V.
+20. FNT-2 — identidad reservada, iniciales A.V.
     Presente físicamente en el apartamento de Leo,
     octubre 2025, día del retiro. Posible testigo.
     Participación activa incierta.
