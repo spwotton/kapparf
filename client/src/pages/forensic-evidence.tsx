@@ -325,7 +325,7 @@ informacion@poder-judicial.go.cr
 
 Sam Wotton — Jacó, Puntarenas — Junio 2026`;
 
-const WHATSAPP_MSG = `Buenos días. Me hospedé en Crocs Hotel en Jacó durante aproximadamente 8 meses. Durante ese período documenté diez (10) eventos de interferencia electromagnética dirigida a mis dispositivos de grabación:
+const WHATSAPP_MSG = `Buenos días. Me hospedo actualmente en Crocs Hotel en Jacó. Durante las últimas semanas documenté diez (10) eventos de interferencia electromagnética dirigida a mis dispositivos de grabación:
 
 • Canal azul del sensor (430–490 nm): completamente anulado en 4 fotografías RAW de 48 megapíxeles — valor máximo = 0 en 3 millones de sub-píxeles
 • Floor-lock: 93.6% de píxeles en cero absoluto durante 4.2 minutos continuos
