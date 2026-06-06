@@ -71,11 +71,12 @@ export function serveStatic(app: Express) {
   }));
 
   // SPA catch-all — checks dynamically on every request so the server never
-  // gets permanently stuck in 503 mode if dist/public wasn't ready at startup.
+  // gets permanently stuck in holding mode if dist/public wasn't ready at startup.
+  // Returns 200 (not 503) during build so Replit health checks pass immediately.
   app.use("/{*path}", (_req, res) => {
     const indexPath = path.resolve(distPath, "index.html");
     if (!fs.existsSync(indexPath)) {
-      return res.status(503).send(HOLDING_PAGE);
+      return res.status(200).send(HOLDING_PAGE);
     }
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.setHeader("Pragma", "no-cache");

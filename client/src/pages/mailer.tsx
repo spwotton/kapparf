@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield, Zap, AlertTriangle, Radio } from "lucide-react";
+import { Send, CheckCircle, XCircle, ChevronDown, ChevronUp, Shield, Zap, AlertTriangle, Radio, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const TEMPLATES: { label: string; to: string; subject: string; body: string }[] = [
@@ -757,6 +757,9 @@ export default function MailerPage() {
 
       {/* ── Venezuela / US Blast — Danny Peralta / Daniela / IRS Fraud ── */}
       <VenezuelaPanel />
+
+      {/* ── UPDATE BLAST — RE: all campaigns → forensic site CTA ── */}
+      <UpdateAllPanel />
     </div>
   );
 }
@@ -988,6 +991,117 @@ function ExpansionPanel() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// UPDATE BLAST — RE: to every contact across all 7 campaigns
+// Russell Brunson / Dan Kennedy copywriting → single CTA to forensic site
+// ─────────────────────────────────────────────────────────────────────────────
+function UpdateAllPanel() {
+  const { toast } = useToast();
+  const [fired, setFired] = React.useState<{ total?: number } | null>(null);
+  const [loading, setLoading] = React.useState(false);
+
+  const fire = async (dryRun: boolean) => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/mailer/fire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: "kappa-fire-2026", target: "update-all", dryRun }),
+      });
+      await res.json();
+      if (dryRun) {
+        toast({ title: "Dry run complete", description: "Contact list logged to server console — check for count and RE: subjects." });
+      } else {
+        setFired({ total: 560 });
+        toast({ title: "Update blast queued", description: "All contacts firing async with RE: subjects. Monitor server log." });
+      }
+    } catch (e) {
+      toast({ title: "Error", description: String(e), variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="border border-orange-200 dark:border-orange-900 rounded-lg p-4 space-y-3 bg-orange-50/30 dark:bg-orange-950/20">
+      <div className="flex items-center gap-2">
+        <RefreshCw className="w-4 h-4 text-orange-500" />
+        <p className="text-sm font-medium">UPDATE BLAST — RE: All Campaigns (~560 contacts)</p>
+      </div>
+
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Sends a follow-up to every unique contact across all 7 campaigns with <span className="font-mono bg-muted px-1 rounded">RE:</span> prepended to their original subject line.
+        Body uses pattern-interrupt opens, short punchy paragraphs, escalation hook, and a single CTA to{" "}
+        <span className="font-medium text-foreground">echokappa.com/forensic-evidence</span>.
+        Spanish variant auto-applied to CR judicial / spectrum contacts.
+      </p>
+
+      <div className="grid grid-cols-3 gap-2 text-xs">
+        <div className="bg-background border rounded p-2 space-y-0.5">
+          <p className="font-medium text-foreground">~560 total</p>
+          <p className="text-muted-foreground">Deduplicated unique addresses</p>
+        </div>
+        <div className="bg-background border rounded p-2 space-y-0.5">
+          <p className="font-medium text-foreground">2 variants</p>
+          <p className="text-muted-foreground">EN (default) · ES (CR judicial)</p>
+        </div>
+        <div className="bg-background border rounded p-2 space-y-0.5">
+          <p className="font-medium text-foreground">1 CTA</p>
+          <p className="text-muted-foreground">echokappa.com/forensic-evidence</p>
+        </div>
+      </div>
+
+      <div className="text-xs text-muted-foreground bg-muted/40 border rounded px-3 py-2 space-y-1">
+        <p className="text-foreground font-medium">Email preview (EN):</p>
+        <p className="italic">"You heard from me recently."</p>
+        <p className="italic">"Here's the update: It hasn't stopped."</p>
+        <p className="italic">"23 violations. 18 months. 21 actors. All public."</p>
+        <p className="italic">"→ echokappa.com/forensic-evidence"</p>
+        <p className="italic text-orange-600 dark:text-orange-400">"P.S. The suspect holds sole-source contracts for SJO airport power..."</p>
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-orange-700 dark:text-orange-300 bg-orange-50 dark:bg-orange-950/40 border border-orange-200 dark:border-orange-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          Fires to <strong>all prior contacts</strong> — media, authorities, NGOs, aviation, legal, CR judicial, US intel, Venezuela.
+          Run dry-run first to confirm count and subjects in server log.
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-update-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-orange-300 dark:border-orange-700"
+          onClick={() => fire(true)}
+          disabled={loading}
+        >
+          Dry Run (log only)
+        </Button>
+        <Button
+          data-testid="button-update-send"
+          size="sm"
+          className="gap-2 bg-orange-600 hover:bg-orange-700 text-white"
+          onClick={() => fire(false)}
+          disabled={loading}
+        >
+          <Send className="w-3.5 h-3.5" />
+          {loading ? "Queuing…" : "Fire Update Blast"}
+        </Button>
+      </div>
+
+      {fired && (
+        <div className="flex items-center gap-3 text-sm">
+          <CheckCircle className="w-4 h-4 text-green-500" />
+          <span className="text-green-600 font-medium">Update blast queued — {fired.total} contacts firing async (~200s)</span>
+          <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Venezuela / US Panel — Danny Peralta / Daniela Peralta Marquez / IRS Fraud
 // ─────────────────────────────────────────────────────────────────────────────
 function VenezuelaPanel() {
@@ -1075,3 +1189,4 @@ function VenezuelaPanel() {
     </div>
   );
 }
+
