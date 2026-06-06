@@ -176,3 +176,4 @@ public/forensic_slides/kappa_master_FINAL.mp4 filter=lfs diff=lfs merge=lfs -tex
 /public/forensic_slides/kappa_suppression_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_apr29_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_may17_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text
+/public/forensic_slides/kappa_jan7_SBS.mp4 filter=lfs diff=lfs merge=lfs -text

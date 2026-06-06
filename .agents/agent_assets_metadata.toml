@@ -395,3 +395,9 @@ id = "yptYIJ6tf6Efs0GKp_1ZE"
 uri = "file://public/forensic_slides/apr29_timeline.jpg"
 type = "image"
 title = "Oct 2025 Timeline — Floor-Lock + Burst Sequence"
+
+[[outputs]]
+id = "2d4fFXmMUofHDA9npuPPR"
+uri = "file://public/forensic_slides/kappa_jan7_SBS.mp4"
+type = "video"
+title = "Jan 7 2026 — Side-by-Side: Original vs 80× Forensic Amp (6.4 min, 3840×1080)"
