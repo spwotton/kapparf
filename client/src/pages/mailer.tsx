@@ -896,7 +896,7 @@ function ExpansionPanel() {
       const res = await fetch("/api/mailer/fire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ target: "expansion", dryRun }),
+        body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "expansion", dryRun }),
       });
       const data = await res.json();
       if (dryRun) {
@@ -1005,7 +1005,7 @@ function UpdateAllPanel() {
       const res = await fetch("/api/mailer/fire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ target: "update-all", dryRun }),
+        body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "update-all", dryRun }),
       });
       await res.json();
       if (dryRun) {
@@ -1112,7 +1112,7 @@ function VenezuelaPanel() {
     const res = await fetch("/api/mailer/fire", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ target: "venezuela", dryRun }),
+      body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "venezuela", dryRun }),
     });
     const data = await res.json();
     if (dryRun) {
