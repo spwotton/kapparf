@@ -2,19 +2,18 @@ import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
 
+const HOLDING_PAGE = `<!DOCTYPE html><html><head><title>KAPPA — Starting</title>` +
+  `<meta http-equiv="refresh" content="5"></head>` +
+  `<body style="font-family:monospace;padding:2rem;background:#0a0a0a;color:#ccc">` +
+  `<h2 style="color:#fff">KAPPA is starting up</h2>` +
+  `<p>Client assets are building. This page will refresh automatically every 5 seconds.</p>` +
+  `</body></html>`;
+
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "public");
+
   if (!fs.existsSync(distPath)) {
-    console.warn(`[static] dist/public not found — serving API-only mode until client build completes`);
-    app.use("/{*path}", (_req, res) => {
-      res.status(503).send(
-        `<!DOCTYPE html><html><head><title>KAPPA — Starting</title>` +
-        `<meta http-equiv="refresh" content="10"></head><body style="font-family:monospace;padding:2rem">` +
-        `<h2>KAPPA is starting up</h2><p>Client assets are building. This page will refresh automatically.</p>` +
-        `</body></html>`
-      );
-    });
-    return;
+    console.warn(`[static] dist/public not found at startup — will serve holding page until assets are ready`);
   }
 
   // Serve attached_assets directly so large files work even when Vite skips copying them
@@ -60,6 +59,7 @@ export function serveStatic(app: Express) {
     }));
   }
 
+  // Static file serving — Express will skip this middleware if distPath doesn't exist yet
   app.use(express.static(distPath, {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".html")) {
@@ -70,10 +70,16 @@ export function serveStatic(app: Express) {
     },
   }));
 
+  // SPA catch-all — checks dynamically on every request so the server never
+  // gets permanently stuck in 503 mode if dist/public wasn't ready at startup.
   app.use("/{*path}", (_req, res) => {
+    const indexPath = path.resolve(distPath, "index.html");
+    if (!fs.existsSync(indexPath)) {
+      return res.status(503).send(HOLDING_PAGE);
+    }
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     res.setHeader("Pragma", "no-cache");
     res.setHeader("Expires", "0");
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(indexPath);
   });
 }
