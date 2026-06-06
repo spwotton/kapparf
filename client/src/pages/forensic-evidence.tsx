@@ -442,23 +442,12 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
 
 ── ESPECULATIVOS (a solicitud del denunciante) ────────
 
-18. DANIEL WAGNER — IG: danwaysouth
+18. DAN W. — IG: danwaysouth
     Conocido del denunciante de Alcohólicos Anónimos.
     Reside en Vista Las Palmas, Jacó (piso estimado 7–8).
-    Primer "like" en publicaciones de alevida89.
-    Viajes: Dubái, Cannes, Barcelona, Berlín (sep–oct 2024).
-    Likeado por: dustinharrington92.
-
-19. ALE VIDA — IG: alevida89
-    Likeada por danwaysouth. Posible pareja de Melissa López Sánchez.
-
-20. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
-    Vista en persona oct 2025. Presente en apartamento de Leo el día
-    del retiro. Posible testigo. Participación activa incierta.
-
-21. DUSTIN HARRINGTON — IG: dustinharrington92
-    Aparece likeando múltiples publicaciones de danwaysouth.
-    Sin información adicional disponible.
+    Viajes frecuentes: Dubái, Cannes, Barcelona, Berlín (2024).
+    Incluido a solicitud del denunciante. OIJ a verificar
+    independientemente antes de cualquier acción.
 
 ══════════════════════════════════════════════════════
 IV. UBICACIONES A INSPECCIONAR (¿DÓNDE?)
