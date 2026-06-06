@@ -1,0 +1,31 @@
+7 months. 9 documented events. 3 distinct attack modes. 1 location.
+
+Crocs Hotel, Jacó, Costa Rica.
+
+My iPhone 14 Pro RAW sensor is showing something that shouldn't be possible.
+
+In a 48MP DNG taken at night:
+→ Red channel: 3.24% signal ✓
+→ Green channel: 3.02% signal ✓  
+→ Blue channel: 0.000% signal. Max pixel value = 0. Across 3 million sub-pixels. ✗
+
+A CMOS sensor always produces thermal noise even in complete darkness. 
+Zero mean with zero maximum across every single blue pixel is not darkness.
+That is selective spectral suppression of the 430-490nm wavelength range.
+
+The video footage shows the same pattern across 8 clips spanning October 2025 to June 2026:
+
+Floor-lock attacks: 93.6% of pixels forced to absolute zero
+Ceiling-lock attacks: 88% of pixels saturated in 33 milliseconds
+12.5 continuous minutes of electromagnetic interference — every single frame
+
+I've also documented people positioned behind panels in front of windows that have the visual signature of RF camouflage shielding material.
+
+This has been formally reported to the OIJ — Costa Rica's Judicial Investigation Agency.
+Hotline: 800-8000-645
+
+All evidence is forensically documented, SHA-256 hashed, and timestamped.
+
+If you've experienced anything similar in Costa Rica, or know what technology produces selective single-channel sensor suppression — I want to hear from you.
+
+#CostaRica #Jaco #ElectromagneticHarrassment #SIGINT #ForensicEvidence #iPhone14Pro #RAWPhotography #DigitalForensics #OIJ #HumanRights #TIJ #DirectedEnergy #SensorSuppression #KAPPA

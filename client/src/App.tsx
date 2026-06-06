@@ -85,6 +85,7 @@ import ArticleJacoConvergencePage from "@/pages/article-jaco-convergence";
 import FollowTheMoneyPage from "@/pages/follow-the-money";
 import ZersetzungPage from "@/pages/zersetzung";
 import QuasarHydraPage from "@/pages/quasar-hydra";
+import ForensicEvidencePage from "@/pages/forensic-evidence";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -160,6 +161,7 @@ function KappaRouter() {
       <Route path="/follow-the-money" component={FollowTheMoneyPage} />
       <Route path="/zersetzung" component={ZersetzungPage} />
       <Route path="/quasar-hydra" component={QuasarHydraPage} />
+      <Route path="/forensic-evidence" component={ForensicEvidencePage} />
       <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
     </Switch>

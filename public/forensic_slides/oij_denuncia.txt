@@ -1,0 +1,118 @@
+ORGANISMO DE INVESTIGACIÓN JUDICIAL (OIJ)
+Departamento de Criminalística / Unidad de Delitos Informáticos y Tecnológicos
+San José, Costa Rica
+
+Fecha: 6 de junio de 2026
+
+DENUNCIA FORMAL — ACOSO ELECTROMAGNÉTICO, VIGILANCIA ILEGAL Y 
+INTERFERENCIA DELIBERADA DE DISPOSITIVOS ELECTRÓNICOS
+
+Estimados señores del OIJ:
+
+Por medio de la presente, yo, Sam Wotton, ciudadano extranjero con residencia 
+temporal en Costa Rica, interpongo denuncia formal por hechos que constituyen 
+presunta interferencia electromagnética intencional, acoso sistemático y vigilancia 
+ilegal, cometidos en mi contra durante los meses de octubre de 2025 a junio de 2026, 
+mientras me hospedé en el Crocs Hotel, Jacó, Puntarenas, Costa Rica.
+
+────────────────────────────────────────────
+I. HECHOS DENUNCIADOS
+────────────────────────────────────────────
+
+Durante siete meses consecutivos documenté nueve (9) eventos de interferencia 
+deliberada sobre los sensores de mis dispositivos de grabación (iPhone 14 Pro y 
+cámaras ProRes), todos ocurridos en o cerca del Crocs Hotel. El análisis forense 
+cuantitativo —realizado con la plataforma KAPPA SIGINT— revela tres modalidades 
+de ataque distintas y técnicamente sofisticadas:
+
+1. SUPRESIÓN DE PISO (Floor-Lock):
+   - Múltiples eventos entre octubre de 2025 y junio de 2026.
+   - En el evento de mayor intensidad (octubre 2025): 93.6% de todos los píxeles 
+     del sensor bloqueados en valor absoluto CERO durante 4.2 minutos.
+   - El 6 de junio de 2026 a las 00:54 UTC: 71.4% de píxeles en cero durante 10 
+     segundos continuos.
+   - Físicamente imposible bajo condiciones normales de operación de sensor CMOS.
+
+2. SATURACIÓN DE TECHO (Ceiling-Lock):
+   - 5 de junio de 2026, 04:03 UTC: 88% de píxeles saturados al máximo.
+   - El dispositivo detectó la grabación y cambió de estado en 33 milisegundos — 
+     tiempo de respuesta consistente con activación de sistema activo.
+   - Puntuación de desenfoque (blur): 6.22 en escala normalizada (normal: <3.0).
+
+3. SUPRESIÓN ESPECTRAL SELECTIVA DEL CANAL AZUL:
+   - 5 de junio de 2026, 21:55 hora local: Cuatro (4) fotografías RAW de 48 
+     megapíxeles (DNG, iPhone 14 Pro) muestran el canal azul de la matriz Bayer 
+     completamente a CERO.
+   - R (rojo): media 3.24% — normal. G1/G2 (verde): ~3.02% — normal.
+   - B (azul): media 0.000% — máximo pixel = 0 en los 3 millones de sub-píxeles azules.
+   - Un sensor CMOS siempre produce valores no-nulos por ruido térmico y electrónico, 
+     incluso en oscuridad total. El valor máximo = 0 en todos los píxeles azules es 
+     físicamente imposible sin supresión activa y selectiva en la longitud de onda 
+     430-490 nm (visible azul).
+
+4. INTERFERENCIA SOSTENIDA DE CAMPO AMPLIO:
+   - 25 de octubre de 2025: 12.5 minutos continuos con blur = 6.1-7.4 en cada fotograma.
+   - Sin recuperación, sin interrupción. Fuente posiblemente aérea o en posición 
+     elevada fija.
+
+────────────────────────────────────────────
+II. OBSERVACIONES ADICIONALES EN LA ESCENA
+────────────────────────────────────────────
+
+He observado la presencia de personas en habitaciones del Crocs Hotel con paneles 
+ubicados frente a ventanas que presentan características visuales consistentes con 
+materiales de camuflaje de radiofrecuencia (RF). Estas personas se posicionan detrás 
+de dichos paneles, lo que sugiere la operación de equipos activos de interferencia 
+electromagnética desde las instalaciones del hotel.
+
+────────────────────────────────────────────
+III. EVIDENCIA FORENSE DISPONIBLE
+────────────────────────────────────────────
+
+Toda la evidencia ha sido analizada, hasheada (SHA-256) y documentada en la 
+plataforma KAPPA Evidence Platform:
+
+  • 9 clips de video (formatos ProRes HQ y H.264, iOS)
+  • 4 fotografías RAW DNG de 48MP con metadatos EXIF intactos
+  • Datos JSON de análisis por fotograma (blur, YAVG, ZERO%, SAT%)
+  • Visualizaciones forenses de canales Bayer individuales
+  • Videos comparativos originales vs. amplificación forense (gamma 3.0)
+  • Registros de red (PCAP): spike de tráfico 06:30, sondas HiPerConTracer, 
+    enrutamiento ePDG Liberty, telemetría Samsung DTIgnite, rastreo Facebook Netseer
+  • Análisis ELF: frecuencia anómala de 50 Hz vs. red eléctrica CR de 60 Hz
+
+────────────────────────────────────────────
+IV. SOLICITUD
+────────────────────────────────────────────
+
+Solicito respetuosamente que el OIJ:
+
+1. Inicie una investigación formal sobre los hechos descritos.
+2. Asigne personal técnico especializado en delitos electrónicos y electromagnéticos.
+3. Realice inspección técnica en el Crocs Hotel, Jacó, Puntarenas.
+4. Preserve la evidencia digital bajo cadena de custodia.
+5. Coordine con SUTEL (Superintendencia de Telecomunicaciones) para evaluación 
+   del espectro radioeléctrico en la ubicación indicada.
+
+────────────────────────────────────────────
+V. DATOS DE CONTACTO
+────────────────────────────────────────────
+
+Denunciante: Sam Wotton
+Plataforma de evidencia: KAPPA SIGINT (RF Observatory Fusion)
+Teléfono OIJ: 800-8000-645
+Correo OIJ: informacion@poder-judicial.go.cr
+
+Atentamente,
+
+Sam Wotton
+Jacó, Puntarenas, Costa Rica
+6 de junio de 2026
+
+────────────────────────────────────────────
+ADDENDUM — 10th EVENT FILED THIS DATE
+────────────────────────────────────────────
+Jun 6 2026 04:05 UTC — NEW CLIP (ProRes, 85MB, 3.0 seconds):
+YAVG: 6.1/255 (2.4% brightness)  ZERO%: 46.8%  SAT%: 0.0%  BLUR: 75.0
+B-channel: 2.29% (partially present but YAVG consistent with Jan 7 luminance suppression)
+Pattern: 90 frames — zero variance across entire 3-second clip, consistent with active continuous suppression.

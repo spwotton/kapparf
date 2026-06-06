@@ -16,6 +16,8 @@ pw-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-he
 public/forensic_slides/kappa_master_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text
 public/forensic_slides/kappa_jan7_SBS_v2.mp4 filter=lfs diff=lfs merge=lfs -text
 public/forensic_slides/kappa_jun2_SBS_v2.mp4 filter=lfs diff=lfs merge=lfs -text
+public/forensic_slides/kappa_jan7_v3.mp4 filter=lfs diff=lfs merge=lfs -text
+public/forensic_slides/kappa_jun2_v3.mp4 filter=lfs diff=lfs merge=lfs -text
 /attached_assets/preface_e_1772401374239.zip filter=lfs diff=lfs merge=lfs -text
 /attached_assets/satellite_window_sweep_2026-03-06_highcov_2min_-_Copy_1772905767259.json filter=lfs diff=lfs merge=lfs -text
 /attached_assets/satellite_window_sweep_2026-03-06_highcov_2min_1772905767259.json filter=lfs diff=lfs merge=lfs -text
@@ -180,3 +182,4 @@ public/forensic_slides/kappa_jun2_SBS_v2.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_may17_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_jan7_SBS.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_jun2_SBS.mp4 filter=lfs diff=lfs merge=lfs -text
+/public/forensic_slides/kappa_jun6_new5_sbs.mp4 filter=lfs diff=lfs merge=lfs -text
