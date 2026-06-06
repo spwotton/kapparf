@@ -449,6 +449,16 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
     Incluido a solicitud del denunciante. OIJ a verificar
     independientemente antes de cualquier acción.
 
+19. "FROG" — identidad reservada, iniciales M.S.
+    Presente físicamente en el apartamento de Leo,
+    octubre 2025, día del retiro. Posible testigo.
+    Participación activa incierta.
+
+20. "TOAD" — identidad reservada, iniciales A.V.
+    Presente físicamente en el apartamento de Leo,
+    octubre 2025, día del retiro. Posible testigo.
+    Participación activa incierta.
+
 ══════════════════════════════════════════════════════
 IV. UBICACIONES A INSPECCIONAR (¿DÓNDE?)
 ══════════════════════════════════════════════════════
