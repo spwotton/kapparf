@@ -249,8 +249,11 @@ Yo, Sam Wotton, ciudadano extranjero con residencia temporal en Costa Rica,
 interpongo denuncia formal por hechos ocurridos entre diciembre de 2024 y
 junio de 2026 en Jacó, Puntarenas, Costa Rica.
 
+Evidencia digital completa:
+https://e3c83b39-23b6-4d00-8bcd-067e19790109-00-q2ogrez5zpc7.spock.replit.dev/forensic-evidence
+
 ══════════════════════════════════════════════════════
-I. RESUMEN DE HECHOS
+I. RESUMEN DE HECHOS (¿QUÉ?)
 ══════════════════════════════════════════════════════
 
 Campaña de acoso sistemático de 18+ meses que incluye interferencia
@@ -259,162 +262,317 @@ perpetradores se desplazan junto al denunciante entre distintas
 ubicaciones. Equipos de RF / acústica dirigida operados desde
 propiedades cercanas con malla de camuflaje militar. Daño psicológico
 intencional mediante contenido auditivo dirigido (anclaje de trauma
-repetitivo — técnica de hostigamiento documentada).
+repetitivo — técnica documentada). Red de propiedades coordinada con
+acceso compartido a infraestructura de red (misma contraseña WiFi en
+todas las propiedades del gestor).
 
 ══════════════════════════════════════════════════════
 II. DELITOS
 ══════════════════════════════════════════════════════
 
-  Art. 214 CP     — Extorsión ($2,500 exigidos desde dic 2024)
-  Art. 217 CP     — Fraude con tarjetas de crédito ($80,000+)
-  Art. 123 CP     — Lesiones graves (estrangulamiento, oct 2025)
-  Art. 22 L.8589  — Hostigamiento y acoso sistemático
-  Ley 7593 SUTEL  — Interferencia radioeléctrica ilegal
-  Art. 274 CP     — Asociación ilícita (operación multi-persona coordinada)
+  Art. 214 CP      — Extorsión ($2,500 exigidos desde dic 2024)
+  Art. 217 CP      — Fraude con tarjetas de crédito ($80,000+)
+  Art. 123 CP      — Lesiones graves (estrangulamiento, oct 2025)
+  Art. 22 L.8589   — Hostigamiento y acoso sistemático
+  Ley 7593 SUTEL   — Interferencia radioeléctrica ilegal
+  Art. 274 CP      — Asociación ilícita (operación multi-persona)
+  Art. 229 bis CP  — Acceso ilegal a sistemas informáticos (routers)
 
 ══════════════════════════════════════════════════════
-III. PERSONAS A INVESTIGAR
+III. PERSONAS A INVESTIGAR (¿QUIÉN?)
 ══════════════════════════════════════════════════════
 
 ── CONFIRMADAS / ALTA CONFIANZA ──────────────────────
 
-1. DIANA SOTO — Jaco Vacations, Jacó
+1. DIANA K. RYAN SOTO — Jaco Vacations, Jacó
+   Tel: +506 8922 4405
    Nodo de origen. Extorsión $2,500 desde 28 dic 2024.
    Al regreso del denunciante (abr 2025): techo bajado ~90 cm,
    sistema Vison con sensores PIR, emisores paramétricos desde
    garaje, pelota de 3.6m como obstrucción visual.
-   Es propietaria de la casa directamente al frente de su propiedad.
+   Propietaria de la casa directamente al frente de su propiedad.
    Conectada a TODAS las propiedades en la cadena de ubicaciones.
    INSPECCIONAR: garaje, casa al frente, sensores PIR instalados.
 
 2. GENESIS DANIELA PERALTA MÁRQUEZ — IG: gemperalta._
-   Expareja del denunciante. Vivió en Jaco Vacations oct–dic 2024.
-   Ha afirmado directamente ser responsable de la operación (100+
-   veces en un solo día). Sospecha de fraude de tarjetas: $80,000+.
-   Relación paralela sospechada con Pablo Mora (IG: pastibmx).
-   Confirmó haber transportado a Junior Araya al apartamento del
-   amigo Leo el día del intento de emboscada (14 oct 2025).
-   Publicó pila de efectivo y foto del gato compartido tras separación.
+   Tel CR:  +506 8977 6373 (registrado a Carlos Chavez — no a su
+            nombre; posible número prestado o burner)
+   Tel VE:  +58 424-4743001 (registrado a "Dr Juguete" — nombre
+            sospechoso; uso incierto, posiblemente una sola
+            videollamada confirmada con ese número)
+   UBICACIÓN ACTUAL: Buenos Aires, Argentina. Historia de Instagram
+   publicada aprox. 3 semanas antes de ser bloqueada. Mientras
+   estuvo fuera publicó foto de la última casa compartida con el
+   denunciante ("La Foor", Jacó). Confirmada también en
+   Venezuela/Colombia via videollamada (mostró barrio familiar).
+   Expareja. Vivió en Jaco Vacations oct–dic 2024.
+   Afirmó directamente ser responsable de la operación (100+ veces
+   en un solo día). Sospecha fraude tarjetas: $80,000+.
+   Relación paralela con Pablo Mora (IG: pastibmx) durante la
+   relación — lo describía falsamente como entrenador de gimnasio.
+   Confirmó haber transportado a Junior Araya al apartamento de Leo
+   el día del intento de emboscada (14 oct 2025).
 
-3. MATTHEW HANLON — Riverwalk, Jacó
-   POSIBLE COORDINADOR / "HANDLER" DE LA OPERACIÓN.
+3. MATTHEW HANLON — Riverwalk unidades 5–6, bajo El Miro, Jacó
+   Tel: +506 6474 8840
+   POSIBLE COORDINADOR / HANDLER DE LA OPERACIÓN.
    IDENTIFICADO FOTOGRÁFICAMENTE. Operativo de largo plazo.
-   Residente en Riverwalk (debajo de El Miro, prop. Todd Johnson,
-   administrado por Greenwald). Su compañero de cuarto (cabello rojo)
-   cometió el estrangulamiento el 14 oct 2025. Riverwalk identificado
-   como sitio de operación de equipos de sonar / acústica dirigida.
-   Su esposa / pareja aparece en su foto de perfil de Instagram
-   (imagen de pareja). Nombre desconocido — identificar mediante
-   registros de Riverwalk / padrón electoral.
+   Unidades 5–6 (últimas a la izquierda bajo El Miro, prop. Todd
+   Johnson, administrado por José Obando / Greenwald).
+   Su compañero de cuarto (cabello rojo) cometió el estrangulamiento
+   el 14 oct 2025. Riverwalk identificado como sitio de operación
+   de equipos de sonar / acústica dirigida.
+   Esposa/pareja aparece en foto de perfil IG — nombre desconocido.
+   Identificar mediante registros de Riverwalk / padrón electoral.
 
 4. ESPOSA / PAREJA DE MATTHEW HANLON — nombre desconocido
    Aparece en foto de perfil de Instagram de Hanlon.
-   Identificar nombre y rol mediante registros de residencia.
+   Se trasladó con Hanlon frente al denunciante en Crocs Hotel.
+   Identificar mediante registros de residencia de Riverwalk.
 
 5. HOMBRE DE CABELLO ROJO — nombre desconocido
-   Perpetrador del estrangulamiento, 14 oct 2025. Compañero de cuarto
-   de Matthew Hanlon en Riverwalk. Lesiones documentadas.
+   Perpetrador del estrangulamiento, 14 oct 2025.
+   Compañero de cuarto de Hanlon en Riverwalk unidades 5–6.
+   Lesiones documentadas fotográficamente (arañazos, moretones).
    IDENTIFICAR mediante registros de residentes de Riverwalk.
 
 6. JUNIOR ARAYA — IG: junior_araya (#bmx Jaco CR)
-   Presente en apartamento del amigo Leo, 14 oct 2025.
+   Presente en apartamento de Leo, 14 oct 2025.
    Utilizado para atraer al denunciante a la calle para agredirlo.
-   Genesis Peralta confirmó haberlo transportado a esa ubicación.
-   Asociado de Pablo Mora (BMX).
+   Genesis Peralta confirmó haberlo transportado ese día.
+   Asociado de Pablo Mora (BMX, Tournón).
 
 ── INDIRECTOS / PERIFÉRICOS ──────────────────────────
 
-7. PABLO MORA — IG: pastibmx (BMX profesional, Tournón/El Garza)
-   Sospechado como pareja paralela de Genesis Peralta.
-   Genesis lo visitaba describiendo falsamente su ocupación.
-   Asociado de Junior Araya. No conoce al denunciante directamente.
+7. JOSÉ ANDRÉS OBANDO — administrador propiedades Greenwald
+   Tel: +506 6004 0300
+   OPERATIVAMENTE MÁS SOSPECHOSO QUE EL PROPIETARIO.
+   Administrador de campo de la red de propiedades de Greenwald.
+   INCIDENTE CLAVE — CONTROL DE RED (Riverwalk):
+     El denunciante actualizó el firmware del router. Minutos
+     después Todd Johnson asomó a la ventana mirándolo. Poco
+     después, José texteó diciendo que un técnico de Liberty
+     vendría a cambiar el router ese domingo. El técnico llegó
+     y cambió el router. Semanas más tarde el mismo joven fue
+     visto trabajando en la piscina del complejo — confirma que
+     el cambio fue pretexto para restaurar firmware vulnerable.
+   TODAS las propiedades de Greenwald: contraseña WiFi compartida
+   "rent Costa Rica home" (nombre de la empresa gestora).
 
-8. MARJORIE ALFARO (posible apellido de casada: Jiménez)
-   Asociada de la red. Posible vínculo con Jorge Jiménez (cuñada).
-   Investigar conexión familiar.
+8. TODD JOHNSON — propietario Riverwalk, sector tecnológico/IA
+   Propietario de Riverwalk unidades 5–6. Miró por la ventana al
+   denunciante minutos después de que éste actualizara el firmware.
+   Asociado al sector de tecnología / inteligencia artificial.
+   Investigar conocimiento de actividades en su propiedad.
 
-9. JAIRO ALFARO
-   Operativo de campo, Jacó. Asociado directo de Genesis Peralta.
+9. MIKE GREENWALD — Jaco Realty
+   Tel: +506 8877 5817
+   Propietario de Riverwalk y Hermosa Palms (donde reside Lipman).
+   Contraseña WiFi compartida en todas sus propiedades:
+   "rent Costa Rica home".
+   NOTA: el denunciante considera que José Obando tiene mayor
+   implicación operacional directa. Se reportó por tercero que
+   Greenwald tuvo reuniones con administración Biden/CIA (4 años).
+   OIJ a evaluar independientemente.
 
-10. TODD JOHNSON — propietario de Riverwalk
-    Propietario del complejo donde residen Hanlon y el agresor.
-    Investigar conocimiento de actividades en su propiedad.
+10. PABLO MORA — IG: pastibmx (BMX, Tournón / El Garza)
+    Pareja paralela sospechada de Genesis Peralta durante la relación.
+    No conoce al denunciante directamente. Asociado de Junior Araya.
 
-11. GREENWALD — administrador de Riverwalk
-    Administrador del complejo. Puede tener registros de residentes
-    e incidentes relevantes para la investigación.
+11. MARJORIE ALFARO (posible apellido de casada: Jiménez)
+    Asociada de la red. Posible vínculo familiar con Jorge Jiménez.
 
-12. MICHAEL LIPMAN + DANIELA (esposa) — Breakwater Point, Jacó
-    Propietarios del condo donde residió el denunciante dic 2024–abr
-    2025. Periodo de escalada extrema del acoso (ene 2025).
-    Posteriormente se trasladaron a Hermosa Palms (prop. Greenfield).
+12. JAIRO ALFARO
+    Operativo de campo, Jacó. Asociado directo de Genesis Peralta.
 
-13. MICHAEL GREENFIELD — Hermosa Palms, Jacó
-    Propietario de Hermosa Palms. Recibió a los Lipman en su
-    propiedad personal. Incluido por cadena de propiedad.
+13. MICHAEL LIPMAN + DANIELA (esposa) — Breakwater Point, Jacó
+    Propietarios del condo donde residió el denunciante dic 2024–
+    abr 2025. Periodo de escalada extrema (ene 2025).
+    Posteriormente en Hermosa Palms (prop. Greenwald).
+
+14. MICHAEL GREENFIELD — Hermosa Palms, Jacó
+    Propietario. Recibió a los Lipman. Cadena de propiedad.
+
+15. DAN [APELLIDO DESCONOCIDO] — reside en La Flor, Jacó
+    RESIDENCIA: La Flor, unidades 23–24–25 (costado trasero),
+    en línea visual directa con la ubicación actual del denunciante.
+    MALLA DE CAMUFLAJE RF FOTOGRAFIADA EN EL TECHO de esas unidades.
+    PROPIEDAD ADICIONAL: Villareal — propiedad al otro lado de la
+    calle frente a La Flor; Dan la arrienda vía Airbnb.
+    Origen: San Diego, California, EE.UU.
+    Padre: propietario de casa en Winter Park, Florida.
+    Residente en Costa Rica desde aprox. 2006.
+    ANTECEDENTE / MÓVIL DOCUMENTADO:
+      El denunciante alquiló Villareal vía Airbnb. Las unidades de
+      aire acondicionado jamás habían sido limpiadas — capa de moho
+      negro de ~5 cm. El denunciante contrajo alergia/problema
+      respiratorio. Al notificar a Dan, éste reaccionó con enojo
+      desproporcionado por haber tocado sus máquinas (posible
+      modificación IoT instalada en los equipos — no quería que
+      el denunciante viera el interior). El denunciante solicitó
+      reembolso de $600 vía Airbnb — disputa documentada en cuenta
+      Airbnb del denunciante. Dan eventualmente reembolsó.
+      VENDETTA DOCUMENTADA desde este evento.
+    PRIORIDAD: línea visual directa + malla RF = inspección urgente.
+    Identificar apellido vía Registro Nacional: "Villareal", Jacó.
+
+16. BRIAN [APELLIDO DESCONOCIDO] — Bungalows en Hermosa, Jacó
+    Propietario de los Bungalows en Hermosa Beach, Jacó.
+    Miembro de Alcohólicos Anónimos (AA) — conocido del denunciante.
+    El denunciante se hospedó allí tras el episodio de Villareal.
+    Nota: es la misma semana en que el denunciante conoció a
+    Genesis Peralta; Peralta se mudó con él en esa propiedad
+    una semana después. Conexión AA — misma red social que
+    Daniel Wagner y otros actores de la cadena.
+    Sin evidencia directa de implicación activa. Incluido por
+    patrón de conexiones AA en la cadena de propiedades.
+
+17. LINDSAY / MICHELLE / BOB [APELLIDOS DESCONOCIDOS]
+    Oficiales de la Policía de Toronto (Toronto Police Service),
+    Canadá. Propietarios de la unidad #14 en La Flor, Jacó
+    (esquina entrada del edificio). Presencia aprox. 2 meses/año.
+    El denunciante fue informado directamente de su identidad.
+    CONEXIÓN INTERPOL: mencionaron acuerdo multi-jurisdiccional
+    entre Toronto y organismos internacionales (posiblemente Interpol).
+    Relevancia: oficiales de policía extranjeros propietarios en el
+    mismo edificio donde se documentó acoso activo; acuerdo
+    internacional mencionado en contexto del hostigamiento.
+    OIJ a verificar vía canales de cooperación policial internacional.
+    Identificar apellidos: registro de propietarios La Flor, unidad 14.
 
 ── ESPECULATIVOS (a solicitud del denunciante) ────────
 
-14. DANIEL WAGNER — IG: danwaysouth
+18. DANIEL WAGNER — IG: danwaysouth
     Conocido del denunciante de Alcohólicos Anónimos.
-    Reside en Vista Las Palmas, Jacó (piso estimado 7–8 por
-    análisis visual de fotografías de su perfil de Instagram).
-    Primer "like" documentado en publicaciones de alevida89 (IG
-    vinculada a la red). Viajes recientes: Dubái, Cannes (Hotel
-    Carlton), Barcelona, Berlín (sep–oct 2024).
-    Likeado por: dustinharrington92 en múltiples publicaciones.
+    Reside en Vista Las Palmas, Jacó (piso estimado 7–8).
+    Primer "like" en publicaciones de alevida89.
+    Viajes: Dubái, Cannes, Barcelona, Berlín (sep–oct 2024).
+    Likeado por: dustinharrington92.
 
-15. ALE VIDA — IG: alevida89
+19. ALE VIDA — IG: alevida89
     Likeada por danwaysouth. Posible pareja de Melissa López Sánchez.
-    Tatuaje en muslo exterior visible en fotos de Instagram.
 
-16. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
+20. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
     Vista en persona oct 2025. Presente en apartamento de Leo el día
-    del retiro del denunciante. Nombre mencionado por operativos.
-    NOTA: participación activa incierta — posible testigo.
+    del retiro. Posible testigo. Participación activa incierta.
 
-17. DUSTIN HARRINGTON — IG: dustinharrington92
-    Aparece como "like" en múltiples publicaciones de danwaysouth
-    (Dubái, Cannes). Sin información adicional disponible.
+21. DUSTIN HARRINGTON — IG: dustinharrington92
+    Aparece likeando múltiples publicaciones de danwaysouth.
+    Sin información adicional disponible.
 
 ══════════════════════════════════════════════════════
-IV. PROPIEDADES CLAVE A INSPECCIONAR
+IV. UBICACIONES A INSPECCIONAR (¿DÓNDE?)
 ══════════════════════════════════════════════════════
 
-A. JACO VACATIONS (Diana Soto) — Jacó
-   Garaje (emisores), sensores PIR, techo modificado, casa al frente.
-   Coordinar con SUTEL para análisis de espectro radioeléctrico.
+A. JACO VACATIONS (Diana K. Ryan Soto) — Jacó, Puntarenas
+   Tel: +506 8922 4405
+   Garaje (emisores paramétricos), sensores PIR (sistema Vison),
+   techo modificado (~90 cm más bajo desde abr 2025), casa al frente.
+   Referencia: zona centro Jacó, frente al mar.
+   Coordinar con SUTEL para análisis de espectro en sitio.
 
-B. RIVERWALK (Todd Johnson / Greenwald) — debajo de El Miro, Jacó
-   Escena de agresión. Equipos sonar. Registros de residentes.
-   Identificar: Hanlon, esposa de Hanlon, hombre de cabello rojo.
+B. RIVERWALK — unidades 5–6, últimas a la izquierda bajo El Miro
+   Prop. Todd Johnson / adm. José Obando / Greenwald — Jacó
+   Escena del estrangulamiento (14 oct 2025).
+   Equipos de sonar / acústica dirigida operados desde el lugar.
+   Solicitar: registros de residentes, contratos de arrendamiento,
+   identificar Hanlon + esposa + hombre cabello rojo.
 
-C. QUEBRADA SECA, LOS RÍOS — malla RF fotografiada 25 sep 2025
+C. QUEBRADA SECA, LOS RÍOS
+   Malla de camuflaje militar fotografiada: 25 sep 2025, 22:21 hrs.
+   Material consistente con ocultamiento de equipos RF/EM.
    Coordinar con SUTEL para inspección técnica.
 
-D. VISTA LAS PALMAS, piso 7–8 — posible ubicación Daniel Wagner.
+D. LA FLOR — Jacó, Puntarenas (en línea visual directa)
+   Unidad 9: residencia anterior del denunciante + Genesis Peralta.
+     Terraza en tercer piso con vista al mar. ESCENA ACTIVA —
+     acoso por voz e interferencia actualmente en curso desde esta
+     unidad. Denunciante tiene videos de ese periodo.
+     PRIORIDAD MÁXIMA — inspección inmediata.
+   Unidades 23–24–25 (costado trasero): Dan (San Diego / CR 2006).
+     Malla de camuflaje RF en techo — fotografiada.
+   Unidad 14 (esquina entrada): Lindsay / Michelle / Bob
+     (Toronto Police Service). Presencia aprox. 2 meses/año.
+   Solicitar registro completo propietarios y residentes.
+   Coordinar con SUTEL. Contactar Toronto Police via Interpol.
 
-E. CROCS HOTEL, JACÓ — escena principal interferencia EM.
+E. VILLAREAL — frente a La Flor, Jacó
+   Propiedad de Dan (arrendada vía Airbnb). Anterior al episodio
+   de mold/disputa. Inspeccionar unidades de AC (posible IoT).
+
+F. VISTA LAS PALMAS — Jacó, Puntarenas
+   Piso 7–8: posible ubicación Daniel Wagner (danwaysouth, IG).
+   Solicitar registro de propietarios y residentes.
+
+G. CROCS HOTEL, JACÓ — escena principal interferencia EM
    Revisar registros de huéspedes oct 2025 – jun 2026.
    Buscar huéspedes recurrentes o con acceso técnico al inmueble.
+   Coordinar con SUTEL.
 
 ══════════════════════════════════════════════════════
-V. EVIDENCIA FORENSE DISPONIBLE
+V. DINÁMICA DE LOS HECHOS (¿CÓMO?)
+══════════════════════════════════════════════════════
+
+MODALIDAD: Operación multi-actor coordinada. Perpetradores se
+reubican físicamente junto al denunciante al cambiar de alojamiento.
+Equipos RF y acústica dirigida desde propiedades adyacentes.
+Infraestructura de red comprometida mediante firmware de router
+no actualizado (ver incidente Riverwalk).
+Infraestructura de drones: cobertizo en propiedad adyacente
+documentado procesando video de drones activamente (oct 2025,
+PCAP disponible). Vehículo con luz intermitente documentado en
+video (marca ~11s) — probable hotspot móvil con MAC suplantada
+(estilo Android Auto) para interferir internet y coordinar drones.
+
+HORAS DE INCIDENCIA: Predominantemente nocturno. Eventos
+documentados entre 22:00–04:00 hrs. Malla RF fotografiada a
+las 22:21 hrs el 25 sep 2025.
+
+INCIDENTE CONTROL DE RED — RIVERWALK:
+  • Denunciante actualiza firmware del router en Riverwalk.
+  • Minutos después: Todd Johnson asoma a la ventana mirándolo.
+  • Minutos después: José Obando (+506 6004 0300) texteó al
+    denunciante avisando que Liberty vendría a cambiar el router.
+  • Técnico (joven desconocido) llega y cambia el router.
+  • Semanas más tarde: el mismo joven visto trabajando en la
+    piscina del complejo — confirma que fue pretexto.
+  • TODAS las propiedades Greenwald: misma contraseña WiFi
+    "rent Costa Rica home".
+
+CRONOLOGÍA PRINCIPAL:
+  • 28 dic 2024  — Extorsión $2,500 (Diana Soto, Jaco Vacations)
+  • Ene 2025     — Escalada extrema en Breakwater Point (Lipman)
+  • Abr 2025     — Regreso a Jaco Vacations: techo bajado, PIR y
+                    emisores instalados durante ausencia
+  • 25 sep 2025  — Fotografía malla RF a las 22:21 (Quebrada Seca)
+  • 14 oct 2025  — Emboscada: estrangulamiento (cabello rojo,
+                    Riverwalk); Genesis transportó a Junior Araya
+  • Oct 2025–
+    Jun 2026     — Interferencia EM sostenida en Crocs Hotel
+                    (10 eventos, 240,000+ archivos de red)
+
+══════════════════════════════════════════════════════
+VI. EVIDENCIA FORENSE DISPONIBLE
 ══════════════════════════════════════════════════════
 
   • 10 clips de video iPhone 14 Pro (ProRes HQ + H.264, EXIF intacto)
-  • 4 fotografías RAW DNG 48MP — B = 0.000%, max pixel = 0
+  • 4 fotografías RAW DNG 48MP — canal B = 0.000%, max pixel = 0
   • Fotografías de lesiones físicas (14 oct 2025)
   • Fotografías de malla de camuflaje RF (25 sep 2025, 22:21 hrs)
-  • Análisis forense cuantitativo por fotograma — KAPPA SIGINT
-  • PCAP / registros de red: 240,000+ archivos
+  • Video camión con luz intermitente — marca ~11 segundos.
+    Posible hotspot móvil con MAC address suplantada (Android Auto
+    o similar) usado para interferir internet y coordinar drones.
+  • Video octubre 2025: cobertizo en propiedad adyacente con
+    actividad de procesamiento activo de video de drones.
+  • PCAP de ese periodo disponible para análisis forense.
+  • PCAP / registros de red: 240,000+ archivos totales
   • Análisis ELF: 50 Hz anómalo vs red CR 60 Hz
   • Capturas OSINT de perfiles de redes sociales
   • Identificación fotográfica de Matthew Hanlon
   • Todo hasheado SHA-256 con marca de tiempo
 
 ══════════════════════════════════════════════════════
-VI. SOLICITUDES AL OIJ
+VII. SOLICITUDES AL OIJ
 ══════════════════════════════════════════════════════
 
   1. Investigación formal por crimen organizado
@@ -422,9 +580,12 @@ VI. SOLICITUDES AL OIJ
   3. Inspección técnica de Jaco Vacations (Diana Soto)
   4. Coordinar con SUTEL: Crocs Hotel y Quebrada Seca
   5. Investigar fraude de $80,000+ en tarjetas de crédito
-  6. Revisar registros de residencia en Riverwalk
-  7. Revisar registros de huéspedes en Crocs Hotel
-  8. Preservar evidencia digital bajo cadena de custodia
+  6. Revisar registros de residencia Riverwalk (unidades 5–6)
+  7. Revisar registros de huéspedes Crocs Hotel
+  8. Investigar acceso no autorizado a routers / red (Art. 229 bis)
+  9. Localizar Genesis Peralta (última ubicación: Buenos Aires,
+     Argentina — IG: gemperalta._)
+ 10. Preservar evidencia digital bajo cadena de custodia
 
 OIJ Hotline: 800-8000-645
 informacion@poder-judicial.go.cr
@@ -432,14 +593,15 @@ informacion@poder-judicial.go.cr
 ─────────────────────────────────────────────────────
 AVISO LEGAL
 ─────────────────────────────────────────────────────
-Las personas en la sección "ESPECULATIVOS" (ítems 14–17) y algunas
-en "INDIRECTOS" (10–13) son incluidas únicamente a solicitud del
-denunciante para fines de investigación. El denunciante reconoce
-que su participación activa no ha sido confirmada y pueden ser
-testigos, conocidos periféricos, o personas sin ninguna relación
-con los hechos. El OIJ deberá verificar independientemente el rol
-de cada persona antes de tomar cualquier acción legal.
+Las personas en "ESPECULATIVOS" (18–21) y algunas en "INDIRECTOS"
+(10–17) son incluidas a solicitud del denunciante para investigación.
+El denunciante reconoce que su participación puede no estar
+confirmada. El OIJ debe verificar independientemente antes de
+tomar cualquier acción legal.
 ─────────────────────────────────────────────────────
+
+Evidencia digital completa:
+https://e3c83b39-23b6-4d00-8bcd-067e19790109-00-q2ogrez5zpc7.spock.replit.dev/forensic-evidence
 
 Sam Wotton — Jacó, Puntarenas, Costa Rica — Junio 2026`;
 
