@@ -359,3 +359,39 @@ id = "Fk91rSLpSaziyLcUF7kKd"
 uri = "file://public/forensic_slides/kappa_suppression_FINAL.mp4"
 type = "video"
 title = "KAPPA Suppression Evidence — Floor-Lock Attack (80s)"
+
+[[outputs]]
+id = "k57XkvGYhkLGn_rB1cMMk"
+uri = "file://public/forensic_slides/kappa_master_FINAL.mp4"
+type = "video"
+title = "KAPPA Master Evidence Video — 6 Clips / 7 Months (2:31 with narration)"
+
+[[outputs]]
+id = "PnXUBub-6VAhmAwFaYg-a"
+uri = "file://public/forensic_slides/kappa_apr29_FINAL.mp4"
+type = "video"
+title = "Apr 29 Clip — Floor-Lock 90.6% (16s)"
+
+[[outputs]]
+id = "8dFVn1rB1-3V54uELz0G5"
+uri = "file://public/forensic_slides/kappa_may17_FINAL.mp4"
+type = "video"
+title = "May 17 Clip — Perfect Zero-Lock 68.4% (19s)"
+
+[[outputs]]
+id = "4_tuBnDFXM_XqM71S1Ajh"
+uri = "file://public/forensic_slides/master_summary.jpg"
+type = "image"
+title = "Master Forensic Summary Chart — All 6 Incidents"
+
+[[outputs]]
+id = "gWNWlqmuX8tszIUeqs-wU"
+uri = "file://public/forensic_slides/oct25_timeline.jpg"
+type = "image"
+title = "Oct 25 Timeline — 12.5min Continuous Interference"
+
+[[outputs]]
+id = "yptYIJ6tf6Efs0GKp_1ZE"
+uri = "file://public/forensic_slides/apr29_timeline.jpg"
+type = "image"
+title = "Oct 2025 Timeline — Floor-Lock + Burst Sequence"
