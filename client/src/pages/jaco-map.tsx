@@ -221,10 +221,15 @@ function buildTerrain(scene: THREE.Scene, elevData: number[][] | null) {
     // κ wave-function interference — born rule probability density
     float kappaPhase(vec2 p, float t){
       const float KAPPA=1.273;
+      const float PHI=1.618;   // GOS golden ratio
+      const float DK=0.161393; // GOS Δκ bridge constant
       float w1=sin(p.x*KAPPA*4.0-t*0.28)*cos(p.y*KAPPA*3.0+t*0.19);
       float w2=cos(p.x*2.31+p.y*3.14*KAPPA-t*0.11);
-      // Born rule |ψ|² probability density
-      float psi=w1*0.6+w2*0.4;
+      // φ-harmonic layer — GOS toroidal standing wave (from BSP three-point lighting)
+      float d=length(p*0.08);
+      float w3=sin(d*KAPPA*PHI-t*DK*6.283)*0.5+cos(d*KAPPA-t*0.07)*0.5;
+      // Born rule |ψ|² probability density (three-component interference)
+      float psi=w1*0.45+w2*0.3+w3*0.25;
       return psi*psi; // always positive, like probability
     }
 
@@ -704,7 +709,7 @@ function createScene(
     fb.style.cssText = "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#00ffcc;font-family:monospace;font-size:13px;background:#020a12;";
     fb.innerHTML = `<div style="text-align:center;opacity:.7"><div style="font-size:22px;margin-bottom:10px">◌</div>JACÓ VALLEY 3D MAP<br><span style="font-size:10px;color:#445;line-height:2">${msg ?? "WebGL unavailable in this environment"}<br>Open this page in Chrome or Firefox</span></div>`;
     container.appendChild(fb);
-    return { destroy: () => fb.remove(), resetView: () => {}, zoomIn: () => {}, zoomOut: () => {}, focusTarget: () => {}, updateAircraft: () => {} };
+    return { destroy: () => fb.remove(), resetView: () => {}, zoomIn: () => {}, zoomOut: () => {}, getCanvas: () => undefined as any, focusTarget: () => {}, snapToTrack: () => {}, updateAircraft: () => {} };
   }
 
   // Quick canvas probe — catches both missing WebGL and context-creation failure
@@ -817,6 +822,7 @@ function createScene(
 
   const drone = buildDrone(scene);
   drone.visible = false; // hidden until real OpenSky contact positions it
+  let droneBaseY = 0; // fixed base altitude — hover bob oscillates around this
   const partCount = 600;
   const partGeo = new THREE.BufferGeometry();
   const pPos = new Float32Array(partCount*3), pSpd = new Float32Array(partCount);
@@ -875,8 +881,11 @@ function createScene(
     // droneTarget is set exclusively by the real OpenSky loiter detector below.
     // No simulated patrol. drone.visible is toggled by updateAircraft() only.
     if (drone.visible) {
-      // Hover bob only when a real contact is active
-      drone.position.y += Math.sin(t*2.3)*0.35;
+      // Hover bob oscillates around the fixed base altitude — never accumulates
+      drone.position.y = droneBaseY + Math.sin(t*2.3)*0.35;
+      // GOS breath scale: κ-scaled pulsation at carrier freq (8.392 Hz, scaled to visual)
+      const breathScale = 1.0 + 0.018 * Math.sin(6.28318 * 0.08392 * t);
+      drone.scale.setScalar(breathScale);
     }
 
     // ── Scan beam rotation ────────────────────────────────────────────────────
@@ -915,7 +924,7 @@ function createScene(
       if((obj as any)._isNavLight==="red")((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=t%1.8<0.07?1.0:0.5;
       if((obj as any)._isNavLight==="strobe"){const s=(t%1.2<0.06||((t+0.07)%1.2<0.06));((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=s?1.0:0.0;}
       // Belly PointLight pulses with rotor effort
-      if((obj as any)._isBellyLight)(obj as THREE.PointLight).intensity=1.2+Math.abs(pitch)*4+Math.sin(t*8)*0.15;
+      if((obj as any)._isBellyLight)(obj as THREE.PointLight).intensity=1.2+Math.abs(Math.sin(t*1.4))*0.8+Math.sin(t*8)*0.15;
       // Rotor hubs spin fast — alternate CW/CCW like real quad
       if((obj as any)._rotorIdx!==undefined){const dir=(obj as any)._rotorIdx%2===0?1:-1;obj.rotation.y=t*28*dir;}
       // Update quantum shader uTime uniforms
@@ -930,6 +939,8 @@ function createScene(
     const pa=partGeo.attributes.position.array as Float32Array;
     for(let i=0;i<partCount;i++){pa[i*3+1]+=pSpd[i]*0.6;if(pa[i*3+1]>55){pa[i*3+1]=0;pa[i*3]=(Math.random()-.5)*180;pa[i*3+2]=(Math.random()-.5)*180;}}
     partGeo.attributes.position.needsUpdate=true;
+    // Smooth aircraft position lerp — OpenSky polls every 30s, this makes meshes glide continuously
+    for(const [,m] of acMeshes.entries()){const tgt=(m as any)._tgt;if(tgt){m.position.x+=(tgt[0]-m.position.x)*0.05;m.position.y+=(tgt[1]-m.position.y)*0.05;m.position.z+=(tgt[2]-m.position.z)*0.05;}}
     renderer.render(scene,camera);
   };
   animate();
@@ -951,6 +962,7 @@ function createScene(
     zoomOut:()=>{camDist=Math.min(250,camDist+18);},
     getCanvas:()=>renderer.domElement,
     focusTarget:(idx:number)=>{const t=TARGETS[idx];if(!t)return;const[x,,z]=latLonToScene(t.lat,t.lon,0);camTarget.set(x,8,z);camDist=45;camElev=.45;},
+    snapToTrack:()=>{if(drone.visible){camTarget.set(drone.position.x,drone.position.y,drone.position.z);camDist=35;camElev=0.55;}},
     updateAircraft:(aircraft:LiveAircraft[])=>{
       const seen=new Set<string>();
       const haversineKm=(la1:number,lo1:number,la2:number,lo2:number)=>{
@@ -969,13 +981,17 @@ function createScene(
         const[ax,,az]=latLonToScene(ac.latitude,ac.longitude,0);
         let mesh=acMeshes.get(ac.icao24);
         if(!mesh){mesh=buildAircraftMesh(ac);acMeshes.set(ac.icao24,mesh);scene.add(mesh);}
-        mesh.position.set(ax,acY(ac.baroAltitude??ac.geoAltitude),az);
+        const tY=acY(ac.baroAltitude??ac.geoAltitude);
+        // First-seen: snap immediately; subsequent polls: store target for smooth lerp
+        if(!(mesh as any)._posInit){mesh.position.set(ax,tY,az);(mesh as any)._posInit=true;}
+        (mesh as any)._tgt=[ax,tY,az];
         if(ac.trueTrack!==null)mesh.rotation.y=(ac.trueTrack*Math.PI)/180;
       }
       // Position drone model on closest real contact; hide when none in AOR
       if(closestAc){
         const[dx,,dz]=latLonToScene(closestAc.latitude!,closestAc.longitude!,0);
         const dAlt = acY(closestAc.baroAltitude??closestAc.geoAltitude);
+        droneBaseY = dAlt; // anchor — hover bob oscillates around this, never accumulates
         drone.position.set(dx, dAlt, dz);
         if(closestAc.trueTrack!==null) drone.rotation.y=(closestAc.trueTrack*Math.PI)/180;
         drone.visible=true;
@@ -1036,6 +1052,9 @@ export default function JacoMapPage() {
   const [elevData, setElevData] = useState<number[][]|null>(null);
   const [time, setTime] = useState(new Date());
   const [renderMode, setRenderMode] = useState<"webgpu"|"webgl"|"leaflet"|null>(null);
+
+  // ── Live ADS-B contact currently closest to Jacó center (within 8km) ────────
+  const [liveContact, setLiveContact] = useState<LiveAircraft|null>(null);
 
   // ── Auto-loop detector state ────────────────────────────────────────────────
   const [loopAlert, setLoopAlert] = useState<string|null>(null);
@@ -1310,8 +1329,12 @@ export default function JacoMapPage() {
   },[elevStatus,elevData]);
 
   useEffect(()=>{
-    if(liveAircraft.length===0) return;
+    if(liveAircraft.length===0){ setLiveContact(null); return; }
     sceneRef.current?.updateAircraft(liveAircraft);
+    // Compute nearest real contact to Jacó center for ACTIVE TRACK HUD
+    let nearest:LiveAircraft|null=null; let nearestD=Infinity;
+    liveAircraft.forEach(ac=>{ if(!ac.latitude||!ac.longitude) return; const d=haversineKm(CENTER.lat,CENTER.lon,ac.latitude,ac.longitude); if(d<8&&d<nearestD){nearestD=d;nearest=ac;} });
+    setLiveContact(nearest);
 
     const now = Date.now();
     const hist = acHistory.current;
@@ -2121,6 +2144,25 @@ export default function JacoMapPage() {
           </div>
         </div>
       </div>
+
+      {/* ── ACTIVE TRACK strip — only when a real ADS-B contact is within 8km ── */}
+      {liveContact && (
+        <div className="absolute top-[41px] left-1/2 -translate-x-1/2 z-40 flex items-center gap-2.5 px-3 py-1 bg-black/88 backdrop-blur-md border border-amber-500/35 border-t-0 rounded-b-lg shadow-lg" data-testid="hud-active-track">
+          <div className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse shrink-0"/>
+          <span className="text-[9px] font-mono text-amber-400 uppercase tracking-widest shrink-0">ACTIVE TRACK</span>
+          <span className="text-[10px] font-mono font-bold text-white truncate max-w-20">{liveContact.callsign?.trim()||liveContact.icao24.toUpperCase()}</span>
+          <span className="text-[9px] font-mono text-gray-500 hidden sm:block">ICAO:{liveContact.icao24.toUpperCase()}</span>
+          {liveContact.baroAltitude!=null&&<span className="text-[9px] font-mono text-cyan-400 tabular-nums">{Math.round(liveContact.baroAltitude)}m</span>}
+          {liveContact.velocity!=null&&<span className="text-[9px] font-mono text-blue-400 tabular-nums hidden sm:block">{Math.round(liveContact.velocity*3.6)}km/h</span>}
+          {liveContact.trueTrack!=null&&<span className="text-[9px] font-mono text-gray-500 tabular-nums hidden sm:block">{Math.round(liveContact.trueTrack)}°</span>}
+          <span className="text-[9px] font-mono text-gray-600 truncate max-w-16 hidden md:block">{liveContact.originCountry}</span>
+          <button
+            onClick={()=>sceneRef.current?.snapToTrack()}
+            className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-mono bg-amber-500/15 text-amber-300 hover:bg-amber-500/28 transition-colors shrink-0"
+            data-testid="button-snap-to-track"
+          >⊕ SNAP</button>
+        </div>
+      )}
 
       {/* ════════════════════════════════════════════════════════════
            DESKTOP BLADE UI  (md and up)

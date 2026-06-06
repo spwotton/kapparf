@@ -1,4 +1,5 @@
 - [Replit shell-process lifecycle](replit-shell-lifecycle.md) — detached nohup bg procs get killed when workflows restart; run inline-chunked or as workflows.
 - [Tesseract on waterfalls](tesseract-on-waterfalls.md) — dense spectrogram pixel data makes tesseract spin out; crop UI strip or skip OCR entirely.
 - [KiwiSDR egress from Replit](kiwisdr-egress.md) — public KiwiSDR nodes are unreachable from Replit containers (DNS NXDOMAIN + connect-timeout on :8073).
-- [Ollama local LLM setup](ollama-setup.md) — Ollama + DeepSeek R1 1.5B installed; needs LD_LIBRARY_PATH and specific extraction steps.
+- [Jaco 3D drone animation patterns](jaco-drone-animation.md) — hover bob must use base anchor (droneBaseY), not +=; pitch is not in scope at belly-light traverse; aircraft lerp via _tgt/_posInit pattern.
+- [GOS corpus for Jaco shaders](gos-jaco-shaders.md) — GOS Quantum Quake + QuantumRenderer are primary shader sources; φ-harmonic and κ-breath woven into terrain/drone.
