@@ -183,3 +183,5 @@ public/forensic_slides/kappa_jun2_v3.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_jan7_SBS.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_jun2_SBS.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_jun6_new5_sbs.mp4 filter=lfs diff=lfs merge=lfs -text
+/public/forensic_slides/los_rios_view_oct21.jpg filter=lfs diff=lfs merge=lfs -text
+/public/forensic_slides/poi_pastibmx.png filter=lfs diff=lfs merge=lfs -text

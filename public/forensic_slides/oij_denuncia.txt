@@ -4,115 +4,130 @@ San José, Costa Rica
 
 Fecha: 6 de junio de 2026
 
-DENUNCIA FORMAL — ACOSO ELECTROMAGNÉTICO, VIGILANCIA ILEGAL Y 
-INTERFERENCIA DELIBERADA DE DISPOSITIVOS ELECTRÓNICOS
+DENUNCIA FORMAL — ACOSO SISTEMÁTICO, INTERFERENCIA ELECTROMAGNÉTICA,
+AGRESIÓN FÍSICA, FRAUDE Y EXTORSIÓN
 
 Estimados señores del OIJ:
 
-Por medio de la presente, yo, Sam Wotton, ciudadano extranjero con residencia 
-temporal en Costa Rica, interpongo denuncia formal por hechos que constituyen 
-presunta interferencia electromagnética intencional, acoso sistemático y vigilancia 
-ilegal, cometidos en mi contra durante los meses de octubre de 2025 a junio de 2026, 
-mientras me hospedé en el Crocs Hotel, Jacó, Puntarenas, Costa Rica.
+Por medio de la presente, yo, Sam Wotton, ciudadano extranjero con residencia
+temporal en Costa Rica, interpongo denuncia formal por los siguientes delitos
+cometidos en mi contra entre diciembre de 2024 y junio de 2026, en múltiples
+propiedades en Jacó, Puntarenas, Costa Rica.
 
-────────────────────────────────────────────
-I. HECHOS DENUNCIADOS
-────────────────────────────────────────────
+═══════════════════════════════════════════════
+I. ORIGEN DEL CASO Y CRONOLOGÍA
+═══════════════════════════════════════════════
 
-Durante siete meses consecutivos documenté nueve (9) eventos de interferencia 
-deliberada sobre los sensores de mis dispositivos de grabación (iPhone 14 Pro y 
-cámaras ProRes), todos ocurridos en o cerca del Crocs Hotel. El análisis forense 
-cuantitativo —realizado con la plataforma KAPPA SIGINT— revela tres modalidades 
-de ataque distintas y técnicamente sofisticadas:
+OCT–DIC 2024 — Jaco Vacations (Diana Soto)
+  Residí con mi pareja Genesis Daniela Peralta Márquez en una propiedad
+  administrada por Diana Soto (empresa: Jaco Vacations). Me retiré el 28
+  de diciembre de 2024 sin previo aviso.
 
-1. SUPRESIÓN DE PISO (Floor-Lock):
-   - Múltiples eventos entre octubre de 2025 y junio de 2026.
-   - En el evento de mayor intensidad (octubre 2025): 93.6% de todos los píxeles 
-     del sensor bloqueados en valor absoluto CERO durante 4.2 minutos.
-   - El 6 de junio de 2026 a las 00:54 UTC: 71.4% de píxeles en cero durante 10 
-     segundos continuos.
-   - Físicamente imposible bajo condiciones normales de operación de sensor CMOS.
+DIC 28 2024 — INICIO DE EXTORSIÓN
+  Diana Soto exige $2,500 desde esa fecha. Me niego. La campaña de
+  acoso comienza de inmediato.
 
-2. SATURACIÓN DE TECHO (Ceiling-Lock):
-   - 5 de junio de 2026, 04:03 UTC: 88% de píxeles saturados al máximo.
-   - El dispositivo detectó la grabación y cambió de estado en 33 milisegundos — 
-     tiempo de respuesta consistente con activación de sistema activo.
-   - Puntuación de desenfoque (blur): 6.22 en escala normalizada (normal: <3.0).
+DIC 28 2024 – ABR 2025 — Breakwater Point (Condo de Michael Lipman)
+  El acoso se vuelve extremo en enero de 2025.
 
-3. SUPRESIÓN ESPECTRAL SELECTIVA DEL CANAL AZUL:
-   - 5 de junio de 2026, 21:55 hora local: Cuatro (4) fotografías RAW de 48 
-     megapíxeles (DNG, iPhone 14 Pro) muestran el canal azul de la matriz Bayer 
-     completamente a CERO.
-   - R (rojo): media 3.24% — normal. G1/G2 (verde): ~3.02% — normal.
-   - B (azul): media 0.000% — máximo pixel = 0 en los 3 millones de sub-píxeles azules.
-   - Un sensor CMOS siempre produce valores no-nulos por ruido térmico y electrónico, 
-     incluso en oscuridad total. El valor máximo = 0 en todos los píxeles azules es 
-     físicamente imposible sin supresión activa y selectiva en la longitud de onda 
-     430-490 nm (visible azul).
+ABR 2025 — Regreso a propiedad de Diana Soto (Jaco Vacations)
+  Al regresar, encontré modificaciones físicas en la propiedad:
+  • El techo había sido bajado ~90 cm (3 pies)
+  • Sistema de alarma Vison con sensores PIR instalados
+  • Emisores paramétricos activos desde el garaje constantemente
+  • Se compró una pelota de playa de ~3.6 metros como obstrucción visual
+  • Diana Soto es propietaria de la casa directamente al frente
 
-4. INTERFERENCIA SOSTENIDA DE CAMPO AMPLIO:
-   - 25 de octubre de 2025: 12.5 minutos continuos con blur = 6.1-7.4 en cada fotograma.
-   - Sin recuperación, sin interrupción. Fuente posiblemente aérea o en posición 
-     elevada fija.
+25 SET 2025 — Malla de camuflaje RF fotografiada
+  Quebrada Seca (Los Ríos): malla de camuflaje militar en ventana
+  fotografiada desde terraza de usuario (22:21 hora local).
 
-────────────────────────────────────────────
-II. OBSERVACIONES ADICIONALES EN LA ESCENA
-────────────────────────────────────────────
+14 OCT 2025 — AGRESIÓN FÍSICA (Riverwalk)
+  Hombre de cabello rojo (residente en Riverwalk con Matthew Hanlon)
+  estranguló físicamente al denunciante. Lesiones documentadas
+  fotográficamente. Misma fecha: Junior Araya y asociados intentaron
+  atraer al denunciante fuera del apartamento de su amigo Leo para
+  agredirle en la calle.
 
-He observado la presencia de personas en habitaciones del Crocs Hotel con paneles 
-ubicados frente a ventanas que presentan características visuales consistentes con 
-materiales de camuflaje de radiofrecuencia (RF). Estas personas se posicionan detrás 
-de dichos paneles, lo que sugiere la operación de equipos activos de interferencia 
-electromagnética desde las instalaciones del hotel.
+OCT 2025 – JUN 2026 — Crocs Hotel, Jacó
+  Diez (10) eventos de interferencia electromagnética documentados.
+  Tres modalidades de ataque. Último evento: 6 jun 2026, 04:05 UTC.
 
-────────────────────────────────────────────
-III. EVIDENCIA FORENSE DISPONIBLE
-────────────────────────────────────────────
+═══════════════════════════════════════════════
+II. PERSONAS INVOLUCRADAS
+═══════════════════════════════════════════════
 
-Toda la evidencia ha sido analizada, hasheada (SHA-256) y documentada en la 
-plataforma KAPPA Evidence Platform:
+1. DIANA SOTO — Jaco Vacations
+   Extorsión $2,500. Modificaciones estructurales en propiedad.
+   Propietaria de casa al frente. Conectada a TODAS las propiedades.
 
-  • 9 clips de video (formatos ProRes HQ y H.264, iOS)
-  • 4 fotografías RAW DNG de 48MP con metadatos EXIF intactos
-  • Datos JSON de análisis por fotograma (blur, YAVG, ZERO%, SAT%)
-  • Visualizaciones forenses de canales Bayer individuales
-  • Videos comparativos originales vs. amplificación forense (gamma 3.0)
-  • Registros de red (PCAP): spike de tráfico 06:30, sondas HiPerConTracer, 
-    enrutamiento ePDG Liberty, telemetría Samsung DTIgnite, rastreo Facebook Netseer
-  • Análisis ELF: frecuencia anómala de 50 Hz vs. red eléctrica CR de 60 Hz
+2. GENESIS DANIELA PERALTA MÁRQUEZ — IG: gemperalta._
+   Pareja anterior. Ha afirmado hoy 100+ veces ser la responsable.
+   Sospechosa de fraude con tarjetas de crédito ($80,000+).
 
-────────────────────────────────────────────
-IV. SOLICITUD
-────────────────────────────────────────────
+3. MATTHEW HANLON — Riverwalk, Jacó
+   Operativo de largo plazo. Identificado fotográficamente.
 
-Solicito respetuosamente que el OIJ:
+4. HOMBRE DE CABELLO ROJO (nombre desconocido)
+   Perpetrador de estrangulamiento. Riverwalk. 14 oct 2025.
 
-1. Inicie una investigación formal sobre los hechos descritos.
-2. Asigne personal técnico especializado en delitos electrónicos y electromagnéticos.
-3. Realice inspección técnica en el Crocs Hotel, Jacó, Puntarenas.
-4. Preserve la evidencia digital bajo cadena de custodia.
-5. Coordine con SUTEL (Superintendencia de Telecomunicaciones) para evaluación 
-   del espectro radioeléctrico en la ubicación indicada.
+5. JUNIOR ARAYA — IG: junior_araya (BMX, Jacó CR)
+   Intento de emboscada 14 oct 2025. Amigo de Pablo Mora.
+   Vinculado a Genesis Peralta por confirmación directa de ella.
 
-────────────────────────────────────────────
-V. DATOS DE CONTACTO
-────────────────────────────────────────────
+6. PABLO MORA — IG: pastibmx (BMX rider profesional)
+   Periférico. Posible pareja paralela de Genesis. Tournón/El Garza.
 
-Denunciante: Sam Wotton
-Plataforma de evidencia: KAPPA SIGINT (RF Observatory Fusion)
-Teléfono OIJ: 800-8000-645
-Correo OIJ: informacion@poder-judicial.go.cr
+7. MARJORIE ALFARO (posiblemente Jiménez)
+   Asociada de la red. Posible vínculo con Jorge Jiménez.
 
-Atentamente,
+8. JAIRO ALFARO
+   Operativo de campo en Jacó. Asociado directo de Genesis Peralta.
 
-Sam Wotton
-Jacó, Puntarenas, Costa Rica
-6 de junio de 2026
+9. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
+   Vista en persona oct 2025. Presente en apartamento de Leo
+   el día del retiro. Nivel de participación incierto.
 
-────────────────────────────────────────────
-ADDENDUM — 10th EVENT FILED THIS DATE
-────────────────────────────────────────────
-Jun 6 2026 04:05 UTC — NEW CLIP (ProRes, 85MB, 3.0 seconds):
-YAVG: 6.1/255 (2.4% brightness)  ZERO%: 46.8%  SAT%: 0.0%  BLUR: 75.0
-B-channel: 2.29% (partially present but YAVG consistent with Jan 7 luminance suppression)
-Pattern: 90 frames — zero variance across entire 3-second clip, consistent with active continuous suppression.
+═══════════════════════════════════════════════
+III. PROPIEDADES CLAVE A INSPECCIONAR
+═══════════════════════════════════════════════
+
+1. Jaco Vacations (Diana Soto) — Jacó, Puntarenas
+   Emisores en garaje, techo modificado, PIR, propiedad al frente.
+
+2. Quebrada Seca, Los Ríos — malla de camuflaje RF fotografiada
+
+3. Riverwalk (Todd Johnson / Greenwald) — debajo de El Miro
+   Escena de agresión. Equipos de sonar reportados.
+
+4. Crocs Hotel, Jacó — escena principal interferencia EM
+
+═══════════════════════════════════════════════
+IV. DELITOS DENUNCIADOS
+═══════════════════════════════════════════════
+
+  • Extorsión: $2,500 (Art. 214 Código Penal CR)
+  • Fraude tarjetas de crédito: $80,000+ (Art. 217 CP)
+  • Agresión física / estrangulamiento: 14 oct 2025 (Art. 123 CP)
+  • Interferencia electromagnética ilegal (Ley 7593 SUTEL)
+  • Acoso y hostigamiento sistemático (Art. 22 Ley 8589)
+  • Modificación ilegal de propiedad con fines de vigilancia
+
+═══════════════════════════════════════════════
+V. EVIDENCIA DISPONIBLE
+═══════════════════════════════════════════════
+
+  • 10 clips de video (ProRes HQ y H.264, iPhone 14 Pro)
+  • 4 fotografías RAW DNG 48MP — canal azul = 0.000%
+  • Fotografías de lesiones físicas (14 oct 2025)
+  • Fotografías malla de camuflaje RF (25 sep 2025)
+  • Análisis forense cuantitativo por fotograma (KAPPA platform)
+  • Registros de red PCAP
+  • Análisis ELF: 50 Hz anómalo vs red CR 60 Hz
+  • Capturas OSINT de redes sociales
+  • Todo hasheado SHA-256 con marca de tiempo
+
+OIJ Hotline: 800-8000-645
+informacion@poder-judicial.go.cr
+
+Sam Wotton — Jacó, Puntarenas, Costa Rica — 6 de junio de 2026
