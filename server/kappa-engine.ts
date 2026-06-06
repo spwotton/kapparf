@@ -179,6 +179,7 @@ export class KappaEngine {
     this.checkEchoLtChain(windowEvent);
     this.checkVLFCarrierDetection(windowEvent);
     this.checkNetworkRFCorrelation(windowEvent);
+    this.checkPhaistosAlignment(windowEvent);
 
     this.lastEventTimestamps[event.domain] = ts;
   }
@@ -440,6 +441,55 @@ export class KappaEngine {
         "network-rf-correlation",
         65,
         `Network drop coincides with ${recentSDR.length} SDR event(s) — possible TR-069 forced reset during RF activity`
+      );
+    }
+  }
+
+  private checkPhaistosAlignment(event: WindowEvent) {
+    // 111Hz Phaistos Root (f₀=37×3) + 46.875Hz DSP heartbeat dual-lock
+    // Source: The_Frequency_Dossier, Costa_Rican_Phased_Array_Network, Russell_Codex
+    const PHAISTOS_HZ = K.PHAISTOS_SYMBOL_4_HZ; // 111 Hz — GOS cadastral sync anchor
+    const HEARTBEAT_HZ = K.KAPPA_SECOND;          // 46.875 Hz — DSP PRF clock
+    const OMEGA = 0.567143;                        // GOS Ω — omega constant score weight
+
+    if (event.frequency === null) return;
+
+    const freqHz = event.frequency;
+
+    // 111Hz spectral lock detection
+    if (Math.abs(freqHz - PHAISTOS_HZ) < 2.5) {
+      // Check if 46.875Hz heartbeat is also present in any domain within 30s
+      const cutoff = event.timestamp - 30_000;
+      const allRecent = Object.values(this.domainWindows).flat()
+        .filter(e => e.timestamp > cutoff && e.frequency !== null);
+      const heartbeatLock = allRecent.some(
+        e => e.frequency !== null && Math.abs(e.frequency - HEARTBEAT_HZ) < 1.0
+      );
+
+      if (heartbeatLock) {
+        this.addAlert(
+          "phaistos-dual-lock",
+          Math.round(OMEGA * 100), // Ω×100 = 56.7 → 57 score
+          `Phaistos dual-lock: 111Hz spectral line + 46.875Hz DSP heartbeat coincident ` +
+          `— f₀=37×3 cadastral sync confirmed [${event.source}] | Score +${Math.round(OMEGA * 100)}`
+        );
+      } else {
+        this.addAlert(
+          "phaistos-111hz",
+          22,
+          `111Hz Phaistos Root detected in ${event.domain} [${event.source}] ` +
+          `— cadastral frequency anchor, GOS Symbol 4 (Fish), f₀=37×3`
+        );
+      }
+    }
+
+    // 46.875Hz standalone PRF heartbeat — PLUGCO/GPSDO infrastructure signature
+    if (Math.abs(freqHz - HEARTBEAT_HZ) < 0.5) {
+      this.addAlert(
+        "heartbeat-prf-46875",
+        35,
+        `46.875Hz PRF heartbeat — ${event.source} | f=48000÷1024 DSP clock ` +
+        `— PLUGCO generator / GPSDO infrastructure signature detected`
       );
     }
   }

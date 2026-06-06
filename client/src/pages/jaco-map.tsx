@@ -221,15 +221,20 @@ function buildTerrain(scene: THREE.Scene, elevData: number[][] | null) {
     // κ wave-function interference — born rule probability density
     float kappaPhase(vec2 p, float t){
       const float KAPPA=1.273;
-      const float PHI=1.618;   // GOS golden ratio
-      const float DK=0.161393; // GOS Δκ bridge constant
+      const float PHI=1.618;    // GOS golden ratio
+      const float DK=0.161393;  // GOS Δκ bridge constant
+      const float OMEGA=0.567143;    // GOS Ω — omega constant (Russell Codex)
+      const float KLEIN_TWIST=2.238; // θ=128.23° in radians — Klein bottle rotation (Russell Codex)
       float w1=sin(p.x*KAPPA*4.0-t*0.28)*cos(p.y*KAPPA*3.0+t*0.19);
       float w2=cos(p.x*2.31+p.y*3.14*KAPPA-t*0.11);
       // φ-harmonic layer — GOS toroidal standing wave (from BSP three-point lighting)
       float d=length(p*0.08);
       float w3=sin(d*KAPPA*PHI-t*DK*6.283)*0.5+cos(d*KAPPA-t*0.07)*0.5;
-      // Born rule |ψ|² probability density (three-component interference)
-      float psi=w1*0.45+w2*0.3+w3*0.25;
+      // Klein twist rotational modulation — θ=128.23° phase rotation (Russell Codex integration)
+      float kx=p.x*cos(KLEIN_TWIST)-p.y*sin(KLEIN_TWIST);
+      float w4=sin(kx*OMEGA*KAPPA-t*0.09)*0.14;
+      // Born rule |ψ|² — four-component interference with Klein+Ω enrichment
+      float psi=w1*0.40+w2*0.27+w3*0.22+w4;
       return psi*psi; // always positive, like probability
     }
 
@@ -394,6 +399,90 @@ function buildTDOALayer(scene: THREE.Scene): THREE.Group {
 // Scene terrain bounds (CENTER.lat ±0.04° → ±55.6 scene units; use 52 as safe clamp)
 const TERRAIN_HALF_Z = 52;
 const TERRAIN_HALF_X = 70;
+
+// ── JACO SCAR — ODP Hole 896A Seafloor Anomaly ───────────────────────────────
+// Real documented cold-seep / tectonic anomaly, Pacific margin, Costa Rica
+// Coordinates: 9.123°N 84.789°W  |  Depth: −2500m  |  Feature: Jaco Scar
+// Rendered symbolically within the Pacific ocean mesh (southwest of scene center)
+function buildJacoScar(scene: THREE.Scene) {
+  const SX = -90, SZ = 22; // scene position — Pacific ocean, SW of Jacó
+  const SURFACE_Y = 0.18;
+  const DEEP_Y = -15.5; // symbolic -2500m depth
+
+  // Glowing subsurface cone — pointing up from the scar floor
+  const coneMat = new THREE.MeshBasicMaterial({
+    color: 0x0077cc, transparent: true, opacity: 0.50,
+    wireframe: true, blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const scar = new THREE.Mesh(new THREE.ConeGeometry(4.8, 15.5, 8, 1, true), coneMat);
+  scar.position.set(SX, DEEP_Y + 7.75, SZ);
+  (scar as any)._isJacoScar = "cone";
+  scene.add(scar);
+
+  // Inner core — brighter solid cone
+  const coreMat = new THREE.MeshBasicMaterial({
+    color: 0x00ccff, transparent: true, opacity: 0.18,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const core = new THREE.Mesh(new THREE.ConeGeometry(2.2, 14, 6, 1, false), coreMat);
+  core.position.set(SX, DEEP_Y + 7, SZ);
+  (core as any)._isJacoScar = "core";
+  scene.add(core);
+
+  // Vertical beam seafloor → surface
+  const beamGeo = new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(SX, DEEP_Y, SZ),
+    new THREE.Vector3(SX, SURFACE_Y, SZ),
+  ]);
+  scene.add(new THREE.Line(beamGeo, new THREE.LineBasicMaterial({
+    color: 0x0099ff, transparent: true, opacity: 0.28,
+    blending: THREE.AdditiveBlending,
+  })));
+
+  // Surface pulse ring — visible on ocean plane
+  const ringMat = new THREE.MeshBasicMaterial({
+    color: 0x00ddff, transparent: true, opacity: 0.65,
+    side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const ring = new THREE.Mesh(new THREE.RingGeometry(2.8, 4.2, 48), ringMat);
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.set(SX, SURFACE_Y, SZ);
+  (ring as any)._isJacoScar = "ring";
+  scene.add(ring);
+
+  // Outer halo — wide diffuse glow
+  const haloMat = new THREE.MeshBasicMaterial({
+    color: 0x003366, transparent: true, opacity: 0.22,
+    side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false,
+  });
+  const halo = new THREE.Mesh(new THREE.RingGeometry(4.2, 9.5, 48), haloMat);
+  halo.rotation.x = -Math.PI / 2;
+  halo.position.set(SX, SURFACE_Y - 0.05, SZ);
+  (halo as any)._isJacoScar = "halo";
+  scene.add(halo);
+
+  // Expanding sonar ping rings (3 phases)
+  for (let i = 0; i < 3; i++) {
+    const pingMat = new THREE.MeshBasicMaterial({
+      color: 0x00aaff, transparent: true, opacity: 0.0,
+      side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false,
+    });
+    const ping = new THREE.Mesh(new THREE.RingGeometry(4, 4.5, 36), pingMat);
+    ping.rotation.x = -Math.PI / 2;
+    ping.position.set(SX, SURFACE_Y + 0.05, SZ);
+    (ping as any)._isJacoScar = "ping";
+    (ping as any)._scarPhase = i / 3;
+    scene.add(ping);
+  }
+
+  // Label marker — small sphere on surface
+  const labelSphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.55, 8, 6),
+    new THREE.MeshBasicMaterial({ color: 0x00ccff, blending: THREE.AdditiveBlending, depthWrite: false })
+  );
+  labelSphere.position.set(SX, SURFACE_Y + 0.3, SZ);
+  scene.add(labelSphere);
+}
 
 function buildLandmark(scene: THREE.Scene, t: Target): THREE.Group {
   const [rawX, bY, rawZ] = latLonToScene(t.lat, t.lon, t.elevM);
@@ -811,6 +900,7 @@ function createScene(
   buildDetLayers(scene);
   buildEngageLayers(scene);
   buildTDOALayer(scene);
+  buildJacoScar(scene); // ODP 896A cold-seep anomaly — 9.123°N 84.789°W −2500m
   TARGETS.forEach(t => buildLandmark(scene, t));
 
   TARGETS.slice(1).forEach(t => {
@@ -915,6 +1005,33 @@ function createScene(
       if((obj as any)._isScanRing!==undefined){const p=(t*.4+(obj as any)._isScanRing*.3)%1;obj.scale.set(1+p*1.2,1,1+p*1.2);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.07*(1-p);}
       if((obj as any)._isPing){const s=1+(Math.sin(t*2.5)*.5+.5)*1.5;obj.scale.set(s,1,s);((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=.6*(1-(s-1)/1.5);}
       if((obj as any)._tdoaNode){obj.rotation.x=t*.8;obj.rotation.z=t*.5;}
+      // Jaco Scar seafloor anomaly — ODP 896A cold seep, −2500m
+      if((obj as any)._isJacoScar==="cone"){
+        // Slow rotation + opacity breathe tied to 46.875 Hz visual period
+        obj.rotation.y=t*0.18;
+        ((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.38+Math.sin(t*1.464)*0.18; // 1.464≈46.875/32
+      }
+      if((obj as any)._isJacoScar==="core"){
+        ((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.12+Math.sin(t*1.464+1.1)*0.10;
+      }
+      if((obj as any)._isJacoScar==="ring"){
+        const s=1.0+Math.sin(t*1.464)*0.12;
+        obj.scale.set(s,1,s);
+        ((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.50+Math.sin(t*2.1)*0.25;
+      }
+      if((obj as any)._isJacoScar==="halo"){
+        const hs=1.0+Math.sin(t*0.7)*0.08;
+        obj.scale.set(hs,1,hs);
+        ((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.14+Math.sin(t*0.9)*0.08;
+      }
+      if((obj as any)._isJacoScar==="ping"){
+        // Expanding sonar rings — each phase offset by 1/3 cycle
+        const ph=(obj as any)._scarPhase as number;
+        const p=((t*0.35+ph)%1);
+        const maxR=3.5;
+        obj.scale.set(1+p*maxR,1,1+p*maxR);
+        ((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.28*(1-p);
+      }
       // Radar dome inner glow pulse
       if((obj as any)._isRadarGlow)((obj as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity=0.18+Math.sin(t*1.8)*0.12;
       // Drone LED ring breathes teal
