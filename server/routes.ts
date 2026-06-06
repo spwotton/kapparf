@@ -7420,7 +7420,7 @@ export function registerGazetteIntelRoutes(app: express.Express) {
   app.post("/api/mailer/fire", async (req, res) => {
     const { secret, target, dryRun } = req.body as { secret?: string; target?: string; dryRun?: boolean };
     const fireSecret = process.env.MAILER_FIRE_SECRET;
-    if (fireSecret && secret !== fireSecret) return res.status(403).json({ error: "Forbidden" });
+    if (!fireSecret || secret !== fireSecret) return res.status(403).json({ error: "Forbidden" });
     const apiKey = process.env.MAILGUN_API_KEY;
     const domain = process.env.MAILGUN_DOMAIN;
     if (!apiKey || !domain) return res.status(500).json({ error: "Mailgun not configured" });
@@ -8073,7 +8073,7 @@ This email is constructed from verifiable technical disclosures, public contract
   app.post("/api/mailer/us-intel-blast", async (req, res) => {
     const { secret, dryRun } = req.body as { secret?: string; dryRun?: boolean };
     const fireSecret = process.env.MAILER_FIRE_SECRET;
-    if (fireSecret && secret !== fireSecret) return res.status(403).json({ error: "Forbidden" });
+    if (!fireSecret || secret !== fireSecret) return res.status(403).json({ error: "Forbidden" });
     const apiKey = process.env.MAILGUN_API_KEY;
     const domain = process.env.MAILGUN_DOMAIN;
     if (!apiKey || !domain) return res.status(500).json({ error: "Mailgun not configured" });
