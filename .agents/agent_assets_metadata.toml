@@ -425,3 +425,15 @@ id = "Kpe4TxefiZrilkBbSET40"
 uri = "file://public/forensic_slides/IMG_0525_channels.jpg"
 type = "image"
 title = "IMG_0525 — RGGB Channel Grid"
+
+[[outputs]]
+id = "Uwl9xhvbfyHH7tSIX29JV"
+uri = "file://public/forensic_slides/DNG_NEW3_channels.jpg"
+type = "image"
+title = "DNG NEW3 — B-Channel Analysis (Jun 5 21:55 — exact duplicate of IMG_0524)"
+
+[[outputs]]
+id = "qm85LIQ5P8ryEtsfZ84U9"
+uri = "file://public/forensic_slides/DNG_NEW4_channels.jpg"
+type = "image"
+title = "DNG NEW4 — B-Channel Analysis (Jun 5 21:55:18 — duplicate of IMG_0525)"
