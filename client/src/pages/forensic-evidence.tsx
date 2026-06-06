@@ -449,14 +449,14 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
     Incluido a solicitud del denunciante. OIJ a verificar
     independientemente antes de cualquier acción.
 
-19. FNT-1 — identidad reservada, iniciales M.S.
-    Presente físicamente en el apartamento de Leo,
-    octubre 2025, día del retiro. Posible testigo.
+19. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
+    Vista en persona oct 2025. Presente en apartamento de Leo
+    el día del retiro. Posible testigo.
     Participación activa incierta.
 
-20. FNT-2 — identidad reservada, iniciales A.V.
-    Presente físicamente en el apartamento de Leo,
-    octubre 2025, día del retiro. Posible testigo.
+20. ALE VIDA — IG: alevida89
+    Presente en apartamento de Leo el día del retiro,
+    octubre 2025. Posible testigo.
     Participación activa incierta.
 
 ══════════════════════════════════════════════════════
