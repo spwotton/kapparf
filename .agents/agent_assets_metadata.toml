@@ -401,3 +401,27 @@ id = "2d4fFXmMUofHDA9npuPPR"
 uri = "file://public/forensic_slides/kappa_jan7_SBS.mp4"
 type = "video"
 title = "Jan 7 2026 — Side-by-Side: Original vs 80× Forensic Amp (6.4 min, 3840×1080)"
+
+[[outputs]]
+id = "v1QmM0KnRLMN0qVOlIlSE"
+uri = "file://public/forensic_slides/IMG_0524_channel_analysis.jpg"
+type = "image"
+title = "IMG_0524 — B-Channel 100% Zeroed (Jun 5 21:55:09 local)"
+
+[[outputs]]
+id = "kjp0g9xzldie6MZ0mEmX-"
+uri = "file://public/forensic_slides/IMG_0525_channel_analysis.jpg"
+type = "image"
+title = "IMG_0525 — B-Channel 100% Zeroed (Jun 5 21:55:18 local — 9s later)"
+
+[[outputs]]
+id = "fSGRx7JJmcOZp5SCBsI2I"
+uri = "file://public/forensic_slides/IMG_0524_channels.jpg"
+type = "image"
+title = "IMG_0524 — RGGB Channel Grid"
+
+[[outputs]]
+id = "Kpe4TxefiZrilkBbSET40"
+uri = "file://public/forensic_slides/IMG_0525_channels.jpg"
+type = "image"
+title = "IMG_0525 — RGGB Channel Grid"
