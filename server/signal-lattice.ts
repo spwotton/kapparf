@@ -619,7 +619,7 @@ Return JSON only:
 
   const models = [
     "meta-llama/llama-3.3-70b-instruct:free",
-    "deepseek/deepseek-r1:free",
+    "deepseek/deepseek-v4-flash:free",
   ];
 
   for (const model of models) {
