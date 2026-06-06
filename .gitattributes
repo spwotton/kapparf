@@ -172,3 +172,4 @@ pw-browsers/chromium_headless_shell-1208/chrome-headless-shell-linux64/chrome-he
 /public/denuncia/los_rios_compound_20251021.jpg filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_forensic_v1.mp4 filter=lfs diff=lfs merge=lfs -text
 /public/forensic_slides/kappa_forensic_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text
+/public/forensic_slides/kappa_suppression_FINAL.mp4 filter=lfs diff=lfs merge=lfs -text

@@ -353,3 +353,9 @@ id = "3WRFyz0Z5eQKsYNEer4Ls"
 uri = "file://public/forensic_slides/kappa_forensic_FINAL.mp4"
 type = "video"
 title = "KAPPA Forensic Video — Final Cut with Narration (59s)"
+
+[[outputs]]
+id = "Fk91rSLpSaziyLcUF7kKd"
+uri = "file://public/forensic_slides/kappa_suppression_FINAL.mp4"
+type = "video"
+title = "KAPPA Suppression Evidence — Floor-Lock Attack (80s)"
