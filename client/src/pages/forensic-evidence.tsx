@@ -393,7 +393,7 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
 14. MICHAEL GREENFIELD — Hermosa Palms, Jacó
     Propietario. Recibió a los Lipman. Cadena de propiedad.
 
-15. DAN [APELLIDO DESCONOCIDO] — reside en La Flor, Jacó
+15. DAN CIESLA — reside en La Flor, Jacó
     RESIDENCIA: La Flor, unidades 23–24–25 (costado trasero),
     en línea visual directa con la ubicación actual del denunciante.
     MALLA DE CAMUFLAJE RF FOTOGRAFIADA EN EL TECHO de esas unidades.
@@ -402,6 +402,10 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
     Origen: San Diego, California, EE.UU.
     Padre: propietario de casa en Winter Park, Florida.
     Residente en Costa Rica desde aprox. 2006.
+    Tel: +1 619-200-4582 (área 619 = San Diego — confirma origen)
+    VÍNCULO FINANCIERO DOCUMENTADO: transferencia Zelle $1,500
+    del denunciante a Dan Ciesla. Memo: "Villa real #1 may".
+    Cuenta origen: terminada en 9266. Captura de pantalla disponible.
     ANTECEDENTE / MÓVIL DOCUMENTADO:
       El denunciante alquiló Villareal vía Airbnb. Las unidades de
       aire acondicionado jamás habían sido limpiadas — capa de moho
@@ -558,6 +562,8 @@ VI. EVIDENCIA FORENSE DISPONIBLE
   • 4 fotografías RAW DNG 48MP — canal B = 0.000%, max pixel = 0
   • Fotografías de lesiones físicas (14 oct 2025)
   • Fotografías de malla de camuflaje RF (25 sep 2025, 22:21 hrs)
+  • Captura Zelle: $1,500 enviado a Dan Ciesla, memo "Villa real
+    #1 may", tel destino 619-200-4582, cuenta origen xxxx9266
   • Video camión con luz intermitente — marca ~11 segundos.
     Posible hotspot móvil con MAC address suplantada (Android Auto
     o similar) usado para interferir internet y coordinar drones.
@@ -857,6 +863,14 @@ export default function ForensicEvidencePage() {
               <CardContent>
                 <img src="/forensic_slides/slide_rf_camo_los_rios.jpg" alt="RF camo slide" className="w-full rounded border border-border cursor-pointer"
                   onClick={() => setLightbox("/forensic_slides/slide_rf_camo_los_rios.jpg")} />
+              </CardContent>
+            </Card>
+            <Card className="border-yellow-400/30">
+              <CardHeader><CardTitle className="text-sm text-yellow-400">Financial Evidence — Zelle Transfer to Dan Ciesla</CardTitle></CardHeader>
+              <CardContent>
+                <img src="/forensic_slides/zelle_dan_ciesla_1500.png" alt="Zelle $1,500 Dan Ciesla" className="w-full rounded border border-yellow-400/20 cursor-pointer mb-3"
+                  onClick={() => setLightbox("/forensic_slides/zelle_dan_ciesla_1500.png")} />
+                <p className="text-xs text-muted-foreground">Zelle confirmation: $1,500.00 sent to <strong>dan ciesla</strong>. Memo: "Villa real #1 may". Destination: +1 619-200-4582 (San Diego area code — confirms stated origin). Source account ending 9266. Establishes direct financial relationship between complainant and POI-015 (Dan Ciesla, La Flor units 23–25, RF camouflage documented).</p>
               </CardContent>
             </Card>
           </div>

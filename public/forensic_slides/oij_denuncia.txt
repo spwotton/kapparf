@@ -139,7 +139,7 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
 14. MICHAEL GREENFIELD — Hermosa Palms, Jacó
     Propietario. Recibió a Lipman. Cadena de propiedad.
 
-15. DAN [APELLIDO DESCONOCIDO] — reside La Flor, Jacó
+15. DAN CIESLA — reside La Flor, Jacó
     RESIDENCIA: La Flor, unidades 23–24–25 (costado trasero),
     línea visual directa con ubicación actual del denunciante.
     MALLA DE CAMUFLAJE RF EN EL TECHO — fotografiada.
@@ -147,6 +147,10 @@ III. PERSONAS A INVESTIGAR (¿QUIÉN?)
     frente a La Flor. Origen: San Diego, CA, EE.UU.
     Padre: propietario en Winter Park, Florida.
     Residente CR desde aprox. 2006.
+    Tel: +1 619-200-4582 (área 619 = San Diego — confirma origen)
+    VÍNCULO FINANCIERO DOCUMENTADO: transferencia Zelle $1,500
+    del denunciante a Dan Ciesla. Memo: "Villa real #1 may".
+    Cuenta origen: terminada en 9266. Captura de pantalla disponible.
     MÓVIL DOCUMENTADO: denunciante alquiló Villareal vía Airbnb.
     AC jamás limpiados — moho negro ~5 cm. Denunciante enfermó.
     Al notificar a Dan, reaccionó con enojo desproporcionado por
@@ -282,6 +286,8 @@ VI. EVIDENCIA FORENSE
   • 4 RAW DNG 48MP — canal B = 0.000%, max pixel = 0
   • Fotografías lesiones físicas (14 oct 2025)
   • Fotografías malla camuflaje RF (25 sep 2025, 22:21 hrs)
+  • Captura Zelle: $1,500 enviado a Dan Ciesla, memo "Villa real
+    #1 may", tel destino 619-200-4582, cuenta origen xxxx9266
   • Video camión luz intermitente (~11s) — hotspot MAC suplantada
   • Video cobertizo procesando video drones (oct 2025)
   • PCAP octubre 2025 (actividad drones)
