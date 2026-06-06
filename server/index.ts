@@ -115,6 +115,47 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
 
   await registerRoutes(httpServer, app);
 
+  // Serve public/evidence/ at /evidence — video & audio forensic files (auth-gated)
+  const publicEvidenceDir = path.join(process.cwd(), "public", "evidence");
+  if (fs.existsSync(publicEvidenceDir)) {
+    app.get("/evidence/DENUNCIA_SAM_WOTTON_20260530.html", (_req, res) => {
+      res.setHeader("Cache-Control", "no-cache");
+      res.sendFile(path.join(publicEvidenceDir, "DENUNCIA_SAM_WOTTON_20260530.html"));
+    });
+    const { requireAuth: evidenceAuth } = await import("./middleware/auth");
+    app.use("/evidence", evidenceAuth, express.static(publicEvidenceDir, {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".mp4") || filePath.endsWith(".mov")) {
+          res.setHeader("Content-Type", "video/mp4");
+          res.setHeader("Accept-Ranges", "bytes");
+        }
+      },
+    }));
+  }
+
+  // ── Register error handler + static serving BEFORE listen so health checks
+  //    pass immediately.  Background services start AFTER the port is open.
+  app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    console.error("Internal Server Error:", err);
+    if (res.headersSent) return next(err);
+    return res.status(status).json({ message });
+  });
+
+  if (process.env.NODE_ENV === "production") {
+    serveStatic(app);
+  } else {
+    const { setupVite } = await import("./vite");
+    await setupVite(httpServer, app);
+  }
+
+  const port = parseInt(process.env.PORT || "5000", 10);
+  httpServer.listen({ port, host: "0.0.0.0", reusePort: true }, () => {
+    log(`serving on port ${port}`);
+  });
+
+  // ── Background services — start AFTER the server is already listening ──────
   const { startCollectors } = await import("./collectors");
   const { startAutoCorrelator } = await import("./auto-correlator");
   const { startKiwiSDRScanner } = await import("./kiwisdr-scanner");
@@ -237,75 +278,4 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
   setTimeout(() => startFtmHypervisor().catch(e => console.warn("[FTM] startup error:", e.message)), 12_000);
 
   console.log("[KAPPA] Hypervisor auto-started — all systems 24/7");
-
-  app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    console.error("Internal Server Error:", err);
-
-    if (res.headersSent) {
-      return next(err);
-    }
-
-    return res.status(status).json({ message });
-  });
-
-  // Serve public/scripts/ at /scripts — must run before Vite/static catch-all in all environments
-  const publicScriptsDir = path.join(process.cwd(), "public", "scripts");
-  if (fs.existsSync(publicScriptsDir)) {
-    app.use("/scripts", express.static(publicScriptsDir, {
-      setHeaders: (res, filePath) => {
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        if (filePath.endsWith(".sh")) {
-          res.setHeader("Content-Type", "text/plain; charset=utf-8");
-        }
-      },
-    }));
-  }
-
-  // Serve public/evidence/ at /evidence — video & audio forensic files (auth-gated)
-  const publicEvidenceDir = path.join(process.cwd(), "public", "evidence");
-  if (fs.existsSync(publicEvidenceDir)) {
-    // Public denuncia report — no auth required
-    app.get("/evidence/DENUNCIA_SAM_WOTTON_20260530.html", (_req, res) => {
-      res.setHeader("Cache-Control", "no-cache");
-      res.sendFile(path.join(publicEvidenceDir, "DENUNCIA_SAM_WOTTON_20260530.html"));
-    });
-    const { requireAuth: evidenceAuth } = await import("./middleware/auth");
-    app.use("/evidence", evidenceAuth, express.static(publicEvidenceDir, {
-      setHeaders: (res, filePath) => {
-        if (filePath.endsWith(".mp4") || filePath.endsWith(".mov")) {
-          res.setHeader("Content-Type", "video/mp4");
-          res.setHeader("Accept-Ranges", "bytes");
-        }
-      },
-    }));
-  }
-
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (process.env.NODE_ENV === "production") {
-    serveStatic(app);
-  } else {
-    const { setupVite } = await import("./vite");
-    await setupVite(httpServer, app);
-  }
-
-  // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = parseInt(process.env.PORT || "5000", 10);
-  httpServer.listen(
-    {
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    },
-    () => {
-      log(`serving on port ${port}`);
-    },
-  );
 })();
