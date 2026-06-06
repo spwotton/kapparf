@@ -3,278 +3,242 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Copy, Download, Film, AlertTriangle, ExternalLink, MapPin, User, Link2 } from "lucide-react";
+import { Copy, Download, Film, AlertTriangle, ExternalLink, MapPin, Users, Link2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-// ── DATA ─────────────────────────────────────────────────────────────────────
+// ── EM EVENT DATA ─────────────────────────────────────────────────────────────
+
+const EM_EVENTS = [
+  { phase: "1", mode: "FLOOR-LOCK + BURST",      zero: "93.6%", duration: "4.2 min",   metric: "93.6% pixels @ absolute zero", color: "red" },
+  { phase: "2", mode: "SUSTAINED WIDEBAND",       zero: "—",     duration: "12.5 min",  metric: "blur coeff 6.4 · sustained",   color: "orange" },
+  { phase: "3", mode: "LUMINANCE SUPPRESSION",    zero: "—",     duration: "6.4 min",   metric: "YAVG 6.2 / 255",              color: "cyan" },
+  { phase: "4", mode: "FLOOR-LOCK PARTIAL",       zero: "24%",   duration: "31 s",      metric: "24% zero · partial clip",     color: "blue" },
+  { phase: "5", mode: "FLOOR-LOCK ENTIRE CLIP",   zero: "90.6%", duration: "16.5 s",    metric: "90.6% zero · full duration",  color: "blue" },
+  { phase: "6", mode: "PERFECT ZERO-LOCK",        zero: "68.4%", duration: "18.95 s",   metric: "68.4% flat · near-constant",  color: "blue" },
+  { phase: "7", mode: "B-CHANNEL 100% ZEROED",    zero: "100%",  duration: "static",    metric: "4× RAW DNG · B=0.000% · max=0", color: "red" },
+  { phase: "8", mode: "CEILING-LOCK",             zero: "88%",   duration: "33 ms trig",metric: "88% sat · 33ms onset",        color: "orange" },
+  { phase: "9", mode: "FLOOR-LOCK × 2",           zero: "71.4%", duration: "sequential",metric: "71.4% + 46.8% zero",         color: "blue" },
+  { phase: "10",mode: "FLOOR-LOCK × 2 (cont.)",  zero: "46.8%", duration: "3 s",       metric: "YAVG 6.1 / 255",             color: "blue" },
+];
 
 const SLIDES = [
   { src: "/forensic_slides/slide_kappa_01_cover.jpg",        label: "Cover — Overview" },
-  { src: "/forensic_slides/slide_kappa_02_timeline.jpg",     label: "Incident Timeline" },
+  { src: "/forensic_slides/slide_kappa_02_timeline.jpg",     label: "Event Timeline" },
   { src: "/forensic_slides/slide_kappa_03_blue_channel.jpg", label: "B-Channel 100% Zeroed" },
   { src: "/forensic_slides/slide_kappa_04_modes.jpg",        label: "3 Attack Modes" },
   { src: "/forensic_slides/slide_kappa_05_summary.jpg",      label: "Evidence Summary Table" },
-  { src: "/forensic_slides/slide_rf_camo_los_rios.jpg",      label: "RF Camo — Los Ríos Sep 25" },
+  { src: "/forensic_slides/slide_rf_camo_los_rios.jpg",      label: "RF Camo — Los Ríos" },
   { src: "/forensic_slides/IMG_0524_channels.jpg",           label: "IMG_0524 Bayer Channels" },
   { src: "/forensic_slides/IMG_0525_channels.jpg",           label: "IMG_0525 Bayer Channels" },
-  { src: "/forensic_slides/DNG_NEW3_channels.jpg",           label: "DNG_NEW3 Channels" },
-  { src: "/forensic_slides/DNG_NEW4_channels.jpg",           label: "DNG_NEW4 Channels" },
   { src: "/forensic_slides/master_summary.jpg",              label: "Master Summary Frame" },
-  { src: "/forensic_slides/oct25_timeline.jpg",              label: "Oct 25 Sustained 12.5min" },
-  { src: "/forensic_slides/apr29_timeline.jpg",              label: "Apr 29 Floor Lock" },
+  { src: "/forensic_slides/oct25_timeline.jpg",              label: "12.5 min Sustained Event" },
+  { src: "/forensic_slides/apr29_timeline.jpg",              label: "Floor Lock — Full Clip" },
 ];
 
 const VIDEOS = [
-  { src: "/forensic_slides/kappa_jan7_v3.mp4",          label: "Jan 7 — 6.4min Luminance Suppression SBS",  tag: "6.4 min",  color: "cyan" },
-  { src: "/forensic_slides/kappa_jun2_v3.mp4",          label: "Jun 2 — 31s Floor Lock SBS",                tag: "31 s",     color: "blue" },
-  { src: "/forensic_slides/kappa_jun6_new5_sbs.mp4",    label: "Jun 6 04:05 UTC — 47% Zero NEW",            tag: "3 s NEW",  color: "red" },
-  { src: "/forensic_slides/kappa_forensic_FINAL.mp4",   label: "Jun 5 — Ceiling Lock 88% Sat Narrated",     tag: "narrated", color: "orange" },
-  { src: "/forensic_slides/kappa_suppression_FINAL.mp4",label: "Jun 6 — Floor Lock 71% Narrated",           tag: "narrated", color: "blue" },
-  { src: "/forensic_slides/kappa_apr29_FINAL.mp4",      label: "Apr 29 — 90.6% Floor Lock",                 tag: "16.5 s",   color: "blue" },
-  { src: "/forensic_slides/kappa_may17_FINAL.mp4",      label: "May 17 — Perfect Zero Lock",                tag: "18.95 s",  color: "blue" },
-  { src: "/forensic_slides/kappa_master_FINAL.mp4",     label: "Master Narration — 151s Full Brief",        tag: "2.5 min",  color: "cyan" },
+  { src: "/forensic_slides/kappa_jan7_v3.mp4",           label: "Luminance Suppression — YAVG 6.2/255 · 6.4 min SBS",  tag: "6.4 min",  color: "cyan" },
+  { src: "/forensic_slides/kappa_jun2_v3.mp4",           label: "Floor Lock — 24% zero · 31s SBS",                     tag: "31 s",     color: "blue" },
+  { src: "/forensic_slides/kappa_jun6_new5_sbs.mp4",     label: "Floor Lock — 46.8% zero · YAVG 6.1 · 3s",            tag: "3 s",      color: "blue" },
+  { src: "/forensic_slides/kappa_forensic_FINAL.mp4",    label: "Ceiling Lock — 88% sat · 33ms onset · narrated",      tag: "narrated", color: "orange" },
+  { src: "/forensic_slides/kappa_suppression_FINAL.mp4", label: "Floor Lock — 71.4% zero · narrated",                  tag: "narrated", color: "blue" },
+  { src: "/forensic_slides/kappa_apr29_FINAL.mp4",       label: "Floor Lock — 90.6% zero · full clip",                 tag: "16.5 s",   color: "blue" },
+  { src: "/forensic_slides/kappa_may17_FINAL.mp4",       label: "Perfect Zero-Lock — 68.4% flat",                      tag: "18.95 s",  color: "blue" },
+  { src: "/forensic_slides/kappa_master_FINAL.mp4",      label: "Master Briefing — all modes · full narration",        tag: "2.5 min",  color: "cyan" },
 ];
 
-const EVENTS = [
-  { date: "Dec 28 2024",  loc: "Jaco Vacations",  mode: "ORIGIN EVENT",           metric: "Moved out — extortion begins", color: "red" },
-  { date: "Jan 2025",     loc: "Breakwater Point", mode: "HARASSMENT BEGINS",      metric: "Extreme — escalating",         color: "red" },
-  { date: "Apr 2025",     loc: "Jaco Vac (return)",mode: "PHYSICAL MODIFICATION",  metric: "Ceiling 3ft lower, PIR, param",color: "orange" },
-  { date: "Sep 25 2025",  loc: "Quebrada Seca",    mode: "RF CAMO OBSERVED",       metric: "Military netting at window",    color: "orange" },
-  { date: "Oct 14 2025",  loc: "Riverwalk",        mode: "PHYSICAL ASSAULT",       metric: "Strangulation + jump attempt",  color: "red" },
-  { date: "Oct 19 2025",  loc: "Crocs Hotel",      mode: "FLOOR-LOCK + BURST",     metric: "93.6% zero  4.2min",           color: "red" },
-  { date: "Oct 25 2025",  loc: "Crocs Hotel",      mode: "SUSTAINED WIDEBAND",     metric: "blur 6.4  12.5min",            color: "orange" },
-  { date: "Apr 29 2026",  loc: "Crocs Hotel",      mode: "FLOOR-LOCK ENTIRE CLIP", metric: "90.6% zero  16.5s",            color: "blue" },
-  { date: "May 17 2026",  loc: "Crocs Hotel",      mode: "PERFECT ZERO-LOCK",      metric: "68.4% flat  18.95s",           color: "blue" },
-  { date: "Jan 7 2026",   loc: "Crocs Hotel",      mode: "LUMINANCE SUPPRESS",     metric: "YAVG 6.2/255  6.4min",        color: "cyan" },
-  { date: "Jun 2 2026",   loc: "Crocs Hotel",      mode: "FLOOR-LOCK PARTIAL",     metric: "24% zero  31s",                color: "blue" },
-  { date: "Jun 5 2026",   loc: "Crocs Hotel",      mode: "B-CHANNEL 100% ZERO",    metric: "4× RAW DNG  B=0.000%",        color: "red" },
-  { date: "Jun 5 2026",   loc: "Crocs Hotel",      mode: "CEILING-LOCK",           metric: "88% sat  33ms trigger",        color: "orange" },
-  { date: "Jun 6 2026",   loc: "Crocs Hotel",      mode: "FLOOR-LOCK × 2",         metric: "71.4% + 46.8% zero",          color: "blue" },
-];
-
-const PERSONS = [
+const NETWORK_NODES = [
   {
-    name: "Diana Soto",
-    ig: null,
-    role: "ORIGIN NODE — Property Manager",
+    id: "POI-001",
+    role: "Origin Node — Property Manager",
     certainty: "confirmed",
-    detail: "Jaco Vacations property manager. Connected to every property user has stayed at. Extortion demand: $2,500 since Dec 28 2024. When user returned to her property (Apr 2025): ceiling had been lowered 3ft, Vison PIR alarm system installed, parametric emitters active from garage, 12ft beach ball obstruction purchased, and she owns the house directly across the street.",
-    photo: null,
-    tags: ["Jaco Vacations", "Extortion $2,500", "Property modification", "PIR sensors", "Parametric emitter"],
     color: "red",
+    detail: "Manages the initial rental property. Extortion demand issued immediately upon user's departure ($2,500). On user's return months later: ceiling structurally lowered ~90 cm, passive infrared motion sensors installed (Vison alarm system), parametric acoustic emitters operating continuously from garage, large visual obstruction (beach ball ~3.6m) purchased. Also owns the property directly across the street. Connected to every location in the chain.",
+    tags: ["Origin", "Extortion $2,500", "Structural modification", "PIR sensors", "Parametric emitter", "Adjacent property owned"],
   },
   {
-    name: "Genesis Daniela Peralta Márquez",
-    ig: "gemperalta._",
-    role: "Primary Operative (claimed)",
+    id: "POI-002",
+    role: "Primary Operative — Former Partner",
     certainty: "confirmed",
-    detail: "Former partner. Lived with user at Jaco Vacations Oct–Dec 2024. Has claimed 100+ times today she is behind the operation. Suspected ongoing relationship with Pablo Mora throughout time with user. Would travel to Tournón/El Garza area (Pablo's neighbourhood) for 'personal training sessions' — user never saw Pablo at the gym. After separation: posted large cash stack on Instagram and photo of 'lost' shared cat (suggesting she kept it and returned it to Pablo). Lies about Pablo's occupation.",
-    photo: null,
-    tags: ["Jaco Vacations", "Tournón/El Garza", "Claimed primary", "$80K fraud suspected"],
     color: "red",
+    detail: "Lived at origin property with user for approximately 3 months. Has stated directly and repeatedly (100+ times on single day) that she is responsible for the operation. Suspected concurrent relationship with POI-005 throughout — described him falsely as a gym trainer. After departure: posted large cash sum on social media; shared pet (acquired together) believed returned to POI-005. Suspected involvement in $80,000+ credit card fraud.",
+    tags: ["Self-claimed primary", "$80K fraud suspected", "Origin property Oct–Dec"],
   },
   {
-    name: "Matthew Hanlon",
-    ig: null,
-    role: "Long-term operative — identified in photo",
+    id: "POI-003",
+    role: "Long-term Operative — Riverwalk (photographically identified)",
     certainty: "confirmed",
-    detail: "Identified in photograph. Long-term involvement throughout campaign. Lived at Riverwalk complex. His red-haired roommate committed the physical assault (strangulation) on Oct 14 2025. Riverwalk identified as sonar equipment operation site.",
+    color: "red",
+    detail: "Identified in photograph. Resident at Riverwalk complex throughout campaign. POI-004 (roommate) committed physical assault at this location. Riverwalk is identified as a directed-acoustic / sonar equipment operation site.",
     photo: "/forensic_slides/matthew_hanlon_identified.jpg",
-    tags: ["Riverwalk", "Sonar operations", "Oct 14 assault location"],
-    color: "red",
+    tags: ["Riverwalk", "Photographically confirmed", "Sonar site"],
   },
   {
-    name: "Red-haired male (unnamed)",
-    ig: null,
-    role: "Physical assault perpetrator",
+    id: "POI-004",
+    role: "Physical Assault Perpetrator — Red-haired male",
     certainty: "confirmed",
-    detail: "Lived with Matthew Hanlon at Riverwalk. Committed strangulation assault against user. Physical injuries documented (scratches, bruising). Assault occurred Oct 14 2025.",
-    photo: "/forensic_slides/injuries_scratches.jpg",
-    tags: ["Riverwalk", "Strangulation Oct 14 2025", "Physical evidence documented"],
     color: "red",
+    detail: "Roommate of POI-003 at Riverwalk. Committed strangulation assault resulting in documented injuries (scratches, bruising — photographed). Identity unknown to user; OIJ can identify via Riverwalk resident records.",
+    photo: "/forensic_slides/injuries_scratches.jpg",
+    tags: ["Strangulation — Oct 2025", "Injuries documented", "Identity: OIJ to confirm"],
   },
   {
-    name: "Pablo Mora",
-    ig: "pastibmx",
-    role: "Peripheral — Genesis's suspected parallel partner",
+    id: "POI-005",
+    role: "Peripheral — Indirect via POI-002",
     certainty: "indirect",
-    detail: "Pro BMX rider. Genesis confirmed she visited his apartment in Tournón area near El Garza while with user. User never met him. Genesis falsely described him as a gym trainer — he is a professional BMX rider (2,800+ followers). After separation Genesis posted photo of 'lost' cat, believed returned to Pablo. Was threatened to be called in to fight user but did not appear. His BMX associate Junior Araya was present at the Oct 14 threat incident.",
+    color: "orange",
+    detail: "Professional BMX rider. POI-002 visited his residence while with user, describing him falsely as a gym trainer. Never interacted with user directly. Was cited as a potential threat by operators but did not appear. His BMX associate (POI-006) was present at the ambush attempt.",
     photo: "/forensic_slides/poi_pastibmx.png",
-    tags: ["Tournón / El Garza", "BMX", "Genesis parallel relationship"],
-    color: "orange",
+    tags: ["BMX", "Indirect via POI-002", "Tournón / El Garza"],
   },
   {
-    name: "Junior Araya",
-    ig: "junior_araya",
-    role: "Direct threat actor — lure/ambush Oct 14",
+    id: "POI-006",
+    role: "Direct Threat Actor — Ambush attempt",
     certainty: "reported",
-    detail: "BMX friend of Pablo Mora. Jacó-based (bio: '#bmx Jaco CR'). Present at Leo's apartment on Oct 14 2025. Operators used him as a threat — claimed they would call him to come fight. Attempted to lure user out of the apartment complex to be jumped on the street. Has a sister named Genesis (separate from Peralta). When user was at Rico's/Famoso's, operators constantly claimed 'his sister was there'. Genesis Peralta confirmed she had dropped him off at that exact apartment after BMX with Pablo.",
+    color: "orange",
+    detail: "BMX associate of POI-005. Present at friend's apartment on the date of the assault at Riverwalk. Operators used him as a threat to lure user out of the building complex onto the street. POI-002 independently confirmed she had transported him to that exact building after BMX training with POI-005.",
     photo: "/forensic_slides/poi_junior_araya.png",
-    tags: ["Leo's apartment", "Oct 14 lure attempt", "Pablo Mora associate", "Jacó"],
-    color: "orange",
+    tags: ["Ambush attempt — Oct 2025", "POI-005 associate", "Jacó"],
   },
   {
-    name: "Marjorie Alfaro",
-    ig: null,
-    role: "Associate — network connection",
+    id: "POI-007",
+    role: "Ground Associate — Jacó area",
     certainty: "reported",
-    detail: "Possibly Jiménez (married name). Possibly related to Jorge Jiménez — may be his brother's wife. Associated with the broader network.",
-    photo: null,
-    tags: ["Possible Jiménez link"],
     color: "orange",
+    detail: "Ground-level operative in Jacó. Direct associate of POI-002. Possible link to a broader network family connection (under investigation).",
+    tags: ["Jacó ground network", "POI-002 associate"],
   },
   {
-    name: "Jairo Alfaro",
-    ig: null,
-    role: "Ground operative — Jacó",
+    id: "POI-008",
+    role: "Ground Associate — Jacó area (secondary)",
     certainty: "reported",
-    detail: "Ground troops in Jacó area. Acts as sidekick/associate to Genesis Daniela Peralta Márquez.",
-    photo: null,
-    tags: ["Jacó ground network", "Genesis associate"],
     color: "orange",
+    detail: "Second ground-level associate. Acts alongside POI-007. Possible Jiménez family network connection — further corroboration required.",
+    tags: ["Jacó ground network", "Possible family link"],
   },
   {
-    name: "Melissa López Sánchez",
-    ig: "melika_losa",
-    role: "Noted associate — uncertain involvement",
-    certainty: "uncertain",
-    detail: "Seen in person on one of the October 2025 dates. Was present at Leo's apartment on the day user moved out ('smashed stuff' day). Her name is repeatedly claimed by operators as being 'with them.' User notes she may not be actively involved — she was a tenant at the apartment, not necessarily an operative. Treat as noted/uncertain pending further corroboration.",
-    photo: null,
-    tags: ["Leo's apartment", "Oct 2025 sighting", "Name claimed by operators"],
-    color: "cyan",
-  },
-  {
-    name: "Ale Vida",
-    ig: "alevida89",
-    role: "Noted associate — possible Melissa connection",
-    certainty: "uncertain",
-    detail: "Fits physical pattern described alongside Genesis (thigh tattoo confirmed in photo, similar appearance). Possibly Melissa López Sánchez's girlfriend. Noted for network mapping purposes.",
-    photo: "/forensic_slides/poi_alevida89.png",
-    tags: ["Possible Melissa associate", "Physical pattern match"],
-    color: "cyan",
-  },
-  {
-    name: "Shanti Dunia RF",
-    ig: "shantidunia / shanticonciergeluxury_cr",
-    role: "Noted — luxury concierge, Jacó network",
+    id: "POI-009",
+    role: "Noted — HNWI Concierge, Jacó (network mapping only)",
     certainty: "noted",
-    detail: "Verified Instagram business account: Shanti Concierge. HNWI (High Net Worth Individual) luxury concierge service covering Jacó, Tamarindo, and St Teresa. 1,428 followers, 5,353 following. Key common followers with other network nodes include lco_2017. A concierge with HNWI access in Jacó represents potential infrastructure for placing operatives across hotel properties. Noted for further investigation.",
+    color: "cyan",
+    detail: "Verified luxury concierge business operating across Jacó, Tamarindo, and St Teresa. HNWI clientele. A common follower (lco_2017) bridges this account with other network nodes. Concierge access to hotel properties in Jacó is relevant infrastructure context. Included for network mapping — no direct operational role confirmed.",
     photo: "/forensic_slides/poi_shanti_concierge.png",
-    tags: ["Jacó concierge", "HNWI access", "Verified account", "lco_2017 connection"],
-    color: "cyan",
-  },
-  {
-    name: "Dunia Y.oírLo I",
-    ig: "dunia__the_world_mean",
-    role: "Noted — Shanti network",
-    certainty: "noted",
-    detail: "Personal account linked to Shanti Dunia / shanticonciergeluxury_cr business. 1,049 posts. Common follower lco_2017 bridges both this account and shantidunia. Noted for network mapping.",
-    photo: "/forensic_slides/poi_dunia_world_mean.png",
-    tags: ["Shanti Dunia network", "lco_2017 link"],
-    color: "cyan",
+    tags: ["Jacó concierge", "HNWI access", "lco_2017 bridge", "Network mapping only"],
   },
 ];
 
 const LOCATIONS = [
   {
-    name: "Jaco Vacations (Diana Soto property)",
-    period: "Oct–Dec 2024 / Apr–? 2025",
+    id: "LOC-A",
+    label: "Origin Rental Property (Jaco Vacations)",
     color: "red",
     notes: [
-      "Origin of campaign — user + Genesis Peralta lived here Oct–Dec 2024",
-      "User moved out Dec 28 without notice → $2,500 extortion demand begins",
-      "On return Apr 2025: ceiling structurally lowered 3 feet",
-      "Vison alarm system with PIR motion sensors installed",
-      "Parametric acoustic emitters active from garage",
-      "12-foot beach ball purchased — visual obstruction of equipment from street",
-      "Diana Soto also owns the house directly across the street",
+      "Extortion demand ($2,500) issued immediately upon user's departure",
+      "On return: ceiling structurally lowered ~90 cm",
+      "Vison alarm system with PIR motion sensors installed throughout",
+      "Parametric acoustic emitters operating from garage — continuous",
+      "3.6m beach ball purchased — visual obstruction of equipment from street",
+      "POI-001 owns the house directly across the street",
+      "POI-001 connected to all subsequent properties in the chain",
     ],
   },
   {
-    name: "Breakwater Point (Michael Lipman condo)",
-    period: "Dec 28 2024 – Apr 2025",
+    id: "LOC-B",
+    label: "Breakwater Point Condo",
     color: "orange",
     notes: [
-      "Moved here after leaving Jaco Vacations Dec 28 2024",
-      "Harassment became extreme starting Jan 2025",
-      "Michael Lipman + wife Daniela later moved to Hermosa Palms (Michael Greenfield's property)",
-      "Left in April 2025 due to conflict with Genesis",
+      "Second residence — moved here after leaving origin property",
+      "EM interference campaign escalated significantly during this period",
+      "Owners (Lipman family) subsequently relocated to LOC-C",
     ],
   },
   {
-    name: "Hermosa Palms (Michael Greenfield)",
-    period: "Reference",
+    id: "LOC-C",
+    label: "Hermosa Palms",
     color: "cyan",
     notes: [
-      "Owned by Michael Greenfield",
-      "Michael Lipman + wife Daniela moved here from Breakwater Point",
-      "Greenfield built this as personal family home",
+      "LOC-B owners relocated here — owned by a third-party developer",
+      "Property built as personal family home",
+      "Referenced for property-chain mapping",
     ],
   },
   {
-    name: "Riverwalk / Todd Johnson (Greenwald-managed)",
-    period: "During campaign",
+    id: "LOC-D",
+    label: "Riverwalk Complex",
     color: "red",
     notes: [
-      "Located below El Miro",
-      "Managed by Greenwald",
-      "Matthew Hanlon + red-haired assailant lived here",
-      "Sonar/directed acoustic equipment operated from this location",
-      "Physical assault (strangulation) occurred here Oct 14 2025",
+      "POI-003 and POI-004 (assault perpetrator) resident here",
+      "Directed-acoustic / sonar equipment operated from this location",
+      "Physical assault (strangulation) committed here",
+      "Injuries photographically documented",
     ],
   },
   {
-    name: "Leo's apartment (3-unit)",
-    period: "Oct 2025",
+    id: "LOC-E",
+    label: "Transitional Apartment (friend's property)",
     color: "orange",
     notes: [
-      "Friend Leo's property — 3 units: girls at end, 3 guys middle, user",
-      "User moved out and back in — tenants completely changed on return",
-      "Melissa López Sánchez present on the move-out day",
-      "Oct 14 2025: operators threatened to call Junior Araya; lure/jump attempt",
-      "Genesis Peralta had previously dropped Junior Araya here after BMX with Pablo Mora",
+      "3-unit building — tenants changed completely between user's stays",
+      "Ambush attempt staged here: POI-006 used to lure user into street",
+      "POI-002 independently confirmed she transported POI-006 to this building",
     ],
   },
   {
-    name: "Rico's & Famoso's",
-    period: "During campaign",
-    color: "cyan",
-    notes: [
-      "User and Genesis Peralta lived here (Fruteria Pueblo across the street)",
-      "Genesis would leave to visit Tournón area (Pablo Mora's neighbourhood)",
-      "Operators repeatedly claimed Junior Araya's sister was present here",
-    ],
-  },
-  {
-    name: "Quebrada Seca, Los Ríos",
-    period: "Sep 25 2025",
+    id: "LOC-F",
+    label: "Quebrada Seca, Los Ríos",
     color: "orange",
     notes: [
-      "RF camouflage netting photographed at window/terrace 22:21 local time",
-      "Observed from user's apartment terrace across the street",
-      "Military-pattern leaf camouflage consistent with RF concealment material",
-      "Temporal correlation: Oct 2025 sustained wideband interference began same week",
+      "RF camouflage netting photographed at adjacent window from user's terrace",
+      "Military-pattern leaf camouflage material — consistent with RF equipment concealment",
+      "Photo timestamp: 22:21 local time",
+      "Temporally correlated with onset of sustained wideband interference events",
     ],
   },
   {
-    name: "Crocs Hotel, Jacó",
-    period: "Oct 2025 – Jun 6 2026",
+    id: "LOC-G",
+    label: "Crocs Hotel, Jacó — Primary EM Site",
     color: "red",
     notes: [
-      "Primary EM interference location — 10 documented sensor events",
-      "3 attack modes: floor-lock, ceiling-lock, sustained wideband",
-      "Blue channel 100% zeroed in 4 RAW DNG photos (Jun 5 2026)",
-      "Latest event: Jun 6 2026 04:05 UTC — 46.8% zero, YAVG 6.1/255",
-      "OIJ formal complaint filed",
+      "10 documented EM interference events across 3 distinct attack modes",
+      "B-channel 100% zeroed in 4 independent RAW DNG captures",
+      "Floor-lock, ceiling-lock, and sustained wideband all recorded",
+      "Most recent event: floor-lock, YAVG 6.1/255, 46.8% zero",
+      "OIJ formal complaint filed. All evidence SHA-256 hashed",
     ],
   },
 ];
 
+const IG_CAPTION = `18 months. 10 documented electromagnetic events. 3 distinct attack modes. One location.
+
+Jacó, Costa Rica.
+
+iPhone 14 Pro RAW sensor — 48 megapixel DNG captured at night:
+
+→ Red channel: 3.24%
+→ Green channel: 3.02%
+→ Blue channel: 0.000%
+   Maximum pixel value = 0 across all 3 million blue sub-pixels
+
+This is not darkness.
+
+A CMOS sensor generates thermal noise in every pixel even in a completely sealed black box. Zero mean AND zero maximum across an entire Bayer channel is not an exposure issue — it is active suppression of the 430–490 nm spectral band.
+
+8 video clips. Three interference signatures:
+
+FLOOR-LOCK — 93.6% of all pixels forced to absolute zero
+CEILING-LOCK — 88% saturation triggered in under 33 milliseconds
+SUSTAINED WIDEBAND — 12.5 continuous minutes, blur coefficient 6.4
+
+The campaign began immediately after leaving a rental property following an extortion demand. Physical assault documented and photographed. $80,000+ in credit card fraud. Formal complaint filed with the OIJ — Costa Rica Judicial Investigation Agency.
+
+All 10 events are SHA-256 hashed, frame-analysed, and timestamped. 240,000+ source files on record.
+
+OIJ tip line: 800-8000-645
+
+#CostaRica #Jaco #DigitalForensics #iPhone14Pro #SIGINT #ForensicEvidence #OIJ #HumanRights #DirectedEnergy #SensorSuppression #ElectromagneticHarassment #KAPPA`;
+
 const OIJ_LETTER = `ORGANISMO DE INVESTIGACIÓN JUDICIAL (OIJ)
 Departamento de Criminalística / Unidad de Delitos Informáticos y Tecnológicos
 San José, Costa Rica
-
-Fecha: 6 de junio de 2026
 
 DENUNCIA FORMAL — ACOSO SISTEMÁTICO, INTERFERENCIA ELECTROMAGNÉTICA,
 AGRESIÓN FÍSICA, FRAUDE Y EXTORSIÓN
@@ -282,206 +246,100 @@ AGRESIÓN FÍSICA, FRAUDE Y EXTORSIÓN
 Estimados señores del OIJ:
 
 Por medio de la presente, yo, Sam Wotton, ciudadano extranjero con residencia
-temporal en Costa Rica, interpongo denuncia formal por los siguientes delitos
-cometidos en mi contra entre diciembre de 2024 y junio de 2026, en múltiples
-propiedades en Jacó, Puntarenas, Costa Rica.
+temporal en Costa Rica, interpongo denuncia formal por los siguientes delitos.
 
-═══════════════════════════════════════════════
-I. ORIGEN DEL CASO Y CRONOLOGÍA
-═══════════════════════════════════════════════
+═══════════════════════════════════════════
+I. HECHOS
+═══════════════════════════════════════════
 
-OCT–DIC 2024 — Jaco Vacations (Diana Soto)
-  Residí con mi pareja Genesis Daniela Peralta Márquez en una propiedad
-  administrada por Diana Soto (empresa: Jaco Vacations). Me retiré el 28
-  de diciembre de 2024 sin previo aviso.
+1. EXTORSIÓN ($2,500): La administradora de la propiedad inicial (Jaco
+   Vacations) exige $2,500 desde el día de mi retiro. Al regresar meses
+   después encontré: techo bajado ~90 cm, sistema Vison con sensores PIR,
+   emisores paramétricos activos desde el garaje, pelota obstructora de
+   3.6 metros. La misma persona es propietaria de la casa al frente.
 
-DIC 28 2024 — INICIO DE EXTORSIÓN
-  Diana Soto exige $2,500 desde esa fecha. Me niego. La campaña de
-  acoso comienza de inmediato.
+2. FRAUDE CON TARJETAS DE CRÉDITO ($80,000+): Mi expareja (Genesis
+   Daniela Peralta Márquez, IG: gemperalta._) ha afirmado
+   repetidamente ser la responsable de la operación. Se sospecha su
+   participación en fraudes con tarjetas de crédito por más de $80,000.
 
-DIC 28 2024 – ABR 2025 — Breakwater Point (Condo de Michael Lipman)
-  El acoso se vuelve extremo en enero de 2025.
+3. AGRESIÓN FÍSICA: Un residente del complejo Riverwalk (compañero de
+   cuarto de Matthew Hanlon, cabello rojo, identidad desconocida para
+   el denunciante) me estranguló físicamente. Las lesiones están
+   documentadas fotográficamente. Esa misma fecha, asociados intentaron
+   atraerme a la calle para agredirme.
 
-ABR 2025 — Regreso a propiedad de Diana Soto (Jaco Vacations)
-  Al regresar, encontré modificaciones físicas en la propiedad:
-  • El techo había sido bajado ~90 cm (3 pies)
-  • Sistema de alarma Vison con sensores PIR instalados
-  • Emisores paramétricos activos desde el garaje constantemente
-  • Se compró una pelota de playa de ~3.6 metros como obstrucción visual
-  • Diana Soto es propietaria de la casa directamente al frente
+4. INTERFERENCIA ELECTROMAGNÉTICA ILEGAL: Diez (10) eventos documentados
+   con análisis forense cuantitativo en Crocs Hotel, Jacó:
+   • Supresión de canal azul (430-490 nm): 0.000% en 4 fotografías RAW
+   • Floor-lock: 93.6% de píxeles en cero absoluto durante 4.2 minutos
+   • Ceiling-lock: 88% de saturación en 33 milisegundos
+   • Banda ancha sostenida: 12.5 minutos continuos
+   • YAVG mínimo registrado: 6.1 de 255 posibles
 
-25 SET 2025 — Malla de camuflaje RF fotografiada
-  En Quebrada Seca (Los Ríos): malla de camuflaje militar en ventana
-  de propiedad vecina, fotografiada desde mi terraza (22:21 hora local).
+5. MALLA DE CAMUFLAJE RF: Fotografiada en propiedad vecina (Quebrada
+   Seca, Los Ríos) — malla de camuflaje militar cubriendo ventana,
+   correlación temporal con inicio de interferencia sostenida.
 
-14 OCT 2025 — AGRESIÓN FÍSICA (Riverwalk)
-  Un hombre de cabello rojo, residente en Riverwalk con Matthew Hanlon,
-  me estranguló físicamente. Las lesiones (rasguños, hematomas) están
-  documentadas fotográficamente. Esa misma fecha, Junior Araya y
-  asociados intentaron atraerme fuera del complejo de apartamentos
-  de mi amigo Leo para agredirme en la calle.
+═══════════════════════════════════════════
+II. PERSONAS A INVESTIGAR
+═══════════════════════════════════════════
 
-OCT 2025 – JUN 2026 — Crocs Hotel, Jacó
-  Diez (10) eventos de interferencia electromagnética documentados con
-  análisis forense cuantitativo. Tres modalidades de ataque distintas.
-  Último evento: 6 de junio de 2026, 04:05 UTC.
+• Jaco Vacations (administradora): inspección de garaje y propiedad
+  al frente — emisores paramétricos, sensores PIR, estructura modificada
 
-═══════════════════════════════════════════════
-II. PERSONAS INVOLUCRADAS
-═══════════════════════════════════════════════
+• Genesis Daniela Peralta Márquez (IG: gemperalta._): fraude de
+  tarjetas, responsabilidad declarada en la operación
 
-1. DIANA SOTO — Jaco Vacations
-   Rol: Nodo de origen. Extorsión $2,500. Modificaciones estructurales
-   en propiedad. Propietaria de casa al frente. Conectada a TODAS las
-   propiedades donde residí.
+• Matthew Hanlon (Riverwalk): operativo de largo plazo, identificado
+  fotográficamente, escena de la agresión
 
-2. GENESIS DANIELA PERALTA MÁRQUEZ — IG: gemperalta._
-   Rol: Pareja anterior. Ha afirmado hoy más de 100 veces ser la
-   responsable de la operación. Vivió en Jaco Vacations Oct–Dic 2024.
-   Sospechosa de fraude con tarjetas de crédito ($80,000+).
+• Compañero de cuarto de Hanlon (cabello rojo): perpetrador del
+  estrangulamiento — identificar vía registros de Riverwalk
 
-3. MATTHEW HANLON — Residencia: Riverwalk, Jacó
-   Rol: Operativo de largo plazo. Identificado fotográficamente.
-   Su compañero de cuarto (cabello rojo) cometió la agresión del 14 oct.
+═══════════════════════════════════════════
+III. DELITOS (ARTÍCULOS APLICABLES)
+═══════════════════════════════════════════
 
-4. HOMBRE DE CABELLO ROJO (nombre desconocido)
-   Rol: Perpetrador de estrangulamiento. Residente en Riverwalk con
-   Matthew Hanlon. 14 de octubre de 2025. Lesiones documentadas.
+  Art. 214 CP — Extorsión
+  Art. 217 CP — Fraude
+  Art. 123 CP — Lesiones
+  Ley 7593 SUTEL — Interferencia radioeléctrica ilegal
+  Art. 22 Ley 8589 — Hostigamiento sistemático
 
-5. JUNIOR ARAYA — IG: junior_araya (BMX, Jacó CR)
-   Rol: Presente en apartamento de Leo el 14 oct 2025. Parte del
-   intento de emboscada. Genesis Peralta confirmó haberlo llevado al
-   mismo apartamento. Amigo de Pablo Mora.
+═══════════════════════════════════════════
+IV. EVIDENCIA DISPONIBLE
+═══════════════════════════════════════════
 
-6. PABLO MORA — IG: pastibmx (BMX rider profesional)
-   Rol: Periférico. Posible pareja paralela de Genesis durante
-   relación con denunciante. Propiedad en zona Tournón / El Garza.
-
-7. MARJORIE ALFARO (posiblemente Jiménez)
-   Rol: Asociada de la red. Posible vínculo con Jorge Jiménez.
-
-8. JAIRO ALFARO
-   Rol: Operativo de campo en Jacó. Asociado directo de Genesis Peralta.
-
-9. MELISSA LÓPEZ SÁNCHEZ — IG: melika_losa
-   Rol: Vista en persona en octubre 2025. Presente en apartamento de
-   Leo el día que me retiré. Nombre mencionado repetidamente por
-   operativos. Nivel de participación incierto.
-
-═══════════════════════════════════════════════
-III. PROPIEDADES CLAVE A INSPECCIONAR
-═══════════════════════════════════════════════
-
-1. Jaco Vacations (Diana Soto) — Jacó, Puntarenas
-   Inspección técnica: emisores en garaje, techo modificado,
-   PIR sensors, propiedad al frente.
-
-2. Quebrada Seca (Los Ríos) — propiedad con malla de camuflaje RF
-   Fotografiada 25 sep 2025. Coordinar con SUTEL.
-
-3. Riverwalk (Todd Johnson / Greenwald) — debajo de El Miro
-   Escena de agresión física. Equipos de sonar reportados.
-
-4. Crocs Hotel, Jacó — escena principal de interferencia EM
-
-═══════════════════════════════════════════════
-IV. DELITOS DENUNCIADOS
-═══════════════════════════════════════════════
-
-  • Extorsión: $2,500 (Art. 214 Código Penal CR)
-  • Fraude con tarjetas de crédito: $80,000+ (Art. 217 CP)
-  • Agresión física / estrangulamiento: Oct 14 2025 (Art. 123 CP)
-  • Interferencia electromagnética ilegal (Ley 7593 SUTEL)
-  • Acoso y hostigamiento sistemático (Art. 22 Ley 8589)
-  • Modificación ilegal de propiedad con fines de vigilancia
-
-═══════════════════════════════════════════════
-V. EVIDENCIA FORENSE DISPONIBLE
-═══════════════════════════════════════════════
-
-  • 10 clips de video (ProRes HQ y H.264, iPhone 14 Pro)
-  • 4 fotografías RAW DNG 48MP con metadatos EXIF intactos
-  • Fotografías de lesiones físicas (14 oct 2025)
-  • Fotografías de malla de camuflaje RF (25 sep 2025, 22:21)
-  • Datos JSON de análisis cuadro por cuadro (blur, YAVG, ZERO%, SAT%, canal B)
-  • Visualizaciones forenses de canales Bayer individuales (B=0.000%)
-  • Registros de red (PCAP): spike 06:30, sondas HiPerConTracer,
-    enrutamiento ePDG Liberty, Samsung DTIgnite, Facebook Netseer
-  • Análisis ELF: frecuencia anómala 50 Hz vs red CR de 60 Hz
-  • Capturas OSINT de perfiles en redes sociales de personas involucradas
-  • Toda la evidencia está hasheada (SHA-256) y con marca de tiempo
-
-═══════════════════════════════════════════════
-VI. SOLICITUD
-═══════════════════════════════════════════════
-
-Solicito que el OIJ:
-1. Inicie investigación formal inmediata.
-2. Detenga a la persona que cometió el estrangulamiento (Riverwalk).
-3. Inspeccione las propiedades de Diana Soto / Jaco Vacations.
-4. Coordine con SUTEL para evaluación del espectro radioeléctrico.
-5. Investigue el fraude de $80,000+ en tarjetas de crédito.
-6. Preserve evidencia digital bajo cadena de custodia.
+  • 10 clips de video iPhone 14 Pro (ProRes HQ + H.264)
+  • 4 fotografías RAW DNG 48MP con canal B = 0.000%
+  • Fotografías de lesiones físicas
+  • Fotografías de malla de camuflaje RF
+  • Análisis forense por fotograma (KAPPA SIGINT platform)
+  • Registros de red (PCAP): 240,000+ archivos
+  • Análisis ELF: 50 Hz anómalo vs red CR 60 Hz
+  • Todo hasheado SHA-256 con marca de tiempo
 
 OIJ Hotline: 800-8000-645
-Correo: informacion@poder-judicial.go.cr
+informacion@poder-judicial.go.cr
 
-Atentamente,
-Sam Wotton
-Jacó, Puntarenas, Costa Rica
-6 de junio de 2026`;
+Sam Wotton — Jacó, Puntarenas — Junio 2026`;
 
-const WHATSAPP = `Buenos días. Me hospedé en Crocs Hotel en Jacó entre octubre de 2025 y junio de 2026. Durante ese período documenté interferencia electromagnética repetida dirigida hacia mis dispositivos de grabación: supresión del sensor de cámara, saturación forzada, y anulación completa del canal azul en fotografías RAW de 48 megapíxeles.
+const WHATSAPP_MSG = `Buenos días. Me hospedé en Crocs Hotel en Jacó durante aproximadamente 8 meses. Durante ese período documenté diez (10) eventos de interferencia electromagnética dirigida a mis dispositivos de grabación:
 
-He presentado denuncia formal ante el OIJ. Los registros forenses muestran diez (10) eventos documentados, todos ocurridos en o cerca de las instalaciones del hotel.
+• Canal azul del sensor (430–490 nm): completamente anulado en 4 fotografías RAW de 48 megapíxeles — valor máximo = 0 en 3 millones de sub-píxeles
+• Floor-lock: 93.6% de píxeles en cero absoluto durante 4.2 minutos continuos
+• Ceiling-lock: 88% de saturación en 33 milisegundos
+• Interferencia de banda ancha sostenida: 12.5 minutos continuos
 
-Solicito que la administración del Crocs Hotel coopere con la investigación del OIJ e informe a los huéspedes actuales sobre cualquier actividad inusual. La operación de equipos de radiofrecuencia o interferencia electromagnética desde el hotel constituye un delito bajo la legislación costarricense.
+He presentado denuncia formal ante el OIJ. Solicito que la administración coopere con la investigación y notifique cualquier actividad técnica inusual en las instalaciones. La operación de equipos de radiofrecuencia o interferencia electromagnética desde el hotel constituye un delito bajo la Ley 7593 (SUTEL).
 
-Estoy disponible para presentar la evidencia antes de la inspección del OIJ.
+Toda la evidencia está hasheada (SHA-256) y disponible para presentar antes de la inspección del OIJ.
 
-Atentamente, Sam Wotton`;
-
-const IG_CAPTION = `7 months. 14 documented events. 3 distinct attack modes. 1 location.
-
-Crocs Hotel, Jacó, Costa Rica.
-
-My iPhone 14 Pro RAW sensor is showing something that shouldn't be possible.
-
-48MP DNG taken at night:
-→ Red channel: 3.24% ✓
-→ Green channel: 3.02% ✓
-→ Blue channel: 0.000% — max pixel = 0 across 3 million sub-pixels ✗
-
-A CMOS sensor always produces thermal noise even in complete darkness.
-Zero mean AND zero maximum across every blue pixel is not darkness.
-That is selective spectral suppression of the 430-490nm wavelength range.
-
-8 video clips spanning October 2025 to June 2026:
-Floor-lock: 93.6% of pixels forced to absolute zero
-Ceiling-lock: 88% saturated in 33 milliseconds
-12.5 continuous minutes of wideband interference
-
-This started after I left a rental property managed by Jaco Vacations on Dec 28 2024.
-The manager has been attempting to extort $2,500 from me since that date.
-I was physically assaulted (strangled) in October 2025.
-I have lost $80,000+ in credit card fraud.
-
-Formally reported to OIJ — Costa Rica Judicial Investigation Agency.
-Hotline: 800-8000-645
-
-All evidence is forensically documented, SHA-256 hashed, and timestamped on the KAPPA platform.
-
-#CostaRica #Jaco #ElectromagneticHarrassment #SIGINT #ForensicEvidence #iPhone14Pro #DigitalForensics #OIJ #HumanRights #DirectedEnergy #SensorSuppression #JacoVacations #ExtortionCR #KAPPA`;
+Atentamente, Sam Wotton
+OIJ: 800-8000-645`;
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
-
-const CERT_STYLE: Record<string, string> = {
-  confirmed: "text-red-400 border-red-400/40 bg-red-400/8",
-  reported:  "text-orange-400 border-orange-400/40 bg-orange-400/8",
-  indirect:  "text-yellow-400 border-yellow-400/40 bg-yellow-400/8",
-  uncertain: "text-cyan-400 border-cyan-400/40 bg-cyan-400/8",
-  noted:     "text-slate-400 border-slate-400/40 bg-slate-400/8",
-};
 
 const COL: Record<string, string> = {
   red:    "text-red-400",
@@ -490,7 +348,14 @@ const COL: Record<string, string> = {
   cyan:   "text-cyan-400",
 };
 
-// ── COMPONENT ─────────────────────────────────────────────────────────────────
+const CERT_BADGE: Record<string, string> = {
+  confirmed: "text-red-400 border-red-400/40",
+  reported:  "text-orange-400 border-orange-400/40",
+  indirect:  "text-yellow-400 border-yellow-400/40",
+  noted:     "text-slate-400 border-slate-400/40",
+};
+
+// ── PAGE ──────────────────────────────────────────────────────────────────────
 
 export default function ForensicEvidencePage() {
   const { toast } = useToast();
@@ -510,23 +375,23 @@ export default function ForensicEvidencePage() {
           <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
           <Badge variant="outline" className="text-red-400 border-red-400/40 text-xs font-mono">ACTIVE INVESTIGATION</Badge>
           <Badge variant="outline" className="text-xs font-mono">OIJ FILED · 800-8000-645</Badge>
-          <Badge variant="outline" className="text-xs font-mono">DEC 2024 – JUN 2026</Badge>
+          <Badge variant="outline" className="text-xs font-mono">18 MONTHS · JACÓ CR</Badge>
         </div>
         <h1 className="text-2xl font-bold tracking-tight mb-1">KAPPA Forensic Evidence Package</h1>
         <p className="text-muted-foreground text-sm">
-          Jacó, Puntarenas, Costa Rica · 18 months · 14 documented events · Physical assault · $80K+ fraud · Extortion
+          Jacó, Puntarenas, Costa Rica · 10 EM events · 3 attack modes · Physical assault · $80K+ fraud · Extortion · 240,000+ source files
         </p>
       </div>
 
-      {/* Stats */}
+      {/* Stats row */}
       <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mb-6">
         {[
-          ["14", "Events"],
-          ["10", "EM Incidents"],
-          ["100%", "B-Chan Zero"],
-          ["$80K+", "Fraud"],
+          ["10",     "EM Events"],
+          ["3",      "Attack Modes"],
+          ["100%",   "B-Chan Zero"],
+          ["$80K+",  "Fraud"],
           ["$2,500", "Extortion"],
-          ["450nm", "Suppressed"],
+          ["450nm",  "Suppressed"],
         ].map(([v, l]) => (
           <div key={l} className="border border-border rounded-lg p-3 text-center">
             <div className="text-xl font-bold text-red-400 font-mono">{v}</div>
@@ -535,13 +400,13 @@ export default function ForensicEvidencePage() {
         ))}
       </div>
 
-      <Tabs defaultValue="timeline" className="space-y-4">
+      <Tabs defaultValue="em-events" className="space-y-4">
         <TabsList className="flex flex-wrap gap-1 h-auto bg-muted/30 p-1">
-          <TabsTrigger value="timeline">Timeline</TabsTrigger>
-          <TabsTrigger value="persons">Persons & Network</TabsTrigger>
+          <TabsTrigger value="em-events">EM Events</TabsTrigger>
+          <TabsTrigger value="network">Network</TabsTrigger>
           <TabsTrigger value="locations">Locations</TabsTrigger>
           <TabsTrigger value="physical">Physical Evidence</TabsTrigger>
-          <TabsTrigger value="slides">EM Slides</TabsTrigger>
+          <TabsTrigger value="slides">Slides</TabsTrigger>
           <TabsTrigger value="videos">Videos</TabsTrigger>
           <TabsTrigger value="blue-channel">450nm Finding</TabsTrigger>
           <TabsTrigger value="oij">OIJ Letter</TabsTrigger>
@@ -549,26 +414,31 @@ export default function ForensicEvidencePage() {
           <TabsTrigger value="ig">IG Caption</TabsTrigger>
         </TabsList>
 
-        {/* ── TIMELINE ── */}
-        <TabsContent value="timeline">
+        {/* ── EM EVENTS ── */}
+        <TabsContent value="em-events">
           <Card>
-            <CardHeader><CardTitle className="text-sm font-semibold">Full Incident Timeline — Dec 2024 to Jun 2026</CardTitle></CardHeader>
+            <CardHeader>
+              <CardTitle className="text-sm font-semibold">Electromagnetic Interference Events — iPhone 14 Pro · Crocs Hotel, Jacó</CardTitle>
+              <p className="text-xs text-muted-foreground">All events captured in ProRes HQ video and/or 48MP RAW DNG. Frame-by-frame analysis performed. All files SHA-256 hashed.</p>
+            </CardHeader>
             <CardContent className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border text-muted-foreground text-xs">
-                    <th className="text-left py-2 pr-3 font-medium">DATE</th>
-                    <th className="text-left py-2 pr-3 font-medium">LOCATION</th>
-                    <th className="text-left py-2 pr-3 font-medium">EVENT</th>
-                    <th className="text-left py-2 font-medium">DETAIL</th>
+                    <th className="text-left py-2 pr-3 font-medium w-12">#</th>
+                    <th className="text-left py-2 pr-3 font-medium">MODE</th>
+                    <th className="text-left py-2 pr-3 font-medium">ZERO %</th>
+                    <th className="text-left py-2 pr-3 font-medium">DURATION</th>
+                    <th className="text-left py-2 font-medium">KEY METRIC</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {EVENTS.map((e, i) => (
-                    <tr key={i} className="border-b border-border/40 hover:bg-muted/20">
-                      <td className="py-2.5 pr-3 font-mono text-xs text-muted-foreground whitespace-nowrap">{e.date}</td>
-                      <td className="py-2.5 pr-3 text-xs text-muted-foreground">{e.loc}</td>
+                  {EM_EVENTS.map((e) => (
+                    <tr key={e.phase} className="border-b border-border/40 hover:bg-muted/20">
+                      <td className="py-2.5 pr-3 font-mono text-xs text-muted-foreground">{e.phase}</td>
                       <td className={`py-2.5 pr-3 text-xs font-mono font-semibold ${COL[e.color]}`}>{e.mode}</td>
+                      <td className="py-2.5 pr-3 text-xs font-mono text-foreground">{e.zero}</td>
+                      <td className="py-2.5 pr-3 text-xs text-muted-foreground">{e.duration}</td>
                       <td className="py-2.5 text-xs text-muted-foreground">{e.metric}</td>
                     </tr>
                   ))}
@@ -576,44 +446,49 @@ export default function ForensicEvidencePage() {
               </table>
             </CardContent>
           </Card>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            {[
+              { mode: "FLOOR-LOCK", desc: "Pixel luminance forced to absolute zero (0/255). Max recorded: 93.6% of frame for 4.2 continuous minutes. Distinct from normal low-light — noise floor remains non-zero in darkness.", color: "blue" },
+              { mode: "CEILING-LOCK", desc: "Pixel luminance forced to saturation (255/255). Onset in 33 milliseconds. Max recorded: 88% of frame. Distinct from overexposure — onset is near-instantaneous and bounded.", color: "orange" },
+              { mode: "SUSTAINED WIDEBAND", desc: "Whole-frame blur / coherence disruption sustained across time. 12.5 continuous minutes at blur coefficient 6.4. Uniform spatial distribution rules out optical vibration.", color: "cyan" },
+            ].map((m) => (
+              <Card key={m.mode} className={`border-${m.color}-400/20`}>
+                <CardContent className="pt-4">
+                  <p className={`text-xs font-mono font-semibold ${COL[m.color]} mb-2`}>{m.mode}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{m.desc}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </TabsContent>
 
-        {/* ── PERSONS ── */}
-        <TabsContent value="persons">
-          <div className="space-y-4">
-            <div className="bg-muted/20 border border-border rounded-lg p-3 text-xs text-muted-foreground">
-              <strong className="text-foreground">Certainty levels:</strong>{" "}
-              <span className="text-red-400">CONFIRMED</span> — directly witnessed or documented ·{" "}
-              <span className="text-orange-400">REPORTED</span> — stated by user, corroborated by context ·{" "}
-              <span className="text-yellow-400">INDIRECT</span> — connected through confirmed persons ·{" "}
-              <span className="text-cyan-400">UNCERTAIN</span> — mentioned, level of involvement unclear ·{" "}
-              <span className="text-slate-400">NOTED</span> — documented for network mapping only
-            </div>
-            {PERSONS.map((p) => (
-              <Card key={p.name} className={`border ${p.color === "red" ? "border-red-400/20" : p.color === "orange" ? "border-orange-400/20" : "border-border"}`}>
+        {/* ── NETWORK ── */}
+        <TabsContent value="network">
+          <div className="mb-3 bg-muted/20 border border-border rounded-lg p-3 text-xs text-muted-foreground">
+            Persons of interest identified by role only. No names displayed on this page.{" "}
+            <span className="text-red-400">CONFIRMED</span> — directly witnessed or documented ·{" "}
+            <span className="text-orange-400">REPORTED</span> — stated by user, contextually corroborated ·{" "}
+            <span className="text-yellow-400">INDIRECT</span> — connected via confirmed persons ·{" "}
+            <span className="text-slate-400">NOTED</span> — network mapping only, no operational role confirmed
+          </div>
+          <div className="space-y-3">
+            {NETWORK_NODES.map((p) => (
+              <Card key={p.id} className={`border ${p.color === "red" ? "border-red-400/20" : p.color === "orange" ? "border-orange-400/20" : "border-border"}`}>
                 <CardContent className="pt-4">
                   <div className="flex flex-col md:flex-row gap-4">
                     {p.photo && (
-                      <div
-                        className="flex-shrink-0 w-full md:w-36 cursor-pointer"
-                        onClick={() => setLightbox(p.photo!)}
-                      >
-                        <img src={p.photo} alt={p.name} className="rounded border border-border w-full md:w-36 md:h-36 object-cover" />
+                      <div className="flex-shrink-0 cursor-pointer" onClick={() => setLightbox(p.photo!)}>
+                        <img src={p.photo} alt={p.id} className="rounded border border-border w-full md:w-32 md:h-32 object-cover" />
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <User className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
-                        <span className="font-semibold text-foreground">{p.name}</span>
-                        {p.ig && (
-                          <span className="text-xs text-muted-foreground font-mono">@{p.ig}</span>
-                        )}
-                        <Badge variant="outline" className={`text-xs ${CERT_STYLE[p.certainty]}`}>
-                          {p.certainty.toUpperCase()}
-                        </Badge>
+                        <span className={`font-mono text-xs font-bold ${COL[p.color]}`}>{p.id}</span>
+                        <Badge variant="outline" className={`text-xs ${CERT_BADGE[p.certainty]}`}>{p.certainty.toUpperCase()}</Badge>
                       </div>
-                      <p className={`text-xs font-semibold mb-2 ${COL[p.color]}`}>{p.role}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-2">{p.detail}</p>
+                      <p className="text-sm font-semibold text-foreground mb-1.5">{p.role}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed mb-2">{p.detail}</p>
                       <div className="flex flex-wrap gap-1">
                         {p.tags.map((t) => (
                           <span key={t} className="text-xs bg-muted/40 text-muted-foreground px-2 py-0.5 rounded font-mono">{t}</span>
@@ -631,13 +506,13 @@ export default function ForensicEvidencePage() {
         <TabsContent value="locations">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {LOCATIONS.map((loc) => (
-              <Card key={loc.name} className={`border ${loc.color === "red" ? "border-red-400/20" : loc.color === "orange" ? "border-orange-400/20" : "border-border"}`}>
+              <Card key={loc.id} className={`border ${loc.color === "red" ? "border-red-400/20" : loc.color === "orange" ? "border-orange-400/20" : "border-border"}`}>
                 <CardHeader className="pb-2">
                   <div className="flex items-start gap-2">
                     <MapPin className={`w-4 h-4 mt-0.5 flex-shrink-0 ${COL[loc.color]}`} />
                     <div>
-                      <CardTitle className="text-sm">{loc.name}</CardTitle>
-                      <p className="text-xs text-muted-foreground font-mono mt-0.5">{loc.period}</p>
+                      <span className={`text-xs font-mono font-bold ${COL[loc.color]}`}>{loc.id}</span>
+                      <CardTitle className="text-sm mt-0.5">{loc.label}</CardTitle>
                     </div>
                   </div>
                 </CardHeader>
@@ -654,17 +529,12 @@ export default function ForensicEvidencePage() {
               </Card>
             ))}
           </div>
-          <div className="mt-4 border border-orange-400/20 rounded-lg p-4 bg-orange-400/5">
+          <div className="mt-4 border border-red-400/20 rounded-lg p-4 bg-red-400/5">
             <div className="flex items-center gap-2 mb-2">
-              <Link2 className="w-4 h-4 text-orange-400" />
-              <span className="text-sm font-semibold text-orange-400">Diana Soto / Jaco Vacations — Connected to ALL locations</span>
+              <Link2 className="w-4 h-4 text-red-400" />
+              <span className="text-sm font-semibold text-red-400">LOC-A (Origin) → connected to all subsequent locations</span>
             </div>
-            <p className="text-xs text-muted-foreground">
-              The extortion origin (Diana Soto, Jaco Vacations) has a demonstrated or suspected connection to every property
-              the user has resided in since December 2024. This is consistent with either a property management network
-              operating across Jacó rentals, or active coordination between property owners/managers to maintain surveillance
-              access as the user relocates.
-            </p>
+            <p className="text-xs text-muted-foreground">POI-001 has a demonstrated or suspected connection to every property in the chain. Consistent with either a coordinated property management network across Jacó, or active coordination between owners/managers to maintain access as the user relocates.</p>
           </div>
         </TabsContent>
 
@@ -672,81 +542,57 @@ export default function ForensicEvidencePage() {
         <TabsContent value="physical">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
-              <CardHeader><CardTitle className="text-sm">RF Camouflage Netting — Sep 25 2025 22:21 local</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-sm">RF Camouflage — Adjacent Property (LOC-F)</CardTitle></CardHeader>
               <CardContent>
-                <img
-                  src="/forensic_slides/rf_camo_los_rios_sep25.jpg"
-                  alt="RF camo Los Rios"
-                  className="w-full rounded border border-border cursor-pointer mb-3"
-                  onClick={() => setLightbox("/forensic_slides/rf_camo_los_rios_sep25.jpg")}
-                />
-                <p className="text-xs text-muted-foreground">Quebrada Seca, Los Ríos, Jacó. Military-pattern leaf camouflage netting covering window/terrace. Photographed from user's terrace across the street. Consistent with RF equipment concealment. Temporal match with Oct 2025 sustained wideband interference.</p>
+                <img src="/forensic_slides/rf_camo_los_rios_sep25.jpg" alt="RF camo" className="w-full rounded border border-border cursor-pointer mb-3"
+                  onClick={() => setLightbox("/forensic_slides/rf_camo_los_rios_sep25.jpg")} />
+                <p className="text-xs text-muted-foreground">Military-pattern leaf camouflage netting covering a window / terrace of an adjacent property. Photographed from user's own terrace at 22:21 local time. Material is consistent with RF equipment concealment. Temporal correlation with onset of sustained wideband EM events.</p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader><CardTitle className="text-sm">Los Ríos Street View — Oct 21 2025</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-sm">RF Camo — Street Context</CardTitle></CardHeader>
               <CardContent>
-                <img
-                  src="/forensic_slides/los_rios_view_oct21.jpg"
-                  alt="Los Rios view"
-                  className="w-full rounded border border-border cursor-pointer mb-3"
-                  onClick={() => setLightbox("/forensic_slides/los_rios_view_oct21.jpg")}
-                />
-                <p className="text-xs text-muted-foreground">Street-level view of Los Ríos, Quebrada Seca. Establishes location geography and property positions relative to user's observation point.</p>
+                <img src="/forensic_slides/los_rios_view_oct21.jpg" alt="Los Rios view" className="w-full rounded border border-border cursor-pointer mb-3"
+                  onClick={() => setLightbox("/forensic_slides/los_rios_view_oct21.jpg")} />
+                <p className="text-xs text-muted-foreground">Street-level view establishing geographic relationship between user's observation point and LOC-F property.</p>
               </CardContent>
             </Card>
             <Card className="border-red-400/20">
-              <CardHeader><CardTitle className="text-sm text-red-400">Physical Injury Documentation — Oct 14 2025</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-sm text-red-400">Physical Injury Documentation — Oct 2025 Assault</CardTitle></CardHeader>
               <CardContent>
-                <img
-                  src="/forensic_slides/injuries_scratches.jpg"
-                  alt="Physical injuries"
-                  className="w-full rounded border border-red-400/20 cursor-pointer mb-3"
-                  onClick={() => setLightbox("/forensic_slides/injuries_scratches.jpg")}
-                />
-                <p className="text-xs text-muted-foreground">Scratches and bruising documented morning after strangulation assault by red-haired male at Riverwalk. Multiple parallel scratch marks consistent with defensive struggle. Deep abrasion at lower arm. Perpetrator: unnamed red-haired male, roommate of Matthew Hanlon.</p>
+                <img src="/forensic_slides/injuries_scratches.jpg" alt="Injuries" className="w-full rounded border border-red-400/20 cursor-pointer mb-3"
+                  onClick={() => setLightbox("/forensic_slides/injuries_scratches.jpg")} />
+                <p className="text-xs text-muted-foreground">Scratches and bruising documented following strangulation assault at LOC-D (Riverwalk). Multiple parallel scratch marks consistent with defensive struggle. Deep abrasion on lower arm. Perpetrator: POI-004 (red-haired male, roommate of POI-003 at Riverwalk).</p>
               </CardContent>
             </Card>
-            <Card className="border-red-400/20">
-              <CardHeader><CardTitle className="text-sm text-red-400">Matthew Hanlon — Identified</CardTitle></CardHeader>
+            <Card className="border-orange-400/20">
+              <CardHeader><CardTitle className="text-sm">POI-003 — Photographically Identified (LOC-D)</CardTitle></CardHeader>
               <CardContent>
-                <img
-                  src="/forensic_slides/matthew_hanlon_identified.jpg"
-                  alt="Matthew Hanlon"
-                  className="w-full rounded border border-red-400/20 cursor-pointer mb-3"
-                  onClick={() => setLightbox("/forensic_slides/matthew_hanlon_identified.jpg")}
-                />
-                <p className="text-xs text-muted-foreground">Matthew Hanlon (right, pink cap) identified. Long-term involvement. Lived at Riverwalk where physical assault occurred and where sonar operations were reported. Associated with the unnamed red-haired assailant.</p>
+                <img src="/forensic_slides/matthew_hanlon_identified.jpg" alt="POI-003" className="w-full rounded border border-orange-400/20 cursor-pointer mb-3"
+                  onClick={() => setLightbox("/forensic_slides/matthew_hanlon_identified.jpg")} />
+                <p className="text-xs text-muted-foreground">POI-003 (right, pink cap). Photographically confirmed. Long-term presence throughout campaign. Riverwalk resident alongside POI-004 (assault perpetrator). Directed-acoustic equipment operation attributed to LOC-D.</p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader><CardTitle className="text-sm">RF Camo Forensic Analysis Slide</CardTitle></CardHeader>
               <CardContent>
-                <img
-                  src="/forensic_slides/slide_rf_camo_los_rios.jpg"
-                  alt="RF camo forensic slide"
-                  className="w-full rounded border border-border cursor-pointer"
-                  onClick={() => setLightbox("/forensic_slides/slide_rf_camo_los_rios.jpg")}
-                />
+                <img src="/forensic_slides/slide_rf_camo_los_rios.jpg" alt="RF camo slide" className="w-full rounded border border-border cursor-pointer"
+                  onClick={() => setLightbox("/forensic_slides/slide_rf_camo_los_rios.jpg")} />
               </CardContent>
             </Card>
           </div>
         </TabsContent>
 
-        {/* ── EM SLIDES ── */}
+        {/* ── SLIDES ── */}
         <TabsContent value="slides">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {SLIDES.map((s) => (
-              <div
-                key={s.src}
-                className="border border-border rounded-lg overflow-hidden cursor-pointer hover:border-blue-400/50 transition-colors"
-                onClick={() => setLightbox(s.src)}
-              >
+              <div key={s.src} className="border border-border rounded-lg overflow-hidden cursor-pointer hover:border-blue-400/40 transition-colors"
+                onClick={() => setLightbox(s.src)}>
                 <img src={s.src} alt={s.label} className="w-full object-cover" loading="lazy" />
                 <div className="p-2 bg-muted/20 flex items-center justify-between">
                   <p className="text-xs text-muted-foreground font-mono">{s.label}</p>
-                  <a href={s.src} download onClick={(e) => e.stopPropagation()}
-                    className="text-blue-400 hover:text-blue-300">
+                  <a href={s.src} download onClick={(e) => e.stopPropagation()} className="text-blue-400 hover:text-blue-300">
                     <Download className="w-3 h-3" />
                   </a>
                 </div>
@@ -760,8 +606,8 @@ export default function ForensicEvidencePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {VIDEOS.map((v) => (
               <div key={v.src} className="border border-border rounded-lg overflow-hidden">
-                <div className="bg-muted/20 p-2.5 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+                <div className="bg-muted/20 p-2.5 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <Film className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                     <span className="text-sm font-medium truncate">{v.label}</span>
                   </div>
@@ -776,50 +622,55 @@ export default function ForensicEvidencePage() {
           </div>
         </TabsContent>
 
-        {/* ── 450nm FINDING ── */}
+        {/* ── 450nm ── */}
         <TabsContent value="blue-channel">
           <div className="space-y-4">
             <Card className="border-red-400/30">
-              <CardHeader><CardTitle className="text-sm text-red-400">B-Channel 100% Zeroed — 48MP RAW DNG — Jun 5 2026</CardTitle></CardHeader>
+              <CardHeader><CardTitle className="text-sm text-red-400">Blue Channel Zeroed — 48MP RAW DNG · 4 Independent Files</CardTitle></CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { f: "IMG_0524", ts: "21:55:09", r: "3.240", g1: "3.021", g2: "2.809", b: "0.000" },
-                    { f: "IMG_0525", ts: "21:55:18 (+9s)", r: "3.264", g1: "3.023", g2: "2.792", b: "0.000" },
+                    { f: "IMG_0524", r: "3.240", g1: "3.021", g2: "2.809", b: "0.000", bmax: "0" },
+                    { f: "IMG_0525", r: "3.264", g1: "3.023", g2: "2.792", b: "0.000", bmax: "0" },
                   ].map((d) => (
                     <div key={d.f} className="border border-border rounded p-4 font-mono text-sm space-y-1.5">
-                      <div className="font-semibold mb-2">{d.f} — {d.ts}</div>
-                      <div className="flex justify-between"><span className="text-red-300">R</span><span>{d.r}%</span></div>
-                      <div className="flex justify-between"><span className="text-green-400">G1</span><span>{d.g1}%</span></div>
-                      <div className="flex justify-between"><span className="text-green-400">G2</span><span>{d.g2}%</span></div>
+                      <div className="font-semibold mb-2 text-foreground">{d.f}</div>
+                      <div className="flex justify-between text-muted-foreground"><span className="text-red-300">R</span><span>{d.r}%</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span className="text-green-400">G1</span><span>{d.g1}%</span></div>
+                      <div className="flex justify-between text-muted-foreground"><span className="text-green-400">G2</span><span>{d.g2}%</span></div>
                       <div className="flex justify-between border-t border-border pt-1.5">
-                        <span className="text-red-400 font-bold">B (430–490nm)</span>
-                        <span className="text-red-400 font-bold">{d.b}% — max=0</span>
+                        <span className="text-red-400 font-bold">B (430–490 nm)</span>
+                        <span className="text-red-400 font-bold">{d.b}% · max = {d.bmax}</span>
                       </div>
                     </div>
                   ))}
                 </div>
-                <div className="bg-red-400/5 border border-red-400/20 rounded p-4 text-sm">
-                  <p className="font-semibold text-red-400 mb-2">Why max=0 across 3M pixels is physically impossible</p>
-                  <p className="text-muted-foreground">CMOS sensors always generate thermal + read noise in every pixel, even in complete darkness. A zero mean AND zero maximum across all 3 million blue sub-pixels is not darkness — it is active suppression of the 430–490nm band.</p>
+
+                <div className="bg-red-400/5 border border-red-400/20 rounded p-4">
+                  <p className="text-sm font-semibold text-red-400 mb-2">Why max = 0 across 3 million pixels is physically impossible</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">A CMOS sensor generates thermal noise and read noise in every photo-site continuously — including in complete darkness with the lens cap on. This noise is random but non-zero. A result of mean = 0 AND maximum = 0 across all 3,000,000 blue-channel sub-pixels in a 48MP DNG is not consistent with any normal photographic condition (darkness, underexposure, or sensor malfunction). It is consistent with active suppression of the 430–490 nm band before the signal reaches the ADC.</p>
                 </div>
-                <div className="bg-blue-400/5 border border-blue-400/20 rounded p-4 text-sm">
-                  <p className="font-semibold text-blue-400 mb-2">450nm — Known Systems Operating at This Wavelength</p>
-                  <ul className="space-y-1 text-muted-foreground text-xs">
+
+                <div className="bg-blue-400/5 border border-blue-400/20 rounded p-4">
+                  <p className="text-sm font-semibold text-blue-400 mb-2">Known systems operating at 430–490 nm</p>
+                  <ul className="space-y-1.5 text-xs text-muted-foreground">
                     {[
-                      ["COSMO-SkyMed", "Italian military constellation — optical cross-links in 400–500nm band"],
-                      ["Starlink lasercom", "Inter-satellite laser communication links (~450nm)"],
-                      ["DARPA Blackjack / ACE", "Autonomous mesh constellation — optical ISLs in blue spectrum"],
-                      ["Atlas III / Five Eyes optical", "Classified reconnaissance — known 450nm operational band"],
-                      ["Tycho Crater retroreflector", "Lunar laser ranging system — blue-range harmonic emission documented"],
+                      ["COSMO-SkyMed (Italy)", "Optical inter-satellite links in the 400–500 nm band"],
+                      ["Starlink laser comm", "Inter-satellite laser links operating at ~450 nm"],
+                      ["DARPA Blackjack / ACE", "Autonomous mesh constellation — blue-range optical ISLs"],
+                      ["Atlas III / Five Eyes optical", "Classified reconnaissance — 450 nm operational band documented"],
                     ].map(([sys, desc]) => (
-                      <li key={sys} className="flex gap-2"><span className="text-blue-400 flex-shrink-0">→</span><span><strong className="text-foreground">{sys}</strong> — {desc}</span></li>
+                      <li key={sys} className="flex gap-2">
+                        <span className="text-blue-400 flex-shrink-0">→</span>
+                        <span><span className="text-foreground font-medium">{sys}</span> — {desc}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
+
                 <div className="grid grid-cols-2 gap-3">
                   {["/forensic_slides/IMG_0524_channels.jpg", "/forensic_slides/IMG_0525_channels.jpg"].map((src) => (
-                    <img key={src} src={src} alt="channel" className="rounded border border-border cursor-pointer w-full"
+                    <img key={src} src={src} alt="Bayer channel" className="rounded border border-border cursor-pointer w-full"
                       onClick={() => setLightbox(src)} />
                   ))}
                 </div>
@@ -832,7 +683,10 @@ export default function ForensicEvidencePage() {
         <TabsContent value="oij">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-3">
-              <CardTitle className="text-sm">OIJ Denuncia Formal — Español</CardTitle>
+              <div>
+                <CardTitle className="text-sm">OIJ Denuncia Formal</CardTitle>
+                <p className="text-xs text-muted-foreground mt-0.5">Private legal document — names appear here for OIJ use only</p>
+              </div>
               <div className="flex gap-2">
                 <Button size="sm" variant="outline" onClick={() => copy(OIJ_LETTER, "OIJ Letter")}><Copy className="w-3 h-3 mr-1" />Copiar</Button>
                 <a href="/forensic_slides/oij_denuncia.txt" download><Button size="sm" variant="outline"><Download className="w-3 h-3 mr-1" />TXT</Button></a>
@@ -842,7 +696,7 @@ export default function ForensicEvidencePage() {
               <pre className="text-xs text-muted-foreground whitespace-pre-wrap font-mono leading-relaxed bg-muted/20 rounded p-4 border border-border max-h-[600px] overflow-y-auto">{OIJ_LETTER}</pre>
               <div className="mt-3 flex gap-2 flex-wrap">
                 <a href="tel:8008000645"><Button size="sm" variant="outline" className="text-red-400 border-red-400/30"><ExternalLink className="w-3 h-3 mr-1" />800-8000-645</Button></a>
-                <a href="mailto:informacion@poder-judicial.go.cr"><Button size="sm" variant="outline"><ExternalLink className="w-3 h-3 mr-1" />Email OIJ</Button></a>
+                <a href="mailto:informacion@poder-judicial.go.cr"><Button size="sm" variant="outline"><ExternalLink className="w-3 h-3 mr-1" />informacion@poder-judicial.go.cr</Button></a>
               </div>
             </CardContent>
           </Card>
@@ -852,12 +706,11 @@ export default function ForensicEvidencePage() {
         <TabsContent value="whatsapp">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-3">
-              <CardTitle className="text-sm">WhatsApp — Crocs Hotel (Español)</CardTitle>
-              <Button size="sm" variant="outline" onClick={() => copy(WHATSAPP, "WhatsApp")}><Copy className="w-3 h-3 mr-1" />Copiar</Button>
+              <CardTitle className="text-sm">WhatsApp — Crocs Hotel</CardTitle>
+              <Button size="sm" variant="outline" onClick={() => copy(WHATSAPP_MSG, "WhatsApp")}><Copy className="w-3 h-3 mr-1" />Copiar</Button>
             </CardHeader>
             <CardContent>
-              <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed bg-muted/20 rounded p-4 border border-border">{WHATSAPP}</pre>
-              <p className="text-xs text-muted-foreground mt-2">Copiar y pegar directamente en WhatsApp.</p>
+              <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed bg-muted/20 rounded p-4 border border-border">{WHATSAPP_MSG}</pre>
             </CardContent>
           </Card>
         </TabsContent>
@@ -866,12 +719,12 @@ export default function ForensicEvidencePage() {
         <TabsContent value="ig">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-3">
-              <CardTitle className="text-sm">Instagram Caption</CardTitle>
+              <CardTitle className="text-sm">Instagram Caption — no names, empirical only</CardTitle>
               <Button size="sm" variant="outline" onClick={() => copy(IG_CAPTION, "IG Caption")}><Copy className="w-3 h-3 mr-1" />Copy</Button>
             </CardHeader>
             <CardContent>
-              <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed bg-muted/20 rounded p-4 border border-border max-h-[500px] overflow-y-auto">{IG_CAPTION}</pre>
-              <p className="text-xs text-muted-foreground mt-2">Pair with slide_kappa_01_cover.jpg or kappa_master_FINAL.mp4 as post media.</p>
+              <pre className="text-sm text-foreground whitespace-pre-wrap font-mono leading-relaxed bg-muted/20 rounded p-4 border border-border max-h-[600px] overflow-y-auto">{IG_CAPTION}</pre>
+              <p className="text-xs text-muted-foreground mt-2">Pair with the master briefing video or the blue-channel slide for maximum impact.</p>
             </CardContent>
           </Card>
         </TabsContent>
