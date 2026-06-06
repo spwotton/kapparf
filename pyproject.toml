@@ -16,4 +16,5 @@ dependencies = [
     "scipy>=1.17.1",
     "soundfile>=0.13.1",
     "websocket>=0.2.1",
+    "zstandard>=0.25.0",
 ]

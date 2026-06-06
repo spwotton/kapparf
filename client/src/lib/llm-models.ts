@@ -138,16 +138,18 @@ export const LLM_MODELS: LLMModel[] = [
 export const DEFAULT_MODEL_ID = LLM_MODELS[0].id;
 
 export const OLLAMA_SUGGESTED_MODELS = [
-  { id: "dolphin-mistral",       label: "dolphin-mistral",       note: "Uncensored Mistral 7B fine-tune" },
-  { id: "dolphin-llama3",        label: "dolphin-llama3",        note: "Uncensored Llama 3 8B fine-tune" },
-  { id: "dolphin3",              label: "dolphin3",              note: "Dolphin 3.0 — fully uncensored" },
-  { id: "mistral",               label: "mistral",               note: "Mistral 7B Instruct (lightly filtered)" },
-  { id: "llama3.2",              label: "llama3.2",              note: "Meta Llama 3.2 3B" },
-  { id: "llama3.1",              label: "llama3.1",              note: "Meta Llama 3.1 8B" },
-  { id: "qwen2.5",               label: "qwen2.5",               note: "Qwen 2.5 7B" },
-  { id: "phi4-mini",             label: "phi4-mini",             note: "Microsoft Phi-4 mini" },
-  { id: "gemma3:1b",             label: "gemma3:1b",             note: "Google Gemma 3 1B" },
-  { id: "wizardlm2",             label: "wizardlm2",             note: "WizardLM 2 — strong reasoning" },
+  { id: "deepseek-r1:1.5b",     label: "deepseek-r1:1.5b",     note: "✓ INSTALLED — DeepSeek R1 1.5B reasoning model (local)" },
+  { id: "deepseek-r1:7b",       label: "deepseek-r1:7b",       note: "DeepSeek R1 7B — stronger reasoning (~4.7 GB)" },
+  { id: "dolphin-mistral",      label: "dolphin-mistral",       note: "Uncensored Mistral 7B fine-tune" },
+  { id: "dolphin-llama3",       label: "dolphin-llama3",        note: "Uncensored Llama 3 8B fine-tune" },
+  { id: "dolphin3",             label: "dolphin3",              note: "Dolphin 3.0 — fully uncensored" },
+  { id: "mistral",              label: "mistral",               note: "Mistral 7B Instruct (lightly filtered)" },
+  { id: "llama3.2",             label: "llama3.2",              note: "Meta Llama 3.2 3B" },
+  { id: "llama3.1",             label: "llama3.1",              note: "Meta Llama 3.1 8B" },
+  { id: "qwen2.5",              label: "qwen2.5",               note: "Qwen 2.5 7B" },
+  { id: "phi4-mini",            label: "phi4-mini",             note: "Microsoft Phi-4 mini" },
+  { id: "gemma3:1b",            label: "gemma3:1b",             note: "Google Gemma 3 1B" },
+  { id: "wizardlm2",            label: "wizardlm2",             note: "WizardLM 2 — strong reasoning" },
 ];
 
 export interface AgentRole {
