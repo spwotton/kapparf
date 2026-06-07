@@ -1204,6 +1204,56 @@ function LawyersPanel() {
           <span className="text-muted-foreground text-xs ml-auto">Monitor server log for delivery confirmation</span>
         </div>
       )}
+
+      <div className="border-t border-emerald-200 dark:border-emerald-800 pt-3 space-y-2">
+        <p className="text-xs font-medium text-foreground">RE: Follow-up — OBD-II always-hot evidence</p>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          Adds the J1962 OBD-II always-hot power explanation to each thread — addresses why the device was broadcasting from an ignition-off, parked vehicle. Same 4 recipients, RE: subject prefix.
+        </p>
+        <div className="flex gap-2">
+          <Button
+            data-testid="button-lawyers-followup-dry"
+            variant="outline"
+            size="sm"
+            className="border-emerald-300 dark:border-emerald-700 text-xs"
+            onClick={async () => {
+              setLoading(true);
+              try {
+                await fetch("/api/mailer/fire", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "lawyers-followup", dryRun: true }),
+                });
+                toast({ title: "Follow-up dry run", description: "4 RE: emails logged to server console." });
+              } finally { setLoading(false); }
+            }}
+            disabled={loading}
+          >
+            Dry Run (RE:)
+          </Button>
+          <Button
+            data-testid="button-lawyers-followup-send"
+            size="sm"
+            className="gap-2 bg-teal-600 hover:bg-teal-700 text-white text-xs"
+            onClick={async () => {
+              setLoading(true);
+              try {
+                await fetch("/api/mailer/fire", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "lawyers-followup", dryRun: false }),
+                });
+                setFired({ total: 4 });
+                toast({ title: "Follow-up sent", description: "RE: emails to 4 lawyers queued." });
+              } finally { setLoading(false); }
+            }}
+            disabled={loading}
+          >
+            <Send className="w-3 h-3" />
+            Send RE: to 4 Lawyers
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
