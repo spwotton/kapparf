@@ -8362,4 +8362,83 @@ This email is constructed from verifiable technical disclosures, public contract
     }
   });
 
+  // ── Bulk data export ─────────────────────────────────────────────────────────
+  app.get("/api/export/bulk", async (_req, res) => {
+    try {
+      const { db: dbConn } = await import("./db");
+      const schema = await import("@shared/schema");
+      const { desc: descOrd } = await import("drizzle-orm");
+
+      const [
+        signalEvents,
+        correlations,
+        incidents,
+        satellites,
+        audioFlags,
+        deepResearchRuns,
+        collectionLogs,
+        forensicReports,
+        pcapUploads,
+        spectralSweeps,
+        detectedBearings,
+        directionBearings,
+      ] = await Promise.all([
+        storage.getSignalEvents(undefined, 10000),
+        storage.getCorrelations(10000),
+        storage.getIncidents(10000),
+        storage.getSatellites(),
+        storage.getAudioFlags(10000),
+        storage.getDeepResearchRuns(),
+        dbConn.select().from(schema.collectionLogs).orderBy(descOrd(schema.collectionLogs.timestamp)).limit(10000),
+        dbConn.select().from(schema.forensicReports).limit(5000),
+        dbConn.select().from(schema.pcapUploads).limit(1000),
+        dbConn.select().from(schema.spectralSweeps).orderBy(descOrd(schema.spectralSweeps.timestamp)).limit(5000),
+        dbConn.select().from(schema.detectedBearings).orderBy(descOrd(schema.detectedBearings.timestamp)).limit(10000),
+        dbConn.select().from(schema.directionBearings).orderBy(descOrd(schema.directionBearings.timestamp)).limit(10000),
+      ]);
+
+      const dump = {
+        meta: {
+          exported_at: new Date().toISOString(),
+          platform: "KAPPA SIGINT v1",
+          observer: { callsign: "ECHO", lat: 9.6219, lon: -84.6397, location: "Hotel Pochote Grande, Jacó Beach, Costa Rica" },
+          record_counts: {
+            signal_events: signalEvents.length,
+            correlations: correlations.length,
+            incidents: incidents.length,
+            satellites: satellites.length,
+            audio_flags: audioFlags.length,
+            deep_research_runs: deepResearchRuns.length,
+            collection_logs: collectionLogs.length,
+            forensic_reports: forensicReports.length,
+            pcap_uploads: pcapUploads.length,
+            spectral_sweeps: spectralSweeps.length,
+            detected_bearings: detectedBearings.length,
+            direction_bearings: directionBearings.length,
+          },
+        },
+        signal_events: signalEvents,
+        correlations,
+        incidents,
+        satellites,
+        audio_flags: audioFlags,
+        deep_research_runs: deepResearchRuns,
+        collection_logs: collectionLogs,
+        forensic_reports: forensicReports,
+        pcap_uploads: pcapUploads,
+        spectral_sweeps: spectralSweeps,
+        detected_bearings: detectedBearings,
+        direction_bearings: directionBearings,
+      };
+
+      const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Content-Disposition", `attachment; filename="kappa-bulk-export-${ts}.json"`);
+      res.json(dump);
+    } catch (err: any) {
+      console.error("[export/bulk]", err);
+      res.status(500).json({ error: err.message ?? "Export failed" });
+    }
+  });
+
 }
