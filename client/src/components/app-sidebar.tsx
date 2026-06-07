@@ -222,39 +222,49 @@ const navGroups: NavGroup[] = [
   },
 ];
 
+const EXPANDED_BY_DEFAULT = new Set(["EVIDENCE", "PUBLIC"]);
+
 function CollapsibleGroup({ group, location }: { group: NavGroup; location: string }) {
   const { t } = useI18n();
-
   const groupLabel = t(group.labelKey as any) !== group.labelKey ? t(group.labelKey as any) : group.fallbackLabel;
+  const hasActive = group.items.some((i) => i.url === location);
+  const [open, setOpen] = useState(EXPANDED_BY_DEFAULT.has(group.fallbackLabel) || hasActive);
 
   return (
-    <div className="mb-6">
-      <div className="px-4 mb-2">
+    <div className="mb-4">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center justify-between px-4 mb-1 group"
+        aria-expanded={open}
+      >
         <h4 className="section-label">{groupLabel}</h4>
-      </div>
-      <ul className="space-y-0.5">
-        {group.items.map((item) => {
-          const itemTitle = t(item.titleKey as any) !== item.titleKey ? t(item.titleKey as any) : item.fallback;
-          const isActive = location === item.url;
-          return (
-            <li key={item.url}>
-              <Link
-                href={item.url}
-                className={`flex items-center gap-3 px-4 py-1.5 text-sm font-serif transition-colors border-l-2 ${
-                  isActive
-                    ? "border-primary text-primary font-bold bg-sidebar-accent/50"
-                    : "border-transparent text-foreground hover:text-primary hover:bg-sidebar-accent/30"
-                }`}
-              >
-                <span className={item.url === "/jaco" ? "italic" : ""}>{itemTitle}</span>
-                {item.url === "/jaco" && (
-                  <span className="ml-auto text-[9px] font-mono font-normal not-italic border border-muted-foreground/30 text-muted-foreground/50 rounded px-1 py-0.5 leading-none tracking-wide">WebGPU</span>
-                )}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+        <span className={`text-muted-foreground/50 text-[10px] transition-transform duration-200 ${open ? "rotate-90" : ""}`}>›</span>
+      </button>
+      {open && (
+        <ul className="space-y-0.5">
+          {group.items.map((item) => {
+            const itemTitle = t(item.titleKey as any) !== item.titleKey ? t(item.titleKey as any) : item.fallback;
+            const isActive = location === item.url;
+            return (
+              <li key={item.url}>
+                <Link
+                  href={item.url}
+                  className={`flex items-center gap-3 px-4 py-1.5 text-sm font-serif transition-colors border-l-2 ${
+                    isActive
+                      ? "border-primary text-primary font-bold bg-sidebar-accent/50"
+                      : "border-transparent text-foreground hover:text-primary hover:bg-sidebar-accent/30"
+                  }`}
+                >
+                  <span className={item.url === "/jaco" ? "italic" : ""}>{itemTitle}</span>
+                  {item.url === "/jaco" && (
+                    <span className="ml-auto text-[9px] font-mono font-normal not-italic border border-muted-foreground/30 text-muted-foreground/50 rounded px-1 py-0.5 leading-none tracking-wide">WebGPU</span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

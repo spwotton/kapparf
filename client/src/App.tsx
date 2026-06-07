@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { HeaderControls } from "@/components/header-controls";
+import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { ThemeProvider, useTheme } from "@/lib/theme";
 import { DossierProvider, useDossier } from "@/lib/dossier";
 import { SiteModeProvider, useSiteMode } from "@/lib/site-mode";
@@ -298,11 +299,12 @@ function AppWithDossier() {
               <AppSidebar />
               <div className="flex flex-col flex-1 min-w-0">
                 <HeaderControls />
-                <main className="flex-1 overflow-auto min-h-0">
+                <main className="flex-1 overflow-auto min-h-0 pb-16 md:pb-0">
                   <KappaRouter />
                 </main>
               </div>
             </div>
+            <MobileBottomNav />
           </SidebarProvider>
         </Route>
       </Switch>

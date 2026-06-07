@@ -1,9 +1,9 @@
-import { Moon, Sun, Languages, Newspaper, Shield } from "lucide-react";
+import { Moon, Sun, Languages, Newspaper, Shield, Menu } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { useI18n } from "@/lib/i18n";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useSiteMode } from "@/lib/site-mode";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 
 function ModePill() {
   const { mode, toggle } = useSiteMode();
@@ -29,12 +29,12 @@ function ModePill() {
       {mode === "kappa" ? (
         <>
           <Newspaper className="h-2.5 w-2.5" />
-          <span>GAZETTE</span>
+          <span className="hidden sm:inline">GAZETTE</span>
         </>
       ) : (
         <>
           <Shield className="h-2.5 w-2.5" />
-          <span>CIA JW</span>
+          <span className="hidden sm:inline">CIA JW</span>
         </>
       )}
     </button>
@@ -46,12 +46,23 @@ export function HeaderControls() {
   const { locale, setLocale } = useI18n();
 
   return (
-    <header className="flex items-center justify-between px-4 h-10 border-b border-border bg-background">
+    <header className="flex items-center justify-between px-3 h-11 border-b border-border bg-background shrink-0">
       <div className="flex items-center gap-2">
-        <SidebarTrigger data-testid="button-sidebar-toggle" className="text-muted-foreground hover:text-foreground" />
+        {/* Sidebar trigger — larger tap target on mobile */}
+        <SidebarTrigger
+          data-testid="button-sidebar-toggle"
+          className="h-8 w-8 flex items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+        />
+        {/* Site name visible on mobile when sidebar is closed */}
+        <Link
+          href="/"
+          className="md:hidden text-sm font-serif font-bold tracking-tight text-foreground hover:text-primary transition-colors"
+        >
+          KAPPA
+        </Link>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         <ModePill />
         <div className="h-3 w-px bg-border" />
         <button
@@ -60,7 +71,7 @@ export function HeaderControls() {
           className="flex items-center gap-1.5 font-sans text-[11px] font-semibold tracking-widest text-muted-foreground hover:text-primary uppercase transition-colors"
         >
           <Languages className="h-3 w-3" />
-          {locale === "en" ? "ES" : "EN"}
+          <span className="hidden sm:inline">{locale === "en" ? "ES" : "EN"}</span>
         </button>
         <div className="h-3 w-px bg-border" />
         <button
@@ -69,7 +80,7 @@ export function HeaderControls() {
           className="flex items-center gap-1.5 font-sans text-[11px] font-semibold tracking-widest text-muted-foreground hover:text-primary uppercase transition-colors"
         >
           {theme === "light" ? <Moon className="h-3 w-3" /> : <Sun className="h-3 w-3" />}
-          {theme === "light" ? "DARK" : "LIGHT"}
+          <span className="hidden sm:inline">{theme === "light" ? "DARK" : "LIGHT"}</span>
         </button>
       </div>
     </header>
