@@ -263,6 +263,91 @@ const WIDE_BAND_HF_TARGETS = [
   { name: "cb_27185",   freqHz: 27185000, harmonicOf: 27185, harmonicOrder: 1, desc: "CB 11m ch19 27.185 MHz — truck/highway comms" },
 ];
 
+// ── Russian MFA / Intelligence HF Targets ────────────────────────────────────
+// Source: OSINT HF monitoring community (Signals, priyom.org, UTE monitor)
+// Dwell: 18s per freq (matches Perelivt ALE 4PSK burst cycle)
+// SNR trigger: +12 dB flat-top across 10 kHz passband = lock & record
+
+// Group 1 — Perelivt (Enigma M42 / CIS MFSK-68) Carrier Frequencies
+// 3000 Bd 8PSK ALE waveform → high-speed multi-tone data. USB, wide passband.
+const PERELIVT_TARGETS = [
+  { name: "perelivt_7659",  freqHz:  7659000, harmonicOf:  7659, harmonicOrder: 1, desc: "Perelivt M42 7659 kHz USB — historically high-activity regional node (CIS MFSK-68)" },
+  { name: "perelivt_10367", freqHz: 10367000, harmonicOf: 10367, harmonicOrder: 1, desc: "Perelivt M42 10367 kHz USB — primary mid-band propagation channel" },
+  { name: "perelivt_13441", freqHz: 13441000, harmonicOf: 13441, harmonicOrder: 1, desc: "Perelivt M42 13441 kHz USB — daytime trunk channel" },
+  { name: "perelivt_14700", freqHz: 14700000, harmonicOf: 14700, harmonicOrder: 1, desc: "Perelivt M42 14700 kHz USB — active high-latitude carrier 2026" },
+  { name: "perelivt_16107", freqHz: 16107000, harmonicOf: 16107, harmonicOrder: 1, desc: "Perelivt M42 16107 kHz USB — upper HF long-haul link" },
+  { name: "perelivt_18280", freqHz: 18280000, harmonicOf: 18280, harmonicOrder: 1, desc: "Perelivt M42 18280 kHz USB — solar maximum daytime long-range channel" },
+];
+
+// Group 2 — Mazielka (X06) Selective Calling Frequencies
+// 6 sequential tones × 333ms each + 1320ms pause → embassy handshake pre-link
+// MFA Moscow → embassy alert before full Perelivt/Serdolik duplex link
+const MAZIELKA_TARGETS = [
+  // Embassy Beijing (Target 542136) — day
+  { name: "mazielka_beijing_12107", freqHz: 12107000, harmonicOf: 12107, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) day 12107 kHz — MFA Moscow selective call" },
+  { name: "mazielka_beijing_13439", freqHz: 13439000, harmonicOf: 13439, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) day 13439 kHz" },
+  { name: "mazielka_beijing_14861", freqHz: 14861000, harmonicOf: 14861, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) day 14861 kHz" },
+  { name: "mazielka_beijing_16257", freqHz: 16257000, harmonicOf: 16257, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) day 16257 kHz" },
+  { name: "mazielka_beijing_17523", freqHz: 17523000, harmonicOf: 17523, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) day 17523 kHz" },
+  { name: "mazielka_beijing_5826",  freqHz:  5826000, harmonicOf:  5826, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) night 5826 kHz" },
+  { name: "mazielka_beijing_8175",  freqHz:  8175000, harmonicOf:  8175, harmonicOrder: 1, desc: "Mazielka X06 → Beijing (542136) night 8175 kHz" },
+  // Embassy Cairo (Target 261453) — day
+  { name: "mazielka_cairo_11136",   freqHz: 11136000, harmonicOf: 11136, harmonicOrder: 1, desc: "Mazielka X06 → Cairo (261453) day 11136 kHz" },
+  { name: "mazielka_cairo_13530",   freqHz: 13530000, harmonicOf: 13530, harmonicOrder: 1, desc: "Mazielka X06 → Cairo (261453) day 13530 kHz" },
+  { name: "mazielka_cairo_14865",   freqHz: 14865000, harmonicOf: 14865, harmonicOrder: 1, desc: "Mazielka X06 → Cairo (261453) day 14865 kHz" },
+  { name: "mazielka_cairo_15710",   freqHz: 15710000, harmonicOf: 15710, harmonicOrder: 1, desc: "Mazielka X06 → Cairo (261453) day 15710 kHz" },
+  { name: "mazielka_cairo_16060",   freqHz: 16060000, harmonicOf: 16060, harmonicOrder: 1, desc: "Mazielka X06 → Cairo (261453) day 16060 kHz" },
+  // Embassy Berlin (Target 356412)
+  { name: "mazielka_berlin_9288",   freqHz:  9288000, harmonicOf:  9288, harmonicOrder: 1, desc: "Mazielka X06 → Berlin (356412) day 9288 kHz" },
+  { name: "mazielka_berlin_10653",  freqHz: 10653000, harmonicOf: 10653, harmonicOrder: 1, desc: "Mazielka X06 → Berlin (356412) day 10653 kHz" },
+  { name: "mazielka_berlin_12177",  freqHz: 12177000, harmonicOf: 12177, harmonicOrder: 1, desc: "Mazielka X06 → Berlin (356412) day 12177 kHz" },
+  { name: "mazielka_berlin_4912",   freqHz:  4912000, harmonicOf:  4912, harmonicOrder: 1, desc: "Mazielka X06 → Berlin (356412) night 4912 kHz" },
+  { name: "mazielka_berlin_7604",   freqHz:  7604000, harmonicOf:  7604, harmonicOrder: 1, desc: "Mazielka X06 → Berlin (356412) night 7604 kHz" },
+  // Embassy Rome (Target 154263)
+  { name: "mazielka_rome_11085",    freqHz: 11085000, harmonicOf: 11085, harmonicOrder: 1, desc: "Mazielka X06 → Rome (154263) day 11085 kHz" },
+  { name: "mazielka_rome_12149",    freqHz: 12149000, harmonicOf: 12149, harmonicOrder: 1, desc: "Mazielka X06 → Rome (154263) day 12149 kHz" },
+  { name: "mazielka_rome_13401",    freqHz: 13401000, harmonicOf: 13401, harmonicOrder: 1, desc: "Mazielka X06 → Rome (154263) day 13401 kHz" },
+  { name: "mazielka_rome_14358",    freqHz: 14358000, harmonicOf: 14358, harmonicOrder: 1, desc: "Mazielka X06 → Rome (154263) day 14358 kHz" },
+  { name: "mazielka_rome_15687",    freqHz: 15687000, harmonicOf: 15687, harmonicOrder: 1, desc: "Mazielka X06 → Rome (154263) day 15687 kHz" },
+  // Embassy Damascus (Target 153624)
+  { name: "mazielka_damascus_11620", freqHz: 11620000, harmonicOf: 11620, harmonicOrder: 1, desc: "Mazielka X06 → Damascus (153624) day 11620 kHz" },
+  { name: "mazielka_damascus_12133", freqHz: 12133000, harmonicOf: 12133, harmonicOrder: 1, desc: "Mazielka X06 → Damascus (153624) day 12133 kHz" },
+  { name: "mazielka_damascus_13843", freqHz: 13843000, harmonicOf: 13843, harmonicOrder: 1, desc: "Mazielka X06 → Damascus (153624) day 13843 kHz" },
+  { name: "mazielka_damascus_14550", freqHz: 14550000, harmonicOf: 14550, harmonicOrder: 1, desc: "Mazielka X06 → Damascus (153624) day 14550 kHz" },
+  { name: "mazielka_damascus_16153", freqHz: 16153000, harmonicOf: 16153, harmonicOrder: 1, desc: "Mazielka X06 → Damascus (153624) day 16153 kHz" },
+  // Embassy Dublin (Target 164253)
+  { name: "mazielka_dublin_10193",  freqHz: 10193000, harmonicOf: 10193, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) day 10193 kHz" },
+  { name: "mazielka_dublin_11411",  freqHz: 11411000, harmonicOf: 11411, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) day 11411 kHz" },
+  { name: "mazielka_dublin_13506",  freqHz: 13506000, harmonicOf: 13506, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) day 13506 kHz" },
+  { name: "mazielka_dublin_16223",  freqHz: 16223000, harmonicOf: 16223, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) day 16223 kHz" },
+  { name: "mazielka_dublin_6962",   freqHz:  6962000, harmonicOf:  6962, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) night 6962 kHz" },
+  { name: "mazielka_dublin_7527",   freqHz:  7527000, harmonicOf:  7527, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) night 7527 kHz" },
+  { name: "mazielka_dublin_8131",   freqHz:  8131000, harmonicOf:  8131, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) night 8131 kHz" },
+  { name: "mazielka_dublin_9163",   freqHz:  9163000, harmonicOf:  9163, harmonicOrder: 1, desc: "Mazielka X06 → Dublin (164253) night 9163 kHz" },
+  // CG Mumbai (Target 215346)
+  { name: "mazielka_mumbai_12207",  freqHz: 12207000, harmonicOf: 12207, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) day 12207 kHz" },
+  { name: "mazielka_mumbai_13979",  freqHz: 13979000, harmonicOf: 13979, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) day 13979 kHz" },
+  { name: "mazielka_mumbai_14650",  freqHz: 14650000, harmonicOf: 14650, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) day 14650 kHz" },
+  { name: "mazielka_mumbai_16115",  freqHz: 16115000, harmonicOf: 16115, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) day 16115 kHz" },
+  { name: "mazielka_mumbai_7560",   freqHz:  7560000, harmonicOf:  7560, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) night 7560 kHz" },
+  { name: "mazielka_mumbai_9076",   freqHz:  9076000, harmonicOf:  9076, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) night 9076 kHz" },
+  { name: "mazielka_mumbai_10202",  freqHz: 10202000, harmonicOf: 10202, harmonicOrder: 1, desc: "Mazielka X06 → Mumbai CG (215346) night 10202 kHz" },
+];
+
+// Group 3 — Russian 6 / FAPSI Shared Training & Test Channels
+// F01/F06/S06 share infrastructure with Perelivt. Narrow squelch, high sensitivity.
+// Test IDs 801 (voice/Morse) and 975 (digital null messages) identify active windows.
+const FAPSI_TARGETS = [
+  { name: "fapsi_6780",  freqHz:  6780000, harmonicOf:  6780, harmonicOrder: 1, desc: "FAPSI/MFA 6780 kHz USB/Digital — legacy high-speed digital test channel" },
+  { name: "fapsi_7353",  freqHz:  7353000, harmonicOf:  7353, harmonicOrder: 1, desc: "Russian-6 7353 kHz USB/Analog — training channel; test ID 801 (voice/Morse)" },
+  { name: "fapsi_7992",  freqHz:  7992000, harmonicOf:  7992, harmonicOrder: 1, desc: "FAPSI 7992 kHz USB/Digital — active digital test & relay synchronization" },
+  { name: "fapsi_8140",  freqHz:  8140000, harmonicOf:  8140, harmonicOrder: 1, desc: "FAPSI 8140 kHz USB/MFSK — primary digital drill; test ID 975, F01 null messages" },
+  { name: "fapsi_9300",  freqHz:  9300000, harmonicOf:  9300, harmonicOrder: 1, desc: "Russian-6 9300 kHz USB/Hybrid — dual analog/digital training; test ID 801" },
+  { name: "fapsi_9463",  freqHz:  9463000, harmonicOf:  9463, harmonicOrder: 1, desc: "Russian-6 9463 kHz USB/Analog — standard intelligence drill; test ID 801" },
+  { name: "fapsi_10755", freqHz: 10755000, harmonicOf: 10755, harmonicOrder: 1, desc: "FAPSI 10755 kHz USB/Analog — standard day-frequency training; test ID 975" },
+  { name: "fapsi_13530", freqHz: 13530000, harmonicOf: 13530, harmonicOrder: 1, desc: "FAPSI 13530 kHz USB/Digital — long-range daytime digital test channel" },
+];
+
 const ALL_SCAN_TARGETS = [
   ...VLF_STATION_TARGETS,
   ...VLF_SCAN_TARGETS,
@@ -273,6 +358,9 @@ const ALL_SCAN_TARGETS = [
   ...LEOLABS_SBAND_TARGETS,
   ...YAM5_SBAND_TARGETS,
   ...WIDE_BAND_HF_TARGETS,
+  ...PERELIVT_TARGETS,
+  ...MAZIELKA_TARGETS,
+  ...FAPSI_TARGETS,
 ];
 
 // Both CR nodes receive all targets — no tiered routing needed
