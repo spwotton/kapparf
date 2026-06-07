@@ -2512,6 +2512,54 @@ export async function registerRoutes(
     }
   });
 
+  // ── Cosmic Genesis Oracle proxy (mega_corpus 26-corpus synthesis) ──────────
+  app.post("/api/oracle/query", async (req, res) => {
+    const ORACLE_URL = process.env.KAPPA_LAB_URL ?? "";
+    const ORACLE_KEY = process.env.K_ORACLE_API_KEY ?? "";
+    if (!ORACLE_URL) return res.status(503).json({ error: "Oracle not configured" });
+
+    const { question, groups } = req.body as { question?: string; groups?: string[] };
+    if (!question) return res.status(400).json({ error: "question required" });
+
+    const voices = (groups ?? ["research", "ancient", "hermetic"]).map((g: string) => ({
+      corpus: g, weight: 1.0,
+    }));
+
+    try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (ORACLE_KEY) headers["Authorization"] = `Bearer ${ORACLE_KEY}`;
+
+      const upstream = await fetch(`${ORACLE_URL}/api/synthesize`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ question, voices }),
+        signal: AbortSignal.timeout(45000),
+      });
+
+      if (!upstream.ok) return res.status(upstream.status).json({ error: `Oracle HTTP ${upstream.status}` });
+
+      // Collect SSE stream → extract synthesis per group + master token
+      const raw = await upstream.text();
+      const groupSyntheses: Record<string, string> = {};
+      let master = "";
+
+      for (const line of raw.split("\n")) {
+        if (!line.startsWith("data:")) continue;
+        try {
+          const d = JSON.parse(line.slice(5).trim());
+          if (d.type === "group_done" && d.id && d.synthesis) groupSyntheses[d.id] = d.synthesis;
+          if (d.type === "master_token" && d.token) master += d.token;
+          if (d.type === "done" && d.master) master = d.master;
+        } catch { /* skip malformed */ }
+      }
+
+      return res.json({ question, groups: groupSyntheses, master: master || null });
+    } catch (err) {
+      console.error("[Oracle] query error:", err);
+      return res.status(500).json({ error: String(err) });
+    }
+  });
+
   app.post("/api/social/caption", async (req, res) => {
     try {
     const { template } = req.body;

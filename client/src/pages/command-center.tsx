@@ -331,16 +331,45 @@ export default function CommandCenterPage() {
     } else if (lower === "feed") {
       setFeedExpanded((p) => !p);
       addMessage("system", feedExpanded ? "Live feed collapsed." : "Live feed expanded.");
+    } else if (lower.startsWith("oracle ") || lower === "oracle") {
+      const question = cmd.trim().slice(7).trim() ||
+        `SIGINT situation report: κ=${kappaStatus?.score?.toFixed(1) ?? 0} [${kappaStatus?.threatLevel ?? "NOMINAL"}], ` +
+        `${stats?.totalEvents ?? 0} events, ${stats?.correlationCount ?? 0} correlations. What does this indicate?`;
+
+      const contextQ = question.includes("κ=") ? question :
+        `[KAPPA context: κ=${kappaStatus?.score?.toFixed(1) ?? 0}, threat=${kappaStatus?.threatLevel ?? "NOMINAL"}, ` +
+        `events=${stats?.totalEvents ?? 0}, correlations=${stats?.correlationCount ?? 0}] ${question}`;
+
+      addMessage("system", `↑ Oracle query: "${question}"\nQuerying Cosmic Genesis corpus…`);
+
+      fetch("/api/oracle/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: contextQ, groups: ["research", "ancient", "hermetic"] }),
+      })
+        .then((r) => r.json())
+        .then((data: { question: string; groups: Record<string, string>; master: string | null; error?: string }) => {
+          if (data.error) { addMessage("alert", `Oracle error: ${data.error}`); return; }
+          const parts: string[] = [];
+          if (data.groups?.research) parts.push(`【Research】\n${data.groups.research.slice(0, 600)}`);
+          if (data.groups?.hermetic) parts.push(`【Hermetic】\n${data.groups.hermetic.slice(0, 400)}`);
+          if (data.groups?.ancient) parts.push(`【Ancient】\n${data.groups.ancient.slice(0, 400)}`);
+          if (data.master) parts.push(`【Synthesis】\n${data.master.slice(0, 800)}`);
+          addMessage("system", parts.join("\n\n") || "Oracle returned no synthesis.", { type: "oracle" });
+        })
+        .catch((err) => addMessage("alert", `Oracle unreachable: ${err}`));
+
     } else if (lower === "help" || lower === "h" || lower === "?") {
       addMessage("system",
         "Commands:\n" +
-        "  status (s)  — System overview\n" +
-        "  events (e)  — Recent events\n" +
+        "  status (s)       — System overview\n" +
+        "  events (e)       — Recent events\n" +
         "  correlations (c) — Active correlations\n" +
-        "  threats (t) — Threat assessment\n" +
-        "  scan/sweep  — Run pipeline sweep\n" +
-        "  feed        — Toggle live feed\n" +
-        "  help (h/?)  — This message"
+        "  threats (t)      — Threat assessment\n" +
+        "  scan/sweep       — Run pipeline sweep\n" +
+        "  feed             — Toggle live feed\n" +
+        "  oracle <q>       — Query Cosmic Genesis Oracle (26 corpora)\n" +
+        "  help (h/?)       — This message"
       );
     } else {
       addMessage("system", `Unknown command: "${cmd}". Type 'help' for available commands.`);

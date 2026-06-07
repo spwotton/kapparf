@@ -47,6 +47,7 @@ timeoutMs = 120000
 
 [userenv.shared]
 VITE_MAILER_SECRET = "kappa-lawyers-fire-2026"
+KAPPA_LAB_URL = "https://cosmic-genesis-model.replit.app"
 
 [[ports]]
 localPort = 5000
