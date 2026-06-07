@@ -46,6 +46,8 @@ timeoutMs = 120000
 [userenv]
 
 [userenv.shared]
+MAILER_FIRE_SECRET = "kappa-lawyers-fire-2026"
+VITE_MAILER_SECRET = "kappa-lawyers-fire-2026"
 
 [[ports]]
 localPort = 5000

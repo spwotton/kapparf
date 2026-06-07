@@ -755,6 +755,9 @@ export default function MailerPage() {
       {/* ── Expansion Blast — UK/DSE, Italy, Argentina, EU, Brazil, ICS, Aviation ── */}
       <ExpansionPanel />
 
+      {/* ── Lawyers Outreach — CL-273123 / BLE platform / Jacó ── */}
+      <LawyersPanel />
+
       {/* ── Venezuela / US Blast — Danny Peralta / Daniela / IRS Fraud ── */}
       <VenezuelaPanel />
 
@@ -1095,6 +1098,110 @@ function UpdateAllPanel() {
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span className="text-green-600 font-medium">Update blast queued — {fired.total} contacts firing async (~200s)</span>
           <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Lawyers Panel — CL-273123 / bdb-PKE-79E9 / BLE surveillance / Jacó Beach
+// ─────────────────────────────────────────────────────────────────────────────
+function LawyersPanel() {
+  const { toast } = useToast();
+  const [fired, setFired] = React.useState<{ sent?: number; failed?: number; total?: number } | null>(null);
+  const [loading, setLoading] = React.useState(false);
+
+  const fire = async (dryRun: boolean) => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/mailer/fire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "lawyers", dryRun }),
+      });
+      const data = await res.json();
+      if (dryRun) {
+        toast({ title: "Dry run complete", description: "4 lawyer contacts logged to server console — check for subjects and bodies." });
+      } else {
+        setFired({ total: 4 });
+        toast({ title: "Lawyer outreach sent", description: "4 emails queued. Monitor server log for delivery status." });
+      }
+      return data;
+    } catch (err: any) {
+      toast({ title: "Error", description: err?.message || String(err), variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const CONTACTS = [
+    { label: "ECIJA Legal — Mauricio París", email: "mparis@ecija.com", note: "Ley 10.487 · data privacy", color: "bg-emerald-500" },
+    { label: "Aguilar Castillo Love — Mary Ann Drake", email: "mdr@aguilarcastillolove.com", note: "BLE hardware · packet-sniffing", color: "bg-blue-500" },
+    { label: "ARA-Law", email: "info@aralaw.cr", note: "Financial fraud denuncia", color: "bg-amber-500" },
+    { label: "Pirie Legal / CPG Legal", email: "info@lawyersofcostarica.com", note: "Civil restitution", color: "bg-purple-500" },
+  ];
+
+  return (
+    <div className="border border-emerald-200 dark:border-emerald-900 rounded-lg p-4 space-y-3 bg-emerald-50/30 dark:bg-emerald-950/20">
+      <div className="flex items-center gap-2">
+        <Shield className="w-4 h-4 text-emerald-500" />
+        <p className="text-sm font-medium">Lawyer Outreach — CL-273123 / BLE Surveillance Platform</p>
+        <Badge variant="outline" className="text-xs ml-auto border-emerald-300 dark:border-emerald-700 text-emerald-600 dark:text-emerald-400">
+          4 recipients
+        </Badge>
+      </div>
+
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        First-contact inquiry emails to 4 Costa Rican law firms regarding the documented mobile BLE surveillance platform in vehicle CL-273123 (bdb-PKE-79E9 / MISHIK Pte Ltd HID device, owner Esteban Hernández Fernández). Each email is tailored to the firm's specific practice area. Tone: professional inquiry, not formal complaint — asking if they can advise and requesting a consultation.
+      </p>
+
+      <div className="grid grid-cols-1 gap-1.5">
+        {CONTACTS.map((c) => (
+          <div key={c.email} className="flex items-center gap-2 text-xs bg-background border border-border rounded px-3 py-2">
+            <span className={`w-2 h-2 rounded-full shrink-0 ${c.color}`} />
+            <span className="font-medium text-foreground">{c.label}</span>
+            <span className="text-muted-foreground font-mono ml-1">{c.email}</span>
+            <span className="ml-auto text-muted-foreground/70 italic shrink-0">{c.note}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          Emails are sent from <span className="font-mono">hello@echokappa.com</span> as Samuel Wotton. Each email briefly describes the BLE platform, MISHIK manufacturer, RSSI evidence, and the Android Auto admission, then asks whether the firm can advise. No formal legal action requested — inquiry only.
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-lawyers-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-emerald-300 dark:border-emerald-700"
+          onClick={() => fire(true)}
+          disabled={loading}
+        >
+          Dry Run (log only)
+        </Button>
+        <Button
+          data-testid="button-lawyers-send"
+          size="sm"
+          className="gap-2 bg-emerald-600 hover:bg-emerald-700 text-white"
+          onClick={() => fire(false)}
+          disabled={loading}
+        >
+          <Send className="w-3.5 h-3.5" />
+          Send to 4 Lawyers
+        </Button>
+      </div>
+
+      {fired && (
+        <div className="flex items-center gap-3 text-sm">
+          <CheckCircle className="w-4 h-4 text-green-500" />
+          <span className="text-green-600 font-medium">{fired.total} emails queued</span>
+          <span className="text-muted-foreground text-xs ml-auto">Monitor server log for delivery confirmation</span>
         </div>
       )}
     </div>
