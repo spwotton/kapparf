@@ -205,6 +205,8 @@ const navGroups: NavGroup[] = [
     items: [
       { titleKey: "sidebar.hyperobjects", fallback: "⬡ Hyperobject Intel", url: "/hyperobjects", icon: Atom },
       { titleKey: "sidebar.gooseGazette", fallback: "Goose Gazette", url: "/goose", icon: Newspaper },
+      { titleKey: "sidebar.articleBle", fallback: "Article: BLE Surveillance Truck", url: "/articles/ble-vehicle", icon: Newspaper },
+      { titleKey: "sidebar.articleRec37", fallback: "Article: Recording 37", url: "/articles/recording-37", icon: Newspaper },
     ],
   },
   {

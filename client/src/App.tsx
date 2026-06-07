@@ -83,6 +83,8 @@ import StatusReportPage from "@/pages/status-report";
 import NexusSlidesPage from "@/pages/nexus-slides";
 import SpectrumPage from "@/pages/spectrum";
 import ArticleJacoConvergencePage from "@/pages/article-jaco-convergence";
+import ArticleBleVehiclePage from "@/pages/article-ble-vehicle";
+import ArticleRecording37Page from "@/pages/article-recording-37";
 import FollowTheMoneyPage from "@/pages/follow-the-money";
 import ZersetzungPage from "@/pages/zersetzung";
 import QuasarHydraPage from "@/pages/quasar-hydra";
@@ -160,6 +162,8 @@ function KappaRouter() {
       <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
+      <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
+      <Route path="/articles/recording-37" component={ArticleRecording37Page} />
       <Route path="/follow-the-money" component={FollowTheMoneyPage} />
       <Route path="/zersetzung" component={ZersetzungPage} />
       <Route path="/quasar-hydra" component={QuasarHydraPage} />
@@ -178,6 +182,8 @@ function GooseRouter() {
       <Route path="/nexus-slides" component={NexusSlidesPage} />
       <Route path="/setecom-report" component={SetecomExposePage} />
       <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
+      <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
+      <Route path="/articles/recording-37" component={ArticleRecording37Page} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
       <Route path="/goose/signals" component={GooseSignalsPage} />
       <Route path="/goose/lattice" component={SignalLatticePage} />
