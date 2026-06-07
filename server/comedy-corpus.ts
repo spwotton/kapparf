@@ -23,6 +23,7 @@ import { queryModel } from "./research-engine";
 // κ-Lab Oracle URL (Node #1090 · Hotel Pochote Grande, Jacó)
 // Set KAPPA_LAB_URL in env; falls back to internal research engine if unreachable
 const KAPPA_LAB_URL = process.env.KAPPA_LAB_URL ?? "";
+const K_ORACLE_API_KEY = process.env.K_ORACLE_API_KEY ?? "";
 
 // ── κ-LAB ORACLE QUERY ────────────────────────────────────────────────────────
 async function queryKappaLabOracle(question: string, voices: string[]): Promise<string | null> {
@@ -30,9 +31,11 @@ async function queryKappaLabOracle(question: string, voices: string[]): Promise<
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 30000);
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (K_ORACLE_API_KEY) headers["Authorization"] = `Bearer ${K_ORACLE_API_KEY}`;
     const resp = await fetch(`${KAPPA_LAB_URL}/api/synthesize`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       signal: controller.signal,
       body: JSON.stringify({
         question,
