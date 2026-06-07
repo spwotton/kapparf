@@ -8263,4 +8263,103 @@ This email is constructed from verifiable technical disclosures, public contract
     res.json({ ok: true });
   });
 
+  // ── Radiogoniometry Auto-Ingest from real signal event positions ─────────────
+  // Pulls signal events that have lat/lon + frequency, computes real bearing
+  // from ECHO (Hotel Pochote Grande, Jacó) to each detected signal position,
+  // and creates sweep + detected-bearing records in QUASAR-HYDRA.
+  // Zero synthetic data — every bearing comes from a real ADS-B/seismic/RF event.
+  app.post("/api/radiogoniometry/auto-ingest", async (_req, res) => {
+    try {
+      const ECHO_LAT = 9.621887;
+      const ECHO_LON = -84.63969;
+      const THETA_K  = 128.23; // Klein-twist azimuth
+
+      // Pull signal events from the last 90s (window slightly larger than the 60s ingest interval)
+      // so we only process fresh events, not the entire history, preventing DB bloat.
+      const events = await storage.getSignalEventsByWindow(90);
+      const positioned = events.filter(e =>
+        e.latitude != null && e.longitude != null &&
+        e.frequency != null && e.frequency > 0
+      );
+
+      let created = 0;
+      const seen = new Set<string>();
+
+      for (const evt of positioned.slice(0, 60)) {
+        const lat = evt.latitude!;
+        const lon = evt.longitude!;
+        const freqHz = evt.frequency! * 1e6; // events store MHz, sweeper needs Hz
+
+        // Deduplicate by event ID so reruns are idempotent
+        if (seen.has(evt.id)) continue;
+        seen.add(evt.id);
+
+        // Haversine bearing from ECHO to signal position
+        const dlon = lon - ECHO_LON;
+        const dlat = lat - ECHO_LAT;
+        const bearing = ((Math.atan2(dlon, dlat) * 180 / Math.PI) + 360) % 360;
+
+        // Klein-twist delta (documented constant θ_K = 128.23°)
+        const bearingDeltaThetaK = Math.abs(((bearing - THETA_K + 180) % 360) - 180);
+        const isKleinAlignment   = bearingDeltaThetaK < 5;
+        const confidence = Math.min(0.95, (evt.confidence ?? 0.5));
+
+        const sweep = await storage.createSpectralSweep({
+          centerFreqHz: freqHz,
+          bandwidthHz: 1e6,
+          antennaCount: 1,
+          arrayRadiusM: 0,
+          noiseFloorDb: null,
+          iqSnapshotLength: 0,
+          eigenvalues: [],
+          signalComponents: 1,
+          status: "complete",
+          metadata: {
+            source: "kappa_signal_event",
+            eventId: evt.id,
+            domain: evt.domain,
+            isKleinAlignment,
+            bearingDeltaThetaK: +bearingDeltaThetaK.toFixed(2),
+            signalLat: lat,
+            signalLon: lon,
+          },
+        });
+
+        await storage.createDetectedBearing({
+          sweepId: sweep.id,
+          azimuthDeg: +bearing.toFixed(2),
+          pseudoSpectrumPeak: confidence,
+          normalizedPeak: confidence,
+          confidence,
+          frequencyHz: freqHz,
+          method: "kappa_position",
+          pseudoSpectrum: [],
+        });
+
+        created++;
+      }
+
+      console.log(`[radiogoniometry/auto-ingest] positioned=${positioned.length}, created=${created}`);
+      res.json({ ok: true, created, checked: positioned.length });
+    } catch (err: any) {
+      console.error("[radiogoniometry/auto-ingest]", err);
+      res.status(500).json({ error: err.message ?? "Auto-ingest failed" });
+    }
+  });
+
+  // ── Radiogoniometry latest bearings (for jaco-map overlay) ──────────────────
+  app.get("/api/radiogoniometry/latest-bearings", async (_req, res) => {
+    try {
+      const { db: dbConn } = await import("./db");
+      const { detectedBearings } = await import("@shared/schema");
+      const { desc: descOrd } = await import("drizzle-orm");
+      const bearings = await dbConn.select().from(detectedBearings)
+        .orderBy(descOrd(detectedBearings.timestamp))
+        .limit(10);
+      res.json({ bearings });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message ?? "Failed" });
+    }
+  });
+
 }

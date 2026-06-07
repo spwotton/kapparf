@@ -1282,6 +1282,13 @@ export default function JacoMapPage() {
       setOracleRunning(false);
     }
   }, [oracleRunning, droneTarget, aircraftCount, liveAircraft, oracleData]);
+  const { data: bearingData } = useQuery<{ bearings: Array<{ id: string; azimuthDeg: number; frequencyHz: number; confidence: number; method: string; timestamp: string }> }>({
+    queryKey: ["/api/radiogoniometry/latest-bearings"],
+    queryFn: () => fetch("/api/radiogoniometry/latest-bearings").then(r => r.json()),
+    refetchInterval: 10_000,
+    staleTime: 8_000,
+  });
+
   const { data: tidalData } = useQuery<any>({
     queryKey: ["/api/tidal"], refetchInterval: 120_000, staleTime: 115_000,
   });
@@ -1600,6 +1607,55 @@ export default function JacoMapPage() {
         <div className="pt-1 space-y-1">
           <div className="flex items-center gap-2"><Crosshair className="h-3 w-3 text-green-400"/><span className="text-[10px] text-green-300 font-mono">Array coverage: Jaco AOR + Pacific coast</span></div>
           <div className="flex items-center gap-2"><Signal className="h-3 w-3 text-green-400"/><span className="text-[10px] text-green-300 font-mono">Frequencies: HF 3–30 MHz / VLF 16 kHz</span></div>
+        </div>
+
+        {/* ── Live MUSIC Bearings from QUASAR-HYDRA ── */}
+        <div className="pt-2 border-t border-white/5">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[9px] text-cyan-500 font-mono uppercase tracking-widest">QUASAR-HYDRA · Live Bearings</span>
+            <span className="text-[9px] text-gray-600 font-mono">10s poll</span>
+          </div>
+          {(!bearingData?.bearings || bearingData.bearings.length === 0) ? (
+            <div className="text-[10px] text-gray-600 font-mono py-2 text-center">Awaiting sweep data — submit IQ or CSV</div>
+          ) : (
+            <div className="space-y-1">
+              {bearingData.bearings.slice(0, 6).map((b, i) => {
+                const az = b.azimuthDeg;
+                const conf = Math.round((b.confidence ?? 0) * 100);
+                const freqLabel = b.frequencyHz >= 1e6
+                  ? `${(b.frequencyHz/1e6).toFixed(2)} MHz`
+                  : b.frequencyHz >= 1e3
+                  ? `${(b.frequencyHz/1e3).toFixed(1)} kHz`
+                  : `${b.frequencyHz.toFixed(0)} Hz`;
+                const isKappa = b.method === "kappa_correlation";
+                return (
+                  <div key={b.id ?? i} className="flex items-center justify-between px-2 py-1 rounded bg-cyan-500/5 border border-cyan-500/10" data-testid={`bearing-row-${i}`}>
+                    <div className="flex items-center gap-2">
+                      {/* Mini compass needle */}
+                      <svg width="16" height="16" viewBox="-8 -8 16 16">
+                        <line
+                          x1="0" y1="6"
+                          x2={Math.sin(az*Math.PI/180)*6}
+                          y2={-Math.cos(az*Math.PI/180)*6}
+                          stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round"
+                        />
+                        <circle cx="0" cy="0" r="1.5" fill="#22d3ee" fillOpacity="0.6"/>
+                      </svg>
+                      <span className="text-[10px] font-mono text-cyan-300 tabular-nums">{az.toFixed(1)}°</span>
+                      <span className="text-[9px] font-mono text-gray-500">{freqLabel}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      {isKappa && <span className="text-[8px] font-mono text-amber-500/70">κ</span>}
+                      <span className="text-[9px] font-mono text-gray-600">{conf}%</span>
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="text-[9px] text-gray-600 font-mono text-right pt-0.5">
+                {new Date(bearingData.bearings[0]?.timestamp ?? Date.now()).toLocaleTimeString()}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

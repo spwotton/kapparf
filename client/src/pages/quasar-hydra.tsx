@@ -301,7 +301,7 @@ function SweepsTable() {
   }>({
     queryKey: ["/api/radiogoniometry/sweeps", page],
     queryFn: () => fetch(`/api/radiogoniometry/sweeps?limit=${limit}&offset=${page * limit}`).then(r => r.json()),
-    refetchInterval: 30000,
+    refetchInterval: 5000,
   });
 
   const sweeps = data?.sweeps ?? [];
@@ -1090,14 +1090,34 @@ function HydraTab() {
 export default function QuasarHydraPage() {
   const [selectedSpoke, setSelectedSpoke] = useState<RuneSpoke | null>(null);
   const [activeTab, setActiveTab] = useState("quasar");
+  const [ingestStatus, setIngestStatus] = useState<{ created: number; checked: number } | null>(null);
+  const [ingestTs, setIngestTs] = useState<string | null>(null);
 
   const { data: sweepsData } = useQuery<{ sweeps: any[] }>({
     queryKey: ["/api/radiogoniometry/sweeps"],
     queryFn: () => fetch("/api/radiogoniometry/sweeps?limit=50").then(r => r.json()),
-    refetchInterval: 30000,
+    refetchInterval: 5000,
   });
 
   const sweeps = sweepsData?.sweeps ?? [];
+
+  // Auto-ingest from KAPPA correlations on mount + every 60s
+  useEffect(() => {
+    const runIngest = () => {
+      fetch("/api/radiogoniometry/auto-ingest", { method: "POST" })
+        .then(r => r.json())
+        .then(d => {
+          if (d.ok) {
+            setIngestStatus({ created: d.created, checked: d.checked });
+            setIngestTs(new Date().toLocaleTimeString());
+          }
+        })
+        .catch(() => {});
+    };
+    runIngest();
+    const t = setInterval(runIngest, 60_000);
+    return () => clearInterval(t);
+  }, []);
 
   return (
     <div className="p-6 space-y-6 max-w-full">
@@ -1113,13 +1133,18 @@ export default function QuasarHydraPage() {
             Calibration scalar <span className="font-mono">s = 10√13 ≈ {(10 * Math.sqrt(13)).toFixed(4)}</span>.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <Badge variant="outline" className="font-mono text-[10px] rounded-none">
             {sweeps.length} sweep{sweeps.length !== 1 ? "s" : ""}
           </Badge>
           <Badge variant="outline" className="font-mono text-[10px] rounded-none border-primary/50 text-primary">
             LSCSA · MUSIC · UCA
           </Badge>
+          {ingestStatus && (
+            <Badge variant="outline" className="font-mono text-[10px] rounded-none border-green-500/50 text-green-400 animate-pulse">
+              ● AUTO-INGEST · +{ingestStatus.created} · {ingestTs}
+            </Badge>
+          )}
         </div>
       </div>
 
