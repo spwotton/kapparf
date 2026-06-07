@@ -763,6 +763,9 @@ export default function MailerPage() {
 
       {/* ── UPDATE BLAST — RE: all campaigns → forensic site CTA ── */}
       <UpdateAllPanel />
+
+      {/* ── BLE UPDATE BLAST — RE: all campaigns → new BLE/OBD-II/RSSI evidence ── */}
+      <UpdateBlePanel />
     </div>
   );
 }
@@ -1097,6 +1100,111 @@ function UpdateAllPanel() {
         <div className="flex items-center gap-3 text-sm">
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span className="text-green-600 font-medium">Update blast queued — {fired.total} contacts firing async (~200s)</span>
+          <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BLE UPDATE PANEL — new hardware evidence blast to all ~320 prior contacts
+// ─────────────────────────────────────────────────────────────────────────────
+function UpdateBlePanel() {
+  const { toast } = useToast();
+  const [fired, setFired] = React.useState<{ total?: number } | null>(null);
+  const [loading, setLoading] = React.useState(false);
+
+  const fire = async (dryRun: boolean) => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/mailer/fire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "update-ble", dryRun }),
+      });
+      await res.json();
+      if (dryRun) {
+        toast({ title: "Dry run complete", description: "Contact list logged to server console — check count and RE: subjects." });
+      } else {
+        setFired({ total: 320 });
+        toast({ title: "BLE update blast queued", description: "All contacts firing async with new hardware evidence. Monitor server log." });
+      }
+    } catch (e) {
+      toast({ title: "Error", description: String(e), variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="border border-blue-200 dark:border-blue-900 rounded-lg p-4 space-y-3 bg-blue-50/30 dark:bg-blue-950/20">
+      <div className="flex items-center gap-2">
+        <RefreshCw className="w-4 h-4 text-blue-500" />
+        <p className="text-sm font-medium">BLE HARDWARE UPDATE — RE: All Campaigns (~320 contacts)</p>
+      </div>
+
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        New physical evidence: <span className="font-mono bg-muted px-1 rounded">bdb-PKE-79E9</span> MISHIK HID beacon on vehicle CL-273123, OBD-II always-hot proof (J1962 pin 16), and RSSI walk-up curve −95→−20 dBm confirming fixed stationary beacon. Sent as <span className="font-mono bg-muted px-1 rounded">RE:</span> to each contact's original subject. Spanish variant auto-applied to CR judicial contacts.
+      </p>
+
+      <div className="grid grid-cols-3 gap-2 text-xs">
+        <div className="bg-background border rounded p-2 space-y-0.5">
+          <p className="font-medium text-foreground">bdb-PKE-79E9</p>
+          <p className="text-muted-foreground">MISHIK HID / OUI 0x0166</p>
+        </div>
+        <div className="bg-background border rounded p-2 space-y-0.5">
+          <p className="font-medium text-foreground">CL-273123</p>
+          <p className="text-muted-foreground">OBD-II always-hot · stationary</p>
+        </div>
+        <div className="bg-background border rounded p-2 space-y-0.5">
+          <p className="font-medium text-foreground">−95 → −20 dBm</p>
+          <p className="text-muted-foreground">RSSI walk-up · fixed beacon</p>
+        </div>
+      </div>
+
+      <div className="text-xs text-muted-foreground bg-muted/40 border rounded px-3 py-2 space-y-1">
+        <p className="text-foreground font-medium">Email preview (EN):</p>
+        <p className="italic">"New physical evidence has been recovered."</p>
+        <p className="italic">"An HID-profile BLE beacon has one operational purpose: wireless keyboard/input injection."</p>
+        <p className="italic">"OBD-II J1962 pin 16 is always-hot — device broadcasts 24/7 engine on or off."</p>
+        <p className="italic">"RSSI −95 → −20 dBm: signature of a fixed beacon, not a passing car."</p>
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          Fires to <strong>all prior contacts</strong> with new BLE hardware evidence. Run dry-run first to confirm count.
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-update-ble-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-blue-300 dark:border-blue-700"
+          onClick={() => fire(true)}
+          disabled={loading}
+        >
+          Dry Run (log only)
+        </Button>
+        <Button
+          data-testid="button-update-ble-send"
+          size="sm"
+          className="gap-2 bg-blue-600 hover:bg-blue-700 text-white"
+          onClick={() => fire(false)}
+          disabled={loading}
+        >
+          <Send className="w-3.5 h-3.5" />
+          {loading ? "Queuing…" : "Fire BLE Update Blast"}
+        </Button>
+      </div>
+
+      {fired && (
+        <div className="flex items-center gap-3 text-sm">
+          <CheckCircle className="w-4 h-4 text-green-500" />
+          <span className="text-green-600 font-medium">BLE update blast queued — {fired.total} contacts firing async (~112s)</span>
           <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
         </div>
       )}

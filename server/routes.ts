@@ -7550,6 +7550,46 @@ export function registerGazetteIntelRoutes(app: express.Express) {
           }
         }
 
+        if (target === "update-ble") {
+          const { BLE_UPDATE_BODY_EN, BLE_UPDATE_BODY_ES } = await import("./mailer-campaign-update-ble");
+          const { CAMPAIGN_CONTACTS } = await import("./mailer-campaign");
+          const { AV_CAMPAIGN_CONTACTS } = await import("./mailer-campaign-aviation");
+          const { SUPP_CONTACTS } = await import("./mailer-campaign-supplementary");
+          const { EXPANSION_CONTACTS } = await import("./mailer-campaign-expansion");
+          const { CR_AUTH_CONTACTS } = await import("./mailer-campaign-cr-authorities");
+          const { US_INTEL_CONTACTS } = await import("./mailer-campaign-us-intel");
+          const { VENEZUELA_CONTACTS } = await import("./mailer-campaign-venezuela");
+          const { isSpanishContact } = await import("./mailer-campaign-update");
+
+          const seen = new Set<string>();
+          const all: { id: number; to: string; org: string; subject: string; body: string }[] = [];
+          let idOffset = 11000;
+
+          const addBle = (c: any, cat?: string) => {
+            const key = (c.to as string).toLowerCase().trim();
+            if (seen.has(key)) return;
+            seen.add(key);
+            const spanish = isSpanishContact(cat ?? c.category, c.subject);
+            all.push({
+              id: idOffset++,
+              to: c.to,
+              org: c.org || c.name || c.to,
+              subject: `RE: ${c.subject}`,
+              body: spanish ? BLE_UPDATE_BODY_ES : BLE_UPDATE_BODY_EN,
+            });
+          };
+
+          for (const c of CAMPAIGN_CONTACTS as any[]) addBle(c);
+          for (const c of AV_CAMPAIGN_CONTACTS as any[]) addBle(c, c.category);
+          for (const c of SUPP_CONTACTS as any[]) addBle(c, c.category);
+          for (const c of EXPANSION_CONTACTS as any[]) addBle(c);
+          for (const c of CR_AUTH_CONTACTS as any[]) addBle(c, c.category);
+          for (const c of US_INTEL_CONTACTS as any[]) addBle(c, c.category);
+          for (const c of VENEZUELA_CONTACTS as any[]) addBle(c);
+
+          contacts = all;
+        }
+
         if (target === "update-all") {
           const { UPDATE_BODY_EN, UPDATE_BODY_ES, isSpanishContact } = await import("./mailer-campaign-update");
           const { CAMPAIGN_CONTACTS } = await import("./mailer-campaign");
