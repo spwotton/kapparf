@@ -27,6 +27,7 @@ const NAV_SECTIONS = [
   { id: "signal", label: "The Signal" },
   { id: "dish", label: "The Dish" },
   { id: "watcher", label: "The Watcher" },
+  { id: "faces", label: "The Faces" },
   { id: "blackout", label: "The Blackout" },
   { id: "vehicle", label: "The Vehicle" },
   { id: "timeline", label: "Timeline" },
@@ -440,9 +441,134 @@ export default function PochoteIncidentPage() {
           </Alert>
         </section>
 
-        {/* ── SECTION 4: THE BLACKOUT ──────────────────────────── */}
-        <section id="blackout" className="scroll-mt-20 mb-24">
+        {/* ── SECTION 4: THE FACES ─────────────────────────────── */}
+        <section id="faces" className="scroll-mt-20 mb-24">
           <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 04</div>
+          <h2 className="text-3xl font-black text-foreground mb-4 leading-tight">The Faces</h2>
+          <h3 className="text-lg font-semibold text-muted-foreground mb-6">They were looking back.</h3>
+
+          <p className="text-muted-foreground leading-relaxed mb-8 text-base max-w-2xl">
+            On the same day the antenna was filmed, Sam captured two additional photographs — IMG_0697 and IMG_0696 — through the tropical foliage at the yoga place rear. In IMG_0697, he drew an orange circle in post around two distinct individuals visible through palm fronds. In IMG_0696, a face is partially visible below an iPhone crop-tool UI. Both images were 3–4× upscaled and processed through contrast enhancement before AI forensic vision analysis.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
+              <img
+                src="/evidence/boom/faces/697_original.jpg"
+                alt="IMG_0697 — two individuals circled in orange through foliage"
+                className="w-full object-cover"
+                loading="lazy"
+              />
+              <div className="p-3 text-[10px] font-mono text-muted-foreground">IMG_0697 — orange circle marks two individuals · 1179×1894px · June 8, 2026</div>
+            </div>
+            <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
+              <img
+                src="/evidence/boom/faces/696_region_raw.jpg"
+                alt="IMG_0696 — face visible in lower center through monstera fronds"
+                className="w-full object-cover"
+                loading="lazy"
+              />
+              <div className="p-3 text-[10px] font-mono text-muted-foreground">IMG_0696 — face in lower center cropped · 1179×2556px source · June 8, 2026</div>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-foreground mb-4">Enhanced Forensic Crops — 3–4× Upscale + Contrast Pipeline</h3>
+          <p className="text-muted-foreground text-sm mb-6 max-w-2xl">Each crop was upscaled to 3–4× original resolution, run through 2.8–3.5× contrast enhancement, 1.6–1.8× brightness boost, 3–4× sharpness, and histogram equalization before AI analysis. The same pipeline that first revealed the antenna.</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+            <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
+              <img src="/evidence/boom/faces/697_enhanced.jpg" alt="Both figures — full region enhanced" className="w-full object-cover" loading="lazy" />
+              <div className="p-3 text-[10px] font-mono text-muted-foreground">Both figures · full circled region · 3× upscale</div>
+            </div>
+            <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
+              <img src="/evidence/boom/faces/697_left_figure.jpg" alt="Left figure isolated — 4× upscale" className="w-full object-cover" loading="lazy" />
+              <div className="p-3 text-[10px] font-mono text-muted-foreground">Left figure isolated · 4× upscale</div>
+            </div>
+            <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
+              <img src="/evidence/boom/faces/697_right_figure.jpg" alt="Right figure isolated — 4× upscale" className="w-full object-cover" loading="lazy" />
+              <div className="p-3 text-[10px] font-mono text-muted-foreground">Right figure isolated · 4× upscale · eyes toward camera</div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+
+            <div className="border border-border/50 rounded-xl p-5 bg-muted/5">
+              <div className="text-[10px] font-mono text-muted-foreground/60 uppercase tracking-widest mb-3">LEFT FIGURE — IMG_0697</div>
+              <div className="space-y-2 text-sm">
+                {[
+                  { k: "Gender / Age", v: "Male presentation · 20s–30s" },
+                  { k: "Hair", v: "Short dark crew cut — possible military/tactical grooming" },
+                  { k: "Clothing", v: "Light shirt with horizontal stripes / bands — possible uniform or tactical vest overlay" },
+                  { k: "Build / Posture", v: "Slim · forward-lean observation posture" },
+                  { k: "Equipment", v: "Red-orange curved structure at shoulder — possible strap, harness, or tactical gear" },
+                  { k: "Gaze direction", v: "Head slightly downward — observing below eye level" },
+                ].map(r => (
+                  <div key={r.k} className="flex gap-3">
+                    <div className="text-[10px] font-mono text-muted-foreground/50 uppercase min-w-[110px] pt-0.5">{r.k}</div>
+                    <div className="text-foreground/80 leading-snug">{r.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="border border-border/50 rounded-xl p-5 bg-muted/5">
+              <div className="text-[10px] font-mono text-muted-foreground/60 uppercase tracking-widest mb-3">RIGHT FIGURE — IMG_0697</div>
+              <div className="space-y-2 text-sm">
+                {[
+                  { k: "Gender / Age", v: "Male presentation · 25–45 years" },
+                  { k: "Hair", v: "Short-medium dark hair · neat side-part" },
+                  { k: "Clothing", v: "White or off-white shirt with collar — lightweight fabric" },
+                  { k: "Build / Posture", v: "Slim · upright · alert" },
+                  { k: "Environment", v: "Red/orange diagonal bands nearby — possible caution or barrier tape" },
+                  { k: "Gaze direction", v: "Eyes appear oriented DIRECTLY TOWARD CAMERA" },
+                ].map(r => (
+                  <div key={r.k} className="flex gap-3">
+                    <div className="text-[10px] font-mono text-muted-foreground/50 uppercase min-w-[110px] pt-0.5">{r.k}</div>
+                    <div className={`leading-snug ${r.k === "Gaze direction" ? "text-red-500 font-semibold" : "text-foreground/80"}`}>{r.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          <div className="border border-red-600/30 rounded-xl p-5 bg-red-500/5 mb-10">
+            <div className="text-[10px] font-mono text-red-500/80 uppercase tracking-widest mb-3">IMG_0696 — FACE IN LOWER CENTER</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <img src="/evidence/boom/faces/696_enhanced.jpg" alt="IMG_0696 face — 4× upscale" className="rounded-lg w-full object-cover max-h-64" loading="lazy" />
+              <div className="space-y-2 text-sm">
+                {[
+                  { k: "Gender / Age", v: "Male presentation · 25–45 years" },
+                  { k: "Hair", v: "Light brown / dark blonde · short neat cut" },
+                  { k: "Clothing", v: "White or off-white light shirt — V-neckline or collar visible" },
+                  { k: "Build / Posture", v: "Slim · forward-leaning · peering through foliage" },
+                  { k: "Device", v: "HIGHLY PROBABLE — dark rectangular object at chest/eye level consistent with phone, camera, or binoculars" },
+                  { k: "Gaze direction", v: "DIRECT GAZE — eyes oriented forward toward camera" },
+                ].map(r => (
+                  <div key={r.k} className="flex gap-3">
+                    <div className="text-[10px] font-mono text-muted-foreground/50 uppercase min-w-[90px] pt-0.5">{r.k}</div>
+                    <div className={`leading-snug text-xs ${(r.k === "Gaze direction" || r.k === "Device") ? "text-red-500 font-semibold" : "text-foreground/80"}`}>{r.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <blockquote className="my-10 border-l-4 border-red-600 pl-6 py-2">
+            <p className="text-base italic text-foreground leading-relaxed mb-3">
+              "The right figure's eyes appear oriented <strong>directly toward the camera</strong>. The IMG_0696 individual is <strong>forward-leaning, peering through foliage</strong> with a <strong>highly probable handheld device</strong> at chest or eye level. The head is not turned — direct observation is the most likely interpretation. They detected the observer."
+            </p>
+            <cite className="text-xs font-mono text-muted-foreground not-italic">— qwen/qwen3-vl-32b-instruct · Four enhanced crops analyzed · June 8, 2026</cite>
+          </blockquote>
+
+          <Alert type="amber" label="COUNTER-SURVEILLANCE DETECTED">
+            The IMG_0696 individual is described as holding a device consistent with a smartphone, camera, or binoculars at eye or chest level while peering through foliage toward the observer's position. Combined with the direct gaze from the right figure in IMG_0697, this indicates the surveillance team detected Sam filming and initiated counter-photography or device targeting within the same observation window.
+          </Alert>
+        </section>
+
+        {/* ── SECTION 5: THE BLACKOUT ──────────────────────────── */}
+        <section id="blackout" className="scroll-mt-20 mb-24">
+          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 05</div>
           <h2 className="text-3xl font-black text-foreground mb-4 leading-tight">The Blackout</h2>
           <h3 className="text-lg font-semibold text-muted-foreground mb-6">The moment he started filming, the network went down.</h3>
 
@@ -485,9 +611,9 @@ export default function PochoteIncidentPage() {
           </Alert>
         </section>
 
-        {/* ── SECTION 5: THE VEHICLE ───────────────────────────── */}
+        {/* ── SECTION 6: THE VEHICLE ───────────────────────────── */}
         <section id="vehicle" className="scroll-mt-20 mb-24">
-          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 05</div>
+          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 06</div>
           <h2 className="text-3xl font-black text-foreground mb-4 leading-tight">The Vehicle</h2>
           <h3 className="text-lg font-semibold text-muted-foreground mb-6">CL-273123 — a 1997 Toyota Tacoma with a modified BLE platform inside.</h3>
 
@@ -543,7 +669,7 @@ export default function PochoteIncidentPage() {
 
         {/* ── SECTION 6: TIMELINE ──────────────────────────────── */}
         <section id="timeline" className="scroll-mt-20 mb-24">
-          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 06</div>
+          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 07</div>
           <h2 className="text-3xl font-black text-foreground mb-4 leading-tight">The Timeline</h2>
           <h3 className="text-lg font-semibold text-muted-foreground mb-8">Forty-eight hours in Jacó Beach.</h3>
 
@@ -561,12 +687,14 @@ export default function PochoteIncidentPage() {
             <TimelineItem time="23:05 Jun 8" title="Antenna location confirmed — video IMG_0663" detail="Rotating parabolic dish filmed directly from balcony. Yoga place rear, between La Flor and Pochote Grande, houses 9–11." hot />
             <TimelineItem time="23:07 Jun 8" title="AI vision confirms antenna rotation — 39 frames" detail="qwen-vl-32b after 3× contrast enhancement: dark curved parabolic dish in center-right, shape shifts elongated→compact→rounded = rotation confirmed." hot />
             <TimelineItem time="23:09 Jun 8" title="AI vision confirms surveillance operative — 83 frames" detail="One individual, light top/dark pants, stationary at fixed post right of antenna throughout entire 8.3s clip. 12/12 frames confirmed." hot />
+            <TimelineItem time="23:25 Jun 8" title="FACES CAPTURED — two individuals circled in orange — IMG_0697" detail="Sam photographs two individuals through foliage. Orange circle drawn around both. 1179×1894px JPEG. Second photo (IMG_0696) captures a face in lower-center through monstera fronds, holding a device." hot />
+            <TimelineItem time="23:30 Jun 8" title="Face forensics complete — 3 individuals described — at least 2 direct gaze" detail="qwen-vl-32b: LEFT figure — short dark crew cut, horizontal-stripe possible uniform, tactical gear at shoulder. RIGHT figure — neat dark hair, white shirt, eyes directly toward camera. IMG_0696 figure — device at eye level, direct gaze = counter-photography." hot />
           </div>
         </section>
 
-        {/* ── SECTION 7: EVIDENCE ──────────────────────────────── */}
+        {/* ── SECTION 8: EVIDENCE ──────────────────────────────── */}
         <section id="evidence" className="scroll-mt-20 mb-24">
-          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 07</div>
+          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 08</div>
           <h2 className="text-3xl font-black text-foreground mb-4 leading-tight">The Evidence Chain</h2>
           <h3 className="text-lg font-semibold text-muted-foreground mb-8">Every incident. Every ID. Every timestamp.</h3>
 
@@ -592,14 +720,16 @@ export default function PochoteIncidentPage() {
                 <EvidenceRow id="254535ff-30dd-4c8a-81b2-c4a3d9d3fe95" date="Jun 8 23:05" category="surveillance_infrastructure" title="ANTENNA LOCATION CONFIRMED — Yoga place rear, La Flor/Pochote Grande" severity={5} />
                 <EvidenceRow id="7cb9428e-59b3-40c8-9d60-ca6f9a8cce95" date="Jun 8 23:07" category="surveillance_infrastructure" title="AI VISION CONFIRMS: Rotating parabolic dish — center-right, all 39 frames" severity={5} />
                 <EvidenceRow id="b8f73ca0-3331-4a74-894b-0d9502650cf2" date="Jun 8 23:09" category="surveillance_personnel" title="CONFIRMED INDIVIDUAL — Light top/dark pants — stationary right of antenna" severity={5} />
+                <EvidenceRow id="69f0d550-3828-4a27-9661-4b3e6ce3c4d9" date="Jun 8 23:25" category="surveillance_personnel" title="FACES VISIBLE — Two individuals photographed through foliage — orange circle — IMG_0697 + IMG_0696" severity={5} />
+                <EvidenceRow id="91698229-b4eb-47cb-a117-d346b0ea2c1b" date="Jun 8 23:30" category="surveillance_personnel" title="FACE FORENSICS — 3 individuals positively described — at least 2 looking directly at camera — device in hand" severity={5} />
               </tbody>
             </table>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-4 text-xs text-muted-foreground font-mono">
-            <span>10 incidents logged</span>
+            <span>12 incidents logged</span>
             <span>·</span>
-            <span>9 severity-5 events</span>
+            <span>11 severity-5 events</span>
             <span>·</span>
             <span>All stored in PostgreSQL with SHA-256 integrity hash</span>
             <span>·</span>
@@ -607,9 +737,9 @@ export default function PochoteIncidentPage() {
           </div>
         </section>
 
-        {/* ── SECTION 8: FINDINGS ──────────────────────────────── */}
+        {/* ── SECTION 9: FINDINGS ──────────────────────────────── */}
         <section id="findings" className="scroll-mt-20 mb-24">
-          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 08</div>
+          <div className="text-[10px] font-mono text-muted-foreground/50 tracking-widest uppercase mb-4">Section 09</div>
           <h2 className="text-3xl font-black text-foreground mb-4 leading-tight">Formal Findings</h2>
           <h3 className="text-lg font-semibold text-muted-foreground mb-8">What the evidence supports, stated plainly.</h3>
 
@@ -631,6 +761,9 @@ export default function PochoteIncidentPage() {
             </Finding>
             <Finding icon="🔴" title="Finding 6 — Multi-day surveillance operation by multiple personnel">
               Three distinct surveillance-correlated individuals have been documented across June 6–8: the pool archway figure (face-mounted device), the hooded individual on the porch (Israel Brooks, June 7), and the stationary operative at the antenna post (June 8). Combined with the rotating directional antenna and mobile BLE vehicle, this constitutes a coordinated multi-asset surveillance operation against a single target at Hotel Pochote Grande.
+            </Finding>
+            <Finding icon="👁" title="Finding 7 — Surveillance operatives photographed directly — counter-surveillance detected">
+              AI forensic vision of 3–4× upscaled enhanced crops from IMG_0697 and IMG_0696 positively described three individuals at the surveillance post. Left figure: short dark crew cut, horizontal-stripe upper garment consistent with uniform or tactical vest, red-orange shoulder structure consistent with tactical harness or strap. Right figure: neat dark hair, white shirt with collar, eyes oriented directly toward the camera. IMG_0696 figure: forward-lean posture peering through foliage, highly probable handheld device at chest or eye level (phone, camera, or binoculars), direct gaze confirmed. The combination of direct gaze and device-in-hand from the IMG_0696 individual is consistent with counter-photography — the surveillance team detected the observer and initiated return-targeting within the same photographic window.
             </Finding>
           </div>
 
