@@ -123,6 +123,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
     items: [
+      { titleKey: "sidebar.pochoteIncident", fallback: "Operation Pochote Grande", url: "/pochote-incident", icon: AlertTriangle },
       { titleKey: "sidebar.forensicEvidence", fallback: "Forensic Evidence Package", url: "/forensic-evidence", icon: FileWarning },
       { titleKey: "sidebar.setecomExpose", fallback: "SETECOM Exposé", url: "/setecom", icon: AlertTriangle },
       { titleKey: "sidebar.ciajwHome", fallback: "CIAJW Home", url: "/whistleblower", icon: Shield },
