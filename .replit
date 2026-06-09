@@ -47,3 +47,7 @@ timeoutMs = 120000
 
 [userenv.shared]
 KAPPA_LAB_URL = "https://cosmic-genesis-model.replit.app"
+
+[[ports]]
+localPort = 5000
+externalPort = 80

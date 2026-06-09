@@ -1,6 +1,7 @@
 import { storage } from "./storage";
 import { kappaEngine } from "./kappa-engine";
 import { hypervisor } from "./hypervisor";
+import { omegaCorrelator } from "./spectrum-sweeper";
 
 interface FeedResult {
   feed: string;
@@ -486,6 +487,36 @@ async function runFeedCycle(): Promise<void> {
   feedState.cycleCount++;
   feedState.lastRun = Date.now();
   feedState.totalEventsIngested += totalIngested;
+
+  // ── Ω-Correlator auto-feed: push real values into all 24 AK7 spokes ──────
+  try {
+    const kappaStatus = kappaEngine.getStatus();
+    const score = kappaStatus.score ?? 0;
+    if (score > 0) await omegaCorrelator.ingestReading("kappa_score", score, "0-100", "kappa-engine");
+
+    const recentEvents = await storage.getSignalEvents(undefined, 50);
+    let bestKp = -1, bestXray = 0, bestBz = 0, bestMag = -1, lightningCount = 0;
+    for (const ev of recentEvents) {
+      const m = ev.metadata as any;
+      if (!m) continue;
+      if (ev.source === "noaa-swpc-kindex" && typeof m.kpIndex === "number") bestKp = Math.max(bestKp, m.kpIndex);
+      if (ev.source === "noaa-goes-xray" && typeof m.flux === "number") bestXray = Math.max(bestXray, m.flux);
+      if (ev.source === "noaa-swpc-mag" && typeof m.bzNt === "number") bestBz = m.bzNt;
+      if ((ev.source === "usgs-earthquake" || ev.source === "iris-fdsn") && typeof m.magnitude === "number") bestMag = Math.max(bestMag, m.magnitude);
+      if (ev.source === "wwlln-lightning" && ev.eventType === "lightning-strike") lightningCount++;
+    }
+    const reads: [string, number, string, string][] = [];
+    if (bestKp >= 0) reads.push(["kp_index", bestKp, "0-9", "noaa-swpc"]);
+    if (bestXray > 0) reads.push(["solar_xray", bestXray, "W/m²", "noaa-goes"]);
+    reads.push(["solar_wind_bz", bestBz, "nT", "noaa-swpc-mag"]);
+    if (bestMag >= 0) reads.push(["seismic_usgs", bestMag, "M", "usgs"]);
+    if (lightningCount > 0) reads.push(["lightning_wwlln", lightningCount, "strikes/cycle", "wwlln"]);
+    reads.push(["network_anomaly", score, "score", "kappa-engine"]);
+    for (const [domain, val, unit, src] of reads) {
+      await omegaCorrelator.ingestReading(domain, val, unit, src);
+    }
+    await omegaCorrelator.checkCorrelationEvent(3);
+  } catch {}
 
   const durationMs = Date.now() - startMs;
   console.log(`[ExternalFeeds] Cycle #${feedState.cycleCount}: ${totalIngested} events from ${feeds.length} feeds, ${durationMs}ms`);
