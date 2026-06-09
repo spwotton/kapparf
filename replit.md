@@ -8,6 +8,9 @@ KAPPA is a software-defined Signal Intelligence (SIGINT) platform designed to co
 - No simulated detection pipelines
 - Notion-style minimal professional UI (not sci-fi)
 
+## Inter-App API Contracts
+**IMPORTANT: Read `docs/INTER_APP_CONTRACTS.md` at the start of ANY session involving Atlantis, KYMA, Oracle, or Meridian.** This file contains all known API endpoints, data shapes, and integration status across the full app ecosystem. It has TODOs that Sam fills in as he confirms real endpoint URLs from each app. Never rebuild this from scratch — always update that file.
+
 ## System Architecture
 The platform utilizes a modern web stack and a sophisticated real-time correlation engine for multi-domain signal intelligence.
 

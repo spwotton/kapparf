@@ -4,4 +4,4 @@
 - [Jaco 3D drone animation patterns](jaco-drone-animation.md) — hover bob must use base anchor (droneBaseY), not +=; pitch is not in scope at belly-light traverse; aircraft lerp via _tgt/_posInit pattern.
 - [GOS corpus for Jaco shaders](gos-jaco-shaders.md) — GOS Quantum Quake + QuantumRenderer are primary shader sources; φ-harmonic and κ-breath woven into terrain/drone.
 - [Jaco Scar seafloor anomaly](jaco-scar-anomaly.md) — ODP 896A cold seep at 9.123°N 84.789°W −2500m, rendered as Three.js wireframe cone in ocean mesh area (SX=-90, SZ=22), animated at 46.875Hz visual rate.
-  
+- [Inter-app API contracts](inter-app-contracts.md) — ALL cross-app endpoints live in docs/INTER_APP_CONTRACTS.md; read that file first every session before any Atlantis/KYMA/Oracle/Meridian work.
