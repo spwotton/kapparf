@@ -1,0 +1,75 @@
+KAPPA FACE FORENSIC REPORT
+IMG_0697 — LEFT figure isolated — 4× upscale
+Generated: 2026-06-08
+Model: qwen/qwen3-vl-32b-instruct
+
+**FORENSIC FACE AND INDIVIDUAL ANALYSIS — Jacó Beach, Costa Rica, June 8, 2026**  
+**Image: IMG_0697 — LEFT figure isolated — 4× upscale**
+
+---
+
+**1. FACE —**
+
+- **Skin Tone**: Due to extreme contrast enhancement and pixelation, skin tone is difficult to determine with certainty. However, the visible areas (particularly around the forehead and cheek region) suggest a **light to medium complexion**, with some areas appearing washed-out white due to overexposure. There is no clear indication of dark pigmentation or tanning.
+  
+- **Approximate Age Range**: The facial structure is indistinct, but the presence of what appears to be a **smooth forehead and minimal visible wrinkles** suggests an individual in the **early to mid-20s to early 30s**. The lack of pronounced sagging or deep lines supports this estimation.
+
+- **Gender Presentation**: Based on the visible facial contour — a relatively **angular jawline**, and what may be a **slightly defined brow ridge** — the individual presents as **male**. However, due to image degradation, this is an inference based on limited structural cues.
+
+- **Facial Hair**: **No visible facial hair** is discernible. The area around the jawline and cheek appears smooth, with no indication of stubble or beard growth.
+
+- **Expression**: The face is **partially obscured** by foliage and overexposure. The visible portion of the face (forehead and upper cheek) shows **no clear expression** — no discernible eye movement, brow position, or mouth shape. The individual appears **neutral or passive**.
+
+- **Head Covering**: **No head covering** is visible. The top of the head appears bare, though it is partially obscured by foliage and image noise. There is no indication of a hat, cap, or hood.
+
+---
+
+**2. HAIR —**
+
+- **Color**: The hair appears to be **dark**, possibly **black or dark brown**, though the exact shade is obscured by shadow and overexposure. The visible portion at the crown and sides shows **dense, dark strands**.
+
+- **Length**: Hair appears to be **short**, likely **crew-cut or buzzed style**, as there is no visible length extending beyond the scalp. The silhouette suggests a close-cropped cut.
+
+- **Style**: The hair is **neatly trimmed**, with no visible fringe or sideburns. The style is utilitarian, consistent with a **military, tactical, or security personnel** grooming standard.
+
+- **Visible**: Hair is **partially visible** at the crown and sides, but heavily distorted by foliage and image artifacts.
+
+---
+
+**3. CLOTHING —**
+
+- **Upper Garment Color/Type**: The individual is wearing a **light-colored upper garment**, possibly **white, off-white, or light gray**. The material appears **smooth and non-textured**, suggesting a **synthetic or cotton blend**. The garment has **horizontal stripes or bands** — alternating between **light and dark gray or black** — visible across the torso and shoulder area. This pattern is **not consistent with casual wear**, and may suggest a **uniform**, **tactical vest**, or **camouflage-patterned shirt**.
+
+- **Logos or Markings**: **No clear logos, insignia, or text** are visible. The horizontal bands may be part of a **camouflage pattern** (e.g., digital or tiger stripe), or a **tactical vest overlay**. Due to image quality, it is not possible to confirm whether these are intentional markings or artifacts.
+
+---
+
+**4. BODY —**
+
+- **Build**: The individual appears to have a **slim to average build**. The shoulder width is moderate, and the torso appears narrow, with no indication of muscular bulk or obesity. The silhouette suggests a **lean physique**.
+
+- **Posture**: The individual is **standing upright**, with a **slightly forward-leaning posture**. The head is tilted slightly downward, suggesting the person may be **looking down or focusing on something below eye level** (e.g., a device, map, or ground).
+
+- **What they appear to be doing**: The posture and partial occlusion suggest the individual is **stationary and observing**. Given the context (surveillance post), they are likely **monitoring the area**, possibly using a handheld device or binoculars (though not visible in this frame).
+
+---
+
+**5. Equipment, Device, or Object —**
+
+- **In hands or nearby**: **No object is clearly visible in the hands**. The arms are partially obscured by foliage and image distortion. However, there is a **red-orange curved structure** to the left of the figure — possibly a **strap, harness, or part of a backpack** — which may be attached to the individual or nearby. This could be a **tactical gear component**, but it is not confirmed.
+
+---
+
+**6. Position Relative to Vegetation/Fence/Gate Structures —**
+
+- The individual is **partially concealed behind dense tropical foliage**, including **green leafy plants** and possibly **small trees or shrubs**. The foliage is **dense and irregular**, suggesting a **natural or semi-wild environment**.
+
+- The figure is positioned **close to a vertical structure** (possibly a fence or gate) — indicated by the **dark vertical line to the far left** of the image. This structure appears to be **metal or wooden**, and the individual is standing **adjacent to it**, likely using it for cover or as a vantage point.
+
+- The red-orange curved object may be part of a **fence, gate, or support structure**, possibly a **railing or handrail**.
+
+---
+
+**7. Eye Direction —**
+
+- **

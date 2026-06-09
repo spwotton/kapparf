@@ -37,6 +37,12 @@ app.use(session({
   },
 }));
 
+// Public — /evidence/boom served WITHOUT auth (antenna frames, face crops for /pochote-incident)
+// Must be registered at top-level BEFORE registerRoutes() so it precedes the auth-gated /evidence route
+app.use("/evidence/boom", express.static(path.join(process.cwd(), "public", "evidence", "boom"), {
+  setHeaders: (res) => { res.setHeader("Cache-Control", "public, max-age=3600"); },
+}));
+
 // Serve public/scripts/ at /scripts before any route or Vite catch-all, in all environments
 app.get("/scripts/:filename", (req, res) => {
   const filename = path.basename(req.params.filename);
@@ -122,6 +128,11 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
       res.setHeader("Cache-Control", "no-cache");
       res.sendFile(path.join(publicEvidenceDir, "DENUNCIA_SAM_WOTTON_20260530.html"));
     });
+    // Public — boom subdir (faces, antenna frames, people frames) served without auth
+    // so they load on the public /pochote-incident editorial page
+    app.use("/evidence/boom", express.static(path.join(publicEvidenceDir, "boom"), {
+      setHeaders: (res) => { res.setHeader("Cache-Control", "public, max-age=3600"); },
+    }));
     const { requireAuth: evidenceAuth } = await import("./middleware/auth");
     app.use("/evidence", evidenceAuth, express.static(publicEvidenceDir, {
       setHeaders: (res, filePath) => {

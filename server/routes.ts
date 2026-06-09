@@ -207,6 +207,10 @@ export async function registerRoutes(
     res.sendFile(scriptPath);
   });
 
+  // Public — boom subdir (antenna frames, people frames, faces) for /pochote-incident editorial page
+  app.use("/evidence/boom", express.static(nodePath.resolve(process.cwd(), "public/evidence/boom"), {
+    setHeaders: (res) => { res.setHeader("Cache-Control", "public, max-age=3600"); },
+  }));
   app.use("/evidence", requireAuth, express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".mp4")) {

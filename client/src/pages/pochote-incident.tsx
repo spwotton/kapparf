@@ -454,7 +454,7 @@ export default function PochoteIncidentPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
             <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
               <img
-                src="/evidence/boom/faces/697_original.jpg"
+                src="/pochote/faces/697_original.jpg"
                 alt="IMG_0697 — two individuals circled in orange through foliage"
                 className="w-full object-cover"
                 loading="lazy"
@@ -463,7 +463,7 @@ export default function PochoteIncidentPage() {
             </div>
             <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
               <img
-                src="/evidence/boom/faces/696_region_raw.jpg"
+                src="/pochote/faces/696_region_raw.jpg"
                 alt="IMG_0696 — face visible in lower center through monstera fronds"
                 className="w-full object-cover"
                 loading="lazy"
@@ -477,15 +477,15 @@ export default function PochoteIncidentPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
             <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
-              <img src="/evidence/boom/faces/697_enhanced.jpg" alt="Both figures — full region enhanced" className="w-full object-cover" loading="lazy" />
+              <img src="/pochote/faces/697_enhanced.jpg" alt="Both figures — full region enhanced" className="w-full object-cover" loading="lazy" />
               <div className="p-3 text-[10px] font-mono text-muted-foreground">Both figures · full circled region · 3× upscale</div>
             </div>
             <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
-              <img src="/evidence/boom/faces/697_left_figure.jpg" alt="Left figure isolated — 4× upscale" className="w-full object-cover" loading="lazy" />
+              <img src="/pochote/faces/697_left_figure.jpg" alt="Left figure isolated — 4× upscale" className="w-full object-cover" loading="lazy" />
               <div className="p-3 text-[10px] font-mono text-muted-foreground">Left figure isolated · 4× upscale</div>
             </div>
             <div className="rounded-xl overflow-hidden border border-border bg-muted/10">
-              <img src="/evidence/boom/faces/697_right_figure.jpg" alt="Right figure isolated — 4× upscale" className="w-full object-cover" loading="lazy" />
+              <img src="/pochote/faces/697_right_figure.jpg" alt="Right figure isolated — 4× upscale" className="w-full object-cover" loading="lazy" />
               <div className="p-3 text-[10px] font-mono text-muted-foreground">Right figure isolated · 4× upscale · eyes toward camera</div>
             </div>
           </div>
@@ -535,7 +535,7 @@ export default function PochoteIncidentPage() {
           <div className="border border-red-600/30 rounded-xl p-5 bg-red-500/5 mb-10">
             <div className="text-[10px] font-mono text-red-500/80 uppercase tracking-widest mb-3">IMG_0696 — FACE IN LOWER CENTER</div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <img src="/evidence/boom/faces/696_enhanced.jpg" alt="IMG_0696 face — 4× upscale" className="rounded-lg w-full object-cover max-h-64" loading="lazy" />
+              <img src="/pochote/faces/696_enhanced.jpg" alt="IMG_0696 face — 4× upscale" className="rounded-lg w-full object-cover max-h-64" loading="lazy" />
               <div className="space-y-2 text-sm">
                 {[
                   { k: "Gender / Age", v: "Male presentation · 25–45 years" },
@@ -689,6 +689,8 @@ export default function PochoteIncidentPage() {
             <TimelineItem time="23:09 Jun 8" title="AI vision confirms surveillance operative — 83 frames" detail="One individual, light top/dark pants, stationary at fixed post right of antenna throughout entire 8.3s clip. 12/12 frames confirmed." hot />
             <TimelineItem time="23:25 Jun 8" title="FACES CAPTURED — two individuals circled in orange — IMG_0697" detail="Sam photographs two individuals through foliage. Orange circle drawn around both. 1179×1894px JPEG. Second photo (IMG_0696) captures a face in lower-center through monstera fronds, holding a device." hot />
             <TimelineItem time="23:30 Jun 8" title="Face forensics complete — 3 individuals described — at least 2 direct gaze" detail="qwen-vl-32b: LEFT figure — short dark crew cut, horizontal-stripe possible uniform, tactical gear at shoulder. RIGHT figure — neat dark hair, white shirt, eyes directly toward camera. IMG_0696 figure — device at eye level, direct gaze = counter-photography." hot />
+            <TimelineItem time="23:45 Jun 8" title="ESCALATION — Active threats made against observer during documentation" detail="Observer reports being continuously threatened in real-time while conducting forensic documentation. Intimidation concurrent with detection by surveillance team (direct gaze, counter-photography). Logged as Penal Code Art. 274 / Art. 195 violation." hot />
+            <TimelineItem time="23:46 Jun 8" title="HOTEL INFILTRATION — Surveillance personnel inside Hotel Pochote Grande — opposite corner" detail="Observer confirms adversarial assets are positioned inside the hotel itself, in the opposite corner from his room. Internal + external triangulation: antenna post (yoga rear, balcony LOS) + hotel opposite corner = full-envelope coverage. Operation has entered confrontational phase." hot />
           </div>
         </section>
 
@@ -722,14 +724,16 @@ export default function PochoteIncidentPage() {
                 <EvidenceRow id="b8f73ca0-3331-4a74-894b-0d9502650cf2" date="Jun 8 23:09" category="surveillance_personnel" title="CONFIRMED INDIVIDUAL — Light top/dark pants — stationary right of antenna" severity={5} />
                 <EvidenceRow id="69f0d550-3828-4a27-9661-4b3e6ce3c4d9" date="Jun 8 23:25" category="surveillance_personnel" title="FACES VISIBLE — Two individuals photographed through foliage — orange circle — IMG_0697 + IMG_0696" severity={5} />
                 <EvidenceRow id="91698229-b4eb-47cb-a117-d346b0ea2c1b" date="Jun 8 23:30" category="surveillance_personnel" title="FACE FORENSICS — 3 individuals positively described — at least 2 looking directly at camera — device in hand" severity={5} />
+                <EvidenceRow id="bd2668fa-ab3b-4b9c-8a29-2c9c93c68b83" date="Jun 8 23:45" category="threat" title="ACTIVE THREATS — Observer threatened in real-time during forensic documentation session" severity={5} />
+                <EvidenceRow id="9f83875f-a27a-4d84-80d7-e218ae387df5" date="Jun 8 23:46" category="surveillance_personnel" title="HOTEL INFILTRATION — Surveillance personnel inside Pochote Grande — opposite corner from observer" severity={5} />
               </tbody>
             </table>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-4 text-xs text-muted-foreground font-mono">
-            <span>12 incidents logged</span>
+            <span>14 incidents logged</span>
             <span>·</span>
-            <span>11 severity-5 events</span>
+            <span>13 severity-5 events</span>
             <span>·</span>
             <span>All stored in PostgreSQL with SHA-256 integrity hash</span>
             <span>·</span>
@@ -765,10 +769,13 @@ export default function PochoteIncidentPage() {
             <Finding icon="👁" title="Finding 7 — Surveillance operatives photographed directly — counter-surveillance detected">
               AI forensic vision of 3–4× upscaled enhanced crops from IMG_0697 and IMG_0696 positively described three individuals at the surveillance post. Left figure: short dark crew cut, horizontal-stripe upper garment consistent with uniform or tactical vest, red-orange shoulder structure consistent with tactical harness or strap. Right figure: neat dark hair, white shirt with collar, eyes oriented directly toward the camera. IMG_0696 figure: forward-lean posture peering through foliage, highly probable handheld device at chest or eye level (phone, camera, or binoculars), direct gaze confirmed. The combination of direct gaze and device-in-hand from the IMG_0696 individual is consistent with counter-photography — the surveillance team detected the observer and initiated return-targeting within the same photographic window.
             </Finding>
+            <Finding icon="⚠️" title="Finding 8 — Real-time threats and hotel infiltration — operation entered confrontational phase">
+              The observer reports being continuously threatened during the documentation session of June 8, 2026 — concurrent with the moment surveillance operatives detected the camera. Separately, adversarial personnel have been confirmed inside Hotel Pochote Grande itself, positioned in the opposite corner from the observer's room. This creates a full-envelope geometry: external antenna post at the yoga place rear (direct line of sight from balcony) + internal hotel assets at opposite corner = bilateral coverage with no blind angle. The shift from passive collection to active threats and internal hotel placement constitutes a documented escalation from surveillance to intimidation. Under Costa Rica Penal Code Article 195 (criminal threats) and Article 274 (obstruction / witness intimidation), the threats made during a self-documentation session constitute independent criminal acts.
+            </Finding>
           </div>
 
           <Alert type="blue" label="LEGAL STANDING — COSTA RICA">
-            The documented activities — WiFi deauthentication attacks, operation of unauthorized RF infrastructure, and coordinated surveillance of a person without consent — constitute violations of Costa Rica's Law 9048 (unauthorized computer access and RF interference), Ley 8968 (data protection and privacy), and potentially Articles 196–197 of the Penal Code (violation of private communications). The rotating antenna at the yoga place rear property may also constitute unauthorized use of radio spectrum under SUTEL jurisdiction, which mandates frequency authorization for all directional transmitters above threshold power levels.
+            The documented activities constitute violations of: <strong>Law 9048</strong> — unauthorized WiFi deauthentication attacks and RF interference; <strong>Ley 8968</strong> — surveillance without consent and unlawful data collection; <strong>Articles 196–197 Penal Code</strong> — violation of private communications; <strong>Article 195 Penal Code</strong> — criminal threats made against observer during documentation; <strong>Article 274 Penal Code</strong> — obstruction of justice / witness intimidation (threats during active self-documentation). The rotating antenna at the yoga place rear may also constitute unauthorized use of radio spectrum under SUTEL jurisdiction. Placement of personnel inside the observer's hotel may constitute criminal harassment under Article 197.
           </Alert>
 
           <div className="mt-16 py-10 border-t border-border text-center">

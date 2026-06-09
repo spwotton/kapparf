@@ -1,0 +1,64 @@
+KAPPA FACE FORENSIC REPORT
+IMG_0697 — full circled region enhanced — both figures
+Generated: 2026-06-08
+Model: qwen/qwen3-vl-32b-instruct
+
+**FORENSIC FACE AND INDIVIDUAL ANALYSIS — Jacó Beach, Costa Rica, June 8, 2026**  
+**Image: IMG_0697 — Full circled region enhanced — both figures**
+
+---
+
+**1. FACE —**
+
+- **Skin Tone**: Due to extreme contrast enhancement and pixelation, skin tone is difficult to determine with certainty. However, the visible areas suggest a **light to medium olive complexion**, with some regions appearing washed out (overexposed) due to enhancement. No definitive melanin indicators (e.g., freckles, moles) are discernible.
+- **Approximate Age Range**: Indeterminate. Facial contours are obscured by image noise and overexposure. However, the apparent lack of pronounced wrinkles or deep lines suggests **possible young adult to middle-aged adult (20s–40s)**. No definitive aging markers are visible.
+- **Gender Presentation**: Ambiguous. The figure on the left appears to have a more angular jawline and possibly broader shoulders (inferred from silhouette), suggesting **male presentation**. The figure on the right appears smaller and less defined, possibly **female or non-binary**, but this is speculative due to poor resolution. No definitive secondary sexual characteristics are visible.
+- **Facial Hair**: No visible facial hair. The left figure may have a faint suggestion of a shadowed beard or stubble, but this is likely artifact from image enhancement.
+- **Expression**: Indiscernible. Both faces are blurred and partially obscured by foliage and overexposure. No clear eye shape, brow position, or mouth contour is visible to infer expression.
+- **Head Covering**: The left figure appears to be wearing a **light-colored cap or hat** — a curved, light-toned structure is visible above the forehead and extending backward. The right figure may have a **hood or dark cap**, but this is uncertain due to shadowing and pixelation.
+
+---
+
+**2. HAIR —**
+
+- **Color**: The left figure appears to have **dark hair**, possibly black or dark brown, visible at the sides and back of the head. The right figure’s hair is **indistinct** — may be dark, but could also be obscured by a hood or cap.
+- **Length**: Both appear to have **short to medium-length hair**, consistent with a casual or practical style. The left figure’s hair appears to be cut short on the sides, possibly with longer top (though this is speculative).
+- **Style**: The left figure’s hair seems to be **neatly styled**, possibly a short crew cut or similar. The right figure’s hair is **unidentifiable** due to occlusion.
+- **Visible**: Hair is **partially visible** on both figures, but heavily distorted by image enhancement and foliage.
+
+---
+
+**3. CLOTHING —**
+
+- **Upper Garment Color/Type**:  
+  - **Left Figure**: Wearing a **light-colored shirt or jacket**, possibly white, off-white, or light gray. The garment appears to be **short-sleeved or sleeveless**, with a visible collar or neckline. No clear logos or markings are visible — the fabric texture is pixelated and washed out.  
+  - **Right Figure**: Wearing a **darker upper garment**, possibly navy, black, or dark gray. Appears to be a **long-sleeved shirt or hoodie**. A faint vertical seam or zipper line may be visible down the front, suggesting a **hoodie or zip-up jacket**.  
+- **Logos or Markings**: **No discernible logos, insignia, or text** are visible on either garment. Any potential branding is obscured by image noise and overexposure.
+
+---
+
+**4. BODY —**
+
+- **Build**:  
+  - **Left Figure**: Appears to have a **slim to average build**, with shoulders slightly broader than torso.  
+  - **Right Figure**: Appears **slimmer**, possibly smaller stature, with less defined shoulder width.  
+- **Posture**: Both figures are standing upright, slightly angled toward each other. The left figure seems to be leaning slightly forward, possibly observing or interacting with something in front. The right figure appears more upright and still.  
+- **What they appear to be doing**: The figures appear to be **stationary and observing**. The left figure’s posture suggests possible surveillance or scanning behavior. The right figure appears to be **standing guard or monitoring**. No active movement is evident.
+
+---
+
+**5. Equipment, Device, or Object —**
+
+- **In Hands or Nearby**:  
+  - **Left Figure**: Appears to be holding a **dark rectangular object** — possibly a **smartphone, camera, or small tablet** — held in front of the body at chest level. The object has a **light-colored edge or screen**, consistent with a device being operated.  
+  - **Right Figure**: No clear object is visible in hands. May be holding something small and dark, but it is obscured by foliage and shadow.  
+- **Other Equipment**: No visible backpacks, bags, or other gear. No binoculars, cameras on tripods, or other surveillance equipment is clearly identifiable.
+
+---
+
+**6. Position Relative to Vegetation/Fence/Gate Structures —**
+
+- Both figures are **partially concealed by dense tropical foliage** — likely palm fronds, broad-leafed plants, or vines.  
+- They are positioned **behind a light-colored metal or wooden structure**, possibly a **fence, gate, or railing**, visible as diagonal white lines crossing the image.  
+- The structure appears to be **part of a surveillance post or observation point**, located between La Flor Hotel and Hotel Pochote Grande.  
+- The figures are **stationed close to the structure**, using it as a partial barrier or vantage point. The

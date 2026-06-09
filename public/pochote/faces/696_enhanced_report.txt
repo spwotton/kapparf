@@ -1,0 +1,79 @@
+KAPPA FACE FORENSIC REPORT
+IMG_0696 — face in lower center — 4× upscale
+Generated: 2026-06-08
+Model: qwen/qwen3-vl-32b-instruct
+
+**FORENSIC FACE AND INDIVIDUAL ANALYSIS — Jacó Beach, Costa Rica, June 8, 2026**  
+**Image: IMG_0696 — Face in Lower Center — 4× Upscale**
+
+---
+
+### 1. **FACE**
+
+- **Skin Tone**: Due to extreme overexposure and color distortion (likely from aggressive contrast enhancement and upscaling), skin tone is highly unreliable. However, visible patches suggest a **light to medium complexion**, with areas of pinkish-red and pale gray/white — possibly indicating sun exposure or reflection off light-colored clothing. The image lacks sufficient tonal range to confirm definitively.
+  
+- **Approximate Age Range**: **Estimate: 25–45 years**. Based on visible facial structure — a relatively smooth contour with no pronounced wrinkles or deep lines — and the apparent lack of significant sagging or age-related texture. The overexposure obscures fine details such as crow’s feet or nasolabial folds, making precise aging impossible.
+
+- **Gender Presentation**: **Appears male**, based on facial structure — broad forehead, angular jawline (suggested by shadowing), and lack of visible feminine facial features (e.g., softer jaw, narrower brow). However, the image is too degraded to confirm with certainty.
+
+- **Facial Hair**: **No visible facial hair**. The lower face area appears smooth, though the overexposure may mask stubble. No beard, mustache, or sideburns are discernible.
+
+- **Expression**: **Neutral to slightly alert**. The eyes appear to be open and directed forward, but the overexposure and distortion make it impossible to determine if the mouth is closed, slightly open, or smiling. No clear emotional expression is evident.
+
+- **Head Covering**: **No visible hat, cap, or hood**. The top of the head appears exposed, though the image is heavily obscured by foliage and overexposure. There is no indication of a head covering — no brim, ear flaps, or hood outline.
+
+---
+
+### 2. **HAIR**
+
+- **Color**: **Light brown or dark blonde**, inferred from the darker patches visible at the top and sides of the head. However, due to overexposure and color noise, this is speculative.
+
+- **Length**: **Short to medium length**, based on the apparent silhouette. Hair does not appear to extend past the ears or nape of the neck. The crown area is obscured by foliage.
+
+- **Style**: **Possibly short, neat, or crew-cut style**. No visible parting, waves, or braids. The silhouette suggests a uniform or military-style cut, but this is speculative.
+
+- **Visible**: **Partially visible** — the top and sides of the head are somewhat visible through gaps in foliage, but the front and lower portions are obscured.
+
+---
+
+### 3. **CLOTHING**
+
+- **Upper Garment Color/Type**: **Light-colored, possibly white or off-white**. The garment appears to be a **short-sleeved shirt or light jacket**, judging by the shoulder width and visible collar area (suggested by a slight V-shape at the neck). The fabric seems lightweight, possibly cotton or synthetic.
+
+- **Logos or Markings**: **No discernible logos, patches, or insignia**. The image is too distorted and overexposed to identify any text, symbols, or emblems. The surface appears uniform in color.
+
+---
+
+### 4. **BODY**
+
+- **Build**: **Slim to average build**. The shoulders appear narrow, and the torso is not bulky. The silhouette suggests a lean physique, though details are obscured.
+
+- **Posture**: **Upright, slightly forward-leaning**. The individual appears to be standing with a straight spine, possibly leaning slightly forward — consistent with someone observing or peering through foliage.
+
+- **What they appear to be doing**: **Observing or surveilling**. The posture, eye direction (see below), and position behind foliage strongly suggest intentional concealment and observation. Likely holding or operating a device (see #5).
+
+---
+
+### 5. **Equipment, Device, or Object**
+
+- **In hands or nearby**: **Highly probable presence of a handheld device** — possibly a **camera, smartphone, or binoculars**. The area below the face shows a dark, rectangular shape with a lighter border, suggesting a device held in front of the body. The object appears to be held at chest or eye level, consistent with surveillance activity.
+
+- **No visible cables or attachments** — the device seems to be handheld and self-contained.
+
+---
+
+### 6. **Position Relative to Vegetation/Fence/Gate Structures**
+
+- **Position**: The individual is **partially concealed behind dense tropical foliage** — likely vines, shrubs, or low trees. The foliage is thick and layered, with white/green overexposed patches suggesting bright sunlight filtering through leaves.
+
+- **Fence/Gate**: **No visible fence or gate structure** in immediate proximity. The individual appears to be behind vegetation that may border a property line or natural barrier. The context (yoga place rear, between La Flor Hotel and Hotel Pochote Grande) suggests this is a boundary area, possibly a hedge or garden.
+
+- **Depth**: The person is **at least partially hidden**, with foliage in front and behind them. The image suggests they are **positioned at the edge of the vegetation**, peeking through gaps.
+
+---
+
+### 7. **Eye Direction**
+
+- **Looking toward the camera**: **Yes — likely direct gaze**. The eyes, though overexposed, appear to be oriented forward. The dark, oval-shaped areas suggest pupils facing the direction of the camera. The head is not turned, and the posture supports direct observation.
+
+- **Possible
