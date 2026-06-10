@@ -133,6 +133,16 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
     app.use("/evidence/boom", express.static(path.join(publicEvidenceDir, "boom"), {
       setHeaders: (res) => { res.setHeader("Cache-Control", "public, max-age=3600"); },
     }));
+    // Public — image files (jpg/jpeg/png/gif/webp) in evidence/ served without auth
+    // so article pages and forensic pages can load still images publicly
+    app.use("/evidence", (req, res, next) => {
+      if (/\.(jpe?g|png|gif|webp)$/i.test(req.path)) {
+        return express.static(publicEvidenceDir, {
+          setHeaders: (r) => { r.setHeader("Cache-Control", "public, max-age=3600"); },
+        })(req, res, next);
+      }
+      next();
+    });
     const { requireAuth: evidenceAuth } = await import("./middleware/auth");
     app.use("/evidence", evidenceAuth, express.static(publicEvidenceDir, {
       setHeaders: (res, filePath) => {

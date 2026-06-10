@@ -211,6 +211,15 @@ export async function registerRoutes(
   app.use("/evidence/boom", express.static(nodePath.resolve(process.cwd(), "public/evidence/boom"), {
     setHeaders: (res) => { res.setHeader("Cache-Control", "public, max-age=3600"); },
   }));
+  // Public — still images (jpg/jpeg/png/gif/webp) served without auth so article pages load forensic photos
+  app.use("/evidence", (req, res, next) => {
+    if (/\.(jpe?g|png|gif|webp)$/i.test(req.path)) {
+      return express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
+        setHeaders: (r) => { r.setHeader("Cache-Control", "public, max-age=3600"); },
+      })(req, res, next);
+    }
+    next();
+  });
   app.use("/evidence", requireAuth, express.static(nodePath.resolve(process.cwd(), "public/evidence"), {
     setHeaders: (res, filePath) => {
       if (filePath.endsWith(".mp4")) {
