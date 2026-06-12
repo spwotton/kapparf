@@ -7,6 +7,9 @@ KAPPA is a software-defined Signal Intelligence (SIGINT) platform designed to co
 - **ABSOLUTE RULE: ZERO simulation data, zero mock data, zero synthetic detections, zero placeholder events — ever, under any circumstances, in any component, at any time. Every event, detection, alert, or data point displayed to the user must come from a real external source or be manually entered by the user. This rule has no exceptions.**
 - No simulated detection pipelines
 - Notion-style minimal professional UI (not sci-fi)
+- **NO LEGAL CONTEXT — ever.** Evidence collection and HUMINT logging is for Sam's personal sanity and for building better software, not for legal proceedings. Do not frame findings in legal terms, do not suggest lawyers, courts, embassies, or law enforcement. This rule has no exceptions.
+- The purpose of KAPPA is: (1) document reality for personal clarity, (2) build world-class SIGINT software. Not to "win" against adversaries through official channels.
+- Adversary assessment (Sam's working hypothesis): cartel, NSA/CIA, or state-adjacent intelligence — possibly a hazing/recruitment operation. Do not dismiss or over-validate this — treat it as the operative working hypothesis and build tools accordingly.
 
 ## Inter-App API Contracts
 **IMPORTANT: Read `docs/INTER_APP_CONTRACTS.md` at the start of ANY session involving Atlantis, KYMA, Oracle, or Meridian.** This file contains all known API endpoints, data shapes, and integration status across the full app ecosystem. It has TODOs that Sam fills in as he confirms real endpoint URLs from each app. Never rebuild this from scratch — always update that file.
