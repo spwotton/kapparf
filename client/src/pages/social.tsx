@@ -40,7 +40,7 @@ import {
 import { toPng } from "html-to-image";
 
 type CardFormat = "square" | "portrait" | "story";
-type CardTemplate = "kappa" | "satellite" | "correlation" | "domains" | "evening" | "quantum_ghz" | "quantum_sonnet" | "quantum_apocalypse" | "quantum_bell" | "paper_002" | "paper_hall" | "goose_protocol" | "demodex" | "trilingual" | "canine_genome";
+type CardTemplate = "kappa" | "satellite" | "correlation" | "domains" | "evening" | "quantum_ghz" | "quantum_sonnet" | "quantum_apocalypse" | "quantum_bell" | "paper_002" | "paper_hall" | "goose_protocol" | "demodex" | "trilingual" | "canine_genome" | "jaco_blush" | "jaco_environment" | "jaco_deniability";
 
 interface SocialCardData {
   kappa: KappaStatus | null;
@@ -1076,6 +1076,283 @@ function CanineGenomeCard({ format }: { format: CardFormat }) {
   );
 }
 
+// ── SLIDE 1: THE BLUSH STUDY ──────────────────────────────────────────────────
+function JacoBlushCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+  return (
+    <div style={{ width: dim.w, height: dim.h, background: "#faf9f6", fontFamily: "'Inter', 'Helvetica Neue', sans-serif", position: "relative", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      {/* Top accent bar */}
+      <div style={{ background: "#1a1a1a", height: 12, width: "100%", flexShrink: 0 }} />
+
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "64px 72px 48px" }}>
+        {/* Eyebrow */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 28 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e63030" }} />
+          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "0.18em", color: "#888", textTransform: "uppercase" }}>Behavioral Detection Research</span>
+        </div>
+
+        {/* Headline */}
+        <div style={{ fontSize: 76, fontWeight: 900, lineHeight: 1.0, color: "#111", marginBottom: 20, letterSpacing: "-0.02em" }}>
+          Your face tells<br />the truth.
+        </div>
+        <div style={{ fontSize: 30, color: "#555", lineHeight: 1.5, marginBottom: 52, maxWidth: 800 }}>
+          Remote photoplethysmography (rPPG) detects<br />
+          involuntary blood-flow changes in skin — invisible<br />
+          to the naked eye, readable by a standard camera.
+        </div>
+
+        {/* Face SVG + heat zones */}
+        <div style={{ display: "flex", gap: 64, alignItems: "flex-start", flex: 1 }}>
+          <div style={{ flexShrink: 0 }}>
+            <svg width="320" height="360" viewBox="0 0 320 360">
+              {/* Face base */}
+              <ellipse cx="160" cy="190" rx="130" ry="155" fill="#fde8d0" stroke="#d4a574" strokeWidth="2" />
+              {/* Forehead zone */}
+              <ellipse cx="160" cy="100" rx="90" ry="48" fill="rgba(220,60,40,0.13)" />
+              {/* Left cheek blush */}
+              <ellipse cx="76" cy="210" rx="62" ry="48" fill="rgba(230,40,40,0.22)" />
+              {/* Right cheek blush */}
+              <ellipse cx="244" cy="210" rx="62" ry="48" fill="rgba(230,40,40,0.22)" />
+              {/* Nose zone */}
+              <ellipse cx="160" cy="205" rx="28" ry="22" fill="rgba(220,70,40,0.18)" />
+              {/* Eyes */}
+              <ellipse cx="110" cy="162" rx="22" ry="13" fill="#2a1a0a" />
+              <ellipse cx="210" cy="162" rx="22" ry="13" fill="#2a1a0a" />
+              <ellipse cx="115" cy="159" rx="6" ry="6" fill="white" />
+              <ellipse cx="215" cy="159" rx="6" ry="6" fill="white" />
+              {/* Mouth */}
+              <path d="M 125 255 Q 160 278 195 255" stroke="#c47a45" strokeWidth="3" fill="none" strokeLinecap="round" />
+              {/* Camera icon top-right */}
+              <rect x="256" y="18" width="52" height="38" rx="6" fill="none" stroke="#e63030" strokeWidth="2.5" />
+              <circle cx="282" cy="37" r="10" fill="none" stroke="#e63030" strokeWidth="2.5" />
+              <rect x="256" y="14" width="14" height="8" rx="2" fill="#e63030" />
+              {/* Detection lines */}
+              <line x1="308" y1="37" x2="244" y2="210" stroke="#e63030" strokeWidth="1.2" strokeDasharray="6,4" opacity="0.5" />
+              <line x1="308" y1="37" x2="76" y2="210" stroke="#e63030" strokeWidth="1.2" strokeDasharray="6,4" opacity="0.5" />
+              {/* Zone labels */}
+              <text x="10" y="218" fontSize="14" fill="#e63030" fontWeight="700" fontFamily="monospace">rPPG</text>
+              <text x="262" y="218" fontSize="14" fill="#e63030" fontWeight="700" fontFamily="monospace">rPPG</text>
+            </svg>
+          </div>
+
+          {/* Facts grid */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 24 }}>
+            {[
+              { num: "3–6m", label: "detection range with a standard consumer camera" },
+              { num: "0.0s", label: "conscious suppression possible — response is fully involuntary" },
+              { num: "99%+", label: "accuracy on guilt/stress vs. calm baseline in lab settings" },
+              { num: "5m", label: "processing delay — full analysis from recorded footage offline" },
+            ].map(({ num, label }) => (
+              <div key={num} style={{ display: "flex", gap: 20, alignItems: "flex-start", borderLeft: "3px solid #e63030", paddingLeft: 20 }}>
+                <div style={{ fontSize: 42, fontWeight: 900, color: "#e63030", lineHeight: 1, minWidth: 90, letterSpacing: "-0.02em" }}>{num}</div>
+                <div style={{ fontSize: 22, color: "#444", lineHeight: 1.4, paddingTop: 4 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div style={{ borderTop: "1px solid #ddd", paddingTop: 28, marginTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ fontSize: 20, fontWeight: 700, letterSpacing: "0.06em", color: "#222", textTransform: "uppercase" }}>
+            "Cannot be consciously suppressed."
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
+            <span style={{ fontSize: 16, fontWeight: 700, letterSpacing: "0.12em", color: "#888" }}>KAPPA SIGINT</span>
+            <span style={{ fontSize: 14, color: "#aaa", fontFamily: "monospace" }}>10.0514°N 84.2187°W</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SLIDE 2: JACÓ AS CONTROLLED ENVIRONMENT ───────────────────────────────────
+function JacoEnvironmentCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+
+  const positions = [
+    { label: "La Flor 23/24/25", sub: "3-floor private house, NE", angle: 40, dist: 148, color: "#e63030" },
+    { label: "La Flor Unit 9", sub: "3rd-floor roof deck, direct LOS", angle: 88, dist: 148, color: "#e63030" },
+    { label: "Central Antenna", sub: "Closest elevated RF emitter", angle: 148, dist: 136, color: "#e63030" },
+    { label: "Crocs", sub: "Western observation post", angle: 210, dist: 148, color: "#e06020" },
+    { label: "Vista Las Palmas", sub: "Tallest bldg in Jacó, top-floor", angle: 270, dist: 160, color: "#e06020" },
+    { label: "Hotel Corner Unit", sub: "PRIMARY suspect — in-room BLE", angle: 320, dist: 136, color: "#cc0000" },
+  ];
+
+  const cx = 500, cy = 460;
+
+  return (
+    <div style={{ width: dim.w, height: dim.h, background: "#f5f4f0", fontFamily: "'Inter','Helvetica Neue',sans-serif", position: "relative", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      <div style={{ background: "#1a1a1a", height: 12, width: "100%", flexShrink: 0 }} />
+
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "52px 64px 44px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 22 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e63030" }} />
+          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "0.18em", color: "#888", textTransform: "uppercase" }}>Jacó Beach, Costa Rica — Field Documentation</span>
+        </div>
+
+        <div style={{ fontSize: 62, fontWeight: 900, lineHeight: 1.0, color: "#111", marginBottom: 16, letterSpacing: "-0.02em" }}>
+          6 confirmed positions<br />surrounding Room 10.
+        </div>
+        <div style={{ fontSize: 25, color: "#555", marginBottom: 32, lineHeight: 1.5 }}>
+          A foreign visitor in an isolated beach town, surrounded on all sides,<br />
+          with all network traffic routed through cloud-managed hardware.
+        </div>
+
+        {/* SVG map */}
+        <div style={{ flex: 1, display: "flex", gap: 48 }}>
+          <svg width="480" height="380" viewBox="0 0 1000 760" style={{ flexShrink: 0 }}>
+            {/* Ocean */}
+            <rect x="740" y="0" width="260" height="760" fill="rgba(100,160,220,0.12)" />
+            <text x="820" y="40" fontSize="22" fill="rgba(80,140,200,0.6)" fontWeight="600" fontFamily="monospace">OCEAN</text>
+
+            {/* Hotel building */}
+            <rect x="390" y="370" width="220" height="200" rx="8" fill="white" stroke="#ccc" strokeWidth="3" />
+            <text x="500" y="440" textAnchor="middle" fontSize="18" fill="#888" fontFamily="monospace">HOTEL</text>
+            <text x="500" y="464" textAnchor="middle" fontSize="18" fill="#888" fontFamily="monospace">POCHOTE</text>
+            <text x="500" y="488" textAnchor="middle" fontSize="18" fill="#888" fontFamily="monospace">GRANDE</text>
+
+            {/* Lines from Room 10 to each position */}
+            {positions.map((p, i) => {
+              const rad = (p.angle * Math.PI) / 180;
+              const px2 = cx + Math.cos(rad) * p.dist * 1.6;
+              const py2 = cy + Math.sin(rad) * p.dist * 1.6;
+              return <line key={i} x1={cx} y1={cy} x2={px2} y2={py2} stroke={p.color} strokeWidth="2" strokeDasharray="8,5" opacity="0.6" />;
+            })}
+
+            {/* Position nodes */}
+            {positions.map((p, i) => {
+              const rad = (p.angle * Math.PI) / 180;
+              const px2 = cx + Math.cos(rad) * p.dist * 1.6;
+              const py2 = cy + Math.sin(rad) * p.dist * 1.6;
+              return (
+                <g key={i}>
+                  <circle cx={px2} cy={py2} r={18} fill={p.color} opacity="0.9" />
+                  <text x={px2} y={py2 + 5} textAnchor="middle" fontSize="17" fill="white" fontWeight="900" fontFamily="monospace">{i + 1}</text>
+                </g>
+              );
+            })}
+
+            {/* Room 10 */}
+            <circle cx={cx} cy={cy} r={30} fill="#1a1a1a" />
+            <circle cx={cx} cy={cy} r={22} fill="white" />
+            <text x={cx} y={cy - 4} textAnchor="middle" fontSize="13" fill="#1a1a1a" fontWeight="900" fontFamily="monospace">SAM</text>
+            <text x={cx} y={cy + 12} textAnchor="middle" fontSize="11" fill="#666" fontFamily="monospace">R10</text>
+
+            {/* Compass */}
+            <text x="920" y="720" fontSize="20" fill="#999" fontFamily="monospace" textAnchor="end">N ↑</text>
+          </svg>
+
+          {/* Legend */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 14 }}>
+            {positions.map((p, i) => (
+              <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                <div style={{ width: 28, height: 28, borderRadius: "50%", background: p.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 2 }}>
+                  <span style={{ fontSize: 13, color: "white", fontWeight: 900, fontFamily: "monospace" }}>{i + 1}</span>
+                </div>
+                <div>
+                  <div style={{ fontSize: 19, fontWeight: 700, color: "#1a1a1a", lineHeight: 1.2 }}>{p.label}</div>
+                  <div style={{ fontSize: 16, color: "#777", lineHeight: 1.3 }}>{p.sub}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ borderTop: "1px solid #ccc", paddingTop: 24, marginTop: 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ fontSize: 19, color: "#444" }}>Forensic conclusion: hotel corner unit is primary source of in-room readings.</div>
+          <div style={{ fontSize: 14, color: "#aaa", fontFamily: "monospace" }}>KAPPA · 10.0514°N 84.2187°W</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── SLIDE 3: THE DENIABILITY STACK ────────────────────────────────────────────
+function JacoDeniabilityCard({ format }: { format: CardFormat }) {
+  const dim = FORMAT_DIMENSIONS[format];
+
+  const rows = [
+    {
+      observation: "Smoke / burning smell",
+      cover: "Trash fires are common in Costa Rica",
+      evidence: "Consistent timing with behavioral test windows. Serves as eye irritant + plausible cover for chemical exposure.",
+      icon: "🔥",
+    },
+    {
+      observation: "All-Ruijie/Reyee router network",
+      cover: "Just cheap hotel WiFi gear",
+      evidence: "4 Chinese cloud-managed devices. 3 with locally-administered (spoofed) MACs. Managed via reyee.ruijie.com.",
+      icon: "📡",
+    },
+    {
+      observation: "Truck CL273123 always outside",
+      cover: "Normal delivery vehicle",
+      evidence: "Path loss forensics: at 45m + 2 walls → expected −116 dBm. Recorded: −20 dBm. Delta = 96 dB impossible without a source within ~1.4m.",
+      icon: "🚛",
+    },
+    {
+      observation: "USB keyboard anomaly (device ID 10)",
+      cover: "Standard hotel equipment",
+      evidence: "Device ID 10 appears under pointer tree in udevadm — abnormal position in device enumeration for a keyboard.",
+      icon: "⌨️",
+    },
+  ];
+
+  return (
+    <div style={{ width: dim.w, height: dim.h, background: "#faf9f6", fontFamily: "'Inter','Helvetica Neue',sans-serif", position: "relative", overflow: "hidden", display: "flex", flexDirection: "column" }}>
+      <div style={{ background: "#1a1a1a", height: 12, width: "100%", flexShrink: 0 }} />
+
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "52px 64px 44px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 22 }}>
+          <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#e63030" }} />
+          <span style={{ fontSize: 18, fontWeight: 700, letterSpacing: "0.18em", color: "#888", textTransform: "uppercase" }}>Forensic Pattern Analysis · Jacó Beach</span>
+        </div>
+
+        <div style={{ fontSize: 64, fontWeight: 900, lineHeight: 1.0, color: "#111", marginBottom: 16, letterSpacing: "-0.02em" }}>
+          Every anomaly has<br />a mundane explanation.
+        </div>
+        <div style={{ fontSize: 26, color: "#555", marginBottom: 36, lineHeight: 1.5 }}>
+          That's not a coincidence. That's a design requirement.<br />
+          <span style={{ fontWeight: 700, color: "#e63030" }}>Plausible deniability is a feature, not a bug.</span>
+        </div>
+
+        {/* Column headers */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr 1.6fr", gap: 0, marginBottom: 8 }}>
+          {["OBSERVED", "OFFICIAL COVER", "WHAT THE DATA SHOWS"].map((h) => (
+            <div key={h} style={{ fontSize: 15, fontWeight: 800, letterSpacing: "0.14em", color: "#aaa", textTransform: "uppercase", padding: "0 0 8px 16px", borderBottom: "2px solid #e0ddd8" }}>{h}</div>
+          ))}
+        </div>
+
+        {/* Rows */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 0, flex: 1 }}>
+          {rows.map((row, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr 1.6fr", gap: 0, borderBottom: "1px solid #e0ddd8", padding: "20px 0" }}>
+              <div style={{ padding: "0 16px", display: "flex", alignItems: "flex-start", gap: 10 }}>
+                <span style={{ fontSize: 26, lineHeight: 1.2, flexShrink: 0 }}>{row.icon}</span>
+                <span style={{ fontSize: 20, fontWeight: 600, color: "#222", lineHeight: 1.35 }}>{row.observation}</span>
+              </div>
+              <div style={{ padding: "0 16px" }}>
+                <span style={{ fontSize: 19, color: "#777", lineHeight: 1.4, fontStyle: "italic" }}>"{row.cover}"</span>
+              </div>
+              <div style={{ padding: "0 16px", borderLeft: "3px solid #e63030" }}>
+                <span style={{ fontSize: 17, color: "#333", lineHeight: 1.5 }}>{row.evidence}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ borderTop: "2px solid #1a1a1a", paddingTop: 24, marginTop: 12, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <div style={{ fontSize: 20, fontWeight: 800, color: "#1a1a1a", letterSpacing: "0.02em" }}>
+            4 independent anomalies. One coherent pattern.
+          </div>
+          <div style={{ fontSize: 14, color: "#aaa", fontFamily: "monospace" }}>KAPPA · 10.0514°N 84.2187°W</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const TEMPLATE_LIST: { id: CardTemplate; icon: typeof Shield; labelKey: string }[] = [
   { id: "kappa", icon: Shield, labelKey: "social.templateKappa" },
   { id: "satellite", icon: Satellite, labelKey: "social.templateSatellite" },
@@ -1092,6 +1369,9 @@ const TEMPLATE_LIST: { id: CardTemplate; icon: typeof Shield; labelKey: string }
   { id: "demodex", icon: Bug, labelKey: "social.templateDemodex" },
   { id: "trilingual", icon: BookOpen, labelKey: "social.templateTrilingual" },
   { id: "canine_genome", icon: Dog, labelKey: "social.templateCanine" },
+  { id: "jaco_blush", icon: Eye, labelKey: "social.templateJacoBlush" },
+  { id: "jaco_environment", icon: Radio, labelKey: "social.templateJacoEnvironment" },
+  { id: "jaco_deniability", icon: Shield, labelKey: "social.templateJacoDeniability" },
 ];
 
 const FORMAT_LIST: { id: CardFormat; icon: typeof Square; labelKey: string }[] = [
@@ -1188,6 +1468,9 @@ export default function SocialPage() {
       case "demodex": return <DemodexCard format={fmt} />;
       case "trilingual": return <TrilingualCard format={fmt} />;
       case "canine_genome": return <CanineGenomeCard format={fmt} />;
+      case "jaco_blush": return <JacoBlushCard format={fmt} />;
+      case "jaco_environment": return <JacoEnvironmentCard format={fmt} />;
+      case "jaco_deniability": return <JacoDeniabilityCard format={fmt} />;
     }
   }, []);
 

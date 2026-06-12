@@ -2478,30 +2478,25 @@ export async function registerRoutes(
     });
   });
 
-  app.get("/api/social/data", async (_req, res) => {
-    const [domainCounts, correlationCount, events, correlations, satellites] = await Promise.all([
-      storage.getEventCountsByDomain(),
-      storage.getCorrelationCount(),
-      storage.getRecentSignalEvents(10),
-      storage.getCorrelations(),
-      storage.getSatellites(),
-    ]);
-
-    const totalEvents = Object.values(domainCounts).reduce((a, b) => a + b, 0);
-    const kappaStatus = kappaEngine.getStatus();
-    const visibleSats = satellites.filter((s: any) => (s.elevation ?? 0) > 30);
-    const overheadSats = satellites.filter((s: any) => (s.elevation ?? 0) > 75);
-
+  app.get("/api/social/data", (_req, res) => {
+    // Serve purely from in-memory engine state — no DB calls (pool saturation avoidance)
+    const k = kappaEngine.getStatus();
+    const domainCounts: Record<string, number> = {};
+    for (const [domain, count] of Object.entries(k.domainWindows ?? {})) {
+      domainCounts[domain] = count as number;
+    }
+    const totalEvents = k.eventsProcessed ?? 0;
+    const totalCorrelations = Object.values(k.correlationCounts ?? {}).reduce((a: number, b: unknown) => a + (b as number), 0);
     res.json({
-      kappa: kappaStatus,
+      kappa: k,
       totalEvents,
-      totalCorrelations: correlationCount,
+      totalCorrelations,
       domainCounts,
-      recentCorrelations: correlations.slice(0, 5),
-      recentEvents: events,
-      satelliteCount: satellites.length,
-      visibleSatellites: visibleSats.length,
-      overheadSatellites: overheadSats.length,
+      recentCorrelations: [],
+      recentEvents: (k.recentAlerts ?? []).slice(0, 10),
+      satelliteCount: (k.satOverhead ?? 0) + (k.satKlein ?? 0),
+      visibleSatellites: k.satOverhead ?? 0,
+      overheadSatellites: k.satOverhead ?? 0,
       generatedAt: new Date().toISOString(),
     });
   });
