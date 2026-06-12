@@ -35,6 +35,7 @@ import {
   Mic,
   Camera,
   AlertTriangle,
+  Wifi,
   Film,
   Newspaper,
   Hash,
@@ -165,6 +166,7 @@ const navGroups: NavGroup[] = [
     items: [
       { titleKey: "sidebar.devices", fallback: "Devices", url: "/devices", icon: Fingerprint },
       { titleKey: "sidebar.bettercap", fallback: "Bettercap", url: "/bettercap", icon: Radio },
+      { titleKey: "sidebar.sensorArray", fallback: "RSSI Sensor Array", url: "/sensor-array", icon: Wifi },
       { titleKey: "sidebar.forensicHypervisor", fallback: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
     ],
   },

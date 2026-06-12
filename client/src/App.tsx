@@ -92,6 +92,7 @@ import QuasarHydraPage from "@/pages/quasar-hydra";
 import ForensicEvidencePage from "@/pages/forensic-evidence";
 import PochoteIncidentPage from "@/pages/pochote-incident";
 import ParabolicAntennaPage from "@/pages/parabolic-antenna";
+import SensorArrayPage from "@/pages/sensor-array";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -173,6 +174,7 @@ function KappaRouter() {
       <Route path="/forensic-evidence" component={ForensicEvidencePage} />
       <Route path="/pochote-incident" component={PochoteIncidentPage} />
       <Route path="/parabolic-antenna" component={ParabolicAntennaPage} />
+      <Route path="/sensor-array" component={SensorArrayPage} />
       <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
     </Switch>

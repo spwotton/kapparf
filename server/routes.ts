@@ -8548,4 +8548,106 @@ This email is constructed from verifiable technical disclosures, public contract
     }
   });
 
+  // ── RSSI Sensor Array — multi-node ingest & live feed ─────────────────────
+  interface RSSIReading {
+    mac: string;
+    name: string;
+    rssi: number;
+    timestamp: string;
+    lat?: number;
+    lon?: number;
+    nodeId: string;
+  }
+
+  interface SensorNode {
+    nodeId: string;
+    label: string;
+    type: "android" | "iphone" | "laptop" | "kiwi" | "other";
+    token: string;
+    registeredAt: string;
+    lastSeenAt: string;
+    readingCount: number;
+    lat?: number;
+    lon?: number;
+  }
+
+  const rssiRingBuffer = new Map<string, RSSIReading[]>();
+  const rssiNodeRegistry = new Map<string, SensorNode>();
+  const RSSI_RING_SIZE = 500;
+
+  function rssiPush(nodeId: string, readings: RSSIReading[]) {
+    const buf = rssiRingBuffer.get(nodeId) ?? [];
+    for (const r of readings) buf.push(r);
+    if (buf.length > RSSI_RING_SIZE) buf.splice(0, buf.length - RSSI_RING_SIZE);
+    rssiRingBuffer.set(nodeId, buf);
+    const node = rssiNodeRegistry.get(nodeId);
+    if (node) {
+      node.lastSeenAt = new Date().toISOString();
+      node.readingCount += readings.length;
+    }
+  }
+
+  app.post("/api/rssi/node/register", (req, res) => {
+    const { nodeId, label, type, lat, lon } = req.body ?? {};
+    if (!nodeId || !label) return res.status(400).json({ error: "nodeId and label required" });
+    const token = `kappa-${nodeId}-${Date.now().toString(36)}`;
+    const node: SensorNode = {
+      nodeId,
+      label,
+      type: type ?? "other",
+      token,
+      registeredAt: new Date().toISOString(),
+      lastSeenAt: new Date().toISOString(),
+      readingCount: 0,
+      lat,
+      lon,
+    };
+    rssiNodeRegistry.set(nodeId, node);
+    if (!rssiRingBuffer.has(nodeId)) rssiRingBuffer.set(nodeId, []);
+    console.log(`[rssi] node registered: ${nodeId} (${label})`);
+    res.json({ ok: true, token, nodeId });
+  });
+
+  app.post("/api/rssi/ingest", (req, res) => {
+    const { nodeId, nodeToken, readings } = req.body ?? {};
+    if (!nodeId || !Array.isArray(readings)) return res.status(400).json({ error: "nodeId and readings[] required" });
+    const node = rssiNodeRegistry.get(nodeId);
+    if (node && nodeToken && node.token !== nodeToken) return res.status(403).json({ error: "invalid token" });
+    const tagged: RSSIReading[] = readings.map((r: any) => ({
+      mac: r.mac ?? "00:00:00:00:00:00",
+      name: r.name ?? "Unknown",
+      rssi: Number(r.rssi ?? -100),
+      timestamp: r.timestamp ?? new Date().toISOString(),
+      lat: r.lat,
+      lon: r.lon,
+      nodeId,
+    }));
+    rssiPush(nodeId, tagged);
+    res.json({ ok: true, ingested: tagged.length });
+  });
+
+  app.get("/api/rssi/live", (_req, res) => {
+    const nodes: Record<string, { node: SensorNode | null; readings: RSSIReading[] }> = {};
+    for (const [nodeId, readings] of rssiRingBuffer.entries()) {
+      nodes[nodeId] = { node: rssiNodeRegistry.get(nodeId) ?? null, readings: readings.slice(-100) };
+    }
+    const allReadings: RSSIReading[] = [];
+    for (const readings of rssiRingBuffer.values()) allReadings.push(...readings);
+    const crossNodeMap = new Map<string, Set<string>>();
+    for (const r of allReadings) {
+      const s = crossNodeMap.get(r.mac) ?? new Set<string>();
+      s.add(r.nodeId);
+      crossNodeMap.set(r.mac, s);
+    }
+    const crossNode: Record<string, string[]> = {};
+    for (const [mac, nodeSet] of crossNodeMap.entries()) {
+      if (nodeSet.size > 1) crossNode[mac] = Array.from(nodeSet);
+    }
+    res.json({ nodes, crossNode, totalReadings: allReadings.length, ts: new Date().toISOString() });
+  });
+
+  app.get("/api/rssi/nodes", (_req, res) => {
+    res.json(Array.from(rssiNodeRegistry.values()));
+  });
+
 }
