@@ -65,7 +65,7 @@ const SURV_NODES = [
   {
     id: "vista-las-palmas",
     label: "Vista Las Palmas — Top Floor",
-    desc: "One of the tallest buildings in Jacó. Dan Wagner. Red lights on roof — possible antenna array. Top-floor panel suite with direct sightlines over entire area.",
+    desc: "72m / 18-floor beachfront condo tower, directly on coastline. Dan Wagner resident. Roof has dual synchronized aviation obstruction lights (legally required at this height). Separate crane ~12m below roofline has independent non-compliant blinking red light — documented anomaly. Top-floor panel suite with panoramic sightlines over entire Jacó area including Hotel Pochote Grande.",
     color: 0xcc00ff,
     glowColor: "#cc00ff",
     pos3d: [-30, 0, 50] as [number, number, number],
