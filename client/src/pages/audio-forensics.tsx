@@ -247,6 +247,19 @@ const FREQ_DETAILS: Record<string, FreqDetail> = {
       { label: "Starlink downlink ELF component at memory-band frequencies", speculative: true, url: "https://www.starlink.com" },
     ],
   },
+  "struct_90Hz": {
+    hz: 90.17, bw: 2.0, cat: "PSY",
+    desc: "Unidentified structural dominant — 90.17 Hz. Top or 2nd peak in all 4 Jun-12 contact recordings (+72–80 dB SNR). NOT a simple harmonic of 60 Hz (which gives 90.0) or 50 Hz. Conducted through walls and floor — physically embedded in building structure.",
+    sources: [
+      { label: "Dominant structural peak in all 4 contact recordings Jun 12 20:57 UTC — Pochote Grande" },
+      { label: "Motor at 5,400 RPM produces 90 Hz fundamental (industrial fan / generator at partial load)" },
+      { label: "1.5× 60 Hz subharmonic — possible if mains-coupled equipment has half-wave rectification artifact" },
+      { label: "BVTSONAR structural coupling — base-band emission after wall transmission loss", speculative: true },
+      { label: "Tacacorí array mechanical resonance node — antenna mast vibration at ground frequency", speculative: true },
+      { label: "Concealed speaker sub-bass driver resonance — enclosure tuned to ~90 Hz", speculative: true },
+    ],
+    forensicNote: "First appeared Jun 12 2026 contact recordings. +80.4 dB peak in Rec44 — strongest single peak in entire contact dataset. Requires dedicated measurement session to characterize.",
+  },
   "twist_128Hz": {
     hz: 128.23, bw: 1.5, cat: "GEN",
     desc: "Klein twist base frequency — holographic constant scaling anchor. Used to validate ATP2C2 gene resonance at 183.42 Hz via 0.32% deviation.",
