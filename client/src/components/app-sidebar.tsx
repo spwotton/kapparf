@@ -167,6 +167,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.devices", fallback: "Devices", url: "/devices", icon: Fingerprint },
       { titleKey: "sidebar.bettercap", fallback: "Bettercap", url: "/bettercap", icon: Radio },
       { titleKey: "sidebar.sensorArray", fallback: "RSSI Sensor Array", url: "/sensor-array", icon: Wifi },
+      { titleKey: "sidebar.demodexPhone", fallback: "Demodex Phone", url: "/demodex-phone", icon: Microscope },
       { titleKey: "sidebar.forensicHypervisor", fallback: "Forensic Hypervisor", url: "/forensic-hypervisor", icon: Crosshair },
     ],
   },

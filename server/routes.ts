@@ -8650,4 +8650,45 @@ This email is constructed from verifiable technical disclosures, public contract
     res.json(Array.from(rssiNodeRegistry.values()));
   });
 
+  // ── Demodex Phone Interface — ARKit blendshape ingest ────────────────────────
+  interface DemodexFrame {
+    sessionId: string;
+    source: "browser" | "iphone" | "android";
+    timestamp: number;
+    serverTimestamp?: number;
+    blendshapes: Record<string, number>;
+    headRotation?: { pitch: number; yaw: number; roll: number };
+    eyeVectors?: {
+      leftEyeYaw: number; leftEyePitch: number;
+      rightEyeYaw: number; rightEyePitch: number;
+    };
+    chitinMetrics?: Record<string, number>;
+    rawParams?: number[];
+  }
+
+  const demodexFrameBuffer: DemodexFrame[] = [];
+  const DEMODEX_RING_SIZE = 200;
+
+  app.post("/api/demodex/ingest", (req, res) => {
+    const frame: DemodexFrame = {
+      ...req.body,
+      serverTimestamp: Date.now(),
+    };
+    demodexFrameBuffer.push(frame);
+    if (demodexFrameBuffer.length > DEMODEX_RING_SIZE) demodexFrameBuffer.shift();
+    res.json({ ok: true, frameCount: demodexFrameBuffer.length, serverTimestamp: frame.serverTimestamp });
+  });
+
+  app.get("/api/demodex/latest", (_req, res) => {
+    res.json(demodexFrameBuffer.slice(-20));
+  });
+
+  app.get("/api/demodex/stats", (_req, res) => {
+    const count = demodexFrameBuffer.length;
+    const last = demodexFrameBuffer[count - 1] ?? null;
+    const sources = [...new Set(demodexFrameBuffer.map(f => f.source))];
+    const sessions = [...new Set(demodexFrameBuffer.map(f => f.sessionId))];
+    res.json({ frameCount: count, lastFrame: last, sources, sessionCount: sessions.length });
+  });
+
 }
