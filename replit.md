@@ -48,6 +48,7 @@ The platform utilizes a modern web stack and a sophisticated real-time correlati
 - **Forensic Hypervisor:** Autonomous 24/7 signal-intelligence correlation engine performing SQL pattern mining, temporal enrichment, and PCAP/PCAPNG analysis against KAPPA events.
 - **KiwiSDR Vision Hypervisor:** Autonomous Playwright-based system capturing spectrograms from KiwiSDR and analyzing them with OpenAI Vision across 21 frequency profiles.
 - **Memory Cortex:** Semantic vector memory with multi-provider embeddings, supporting various categories and API routes for storage, search, and recall. Includes auto-ingestion for quantum circuits, proofs, and satellite data.
+- **RSSI Sensor Array** (`/sensor-array`): Multi-node BLE/WiFi RSSI ingest system. In-memory ring buffer (500 readings/node). Routes: POST /api/rssi/ingest, GET /api/rssi/live, POST /api/rssi/node/register. Three.js 3D scene of Hotel Pochote Grande surveillance network (6 nodes mapped). Path loss forensics showing truck CL273123 cannot be primary BLE source (−116 dBm expected at 45m+walls). ESRI satellite map. Termux Android setup. Interactive path loss calculator.
 
 ## External Dependencies
 - **OpenSky Network:** Live flight data.
@@ -70,3 +71,20 @@ The platform utilizes a modern web stack and a sophisticated real-time correlati
 - **Playwright (Chromium):** Headless browser for KiwiSDR Vision.
 - **Heartbeat Tracker:** External device monitoring via heartbeat-tracker-monitor.replit.app — polls status/stats, shows device fleet with latency/jitter/uptime, agent downloads. Wired through `/api/tracker/*` routes.
 - **External Data Feeds:** Autonomous 120s-cycle ingestion from USGS earthquakes, IRIS FDSN regional seismic, NOAA SWPC (Kp index, X-ray flux, solar wind magnetic/plasma), GeoNet NZ seismic, WWLLN lightning, and KiwiSDR public node discovery. All events flow into KAPPA engine + hypervisor.
+- **ESRI World Imagery:** Free satellite tiles (no API key) used in RSSI Sensor Array map.
+
+## Key Evidence Files (public/evidence/)
+- `rssi_*.png` — BLE RSSI scan captures from bettercap sessions
+- `room10_aerial_geometry.jpeg` — Apple Maps aerial showing Room 10 (blue dot) and truck parking lot positions
+- `pochote_surveillance_network_aerial.jpeg` — Wider aerial showing all three outer surveillance positions (La Flor, central antenna, Crocs)
+
+## Surveillance Network — Hotel Pochote Grande, Jacó Beach
+Six confirmed positions surrounding Room 10 (Sam's position, eastern end of hotel, ocean to the east):
+1. **La Flor units 23/24/25** — large private houses (~2400 sq ft, 3 floors), NE of hotel
+2. **La Flor unit 9** — Genesis Peralta's former residence, only unit with 3rd-floor roof deck, direct LOS to Sam's balcony
+3. **Central antenna position** — middle X in aerial, closest elevated RF emitter
+4. **Crocs** — western observation post
+5. **Vista Las Palmas** — one of tallest buildings in Jacó, top-floor panel suite, Dan Wagner. Red lights on roof = possible antenna array
+6. **Hotel corner unit** — across courtyard, masked individual photographed on porch (confirmed operative)
+
+Path loss forensic conclusion: truck CL273123 at ~45m + 2 walls produces expected RSSI of ~−116 dBm (below noise floor). The −20 dBm peak recorded in Room 10 requires a source within ~1.4m (standard BLE) or ~11cm (+20 dBm TX). Hotel corner unit is primary suspect for in-room readings.
