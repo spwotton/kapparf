@@ -8010,6 +8010,57 @@ This email is constructed from verifiable technical disclosures, public contract
     res.json({ ok: true, sent, failed, total: results.length, results });
   });
 
+  // ── Genesis & Danny Peralta — Focused Venezuela Campaign ─────────────────
+  // Clean variant: dual hypothesis explicit, no hallucinated claims,
+  // targets NGOs / Argentine authorities / surveillance accountability /
+  // Italian Leonardo-Telespazio civil society / investigative journalism.
+  app.post("/api/mailer/genesis-venezuela-focused", requireAuth, async (req, res) => {
+    const { dryRun } = req.body as { dryRun?: boolean };
+    const apiKey = process.env.MAILGUN_API_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    if (!apiKey || !domain) {
+      return res.status(500).json({ error: "Mailgun not configured" });
+    }
+
+    const { GENESIS_VZ_CONTACTS } = await import("./mailer-campaign-genesis-venezuela");
+
+    if (dryRun) {
+      return res.json({
+        ok: true,
+        dryRun: true,
+        total: GENESIS_VZ_CONTACTS.length,
+        contacts: GENESIS_VZ_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, category: c.category })),
+      });
+    }
+
+    const Mailgun = (await import("mailgun.js")).default;
+    const mg = new Mailgun(FormData);
+    const client = mg.client({ username: "api", key: apiKey });
+    const sender = `Samuel Wotton <hello@echokappa.com>`;
+
+    const results: { id: number; to: string; org: string; ok: boolean; msgId?: string; error?: string }[] = [];
+
+    for (const contact of GENESIS_VZ_CONTACTS) {
+      try {
+        const r = await client.messages.create(domain, {
+          from: sender,
+          to: [contact.to],
+          subject: contact.subject,
+          text: contact.body,
+        });
+        results.push({ id: contact.id, to: contact.to, org: contact.org, ok: true, msgId: r.id });
+      } catch (err: any) {
+        const detail = err?.response?.body?.message || err?.message || String(err);
+        results.push({ id: contact.id, to: contact.to, org: contact.org, ok: false, error: detail });
+      }
+      await new Promise((r) => setTimeout(r, 400));
+    }
+
+    const sent = results.filter((r) => r.ok).length;
+    const failed = results.filter((r) => !r.ok).length;
+    res.json({ ok: true, sent, failed, total: results.length, results });
+  });
+
   // ── Radiogoniometry Spectrum Sweeper ─────────────────────────────────────
   app.post("/api/spectrum/upload-csv", async (req, res) => {
     try {

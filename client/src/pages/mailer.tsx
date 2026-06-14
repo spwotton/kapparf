@@ -761,6 +761,9 @@ export default function MailerPage() {
       {/* ── Venezuela / US Blast — Danny Peralta / Daniela / IRS Fraud ── */}
       <VenezuelaPanel />
 
+      {/* ── Genesis & Danny Peralta — Clean focused campaign (no hallucinated claims) ── */}
+      <GenesisVenezuelaPanelFocused />
+
       {/* ── UPDATE BLAST — RE: all campaigns → forensic site CTA ── */}
       <UpdateAllPanel />
 
@@ -1449,6 +1452,173 @@ function VenezuelaPanel() {
           <CheckCircle className="w-4 h-4 text-green-500" />
           <span className="text-green-600 font-medium">Blast queued — {fired.total} contacts firing async</span>
           <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Genesis & Danny Peralta — Focused Venezuela Campaign
+// Clean variant: no hallucinated claims, dual hypothesis explicit.
+// Targets: Venezuelan anti-trafficking NGOs, Venezuelan/Argentine diaspora,
+//          Argentine UIF/MPF/investigative press, Privacy International /
+//          Access Now / Citizen Lab (surveillance-vendor accountability),
+//          Italian Garante + Leonardo/Telespazio civil society overlap,
+//          European digital rights orgs with post-Stasi / Latin America nexus.
+// ─────────────────────────────────────────────────────────────────────────────
+function GenesisVenezuelaPanelFocused() {
+  const { toast } = useToast();
+  const [showResults, setShowResults] = React.useState(false);
+
+  const mutation = useMutation({
+    mutationFn: (payload: { dryRun?: boolean }) =>
+      apiRequest("POST", "/api/mailer/genesis-venezuela-focused", payload),
+    onSuccess: (data: any) => {
+      if (data.dryRun) {
+        toast({ title: `Dry run: ${data.total} recipients`, description: data.contacts.map((c: any) => c.org).join(", ") });
+      } else {
+        toast({ title: `Sent ${data.sent}/${data.total}`, description: data.failed > 0 ? `${data.failed} failed` : "All delivered" });
+      }
+    },
+    onError: (err: any) => {
+      toast({ title: "Error", description: err?.message || String(err), variant: "destructive" });
+    },
+  });
+
+  const result = mutation.data as any;
+
+  return (
+    <div className="border border-amber-200 dark:border-amber-900 rounded-lg p-4 space-y-3 bg-amber-50/30 dark:bg-amber-950/20">
+      <div className="flex items-center gap-2">
+        <Shield className="w-4 h-4 text-amber-500" />
+        <p className="text-sm font-medium">Genesis & Danny Peralta — Focused Campaign (Clean variant)</p>
+        <Badge variant="outline" className="text-xs ml-auto border-amber-300 dark:border-amber-700 text-amber-600 dark:text-amber-400">
+          47 recipients
+        </Badge>
+      </div>
+
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Factually grounded. Every claim verified against{" "}
+        <span className="font-mono text-foreground">30_Genesis_Danny_Peralta_Venezuela_Thread.md</span>.
+        Dual hypothesis (victim vs. willing) stated explicitly. No hallucinated claims, no legal framing.
+        Covers Venezuela, Argentina, CR immigration, full migration corridor (Colombia → Panama → Ecuador → Chile),
+        Venezuelan diaspora in Spain / Chile / Peru / Colombia, and digital rights orgs.
+      </p>
+
+      <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Anti-trafficking NGOs (8)</p>
+          <p>Polaris, La Strada, GAATW, ECPAT, UNODC, IJM, Free the Slaves, HTF</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Venezuelan civil society (7)</p>
+          <p>Transparencia VZ, Control Ciudadano, CASAVE, PROVEA, CEPAZ + diaspora orgs</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Argentina — authorities + press (8)</p>
+          <p>UIF, MPF PROCELAC, Migraciones, Cancillería, Infobae, Clarín, La Nación, El Cronista</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Costa Rica — immigration (4)</p>
+          <p>DGME, Defensoría de los Habitantes, ACNUR/UNHCR CR, OIM/IOM CR</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Migration corridor (4)</p>
+          <p>Migración Colombia, Migración Panamá, Cancillería Ecuador (Movilidad Humana), PDI Chile Trata</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Venezuelan diaspora — expanded (4)</p>
+          <p>España, Chile, Perú, Colombia — diaspora community contacts</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Surveillance accountability (5)</p>
+          <p>Privacy International, Access Now, Citizen Lab, EFF, EDRi</p>
+        </div>
+        <div className="space-y-1">
+          <p className="font-medium text-foreground">Investigative journalism (7)</p>
+          <p>InSight Crime, OCCRP, Armando.info, Runrún, El Efecto Cocuyo, Connectas, El País América</p>
+        </div>
+      </div>
+
+      <div className="text-xs text-muted-foreground bg-muted/40 border rounded px-3 py-2 space-y-1">
+        <p className="text-foreground font-medium">3 letter variants:</p>
+        <p><span className="font-mono text-foreground">EN</span> — Personal account, dual hypothesis explicit</p>
+        <p><span className="font-mono text-foreground">ES</span> — Same tone, Spanish-language recipients</p>
+        <p><span className="font-mono text-foreground">NGO-tip</span> — Pattern framing: Margarita Island cluster, Aurora Yoga hub, Argentina thread</p>
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          Sends to 47 recipients across NGO / Venezuelan civil society / Argentine authorities /
+          CR immigration / migration corridor / Venezuelan diaspora / surveillance accountability /
+          investigative journalism. ~400ms stagger (~19s total).
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-genesis-vz-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-amber-300 dark:border-amber-700"
+          onClick={() => mutation.mutate({ dryRun: true })}
+          disabled={mutation.isPending}
+        >
+          Dry Run (list only)
+        </Button>
+        <Button
+          data-testid="button-genesis-vz-send"
+          size="sm"
+          className="gap-2 bg-amber-600 hover:bg-amber-700 text-white"
+          onClick={() => mutation.mutate({})}
+          disabled={mutation.isPending}
+        >
+          <Send className="w-3.5 h-3.5" />
+          {mutation.isPending ? "Sending… (~21s)" : "Send Focused Campaign"}
+        </Button>
+      </div>
+
+      {result && !result.dryRun && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-3 text-sm">
+            <span className="text-green-600 font-medium">{result.sent} sent</span>
+            {result.failed > 0 && <span className="text-red-500 font-medium">{result.failed} failed</span>}
+            <span className="text-muted-foreground text-xs">/ {result.total} total</span>
+            <button
+              className="text-xs text-muted-foreground underline ml-auto"
+              onClick={() => setShowResults(!showResults)}
+              data-testid="toggle-genesis-vz-results"
+            >
+              {showResults ? "hide" : "show"} details
+            </button>
+          </div>
+          {showResults && (
+            <div className="max-h-60 overflow-y-auto space-y-0.5 border border-border rounded p-2">
+              {result.results.map((r: any) => (
+                <div key={r.id} data-testid={`genesis-vz-result-${r.id}`} className="flex items-center gap-2 text-xs font-mono py-0.5">
+                  {r.ok ? <CheckCircle className="w-3 h-3 text-green-500 shrink-0" /> : <XCircle className="w-3 h-3 text-red-500 shrink-0" />}
+                  <span className="text-muted-foreground w-8 shrink-0">{r.id}</span>
+                  <span className="truncate text-foreground">{r.to}</span>
+                  <span className="text-muted-foreground shrink-0 ml-auto pl-2">{r.org}</span>
+                  {r.error && <span className="text-red-400 truncate">{r.error}</span>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {result?.dryRun && (
+        <div className="max-h-60 overflow-y-auto space-y-0.5 border border-border rounded p-2">
+          {result.contacts.map((c: any) => (
+            <div key={c.id} data-testid={`genesis-vz-dry-${c.id}`} className="flex items-center gap-2 text-xs font-mono py-0.5">
+              <span className="text-muted-foreground w-8 shrink-0">{c.id}</span>
+              <span className="truncate text-foreground">{c.to}</span>
+              <Badge variant="outline" className="text-xs shrink-0 ml-auto">{c.category}</Badge>
+            </div>
+          ))}
         </div>
       )}
     </div>
