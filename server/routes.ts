@@ -8737,4 +8737,232 @@ This email is constructed from verifiable technical disclosures, public contract
     res.json({ frameCount: count, lastFrame: last, sources, sessionCount: sessions.length });
   });
 
+  // ─── GOOGLE DRIVE HELPERS ────────────────────────────────────────────────────
+
+  app.get("/api/drive/list", requireAuth, async (req, res) => {
+    try {
+      const rawQ = (req.query.q as string) || "";
+      const recent = req.query.recent === "1" || req.query.recent === "true";
+      const token = await eeGetAccessToken();
+      // recent=true: list all images sorted by modifiedTime, no name filter
+      // otherwise: build OR name-contains query from the search terms
+      let driveQ: string;
+      if (recent || !rawQ) {
+        driveQ = "mimeType contains 'image/' and trashed = false";
+      } else {
+        const terms = rawQ.split(/\s+OR\s+/i).map(t => t.trim()).filter(Boolean);
+        driveQ = terms.length > 1
+          ? "(" + terms.map(t => `name contains '${t.replace(/'/g, "\\'")}'`).join(" or ") + ") and trashed = false"
+          : `name contains '${terms[0]?.replace(/'/g, "\\'") ?? ""}' and trashed = false`;
+      }
+      const params = new URLSearchParams({
+        q: driveQ,
+        fields: "files(id,name,mimeType,modifiedTime,size)",
+        pageSize: "80",
+        orderBy: "modifiedTime desc",
+      });
+      const r = await fetch(`https://www.googleapis.com/drive/v3/files?${params}`, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: AbortSignal.timeout(15000),
+      });
+      if (!r.ok) {
+        const err = await r.text();
+        return res.status(r.status).json({ error: `Drive API error: ${err}` });
+      }
+      const d: any = await r.json();
+      res.json(d.files ?? []);
+    } catch (err: any) {
+      if (err.message?.includes("Not authenticated")) {
+        return res.status(401).json({ error: "Google Drive not authenticated. Visit /api/auth/google to authorize." });
+      }
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/drive/file/:id", requireAuth, async (req, res) => {
+    try {
+      const fileId = req.params.id;
+      if (!fileId || !/^[\w-]+$/.test(fileId)) {
+        return res.status(400).json({ error: "Invalid file ID" });
+      }
+      const token = await eeGetAccessToken();
+      // Get metadata first
+      const metaR = await fetch(
+        `https://www.googleapis.com/drive/v3/files/${fileId}?fields=id,name,mimeType,size`,
+        { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(10000) }
+      );
+      if (!metaR.ok) {
+        return res.status(metaR.status).json({ error: "Drive metadata fetch failed" });
+      }
+      const meta: any = await metaR.json();
+      const mimeType: string = meta.mimeType ?? "image/jpeg";
+      if (!mimeType.startsWith("image/")) {
+        return res.status(415).json({ error: `File is not an image (${mimeType})` });
+      }
+      // Fetch bytes
+      const dlR = await fetch(
+        `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`,
+        { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(30000) }
+      );
+      if (!dlR.ok) {
+        return res.status(dlR.status).json({ error: "Drive file download failed" });
+      }
+      const buf = Buffer.from(await dlR.arrayBuffer());
+      res.json({ id: fileId, name: meta.name, mimeType, base64: buf.toString("base64") });
+    } catch (err: any) {
+      if (err.message?.includes("Not authenticated")) {
+        return res.status(401).json({ error: "Google Drive not authenticated. Visit /api/auth/google to authorize." });
+      }
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  // ─── MASK TATTOO FORENSICS ───────────────────────────────────────────────────
+
+  app.post("/api/forensics/mask-tattoo-compare", requireAuth, async (req, res) => {
+    try {
+      const { driveFileId1, driveFileId2, base64Image1, base64Image2, mimeType1, mimeType2 } = req.body as {
+        driveFileId1?: string; driveFileId2?: string;
+        base64Image1?: string; base64Image2?: string;
+        mimeType1?: string; mimeType2?: string;
+      };
+
+      async function resolveImage(driveId?: string, b64?: string, mime?: string): Promise<{ data: string; mimeType: string } | null> {
+        if (driveId && /^[\w-]+$/.test(driveId)) {
+          try {
+            const token = await eeGetAccessToken();
+            const metaR = await fetch(
+              `https://www.googleapis.com/drive/v3/files/${driveId}?fields=mimeType`,
+              { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(10000) }
+            );
+            const meta: any = metaR.ok ? await metaR.json() : {};
+            const resolvedMime = meta.mimeType ?? "image/jpeg";
+            const dlR = await fetch(
+              `https://www.googleapis.com/drive/v3/files/${driveId}?alt=media`,
+              { headers: { Authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(30000) }
+            );
+            if (!dlR.ok) return null;
+            const buf = Buffer.from(await dlR.arrayBuffer());
+            return { data: buf.toString("base64"), mimeType: resolvedMime };
+          } catch { return null; }
+        }
+        if (b64) {
+          return { data: b64, mimeType: mime ?? "image/jpeg" };
+        }
+        return null;
+      }
+
+      const [img1, img2] = await Promise.all([
+        resolveImage(driveFileId1, base64Image1, mimeType1),
+        resolveImage(driveFileId2, base64Image2, mimeType2),
+      ]);
+
+      if (!img1) return res.status(400).json({ error: "Image 1 could not be resolved. Provide driveFileId1 or base64Image1." });
+      if (!img2) return res.status(400).json({ error: "Image 2 could not be resolved. Provide driveFileId2 or base64Image2." });
+
+      const prompt = `You are a forensic visual analyst performing a structured mask geometry comparison.
+
+Image 1 is a TATTOO depicting a mask design.
+Image 2 is a PHOTOGRAPH of a person wearing a physical mask.
+
+Perform a rigorous geometric comparison of the mask in each image. Do NOT attempt facial recognition or identity matching — analyze mask shape only.
+
+Return a JSON object with exactly these fields:
+{
+  "confidence": <integer 0-100 — geometric consistency score>,
+  "assessedSameDesign": <boolean — true if masks are likely the same design>,
+  "reasoning": "<2-4 sentence structured analysis>",
+  "matchFeatures": ["<feature 1>", "<feature 2>", ...],
+  "mismatchFeatures": ["<feature 1>", "<feature 2>", ...]
+}
+
+Analyze these specific dimensions:
+(a) Facial coverage — which regions are covered (forehead, eyes, nose, cheeks, chin) vs exposed
+(b) Edge geometry — top curve shape, lateral cutouts, lower chin line
+(c) Structural elements — eye holes (shape, size, position), bridge treatment, cheek coverage
+(d) Distinguishing features — unusual cuts, asymmetries, decorative elements
+
+Respond with valid JSON only. No markdown.`;
+
+      const result = await geminiGenerate(
+        [
+          { inline_data: { mime_type: img1.mimeType, data: img1.data } },
+          { inline_data: { mime_type: img2.mimeType, data: img2.data } },
+          { text: prompt },
+        ],
+        { maxTokens: 1200, temperature: 0 }
+      );
+
+      if (!result) {
+        return res.status(503).json({ error: "Gemini unavailable — no active key/model found." });
+      }
+
+      let parsed: any;
+      try {
+        const clean = result.text.replace(/```json\n?|```/g, "").trim();
+        parsed = JSON.parse(clean);
+      } catch {
+        return res.status(422).json({ error: "Gemini returned non-JSON output", raw: result.text });
+      }
+
+      res.json({
+        confidence: typeof parsed.confidence === "number" ? parsed.confidence : 0,
+        assessedSameDesign: !!parsed.assessedSameDesign,
+        reasoning: parsed.reasoning ?? "",
+        matchFeatures: Array.isArray(parsed.matchFeatures) ? parsed.matchFeatures : [],
+        mismatchFeatures: Array.isArray(parsed.mismatchFeatures) ? parsed.mismatchFeatures : [],
+        model: result.model,
+      });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/forensics/mask-tattoo-compare/log", requireWriteAuth, async (req, res) => {
+    try {
+      const { createHash } = await import("crypto");
+      const {
+        confidence, assessedSameDesign, reasoning, matchFeatures, mismatchFeatures,
+        model, imageRef1, imageRef2,
+      } = req.body;
+
+      const payload = JSON.stringify({
+        confidence, assessedSameDesign, reasoning,
+        matchFeatures, mismatchFeatures, model,
+        imageRef1, imageRef2,
+        loggedAt: new Date().toISOString(),
+      });
+
+      const hash = createHash("sha256").update(payload).digest("hex");
+
+      const { insertIncidentSchema } = await import("@shared/schema");
+      const incidentData = insertIncidentSchema.parse({
+        category: "visual-forensics",
+        severity: assessedSameDesign ? 2 : 4,
+        title: `Mask Geometry Comparison — Confidence ${confidence}%${assessedSameDesign ? " — SAME DESIGN ASSESSED" : ""}`,
+        description: [
+          `Model: ${model ?? "gemini"}`,
+          `Confidence: ${confidence}/100`,
+          `Assessed same design: ${assessedSameDesign ? "YES" : "NO"}`,
+          "",
+          reasoning ?? "",
+          "",
+          matchFeatures?.length ? `Match features: ${(matchFeatures as string[]).join("; ")}` : "",
+          mismatchFeatures?.length ? `Mismatch features: ${(mismatchFeatures as string[]).join("; ")}` : "",
+          "",
+          `Image ref 1: ${imageRef1 ?? "not specified"}`,
+          `Image ref 2: ${imageRef2 ?? "not specified"}`,
+          `SHA-256: ${hash}`,
+        ].filter(Boolean).join("\n"),
+        tags: ["mask-tattoo", "visual-forensics", "gemini", "ale-alevida89"],
+        status: "documented",
+      });
+
+      const incident = await storage.createIncident({ ...incidentData, hash });
+      res.json({ ok: true, incidentId: incident.id, hash });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
 }
