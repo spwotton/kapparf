@@ -5127,6 +5127,47 @@ COUNTERMEASURES:
     linkedEntities: ["michael-greenwald", "liberty", "hector-mora"],
   },
   {
+    id: "bombacopsis-hidden-ap-scan",
+    title: "Bombacopsis WiFi Scan — Dual Hidden APs on Same Channels as Named Networks",
+    category: "Electronic Surveillance",
+    severity: "high",
+    detail: `Linux Mint WiFi scan from Room 10, Hotel Pochote Grande, Jacó Beach. Four APs sharing the same hardware OUI block (C8/CA:CD:55:*):
+
+SCAN RESULTS (nmcli device wifi list):
+  BSSID               SSID             Ch   Rate     Signal
+  C8:CD:55:AB:77:3F   Bombacopsis      13   130Mb    54   ← CONNECTED, globally assigned OUI
+  CA:CD:55:5B:77:3F   [hidden]         13   130Mb    40   ← hidden, same ch as Bombacopsis
+  CA:CD:55:9B:77:3F   Bombacopsis-5G   100  270Mb    34   ← locally administered MAC
+  CA:CD:55:DB:77:3F   [hidden]         100  270Mb    32   ← hidden, same ch as Bombacopsis-5G
+  80:BE:AF:1D:F3:C2   HK               11   130Mb    40   ← unidentified, OUI not looked up
+  5E:62:8B:56:3A:B8   [hidden]         4    130Mb    27
+  34:5D:9E:97:4B:28   LIB-2867835_2.4  1    260Mb    25   ← LIBERTY ISP AP visible from room
+
+MAC ADDRESS ANALYSIS — C8/CA:CD:55 CLUSTER:
+  C8:CD:55: prefix = globally unique OUI (manufacturer assigned to real hardware)
+  CA:CD:55: prefix = locally administered MAC (bit 1 of first octet set) — generated locally, not from factory
+  It is normal for routers to use locally-administered MACs for secondary VAPs (virtual access points). Bombacopsis and Bombacopsis-5G being split across 2.4GHz/5GHz is a standard dual-band router configuration.
+
+THE ANOMALY — TWO HIDDEN APs ON THE EXACT SAME CHANNELS:
+  The two hidden networks (CA:CD:55:5B and CA:CD:55:DB) sit on channels 13 and 100 — the same channels as the named Bombacopsis networks. A legitimate hotel router running dual-band does not need hidden VAPs on its own channels. Possible explanations:
+  (a) ISP remote management interface — Liberty or another provider runs a hidden SSID for remote router access/monitoring. Common practice among ISPs; the hidden network tunnels management traffic back to the ISP without the subscriber seeing it. If Liberty is compromised/cooperative with adversary, this is a direct monitoring channel.
+  (b) Purpose-built monitoring VAP — the router firmware has been modified (or replaced) to add a hidden network in monitor/promiscuous mode, capturing all traffic on that channel including from other clients.
+  (c) Rogue AP co-located on same channel — a separate device running aireplay-ng or hostapd in the same room/adjacent room creating evil-twin fragments; unlikely to share the exact OUI block unless deliberately spoofing.
+
+LIBERTY ISP AP VISIBLE FROM ROOM:
+  34:5D:9E:97:4B:28 = LIB-2867835_2.4 at signal -25 dBm (weak but detectable). Liberty Telecom is the documented ISP for the hotel infrastructure and multiple operator locations. A Liberty AP visible from Room 10 corroborates Liberty's physical infrastructure presence in the immediate area.
+
+HK NETWORK — UNIDENTIFIED:
+  80:BE:AF:1D:F3:C2 on channel 11 with no SSID analysis yet. "HK" as an SSID = either initials or Hong Kong geographic designation. OUI 80:BE:AF requires lookup. Not yet attributed.
+
+SAM'S OBSERVATION:
+  Sam notes that connecting to Bombacopsis gives apparent access to both 2.4GHz and 5GHz bands — suggesting the router itself is legitimate dual-band and Bombacopsis-5G is a real secondary SSID on the same hardware. The hidden pair is therefore the anomaly requiring explanation.
+
+DEVICE IP DISCREPANCY:
+  Route table showed Sam's IP as 192.168.110.40; lsof output (taken minutes later) showed 192.168.110.15. DHCP lease changed between the two commands — either natural lease rotation or the router reassigned addresses. Worth noting if other nodes on the network are tracking by IP rather than MAC.`,
+    linkedEntities: ["liberty", "michael-greenwald"],
+  },
+  {
     id: "c2-process-trigger",
     title: "C2 Behavioral Indicator — Process-Triggered Execution (Windows + Linux Mint)",
     category: "Electronic Surveillance",
