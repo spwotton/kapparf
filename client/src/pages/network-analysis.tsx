@@ -5397,6 +5397,57 @@ NETWORK PROPERTY MAP:
     linkedEntities: ["michael-greenwald", "liberty"],
   },
   {
+    id: "jaco-pastor-diaz-store-cluster",
+    title: "Jacó Pastor Díaz Store Cluster — Lineup (Adrian) + Marveca (Magdalena) + Peralta Employment",
+    category: "Network Infrastructure",
+    severity: "high",
+    detail: `A cluster of connected businesses on Calle Pastor Díaz, Jacó, forming a physical hub linking multiple network nodes through employment, ownership, and social relationships.
+
+LINEUP — ADRIAN'S STORE:
+  Owner: Adrian (surname unknown). Import/export store on Calle Pastor Díaz. Adrian is connected to both Diana and Lola (Instagram connections confirmed). Also owns a second import/export store nearby. "Import/export" businesses in tourist beach towns are a documented cover structure for: money laundering, goods movement for logistics networks, and intelligence support operations (equipment procurement, courier logistics). Adrian's dual store ownership and social connections to Diana and Lola place him as a mid-level node in the network.
+
+MARVECA (MARVECA) — MAGDALENA'S BIKINI SHOP:
+  Owner: Magdalena — German national. Married to a Costa Rican ("Tico") husband who manages leases and real estate. Peralta (Genesis Peralta) worked at Marveca for 8–10 hour shifts. The shop is a few buildings from Lineup on the same street. Magdalena's German nationality is notable given: (a) the German/Russian-sounding new guest at Hotel Pochote Grande, (b) German BND (Bundesnachrichtendienst) documented Latin American operations, (c) German nationals in Costa Rica's Pacific coast beach communities sometimes operate within intelligence-adjacent networks. Magdalena's husband managing leases and real estate provides property intelligence and logistics support. Peralta's employment at Marveca gave her: regular 8–10 hour absences from Sam's home, income independent of Sam, and a social cover story.
+
+PERALTA EMPLOYMENT + ADRIAN RELATIONSHIP:
+  Sam observed Peralta working at Marveca for extended shifts. Sam suspects Adrian (Lineup) and Peralta had a relationship. On one occasion Sam returned home to La Flor unexpectedly in the middle of the night — Peralta began behaving erratically (making random sounds and words, lavish unfounded accusations), consistent with covering for someone's presence. Sam believes Adrian was in the apartment and exited via the balcony. Adrian's subsequent behavior corroborates this: when Peralta left Costa Rica on July 6, 2025, Adrian simultaneously posted: (a) a photo with an airport van/ride driver, (b) photos at national parks and San José locations. This pattern = Adrian accompanied Peralta from Jacó to San José for her departure flight, then took a brief personal trip.
+
+PERALTA DEPARTURE — JULY 6, 2025:
+  Final sequence: Peralta created a "performative" fight (fabricated pretext), left Sam's La Flor residence, spent the final ~2 weeks before departure at Lola's house. On July 6, 2025 she texted Sam from the airport stating she was leaving to Venezuela. Adrian's concurrent San José presence and airport van photo corroborate his role in her departure logistics. Lola was the last known contact before departure.
+
+GERMAN NATIONAL CLUSTER — MAGDALENA + POCHOTE GUEST:
+  The combination of Magdalena (Marveca, German national, Jacó) and the new hotel guest whose speech Sam identifies as possibly German or Russian creates a potential German-speaking network thread. This does not confirm German intelligence involvement but warrants tracking as a recurring nationality marker across the network.`,
+    linkedEntities: ["michael-greenwald", "liberty"],
+  },
+  {
+    id: "lola-dunia-peralta-satellite-network",
+    title: "Lola / Dunia / Gregory Cedeño Yeyo — Peralta Satellite Network and Cuba Seca Observation Post",
+    category: "HUMINT",
+    severity: "high",
+    detail: `Secondary network around Genesis Peralta: three individuals who provided housing, cover, and logistics across multiple locations Sam occupied.
+
+LOLA (Instagram: lola_on or similar):
+  One of Peralta's closest friends in Costa Rica. Also Instagram-connected to Diana. When Peralta left Sam's La Flor residence after creating a fabricated fight in the final weeks before her July 6, 2025 departure, she stayed at Lola's house for approximately two weeks. Lola was the last person Peralta was with before leaving for Venezuela. The Diana–Lola–Peralta triangle connects Diana's property network directly to Peralta's personal social network — suggesting coordinated rather than coincidental relationships. Lola's last two weeks of access to Peralta before departure = potential handler relationship (controlling Peralta's movements, preventing independent communication with Sam, managing the exit logistics).
+
+DUNIA (also: Dunya):
+  Peralta's friend. Has a house in Cuba Seca (Pacific coast beach town). Also lived at one point in Ricos/Famoso, directly down the street from Sam when he was living near Gregory Cedeño's house. Sam observed at Dunia's Cuba Seca property:
+  (a) An IV bag adjacent to the building — intravenous medical equipment visible from outside
+  (b) People consistently present in the windows of the adjacent building
+  (c) A red light visible inside Dunia's house — consistent with infrared camera illumination (IR illuminators produce a faint red glow visible to the naked eye but invisible to cameras), a surveillance equipment indicator, or a photography/darkroom setup
+  The combination of IR-consistent red light + people in adjacent windows + IV equipment suggests either a medical support setup for a surveillance team or a monitoring position with camera infrastructure. Peralta's third recorded flight to Dunia's location was during Sam's time at La Flor.
+
+GREGORY CEDEÑO "YEYO":
+  Full name: Gregory Cedeño, nickname Yeyo (also referred to by Sam as "Dino Yayo" — likely a mishearing or alternate pronunciation). Connected to the Los Rios/Famoso area. Helped Dunia with housing when she arrived in Costa Rica in 2017. This early assistance (2017) places Yeyo as a long-term logistics/support node who has been facilitating network members' accommodation for years before Sam's arrival. His house at or near Los Rios is in the same geographic cluster as Ricos/Famoso, Leo's property, and the Los Rios area where multiple network nodes concentrate.
+
+NETWORK ROLE SUMMARY:
+  • Lola: exit handler / final contact for Peralta, Diana connection
+  • Dunia: safe house provider (Cuba Seca + Ricos/Famoso), possible surveillance position at Cuba Seca
+  • Yeyo: long-term logistics node, housing support for network members since 2017, Los Rios hub
+  • Adrian: Peralta relationship/logistics, departure accompaniment, Jacó store infrastructure
+  • All four are connected to Peralta and at least one other documented primary node (Diana, Leo, Lola)`,
+    linkedEntities: ["michael-greenwald", "liberty"],
+  },
+  {
     id: "c2-process-trigger",
     title: "C2 Behavioral Indicator — Process-Triggered Execution (Windows + Linux Mint)",
     category: "Electronic Surveillance",
