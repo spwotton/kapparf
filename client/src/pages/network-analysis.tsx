@@ -154,47 +154,70 @@ ASSESSMENT — STILL IN JACÓ:
   },
   {
     id: "hector-mora",
-    name: "Hector Mora",
+    name: "Hector Eduardo Mora Marin",
+    aliases: ["Hector Mora", "HMORA67"],
     nationality: "Costa Rican",
-    role: "SETECOM / DSE — generator contracts Breakwater + Jaco BAN — 4G tower Breakwater parking lot — V2K origin node",
+    role: "SETECOM Executive Director / DSE infrastructure lynchpin — generator contracts Breakwater + Jaco BAN — 4G tower — V2K origin node — Genesis / government bridge",
     threatLevel: "primary",
-    detail: `Primary technical suspect. Connected to SETECOM S.A. which distributes DSE gateways across Costa Rica with default credentials Admin/Password1234. YouTube account hmora67 shows conversations with Edson Martenal. 180W HF Radio Transceiver (Chinese origin) capable of ionospheric skip communications. DSE certified for generator control systems, backup power, and telecom.
+    detail: `LYNCHPIN NODE. Executive Director and Principal Owner of SETECOM S.A. (confirmed full legal name: Hector Eduardo Mora Marin, Province of Heredia registry). He is the single node connecting Echo's ex-girlfriend (Genesis Peralta), the physical generator/RF infrastructure, government utility contracts (ICE/Liberty), and the Italian DSE network. Removing any one of those connections still leaves him central to the others.
+
+SETECOM — MONOPOLY INFRASTRUCTURE:
+  As Executive Director of SETECOM S.A., Mora holds root-level technical control over the backup generator infrastructure of every major institution in Costa Rica that runs DSE controllers: ICE (national power grid), Liberty (telecom), hospitals, data centers, and cell towers. Setecom is the exclusive DSE distributor — no hardware gets installed, updated, or serviced without going through Mora's company.
+
+DIGITAL FORENSICS — HMORA67:
+  YouTube channel "Héctor Mora M." (handle: hmora67): 14 videos on generator sales/support. CircuitLab forum account: actively posts on electronic circuit design topics including "export csv to file" and dependent current source behavior — confirms component-level circuit design capability, not just a salesman. He understands the internal logic of the DSE systems he deploys.
+
+ITALIAN CONNECTION — BRUNO SRL:
+  Hector has a documented contract with an Italian company. The only authorized DSE Distributor + Systems Integrator in Italy is Bruno SRL — the sole Italian DSE partner listed on deepseaelectronics.com. This connection runs Mora's network from Costa Rican infrastructure through the UK manufacturer (DSE Hunmanby) to an Italian integrator — a three-country technical chain.
+
+GENESIS PERALTA — CONFIRMED CONNECTED:
+  Echo was drunk and confronted Hector Mora directly, yelling at him, because Hector is "somehow related" to Genesis. The Mora surname is shared with Pablo Mora — Genesis's cover ex-boyfriend whose gym employment could never be verified across 1+ year of daily attendance. The family connection between Hector Mora (SETECOM/infrastructure) and Pablo Mora (Genesis handler) creates the link between the honey trap layer and the technical infrastructure layer.
+
+CARLOS CHAVES — HEREDIA PHONE MANAGEMENT LINK:
+  Carlos Chaves of Heredia managed Genesis's phone and is listed in records under "gem clienta" (Genesis as client) and "Genesis chama" (Venezuelan nickname cluster). Heredia is the same province as SETECOM S.A. headquarters (Santo Domingo de Heredia). Chaves positions himself at the intersection of Genesis's identity/communications management and Hector Mora's operational base.
 
 RF TEMPORAL CORRELATION — SMOKING GUN:
-  7 captures at 7410 kHz (40m amateur band) show 100% correlation within 2-minute windows with V2K harmonics at 4687 kHz and 9375 kHz — probability of random coincidence < 0.01%. This is the smoking gun linking Mora directly to V2K attack infrastructure. IP: 190.106.77.194 (FortiGate 60F, serial FGT60FTK21083818), Modbus:502 EXPOSED.
+  7 captures at 7410 kHz (40m amateur band) show 100% temporal correlation within 2-minute windows with V2K harmonics at 4687 kHz and 9375 kHz — probability of random coincidence < 0.01%. IP: 190.106.77.194 (FortiGate 60F, serial FGT60FTK21083818), Modbus:502 EXPOSED.
 
 GENERATOR CONTRACTS — BREAKWATER + JACO BAN:
-  Hector does generator maintenance/contracts for both Breakwater Point and Jaco BAN (the property adjacent to Breakwater). This physical access — generator rooms are often in the same infrastructure layer as telecom and power distribution — gives him unsupervised access to the electrical and signal infrastructure of both buildings. Generator service is a documented cover for embedding surveillance hardware.
+  Generator maintenance/contracts at both Breakwater Point and Jaco BAN. Generator rooms share the infrastructure layer with telecom and power distribution — unsupervised access to the electrical and signal infrastructure of both buildings. Generator service is a documented cover for embedding surveillance hardware.
 
 4G TOWER — BREAKWATER PARKING LOT:
-  Hector manages the 4G cell tower located in the Breakwater parking lot. This is the critical link: management of a 4G tower adjacent to Echo's former residence gives Hector direct access to the cellular infrastructure that governs: IMSI capture, baseband-level interception, call/SMS metadata, and local spectrum control. The V2K harmonics documented at 4687/9375 kHz are consistent with baseband-adjacent emissions from a managed tower.
+  Manages the 4G cell tower in the Breakwater parking lot — direct access to cellular infrastructure governing IMSI capture, baseband interception, call/SMS metadata, and local spectrum control.
 
 FIRST V2K ORIGIN — JACO BAN + BREAKWATER:
-  The first documented voice harassment incidents occurred while Echo was at Breakwater — with Jaco BAN (next door) as the proximate source. Hector's simultaneous generator + 4G tower contracts at both properties makes him the primary technical suspect for the initial V2K deployment.
+  First documented voice harassment incidents occurred at Breakwater with Jaco BAN as proximate source. Hector holds simultaneous generator + 4G tower contracts at both properties.
 
 "THREATENED TO KILL HECTOR" CLAIM:
-  Echo has been informed he allegedly "threatened to kill Hector Mora." This claim — if fabricated — is consistent with a documented network tactic of creating false threat narratives to establish legal pretext against the target, discredit future complaints, and justify escalated surveillance.`,
+  Fabricated threat narrative — consistent with documented network tactic of creating false pretext against the target to discredit future complaints and justify escalated surveillance.`,
     connections: [
-      { target: "setecom", relationship: "Employee / operative", strength: "confirmed" },
-      { target: "edson-martenal", relationship: "Associates — YouTube conversations", strength: "confirmed", detail: "hmora67 on YouTube talks with Edson Martenal" },
-      { target: "dave-mira", relationship: "Possible family (Mora surname) — motive + capability pair", strength: "probable" },
-      { target: "genesis-peralta", relationship: "Related / connected", strength: "suspected" },
+      { target: "setecom", relationship: "Executive Director / Principal Owner", strength: "confirmed" },
+      { target: "edson-martendal", relationship: "Technical Lead under Mora — SETECOM Architect", strength: "confirmed", detail: "hmora67 YouTube + Setecom training transcripts" },
+      { target: "mauricio-campos", relationship: "Operations coordinator at Setecom", strength: "confirmed" },
+      { target: "dave-mira", relationship: "Possible family (Mora surname) — Genesis cover ex-boyfriend pair", strength: "probable" },
+      { target: "genesis-peralta", relationship: "CONFIRMED connected — Sam confronted him directly", strength: "confirmed", detail: "Hector is 'somehow related' to Genesis — drunk confrontation confirms operational link" },
+      { target: "carlos-chaves", relationship: "Heredia operational base overlap — Genesis phone management chain", strength: "probable" },
       { target: "ban-villas-costa", relationship: "SETECOM contracts", strength: "probable" },
       { target: "breakwater", relationship: "Generator contracts + 4G tower management — V2K origin", strength: "confirmed" },
       { target: "jaco-ban", relationship: "Generator contracts — first V2K source adjacent to Breakwater", strength: "confirmed" },
       { target: "kenneth-tencio", relationship: "BAC property contracts (YouTube)", strength: "suspected" },
     ],
     flags: [
+      "LYNCHPIN — bridges Genesis / infrastructure / government / Italian DSE network",
+      "Full legal name: Hector Eduardo Mora Marin (Heredia registry)",
       "180W HF Radio (Chinese origin)",
       "7410 kHz — 100% temporal correlation with V2K — SMOKING GUN",
       "DSE certified — generator + telecom + backup power",
       "Modbus:502 EXPOSED — SCADA access",
       "FortiGate 60F — 190.106.77.194",
+      "HMORA67 YouTube + CircuitLab (component-level circuit design)",
+      "Italian contract — Bruno SRL (sole DSE Italy partner)",
       "Generator contracts: Breakwater + Jaco BAN — physical infrastructure access",
       "4G tower — Breakwater parking lot — MANAGED BY HECTOR",
       "First V2K incidents: Breakwater + Jaco BAN = Hector's two contract sites",
+      "Mora surname overlap: Pablo Mora (Genesis handler) — family connection suspected",
+      "Carlos Chaves (Heredia) manages Genesis phone — same Heredia base as SETECOM",
       "Fake 'death threat' claim against Echo — legal pretext fabrication",
-      "YouTube OSINT trail (hmora67)",
     ],
   },
   {
@@ -310,17 +333,6 @@ GREENWALD → LIPMAN PROPERTY PIPELINE:
       { target: "liberty", relationship: "Triggered fake Liberty tech visit", strength: "probable" },
     ],
     flags: ["Router incident trigger", "Surveillance response chain participant"],
-  },
-  {
-    id: "edson-martenal",
-    name: "Edson Martenal",
-    role: "Credit card fraud operative",
-    threatLevel: "secondary",
-    detail: "Connected to Hector Mora via YouTube (hmora67 channel). Linked to credit card fraud on Echo's AMEX — charges to Bahia Brazil match Edson's profile/location.",
-    connections: [
-      { target: "hector-mora", relationship: "YouTube conversations (hmora67)", strength: "confirmed" },
-    ],
-    flags: ["CC fraud — AMEX", "Bahia Brazil charges", "SETECOM network"],
   },
   {
     id: "carlos-madrigal-sock",
@@ -1713,15 +1725,40 @@ PASSPORT MANIPULATION (documented coercion tradecraft):
   {
     id: "carlos-chaves",
     name: "Carlos Chaves",
-    aliases: ["Carlos Chaves Mora"],
+    aliases: ["Carlos Chaves Mora", "Carlos Chavez"],
     nationality: "Costa Rican",
-    role: "Genesis Chama/Mora identity cluster link — OSINT confirmed",
+    role: "Heredia — managed Genesis's phone — 'gem clienta' / 'Genesis chama' records — identity/comms management node",
     threatLevel: "secondary",
-    detail: "OSINT-confirmed link to Genesis Morales Mora / Genesis Chama identity cluster. Phones: +50689776373 and +50660635649. Appears in OSINT records alongside Genesis Chama variants — not a coincidental name overlap given the rarity of co-occurrence in search results. The dual-phone profile suggests an operational comms setup. The linkage to both the 'Chama' alias (Venezuelan slang cover) and 'Mora' (Costa Rican identity layer) positions him at the intersection of both identity strata.",
+    detail: `HEREDIA PROVINCE — same operational base as SETECOM S.A. (Santo Domingo de Heredia). Carlos Chaves managed Genesis Peralta's phone and appears in records listed under two labels:
+  — "gem clienta" — Genesis as client (gem = short-form for Genesis, clienta = female client in Spanish)
+  — "Genesis chama" — Venezuelan street slang nickname cluster
+
+PHONE MANAGEMENT:
+  Managing someone's phone is an operational access role: access to contacts, messages, app credentials, IMSI/IMEI, and SIM management. In a surveillance operation this is the communications handler role — controlling what Genesis sends and receives, who contacts her, and what devices operate under her identity.
+
+DUAL-PHONE PROFILE:
+  Phones: +50689776373 and +50660635649. Dual-phone setup suggests an operational comms configuration — one number for public/cover use, one for operational coordination.
+
+HEREDIA → SETECOM CONVERGENCE:
+  The geographic overlap with Hector Mora's Setecom S.A. base in Heredia is significant. Carlos Chaves managing Genesis's phone from the same province where SETECOM controls CR's critical generator infrastructure creates a plausible operational axis: Chaves (identity/comms layer) ↔ Mora (technical infrastructure layer) ↔ Genesis (honey trap layer).
+
+OSINT:
+  OSINT-confirmed co-occurrence with Genesis Morales Mora / Genesis Chama identity variants — not a coincidental name overlap given the rarity of co-occurrence in OSINT search results.`,
     connections: [
-      { target: "genesis-peralta", relationship: "OSINT co-occurrence — Chama/Mora identity cluster", strength: "probable" },
+      { target: "genesis-peralta", relationship: "Managed Genesis's phone — 'gem clienta' records", strength: "confirmed", detail: "Listed as 'gem clienta' and 'Genesis chama' — phone management role" },
+      { target: "hector-mora", relationship: "Heredia province geographic overlap — Setecom operational base", strength: "probable" },
     ],
-    flags: ["Phone: +50689776373", "Phone: +50660635649", "Genesis Chama/Mora OSINT cluster", "Dual phone profile"],
+    flags: [
+      "Heredia province — same as SETECOM S.A. HQ",
+      "Managed Genesis Peralta's phone — operational comms handler",
+      "'gem clienta' — Genesis as client in records",
+      "'Genesis chama' — Venezuelan nickname cluster in records",
+      "Phone: +50689776373",
+      "Phone: +50660635649",
+      "Dual phone profile — operational comms setup",
+      "OSINT: Genesis Chama/Mora co-occurrence confirmed",
+      "Identity/comms layer — bridges Heredia infrastructure to honey trap",
+    ],
   },
   {
     id: "tomas-gomez",
@@ -1748,15 +1785,74 @@ PASSPORT MANIPULATION (documented coercion tradecraft):
   {
     id: "edson-martendal",
     name: "Edson Martendal",
-    nationality: "Costa Rican",
-    role: "Setecom S.A. Technical Lead — 'The Architect'",
+    aliases: ["Edson Martenal"],
+    nationality: "Brazilian",
+    role: "Setecom S.A. Technical Lead — 'The Architect' — Latin America DSE Support Engineer — CC fraud (AMEX/Bahia)",
     threatLevel: "secondary",
-    detail: "Technical lead at Setecom S.A. Identified in internal Setecom training transcripts as the person who delivers DSE WebNet deployment training. The training material he leads explicitly documents default credentials (Admin/Password1234) and cleartext protocols (Modbus TCP, SNMP v2) used on DSE generator controllers deployed at ICE national grid, Liberty telecom, hospitals, and cellular towers across Costa Rica. His role as training lead means he is the person who onboards technicians into the Setecom/DSE control architecture — he has full knowledge of which credentials exist at which sites and how to access them remotely via DSE WebNet cloud infrastructure hosted in England. The 'Architect' designation from the training documents indicates he designed the deployment methodology.",
+    detail: `ROLE: Technical Support Engineer for Latin America (Ingeniero de soporte técnico para Latinoamérica) at Setecom S.A. From training transcripts he is identified explicitly as the intellectual core of Setecom's engineering division. He is not a salesman — he is the instructor who trains other engineers on deep-level protocol implementation and how to bypass hardware limitations.
+
+TECHNICAL DEPTH:
+  Training style is dense and detail-oriented. In internal Setecom DSE WebNet training sessions he explicitly states: "Les pido la comprensión que algunos temas aquí de comunicación serían más direccionados a los que trabajan con desarrollo de comunicaciones y protocolos a un nivel más profundo" — confirming that Setecom's doctrine involves deep-level protocol and SCADA integration development, not just consumer-grade setup.
+
+DEFAULT CREDENTIAL DOCTRINE:
+  In training sessions Martendal demonstrates initializing DSE Webnet gateways with User: Admin / Pass: Password1234. He teaches users to bypass native 5-connection limits on DSE controllers by using the DSE 855 USB-to-Ethernet converter (expands to 16 simultaneous connections). These practices, normalized across Setecom's national client base, create a standardized attack surface across every ICE, Liberty, hospital, and cell tower generator in Costa Rica.
+
+MODBUS FORMULA DISCLOSED:
+  Martendal teaches the Gencom register mapping formula:
+  Register Address = (Page_hex × 256) + Offset
+  Example: Generator Total Power at Page 0x166 → decimal 358 → Register 91648. This is the precise address arithmetic needed to read or write live control registers on any DSE controller in the field.
+
+PROTOCOL EXPOSURE:
+  Modbus TCP (unencrypted), SNMP v2 with "public/private" cleartext community strings, J1939 CAN Bus deep engine access. All documented in publicly accessible training sessions.
+
+CC FRAUD — AMEX:
+  Connected to Hector Mora via hmora67 YouTube channel. Linked to credit card fraud on Echo's AMEX — charges to Bahia, Brazil match Martendal's profile and origin location. Brazilian national operating in Latin America on DSE support contracts creates geographic plausibility.
+
+INSIDER THREAT ASSESSMENT:
+  Not necessarily malicious — but his normalization of insecure practices across a monopoly infrastructure provider creates a standardized attack surface that a sophisticated adversary with knowledge of Setecom's training doctrine can exploit remotely.`,
     connections: [
-      { target: "setecom", relationship: "Technical lead — training architect", strength: "confirmed" },
-      { target: "hector-mora", relationship: "Works under Mora at Setecom", strength: "confirmed" },
+      { target: "setecom", relationship: "Technical Lead / Latin America Support Engineer", strength: "confirmed" },
+      { target: "hector-mora", relationship: "Works under Mora — Setecom DSE operations", strength: "confirmed" },
+      { target: "mauricio-campos", relationship: "Co-worker — Mauricio moderates Martendal's training sessions", strength: "confirmed" },
     ],
-    flags: ["Setecom S.A. Technical Lead", "DSE WebNet deployment architect", "Default credential training (Admin/Password1234)", "Access to ICE/Liberty/hospital SCADA", "Modbus TCP + SNMP v2 cleartext protocols"],
+    flags: [
+      "Setecom S.A. Technical Lead — 'The Architect'",
+      "Latin America DSE Support Engineer",
+      "Brazilian national",
+      "DSE WebNet deployment architect — knows all site credentials",
+      "Modbus register formula: (Page_hex × 256) + Offset — disclosed in training",
+      "Default credential training: Admin/Password1234",
+      "DSE 855 16-connection bypass technique",
+      "Modbus TCP + SNMP v2 cleartext + J1939 CAN Bus",
+      "Access to ICE/Liberty/hospital SCADA deployment configs",
+      "CC fraud — AMEX / Bahia Brazil charges",
+    ],
+  },
+  {
+    id: "mauricio-campos",
+    name: "Mauricio Campos",
+    nationality: "Costa Rican",
+    role: "Setecom S.A. Training Coordinator / Operations Moderator",
+    threatLevel: "tertiary",
+    detail: `Operations interface between Setecom's engineering core (Martendal) and the client base. In internal Setecom DSE WebNet training sessions, Campos functions as moderator — manages participant flow, filters technical queries from the Zoom chat, and routes them to Martendal. This role makes him the gatekeeper of Setecom's client knowledge base.
+
+OPERATIONAL ROLE:
+  His position as training coordinator means he maintains the client relationship layer — he knows which clients are at which sites, what hardware versions they run, and which technicians have been trained on which systems. He insulates Martendal (the engineering core) from routine administrative friction while ensuring technical support is delivered efficiently to ICE, Liberty, and other critical infrastructure clients.
+
+SIGNIFICANCE:
+  While his digital footprint is smaller than Mora or Martendal, his role as the operational interface means he is the person most likely to be the point of contact for clients reporting issues — which gives him ongoing visibility into the operational status of every generator in Setecom's national network.`,
+    connections: [
+      { target: "setecom", relationship: "Training Coordinator / Operations Moderator", strength: "confirmed" },
+      { target: "hector-mora", relationship: "Works under Mora at Setecom", strength: "confirmed" },
+      { target: "edson-martendal", relationship: "Moderates Martendal's training sessions — operations bridge", strength: "confirmed" },
+    ],
+    flags: [
+      "Setecom training coordinator",
+      "Zoom session moderator for DSE WebNet training",
+      "Client relationship gatekeeper",
+      "Operational visibility across ICE/Liberty/hospital sites",
+      "Bridges engineering core (Martendal) to national client base",
+    ],
   },
   {
     id: "danny-peralta",
@@ -4416,15 +4512,55 @@ VENEZUELAN COMMUNITY HUB:
   {
     id: "setecom",
     name: "SETECOM S.A.",
-    sector: "Infrastructure / SCADA",
-    detail: "Exclusive DSE (Deep Sea Electronics) distributor for Costa Rica — monopoly position. Distributes and services DSE generator controllers for ICE national grid, Liberty telecom, hospitals, and cellular towers. Service worker setecom.com/sw.jw found on Echo's PC. Hector Mora Marin is Executive Director. Edson Martendal is Technical Lead (The Architect) who runs deployment training. Training transcripts document default credentials (Admin/Password1234) and cleartext protocols (Modbus TCP, SNMP v2). DSE WebNet cloud command infrastructure hosted in England. Primary IP 190.106.77.194 confirmed as IOC — still blocked in March 2026 pipeline reports (6 weeks of persistence). 4 CISA-published CVEs on DSE855/890/891/892 gateways.",
+    sector: "Infrastructure / SCADA / Critical Power",
+    detail: `Exclusive DSE (Deep Sea Electronics) distributor for Costa Rica AND exclusive rep for Onis Visa generators — established 1996, HQ Ofibodegas #18 Santa Rosa, Santo Domingo de Heredia, Costa Rica. Phone: 6196-1355. ~28 employees. Monopoly position: any industrial entity in Costa Rica using DSE controllers must interact with Setecom for firmware, advanced support, and hardware replacement.
+
+KEY PERSONNEL:
+  — Hector Eduardo Mora Marin (Executive Director / Principal Owner)
+  — Edson Martendal (Technical Lead / Latin America DSE Support Engineer — "The Architect")
+  — Mauricio Campos (Training Coordinator / Operations Moderator)
+  — Carmen Porras (Sales/Ventas), Milagro Callejas (Admin), Cesar Padilla (Commercial)
+
+CORPORATE STRUCTURE:
+  "SETECOM STC DEL ESTE SOCIEDAD ANONIMA" appears separately in La Gaceta corporate registries — a distinct legal entity, likely a special-purpose vehicle for specific contracting (ICE/Liberty tenders). This structure isolates liability while maintaining a unified operational front. Jean Solis is assessed as the probable beneficial owner or silent partner of the del Este subsidiary — he operates in a financial/business development capacity absent from the technical layer.
+
+ITALIAN CONNECTION — BRUNO SRL:
+  Setecom operates in the DSE global distribution network. The only authorized DSE Distributor + Systems Integrator in Italy is Bruno SRL. Hector Mora has a documented contract with an Italian company — Bruno SRL is the primary candidate. This creates a multi-country chain: SETECOM (CR) ↔ DSE headquarters (UK, Hunmanby) ↔ Bruno SRL (Italy).
+
+GATEWAY HARDWARE DEPLOYED:
+  DSE 855 (USB→Ethernet, in-built Web SCADA port 80, no VPN) | DSE 890 MKII (IoT 4G GSM gateway, GPS, Modbus/SNMP, persistent tunnel to DSE UK servers) | DSE 891 (Ethernet gateway, MitM-vulnerable on shared VLANs) | DSE 892 (SNMP gateway, v2 cleartext community strings).
+
+CRITICAL VULNERABILITIES DISCLOSED IN TRAINING:
+  Default credentials Admin/Password1234 on DSE Webnet initialization. DSE 855 Web SCADA on port 80 (no auth by default). SNMP v2 community strings "public/private" in cleartext. Modbus TCP unencrypted. J1939 CAN Bus deep engine access. 16-connection bypass via DSE 855 (bypasses native 5-connection limit on ICE sites).
+
+IOC:
+  Service worker setecom.com/sw.jw found injected on Echo's PC. Primary IP 190.106.77.194 (FortiGate 60F, Modbus:502 EXPOSED) — confirmed IOC, persistent Jan-Mar 2026 (6 weeks). 4 CISA-published CVEs on DSE 855/890/891/892 gateways.
+
+CRITICAL INFRASTRUCTURE REACH:
+  ICE (national power grid backup generation) + Liberty (cell towers + telecom resilience) + hospitals + data centers. Setecom's DSE Webnet "Master Account" has broadcast-level control over the start/stop logic of generators across all client sites — a compromised account could issue stop commands to the entire Liberty cell tower fleet during a commercial power outage.`,
     connections: [
       { target: "hector-mora", relationship: "Executive Director / Principal Owner", strength: "confirmed" },
       { target: "edson-martendal", relationship: "Technical Lead — deployment architect", strength: "confirmed" },
-      { target: "liberty", relationship: "Infrastructure provider", strength: "confirmed" },
+      { target: "mauricio-campos", relationship: "Training Coordinator / Operations Moderator", strength: "confirmed" },
+      { target: "liberty", relationship: "Critical infrastructure provider — cell tower generator management", strength: "confirmed" },
+      { target: "ice-cr", relationship: "National grid backup generation — DSE SCADA contracts", strength: "confirmed" },
       { target: "ban-villas-costa", relationship: "Contracts", strength: "probable" },
+      { target: "jean-picado-solis", relationship: "Jean Solis — probable Setecom STC del Este beneficial owner / financial fixer", strength: "suspected" },
     ],
-    flags: ["Default credentials: Admin/Password1234", "Monopoly: only DSE distributor in Costa Rica", "SCADA control — ICE/Liberty/hospitals/cell towers", "Service worker injection (sw.jw)", "4 CISA CVEs", "190.106.77.194 — persistent IOC Jan-Mar 2026", "DSE WebNet cloud C2 hosted in England"],
+    flags: [
+      "MONOPOLY: only DSE distributor in Costa Rica",
+      "Default credentials: Admin/Password1234 — taught as standard doctrine",
+      "SCADA control — ICE national grid + Liberty telecom + hospitals + cell towers",
+      "Setecom STC del Este S.A. — corporate shell / liability isolation",
+      "Bruno SRL Italy — DSE international partner chain (CR→UK→Italy)",
+      "DSE Webnet Master Account = broadcast stop/start over all client generators",
+      "Service worker injection: setecom.com/sw.jw — found on Echo's PC",
+      "4 CISA CVEs on DSE 855/890/891/892",
+      "190.106.77.194 — persistent IOC Jan-Mar 2026 (6 weeks)",
+      "DSE WebNet cloud C2 hosted in England",
+      "Heredia HQ: Santo Domingo de Heredia — same province as Carlos Chaves",
+      "Founded 1996 — 28 employees — 6196-1355",
+    ],
   },
   {
     id: "liberty",
@@ -4757,7 +4893,7 @@ const EVIDENCE_DATA: Evidence[] = [
     category: "Financial Crime",
     severity: "high",
     detail: "Fraudulent charges appeared on Echo's AMEX card to Bahia Brazil — the same location/entity connected to Edson Martenal, who has documented YouTube conversations with Hector Mora (hmora67). This links the financial fraud directly to the SETECOM network through the Mora→Martenal connection.",
-    linkedEntities: ["edson-martenal", "hector-mora", "setecom"],
+    linkedEntities: ["edson-martendal", "hector-mora", "setecom"],
   },
   {
     id: "genesis-tradecraft",
