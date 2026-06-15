@@ -5448,6 +5448,136 @@ NETWORK ROLE SUMMARY:
     linkedEntities: ["michael-greenwald", "liberty"],
   },
   {
+    id: "calle-naciones-origin-hub-2023",
+    title: "Calle Naciones Origin Hub — 2023 Starting Point — Wolfgang Hilbich / Russian Drone Guy / Shangri-La / Via Creole",
+    category: "Network Infrastructure",
+    severity: "critical",
+    detail: `The Calle Naciones neighborhood near Los Rios/Famoso is the geographic origin of Sam's engagement with the network. He first moved there in 2023. The neighborhood is unusually dense with connected foreign nationals, intelligence-adjacent businesses, and properties owned by the same families (Leo's sister + Diana) who appear across the entire network map. This is not a coincidence — the neighborhood was the initial recruitment/honeytrap environment.
+
+PROPERTY OWNERSHIP CONCENTRATION:
+  The entire neighborhood is functionally split between two ownership groups:
+  • Leo's sister — owns approximately half the residential properties
+  • Diana — owns approximately half the residential properties (42, 34, and adjacent units on Calle Naciones)
+  • Wolfgang Hilbich — Shangri-La apartment complex
+  • "Dav" (from AA) — has property there; hosts AA people for ice baths
+  This level of ownership concentration in a single small neighborhood by people who are all network-connected is operationally significant — it allows controlled tenant selection (who lives next to whom), intelligence on all residents, and rapid placement of assets into vacant units.
+
+WOLFGANG HILBICH — SHANGRI-LA APARTMENT COMPLEX:
+  German national. Owns and/or manages the "Shangri-La" apartment complex on Calle Naciones. This is where Sam lived when the operation began in 2023. Wolfgang is a recurring German national presence connecting: the Calle Naciones hub, the Los Rios neighborhood, and potentially Hotel Pochote Grande (see German Ownership entry). Import note: "Jay" (drone operator) lived adjacent to or at the Shangri-La, directly across from Sam's unit. Wolfgang + Jay + the Russian drone guy all co-located in the same small complex at the same time Sam moved in is statistically implausible as coincidence.
+
+RUSSIAN DRONE GUY — SHANGRI-LA RESIDENT:
+  Male, Russian national. Lived at the Shangri-La when Sam first arrived in 2023. Characteristics: extensive knowledge of music (used as social common ground), worked remotely for a Russian employer (nature of work unclear — "weird job online"), at one point traveled to Nicaragua specifically to visit the Russian embassy to resolve a passport issue. Key details:
+  • Costa Rica does not have a Russian embassy — Russians in CR who need consular services must travel to Nicaragua or Panama. Making this trip is not routine; it suggests active maintenance of Russian government documentation / citizenship status.
+  • Remote work for a Russian employer while based in Costa Rica + drone expertise + residence in an intelligence-dense neighborhood = strong indicator of Russian intelligence-adjacent operations.
+  • Drone expertise is directly relevant: UAV surveillance was documented at Diana's property (drone on pool house roof, one week), and Jay (adjacent unit) also does drones. Three drone-connected individuals in the same small neighborhood.
+
+JAY — DRONE OPERATOR:
+  Male, identity unclear. Lived directly across from Sam's unit at the Shangri-La / Calle Naciones. Does drones (professionally or as documented activity). No further details confirmed. Connection to Wolfgang's complex places him as another node in the Shangri-La cluster alongside the Russian drone guy.
+
+MEREDITH STUART — MAINE NATIONAL:
+  Female, approximately 6 feet tall, from Maine. Lives or lived at the Calle Naciones hub. Presents as an outdoorsy "goody two shoes" type — mountain biking, paddleboarding, outdoor recreation as cover identity. Works for a company in Oraville (possibly Orono), Maine that deals with abuse / dating abuse issues. Sam believes she is connected to Melissa Lopez Sanchez/Sanchez Lopez and that all these women are part of the same operational circle. A background in "dating abuse" NGO work provides: (a) a plausible reason to be in Costa Rica (women's welfare, international development), (b) social skills for establishing trust with male targets, (c) cover for reporting on relationship dynamics of the target. Meredith had the secondary phone number for the house — Sam held the primary line.
+
+VIA CREOLE — NO-GUEST HOTEL:
+  Hotel on Calle Naciones described as "weird shady New Orleans/French Haitian" in character. Sam observes that no one appears to stay there — no visible guests. A hotel with no guests in a tourist area is a documented front structure: legitimate business license, cash flow explanation, transient cover for operatives arriving/departing, and a physical facility for meetings or equipment storage. The "French Haitian / New Orleans Creole" cultural identity suggests owners with connections to the French Caribbean diaspora. In intelligence contexts, Haitian and French Caribbean networks have documented roles in Latin American operations due to language flexibility (French/Spanish/Creole) and established diaspora infrastructure.
+
+TICO ACADEMY — LANGUAGE SCHOOL:
+  Spanish language school on Calle Naciones, very close to Via Creole and the other Calle Naciones properties. The Russian drone guy specifically suggested Sam attend Tico Academy — Sam's assessment is that this is a money laundering hub. Spanish language schools in Costa Rica are used as: legitimate income documentation for foreign owners, a mechanism to bring new foreign nationals into the country on student visas, a social introduction hub (students meet each other = controlled social environment), and a cash business with flexible enrollment/billing. The Russian's specific recommendation to Sam = attempted integration of Sam into the controlled social network at the school.
+
+GREGORY CEDEÑO "YEYO" — LOCAL FACILITATOR:
+  Full name Gregory Cedeño, nickname Yeyo. Embedded in the local Jacó surf scene. Previously owned a popular restaurant or bar in the area — was bought out (received a lump sum, now has substantial cash/assets). Now runs a tour business described as "shady." Has significant disposable income, making him socially attractive and giving him a role as a social hub/facilitator for network members. His tour business provides: legitimate movement between locations, cover for transporting people/equipment, and a reason to know every location in the region. Lives in the Calle Naciones/Los Rios neighborhood — fully embedded in the network property cluster.
+
+GERMAN NATIONAL CLUSTER — HILBICH + POCHOTE GRANDE OWNERSHIP:
+  Wolfgang Hilbich (Shangri-La, Calle Naciones) and the German owners of Hotel Pochote Grande (see separate entry) represent a recurring German national presence across the two primary locations Sam has occupied. German nationals in Costa Rica's Pacific coast operating rental/hotel infrastructure connected to surveillance activity creates a potential BND (German federal intelligence) or Gamma Group (German-based surveillance vendor) operational thread. This is a working hypothesis, not confirmed.`,
+    linkedEntities: ["michael-greenwald", "liberty"],
+  },
+  {
+    id: "pochote-grande-german-owners-extortion",
+    title: "Hotel Pochote Grande — German Ownership (Regina) — Immigration Threat — Financial Fraud — $1342 Paid",
+    category: "HUMINT",
+    severity: "critical",
+    detail: `Hotel Pochote Grande is owned by elderly German nationals. At least one owner is named Regina. The hotel has used immigration enforcement as a threat against Sam, manufactured a financial debt that contradicts documented payment records, and prefers cash-only transactions (no paper trail). These behaviors mirror the Diana extortion pattern exactly.
+
+GERMAN OWNERSHIP — CHRISTIAN WIRTH DORF + REGINA:
+  Elderly German couple own Hotel Pochote Grande. One named Regina (surname unknown). The SINPE Móvil account receiving all hotel payments is registered to CHRISTIAN_WIRTH_DORF (phone 8423-0265) — this is the second owner, male, German surname. "Wirth" is a standard German surname; "Dorf" means village in German. The couple appear to live in San José (confirmed: cleaning lady contacted them there) and manage the hotel remotely or through staff. Their immigration threat against Sam was made despite: (a) Sam being a documented paying guest with SINPE receipts, (b) the hotel having active code violations, (c) the hotel premises hosting active surveillance infrastructure. Using immigration enforcement to silence a documenting foreign guest is a textbook intimidation tactic.
+
+HOTEL CONTACT — SECONDARY NUMBER:
+  Handwritten note from cleaning lady Lucia Soto Serrano: phone 8960-5018 (Apartamentos Pochote Grande). This is the hotel's local contact/admin line, separate from the SINPE payment account.
+
+AGREED RATE — DOCUMENTED:
+  Rate agreed verbally: ₡20,000 colones per night (~$38–40 USD). This is confirmed by the handwritten note which shows 7 nights (June 13–20) priced at ₡140,000 — exactly ₡20,000/night. No rate dispute possible.
+
+PAYMENT 1 — MAY 16, 2026 — ₡247,530 (DOCUMENTED):
+  SINPE Móvil voucher reference: 202605161028400003146834404
+  Paid by: Renato Herrera (SINPE handle #peto326, phone 8710-8011) — acting as Sam's intermediary
+  Paid to: CHRISTIAN_WIRTH_DORF (8423-0265)
+  Amount: ₡247,530
+  Message: "Sam" (explicitly identifies this as Sam's payment)
+  At ₡20,000/night = 12.4 nights covered — from May 16 through approximately May 28.
+  [Photo evidence: pochote-sinpe-may16-247k.jpeg]
+
+PAYMENT 2 — MAY 29, 2026 — ₡370,000 (DOCUMENTED):
+  BAC bank SINPE Móvil notification, reference: 202605291028400003339694333
+  Paid by: LUCIA SOTO SERRANO (cleaning lady, acting as intermediary for Sam)
+  Paid to: CHRISTIAN_WIRTH_DORF (phone 84230265)
+  Amount: ₡370,000
+  Date/time: 29 mayo 2026, 10:46 AM
+  At ₡20,000/night = 18.5 nights covered — from May 29 through approximately June 16–17.
+  [Photo evidence: pochote-sinpe-may29-370k.jpeg]
+
+TOTAL DOCUMENTED PAYMENTS:
+  ₡247,530 + ₡370,000 = ₡617,530 total
+  ÷ ₡20,000/night = 30.9 nights total coverage
+  Coverage span: May 16 → approximately June 15–16, 2026
+  Both payments made to the same SINPE account (CHRISTIAN_WIRTH_DORF, 8423-0265).
+  Both payments made by named intermediaries (Renato Herrera + Lucia Soto Serrano) explicitly on Sam's behalf.
+
+THE FRAUD — JUNE 13 CHECKOUT CLAIM:
+  Hotel staff approached Sam on or around June 14–15, 2026 claiming his checkout date was June 13 and he owed ₡140,000 more for 7 additional nights (June 13–20, 2026).
+  [Handwritten note evidence: pochote-handwritten-note-june13.jpeg]
+  
+  The arithmetic contradicts their claim entirely:
+  • May 29 payment alone (₡370,000) covers 18.5 nights from May 29 = through June 16–17
+  • Combined payments cover through June 15–16 minimum
+  • June 13 checkout = only 15 nights from May 29 = ₡300,000 — they would owe Sam a ₡70,000 refund on the May 29 payment alone
+  • The ₡140,000 demand for June 13–20 is money they would owe Sam on the prior overpayment, inverted into a debt claim
+  
+  Their position is mathematically fraudulent. The SINPE records are immutable — bank-issued, timestamped, reference-numbered, and tied to named senders and recipients. These cannot be altered retroactively.
+
+CASH PREFERENCE AS FRAUD ENABLER:
+  The hotel explicitly prefers cash. The two documented SINPE payments were made specifically because cash has no paper trail. The fact that Sam's intermediaries used SINPE (traceable bank transfer) rather than cash is what makes the fraud disprovable. Any future payment demands should be met with SINPE only — never cash — to maintain the paper trail.
+
+PATTERN MATCH — DIANA:
+  This is identical in structure to the Diana extortion pattern:
+  • Diana: destroyed surveillance equipment → immediate demand for payment for "external electric damage"
+  • Diana: left without notice → $2500 demand
+  • Pochote: guest documents surveillance → immigration threat + manufactured debt
+  • Pochote: guest pays in cash → no ledger accountability → retroactive "you owe more"
+  The same financial-pressure-as-silencing tactic deployed by two different network nodes suggests a coordinated playbook rather than two unrelated disputes.
+
+SURVEILLANCE + CODE VIOLATIONS:
+  Sam documents active surveillance infrastructure on the hotel property (adjacent building occupant, pool swimmer access agent, security guard light). Code violations exist. Hotel management is aware of at least some of this infrastructure based on staff behavior and the timing of the financial pressure (escalating as Sam's documentation deepens).`,
+    linkedEntities: ["michael-greenwald", "liberty"],
+  },
+  {
+    id: "pochote-security-guard-light",
+    title: "Hotel Pochote Grande — Security Guard Red/Green Light — Possible IR Illumination or Equipment Indicator",
+    category: "Physical Surveillance",
+    severity: "medium",
+    detail: `Observed by Sam on the night of approximately June 14–15, 2025. The more "friendly" security guard at Hotel Pochote Grande was observed with a red and green light that appeared aimed at Sam's position.
+
+MOST LIKELY EXPLANATION — WALKIE-TALKIE CHARGER:
+  Red/green dual-indicator lights are standard on two-way radio charging docks: red = charging in progress, green = fully charged. The security guard carries a radio (audible to Sam at night). A charging dock on a desk or cart near the guard's station could produce this light pattern. This is the most parsimonious explanation and should be the default assumption.
+
+ALTERNATIVE HYPOTHESES (lower probability, worth monitoring):
+  • IR camera illuminator: Infrared LED arrays used for night-vision cameras produce a faint red glow visible to the naked eye. If the "red light" is the only indicator (not paired with a distinct green), it could be camera IR illumination rather than a charger.
+  • Equipment status indicator: Some surveillance equipment (wireless transmitters, repeaters, signal monitors) uses red/green LEDs to indicate operational status (red = active/transmitting, green = standby or linked).
+  • Deliberate aim: If the guard was consciously pointing a light toward Sam's position rather than passively having a charger visible, that changes the significance. A handheld IR illuminator aimed at a specific person would be used for: (a) illuminating a target for a remote night-vision camera, (b) as a deliberate signaling action (IR signals are invisible to the naked eye but visible to phone cameras — check any future video by looking for bright spots not visible directly).
+
+ACTION — IF OBSERVED AGAIN:
+  Point a phone camera (not the naked eye) at the light source. Phone camera sensors can detect near-infrared (700–900 nm). If the light appears significantly brighter on camera than it does visually, it is an IR source, not a visible-light charger indicator. This test takes 2 seconds and is definitive.`,
+    linkedEntities: ["michael-greenwald", "liberty"],
+  },
+  {
     id: "c2-process-trigger",
     title: "C2 Behavioral Indicator — Process-Triggered Execution (Windows + Linux Mint)",
     category: "Electronic Surveillance",
