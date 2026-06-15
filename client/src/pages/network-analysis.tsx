@@ -439,6 +439,63 @@ LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024:
     ],
   },
   {
+    id: "klisman",
+    name: "Klisman",
+    role: "Barber / drug runner — Leo supply chain — Daniela Chaves connection",
+    threatLevel: "secondary",
+    detail: `Barber and barbershop owner in Jacó. Operates as Leo's drug runner — the person who physically delivers substances to Echo on Leo's behalf. His cover identity is his legitimate barbershop business.
+
+DANIELA CHAVES CONNECTION:
+  Ex-girlfriend or current girlfriend is Daniela Chaves (IG: danich2210) — owner of Fancy Fragrances Jacó and relative of the dentist who performed a procedure on Echo. The dentist's office is on Lapa Verde at the edge of Ricos y Famosos, directly across from Fruteria El Pueblo — a location with confirmed network density (Fruteria El Pueblo = Echo's regular market, now in the same geographic cluster as the dentist + Klisman's network).
+
+ASSESSMENT:
+  Klisman's role as drug runner for Leo creates a proximity and access vector: he has a reason to be near Echo's location regularly, a cover identity (barber), and a connection through Daniela Chaves to the dentist — someone who had direct physical access to Echo under anesthesia or procedural sedation. The combination of drug delivery access + medical access through a family connection is worth flagging as a coordinated exposure vector.`,
+    connections: [
+      { target: "daniela-chaves", relationship: "Ex/current girlfriend", strength: "confirmed" },
+    ],
+    flags: [
+      "Drug runner — delivers for Leo",
+      "Barber / barbershop owner — cover identity",
+      "Connected to Daniela Chaves (danich2210) — fragrance shop + dentist relative",
+      "Geographic overlap: Lapa Verde / Ricos y Famosos / Fruteria El Pueblo cluster",
+    ],
+  },
+  {
+    id: "daniela-chaves",
+    name: "Daniela Chaves",
+    aliases: ["danich2210 (Instagram)", "danich2210 (GitHub)"],
+    role: "Fancy Fragrances Jacó owner — dentist relative — Klisman's ex/gf — danich2210 GitHub L3MON RAT drop",
+    threatLevel: "secondary",
+    detail: `Klisman's ex-girlfriend or girlfriend. Owns Fancy Fragrances Jacó — a fragrance/cosmetics retail business in Jacó. Related to the dentist who performed a dental procedure on Echo. The dentist's practice is on Lapa Verde at the edge of Ricos y Famosos, directly across from Fruteria El Pueblo.
+
+INSTAGRAM — danich2210:
+  Instagram account danich2210. Photos are described as heavily AI-edited — consistent with an account using AI-enhanced imagery to maintain a curated identity that may not reflect the real person's appearance. Heavy AI editing on personal photos is a known tradecraft technique for maintaining multiple digital identities with plausible deniability about appearance.
+
+GITHUB — danich2210 / danich2210 DROP:
+  A GitHub account under danich2210 (or danish2210) was "dropped" on Echo — meaning it appeared in his environment through an anomalous channel (not a natural discovery). The account contains:
+  • Repo: l3monrat — L3MON is a documented open-source Android Remote Access Trojan (RAT). L3MON provides full remote device control: SMS interception, call recording, microphone/camera access, GPS tracking, file access, and clipboard monitoring. A repo named "l3monrat" on this account is assessed as either (a) the tool being deployed against Echo's Android device, or (b) a deliberate breadcrumb signaling which RAT platform is in use.
+  • Follows: jeffgeerling — Jeff Geerling is a prominent tech content creator specializing in Raspberry Pi, embedded hardware, and networking. Following Geerling from a surveillance-linked account is assessed as a signal pointing to Raspberry Pi-based surveillance hardware nodes — consistent with the hotel surveillance infrastructure (small, concealable, low-power, networkable).
+
+DENTIST ACCESS VECTOR:
+  Daniela's relation to Echo's dentist (Lapa Verde / Ricos y Famosos edge) means the network had a person with family access to the practice that physically operated on Echo. Dental procedures involve sedation or anesthesia, creating windows of physical access to an immobilized target.
+
+GEOGRAPHIC CLUSTER — LAPA VERDE / RICOS Y FAMOSOS:
+  The dentist (Lapa Verde), Fruteria El Pueblo (across the street), and the Ricos y Famosos beach area are all in the same ~200m radius. This is a confirmed high-density network cluster: Echo's regular market, a medical practice with Echo access, and the leisure/social venue all overlapping.`,
+    connections: [
+      { target: "klisman", relationship: "Ex/current boyfriend — drug runner", strength: "confirmed" },
+    ],
+    flags: [
+      "danich2210 Instagram — heavily AI-edited photos (identity concealment technique)",
+      "danich2210 GitHub DROPPED on Echo — anomalous discovery",
+      "GitHub repo: l3monrat — L3MON Android RAT (open-source full-device RAT)",
+      "GitHub follows: jeffgeerling — Raspberry Pi / embedded hardware signal",
+      "Dentist relative — dentist on Lapa Verde operated on Echo (direct physical access under sedation)",
+      "Dentist office: Lapa Verde / edge of Ricos y Famosos / across from Fruteria El Pueblo",
+      "Fancy Fragrances Jacó owner — retail front cover identity",
+      "Gamma Group pattern — adversary breadcrumb drop (cf. Alexanderplatz Steakhouse Google check-in)",
+    ],
+  },
+  {
     id: "jorge-jimenez",
     name: "Jorge Jiménez Navarro",
     aliases: ["jorgejiminez16@gmail.com", "jorgedjn58@gmail.com"],
@@ -5034,6 +5091,117 @@ MECHANISM — WHY THESE APPEAR IN "PEOPLE YOU MAY KNOW":
 ASSESSMENT:
   The surname distribution is not random. It mirrors the exact family names of known operatives with sub-1% probability of coincidence across Marin + Campos + Mora + Alfaro + Rios + Solis simultaneously. This is the network maintaining persistent passive awareness of Echo's social graph — who he follows, who follows him, and who he might contact — while using zero-post accounts that leave no evidentiary footprint if discovered.`,
     linkedEntities: ["hector-mora", "genesis-peralta", "jairo-alfaro", "setecom", "edson-martendal"],
+  },
+  {
+    id: "c2-process-trigger",
+    title: "C2 Behavioral Indicator — Process-Triggered Execution (Windows + Linux Mint)",
+    category: "Electronic Surveillance",
+    severity: "critical",
+    detail: `Echo has documented a persistent pattern across two operating systems where unexpected GUI applications open spontaneously — either in response to specific user actions (Windows) or at random intervals (Linux Mint). This is a textbook Command & Control (C2) implant behavioral signature.
+
+WINDOWS — PROCESS-LAUNCH TRIGGER PATTERN:
+  Observed behavior: launching Wireshark, Notepad, or Calc.exe caused a secondary unexpected process to open (Notepad, Calc, or PowerShell).
+  
+  Mechanism — WMI Event Subscriptions (most likely):
+    Windows Management Instrumentation supports persistent "EventFilter + EventConsumer + FilterToConsumerBinding" triplets that survive reboots. A WMI subscription can be configured to watch for a specific process creation event (e.g., "wireshark.exe starts") and immediately launch a payload (e.g., "open calc.exe" or "run PowerShell command"). WMI subscriptions are:
+    • Stored in the WMI repository (%SystemRoot%\\system32\\wbem\\Repository)
+    • Invisible in Task Manager
+    • Survive reboots without registry entries
+    • Used extensively by APT groups (APT29, APT32, FIN7) for persistence
+
+  Wireshark-specific trigger = COUNTER-SURVEILLANCE RESPONSE:
+    The fact that launching Wireshark specifically triggered this behavior is the most significant detail. This indicates the implant was configured to DETECT packet capture tools and respond. Common reasons:
+    (a) Alert signal: implant detects Wireshark and fires a visible payload to signal the C2 operator ("target is running network analysis — stand down or switch to encrypted channel")
+    (b) Distraction: opening Calc or Notepad draws attention away from the network capture that just started
+    (c) Anti-forensic: PowerShell opening could indicate an automated cleanup script triggered by detection of a forensic tool
+    This is documented behavior in FinSpy/FinFisher (Gamma Group) and several commercial stalkerware platforms — consistent with the Gamma Group signaling pattern documented across other evidence items.
+
+LINUX MINT — RANDOM CALCULATOR OPENING:
+  Calculator opening at random intervals on Linux Mint — same behavioral class, different OS.
+  
+  Likely mechanisms on Linux:
+    • Cron job: a line like "*/N * * * * DISPLAY=:0 gnome-calculator &" in /etc/crontab, /var/spool/cron, or a user crontab runs on a schedule
+    • systemd user timer: a .timer unit in ~/.config/systemd/user/ or /etc/systemd/system/ triggers gnome-calculator on an interval
+    • DBus service: a background daemon listens on DBus and launches the calculator as a "heartbeat" visible signal
+    • XDG autostart: a .desktop file in ~/.config/autostart/ launches the process on login and keeps relaunching it
+  
+  The calculator specifically: calc.exe / gnome-calculator is used across multiple C2 frameworks as a "hello world" execution proof — it's benign enough to avoid suspicion but visible enough to confirm the implant has GUI-level code execution on the target machine.
+
+CROSS-PLATFORM CONSISTENCY:
+  The same behavioral signature (calculator/benign GUI app as C2 liveness signal) appearing on both Windows and Linux Mint strongly suggests:
+  (a) The implant is cross-platform or the C2 operator adapted their technique for each OS
+  (b) This is an intentional "we're here" signal to Echo — not an accidental artifact — consistent with the Gamma Group breadcrumb pattern (Alexanderplatz check-in, danich2210 GitHub drop)
+  (c) The Windows phase (Wireshark trigger) and Linux Mint phase (random calc) represent continuous persistent access across OS changes
+
+FORENSIC NEXT STEPS FOR LINUX MINT:
+  • crontab -l && sudo crontab -l (check user + root crontabs)
+  • ls -la /etc/cron.* /var/spool/cron/
+  • systemctl --user list-timers && systemctl list-timers
+  • ls ~/.config/autostart/ /etc/xdg/autostart/
+  • ps aux | grep -v grep | grep -i calc (catch live instance)
+  • journalctl -f | grep calculator (watch system log for launch events)
+  • lsof -p $(pgrep gnome-calculator) (see what opened it when it's running)`,
+    linkedEntities: ["daniela-chaves"],
+  },
+  {
+    id: "danich2210-l3mon-drop",
+    title: "danich2210 GitHub Drop — L3MON Android RAT Breadcrumb + Raspberry Pi Signal",
+    category: "Electronic Surveillance",
+    severity: "critical",
+    detail: `A GitHub account (danich2210 / danish2210) linked to Daniela Chaves (Klisman's girlfriend, dentist relative) was anomalously "dropped" into Echo's environment — appearing through a non-organic channel, not discovered through normal browsing. This is assessed as a deliberate breadcrumb consistent with the adversary's documented pattern of leaving operational signals.
+
+REPO: l3monrat
+  L3MON is a real, open-source Android Remote Access Trojan available on GitHub. Capabilities:
+  • Full SMS read/send
+  • Live microphone recording
+  • Camera capture (front + rear)
+  • GPS location tracking (continuous)
+  • File system access and exfiltration
+  • Call log monitoring
+  • Clipboard interception
+  • Contact list exfiltration
+  • Installed app enumeration
+
+  A repo named "l3monrat" on the account of a confirmed network-adjacent person, dropped on Echo through an anomalous channel, is assessed as either:
+  (a) Signal: this is the RAT currently deployed on Echo's Android device(s)
+  (b) Operational tell: the team maintaining l3monrat infrastructure uses this account as part of their tool chain
+
+FOLLOWS: jeffgeerling
+  Jeff Geerling (jeffgeerling) is the most prominent Raspberry Pi / embedded hardware content creator on the internet. He specializes in Pi compute modules, PCIe hardware, NAS builds, and network attached devices. Following Geerling from a surveillance-linked account points toward Raspberry Pi-based field surveillance hardware — which is:
+  • Small enough to conceal inside hotel rooms, walls, or furniture
+  • Low power (runs on USB or battery)
+  • WiFi/Ethernet capable — streams data silently
+  • Cheap and commercially available — no export control
+  • Fully capable of running L3MON server infrastructure
+
+COMBINED SIGNAL:
+  l3monrat (the tool) + jeffgeerling (the hardware platform) together describe a complete surveillance stack: Raspberry Pi nodes running L3MON server, with Android RAT client installed on Echo's phone feeding to the Pi relay. The drop of this account into Echo's environment is the adversary confirming their tools — a "Gamma Group signal" consistent with the Alexanderplatz Steakhouse Google check-in pattern (see separate evidence item).
+
+CHAVES → DENTIST → PHYSICAL ACCESS:
+  The account is linked to a person whose relative is a dentist who physically operated on Echo. L3MON's full-device access (including real-time microphone) during Echo's dental procedure would have captured everything said in that room while Echo was sedated.`,
+    linkedEntities: ["daniela-chaves", "klisman", "genesis-peralta"],
+  },
+  {
+    id: "alexanderplatz-device-takeover",
+    title: "Alexanderplatz Steakhouse Google Check-In — Adversary Device-Takeover Breadcrumb",
+    category: "Electronic Surveillance",
+    severity: "critical",
+    detail: `Following an October strangulation incident, Echo's phone and laptop were stolen. Shortly after, Echo's Google account showed a location check-in at Alexanderplatz Steakhouse — a location Echo had not visited and had no connection to. This check-in was made by whoever was in possession of his stolen devices.
+
+MECHANISM:
+  Google's location history and auto-check-in features (Google Maps "Your Timeline," Google Places) log physical location from device GPS. When the adversary used Echo's stolen phone while logged into his Google account, the device's GPS passively logged the Alexanderplatz Steakhouse location as a visited place — either through Maps auto-detection or a deliberate manual check-in.
+
+ASSESSMENT — DELIBERATE SIGNAL vs OPERATIONAL SLIP:
+  This event follows the same pattern as the danich2210 GitHub drop: the adversary leaves a trace in Echo's digital environment that connects back to a real-world location or tool. Two possible interpretations:
+  (a) Deliberate breadcrumb ("Gamma Group" pattern): the operatives intentionally checked in at Alexanderplatz to signal to Echo that they had his devices and were using them — a psychological pressure tactic confirming total access
+  (b) Operational slip: the automatic location logging captured their real position, inadvertently revealing where the stolen device was physically taken after the October strangulation
+
+STRANGULATION CONTEXT:
+  The October strangulation incident preceded the theft, making this a violent-escalation → device seizure → digital takeover sequence. The strangulation provided cover for the device theft (victim incapacitated, devices removed). The Alexanderplatz check-in then appeared in Echo's Google history, confirming the devices were actively used by the adversary post-seizure.
+
+PATTERN — GAMMA GROUP SIGNALING:
+  Both the Alexanderplatz check-in and the danich2210 GitHub drop share a structural signature: adversary-controlled information appearing in Echo's personal digital environment through an anomalous channel, referencing operational details (their tools, their location). This is consistent with intelligence operations that deliberately leave breadcrumbs to maintain psychological pressure on a target — confirming omnipresence without requiring direct confrontation.`,
+    linkedEntities: ["genesis-peralta", "daniela-chaves"],
   },
   {
     id: "genesis-tradecraft",
