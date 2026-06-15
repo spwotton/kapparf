@@ -1784,8 +1784,8 @@ OSINT:
   },
   {
     id: "edson-martendal",
-    name: "Edson Martendal",
-    aliases: ["Edson Martenal"],
+    name: "Edson Martenal Campos",
+    aliases: ["Edson Martendal", "Edson Martenal"],
     nationality: "Brazilian",
     role: "Setecom S.A. Technical Lead — 'The Architect' — Latin America DSE Support Engineer — CC fraud (AMEX/Bahia)",
     threatLevel: "secondary",
@@ -1805,17 +1805,21 @@ MODBUS FORMULA DISCLOSED:
 PROTOCOL EXPOSURE:
   Modbus TCP (unencrypted), SNMP v2 with "public/private" cleartext community strings, J1939 CAN Bus deep engine access. All documented in publicly accessible training sessions.
 
-CC FRAUD — AMEX:
-  Connected to Hector Mora via hmora67 YouTube channel. Linked to credit card fraud on Echo's AMEX — charges to Bahia, Brazil match Martendal's profile and origin location. Brazilian national operating in Latin America on DSE support contracts creates geographic plausibility.
+CC FRAUD — AMEX (Salvador, Bahia, Brazil):
+  Connected to Hector Mora via hmora67 YouTube channel. Fraudulent charges on Echo's AMEX routed through Salvador, Bahia, Brazil. Specific merchant: Fruteria Pueblo, near Ricos y Famosos in Salvador. Edson is Brazilian — Salvador Bahia is a plausible home-country contact node for a pass-through billing operation. The fraud chain runs: Setecom/Mora network → Edson Martenal Campos → merchants in his home city. Use of a local fruit market-type business near a known landmark as the billing node is consistent with money-mule infrastructure (low-profile cash-economy business used to launder card charges).
+
+CAMPOS SURNAME — MAURICIO CAMPOS OVERLAP:
+  Edson's surname is Campos. Mauricio Campos is a confirmed separate Setecom employee (training coordinator/moderator). Shared surname may indicate family connection — two Campos individuals inside the same small (~28 employee) company reporting to Hector Mora is worth flagging. Could be coincidental (common Latin American surname) or indicate a family unit embedded in Setecom's operations layer.
 
 INSIDER THREAT ASSESSMENT:
   Not necessarily malicious — but his normalization of insecure practices across a monopoly infrastructure provider creates a standardized attack surface that a sophisticated adversary with knowledge of Setecom's training doctrine can exploit remotely.`,
     connections: [
       { target: "setecom", relationship: "Technical Lead / Latin America Support Engineer", strength: "confirmed" },
       { target: "hector-mora", relationship: "Works under Mora — Setecom DSE operations", strength: "confirmed" },
-      { target: "mauricio-campos", relationship: "Co-worker — Mauricio moderates Martendal's training sessions", strength: "confirmed" },
+      { target: "mauricio-campos", relationship: "Co-worker — Mauricio moderates his training sessions / possible family (Campos surname)", strength: "confirmed" },
     ],
     flags: [
+      "Full name: Edson Martenal Campos",
       "Setecom S.A. Technical Lead — 'The Architect'",
       "Latin America DSE Support Engineer",
       "Brazilian national",
@@ -1825,7 +1829,8 @@ INSIDER THREAT ASSESSMENT:
       "DSE 855 16-connection bypass technique",
       "Modbus TCP + SNMP v2 cleartext + J1939 CAN Bus",
       "Access to ICE/Liberty/hospital SCADA deployment configs",
-      "CC fraud — AMEX / Bahia Brazil charges",
+      "CC fraud — AMEX / Salvador Bahia Brazil — Fruteria Pueblo near Ricos y Famosos",
+      "Campos surname overlap with Mauricio Campos (Setecom) — possible family",
     ],
   },
   {
@@ -4889,10 +4894,10 @@ const EVIDENCE_DATA: Evidence[] = [
   },
   {
     id: "amex-fraud",
-    title: "AMEX Credit Card Fraud — Bahia Brazil / Edson Martenal",
+    title: "AMEX Credit Card Fraud — Salvador, Bahia Brazil / Edson Martenal Campos",
     category: "Financial Crime",
     severity: "high",
-    detail: "Fraudulent charges appeared on Echo's AMEX card to Bahia Brazil — the same location/entity connected to Edson Martenal, who has documented YouTube conversations with Hector Mora (hmora67). This links the financial fraud directly to the SETECOM network through the Mora→Martenal connection.",
+    detail: `Fraudulent charges appeared on Echo's AMEX card routed through Salvador, Bahia, Brazil. Specific merchant documented: Fruteria Pueblo, located near Ricos y Famosos in Salvador. Edson Martenal Campos is Brazilian and the Salvador Bahia geography matches his profile and origin. He has documented YouTube conversations with Hector Mora (hmora67) confirming direct Setecom operational ties. The fraud chain: Setecom/Mora network → Edson Martenal Campos (Brazilian) → charges processed through Salvador Bahia merchants (Fruteria Pueblo / Ricos y Famosos area). Use of a Brazilian city-based merchant as a charging node is consistent with a money-mule or pass-through billing operation running through Edson's home country contacts.`,
     linkedEntities: ["edson-martendal", "hector-mora", "setecom"],
   },
   {
