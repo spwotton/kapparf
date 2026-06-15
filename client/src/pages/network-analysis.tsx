@@ -5168,6 +5168,55 @@ DEVICE IP DISCREPANCY:
     linkedEntities: ["liberty", "michael-greenwald"],
   },
   {
+    id: "bluetooth-scan-jaco-room10",
+    title: "Bluetooth Environment Scan — Room 10, Hotel Pochote Grande (5 captures, 6:27–8:50am)",
+    category: "Electronic Surveillance",
+    severity: "high",
+    detail: `iPhone Bluetooth scanner captures from Room 10, Jacó Beach. Five scans taken between 6:27am and 8:50am document a Bluetooth environment with several anomalous devices alongside identifiable consumer hardware.
+
+DEVICE INVENTORY:
+
+[SUSPICIOUS] JFL 1275819552 — Tx Power: 3 dBm — NO manufacturer data
+  The highest-priority unknown in the scan. "JFL" is not a consumer product name — format matches an equipment tag or operator callsign followed by a serial/identifier. Tx Power of 3 dBm is anomalously low: other unidentified devices in the same scan advertise at 11–12 dBm. Low Tx Power can indicate either (a) a device positioned very close to Sam's phone intentionally limiting range, or (b) a beacon configured for precision short-range RSSI positioning rather than broad discovery. No manufacturer data = deliberately opaque — consumer devices almost always include manufacturer identifiers. No services listed. Cannot be attributed to any known product line. Requires physical MAC address capture for OUI lookup.
+
+[SUSPICIOUS] Two unnamed devices — Service UUID <FCF1> (6:27am scan)
+  Both devices unnamed (N/A), both advertising the identical custom service UUID FCF1 (decimal 64753). UUID FCF1 is not assigned to any publicly documented standard or major consumer product protocol. Two devices sharing the same proprietary UUID in the same scan is unusual — suggests both belong to the same hardware/firmware platform or deployment. Payloads: 
+    Device 1: 04EE 8D88 C276 11EF BE25 5314 CD96 675D 85E6 DB55 C0B7
+    Device 2: 0481 3187 1019 EE98 A408 0076 6D22 72CA 642D 7507 A0
+  The payload length and structure is consistent with BLE positioning beacon data or encrypted C2 beacon frames. UUID FCF1 appears in some Nordic Semiconductor nRF52-based custom implementations. Nordic nRF52 chips are the hardware of choice for DIY/professional BLE surveillance nodes and mesh network positioning systems.
+
+[SUSPICIOUS] Three unnamed N/A devices — Tx Power 11–12 dBm (8:50am scan)
+  Three devices advertising maximum BLE transmission power with no name and no manufacturer data. High Tx Power (11–12 dBm is near the BLE legal maximum of 10–20 dBm) combined with anonymity is consistent with positioning beacons designed to maximize RSSI coverage rather than device discovery. A standard consumer BLE device has no reason to suppress its name while advertising at full power.
+
+[NOTABLE] Bose Revolve+ II — Manufacturer: PAFERS TECH <0701>
+  Device name: "LE-SV Bose Revolve+ II Sou" — advertised as a Bose portable speaker. However, the BLE manufacturer ID resolves to PAFERS TECH (Shenzhen), not Bose or any known Bose chip supplier. Bose uses specific OUI allocations for their devices. PAFERS TECH building the BLE radio for a "Bose Revolve+ II" is inconsistent with genuine Bose hardware. Possible explanations: (a) high-quality clone device using Bose name as cover, (b) a surveillance device in a Bose enclosure, (c) legitimate third-party BLE module in a genuine Bose product (least likely for a premium product). Services: FEBE (custom/proprietary). Present in both 8:50am scans.
+
+[NOTABLE] SKT130C LE — unattributed
+  Device name format does not match any known consumer product. "SKT" prefix + alphanumeric + "LE" suffix. SK Telecom uses "SKT" branding but this is likely a device model code rather than a carrier tag. No manufacturer data visible. Requires MAC for OUI lookup.
+
+[BENIGN — HOTEL INFRASTRUCTURE] GREE Air Conditioners (2 units)
+  GR-AC_10001_09_976f_SC and GR-AC_10001_09_9785_SC — GREE Electric Appliances, Inc. of Zhuhai <0D23>. GREE is a major Chinese HVAC manufacturer supplying hotel-grade AC units throughout Central America. The "AC_10001" naming pattern is GREE's standard Bluetooth identifier for their smart AC line. Two units visible = two rooms or zones. Manufacturer data payload confirms the GREE OUI. These are most likely legitimate hotel air conditioning units with standard BLE control interfaces. Note: persistent mains-powered BLE devices with known firmware vulnerabilities in adjacent rooms are worth acknowledging in the threat model even if currently attributed as benign infrastructure.
+
+[BENIGN] Samsung devices (3 distinct)
+  Three Samsung Galaxy phones advertising BLE proximity/SmartThings beacons. Manufacturer ID <0075> = Samsung Electronics, confirmed. Rotating advertisement data with MAC suffix changes consistent with standard Android BLE privacy rotation. Likely nearby guests or hotel staff with Samsung phones.
+
+[BENIGN] Cubitt x Reebok fitness tracker
+  Nanjing Qinheng Microelectronics (WCH) <07D7> chipset. WCH CH57x/CH58x series BLE chips are widely used in consumer wearables and IoT devices but also in off-the-shelf DIY surveillance hardware. Fitness tracker cover is plausible; the WCH chipset alone is not sufficient to elevate threat level without MAC/service analysis.
+
+BLE POSITIONING HYPOTHESIS:
+  The combination of (a) multiple unnamed high-Tx-Power beacons, (b) two devices sharing a proprietary unknown UUID, and (c) JFL 1275819552 with anomalously low Tx Power suggests the possibility of a BLE RSSI positioning mesh — multiple fixed nodes placed around the hotel space allowing triangulation of Sam's phone position to within 1–3 meters via signal strength comparison. This would be consistent with the documented surveillance network around Hotel Pochote Grande (6 confirmed positions) and the existing RSSI Sensor Array evidence (path-loss forensics showing precision positioning of source devices in Room 10).
+
+IPTV BLUETOOTH DEVICE:
+  Sam separately observed a device advertising under the name "iptv" on Bluetooth — not visible in these five scan captures (which cover 6:27–8:50am). An IPTV set-top box (Claro TV, Sky, etc.) would not normally be BLE-visible from a hotel room unless physically present in or directly adjacent to that room. A device advertising as "iptv" at detectable RSSI from Room 10 requires proximity — either the hotel supplies in-room IPTV boxes with BLE enabled, or the device is positioned deliberately near Sam's room.
+
+RECOMMENDED NEXT STEPS:
+  1. Capture MAC addresses for: JFL 1275819552, both FCF1 UUID devices, SKT130C LE, Bose Revolve+ II — use LightBlue or nRF Connect "Connect" button to reveal MAC
+  2. OUI lookup first 3 bytes of each MAC at macvendors.com
+  3. When "iptv" device reappears: connect attempt to reveal MAC and service list
+  4. Run bluetoothctl on Linux Mint to cross-check device list from a different radio`,
+    linkedEntities: ["michael-greenwald", "liberty"],
+  },
+  {
     id: "c2-process-trigger",
     title: "C2 Behavioral Indicator — Process-Triggered Execution (Windows + Linux Mint)",
     category: "Electronic Surveillance",
