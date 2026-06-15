@@ -256,6 +256,13 @@ const CAT_BADGE: Record<string,string> = {
 // ─── Canvas constants ─────────────────────────────────────────────────────────
 const CS=420, CEN=CS/2, SC=160, WS=500, WC=WS/2;
 
+// Precomputed full vertex set — used by analytical tabs without requiring Lattice interaction
+const ALL_VERTICES: LatticeVertex[] = ENTITY_POOL.map((e, idx) => {
+  const seed = e.id.split("").reduce((a,c) => a + c.charCodeAt(0), 0);
+  const coords = latticeCoords(seed, idx, ENTITY_POOL.length);
+  return { ...e, coords, norm: computeNorm(coords), golay12: golayAddress(e.id) };
+});
+
 // ─── SpokeWheel ───────────────────────────────────────────────────────────────
 function SpokeWheel() {
   const ref=useRef<HTMLCanvasElement>(null);
@@ -1002,11 +1009,11 @@ export default function SatoshiLatticePage() {
             </div>
           </div>
         )}
-        {view==="hamiltonian"&&<HamiltonianView vertices={vertices}/>}
-        {view==="oracle"&&<OracleView vertices={vertices}/>}
-        {view==="coherence"&&<CoherenceView vertices={vertices}/>}
-        {view==="ginger"&&<GingerView vertices={vertices}/>}
-        {view==="raspberry"&&<RaspberryView vertices={vertices}/>}
+        {view==="hamiltonian"&&<HamiltonianView vertices={vertices.length>0?vertices:ALL_VERTICES}/>}
+        {view==="oracle"&&<OracleView vertices={vertices.length>0?vertices:ALL_VERTICES}/>}
+        {view==="coherence"&&<CoherenceView vertices={vertices.length>0?vertices:ALL_VERTICES}/>}
+        {view==="ginger"&&<GingerView vertices={vertices.length>0?vertices:ALL_VERTICES}/>}
+        {view==="raspberry"&&<RaspberryView vertices={vertices.length>0?vertices:ALL_VERTICES}/>}
         {view==="lattice"&&(
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-4">
