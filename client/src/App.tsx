@@ -89,6 +89,7 @@ import ArticleRecording37Page from "@/pages/article-recording-37";
 import FollowTheMoneyPage from "@/pages/follow-the-money";
 import ZersetzungPage from "@/pages/zersetzung";
 import QuasarHydraPage from "@/pages/quasar-hydra";
+import OpticalScanPage from "@/pages/optical-scan";
 import ForensicEvidencePage from "@/pages/forensic-evidence";
 import PochoteIncidentPage from "@/pages/pochote-incident";
 import ParabolicAntennaPage from "@/pages/parabolic-antenna";
@@ -147,6 +148,7 @@ function KappaRouter() {
       <Route path="/meridian" component={MeridianHypervisorPage} />
       <Route path="/bio-acoustic" component={BioAcousticPage} />
       <Route path="/spectrum" component={SpectrumPage} />
+      <Route path="/optical-scan" component={OpticalScanPage} />
       <Route path="/audio" component={AudioForensicsPage} />
       <Route path="/video-forensics" component={VideoForensicsPage} />
       <Route path="/goose" component={GooseGazettePage} />
