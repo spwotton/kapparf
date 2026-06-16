@@ -46,10 +46,15 @@ description: Corrected layer map for Sam's CR/FL networks. Previous "closed loop
 - Forensic analysis confirms same cat (piebald sleeve asymmetry, facial blaze, eye color — all match)
 
 ### Adam Harper — Foundational Node
-- Known since 2012. Reason Sam originally moved to CR.
-- Brianna Harper (family) in Jacó → befriended Shelby → Shelby works for David Karr
+- Known since 2012. **Original reason Sam moved to CR.**
+- **Get Fit Fast Supplements** — former owner, Delray Beach FL (with Brianna)
+- **Jason Genova coaching** — public YouTube figure, significant online supplement presence
+- **Major Amazon seller.** Sam's primary income source for years.
+- Sold business, moved to CR ~2018 — established in Jacó ~6 years before Sam arrived Jan 2024
+- Brianna Harper (wife) in Jacó → befriended Shelby → Shelby works for David Karr
 - Karr = La Flor HOA president, LOS to Room 10, major CR real estate figure
 - **This chain is social/real estate layer only. Not AA. Not Florida surveillance.**
+- South Florida corridor: Delray Beach (Harper) / Boca Raton (Santoni) / Pompano Beach (Vaughan) — all ~10mi apart
 
 ## Correct Timeline
 - Last 5 months in US: lived with parents
