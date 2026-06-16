@@ -4,7 +4,7 @@ hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "gobject-introspection", "gtk3", "lcms2", "libGL", "libimagequant", "libjpeg", "libsndfile", "libtiff", "libwebp", "libxcrypt", "openjpeg", "pkg-config", "qhull", "tcl", "tesseract", "tk", "xsimd", "zlib"]
+packages = ["cairo", "catch2", "ffmpeg-full", "fmt", "freetype", "ghostscript", "gobject-introspection", "gtk3", "lcms2", "libGL", "libimagequant", "libjpeg", "libsndfile", "libtiff", "libwebp", "libxcrypt", "muparserx", "nlohmann_json", "openjpeg", "pkg-config", "qhull", "spdlog", "tcl", "tesseract", "tk", "xsimd", "zlib"]
 
 [env]
 PORT = "5000"
