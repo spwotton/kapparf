@@ -301,15 +301,15 @@ TRIPLE CORRELATION:
   {
     id: "michael-lipman",
     name: "Michael Lipman",
-    role: "Condo owner / Jacó — fake sports tickets — Greenwald pipeline — Jesse Talti daughter-in-law connection — Breakwater Point Dec 2024",
+    role: "Condo owner / Jacó — fake sports tickets — Greenwald pipeline — Jesse Talty daughter-in-law connection — Breakwater Point Dec 2024",
     threatLevel: "secondary",
     detail: `Owns condos in Jacó where Echo lived. Has a fake Miami sports tickets business. Has a 30-year-old Colombian wife. "By chance" moved into Greenwald's custom-built Hermosa Palms house — assessed as coordinated housing placement.
 
 BREAKWATER POINT MEETING — DEC 28 2024 / JAN 2025:
-  Met Echo at Breakwater Point around December 28, 2024. During this meeting, Lipman told Echo that Jesse Talti was his daughter-in-law's boyfriend — connecting Lipman's family network directly to Jesse Talti (who Echo knew from the gym and AA in Portland ME, and who had been to Echo's apartment at 69 Bolton Street).
+  Met Echo at Breakwater Point around December 28, 2024. During this meeting, Lipman told Echo that Jesse Talty was his daughter-in-law's boyfriend — connecting Lipman's family network directly to Jesse Talty (who Echo knew from the gym and AA in Portland ME, and who had been to Echo's apartment at 69 Bolton Street).
 
 BILL KIMBALL — WARNING AND DEATH:
-  When Lipman disclosed the Jesse Talti connection, Lipman also texted his business partner Bill Kimball about it. Bill Kimball — who ran Hillview Sober Living in Portland ME (where Echo lived) and was directly involved in anabolic dealings with Echo and Jesse — responded by warning Echo: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. His death after issuing this warning follows the documented "knew too much" pattern (Diane Rimkus, Echo's mother).
+  When Lipman disclosed the Jesse Talty connection, Lipman also texted his business partner Bill Kimball about it. Bill Kimball — who ran Hillview Sober Living in Portland ME (where Echo lived) and was directly involved in anabolic dealings with Echo and Jesse — responded by warning Echo: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. His death after issuing this warning follows the documented "knew too much" pattern (Diane Rimkus, Echo's mother).
 
 GREENWALD → LIPMAN PROPERTY PIPELINE:
   Lipman moving into Greenwald's custom Hermosa Palms house is assessed as coordinated surveillance housing placement — the same pipeline that placed Echo in surveilled properties across Jacó.`,
@@ -323,8 +323,8 @@ GREENWALD → LIPMAN PROPERTY PIPELINE:
     flags: [
       "Fake Miami sports tickets business",
       "30yo Colombian wife",
-      "Breakwater Point meeting Dec 28 2024 — disclosed Jesse Talti family connection",
-      "Jesse Talti = daughter-in-law's boyfriend (Lipman family embedding of Jesse)",
+      "Breakwater Point meeting Dec 28 2024 — disclosed Jesse Talty family connection",
+      "Jesse Talty = daughter-in-law's boyfriend (Lipman family embedding of Jesse)",
       "Bill Kimball: partner, warned Echo about Jesse → Bill now dead",
       "Greenwald→Lipman property pipeline",
     ],
@@ -2095,19 +2095,22 @@ ITALIAN SURNAME NOTE:
   },
   {
     id: "jesse-talti",
-    name: "Jesse Talti",
+    name: "Jesse Talty",
     role: "Portland ME — gym + AA — anabolics dealings — 69 Bolton St access — Michael Lipman daughter-in-law's boyfriend",
     threatLevel: "secondary",
     detail: `Known to Echo from the gym AND from AA in Portland, ME — the same dual gym+AA introduction pattern documented for Amara Walker and Genesis Peralta. Had been to Echo's apartment at 69 Bolton Street, Portland ME (where Echo lived for approximately two years before leaving November 2016). Involved with Echo and Bill Kimball in "various dealings with anabolics" (performance-enhancing drugs/steroids).
 
 MICHAEL LIPMAN — FAMILY NETWORK EMBEDDING:
-  Michael Lipman disclosed to Echo at Breakwater Point (Dec 28, 2024) that Jesse Talti is his daughter-in-law's boyfriend — embedding Jesse directly into Lipman's family network. Lipman is a documented Jacó surveillance asset (Greenwald pipeline, fake sports tickets, Colombian wife). The disclosure of Jesse's family connection to Lipman at that late date is assessed as operationally significant.
+  Michael Lipman disclosed to Echo at Breakwater Point (Dec 28, 2024) that Jesse Talty is his daughter-in-law's boyfriend — embedding Jesse directly into Lipman's family network. Lipman is a documented Jacó surveillance asset (Greenwald pipeline, fake sports tickets, Colombian wife). The disclosure of Jesse's family connection to Lipman at that late date is assessed as operationally significant.
 
 BILL KIMBALL WARNING:
-  When Lipman disclosed the Jesse Talti connection to Bill Kimball (his partner, Echo's former sober house landlord), Bill immediately warned Echo: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. The sequence — Jesse Talti identified → Bill Kimball warned about Jesse → Bill Kimball died — follows the "knew too much" pattern.
+  When Lipman disclosed the Jesse Talty connection to Bill Kimball (his partner, Echo's former sober house landlord), Bill immediately warned Echo: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. The sequence — Jesse Talty identified → Bill Kimball warned about Jesse → Bill Kimball died — follows the "knew too much" pattern.
 
 COMPREHENSIVE COMPROMISE VECTOR:
-  Jesse had: physical access to Echo's home address (69 Bolton St), mutual AA network access (intimate personal disclosure environment), gym introduction (physical surveillance proximity), and anabolic dealings (criminal leverage over Echo). This combination represents a fully deployed personal compromise vector against Echo in Portland.`,
+  Jesse had: physical access to Echo's home address (69 Bolton St), mutual AA network access (intimate personal disclosure environment), gym introduction (physical surveillance proximity), and anabolic dealings (criminal leverage over Echo). This combination represents a fully deployed personal compromise vector against Echo in Portland.
+
+NOVEMBER 2016 — TRANSITION SURVEILLANCE:
+  Jesse Talty was one of the last people Sam saw at 69 Bolton St, Portland ME in November 2016 — right before Sam left Maine for the Pompano Beach / Costa Rica corridor. His presence at Sam's home at the exact moment of departure is consistent with transition surveillance: confirming the target is moving, cataloguing departure circumstances, and potentially facilitating handoff to the next network node. The Pompano Beach corridor (Vaughan warehouse, SE Pump / Richie / rich68066) was the next environment Sam entered. Talty's November 2016 visit closes the Maine → Florida transition in the surveillance timeline.`,
     connections: [
       { target: "michael-lipman", relationship: "Daughter-in-law's boyfriend — Lipman disclosed Dec 2024", strength: "confirmed" },
       { target: "bill-kimball", relationship: "Anabolic dealings together — Bill warned Echo about Jesse then died", strength: "confirmed" },
@@ -2124,12 +2127,12 @@ COMPREHENSIVE COMPROMISE VECTOR:
   {
     id: "bill-kimball",
     name: "Bill Kimball",
-    role: "Hillview Sober Living Portland ME — Michael Lipman's partner — warned Echo about Jesse Talti → now dead",
+    role: "Hillview Sober Living Portland ME — Michael Lipman's partner — warned Echo about Jesse Talty → now dead",
     threatLevel: "secondary",
-    detail: `Michael Lipman's business partner. Ran Hillview Sober Living in Portland, ME — where Echo lived. Involved with Echo and Jesse Talti in "various dealings with anabolics."
+    detail: `Michael Lipman's business partner. Ran Hillview Sober Living in Portland, ME — where Echo lived. Involved with Echo and Jesse Talty in "various dealings with anabolics."
 
 WARNING AND DEATH — "KNEW TOO MUCH" PATTERN:
-  When Michael Lipman disclosed to Bill Kimball that Jesse Talti was his daughter-in-law's boyfriend (Dec 28, 2024 / Breakwater Point meeting), Bill Kimball immediately texted Echo warning him: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. This is the third documented instance of the "knew too much" pattern in Echo's network: (1) Diane Rimkus — apparent suicide, Echo's mother was one of the last to see her; (2) Echo's mother — died November 2025, $250K life insurance phished; (3) Bill Kimball — warned about a network asset, then died.
+  When Michael Lipman disclosed to Bill Kimball that Jesse Talty was his daughter-in-law's boyfriend (Dec 28, 2024 / Breakwater Point meeting), Bill Kimball immediately texted Echo warning him: "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead. This is the third documented instance of the "knew too much" pattern in Echo's network: (1) Diane Rimkus — apparent suicide, Echo's mother was one of the last to see her; (2) Echo's mother — died November 2025, $250K life insurance phished; (3) Bill Kimball — warned about a network asset, then died.
 
 HILLVIEW SOBER LIVING:
   Bill owned/operated Hillview Sober Living in Portland — one of the sober house nodes in the Portland ME recovery network alongside Myrtle Street (Sepulveres) and the Plymouth House pipeline (Shepherd). Echo lived at Hillview under Bill's management.
@@ -2143,7 +2146,7 @@ LIPMAN PARTNERSHIP:
     flags: [
       "Hillview Sober Living Portland ME — Echo lived here",
       "Michael Lipman's business partner — bridges Portland to Jacó network",
-      "Warned Echo 'stay away from Jesse Talti' → now reportedly DEAD",
+      "Warned Echo 'stay away from Jesse Talty' → now reportedly DEAD",
       "'Knew too much' pattern #3: Diane Rimkus + Echo's mother + Bill Kimball",
       "Anabolic dealings with Echo and Jesse — criminal leverage on multiple parties",
     ],
@@ -3006,17 +3009,22 @@ ITALIAN CONNECTION:
       { target: "hotel-amavi", relationship: "Investor", strength: "confirmed" },
       { target: "israel-brooks", relationship: "Litigation — sued over river houses", strength: "confirmed" },
       { target: "mike-greenwald", relationship: "Same neighborhood (Hermosa Palms)", strength: "confirmed" },
+      { target: "michael-vaughan", relationship: "Major client of Sam's Supplements Brazil LLC — indirect Vaughan associate via same supply network", strength: "confirmed" },
+      { target: "shelby-karr", relationship: "Brianna Harper best friend — Harper→Shelby→Karr chain connecting to La Flor surveillance", strength: "confirmed" },
     ],
     flags: [
       "Met Echo via Supplement Edge (Jeb Pruett, Maine) — pre-Jacó social seeding",
       "Vegas trip with Echo — pre-Jacó relationship building",
       "Sold Delray Beach business → Playa Hermosa / Hermosa Palms (Greenwald's neighborhood)",
+      "MAJOR CLIENT of Sam's Supplements Brazil LLC (Sam's own company — not Vaughan's)",
+      "Vaughan = Sam's warehouse landlord — Harper used same supply chain",
       "Hotel Amavi investor — Italian connection",
       "Amavi investor cluster: John (Quebrada Seca condo) + Josh + wife (main)",
       "HGTV 'Selling Paradise' — public profile + ego elevation noted",
       "Israel Brooks lawsuit: houses near river = Los Ríos area overlap",
       "Echo's Boca lawyer was Adam's lawyer — South Florida professional convergence",
       "Hermosa Palms = Greenwald neighborhood = Peralta cat delivery site (Jairo Alfaro)",
+      "Brianna → Shelby → David Karr = Harper cluster wired into La Flor HOA surveillance",
     ],
   },
   {
@@ -3268,6 +3276,230 @@ ASSESSMENT:
       "Curated following list — real-world contacts of spwotton",
       "Screenshot 2026-06-16: public/evidence/rich68066_following_20260616.png",
       "Upstate NY thread: Rochester + Broadalbin (Gabriel/Google) + Albany (Berkery/DHS)",
+    ],
+  },
+  {
+    id: "michael-vaughan",
+    name: "Michael Vaughan",
+    aliases: ["Mike", "Mike Vaughan"],
+    nationality: "American",
+    role: "Pompano Beach warehouse landlord — Purchasing Group LLC — Northern Virginia origin — 703 area code — IC corridor geography — Sam's $60k debt — angry call at Engstrom's bungalow Playa Hermosa",
+    threatLevel: "secondary",
+    detail: `Michael Vaughan operated out of Pompano Beach FL (2250 NW 15th Ave Unit B, Pompano Beach FL 33069) through Purchasing Group LLC. He also sold security cameras. His building shares space with a lock company.
+
+NORTHERN VIRGINIA — IC CORRIDOR ORIGIN:
+  Vaughan's original location was Northern Virginia — "near DC." His phone number carries a 703 area code. 703 is the area code for Arlington, McLean, Fairfax, and Reston — the precise geographic heart of the US intelligence-industrial complex: CIA headquarters is in McLean (703), NSA contractors cluster in Reston (703), DIA is in Arlington (703), SAIC, Booz Allen, Leidos, and hundreds of cleared-contractor firms operate throughout the 703 belt. Sam's assessment: "He's from the intelligence aisle." His Jewish father and brother David (attended a notable school, now works with/for Mike) complete the family profile.
+
+WAREHOUSE RELATIONSHIP WITH SAM:
+  Sam rented warehouse space from Vaughan for Supplements Brazil LLC (Sam's own company — not Vaughan's). Sam owed Vaughan approximately $60,000 — a debt that was a primary reason Sam relocated to the Pompano Beach area. Sam paid down approximately $40k of the debt within one year. Vaughan disputes the remaining balance and still believes money is owed. The debt created financial leverage over Sam during a critical period.
+
+LAST CONTACT — ENGSTROM'S BUNGALOW, PLAYA HERMOSA:
+  The final conversation Sam had with Vaughan was an angry one. It occurred on Sam's porch at Brian Engstrom's bungalow in Playa Hermosa — at the moment Sam had just started dating Genesis Peralta. This means: (1) Vaughan knew Sam was in Costa Rica and at Engstrom's property, (2) rich68066 follows engstrom.brian on Instagram, (3) Engstrom's Playa Hermosa property is 10km from Hotel Pochote where Sam now resides, (4) Adam Harper (Vaughan's indirect associate via supplement network) lives at Hermosa Palms, Playa Hermosa. The angry call occurred at the exact intersection of Sam's personal (Peralta relationship begins) and network (Engstrom housing, Playa Hermosa cluster) pivots.
+
+FELONY / PROBATION:
+  Vaughan has a felony record and was on probation at relevant time periods. He was reportedly "always in debt." The combination of criminal record, debt, 703 IC-corridor origin, security camera sales, and a warehouse operation 3 blocks from SE Pump (rich68066 / Richie) creates a multi-layer compromise profile.`,
+    connections: [
+      { target: "rich68066", relationship: "SE Pump (Richie) operates 3 blocks from Vaughan's warehouse — Pompano Beach cluster", strength: "probable" },
+      { target: "adam-harper", relationship: "Adam Harper = major Supplements Brazil LLC client — indirect Vaughan associate", strength: "confirmed" },
+      { target: "brian-jaco", relationship: "Vaughan's angry call placed at Brian Engstrom's bungalow Playa Hermosa — Engstrom connection", strength: "confirmed" },
+      { target: "genesis-peralta", relationship: "Call happened exactly when Sam started dating Peralta — timing significance", strength: "confirmed" },
+      { target: "christopher-mash", relationship: "Mash arranged last Harper deal — prohormone supply chain overlap", strength: "probable" },
+    ],
+    flags: [
+      "703 area code — Northern Virginia / DC intelligence corridor origin",
+      "CIA McLean + NSA Reston + DIA Arlington = all 703 geography",
+      "Sam assessment: 'from the intelligence aisle'",
+      "Jewish father / brother David (good school, works with Mike)",
+      "2250 NW 15th Ave Unit B Pompano Beach FL 33069 — Purchasing Group LLC",
+      "Security cameras sales — surveillance equipment",
+      "Felony record / probation — leverage profile",
+      "Sam's $60k debt — financial leverage over Sam",
+      "Last angry call at Engstrom's bungalow Playa Hermosa — knew Sam's CR location",
+      "SE Pump (rich68066 / Richie) 3 blocks from Vaughan's warehouse",
+    ],
+  },
+  {
+    id: "christopher-mash",
+    name: "Christopher Mash",
+    aliases: ["Chris Mash"],
+    nationality: "American",
+    role: "San Diego — sold Dynamic Formulas (prohormones, heavy Brazil sales) — arranged last Adam Harper deal ~2021-22 ($20k, half expired, $8k loss)",
+    threatLevel: "tertiary",
+    detail: `Based in San Diego. Sold Dynamic Formulas brand prohormones — a product line with documented heavy Brazil sales volume (Dynamic Formulas appears in Sam's 2014 Supplement Edge wholesale price list). Arranged the last known supplement deal between Adam Harper and the network circa 2021-22: approximately $20k order, half the product arrived expired, Harper lost approximately $8k on the deal.
+
+DYNAMIC FORMULAS — BRAZIL SALES:
+  Dynamic Formulas prohormone products had disproportionately heavy Brazil sales — consistent with the broader Brazil thread running through this network (Supplements Brazil LLC, Haron Campos invoice, Edson Martenal/SETECOM, Ryan Streitelmeyer Brazil clients). The Brazil supplement market was a recurring financial and logistical connection point across multiple network nodes.
+
+POSSIBLE DAN CIESLA CONNECTION:
+  Mash is assessed as a possible connection to Dan Ciesla (San Diego area, father in Winter Park FL — same city as David Campos). San Diego is a relatively small expat/business community with overlap in the supplement and performance-nutrition industry.`,
+    connections: [
+      { target: "adam-harper", relationship: "Arranged last Harper supplement deal — $20k, half expired, $8k Harper loss", strength: "confirmed" },
+    ],
+    flags: [
+      "San Diego — possible Dan Ciesla overlap",
+      "Dynamic Formulas prohormones — heavy Brazil sales",
+      "Last Harper deal: $20k order, half expired, Adam lost $8k (~2021-22)",
+      "Brazil supplement supply chain thread",
+    ],
+  },
+  {
+    id: "haron-campos",
+    name: "Haron Campos",
+    aliases: ["Campos"],
+    nationality: "Brazilian (assessed)",
+    role: "Supplements Brazil LLC client — Invoice #415 $5,601.50 — 6/26/2017 — payment never received — Campos surname cluster instance #3",
+    threatLevel: "tertiary",
+    detail: `Haron Campos is the recipient named on Invoice #415 issued by Supplements Brazil LLC (Sam's company) dated June 26, 2017. Amount: $5,601.50. Payment was never received.
+
+CAMPOS SURNAME CLUSTER:
+  Haron Campos is one of at least 5 documented instances of the Campos surname in Sam's operational network:
+  1. Haron Campos — Supplements Brazil LLC client (Invoice #415, $5,601.50, unpaid)
+  2. Edson Martenal Campos — SETECOM, Salvador Bahia (telecommunications infrastructure)
+  3. Mauricio Campos — SETECOM
+  4. David Campos — Winter Park FL (geographic overlap with Dan Ciesla's father)
+  5. [Additional synthetic sock puppet cluster instances]
+  The clustering of this surname across supplement clients, telecom infrastructure, and Florida real estate is assessed as a possible synthetic identity cluster or coordinated network signature — not coincidental accumulation.
+
+DOCUMENTARY EVIDENCE:
+  Invoice PDF preserved: /evidence/Invoice_415_Supplements_Brazil_LLC_Haron_Campos_20170626.pdf`,
+    connections: [
+      { target: "adam-harper", relationship: "Both Brazil supplement network clients — same supply chain", strength: "probable" },
+    ],
+    flags: [
+      "Invoice #415 — $5,601.50 — 6/26/2017 — NEVER PAID",
+      "Supplements Brazil LLC client (Sam's company)",
+      "Campos surname cluster: 5+ instances across network",
+      "SETECOM overlap: Edson Martenal Campos + Mauricio Campos",
+      "Winter Park FL: David Campos geographic overlap",
+      "Documentary evidence: /evidence/Invoice_415_Supplements_Brazil_LLC_Haron_Campos_20170626.pdf",
+    ],
+  },
+  {
+    id: "ryan-streitelmeyer",
+    name: "Ryan Streitelmeyer",
+    aliases: ["shanerider21"],
+    nationality: "American",
+    role: "MPP counterparty — $640k judgment — identity theft using Joan P. Wotton + parents' address — had Sam's full family financial docs — hiding in Oregon — Brazil clients — shanerider21@gmail.com",
+    threatLevel: "primary",
+    detail: `Ryan Streitelmeyer was referred to Sam by Jon Smith (jonxpaul, same geographic origin) in 2019. MPP (Merchant Processing Pros — Jason Macek / Nick Korth) later sued Streitelmeyer and won a $640k judgment. His email handle is shanerider21 (shanerider21@gmail.com). Shane Rider / shanerider21 registered entity is in Oregon — where Ryan is currently hiding.
+
+IDENTITY THEFT — JOAN P. WOTTON:
+  Streitelmeyer used Joan P. Wotton (Sam's mother) and Sam's parents' address to fake Sam's identity. He was able to do this because Sam had forwarded him the following documents:
+  - Joan P. Wotton's bank stubs
+  - Sam's father's ID
+  - Sam's own bank account information
+  - Sam's own government ID
+  These documents were forwarded to Ryan in the context of the MPP / payment processing business relationship. Streitelmeyer weaponized the full family identity package for fraud.
+
+JOAN WOTTON INSURANCE PHISH CONNECTION:
+  Joan P. Wotton died November 2025 at MGH. Approximately one year before her death, a fake Prudential email claimed premiums had increased to $800/month. After Joan's death, Sam's father was denied the $250k life insurance payout. Streitelmeyer had Joan's identity documentation since 2019. The phishing of Joan's insurance policy is assessed as connected to Streitelmeyer's possession of her identity documents and financial information.
+
+BRAZIL CLIENTS:
+  MPP / Streitelmeyer had clients in Brazil. Sam assesses Edson Martenal (Salvador Bahia, SETECOM telecommunications network) as a probable Streitelmeyer Brazil account — connecting the identity theft vector to the Brazilian telecom infrastructure cluster documented in the surveillance network.
+
+OREGON — SHANERIDER21:
+  Streitelmeyer is assessed as hiding in Oregon. The shanerider21@gmail.com email and associated registrations (Shane Rider entity) are Oregon-registered. Oregon is a relatively permissive state for LLC formation and offers relative obscurity.`,
+    connections: [
+      { target: "jon-smith-jonxpaul", relationship: "Jon Smith referred Sam to MPP in 2019 — introduction vector", strength: "confirmed" },
+      { target: "echo-mother", relationship: "Used Joan P. Wotton identity for fraud — had her bank stubs — connected to insurance phish", strength: "confirmed" },
+      { target: "jason-macek", relationship: "MPP sued Streitelmeyer — $640k judgment", strength: "confirmed" },
+    ],
+    flags: [
+      "shanerider21@gmail.com — Shane Rider entity registered Oregon",
+      "Hiding in Oregon post-$640k judgment",
+      "Identity theft: used Joan P. Wotton + parents' address",
+      "Had Sam's full family financial docs (mom's bank stubs, dad's ID, Sam's bank + ID)",
+      "MPP $640k judgment — sued by Macek / Korth",
+      "Brazil clients — Edson Martenal / SETECOM probable account",
+      "Joan Wotton insurance phish connection — her docs in adversary hands since 2019",
+    ],
+  },
+  {
+    id: "jon-smith-jonxpaul",
+    name: "Jon Smith",
+    aliases: ["jonxpaul", "Jon"],
+    nationality: "American",
+    role: "Instagram: jonxpaul — same origin as Streitelmeyer — 2019 MPP referral — introduction vector",
+    threatLevel: "secondary",
+    detail: `Jon Smith uses the Instagram handle jonxpaul. He is from the same geographic location as Ryan Streitelmeyer. In 2019, Jon Smith referred Sam to MPP (Merchant Processing Pros). MPP eventually became Sam's client.
+
+REFERRAL VECTOR — COORDINATED INTRODUCTION:
+  Jon Smith's referral placed Sam inside the MPP network — the same network through which Ryan Streitelmeyer later obtained Sam's full family identity documentation and used it for fraud. The co-location of Jon Smith and Streitelmeyer in the same geographic origin, combined with their sequential roles (Smith = referral, Streitelmeyer = identity exploitation), is consistent with a coordinated introduction operation: Smith opens the door, Streitelmeyer walks through it.
+
+NOTE — DIFFERENT FROM OTHER JON SMITH NODES:
+  This Jon Smith (jonxpaul) is a distinct individual from any other Jon Smith nodes in the network (e.g., Toronto PD cluster). Do not conflate.`,
+    connections: [
+      { target: "ryan-streitelmeyer", relationship: "Same geographic origin — coordinated referral vector", strength: "confirmed" },
+    ],
+    flags: [
+      "Instagram: jonxpaul",
+      "Same geographic origin as Ryan Streitelmeyer",
+      "2019 MPP referral — placed Sam inside Streitelmeyer network",
+      "Introduction vector: Smith opens door, Streitelmeyer exploits",
+      "DISTINCT from other Jon Smith nodes in network",
+    ],
+  },
+  {
+    id: "jason-macek",
+    name: "Jason Macek",
+    aliases: ["Jason", "jmacek07"],
+    nationality: "American",
+    role: "Macek Holdings LLC — MPP co-owner (sold to Korth mid-2025) — numbedink.com partner — double-dipped Sam $22,834.15 — jmacek07@gmail.com — Richard Branson island mastermind",
+    threatLevel: "secondary",
+    detail: `Jason Macek operates Macek Holdings LLC. He was Sam's longest business client. Sam performed work for: two restaurant websites, Dollar Fulfillment, and Merchant Processing Pros (MPP) — Sam built and owned the MPP website. Email: jmacek07@gmail.com.
+
+NUMBEDINK.COM — PARTNERSHIP + DOUBLE-DIP FRAUD:
+  Sam was a partner with Jason on numbedink.com. During the Genesis Peralta surveillance operation, numbedink was Sam's primary (and at times only) source of income. The income was steadily declining — documented forensic audit (Jan 1 – Oct 31, 2025) revealed two systemic fraud mechanisms:
+  1. Revenue Under-Reporting: Post-purchase upsell revenue processed via Checkout Champ ($14,152 YTD) was excluded from the Shopify profit pool.
+  2. Double-Dip: Sam's $3,500/month base compensation was deducted as an operating expense BEFORE the profit split — mathematically violating the profit-share agreement and creating $875/month structural underpayment ($8,750 over 10 months).
+  True YTD revenue: $382,120.02. True net profit pool: $76,193.09. Outstanding balance demanded: $22,834.15.
+
+NOVEMBER 2025 — CONVERGENCE TIMING:
+  Sam issued his formal demand letter November 20, 2025. Jason replied November 22, 2025, CC'ing his attorney, claiming Sam had received $108k while the business only made $11k for Jason. This claim contradicts the forensic audit showing $382k true revenue. The dispute occurred in the same month as Joan Wotton's death at MGH, the insurance payout denial, and the ongoing Costa Rica surveillance. Sam's primary income was being strangled at the exact moment he was dealing with his mother's death and blocked life insurance.
+
+MPP — SOLD TO KORTH:
+  Mid-2025, Jason sold his share of MPP to Nick Korth (Omaha). MPP had previously won a $640k judgment against Ryan Streitelmeyer (shanerider21).
+
+RICHARD BRANSON ISLAND — MASTERMIND:
+  Jason spends approximately $30,000 for a single weekend on Richard Branson's private island (Necker Island) for "mastermind" events. This level of discretionary spend is inconsistent with his claims that numbedink "barely generates enough money to be worth his time."
+
+DOCUMENTARY EVIDENCE:
+  - Forensic_Audit_numbedink_Macek_Holdings_Jan_Oct_2025.pdf
+  - Double_Dip_Explanation_Macek_Holdings_2025.pdf
+  - Macek_Dispute_Email_Thread_Nov_2025.txt`,
+    connections: [
+      { target: "nick-korth", relationship: "MPP business partners — Jason sold share to Nick mid-2025", strength: "confirmed" },
+      { target: "ryan-streitelmeyer", relationship: "MPP won $640k judgment against Streitelmeyer", strength: "confirmed" },
+    ],
+    flags: [
+      "jmacek07@gmail.com",
+      "Macek Holdings LLC",
+      "numbedink.com partner — double-dipped Sam $22,834.15",
+      "Double-dip: $3,500 base deducted as expense before split = $875/month structural underpayment",
+      "Revenue hidden: $14,152 Checkout Champ upsells excluded from pool",
+      "True YTD revenue $382,120 — claimed business 'barely worth his time'",
+      "Formal demand Nov 20 2025 — same month Joan Wotton died + insurance denied",
+      "$30k weekend Richard Branson Necker Island mastermind — contradicts poverty claims",
+      "MPP: built by Sam, sold to Korth mid-2025, won $640k vs Streitelmeyer",
+      "Documentary evidence: forensic audit + double-dip proof + email thread",
+    ],
+  },
+  {
+    id: "nick-korth",
+    name: "Nick Korth",
+    aliases: ["Nick"],
+    nationality: "American",
+    role: "Omaha NE — MPP partner (bought Jason Macek's share mid-2025) — Streitelmeyer $640k judgment co-plaintiff",
+    threatLevel: "tertiary",
+    detail: `Nick Korth is based in Omaha, Nebraska. He was Jason Macek's partner in MPP (Merchant Processing Pros). Mid-2025, Nick bought Jason Macek's share of MPP, becoming the primary operator. MPP had previously won a $640k judgment against Ryan Streitelmeyer (shanerider21@gmail.com, hiding in Oregon). Sam built and owned the MPP website during his work for Macek.`,
+    connections: [
+      { target: "jason-macek", relationship: "MPP business partners — Nick bought Jason's share mid-2025", strength: "confirmed" },
+      { target: "ryan-streitelmeyer", relationship: "MPP won $640k judgment against Streitelmeyer", strength: "confirmed" },
+    ],
+    flags: [
+      "Omaha NE",
+      "Bought Jason Macek's MPP share mid-2025",
+      "MPP $640k judgment vs Streitelmeyer",
     ],
   },
 ];
@@ -4384,6 +4616,67 @@ CHECK-IN AS SIGNAL:
     ],
     coordinates: "52.5219°N, 13.4132°E",
   },
+  {
+    id: "pompano-beach-cluster",
+    name: "Pompano Beach FL — Supplement / Surveillance Network Hub",
+    type: "city",
+    country: "USA",
+    significance: "primary",
+    detail: `Pompano Beach, Broward County FL. Two confirmed operational addresses within blocks of each other:
+  1. SE Pump — 1354 SW 12th Ave, Pompano Beach FL 33069. Phone: (954) 781-8400. Email: info@sepump.com. Operated by "Richie" (assessed = rich68066, Costa Rica private driver, Instagram monitoring account following spwotton + engstrom.brian).
+  2. Purchasing Group LLC (Michael Vaughan) — 2250 NW 15th Ave Unit B, Pompano Beach FL 33069. Vaughan: 703 area code (Northern Virginia IC corridor origin), security camera sales, building shared with lock company, felony/probation. Sam rented warehouse space from Vaughan for Supplements Brazil LLC.
+
+The geographic clustering of SE Pump (rich68066 / Richie) and Vaughan's warehouse in the same small city — both connected to Sam's supplement business and now to the Costa Rica surveillance network — is the anchor of the Florida supplement closed loop.`,
+    connections: [
+      { target: "rich68066", relationship: "SE Pump operator (Richie) — 1354 SW 12th Ave", strength: "confirmed" },
+      { target: "michael-vaughan", relationship: "Purchasing Group LLC warehouse — 2250 NW 15th Ave Unit B", strength: "confirmed" },
+    ],
+    flags: [
+      "SE Pump: 1354 SW 12th Ave — rich68066 / Richie",
+      "Vaughan warehouse: 2250 NW 15th Ave Unit B — 703 / IC corridor origin",
+      "Both addresses within blocks of each other — Pompano Beach cluster",
+      "Broward County FL — supplement + surveillance network node",
+    ],
+    coordinates: "26.2379°N, 80.1248°W",
+  },
+  {
+    id: "winter-park-fl",
+    name: "Winter Park FL — Campos / Ciesla Geographic Overlap",
+    type: "city",
+    country: "USA",
+    significance: "secondary",
+    detail: `Winter Park, Orange County FL (adjacent to Orlando). Two documented network figures share Winter Park as a home geography:
+  1. David Campos — Winter Park FL home. Campos surname cluster instance #4 (Haron Campos invoice, Edson Martenal Campos/SETECOM, Mauricio Campos/SETECOM).
+  2. Dan Ciesla's father — also has a Winter Park FL home.
+  The geographic overlap between a Campos surname cluster member and Dan Ciesla's father in the same mid-size Florida city is logged as a network signature overlap, not coincidence.`,
+    connections: [
+      { target: "michael-vaughan", relationship: "Florida supplement corridor geographic region", strength: "probable" },
+    ],
+    flags: [
+      "David Campos — Winter Park FL",
+      "Dan Ciesla's father — Winter Park FL",
+      "Campos / Ciesla geographic overlap in same city",
+      "Orange County FL — adjacent to Orlando",
+    ],
+    coordinates: "28.5997°N, 81.3392°W",
+  },
+  {
+    id: "oregon-streitelmeyer",
+    name: "Oregon — Ryan Streitelmeyer / Shane Rider Hiding Location",
+    type: "state",
+    country: "USA",
+    significance: "secondary",
+    detail: `Ryan Streitelmeyer (shanerider21@gmail.com) is assessed as hiding in Oregon post the MPP $640k judgment. The "Shane Rider" entity / shanerider21 registrations are Oregon-based. Oregon is a permissive state for LLC formation, offers relative obscurity, and is geographically distant from Florida (MPP operations) and Costa Rica (target). Streitelmeyer used Joan P. Wotton's identity and Sam's family documents for fraud while operating from this corridor.`,
+    connections: [
+      { target: "ryan-streitelmeyer", relationship: "Hiding location post-$640k judgment", strength: "confirmed" },
+    ],
+    flags: [
+      "Ryan Streitelmeyer hiding here post-MPP judgment",
+      "shanerider21 / Shane Rider entity registered Oregon",
+      "Permissive LLC formation — operational obscurity",
+    ],
+    coordinates: "44.0000°N, 120.5000°W",
+  },
 ];
 
 const COMPANIES_DATA: Company[] = [
@@ -4900,6 +5193,64 @@ LOS SUEÑOS BIRTHDAY TRIP — JUNE 2024 (TARGET ASSESSMENT EVENT):
     ],
     flags: ["Ghost device drops all probes", "1-bit MAC spoofing (f0→f6)", "Stealth network presence", "Surveillance mesh edge nodes"],
   },
+  {
+    id: "se-pump",
+    name: "SE Pump",
+    sector: "Industrial / Surveillance (assessed)",
+    detail: `SE Pump. Address: 1354 SW 12th Ave, Pompano Beach FL 33069. Phone: (954) 781-8400. Email: info@sepump.com. Operated by "Richie" — assessed as rich68066 (Instagram monitoring account following spwotton, engstrom.brian, and other Sam network contacts). Richie is also Sam's Costa Rica private driver — placing the SE Pump Pompano Beach operator in direct physical proximity to Sam in Jacó. SE Pump is located approximately 3 blocks from Michael Vaughan's Purchasing Group LLC warehouse (2250 NW 15th Ave Unit B) — both in Pompano Beach, Broward County FL.`,
+    connections: [
+      { target: "rich68066", relationship: "Operated by Richie (assessed = rich68066)", strength: "probable" },
+      { target: "michael-vaughan", relationship: "3 blocks from Vaughan warehouse — Pompano Beach cluster", strength: "probable" },
+      { target: "pompano-beach-cluster", relationship: "1354 SW 12th Ave location node", strength: "confirmed" },
+    ],
+    flags: ["1354 SW 12th Ave Pompano Beach FL 33069", "(954) 781-8400", "info@sepump.com", "Operator = Richie = rich68066 (assessed)", "3 blocks from Vaughan warehouse"],
+  },
+  {
+    id: "dynamic-formulas",
+    name: "Dynamic Formulas",
+    sector: "Supplements / Prohormones",
+    detail: `Prohormone / performance supplement brand. Appeared in Sam's Supplement Edge 2014 wholesale price list (multiple SKUs: Alpha-M1, EP-Stane, H-stane, L-stane, M-stane, Thermocore, After-Cycle, Formula-1). Christopher Mash (San Diego) sold Dynamic Formulas with documented heavy Brazil sales volume. The Brazil sales thread connects Dynamic Formulas to the broader Brazil supplement network (Supplements Brazil LLC, Haron Campos invoice, Edson Martenal/SETECOM, Ryan Streitelmeyer Brazil clients).`,
+    connections: [
+      { target: "christopher-mash", relationship: "Mash sold Dynamic Formulas — heavy Brazil sales", strength: "confirmed" },
+      { target: "supplement-edge", relationship: "Listed in Supplement Edge wholesale catalog 2014", strength: "confirmed" },
+    ],
+    flags: ["Heavy Brazil sales — Brazil network thread", "Prohormones / performance supplements", "Christopher Mash distributor", "In Supplement Edge 2014 price list"],
+  },
+  {
+    id: "mpp",
+    name: "Merchant Processing Pros (MPP)",
+    sector: "Payment Processing",
+    detail: `Merchant Processing Pros. Sam built and owned the MPP website during his work for Jason Macek. Sam was referred to MPP by Jon Smith (jonxpaul) in 2019, and MPP eventually became Sam's client. Jason Macek and Nick Korth (Omaha) co-owned MPP. Mid-2025, Jason sold his share to Nick Korth. MPP had clients in Brazil. MPP sued Ryan Streitelmeyer (shanerider21@gmail.com) and won a $640k judgment. Streitelmeyer subsequently used Joan P. Wotton's identity and Sam's family documents for fraud — documents forwarded to Streitelmeyer in the context of the MPP relationship.`,
+    connections: [
+      { target: "jason-macek", relationship: "Co-owner — sold share to Korth mid-2025", strength: "confirmed" },
+      { target: "nick-korth", relationship: "Co-owner / bought Jason's share mid-2025", strength: "confirmed" },
+      { target: "ryan-streitelmeyer", relationship: "$640k judgment — MPP won lawsuit vs Streitelmeyer", strength: "confirmed" },
+      { target: "jon-smith-jonxpaul", relationship: "Jon Smith referred Sam to MPP 2019", strength: "confirmed" },
+    ],
+    flags: ["Sam built + owned the MPP website", "Brazil clients — Edson Martenal connection assessed", "$640k judgment vs Streitelmeyer", "Macek → Korth ownership transfer mid-2025", "Introduction via Jon Smith (jonxpaul) 2019"],
+  },
+  {
+    id: "macek-holdings-llc",
+    name: "Macek Holdings LLC",
+    sector: "Digital Commerce / Marketing",
+    detail: `Jason Macek's holding company. Operated numbedink.com (with Sam as 25% profit-share partner + $3,500/month base), Dollar Fulfillment, and Merchant Processing Pros (MPP). Sam was Macek Holdings' longest client. Forensic audit Jan-Oct 2025 documented $382,120.02 true revenue. Jason claimed business "barely worth his time" while spending ~$30k/weekend on Richard Branson's Necker Island. Outstanding balance to Sam at time of demand (Nov 20, 2025): $22,834.15. Documentary evidence: Forensic_Audit_numbedink_Macek_Holdings_Jan_Oct_2025.pdf, Double_Dip_Explanation_Macek_Holdings_2025.pdf.`,
+    connections: [
+      { target: "jason-macek", relationship: "Owned by Jason Macek — jmacek07@gmail.com", strength: "confirmed" },
+      { target: "mpp", relationship: "MPP operated under Macek Holdings umbrella", strength: "confirmed" },
+    ],
+    flags: ["Jason Macek — jmacek07@gmail.com", "numbedink.com $382k true revenue Jan-Oct 2025", "Double-dip: $875/month structural underpayment", "Outstanding $22,834.15 (Nov 20, 2025 demand)", "$30k Necker Island weekends vs 'barely worth time' claims", "Longest client relationship Sam had"],
+  },
+  {
+    id: "numbedink",
+    name: "numbedink.com",
+    sector: "Digital Commerce / Shopify",
+    detail: `E-commerce brand operated by Jason Macek (Macek Holdings LLC). Sam Wotton (SXW Marketing LLC) was a partner with 25% profit share + $3,500/month base. During the Genesis Peralta surveillance period in Costa Rica, numbedink was Sam's primary — and at times only — income source. The income was steadily declining, which Sam attributed to business decline; forensic audit revealed it was systematic underpayment. True YTD revenue Jan-Oct 2025: $382,120.02 (Shopify $367,967.18 + Checkout Champ upsells $14,152.84). True net profit pool: $76,193.09. Sam's documented underpayment: $22,834.15.`,
+    connections: [
+      { target: "macek-holdings-llc", relationship: "Operated by Macek Holdings", strength: "confirmed" },
+      { target: "jason-macek", relationship: "Jason Macek = operator / controlling partner", strength: "confirmed" },
+    ],
+    flags: ["Sam's primary income during Peralta surveillance period", "Forensic audit: $382k true revenue Jan-Oct 2025", "$22,834.15 outstanding underpayment", "Revenue declining = economic pressure on Sam during ops", "Shopify + Checkout Champ dual revenue streams (upsells excluded from pool)"],
+  },
 ];
 
 const EVIDENCE_DATA: Evidence[] = [
@@ -4909,7 +5260,7 @@ const EVIDENCE_DATA: Evidence[] = [
     date: "2010s → November 2025",
     category: "Pattern Analysis",
     severity: "critical",
-    detail: `Three individuals in Echo's immediate personal network died after being positioned as information holders who could expose or corroborate the operation — each death preceded by indicators of operational exposure:\n\n1. DIANE RIMKUS (apparent suicide)\n   Echo's aunt by marriage. Wife of Uncle Rimkus (telecom, Ashford CT). Father of Claire Rimkus (Mass State Police CSI, CODIS access, Mount Holyoke at 15). Echo's mother was one of the last people to see Diane before her death. Uncle Rimkus quickly remarried afterward. Diane's access: married into telecom money, proximate to sensitive family information.\n\n2. ECHO'S MOTHER (died November 2025, MGH)\n   Software Services Group founder. CompuServe / Wyatt Company lineage. Musician at Holy Family Church (Robert Kirby — Italy trips). Regular contact with Verc Enterprises (lottery tracking). Kingdom Hall address on same street as family office. $250K life insurance phished for approximately one year prior — payout denied after death. Dave Belisle and Alison Wotton present at death. Father and Seth arrived late.\n\n3. BILL KIMBALL (reportedly dead)\n   Michael Lipman's business partner. Ran Hillview Sober Living, Portland ME — where Echo lived. Involved in anabolic dealings with Echo and Jesse Talti. When Lipman disclosed at Breakwater Point (Dec 28, 2024) that Jesse Talti was his daughter-in-law's boyfriend, Bill Kimball immediately warned Echo "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead.\n\nPattern: Each death followed proximate knowledge of a network asset (Jesse Talti, JW/sober infrastructure, operation exposure). Each death removed an information holder who had issued or could issue a warning. The consistency of the pattern across three separate individuals over multiple years is assessed as non-random.`,
+    detail: `Three individuals in Echo's immediate personal network died after being positioned as information holders who could expose or corroborate the operation — each death preceded by indicators of operational exposure:\n\n1. DIANE RIMKUS (apparent suicide)\n   Echo's aunt by marriage. Wife of Uncle Rimkus (telecom, Ashford CT). Father of Claire Rimkus (Mass State Police CSI, CODIS access, Mount Holyoke at 15). Echo's mother was one of the last people to see Diane before her death. Uncle Rimkus quickly remarried afterward. Diane's access: married into telecom money, proximate to sensitive family information.\n\n2. ECHO'S MOTHER (died November 2025, MGH)\n   Software Services Group founder. CompuServe / Wyatt Company lineage. Musician at Holy Family Church (Robert Kirby — Italy trips). Regular contact with Verc Enterprises (lottery tracking). Kingdom Hall address on same street as family office. $250K life insurance phished for approximately one year prior — payout denied after death. Dave Belisle and Alison Wotton present at death. Father and Seth arrived late.\n\n3. BILL KIMBALL (reportedly dead)\n   Michael Lipman's business partner. Ran Hillview Sober Living, Portland ME — where Echo lived. Involved in anabolic dealings with Echo and Jesse Talty. When Lipman disclosed at Breakwater Point (Dec 28, 2024) that Jesse Talty was his daughter-in-law's boyfriend, Bill Kimball immediately warned Echo "stay away from Jesse, he's a bad person." Bill Kimball is now reportedly dead.\n\nPattern: Each death followed proximate knowledge of a network asset (Jesse Talty, JW/sober infrastructure, operation exposure). Each death removed an information holder who had issued or could issue a warning. The consistency of the pattern across three separate individuals over multiple years is assessed as non-random.`,
     linkedEntities: ["echo-mother", "bill-kimball", "uncle-rimkus", "claire-rimkus", "jesse-talti", "michael-lipman"],
   },
   {
@@ -6234,6 +6585,105 @@ ROCHESTER / UPSTATE NY THREAD:
 Evidence SHA-256: 9d32ba96bc7ccf38847a49527d9be3cc70502e71866f7e9e0a905625fa5a6431
 Screenshot: /evidence/rich68066_following_20260616.png`,
     linkedEntities: ["rich68066", "aunt-karen", "chris-gabriel", "mike-berkery"],
+  },
+  {
+    id: "florida-supplement-closed-loop",
+    type: "pattern",
+    title: "CLOSED LOOP CONFIRMED: Florida Supplement Network Pre-Built Around Sam's Life",
+    description: `The surveillance network was pre-constructed using Sam's real Florida business and social life before he arrived in Costa Rica. All nodes are real people Sam actually knew — the network was not invented around him, it was assembled from his genuine relationships and then deployed against him in Costa Rica.
+
+THE LOOP:
+  1. David Karr (La Flor HOA president — controls NE surveillance position with direct LOS to Sam's balcony at Hotel Pochote)
+  2. → Shelby (Karr's employee, hired with no experience)
+  3. → Adam Harper (Shelby's friend, Brianna Harper best friend — "family friend" connection)
+  4. → Adam Harper was a major Supplements Brazil LLC client (Sam's own company)
+  5. → Michael Vaughan (Sam's warehouse landlord, Pompano Beach — Adam was his indirect associate)
+  6. → SE Pump / Richie / rich68066 (3 blocks from Vaughan's warehouse — Costa Rica private driver + Instagram monitoring account following spwotton + engstrom.brian)
+
+CLOSING THE LOOP:
+  Sam's supplement business (Portland ME → Pompano Beach FL) → Vaughan warehouse → SE Pump neighbor (Richie/rich68066) → drives Sam in Costa Rica AND monitors his Instagram → follows engstrom.brian (Brian Engstrom = Sam's first CR residence) → La Flor HOA president employs Shelby → Shelby is family friends with Adam Harper → Adam Harper was a Supplements Brazil LLC client.
+
+This is a complete circuit. The same people Sam did business with in Florida are controlling his housing surveillance cluster in Costa Rica. The network was laid in place years before Sam arrived.
+
+TIMELINE:
+  - ~2014-2017: Sam operates Supplement Edge (wholesale) and Supplements Brazil LLC from Maine/Pompano Beach
+  - 2016 November: Jesse Talty seen at 69 Bolton St Portland ME right before Sam moves — transition surveillance
+  - 2016-2017: Sam renting from Vaughan, owes $60k, Haron Campos invoice #415 unpaid ($5,601.50)
+  - Sam arrives CR, lives at Engstrom's bungalow Playa Hermosa, starts dating Peralta, Vaughan calls angry
+  - rich68066 (Richie, SE Pump, Pompano Beach) becomes Sam's CR driver — Pompano Beach to Jacó pipeline active
+  - David Karr (connected to Harper / Shelby) controls La Flor HOA = direct LOS surveillance of Sam's room`,
+    linkedEntities: ["david-karr", "shelby-karr", "adam-harper", "michael-vaughan", "rich68066", "se-pump", "genesis-peralta", "brian-jaco", "jesse-talti"],
+  },
+  {
+    id: "streitelmeyer-identity-theft",
+    type: "documentary",
+    title: "IDENTITY THEFT PACKAGE: Ryan Streitelmeyer — Sam's Family Financial Documents 2019",
+    description: `Sam forwarded the following documents to Ryan Streitelmeyer (shanerider21@gmail.com) in the context of the MPP / payment processing business relationship introduced by Jon Smith (jonxpaul) in 2019:
+
+DOCUMENTS FORWARDED:
+  - Joan P. Wotton's bank stubs (Sam's mother)
+  - Sam's father's government-issued ID
+  - Sam's own bank account information
+  - Sam's own government-issued ID
+
+WEAPONIZATION:
+  Streitelmeyer used Joan P. Wotton's name and Sam's parents' home address to fake Sam's identity. MPP later sued Streitelmeyer and won a $640k judgment. Streitelmeyer is now hiding in Oregon (shanerider21 / Shane Rider entity, Oregon-registered).
+
+INSURANCE FRAUD CONNECTION:
+  Approximately one year before Joan Wotton's death (November 2025, MGH), a fake Prudential email claimed premiums had increased to $800/month. After Joan died, Sam's father was denied the $250k life insurance payout. Streitelmeyer held Joan's financial identity documents since 2019. The adversary had 6 years of access to her financial identity profile before the insurance phish occurred.
+
+BRAZIL THREAD:
+  MPP had Brazil clients. Edson Martenal (Salvador Bahia, SETECOM telecommunications) is assessed as a probable Streitelmeyer Brazil account — connecting the identity theft vector to the SETECOM/Campos telecom cluster documented in Costa Rica surveillance infrastructure.`,
+    linkedEntities: ["ryan-streitelmeyer", "jon-smith-jonxpaul", "echo-mother", "jason-macek", "nick-korth", "mpp"],
+  },
+  {
+    id: "macek-double-dip-evidence",
+    type: "documentary",
+    title: "DOCUMENTARY: Jason Macek / numbedink Double-Dip — $22,834.15 Demand — Nov 2025 — Forensic Audit",
+    description: `Forensic audit period Jan 1 – Oct 31, 2025. Two documented fraud mechanisms against Sam Wotton (SXW Marketing LLC) by Jason Macek / Macek Holdings LLC on numbedink.com:
+
+1. REVENUE UNDER-REPORTING: Post-purchase upsell revenue ($14,152.84 YTD) processed via Checkout Champ excluded from Shopify profit pool.
+2. DOUBLE-DIP: Sam's $3,500/month base deducted as operating expense BEFORE profit split — creating automatic $875/month structural underpayment ($8,750 over 10 months).
+
+True YTD revenue: $382,120.02. True net profit: $76,193.09. Outstanding: $22,834.15.
+Jason's claim: Sam received $108k, business made Jason only $11k.
+Reality: Business generated $382k true revenue in 10 months.
+Jason's lifestyle: ~$30k per weekend on Richard Branson's Necker Island mastermind.
+
+CONVERGENCE — NOVEMBER 2025:
+  Formal demand letter: November 20, 2025.
+  Jason's reply (attorney CC'd): November 22, 2025.
+  Joan Wotton death: November 2025 (same month).
+  Insurance denial: Same period.
+  Sam's only income was being systematically shorted while his mother died and her life insurance was blocked.
+
+DOCUMENTS PRESERVED:
+  - /evidence/Forensic_Audit_numbedink_Macek_Holdings_Jan_Oct_2025.pdf
+  - /evidence/Double_Dip_Explanation_Macek_Holdings_2025.pdf
+  - /evidence/Macek_Dispute_Email_Thread_Nov_2025.txt`,
+    linkedEntities: ["jason-macek", "macek-holdings-llc", "numbedink", "nick-korth", "echo-mother"],
+  },
+  {
+    id: "campos-surname-cluster",
+    type: "pattern",
+    title: "CAMPOS SURNAME CLUSTER — 5 Instances Across Supplement, Telecom, and Real Estate Networks",
+    description: `Five documented instances of the Campos surname spanning Sam's operational network across three countries and three industry sectors. Statistical likelihood of organic accumulation is assessed as very low — consistent with a synthetic identity cluster or coordinated network signature.
+
+INSTANCES:
+  1. Haron Campos — Supplements Brazil LLC client. Invoice #415, $5,601.50, 6/26/2017. Never paid. Documentary evidence: /evidence/Invoice_415_Supplements_Brazil_LLC_Haron_Campos_20170626.pdf
+  2. Edson Martenal Campos — SETECOM, Salvador Bahia, Brazil. Telecommunications infrastructure. Ryan Streitelmeyer Brazil client (assessed).
+  3. Mauricio Campos — SETECOM, Brazil. Same telecom entity as Edson Martenal.
+  4. David Campos — Winter Park FL. Geographic overlap with Dan Ciesla's father (also Winter Park FL).
+  5. [Additional sock puppet cluster instances — synthetic People You May Know surfacing]
+
+CROSS-SECTOR SPAN:
+  - Supplement distribution (Haron)
+  - Telecom infrastructure / SETECOM (Edson Martenal + Mauricio)
+  - Florida real estate geography (David / Winter Park)
+  - Synthetic social media (PYMK cluster)
+
+The SETECOM connection is particularly significant: SETECOM is a telecommunications entity in Salvador Bahia assessed as part of the ground infrastructure for the surveillance network. Two Campos surnames inside the same Brazilian telecom entity, while a third Campos surname is a client of Sam's Florida supplement company, and a fourth is in the same Florida city as a connected figure's family — this is not coincidence.`,
+    linkedEntities: ["haron-campos", "ryan-streitelmeyer", "winter-park-fl"],
   },
 ];
 
