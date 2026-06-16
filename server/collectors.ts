@@ -198,11 +198,18 @@ async function checkTLEConsistency(
   if (epochGap < TLE_SPOOF_THRESHOLDS.MIN_EPOCH_GAP_MS) return;
 
   const deltaN = Math.abs(newFields.meanMotion - prev.meanMotion);
-  const deltaM = Math.abs(newFields.meanAnomaly - prev.meanAnomaly);
-  if (deltaM > 180) {
-    const adjustedDeltaM = 360 - deltaM;
-    if (adjustedDeltaM < TLE_SPOOF_THRESHOLDS.DELTA_M_DEG) return;
-  }
+
+  // Mean anomaly (M) advances continuously as the satellite orbits, so the raw
+  // difference between two epochs is meaningless (a GEO sat legitimately shows
+  // ~96-206°). To detect spoofing we propagate the PREVIOUS epoch forward using
+  // its mean motion and compare the OBSERVED M against the EXPECTED M. Only a
+  // real velocity/position manipulation produces a residual.
+  const epochGapDays = (newEpoch - prev.epochTimestamp) / 86_400_000;
+  const avgMeanMotion = (prev.meanMotion + newFields.meanMotion) / 2; // rev/day
+  const expectedAdvanceDeg = avgMeanMotion * 360 * epochGapDays;
+  const expectedM = (((prev.meanAnomaly + expectedAdvanceDeg) % 360) + 360) % 360;
+  const rawDiff = Math.abs(newFields.meanAnomaly - expectedM) % 360;
+  const deltaM = rawDiff > 180 ? 360 - rawDiff : rawDiff; // shortest angular distance, 0-180°
 
   let elevationOffset = 0;
   try {
