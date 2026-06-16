@@ -21,6 +21,7 @@ import {
   type Incident, type InsertIncident,
   type SpectralSweep, type InsertSpectralSweep,
   type DetectedBearing, type InsertDetectedBearing,
+  type StudioPost, type InsertStudioPost,
   users, signalEvents, correlations, satellitePasses, sdrNodes,
   correlationFeedback, collectionLogs,
   researchSessions, researchQueries, researchFindings,
@@ -29,6 +30,7 @@ import {
   corticalNodes, latentSpace as latentSpaceTable, corticalLogs, neuralSnapshots,
   incidents,
   spectralSweeps, detectedBearings,
+  studioPosts,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, sql, and, or, ilike, gte, lte, inArray } from "drizzle-orm";
@@ -108,6 +110,11 @@ export interface IStorage {
   getSpectralSweep(id: string): Promise<SpectralSweep | undefined>;
   createDetectedBearing(bearing: InsertDetectedBearing): Promise<DetectedBearing>;
   getDetectedBearings(sweepId: string): Promise<DetectedBearing[]>;
+  createStudioPost(post: InsertStudioPost): Promise<StudioPost>;
+  getStudioPosts(limit?: number): Promise<StudioPost[]>;
+  getStudioPost(id: string): Promise<StudioPost | undefined>;
+  updateStudioPost(id: string, updates: Partial<InsertStudioPost>): Promise<StudioPost | undefined>;
+  deleteStudioPost(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -565,6 +572,31 @@ export class DatabaseStorage implements IStorage {
     return db.select().from(detectedBearings)
       .where(eq(detectedBearings.sweepId, sweepId))
       .orderBy(desc(detectedBearings.azimuthDeg));
+  }
+
+  async createStudioPost(post: InsertStudioPost): Promise<StudioPost> {
+    const [created] = await db.insert(studioPosts).values(post).returning();
+    return created;
+  }
+
+  async getStudioPosts(limit = 100): Promise<StudioPost[]> {
+    return db.select().from(studioPosts)
+      .orderBy(desc(studioPosts.createdAt))
+      .limit(limit);
+  }
+
+  async getStudioPost(id: string): Promise<StudioPost | undefined> {
+    const [row] = await db.select().from(studioPosts).where(eq(studioPosts.id, id));
+    return row;
+  }
+
+  async updateStudioPost(id: string, updates: Partial<InsertStudioPost>): Promise<StudioPost | undefined> {
+    const [row] = await db.update(studioPosts).set(updates).where(eq(studioPosts.id, id)).returning();
+    return row;
+  }
+
+  async deleteStudioPost(id: string): Promise<void> {
+    await db.delete(studioPosts).where(eq(studioPosts.id, id));
   }
 }
 

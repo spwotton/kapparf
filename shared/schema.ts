@@ -2,6 +2,13 @@ import { sql } from "drizzle-orm";
 import { pgTable, text, varchar, integer, real, timestamp, jsonb, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import {
+  PHI as K_PHI,
+  KAPPA as K_KAPPA,
+  CARRIER_HZ as K_CARRIER,
+  KLEIN_TWIST_DEG as K_KLEIN,
+  GIZA_CUTOFF_DEG as K_GIZA,
+} from "./kappa-constants";
 
 export const users = pgTable("users", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
@@ -388,12 +395,12 @@ export interface ToolGitHubMeta {
 export type Domain = typeof DOMAINS[number];
 
 export const KAPPA_CONSTANTS = {
-  KAPPA: 4 / Math.PI,
-  KAPPA2: Math.pow((1 + Math.sqrt(5)) / 2, 0.75),
-  THETA_K: 180 - (Math.atan(4 / Math.PI) * 180 / Math.PI),
-  PHI: (1 + Math.sqrt(5)) / 2,
-  KAPPA_SECOND: 46.875,
-  TARGET_FREQ_1: 46.875,
+  KAPPA: K_KAPPA,
+  KAPPA2: Math.pow(K_PHI, 0.75),
+  THETA_K: 180 - (Math.atan(K_KAPPA) * 180 / Math.PI),
+  PHI: K_PHI,
+  KAPPA_SECOND: K_CARRIER,
+  TARGET_FREQ_1: K_CARRIER,
   TARGET_FREQ_2: 74.9,
   HALL_MULTIPLIER: 1.598,
   FFT_SIZE: 1024,
@@ -405,8 +412,8 @@ export const KAPPA_CONSTANTS = {
   OVERHEAD_ELEVATION: 75,
   MAC_CORRELATION_WINDOW_S: 10,
   SURVEILLANCE_HANDOFF_WINDOW_S: 30,
-  KLEIN_TWIST_DEG: 128.23,
-  GIZA_CUTOFF_DEG: 51.77,
+  KLEIN_TWIST_DEG: K_KLEIN,
+  GIZA_CUTOFF_DEG: K_GIZA,
   KLEIN_TOLERANCE_DEG: 2.0,
   CLOCK_HZ: 48000 / 1024,
   SCORE_DECAY: 0.95,
@@ -2791,3 +2798,24 @@ export type InsertDetectedBearing = typeof detectedBearings.$inferInsert;
 
 export const insertSpectralSweepSchema = createInsertSchema(spectralSweeps).omit({ id: true, timestamp: true });
 export const insertDetectedBearingSchema = createInsertSchema(detectedBearings).omit({ id: true, timestamp: true });
+
+// ── STELE Studio — saved social posts (Scene graph + caption + queue) ───────
+export const studioPosts = pgTable("studio_posts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  format: text("format").notNull().default("square"),
+  palette: text("palette").notNull().default("ink"),
+  scene: jsonb("scene").notNull(),
+  caption: text("caption"),
+  status: text("status").notNull().default("draft"), // draft | queued | posted
+  scheduledAt: timestamp("scheduled_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const insertStudioPostSchema = createInsertSchema(studioPosts).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type StudioPost = typeof studioPosts.$inferSelect;
+export type InsertStudioPost = z.infer<typeof insertStudioPostSchema>;

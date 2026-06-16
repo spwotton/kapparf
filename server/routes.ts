@@ -163,6 +163,7 @@ import {
   CONSTITUTION as GAZETTE_CONSTITUTION,
 } from "./gazette-refiner";
 import { reelRouter } from "./reel-routes";
+import { studioRouter } from "./studio-routes";
 import { registerFtmRoutes } from "./lib/ftm/ftmRoutes";
 import { runLscsa } from "./lib/lscsa";
 import { runMusic } from "./lib/music";
@@ -196,6 +197,7 @@ export async function registerRoutes(
 ): Promise<Server> {
 
   app.use("/api/reel", reelRouter);
+  app.use("/api/studio", studioRouter);
 
   app.get("/dl/kappa_capture.sh", (_req, res) => {
     const scriptPath = nodePath.resolve(process.cwd(), "kappa_tshark_capture.sh");

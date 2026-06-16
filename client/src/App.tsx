@@ -31,6 +31,7 @@ import HypervisorPage from "@/pages/hypervisor";
 import IntelligencePage from "@/pages/intelligence";
 import LatticePage from "@/pages/lattice";
 import SocialPage from "@/pages/social";
+import StudioPage from "@/pages/studio";
 import ResearchPage from "@/pages/research";
 import DeepResearchPage from "@/pages/deep-research";
 import ImageryPage from "@/pages/imagery";
@@ -121,6 +122,7 @@ function KappaRouter() {
       <Route path="/intelligence" component={IntelligencePage} />
       <Route path="/lattice" component={LatticePage} />
       <Route path="/social" component={SocialPage} />
+      <Route path="/studio" component={StudioPage} />
       <Route path="/research" component={ResearchPage} />
       <Route path="/deep-research" component={DeepResearchPage} />
       <Route path="/imagery" component={ImageryPage} />
