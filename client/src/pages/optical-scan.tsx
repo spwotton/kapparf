@@ -413,7 +413,7 @@ export default function OpticalScanPage() {
         </div>
       </div>
 
-      <div className="flex flex-1 gap-0 overflow-hidden min-h-0" style={{ minHeight: 0 }}>
+      <div className="flex flex-col md:flex-row flex-1 gap-0 overflow-hidden min-h-0" style={{ minHeight: 0 }}>
         {/* Left: camera */}
         <div className="flex flex-col flex-1 min-w-0 border-r border-border/40">
           {/* Camera feed */}
@@ -474,7 +474,7 @@ export default function OpticalScanPage() {
         </div>
 
         {/* Right: analysis panels */}
-        <div className="flex flex-col w-80 shrink-0">
+        <div className="flex flex-col w-full md:w-80 md:shrink-0">
           {/* FFT spectrum */}
           <div className="border-b border-border/40">
             <div className="flex items-center gap-2 px-3 py-1.5 border-b border-border/20">

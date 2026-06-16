@@ -95,6 +95,7 @@ import PochoteIncidentPage from "@/pages/pochote-incident";
 import ParabolicAntennaPage from "@/pages/parabolic-antenna";
 import SensorArrayPage from "@/pages/sensor-array";
 import DemodexPhonePage from "@/pages/demodex-phone";
+import NetworkAnalysisPage from "@/pages/network-analysis";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -180,6 +181,7 @@ function KappaRouter() {
       <Route path="/parabolic-antenna" component={ParabolicAntennaPage} />
       <Route path="/sensor-array" component={SensorArrayPage} />
       <Route path="/demodex-phone" component={DemodexPhonePage} />
+      <Route path="/network-analysis" component={NetworkAnalysisPage} />
       <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
     </Switch>

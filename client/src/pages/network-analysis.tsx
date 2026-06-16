@@ -3227,6 +3227,49 @@ VENUE SIGNIFICANCE:
       "Wellness layer = Aurora Yoga / AA substrate social adjacency",
     ],
   },
+  {
+    id: "rich68066",
+    name: "rich68066",
+    aliases: ["rich68066 (Instagram)"],
+    role: "Social graph mapping account — 4 followers / 450 following — follows spwotton + real-network contacts simultaneously",
+    threatLevel: "secondary",
+    detail: `Instagram account rich68066. 4 followers, 450 following. Profile consistent with a purpose-built social graph monitoring account — near-zero organic presence, large curated following list.
+
+TIMING CORRELATION:
+  Began following spwotton at the same time as aunt Karen (Rochester, NY). The simultaneous follow of Echo AND a confirmed real-world personal contact (family member not publicly associated with the investigation) strongly suggests the account is curated by someone with access to Echo's real-world network — not algorithmically derived.
+
+VISIBLE FOLLOWING (screenshot 2026-06-16):
+  1. spwotton — Sam Wotton (Echo)
+  2. ckogel — Christopher Kogel
+  3. scottrobinson674 — Scott Robinson
+  4. dixonhoward4 — Dixon Howard
+  5. hank_list — Hank List
+  6. engstrom.brian — Brian Engstrom
+  7. andrewstout0325 — Andrew Stout
+  8. paradisedtours — Dustin Don Harrington (already following — bilateral)
+  9. n0_5crub5 — Tom Hyndman (already following — bilateral)
+
+SIGNATURE — MONITORING ACCOUNT, NOT SOCIAL ACCOUNT:
+  4 followers / 450 following is the inverse of any organic social account. This profile exists to receive content (passively monitor feeds), not broadcast it. The simultaneous follow with aunt Karen links the account operator to someone who knows Echo's family network offline or through a data broker with contact list access.
+
+ROCHESTER / UPSTATE NY THREAD:
+  Aunt Karen (Rochester NY) + Josh (son, builds sonic stages for concerts — audio/acoustic professional) started following at the same time. Christopher Gabriel (Google AI government sales, Broadalbin NY — ~150km from Rochester) is assessed as an overlap node in the same upstate NY cluster. Mike Berkery (DHS, Albany area — ~100km from Rochester) completes the NY corridor: Rochester → Broadalbin → Albany.
+
+ASSESSMENT:
+  rich68066 is a social graph surveillance asset. It is not a person — it is infrastructure. The follow timing correlation with a non-public family member rules out coincidence. The operator had prior knowledge of Echo's personal network or is running automated contact-list correlation (similar mechanism to the synthetic surname cluster in People You May Know). Screenshot preserved in evidence: /evidence/rich68066_following_20260616.png`,
+    connections: [
+      { target: "aunt-karen", relationship: "Followed simultaneously — timing correlation", strength: "confirmed", detail: "Both followed spwotton at same time — rules out coincidence" },
+      { target: "chris-gabriel", relationship: "Upstate NY cluster overlap — Rochester → Broadalbin corridor", strength: "probable" },
+      { target: "mike-berkery", relationship: "NY corridor — Rochester → Albany DHS geography", strength: "suspected" },
+    ],
+    flags: [
+      "4 followers / 450 following — monitoring account signature",
+      "Simultaneous follow with aunt Karen (Rochester NY) — family network access",
+      "Curated following list — real-world contacts of spwotton",
+      "Screenshot 2026-06-16: public/evidence/rich68066_following_20260616.png",
+      "Upstate NY thread: Rochester + Broadalbin (Gabriel/Google) + Albany (Berkery/DHS)",
+    ],
+  },
 ];
 
 const LOCATIONS_DATA: Location[] = [
@@ -6165,6 +6208,32 @@ MARJORIE ALFARO JIMÉNEZ — THE BRIDGE:
 STRUCTURAL ASSESSMENT:
   Picado controls communications interception. The third actor controls physical infrastructure and RF delivery. Alfaro Jiménez bridges them to the human intelligence (honey trap/placement) layer. This is not a flat network of bad actors — it is a structured hierarchy with defined roles, each domain owned by one person, connected through a single bridge node who has been physically observed co-locating with the ISP layer principal at a known operational site.`,
     linkedEntities: ["jean-picado-solis", "marjorie-alfaro", "hector-mora", "jorge-jimenez"],
+  },
+  {
+    id: "rich68066-socmint",
+    title: "rich68066 — Social Graph Mapping Account (Instagram, 2026-06-16)",
+    date: "2026-06-16",
+    category: "Electronic Surveillance",
+    severity: "high",
+    detail: `Instagram account rich68066 (4 followers, 450 following) identified following spwotton alongside a simultaneous follow from aunt Karen (Rochester, NY). Account is assessed as a purpose-built social graph monitoring asset.
+
+ACCOUNT PROFILE:
+  • Username: rich68066
+  • Followers: 4 (near-zero — not a social account)
+  • Following: 450 (large curated list)
+  • Mutual connections visible with spwotton network
+
+VISIBLE FOLLOWING (screenshot):
+  spwotton (Sam Wotton), ckogel (Christopher Kogel), scottrobinson674, dixonhoward4, hank_list (Hank List), engstrom.brian (Brian Engstrom), andrewstout0325 (Andrew Stout), paradisedtours (Dustin Don Harrington — bilateral), n0_5crub5 (Tom Hyndman — bilateral)
+
+TIMING: Simultaneous follow with aunt Karen (Rochester NY) — family contact not publicly associated with investigation. Rules out algorithmic surfacing.
+
+ROCHESTER / UPSTATE NY THREAD:
+  Aunt Karen (Rochester) + Josh (son, sonic stage builder, acoustic professional) + Christopher Gabriel (Google AI, Broadalbin NY, ~150km from Rochester) + Mike Berkery (DHS, Albany ~100km from Rochester) = upstate NY corridor with tech/intelligence density.
+
+Evidence SHA-256: 9d32ba96bc7ccf38847a49527d9be3cc70502e71866f7e9e0a905625fa5a6431
+Screenshot: /evidence/rich68066_following_20260616.png`,
+    linkedEntities: ["rich68066", "aunt-karen", "chris-gabriel", "mike-berkery"],
   },
 ];
 
