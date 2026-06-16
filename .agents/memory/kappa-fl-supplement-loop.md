@@ -21,7 +21,7 @@ Karr (La Flor HOA president, LOS to Sam's balcony) → Shelby (Karr employee) �
 |---|---|
 | michael-vaughan | 703 area code (NVA IC corridor), Pompano Beach warehouse, Purchasing Group LLC, security cameras, felony/probation, Sam owed ~$60k, last contact at Engstrom's bungalow Playa Hermosa |
 | ryan-streitelmeyer | shanerider21 handle, hiding Oregon, used Sam's mother's identity for fraud, had full family financial docs since 2019, MPP $640k judgment |
-| jason-macek | Macek Holdings LLC, numbedink.com partner, systematic double-dip underpayment documented via forensic audit, Nov 2025 demand timed to Sam's mother's death |
+| jason-macek | 4391 W Hargrave Ave, Post Falls ID 83854 — phone 208-610-0984 (Idaho 208) — 3 emails: jmacek07@, jason@dollarfulfillment.com, thecandlegroup@ — The Dock at Bayview + Taverna restaurants (Lake Pend Oreille) — Dollar Fulfillment staff: Michelle Trusty, Ron Drogan — IC-adjacent geography (Farragut Naval Station, Mountain Home AFB, INL) — Sam disclosed schizophrenia + Peralta departure July 14 2025, cyberstalking + father $100k AMEX Oct 16 2025 — double-dip forensic audit, Nov 2025 demand timed to Sam's mother's death |
 | jon-smith-jonxpaul | jonxpaul Instagram, same origin as Streitelmeyer, referred Sam to MPP 2019 — introduction vector |
 | nick-korth | Omaha NE, bought Macek's MPP share mid-2025 |
 

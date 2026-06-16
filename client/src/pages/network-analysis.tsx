@@ -3442,46 +3442,85 @@ NOTE — DIFFERENT FROM OTHER JON SMITH NODES:
   {
     id: "jason-macek",
     name: "Jason Macek",
-    aliases: ["Jason", "jmacek07"],
+    aliases: ["Jason", "jmacek07", "thecandlegroup"],
     nationality: "American",
-    role: "Macek Holdings LLC — MPP co-owner (sold to Korth mid-2025) — numbedink.com partner — double-dipped Sam $22,834.15 — jmacek07@gmail.com — Richard Branson island mastermind",
+    role: "Macek Holdings LLC — The Dock at Bayview ID — Taverna — Dollar Fulfillment — MPP co-owner — numbedink partner — double-dipped Sam $22,834.15 — Idaho IC-adjacent geography",
     threatLevel: "secondary",
-    detail: `Jason Macek operates Macek Holdings LLC. He was Sam's longest business client. Sam performed work for: two restaurant websites, Dollar Fulfillment, and Merchant Processing Pros (MPP) — Sam built and owned the MPP website. Email: jmacek07@gmail.com.
+    detail: `Jason Macek operates Macek Holdings LLC. He was Sam's longest business client. Sam performed work for: two restaurant websites (The Dock at Bayview + Taverna), Dollar Fulfillment, and Merchant Processing Pros (MPP) — Sam built and owned the MPP website.
+
+EMAILS (THREE CONFIRMED):
+  jmacek07@gmail.com — primary
+  jason@dollarfulfillment.com — Dollar Fulfillment business entity
+  thecandlegroup@gmail.com — The Candle Group business entity
+
+PHYSICAL ADDRESS (CONFIRMED — from Sam's invoice Aug 17 2024):
+  Macek Holdings LLC
+  4391 W Hargrave Ave
+  Post Falls, ID 83854
+  Post Falls is in Kootenai County, Idaho — adjacent to Coeur d'Alene. IC-adjacent geography: Mountain Home AFB (Air Force), Farragut Naval Station (historic NUWC, Bayview waterfront on Lake Pend Oreille), Idaho National Laboratory (DOE/nuclear), NSA Idaho presence.
+
+RESTAURANT NETWORK:
+  The Dock at Bayview — thedockatbayview.com — seasonal bar/restaurant on Lake Pend Oreille, Idaho
+  Taverna — tavernainbayview.com — Italian restaurant, Lake Pend Oreille, near Post Falls/Coeur d'Alene
+  Website copy (Sam-written): "family-owned Italian restaurant nestled on the shores of Lake Pend Oreille, just outside Coeur d'Alene and Post Falls, Idaho"
+  Kelli Cain (kellic2424@gmail.com) — Dock staff/manager. Partner "Matt" flew out of DC — DC corridor connection.
+  Kenneth Linares (kjlinares007@gmail.com) — Taverna restaurant contact
+  Taylor Hurd (tayhurd@gmail.com) — Taverna restaurant contact
+
+DOLLAR FULFILLMENT STAFF:
+  Michelle Trusty (michelle@dollarfulfillment.com) — Dollar Fulfillment manager. The "Michelle" in Macek's Oct 2025 email who "regularly reached out asking if he had heard from Sam." She was managing product fulfillment operations and needed Sam for website edits.
+  "Liya" — product supplier contact Sam was following up with (250-unit cleanser order, Sept 2025)
+
+INTEL DISCLOSURES SAM MADE TO MACEK:
+  July 14 2025: Sam disclosed Genesis Peralta had "left the country without saying anything" and that he was "dealing with schizophrenia I didn't know I had." Full psychological + relationship status on record with Macek.
+  July 18 2025: Sam disclosed he was considering going to Venezuela but found it dangerous for a white American. Geographic planning on Macek's radar.
+  Oct 16 2025: Sam disclosed directly: "the cyber stalking thing — it's something I'm actually dealing with here in this city, I have tons of proof." Also disclosed father had paid $100k from investments toward Sam's AMEX without Sam knowing, and card was being frozen imminently. Complete vulnerability portrait at lowest point.
+  If Macek is a network node, these emails constituted real-time operational intelligence: honey-trap extracted, target psychologically compromised, financially isolated, aware of surveillance, schizophrenia label attached.
 
 NUMBEDINK.COM — PARTNERSHIP + DOUBLE-DIP FRAUD:
-  Sam was a partner with Jason on numbedink.com. During the Genesis Peralta surveillance operation, numbedink was Sam's primary (and at times only) source of income. The income was steadily declining — documented forensic audit (Jan 1 – Oct 31, 2025) revealed two systemic fraud mechanisms:
-  1. Revenue Under-Reporting: Post-purchase upsell revenue processed via Checkout Champ ($14,152 YTD) was excluded from the Shopify profit pool.
-  2. Double-Dip: Sam's $3,500/month base compensation was deducted as an operating expense BEFORE the profit split — mathematically violating the profit-share agreement and creating $875/month structural underpayment ($8,750 over 10 months).
+  Sam was a partner with Jason on numbedink.com. During the Genesis Peralta surveillance operation, numbedink was Sam's primary (and at times only) source of income. Documented forensic audit (Jan 1 – Oct 31, 2025) revealed two systemic fraud mechanisms:
+  1. Revenue Under-Reporting: Post-purchase upsell revenue processed via Checkout Champ ($14,152 YTD) excluded from Shopify profit pool.
+  2. Double-Dip: Sam's $3,500/month base deducted as operating expense BEFORE profit split — $875/month structural underpayment ($8,750 over 10 months).
   True YTD revenue: $382,120.02. True net profit pool: $76,193.09. Outstanding balance demanded: $22,834.15.
+  Jason's claimed September net: $400 (paying Sam $100). Sam's verified September revenue: $39,615.34 net profit $14,671.08.
 
 NOVEMBER 2025 — CONVERGENCE TIMING:
-  Sam issued his formal demand letter November 20, 2025. Jason replied November 22, 2025, CC'ing his attorney, claiming Sam had received $108k while the business only made $11k for Jason. This claim contradicts the forensic audit showing $382k true revenue. The dispute occurred in the same month as Joan Wotton's death at MGH, the insurance payout denial, and the ongoing Costa Rica surveillance. Sam's primary income was being strangled at the exact moment he was dealing with his mother's death and blocked life insurance.
+  Sam issued formal demand November 20, 2025. Dispute occurred same month as Joan Wotton death at MGH, insurance payout denial, and ongoing Costa Rica surveillance. Income strangled at exact moment of maximum personal crisis.
 
 MPP — SOLD TO KORTH:
-  Mid-2025, Jason sold his share of MPP to Nick Korth (Omaha). MPP had previously won a $640k judgment against Ryan Streitelmeyer (shanerider21).
+  Mid-2025, Jason sold his MPP share to Nick Korth (Omaha). MPP had previously won $640k judgment against Ryan Streitelmeyer.
 
 RICHARD BRANSON ISLAND — MASTERMIND:
-  Jason spends approximately $30,000 for a single weekend on Richard Branson's private island (Necker Island) for "mastermind" events. This level of discretionary spend is inconsistent with his claims that numbedink "barely generates enough money to be worth his time."
+  Jason spends ~$30,000 per weekend on Necker Island for "mastermind" events. Contradicts his claims numbedink barely generates enough revenue to be worth his time.
 
 DOCUMENTARY EVIDENCE:
   - Forensic_Audit_numbedink_Macek_Holdings_Jan_Oct_2025.pdf
   - Double_Dip_Explanation_Macek_Holdings_2025.pdf
-  - Macek_Dispute_Email_Thread_Nov_2025.txt`,
+  - Macek_Dispute_Email_Thread_Nov_2025.txt
+  - MPP_Promo_Reel_2022-09-29.pdf
+  - Emails_from_jason_at_dollarfulfillment_dot_com (Google Drive doc — full email archive)`,
     connections: [
       { target: "nick-korth", relationship: "MPP business partners — Jason sold share to Nick mid-2025", strength: "confirmed" },
       { target: "ryan-streitelmeyer", relationship: "MPP won $640k judgment against Streitelmeyer", strength: "confirmed" },
     ],
     flags: [
-      "jmacek07@gmail.com",
-      "Macek Holdings LLC",
-      "numbedink.com partner — double-dipped Sam $22,834.15",
-      "Double-dip: $3,500 base deducted as expense before split = $875/month structural underpayment",
-      "Revenue hidden: $14,152 Checkout Champ upsells excluded from pool",
-      "True YTD revenue $382,120 — claimed business 'barely worth his time'",
+      "jmacek07@gmail.com | jason@dollarfulfillment.com | thecandlegroup@gmail.com",
+      "PHONE: 208-610-0984 (Idaho 208 area code — Post Falls/Coeur d'Alene confirmed)",
+      "ADDRESS: 4391 W Hargrave Ave, Post Falls, ID 83854 (Macek Holdings LLC — confirmed invoice)",
+      "Location: Post Falls/Bayview ID — Lake Pend Oreille — IC-adjacent (Farragut Naval Station, Mountain Home AFB, INL)",
+      "The Dock at Bayview (thedockatbayview.com) + Taverna (tavernainbayview.com) — restaurants, Idaho",
+      "Dollar Fulfillment staff: Michelle Trusty (michelle@), Ron Drogan (ron@), support@dollarfulfillment.com",
+      "Rob Kubiak (rob@arthurelliott.com) — Arthur Elliott Co — associated Dollar Fulfillment marketing ops",
+      "Kelli Cain (kellic2424@gmail.com) — Dock mgr, partner Matt flew DC; Kenneth Linares + Taylor Hurd (Taverna)",
+      "Macek Holdings LLC | Dollar Fulfillment | The Candle Group | numbedink | MPP",
+      "numbedink.com double-dip: $875/month structural underpayment + $14,152 hidden upsell revenue",
+      "True YTD revenue $382,120 — Sam owed $22,834.15 — Jason claimed $400 Sept net",
+      "Sam disclosed schizophrenia + Peralta departure to Macek July 14 2025",
+      "Sam disclosed Costa Rica cyberstalking + father $100k AMEX to Macek Oct 16 2025",
+      "Sam disclosed Venezuela geographic options to Macek July 18 2025",
       "Formal demand Nov 20 2025 — same month Joan Wotton died + insurance denied",
-      "$30k weekend Richard Branson Necker Island mastermind — contradicts poverty claims",
+      "$30k weekend Necker Island mastermind — contradicts poverty claims about numbedink",
       "MPP: built by Sam, sold to Korth mid-2025, won $640k vs Streitelmeyer",
-      "Documentary evidence: forensic audit + double-dip proof + email thread",
     ],
   },
   {
