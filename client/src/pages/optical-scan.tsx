@@ -392,11 +392,11 @@ export default function OpticalScanPage() {
   return (
     <div className="flex flex-col h-full bg-background text-foreground overflow-auto">
       {/* Header */}
-      <div className="flex items-center gap-3 px-5 py-3 border-b border-border/40">
-        <Camera className="h-4 w-4 text-blue-500" />
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-border/40 flex-wrap">
+        <Camera className="h-4 w-4 text-blue-500 shrink-0" />
         <span className="font-semibold text-sm tracking-wide">450nm Optical Scan</span>
-        <span className="text-xs text-muted-foreground">— blue channel temporal FFT · 46.875 Hz alias detector</span>
-        <div className="ml-auto flex items-center gap-2">
+        <span className="text-xs text-muted-foreground hidden sm:inline">— blue channel FFT · 46.875 Hz alias</span>
+        <div className="ml-auto flex items-center gap-2 flex-wrap">
           {streaming && (
             <>
               <Badge variant="outline" className="text-xs font-mono">{fps} fps</Badge>
