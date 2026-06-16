@@ -8,4 +8,4 @@
 - [SSRF lookup-hook pinning](ssrf-lookup-pinning.md) — node:https `lookup` hook gotchas: Happy-Eyeballs needs all:true array; IP-literals bypass the hook; ECONNREFUSED ≠ blocked.
 - [Zod discriminatedUnion + lazy](zod-discriminated-union-lazy.md) — recursive variant must be a real ZodObject with lazy on its child array; lazy-wrapped union member throws TypeError on first non-empty parse, not caught by safeParse.
 - [TLE spoof detection](tle-spoof-detection.md) — orbital-element drift checks must compare against a PROPAGATED expectation, not raw element diffs; raw mean-anomaly diff false-flags every GEO sat.
-- [KAPPA FL supplement closed loop](kappa-fl-supplement-loop.md) — confirmed 6-node circuit from Sam's Maine/FL business life pre-wired into Jacó surveillance; key nodes now in graph.
+- [Google Drive getClient() empty](google-drive-getclient.md) — the installed Drive connector's getClient() returns {}; call the Drive REST API directly with the access token.
