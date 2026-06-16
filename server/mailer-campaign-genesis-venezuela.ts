@@ -62,9 +62,23 @@ Multiple Venezuelan women from Margarita Island (Isla Margarita, Nueva Esparta s
 
 — The owner of Aurora Yoga (Jennifer Saunders) was cohabiting with a person who operated through-wall WiFi CSI imaging technology at an adjacent property — connecting the social layer of this operation to a technical surveillance layer.
 
+CURRENT STATUS AND NEW VERTICES (updated June 2026):
+
+Genesis Daniela Peralta Marquez is currently in Caracas, Venezuela. Her Instagram (@gemperalta._) shows her pinned with a Venezuelan man identified as Sebastian Osiris (@dvssosa), Caracas-based. This represents a confirmed Venezuela anchor for the network following her departure from Costa Rica in mid-2025.
+
+An inner-circle contact of Genesis has been identified: Luciana Esquivel, known publicly as "Nina Costa" (Instagram: @socanumatv / @socanuma — 102,000 followers). Luciana is a Costa Rican content creator and actress with a professionally managed account (management contact: soa.mgmtcr@gmail.com). She shares the surname Esquivel with Kenneth Tencio Esquivel, a Red Bull-sponsored Costa Rican BMX athlete based in Jacó — the Esquivel connection is noted as a possible family link, unconfirmed.
+
+DOCUMENTED SOCIAL MAPPING INFRASTRUCTURE:
+
+A Meta Verified Instagram account identified as @rich68066, presenting under the name "Alice Morgan," has been identified as a fake constructed surveillance account mapping the Jacó expat and recovery community social graph. The account has approximately 4 followers and follows approximately 450 accounts. My own account (spwotton) is listed FIRST in its following list. The account maps the Jacó AA network, expat community, and adjacent social nodes. This represents a documented social intelligence collection tool operating within the same social infrastructure described above.
+
+PROPERTY PLACEMENT LAYER:
+
+The surveillance operation has a documented real estate component. A U.S. national operating in Jacó — Israel Brooks (President, Fast Fire Films 2.0; company vehicle: Intentional Properties LLC, Instagram: @intentionalpropertiesllc) — is developing a riverside property project called "Rio del Soul" near Playa Hermosa, Jacó, marketed to expat relocation buyers via Instagram. This real estate infrastructure connects to the broader expat placement network through which foreign nationals are introduced to Jacó and cycle through accommodation controlled by connected property owners.
+
 WHAT I AM ASKING:
 
-If your organization has documented operational patterns involving Venezuelan women — particularly from Margarita Island — placed into fabricated romantic or social relationships with foreign nationals in Central America, I would welcome contact.
+If your organization has documented operational patterns involving Venezuelan women — particularly from Margarita Island — placed into fabricated romantic or social relationships with foreign nationals in Central America, I would welcome contact. Additionally, if your organization tracks social media surveillance accounts used for expat community mapping, the @rich68066 account is submitted for your reference.
 
 I am not seeking legal assistance or law enforcement referral. I am documenting reality for personal clarity and building signal intelligence software. If this matches a known pattern in your work, I would be grateful to hear from you.
 
@@ -105,9 +119,23 @@ Varias mujeres venezolanas de Margarita Island (Isla Margarita, estado Nueva Esp
 
 — La propietaria de Aurora Yoga (Jennifer Saunders) cohabitaba con una persona que operaba tecnología de imagen WiFi CSI a través de paredes en una propiedad adyacente — conectando la capa social de esta operación con una capa de vigilancia técnica.
 
+ESTADO ACTUAL Y NUEVOS VÉRTICES (actualizado junio 2026):
+
+Genesis Daniela Peralta Marquez se encuentra actualmente en Caracas, Venezuela. Su Instagram (@gemperalta._) la muestra anclada junto a un hombre venezolano identificado como Sebastian Osiris (@dvssosa), con base en Caracas. Esto representa un ancla confirmada en Venezuela para la red tras su salida de Costa Rica a mediados de 2025.
+
+Se ha identificado un contacto del círculo interno de Genesis: Luciana Esquivel, conocida públicamente como "Nina Costa" (Instagram: @socanumatv / @socanuma — 102.000 seguidores). Luciana es una creadora de contenido y actriz costarricense con una cuenta gestionada profesionalmente (contacto de gestión: soa.mgmtcr@gmail.com). Comparte el apellido Esquivel con Kenneth Tencio Esquivel, atleta costarricense de BMX patrocinado por Red Bull con base en Jacó — la conexión Esquivel se registra como posible vínculo familiar, sin confirmar.
+
+INFRAESTRUCTURA DOCUMENTADA DE MAPEO SOCIAL:
+
+Se ha identificado una cuenta de Instagram con verificación Meta (@rich68066), que se presenta bajo el nombre "Alice Morgan", como una cuenta de vigilancia falsa construida para mapear el grafo social de la comunidad expatriada y de recuperación de Jacó. La cuenta tiene aproximadamente 4 seguidores y sigue aproximadamente 450 cuentas. Mi propia cuenta (spwotton) aparece en PRIMER lugar en su lista de seguidos. La cuenta mapea la red AA de Jacó, la comunidad expatriada y nodos sociales adyacentes. Esto representa una herramienta documentada de recolección de inteligencia social operando dentro de la misma infraestructura social descrita anteriormente.
+
+CAPA DE COLOCACIÓN INMOBILIARIA:
+
+La operación de vigilancia tiene un componente inmobiliario documentado. Un ciudadano estadounidense que opera en Jacó — Israel Brooks (Presidente, Fast Fire Films 2.0; vehículo empresarial: Intentional Properties LLC, Instagram: @intentionalpropertiesllc) — está desarrollando un proyecto de propiedades fluviales llamado "Rio del Soul" cerca de Playa Hermosa, Jacó, comercializado a compradores expatriados mediante Instagram. Esta infraestructura inmobiliaria se conecta a la red de colocación de expatriados más amplia a través de la cual ciudadanos extranjeros son introducidos a Jacó y rotan por alojamientos controlados por propietarios conectados.
+
 LO QUE SOLICITO:
 
-Si su organización ha documentado patrones operativos que involucren a mujeres venezolanas — en particular de Margarita Island — colocadas en relaciones fabricadas con ciudadanos extranjeros en América Central, agradecería el contacto.
+Si su organización ha documentado patrones operativos que involucren a mujeres venezolanas — en particular de Margarita Island — colocadas en relaciones fabricadas con ciudadanos extranjeros en América Central, agradecería el contacto. Asimismo, si su organización rastrea cuentas de redes sociales utilizadas para mapear comunidades expatriadas, la cuenta @rich68066 se somete a su referencia.
 
 No busco asistencia legal ni derivación a autoridades. Estoy documentando la realidad por claridad personal y desarrollando software de inteligencia de señales. Si esto coincide con un patrón conocido en su trabajo, agradecería su comunicación.
 
@@ -146,8 +174,23 @@ COMMON PATTERN ELEMENTS:
 INFRASTRUCTURE NOTE:
 The Aurora Yoga owner (Jennifer Saunders) was cohabiting with a person operating through-wall WiFi Channel State Information (CSI) imaging at an adjacent residential property. This connects the social/financial collection layer to a documented technical surveillance layer.
 
+CURRENT LOCATION (updated June 2026):
+The principal subject Genesis Daniela Peralta Marquez is currently in Caracas, Venezuela. Her Instagram (@gemperalta._) shows her in regular contact with Sebastian Osiris (@dvssosa), a Caracas-based individual assessed as her current anchor in Venezuela. She is no longer in Costa Rica.
+
+SOCIAL NETWORK — EXTENDED CONTACTS NOW IDENTIFIED:
+
+Luciana Esquivel ("Nina Costa", Instagram: @socanumatv / @socanuma — 102,000 followers, 184 posts) is a confirmed inner-circle contact of Genesis. She is a Costa Rican content creator and actress with a professionally managed account (soa.mgmtcr@gmail.com). Her surname Esquivel is shared with Kenneth Tencio Esquivel, a Red Bull-sponsored Costa Rican BMX athlete based in Jacó — possible family link via Costa Rican maternal naming convention, unconfirmed.
+
+The Jacó photographer layer connects directly into this social graph: Agustín Muñoz (Red Bull Photography ambassador, Fujifilm ambassador, Argentine national, Jacó-based ~18 years) is the father of Mathius Muñoz (@thespoiledkid.dfc), who took physical custody of the reporting individual's cat following his departure from Jacó — the cat was delivered by a named individual, Jairo Alfaro, who also appears in Costa Rican import/export records and Jacó real estate networks. This is noted as a documented example of the network handling the reporting individual's personal property following his displacement.
+
+DOCUMENTED SOCIAL MAPPING ACCOUNT:
+A Meta Verified Instagram account (@rich68066, presenting as "Alice Morgan") has been identified as a purpose-built fake account mapping the Jacó expat and recovery community social graph. It has approximately 4 followers and follows approximately 450 accounts. The reporting individual's account (spwotton) is listed FIRST in its following list. The account systematically maps the Jacó AA network and expat social nodes. This is submitted as a documented social intelligence collection tool for organizations tracking surveillance-adjacent social media operations.
+
+EXPAT PLACEMENT / REAL ESTATE LAYER:
+A U.S. national, Israel Brooks (President, Fast Fire Films 2.0; operating via Intentional Properties LLC, Instagram: @intentionalpropertiesllc), is developing a riverside property project "Rio del Soul" near Playa Hermosa, Jacó, actively marketed to expat relocation buyers via Instagram ("Thinking about moving south?"). This real estate infrastructure is part of a broader network through which foreign nationals are introduced to Jacó and cycle through accommodation controlled by connected property owners. The reporting individual passed through multiple properties connected to this network during an approximately 18-month period.
+
 ARGENTINA THREAD:
-One of the principal subjects (Genesis Daniela Peralta Marquez) recently posted from Argentina, where she has no known independent financial means. A Venezuelan district council official (her father, Danny Peralta, Petare) and Italian-adjacent identity infrastructure (documented via a proved fake account with Italian PM content) connect this to a broader Venezuela–Argentina–European corridor. This thread is submitted for cross-reference with your case files.
+Genesis Daniela Peralta Marquez previously posted from Argentina, where she had no known independent financial means. A Venezuelan district council official (her father, Danny Peralta, Petare) and Italian-adjacent identity infrastructure (documented via a proved fake account with Italian PM content) connect this to a broader Venezuela–Argentina–European corridor. This thread is submitted for cross-reference with your case files.
 
 DUAL HYPOTHESIS (stated explicitly):
 The reporting individual holds open both (A) that some of these women are trafficking victims placed without full agency, and (B) that some participated willingly. No resolution is asserted.
