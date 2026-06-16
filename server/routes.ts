@@ -7515,6 +7515,9 @@ export function registerGazetteIntelRoutes(app: express.Express) {
         } else if (target === "lawyers-followup") {
           const { LAWYER_FOLLOWUP_CONTACTS } = await import("./mailer-campaign-lawyers-followup");
           contacts = LAWYER_FOLLOWUP_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "genesis-venezuela") {
+          const { GENESIS_VZ_CONTACTS } = await import("./mailer-campaign-genesis-venezuela");
+          contacts = GENESIS_VZ_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
         } else {
           // Full whistleblower blast
           const SUBJECT = "ITALY'S LONG LEASH: Leonardo S.p.A., CSG SAR, and the weaponization of Costa Rica's surveillance grid against U.S. citizens";
@@ -8221,6 +8224,92 @@ This email is constructed from verifiable technical disclosures, public contract
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
+  });
+
+  // ── Fire-all: localhost-only, fires every campaign sequentially ───────────
+  app.post("/api/mailer/fire-all", async (req, res) => {
+    const ip = req.ip || req.socket?.remoteAddress || "";
+    const isLocal = ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1";
+    if (!isLocal) return res.status(403).json({ error: "Localhost only" });
+
+    const apiKey = process.env.MAILGUN_API_KEY;
+    const domain = process.env.MAILGUN_DOMAIN;
+    if (!apiKey || !domain) return res.status(500).json({ error: "Mailgun not configured" });
+
+    const targets = [
+      "whistleblower", "cr-authorities", "expansion",
+      "venezuela", "us-intel", "lawyers", "genesis-venezuela"
+    ];
+    const summary: Record<string, { queued: number } | { error: string }> = {};
+
+    for (const target of targets) {
+      try {
+        let contacts: { id: number; to: string; org: string; subject: string; body: string }[] = [];
+
+        if (target === "cr-authorities") {
+          const { CR_AUTH_CONTACTS } = await import("./mailer-campaign-cr-authorities");
+          contacts = CR_AUTH_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "expansion") {
+          const { EXPANSION_CONTACTS } = await import("./mailer-campaign-expansion");
+          contacts = EXPANSION_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "venezuela") {
+          const { VENEZUELA_CONTACTS } = await import("./mailer-campaign-venezuela");
+          contacts = VENEZUELA_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "us-intel") {
+          const { US_INTEL_CONTACTS } = await import("./mailer-campaign-us-intel");
+          contacts = US_INTEL_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "lawyers") {
+          const { LAWYER_CONTACTS } = await import("./mailer-campaign-lawyers");
+          contacts = LAWYER_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else if (target === "genesis-venezuela") {
+          const { GENESIS_VZ_CONTACTS } = await import("./mailer-campaign-genesis-venezuela");
+          contacts = GENESIS_VZ_CONTACTS.map((c) => ({ id: c.id, to: c.to, org: c.org, subject: c.subject, body: c.body }));
+        } else {
+          // whistleblower
+          const { CAMPAIGN_CONTACTS } = await import("./mailer-campaign");
+          const { AV_CAMPAIGN_CONTACTS } = await import("./mailer-campaign-aviation");
+          const { SUPP_CONTACTS } = await import("./mailer-campaign-supplementary");
+          const WB_SUBJECT = "ITALY'S LONG LEASH: Leonardo S.p.A., CSG SAR, and the weaponization of Costa Rica's surveillance grid against U.S. citizens";
+          const WB_BODY = (await import("./mailer-campaign")).CAMPAIGN_CONTACTS[0]?.body ?? "";
+          contacts = [
+            ...CAMPAIGN_CONTACTS.map((c) => ({ ...c })),
+            ...AV_CAMPAIGN_CONTACTS.map((c) => ({ ...c })),
+            ...SUPP_CONTACTS.map((c) => ({ ...c })),
+          ].map((c) => ({ id: c.id, to: c.to, org: c.org, subject: (c as any).subject || WB_SUBJECT, body: (c as any).body || WB_BODY }));
+        }
+
+        summary[target] = { queued: contacts.length };
+
+        // Fire async
+        (async () => {
+          const Mailgun = (await import("mailgun.js")).default;
+          const mg = new Mailgun(FormData);
+          const client = mg.client({ username: "api", key: apiKey });
+          const sender = target === "cr-authorities"
+            ? "Samuel Wotton <hello@echokappa.com>"
+            : target === "genesis-venezuela"
+            ? "Samuel Wotton <hello@echokappa.com>"
+            : "Operational Insider <hello@echokappa.com>";
+          let ok = 0, fail = 0;
+          for (const c of contacts) {
+            try {
+              await client.messages.create(domain, { from: sender, to: [c.to], subject: c.subject, text: c.body });
+              ok++;
+              console.log(`[fire-all:${target}] OK [${c.id}] ${c.org} → ${c.to}`);
+            } catch (err: any) {
+              fail++;
+              console.error(`[fire-all:${target}] FAIL [${c.id}] ${c.org}: ${err?.response?.body?.message || err?.message}`);
+            }
+            await new Promise((r) => setTimeout(r, 400));
+          }
+          console.log(`[fire-all:${target}] DONE — sent:${ok} failed:${fail}`);
+        })();
+      } catch (err: any) {
+        summary[target] = { error: err?.message || String(err) };
+      }
+    }
+
+    res.json({ ok: true, status: "firing", campaigns: summary });
   });
 
   // ── US Intelligence / CR Judicial targeted blast ──────────────────────────
