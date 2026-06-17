@@ -200,6 +200,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.liquidCortex", fallback: "Liquid Cortex", url: "/liquid-cortex", icon: Brain },
       { titleKey: "sidebar.memoryCortex", fallback: "Memory Cortex", url: "/memory", icon: Database },
       { titleKey: "sidebar.imagery", fallback: "Imagery", url: "/imagery", icon: ScanEye },
+      { titleKey: "sidebar.gosHyperstructure", fallback: "Ω-GOS Hyperstructure", url: "/gos-hyperstructure", icon: Orbit },
       { titleKey: "sidebar.omegaGos", fallback: "Ω-GOS 7/4 LNN", url: "/omega-gos", icon: Atom },
       { titleKey: "sidebar.reel", fallback: "Ω-REEL", url: "/reel", icon: Film },
       { titleKey: "sidebar.mediaPitch", fallback: "Media Pitch", url: "/media-pitch", icon: Newspaper },

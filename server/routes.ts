@@ -18,6 +18,7 @@ import { getPipelineStatus, runPipelineOnce, startPipeline, stopPipeline, type P
 import { runSyncCapture, getSyncCaptureStatus, getSyncCaptureHistory, getScreenshotFiles, getScanResultFiles } from "./sync-capture";
 import { getAvailableModels, queryModel, recursiveQuery, getProviderStatus } from "./research-engine";
 import { executeDeepResearchRun } from "./deep-research";
+import { createGOSJob, dispatchGOSJob, getGOSJob, listGOSJobs, getProviderStatus as getGOSProviderStatus, GOS_PROVIDERS, GOS_SUBDOC_VECTORS } from "./gos-hyperstructure";
 import { fetchUrl } from "./research-web";
 import { pinnedFetch, SsrfError } from "./ssrf-guard";
 import { analyzeImage, INVESTIGATION_PRESETS, getNasaGibsUrl } from "./icositetragon-engine";
@@ -5163,6 +5164,114 @@ done
     } catch (e) {
       res.json({ states: [], time: Date.now(), error: String(e) });
     }
+  });
+
+  // ── Ω-GOS HYPERSTRUCTURE RESEARCH ENGINE ────────────────────────────────────
+  app.get("/api/gos-hyperstructure/providers", (_req, res) => {
+    const status = getGOSProviderStatus();
+    res.json({
+      providers: GOS_PROVIDERS.map(p => ({
+        ...p,
+        available: status.find(s => s.id === p.id)?.available ?? false,
+        reason: status.find(s => s.id === p.id)?.reason,
+      })),
+      subdocVectors: GOS_SUBDOC_VECTORS,
+    });
+  });
+
+  app.get("/api/gos-hyperstructure/jobs", (_req, res) => {
+    res.json({ jobs: listGOSJobs().map(j => ({ id: j.id, topic: j.topic, status: j.status, createdAt: j.createdAt, dispatchCount: j.dispatches.length })) });
+  });
+
+  app.get("/api/gos-hyperstructure/jobs/:id", (req, res) => {
+    const job = getGOSJob(req.params.id);
+    if (!job) return res.status(404).json({ error: "Job not found" });
+    res.json(job);
+  });
+
+  app.post("/api/gos-hyperstructure/context", async (req, res) => {
+    try {
+      const { topic } = req.body;
+      if (!topic?.trim()) return res.status(400).json({ error: "topic required" });
+
+      // Fetch live KAPPA data
+      let kappaData: any = { score: 0, threatLevel: "NOMINAL", correlationCount: 0, topCorrelations: [], recentEvents: [] };
+      try {
+        const [scoreRes, corrRes, eventsRes] = await Promise.allSettled([
+          storage.getLatestKappaScore(),
+          storage.getCorrelations(10),
+          storage.getRecentEvents(20),
+        ]);
+        if (scoreRes.status === "fulfilled" && scoreRes.value) {
+          kappaData.score = scoreRes.value.score ?? 0;
+          kappaData.threatLevel = scoreRes.value.threatLevel ?? "NOMINAL";
+        }
+        if (corrRes.status === "fulfilled" && corrRes.value) {
+          kappaData.correlationCount = corrRes.value.length;
+          kappaData.topCorrelations = corrRes.value.slice(0, 8).map((c: any) => ({
+            rule: c.ruleName ?? c.rule ?? "Unknown",
+            domains: Array.isArray(c.domains) ? c.domains.join(", ") : String(c.domains ?? ""),
+            severity: String(c.severity ?? ""),
+            timestamp: c.timestamp ?? c.createdAt ?? "",
+          }));
+        }
+        if (eventsRes.status === "fulfilled" && eventsRes.value) {
+          kappaData.recentEvents = eventsRes.value.slice(0, 15).map((e: any) => ({
+            type: e.type ?? e.eventType ?? "event",
+            source: e.source ?? e.domain ?? "unknown",
+            description: e.description ?? e.title ?? e.summary ?? "",
+            timestamp: e.timestamp ?? e.createdAt ?? "",
+          }));
+        }
+      } catch (_) {}
+
+      const jobId = await createGOSJob(topic.trim(), kappaData);
+      const job = getGOSJob(jobId)!;
+      res.json({ jobId, status: job.status, subdocCount: job.subdocs.length, masterDocLength: job.masterDoc.length });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/gos-hyperstructure/dispatch", async (req, res) => {
+    try {
+      const { jobId, providerIds } = req.body;
+      if (!jobId) return res.status(400).json({ error: "jobId required" });
+      const job = getGOSJob(jobId);
+      if (!job) return res.status(404).json({ error: "Job not found" });
+      if (!Array.isArray(providerIds) || providerIds.length === 0) return res.status(400).json({ error: "providerIds required" });
+
+      // Respond immediately, dispatch runs async
+      res.json({ ok: true, jobId, dispatching: providerIds.length });
+      dispatchGOSJob(jobId, providerIds).catch(e => console.error("[GOS] dispatch error:", e));
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.get("/api/gos-hyperstructure/download/:jobId/:providerId", (req, res) => {
+    const job = getGOSJob(req.params.jobId);
+    if (!job) return res.status(404).json({ error: "Job not found" });
+
+    const { providerId } = req.params;
+    if (providerId === "master") {
+      res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+      res.setHeader("Content-Disposition", `attachment; filename="gos-master-${job.id}.md"`);
+      return res.send(job.masterDoc);
+    }
+    if (providerId === "meta") {
+      res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+      res.setHeader("Content-Disposition", `attachment; filename="gos-meta-synthesis-${job.id}.md"`);
+      return res.send(job.metaSynthesis ?? "# Meta-synthesis not yet available");
+    }
+
+    const dispatch = job.dispatches.find(d => d.providerId === providerId);
+    if (!dispatch) return res.status(404).json({ error: "Dispatch not found" });
+
+    const safe = dispatch.providerName.replace(/[^a-z0-9]/gi, "-").toLowerCase();
+    res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+    res.setHeader("Content-Disposition", `attachment; filename="gos-${safe}-${job.id}.md"`);
+    res.send(`# Ω-GOS Synthesis — ${dispatch.providerName}\n**Model:** ${dispatch.model}\n**Duration:** ${dispatch.durationMs ?? 0}ms\n**Topic:** ${job.topic}\n\n---\n\n${dispatch.synthesis}`);
   });
 
   // ── Ω-GOS 7/4 LNN Hypervisor routes ────────────────────────────────────────

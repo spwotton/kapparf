@@ -9,3 +9,4 @@
 - [Zod discriminatedUnion + lazy](zod-discriminated-union-lazy.md) — recursive variant must be a real ZodObject with lazy on its child array; lazy-wrapped union member throws TypeError on first non-empty parse, not caught by safeParse.
 - [TLE spoof detection](tle-spoof-detection.md) — orbital-element drift checks must compare against a PROPAGATED expectation, not raw element diffs; raw mean-anomaly diff false-flags every GEO sat.
 - [Google Drive getClient() empty](google-drive-getclient.md) — the installed Drive connector's getClient() returns {}; call the Drive REST API directly with the access token.
+- [GOS Hyperstructure Engine](gos-hyperstructure-engine.md) — multi-provider synthesis engine; Kimi K2 available via OpenRouter already (no extra key needed); KIMI_API_KEY for direct Moonshot API.
