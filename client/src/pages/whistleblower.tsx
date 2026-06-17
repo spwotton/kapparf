@@ -334,11 +334,64 @@ const navGroups = [
   },
 ];
 
+function LanguagePopup({ onSelect }: { onSelect: (lang: "en" | "es") => void }) {
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm" data-testid="lang-popup">
+      <div className="bg-background border border-border rounded-sm shadow-2xl max-w-sm w-full mx-4 p-8 text-center">
+        <div className="text-xs font-mono tracking-widest text-muted-foreground/60 uppercase mb-6">CIAJW — Signal Intelligence Dispatch</div>
+        <h2 className="text-2xl font-serif font-bold text-foreground mb-2 leading-tight">
+          What's happening at<br />Hotel Pochote Grande?
+        </h2>
+        <p className="text-sm text-muted-foreground mb-2 font-serif italic">
+          ¿Qué está pasando en el Hotel Pochote Grande?
+        </p>
+        <p className="text-xs text-muted-foreground/50 font-mono mb-8">
+          Choose a language to continue / Elige un idioma para continuar
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            onClick={() => onSelect("en")}
+            data-testid="button-lang-en"
+            className="flex flex-col items-center gap-2 p-4 border border-border rounded-sm hover:border-primary hover:bg-primary/5 transition-all"
+          >
+            <span className="text-2xl">🇺🇸</span>
+            <span className="text-sm font-semibold text-foreground">English</span>
+          </button>
+          <button
+            onClick={() => onSelect("es")}
+            data-testid="button-lang-es"
+            className="flex flex-col items-center gap-2 p-4 border border-border rounded-sm hover:border-primary hover:bg-primary/5 transition-all"
+          >
+            <span className="text-2xl">🇪🇸</span>
+            <span className="text-sm font-semibold text-foreground">Español</span>
+          </button>
+        </div>
+        <p className="text-[10px] text-muted-foreground/30 font-mono mt-6">
+          Your choice is saved locally. No tracking.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function WhistleblowerPage() {
   const [activeSection, setActiveSection] = useState("overview");
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const scrollSpyPaused = useRef(false);
   const scrollSpyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const [lang, setLang] = useState<"en" | "es" | null>(() => {
+    try {
+      const stored = localStorage.getItem("ciajw_lang");
+      if (stored === "en" || stored === "es") return stored;
+    } catch {}
+    return null;
+  });
+
+  const handleLangSelect = (l: "en" | "es") => {
+    setLang(l);
+    try { localStorage.setItem("ciajw_lang", l); } catch {}
+  };
 
   useEffect(() => {
     const sectionIds = navGroups.flatMap(g => g.items).map(item => item.id);
@@ -410,6 +463,7 @@ export default function WhistleblowerPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground" data-testid="whistleblower-page">
+      {lang === null && <LanguagePopup onSelect={handleLangSelect} />}
 
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-amber-900/30 dark:border-amber-900/50">
         <div className="max-w-6xl mx-auto px-4 py-2">

@@ -14,7 +14,17 @@ const SiteModeContext = createContext<SiteModeContextValue>({
   setMode: () => {},
 });
 
+function isGooseDomain(): boolean {
+  try {
+    const h = window.location.hostname.toLowerCase();
+    return h === "goosegazette.org" || h === "www.goosegazette.org" || h.endsWith(".goosegazette.org");
+  } catch {
+    return false;
+  }
+}
+
 function resolveStoredMode(raw: string | null): SiteMode {
+  if (isGooseDomain()) return "goose";
   if (raw === "goose") return "goose";
   return "kappa";
 }
@@ -24,13 +34,15 @@ export function SiteModeProvider({ children }: { children: React.ReactNode }) {
     try {
       return resolveStoredMode(localStorage.getItem("kappa_site_mode"));
     } catch {
-      return "kappa";
+      return isGooseDomain() ? "goose" : "kappa";
     }
   });
 
   const setMode = (m: SiteMode) => {
     setModeState(m);
-    try { localStorage.setItem("kappa_site_mode", m); } catch {}
+    if (!isGooseDomain()) {
+      try { localStorage.setItem("kappa_site_mode", m); } catch {}
+    }
   };
 
   const toggle = () => setMode(mode === "goose" ? "kappa" : "goose");

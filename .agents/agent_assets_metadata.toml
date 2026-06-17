@@ -443,3 +443,9 @@ id = "kqbzwWDV38sinP7pVMJO3"
 uri = "file://public/stasis-mom.txt"
 type = "text"
 title = "Stasi's Mom — full lyrics"
+
+[[outputs]]
+id = "5Sisj-7RQ1_48_nczjrTE"
+uri = "file://public/nav-audit-report.md"
+type = "text"
+title = "Nav Audit Report — 10 suggested actions, vote required"
