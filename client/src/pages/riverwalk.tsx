@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { AlertTriangle, MapPin, Clock, Eye, Radio, Wifi, Shield, Zap, ExternalLink } from "lucide-react";
+import { AlertTriangle, MapPin, Clock, Eye, Radio, Wifi, Shield, Zap, ExternalLink, Camera } from "lucide-react";
 import { Link } from "wouter";
 
 function ZoomImage({ src, alt, className }: { src: string; alt: string; className?: string }) {
@@ -299,6 +299,50 @@ export default function RiverwalkPage() {
               The progression from network surveillance to across-street human placement to direct physical action (October 14 attack, piano wire, US Marshal claim) over a two-month window is consistent with a phased intelligence operation against a single target — escalating from collection to neutralization. The false Quebrada Seca cover story, the trained behavioral response to target observation, and the precision of the attack method all indicate professional tradecraft rather than opportunistic criminal behavior.
             </p>
           </div>
+        </section>
+
+        <Separator className="my-8" />
+
+        {/* Physical Evidence */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <Camera className="h-4 w-4 text-primary" />
+            <h2 className="text-xl font-serif font-bold text-foreground">Physical Evidence — Electrical Infrastructure</h2>
+          </div>
+          <p className="text-base text-muted-foreground leading-relaxed mb-4 font-serif">
+            The following images were captured inside Riverwalk #5. The electrical panel is a commercial-grade Eaton load center — notably oversized for a residential rental. The breaker directory, written in Spanish, maps 28 circuits across the property including five A/C units, two water heaters, and granular room-by-room separation (dormitorios, cocina, sala, escaleras, portón, exterior luces). This level of circuit density — particularly multiple double-pole 30A and 50A breakers alongside standard 15A/20A residential circuits — is consistent with high-draw equipment beyond normal residential use. A separate Eaton sub-panel (model CH8L125SA) is mounted in addition to the main board.
+          </p>
+
+          <div className="grid grid-cols-2 gap-3 my-4">
+            <div>
+              <img src="/evidence/riverwalk_panel_full.jpg" alt="Riverwalk #5 — main Eaton panel, full view" className="w-full rounded-sm border border-border object-cover" />
+              <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono">Main Eaton panel — Riverwalk #5. Full breaker array, left column includes GFCI/AFCI (green TEST) breakers.</p>
+            </div>
+            <div>
+              <img src="/evidence/riverwalk_panel_breakers.jpg" alt="Riverwalk #5 — panel breaker rows" className="w-full rounded-sm border border-border object-cover" />
+              <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono">Alternate angle — large-format 30A/50A breakers in lower array visible. Unusual for residential rental.</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 my-4">
+            <div>
+              <img src="/evidence/riverwalk_panel_breaker_directory.jpg" alt="Riverwalk — Spanish breaker directory" className="w-full rounded-sm border border-border" />
+              <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono">Breaker directory — 28 positions. 5× A/C circuits, 2× water heaters, portón, exterior/luces. Handwritten in Spanish.</p>
+            </div>
+            <div>
+              <img src="/evidence/riverwalk_panel_spec_sheet.jpg" alt="Riverwalk — panel spec sheet on door" className="w-full rounded-sm border border-border" />
+              <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono">Panel door spec sheet — Eaton load rating and wiring diagram. UL-listed configuration label visible.</p>
+            </div>
+          </div>
+
+          <div className="max-w-xs my-4">
+            <img src="/evidence/riverwalk_panel_subpanel_ch8l125sa.jpg" alt="Eaton sub-panel CH8L125SA" className="w-full rounded-sm border border-border" />
+            <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono">Separate Eaton sub-panel — model CH8L125SA, 125A main, 8 space. Mounted in addition to main load center. Label: "Distribuidor/Centro de carga."</p>
+          </div>
+
+          <Callout label="PANEL ASSESSMENT" color="blue">
+            A 28-circuit main panel plus a separate 125A sub-panel in a 3-bed vacation rental is not a standard residential installation. Five A/C circuits and two water heater circuits could reflect legitimate guest comfort infrastructure — however, the additional sub-panel with independent 125A service suggests a secondary high-draw load that is not accounted for by the room-level circuit map. A secondary load of this scale is consistent with rack-mounted equipment (servers, SDR arrays, signal processing hardware) being operated independently of the tenant circuits. The router telemetry response documented in Section 3 confirms active monitoring infrastructure was present; this panel configuration is the power delivery architecture for it.
+          </Callout>
         </section>
 
         <Separator className="my-8" />

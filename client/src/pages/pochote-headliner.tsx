@@ -508,6 +508,10 @@ export default function PochoteHeadlinerPage() {
               <ZoomImage src={aerialImg} alt="Hotel Pochote Grande surveillance network aerial" className="w-full" />
               <p className="text-xs text-muted-foreground/60 mt-1 font-mono">Full surveillance perimeter — La Flor, central antenna, Crocs.</p>
             </div>
+            <div>
+              <img src="/evidence/laflor_airbnb_listing.jpg" alt="La Flor — Airbnb listing screenshot" className="w-full rounded-sm border border-border" />
+              <p className="text-xs text-muted-foreground/60 mt-1 font-mono">La Flor Airbnb listing — "New House, steps to the beach," Jacó, 3 bed/3 bath, 36 reviews. Last hotel before current location.</p>
+            </div>
           </div>
 
           <SurveillanceNetworkDiagram />
@@ -750,6 +754,18 @@ export default function PochoteHeadlinerPage() {
                 <ZoomImage src={tattooLegs} alt="Existing evidence — leg documentation" className="w-full" />
                 <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono text-center">Full leg view — additional confirmation</p>
               </div>
+            </div>
+          </div>
+
+          {/* Dana Soto / Telecable box — infrastructure note */}
+          <div className="border border-amber-800/40 bg-amber-950/10 rounded-sm p-4 my-4">
+            <div className="text-xs font-mono font-bold text-amber-400 mb-2 uppercase tracking-widest">SIGINT INFRASTRUCTURE — DANA SOTO RESIDENCE</div>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+              Genesis Peralta (Operative 01) resided with <strong className="text-foreground">Dana Soto</strong>. During access to that residence, a Telecable device was found stored on top of a cabinet — dusty, upside-down, with handwritten installation notes on the underside label. Telecable is a Costa Rican cable/broadband provider. A device stored in this manner — not connected, not discarded, positioned face-down with installation credentials visible — is consistent with a previously-deployed network tap or traffic interception device that was taken off-line and retained rather than returned or destroyed.
+            </p>
+            <div className="max-w-sm">
+              <img src="/evidence/telecable_box_dana_soto_peralta_house.jpg" alt="Telecable box — Dana Soto / Peralta residence" className="w-full rounded-sm border border-border" />
+              <p className="text-[10px] text-muted-foreground/50 mt-1 font-mono">Telecable device — found on cabinet, inverted, in Dana Soto/Peralta residence. Handwritten installation notes visible on underside label. Device not in use at time of discovery.</p>
             </div>
           </div>
 
