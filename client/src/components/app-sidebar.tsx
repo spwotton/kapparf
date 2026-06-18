@@ -45,6 +45,7 @@ import {
   BrainCog,
   Compass,
   Target,
+  Router,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -126,6 +127,7 @@ const navGroups: NavGroup[] = [
   {
     labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
     items: [
+      { titleKey: "sidebar.docsisForensics", fallback: "⚡ DOCSIS Modem Forensics", url: "/docsis-forensics", icon: Router },
       { titleKey: "sidebar.pochoteHeadliner", fallback: "▶ 30 Days at Pochote Grande", url: "/pochote-headliner", icon: AlertTriangle },
       { titleKey: "sidebar.riverwalk", fallback: "▶ Riverwalk — Oct 14 Attack", url: "/riverwalk", icon: AlertTriangle },
       { titleKey: "sidebar.networkAnalysis", fallback: "HUMINT Network Analysis", url: "/network-analysis", icon: Network },
