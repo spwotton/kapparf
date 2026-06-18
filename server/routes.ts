@@ -5866,6 +5866,34 @@ export function registerGooseRoutes(app: express.Express) {
     } catch (e: any) { res.status(500).send(`<!-- rss error: ${e.message} -->`); }
   });
 
+  // ── INTEL WAND — AI chapter synthesis for CIAJW article ─────────────────────
+  app.post("/api/intel/wand", async (req, res) => {
+    try {
+      const { chapter, context } = req.body as { chapter: string; context: string };
+      if (!chapter || !context) return res.status(400).json({ error: "chapter and context required" });
+      const prompt = `You are a senior SIGINT analyst reviewing field intelligence for a classified investigation at Hotel Pochote Grande, Jacó, Costa Rica. 
+The subject (Sam Wotton, Australian) has been under documented multi-domain surveillance for 30+ days.
+Your task: synthesize the evidence below for chapter "${chapter}" into a concise, precise intelligence assessment.
+
+Write in a journalistic-intel style: factual, specific, no hedging. 3–5 short paragraphs.
+Connect the evidence points, identify the strongest corroborations, and state what the combined picture means operationally.
+Do NOT use legal framing. This is for situational awareness and personal documentation.
+
+EVIDENCE CONTEXT:
+${context.slice(0, 4000)}`;
+
+      const completion = await (audioOpenAI as any).chat.completions.create({
+        model: "gpt-4o-mini",
+        max_tokens: 900,
+        messages: [{ role: "user", content: prompt }],
+      });
+      const synthesis = completion.choices?.[0]?.message?.content ?? "Synthesis unavailable.";
+      res.json({ synthesis, chapter, model: "gpt-4o-mini" });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message ?? "Synthesis failed" });
+    }
+  });
+
   // ── POCHOTE BATCH AUDIO TRANSCRIPTION ────────────────────────────────────────
   app.post("/api/pochote/transcribe-all", async (_req, res) => {
     try {

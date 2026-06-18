@@ -10,3 +10,4 @@
 - [TLE spoof detection](tle-spoof-detection.md) — orbital-element drift checks must compare against a PROPAGATED expectation, not raw element diffs; raw mean-anomaly diff false-flags every GEO sat.
 - [Google Drive getClient() empty](google-drive-getclient.md) — the installed Drive connector's getClient() returns {}; call the Drive REST API directly with the access token.
 - [GOS Hyperstructure Engine](gos-hyperstructure-engine.md) — multi-provider synthesis engine; Kimi K2 available via OpenRouter already (no extra key needed); KIMI_API_KEY for direct Moonshot API.
+- [Whistleblower chapter architecture](whistleblower-chapters.md) — page rebuilt as 7-tab chapter wiki; /api/intel/wand is the AI synthesis endpoint.
