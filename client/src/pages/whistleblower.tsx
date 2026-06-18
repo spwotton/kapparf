@@ -1130,37 +1130,122 @@ export default function WhistleblowerPage() {
 
       {/* Hero ---------------------------------------------------------------- */}
       <div className="relative overflow-hidden border-b border-border">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-amber-950/30 via-background to-background" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 pt-12 pb-10">
-          <div className="flex flex-wrap items-center gap-2 mb-5">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-amber-950/40 via-background to-background" />
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-0">
+          {/* Top bar */}
+          <div className="flex flex-wrap items-center gap-2 mb-6">
             <Badge variant="destructive" className="text-[10px] font-mono rounded-none tracking-widest animate-pulse">LIVE OPERATION</Badge>
             <Badge variant="outline" className="text-[10px] font-mono rounded-none tracking-widest">SIGINT PLATFORM</Badge>
             <Badge variant="outline" className="text-[10px] font-mono rounded-none tracking-widest">CIAJW.COM</Badge>
             <div className="ml-auto flex items-center gap-2">
-              <button onClick={() => handleLang(l === "en" ? "es" : "en")} className="text-[10px] font-mono text-muted-foreground/50 hover:text-muted-foreground border border-border/50 px-2 py-0.5 rounded-sm transition-colors">
-                {l === "en" ? "ES" : "EN"}
+              <button onClick={() => handleLang(l === "en" ? "es" : "en")}
+                className="text-[10px] font-mono text-muted-foreground/50 hover:text-foreground border border-border/50 px-2 py-1 rounded-sm transition-colors"
+                data-testid="button-lang-toggle">
+                {l === "en" ? "🇨🇷 ES" : "🇬🇧 EN"}
               </button>
             </div>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-foreground leading-tight mb-4" data-testid="hero-title">
-            {l === "es" ? "30 Noches Bajo Vigilancia:" : "30 Nights Under Surveillance:"}
-            <br />
-            <span className="text-muted-foreground font-normal">
-              {l === "es" ? "Jacó, Costa Rica — 2025–2026" : "Jacó, Costa Rica — 2025–2026"}
-            </span>
-          </h1>
+          {/* Two-column on md+, stacked on mobile */}
+          <div className="flex flex-col md:flex-row md:gap-10 md:items-start pb-8">
+            {/* Text column */}
+            <div className="flex-1 min-w-0">
+              <div className="text-[10px] font-mono text-amber-400/80 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <span className="h-px flex-1 bg-amber-800/30" />
+                {l === "es" ? "Informe de Inteligencia Exclusivo" : "Exclusive Intelligence Report"}
+                <span className="h-px flex-1 bg-amber-800/30" />
+              </div>
 
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 max-w-2xl font-serif">
-            {l === "es"
-              ? "Una antena parabólica rotatoria. Seis posiciones de vigilancia. Tránsitos nocturnos de drones. Propietarios alemanes. Una señal anómala de 57 Hz documentada en la última noche. El motor KAPPA registrando correlaciones activas en seis dominios de señales independientes."
-              : "A rotating parabolic dish antenna. Six surveillance positions surrounding one room. Nightly drone transits. German-connected ownership. A 57 Hz anomalous signal documented on the final night. The KAPPA engine recording active correlations across six independent signal domains."}
-          </p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-foreground leading-tight mb-4" data-testid="hero-title">
+                {l === "es" ? "30 Noches Bajo Vigilancia" : "30 Nights Under Surveillance"}
+                <span className="block text-xl sm:text-2xl md:text-3xl text-amber-400 font-normal mt-1">
+                  {l === "es" ? "Jacó, Costa Rica — 2025–2026" : "Jacó, Costa Rica — 2025–2026"}
+                </span>
+              </h1>
 
-          <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground/60 font-mono">
-            <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />May 17 – June 18, 2026</span>
-            <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" />Hotel Pochote Grande, Jacó Beach, Puntarenas, CR</span>
-            <span className="flex items-center gap-1.5"><Eye className="h-3.5 w-3.5" />~35 min read</span>
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-5 font-serif">
+                {l === "es"
+                  ? "Una antena parabólica rotatoria. Seis posiciones confirmadas de vigilancia rodeando una habitación. Tránsitos nocturnos de drones. Propietarios alemanes. Una señal anómala de 57 Hz documentada en la última noche. El motor KAPPA registrando correlaciones activas en seis dominios de señales independientes."
+                  : "A rotating parabolic dish antenna. Six confirmed surveillance positions surrounding one room. Nightly drone transits. German-connected ownership. A 57.28 Hz anomalous signal documented on the final night. The KAPPA engine recording active correlations across six independent signal domains."}
+              </p>
+
+              {/* Pull quote */}
+              <blockquote className="border-l-4 border-amber-600 pl-4 mb-5 text-sm text-muted-foreground/80 italic font-serif">
+                {l === "es"
+                  ? '"La frecuencia de 57.28 Hz no existe en ningún sistema eléctrico natural o doméstico. Requiere un transmisor activo."'
+                  : '"57.28 Hz does not appear in any natural or domestic electrical system. Its presence at 54 dB SNR requires an active transmitter."'}
+              </blockquote>
+
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground/60 font-mono mb-6">
+                <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" />May 17 – June 18, 2026</span>
+                <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" />Hotel Pochote Grande, Jacó</span>
+                <span className="flex items-center gap-1.5"><Eye className="h-3.5 w-3.5" />~35 min read</span>
+              </div>
+
+              {/* Key figures bar */}
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-0">
+                {[
+                  { v: "6", l_en: "Surveillance\nPositions", l_es: "Posiciones\nVigilancia" },
+                  { v: "57 Hz", l_en: "Anomalous\nSignal", l_es: "Señal\nAnómala" },
+                  { v: "5×", l_en: "AC Units\nDetected", l_es: "Unidades\nAC" },
+                  { v: "54dB", l_en: "Signal\nSNR", l_es: "SNR\nSeñal" },
+                  { v: "303", l_en: "Videos\nArchived", l_es: "Videos\nArchivados" },
+                  { v: "33", l_en: "PCAP\nCaptures", l_es: "Capturas\nPCAP" },
+                ].map(f => (
+                  <div key={f.v} className="border border-border/50 bg-card/30 rounded-sm px-2 py-2 text-center">
+                    <div className="text-lg font-black font-mono text-amber-400 leading-none">{f.v}</div>
+                    <div className="text-[8px] font-mono text-muted-foreground/50 mt-1 leading-tight whitespace-pre-line">{l === "es" ? f.l_es : f.l_en}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Aerial image column — hidden on mobile, shown md+ */}
+            <div className="hidden md:block flex-shrink-0 w-72 lg:w-80 space-y-3">
+              <div className="relative overflow-hidden rounded-sm border border-border/60">
+                <img
+                  src="/evidence/pochote_surveillance_network_aerial.jpeg"
+                  alt="Pochote Grande surveillance network — aerial view"
+                  className="w-full object-cover"
+                  onError={e => { (e.target as HTMLImageElement).style.display = "none"; }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-3">
+                  <p className="text-[9px] font-mono text-white/70 leading-tight">
+                    {l === "es" ? "Red de vigilancia — Hotel Pochote Grande, Jacó Beach" : "Surveillance network — Hotel Pochote Grande, Jacó Beach"}
+                  </p>
+                </div>
+              </div>
+              <div className="relative overflow-hidden rounded-sm border border-border/60">
+                <img
+                  src="/evidence/room10_aerial_geometry.jpeg"
+                  alt="Room 10 geometry — Apple Maps aerial"
+                  className="w-full object-cover max-h-40"
+                  onError={e => { (e.target as HTMLImageElement).style.display = "none"; }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-3 py-2">
+                  <p className="text-[9px] font-mono text-white/70">
+                    {l === "es" ? "Geometría Habitación 10 — posición marcada en azul" : "Room 10 geometry — position marked in blue"}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile-only image strip */}
+          <div className="md:hidden flex gap-3 overflow-x-auto pb-4 scrollbar-hide -mx-4 px-4">
+            {[
+              { src: "/evidence/pochote_surveillance_network_aerial.jpeg", cap: l === "es" ? "Red de vigilancia" : "Surveillance network" },
+              { src: "/evidence/room10_aerial_geometry.jpeg", cap: l === "es" ? "Geometría R10" : "Room 10 geometry" },
+              { src: "/evidence/riverwalk_panel_1.jpg", cap: l === "es" ? "Panel eléctrico" : "Electrical panel" },
+            ].map((img, i) => (
+              <div key={i} className="flex-shrink-0 w-44 relative rounded-sm overflow-hidden border border-border/60">
+                <img src={img.src} alt={img.cap} className="w-full h-28 object-cover"
+                  onError={e => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-2 py-1.5">
+                  <p className="text-[8px] font-mono text-white/70">{img.cap}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
