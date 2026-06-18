@@ -449,3 +449,15 @@ id = "5Sisj-7RQ1_48_nczjrTE"
 uri = "file://public/nav-audit-report.md"
 type = "text"
 title = "Nav Audit Report — 10 suggested actions, vote required"
+
+[[outputs]]
+id = "bhsPLAAmpJLFbkd52aW1Z"
+uri = "file://public/evidence/recording49_fft_report.md"
+type = "text"
+title = "Recording 49 — FFT Forensic Analysis Report"
+
+[[outputs]]
+id = "jssrLCtoAbQxOgIiXoLhV"
+uri = "file://public/evidence/spectrogram_rec49.png"
+type = "image"
+title = "Spectrogram — Recording 49 (0–500 Hz)"
