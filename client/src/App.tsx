@@ -102,6 +102,7 @@ import RiverwalkPage from "@/pages/riverwalk";
 import ThreatHuntingPage from "@/pages/threat-hunting";
 import DocsisForensicsPage from "@/pages/docsis-forensics";
 import GOSHyperstructurePage from "@/pages/gos-hyperstructure";
+import TattooBrandingPage from "@/pages/tattoo-branding";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -193,6 +194,7 @@ function KappaRouter() {
       <Route path="/riverwalk" component={RiverwalkPage} />
       <Route path="/threat-hunting" component={ThreatHuntingPage} />
       <Route path="/docsis-forensics" component={DocsisForensicsPage} />
+      <Route path="/tattoo-branding" component={TattooBrandingPage} />
       <Route path="/gos-hyperstructure" component={GOSHyperstructurePage} />
       <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
