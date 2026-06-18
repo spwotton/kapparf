@@ -126,6 +126,7 @@ const navGroups: NavGroup[] = [
     labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
     items: [
       { titleKey: "sidebar.pochoteHeadliner", fallback: "▶ 30 Days at Pochote Grande", url: "/pochote-headliner", icon: AlertTriangle },
+      { titleKey: "sidebar.riverwalk", fallback: "▶ Riverwalk — Oct 14 Attack", url: "/riverwalk", icon: AlertTriangle },
       { titleKey: "sidebar.networkAnalysis", fallback: "HUMINT Network Analysis", url: "/network-analysis", icon: Network },
       { titleKey: "sidebar.pochoteIncident", fallback: "Operation Pochote Grande", url: "/pochote-incident", icon: AlertTriangle },
       { titleKey: "sidebar.parabolicAntenna", fallback: "Parabolic Antenna — Santa Reyes", url: "/parabolic-antenna", icon: Radio },

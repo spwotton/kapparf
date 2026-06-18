@@ -98,6 +98,7 @@ import SensorArrayPage from "@/pages/sensor-array";
 import DemodexPhonePage from "@/pages/demodex-phone";
 import NetworkAnalysisPage from "@/pages/network-analysis";
 import PochoteHeadlinerPage from "@/pages/pochote-headliner";
+import RiverwalkPage from "@/pages/riverwalk";
 import GOSHyperstructurePage from "@/pages/gos-hyperstructure";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
@@ -187,6 +188,7 @@ function KappaRouter() {
       <Route path="/demodex-phone" component={DemodexPhonePage} />
       <Route path="/network-analysis" component={NetworkAnalysisPage} />
       <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
+      <Route path="/riverwalk" component={RiverwalkPage} />
       <Route path="/gos-hyperstructure" component={GOSHyperstructurePage} />
       <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
