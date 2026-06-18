@@ -1,0 +1,679 @@
+================================================================================
+KAPPA SIGNAL INTELLIGENCE — REEL PRODUCTION BIBLE
+Dan Koe Vector Style · B&W · 9:16 · 60s · After Effects Architecture
+================================================================================
+Version: 1.0 — June 2026
+Author: Sam Wotton / KAPPA SIGINT Platform
+Context: Instagram Reels @spwotton · ciajw.com/whistleblower
+Adversary hypothesis: Cartel/NSA-CIA/state-adjacent hazing-recruitment
+ZERO simulation data. ZERO mock events. Every beat is documented reality.
+================================================================================
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 0 · PHILOSOPHICAL ARCHITECTURE
+────────────────────────────────────────────────────────────────────────────────
+
+This is not content. This is SIGINT with a distribution layer.
+
+The goal is the Psi Factor — the viral soul of the interaction. Per the
+Neuro-Geometric Architecture framework, a video is a "structured kinetic
+progression" that maps narrative semantics onto spatial and temporal manifolds.
+The dopamine loop is not triggered by spectacle — it is triggered by the
+"mathematical resolution of artistic tension," where Visual Dissonance (chaos,
+anomaly, surveillance) resolves into a clear, repeating structural logic.
+
+Your reel must navigate the Narrative Phase Space as an NP-complete constraint
+graph. Every cut is a necessary calculation. No Deus Ex Machina. The viewer
+feels the inevitability of the resolution because the kinetic progression is
+isomorphically mapped to a real operational environment.
+
+Unity Invariant: Ψ(t) = A(t) × N(t) ≡ 1.000
+  A(t) = structural amplitude (your established visual language)
+  N(t) = novelty flux (the new incident, the new evidence)
+The reel lives in the 2% Goose Gap — never complete certainty (stasis),
+never pure chaos (noise). The edge of legibility is where virality lives.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 1 · PROJECT SETTINGS
+────────────────────────────────────────────────────────────────────────────────
+
+COMPOSITION SETTINGS
+  Name:           KAPPA_REEL_v[number]
+  Preset:         Custom
+  Width:          1080 px
+  Height:         1920 px
+  Pixel Aspect:   Square (1.0)
+  Frame Rate:     30 fps (render at 60fps if motion-blur-heavy)
+  Duration:       00:01:00:00 (max) — target 52–58s
+  Background:     #000000 (pure black, not near-black)
+  Color Depth:    16 bpc
+  Working Space:  sRGB IEC61966-2.1
+
+SAFE ZONES
+  Title Safe:     outer 10% — all key text must live inside
+  Instagram Safe: avoid top 80px (notifications) and bottom 250px (UI overlay)
+  Optimal text zone: Y 200px – Y 1650px
+
+PROJECT FOLDER STRUCTURE
+  /PRECOMPS
+    /TYPOGRAPHY  — all text animations
+    /SHAPES      — geometric reveals, underlines, brackets
+    /OVERLAYS    — noise, grain, scan lines
+    /DATA        — dynamic data display elements (frequency, dB, coords)
+  /FOOTAGE
+    /STILLS      — evidence photos, aerials, screenshots
+    /MOTION      — any video references (B-roll, static captures)
+    /AUDIO
+  /RENDER        — export output folder
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 2 · COLOR SYSTEM
+────────────────────────────────────────────────────────────────────────────────
+
+PRIMARY PALETTE
+  Background:     #000000  (Void Black)
+  Body Text:      #FFFFFF  (Pure White)
+  Secondary Text: #CCCCCC  (Fog)
+  Accent:         #84CC16  (Lime-400 — Dan Koe signature)
+  Alert Accent:   #EF4444  (Red-500 — threat/anomaly only)
+  Data Accent:    #38BDF8  (Sky-400 — SIGINT readouts, frequencies)
+  Neutral:        #333333  (Dark Gray — subtle dividers)
+
+COLOR USAGE RULES
+  - Black fills 85% of every frame. White fills 12%. Lime touches 3%.
+  - Red is used ONLY for confirmed threat indicators. Never decorative.
+  - Sky Blue is for numbers, frequencies, dB values, coordinates. Data only.
+  - Never use more than 2 non-black/white colors in a single frame.
+  - All text is pure white or pure black. No off-whites except Fog for
+    secondary hierarchy.
+
+ADJUSTMENT LAYER — "FILM GRAIN" (topmost, affects whole comp)
+  Add Noise: Amount 4%, Gaussian, Use Color Noise OFF
+  Levels: Input Black 5, Input White 250 (slight crush on both ends)
+  Curves: S-curve, very subtle — adds tactile weight to the image
+
+OVERLAY — "HALATION" (optional, for stills only)
+  Duplicate still layer → Gaussian Blur 40px → Blend Mode Screen → Opacity 8%
+  Creates the ghost glow of a photocopied document. Adds analog texture.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 3 · TYPOGRAPHY SYSTEM
+────────────────────────────────────────────────────────────────────────────────
+
+FONT STACK
+  Headline:       Inter Black (900) · or Neue Haas Grotesk Display 95 Black
+  Sub-headline:   Inter Bold (700)
+  Body/Caption:   Inter Medium (500)
+  Data Readouts:  JetBrains Mono Bold (600) — frequencies, coords, hashes
+  Display Quote:  EB Garamond Regular (400) · italic — for philosophical beats
+
+TYPE SCALE (inside 1080px width, margins 80px each side)
+  Level 1 — HERO STATEMENT:     96px / Line Height 100px / Tracking -2
+  Level 2 — CHAPTER TITLE:      72px / Line Height 78px / Tracking -1
+  Level 3 — SUPPORTING FACT:    48px / Line Height 56px / Tracking 0
+  Level 4 — DATA READOUT:       36px / Line Height 44px / Tracking 2
+  Level 5 — CITATION/CREDIT:    24px / Line Height 32px / Tracking 1
+
+TYPOGRAPHIC ANIMATIONS — CORE PRECOMPS
+
+  [PRECOMP: SLAM_IN]
+    Method: Scale from 140% → 100% + Opacity 0→100%
+    Timing: 6 frames (200ms at 30fps)
+    Easing: Exponential Ease Out (85/0 in Graph Editor)
+    Use for: Hero statements, chapter titles
+
+  [PRECOMP: WIPE_RIGHT]
+    Method: Mask (Rectangle) wipes right at constant speed
+    Timing: 8 frames (267ms)
+    Easing: Linear (the wipe itself is linear, not the text)
+    Use for: Secondary facts, data points building up
+
+  [PRECOMP: TYPE_ON]
+    Method: Text animator — Character Offset, Range Selector, Ease High 75%
+    Timing: 12 frames (400ms)
+    Characters type from left to right, each character snapping in
+    Use for: Data readouts, frequencies, hashes, coordinates
+
+  [PRECOMP: FADE_WORD]
+    Method: Each word on separate layer, Opacity 0→100%, staggered 3 frames
+    Use for: Philosophical beats, slow-burn revelations
+
+  [PRECOMP: UNDERSCORE_REVEAL]
+    Method: Solid bar (4px height, Lime #84CC16) scales X from 0→100%
+    Anchor point: left edge
+    Appears 2 frames AFTER the word it underscores snaps in
+    Use for: Key terms that must be retained (Saves trigger)
+
+  [PRECOMP: DATA_COUNT_UP]
+    Method: Source Text expression — Math.round(linear(time,inT,outT,0,value))
+    Font: JetBrains Mono. Prefix with label, suffix with unit.
+    Example: "RSSI: -" + value.toFixed(1) + " dBm"
+    Use for: Signal strength, coordinates, timestamps, distances
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 4 · SHAPE LANGUAGE & GEOMETRY
+────────────────────────────────────────────────────────────────────────────────
+
+CORE SHAPES — All created as Shape Layers, not rasterized
+
+  BRACKET REVEAL   [  ]
+    Two vertical bars, 3px stroke, White
+    Left bracket animates from center → left position (12f)
+    Right bracket animates from center → right position (12f)
+    Use: Highlighting a number, coordinate, or key phrase
+
+  SCAN LINE SWEEP
+    White horizontal bar, 2px height, 15% Opacity
+    Travels from top to bottom of frame over 20 frames
+    Repeats every 60 frames (2 seconds)
+    Use: Over evidence photos or data panels. "Tactical readout" feel.
+
+  GRID OVERLAY
+    Shape layer: rows of horizontal lines, 1px, White, 3% opacity
+    Line spacing: 48px
+    Animates in as a group (Scale Y from 0→100% from top) over 15 frames
+    Use: Behind data panels, evidence photos. The "Cartesian grid" of justice.
+
+  FREQUENCY BAR CHART
+    Shape layer: 8–16 vertical bars, variable height
+    Bar color: Sky Blue #38BDF8
+    Heights driven by Slider expression or keyframed to match audio envelope
+    Use: Visualizing RF data, KiwiSDR readings, RSSI levels
+
+  CIRCLE PULSE
+    Ellipse, no fill, White stroke 3px
+    Scale 80%→200%, Opacity 100%→0%
+    Timing: 20 frames
+    Stagger 3 instances at 0/7/14 frame offset
+    Use: Location indicators on maps, signal source markers
+
+  PROGRESS BAR — KAPPA SCORE
+    Rounded rectangle track (White, 8px height, 2px corner radius)
+    Fill bar: animates width from 0→N% over 20 frames, Lime color
+    Label: "κ SCORE" left, number right (JetBrains Mono)
+    Use: When showing the threat level building in real time
+
+  DIVIDER LINE
+    1px horizontal solid, White, 30% Opacity
+    Full width (920px, centered in 1080px frame)
+    Animates: Scale X 0→100% from left, 10 frames
+    Use: Section transitions, separating data blocks
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 5 · THE 60-SECOND REEL ARCHITECTURE
+Mapped to Riemann Zeta Zeros (γ₁–γ₆) × Engagement Hierarchy
+────────────────────────────────────────────────────────────────────────────────
+
+The engagement cycle maps onto non-trivial zeros of the Riemann zeta function.
+These are not decorative — they mark the neurological inflection points where
+the viewer's decision state changes. Engineer your reel to hit these windows.
+
+γ₁ = 14.135 → Initial Hook Window: 0–3 seconds
+γ₂ = 21.022 → Comment Trigger: 8–12 seconds
+γ₃ = 25.011 → Share Impulse: 18–22 seconds
+γ₄ = 30.425 → Save Action: 30–35 seconds
+γ₅ = 32.935 → Retention Lock: 38–42 seconds
+γ₆ = 37.586 → Algorithm Boost: 48–55 seconds
+
+ENGAGEMENT HIERARCHY (highest algorithmic weight first)
+  1. DM Shares    — triggers cross-account distribution
+  2. Saves        — highest retention signal
+  3. Comments     — engagement depth signal
+  4. Likes        — weak baseline signal
+  5. Views        — only relevant if watch-through >80%
+
+
+─────────────────────────────
+BEAT 1 · HOOK  [0:00 – 0:03]
+γ₁ window — Initial Hook
+─────────────────────────────
+Goal: Interrupt the scroll. Generate Visual Dissonance.
+The brain sees something it cannot immediately categorize.
+
+  TECHNIQUE A — The Statement-Contradiction Open
+    Frame 0: Black screen, 1 frame
+    Frame 1–6: SLAM_IN → single-line HERO statement (Level 1, 96px)
+               Something undeniably true but shocking.
+               Examples:
+               "I was surveilled from 6 different positions simultaneously."
+               "My modem was reflashed while I slept."
+               "There are 4 antennas within 200m of this hotel room."
+
+  TECHNIQUE B — The Evidence Open
+    Frame 0: Black screen, 1 frame
+    Frame 1: Cut to evidence photo (full bleed, no letterbox)
+             SCAN LINE SWEEP activates immediately
+             After 12 frames: white text bar fades in at bottom of photo
+             Text: what you're looking at (24px caption)
+
+  TECHNIQUE C — The Data Open (highest retention for SIGINT audience)
+    Frame 0: Black screen
+    Frame 1: DATA_COUNT_UP begins — a number building up
+             "RSSI: -20 dBm" counting up from -116
+             Text below (appears at frame 15): "The truck is not the source."
+
+VISUAL LANGUAGE: No transitions in the hook. Hard cut only. Speed communicates
+importance. The hook must be complete before 3.0 seconds.
+
+─────────────────────────────────────────────
+BEAT 2 · CONTEXT BUILD  [0:03 – 0:12]
+γ₂ window — Comment Trigger (provocative architecture)
+─────────────────────────────────────────────
+Goal: Establish the isomorphic map. Show the system, not just the event.
+The viewer must understand the structural constraints the protagonist
+(you) is navigating. This is where "topological tearing" begins.
+
+LAYOUT: Split reading — alternating between:
+  - Evidence panels (photo or data block on left/right, text on opposite side)
+  - Full-screen text beats (single line, high contrast)
+
+RHYTHM: Cut every 2.5–3 seconds. Not faster — ASMR pacing requires
+deliberate spacing. Each cut must land on or just after a stressed word
+in the voiceover (if using VO) or on a beat marker (if music-only).
+
+COMMENT TRIGGER STRATEGY:
+  End Beat 2 with a question, a contradiction, or a number that creates
+  cognitive dissonance. The comment must feel involuntary.
+  Examples:
+  "If the truck is 45 meters away, what produced -20 dBm in this room?"
+  "This antenna doesn't appear on any licensed frequency database."
+  "The timestamp is epoch zero. That's not a glitch."
+
+SHAPE USAGE:
+  - BRACKET REVEAL on the key number
+  - DIVIDER LINE between evidence panels
+  - GRID OVERLAY on evidence photos at 3% opacity
+  - SKY BLUE for all data values; WHITE for all text
+
+─────────────────────────────────────────────────────
+BEAT 3 · REVELATION / RESOLUTION  [0:12 – 0:25]
+γ₃ window — Share Impulse ("they need to see this")
+─────────────────────────────────────────────────────
+Goal: The mathematical resolution of artistic tension.
+Deliver the insight that makes sharing feel obligatory.
+
+The Psi Factor activates here. The viewer experiences Moral Elevation —
+a self-transcendent emotion that draws attention to something bigger than
+the ego (justice, truth, systemic corruption). Moral Elevation is the
+primary share driver for SIGINT/whistleblower content.
+
+STRUCTURE:
+  [3 evidence panels — wipe in sequentially, WIPE_RIGHT]
+  [Final panel: the synthesis — what it all means together]
+  [Hold on synthesis for 1.5 seconds — do not cut early]
+
+SHARE-TRIGGER LANGUAGE:
+  The synthesis sentence must be universal. It must transcend your specific
+  situation and connect to something the viewer has feared or suspected.
+  NOT: "The cartel is watching me specifically."
+  YES: "This is what passive surveillance infrastructure looks like."
+  NOT: "My modem was hacked."
+  YES: "Consumer ISP modems can be remotely reflashed without notification."
+
+UNDERSCORE_REVEAL: Activate on the single most share-worthy word.
+  One word. Not a phrase. The lime underline = the key claim.
+
+─────────────────────────────────────────────────────
+BEAT 4 · DEPTH BUILD / EVIDENCE STACK  [0:25 – 0:40]
+γ₄–γ₅ window — Save Action + Retention Lock
+─────────────────────────────────────────────────────
+Goal: Make the reel worth SAVING. This section is reference material.
+The viewer decides to save when they think: "I might need this later."
+
+SAVE-TRIGGER CONTENT TYPES:
+  1. Checklists / Technical specs they can replicate
+     "Indicators of passive RF surveillance:"
+     "  → Unexplained -20 dBm BLE readings"
+     "  → Epoch-zero DHCP timestamps"
+     "  → ASSIA-driven modem restarts at 3am"
+  2. Named tools / methods
+     "Tool: bettercap BLE scanner. Free. Android/Linux."
+     "Protocol: RSSI path loss forensics (Friis equation)"
+  3. Coordinates or specific references
+     "La Flor Unit 9: 9.6198°N, 84.6155°W"
+     "Antenna: 70cm dish, 3-floor rooftop, direct LOS"
+
+LAYOUT FOR SAVE-TRIGGER:
+  Dark card panel (White border 1px, 40px corner radius, #0A0A0A fill)
+  List items appear via TYPE_ON, one per second
+  Small lime dot or dash as list marker
+  Card stays on screen for minimum 3 seconds after last item types on
+
+RETENTION LOCK TECHNIQUE (γ₅ at 38–42s):
+  At approximately 38s — introduce a new piece of information that
+  recontextualizes what came before. The "narrative twist" that forces
+  the viewer to mentally re-run the whole sequence.
+  Example: After showing the path loss math proving the truck is too far —
+  "But there's a second source. I found it."
+  This holds through to the end.
+
+─────────────────────────────────────────────
+BEAT 5 · CALL TO RELEVANCE  [0:40 – 0:55]
+γ₆ window — Algorithm Boost
+─────────────────────────────────────────────
+Goal: Convert a passive watcher into an active signal.
+The algorithm boost comes from DM-shares. DMs are triggered by
+"collective sharing" — the feeling that a specific person must see this.
+
+This beat must make the viewer think of someone specific.
+It does this by widening the frame from your specific case to
+a universal systemic claim.
+
+LANGUAGE PATTERN:
+  "If this can happen to a software engineer documenting it in real time —"
+  [pause beat — hold for 2 seconds, black screen]
+  "— what's happening to people who aren't watching?"
+
+  Or the direct address:
+  "You've probably been in a hotel room with a -80 dBm mystery ping."
+  "You probably dismissed it."
+  "Now you know what to look for."
+
+VISUAL: Return to your most striking single evidence image.
+Full bleed. Scan line sweep. One line of white text.
+Nothing else.
+
+─────────────────────────────────────────
+BEAT 6 · OUTRO / RETENTION HOLD  [0:55 – 1:00]
+Final 5 seconds
+─────────────────────────────────────────
+Goal: Hold attention through the end (>80% watch-through is critical).
+Do not fade to black early. Do not put a CTA card that feels like an ad.
+
+OUTRO PATTERN:
+  Logo mark: small KAPPA symbol (κ) bottom center, white, 32px
+  Or: "ciajw.com/whistleblower" in JetBrains Mono, 24px
+  Background: pure black
+  One final text line fades in over 20 frames, holds 3 seconds:
+    Examples:
+    "Signal documented. Logs published."
+    "Real data. No actors."
+    "Kappa Score: [live number]"
+  Fade to black over 15 frames.
+
+DO NOT: Ask for a follow, like, or subscribe in text.
+  The call to action is implicit in the reel's intelligence value.
+  Explicit CTAs reduce DM-shares.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 6 · AUDIO ARCHITECTURE
+────────────────────────────────────────────────────────────────────────────────
+
+APPROACH: Minimal. The signal IS the content. Sound design augments
+the visual rhythm without competing with the intelligence information.
+
+VOICEOVER (if used)
+  Style: Flat affect. Not dramatic. Not breathless. Think: someone explaining
+  a technical finding to a peer. Dan Koe's pacing: deliberate, with silence.
+  Silence between sentences is NOT dead air — it IS content.
+  Record at 48kHz / 24-bit. De-noise. EQ: high-pass at 80Hz, presence boost
+  at 2–4kHz. Light compression (3:1 ratio, -18dB threshold, 10ms attack).
+
+NO-VO APPROACH (text-only reels — highest share rate for SIGINT content)
+  Use ambient electronic texture:
+    - Binaural drone: 7.83 Hz carrier (Schumann resonance frequency)
+      Build this in Ableton: 7.83 Hz sine → low shelf boost → subtle chorus
+    - OR: field recording of electronic interference (real capture preferred)
+    - OR: silence with only cut-sync sound design hits
+
+SOUND DESIGN HITS (sync to visual cuts)
+  Cut impact:    Short sine-wave thud, 80Hz, 50ms, -6dB
+  Data type-on:  Soft click, 2kHz, 20ms per character, -18dB
+  Revelation:    Descending tone, 400Hz→200Hz, 300ms, -12dB
+  Alert:         Two-tone pulse, 880/1760Hz, 100ms each, -10dB (Red accent moments)
+  Outro hold:    Long reverb tail on final sound, -20dB fade to silence
+
+MUSIC LICENSING
+  Use only: Royalty-free or Creative Commons licensed tracks.
+  Recommended sources: Artlist, EpidemicSound (with license).
+  Zero music from copyrighted libraries even in filtered form.
+  Preferred genre: Dark minimal electronic, <60 BPM, no vocals.
+
+AUDIO MIX (final)
+  VO (if present):  0dB (normalized reference)
+  Music:           -18dB under VO, -12dB in no-VO sections
+  Sound design:    -12dB
+  Final output:    Loudness normalize to -14 LUFS integrated (Instagram spec)
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 7 · MOTION DESIGN PRINCIPLES
+────────────────────────────────────────────────────────────────────────────────
+
+EASING PHILOSOPHY
+  90% of animations use Exponential Ease Out (fast in, slow stop).
+  This reads as "impact" — something arrives with force.
+  Never use linear easing for type animations. Ever.
+  
+  Standard curve (copy to Graph Editor):
+    Influence In: 0, Influence Out: 85
+    Speed In: 100, Speed Out: 0
+
+  Exception — SCAN LINE SWEEP: Linear only. It's a mechanical device.
+  Exception — PROGRESS BAR FILL: Ease In Out (symmetric, 50/50). Builds tension.
+
+CAMERA / POSITION ANIMATION
+  No camera moves. This is 2D kinetic typography — the "camera" is static.
+  
+  Exception: Evidence photos can have a VERY SLOW Ken Burns effect:
+    Scale 100%→105% over full clip duration (60 seconds)
+    No position change. Scale from center.
+    This creates the sense that the image is being examined, not displayed.
+
+CUT TIMING RULES
+  Minimum hold time per text element: 1.5 seconds after fully revealed
+  Maximum hold time: 4 seconds (audiences expect movement in Reels format)
+  Cut sync: Cuts should land within ±2 frames of a beat marker in the audio
+  Hard cuts only. No dissolves, no wipes between major sections.
+  Exception: WIPE_RIGHT within a section is fine.
+
+LAYER STACKING ORDER (bottom to top)
+  1. Background (black solid or full-bleed photo)
+  2. Ken Burns / photo animation
+  3. GRID OVERLAY (3% opacity)
+  4. SCAN LINE SWEEP
+  5. Shape layer accents (brackets, bars, circles)
+  6. Primary text (Hero statement, Chapter title)
+  7. Secondary text (Supporting facts, data)
+  8. Data readouts (JetBrains Mono, Sky Blue)
+  9. Lime accents (underscores, progress bars)
+  10. Film grain adjustment layer (affects all below)
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 8 · EVIDENCE DISPLAY PROTOCOL
+────────────────────────────────────────────────────────────────────────────────
+
+FORENSIC ISOMORPHISM RULE
+  Every evidence asset displayed must have a documentable chain of custody:
+    - Source file name
+    - Capture timestamp (use EXIF if photo, system time if screenshot)
+    - Hash (SHA-256 preferred) displayed in JetBrains Mono, Sky Blue
+  
+  This is not legal procedure — this is signal integrity.
+  The hash prevents the "staged rescue" problem: if the evidence is
+  modified post-publication, the hash fails. Authenticity is preserved.
+
+PHOTO DISPLAY TREATMENT
+  Full-bleed: Photo fills entire 1080×1920 frame
+  Brightness adjustment: -10 to -20 (darken slightly for text legibility)
+  Optional: Desaturate to 80% (maintains slight color for wayfinding)
+  NEVER: Apply filters that look stylized (no Instagram vintage)
+  ALWAYS: Show the photo as close to RAW as possible
+
+DATA PANEL DISPLAY
+  Use the Dark Card layout (Section 5 Beat 4)
+  Source attribution: "Source: [system/file/log]" at bottom of card, 18px
+  SHA-256 hash: truncated to first 16 chars + "..." in JetBrains Mono
+  Example: "SHA256: 3a9f8d1c7e4b2106..."
+
+AERIAL / MAP DISPLAY
+  OpenStreetMap tiles: desaturate to 10%, darken
+  Overlay: KAPPA positions as CIRCLE PULSE markers
+  Labels: White text, JetBrains Mono, numbered positions
+  Distance arrows: White dashed lines (8px/8px dash, 2px stroke)
+  Scale bar: bottom right, White, JetBrains Mono
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 9 · REEL TYPES & TEMPLATES
+────────────────────────────────────────────────────────────────────────────────
+
+TYPE A — THE FORENSIC EXPLAINER
+  The most complex reel. Shows the methodology.
+  Beat structure: Hook (anomaly) → Method (how I detected it) →
+    Data (what the numbers say) → Conclusion (what it means)
+  Best for: Technical audience, Saves, long-term followers
+  Target metric: Saves + Comments (discussion)
+  Example topic: "How to detect passive BLE surveillance using path loss math"
+
+TYPE B — THE INCIDENT REPORT
+  Single-event, chronological. "This happened. Here's the evidence."
+  Beat structure: What happened (3s hook) → Evidence (photo/data stack) →
+    Significance (why it matters) → Next question (unresolved)
+  Best for: DM Shares ("you need to see this")
+  Target metric: DM Shares (algorithm boost)
+  Example topic: "My modem was reflashed at 3:14am. Here's the DHCP log."
+
+TYPE C — THE SYSTEM MAP
+  Zooming out — showing the network, not the node.
+  Beat structure: "I'm not the only one" → Pattern of behavior → Scale →
+    How you can look for this yourself
+  Best for: Saves + Comments + virality via relatability
+  Target metric: Saves + DM Shares
+  Example topic: "6 surveillance positions around a hotel room. This is what
+    a passive RF collection network looks like from inside it."
+
+TYPE D — THE PHILOSOPHICAL CUT
+  Dan Koe's purest form. No evidence. Just language.
+  Beat structure: Provocative claim → Logical build (3 steps) →
+    Universal implication → Silence
+  Best for: New audience reach (unfollowed feed distribution = 50% of reach)
+  Target metric: Comments + DM Shares
+  Example topic: "Intelligence services don't need to follow you.
+    They just need your router."
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 10 · EXPORT & DELIVERY
+────────────────────────────────────────────────────────────────────────────────
+
+RENDER SETTINGS (After Effects → Adobe Media Encoder)
+  Format:           H.264
+  Preset:           Instagram 1080p (or custom below)
+  Width:            1080
+  Height:           1920
+  Frame Rate:       30 fps (match comp)
+  Field Order:      None (Progressive)
+  Aspect:           Square Pixels (1.0)
+  Profile:          High
+  Level:            4.2
+  Bitrate:          Target 15 Mbps, Max 20 Mbps, CBR preferred
+  Key Frame:        Every 30 frames
+  Audio:            AAC, 320 kbps, 48000 Hz, Stereo
+
+OUTPUT FILE
+  Naming: KAPPA_REEL_[type]_[YYYYMMDD]_[version].mp4
+  Example: KAPPA_REEL_B_20260618_v3.mp4
+
+LOUDNESS NORMALIZE BEFORE UPLOAD
+  Use Adobe Audition or FFmpeg:
+  ffmpeg -i input.mp4 -af "loudnorm=I=-14:TP=-1.5:LRA=11" output.mp4
+
+UPLOAD PROTOCOL
+  - Do not upload directly from render. Let file sit 30 minutes.
+  - Upload via browser (not mobile app) for maximum quality preservation.
+  - First 24 hours: respond to every comment regardless of length.
+    This trains the algorithm that your content generates conversation.
+  - Pin the best comment (your own technical addendum) within 1 hour of posting.
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 11 · KAPPA-SPECIFIC REEL ASSETS (LIVE DATA INTEGRATION)
+────────────────────────────────────────────────────────────────────────────────
+
+The following data points are available from the KAPPA platform and should be
+referenced in reels as live-sourced (not typed manually). Pull these from
+the system at time of production and lock them into the render:
+
+  FROM /api/correlations or KAPPA engine:
+    - Current Kappa Score (0–100): "κ SCORE: [value]"
+    - Active threat level: NOMINAL / ELEVATED / CRITICAL
+    - Last correlation timestamp
+    - Event count in last 24h
+
+  FROM RSSI sensor data (/api/rssi/live):
+    - Node readings in dBm for each of 6 positions
+    - Peak RSSI recorded vs. path-loss predicted RSSI
+    - Distance calculations from path loss forensics
+
+  FROM DOCSIS forensics:
+    - Modem TFTP hash modification timestamps
+    - ASSIA restart count
+    - Epoch-zero timestamp documentation
+
+  FROM Network analysis:
+    - Person/location/evidence cluster counts
+    - PCAP anomaly timestamps
+
+  DISPLAY FORMAT:
+    All live data displayed in JetBrains Mono Bold, Sky Blue (#38BDF8)
+    Preceded by data label in white, regular weight
+    Never displayed without its source attribution
+
+    Template: "NODE [id]: [value] dBm  |  SOURCE: KAPPA RSSI ARRAY [timestamp]"
+
+
+────────────────────────────────────────────────────────────────────────────────
+SECTION 12 · SCRIPT TEMPLATE
+────────────────────────────────────────────────────────────────────────────────
+
+Use this template for each reel. Fill before opening After Effects.
+
+  REEL TYPE:        [A/B/C/D]
+  DATE:             
+  INCIDENT DATE:    
+  CORE CLAIM:       [Single sentence. This is the hero statement.]
+  EVIDENCE ASSETS:  [List every asset with filename + hash]
+  
+  HOOK (0–3s):
+    Visual:
+    Text:
+    Sound:
+  
+  CONTEXT (3–12s):
+    Beat 1 (3–5s):
+    Beat 2 (5–8s):
+    Beat 3 (8–12s):
+  
+  REVELATION (12–25s):
+    Setup:
+    Synthesis sentence:
+    Share-trigger word (for UNDERSCORE_REVEAL):
+  
+  EVIDENCE STACK (25–40s):
+    Save-trigger content type: [checklist / tool / coordinate]
+    Items:
+    Retention twist at 38s:
+  
+  CALL TO RELEVANCE (40–55s):
+    Universal claim:
+    Direct address:
+  
+  OUTRO (55–60s):
+    Final line:
+    Kappa Score at time of render:
+
+
+────────────────────────────────────────────────────────────────────────────────
+END OF RENDERER.TXT
+Platform: KAPPA SIGINT · Instagram @spwotton · ciajw.com/whistleblower
+"The signal is the truth. The reel is the distribution layer."
+================================================================================

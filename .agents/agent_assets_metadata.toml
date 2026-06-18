@@ -461,3 +461,15 @@ id = "jssrLCtoAbQxOgIiXoLhV"
 uri = "file://public/evidence/spectrogram_rec49.png"
 type = "image"
 title = "Spectrogram — Recording 49 (0–500 Hz)"
+
+[[outputs]]
+id = "nT1bu004KEwDdBGQce6EG"
+uri = "file://public/renderer.txt"
+type = "text"
+title = "KAPPA Reel Production Bible (renderer.txt)"
+
+[[outputs]]
+id = "pn0VDOL1MdxYmP0T2fXve"
+uri = "file://public/meta-lattice-strategy.md"
+type = "text"
+title = "Meta Riemann Lattice — Instagram Algorithm Strategy"
