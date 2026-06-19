@@ -6827,8 +6827,10 @@ export default function NetworkAnalysisPage() {
 
   const searchLower = globalSearch.toLowerCase();
 
+  const SUSPENDED_PERSONS = ["hector-mora"];
   const filteredPersons = useMemo(() => {
     return PERSONS.filter(p => {
+      if (SUSPENDED_PERSONS.includes(p.id)) return false;
       if (threatFilter !== "all" && p.threatLevel !== threatFilter) return false;
       if (searchLower && !p.name.toLowerCase().includes(searchLower) &&
           !p.role.toLowerCase().includes(searchLower) &&
