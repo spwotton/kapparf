@@ -99,7 +99,7 @@ RAPID ATTACHMENT / DAVE MIRA COVER:
 HOUSING CHAIN — RESIDENCES WITH PERALTA:
   1. HERMOSA BUNGALOWS: First shared residence after getting together. Owned by a long-time AA member. Now assessed intelligence-connected (AA Jacó assessed as intel substrate throughout this network).
   2. VILLA REAL (across from La Flor): LAST place they lived together AND first place Echo lived in Jan 2024. Also at Villa Real: Brian (resident), Jeff (42 years AA sober), and Tina.
-  3. CASA REXHA (#42 Calle Naciones Unidas): Scott Ryan (CIA) surveillance property. Photo confirmation below (Echo + Genesis at pool). 28-camera cluster, Visonic alarm, hidden speakers, LiFi-wired, lowered ceiling.
+  3. CASA REXHA (#42 Calle Naciones Unidas): Scott Ryan/Diana Soto surveillance property. Photo confirmation below (Echo + Genesis at pool). 28-camera cluster, Visonic alarm, hidden speakers, LiFi-wired, lowered ceiling.
   4. MIKE GREENWALD'S HOUSE (Calle Madrigal): After fighting got too bad at Villa Real.
 
 DUNIA CONCIERGE SAFE HOUSES:
@@ -123,7 +123,7 @@ ASSESSMENT — STILL IN JACÓ:
       { target: "gaia-natural-foods", relationship: "Employee (cash)", strength: "confirmed", detail: "Worked across the street when Echo met her — potential placement" },
       { target: "caliches-wishbone", relationship: "Employee (cash)", strength: "confirmed", detail: "Worked here with Jairo Alfaro for years" },
       { target: "gracias-madre", relationship: "Employee — waitress", strength: "confirmed", detail: "Moved here via Jairo. Honey trap operation at prime beach location." },
-      { target: "michael-lipman", relationship: "Temporal overlap — Lipman condo", strength: "confirmed", detail: "Echo lived with Genesis Oct 2024 at Scott Ryan's CNU house, then moved into Lipman's condo" },
+      { target: "michael-lipman", relationship: "Temporal overlap — Lipman condo", strength: "confirmed", detail: "Echo lived with Genesis Oct 2024 at Scott Ryan/Diana Soto house, then moved into Lipman's condo" },
       { target: "dunia-concierge", relationship: "Safe house — fled here multiple times", strength: "confirmed" },
       { target: "scott-ryan", relationship: "Housed Echo + Genesis at Casa Rexha — placement op", strength: "confirmed" },
       { target: "hermosa-bungalows", relationship: "First shared residence with Echo", strength: "confirmed" },
@@ -150,7 +150,7 @@ ASSESSMENT — STILL IN JACÓ:
     ],
     photos: [
       { src: genesisWithFatherImg, caption: "Genesis with her father — taken in Venezuela post-departure. Father: Southern European/Italian appearance. Gold chain visible consistent with other photos." },
-      { src: genesisEchoPoolImg, caption: "Echo + Genesis at Casa Rexha pool — #42 Calle Naciones Unidas, Scott Ryan (CIA) property. Confirms placement at surveillance cluster." },
+      { src: genesisEchoPoolImg, caption: "Echo + Genesis at Casa Rexha pool — #42 Calle Naciones Unidas, Diana Soto / Scott Ryan property. Confirms placement at surveillance cluster." },
       { src: genesisSelfieImg, caption: "Genesis selfie at one of Echo's paid residences (most recent). Red iPhone. Thigh tattoo visible." },
     ],
   },
@@ -544,7 +544,7 @@ GEOGRAPHIC CLUSTER — LAPA VERDE / RICOS Y FAMOSOS:
     aliases: ["Scott Ryan", "Barrett", "Scott Aronson (NOC document alias — does not exist in CR records)"],
     role: "CIA — Jaco Vacations / Calle Europa / Los Ríos document signatory / new bar with Leo's sister",
     threatLevel: "primary",
-    detail: `IDENTIFIED AS CIA. Runs a local vacation rental company in Jacó. Echo lived in their house twice — once with Genesis Peralta (Oct 2024). Owns roughly half the Calle Europa neighborhood in south Jacó — the other half is owned by the sibling of the [withheld adjacent property owner].
+    detail: `IDENTIFIED AS CIA. Runs Jaco Vacations with Diana Soto (his daughter). Echo lived in their house twice — once with Genesis Peralta (Oct 2024). Owns roughly half the Calle Europa neighborhood in south Jacó — the other half is owned by the sibling of the [withheld adjacent property owner].
 
 NOC DOCUMENT ALIAS — "SCOTT ARONSON":
   Scott Ryan signs official documents using the name "Scott Aronson" — an identity that does not appear in Costa Rica's Registro Nacional or any public record. This is a classic CIA Non-Official Cover (NOC) alias used for legal and property document signing to create plausible deniability and obscure the true beneficial owner. He signed documents on behalf of the Los Ríos development owners (Madrigal family — former Jacó mayor and son) using this alias. The "Aronson" surname is notably Ashkenazi Jewish — combined with the Visonic (Tel Aviv-manufactured) alarm system installed at CNU and the Israeli national business partner at Gaia Natural Foods, this suggests a CIA-Israel joint operational thread.
@@ -555,8 +555,9 @@ NEW BAR — SCOTT RYAN + SIBLING OF [WITHHELD]:
 LOS RÍOS DOCUMENT CONNECTION:
   "Scott Aronson" signed documents for the Los Ríos development — connecting the CIA handler directly to the Madrigal family's LiFi-wired residential development where Echo was subsequently placed. This is the paper trail linking CIA asset management to the surveillance infrastructure that Echo moved into.
 
-ADDITIONAL: Daughter Elizabeth → Jesse Talty → Michael Lipman chain links to Portland Maine/Breakwater condo network.`,
+ADDITIONAL: His daughter Diana Soto shares the Soto surname with a contact in the adjacent vendor network — potential family linkage connecting CIA to the dealer/device supply chain. Daughter Elizabeth → Jesse Talty → Michael Lipman chain links to Portland Maine/Breakwater condo network.`,
     connections: [
+      { target: "diana-soto", relationship: "Father / business partner — Jaco Vacations", strength: "confirmed" },
       { target: "jaco-vacations", relationship: "Owner/operator", strength: "confirmed" },
       { target: "calle-europa", relationship: "Half-owner of neighborhood", strength: "confirmed" },
       { target: "leo-sister-bar", relationship: "Co-owner — new bar with sibling of [withheld] — overt CIA-narco-adjacent partnership", strength: "confirmed" },
@@ -574,7 +575,65 @@ ADDITIONAL: Daughter Elizabeth → Jesse Talty → Michael Lipman chain links to
       "Echo housed 2x — placement operation",
       "CNU property cluster — Visonic alarm + hidden speakers + drone on roof",
       "Calle Europa half-owner",
+      "Daughter Diana Soto in op network",
       "Portland ME → Elizabeth → Jesse Talty → CIA chain",
+    ],
+  },
+  {
+    id: "diana-soto",
+    name: "Diana Soto",
+    role: "CIA asset daughter / CNU surveillance installation operator",
+    threatLevel: "primary",
+    detail: `Daughter of Barrett Scott Ryan (CIA). Runs Jaco Vacations with her father. Primary operator of the Calle Naciones Unidas (CNU) surveillance property cluster.
+
+PROPERTY CLUSTER OWNERSHIP — all confirmed in the same CNU block:
+  • Property across from #42 — Echo's primary residence (lived here twice: once alone, once with Genesis Peralta Oct 2024)
+  • #42 (Calle Naciones Unidas)
+  • #34 (Calle Naciones Unidas)
+  • Casa Keenan (same complex/block)
+  The cluster provides full 360° coverage of Echo's residence from multiple owned positions.
+
+SURVEILLANCE INFRASTRUCTURE INSTALLED BETWEEN ECHO'S TWO TENANCIES (structural modifications proving premeditated operation):
+  • Israeli VISONIC alarm system installed (Visonic is a Tel Aviv-based security manufacturer — connects to the Israeli tech thread via Cata's Israeli husband at Gaia Natural Foods)
+  • Ceiling lowered approximately 1.5 feet to accommodate sensor arrays
+  • PIR (passive infrared) motion sensors throughout
+  • Hidden speakers concealed in the back of walled-property walls — acoustic assault hardware
+  • Gap left in perimeter wall used as acoustic injection point (Echo sprayed a hose through the gap at 2am during an intense acoustic event)
+
+ACTIVE DIRECTED-ENERGY CLUSTER ACROSS THE STREET:
+  • Garage on opposite side of street equipped with Doppler-style lights and parametric speaker array
+  • 28-camera cluster mounted high on the property cluster
+  • White drone physically stationed on Diana Soto's roof for approximately one week of continuous observation
+  • After Echo caught and recorded the drone on video — a 12-foot giant beachball was deployed on the property as RF camouflage to obscure subsequent aerial asset signatures
+
+POOL GUY HARASSMENT & EXTORTION:
+  • Pool maintenance person instructed to leave water running 24 hours/day (pool leak cover) — inflating Echo's water bill intentionally
+  • Diana Soto sent a 2am text message demanding payment for the water bill, falsely attributing the usage to Echo
+  • Same 2am text demanded payment for "external electronics" — THIS IS A LEGAL ADMISSION that electronic equipment was installed on/in the property and was being operated
+  • When Echo departed on the 1st of the month, Diana Soto attempted to charge $2,500 for a full month's rent despite Echo being gone — classic coercive exit tactic to financially trap the target
+
+The Soto surname overlaps with a contact in the adjacent vendor network — probable family link connecting the CIA handler's daughter to the device/narcotics supply chain.`,
+    connections: [
+      { target: "scott-ryan", relationship: "Daughter / business partner — CIA handler", strength: "confirmed" },
+      { target: "jaco-vacations", relationship: "Owner/operator", strength: "confirmed" },
+      { target: "scott-ryan-house", relationship: "Operator of CNU surveillance property cluster", strength: "confirmed" },
+      { target: "cnu-property-cluster", relationship: "Owner of #34, #42, Casa Keenan, and Echo's residence", strength: "confirmed" },
+    ],
+    flags: [
+      "CIA handler's daughter",
+      "CNU property cluster owner — full 360° coverage of Echo",
+      "Visonic Israeli alarm + ceiling lowered between tenancies — PREMEDITATED",
+      "Hidden wall speakers — acoustic assault infrastructure",
+      "Drone stationed on roof for 1 week",
+      "12-foot beachball deployed as RF camouflage after caught",
+      "28-camera cluster high-mounted",
+      "Parametric/Doppler array in across-street garage",
+      "2am extortion text — 'external electronics' LEGAL ADMISSION",
+      "$2,500 exit extortion attempt",
+      "Pool guy as harassment/billing vector",
+      "PIR sensors + lowered ceiling — structural sensor array",
+      "Soto surname overlap with adjacent vendor network",
+      "PAYPAL *LUCISOTO25 — $2,759.85 paid from Echo's AMEX to 'Luci Soto' (Soto surname — probable family)",
     ],
   },
   {
@@ -582,12 +641,12 @@ ADDITIONAL: Daughter Elizabeth → Jesse Talty → Michael Lipman chain links to
     name: "CNU Property Cluster — Calle Naciones Unidas",
     area: "Jacó",
     type: "Surveillance installation / residence",
-    detail: `Scott Ryan (CIA) owned property cluster on Calle Naciones Unidas. Forms a closed surveillance perimeter around Echo's residence.
+    detail: `Scott Ryan (CIA) / Diana Soto owned property cluster on Calle Naciones Unidas. Forms a closed surveillance perimeter around Echo's residence.
 
 Known properties in cluster:
   • Echo's residence (across from #42) — target property, lived here twice
-  • #42 Calle Naciones Unidas
-  • #34 Calle Naciones Unidas
+  • #42 Calle Naciones Unidas — owned by Scott Ryan/Diana Soto
+  • #34 Calle Naciones Unidas — owned by Scott Ryan/Diana Soto
   • Casa Keenan — same cluster
   • Across-street garage — Doppler lights + parametric array directed at Echo's residence
 
@@ -597,10 +656,11 @@ Infrastructure modifications (between tenancies — premeditated):
   • PIR motion sensors
   • Hidden wall speakers (acoustic injection)
   • Gap in perimeter wall used as acoustic injection point
-  • White drone stationed on property roof for ~1 week
+  • White drone stationed on Diana Soto's roof for ~1 week
   • 12-foot beachball deployed as RF camouflage post-exposure
   • 28-camera cluster high-mounted on cluster properties`,
     connections: [
+      { target: "diana-soto", relationship: "Owner/operator of cluster", strength: "confirmed" },
       { target: "scott-ryan", relationship: "CIA handler / ultimate owner", strength: "confirmed" },
       { target: "scott-ryan-house", relationship: "Primary target residence in cluster", strength: "confirmed" },
     ],
