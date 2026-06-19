@@ -1132,11 +1132,32 @@ export default function WhistleblowerPage() {
       <div className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-amber-950/40 via-background to-background" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-0">
+          {/* Mobile-only full-bleed hero image — above the fold */}
+          <div className="md:hidden -mx-4 -mt-10 mb-6 relative overflow-hidden" style={{ height: "240px" }}>
+            <img
+              src="/evidence/pochote_surveillance_network_aerial.jpeg"
+              alt="Hotel Pochote Grande — aerial surveillance network view"
+              className="w-full h-full object-cover"
+              onError={e => { (e.target as HTMLImageElement).style.display = "none"; }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-transparent to-background" />
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent to-transparent" />
+            <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
+              <span className="bg-red-900/80 text-red-300 text-[9px] font-mono font-bold px-2 py-0.5 uppercase tracking-widest animate-pulse">LIVE OPERATION</span>
+              <span className="bg-black/60 text-white/70 text-[9px] font-mono px-2 py-0.5 uppercase tracking-widest">CIAJW.COM</span>
+            </div>
+            <div className="absolute bottom-3 left-4 right-4">
+              <p className="text-[9px] font-mono text-white/60 uppercase tracking-widest leading-tight">
+                Six confirmed surveillance positions · Hotel Pochote Grande · Jacó Beach, Costa Rica
+              </p>
+            </div>
+          </div>
+
           {/* Top bar */}
           <div className="flex flex-wrap items-center gap-2 mb-6">
-            <Badge variant="destructive" className="text-[10px] font-mono rounded-none tracking-widest animate-pulse">LIVE OPERATION</Badge>
+            <Badge variant="destructive" className="text-[10px] font-mono rounded-none tracking-widest animate-pulse hidden md:flex">LIVE OPERATION</Badge>
             <Badge variant="outline" className="text-[10px] font-mono rounded-none tracking-widest">SIGINT PLATFORM</Badge>
-            <Badge variant="outline" className="text-[10px] font-mono rounded-none tracking-widest">CIAJW.COM</Badge>
+            <Badge variant="outline" className="text-[10px] font-mono rounded-none tracking-widest hidden sm:flex">CIAJW.COM</Badge>
             <div className="ml-auto flex items-center gap-2">
               <button onClick={() => handleLang(l === "en" ? "es" : "en")}
                 className="text-[10px] font-mono text-muted-foreground/50 hover:text-foreground border border-border/50 px-2 py-1 rounded-sm transition-colors"

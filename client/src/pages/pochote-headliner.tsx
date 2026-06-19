@@ -862,7 +862,117 @@ export default function PochoteHeadlinerPage() {
 
         <Separator className="my-8" />
 
-        {/* Section 8: Live KAPPA Data */}
+        {/* Section 8: Correlation Timeline */}
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <Clock className="h-4 w-4 text-cyan-400" />
+            <h2 className="text-xl font-serif font-bold text-foreground">30-Day Correlation Timeline</h2>
+          </div>
+          <p className="text-base text-muted-foreground leading-relaxed mb-6 font-serif">
+            Chronological record of documented events at Hotel Pochote Grande, May 17 – June 18, 2026. Each entry represents a confirmed observation, capture, or KAPPA-correlated detection.
+          </p>
+
+          <div className="relative">
+            <div className="absolute left-[5.5rem] top-0 bottom-0 w-px bg-border/60" />
+            <div className="space-y-0">
+              {[
+                {
+                  date: "May 17",
+                  badge: "ARRIVAL",
+                  badgeColor: "bg-slate-800/60 text-slate-300",
+                  title: "Check-in — Room 10, Hotel Pochote Grande",
+                  body: "Arrival at the eastern corner unit. KAPPA begins continuous monitoring. Initial baseline: normal Jacó ambient RF environment.",
+                  severity: "info"
+                },
+                {
+                  date: "May 16",
+                  badge: "FINANCIAL",
+                  badgeColor: "bg-amber-900/60 text-amber-300",
+                  title: "SINPE Transfer #1 — 247,000 CRC",
+                  body: "Anomalous hotel administrative SINPE transfer on the 16th. Timing and amount inconsistent with standard payroll cycles. Date predates arrival — transfer attributed to pre-positioning.",
+                  severity: "medium"
+                },
+                {
+                  date: "May 22–26",
+                  badge: "MAPPING",
+                  badgeColor: "bg-violet-900/60 text-violet-300",
+                  title: "Surveillance Network Geometry Confirmed — 6 Positions",
+                  body: "Cross-domain analysis of aerial imagery, KAPPA events, and physical observation confirms six surrounding positions: La Flor 23–25, La Flor #9, Central Antenna, Crocs, Vista Las Palmas, Hotel Corner Unit. 270° cordon established.",
+                  severity: "high"
+                },
+                {
+                  date: "May 29",
+                  badge: "FINANCIAL",
+                  badgeColor: "bg-amber-900/60 text-amber-300",
+                  title: "SINPE Transfer #2 — 370,000 CRC",
+                  body: "Second anomalous transfer. 370,000 CRC from hotel administration. Amounts (370k + 247k = 617k CRC total) consistent with documented per-placement fees in Costa Rica Pacific corridor trafficking cases.",
+                  severity: "medium"
+                },
+                {
+                  date: "June 7",
+                  badge: "BLE/RF",
+                  badgeColor: "bg-blue-900/60 text-blue-300",
+                  title: "BLE Spike — −20 dBm at 10:50 AM · Truck CL273123 Excluded",
+                  body: "Bettercap passive BLE scan records −20 dBm peak. Path loss model for truck CL273123 at 45m + 2 walls predicts −116 dBm — physically impossible source. Hotel Corner Unit (unobstructed path) becomes primary suspect.",
+                  severity: "high"
+                },
+                {
+                  date: "June 8",
+                  badge: "ANTENNA",
+                  badgeColor: "bg-green-900/60 text-green-300",
+                  title: "Parabolic Dish Confirmed — Full 360° Rotation on Video",
+                  body: "AI-enhanced forensic video analysis confirms rotating parabolic dish antenna on Santa Reyes yoga property roof. Full rotation completed in 4-minute observation window. KAPPA cross-correlates with simultaneous WiFi deauth event and CPU thermal spike.",
+                  severity: "critical"
+                },
+                {
+                  date: "June 13",
+                  badge: "HUMINT",
+                  badgeColor: "bg-rose-900/60 text-rose-300",
+                  title: "Handwritten Note Recovered",
+                  body: "Physical document recovered from Room 10 area. Handwritten. Constitutes direct physical evidence of access to the target space outside of scheduled cleaning windows.",
+                  severity: "high"
+                },
+                {
+                  date: "June 14–17",
+                  badge: "AERIAL",
+                  badgeColor: "bg-purple-900/60 text-purple-300",
+                  title: "Drone Transit Cluster — 9 Total Nights",
+                  body: "Multi-rotor UAV transits logged on 9 separate nights. Flight profiles consistent with ISR-capable drones (DJI Mini 3 Pro class) at 30–80m altitude, east-to-west beach transits with offshore loiter. Acoustic + visual + WiFi anomaly correlation.",
+                  severity: "high"
+                },
+                {
+                  date: "June 18",
+                  badge: "RECORDING 49",
+                  badgeColor: "bg-red-900/80 text-red-300",
+                  title: "Final Night — 57.28 Hz Anomalous Signal, 8-Harmonic Series",
+                  body: "00:04 UTC. Recording 49. FFT analysis confirms 57.28 Hz dominant peak at −50 dBFS with confirmed 8-harmonic series (57→113→169→230→285→341→399→455 Hz). Signal present neither in 60 Hz (Costa Rica) nor 50 Hz (European) mains standards. Requires active transmitter. Operation concludes.",
+                  severity: "critical"
+                },
+              ].map((ev, i) => (
+                <div key={i} className="relative flex gap-0 pb-8">
+                  {/* Date column */}
+                  <div className="w-20 flex-shrink-0 pt-1 text-right pr-4">
+                    <span className="text-[10px] font-mono text-muted-foreground/50 leading-tight block">{ev.date}</span>
+                  </div>
+                  {/* Node */}
+                  <div className={`absolute left-[5rem] top-1.5 w-3 h-3 rounded-full border-2 flex-shrink-0 z-10 ${ev.severity === "critical" ? "bg-red-500 border-red-400" : ev.severity === "high" ? "bg-amber-500 border-amber-400" : ev.severity === "medium" ? "bg-yellow-600 border-yellow-500" : "bg-slate-600 border-slate-500"}`} />
+                  {/* Content */}
+                  <div className="flex-1 pl-6 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <span className={`text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-sm tracking-widest ${ev.badgeColor}`}>{ev.badge}</span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-foreground mb-1 leading-tight">{ev.title}</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{ev.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Separator className="my-8" />
+
+        {/* Section 9: Live KAPPA Data */}
         <section>
           <div className="flex items-center gap-2 mb-4">
             <Activity className="h-4 w-4 text-primary" />

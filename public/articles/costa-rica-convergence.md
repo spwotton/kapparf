@@ -64,7 +64,7 @@ A table was set up inside, positioned to face the target's terrace, with microph
 
 The Los Ríos urbanization in Jacó was developed by the **Madrigal family** — the former mayor of Garabito canton and his son. When official documents needed to be signed on the development's behalf, the signatory was listed as **"Scott Aronson."**
 
-Scott Aronson does not exist in Costa Rica's Registro Nacional — the official public record of all legal identities in the country. The name is an alias used by **Barrett Scott Ryan**, who runs **Jaco Vacations** with his daughter Diana Soto.
+Scott Aronson does not exist in Costa Rica's Registro Nacional — the official public record of all legal identities in the country. The name is an alias used by **Barrett Scott Ryan**, who operates a local vacation rental company in Jacó.
 
 Non-Official Cover — NOC — is the CIA designation for an intelligence officer who operates without diplomatic immunity, using a commercial business as their cover. Scott Ryan signs property documents as Scott Aronson. Scott Aronson owns approximately half the properties on Calle Europa, south Jacó's most desirable residential street. The other half is owned by a business partner whose background merits its own investigation.
 
