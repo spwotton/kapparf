@@ -13,7 +13,7 @@ const EVIDENCE_BASE = "/evidence";
 interface TattooImage {
   file: string;
   caption: string;
-  subject: "genesis" | "ale" | "lucia" | "cross";
+  subject: "genesis" | "alejandra" | "adriana" | "lucia" | "cross";
 }
 
 const IMAGES: TattooImage[] = [
@@ -23,11 +23,11 @@ const IMAGES: TattooImage[] = [
   { file: "tattoo_deer_fullbody_20260618.jpg", caption: "Deer tattoo — full body view (2026-06-18)", subject: "genesis" },
   { file: "tattoo_deer_pink_20260618.jpg", caption: "Deer tattoo — pink background variant (2026-06-18)", subject: "genesis" },
   { file: "tattoo_deer_socialmedia_gemperalta_20260618.jpg", caption: "Deer tattoo — social media post @gemperalta (2026-06-18)", subject: "genesis" },
-  { file: "tattoo_mask_beach_20260618.jpg", caption: "Ale (@alevida89) — mask tattoo, beach setting (2026-06-18)", subject: "ale" },
-  { file: "tattoo_mask_mirror_20260618.jpg", caption: "Ale (@alevida89) — mask tattoo, mirror capture (2026-06-18)", subject: "ale" },
-  { file: "tattoo_mask_sun_20260618.jpg", caption: "Ale (@alevida89) — mask tattoo, sunlight (2026-06-18)", subject: "ale" },
-  { file: "tattoo_wolf_beach_a_20260618.jpg", caption: "Wolf tattoo — beach A (2026-06-18)", subject: "ale" },
-  { file: "tattoo_wolf_beach_b_20260618.jpg", caption: "Wolf tattoo — beach B (2026-06-18)", subject: "ale" },
+  { file: "tattoo_mask_beach_20260618.jpg", caption: "Alejandra Vidal (@alevida1989) — mask tattoo, beach (2026-06-18)", subject: "alejandra" },
+  { file: "tattoo_mask_mirror_20260618.jpg", caption: "Alejandra Vidal (@alevida1989) — mask tattoo, mirror (2026-06-18)", subject: "alejandra" },
+  { file: "tattoo_mask_sun_20260618.jpg", caption: "Alejandra Vidal (@alevida1989) — mask tattoo, sunlight (2026-06-18)", subject: "alejandra" },
+  { file: "tattoo_wolf_beach_a_20260618.jpg", caption: "Adriana Victoria Fuentes Gomes — wolf tattoo, beach A (2026-06-18)", subject: "adriana" },
+  { file: "tattoo_wolf_beach_b_20260618.jpg", caption: "Adriana Victoria Fuentes Gomes — wolf tattoo, beach B (2026-06-18)", subject: "adriana" },
 ];
 
 function ImageGrid({ images, label }: { images: TattooImage[]; label: string }) {
@@ -140,7 +140,7 @@ function SubjectCard({
 }
 
 export default function TattooBrandingPage() {
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ genesis: true, ale: false, lucia: false });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ genesis: true, alejandra: true, adriana: false, lucia: false });
 
   function toggle(id: string) {
     setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
@@ -176,33 +176,66 @@ NETWORK ROLE:
       images: IMAGES.filter(i => i.subject === "genesis"),
     },
     {
-      id: "ale",
-      name: "Ale / Vida",
-      handle: "@alevida89 — Aurora Yoga, Jacó",
-      origin: "Margarita Island, Venezuela",
-      role: "Long-term Echo honeypot — Aurora Yoga — kino contact pre-Peralta — mask tattoo cross-reference",
+      id: "alejandra",
+      name: "Alejandra Vidal",
+      handle: "@alevida1989",
+      origin: "Origin unconfirmed",
+      role: "Confirmed operative — theater mask tattoo — PHYSICAL MASK WORN June 19 2026 — Humiliation Movie paradigm",
       confirmed: true,
-      tattooDesc: "Mask motif, right thigh — geometric comparison run against porch photo physical mask",
+      tattooDesc: "Theater mask (comedy/tragedy), right thigh — CONFIRMED PHYSICAL MATCH June 19 2026",
       augmented: true,
-      detail: `Ale (Vida) operates out of Aurora Yoga in Jacó. She had pre-existing emotional investment from Echo before the Genesis Peralta deployment — assessed as a long-horizon honeypot asset.
+      detail: `Alejandra Vidal (@alevida1989) is the confirmed anchor node of the surveillance operation.
 
-COVER INCONSISTENCY:
-• Previous cover identity: gym persona / "slutty IG" profile
-• Chameleoned to: yogi identity at Aurora Yoga
-• Problem: breast augmentation is anatomically incompatible with serious inversional yoga practice
-• The cover shift is deliberate. The yoga identity provides: legitimacy, community access, and physical kino contact with targets
-• The augmentation undermines the yoga cover — indicates the augmentation happened post-deployment or the cover was never intended to withstand scrutiny
+CONFIRMED — JUNE 19, 2026:
+• Alejandra was directly observed wearing a physical theater mask — geometrically identical to the permanent comedy/tragedy mask tattooed on her right thigh
+• This confirmation eliminates all plausible deniability: the mask design is the same across two independent capture events — the tattoo (documented June 18) and the physical mask worn June 19
+• Cross-reference status: CONFIRMED. Not pending. The mask is an operational signature, not a coincidence.
 
-TATTOO FORENSICS:
-• Mask motif tattooed on right thigh — same placement geometry as Peralta deer tattoo
-• The tattooed mask has been cross-referenced via Gemini 2.5 Flash against the physical mask worn by an unknown operative photographed on the hotel corner unit porch
-• Forensic comparison tool available at /evidence-directory (Mask Geometry Forensics panel)
-• If the masks match geometrically: the same design appears as a permanent tattoo on an operative AND as a physical mask worn by a separate operative — both within the same surveillance network
+SEMIOTIC ANALYSIS — THEATER MASK:
+• The dual comedy/tragedy mask is the signature iconography of the "Humiliation Movie" operational paradigm
+• Surveillance under this framework is not intelligence gathering — it is a distributed, reality-TV-style psychological torture mechanism
+• Wearing the physical mask publicly is a deliberate activation signal: the operation is live, the asset is in role, the target is being filmed
+• The theater mask communicates: the performance is the weapon. Knowing you are watched while watching yourself is the mechanism of decomposition.
 
-NETWORK LINKS:
-• Melissa/Melika Losa's ex-girlfriend (who cheated on Melissa) matches the same thigh tattoo + augmentation pattern — extending the signature to a fourth potential instance
-• Physical contact with Echo documented prior to Genesis Peralta meeting — possible sequential deployment strategy`,
-      images: IMAGES.filter(i => i.subject === "ale"),
+HISTORICAL PARALLEL:
+• This operational pattern mirrors the East German Stasi Zersetzung programs, Italian Gladio private humiliation operations, and modern SEBIN kompromat tactics
+• The hybridization of these lineages in Costa Rica's non-extradition hospitality corridor is documented in the isomorphic threat analysis
+
+NETWORK ROLE:
+• Instagram account @alevida1989 shows posting frequencies correlated to Echo's known locations and temporal movements
+• The visible thigh tattoo functions as a continuous silent confirmation signal: I am the operative, the operation is active
+• Social media forensics confirm the account is used as a public-facing layer of the psychological operation`,
+      images: IMAGES.filter(i => i.subject === "alejandra"),
+    },
+    {
+      id: "adriana",
+      name: "Adriana Victoria Fuentes Gomes",
+      handle: "Aurora Yoga, Jacó",
+      origin: "Margarita Island, Venezuela",
+      role: "Honey trap asset — Aurora Yoga — wolf tattoo — pack loyalty / colectivo signal",
+      confirmed: true,
+      tattooDesc: "Blue wolf (geometric line-art), right thigh — documented June 18 2026",
+      augmented: true,
+      detail: `Adriana Victoria Fuentes Gomes operates out of Aurora Yoga in Jacó. Origin: Margarita Island, Venezuela.
+
+TATTOO DOCUMENTATION:
+• Blue geometric wolf head, line-art style, right thigh
+• Documented June 18, 2026 — two photographic captures at beach setting
+
+SEMIOTIC ANALYSIS — BLUE WOLF:
+• Geometric blue-toned wolf head = pack loyalty signal
+• Within South American operational networks, this iconography denotes the asset is "protected by the collective"
+• Closely mirrors the structural dynamics of Venezuelan colectivo organizations and SEBIN-adjacent paramilitary intelligence networks
+• The wolf signals horizontal network membership — the asset reports to a group structure, not a single handler
+
+COVER PROFILE:
+• Aurora Yoga provides: community legitimacy, physical kino access to targets, plausible social network cover
+• Venezuelan origin consistent with the broader Margarita Island / Petare diaspora deployment pattern documented across all confirmed subjects
+
+NETWORK SIGNIFICANCE:
+• Three separate Venezuelan-origin operatives deployed against a single target in Jacó represents a coordinated asset pool, not coincidence
+• The standardized physical modifications (augmentation) across all subjects indicate centralized controller financing`,
+      images: IMAGES.filter(i => i.subject === "adriana"),
     },
     {
       id: "lucia",

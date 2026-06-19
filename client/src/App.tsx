@@ -98,6 +98,7 @@ import SensorArrayPage from "@/pages/sensor-array";
 import DemodexPhonePage from "@/pages/demodex-phone";
 import NetworkAnalysisPage from "@/pages/network-analysis";
 import PochoteHeadlinerPage from "@/pages/pochote-headliner";
+import IsomorphicThreatPage from "@/pages/isomorphic-threat";
 import RiverwalkPage from "@/pages/riverwalk";
 import ThreatHuntingPage from "@/pages/threat-hunting";
 import DocsisForensicsPage from "@/pages/docsis-forensics";
@@ -191,6 +192,7 @@ function KappaRouter() {
       <Route path="/demodex-phone" component={DemodexPhonePage} />
       <Route path="/network-analysis" component={NetworkAnalysisPage} />
       <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
+      <Route path="/isomorphic-threat" component={IsomorphicThreatPage} />
       <Route path="/riverwalk" component={RiverwalkPage} />
       <Route path="/threat-hunting" component={ThreatHuntingPage} />
       <Route path="/docsis-forensics" component={DocsisForensicsPage} />
