@@ -219,6 +219,9 @@ function GooseRouter() {
       <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
       <Route path="/articles/recording-37" component={ArticleRecording37Page} />
       <Route path="/pochote" component={PochoteAnalysisPage} />
+      <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
+      <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
+      <Route path="/tattoo-branding" component={TattooBrandingPage} />
       <Route path="/goose/signals" component={GooseSignalsPage} />
       <Route path="/goose/lattice" component={SignalLatticePage} />
       <Route path="/goose/admin" component={GooseAdminPage} />
@@ -227,7 +230,7 @@ function GooseRouter() {
       <Route path="/goose/press-room" component={GazetteRefinerPage} />
       <Route path="/goose/humor" component={GooseHumorPage} />
       <Route path="/goose" component={GooseGazettePage} />
-      <Route component={GooseGazettePage} />
+      <Route component={WhistleblowerPage} />
     </Switch>
   );
 }
