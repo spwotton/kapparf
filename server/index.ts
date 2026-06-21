@@ -202,9 +202,9 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
   startNetworkWatchdog();
   startPipeline();
   startNetworkThreatScanner();
-  // KiwiSDR Vision requires Playwright/Chromium — only run in explicit development mode.
-  // Deployment container has no PulseAudio and port 8073 is unreachable from cloud.
-  if (process.env.NODE_ENV === "development") {
+  // KiwiSDR Vision — disabled: port 8073 unreachable from Replit cloud containers.
+  // Re-enable by setting ENABLE_KIWI_VISION=true in environment secrets.
+  if (process.env.ENABLE_KIWI_VISION === "true") {
     const { startKiwiVision } = await import("./kiwisdr-vision");
     startKiwiVision(300_000);
   }
@@ -215,8 +215,10 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
   startGooseScheduler();
   const { startHumorHypervisor } = await import("./humor-hypervisor");
   startHumorHypervisor();
-  const { startTicoSatireHypervisor } = await import("./tico-satire-hypervisor");
-  startTicoSatireHypervisor();
+  // TICO-HYPER disabled: all 7 free OpenRouter models returning 402/404/429.
+  // Re-enable when a paid OpenRouter key is available.
+  // const { startTicoSatireHypervisor } = await import("./tico-satire-hypervisor");
+  // startTicoSatireHypervisor();
   const { startComedyCorpusLoader } = await import("./comedy-corpus");
   startComedyCorpusLoader();
   const { startHervKVirus } = await import("./herv-k-virus");
@@ -242,7 +244,8 @@ Object.entries(PUBLIC_DENUNCIA).forEach(([filename, contentType]) => {
   // Gazette Intel Hypervisor — thread correlation research engine
   const { initGazetteIntel, startIntelHypervisor, ingestArticleIntel } = await import("./gazette-intel");
   await initGazetteIntel().catch(e => console.error("[GazetteIntel] init error:", e.message));
-  startIntelHypervisor();
+  // IntelHypervisor disabled: free OpenRouter models all returning 402/404/429.
+  // startIntelHypervisor();
   // Ingest static investigation article intel tags into Memory Cortex
   ingestArticleIntel([
     {
