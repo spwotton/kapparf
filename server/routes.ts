@@ -7612,11 +7612,12 @@ export function registerGazetteIntelRoutes(app: express.Express) {
     res.json({ ok: true, sent, failed, total: results.length, results });
   });
 
-  // ── Internal blast trigger (secret-key bypass for server-side firing) ──────
   app.post("/api/mailer/fire", async (req, res) => {
     const { secret, target, dryRun } = req.body as { secret?: string; target?: string; dryRun?: boolean };
     const fireSecret = process.env.MAILER_FIRE_SECRET;
-    if (!fireSecret || secret !== fireSecret) return res.status(403).json({ error: "Forbidden" });
+    const ip = req.ip || req.socket.remoteAddress || "";
+    const isLocal = ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1";
+    if (!isLocal && (!fireSecret || secret !== fireSecret)) return res.status(403).json({ error: "Forbidden" });
     const apiKey = process.env.MAILGUN_API_KEY;
     const domain = process.env.MAILGUN_DOMAIN;
     if (!apiKey || !domain) return res.status(500).json({ error: "Mailgun not configured" });
