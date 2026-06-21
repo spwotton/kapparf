@@ -9,7 +9,7 @@
 - [O] = Surveillance Operation Investigation Synthesis (Omega-Synthesis)
 - [Q] = Project QUASAR
 - [C] = 
-China, Costa Rica Cyberattack Study
+https://huggingface.co/deepseek-ai/DeepSeek-Prover-V2-671BChina, Costa Rica Cyberattack Study
 
 ---
 
