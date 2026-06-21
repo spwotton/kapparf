@@ -7694,6 +7694,42 @@ export function registerGazetteIntelRoutes(app: express.Express) {
           for (const c of CR_AUTH_CONTACTS as any[]) addD(c, c.category);
           for (const c of US_INTEL_CONTACTS as any[]) addD(c, c.category);
           for (const c of VENEZUELA_CONTACTS as any[]) addD(c);
+        } else if (target === "diamante-correction") {
+          // URL correction follow-up — same 547 contacts, corrected URLs
+          const { CORRECTION_SUBJECT_EN, CORRECTION_SUBJECT_ES, CORRECTION_BODY_EN, CORRECTION_BODY_ES } = await import("./mailer-campaign-diamante-correction");
+          const { CAMPAIGN_CONTACTS } = await import("./mailer-campaign");
+          const { AV_CAMPAIGN_CONTACTS } = await import("./mailer-campaign-aviation");
+          const { SUPP_CONTACTS } = await import("./mailer-campaign-supplementary");
+          const { EXPANSION_CONTACTS } = await import("./mailer-campaign-expansion");
+          const { CR_AUTH_CONTACTS } = await import("./mailer-campaign-cr-authorities");
+          const { US_INTEL_CONTACTS } = await import("./mailer-campaign-us-intel");
+          const { VENEZUELA_CONTACTS } = await import("./mailer-campaign-venezuela");
+          const { isSpanishContact } = await import("./mailer-campaign-update");
+
+          const seen2 = new Set<string>();
+          let idOffset2 = 15000;
+
+          const addC = (c: any, cat?: string) => {
+            const key = (c.to as string).toLowerCase().trim();
+            if (seen2.has(key)) return;
+            seen2.add(key);
+            const spanish = isSpanishContact(cat ?? c.category, c.subject);
+            contacts.push({
+              id: idOffset2++,
+              to: c.to,
+              org: c.org || c.name || c.to,
+              subject: spanish ? CORRECTION_SUBJECT_ES : CORRECTION_SUBJECT_EN,
+              body: spanish ? CORRECTION_BODY_ES : CORRECTION_BODY_EN,
+            });
+          };
+
+          for (const c of CAMPAIGN_CONTACTS as any[]) addC(c);
+          for (const c of AV_CAMPAIGN_CONTACTS as any[]) addC(c, c.category);
+          for (const c of SUPP_CONTACTS as any[]) addC(c, c.category);
+          for (const c of EXPANSION_CONTACTS as any[]) addC(c);
+          for (const c of CR_AUTH_CONTACTS as any[]) addC(c, c.category);
+          for (const c of US_INTEL_CONTACTS as any[]) addC(c, c.category);
+          for (const c of VENEZUELA_CONTACTS as any[]) addC(c);
         } else {
           // Full whistleblower blast
           const SUBJECT = "ITALY'S LONG LEASH: Leonardo S.p.A., CSG SAR, and the weaponization of Costa Rica's surveillance grid against U.S. citizens";

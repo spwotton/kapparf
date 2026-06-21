@@ -2,9 +2,7 @@
 // Subject: covert slot-array antenna, opto-acoustic anomaly, corporate fraud chain
 // From: Samuel Wotton <hello@echokappa.com>
 
-const PAGE_URL = process.env.REPL_SLUG
-  ? `https://${process.env.REPL_SLUG}.${process.env.REPL_OWNER}.replit.app/diamante-del-sol`
-  : "https://kappa-sigint.replit.app/diamante-del-sol";
+const PAGE_URL = "https://kapparf.com/diamante-del-sol";
 
 export const DIAMANTE_SUBJECT_EN =
   "NEW EVIDENCE: Covert Slot-Array Antenna on Jacó High-Rise + Opto-Acoustic Surveillance Device | Samuel Wotton — Documented, Live SIGINT";
