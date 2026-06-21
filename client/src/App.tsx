@@ -105,6 +105,7 @@ import DocsisForensicsPage from "@/pages/docsis-forensics";
 import GOSHyperstructurePage from "@/pages/gos-hyperstructure";
 import TattooBrandingPage from "@/pages/tattoo-branding";
 import DiamanteDelSolPage from "@/pages/diamante-del-sol";
+import CameroXaverLdvPage from "@/pages/camero-xaver-ldv";
 
 // ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
 function KappaRouter() {
@@ -200,6 +201,7 @@ function KappaRouter() {
       <Route path="/tattoo-branding" component={TattooBrandingPage} />
       <Route path="/gos-hyperstructure" component={GOSHyperstructurePage} />
       <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
+      <Route path="/camero-xaver-ldv" component={CameroXaverLdvPage} />
       <Route path="/crank" component={CrankEditorPage} />
       <Route component={NotFound} />
     </Switch>

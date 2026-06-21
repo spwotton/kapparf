@@ -132,6 +132,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.tattooBranding", fallback: "◈ Physical Marker — Thigh Tattoo", url: "/tattoo-branding", icon: Eye },
       { titleKey: "sidebar.pochoteHeadliner", fallback: "▶ 30 Days at Pochote Grande", url: "/pochote-headliner", icon: AlertTriangle },
       { titleKey: "sidebar.diamanteDelSol", fallback: "◈ Diamanté del Sol — SIGINT Report", url: "/diamante-del-sol", icon: Radio },
+      { titleKey: "sidebar.cameroXaverLdv", fallback: "◈ XAVER · LDV · 46.875Hz · GoPro BLE", url: "/camero-xaver-ldv", icon: Radio },
       { titleKey: "sidebar.isomorphicThreat", fallback: "◈ Isomorphic Threat Analysis", url: "/isomorphic-threat", icon: AlertTriangle },
       { titleKey: "sidebar.riverwalk", fallback: "▶ Riverwalk — Oct 14 Attack", url: "/riverwalk", icon: AlertTriangle },
       { titleKey: "sidebar.networkAnalysis", fallback: "HUMINT Network Analysis", url: "/network-analysis", icon: Network },
