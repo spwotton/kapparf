@@ -43,6 +43,18 @@ app.use("/evidence/boom", express.static(path.join(process.cwd(), "public", "evi
   setHeaders: (res) => { res.setHeader("Cache-Control", "public, max-age=3600"); },
 }));
 
+// Downloads — serve zip packages with correct content-type before Vite catch-all
+app.get("/downloads/:filename", (req, res) => {
+  const filename = path.basename(req.params.filename);
+  const filePath = path.join(process.cwd(), "public", "downloads", filename);
+  if (!fs.existsSync(filePath)) { res.status(404).send("Not found"); return; }
+  if (filename.endsWith(".zip")) {
+    res.setHeader("Content-Type", "application/zip");
+    res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+  }
+  res.sendFile(filePath);
+});
+
 // Serve public/scripts/ at /scripts before any route or Vite catch-all, in all environments
 app.get("/scripts/:filename", (req, res) => {
   const filename = path.basename(req.params.filename);

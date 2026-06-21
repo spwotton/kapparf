@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>KAPPA Local — SIGINT Dashboard</title>
+<style>
+  :root{--bg:#0a0a0a;--bg2:#111;--bg3:#161616;--border:#222;--text:#e8e8e8;--dim:#666;--cyan:#00c8c8;--red:#ef4444;--amber:#f59e0b;--green:#22c55e;--violet:#a78bfa;--mono:'JetBrains Mono','Fira Code','Courier New',monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;min-height:100vh}
+  header{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+  header .logo{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--cyan);letter-spacing:.1em}
+  header .tagline{color:var(--dim);font-size:11px;font-family:var(--mono)}
+  .kappa-live{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .kappa-score{font-family:var(--mono);font-size:22px;font-weight:900}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .badge{font-family:var(--mono);font-size:9px;font-weight:700;padding:2px 6px;border-radius:2px;letter-spacing:.1em;text-transform:uppercase}
+  .badge-red{background:#7f1d1d;color:#fca5a5}
+  .badge-amber{background:#78350f;color:#fde68a}
+  .badge-green{background:#14532d;color:#86efac}
+  .badge-cyan{background:#164e63;color:#67e8f9}
+  .badge-dim{background:#1a1a1a;color:var(--dim);border:1px solid var(--border)}
+  main{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:1px;background:var(--border);height:calc(100vh - 45px)}
+  .pane{background:var(--bg);overflow:hidden;display:flex;flex-direction:column}
+  .pane-header{padding:8px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .pane-title{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--dim)}
+  .pane-body{overflow-y:auto;flex:1;padding:8px}
+  .full-width{grid-column:1/-1}
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 12px}
+  .stat{background:var(--bg2);border:1px solid var(--border);border-radius:3px;padding:8px;text-align:center}
+  .stat .val{font-family:var(--mono);font-size:18px;font-weight:900;color:var(--cyan)}
+  .stat .lbl{font-family:var(--mono);font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-top:2px}
+  .event-row{padding:4px 0;border-bottom:1px solid #151515;display:flex;gap:6px;align-items:flex-start}
+  .event-row:last-child{border-bottom:none}
+  .ev-sev{font-family:var(--mono);font-size:8px;font-weight:700;padding:1px 4px;border-radius:1px;flex-shrink:0;margin-top:1px}
+  .sev-critical,.sev-high{background:#7f1d1d;color:#fca5a5}
+  .sev-medium{background:#78350f;color:#fde68a}
+  .sev-info,.sev-low{background:#1a1a1a;color:var(--dim)}
+  .ev-domain{font-family:var(--mono);font-size:8px;color:var(--dim);flex-shrink:0;width:50px;margin-top:1px}
+  .ev-desc{font-size:11px;color:#ccc;flex:1;line-height:1.4}
+  .ev-ts{font-family:var(--mono);font-size:8px;color:#333;flex-shrink:0;margin-top:1px}
+  .ble-row{padding:4px 0;border-bottom:1px solid #151515;display:flex;gap:6px;align-items:center}
+  .ble-row:last-child{border-bottom:none}
+  .ble-addr{font-family:var(--mono);font-size:9px;color:var(--cyan);flex-shrink:0;width:120px}
+  .ble-name{font-size:10px;color:#bbb;flex:1}
+  .ble-rssi{font-family:var(--mono);font-size:9px;width:55px;text-align:right;flex-shrink:0}
+  .ble-tx{font-family:var(--mono);font-size:9px;width:55px;text-align:right;flex-shrink:0}
+  .rssi-ok{color:var(--green)}
+  .rssi-mid{color:var(--amber)}
+  .rssi-bad{color:var(--red)}
+  .tx-high{color:var(--red);font-weight:700}
+  .tx-norm{color:var(--dim)}
+  .llm-pane{grid-column:1/-1;min-height:200px;max-height:300px}
+  textarea{background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;padding:8px;width:100%;resize:none;border-radius:2px;outline:none}
+  textarea:focus{border-color:var(--cyan)}
+  button{background:transparent;border:1px solid var(--border);color:var(--dim);font-family:var(--mono);font-size:9px;padding:4px 10px;cursor:pointer;border-radius:2px;text-transform:uppercase;letter-spacing:.1em;transition:all .15s}
+  button:hover{border-color:var(--cyan);color:var(--cyan)}
+  button.primary{border-color:var(--cyan);color:var(--cyan)}
+  .llm-response{background:var(--bg2);border:1px solid var(--border);border-radius:2px;padding:10px;font-size:11px;line-height:1.6;color:#ccc;white-space:pre-wrap;margin-top:8px;font-family:serif}
+  .net-row{padding:4px 0;border-bottom:1px solid #151515;display:flex;gap:6px;align-items:flex-start}
+  .net-ip{font-family:var(--mono);font-size:9px;color:var(--cyan);width:110px;flex-shrink:0}
+  .net-ports{font-family:var(--mono);font-size:9px;color:var(--amber);flex:1}
+  .net-vendor{font-size:9px;color:var(--dim);flex-shrink:0;width:130px;text-align:right}
+  .empty{color:var(--dim);font-family:var(--mono);font-size:10px;padding:12px 0;text-align:center}
+  .ollama-status{font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:2px}
+  .ollama-ok{color:var(--green);background:#14532d22}
+  .ollama-off{color:var(--red);background:#7f1d1d22}
+  @media(max-width:700px){main{grid-template-columns:1fr}.stat-row{grid-template-columns:repeat(2,1fr)}.full-width{grid-column:1}.llm-pane{grid-column:1}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">KAPPA LOCAL</div>
+  <div class="tagline">Signal Intelligence · Offline Edition · ciajw.com</div>
+  <div class="kappa-live">
+    <span class="dot" id="dot"></span>
+    <span class="kappa-score" id="kScore" style="color:var(--green)">0.0</span>
+    <span class="badge badge-dim" id="kLevel">NOMINAL</span>
+    <span class="ollama-status ollama-off" id="ollamaStatus">LLM OFFLINE</span>
+  </div>
+</header>
+
+<div class="stat-row">
+  <div class="stat"><div class="val" id="statEvents">0</div><div class="lbl">Events</div></div>
+  <div class="stat"><div class="val" id="statBle">0</div><div class="lbl">BLE Scans</div></div>
+  <div class="stat"><div class="val" id="statUniqBle">0</div><div class="lbl">Unique BLE</div></div>
+  <div class="stat"><div class="val" id="statHosts">0</div><div class="lbl">Net Hosts</div></div>
+</div>
+
+<main>
+  <!-- Events pane -->
+  <div class="pane">
+    <div class="pane-header">
+      <div class="dot" style="width:6px;height:6px"></div>
+      <div class="pane-title">Events</div>
+      <select id="domainFilter" style="margin-left:auto;background:var(--bg2);border:1px solid var(--border);color:var(--dim);font-family:var(--mono);font-size:9px;padding:2px 4px">
+        <option value="">All</option>
+        <option value="ble">BLE</option>
+        <option value="network">Network</option>
+        <option value="llm">LLM</option>
+        <option value="kappa">KAPPA</option>
+        <option value="manual">Manual</option>
+      </select>
+    </div>
+    <div class="pane-body" id="eventsList"><div class="empty">Loading…</div></div>
+  </div>
+
+  <!-- BLE pane -->
+  <div class="pane">
+    <div class="pane-header">
+      <div class="pane-title">BLE Devices</div>
+      <span class="badge badge-dim" id="bleCount" style="margin-left:auto">0</span>
+    </div>
+    <div class="pane-body" id="bleList"><div class="empty">Scanning…</div></div>
+  </div>
+
+  <!-- Network pane -->
+  <div class="pane">
+    <div class="pane-header">
+      <div class="pane-title">Network Hosts</div>
+      <span class="badge badge-dim" id="hostCount" style="margin-left:auto">0</span>
+    </div>
+    <div class="pane-body" id="netList"><div class="empty">Scanning subnet…</div></div>
+  </div>
+
+  <!-- Log event pane -->
+  <div class="pane">
+    <div class="pane-header">
+      <div class="pane-title">Log Evidence</div>
+    </div>
+    <div class="pane-body" style="display:flex;flex-direction:column;gap:6px">
+      <input id="logDomain" placeholder="domain (ble/network/manual…)" style="background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:11px;padding:6px 8px;border-radius:2px;outline:none;width:100%"/>
+      <textarea id="logDesc" rows="3" placeholder="Description / observation…"></textarea>
+      <select id="logSev" style="background:var(--bg2);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:10px;padding:4px;border-radius:2px">
+        <option value="info">info</option>
+        <option value="medium">medium</option>
+        <option value="high">high</option>
+        <option value="critical">critical</option>
+      </select>
+      <button class="primary" onclick="logEvent()">LOG TO EVIDENCE DB →</button>
+      <div id="logResult" style="font-family:var(--mono);font-size:9px;color:var(--green);display:none">✓ Logged</div>
+    </div>
+  </div>
+
+  <!-- LLM pane -->
+  <div class="pane llm-pane">
+    <div class="pane-header">
+      <div class="pane-title">LLM Analysis</div>
+      <span id="llmModel" style="font-family:var(--mono);font-size:9px;color:var(--dim);margin-left:auto">llama3.2:3b</span>
+    </div>
+    <div class="pane-body" style="display:flex;flex-direction:column;gap:6px">
+      <textarea id="llmPrompt" rows="2" placeholder="Ask the local LLM anything — e.g. 'Summarize current BLE threat picture' or 'What ports should I worry about?'">Summarize the current threat picture from all available sensor data.</textarea>
+      <div style="display:flex;gap:6px">
+        <button class="primary" onclick="runLLM()" id="llmBtn">ANALYZE →</button>
+        <button onclick="llmQuick('Are any BLE devices showing surveillance indicators?')">BLE CHECK</button>
+        <button onclick="llmQuick('What management ports are open on the network?')">NET CHECK</button>
+        <button onclick="llmQuick('Give me a 3-sentence SIGINT brief on the current situation.')">BRIEF</button>
+      </div>
+      <div id="llmResult" class="llm-response" style="display:none"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const API = '';
+
+function sev(s){
+  const m={critical:'badge-red',high:'badge-red',medium:'badge-amber',info:'badge-dim',low:'badge-dim'};
+  return m[s]||'badge-dim';
+}
+function rssiColor(r){return r>-60?'rssi-ok':r>-80?'rssi-mid':'rssi-bad';}
+function tsShort(ts){try{const d=new Date(ts);return d.toLocaleTimeString();}catch{return ts||'';}}
+
+async function fetchStatus(){
+  const d=await fetch(API+'/api/status').then(r=>r.json()).catch(()=>null);
+  if(!d)return;
+  const score=d.kappa_score||0;
+  $('kScore').textContent=score.toFixed(1);
+  const color=score>=70?'var(--red)':score>=40?'var(--amber)':'var(--green)';
+  $('kScore').style.color=color;
+  $('dot').style.background=color;
+  $('kLevel').textContent=d.kappa_level||'NOMINAL';
+  $('kLevel').className='badge '+(score>=70?'badge-red':score>=40?'badge-amber':'badge-green');
+  $('ollamaStatus').textContent=d.ollama_online?'LLM ONLINE':'LLM OFFLINE';
+  $('ollamaStatus').className='ollama-status '+(d.ollama_online?'ollama-ok':'ollama-off');
+  $('llmModel').textContent=d.model||'llama3.2:3b';
+  if(d.stats){
+    $('statEvents').textContent=d.stats.events||0;
+    $('statBle').textContent=d.stats.ble_scans||0;
+    $('statUniqBle').textContent=d.stats.unique_ble||0;
+    $('statHosts').textContent=d.stats.net_hosts||0;
+  }
+}
+
+async function fetchEvents(){
+  const domain=$('domainFilter').value;
+  const url=API+'/api/events?limit=60'+(domain?'&domain='+domain:'');
+  const events=await fetch(url).then(r=>r.json()).catch(()=>[]);
+  const el=$('eventsList');
+  if(!events.length){el.innerHTML='<div class="empty">No events yet</div>';return;}
+  el.innerHTML=events.map(e=>`
+    <div class="event-row">
+      <span class="ev-sev sev-${e.severity}">${e.severity?.slice(0,3).toUpperCase()||'INF'}</span>
+      <span class="ev-domain">${e.domain||''}</span>
+      <span class="ev-desc">${(e.description||'').slice(0,180)}</span>
+      <span class="ev-ts">${tsShort(e.ts)}</span>
+    </div>`).join('');
+}
+
+async function fetchBLE(){
+  const devices=await fetch(API+'/api/ble').then(r=>r.json()).catch(()=>[]);
+  $('bleCount').textContent=devices.length;
+  const el=$('bleList');
+  if(!devices.length){el.innerHTML='<div class="empty">No BLE devices yet</div>';return;}
+  const seen=new Map();
+  devices.forEach(d=>{if(!seen.has(d.address))seen.set(d.address,d);});
+  const unique=[...seen.values()];
+  el.innerHTML=unique.slice(0,80).map(d=>{
+    const tx=d.tx_power;
+    const txClass=tx!==null&&tx>0?'tx-high':'tx-norm';
+    const txStr=tx!==null?tx+'dBm':'—';
+    const flagged=tx>0||['FCF1','FEA6','DF00'].some(u=>(d.uuids||'').includes(u));
+    return `<div class="ble-row" style="${flagged?'background:#1a0a0a;':''}" title="${d.uuids||''}">
+      <span class="ble-addr">${d.address}</span>
+      <span class="ble-name">${d.name||'<i style="color:#333">N/A</i>'}</span>
+      <span class="ble-rssi ${rssiColor(d.rssi)}">${d.rssi}dBm</span>
+      <span class="ble-tx ${txClass}">TX:${txStr}</span>
+    </div>`;
+  }).join('');
+}
+
+async function fetchNetwork(){
+  const hosts=await fetch(API+'/api/network').then(r=>r.json()).catch(()=>[]);
+  $('hostCount').textContent=hosts.length;
+  const el=$('netList');
+  if(!hosts.length){el.innerHTML='<div class="empty">No hosts discovered yet</div>';return;}
+  const seen=new Map();
+  hosts.forEach(h=>{if(!seen.has(h.ip))seen.set(h.ip,h);});
+  const unique=[...seen.values()];
+  el.innerHTML=unique.slice(0,50).map(h=>{
+    const ports=JSON.parse(h.open_ports||'[]');
+    const flagged=[7547,5555,4444,23,2323].some(p=>ports.includes(p));
+    return `<div class="net-row" style="${flagged?'background:#1a0a0a;':''}">
+      <span class="net-ip">${h.ip}</span>
+      <span class="net-ports">${ports.length?ports.join(', '):'—'}</span>
+      <span class="net-vendor">${h.vendor||''}</span>
+    </div>`;
+  }).join('');
+}
+
+async function logEvent(){
+  const domain=$('logDomain').value||'manual';
+  const desc=$('logDesc').value;
+  const sev=$('logSev').value;
+  if(!desc){return;}
+  await fetch(API+'/api/log',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({domain,description:desc,severity:sev,type:'observation'})});
+  $('logResult').style.display='block';
+  $('logDesc').value='';
+  setTimeout(()=>{$('logResult').style.display='none';},2000);
+  fetchEvents();
+}
+
+async function runLLM(){
+  const prompt=$('llmPrompt').value;
+  if(!prompt)return;
+  $('llmBtn').textContent='THINKING…';
+  $('llmBtn').disabled=true;
+  $('llmResult').style.display='none';
+  const r=await fetch(API+'/api/analyze',{method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({prompt})}).then(r=>r.json()).catch(e=>({error:String(e)}));
+  $('llmResult').textContent=r.response||r.error||'No response';
+  $('llmResult').style.display='block';
+  $('llmBtn').textContent='ANALYZE →';
+  $('llmBtn').disabled=false;
+}
+
+function llmQuick(p){$('llmPrompt').value=p;runLLM();}
+
+$('domainFilter').addEventListener('change',fetchEvents);
+
+function refresh(){
+  fetchStatus();
+  fetchEvents();
+  fetchBLE();
+  fetchNetwork();
+}
+
+refresh();
+setInterval(refresh,15000);
+</script>
+</body>
+</html>
