@@ -769,6 +769,9 @@ export default function MailerPage() {
 
       {/* ── BLE UPDATE BLAST — RE: all campaigns → new BLE/OBD-II/RSSI evidence ── */}
       <UpdateBlePanel />
+
+      {/* ── DIAMANTÉ DEL SOL — slot-array antenna + opto-acoustic anomaly blast ── */}
+      <DiamantePanel />
     </div>
   );
 }
@@ -1625,3 +1628,114 @@ function GenesisVenezuelaPanelFocused() {
   );
 }
 
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DIAMANTÉ DEL SOL — Slot-Array Antenna + Opto-Acoustic Anomaly Blast
+// ─────────────────────────────────────────────────────────────────────────────
+function DiamantePanel() {
+  const { toast } = useToast();
+  const [fired, setFired] = React.useState<{ total?: number } | null>(null);
+  const [loading, setLoading] = React.useState(false);
+
+  const fire = async (dryRun: boolean) => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/mailer/fire", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ secret: import.meta.env.VITE_MAILER_SECRET, target: "diamante", dryRun }),
+      });
+      const data = await res.json();
+      if (dryRun) {
+        toast({ title: "Dry run queued", description: "Diamanté contact list logged to server console — check count." });
+      } else {
+        setFired({ total: 560 });
+        toast({ title: "Diamanté blast queued", description: "~560 contacts firing async. Monitor server log." });
+      }
+      return data;
+    } catch (e: any) {
+      toast({ title: "Error", description: e?.message || String(e), variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="border border-cyan-200 dark:border-cyan-900 rounded-lg p-4 space-y-3 bg-cyan-50/20 dark:bg-cyan-950/20">
+      <div className="flex items-center gap-2">
+        <Radio className="w-4 h-4 text-cyan-500" />
+        <p className="text-sm font-medium">DIAMANTÉ DEL SOL — New Evidence Blast</p>
+        <Badge variant="outline" className="text-xs ml-auto border-cyan-300 dark:border-cyan-700 text-cyan-600 dark:text-cyan-400">
+          ~560 recipients
+        </Badge>
+      </div>
+
+      <p className="text-xs text-muted-foreground leading-relaxed">
+        Full-contact blast announcing the new{" "}
+        <span className="font-mono text-foreground">/diamante-del-sol</span> intelligence report.
+        Covers: louvered penthouse slot-array antenna hypothesis (Babinet's principle, κ·φ spacing law,
+        Klein twist 128.23°, 51.84° LEO elevation), 53 Hz power-line injection → 7 Hz ULF beat product,
+        DayStar Properties fraud chain (Patrick Hundley, $7M), and La Flor Unit #9 LDV opto-acoustic
+        exfiltration anomaly at 0:22 (rolling shutter at 46.875 Hz + 20 kHz ultrasonic spike).
+        EN/ES auto-applied per contact origin. Links directly to the live KAPPA report with 7 nocturnal
+        photos and both YouTube Shorts.
+      </p>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-xs">
+        {[
+          { label: "Subject (EN)", value: "Covert Slot-Array Antenna — Jacó", color: "text-cyan-600 dark:text-cyan-400" },
+          { label: "Subject (ES)", value: "Antena de ranuras encubierta — Jacó", color: "text-cyan-600 dark:text-cyan-400" },
+          { label: "Report URL", value: "/diamante-del-sol", color: "text-foreground" },
+          { label: "Carrier freq.", value: "46.875 Hz (48k/1024)", color: "text-amber-600 dark:text-amber-400" },
+          { label: "Beam elevation", value: "51.84° → LEO", color: "text-red-600 dark:text-red-400" },
+          { label: "LDV anomaly", value: "0:22 rolling shutter", color: "text-purple-600 dark:text-purple-400" },
+        ].map(item => (
+          <div key={item.label} className="bg-background border rounded p-1.5 space-y-0.5">
+            <p className="text-muted-foreground text-[10px] uppercase tracking-wider">{item.label}</p>
+            <p className={`font-mono font-medium ${item.color}`}>{item.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-start gap-2 text-xs text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800 rounded px-3 py-2">
+        <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+        <span>
+          Fires async via <span className="font-mono">target="diamante"</span>. All 7 contact lists
+          (CAMPAIGN + AV + SUPP + EXPANSION + CR_AUTH + US_INTEL + VENEZUELA) deduplicated at runtime.
+          Sending rate 350ms/contact ≈ 200s total. Monitor server log for per-address status.
+        </span>
+      </div>
+
+      <div className="flex gap-2">
+        <Button
+          data-testid="button-diamante-dry-run"
+          variant="outline"
+          size="sm"
+          className="border-cyan-300 dark:border-cyan-700"
+          onClick={() => fire(true)}
+          disabled={loading}
+        >
+          Dry Run (log only)
+        </Button>
+        <Button
+          data-testid="button-diamante-send"
+          size="sm"
+          className="gap-2 bg-cyan-600 hover:bg-cyan-700 text-white"
+          onClick={() => fire(false)}
+          disabled={loading}
+        >
+          <Send className="w-3.5 h-3.5" />
+          {loading ? "Queuing…" : "Fire Diamanté Blast"}
+        </Button>
+      </div>
+
+      {fired && (
+        <div className="flex items-center gap-3 text-sm">
+          <CheckCircle className="w-4 h-4 text-green-500" />
+          <span className="text-green-600 font-medium">Blast queued — ~{fired.total} contacts firing async</span>
+          <span className="text-muted-foreground text-xs ml-auto">Monitor server log for per-contact status</span>
+        </div>
+      )}
+    </div>
+  );
+}
