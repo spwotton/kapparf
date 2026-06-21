@@ -270,6 +270,65 @@ export default function HomePage() {
           </div>
         </header>
 
+        {/* ── VIDEO EVIDENCE — YouTube primary source ── */}
+        <div className="bg-black">
+          {/* Primary video — full width */}
+          <div className="w-full">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/STaaEJeeovM?autoplay=0&rel=0&modestbranding=1&color=white"
+                title="Nocturnal Observation — Diamanté del Sol Rooftop Apex Chromatic Array"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                itemProp="video"
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center justify-between">
+              <span className="text-[10px] font-mono text-white/50 tracking-widest uppercase">
+                PRIMARY · Nocturnal Observation — Rooftop Apex Chromatic Array · @spwotton
+              </span>
+              <a
+                href="https://www.youtube.com/watch?v=STaaEJeeovM"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono text-white/40 hover:text-white/70 tracking-widest uppercase transition-colors"
+              >
+                YouTube ↗
+              </a>
+            </div>
+          </div>
+          {/* Second video */}
+          <div className="border-t border-white/10">
+            <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/6q-MBuV6X8Q?rel=0&modestbranding=1&color=white"
+                title="Louvered Penthouse — Power Line Proximity & LoS Vector"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="px-4 py-2 flex items-center justify-between">
+              <span className="text-[10px] font-mono text-white/50 tracking-widest uppercase">
+                SECONDARY · Louvered Penthouse — Power Line Proximity &amp; LoS Vector · @spwotton
+              </span>
+              <a
+                href="https://www.youtube.com/watch?v=6q-MBuV6X8Q"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] font-mono text-white/40 hover:text-white/70 tracking-widest uppercase transition-colors"
+              >
+                YouTube ↗
+              </a>
+            </div>
+          </div>
+          <div className="px-4 py-2 border-t border-white/10 flex items-center gap-3">
+            <span className="text-[10px] font-mono text-white/30 tracking-widest uppercase">
+              Original source: youtube.com/@spwotton · Diamanté del Sol · Jacó Beach, Puntarenas, Costa Rica
+            </span>
+          </div>
+        </div>
 
         {/* ── LEDE ── */}
         <div className="max-w-4xl mx-auto px-5 py-12">
