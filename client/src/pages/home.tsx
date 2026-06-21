@@ -21,13 +21,6 @@ import {
 } from "lucide-react";
 import { SiInstagram } from "react-icons/si";
 
-import img0283 from "@assets/IMG_0283_1781818382290.jpeg";
-import img0284 from "@assets/IMG_0284_1781818382290.jpeg";
-import img0285 from "@assets/IMG_0285_1781818382290.jpeg";
-import img0287 from "@assets/IMG_0287_1781818382290.jpeg";
-import img0288 from "@assets/IMG_0288_1781818382290.jpeg";
-import img1000 from "@assets/1000001991_1781818382290.jpeg";
-import imgBBB from "@assets/7B5DB1F1-A011-46F0-81A1-E051FB73F38B_1781818382290.jpeg";
 
 const SITE = {
   url: "https://ciajw.com",
@@ -45,15 +38,6 @@ const LEAD = {
     "Diamante del Sol Jaco Beach, covert antenna Costa Rica, slot array antenna surveillance, SIGINT Costa Rica, Samuel Wotton, KAPPA SIGINT, opto-acoustic surveillance device, Jaco Beach surveillance, Costa Rica surveillance investigation, SUTEL MICITT OIJ",
 };
 
-const PHOTOS = [
-  { src: img0283, alt: "Diamanté del Sol rooftop penthouse — nocturnal observation, louvered apex enclosure with cyan-green emission" },
-  { src: img0284, alt: "Diamanté del Sol slot-array geometry — vertical louvered slats photographed from Hotel Pochote Grande LoS vector" },
-  { src: img0285, alt: "Rooftop power line proximity — overhead utility lines crossing line-of-sight to penthouse apex" },
-  { src: img0287, alt: "Nocturnal chromatic emission — pulsing light from louvered enclosure consistent with corona discharge" },
-  { src: img0288, alt: "Diamanté del Sol high-rise full elevation — 10-story structure, Jacó Beach, Puntarenas, Costa Rica" },
-  { src: img1000, alt: "Opto-acoustic surveillance device — concealed within residential infrastructure at La Flor Villa 9" },
-  { src: imgBBB, alt: "Close detail: louvered penthouse element spacing — non-uniform geometry consistent with phased-array antenna design" },
-];
 
 interface KappaStatus {
   score: number;
@@ -286,50 +270,6 @@ export default function HomePage() {
           </div>
         </header>
 
-        {/* ── PHOTO GRID — all 7 nocturnal shots ── */}
-        <div className="bg-black">
-          {/* Lead photo — full width */}
-          <div className="w-full">
-            <img
-              src={PHOTOS[0].src}
-              alt={PHOTOS[0].alt}
-              className="w-full max-h-[520px] object-cover opacity-95"
-              itemProp="image"
-              loading="eager"
-              width={1600}
-              height={900}
-            />
-          </div>
-          {/* 3-column strip */}
-          <div className="grid grid-cols-3 gap-0.5">
-            {PHOTOS.slice(1, 4).map((p, i) => (
-              <img
-                key={i}
-                src={p.src}
-                alt={p.alt}
-                className="w-full aspect-square object-cover opacity-90"
-                loading="lazy"
-              />
-            ))}
-          </div>
-          {/* 2-column strip */}
-          <div className="grid grid-cols-2 gap-0.5 mt-0.5">
-            {PHOTOS.slice(4).map((p, i) => (
-              <img
-                key={i}
-                src={p.src}
-                alt={p.alt}
-                className="w-full aspect-video object-cover opacity-90"
-                loading="lazy"
-              />
-            ))}
-          </div>
-          <div className="px-4 py-2 text-center">
-            <span className="text-[10px] font-mono text-white/40 tracking-widest uppercase">
-              7 of 7 nocturnal photographs · Diamanté del Sol · Jacó Beach · June 2026
-            </span>
-          </div>
-        </div>
 
         {/* ── LEDE ── */}
         <div className="max-w-4xl mx-auto px-5 py-12">
