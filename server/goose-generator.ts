@@ -948,9 +948,11 @@ async function runGeometerAgent(template: Template, data: KappaData, humorPreamb
   const loreSeed = pickLoreSeed();
   const loreBlock = loreSeed ? `\nLORE SEED (weave this real story subtly into background detail — do NOT quote it directly):\n${loreSeed.slice(0, 400)}\n` : "";
   const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data) + loreBlock;
-  const models = process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN : ["gpt-4o-mini"];
-  const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
-  for (const model of models) {
+  const attempts: Array<{ model: string; client: any }> = [
+    ...(process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN.map(m => ({ model: m, client: openrouter })) : []),
+    { model: "gpt-4o-mini", client: aiClient as any },
+  ];
+  for (const { model, client } of attempts) {
     try {
       const resp = await client.chat.completions.create({
         model,
@@ -974,9 +976,11 @@ async function runGeometerAgent(template: Template, data: KappaData, humorPreamb
 // ── L1B: BODY ARCHITECT AGENT ─────────────────────────────────────────────────
 async function runBodyAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<BodyOutput | null> {
   const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
-  const models = process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN : ["gpt-4o-mini"];
-  const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
-  for (const model of models) {
+  const attempts: Array<{ model: string; client: any }> = [
+    ...(process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN.map(m => ({ model: m, client: openrouter })) : []),
+    { model: "gpt-4o-mini", client: aiClient as any },
+  ];
+  for (const { model, client } of attempts) {
     try {
       const resp = await client.chat.completions.create({
         model,
@@ -996,9 +1000,11 @@ async function runBodyAgent(template: Template, data: KappaData, humorPreamble: 
 // ── L1C: METADATA ORACLE AGENT ────────────────────────────────────────────────
 async function runOracleAgent(template: Template, data: KappaData, humorPreamble: string = ""): Promise<OracleOutput | null> {
   const userPrompt = (humorPreamble ? humorPreamble + "\n\n" : "") + template.buildPrompt(data);
-  const models = process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN : ["gpt-4o-mini"];
-  const client = process.env.OPENROUTER_API_KEY ? openrouter : aiClient as any;
-  for (const model of models) {
+  const attempts: Array<{ model: string; client: any }> = [
+    ...(process.env.OPENROUTER_API_KEY ? FREE_MODEL_CHAIN.map(m => ({ model: m, client: openrouter })) : []),
+    { model: "gpt-4o-mini", client: aiClient as any },
+  ];
+  for (const { model, client } of attempts) {
     try {
       const resp = await client.chat.completions.create({
         model,
