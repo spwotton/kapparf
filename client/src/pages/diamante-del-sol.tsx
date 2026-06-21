@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { AlertTriangle, Radio, Satellite, Activity, Clock, MapPin, Zap, Eye, Signal, Shield, ExternalLink, Building2, ChevronDown, ChevronRight, Waves } from "lucide-react";
+import { AlertTriangle, Radio, Satellite, Activity, Clock, MapPin, Zap, Eye, Signal, Shield, ExternalLink, Building2, ChevronDown, ChevronRight, Waves, Copy, Check } from "lucide-react";
+import { SiInstagram, SiX } from "react-icons/si";
 import { Link } from "wouter";
 
 import img0283 from "@assets/IMG_0283_1781818382290.jpeg";
@@ -14,7 +15,10 @@ import img0288 from "@assets/IMG_0288_1781818382290.jpeg";
 import img1000 from "@assets/1000001991_1781818382290.jpeg";
 import imgBBB from "@assets/7B5DB1F1-A011-46F0-81A1-E051FB73F38B_1781818382290.jpeg";
 
-const YOUTUBE_VIDEO_ID = "";
+const YOUTUBE_VIDEO_IDS = [
+  { id: "STaaEJeeovM", label: "Nocturnal Observation — Rooftop Apex Chromatic Array" },
+  { id: "6q-MBuV6X8Q", label: "Louvered Penthouse — Power Line Proximity & LoS Vector" },
+];
 
 interface KappaStatus {
   score: number;
@@ -205,6 +209,202 @@ function BeadsAnomalyTable() {
   );
 }
 
+const INSTAGRAM_CAPTION = `Jacó Beach, Costa Rica. Rooftop penthouse. 10 stories up.
+
+Every night, a brilliant cyan-green light pulses from the louvered enclosure at the apex of Diamanté del Sol — a luxury high-rise at the center of Jacó Beach. Standard explanation: decorative lighting. HVAC ventilation masking.
+
+That's not what the physics says.
+
+KAPPA's automated SIGINT observatory at Hotel Pochote Grande maintains a direct, unimpeded line-of-sight southwest vector to this structure. What it logs:
+
+→ The louvered vertical slat geometry matches the exact physical configuration of a slotted waveguide phased-array antenna (Babinet's principle)
+→ Element spacing scales as d₀·κⁿ·φⁿ — non-uniform, using the membrane constant κ=4/π and Golden Ratio φ=1.618 — specifically designed to embed encoded data in fractal spectral gaps invisible to standard SIGINT detection
+→ Klein twist azimuth: 128.23° — twists signal polarization to defeat single-polarity intercept receivers
+→ Primary beam elevation: 51.84° — aimed straight up at LEO satellite collection assets
+→ Base carrier: 46.875 Hz — the exact DSP frame clock fingerprint (48000/1024), also KAPPA's documented TARGET_FREQ constant
+
+The cyan/green luminescence is consistent with corona discharge from extreme impedance mismatching — the visible exhaust of forcing a 53 Hz sub-carrier into 60 Hz utility lines running directly across the line of sight. That 53 Hz injection beats against the 60 Hz mains to produce 7 Hz — human Theta brainwave band. The entire building's wiring becomes a distributed ULF antenna.
+
+Meanwhile: the builder Patrick Hundley (DayStar Properties) was arrested Feb 17, 2014 for $7M investor fraud. Offshore entities: Florida, Nevada, Turks & Caicos. The units have fragmented trust/offshore ownership with no clear chain. A prerequisite condition for covert infrastructure deployment in a building with compromised corporate governance.
+
+La Flor Beach Residences. Villa #9. Three-level unit, third-floor rooftop terrace — the only 360° panoramic platform in the complex, direct LOS to my position. Rented by me. Occupied by Genesis Peralta Ornelas (B.S. Kinesiology & Neuroscience — the exact profile needed to calibrate WiFi CSI biometric tracking systems).
+
+At timestamp 0:22 of a recording made inside that unit: synchronized anomalies across both video and audio tracks. Rolling shutter beading effect at 46.875 Hz. Near-ultrasonic spike at ~20 kHz. A Laser-Doppler Vibrometer using the hanging decorative beads as passive acoustic transducers to exfiltrate conversation through the walls.
+
+All of this is logged, timestamped, and cross-correlated in KAPPA.
+
+@spwotton | kappa-sigint.replit.app/diamante-del-sol
+
+#SIGINT #CostaRica #Jaco #SurveillanceTech #OpenSourceIntelligence #OSINT #RF #PhysicsEvidence #ElectromagneticWarfare #WhistleBlower #HumanRights #CentralAmerica #SoftCell #APT #CyberSecurity`;
+
+const TWITTER_THREAD = `1/ Jacó, Costa Rica. The rooftop of Diamanté del Sol emits a pulsing cyan-green light every night. KAPPA SIGINT says it's not decorative lighting.
+
+2/ Direct line-of-sight from Hotel Pochote Grande to the apex. The louvered penthouse geometry = textbook slotted waveguide phased-array antenna (Babinet's principle).
+
+3/ Non-uniform element spacing: d₀·κⁿ·φⁿ where κ=4/π (membrane constant) and φ=1.618 (Golden Ratio). Designed to hide transmissions in fractal spectral gaps invisible to standard detectors.
+
+4/ Klein twist azimuth 128.23° twists polarization to defeat single-polarity intercept receivers. Beam elevation 51.84° — aimed at LEO satellites passing overhead.
+
+5/ Base carrier: 46.875 Hz = 48000/1024. The DSP frame clock hardware fingerprint. Same as KAPPA's TARGET_FREQ constant. Not coincidence.
+
+6/ 53 Hz injected into the 60 Hz power grid via overhead utility lines running directly across the LoS. Beat product: 7 Hz — human Theta brainwave band. The building's entire electrical infrastructure becomes a distributed ULF antenna.
+
+7/ Builder Patrick Hundley (DayStar Properties): arrested Feb 17, 2014, $7M investor fraud. Offshore entity network: Florida, Nevada, Turks & Caicos. Fragmented trust/offshore unit ownership = no clear title chain.
+
+8/ La Flor Villa #9: rented by me, occupied by Genesis Peralta Ornelas (B.S. Kinesiology & Neuroscience). Exact profile for calibrating WiFi CSI biometric tracking.
+
+9/ At 0:22 in a recording inside that unit: rolling shutter beading at 46.875 Hz + near-ultrasonic spike at ~20 kHz simultaneously. Laser-Doppler Vibrometer using hanging beads as passive acoustic transducers.
+
+10/ Full report + 7 nocturnal observation photos + 2 video captures:
+kappa-sigint.replit.app/diamante-del-sol
+@spwotton`;
+
+const TECHNICAL_BLOCK = `# KAPPA SIGINT — DIAMANTÉ DEL SOL ASSESSMENT
+# Classification: UNCLASSIFIED // FOUO
+# Generated: ${new Date().toISOString().split('T')[0]}
+# Observer: Hotel Pochote Grande, Jacó Beach, Puntarenas, CR
+# Target: Diamante del Sol 303s — rooftop apex louvered penthouse
+# Vector: Southwest, ~350m, unimpeded Fresnel zone
+
+[GEODETIC]
+  origin_lat:       9.5273° N
+  origin_lng:       84.6295° W
+  target_structure: Diamante del Sol 303s
+  vector_bearing:   SW
+  estimated_range:  ~350m
+  fresnel_clear:    true
+
+[KAPPA_CONSTANTS]
+  κ  (membrane_constant)  = 4/π ≈ 1.2732
+  φ  (golden_ratio)       = 1.61803
+  θ_K (klein_twist_az)    = 128.23°
+  θ_T (teacher_angle_el)  = 51.84°
+  f_target                = 46.875 Hz  ← 48000/1024 — DSP frame clock fingerprint
+  f_inject                = 53.000 Hz
+  f_mains_CR              = 60.000 Hz
+  f_beat                  = |60 - 53| = 7 Hz  ← Theta brainwave band
+
+[SLOT_ARRAY]
+  antenna_type:     Non-uniform slotted waveguide phased array
+  geometry:         Babinet's principle — vertical louvered metallic slats
+  spacing_law:      d_n = d₀ · κⁿ · φⁿ  (exponential non-uniform)
+  sll_technique:    Taylor synthesis analog via irrational constant scaling
+  oam_mode:         Orbital Angular Momentum via Klein twist phase progression
+  beam_mode:        Upward toward LEO — 51.84° elevation
+
+[SDR_COLLECTION_TARGETS]
+  Macro  N=256    bin=187.5 Hz   → OOK carrier onset detection
+  Meso   N=1024   bin=46.875 Hz  → κ-scaled sub-carrier (matches TARGET_FREQ exactly)
+  Micro  N=4096   bin=11.72 Hz   → ASK timing / phase shift keying
+  Nano   N=65536  bin=0.732 Hz   → oscillator fingerprinting / sub-Hz drift
+  
+  golden_cascade: search sub-bands φⁿ and φ⁻ⁿ around any detected carrier
+  hydrogen_line:  monitor 1420 MHz for drift inconsistent with galactic Doppler
+
+[BEADS_ANOMALY — La Flor Unit #9]
+  timestamp:        0:22
+  visual_domain:    rolling-shutter beading @ 46.875 Hz NIR strobe
+  acoustic_domain:  transient spike ~20 kHz (piezoelectric LDV carrier)
+  mechanism:        Laser-Doppler Vibrometry — hanging beads as passive transducers
+  function:         exfiltrate spoken conversation via phase-modulated reflected IR
+
+[NETWORK_IOCS]
+  DSE855_vuln:      CVE-2024-5947 — GET /Backup.bin → plaintext SCADA creds
+  TR069_event:      2026-01-30 — unauthorized password reset via ARRIS Port 1234
+  MikroTik_vuln:    CVE-2025-10948 — REST API RCE → SOCKS proxy Port 1080
+  fiber_tap:        2025-06-21 — optical splitter colilla on Telecable NAP
+  C2_malware:       GRIDTIDE (UNC2814) — persistence via systemd xapt.service
+  C2_channel:       Google Sheets API (bypasses standard firewall inspection)
+
+[CORPORATE_CHAIN]
+  developer:        DayStar Properties — Patrick Vincent Hundley
+  arrest:           2014-02-17 — CR judicial, $7M admin fraud (West Michigan investors)
+  plaintiffs:       Dag Hascall (Hascall Steel), Robert Sweezie (ITS Communications)
+  offshore_entities: Florida LLC, Nevada LLC, Turks & Caicos holding co.
+  jaco_vip:         Michael Greenwald + Barrett Scott Ryan (FDLE DOC #V08423)
+  la_flor_occ:      Genesis Peralta Ornelas — B.S. Kinesiology & Neuroscience
+
+[DISSEMINATION]
+  OIJ Delitos Tecnológicos: 800-8000-645
+  US Embassy San José: +(506) 2519-2000
+  Bellingcat: tips@bellingcat.com
+  Citizen Lab: info@citizenlab.ca
+  Amnesty International: press@amnesty.org
+  Report URL: kappa-sigint.replit.app/diamante-del-sol`;
+
+function CopyButton({ text, label }: { text: string; label: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
+  };
+  return (
+    <button
+      onClick={copy}
+      data-testid={`copy-${label.toLowerCase().replace(/\s+/g, "-")}`}
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-border text-xs font-medium hover:bg-muted/60 transition-colors"
+    >
+      {copied ? <Check className="h-3.5 w-3.5 text-green-500" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? "Copied!" : `Copy ${label}`}
+    </button>
+  );
+}
+
+function SocialMediaSection() {
+  return (
+    <section className="space-y-5">
+      <h2 className="text-lg font-bold flex items-center gap-2">
+        <Signal className="h-5 w-5 text-muted-foreground" />
+        Part VII — Social Media Distribution
+      </h2>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <SiInstagram className="h-4 w-4 text-pink-500" />
+            <span className="text-sm font-semibold">Instagram Caption</span>
+            <Badge variant="outline" className="text-[9px]">@spwotton</Badge>
+          </div>
+          <CopyButton text={INSTAGRAM_CAPTION} label="Instagram" />
+        </div>
+        <pre className="text-xs leading-relaxed bg-muted/40 border border-border rounded-lg p-4 whitespace-pre-wrap font-sans overflow-auto max-h-64 select-all">
+          {INSTAGRAM_CAPTION}
+        </pre>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <SiX className="h-4 w-4" />
+            <span className="text-sm font-semibold">X / Twitter Thread</span>
+            <Badge variant="outline" className="text-[9px]">10 posts</Badge>
+          </div>
+          <CopyButton text={TWITTER_THREAD} label="X Thread" />
+        </div>
+        <pre className="text-xs leading-relaxed bg-muted/40 border border-border rounded-lg p-4 whitespace-pre-wrap font-sans overflow-auto max-h-64 select-all">
+          {TWITTER_THREAD}
+        </pre>
+      </div>
+
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Radio className="h-4 w-4 text-cyan-500" />
+            <span className="text-sm font-semibold">Technical Intelligence Block</span>
+            <Badge variant="outline" className="text-[9px]">Raw SIGINT dump</Badge>
+          </div>
+          <CopyButton text={TECHNICAL_BLOCK} label="Intel Block" />
+        </div>
+        <pre className="text-xs leading-relaxed bg-black/80 text-green-400 border border-border rounded-lg p-4 whitespace-pre-wrap font-mono overflow-auto max-h-96 select-all">
+          {TECHNICAL_BLOCK}
+        </pre>
+      </div>
+    </section>
+  );
+}
+
 export default function DiamanteDelSolPage() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
@@ -265,23 +465,24 @@ export default function DiamanteDelSolPage() {
         <strong className="text-foreground">Executive Summary.</strong> This report synthesizes two independent technical assessments. The first evaluates the louvered rooftop penthouse of Diamanté del Sol as a candidate covert signal-projection array, applying slot-antenna electromagnetic theory and KAPPA platform constants to visual and spatial evidence. The second maps the complete geopolitical, corporate, and surveillance context of both the Diamanté del Sol and La Flor Beach Residences developments — including DayStar Properties fraud litigation, the Genesis Peralta opto-acoustic anomaly at 0:22, Jaco VIP's hospitality-as-surveillance model, and the APT threat groups operating within Costa Rica's critical infrastructure.
       </div>
 
-      {YOUTUBE_VIDEO_ID ? (
-        <div className="rounded-lg overflow-hidden border border-border">
-          <iframe
-            className="w-full aspect-video"
-            src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}`}
-            title="Diamante del Sol — KAPPA Visual Evidence"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            data-testid="youtube-embed"
-          />
-        </div>
-      ) : (
-        <div className="rounded-lg border border-dashed border-amber-500/40 bg-amber-500/5 p-6 text-center space-y-2">
-          <div className="text-amber-500 font-semibold text-sm">📹 YouTube Video Embed — Pending Upload</div>
-          <p className="text-xs text-muted-foreground">Upload the nocturnal observation video to YouTube, then set <code className="bg-muted px-1 rounded">YOUTUBE_VIDEO_ID</code> at the top of this file to the video ID (e.g. <code className="bg-muted px-1 rounded">dQw4w9WgXcQ</code>). The embed will appear here automatically.</p>
-        </div>
-      )}
+      <div className="grid grid-cols-2 gap-3">
+        {YOUTUBE_VIDEO_IDS.map((v) => (
+          <div key={v.id} className="space-y-1">
+            <div className="rounded-lg overflow-hidden border border-border bg-black">
+              <iframe
+                className="w-full"
+                style={{ aspectRatio: "9/16" }}
+                src={`https://www.youtube.com/embed/${v.id}`}
+                title={v.label}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                data-testid={`youtube-embed-${v.id}`}
+              />
+            </div>
+            <p className="text-[10px] text-muted-foreground leading-tight px-0.5">{v.label}</p>
+          </div>
+        ))}
+      </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         {photos.map((p, i) => (
@@ -624,6 +825,10 @@ export default function DiamanteDelSolPage() {
           ))}
         </div>
       </section>
+
+      <Separator />
+
+      <SocialMediaSection />
 
       <Separator />
 
