@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -12,226 +13,301 @@ import { DossierProvider, useDossier } from "@/lib/dossier";
 import { SiteModeProvider, useSiteMode } from "@/lib/site-mode";
 import { useArrowSequence } from "@/hooks/useArrowSequence";
 import { I18nProvider } from "@/lib/i18n";
-import { Moon, Sun, Newspaper, Shield } from "lucide-react";
+import { Moon, Sun, Shield } from "lucide-react";
 import { useLocation } from "wouter";
-import NotFound from "@/pages/not-found";
-import CommandCenterPage from "@/pages/command-center";
-import DashboardPage from "@/pages/overview";
-import EventsPage from "@/pages/events";
-import CorrelationsPage from "@/pages/correlations";
-import SatellitesPage from "@/pages/satellites";
-import NodesPage from "@/pages/nodes";
-import ToolsPage from "@/pages/tools";
-import MapPage from "@/pages/map";
-import DevicesPage from "@/pages/devices";
-import OsintPage from "@/pages/osint";
-import KarachiPage from "@/pages/karachi";
-import CongustoPage from "@/pages/congusto";
-import HypervisorPage from "@/pages/hypervisor";
-import IntelligencePage from "@/pages/intelligence";
-import LatticePage from "@/pages/lattice";
-import SocialPage from "@/pages/social";
-import StudioPage from "@/pages/studio";
-import ResearchPage from "@/pages/research";
-import DeepResearchPage from "@/pages/deep-research";
-import ImageryPage from "@/pages/imagery";
-import ConspiracyBoardPage from "@/pages/conspiracy-board";
-import SuperpositionPage from "@/pages/superposition";
-import BettercapPage from "@/pages/bettercap";
-import ResearchCortexPage from "@/pages/research-cortex";
-import LiquidCortexPage from "@/pages/liquid-cortex";
-import NetworkForensicsPage from "@/pages/network-forensics";
-import EvidenceChainPage from "@/pages/evidence-chain";
-import ForensicHypervisorPage from "@/pages/forensic-hypervisor";
-import WhistleblowerPage from "@/pages/whistleblower";
-import HomePage from "@/pages/home";
-import CrankEditorPage from "@/pages/crank";
-import MemoryCortexPage from "@/pages/memory-cortex";
-import GalliumPage from "@/pages/gallium";
-import SuitesCristinaPage from "@/pages/suites-cristina";
-import JacoMapPage from "@/pages/jaco-map";
-import DroneIntelPage from "@/pages/drone-intel/index";
-import DroneGamePage from "@/pages/drone-game";
-import SpokeWheelPage from "@/pages/spoke-wheel";
-import OmegaGOSLNNPage from "@/pages/omega-gos-lnn";
-import FleetTrackerPage from "@/pages/fleet-tracker";
-import SeismicKappaPage from "@/pages/seismic-kappa";
-import CortexBusPage from "@/pages/cortex-bus";
-import AtlantisHubPage from "@/pages/atlantis-hub";
-import LocalLLMHypervisorPage from "@/pages/local-llm-hypervisor";
-import MeridianHypervisorPage from "@/pages/meridian-hypervisor";
-import BioAcousticPage from "@/pages/bio-acoustic";
-import AudioForensicsPage from "@/pages/audio-forensics";
-import VideoForensicsPage from "@/pages/video-forensics";
-import GooseGazettePage from "@/pages/goose-gazette";
-import EvidenceDirectoryPage from "@/pages/evidence-directory";
-import GooseSignalsPage from "@/pages/goose-signals";
-import SignalLatticePage from "@/pages/signal-lattice";
-import GooseHumorPage from "@/pages/goose-humor";
-import GooseAdminPage from "@/pages/goose-admin";
-import GooseEditorialPage from "@/pages/goose-editorial";
-import DroneBlogPage from "@/pages/drone-blog";
-import PochoteAnalysisPage from "@/pages/pochote-analysis";
-import GazetteRefinerPage from "@/pages/gazette-refiner";
-import HyperobjectsPage from "@/pages/hyperobjects";
-import AtlasObservatoryPage from "@/pages/atlas-observatory";
-import SetecomExposePage from "@/pages/setecom-expose";
-import ReelPage from "@/pages/reel";
-import MailerPage from "@/pages/mailer";
-import MediaPitchPage from "@/pages/media-pitch";
-import SatoshiLatticePage from "@/pages/satoshi-lattice";
-import QuantumSolverPage from "@/pages/quantum-solver";
-import StatusReportPage from "@/pages/status-report";
-import NexusSlidesPage from "@/pages/nexus-slides";
-import SpectrumPage from "@/pages/spectrum";
-import ArticleJacoConvergencePage from "@/pages/article-jaco-convergence";
-import ArticleBleVehiclePage from "@/pages/article-ble-vehicle";
-import ArticleRecording37Page from "@/pages/article-recording-37";
-import FollowTheMoneyPage from "@/pages/follow-the-money";
-import ZersetzungPage from "@/pages/zersetzung";
-import QuasarHydraPage from "@/pages/quasar-hydra";
-import OpticalScanPage from "@/pages/optical-scan";
-import ForensicEvidencePage from "@/pages/forensic-evidence";
-import PochoteIncidentPage from "@/pages/pochote-incident";
-import ParabolicAntennaPage from "@/pages/parabolic-antenna";
-import SensorArrayPage from "@/pages/sensor-array";
-import DemodexPhonePage from "@/pages/demodex-phone";
-import NetworkAnalysisPage from "@/pages/network-analysis";
-import PochoteHeadlinerPage from "@/pages/pochote-headliner";
-import IsomorphicThreatPage from "@/pages/isomorphic-threat";
-import RiverwalkPage from "@/pages/riverwalk";
-import ThreatHuntingPage from "@/pages/threat-hunting";
-import DocsisForensicsPage from "@/pages/docsis-forensics";
-import GOSHyperstructurePage from "@/pages/gos-hyperstructure";
-import TattooBrandingPage from "@/pages/tattoo-branding";
-import DiamanteDelSolPage from "@/pages/diamante-del-sol";
-import CameroXaverLdvPage from "@/pages/camero-xaver-ldv";
 
-// ── KAPPA full-platform router (CIA JW mode) ─────────────────────────────────
+// ── Lazy page imports (code-split per route) ──────────────────────────────────
+const NotFound              = lazy(() => import("@/pages/not-found"));
+const CommandCenterPage     = lazy(() => import("@/pages/command-center"));
+const DashboardPage         = lazy(() => import("@/pages/overview"));
+const EventsPage            = lazy(() => import("@/pages/events"));
+const CorrelationsPage      = lazy(() => import("@/pages/correlations"));
+const SatellitesPage        = lazy(() => import("@/pages/satellites"));
+const NodesPage             = lazy(() => import("@/pages/nodes"));
+const ToolsPage             = lazy(() => import("@/pages/tools"));
+const MapPage               = lazy(() => import("@/pages/map"));
+const DevicesPage           = lazy(() => import("@/pages/devices"));
+const OsintPage             = lazy(() => import("@/pages/osint"));
+const KarachiPage           = lazy(() => import("@/pages/karachi"));
+const CongustoPage          = lazy(() => import("@/pages/congusto"));
+const HypervisorPage        = lazy(() => import("@/pages/hypervisor"));
+const IntelligencePage      = lazy(() => import("@/pages/intelligence"));
+const LatticePage           = lazy(() => import("@/pages/lattice"));
+const SocialPage            = lazy(() => import("@/pages/social"));
+const StudioPage            = lazy(() => import("@/pages/studio"));
+const ResearchPage          = lazy(() => import("@/pages/research"));
+const DeepResearchPage      = lazy(() => import("@/pages/deep-research"));
+const ImageryPage           = lazy(() => import("@/pages/imagery"));
+const ConspiracyBoardPage   = lazy(() => import("@/pages/conspiracy-board"));
+const SuperpositionPage     = lazy(() => import("@/pages/superposition"));
+const BettercapPage         = lazy(() => import("@/pages/bettercap"));
+const ResearchCortexPage    = lazy(() => import("@/pages/research-cortex"));
+const LiquidCortexPage      = lazy(() => import("@/pages/liquid-cortex"));
+const NetworkForensicsPage  = lazy(() => import("@/pages/network-forensics"));
+const EvidenceChainPage     = lazy(() => import("@/pages/evidence-chain"));
+const ForensicHypervisorPage= lazy(() => import("@/pages/forensic-hypervisor"));
+const WhistleblowerPage     = lazy(() => import("@/pages/whistleblower"));
+const HomePage              = lazy(() => import("@/pages/home"));
+const CrankEditorPage       = lazy(() => import("@/pages/crank"));
+const MemoryCortexPage      = lazy(() => import("@/pages/memory-cortex"));
+const GalliumPage           = lazy(() => import("@/pages/gallium"));
+const SuitesCristinaPage    = lazy(() => import("@/pages/suites-cristina"));
+const JacoMapPage           = lazy(() => import("@/pages/jaco-map"));
+const DroneIntelPage        = lazy(() => import("@/pages/drone-intel/index"));
+const DroneGamePage         = lazy(() => import("@/pages/drone-game"));
+const SpokeWheelPage        = lazy(() => import("@/pages/spoke-wheel"));
+const OmegaGOSLNNPage       = lazy(() => import("@/pages/omega-gos-lnn"));
+const FleetTrackerPage      = lazy(() => import("@/pages/fleet-tracker"));
+const SeismicKappaPage      = lazy(() => import("@/pages/seismic-kappa"));
+const CortexBusPage         = lazy(() => import("@/pages/cortex-bus"));
+const AtlantisHubPage       = lazy(() => import("@/pages/atlantis-hub"));
+const LocalLLMHypervisorPage= lazy(() => import("@/pages/local-llm-hypervisor"));
+const MeridianHypervisorPage= lazy(() => import("@/pages/meridian-hypervisor"));
+const BioAcousticPage       = lazy(() => import("@/pages/bio-acoustic"));
+const AudioForensicsPage    = lazy(() => import("@/pages/audio-forensics"));
+const VideoForensicsPage    = lazy(() => import("@/pages/video-forensics"));
+const GooseGazettePage      = lazy(() => import("@/pages/goose-gazette"));
+const EvidenceDirectoryPage = lazy(() => import("@/pages/evidence-directory"));
+const GooseSignalsPage      = lazy(() => import("@/pages/goose-signals"));
+const SignalLatticePage     = lazy(() => import("@/pages/signal-lattice"));
+const GooseHumorPage        = lazy(() => import("@/pages/goose-humor"));
+const GooseAdminPage        = lazy(() => import("@/pages/goose-admin"));
+const GooseEditorialPage    = lazy(() => import("@/pages/goose-editorial"));
+const DroneBlogPage         = lazy(() => import("@/pages/drone-blog"));
+const PochoteAnalysisPage   = lazy(() => import("@/pages/pochote-analysis"));
+const GazetteRefinerPage    = lazy(() => import("@/pages/gazette-refiner"));
+const HyperobjectsPage      = lazy(() => import("@/pages/hyperobjects"));
+const AtlasObservatoryPage  = lazy(() => import("@/pages/atlas-observatory"));
+const SetecomExposePage     = lazy(() => import("@/pages/setecom-expose"));
+const ReelPage              = lazy(() => import("@/pages/reel"));
+const MailerPage            = lazy(() => import("@/pages/mailer"));
+const MediaPitchPage        = lazy(() => import("@/pages/media-pitch"));
+const SatoshiLatticePage    = lazy(() => import("@/pages/satoshi-lattice"));
+const QuantumSolverPage     = lazy(() => import("@/pages/quantum-solver"));
+const StatusReportPage      = lazy(() => import("@/pages/status-report"));
+const NexusSlidesPage       = lazy(() => import("@/pages/nexus-slides"));
+const SpectrumPage          = lazy(() => import("@/pages/spectrum"));
+const ArticleJacoConvergencePage = lazy(() => import("@/pages/article-jaco-convergence"));
+const ArticleBleVehiclePage = lazy(() => import("@/pages/article-ble-vehicle"));
+const ArticleRecording37Page= lazy(() => import("@/pages/article-recording-37"));
+const FollowTheMoneyPage    = lazy(() => import("@/pages/follow-the-money"));
+const ZersetzungPage        = lazy(() => import("@/pages/zersetzung"));
+const QuasarHydraPage       = lazy(() => import("@/pages/quasar-hydra"));
+const OpticalScanPage       = lazy(() => import("@/pages/optical-scan"));
+const ForensicEvidencePage  = lazy(() => import("@/pages/forensic-evidence"));
+const PochoteIncidentPage   = lazy(() => import("@/pages/pochote-incident"));
+const ParabolicAntennaPage  = lazy(() => import("@/pages/parabolic-antenna"));
+const SensorArrayPage       = lazy(() => import("@/pages/sensor-array"));
+const DemodexPhonePage      = lazy(() => import("@/pages/demodex-phone"));
+const NetworkAnalysisPage   = lazy(() => import("@/pages/network-analysis"));
+const PochoteHeadlinerPage  = lazy(() => import("@/pages/pochote-headliner"));
+const IsomorphicThreatPage  = lazy(() => import("@/pages/isomorphic-threat"));
+const RiverwalkPage         = lazy(() => import("@/pages/riverwalk"));
+const ThreatHuntingPage     = lazy(() => import("@/pages/threat-hunting"));
+const DocsisForensicsPage   = lazy(() => import("@/pages/docsis-forensics"));
+const GOSHyperstructurePage = lazy(() => import("@/pages/gos-hyperstructure"));
+const TattooBrandingPage    = lazy(() => import("@/pages/tattoo-branding"));
+const DiamanteDelSolPage    = lazy(() => import("@/pages/diamante-del-sol"));
+const CameroXaverLdvPage    = lazy(() => import("@/pages/camero-xaver-ldv"));
+
+// ── 53-Hyperlattice loading fallback ─────────────────────────────────────────
+// BH53 canonical alphabet — 53 chars, visually unambiguous
+const BH53 = "02345678ABCDEFGHJKLMNPQRSTUVXYZabcefghijknopqrstuvxyz";
+
+function PageLoader() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+        minHeight: "200px",
+        gap: "12px",
+        fontFamily: "ui-monospace, monospace",
+        color: "#6b7280",
+        fontSize: "11px",
+        letterSpacing: "0.08em",
+        userSelect: "none",
+      }}
+    >
+      <SpectrogramBar />
+      <span style={{ opacity: 0.5 }}>κ = 4/π · GF(53)</span>
+    </div>
+  );
+}
+
+function SpectrogramBar() {
+  const cols = 24;
+  const bars = Array.from({ length: cols }, (_, i) => {
+    const char = BH53[i % BH53.length];
+    const h = 8 + ((i * 7 + 13) % 20);
+    return { char, h };
+  });
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-end",
+        gap: "2px",
+        height: "32px",
+      }}
+    >
+      {bars.map((b, i) => (
+        <div
+          key={i}
+          style={{
+            width: "6px",
+            height: `${b.h}px`,
+            background: `hsl(${210 + i * 3}, 40%, 60%)`,
+            borderRadius: "1px",
+            animation: `kappa-pulse ${0.8 + (i % 5) * 0.15}s ease-in-out infinite alternate`,
+            animationDelay: `${i * 0.04}s`,
+          }}
+          title={b.char}
+        />
+      ))}
+      <style>{`
+        @keyframes kappa-pulse {
+          from { opacity: 0.3; transform: scaleY(0.6); }
+          to   { opacity: 1;   transform: scaleY(1);   }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// ── KAPPA full-platform router (CIA JW mode) ──────────────────────────────────
 function KappaRouter() {
   return (
-    <Switch>
-      <Route path="/" component={HomePage} />
-      <Route path="/command-center" component={CommandCenterPage} />
-      <Route path="/status" component={StatusReportPage} />
-      <Route path="/whistleblower" component={WhistleblowerPage} />
-      <Route path="/command" component={CommandCenterPage} />
-      <Route path="/dashboard" component={DashboardPage} />
-      <Route path="/events" component={EventsPage} />
-      <Route path="/correlations" component={CorrelationsPage} />
-      <Route path="/devices" component={DevicesPage} />
-      <Route path="/satellites" component={SatellitesPage} />
-      <Route path="/nodes" component={NodesPage} />
-      <Route path="/tools" component={ToolsPage} />
-      <Route path="/map" component={MapPage} />
-      <Route path="/osint" component={OsintPage} />
-      <Route path="/karachi" component={KarachiPage} />
-      <Route path="/congusto" component={CongustoPage} />
-      <Route path="/hypervisor" component={HypervisorPage} />
-      <Route path="/intelligence" component={IntelligencePage} />
-      <Route path="/lattice" component={LatticePage} />
-      <Route path="/social" component={SocialPage} />
-      <Route path="/studio" component={StudioPage} />
-      <Route path="/research" component={ResearchPage} />
-      <Route path="/deep-research" component={DeepResearchPage} />
-      <Route path="/imagery" component={ImageryPage} />
-      <Route path="/board" component={ConspiracyBoardPage} />
-      <Route path="/superposition" component={SuperpositionPage} />
-      <Route path="/bettercap" component={BettercapPage} />
-      <Route path="/cortex" component={ResearchCortexPage} />
-      <Route path="/liquid-cortex" component={LiquidCortexPage} />
-      <Route path="/forensics" component={NetworkForensicsPage} />
-      <Route path="/evidence" component={EvidenceChainPage} />
-      <Route path="/evidence-directory" component={EvidenceDirectoryPage} />
-      <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
-      <Route path="/memory" component={MemoryCortexPage} />
-      <Route path="/gallium" component={GalliumPage} />
-      <Route path="/cristina" component={SuitesCristinaPage} />
-      <Route path="/jaco" component={JacoMapPage} />
-      <Route path="/drone-intel" component={DroneIntelPage} />
-      <Route path="/game" component={DroneGamePage} />
-      <Route path="/spoke-wheel" component={SpokeWheelPage} />
-      <Route path="/omega-gos" component={OmegaGOSLNNPage} />
-      <Route path="/fleet" component={FleetTrackerPage} />
-      <Route path="/seismic" component={SeismicKappaPage} />
-      <Route path="/cortex-bus" component={CortexBusPage} />
-      <Route path="/atlantis" component={AtlantisHubPage} />
-      <Route path="/local-llm" component={LocalLLMHypervisorPage} />
-      <Route path="/meridian" component={MeridianHypervisorPage} />
-      <Route path="/bio-acoustic" component={BioAcousticPage} />
-      <Route path="/spectrum" component={SpectrumPage} />
-      <Route path="/optical-scan" component={OpticalScanPage} />
-      <Route path="/audio" component={AudioForensicsPage} />
-      <Route path="/video-forensics" component={VideoForensicsPage} />
-      <Route path="/goose" component={GooseGazettePage} />
-      <Route path="/goose/signals" component={GooseSignalsPage} />
-      <Route path="/goose/lattice" component={SignalLatticePage} />
-      <Route path="/goose/admin" component={GooseAdminPage} />
-      <Route path="/goose/editorial" component={GooseEditorialPage} />
-      <Route path="/goose/drone" component={DroneBlogPage} />
-      <Route path="/goose/press-room" component={GazetteRefinerPage} />
-      <Route path="/goose/humor" component={GooseHumorPage} />
-      <Route path="/hyperobjects" component={HyperobjectsPage} />
-      <Route path="/atlas" component={AtlasObservatoryPage} />
-      <Route path="/setecom" component={SetecomExposePage} />
-      <Route path="/reel" component={ReelPage} />
-      <Route path="/mailer" component={MailerPage} />
-      <Route path="/media-pitch" component={MediaPitchPage} />
-      <Route path="/satoshi-lattice" component={SatoshiLatticePage} />
-      <Route path="/quantum-solver" component={QuantumSolverPage} />
-      <Route path="/pochote" component={PochoteAnalysisPage} />
-      <Route path="/nexus-slides" component={NexusSlidesPage} />
-      <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
-      <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
-      <Route path="/articles/recording-37" component={ArticleRecording37Page} />
-      <Route path="/follow-the-money" component={FollowTheMoneyPage} />
-      <Route path="/zersetzung" component={ZersetzungPage} />
-      <Route path="/quasar-hydra" component={QuasarHydraPage} />
-      <Route path="/forensic-evidence" component={ForensicEvidencePage} />
-      <Route path="/pochote-incident" component={PochoteIncidentPage} />
-      <Route path="/parabolic-antenna" component={ParabolicAntennaPage} />
-      <Route path="/sensor-array" component={SensorArrayPage} />
-      <Route path="/demodex-phone" component={DemodexPhonePage} />
-      <Route path="/network-analysis" component={NetworkAnalysisPage} />
-      <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
-      <Route path="/isomorphic-threat" component={IsomorphicThreatPage} />
-      <Route path="/riverwalk" component={RiverwalkPage} />
-      <Route path="/threat-hunting" component={ThreatHuntingPage} />
-      <Route path="/docsis-forensics" component={DocsisForensicsPage} />
-      <Route path="/tattoo-branding" component={TattooBrandingPage} />
-      <Route path="/gos-hyperstructure" component={GOSHyperstructurePage} />
-      <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
-      <Route path="/camero-xaver-ldv" component={CameroXaverLdvPage} />
-      <Route path="/crank" component={CrankEditorPage} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        <Route path="/" component={HomePage} />
+        <Route path="/command-center" component={CommandCenterPage} />
+        <Route path="/status" component={StatusReportPage} />
+        <Route path="/whistleblower" component={WhistleblowerPage} />
+        <Route path="/command" component={CommandCenterPage} />
+        <Route path="/dashboard" component={DashboardPage} />
+        <Route path="/events" component={EventsPage} />
+        <Route path="/correlations" component={CorrelationsPage} />
+        <Route path="/devices" component={DevicesPage} />
+        <Route path="/satellites" component={SatellitesPage} />
+        <Route path="/nodes" component={NodesPage} />
+        <Route path="/tools" component={ToolsPage} />
+        <Route path="/map" component={MapPage} />
+        <Route path="/osint" component={OsintPage} />
+        <Route path="/karachi" component={KarachiPage} />
+        <Route path="/congusto" component={CongustoPage} />
+        <Route path="/hypervisor" component={HypervisorPage} />
+        <Route path="/intelligence" component={IntelligencePage} />
+        <Route path="/lattice" component={LatticePage} />
+        <Route path="/social" component={SocialPage} />
+        <Route path="/studio" component={StudioPage} />
+        <Route path="/research" component={ResearchPage} />
+        <Route path="/deep-research" component={DeepResearchPage} />
+        <Route path="/imagery" component={ImageryPage} />
+        <Route path="/board" component={ConspiracyBoardPage} />
+        <Route path="/superposition" component={SuperpositionPage} />
+        <Route path="/bettercap" component={BettercapPage} />
+        <Route path="/cortex" component={ResearchCortexPage} />
+        <Route path="/liquid-cortex" component={LiquidCortexPage} />
+        <Route path="/forensics" component={NetworkForensicsPage} />
+        <Route path="/evidence" component={EvidenceChainPage} />
+        <Route path="/evidence-directory" component={EvidenceDirectoryPage} />
+        <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
+        <Route path="/memory" component={MemoryCortexPage} />
+        <Route path="/gallium" component={GalliumPage} />
+        <Route path="/cristina" component={SuitesCristinaPage} />
+        <Route path="/jaco" component={JacoMapPage} />
+        <Route path="/drone-intel" component={DroneIntelPage} />
+        <Route path="/game" component={DroneGamePage} />
+        <Route path="/spoke-wheel" component={SpokeWheelPage} />
+        <Route path="/omega-gos" component={OmegaGOSLNNPage} />
+        <Route path="/fleet" component={FleetTrackerPage} />
+        <Route path="/seismic" component={SeismicKappaPage} />
+        <Route path="/cortex-bus" component={CortexBusPage} />
+        <Route path="/atlantis" component={AtlantisHubPage} />
+        <Route path="/local-llm" component={LocalLLMHypervisorPage} />
+        <Route path="/meridian" component={MeridianHypervisorPage} />
+        <Route path="/bio-acoustic" component={BioAcousticPage} />
+        <Route path="/spectrum" component={SpectrumPage} />
+        <Route path="/optical-scan" component={OpticalScanPage} />
+        <Route path="/audio" component={AudioForensicsPage} />
+        <Route path="/video-forensics" component={VideoForensicsPage} />
+        <Route path="/goose" component={GooseGazettePage} />
+        <Route path="/goose/signals" component={GooseSignalsPage} />
+        <Route path="/goose/lattice" component={SignalLatticePage} />
+        <Route path="/goose/admin" component={GooseAdminPage} />
+        <Route path="/goose/editorial" component={GooseEditorialPage} />
+        <Route path="/goose/drone" component={DroneBlogPage} />
+        <Route path="/goose/press-room" component={GazetteRefinerPage} />
+        <Route path="/goose/humor" component={GooseHumorPage} />
+        <Route path="/hyperobjects" component={HyperobjectsPage} />
+        <Route path="/atlas" component={AtlasObservatoryPage} />
+        <Route path="/setecom" component={SetecomExposePage} />
+        <Route path="/reel" component={ReelPage} />
+        <Route path="/mailer" component={MailerPage} />
+        <Route path="/media-pitch" component={MediaPitchPage} />
+        <Route path="/satoshi-lattice" component={SatoshiLatticePage} />
+        <Route path="/quantum-solver" component={QuantumSolverPage} />
+        <Route path="/pochote" component={PochoteAnalysisPage} />
+        <Route path="/nexus-slides" component={NexusSlidesPage} />
+        <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
+        <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
+        <Route path="/articles/recording-37" component={ArticleRecording37Page} />
+        <Route path="/follow-the-money" component={FollowTheMoneyPage} />
+        <Route path="/zersetzung" component={ZersetzungPage} />
+        <Route path="/quasar-hydra" component={QuasarHydraPage} />
+        <Route path="/forensic-evidence" component={ForensicEvidencePage} />
+        <Route path="/pochote-incident" component={PochoteIncidentPage} />
+        <Route path="/parabolic-antenna" component={ParabolicAntennaPage} />
+        <Route path="/sensor-array" component={SensorArrayPage} />
+        <Route path="/demodex-phone" component={DemodexPhonePage} />
+        <Route path="/network-analysis" component={NetworkAnalysisPage} />
+        <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
+        <Route path="/isomorphic-threat" component={IsomorphicThreatPage} />
+        <Route path="/riverwalk" component={RiverwalkPage} />
+        <Route path="/threat-hunting" component={ThreatHuntingPage} />
+        <Route path="/docsis-forensics" component={DocsisForensicsPage} />
+        <Route path="/tattoo-branding" component={TattooBrandingPage} />
+        <Route path="/gos-hyperstructure" component={GOSHyperstructurePage} />
+        <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
+        <Route path="/camero-xaver-ldv" component={CameroXaverLdvPage} />
+        <Route path="/crank" component={CrankEditorPage} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 
 // ── Goose Gazette standalone router (default mode) ───────────────────────────
 function GooseRouter() {
   return (
-    <Switch>
-      <Route path="/whistleblower" component={WhistleblowerPage} />
-      <Route path="/nexus-slides" component={NexusSlidesPage} />
-      <Route path="/setecom-report" component={SetecomExposePage} />
-      <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
-      <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
-      <Route path="/articles/recording-37" component={ArticleRecording37Page} />
-      <Route path="/pochote" component={PochoteAnalysisPage} />
-      <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
-      <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
-      <Route path="/tattoo-branding" component={TattooBrandingPage} />
-      <Route path="/goose/signals" component={GooseSignalsPage} />
-      <Route path="/goose/lattice" component={SignalLatticePage} />
-      <Route path="/goose/admin" component={GooseAdminPage} />
-      <Route path="/goose/editorial" component={GooseEditorialPage} />
-      <Route path="/goose/drone" component={DroneBlogPage} />
-      <Route path="/goose/press-room" component={GazetteRefinerPage} />
-      <Route path="/goose/humor" component={GooseHumorPage} />
-      <Route path="/goose" component={GooseGazettePage} />
-      <Route component={WhistleblowerPage} />
-    </Switch>
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        <Route path="/whistleblower" component={WhistleblowerPage} />
+        <Route path="/nexus-slides" component={NexusSlidesPage} />
+        <Route path="/setecom-report" component={SetecomExposePage} />
+        <Route path="/articles/jaco-files" component={ArticleJacoConvergencePage} />
+        <Route path="/articles/ble-vehicle" component={ArticleBleVehiclePage} />
+        <Route path="/articles/recording-37" component={ArticleRecording37Page} />
+        <Route path="/pochote" component={PochoteAnalysisPage} />
+        <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
+        <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
+        <Route path="/tattoo-branding" component={TattooBrandingPage} />
+        <Route path="/goose/signals" component={GooseSignalsPage} />
+        <Route path="/goose/lattice" component={SignalLatticePage} />
+        <Route path="/goose/admin" component={GooseAdminPage} />
+        <Route path="/goose/editorial" component={GooseEditorialPage} />
+        <Route path="/goose/drone" component={DroneBlogPage} />
+        <Route path="/goose/press-room" component={GazetteRefinerPage} />
+        <Route path="/goose/humor" component={GooseHumorPage} />
+        <Route path="/goose" component={GooseGazettePage} />
+        <Route component={WhistleblowerPage} />
+      </Switch>
+    </Suspense>
   );
 }
 
@@ -268,7 +344,7 @@ function DossierBadge() {
   );
 }
 
-// ── Slim public header for Goose Gazette mode ────────────────────────────────
+// ── Slim public header for Goose Gazette mode ─────────────────────────────────
 function GooseHeader() {
   const { mode, toggle } = useSiteMode();
   const { theme, toggle: toggleTheme } = useTheme();
@@ -309,7 +385,7 @@ function AppWithDossier() {
   const { mode } = useSiteMode();
   useArrowSequence(toggleDossierMode);
 
-  // ── Goose Gazette mode (default) — standalone, no KAPPA sidebar ───────────
+  // ── Goose Gazette mode (default) — standalone, no KAPPA sidebar ──────────
   if (mode === "goose") {
     return (
       <>
@@ -328,7 +404,11 @@ function AppWithDossier() {
   return (
     <>
       <Switch>
-        <Route path="/setecom-report" component={SetecomExposePage} />
+        <Route path="/setecom-report">
+          <Suspense fallback={<PageLoader />}>
+            <SetecomExposePage />
+          </Suspense>
+        </Route>
         <Route>
           <SidebarProvider>
             <div className="flex h-screen w-full">
