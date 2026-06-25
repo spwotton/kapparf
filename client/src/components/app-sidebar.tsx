@@ -291,7 +291,7 @@ function CollapsibleGroup({ group, location }: { group: NavGroup; location: stri
 }
 
 export function AppSidebar() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const { toggle: toggleMode } = useSiteMode();
 
   const { data: kappaStatus } = useQuery<KappaStatus>({
@@ -318,7 +318,7 @@ export function AppSidebar() {
           <button
             onClick={() => {
               toggleMode();
-              window.location.href = "/";
+              navigate("/");
             }}
             data-testid="button-sidebar-mode-toggle"
             title="Switch to Goose Gazette"

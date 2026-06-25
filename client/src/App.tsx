@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, Component, type ErrorInfo, type ReactNode } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -15,6 +15,48 @@ import { useArrowSequence } from "@/hooks/useArrowSequence";
 import { I18nProvider } from "@/lib/i18n";
 import { Moon, Sun, Shield } from "lucide-react";
 import { useLocation } from "wouter";
+
+// ── Error boundary — catches failed lazy chunk loads ──────────────────────────
+class RouteErrorBoundary extends Component<
+  { children: ReactNode; fallback?: ReactNode },
+  { error: Error | null }
+> {
+  state = { error: null };
+  static getDerivedStateFromError(error: Error) { return { error }; }
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error("[KAPPA] Route load error:", error, info);
+  }
+  render() {
+    if (this.state.error) {
+      return this.props.fallback ?? (
+        <div style={{
+          display: "flex", flexDirection: "column", alignItems: "center",
+          justifyContent: "center", height: "100%", minHeight: "200px",
+          gap: "12px", fontFamily: "ui-monospace, monospace", color: "#6b7280",
+          fontSize: "12px", padding: "2rem", textAlign: "center",
+        }}>
+          <span style={{ fontSize: "20px" }}>⚠</span>
+          <span style={{ fontWeight: 600 }}>Page failed to load</span>
+          <span style={{ opacity: 0.6, maxWidth: 320 }}>
+            {(this.state.error as Error).message ?? "Module load error"}
+          </span>
+          <button
+            onClick={() => { this.setState({ error: null }); window.location.reload(); }}
+            style={{
+              marginTop: "8px", padding: "6px 16px", fontSize: "11px",
+              fontFamily: "inherit", letterSpacing: "0.08em", cursor: "pointer",
+              border: "1px solid #6b7280", borderRadius: "4px",
+              background: "transparent", color: "#6b7280",
+            }}
+          >
+            RELOAD
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // ── Lazy page imports (code-split per route) ──────────────────────────────────
 const NotFound              = lazy(() => import("@/pages/not-found"));
@@ -182,6 +224,7 @@ function SpectrogramBar() {
 // ── KAPPA full-platform router (CIA JW mode) ──────────────────────────────────
 function KappaRouter() {
   return (
+    <RouteErrorBoundary>
     <Suspense fallback={<PageLoader />}>
       <Switch>
         <Route path="/" component={HomePage} />
@@ -279,12 +322,14 @@ function KappaRouter() {
         <Route component={NotFound} />
       </Switch>
     </Suspense>
+    </RouteErrorBoundary>
   );
 }
 
 // ── Goose Gazette standalone router (default mode) ───────────────────────────
 function GooseRouter() {
   return (
+    <RouteErrorBoundary>
     <Suspense fallback={<PageLoader />}>
       <Switch>
         <Route path="/whistleblower" component={WhistleblowerPage} />
@@ -305,9 +350,11 @@ function GooseRouter() {
         <Route path="/goose/press-room" component={GazetteRefinerPage} />
         <Route path="/goose/humor" component={GooseHumorPage} />
         <Route path="/goose" component={GooseGazettePage} />
+        <Route path="/" component={WhistleblowerPage} />
         <Route component={WhistleblowerPage} />
       </Switch>
     </Suspense>
+    </RouteErrorBoundary>
   );
 }
 
@@ -405,9 +452,11 @@ function AppWithDossier() {
     <>
       <Switch>
         <Route path="/setecom-report">
-          <Suspense fallback={<PageLoader />}>
-            <SetecomExposePage />
-          </Suspense>
+          <RouteErrorBoundary>
+            <Suspense fallback={<PageLoader />}>
+              <SetecomExposePage />
+            </Suspense>
+          </RouteErrorBoundary>
         </Route>
         <Route>
           <SidebarProvider>
