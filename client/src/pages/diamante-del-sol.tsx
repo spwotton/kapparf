@@ -7,13 +7,13 @@ import { AlertTriangle, Radio, Satellite, Activity, Clock, MapPin, Zap, Eye, Sig
 import { SiInstagram, SiX } from "react-icons/si";
 import { Link } from "wouter";
 
-import img0283 from "@assets/IMG_0283_1781818382290.jpeg";
-import img0284 from "@assets/IMG_0284_1781818382290.jpeg";
-import img0285 from "@assets/IMG_0285_1781818382290.jpeg";
-import img0287 from "@assets/IMG_0287_1781818382290.jpeg";
-import img0288 from "@assets/IMG_0288_1781818382290.jpeg";
-import img1000 from "@assets/1000001991_1781818382290.jpeg";
-import imgBBB from "@assets/7B5DB1F1-A011-46F0-81A1-E051FB73F38B_1781818382290.jpeg";
+const img0283 = "/attached-assets/IMG_0283_1781818382290.jpeg";
+const img0284 = "/attached-assets/IMG_0284_1781818382290.jpeg";
+const img0285 = "/attached-assets/IMG_0285_1781818382290.jpeg";
+const img0287 = "/attached-assets/IMG_0287_1781818382290.jpeg";
+const img0288 = "/attached-assets/IMG_0288_1781818382290.jpeg";
+const img1000 = "/attached-assets/1000001991_1781818382290.jpeg";
+const imgBBB = "/attached-assets/7B5DB1F1-A011-46F0-81A1-E051FB73F38B_1781818382290.jpeg";
 
 const YOUTUBE_VIDEO_IDS = [
   { id: "STaaEJeeovM", label: "Nocturnal Observation — Rooftop Apex Chromatic Array" },
