@@ -319,7 +319,7 @@ function TurtleShell({ apps, activeIds, turtleState }: {
 // ─── App card ─────────────────────────────────────────────────────────────────
 
 function AppCard({ app, isActive }: { app: AtlantisApp; isActive: boolean }) {
-  const c = CAT[app.category];
+  const c = CAT[app.category] ?? CAT['core'];
   const Icon = c.icon;
   const isForthcoming = app.metadata?.forthcoming;
   return (
