@@ -129,7 +129,6 @@ const navGroups: NavGroup[] = [
     labelKey: "sidebar.evidence", fallbackLabel: "EVIDENCE",
     items: [
       { titleKey: "sidebar.docsisForensics", fallback: "⚡ DOCSIS Modem Forensics", url: "/docsis-forensics", icon: Router },
-      { titleKey: "sidebar.tattooBranding", fallback: "◈ Physical Marker — Thigh Tattoo", url: "/tattoo-branding", icon: Eye },
       { titleKey: "sidebar.pochoteHeadliner", fallback: "▶ 30 Days at Pochote Grande", url: "/pochote-headliner", icon: AlertTriangle },
       { titleKey: "sidebar.diamanteDelSol", fallback: "◈ Diamanté del Sol — SIGINT Report", url: "/diamante-del-sol", icon: Radio },
       { titleKey: "sidebar.cameroXaverLdv", fallback: "◈ XAVER · LDV · 46.875Hz · GoPro BLE", url: "/camero-xaver-ldv", icon: Radio },

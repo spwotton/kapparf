@@ -148,7 +148,6 @@ const RiverwalkPage         = lazy(() => import("@/pages/riverwalk"));
 const ThreatHuntingPage     = lazy(() => import("@/pages/threat-hunting"));
 const DocsisForensicsPage   = lazy(() => import("@/pages/docsis-forensics"));
 const GOSHyperstructurePage = lazy(() => import("@/pages/gos-hyperstructure"));
-const TattooBrandingPage    = lazy(() => import("@/pages/tattoo-branding"));
 const DiamanteDelSolPage    = lazy(() => import("@/pages/diamante-del-sol"));
 const CameroXaverLdvPage    = lazy(() => import("@/pages/camero-xaver-ldv"));
 
@@ -314,7 +313,6 @@ function KappaRouter() {
         <Route path="/riverwalk" component={RiverwalkPage} />
         <Route path="/threat-hunting" component={ThreatHuntingPage} />
         <Route path="/docsis-forensics" component={DocsisForensicsPage} />
-        <Route path="/tattoo-branding" component={TattooBrandingPage} />
         <Route path="/gos-hyperstructure" component={GOSHyperstructurePage} />
         <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
         <Route path="/camero-xaver-ldv" component={CameroXaverLdvPage} />
@@ -341,7 +339,6 @@ function GooseRouter() {
         <Route path="/pochote" component={PochoteAnalysisPage} />
         <Route path="/pochote-headliner" component={PochoteHeadlinerPage} />
         <Route path="/diamante-del-sol" component={DiamanteDelSolPage} />
-        <Route path="/tattoo-branding" component={TattooBrandingPage} />
         <Route path="/goose/signals" component={GooseSignalsPage} />
         <Route path="/goose/lattice" component={SignalLatticePage} />
         <Route path="/goose/admin" component={GooseAdminPage} />
