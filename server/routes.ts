@@ -7694,6 +7694,8 @@ export function registerGazetteIntelRoutes(app: express.Express) {
           for (const c of CR_AUTH_CONTACTS as any[]) addD(c, c.category);
           for (const c of US_INTEL_CONTACTS as any[]) addD(c, c.category);
           for (const c of VENEZUELA_CONTACTS as any[]) addD(c);
+          const { DIAMANTE_NETWORK_CONTACTS } = await import("./mailer-campaign-diamante-network");
+          for (const c of DIAMANTE_NETWORK_CONTACTS as any[]) addD(c, c.category);
         } else if (target === "diamante-correction") {
           // URL correction follow-up — same 547 contacts, corrected URLs
           const { CORRECTION_SUBJECT_EN, CORRECTION_SUBJECT_ES, CORRECTION_BODY_EN, CORRECTION_BODY_ES } = await import("./mailer-campaign-diamante-correction");
