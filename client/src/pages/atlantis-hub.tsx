@@ -350,7 +350,7 @@ function AppCard({ app, isActive }: { app: AtlantisApp; isActive: boolean }) {
 
 function EventRow({ ev }: { ev: AtlantisEvent }) {
   const [open, setOpen] = useState(false);
-  const c = CAT[ev.category];
+  const c = CAT[ev.category] ?? CAT['core'];
   const ago = (() => {
     const s = Math.round((Date.now() - new Date(ev.ts).getTime()) / 1000);
     return s < 60 ? `${s}s` : s < 3600 ? `${Math.floor(s/60)}m` : `${Math.floor(s/3600)}h`;
@@ -1019,7 +1019,7 @@ export default function AtlantisHubPage() {
                   or <code className="text-amber-300/70">?key=</code> param when posting events or dreams.
                 </p>
                 {apps.filter(a => !a.metadata?.forthcoming).map(a => {
-                  const C = CAT[a.category];
+                  const C = CAT[a.category] ?? CAT['core'];
                   return (
                     <div key={a.id} className="rounded border border-border/30 bg-muted/10 p-2">
                       <div className="flex items-center gap-2 mb-0.5">

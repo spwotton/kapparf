@@ -803,6 +803,7 @@ export default function SuitesCristinaPage() {
   const [stats, setStats] = useState({ cameras: 0, threats: 0 });
   const [activeFloor, setActiveFloor] = useState<number | null>(null);
   const [time, setTime] = useState(new Date());
+  const [webglError, setWebglError] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
@@ -811,9 +812,13 @@ export default function SuitesCristinaPage() {
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const s = createScene(containerRef.current, setHoveredCamera, setStats);
-    sceneRef.current = s;
-    return () => s.destroy();
+    try {
+      const s = createScene(containerRef.current, setHoveredCamera, setStats);
+      sceneRef.current = s;
+      return () => s.destroy();
+    } catch {
+      setWebglError(true);
+    }
   }, []);
 
   const cameraTypeColors: Record<string, string> = {
@@ -824,6 +829,18 @@ export default function SuitesCristinaPage() {
     parking: "text-blue-400",
     roof: "text-rose-400",
   };
+
+  if (webglError) {
+    return (
+      <div className="relative w-full h-full bg-[#020208] flex items-center justify-center" data-testid="page-suites-cristina">
+        <div className="text-center space-y-2">
+          <div className="text-emerald-400/60 text-sm font-mono uppercase tracking-widest">Suites Cristina — Tactical Surveillance Map</div>
+          <div className="text-white/30 text-xs font-mono">3D render unavailable — WebGL not supported in this environment</div>
+          <div className="text-white/20 text-xs font-mono">Open in Chrome or Firefox for full 3D view</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative w-full h-full bg-[#020208] overflow-hidden" data-testid="page-suites-cristina">

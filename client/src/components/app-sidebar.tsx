@@ -141,7 +141,7 @@ const navGroups: NavGroup[] = [
       { titleKey: "sidebar.forensicEvidence", fallback: "Forensic Evidence Package", url: "/forensic-evidence", icon: FileWarning },
       { titleKey: "sidebar.setecomExpose", fallback: "SETECOM Exposé", url: "/setecom", icon: AlertTriangle },
       { titleKey: "sidebar.ciajwHome", fallback: "CIAJW Home", url: "/whistleblower", icon: Shield },
-      { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence", icon: FileWarning },
+      { titleKey: "sidebar.evidenceChain", fallback: "Evidence Chain", url: "/evidence-chain", icon: FileWarning },
       { titleKey: "sidebar.audioForensics", fallback: "Audio Recordings", url: "/audio", icon: Mic },
       { titleKey: "sidebar.videoForensics", fallback: "Video Forensics Vault", url: "/video-forensics", icon: Mic },
       { titleKey: "sidebar.networkForensics", fallback: "Network Forensics", url: "/forensics", icon: Network },

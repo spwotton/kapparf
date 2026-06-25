@@ -420,7 +420,7 @@ export default function SignalLatticePage() {
               </div>
             )}
 
-            {corpus.size === 0 && arrangements.length === 0 && (
+            {(status?.corpusSize ?? 0) === 0 && arrangements.length === 0 && (
               <div className="text-center py-16 text-gray-700 text-[11px] space-y-2">
                 <div className="flex justify-center"><GoldenSpiral size={80} /></div>
                 <div>Corpus building… first cycle in ~90s after server start.</div>

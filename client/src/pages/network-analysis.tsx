@@ -6734,7 +6734,7 @@ function ThreatBadge({ level }: { level: ThreatLevel }) {
     asset: { color: "bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30", label: "ASSET" },
     unknown: { color: "bg-gray-500/20 text-gray-600 dark:text-gray-400 border-gray-500/30", label: "UNKNOWN" },
   };
-  const c = config[level];
+  const c = config[level] ?? config['unknown'];
   return <Badge variant="outline" className={`text-[9px] ${c.color}`}>{c.label}</Badge>;
 }
 

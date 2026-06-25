@@ -257,7 +257,7 @@ function KappaRouter() {
         <Route path="/cortex" component={ResearchCortexPage} />
         <Route path="/liquid-cortex" component={LiquidCortexPage} />
         <Route path="/forensics" component={NetworkForensicsPage} />
-        <Route path="/evidence" component={EvidenceChainPage} />
+        <Route path="/evidence-chain" component={EvidenceChainPage} />
         <Route path="/evidence-directory" component={EvidenceDirectoryPage} />
         <Route path="/forensic-hypervisor" component={ForensicHypervisorPage} />
         <Route path="/memory" component={MemoryCortexPage} />
